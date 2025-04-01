@@ -1,0 +1,1310 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SunnyUI.FrameDecoder</name>
+    </assembly>
+    <members>
+        <member name="T:Sunny.FrameDecoder.DataCache`1">
+            <summary>
+            数据缓存
+            </summary>
+            <typeparam name="T">类型</typeparam>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="capacity">初始容量</param>
+        </member>
+        <member name="P:Sunny.FrameDecoder.DataCache`1.IsDisposed">
+            <summary>
+            是否释放标志，保证重复释放资源时，不重复释放
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.ThrowIfDisposed">
+            <summary>
+            判断是否已经被释放，如果是，则抛出异常。
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.Dispose">
+            <summary>
+            实现IDisposable中的Dispose方法
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.Dispose(System.Boolean)">
+            <summary>
+            释放对象
+            </summary>
+            <param name="disposing">ture时一般位主动调用释放，false一般为GC调用析构函数时释放</param>
+        </member>
+        <member name="P:Sunny.FrameDecoder.DataCache`1.Tag">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.Advance(System.Int32)">
+            <inheritdoc/>        
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.Clear">
+            <inheritdoc/>      
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.GetMemory(System.Int32)">
+            <inheritdoc/>      
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.GetSpan(System.Int32)">
+            <inheritdoc/>      
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.Remove(System.Int32)">
+            <inheritdoc/>      
+        </member>
+        <member name="P:Sunny.FrameDecoder.DataCache`1.WrittenMemory">
+            <summary>
+            返回到目前为止写入基础缓冲区的数据.
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.DataCache`1.WrittenSpan">
+            <summary>
+            返回到目前为止写入基础缓冲区的数据
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.DataCache`1.WrittenCount">
+            <summary>
+            返回到目前为止写入基础缓冲区的数据量
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.DataCache`1.Capacity">
+            <summary>
+            返回基础缓冲区内的总空间量
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.DataCache`1.FreeCapacity">
+            <summary>
+            返回在不强制基础缓冲区增长的情况下仍可写入的可用空间量
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DataCache`1.Add(System.ReadOnlySpan{`0})">
+            <summary>
+            增加数据
+            </summary>
+            <param name="value">数据</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.IDataCache`1">
+            <summary>
+            缓存接口
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Sunny.FrameDecoder.IDataCache`1.Add(System.ReadOnlySpan{`0})">
+            <summary>
+            增加数据
+            </summary>
+            <param name="value">数据</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.IDataCache`1.Remove(System.Int32)">
+            <summary>
+            从开头移除指定长度
+            </summary>
+            <param name="length"></param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.IDataCache`1.Clear">
+            <summary>
+            清空
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.IDataCache`1.WrittenSpan">
+            <summary>
+            返回到目前为止写入基础缓冲区的数据
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.IDataCache`1.WrittenMemory">
+            <summary>
+            返回到目前为止写入基础缓冲区的数据.
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.IDataCache`1.WrittenCount">
+            <summary>
+            返回到目前为止写入基础缓冲区的数据量
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.BaseByteFrameDecoder">
+            <summary>
+            字节帧解码器基类
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.BaseByteFrameDecoder.Cache">
+            <summary>
+            数据缓存
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseByteFrameDecoder.DataType">
+            <summary>
+            数据类型
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.Dispose(System.Boolean)">
+            <summary>
+            释放对象
+            </summary>
+            <param name="disposing">ture时一般位主动调用释放，false一般为GC调用析构函数时释放</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.Clone">
+            <summary>
+            生成当前解码器副本
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.GetResult(System.Int32,System.Int32)">
+            <summary>
+            返回解码结果
+            </summary>
+            <param name="start">起始位置</param>
+            <param name="length">长度</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.Decode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解码
+            </summary>
+            <param name="data">输入数据</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.DecodeAsync(System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            异步解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.PrepareDecode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.Reset">
+            <summary>
+            缓存复位
+            </summary>
+        </member>
+        <member name="E:Sunny.FrameDecoder.BaseByteFrameDecoder.OnDecoder">
+            <summary>
+            解码输出事件
+            </summary>
+        </member>
+        <member name="E:Sunny.FrameDecoder.BaseByteFrameDecoder.OnDecoderAsync">
+            <summary>
+            异步解码输出事件
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.InvokeOnDecoder(Sunny.FrameDecoder.ByteFrameEventArgs)">
+            <summary>
+            调用解码输出事件
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.InvokeOnDecoderAsync(Sunny.FrameDecoder.ByteFrameEventArgs)">
+            <summary>
+            异步调用解码输出事件
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="E:Sunny.FrameDecoder.BaseByteFrameDecoder.OnDecoderError">
+            <summary>
+            解码错误事件
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.DecoderError(System.String,System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解码错误事件
+            </summary>
+            <param name="error">错误描述</param>
+            <param name="data">数据</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseByteFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.BaseFrameDecoder">
+            <summary>
+            帧解码器基类
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.FinishDecode">
+            <summary>
+            结束一次解码
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.IsDisposed">
+            <summary>
+            是否释放标志，保证重复释放资源时，不重复释放
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.ThrowIfDisposed">
+            <summary>
+            判断是否已经被释放，如果是，则抛出异常。
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.Dispose">
+            <summary>
+            实现IDisposable中的Dispose方法
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.Dispose(System.Boolean)">
+            <summary>
+            释放对象
+            </summary>
+            <param name="disposing">ture时一般位主动调用释放，false一般为GC调用析构函数时释放</param>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.DataType">
+            <summary>
+            数据类型
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.Tag">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.Guid">
+            <summary>
+            GUID
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.IPEndPoint">
+            <summary>
+            解码器数据来源绑定的IP地址和端口
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.FrameExceptDataLength">
+            <summary>
+            帧数据除了数据外的长度
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.DecodingAsync">
+            <summary>
+            异步解码函数
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.MinFrameLength">
+            <summary>
+            获取或设置包数据的最小值（默认为0，不判断）
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.MaxFrameLength">
+            <summary>
+            获取或设置包数据的最大值（默认为0，不判断）
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.Reset">
+            <summary>
+            复位
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.CacheMaxSize">
+            <summary>
+            缓存最大长度
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.LastDecodedTime">
+            <summary>
+            上次完成解码时间
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.LastAddedTime">
+            <summary>
+            上次解码数据时间
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseFrameDecoder.CacheTimeout">
+            <summary>
+            缓存超时，缓存时间为当前解码数据与上次解码成功时间差，默认800，单位ms，大于0判断
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.DoAfterDecoder(System.Object)">
+            <summary>
+            每次解码后执行事件
+            </summary>
+            <param name="sender">对象</param>
+        </member>
+        <member name="E:Sunny.FrameDecoder.BaseFrameDecoder.OnAfterDecoder">
+            <summary>
+            每次解码后执行事件
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseFrameDecoder.CheckTimeout">
+            <summary>
+            缓存超时大于0时，检查超时，判断当前解码数据与上次完成解码数据时间差，超时则复位
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.BaseStringFrameDecoder">
+            <summary>
+            字符串帧解码器基类
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.BaseStringFrameDecoder.Cache">
+            <summary>
+            数据缓存
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseStringFrameDecoder.DataType">
+            <summary>
+            数据类型
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.BaseStringFrameDecoder.Encoding">
+            <summary>
+            编码
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseStringFrameDecoder.Dispose(System.Boolean)">
+            <summary>
+            释放对象
+            </summary>
+            <param name="disposing">ture时一般位主动调用释放，false一般为GC调用析构函数时释放</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseStringFrameDecoder.Decode(System.String)">
+            <summary>
+            解码
+            </summary>
+            <param name="data">输入数据</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseStringFrameDecoder.Decode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解码
+            </summary>
+            <param name="data">输入数据</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseStringFrameDecoder.PrepareDecode(System.String@)">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseStringFrameDecoder.Reset">
+            <summary>
+            缓存复位
+            </summary>
+        </member>
+        <member name="E:Sunny.FrameDecoder.BaseStringFrameDecoder.OnDecoder">
+            <summary>
+            解码输出事件
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BaseStringFrameDecoder.InvokeOnDecoder(Sunny.FrameDecoder.StringFrameEventArgs)">
+            <summary>
+            调用解码输出事件
+            </summary>
+            <param name="e">数据</param>
+        </member>
+        <member name="E:Sunny.FrameDecoder.BaseStringFrameDecoder.OnDecoderError">
+            <summary>
+            解码错误事件
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.CanOpenPackageFrameDecoder">
+            <summary>
+            CanOpen包模式 - 数据帧解码器
+            AA 00 00 08 00 00 06 01 2F 00 1A 00 00 00 00 00 
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.CanOpenPackageFrameDecoder.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="headers">数据头</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.CanOpenPackageFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sunny.FrameDecoder.CanOpenPackageFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="F:Sunny.FrameDecoder.CanOpenPackageFrameDecoder.Headers">
+            <summary>
+            数据头部
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.CanOpenPackageFrameDecoder.FixedLength">
+            <summary>
+            固定长度
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.CanOpenPackageFrameDecoder.PrepareDecode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.CanOpenPackageFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.DelimiterBasedFrameDecoder">
+            <summary>
+            尾部分隔符 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DelimiterBasedFrameDecoder.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="delimiters">分隔符，最好为多字节，并且数据中不会出现分隔符而造成误解码</param>
+            <param name="maxFrameLength">最大数据长度，仅判断数据长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DelimiterBasedFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sunny.FrameDecoder.DelimiterBasedFrameDecoder.Delimiters">
+            <summary>
+            分隔符
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DelimiterBasedFrameDecoder.CreateFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            根据数据创建完整帧数据
+            </summary>
+            <param name="data">数据</param>
+            <returns>完整帧数据</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DelimiterBasedFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DelimiterBasedFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.FixedLengthFrameDecoder">
+            <summary>
+            固定长度 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.FixedLengthFrameDecoder.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="frameLength">帧固定长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.FixedLengthFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="M:Sunny.FrameDecoder.FixedLengthFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="P:Sunny.FrameDecoder.FixedLengthFrameDecoder.FrameLength">
+            <summary>
+            帧固定长度
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.FixedLengthFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder">
+            <summary>
+            头部分隔符 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="headers">数据头部</param>
+            <param name="maxFrameLength">最大数据长度，仅判断数据长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder.Headers">
+            <summary>
+            分隔符。
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder.PrepareDecode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder.CreateFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            根据数据创建完整帧数据
+            </summary>
+            <param name="data">数据</param>
+            <returns>完整帧数据</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderDelimiterFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder">
+            <summary>
+            数据头部、标签、数据长度、数据、数据尾部 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.#ctor(System.Byte[],System.Byte[],System.Int32,Sunny.FrameDecoder.LengthType,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="headers">数据头部</param>
+            <param name="tails">数据尾部</param>
+            <param name="tagLength">标签长度</param>
+            <param name="lengthType">数据长度类型</param>
+            <param name="valueLengthIsLittleEndian">数据长度字节顺序</param>
+            <param name="isFullLength">数据长度是否包含数据头部、标签、数据长度、数据尾部的长度，false为仅数据长度</param>
+            <param name="maxFrameLength">最大数据长度，仅判断数据长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.Headers">
+            <summary>
+            数据头部
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.Tails">
+            <summary>
+            数据尾部
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.TagLength">
+            <summary>
+            标签长度
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.LengthType">
+            <summary>
+            数据长度类型
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.IsFullLength">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.DecodingAsync">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.PrepareDecode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.CreateFrame(System.Byte[],System.ReadOnlySpan{System.Byte})">
+            <summary>
+            根据数据创建完整帧数据
+            </summary>
+            <param name="tags">标签</param>
+            <param name="data">数据</param>
+            <returns>完整帧数据</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTagLengthValueTailFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.HeaderTailFrameDecoder">
+            <summary>
+            数据头部、数据尾部 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTailFrameDecoder.#ctor(System.Byte[],System.Byte[],System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="headers">数据头部</param>
+            <param name="tails">数据尾部</param>
+            <param name="maxFrameLength">最大数据长度，仅判断数据长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTailFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderTailFrameDecoder.Headers">
+            <summary>
+            数据头部
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.HeaderTailFrameDecoder.Tails">
+            <summary>
+            数据尾部
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTailFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTailFrameDecoder.PrepareDecode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTailFrameDecoder.CreateFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            根据数据创建完整帧数据
+            </summary>
+            <param name="data">数据</param>
+            <returns>完整帧数据</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.HeaderTailFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.LengthValueFrameDecoder">
+            <summary>
+            数据长度、数据 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LengthValueFrameDecoder.#ctor(Sunny.FrameDecoder.LengthType,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="lengthType">数据长度类型</param>
+            <param name="valueLengthIsLittleEndian">数据长度字节顺序</param>
+            <param name="isFullLength">数据长度是否包含数据长度的长度，false为仅数据长度</param>
+            <param name="maxFrameLength">最大数据长度，仅判断数据长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LengthValueFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sunny.FrameDecoder.LengthValueFrameDecoder.LengthType">
+            <summary>
+            数据长度类型
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.LengthValueFrameDecoder.IsFullLength">
+            <summary>
+            数据长度是否包含数据长度的长度，false为仅数据长度
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LengthValueFrameDecoder.PrepareDecode(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LengthValueFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LengthValueFrameDecoder.CreateFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            根据数据创建完整帧数据
+            </summary>
+            <param name="data">数据</param>
+            <returns>完整帧数据</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LengthValueFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.TagLengthValueFrameDecoder">
+            <summary>
+            标签、数据长度、数据 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.TagLengthValueFrameDecoder.#ctor(System.Int32,Sunny.FrameDecoder.LengthType,System.Boolean,System.Boolean,System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="tagLength">标签长度</param>
+            <param name="lengthType">数据长度类型</param>
+            <param name="valueLengthIsLittleEndian">数据长度字节顺序</param>
+            <param name="isFullLength">数据长度是否包含标签、数据长度的长度，false为仅数据长度</param>
+            <param name="maxFrameLength">最大数据长度，仅判断数据长度</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.TagLengthValueFrameDecoder.Clone">
+            <inheritdoc/>
+        </member>
+        <member name="P:Sunny.FrameDecoder.TagLengthValueFrameDecoder.TagLength">
+            <summary>
+            标签长度
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.TagLengthValueFrameDecoder.LengthType">
+            <summary>
+            数据长度类型
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.TagLengthValueFrameDecoder.IsFullLength">
+            <summary>
+            数据长度是否包含标签、数据长度的长度，false为仅数据长度
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.TagLengthValueFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.TagLengthValueFrameDecoder.CreateFrame(System.Byte[],System.ReadOnlySpan{System.Byte})">
+            <summary>
+            根据数据创建完整帧数据
+            </summary>
+            <param name="tags">标签</param>
+            <param name="data">数据</param>
+            <returns>完整帧数据</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.TagLengthValueFrameDecoder.DecodeFrame(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            解析完整帧数据
+            </summary>
+            <param name="frame">完整帧数据</param>
+            <returns>解析是否成功</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.LineBasedFrameDecoder">
+            <summary>
+            基于换行符 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LineBasedFrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LineBasedFrameDecoder.PrepareDecode(System.String@)">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.NMEA0183FrameDecoder">
+            <summary>
+            NMEA0183 - 数据帧解码器
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.NMEA0183FrameDecoder.Decoding">
+            <summary>
+            解码函数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.NMEA0183FrameDecoder.PrepareDecode(System.String@)">
+            <summary>
+            准备数据解码
+            </summary>
+            <param name="data">输入数据</param>
+            <returns>判断此数据是否可以解码</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.ByteFrameParams">
+            <summary>
+            字节帧参数
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrameParams.Empty">
+            <summary>
+            空参数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.ByteFrameParams.LengthParams(System.Int32)">
+            <summary>
+            字节帧 - 长度参数
+            </summary>
+            <param name="length">长度</param>
+            <returns>字节帧 - 长度参数</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.ByteFrameParams.TagLengthParams(System.Byte[],System.Int32)">
+            <summary>
+            字节帧 - 标签、长度参数
+            </summary>
+            <param name="tag">标签</param>
+            <param name="length">长度</param>
+            <returns>字节帧 - 标签、长度参数</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.LengthByteFrameParams">
+            <summary>
+            字节帧 - 长度参数
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.LengthByteFrameParams.Length">
+            <summary>
+            长度
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.LengthByteFrameParams.#ctor(System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="length">长度</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.TagLengthByteFrameParams">
+            <summary>
+            字节帧 - 标签、长度参数
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.TagLengthByteFrameParams.Tag">
+            <summary>
+            标签
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.TagLengthByteFrameParams.#ctor(System.Byte[],System.Int32)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="tag">标签</param>
+            <param name="length">长度</param>
+        </member>
+        <member name="P:Sunny.FrameDecoder.TagLengthByteFrameParams.TagValue">
+            <summary>
+            标签值，Tag长度1时为Byte值，2时为小端字节序UShort值，4时为小端字节序UInt值，其余为-1
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.ByteEventArgs">
+            <summary>
+            字节帧结构
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.ByteEventArgs.Buffer">
+            <summary>
+            数据缓存
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteEventArgs.Value">
+            <summary>
+            仅数据
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.ByteEventArgs.#ctor(System.Byte[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.ByteFrameEventArgs">
+            <summary>
+            字节帧结构
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.ByteFrameEventArgs.Buffer">
+            <summary>
+            数据缓存
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrameEventArgs.Value">
+            <summary>
+            仅数据
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrameEventArgs.Body">
+            <summary>
+            除数据外，包括各种参数，例如分隔符、标签、数据头、数据尾部等
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.ByteFrameEventArgs.Decoder">
+            <summary>
+            解码器
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.ByteFrameEventArgs.Params">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrameEventArgs.ValueStart">
+            <summary>
+            数据起始
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrameEventArgs.ValueLength">
+            <summary>
+            数据长度
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrameEventArgs.IsDecoderFrame">
+            <summary>
+            是否解码帧
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.ByteFrameEventArgs.#ctor(Sunny.FrameDecoder.BaseByteFrameDecoder,Sunny.FrameDecoder.ByteFrameParams,System.Byte[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="decoder">解码器</param>
+            <param name="frameParams"></param>
+            <param name="buffer">除数据外，包括各种参数，例如分隔符、标签、数据头、数据尾部等</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.ByteFrameEventArgs.#ctor(Sunny.FrameDecoder.BaseByteFrameDecoder,Sunny.FrameDecoder.ByteFrameParams,System.Int32,System.Int32,System.Byte[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="decoder">解码器</param>
+            <param name="frameParams"></param>
+            <param name="valueLength">数据起始</param>
+            <param name="valueStart">数据长度</param>
+            <param name="buffer">除数据外，包括各种参数，例如分隔符、标签、数据头、数据尾部等</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.OnByteFrameArgs">
+            <summary>
+            字节数组数据事件类
+            </summary>
+            <param name="sender">对象</param>
+            <param name="e">字节数组数据事件类</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.OnByteFrameAsyncArgs">
+            <summary>
+            字节数组数据事件类
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.ByteFrame">
+            <summary>
+            字节帧对象
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrame.Value">
+            <summary>
+            仅数据
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrame.Body">
+            <summary>
+            除数据外，包括各种参数，例如分隔符、标签、数据头、数据尾部等
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrame.Decoder">
+            <summary>
+            解码器
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteFrame.Params">
+            <summary>
+            参数
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.ByteFrame.#ctor(Sunny.FrameDecoder.ByteFrameEventArgs)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="e">字节帧结构</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.ByteDecoderExceptionEventArgs">
+            <summary>
+            字节解码错误消息
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteDecoderExceptionEventArgs.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.ByteDecoderExceptionEventArgs.Value">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.ByteDecoderExceptionEventArgs.#ctor(System.String,System.Byte[])">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.StringDecoderExceptionEventArgs">
+            <summary>
+            字符串解码错误消息
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.StringDecoderExceptionEventArgs.Message">
+            <summary>
+            消息
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.StringDecoderExceptionEventArgs.Value">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.StringDecoderExceptionEventArgs.#ctor(System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message"></param>
+            <param name="value"></param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.OnByteFrameDecoderError">
+            <summary>
+            解码错误事件类
+            </summary>
+            <param name="sender">对象</param>
+            <param name="e">解码错误事件类</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.StringEventArgs">
+            <summary>
+            字符串数据事件类
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.StringEventArgs.Value">
+            <summary>
+            数据
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.StringEventArgs.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="value">数据</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.StringFrameEventArgs">
+            <summary>
+            字符串解码数据事件类
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.StringFrameEventArgs.Decoder">
+            <summary>
+            解码器
+            </summary>
+        </member>
+        <member name="P:Sunny.FrameDecoder.StringFrameEventArgs.Body">
+            <summary>
+            整帧数据，包含分隔符、标签、数据头、数据尾部等
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.StringFrameEventArgs.#ctor(Sunny.FrameDecoder.BaseStringFrameDecoder,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="decoder">解码器</param>
+            <param name="value">数据</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.StringFrameEventArgs.#ctor(Sunny.FrameDecoder.BaseStringFrameDecoder,System.String,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="decoder">解码器</param>
+            <param name="value">数据</param>
+            <param name="body">整帧数据</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.BitHelper">
+            <summary>
+            Bit位操作帮助类
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.BitsString(System.Byte)">
+            <summary>
+            获取二进制字符串
+            </summary>
+            <param name="value">值</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.BitsString(System.UInt16)">
+            <summary>
+            获取二进制字符串
+            </summary>
+            <param name="value">值</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.BitsString(System.UInt32)">
+            <summary>
+            获取二进制字符串
+            </summary>
+            <param name="value">值</param>
+            <returns>字符串</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.BitsByte(System.String)">
+            <summary>
+            获取单字节值
+            </summary>
+            <param name="value">二进制字符串</param>
+            <returns>单字节值</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.BitsUShort(System.String)">
+            <summary>
+            获取无符号双字节值
+            </summary>
+            <param name="value">二进制字符串</param>
+            <returns>无符号双字节值</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.BitsUInt(System.String)">
+            <summary>
+            获取无符号四字节值
+            </summary>
+            <param name="value">二进制字符串</param>
+            <returns>无符号四字节值</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.SetFlag(System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            数值按位操作
+            </summary>
+            <param name="state">数值</param>
+            <param name="flag">位</param>
+            <param name="value">是否有效</param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.BitHelper.HasFlag(System.Int32,System.Int32)">
+            <summary>
+            数值的某位是否有效
+            </summary>
+            <param name="state">数值</param>
+            <param name="flag">位</param>
+            <returns>是否有效</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.IByteFrameDecoderCloneable">
+            <summary>
+            字节数组解码器复制副本接口
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.IByteFrameDecoderCloneable.Clone">
+            <summary>
+            复制一个字节数组解码器
+            </summary>
+            <returns>字节数组解码器</returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.DecoderHelper">
+            <summary>
+            数据帧解码器帮助类
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DecoderHelper.Size(Sunny.FrameDecoder.LengthType)">
+            <summary>
+            数据长度类型的长度
+            </summary>
+            <param name="valueLengthType">数据长度类型</param>
+            <returns>长度</returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DecoderHelper.TryWriteByte(System.Byte[],System.Int32,System.Byte)">
+            <summary>
+            
+            </summary>
+            <param name="buffer"></param>
+            <param name="startIndex"></param>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DecoderHelper.TryWriteUShort(System.Byte[],System.Int32,System.UInt16,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="buffer"></param>
+            <param name="startIndex"></param>
+            <param name="value"></param>
+            <param name="isLittleEndian"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Sunny.FrameDecoder.DecoderHelper.TryWriteUInt(System.Byte[],System.Int32,System.UInt32,System.Boolean)">
+            <summary>
+            
+            </summary>
+            <param name="buffer"></param>
+            <param name="startIndex"></param>
+            <param name="value"></param>
+            <param name="isLittleEndian">字节顺序，true为小端字节(低字节序)，false为大端字节序(高字节序)</param>
+            <returns></returns>
+        </member>
+        <member name="T:Sunny.FrameDecoder.FrameDataType">
+            <summary>
+            数据类型
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.FrameDataType.HEX">
+            <summary>
+            字节数组
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.FrameDataType.ASCII">
+            <summary>
+            字符串
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.LengthType">
+            <summary>
+            数据长度类型
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.LengthType.Byte">
+            <summary>
+            字节，单字节
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.LengthType.UShort">
+            <summary>
+            短整数，双字节
+            </summary>
+        </member>
+        <member name="F:Sunny.FrameDecoder.LengthType.UInt">
+            <summary>
+            整数，四字节
+            </summary>
+        </member>
+        <member name="T:Sunny.FrameDecoder.FrameDecoderException">
+            <summary>
+            编码异常类
+            </summary>
+        </member>
+        <member name="M:Sunny.FrameDecoder.FrameDecoderException.#ctor(System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">消息</param>
+        </member>
+        <member name="M:Sunny.FrameDecoder.FrameDecoderException.#ctor(System.String,System.Exception)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="message">消息</param>
+            <param name="innerException">异常</param>
+        </member>
+        <member name="T:Sunny.FrameDecoder.ThrowHelper">
+            <summary>
+            抛异常帮助类
+            </summary>
+        </member>
+    </members>
+</doc>
