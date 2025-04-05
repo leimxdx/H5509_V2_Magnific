@@ -1,3 +1,9 @@
+D:\GitHub\H5509_V2\bin\Debug\gts.dll
+D:\GitHub\H5509_V2\bin\Debug\gt_rn.dll
+D:\GitHub\H5509_V2\bin\Debug\LAFunc.dll
+D:\GitHub\H5509_V2\bin\Debug\MachineBuilding.dll
+D:\GitHub\H5509_V2\bin\Debug\PIFunc.dll
+D:\GitHub\H5509_V2\bin\Debug\VFunc.dll
 D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe.config
 D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\bin\Debug\H5509_V2.pdb
@@ -27,3 +33,4 @@ D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V2\bin\Debug\gtn_core.cfg

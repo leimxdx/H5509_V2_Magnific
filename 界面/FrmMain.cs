@@ -71,6 +71,9 @@ namespace H5509_V2
 
 
             changeMainPanel(main);
+
+            Motion motion = new Motion(); 
+            motion.InitCard();
         }
 
         /// <summary>
