@@ -79,7 +79,7 @@ namespace H5509_V2
         /// <summary>
         /// Index最大搜索距离，0表示不限制搜索距离，默认为805306368或-805306368
         /// </summary>
-        public int Index最大搜索距离 { get; set; }
+        public int Index最大搜索距离 { get; set; } = 0;
 
         /// <summary>
         /// 反方向离开限位的脱离步长，当移动一次设定的步长，仍未脱离限位时，会再次移动设定的步长，直到脱离限位

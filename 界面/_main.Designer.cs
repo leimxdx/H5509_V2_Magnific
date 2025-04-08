@@ -28,12 +28,40 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(_main));
             this.Panel_left = new System.Windows.Forms.Panel();
             this.pal_setdutstate = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.uiDigitalLabel16 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel15 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel14 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel13 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel12 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel11 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel10 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel9 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel8 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel7 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel6 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel5 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel4 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel3 = new Sunny.UI.UIDigitalLabel();
+            this.uiDigitalLabel2 = new Sunny.UI.UIDigitalLabel();
             this.uiDigitalLabel1 = new Sunny.UI.UIDigitalLabel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.Chk_switch15 = new Sunny.UI.UICheckBox();
+            this.Chk_switch14 = new Sunny.UI.UICheckBox();
+            this.Chk_switch13 = new Sunny.UI.UICheckBox();
+            this.Chk_switch12 = new Sunny.UI.UICheckBox();
+            this.Chk_switch11 = new Sunny.UI.UICheckBox();
+            this.Chk_switch10 = new Sunny.UI.UICheckBox();
+            this.Chk_switch9 = new Sunny.UI.UICheckBox();
+            this.Chk_switch8 = new Sunny.UI.UICheckBox();
+            this.Chk_switch7 = new Sunny.UI.UICheckBox();
+            this.Chk_switch6 = new Sunny.UI.UICheckBox();
+            this.Chk_switch5 = new Sunny.UI.UICheckBox();
+            this.Chk_switch4 = new Sunny.UI.UICheckBox();
+            this.Chk_switch3 = new Sunny.UI.UICheckBox();
+            this.Chk_switch2 = new Sunny.UI.UICheckBox();
             this.pal_dout1_8 = new System.Windows.Forms.Panel();
             this.lbl_dout1 = new System.Windows.Forms.Label();
             this.label157 = new System.Windows.Forms.Label();
@@ -240,7 +268,7 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label152 = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.uiDigitalLabel17 = new Sunny.UI.UIDigitalLabel();
             this.label153 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -258,6 +286,7 @@
             this.panel31 = new System.Windows.Forms.Panel();
             this.lbl_runtime = new System.Windows.Forms.Label();
             this.lbl_currenttime = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.label653 = new System.Windows.Forms.Label();
             this.label652 = new System.Windows.Forms.Label();
             this.lab_uph = new System.Windows.Forms.Label();
@@ -331,37 +360,7 @@
             this.label144 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
-            this.uiDigitalLabel2 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel3 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel6 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel5 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel4 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel9 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel8 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel7 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel16 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel15 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel14 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel13 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel12 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel11 = new Sunny.UI.UIDigitalLabel();
-            this.uiDigitalLabel10 = new Sunny.UI.UIDigitalLabel();
-            this.Chk_switch2 = new Sunny.UI.UICheckBox();
-            this.Chk_switch4 = new Sunny.UI.UICheckBox();
-            this.Chk_switch3 = new Sunny.UI.UICheckBox();
-            this.Chk_switch8 = new Sunny.UI.UICheckBox();
-            this.Chk_switch7 = new Sunny.UI.UICheckBox();
-            this.Chk_switch6 = new Sunny.UI.UICheckBox();
-            this.Chk_switch5 = new Sunny.UI.UICheckBox();
-            this.Chk_switch12 = new Sunny.UI.UICheckBox();
-            this.Chk_switch11 = new Sunny.UI.UICheckBox();
-            this.Chk_switch10 = new Sunny.UI.UICheckBox();
-            this.Chk_switch9 = new Sunny.UI.UICheckBox();
-            this.Chk_switch15 = new Sunny.UI.UICheckBox();
-            this.Chk_switch14 = new Sunny.UI.UICheckBox();
-            this.Chk_switch13 = new Sunny.UI.UICheckBox();
-            this.uiDigitalLabel17 = new Sunny.UI.UIDigitalLabel();
-            this.label6 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel_left.SuspendLayout();
             this.pal_setdutstate.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -384,13 +383,13 @@
             this.pal_dout65_72.SuspendLayout();
             this.groupBox25.SuspendLayout();
             this.uiPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel31.SuspendLayout();
             this.panel1.SuspendLayout();
             this.Panel_right.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox26.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_left
@@ -444,22 +443,292 @@
             this.panel5.Size = new System.Drawing.Size(1284, 52);
             this.panel5.TabIndex = 168;
             // 
+            // uiDigitalLabel16
+            // 
+            this.uiDigitalLabel16.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel16.DecimalPlaces = 1;
+            this.uiDigitalLabel16.DigitalSize = 15;
+            this.uiDigitalLabel16.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel16.Location = new System.Drawing.Point(1194, 4);
+            this.uiDigitalLabel16.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel16.Name = "uiDigitalLabel16";
+            this.uiDigitalLabel16.RectSize = 2;
+            this.uiDigitalLabel16.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel16.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel16.TabIndex = 178;
+            this.uiDigitalLabel16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel16.Value = 105.8D;
+            this.uiDigitalLabel16.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel15
+            // 
+            this.uiDigitalLabel15.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel15.DecimalPlaces = 1;
+            this.uiDigitalLabel15.DigitalSize = 15;
+            this.uiDigitalLabel15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel15.Location = new System.Drawing.Point(1116, 4);
+            this.uiDigitalLabel15.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel15.Name = "uiDigitalLabel15";
+            this.uiDigitalLabel15.RectSize = 2;
+            this.uiDigitalLabel15.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel15.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel15.TabIndex = 177;
+            this.uiDigitalLabel15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel15.Value = 105.8D;
+            this.uiDigitalLabel15.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel14
+            // 
+            this.uiDigitalLabel14.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel14.DecimalPlaces = 1;
+            this.uiDigitalLabel14.DigitalSize = 15;
+            this.uiDigitalLabel14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel14.Location = new System.Drawing.Point(1038, 4);
+            this.uiDigitalLabel14.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel14.Name = "uiDigitalLabel14";
+            this.uiDigitalLabel14.RectSize = 2;
+            this.uiDigitalLabel14.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel14.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel14.TabIndex = 176;
+            this.uiDigitalLabel14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel14.Value = 105.8D;
+            this.uiDigitalLabel14.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel13
+            // 
+            this.uiDigitalLabel13.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel13.DecimalPlaces = 1;
+            this.uiDigitalLabel13.DigitalSize = 15;
+            this.uiDigitalLabel13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel13.Location = new System.Drawing.Point(960, 4);
+            this.uiDigitalLabel13.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel13.Name = "uiDigitalLabel13";
+            this.uiDigitalLabel13.RectSize = 2;
+            this.uiDigitalLabel13.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel13.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel13.TabIndex = 175;
+            this.uiDigitalLabel13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel13.Value = 105.8D;
+            this.uiDigitalLabel13.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel12
+            // 
+            this.uiDigitalLabel12.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel12.DecimalPlaces = 1;
+            this.uiDigitalLabel12.DigitalSize = 15;
+            this.uiDigitalLabel12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel12.Location = new System.Drawing.Point(882, 4);
+            this.uiDigitalLabel12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel12.Name = "uiDigitalLabel12";
+            this.uiDigitalLabel12.RectSize = 2;
+            this.uiDigitalLabel12.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel12.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel12.TabIndex = 174;
+            this.uiDigitalLabel12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel12.Value = 105.8D;
+            this.uiDigitalLabel12.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel11
+            // 
+            this.uiDigitalLabel11.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel11.DecimalPlaces = 1;
+            this.uiDigitalLabel11.DigitalSize = 15;
+            this.uiDigitalLabel11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel11.Location = new System.Drawing.Point(804, 4);
+            this.uiDigitalLabel11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel11.Name = "uiDigitalLabel11";
+            this.uiDigitalLabel11.RectSize = 2;
+            this.uiDigitalLabel11.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel11.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel11.TabIndex = 173;
+            this.uiDigitalLabel11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel11.Value = 105.8D;
+            this.uiDigitalLabel11.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel10
+            // 
+            this.uiDigitalLabel10.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel10.DecimalPlaces = 1;
+            this.uiDigitalLabel10.DigitalSize = 15;
+            this.uiDigitalLabel10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel10.Location = new System.Drawing.Point(726, 4);
+            this.uiDigitalLabel10.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel10.Name = "uiDigitalLabel10";
+            this.uiDigitalLabel10.RectSize = 2;
+            this.uiDigitalLabel10.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel10.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel10.TabIndex = 172;
+            this.uiDigitalLabel10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel10.Value = 105.8D;
+            this.uiDigitalLabel10.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel9
+            // 
+            this.uiDigitalLabel9.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel9.DecimalPlaces = 1;
+            this.uiDigitalLabel9.DigitalSize = 15;
+            this.uiDigitalLabel9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel9.Location = new System.Drawing.Point(648, 4);
+            this.uiDigitalLabel9.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel9.Name = "uiDigitalLabel9";
+            this.uiDigitalLabel9.RectSize = 2;
+            this.uiDigitalLabel9.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel9.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel9.TabIndex = 171;
+            this.uiDigitalLabel9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel9.Value = 105.8D;
+            this.uiDigitalLabel9.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel8
+            // 
+            this.uiDigitalLabel8.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel8.DecimalPlaces = 1;
+            this.uiDigitalLabel8.DigitalSize = 15;
+            this.uiDigitalLabel8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel8.Location = new System.Drawing.Point(570, 4);
+            this.uiDigitalLabel8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel8.Name = "uiDigitalLabel8";
+            this.uiDigitalLabel8.RectSize = 2;
+            this.uiDigitalLabel8.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel8.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel8.TabIndex = 170;
+            this.uiDigitalLabel8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel8.Value = 105.8D;
+            this.uiDigitalLabel8.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel7
+            // 
+            this.uiDigitalLabel7.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel7.DecimalPlaces = 1;
+            this.uiDigitalLabel7.DigitalSize = 15;
+            this.uiDigitalLabel7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel7.Location = new System.Drawing.Point(492, 4);
+            this.uiDigitalLabel7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel7.Name = "uiDigitalLabel7";
+            this.uiDigitalLabel7.RectSize = 2;
+            this.uiDigitalLabel7.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel7.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel7.TabIndex = 169;
+            this.uiDigitalLabel7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel7.Value = 105.8D;
+            this.uiDigitalLabel7.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel6
+            // 
+            this.uiDigitalLabel6.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel6.DecimalPlaces = 1;
+            this.uiDigitalLabel6.DigitalSize = 15;
+            this.uiDigitalLabel6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel6.Location = new System.Drawing.Point(414, 4);
+            this.uiDigitalLabel6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel6.Name = "uiDigitalLabel6";
+            this.uiDigitalLabel6.RectSize = 2;
+            this.uiDigitalLabel6.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel6.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel6.TabIndex = 168;
+            this.uiDigitalLabel6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel6.Value = 105.8D;
+            this.uiDigitalLabel6.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel5
+            // 
+            this.uiDigitalLabel5.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel5.DecimalPlaces = 1;
+            this.uiDigitalLabel5.DigitalSize = 15;
+            this.uiDigitalLabel5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel5.Location = new System.Drawing.Point(336, 4);
+            this.uiDigitalLabel5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel5.Name = "uiDigitalLabel5";
+            this.uiDigitalLabel5.RectSize = 2;
+            this.uiDigitalLabel5.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel5.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel5.TabIndex = 167;
+            this.uiDigitalLabel5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel5.Value = 105.8D;
+            this.uiDigitalLabel5.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel4
+            // 
+            this.uiDigitalLabel4.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel4.DecimalPlaces = 1;
+            this.uiDigitalLabel4.DigitalSize = 15;
+            this.uiDigitalLabel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel4.Location = new System.Drawing.Point(258, 4);
+            this.uiDigitalLabel4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel4.Name = "uiDigitalLabel4";
+            this.uiDigitalLabel4.RectSize = 2;
+            this.uiDigitalLabel4.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel4.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel4.TabIndex = 166;
+            this.uiDigitalLabel4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel4.Value = 105.8D;
+            this.uiDigitalLabel4.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel3
+            // 
+            this.uiDigitalLabel3.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel3.DecimalPlaces = 1;
+            this.uiDigitalLabel3.DigitalSize = 15;
+            this.uiDigitalLabel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel3.Location = new System.Drawing.Point(180, 4);
+            this.uiDigitalLabel3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel3.Name = "uiDigitalLabel3";
+            this.uiDigitalLabel3.RectSize = 2;
+            this.uiDigitalLabel3.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel3.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel3.TabIndex = 165;
+            this.uiDigitalLabel3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel3.Value = 105.8D;
+            this.uiDigitalLabel3.ZoomScaleDisabled = true;
+            // 
+            // uiDigitalLabel2
+            // 
+            this.uiDigitalLabel2.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel2.DecimalPlaces = 1;
+            this.uiDigitalLabel2.DigitalSize = 15;
+            this.uiDigitalLabel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel2.Location = new System.Drawing.Point(102, 4);
+            this.uiDigitalLabel2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel2.Name = "uiDigitalLabel2";
+            this.uiDigitalLabel2.RectSize = 2;
+            this.uiDigitalLabel2.Size = new System.Drawing.Size(64, 42);
+            this.uiDigitalLabel2.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel2.TabIndex = 164;
+            this.uiDigitalLabel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel2.Value = 105.8D;
+            this.uiDigitalLabel2.ZoomScaleDisabled = true;
+            // 
             // uiDigitalLabel1
             // 
             this.uiDigitalLabel1.BackColor = System.Drawing.Color.Lime;
             this.uiDigitalLabel1.DecimalPlaces = 1;
             this.uiDigitalLabel1.DigitalSize = 15;
-            this.uiDigitalLabel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel1.Font = new System.Drawing.Font("宋体", 12F);
             this.uiDigitalLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel1.Location = new System.Drawing.Point(27, 4);
+            this.uiDigitalLabel1.Location = new System.Drawing.Point(24, 4);
             this.uiDigitalLabel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel1.Name = "uiDigitalLabel1";
             this.uiDigitalLabel1.RectSize = 2;
-            this.uiDigitalLabel1.Size = new System.Drawing.Size(58, 42);
+            this.uiDigitalLabel1.Size = new System.Drawing.Size(64, 42);
             this.uiDigitalLabel1.Style = Sunny.UI.UIStyle.Custom;
             this.uiDigitalLabel1.TabIndex = 163;
             this.uiDigitalLabel1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel1.Value = 36.1D;
+            this.uiDigitalLabel1.Value = 105.8D;
             this.uiDigitalLabel1.ZoomScaleDisabled = true;
             // 
             // panel4
@@ -533,6 +802,202 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1284, 229);
             this.panel4.TabIndex = 167;
+            // 
+            // Chk_switch15
+            // 
+            this.Chk_switch15.AutoSize = true;
+            this.Chk_switch15.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch15.CheckBoxSize = 20;
+            this.Chk_switch15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch15.Location = new System.Drawing.Point(1134, 4);
+            this.Chk_switch15.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch15.Name = "Chk_switch15";
+            this.Chk_switch15.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch15.TabIndex = 180;
+            // 
+            // Chk_switch14
+            // 
+            this.Chk_switch14.AutoSize = true;
+            this.Chk_switch14.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch14.CheckBoxSize = 20;
+            this.Chk_switch14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch14.Location = new System.Drawing.Point(1056, 4);
+            this.Chk_switch14.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch14.Name = "Chk_switch14";
+            this.Chk_switch14.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch14.TabIndex = 179;
+            // 
+            // Chk_switch13
+            // 
+            this.Chk_switch13.AutoSize = true;
+            this.Chk_switch13.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch13.CheckBoxSize = 20;
+            this.Chk_switch13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch13.Location = new System.Drawing.Point(978, 4);
+            this.Chk_switch13.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch13.Name = "Chk_switch13";
+            this.Chk_switch13.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch13.TabIndex = 178;
+            // 
+            // Chk_switch12
+            // 
+            this.Chk_switch12.AutoSize = true;
+            this.Chk_switch12.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch12.CheckBoxSize = 20;
+            this.Chk_switch12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch12.Location = new System.Drawing.Point(900, 4);
+            this.Chk_switch12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch12.Name = "Chk_switch12";
+            this.Chk_switch12.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch12.TabIndex = 177;
+            // 
+            // Chk_switch11
+            // 
+            this.Chk_switch11.AutoSize = true;
+            this.Chk_switch11.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch11.CheckBoxSize = 20;
+            this.Chk_switch11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch11.Location = new System.Drawing.Point(822, 4);
+            this.Chk_switch11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch11.Name = "Chk_switch11";
+            this.Chk_switch11.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch11.TabIndex = 176;
+            // 
+            // Chk_switch10
+            // 
+            this.Chk_switch10.AutoSize = true;
+            this.Chk_switch10.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch10.CheckBoxSize = 20;
+            this.Chk_switch10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch10.Location = new System.Drawing.Point(744, 4);
+            this.Chk_switch10.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch10.Name = "Chk_switch10";
+            this.Chk_switch10.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch10.TabIndex = 175;
+            // 
+            // Chk_switch9
+            // 
+            this.Chk_switch9.AutoSize = true;
+            this.Chk_switch9.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch9.CheckBoxSize = 20;
+            this.Chk_switch9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch9.Location = new System.Drawing.Point(666, 4);
+            this.Chk_switch9.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch9.Name = "Chk_switch9";
+            this.Chk_switch9.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch9.TabIndex = 174;
+            // 
+            // Chk_switch8
+            // 
+            this.Chk_switch8.AutoSize = true;
+            this.Chk_switch8.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch8.CheckBoxSize = 20;
+            this.Chk_switch8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch8.Location = new System.Drawing.Point(588, 4);
+            this.Chk_switch8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch8.Name = "Chk_switch8";
+            this.Chk_switch8.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch8.TabIndex = 173;
+            // 
+            // Chk_switch7
+            // 
+            this.Chk_switch7.AutoSize = true;
+            this.Chk_switch7.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch7.CheckBoxSize = 20;
+            this.Chk_switch7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch7.Location = new System.Drawing.Point(510, 4);
+            this.Chk_switch7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch7.Name = "Chk_switch7";
+            this.Chk_switch7.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch7.TabIndex = 172;
+            // 
+            // Chk_switch6
+            // 
+            this.Chk_switch6.AutoSize = true;
+            this.Chk_switch6.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch6.CheckBoxSize = 20;
+            this.Chk_switch6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch6.Location = new System.Drawing.Point(432, 4);
+            this.Chk_switch6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch6.Name = "Chk_switch6";
+            this.Chk_switch6.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch6.TabIndex = 171;
+            // 
+            // Chk_switch5
+            // 
+            this.Chk_switch5.AutoSize = true;
+            this.Chk_switch5.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch5.CheckBoxSize = 20;
+            this.Chk_switch5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch5.Location = new System.Drawing.Point(354, 4);
+            this.Chk_switch5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch5.Name = "Chk_switch5";
+            this.Chk_switch5.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch5.TabIndex = 170;
+            // 
+            // Chk_switch4
+            // 
+            this.Chk_switch4.AutoSize = true;
+            this.Chk_switch4.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch4.CheckBoxSize = 20;
+            this.Chk_switch4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch4.Location = new System.Drawing.Point(276, 4);
+            this.Chk_switch4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch4.Name = "Chk_switch4";
+            this.Chk_switch4.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch4.TabIndex = 169;
+            // 
+            // Chk_switch3
+            // 
+            this.Chk_switch3.AutoSize = true;
+            this.Chk_switch3.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch3.CheckBoxSize = 20;
+            this.Chk_switch3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch3.Location = new System.Drawing.Point(198, 4);
+            this.Chk_switch3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch3.Name = "Chk_switch3";
+            this.Chk_switch3.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch3.TabIndex = 168;
+            // 
+            // Chk_switch2
+            // 
+            this.Chk_switch2.AutoSize = true;
+            this.Chk_switch2.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch2.CheckBoxSize = 20;
+            this.Chk_switch2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Chk_switch2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Chk_switch2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.Chk_switch2.Location = new System.Drawing.Point(120, 4);
+            this.Chk_switch2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Chk_switch2.Name = "Chk_switch2";
+            this.Chk_switch2.Size = new System.Drawing.Size(27, 25);
+            this.Chk_switch2.TabIndex = 167;
             // 
             // pal_dout1_8
             // 
@@ -3333,7 +3798,6 @@
             // uiPanel1
             // 
             this.uiPanel1.Controls.Add(this.uiDigitalLabel17);
-            this.uiPanel1.Controls.Add(this.pictureBox1);
             this.uiPanel1.Controls.Add(this.label153);
             this.uiPanel1.Controls.Add(this.label8);
             this.uiPanel1.Controls.Add(this.label9);
@@ -3358,6 +3822,7 @@
             this.uiPanel1.Controls.Add(this.label123);
             this.uiPanel1.Controls.Add(this.label2);
             this.uiPanel1.Controls.Add(this.label_driverStatus);
+            this.uiPanel1.Controls.Add(this.pictureBox1);
             this.uiPanel1.FillColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.uiPanel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiPanel1.Location = new System.Drawing.Point(0, 1);
@@ -3369,15 +3834,23 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // uiDigitalLabel17
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(871, 40);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 358);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 161;
-            this.pictureBox1.TabStop = false;
+            this.uiDigitalLabel17.BackColor = System.Drawing.Color.Lime;
+            this.uiDigitalLabel17.DecimalPlaces = 1;
+            this.uiDigitalLabel17.DigitalSize = 15;
+            this.uiDigitalLabel17.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel17.Location = new System.Drawing.Point(645, 214);
+            this.uiDigitalLabel17.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel17.Name = "uiDigitalLabel17";
+            this.uiDigitalLabel17.RectSize = 2;
+            this.uiDigitalLabel17.Size = new System.Drawing.Size(180, 35);
+            this.uiDigitalLabel17.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel17.TabIndex = 176;
+            this.uiDigitalLabel17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel17.Value = 36.1D;
+            this.uiDigitalLabel17.ZoomScaleDisabled = true;
             // 
             // label153
             // 
@@ -3605,6 +4078,18 @@
             this.lbl_currenttime.TabIndex = 6;
             this.lbl_currenttime.Text = "HH:mm:ss";
             this.lbl_currenttime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label6.Location = new System.Drawing.Point(690, 0);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(190, 45);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "HeatingTime=000s";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label653
             // 
@@ -4581,501 +5066,16 @@
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
             // 
-            // uiDigitalLabel2
+            // pictureBox1
             // 
-            this.uiDigitalLabel2.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel2.DecimalPlaces = 1;
-            this.uiDigitalLabel2.DigitalSize = 15;
-            this.uiDigitalLabel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel2.Location = new System.Drawing.Point(105, 4);
-            this.uiDigitalLabel2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel2.Name = "uiDigitalLabel2";
-            this.uiDigitalLabel2.RectSize = 2;
-            this.uiDigitalLabel2.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel2.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel2.TabIndex = 164;
-            this.uiDigitalLabel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel2.Value = 36.1D;
-            this.uiDigitalLabel2.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel3
-            // 
-            this.uiDigitalLabel3.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel3.DecimalPlaces = 1;
-            this.uiDigitalLabel3.DigitalSize = 15;
-            this.uiDigitalLabel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel3.Location = new System.Drawing.Point(183, 4);
-            this.uiDigitalLabel3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel3.Name = "uiDigitalLabel3";
-            this.uiDigitalLabel3.RectSize = 2;
-            this.uiDigitalLabel3.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel3.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel3.TabIndex = 165;
-            this.uiDigitalLabel3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel3.Value = 36.1D;
-            this.uiDigitalLabel3.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel6
-            // 
-            this.uiDigitalLabel6.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel6.DecimalPlaces = 1;
-            this.uiDigitalLabel6.DigitalSize = 15;
-            this.uiDigitalLabel6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel6.Location = new System.Drawing.Point(417, 4);
-            this.uiDigitalLabel6.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel6.Name = "uiDigitalLabel6";
-            this.uiDigitalLabel6.RectSize = 2;
-            this.uiDigitalLabel6.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel6.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel6.TabIndex = 168;
-            this.uiDigitalLabel6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel6.Value = 36.1D;
-            this.uiDigitalLabel6.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel5
-            // 
-            this.uiDigitalLabel5.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel5.DecimalPlaces = 1;
-            this.uiDigitalLabel5.DigitalSize = 15;
-            this.uiDigitalLabel5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel5.Location = new System.Drawing.Point(339, 4);
-            this.uiDigitalLabel5.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel5.Name = "uiDigitalLabel5";
-            this.uiDigitalLabel5.RectSize = 2;
-            this.uiDigitalLabel5.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel5.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel5.TabIndex = 167;
-            this.uiDigitalLabel5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel5.Value = 36.1D;
-            this.uiDigitalLabel5.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel4
-            // 
-            this.uiDigitalLabel4.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel4.DecimalPlaces = 1;
-            this.uiDigitalLabel4.DigitalSize = 15;
-            this.uiDigitalLabel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel4.Location = new System.Drawing.Point(261, 4);
-            this.uiDigitalLabel4.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel4.Name = "uiDigitalLabel4";
-            this.uiDigitalLabel4.RectSize = 2;
-            this.uiDigitalLabel4.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel4.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel4.TabIndex = 166;
-            this.uiDigitalLabel4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel4.Value = 36.1D;
-            this.uiDigitalLabel4.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel9
-            // 
-            this.uiDigitalLabel9.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel9.DecimalPlaces = 1;
-            this.uiDigitalLabel9.DigitalSize = 15;
-            this.uiDigitalLabel9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel9.Location = new System.Drawing.Point(651, 4);
-            this.uiDigitalLabel9.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel9.Name = "uiDigitalLabel9";
-            this.uiDigitalLabel9.RectSize = 2;
-            this.uiDigitalLabel9.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel9.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel9.TabIndex = 171;
-            this.uiDigitalLabel9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel9.Value = 36.1D;
-            this.uiDigitalLabel9.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel8
-            // 
-            this.uiDigitalLabel8.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel8.DecimalPlaces = 1;
-            this.uiDigitalLabel8.DigitalSize = 15;
-            this.uiDigitalLabel8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel8.Location = new System.Drawing.Point(573, 4);
-            this.uiDigitalLabel8.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel8.Name = "uiDigitalLabel8";
-            this.uiDigitalLabel8.RectSize = 2;
-            this.uiDigitalLabel8.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel8.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel8.TabIndex = 170;
-            this.uiDigitalLabel8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel8.Value = 36.1D;
-            this.uiDigitalLabel8.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel7
-            // 
-            this.uiDigitalLabel7.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel7.DecimalPlaces = 1;
-            this.uiDigitalLabel7.DigitalSize = 15;
-            this.uiDigitalLabel7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel7.Location = new System.Drawing.Point(495, 4);
-            this.uiDigitalLabel7.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel7.Name = "uiDigitalLabel7";
-            this.uiDigitalLabel7.RectSize = 2;
-            this.uiDigitalLabel7.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel7.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel7.TabIndex = 169;
-            this.uiDigitalLabel7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel7.Value = 36.1D;
-            this.uiDigitalLabel7.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel16
-            // 
-            this.uiDigitalLabel16.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel16.DecimalPlaces = 1;
-            this.uiDigitalLabel16.DigitalSize = 15;
-            this.uiDigitalLabel16.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel16.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel16.Location = new System.Drawing.Point(1197, 4);
-            this.uiDigitalLabel16.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel16.Name = "uiDigitalLabel16";
-            this.uiDigitalLabel16.RectSize = 2;
-            this.uiDigitalLabel16.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel16.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel16.TabIndex = 178;
-            this.uiDigitalLabel16.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel16.Value = 36.1D;
-            this.uiDigitalLabel16.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel15
-            // 
-            this.uiDigitalLabel15.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel15.DecimalPlaces = 1;
-            this.uiDigitalLabel15.DigitalSize = 15;
-            this.uiDigitalLabel15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel15.Location = new System.Drawing.Point(1119, 4);
-            this.uiDigitalLabel15.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel15.Name = "uiDigitalLabel15";
-            this.uiDigitalLabel15.RectSize = 2;
-            this.uiDigitalLabel15.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel15.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel15.TabIndex = 177;
-            this.uiDigitalLabel15.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel15.Value = 36.1D;
-            this.uiDigitalLabel15.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel14
-            // 
-            this.uiDigitalLabel14.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel14.DecimalPlaces = 1;
-            this.uiDigitalLabel14.DigitalSize = 15;
-            this.uiDigitalLabel14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel14.Location = new System.Drawing.Point(1041, 4);
-            this.uiDigitalLabel14.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel14.Name = "uiDigitalLabel14";
-            this.uiDigitalLabel14.RectSize = 2;
-            this.uiDigitalLabel14.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel14.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel14.TabIndex = 176;
-            this.uiDigitalLabel14.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel14.Value = 36.1D;
-            this.uiDigitalLabel14.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel13
-            // 
-            this.uiDigitalLabel13.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel13.DecimalPlaces = 1;
-            this.uiDigitalLabel13.DigitalSize = 15;
-            this.uiDigitalLabel13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel13.Location = new System.Drawing.Point(963, 4);
-            this.uiDigitalLabel13.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel13.Name = "uiDigitalLabel13";
-            this.uiDigitalLabel13.RectSize = 2;
-            this.uiDigitalLabel13.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel13.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel13.TabIndex = 175;
-            this.uiDigitalLabel13.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel13.Value = 36.1D;
-            this.uiDigitalLabel13.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel12
-            // 
-            this.uiDigitalLabel12.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel12.DecimalPlaces = 1;
-            this.uiDigitalLabel12.DigitalSize = 15;
-            this.uiDigitalLabel12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel12.Location = new System.Drawing.Point(885, 4);
-            this.uiDigitalLabel12.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel12.Name = "uiDigitalLabel12";
-            this.uiDigitalLabel12.RectSize = 2;
-            this.uiDigitalLabel12.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel12.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel12.TabIndex = 174;
-            this.uiDigitalLabel12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel12.Value = 36.1D;
-            this.uiDigitalLabel12.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel11
-            // 
-            this.uiDigitalLabel11.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel11.DecimalPlaces = 1;
-            this.uiDigitalLabel11.DigitalSize = 15;
-            this.uiDigitalLabel11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel11.Location = new System.Drawing.Point(807, 4);
-            this.uiDigitalLabel11.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel11.Name = "uiDigitalLabel11";
-            this.uiDigitalLabel11.RectSize = 2;
-            this.uiDigitalLabel11.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel11.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel11.TabIndex = 173;
-            this.uiDigitalLabel11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel11.Value = 36.1D;
-            this.uiDigitalLabel11.ZoomScaleDisabled = true;
-            // 
-            // uiDigitalLabel10
-            // 
-            this.uiDigitalLabel10.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel10.DecimalPlaces = 1;
-            this.uiDigitalLabel10.DigitalSize = 15;
-            this.uiDigitalLabel10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel10.Location = new System.Drawing.Point(729, 4);
-            this.uiDigitalLabel10.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel10.Name = "uiDigitalLabel10";
-            this.uiDigitalLabel10.RectSize = 2;
-            this.uiDigitalLabel10.Size = new System.Drawing.Size(58, 42);
-            this.uiDigitalLabel10.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel10.TabIndex = 172;
-            this.uiDigitalLabel10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel10.Value = 36.1D;
-            this.uiDigitalLabel10.ZoomScaleDisabled = true;
-            // 
-            // Chk_switch2
-            // 
-            this.Chk_switch2.AutoSize = true;
-            this.Chk_switch2.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch2.CheckBoxSize = 20;
-            this.Chk_switch2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch2.Location = new System.Drawing.Point(120, 4);
-            this.Chk_switch2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch2.Name = "Chk_switch2";
-            this.Chk_switch2.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch2.TabIndex = 167;
-            // 
-            // Chk_switch4
-            // 
-            this.Chk_switch4.AutoSize = true;
-            this.Chk_switch4.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch4.CheckBoxSize = 20;
-            this.Chk_switch4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch4.Location = new System.Drawing.Point(276, 4);
-            this.Chk_switch4.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch4.Name = "Chk_switch4";
-            this.Chk_switch4.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch4.TabIndex = 169;
-            // 
-            // Chk_switch3
-            // 
-            this.Chk_switch3.AutoSize = true;
-            this.Chk_switch3.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch3.CheckBoxSize = 20;
-            this.Chk_switch3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch3.Location = new System.Drawing.Point(198, 4);
-            this.Chk_switch3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch3.Name = "Chk_switch3";
-            this.Chk_switch3.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch3.TabIndex = 168;
-            // 
-            // Chk_switch8
-            // 
-            this.Chk_switch8.AutoSize = true;
-            this.Chk_switch8.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch8.CheckBoxSize = 20;
-            this.Chk_switch8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch8.Location = new System.Drawing.Point(588, 4);
-            this.Chk_switch8.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch8.Name = "Chk_switch8";
-            this.Chk_switch8.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch8.TabIndex = 173;
-            // 
-            // Chk_switch7
-            // 
-            this.Chk_switch7.AutoSize = true;
-            this.Chk_switch7.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch7.CheckBoxSize = 20;
-            this.Chk_switch7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch7.Location = new System.Drawing.Point(510, 4);
-            this.Chk_switch7.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch7.Name = "Chk_switch7";
-            this.Chk_switch7.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch7.TabIndex = 172;
-            // 
-            // Chk_switch6
-            // 
-            this.Chk_switch6.AutoSize = true;
-            this.Chk_switch6.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch6.CheckBoxSize = 20;
-            this.Chk_switch6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch6.Location = new System.Drawing.Point(432, 4);
-            this.Chk_switch6.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch6.Name = "Chk_switch6";
-            this.Chk_switch6.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch6.TabIndex = 171;
-            // 
-            // Chk_switch5
-            // 
-            this.Chk_switch5.AutoSize = true;
-            this.Chk_switch5.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch5.CheckBoxSize = 20;
-            this.Chk_switch5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch5.Location = new System.Drawing.Point(354, 4);
-            this.Chk_switch5.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch5.Name = "Chk_switch5";
-            this.Chk_switch5.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch5.TabIndex = 170;
-            // 
-            // Chk_switch12
-            // 
-            this.Chk_switch12.AutoSize = true;
-            this.Chk_switch12.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch12.CheckBoxSize = 20;
-            this.Chk_switch12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch12.Location = new System.Drawing.Point(900, 4);
-            this.Chk_switch12.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch12.Name = "Chk_switch12";
-            this.Chk_switch12.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch12.TabIndex = 177;
-            // 
-            // Chk_switch11
-            // 
-            this.Chk_switch11.AutoSize = true;
-            this.Chk_switch11.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch11.CheckBoxSize = 20;
-            this.Chk_switch11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch11.Location = new System.Drawing.Point(822, 4);
-            this.Chk_switch11.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch11.Name = "Chk_switch11";
-            this.Chk_switch11.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch11.TabIndex = 176;
-            // 
-            // Chk_switch10
-            // 
-            this.Chk_switch10.AutoSize = true;
-            this.Chk_switch10.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch10.CheckBoxSize = 20;
-            this.Chk_switch10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch10.Location = new System.Drawing.Point(744, 4);
-            this.Chk_switch10.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch10.Name = "Chk_switch10";
-            this.Chk_switch10.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch10.TabIndex = 175;
-            // 
-            // Chk_switch9
-            // 
-            this.Chk_switch9.AutoSize = true;
-            this.Chk_switch9.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch9.CheckBoxSize = 20;
-            this.Chk_switch9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch9.Location = new System.Drawing.Point(666, 4);
-            this.Chk_switch9.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch9.Name = "Chk_switch9";
-            this.Chk_switch9.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch9.TabIndex = 174;
-            // 
-            // Chk_switch15
-            // 
-            this.Chk_switch15.AutoSize = true;
-            this.Chk_switch15.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch15.CheckBoxSize = 20;
-            this.Chk_switch15.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch15.Location = new System.Drawing.Point(1134, 4);
-            this.Chk_switch15.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch15.Name = "Chk_switch15";
-            this.Chk_switch15.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch15.TabIndex = 180;
-            // 
-            // Chk_switch14
-            // 
-            this.Chk_switch14.AutoSize = true;
-            this.Chk_switch14.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch14.CheckBoxSize = 20;
-            this.Chk_switch14.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch14.Location = new System.Drawing.Point(1056, 4);
-            this.Chk_switch14.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch14.Name = "Chk_switch14";
-            this.Chk_switch14.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch14.TabIndex = 179;
-            // 
-            // Chk_switch13
-            // 
-            this.Chk_switch13.AutoSize = true;
-            this.Chk_switch13.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch13.CheckBoxSize = 20;
-            this.Chk_switch13.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.Chk_switch13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Chk_switch13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch13.Location = new System.Drawing.Point(978, 4);
-            this.Chk_switch13.MinimumSize = new System.Drawing.Size(1, 1);
-            this.Chk_switch13.Name = "Chk_switch13";
-            this.Chk_switch13.Size = new System.Drawing.Size(27, 25);
-            this.Chk_switch13.TabIndex = 178;
-            // 
-            // uiDigitalLabel17
-            // 
-            this.uiDigitalLabel17.BackColor = System.Drawing.Color.Lime;
-            this.uiDigitalLabel17.DecimalPlaces = 1;
-            this.uiDigitalLabel17.DigitalSize = 15;
-            this.uiDigitalLabel17.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiDigitalLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel17.Location = new System.Drawing.Point(645, 214);
-            this.uiDigitalLabel17.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel17.Name = "uiDigitalLabel17";
-            this.uiDigitalLabel17.RectSize = 2;
-            this.uiDigitalLabel17.Size = new System.Drawing.Size(180, 35);
-            this.uiDigitalLabel17.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel17.TabIndex = 176;
-            this.uiDigitalLabel17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel17.Value = 36.1D;
-            this.uiDigitalLabel17.ZoomScaleDisabled = true;
-            // 
-            // label6
-            // 
-            this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label6.Location = new System.Drawing.Point(690, 0);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(190, 45);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "HeatingTime=000s";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
+            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 161;
+            this.pictureBox1.TabStop = false;
             // 
             // _main
             // 
@@ -5125,7 +5125,6 @@
             this.groupBox25.PerformLayout();
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel31.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -5135,6 +5134,7 @@
             this.groupBox26.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

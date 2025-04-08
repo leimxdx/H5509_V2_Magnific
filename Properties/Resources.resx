@@ -139,6 +139,9 @@
   <data name="机台照" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\机台照.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="机台照1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\机台照.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="设置与维护图标" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\设置与维护图标.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

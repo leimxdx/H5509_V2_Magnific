@@ -15,6 +15,9 @@ namespace H5509_V2
         public double 目标速度 { get; set; }
         public double 目标加速度 { get; set; }
         public double 目标减速度 { get; set; }
+        /// <summary>
+        /// 范围[0,50]
+        /// </summary>
         public short 平滑时间 { get; set; }
         public double Jog平滑时间 { get; set; }
         public double 实际位置 { get; set; }

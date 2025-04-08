@@ -112,7 +112,6 @@
     <Compile Include="动作\gts.cs" />
     <Compile Include="动作\Motion.cs" />
     <Compile Include="模块\APPmaster.cs" />
-    <Compile Include="模块\OperationResult.cs" />
     <Compile Include="界面\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,13 +265,13 @@
     <Content Include="PIFunc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\机台照.png" />
     <Content Include="VFunc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V2\bin\Debug \\192.168.2.165\H5509_V2\bin\Debug</PostBuildEvent>
   </PropertyGroup>
 </Project>
