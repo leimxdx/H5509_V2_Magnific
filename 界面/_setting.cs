@@ -14,7 +14,7 @@ namespace H5509_V2
 {
     public partial class _setting : UIUserControl
     {
-        private Motion motion = new Motion();
+        private Motion motion = MotionEx.GetInstance().Motion;
 
         private System.Timers.Timer RefreshTimer;
 

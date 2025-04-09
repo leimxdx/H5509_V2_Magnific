@@ -13,26 +13,26 @@ namespace H5509_V2
 {
     public class Motion
     {
-        private void ErrorHandler(string command, short error)
+        public void ErrorHandler(string command, short error)
         {
             string result = string.Empty;
 
             switch (error)
             {
                 case 0: break;
-                case 1: result = $"{command}指令执行错误({error})"; break;
-                case 2: result = $"{command}license不支持({error})"; break;
-                case 7: result = $"{command}指令参数错误({error})"; break;
-                case -1: result = $"{command}主机和运动控制器通讯失败({error})"; break;
-                case -6: result = $"{command}打开控制器失败({error})"; break;
-                case -7: result = $"{command}运动控制器没有响应({error})"; break;
-                case -10: result = $"{command}主机和运动控制器通讯失败({error})"; break;
-                case -13: result = $"{command}编码器初始化失败({error})"; break;
-                case -14: result = $"{command}编码器初始化失败({error})"; break;
-                case -15: result = $"{command}动态库版本不匹配({error})"; break;
-                case 15: result = $"{command}动态库版本不匹配({error})"; break;
-                case 16: result = $"{command}不具备版本匹配功能({error})"; break;
-                default: result = $"{command}未知错误({error})"; break;
+                case 1: result = $"执行指令:{command}\n指令执行错误({error})"; break;
+                case 2: result = $"执行指令:{command}\nlicense不支持({error})"; break;
+                case 7: result = $"执行指令:{command}\n指令参数错误({error})"; break;
+                case -1: result = $"执行指令: {command}\n主机和运动控制器通讯失败({error})"; break;
+                case -6: result = $"执行指令:  {command}\n打开控制器失败({error})"; break;
+                case -7: result = $"执行指令: {command}\n运动控制器没有响应({error})"; break;
+                case -10: result = $"执行指令:{command}\n主机和运动控制器通讯失败({error})"; break;
+                case -13: result = $"执行指令: {command}\n编码器初始化失败({error})"; break;
+                case -14: result = $"执行指令:{command}\n编码器初始化失败({error})"; break;
+                case -15: result = $"执行指令:{command}\n动态库版本不匹配({error})"; break;
+                case 15: result = $"执行指令:{command}\n动态库版本不匹配({error})"; break;
+                case 16: result = $"执行指令:{command}\n不具备版本匹配功能({error})"; break;
+                default: result = $"执行指令:{command}\n未知错误({error})"; break;
             }
 
             if (result.Length > 0)

@@ -13,6 +13,8 @@ namespace H5509_V2
         /// </summary>
         public static bool InitedOK = false;
 
+        public static List<IOInfo> IOList;
+
         public static void GetAxisCore(string axisname, out short core, out short axis)
         {
             switch (axisname)

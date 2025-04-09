@@ -51,14 +51,22 @@ namespace H5509_V2
         _speed speed;
         _IO io;
         _log log;
+        MotionEx motionEx = MotionEx.GetInstance();
 
         public ForMain()
         {
             InitializeComponent();
+
+            Init_APPmaster();
+            
         }
         private void ForMain_Load(object sender, EventArgs e)
         {
+
+
             main = new _main();
+
+
             setting = new _setting();
             offset = new _offset();
             speed = new _speed();
@@ -72,8 +80,11 @@ namespace H5509_V2
 
             changeMainPanel(main);
 
-            Motion motion = new Motion(); 
-            motion.InitCard();
+            string msg = motionEx.Motion.InitCard();
+            if (msg != "Success")
+            {
+                MessageBox.Show("系统加载失败！详细信息：\n" + msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         /// <summary>
@@ -127,6 +138,28 @@ namespace H5509_V2
         private void button_log_Click(object sender, EventArgs e)
         {
             changeMainPanel(log);
+        }
+
+        private void Init_APPmaster()
+        {
+            DataTable dataTable = SQLiteHelper.GetDataSet("select * from IOInfo").Tables[0];
+
+            APPmaster.IOList = new List<IOInfo>();
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                APPmaster.IOList.Add(new IOInfo()
+                {
+                    IoModule = dr["模块型号"].ToString(),
+                    Core =Convert.ToInt16( dr["核号"].ToString()),
+                    ModuleNum = Convert.ToInt16(dr["模块号"].ToString()),
+                    IoIndex = Convert.ToInt16(dr["IO索引"].ToString()),
+                    IoNum = dr["IO编号"].ToString(),
+                    IoName = dr["IO名称"].ToString(),
+                    Area = dr["区域"].ToString()
+                });
+            }
+
+            //APPmaster.list = new
         }
     }
 }
