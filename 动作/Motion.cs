@@ -718,7 +718,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisHome">轴回零信息</param>
         /// <returns></returns>
-        public string UniaxialHome(AxisHome axisHome)
+        public string UniaxialHome(AxisHomeInfo axisHome)
         {
             //判断是否运动
             string result = CommonMotionValidate(axisHome.核号, axisHome.轴号);
@@ -763,17 +763,18 @@ namespace H5509_V2
                 //int HOME_MODE_INDEX = 30;  Index回原点
 
                 tHomePrm.mode = axisHome.模式;
-                tHomePrm.moveDir = axisHome.Home搜索方向;
+                tHomePrm.moveDir = axisHome.回零启动方向;
                 tHomePrm.indexDir = 1; //必须赋值,否则报错
                 tHomePrm.edge = axisHome.捕获触发沿;
-                tHomePrm.velHigh = axisHome.搜索Home速度;
+                tHomePrm.velHigh = axisHome.搜索速度;
                 tHomePrm.velLow = 1; //必须赋值,否则报错
                 tHomePrm.acc = axisHome.加速度;
                 tHomePrm.dec = axisHome.减速度;
                 tHomePrm.smoothTime = axisHome.平滑时间;
+                tHomePrm.homeOffset = axisHome.零点偏置;
                 //tHomePrm.searchHomeDistance = 200000;
                 //tHomePrm.searchIndexDistance = 30000;
-                tHomePrm.escapeStep = 1000;
+                tHomePrm.escapeStep = axisHome.反向脱离步长;
 
                 //寻原点
                 error = GTN_GoHome(axisHome.核号, axisHome.轴号, ref tHomePrm);//启动Smart Home回原点
@@ -791,7 +792,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="ListAxisHome"></param>
         /// <returns></returns>
-        public string MultiaxisHome(List<AxisHome> listAxisHome)
+        public string MultiaxisHome(List<AxisHomeInfo> listAxisHome)
         {
             string result = "";
 
@@ -826,17 +827,18 @@ namespace H5509_V2
                     //int HOME_MODE_INDEX = 30;  Index回原点
 
                     tHomePrm[i].mode = listAxisHome[i].模式;
-                    tHomePrm[i].moveDir = listAxisHome[i].Home搜索方向;
+                    tHomePrm[i].moveDir = listAxisHome[i].回零启动方向;
                     tHomePrm[i].indexDir = 1; //必须赋值,否则报错
                     tHomePrm[i].edge = listAxisHome[i].捕获触发沿;
-                    tHomePrm[i].velHigh = listAxisHome[i].搜索Home速度;
+                    tHomePrm[i].velHigh = listAxisHome[i].搜索速度;
                     tHomePrm[i].velLow = 1; //必须赋值,否则报错
                     tHomePrm[i].acc = listAxisHome[i].加速度;
                     tHomePrm[i].dec = listAxisHome[i].减速度;
                     tHomePrm[i].smoothTime = listAxisHome[i].平滑时间;
+                    tHomePrm[i].homeOffset = listAxisHome[i].零点偏置;
                     //tHomePrm.searchHomeDistance = 200000;
                     //tHomePrm.searchIndexDistance = 30000;
-                    tHomePrm[i].escapeStep = 1000;
+                    tHomePrm[i].escapeStep = listAxisHome[i].反向脱离步长;
                 }
 
                 for (int i = 0; i < listAxisHome.Count; i++)

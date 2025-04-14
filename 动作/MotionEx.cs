@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
+using static System.Windows.Forms.LinkLabel;
 using static GTN.mc;
 
 namespace H5509_V2
@@ -37,16 +41,66 @@ namespace H5509_V2
             return instance;
         }
 
+        #region 轴卡初始化
+
+        public string GSNInitCard()
+        { 
+            return Motion.InitCard();
+        }
+
+        #endregion
+
         #region 轴回零
 
+        private AxisHomeInfo GetAxisHomeInfo(string axisInfo)
+        {
+            AxisHomeInfo axisHome = new AxisHomeInfo();
+            for (int i = 0; i < APPmaster.AxisHomeInfoList.Count; i++)
+            {
+                if (axisInfo == APPmaster.AxisHomeInfoList[i].轴名称)
+                {
+                    axisHome = APPmaster.AxisHomeInfoList[i];
+                    break;
+                }
+            }
+            return axisHome;
+        }
 
-        //public string Wait
+        /// <summary>
+        /// 等待多轴回零
+        /// </summary>
+        /// <param name="axisHomes"></param>
+        /// <returns></returns>
+        private string WaitAxisHome(List<AxisHomeInfo> axisHomes)
+        {
+            bool[] bools = new bool[axisHomes.Count];
+            for (int i = 0; i < axisHomes.Count; i++)
+            {
+                string result = WaitAxisHome(axisHomes[i]);
+                if (result != "Success")
+                {
+                    Debug.WriteLine(result);
+                    bools[i] = false;
+                }
+                else bools[i] = true;
+            }
+            if (bools.Contains(false))
+            {
+                return "Fail";
+            }
+            else return "Success";
+        }
 
-        public string WaitAxisHome(AxisHome axisHome)
+        /// <summary>
+        /// 等待单轴回零
+        /// </summary>
+        /// <param name="axisHome"></param>
+        /// <returns></returns>
+        private string WaitAxisHome(AxisHomeInfo axisHome)
         {
             string result = Motion.CommonInitedValidate();
 
-            if(result != "Success") return result;
+            if (result != "Success") return result;
 
             try
             {
@@ -55,7 +109,12 @@ namespace H5509_V2
                 {
                     short error = GTN_GetHomeStatus(axisHome.核号, axisHome.轴号, out tHomeSts);
                     Motion.ErrorHandler($"GTN_GetHomeStatus({axisHome.核号}, {axisHome.轴号}, out tHomeSts)", error);
-
+                    if (APPmaster.IsPause)
+                    {
+                        Motion.AxisStop(axisHome.核号, axisHome.轴号, 1);
+                        return $"核号:{axisHome.核号},轴号:{axisHome.轴号})回零被停止";
+                    }
+                    Thread.Sleep(1); //减少轴卡和CPU压力
                 }
                 while (tHomeSts.run == 1);
 
@@ -73,8 +132,10 @@ namespace H5509_V2
                     else if (tHomeSts.error == HOME_ERROR_NO_INDEX) return "未找到Index";
                     else return "回零异常";
                 }
+
+                result = Motion.AxisZeroPos(axisHome.核号, axisHome.轴号);
             }
-            catch (Exception ex) 
+            catch (Exception ex)
             {
                 return ex.Message;
             }
@@ -82,62 +143,521 @@ namespace H5509_V2
             return "Success";
         }
 
-        public Task<string> InputAxisZHome()
+        /// <summary>
+        /// 多轴回零
+        /// </summary>
+        /// <param name="axisNames"></param>
+        /// <returns></returns>
+        public string AxisHome(string[] axisNames)
         {
-            List<AxisHome> axisHomes = new List<AxisHome>();
-
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
+            List<AxisHomeInfo> axisHomes = new List<AxisHomeInfo>();
+            for (int i = 0; i < axisNames.Length; i++)
+            {
+                axisHomes.Add(GetAxisHomeInfo(axisNames[i]));
+            }
 
             string result = Motion.MultiaxisHome(axisHomes);
-
-            Task<string> task = Task.Run(() =>
+            if (result == "Success")
             {
-                if (result == "Success")
+                Task<string> task = Task.Run(() =>
                 {
-                    //等待回零完成
-                }
-                return result;
-            });
+                    return WaitAxisHome(axisHomes);
+                });
 
-            return task;
+                return task.Result;
+            }
+            else return result;
         }
 
-        public Task<string> OutputAxisZHome()
+        /// <summary>
+        /// 单轴回零
+        /// </summary>
+        /// <param name="axisName"></param>
+        /// <returns></returns>
+        public string AxisHome(string axisName)
         {
-            List<AxisHome> axisHomes = new List<AxisHome>();
+            AxisHomeInfo axisHome = GetAxisHomeInfo(axisName);
 
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
-            axisHomes.Add(new AxisHome() { 核号 = 1, 轴号 = 1, 模式 = 11, Home搜索方向 = -1, 捕获触发沿 = 1, 搜索Home速度 = 10, 加速度 = 10, 减速度 = 0.2, 平滑时间 = 0, });
-
-            string result = Motion.MultiaxisHome(axisHomes);
-
-            Task<string> task = Task.Run(() =>
+            string result = Motion.UniaxialHome(axisHome);
+            if (result == "Success")
             {
-                if (result == "Success")
+                Task<string> task = Task.Run(() =>
                 {
-                    //等待回零完成
-                }
-                return result;
-            });
+                    return WaitAxisHome(axisHome);//等待回零完成
+                });
 
-            return task;
+                return task.Result;
+            }
+            else return result;
         }
-
-        //public Task<string> InputAxisXHome()
-        //{
-        //    List<AxisHome> axisHomes = new List<AxisHome>()
-        //    {
-
-        //    };
-        //    string result = Motion.MultiaxisHome(axisHomes);
-        //}
 
         #endregion
 
+        #region 动作
+
+        /// <summary>
+        /// 获取轴移动信息
+        /// </summary>
+        /// <param name="axisInfo"></param>
+        /// <returns></returns>
+        private AxisRunInfo GetAxisRunInfo(string axisInfo)
+        {
+            AxisRunInfo axisRun = new AxisRunInfo();
+            for (int i = 0; i < APPmaster.AxisRunInfoList.Count; i++)
+            {
+                if (axisInfo == APPmaster.AxisRunInfoList[i].轴名称)
+                {
+                    axisRun = APPmaster.AxisRunInfoList[i];
+                    break;
+                }
+            }
+            return axisRun;
+        }
+
+        /// <summary>
+        /// 等待单轴移动
+        /// </summary>
+        /// <param name="axisRun"></param>
+        /// <returns></returns>
+        private string WaitAxisMove(AxisRun axisRun)
+        {
+            string result = Motion.CommonInitedValidate();
+
+            if (result != "Success") return result;
+
+            try
+            {
+                int sts;
+                do
+                {
+                    short error = GTN_GetSts(axisRun.核号, axisRun.轴号, out sts, 1, out uint pClock);
+                    Motion.ErrorHandler($"GTN_GetSts({axisRun.核号}, {axisRun.轴号}, out {sts}, 1, out uint pClock)", error);
+                    if (APPmaster.IsPause)
+                    {
+                        GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
+                        while (true)
+                        {
+                            if (APPmaster.IsForecePause) break;
+                            if (APPmaster.IsPause) Thread.Sleep(10);
+                            else
+                            {
+                                result = Motion.UniaxialAbsoluteMoveAbs(axisRun);
+                                break;
+                            }
+                        }
+                    }
+                    Thread.Sleep(1); //减少轴卡和CPU压力
+                }
+                while ((sts & 0x400) != 0);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "Success";
+        }
+
+        /// <summary>
+        /// 等待多轴移动
+        /// </summary>
+        /// <param name="axisRuns"></param>
+        /// <returns></returns>
+        private string WaitAxisMove(List<AxisRun> axisRuns)
+        {
+            string result = Motion.CommonInitedValidate();
+
+            if (result != "Success") return result;
+
+            try
+            {
+                bool value = true;
+                int[] sts = new int[axisRuns.Count];
+                do
+                {
+                    for (int i = 0; i < axisRuns.Count; i++)
+                    {
+                        short error = GTN_GetSts(axisRuns[i].核号, axisRuns[i].轴号, out sts[i], 1, out uint pClock);
+                        Motion.ErrorHandler($"GTN_GetSts({axisRuns[i].核号}, {axisRuns[i].轴号}, out {sts[i]}, 1, out uint pClock)", error);
+                    }
+
+                    if (APPmaster.IsPause)
+                    {
+                        for (int i = 0; i < axisRuns.Count; i++)
+                        {
+                            GTN_Stop(axisRuns[i].核号, 1 << (axisRuns[i].轴号 - 1), 1);
+                        }
+                        while (true)
+                        {
+                            if (APPmaster.IsForecePause) break;
+                            if (APPmaster.IsPause) Thread.Sleep(10);
+                            else
+                            {
+                                result = Motion.MultiaxisAbsoluteMoveAbs(axisRuns);
+                                break;
+                            }
+                        }
+                    }
+
+                    value = false;
+
+                    for (int i = 0; i < sts.Length; i++)
+                    {
+                        if ((sts[i] & 0x400) != 0)
+                        {
+                            value = true;
+                            break;
+                        }
+                    }
+
+                    Thread.Sleep(1); //减少轴卡和CPU压力
+                }
+                while (value);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "Success";
+        }
+
+        /// <summary>
+        /// 单轴移动
+        /// </summary>
+        /// <param name="axisName"></param>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public string AxisMove(string axisName, int pos)
+        {
+            AxisRunInfo axisRunInfo = GetAxisRunInfo(axisName);
+
+            AxisRun axisRun = new AxisRun()
+            {
+                核号 = axisRunInfo.核号,
+                轴号 = axisRunInfo.轴号,
+                目标位置 = pos,
+                目标速度 = axisRunInfo.运行速度,
+                目标加速度 = axisRunInfo.加速度,
+                目标减速度 = axisRunInfo.减速度,
+                平滑时间 = axisRunInfo.平滑时间,
+            };
+
+            string result = Motion.UniaxialAbsoluteMoveAbs(axisRun);
+            if (result == "Success")
+            {
+                Task<string> task = Task.Run(() =>
+                {
+                    return WaitAxisMove(axisRun);//等待回零完成
+                });
+
+                return task.Result;
+            }
+            else return result;
+        }
+
+        /// <summary>
+        /// 多轴移动
+        /// </summary>
+        /// <param name="axisNames"></param>
+        /// <param name="poss"></param>
+        /// <returns></returns>
+        public string AxisMove(string[] axisNames, int[] poss)
+        {
+            List<AxisRun> axisRuns = new List<AxisRun>();
+            for (int i = 0; i < axisNames.Length; i++)
+            {
+                AxisRunInfo axisRunInfo = GetAxisRunInfo(axisNames[i]);
+                axisRuns.Add(new AxisRun()
+                {
+                    核号 = axisRunInfo.核号,
+                    轴号 = axisRunInfo.轴号,
+                    目标位置 = poss[i],
+                    目标速度 = axisRunInfo.运行速度,
+                    目标加速度 = axisRunInfo.加速度,
+                    目标减速度 = axisRunInfo.减速度,
+                    平滑时间 = axisRunInfo.平滑时间,
+                });
+            }
+            string result = Motion.MultiaxisAbsoluteMoveAbs(axisRuns);
+            if (result == "Success")
+            {
+                Task<string> task = Task.Run(() =>
+                {
+                    return WaitAxisMove(axisRuns);//等待回零完成
+                });
+
+                return task.Result;
+            }
+            else return result;
+
+        }
+
+        #endregion
+
+        #region IO
+
+        /// <summary>
+        /// 获取单个IO信息
+        /// </summary>
+        /// <param name="ioName"></param>
+        /// <returns></returns>
+        private string GetIOInfo(string ioName, out IOInfo ioInfo)
+        {
+            ioInfo = null;
+            for (int i = 0; i < APPmaster.IOList.Count; i++)
+            {
+                if (ioName.Contains(APPmaster.IOList[i].IO编号))
+                {
+                    ioInfo = APPmaster.IOList[i];
+                    break;
+                }
+            }
+            if (ioInfo != null) return "Success";
+            else return "IO编号不存在";
+
+        }
+
+        /// <summary>
+        /// 获取多个IO信息
+        /// </summary>
+        /// <returns></returns>
+        private string GetIOInfo(string[] ioNames, out List<IOInfo> ioInfos)
+        {
+            ioInfos = new List<IOInfo>();
+            for (int i = 0; i < APPmaster.IOList.Count; i++)
+            {
+                if (ioNames[i].Contains(APPmaster.IOList[i].IO编号))
+                {
+                    ioInfos.Add(APPmaster.IOList[i]);
+                    if (ioInfos.Count == ioNames.Length)
+                    {
+                        break;
+                    }
+                }
+            }
+            if (ioInfos.Count == ioNames.Length) return "Success";
+            else return "有IO编号不存在";
+        }
+
+        /// <summary>
+        /// 获取输入IO
+        /// </summary>
+        /// <param name="iOInfo"></param>
+        /// <param name="iovalue"></param>
+        /// <returns></returns>
+        public string GetDi(IOInfo iOInfo, out string iovalue)
+        {
+            iovalue = "";
+            if (iOInfo.模块类型 == "gLink200")
+            {
+                string result = Motion.GLink_GetExtDi(iOInfo.核号, iOInfo.软件索引, out string value);
+                if (result == "Success")
+                {
+                    char[] chars = value.ToCharArray();
+                    iovalue = chars[0].ToString();
+                }
+                else return result;
+            }
+            else if (iOInfo.模块类型 == "GNM601")
+            {
+                string result = Motion.GNM601_GetDiBit(iOInfo.核号, MC_GPI, iOInfo.软件索引, out short value);
+                if (result == "Success")
+                {
+                    iovalue = value.ToString();
+                }
+                else return result;
+            }
+            else return "未知IO模块";
+
+            return "Success";
+        }
+
+        /// <summary>
+        /// 获取一个输入IO
+        /// </summary>
+        /// <param name="ioName"></param>
+        /// <param name="iovalue"></param>
+        /// <returns></returns>
+        public string GetDi(string ioName, out string iovalue)
+        {
+            iovalue = "";
+            string result = GetIOInfo(ioName, out IOInfo iOInfo);
+            if (result == "Success")
+            {
+                return GetDi(iOInfo, out iovalue);
+            }
+            else return result;
+        }
+
+        /// <summary>
+        /// 获取多个输入IO
+        /// </summary>
+        /// <param name="ioNames"></param>
+        /// <param name="iovalues"></param>
+        /// <returns></returns>
+        public string GetDi(string[] ioNames, out string[] iovalues)
+        {
+            iovalues = new string[ioNames.Length];
+
+            string result = GetIOInfo(ioNames, out List<IOInfo> ioInfos);
+
+            if (result == "Success")
+            {
+                for (int i = 0; i < ioInfos.Count; i++)
+                {
+                    result = GetDi(ioNames[i], out string iovalue);
+                    if (result == "Success")
+                    {
+                        iovalues[i] = iovalue;
+                    }
+                    else return result;
+                }
+
+                return "Success";
+            }
+            else return result;
+        }
+
+        /// <summary>
+        /// 获取输出IO
+        /// </summary>
+        /// <param name="iOInfo"></param>
+        /// <param name="iovalue"></param>
+        /// <returns></returns>
+        public string GetDO(IOInfo iOInfo, out string iovalue)
+        {
+            iovalue = "";
+            if (iOInfo.模块类型 == "gLink200")
+            {
+                string result = Motion.GLink_GetExtDO(iOInfo.核号, iOInfo.软件索引, out string value);
+                if (result == "Success")
+                {
+                    char[] chars = value.ToCharArray();
+                    iovalue = chars[0].ToString();
+                }
+                else return result;
+            }
+            else if (iOInfo.模块类型 == "GNM601")
+            {
+                string result = Motion.GNM601_GetDo(iOInfo.核号, GTN.mc.MC_GPO, out string value);
+                if (result == "Success")
+                {
+                    char[] chars = value.ToCharArray();
+                    iovalue = chars[iOInfo.软件索引 - 1].ToString();
+                }
+                else return result;
+            }
+            else return "未知IO模块";
+
+            return "Success";
+        }
+
+        /// <summary>
+        /// 获取一个输出IO
+        /// </summary>
+        /// <param name="ioName"></param>
+        /// <param name="iovalue"></param>
+        /// <returns></returns>
+        public string GetDO(string ioName, out string iovalue)
+        {
+            iovalue = "";
+            string result = GetIOInfo(ioName, out IOInfo iOInfo);
+            if (result == "Success")
+            {
+                return GetDO(iOInfo, out iovalue);
+            }
+            else return result;
+        }
+
+        /// <summary>
+        /// 获取多个输出IO
+        /// </summary>
+        /// <param name="ioNames"></param>
+        /// <param name="iovalues"></param>
+        /// <returns></returns>
+        public string GetDO(string[] ioNames, out string[] iovalues)
+        {
+            iovalues = new string[ioNames.Length];
+
+            string result = GetIOInfo(ioNames, out List<IOInfo> ioInfos);
+
+            if (result == "Success")
+            {
+                for (int i = 0; i < ioInfos.Count; i++)
+                {
+                    result = GetDO(ioNames[i], out string iovalue);
+                    if (result == "Success")
+                    {
+                        iovalues[i] = iovalue;
+                    }
+                    else return result;
+                }
+
+                return "Success";
+            }
+            else return result;
+        }
+
+        /// <summary>
+        /// 设置IO输出
+        /// </summary>
+        /// <param name="iOInfo"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public string SetDo(IOInfo iOInfo, bool value)
+        {
+            if (iOInfo.模块类型 == "gLink200")
+            {
+                return Motion.GLink_SetExtDoBit(iOInfo.核号, iOInfo.软件索引, value);
+            }
+            else if (iOInfo.模块类型 == "GNM601")
+            {
+                return Motion.GNM601_SetDoBit(iOInfo.核号, MC_GPO, iOInfo.软件索引, value);
+            }
+            else return "未知IO模块";
+        }
+
+        /// <summary>
+        /// 单个IO输出
+        /// </summary>
+        /// <param name="ioName">IO编号</param>
+        /// <param name="value">输出值，1：设置输出为低电平， 0：设置输出为高电平。</param>
+        /// <returns></returns>
+        public string SetDo(string ioName, bool value)
+        {
+            string result = GetIOInfo(ioName, out IOInfo iOInfo);
+            if (result == "Success")
+            {
+                return SetDo(iOInfo, value);
+            }
+            else return result;
+        }
+
+        /// <summary>
+        /// 多个IO输出
+        /// </summary>
+        /// <param name="ioNames"></param>
+        /// <param name="values"></param>
+        /// <returns></returns>
+        public string SetDo(string[] ioNames, bool[] values)
+        {
+            string result = GetIOInfo(ioNames, out List<IOInfo> ioInfos);
+            if (result == "Success")
+            {
+                for (int i = 0; i < ioInfos.Count; i++)
+                {
+                    result = SetDo(ioInfos[i], values[i]);
+                    if (result != "Success")
+                    {
+                        return result;
+                    }
+                }
+                return "Success";
+            }
+            else return result;
+        }
+
+        #endregion
     }
 }

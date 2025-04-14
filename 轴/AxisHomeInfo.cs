@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace H5509_V2
 {
-    public class AxisHome
+    public class AxisHomeInfo
     {
         public short 核号 { get; set; }
 
@@ -22,7 +22,7 @@ namespace H5509_V2
         /// <summary>
         /// 设置启动搜索原点时的运动方向：非正数-负方向，正整数-正方向
         /// </summary>
-        public short Home搜索方向 { get; set; }
+        public short 回零启动方向 { get; set; }
 
         /// <summary>
         /// 设置搜索Index的运动方向：非正数-负方向，正整数-正方向
@@ -37,19 +37,19 @@ namespace H5509_V2
         /// <summary>
         /// 用于设置触发器：触发器需要和轴号对应，触发器用于实现高速硬件捕获，默认设置为-1即可，控制器自动将触发器和轴号对应
         /// </summary>
-        public short 触发器 {  get; set; } = -1;
+        public short 捕获触发器 { get; set; } = -1;
 
         /// <summary>
         /// 搜索Home速度（单位：pulse/ms）
         /// </summary>
-        public double 搜索Home速度 { get; set; }
+        public double 搜索速度 { get; set; }
+
+        public double 定位速度 { get; set; }
 
         /// <summary>
         /// 搜索Index速度（单位：pulse/ms）
         /// </summary>
         public double 搜索Index速度 { get; set; }
-
-        public double 定位速度 { get; set; }
 
         /// <summary>
         /// 回原点运动的加速度（单位：pulse/ms^2）
@@ -85,13 +85,5 @@ namespace H5509_V2
         /// 反方向离开限位的脱离步长，当移动一次设定的步长，仍未脱离限位时，会再次移动设定的步长，直到脱离限位
         /// </summary>
         public int 反向脱离步长 { get; set; } = 1000;
-
-        public bool 回零允许 { get; set; }
-
-        public bool 回零完成信号 { get; set; }
-
-        public bool 回零过程信号 { get; set; }
-
-        public bool 回零标记 { get; set; }
     }
 }

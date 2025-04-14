@@ -14,7 +14,8 @@ namespace H5509_V2
 {
     public partial class _setting : UIUserControl
     {
-        private Motion motion = MotionEx.GetInstance().Motion;
+        private MotionEx motionEx = MotionEx.GetInstance();
+        private Motion motion;
 
         private System.Timers.Timer RefreshTimer;
 
@@ -33,56 +34,42 @@ namespace H5509_V2
         {
             InitializeComponent();
 
+            motion = motionEx.Motion;
+
             RefreshTimer = new System.Timers.Timer() { Interval = 500 };
             RefreshTimer.Elapsed += RefreshAxisStatusElapsedTick;
-
-            //for (int i = 1; i <= 24; i++)
-            //{
-            //    cobox_axisname.Items.Add(i.ToString());
-            //}
-            //cobox_axisname.Text = "1";
 
             txt_home_mode.Items.Add("限位+Home回零");
             txt_home_mode.Items.Add("Home回零");
             txt_home_mode.SelectedIndex = 0;
 
-            cobox_axisname.Items.Add("M1_入料手臂Z1轴");
-            cobox_axisname.Items.Add("M2_入料手臂Z2轴");
-            cobox_axisname.Items.Add("M3_入料手臂Z3轴");
-            cobox_axisname.Items.Add("M4_入料手臂Z4轴");
-            cobox_axisname.Items.Add("M5_入料首手臂P轴");
-            cobox_axisname.Items.Add("M6_出料手臂Z1轴");
-            cobox_axisname.Items.Add("M7_出料手臂Z2轴");
-            cobox_axisname.Items.Add("M8_出料手臂Z3轴");
-            cobox_axisname.Items.Add("M9_出料手臂Z4轴");
-            cobox_axisname.Items.Add("M10_出料手臂P轴");
-            cobox_axisname.Items.Add("M11_Fix3放IC轴");
-            cobox_axisname.Items.Add("M12_Empty顶盘轴");
-            cobox_axisname.Items.Add("M13_Loader顶盘轴");
-            cobox_axisname.Items.Add("M14_Auto1顶盘轴");
-            cobox_axisname.Items.Add("M15_Auto2顶盘轴");
-            cobox_axisname.Items.Add("M16_入料手臂Y轴");
-            cobox_axisname.Items.Add("M17_出料手臂Y轴");
-            cobox_axisname.Items.Add("M18_放Tary盘轴");
-            cobox_axisname.Items.Add("M19_测试手臂Z轴");
-            cobox_axisname.Items.Add("M20_飞梭轴");
-            cobox_axisname.Items.Add("M21_测试手臂X轴");
-            cobox_axisname.Items.Add("M22_入料手臂X轴");
-            cobox_axisname.Items.Add("M23_出料手臂X轴");
+            cobox_glink200.SelectedIndex = 0;
+            comboBox1.SelectedIndex = 0;
+            comboBox2.SelectedIndex = 0;
 
+            for (int i = 0; i < APPmaster.IOList.Count; i++)
+            {
+                string name = APPmaster.IOList[i].IO编号 + "_" + APPmaster.IOList[i].IO名称;
+                if (APPmaster.IOList[i].IO编号.Contains("X")) comboBox3.Items.Add(name);
+                else comboBox4.Items.Add(name);
+            }
+            if (comboBox3.Items.Count > 0) comboBox3.SelectedIndex = 0;
+            if (comboBox4.Items.Count > 0) comboBox4.SelectedIndex = 0;
+
+            for (int i = 0; i < APPmaster.AxisInfoList.Count; i++)
+            {
+                cobox_axisname.Items.Add(APPmaster.AxisInfoList[i].轴名称);
+            }
             cobox_axisname.SelectedIndex = 0;
 
             GlinkDI = new Control[16] { label154, label153, label155, label152, label150, label149, label151, label148, label144, label143, label145, label142, label140, label139, label141, label138 };
-            GlinkDO = new Control[16] { label135, label134, label132, label133, label131, label130, label132, label129, label126, label125, label127, label124, label122, label121, label123, label120 };
+            GlinkDO = new Control[16] { label135, label134, label136, label133, label131, label130, label132, label129, label126, label125, label127, label124, label122, label121, label123, label120 };
             GNM601DI = new Control[16] { label24, label23, label25, label22, label28, label27, label29, label26, label39, label38, label40, label37, label35, label34, label36, label160 };
             GNM601DO = new Control[10] { label115, label114, label116, label113, label111, label110, label112, label109, label106, label105 };
 
             GNM601Home = new Control[6] { label158, label162, label165, label174, label171, label168 };
             GNM601LimitN = new Control[6] { label159, label163, label166, label175, label172, label169 };
             GNM601LimitP = new Control[6] { label161, label164, label167, label176, label173, label170 };
-
-            cobox_glink200.SelectedIndex = 0;
-            comboBox1.SelectedIndex = 0;
         }
 
         public string GetAxisStatus(short core, short axis, ref bool[] gNME601AxisStatus)
@@ -218,7 +205,7 @@ namespace H5509_V2
                 if (value1[i] == '1') GlinkDI[i].BackColor = Color.LimeGreen;
                 else GlinkDI[i].BackColor = Color.Silver;
             }
-            //label154.BackColor = Color.LimeGreen;
+
             motion.GLink_GetExtDO(1, (short)(((glink - 1) * 16) + 1), out string value2);
             for (int i = 0; i < GlinkDO.Length; i++)
             {
@@ -327,7 +314,6 @@ namespace H5509_V2
             RefreshAxisHomeStatus(core, axis);
             RefreshGlink200IO();
             RefreshGNM601IO();
-            
         }
 
         private void RefreshAxisStatusElapsedTick(object sender, EventArgs eventArgs)
@@ -349,6 +335,11 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button52_Click(object sender, EventArgs e)
         {
+            if (!APPmaster.InitedOK)
+            {
+                MessageBox.Show("轴卡未连接！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             if (button52.Text == "开启读取轴信息")
             {
                 RefreshTimer.Start();
@@ -398,7 +389,7 @@ namespace H5509_V2
                 string result = motion.AxisOn(core, axis, true);
                 if (result != "Success")
                 {
-                    //writeDataHelper.RunLog("使能开启失败，详细信息：" + result.ErrorMsg);
+                    MessageBox.Show("使能开启失败！详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -410,7 +401,7 @@ namespace H5509_V2
                 string result = motion.AxisOn(core, axis, false);
                 if (result != "Success")
                 {
-                    //writeDataHelper.RunLog("使能关闭失败，详细信息：" + result.ErrorMsg);
+                    MessageBox.Show("使能关闭失败！详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
@@ -419,6 +410,11 @@ namespace H5509_V2
             }
         }
 
+        /// <summary>
+        /// 清除状态
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button152_Click(object sender, EventArgs e)
         {
 
@@ -427,11 +423,16 @@ namespace H5509_V2
             string result = motion.AxisClrSts(core, axis);
             if (result != "Success")
             {
-                // writeDataHelper.RunLog("清除标志失败，详细信息：" + result.ErrorMsg);
+                MessageBox.Show("清除状态失败！详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //else writeDataHelper.RunLog("清除标志成功，详细信息：" + result.ErrorMsg);
         }
 
+        /// <summary>
+        /// 位置清零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
 
@@ -440,7 +441,7 @@ namespace H5509_V2
             string result = motion.AxisZeroPos(core, axis);
             if (result != "Success")
             {
-                //writeDataHelper.RunLog("位置清零失败，详细信息：" + result.ErrorMsg);
+                MessageBox.Show("清除状态失败！详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             //else writeDataHelper.RunLog("位置清零成功，详细信息：" + result.ErrorMsg);
         }
@@ -597,10 +598,10 @@ namespace H5509_V2
             return axisRun;
         }
 
-        private AxisHome GetHomeValue()
+        private AxisHomeInfo GetHomeValue()
         {
             short mode = 0;
-            if (!double.TryParse(txt_home_offset.Text, out double home_offset))
+            if (!int.TryParse(txt_home_offset.Text, out int home_offset))
             {
                 txt_home_offset.Focus();
                 MessageBox.Show("零点偏置值异常，请输入数字!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -649,17 +650,18 @@ namespace H5509_V2
 
             short edge = (short)(chk_home_rising.Checked ? 1 : 0);
 
-            AxisHome axisHome = new AxisHome()
+            AxisHomeInfo axisHome = new AxisHomeInfo()
             {
                 核号 = core,
                 轴号 = axis,
                 模式 = mode,
-                Home搜索方向 = moveDir,
+                回零启动方向 = moveDir,
                 捕获触发沿 = edge,
-                搜索Home速度 = home_vel,
+                搜索速度 = home_vel,
                 加速度 = home_acc,
                 减速度 = home_dec,
                 平滑时间 = home_Smoothtime,
+                零点偏置 = home_offset,
             };
 
             return axisHome;
@@ -761,7 +763,7 @@ namespace H5509_V2
         {
             APPmaster.GetAxisCore(cobox_axisname.Text, out short core, out short axis);
 
-            AxisHome axisHome = GetHomeValue();
+            AxisHomeInfo axisHome = GetHomeValue();
             if (axisHome != null)
             {
                 string result = motion.UniaxialHome(axisHome);
@@ -937,6 +939,77 @@ namespace H5509_V2
         private void button92_Click(object sender, EventArgs e)
         {
             GNM601OutSignal(false);
+        }
+
+        private void button96_Click(object sender, EventArgs e)
+        {
+            string result = motionEx.GetDi(comboBox3.Text, out string iovalue);
+            if (result == "Success")
+            {
+                textBox1.Text = iovalue;
+            }
+            else
+            {
+                MessageBox.Show("读取失败！" + result);
+            }
+        }
+
+        private void button95_Click(object sender, EventArgs e)
+        {
+            string result = motionEx.SetDo(comboBox4.Text, true);
+            if (result == "Success")
+            {
+                //textBox1.Text = iovalue;
+            }
+            else
+            {
+                MessageBox.Show("写入失败！" + result);
+            }
+        }
+
+        private void button94_Click(object sender, EventArgs e)
+        {
+            string result = motionEx.SetDo(comboBox4.Text, false);
+            if (result == "Success")
+            {
+                //textBox1.Text = iovalue;
+            }
+            else
+            {
+                MessageBox.Show("写入失败！" + result);
+            }
+        }
+
+        private void button97_Click(object sender, EventArgs e)
+        {
+            string result = motionEx.GetDO(comboBox4.Text, out string iovalue);
+            if (result == "Success")
+            {
+                textBox2.Text = iovalue;
+            }
+            else
+            {
+                MessageBox.Show("读取失败！" + result);
+            }
+        }
+
+
+        public string 入料手臂Y回零()
+        {
+            return motionEx.AxisHome("M2_入料手臂Z2轴");
+        }
+
+        private void button78_Click(object sender, EventArgs e)
+        {
+            Task task = Task.Run(() => 
+            {
+                string result = 入料手臂Y回零();
+                if (result == "Success")
+                {
+                    MessageBox.Show("回零成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else MessageBox.Show("回零失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            });
         }
     }
 }

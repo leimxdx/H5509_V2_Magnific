@@ -15,6 +15,18 @@ namespace H5509_V2
 
         public static List<IOInfo> IOList;
 
+        public static List<AxisInfo> AxisInfoList;
+
+        public static List<AxisRunInfo> AxisRunInfoList;
+
+        public static List<AxisHomeInfo> AxisHomeInfoList;
+
+        public static bool IsPause = false; //停止
+
+        public static bool IsForecePause = false; //强制停止
+
+        public static int 气缸动作超时时间 = 3000; //ms
+
         public static void GetAxisCore(string axisname, out short core, out short axis)
         {
             switch (axisname)

@@ -32,6 +32,11 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button92 = new System.Windows.Forms.Button();
+            this.button93 = new System.Windows.Forms.Button();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label177 = new System.Windows.Forms.Label();
+            this.button91 = new System.Windows.Forms.Button();
             this.button90 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label107 = new System.Windows.Forms.Label();
@@ -139,8 +144,18 @@
             this.label24 = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.button97 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.label179 = new System.Windows.Forms.Label();
+            this.button96 = new System.Windows.Forms.Button();
+            this.button94 = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
+            this.button95 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label178 = new System.Windows.Forms.Label();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -421,11 +436,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button91 = new System.Windows.Forms.Button();
-            this.button92 = new System.Windows.Forms.Button();
-            this.button93 = new System.Windows.Forms.Button();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label177 = new System.Windows.Forms.Label();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -619,6 +629,73 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Tag = "@02@#BCD#";
             this.groupBox2.Text = "IO调试";
+            // 
+            // button92
+            // 
+            this.button92.Enabled = false;
+            this.button92.Location = new System.Drawing.Point(339, 570);
+            this.button92.Margin = new System.Windows.Forms.Padding(2);
+            this.button92.Name = "button92";
+            this.button92.Size = new System.Drawing.Size(110, 30);
+            this.button92.TabIndex = 291;
+            this.button92.Text = "输出0";
+            this.button92.UseVisualStyleBackColor = true;
+            this.button92.Click += new System.EventHandler(this.button92_Click);
+            // 
+            // button93
+            // 
+            this.button93.Enabled = false;
+            this.button93.Location = new System.Drawing.Point(225, 570);
+            this.button93.Margin = new System.Windows.Forms.Padding(2);
+            this.button93.Name = "button93";
+            this.button93.Size = new System.Drawing.Size(110, 30);
+            this.button93.TabIndex = 288;
+            this.button93.Text = "输出1";
+            this.button93.UseVisualStyleBackColor = true;
+            this.button93.Click += new System.EventHandler(this.button93_Click);
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Font = new System.Drawing.Font("微软雅黑", 11.25F);
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"});
+            this.comboBox2.Location = new System.Drawing.Point(116, 570);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(99, 28);
+            this.comboBox2.TabIndex = 290;
+            // 
+            // label177
+            // 
+            this.label177.AutoSize = true;
+            this.label177.Location = new System.Drawing.Point(42, 573);
+            this.label177.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label177.Name = "label177";
+            this.label177.Size = new System.Drawing.Size(69, 20);
+            this.label177.TabIndex = 289;
+            this.label177.Text = "doIndex";
+            // 
+            // button91
+            // 
+            this.button91.Enabled = false;
+            this.button91.Location = new System.Drawing.Point(495, 57);
+            this.button91.Margin = new System.Windows.Forms.Padding(2);
+            this.button91.Name = "button91";
+            this.button91.Size = new System.Drawing.Size(110, 30);
+            this.button91.TabIndex = 287;
+            this.button91.Text = "输出0";
+            this.button91.UseVisualStyleBackColor = true;
+            this.button91.Click += new System.EventHandler(this.button91_Click);
             // 
             // button90
             // 
@@ -1842,8 +1919,18 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.textBox2);
+            this.groupBox4.Controls.Add(this.button97);
+            this.groupBox4.Controls.Add(this.textBox1);
+            this.groupBox4.Controls.Add(this.comboBox4);
+            this.groupBox4.Controls.Add(this.label179);
+            this.groupBox4.Controls.Add(this.button96);
+            this.groupBox4.Controls.Add(this.button94);
             this.groupBox4.Controls.Add(this.button12);
+            this.groupBox4.Controls.Add(this.button95);
             this.groupBox4.Controls.Add(this.button11);
+            this.groupBox4.Controls.Add(this.comboBox3);
+            this.groupBox4.Controls.Add(this.label178);
             this.groupBox4.Controls.Add(this.button10);
             this.groupBox4.Controls.Add(this.button9);
             this.groupBox4.Controls.Add(this.button7);
@@ -1877,6 +1964,77 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "单轴回零";
             // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(194, 604);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(203, 27);
+            this.textBox2.TabIndex = 299;
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // button97
+            // 
+            this.button97.Location = new System.Drawing.Point(80, 603);
+            this.button97.Margin = new System.Windows.Forms.Padding(2);
+            this.button97.Name = "button97";
+            this.button97.Size = new System.Drawing.Size(110, 30);
+            this.button97.TabIndex = 300;
+            this.button97.Text = "读取输出";
+            this.button97.UseVisualStyleBackColor = true;
+            this.button97.Click += new System.EventHandler(this.button97_Click);
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(194, 526);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(203, 27);
+            this.textBox1.TabIndex = 174;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.Font = new System.Drawing.Font("微软雅黑", 11.25F);
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(80, 565);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(317, 28);
+            this.comboBox4.TabIndex = 298;
+            // 
+            // label179
+            // 
+            this.label179.AutoSize = true;
+            this.label179.Location = new System.Drawing.Point(20, 569);
+            this.label179.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label179.Name = "label179";
+            this.label179.Size = new System.Drawing.Size(55, 20);
+            this.label179.TabIndex = 297;
+            this.label179.Text = "输出IO";
+            // 
+            // button96
+            // 
+            this.button96.Location = new System.Drawing.Point(80, 525);
+            this.button96.Margin = new System.Windows.Forms.Padding(2);
+            this.button96.Name = "button96";
+            this.button96.Size = new System.Drawing.Size(110, 30);
+            this.button96.TabIndex = 296;
+            this.button96.Text = "读取输入";
+            this.button96.UseVisualStyleBackColor = true;
+            this.button96.Click += new System.EventHandler(this.button96_Click);
+            // 
+            // button94
+            // 
+            this.button94.Location = new System.Drawing.Point(194, 643);
+            this.button94.Margin = new System.Windows.Forms.Padding(2);
+            this.button94.Name = "button94";
+            this.button94.Size = new System.Drawing.Size(110, 30);
+            this.button94.TabIndex = 295;
+            this.button94.Text = "输出0";
+            this.button94.UseVisualStyleBackColor = true;
+            this.button94.Click += new System.EventHandler(this.button94_Click);
+            // 
             // button12
             // 
             this.button12.Location = new System.Drawing.Point(228, 263);
@@ -1887,6 +2045,17 @@
             this.button12.Text = "OutputArmZ4回零";
             this.button12.UseVisualStyleBackColor = true;
             // 
+            // button95
+            // 
+            this.button95.Location = new System.Drawing.Point(80, 643);
+            this.button95.Margin = new System.Windows.Forms.Padding(2);
+            this.button95.Name = "button95";
+            this.button95.Size = new System.Drawing.Size(110, 30);
+            this.button95.TabIndex = 292;
+            this.button95.Text = "输出1";
+            this.button95.UseVisualStyleBackColor = true;
+            this.button95.Click += new System.EventHandler(this.button95_Click);
+            // 
             // button11
             // 
             this.button11.Location = new System.Drawing.Point(228, 230);
@@ -1896,6 +2065,26 @@
             this.button11.TabIndex = 190;
             this.button11.Text = "OutputArmZ3回零";
             this.button11.UseVisualStyleBackColor = true;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.Font = new System.Drawing.Font("微软雅黑", 11.25F);
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(80, 487);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(317, 28);
+            this.comboBox3.TabIndex = 294;
+            // 
+            // label178
+            // 
+            this.label178.AutoSize = true;
+            this.label178.Location = new System.Drawing.Point(20, 491);
+            this.label178.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label178.Name = "label178";
+            this.label178.Size = new System.Drawing.Size(55, 20);
+            this.label178.TabIndex = 293;
+            this.label178.Text = "输入IO";
             // 
             // button10
             // 
@@ -2117,6 +2306,7 @@
             this.button78.TabIndex = 172;
             this.button78.Text = "InputArmY回零";
             this.button78.UseVisualStyleBackColor = true;
+            this.button78.Click += new System.EventHandler(this.button78_Click);
             // 
             // button16
             // 
@@ -5033,73 +5223,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "档案";
             // 
-            // button91
-            // 
-            this.button91.Enabled = false;
-            this.button91.Location = new System.Drawing.Point(495, 57);
-            this.button91.Margin = new System.Windows.Forms.Padding(2);
-            this.button91.Name = "button91";
-            this.button91.Size = new System.Drawing.Size(110, 30);
-            this.button91.TabIndex = 287;
-            this.button91.Text = "输出0";
-            this.button91.UseVisualStyleBackColor = true;
-            this.button91.Click += new System.EventHandler(this.button91_Click);
-            // 
-            // button92
-            // 
-            this.button92.Enabled = false;
-            this.button92.Location = new System.Drawing.Point(339, 570);
-            this.button92.Margin = new System.Windows.Forms.Padding(2);
-            this.button92.Name = "button92";
-            this.button92.Size = new System.Drawing.Size(110, 30);
-            this.button92.TabIndex = 291;
-            this.button92.Text = "输出0";
-            this.button92.UseVisualStyleBackColor = true;
-            this.button92.Click += new System.EventHandler(this.button92_Click);
-            // 
-            // button93
-            // 
-            this.button93.Enabled = false;
-            this.button93.Location = new System.Drawing.Point(225, 570);
-            this.button93.Margin = new System.Windows.Forms.Padding(2);
-            this.button93.Name = "button93";
-            this.button93.Size = new System.Drawing.Size(110, 30);
-            this.button93.TabIndex = 288;
-            this.button93.Text = "输出1";
-            this.button93.UseVisualStyleBackColor = true;
-            this.button93.Click += new System.EventHandler(this.button93_Click);
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.Font = new System.Drawing.Font("微软雅黑", 11.25F);
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "8",
-            "9"});
-            this.comboBox2.Location = new System.Drawing.Point(116, 570);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(99, 28);
-            this.comboBox2.TabIndex = 290;
-            // 
-            // label177
-            // 
-            this.label177.AutoSize = true;
-            this.label177.Location = new System.Drawing.Point(42, 573);
-            this.label177.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label177.Name = "label177";
-            this.label177.Size = new System.Drawing.Size(69, 20);
-            this.label177.TabIndex = 289;
-            this.label177.Text = "doIndex";
-            // 
             // _setting
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5113,6 +5236,7 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
@@ -5535,5 +5659,15 @@
         public System.Windows.Forms.Button button93;
         private System.Windows.Forms.ComboBox comboBox2;
         public System.Windows.Forms.Label label177;
+        public System.Windows.Forms.Button button96;
+        public System.Windows.Forms.Button button94;
+        public System.Windows.Forms.Button button95;
+        private System.Windows.Forms.ComboBox comboBox3;
+        public System.Windows.Forms.Label label178;
+        public System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ComboBox comboBox4;
+        public System.Windows.Forms.Label label179;
+        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.Button button97;
     }
 }

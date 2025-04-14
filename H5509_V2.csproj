@@ -126,7 +126,6 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="动作\AxisHome.cs" />
     <Compile Include="动作\AxisRun.cs" />
     <Compile Include="动作\DeviceIOInfo.cs" />
     <Compile Include="动作\gts.cs" />
@@ -135,6 +134,8 @@
     <Compile Include="动作\MotionEx.cs" />
     <Compile Include="工具\SQLiteHelper.cs" />
     <Compile Include="模块\APPmaster.cs" />
+    <Compile Include="模块\Handler.cs" />
+    <Compile Include="模块\ST_ProcessManage.cs" />
     <Compile Include="界面\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +178,9 @@
     <Compile Include="界面\_speed.Designer.cs">
       <DependentUpon>_speed.cs</DependentUpon>
     </Compile>
+    <Compile Include="轴\AxisHomeInfo.cs" />
+    <Compile Include="轴\AxisInfo.cs" />
+    <Compile Include="轴\AxisRunInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
