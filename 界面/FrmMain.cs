@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
+using Sunny.UI.Win32;
 
 namespace H5509_V2
 {
@@ -53,6 +54,7 @@ namespace H5509_V2
         _IO io;
         _log log;
         MotionEx motionEx = MotionEx.GetInstance();
+        Handler handler = new Handler();
 
         public ForMain()
         {
@@ -63,11 +65,7 @@ namespace H5509_V2
         }
         private void ForMain_Load(object sender, EventArgs e)
         {
-
-
             main = new _main();
-
-
             setting = new _setting();
             offset = new _offset();
             speed = new _speed();
@@ -78,7 +76,6 @@ namespace H5509_V2
             SetControlStyle();
             SetTablayoutDoubleBuffer();
 
-
             changeMainPanel(main);
 
             string msg = motionEx.GSNInitCard();
@@ -86,6 +83,10 @@ namespace H5509_V2
             {
                 MessageBox.Show("系统加载失败！详细信息：\n" + msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            //TimeSpan time = new TimeSpan(0,11,31);
+            //int x = (int)(449 / (time.TotalMinutes / 60));
+            //handler.DebugIO(out string[] iovalues);
         }
 
         /// <summary>
@@ -161,7 +162,6 @@ namespace H5509_V2
                     IO区域 = dr["区域"].ToString()
                 });
             }
-
             dataTable = SQLiteHelper.GetDataSet("select * from AxisInfo").Tables[0];
             APPmaster.AxisInfoList = new List<AxisInfo>();
             foreach (DataRow dr in dataTable.Rows)
@@ -216,6 +216,29 @@ namespace H5509_V2
                 });
             }
             AxisHomeGetCoreAxis();
+
+            GetSiteStatus();
+
+            APPmaster.LoaderTrayICPointInit();
+            APPmaster.LoaderTrayICMapInit();
+            handler.参数初始化();
+
+            Task.Run(() =>
+            {
+                handler.入料手臂吸放料流程();
+            });
+            Task.Run(() =>
+            {
+                handler.飞梭移动流程();
+            });
+            Task.Run(() =>
+            {
+                handler.测试手臂取待测料流程();
+            });
+            Task.Run(() =>
+            {
+                handler.测试手臂取已测料流程();
+            });
         }
 
         private void GetCoreAxis(string axisname, out short core, out short axis)
@@ -249,6 +272,30 @@ namespace H5509_V2
                 GetCoreAxis(APPmaster.AxisHomeInfoList[i].轴名称, out short core, out short axis);
                 APPmaster.AxisHomeInfoList[i].核号 = core;
                 APPmaster.AxisHomeInfoList[i].轴号 = axis;
+            }
+        }
+
+        private void GetSiteStatus()
+        {
+            for (int i = 0; i < 16; i++)
+            {
+                APPmaster.Sitestatus.Add(new bool[2][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true },
+                });
+
+                APPmaster.SiteSave.Add(new bool[2][]
+                {
+                    new bool[] { false, false, false, false },
+                    new bool[] { false, false, false, false },
+                });
+
+                APPmaster.SiteTestOpen[i] = new bool[2][] 
+                { 
+                    new bool[] { false, false, false, false },
+                    new bool[] { false, false, false, false },
+                };
             }
         }
     }

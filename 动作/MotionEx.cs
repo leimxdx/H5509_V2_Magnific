@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.Eventing.Reader;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -44,7 +45,7 @@ namespace H5509_V2
         #region 轴卡初始化
 
         public string GSNInitCard()
-        { 
+        {
             return Motion.InitCard();
         }
 
@@ -52,18 +53,41 @@ namespace H5509_V2
 
         #region 轴回零
 
-        private AxisHomeInfo GetAxisHomeInfo(string axisInfo)
+        private string GetAxisHomeInfo(string axisName, out AxisHomeInfo axisHome)
         {
-            AxisHomeInfo axisHome = new AxisHomeInfo();
+            axisHome = new AxisHomeInfo();
             for (int i = 0; i < APPmaster.AxisHomeInfoList.Count; i++)
             {
-                if (axisInfo == APPmaster.AxisHomeInfoList[i].轴名称)
+                if (axisName.Split('_')[0] == APPmaster.AxisHomeInfoList[i].轴名称)
                 {
                     axisHome = APPmaster.AxisHomeInfoList[i];
+                    return "Success";
+                }
+            }
+            return $"轴:{axisName}回零信息不存在";
+        }
+
+        private string GetAxisHomeInfo(string[] axisName, out List<AxisHomeInfo> axisHomes)
+        {
+            axisHomes = new List<AxisHomeInfo>();
+
+            foreach (var item in APPmaster.AxisHomeInfoList)
+            {
+                for (int i = 0; i < axisName.Length; i++)
+                {
+                    if (axisName[i].Split('_')[0] == item.轴名称)
+                    {
+                        axisHomes.Add(item);
+                        break;
+                    }
+                }
+                if (axisHomes.Count == axisName.Length)
+                {
                     break;
                 }
             }
-            return axisHome;
+            if (axisHomes.Count == axisName.Length) return "Success";
+            else return "有IO编号不存在";
         }
 
         /// <summary>
@@ -151,20 +175,20 @@ namespace H5509_V2
         public string AxisHome(string[] axisNames)
         {
             List<AxisHomeInfo> axisHomes = new List<AxisHomeInfo>();
-            for (int i = 0; i < axisNames.Length; i++)
-            {
-                axisHomes.Add(GetAxisHomeInfo(axisNames[i]));
-            }
-
-            string result = Motion.MultiaxisHome(axisHomes);
+            string result = GetAxisHomeInfo(axisNames, out axisHomes);
             if (result == "Success")
             {
-                Task<string> task = Task.Run(() =>
+                result = Motion.MultiaxisHome(axisHomes);
+                if (result == "Success")
                 {
-                    return WaitAxisHome(axisHomes);
-                });
+                    Task<string> task = Task.Run(() =>
+                    {
+                        return WaitAxisHome(axisHomes);
+                    });
 
-                return task.Result;
+                    return task.Result;
+                }
+                else return result;
             }
             else return result;
         }
@@ -176,21 +200,43 @@ namespace H5509_V2
         /// <returns></returns>
         public string AxisHome(string axisName)
         {
-            AxisHomeInfo axisHome = GetAxisHomeInfo(axisName);
-
-            string result = Motion.UniaxialHome(axisHome);
+            string result = GetAxisHomeInfo(axisName,out AxisHomeInfo axisHome);
             if (result == "Success")
             {
-                Task<string> task = Task.Run(() =>
+                result = Motion.UniaxialHome(axisHome);
+                if (result == "Success")
                 {
-                    return WaitAxisHome(axisHome);//等待回零完成
-                });
+                    Task<string> task = Task.Run(() =>
+                    {
+                        return WaitAxisHome(axisHome);//等待回零完成
+                    });
 
-                return task.Result;
+                    return task.Result;
+                }
+                else return result;
             }
             else return result;
         }
 
+        public string GetDiHome(string[] axisNames, out string[] iovalues)
+        {
+            iovalues = new string[axisNames.Length];
+            string result = GetAxisHomeInfo(axisNames, out List<AxisHomeInfo> axisHomes);
+            if (result == "Success")
+            {
+                for (int i = 0; i < axisHomes.Count; i++)
+                {
+                    result = Motion.GNM601_GetDi(axisHomes[1].核号, GTN.mc.MC_HOME, out string value);
+                    if (result == "Success")
+                    {
+                        iovalues[i] = value[axisHomes[1].轴号].ToString();
+                    }
+                    else return result;
+                }
+            }
+            else return result;
+            return "Success";
+        }
         #endregion
 
         #region 动作
@@ -328,7 +374,7 @@ namespace H5509_V2
         /// <param name="axisName"></param>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public string AxisMove(string axisName, int pos)
+        public string AxisMove(string axisName, double pos)
         {
             AxisRunInfo axisRunInfo = GetAxisRunInfo(axisName);
 
@@ -336,7 +382,7 @@ namespace H5509_V2
             {
                 核号 = axisRunInfo.核号,
                 轴号 = axisRunInfo.轴号,
-                目标位置 = pos,
+                目标位置 = Convert.ToInt32(Math.Round(pos / axisRunInfo.步长mm)),
                 目标速度 = axisRunInfo.运行速度,
                 目标加速度 = axisRunInfo.加速度,
                 目标减速度 = axisRunInfo.减速度,
@@ -362,7 +408,7 @@ namespace H5509_V2
         /// <param name="axisNames"></param>
         /// <param name="poss"></param>
         /// <returns></returns>
-        public string AxisMove(string[] axisNames, int[] poss)
+        public string AxisMove(string[] axisNames, double[] poss)
         {
             List<AxisRun> axisRuns = new List<AxisRun>();
             for (int i = 0; i < axisNames.Length; i++)
@@ -372,7 +418,7 @@ namespace H5509_V2
                 {
                     核号 = axisRunInfo.核号,
                     轴号 = axisRunInfo.轴号,
-                    目标位置 = poss[i],
+                    目标位置 = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm)),
                     目标速度 = axisRunInfo.运行速度,
                     目标加速度 = axisRunInfo.加速度,
                     目标减速度 = axisRunInfo.减速度,
@@ -407,7 +453,7 @@ namespace H5509_V2
             ioInfo = null;
             for (int i = 0; i < APPmaster.IOList.Count; i++)
             {
-                if (ioName.Contains(APPmaster.IOList[i].IO编号))
+                if (ioName.Split('_')[0] == APPmaster.IOList[i].IO编号)
                 {
                     ioInfo = APPmaster.IOList[i];
                     break;
@@ -425,15 +471,20 @@ namespace H5509_V2
         private string GetIOInfo(string[] ioNames, out List<IOInfo> ioInfos)
         {
             ioInfos = new List<IOInfo>();
-            for (int i = 0; i < APPmaster.IOList.Count; i++)
+
+            foreach (var item in APPmaster.IOList)
             {
-                if (ioNames[i].Contains(APPmaster.IOList[i].IO编号))
+                for (int i = 0; i < ioNames.Length; i++)
                 {
-                    ioInfos.Add(APPmaster.IOList[i]);
-                    if (ioInfos.Count == ioNames.Length)
+                    if (ioNames[i].Split('_')[0] == item.IO编号)
                     {
+                        ioInfos.Add(item);
                         break;
                     }
+                }
+                if (ioInfos.Count == ioNames.Length)
+                {
+                    break;
                 }
             }
             if (ioInfos.Count == ioNames.Length) return "Success";
@@ -633,6 +684,29 @@ namespace H5509_V2
             }
             else return result;
         }
+
+        //public string SetDo(string ioName, int num, bool value)
+        //{
+        //string result = GetIOInfo(ioName, out IOInfo iOInfo);
+        //if (！"是否同模块")
+        //{
+        //    return "执行失败，不在同以模块"；
+        //}
+
+        //string sql = "select count(*) from ioinfo where 核='" + iOInfo.核号 + "',模块类型='" + iOInfo.模块类型 + "'";
+
+
+        //if (result == "Success")
+        //{
+        //    for (int i = 0; i < num; i++)
+        //    {
+        //        SetDo(iOInfo, value);
+        //        iOInfo.软件索引++;
+        //    }
+        //    return SetDo(iOInfo, value);
+        //}
+        //else return result;
+        //}
 
         /// <summary>
         /// 多个IO输出

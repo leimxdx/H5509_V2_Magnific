@@ -70,10 +70,10 @@ namespace H5509_V2
                 //writeDataHelper.RunLog($"GTN_StartEcatComm(1):({error})");
                 ErrorHandler("GTN_LoadConfig(1, gtn_core1.cfg)", error);
 
-                //// 配置运动控制器(核2)
-                //error = GTN_LoadConfig(2, "gtn_core2.cfg");
-                ////writeDataHelper.RunLog($"GTN_StartEcatComm(1):({error})");
-                //ErrorHandler("GTN_LoadConfig(2, gtn_core2.cfg)", error);
+                // 配置运动控制器(核2)
+                error = GTN_LoadConfig(2, "gtn_core2.cfg");
+                //writeDataHelper.RunLog($"GTN_StartEcatComm(1):({error})");
+                ErrorHandler("GTN_LoadConfig(2, gtn_core2.cfg)", error);
 
                 //清除轴标志
                 error = GTN_ClrSts(1, 1, 24);

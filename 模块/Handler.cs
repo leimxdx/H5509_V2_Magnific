@@ -1,11 +1,18 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Runtime;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.SqlServer.Server;
+using Sunny.UI.Win32;
+using static System.Windows.Forms.AxHost;
 
 namespace H5509_V2
 {
@@ -14,46 +21,46 @@ namespace H5509_V2
         private MotionEx motionEx = MotionEx.GetInstance();
 
         #region 轴移动
-        public string 入料手臂移动(int xPos, int yPos, int pPos)
+        public string 入料手臂移动(double xPos, double yPos, double pPos)
         {
-            int[] pos = new int[] { xPos, yPos, pPos };
+            double[] pos = new double[] { xPos, yPos, pPos };
             string[] axisNames = new string[] { "M22_入料手臂X轴", "M16_入料手臂Y轴", "M5_入料手臂P轴" };
             return motionEx.AxisMove(axisNames, pos);
         }
 
-        public string 出料手臂移动(int xPos, int yPos, int pPos)
+        public string 出料手臂移动(double xPos, double yPos, double pPos)
         {
-            int[] pos = new int[] { xPos, yPos, pPos };
+            double[] pos = new double[] { xPos, yPos, pPos };
             string[] axisNames = new string[] { "M23_出料手臂X轴", "M17_出料手臂Y轴", "M10_出料手臂P轴" };
             return motionEx.AxisMove(axisNames, pos);
         }
 
-        public string 入料手臂Z移动(bool[] isopen, int pos, bool isdown)
+        public string 入料手臂Z移动(bool[] isopen, double pos, bool isdown)
         {
             List<string> axisNames = new List<string>();
-            List<int> pPoss = new List<int>();
+            List<double> pPoss = new List<double>();
 
             if (isopen[0])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M1_入料手臂Z1轴");
             }
             if (isopen[1])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M2_入料手臂Z2轴");
             }
             if (isopen[2])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M3_入料手臂Z3轴");
             }
             if (isopen[3])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M4_入料手臂Z4轴");
             }
@@ -61,32 +68,32 @@ namespace H5509_V2
             return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray());
         }
 
-        public string 出料手臂Z移动(bool[] isopen, int pos, bool isdown)
+        public string 出料手臂Z移动(bool[] isopen, double pos, bool isdown)
         {
             List<string> axisNames = new List<string>();
-            List<int> pPoss = new List<int>();
+            List<double> pPoss = new List<double>();
 
             if (isopen[0])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M6_出料手臂Z1轴");
             }
             if (isopen[1])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M7_出料手臂Z2轴");
             }
             if (isopen[2])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M8_出料手臂Z3轴");
             }
             if (isopen[3])
             {
-                int zpos = isdown ? pos + 0 : -20; //加上硬件补偿
+                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
                 pPoss.Add(zpos);
                 axisNames.Add("M9_出料手臂Z4轴");
             }
@@ -94,47 +101,48 @@ namespace H5509_V2
             return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray());
         }
 
-        public string 测试手臂X移动(int pos)
+        public string 测试手臂X移动(double pos)
         {
+
             return motionEx.AxisMove("M21_测试手臂X轴", pos);
         }
 
-        public string 测试手臂Z移动(int pos)
+        public string 测试手臂Z移动(double pos)
         {
             return motionEx.AxisMove("M19_测试手臂Z轴", pos);
         }
 
-        public string 放Tary盘轴移动(int pos)
+        public string 放Tary盘轴移动(double pos)
         {
             return motionEx.AxisMove("M18_放Tary盘轴", pos);
         }
 
-        public string 飞梭轴移动(int pos)
+        public string 飞梭轴移动(double pos)
         {
             return motionEx.AxisMove("M20_飞梭轴", pos);
         }
 
-        public string Fix3放IC盘轴移动(int pos)
+        public string Fix3放IC盘轴移动(double pos)
         {
             return motionEx.AxisMove("M11_Fix3放IC轴", pos);
         }
 
-        public string Empty顶盘轴移动(int pos)
+        public string Empty顶盘轴移动(double pos)
         {
             return motionEx.AxisMove("M12_Empty顶盘轴", pos);
         }
 
-        public string Loader顶盘轴移动(int pos)
+        public string Loader顶盘轴移动(double pos)
         {
             return motionEx.AxisMove("M13_Loader顶盘轴", pos);
         }
 
-        public string Auto1顶盘轴移动(int pos)
+        public string Auto1顶盘轴移动(double pos)
         {
             return motionEx.AxisMove("M14_Auto1顶盘轴", pos);
         }
 
-        public string Auto2顶盘轴移动(int pos)
+        public string Auto2顶盘轴移动(double pos)
         {
             return motionEx.AxisMove("M15_Auto2顶盘轴", pos);
         }
@@ -285,6 +293,13 @@ namespace H5509_V2
             stopwatch.Reset();
             if (ispass) return "Success";
             else return "读取超时";
+        }
+
+        public string 测试吸嘴_张开气缸输出(bool value)
+        {
+            string result = motionEx.SetDo("Y094_测试吸嘴张开气缸", value);
+            if (result != "Success") Debug.WriteLine($"测试吸嘴张开气缸{(value ? "到位" : "原位")}输出失败！" + result);
+            return result;
         }
 
         #region Y094_测试吸嘴张开气缸
@@ -575,28 +590,28 @@ namespace H5509_V2
 
         #region 入料吸嘴
 
-        public string 入料吸嘴_吸料(bool[] isopen)
+        public string 入料吸嘴_吸料(bool[] isopen, bool ison)
         {
             List<bool> values = new List<bool>();
             List<string> ioNames = new List<string>();
             if (isopen[0])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y056_上料1_吸真空");
             }
             if (isopen[1])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y057_上料2_吸真空");
             }
             if (isopen[2])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y058_上料3_吸真空");
             }
             if (isopen[3])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y059_上料4_吸真空");
             }
             string result = motionEx.SetDo(ioNames.ToArray(), values.ToArray());
@@ -604,28 +619,28 @@ namespace H5509_V2
             return result;
         }
 
-        public string 入料吸嘴_放料(bool[] isopen)
+        public string 入料吸嘴_放料(bool[] isopen, bool ison)
         {
             List<bool> values = new List<bool>();
             List<string> ioNames = new List<string>();
             if (isopen[0])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y060_上料1_破真空");
             }
             if (isopen[1])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y061_上料2_破真空");
             }
             if (isopen[2])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y062_上料3_破真空");
             }
             if (isopen[3])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y063_上料4_破真空");
             }
             string result = motionEx.SetDo(ioNames.ToArray(), values.ToArray());
@@ -650,28 +665,28 @@ namespace H5509_V2
         #endregion
 
         #region 出料吸嘴
-        public string 出料吸嘴_吸料(bool[] isopen)
+        public string 出料吸嘴_吸料(bool[] isopen, bool ison)
         {
             List<bool> values = new List<bool>();
             List<string> ioNames = new List<string>();
             if (isopen[0])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y068_下料1_吸真空");
             }
             if (isopen[1])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y069_下料2_吸真空");
             }
             if (isopen[2])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y070_下料3_吸真空");
             }
             if (isopen[3])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y071_下料4_吸真空");
             }
             string result = motionEx.SetDo(ioNames.ToArray(), values.ToArray());
@@ -679,28 +694,28 @@ namespace H5509_V2
             return result;
         }
 
-        public string 出料吸嘴_放料(bool[] isopen)
+        public string 出料吸嘴_放料(bool[] isopen, bool ison)
         {
             List<bool> values = new List<bool>();
             List<string> ioNames = new List<string>();
             if (isopen[0])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y072_下料1_破真空");
             }
             if (isopen[1])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y073_下料2_破真空");
             }
             if (isopen[2])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y074_下料3_破真空");
             }
             if (isopen[3])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y075_下料4_破真空");
             }
             string result = motionEx.SetDo(ioNames.ToArray(), values.ToArray());
@@ -726,48 +741,48 @@ namespace H5509_V2
 
         #region 测试吸嘴
 
-        public string 测试吸嘴_吸料(bool[] isopen)
+        public string 测试吸嘴_吸料(bool[] isopen, bool ison)
         {
             List<bool> values = new List<bool>();
             List<string> ioNames = new List<string>();
             if (isopen[0])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y078_测试1_吸真空");
             }
             if (isopen[1])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y079_测试2_吸真空");
             }
             if (isopen[2])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y080_测试3_吸真空");
             }
             if (isopen[3])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y081_测试4_吸真空");
             }
             if (isopen[4])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y082_测试5_吸真空");
             }
             if (isopen[5])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y083_测试6_吸真空");
             }
             if (isopen[6])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y084_测试7_吸真空");
             }
             if (isopen[7])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y085_测试8_吸真空");
             }
             string result = motionEx.SetDo(ioNames.ToArray(), values.ToArray());
@@ -775,48 +790,48 @@ namespace H5509_V2
             return result;
         }
 
-        public string 测试吸嘴_放料(bool[] isopen)
+        public string 测试吸嘴_放料(bool[] isopen, bool ison)
         {
             List<bool> values = new List<bool>();
             List<string> ioNames = new List<string>();
             if (isopen[0])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y086_测试1_破真空");
             }
             if (isopen[1])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y087_测试2_破真空");
             }
             if (isopen[2])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y088_测试3_破真空");
             }
             if (isopen[3])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y089_测试4_破真空");
             }
             if (isopen[4])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y090_测试5_破真空");
             }
             if (isopen[5])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y091_测试6_破真空");
             }
             if (isopen[6])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y092_测试7_破真空");
             }
             if (isopen[7])
             {
-                values.Add(true);
+                values.Add(ison);
                 ioNames.Add("Y093_测试8_破真空");
             }
             string result = motionEx.SetDo(ioNames.ToArray(), values.ToArray());
@@ -1263,66 +1278,2185 @@ namespace H5509_V2
             return result;
         }
 
+        public string DebugIO(out string[] iovalues)
+        {
+            List<string> ioNames = new List<string>();
+
+            ioNames.Add("X016_空Tray区对射1_前");
+            ioNames.Add("X099_2_测试模组上升感应");
+            ioNames.Add("X161_14_1_测试模组对射感应");
+            ioNames.Add("Y0199_2_下压气缸");
+            //ioNames.Add("X080_飞梭前检测产品感应1");
+            //ioNames.Add("X081_飞梭前检测产品感应2");
+            //ioNames.Add("X082_飞梭前检测产品感应3");
+            //ioNames.Add("X083_飞梭前检测产品感应4");
+
+            string result = motionEx.GetDi(ioNames.ToArray(), out iovalues);
+            if (result != "Success") Debug.WriteLine("飞梭前后_检测产品感应IO读取失败!" + result);
+            return result;
+        }
+
         #endregion IO控制与读取
 
 
         #region 动作流程
+        public static bool 结批标记;
 
-        public static int Data_入料手臂吸料state;
-        public static ST_ProcessManage PS_入料手臂吸料; 
+        public static short 入料手臂吸料状态;
 
-        public void 入料手臂吸料_Load()
+        public static short 飞梭移动状态;
+        public static short 飞梭前入料状态;
+        public static short 飞梭前出料状态;
+        public static short 飞梭后入料状态;
+        public static short 飞梭后出料状态;
+
+        public static bool[][] 飞梭前入料IC;
+        public static bool[][] 飞梭前出料IC;
+        public static bool[][] 飞梭后入料IC;
+        public static bool[][] 飞梭后出料IC;
+
+        public static bool[][] 放料IC目标值;
+
+        public static string[][] 飞梭前出料BIN项;
+        public static string[][] 飞梭后出料BIN项;
+
+        public static ST_ProcessManage PS入料手臂吸放料流程;
+
+        public static ST_ProcessManage PS出料手臂吸放料流程;
+
+        public static ST_ProcessManage PS测试手臂取待测料流程;
+
+        public static ST_ProcessManage PS测试手臂取已测料流程;
+
+        public static ST_ProcessManage PS测试区气缸动作流程;
+
+        public static ST_ProcessManage PS入料手臂放料流程;
+
+        public static ST_ProcessManage PS入飞梭移动流程;
+
+        public static int 飞梭2位置 = 0; //0:后面 1:前面
+
+        public static int[] SiteTestState = new int[16];
+
+
+        #region 入料手臂流程
+
+        public void 参数初始化()
         {
-            PS_入料手臂吸料.StepID = 500;
+            飞梭前入料IC = new bool[][] { new bool[] { false, true, false, false }, new bool[] { false, true, false, false } };
+            飞梭前出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+            飞梭后入料IC = new bool[][] { new bool[] { false, false, true, false }, new bool[] { false, false, true, false } };
+            飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+
+            放料IC目标值 = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+        }
+
+        private bool 飞梭是否放置IC(bool[][] bools)
+        {
+            if (bools[0].Contains(false)) return true;
+            else if (bools[1].Contains(false)) return true;
+            else return false;
+        }
+
+        private int[] 吸嘴是否吸料(bool[] open)
+        {
+            int[] opens = new int[4];
+            opens[0] = open[0] ? 0 : 2;
+            opens[1] = open[1] ? 0 : 2;
+            opens[2] = open[2] ? 0 : 2;
+            opens[3] = open[3] ? 0 : 2;
+            return opens;
+        }
+
+        private short[] 吸嘴是否放料(bool[][] open, short colums)
+        {
+            short[] opens = new short[4];
+            opens[0] = (short)(open[colums][0] ? 1 : 0);
+            opens[1] = (short)(open[colums][0] ? 1 : 0);
+            opens[2] = (short)(open[colums][0] ? 1 : 0);
+            opens[3] = (short)(open[colums][0] ? 1 : 0);
+            return opens;
+        }
+
+        private bool 参数对比(bool[] 实际值, bool[] 目标值)
+        {
+            for (int i = 0; i < 实际值.Length; i++)
+            {
+                if (目标值[i] == false) break; //如果不需要放
+                if (实际值[i] != 目标值[i]) return false;
+            }
+            return true;
+        }
+
+        private bool[] 获取放料IC(bool[] 实际值, bool[] 目标值)
+        {
+            bool[] open = new bool[实际值.Length];
+            for (int i = 0; i < 实际值.Length; i++)
+            {
+                if (目标值[i])
+                {
+                    if (!实际值[i])
+                    {
+                        open[i] = true;
+                    }
+                }
+            }
+            return open;
+        }
+
+        private void 交换飞梭前后入料IC数据()
+        {
+            bool[][] temp = new bool[飞梭前入料IC.Length][];
+            for (int i = 0; i < 飞梭前入料IC.Length; i++)
+            {
+                temp[i] = new bool[飞梭前入料IC[i].Length];
+                Array.Copy(飞梭前入料IC[i], temp[i], 飞梭前入料IC[i].Length);
+            }
+
+            飞梭前入料IC = new bool[飞梭后入料IC.Length][];
+            for (int i = 0; i < 飞梭后入料IC.Length; i++)
+            {
+                飞梭前入料IC[i] = new bool[飞梭后入料IC[i].Length];
+                Array.Copy(飞梭后入料IC[i], 飞梭前入料IC[i], 飞梭后入料IC[i].Length);
+            }
+
+            飞梭后入料IC = new bool[temp.Length][];
+            for (int i = 0; i < temp.Length; i++)
+            {
+                飞梭后入料IC[i] = new bool[temp[i].Length];
+                Array.Copy(temp[i], 飞梭后入料IC[i], temp[i].Length);
+            }
+        }
+
+        private void 交换飞梭前后出料IC数据()
+        {
+            飞梭前出料IC = new bool[飞梭后出料IC.Length][];
+            for (int i = 0; i < 飞梭后出料IC.Length; i++)
+            {
+                飞梭前出料IC[i] = new bool[飞梭后出料IC[i].Length];
+                Array.Copy(飞梭后出料IC[i], 飞梭前出料IC[i], 飞梭后出料IC[i].Length);
+            }
+
+            飞梭后出料IC = new bool[2][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+        }
+
+        private void 交换飞梭前后出料BIN数据()
+        {
+            string[][] temp = new string[飞梭前出料BIN项.Length][];
+            for (int i = 0; i < 飞梭前出料BIN项.Length; i++)
+            {
+                temp[i] = new string[飞梭前出料BIN项[i].Length];
+                Array.Copy(飞梭前出料BIN项[i], temp[i], 飞梭前出料BIN项[i].Length);
+            }
+
+            飞梭前出料BIN项 = new string[飞梭后出料BIN项.Length][];
+            for (int i = 0; i < 飞梭后出料BIN项.Length; i++)
+            {
+                飞梭前出料BIN项[i] = new string[飞梭后出料BIN项[i].Length];
+                Array.Copy(飞梭后出料BIN项[i], 飞梭前出料BIN项[i], 飞梭后出料BIN项[i].Length);
+            }
+
+            飞梭后出料BIN项 = new string[temp.Length][];
+            for (int i = 0; i < temp.Length; i++)
+            {
+                飞梭后出料BIN项[i] = new string[temp[i].Length];
+                Array.Copy(temp[i], 飞梭后出料BIN项[i], temp[i].Length);
+            }
+        }
+
+        #endregion
+
+        public void 入料手臂吸放料流程()
+        {
+            string result;
+            short xPoint = 0;
+            short yPoint = 0;
+            short colums = 0;
+            bool[] open = new bool[4];
+            int[] opens = new int[4];
+            bool[] lsopen = new bool[4];
+            int index = 0;
+            double xPos = 0;
+            double yPos = 0;
+
+
+            string[] axisNames =
+                {
+                "M1_入料手臂Z1轴", "M2_入料手臂Z2轴",
+                "M3_入料手臂Z3轴", "M4_入料手臂Z4轴"
+            }; PS入料手臂吸放料流程.StepID = 500;
 
             while (true)
             {
-                switch (PS_入料手臂吸料.StepID)
+                Thread.Sleep(5);
+                switch (PS入料手臂吸放料流程.StepID)
                 {
                     case 500:
+                        PS入料手臂吸放料流程.StepName = "路径规划";
+                        PS入料手臂吸放料流程.Condition = !结批标记;
+                        PS入料手臂吸放料流程.Permit = !PS入料手臂放料流程.Processing;
+                        if (PS入料手臂吸放料流程.Condition && PS入料手臂吸放料流程.Permit)
+                        {
+                            PS入料手臂吸放料流程.Processing = true;
+                            PS入料手臂吸放料流程.StepID = 510;
+                        }
+                        break;
 
-                        PS_入料手臂吸料.StepID = 510;
+                    case 505:
+                        PS入料手臂吸放料流程.StepName = "计算抓料标记";
+                        if (!参数对比(飞梭前入料IC[0], 放料IC目标值[0]) || !参数对比(飞梭前入料IC[1], 放料IC目标值[1]))
+                        {
+                            PS入料手臂吸放料流程.StepID = 510;
+                        }
+                        else Thread.Sleep(10);
                         break;
+
                     case 510:
-                        PS_入料手臂吸料.StepID = 525;
+                        PS入料手臂吸放料流程.StepName = "计算放料IC颗数";
+                        if (!参数对比(飞梭前入料IC[0], 放料IC目标值[0]))
+                        {
+                            open = 获取放料IC(飞梭前入料IC[0], 放料IC目标值[0]);
+                            if (open.Contains(true))
+                            {
+                                colums = 0;
+                                opens = 吸嘴是否吸料(open);
+                                PS入料手臂吸放料流程.StepID = 515;
+                            }
+                        }
+                        else if (!参数对比(飞梭前入料IC[1], 放料IC目标值[1]))
+                        {
+                            open = 获取放料IC(飞梭前入料IC[1], 放料IC目标值[1]);
+                            if (open.Contains(true))
+                            {
+                                colums = 1;
+                                opens = 吸嘴是否吸料(open);
+                                PS入料手臂吸放料流程.StepID = 515;
+                            }
+                        }
+                        else
+                        {
+                            PS入料手臂吸放料流程.StepID = 599;
+                        }
+
                         break;
+
+                    case 515:
+                        PS入料手臂吸放料流程.StepName = "获取Load盘坐标";
+                        bool 坐标 = APPmaster.获取Load盘坐标(true, out xPoint, out yPoint);
+                        if (坐标)
+                        {
+                            PS入料手臂吸放料流程.StepID = 520;
+                        }
+                        else
+                        {
+                            Debug.WriteLine("进入换盘程序");
+                        }
+                        break;
+
+                    case 520:
+                        PS入料手臂吸放料流程.StepName = "获取吸料信息";
+                        result = APPmaster.获取Load盘Open(opens, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                        if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 525;
+                        }
+                        break;
+
                     case 525:
-                        PS_入料手臂吸料.StepID = 530;
+                        PS入料手臂吸放料流程.StepName = "XYP轴移动到Load吸料位置";
+                        result = 入料手臂移动(xPos, yPos, 10);
+                        //if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 530;
+                        }
                         break;
+
                     case 530:
-                        PS_入料手臂吸料.StepID = 535;
+                        PS入料手臂吸放料流程.StepName = "Z轴向下移动";
+                        result = 入料手臂Z移动(lsopen, 1000, true);
+                        //if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 535;
+                        }
                         break;
+
                     case 535:
-                        PS_入料手臂吸料.StepID = 540;
+                        PS入料手臂吸放料流程.StepName = "入料吸嘴吸料";
+                        result = 入料吸嘴_吸料(lsopen, true);
+                        //if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 540;
+                        }
                         break;
+
                     case 540:
-                        PS_入料手臂吸料.StepID = 545;
+                        PS入料手臂吸放料流程.StepName = "入料吸嘴真空检测";
+                        result = 入料吸嘴_真空检测(out string[] io);
+                        //if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 545;
+                            APPmaster.更新Load盘Map(lsopen, index, xPoint, yPoint);
+                            for (int i = 0; i < io.Length; i++)
+                            {
+                                if (lsopen[i] && io[i] == null)
+                                {
+                                    opens[i] = 1;
+                                }
+                            }
+                        }
                         break;
+
                     case 545:
-                        PS_入料手臂吸料.StepID = 550;
+                        PS入料手臂吸放料流程.StepName = "Z轴向上移动";
+                        result = 入料手臂Z移动(lsopen, -0.2, false);
+                        //if (result == "Success")
+                        {
+                            for (int i = 0; i < lsopen.Length; i++)
+                            {
+                                if (i + index >= lsopen.Length) break;
+                                if (lsopen[i + index])
+                                {
+                                    if (opens[i + index] == 1)
+                                    {
+                                        lsopen[i + index] = false;
+                                        //Debug.WriteLine($"入料吸料Z{i + index + 1}吸料成功");
+                                    }
+                                    //else Debug.WriteLine($"入料吸料Z{i + index + 1}吸料失败");
+                                }
+                            }
+                            PS入料手臂吸放料流程.StepID = 550;
+                        }
                         break;
+
                     case 550:
-                        PS_入料手臂吸料.StepID = 555;
+                        PS入料手臂吸放料流程.StepName = "入料Z是否在原点";
+                        result = motionEx.GetDiHome(axisNames, out string[] home);
+                        //if (result == "Success")
+                        {
+                            Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+
+                            if (lsopen.Contains(true))
+                            {
+                                PS入料手臂吸放料流程.StepID = 530;
+                            }
+                            else
+                            {
+                                PS入料手臂吸放料流程.StepID = 560;
+                            }
+                        }
                         break;
-                    case 555:
-                        PS_入料手臂吸料.StepID = 560;
-                        break;
+
                     case 560:
-                        PS_入料手臂吸料.StepID = 565;
+                        PS入料手臂吸放料流程.StepName = "吸完检测";
+                        if (opens.Contains(0)) //如果还有吸嘴没吸
+                        {
+                            PS入料手臂吸放料流程.StepID = 515;
+                        }
+                        else
+                        {
+                            lsopen = new bool[] { opens[0] == 1, opens[1] == 1, opens[2] == 1, opens[3] == 1 };
+                            PS入料手臂吸放料流程.StepID = 700;
+                        }
                         break;
-                    case 565:
-                        PS_入料手臂吸料.StepID = 570;
+
+                    case 599:
+                        飞梭前入料状态 = 1; //入料手臂目标达成
+                        PS入料手臂吸放料流程.StepName = "入料手臂_吸放料流程完成";
+                        PS入料手臂吸放料流程.Processing = false;
+                        PS入料手臂吸放料流程.StepID = 500;
                         break;
-                    case 570:
-                        PS_入料手臂吸料.StepID = 599;
+
+                    case 700:
+                        PS入料手臂吸放料流程.StepName = "XYP轴移动到飞梭放料位置";
+                        xPos = colums == 0 ? 1000 : 1200;
+                        yPos = colums == 0 ? 200 : 400;
+                        result = 入料手臂移动(xPos, yPos, 10);
+                        //if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 705;
+                        }
                         break;
+
+                    case 705:
+                        if (飞梭移动状态 == 0) //入料手臂抓料等待标记
+                        {
+                            result = 入料手臂Z移动(lsopen, 100, true);
+                            //if (result == "Success")
+                            {
+                                PS入料手臂吸放料流程.StepID = 710;
+                            }
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 710:
+                        result = 入料吸嘴_吸料(lsopen, false);
+                        //if (result == "Success")
+                        {
+                            result = 入料吸嘴_放料(lsopen, true);
+                            //if (result == "Success")
+                            {
+                                Thread.Sleep(200);
+                                result = 入料吸嘴_放料(lsopen, false);
+                                //if (result == "Success")
+                                {
+                                    PS入料手臂吸放料流程.StepID = 715;
+                                }
+                            }
+                        }
+                        break;
+
+                    case 715:
+                        result = 入料手臂Z移动(lsopen, -0.2, false);
+                        //if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 720;
+                        }
+                        break;
+
+                    case 720:
+                        PS入料手臂吸放料流程.StepName = "入料Z是否在原点";
+
+                        result = motionEx.GetDiHome(axisNames, out home);
+                        //if (result == "Success")
+                        {
+                            Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+
+                            PS入料手臂吸放料流程.StepID = 510;
+                            for (int i = 0; i < lsopen.Length; i++)
+                            {
+                                if (lsopen[i])
+                                {
+                                    飞梭前入料IC[colums][i] = true;
+                                }
+                            }
+                        }
+                        break;
+
                     default:
-                        Debug.WriteLine(("PS_入料手臂吸料.StepID =" + PS_入料手臂吸料.StepID.ToString() + "对应流程不存在"));
+                        Debug.WriteLine(("PS入料手臂吸料流程.StepID =" + PS入料手臂吸放料流程.StepID.ToString() + "对应流程不存在"));
                         break;
                 }
             }
         }
 
+        public void 出料手臂吸放料流程()
+        {
+            string result;
+            string[] axisNames =
+                {
+                "M6_出料手臂Z1轴", "M7_出料手臂Z2轴",
+                "M8_出料手臂Z3轴", "M9_出料手臂Z4轴"
+            }; PS出料手臂吸放料流程.StepID = 500;
+
+            int[] open = new int[4];
+            bool[][] opens = new bool[2][];
+            bool[] lsopen = new bool[4];
+            string[][] bins = new string[2][];
+            string[] bin = new string[4];
+            short colums = 0;
+            double shuttlex = 0;
+            double shuttley = 0;
+            double shuttlep = 0;
+            int index = 0;
+            double xPos = 0;
+            double yPos = 0;
+            while (true)
+            {
+                Thread.Sleep(5);
+                switch (PS出料手臂吸放料流程.StepID)
+                {
+                    case 500:
+                        PS出料手臂吸放料流程.StepName = "路径规划";
+                        PS出料手臂吸放料流程.Condition = 入料手臂吸料状态 == 0 && 飞梭前入料状态 == 0;
+                        PS出料手臂吸放料流程.Permit = !PS入料手臂放料流程.Processing;
+                        if (PS出料手臂吸放料流程.Condition && PS出料手臂吸放料流程.Permit)
+                        {
+                            opens = new bool[2][]
+                            {
+                               new bool[]{ 飞梭后出料IC[0][0],飞梭后出料IC[0][1],飞梭后出料IC[0][2],飞梭后出料IC[0][3]},
+                               new bool[]{ 飞梭后出料IC[1][0],飞梭后出料IC[1][1],飞梭后出料IC[1][2],飞梭后出料IC[1][3]},
+                            };
+                            bins = new string[2][]
+                            {
+                                new string[]{ 飞梭前出料BIN项[0][0], 飞梭前出料BIN项[0][1], 飞梭前出料BIN项[0][2], 飞梭前出料BIN项[0][3]},
+                                new string[]{ 飞梭前出料BIN项[1][0], 飞梭前出料BIN项[1][1], 飞梭前出料BIN项[1][2], 飞梭前出料BIN项[1][3]},
+                            };
+                            PS出料手臂吸放料流程.Processing = true;
+                            PS出料手臂吸放料流程.StepID = 510;
+                        }
+                        break;
+
+                    case 510:
+                        PS入料手臂吸放料流程.StepName = "计算放料IC颗数";
+                        if (opens[0].Contains(true))
+                        {
+                            colums = 0;
+                            shuttlex = 100;
+                            shuttley = 100;
+                            shuttlep = 10;
+                            open = new int[] { opens[0][0] ? 1 : 0, opens[0][1] ? 1 : 0, opens[0][2] ? 1 : 0, opens[0][3] ? 1 : 0 };
+                            bin = new string[] { bins[0][0], bins[0][1], bins[0][2], bins[0][3] };
+                        }
+                        else if (opens[1].Contains(true))
+                        {
+                            colums = 1;
+                            shuttlex = 100;
+                            shuttley = 100;
+                            shuttlep = 10;
+                            open = new int[] { opens[1][0] ? 1 : 0, opens[1][1] ? 1 : 0, opens[1][2] ? 1 : 0, opens[1][3] ? 1 : 0 };
+                            bin = new string[] { bins[1][0], bins[1][1], bins[1][2], bins[1][3] };
+                        }
+                        else
+                        {
+                            PS出料手臂吸放料流程.StepID = 599;
+                            break;
+                        }
+                        PS出料手臂吸放料流程.StepID = 505;
+                        break;
+
+                    case 515:
+                        result = 出料手臂移动(shuttlex, shuttley, shuttlep);
+                        if (result == "Success")
+                        {
+                            PS出料手臂吸放料流程.StepID = 515;
+                        }
+                        break;
+
+                    case 520:
+                        result = 出料手臂Z移动(opens[colums], 100, true);
+                        if (result == "Success")
+                        {
+                            PS出料手臂吸放料流程.StepID = 525;
+                        }
+                        break;
+
+                    case 525:
+                        result = 出料吸嘴_吸料(opens[colums], true);
+                        if (result == "Success")
+                        {
+                            PS出料手臂吸放料流程.StepID = 530;
+                        }
+                        break;
+
+                    case 530:
+                        result = 出料吸嘴_真空检测(out string[] io);
+                        if (result == "Success")
+                        {
+                            PS出料手臂吸放料流程.StepID = 535;
+                        }
+                        break;
+
+                    case 535:
+                        result = 出料手臂Z移动(opens[colums], -0.2, false);
+                        if (result == "Success")
+                        {
+                            PS出料手臂吸放料流程.StepID = 540;
+                        }
+                        break;
+
+                    case 540:
+                        PS入料手臂吸放料流程.StepName = "出料Z是否在原点";
+                        result = motionEx.GetDiHome(axisNames, out string[] home);
+                        //if (result == "Success")
+                        {
+                            Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+
+                            for (int i = 0; i < opens[colums].Length; i++)
+                            {
+                                if (opens[colums][i])
+                                {
+                                    opens[colums][i] = false;
+                                }
+                            }
+                            PS入料手臂吸放料流程.StepID = 700;
+                        }
+                        break;
+
+                    case 700:
+                        PS入料手臂吸放料流程.StepName = "计算放料盘位置";
+                        if (APPmaster.判断BIN项(open, APPmaster.Auto1, bin, out index))
+                        {
+                            if (APPmaster.获取Auto1盘坐标(false, out short xPoint, out short yPoint))
+                            {
+                                result = APPmaster.获取Auto1盘Open(open, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                                if (result == "Success")
+                                {
+                                    PS入料手臂吸放料流程.StepID = 705;
+                                }
+                            }
+                        }
+                        else if (APPmaster.判断BIN项(open, APPmaster.Auto2, bin, out index))
+                        {
+                            if (APPmaster.获取Auto2盘坐标(false, out short xPoint, out short yPoint))
+                            {
+                                result = APPmaster.获取Auto2盘Open(open, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                                if (result == "Success")
+                                {
+                                    PS入料手臂吸放料流程.StepID = 705;
+                                }
+                            }
+                        }
+                        else if (APPmaster.判断BIN项(open, APPmaster.Fix1, bin, out index))
+                        {
+                            if (APPmaster.获取Fix1盘坐标(false, out short xPoint, out short yPoint))
+                            {
+                                result = APPmaster.获取Fix1盘Open(open, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                                if (result == "Success")
+                                {
+                                    PS入料手臂吸放料流程.StepID = 705;
+                                }
+                            }
+                        }
+                        else if (APPmaster.判断BIN项(open, APPmaster.Fix2, bin, out index))
+                        {
+                            if (APPmaster.获取Fix2盘坐标(false, out short xPoint, out short yPoint))
+                            {
+                                result = APPmaster.获取Fix2盘Open(open, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                                if (result == "Success")
+                                {
+                                    PS入料手臂吸放料流程.StepID = 705;
+                                }
+                            }
+                        }
+                        else if (APPmaster.判断BIN项(open, APPmaster.Fix3, bin, out index))
+                        {
+                            if (APPmaster.获取Fix3盘坐标(false, out short xPoint, out short yPoint))
+                            {
+                                result = APPmaster.获取Fix3盘Open(open, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                                if (result == "Success")
+                                {
+                                    PS入料手臂吸放料流程.StepID = 705;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            PS入料手臂吸放料流程.StepID = 599;
+                        }
+                        break;
+
+                    case 705:
+                        PS入料手臂吸放料流程.StepName = "出料手臂走到放料位";
+                        result = 出料手臂移动(xPos, yPos + APPmaster.Interval * 16.3, 10); //yPitch
+                        if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 710;
+                        }
+                        break;
+
+                    case 710:
+                        PS入料手臂吸放料流程.StepName = "出料手臂Z向下";
+                        result = 出料手臂Z移动(lsopen, 100, true);
+                        if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 715;
+                        }
+                        break;
+
+                    case 715:
+                        PS入料手臂吸放料流程.StepName = "出料吸嘴放料";
+                        result = 出料吸嘴_吸料(lsopen, false);
+                        if (result == "Success")
+                        {
+                            result = 出料吸嘴_放料(lsopen, true);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(200);
+                                result = 出料吸嘴_放料(lsopen, false);
+                                if (result == "Success")
+                                {
+                                    PS入料手臂吸放料流程.StepID = 720;
+                                }
+                            }
+                        }
+                        break;
+
+                    case 720:
+                        PS入料手臂吸放料流程.StepName = "出料手臂Z向上";
+                        result = 出料手臂Z移动(lsopen, -0.2, false);
+                        if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 725;
+                        }
+                        break;
+
+                    case 725:
+                        PS入料手臂吸放料流程.StepName = "出料Z是否在原点";
+                        result = motionEx.GetDiHome(axisNames, out home);
+                        //if (result == "Success")
+                        {
+                            Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+
+                            for (int i = 0; i < opens[colums].Length; i++)
+                            {
+                                if (opens[colums][i])
+                                {
+                                    opens[colums][i] = false;
+                                }
+                            }
+                            PS入料手臂吸放料流程.StepID = 700;
+                        }
+                        break;
+
+                    case 599:
+                        PS出料手臂吸放料流程.StepName = "入料手臂_吸放料流程完成";
+                        PS出料手臂吸放料流程.Processing = false;
+                        PS出料手臂吸放料流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS出料手臂吸放料流程.StepID =" + PS出料手臂吸放料流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
+        public void 飞梭移动流程()
+        {
+            PS入飞梭移动流程.StepID = 500;
+            while (true)
+            {
+                Thread.Sleep(5);
+
+                switch (PS入飞梭移动流程.StepID)
+                {
+                    case 500:
+                        PS入飞梭移动流程.StepName = "路径规划";
+                        PS入飞梭移动流程.Condition = 飞梭前入料状态 == 2 && 飞梭后入料状态 == 0
+                                                    && 飞梭前出料状态 == 0;
+
+                        PS入飞梭移动流程.Permit = !PS入料手臂吸放料流程.Processing;
+                        if (PS入飞梭移动流程.Condition && PS入飞梭移动流程.Permit)
+                        {
+                            飞梭移动状态 = 1;
+                            PS入飞梭移动流程.Processing = true;
+                            PS入飞梭移动流程.StepID = 505;
+                        }
+                        break;
+
+                    case 510:
+                        string result = 飞梭_前后检测产品感应(out string[] iovalues);
+                        if (result == "Success")
+                        {
+                            if (iovalues.Contains("0"))
+                            {
+                                交换飞梭前后入料IC数据();
+                                交换飞梭前后出料IC数据();
+
+                                飞梭后入料状态 = 1;
+                                飞梭前入料状态 = 0;
+
+                                if (飞梭后出料状态 == 2)
+                                {
+                                    交换飞梭前后出料BIN数据();
+                                    飞梭前出料状态 = 1;
+                                    飞梭后出料状态 = 0;
+                                }
+
+                                PS入飞梭移动流程.StepID = 515;
+                            }
+                        }
+                        break;
+
+                    case 515:
+                        if (飞梭2位置 == 0)
+                        {
+                            飞梭2位置 = 1;
+                            result = 飞梭轴移动(200);
+                        }
+                        else
+                        {
+                            飞梭2位置 = 0;
+                            result = 飞梭轴移动(100);
+                        }
+                        if (result == "Success")
+                        {
+                            PS入飞梭移动流程.StepID = 599;
+                        }
+                        break;
+
+                    case 599:
+                        飞梭移动状态 = 0;
+                        PS入飞梭移动流程.StepName = $"飞梭2移动到{(飞梭2位置 == 1 ? "前方" : "后方")}完成";
+                        PS入飞梭移动流程.Processing = false;
+                        PS入飞梭移动流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS入飞梭移动流程.StepID =" + PS入飞梭移动流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
+
+        public void 测试手臂取待测料流程()
+        {
+            string result;
+            bool[] open = new bool[8];
+            PS测试手臂取待测料流程.StepID = 500;
+            while (true)
+            {
+                Thread.Sleep(5);
+
+                switch (PS测试手臂取待测料流程.StepID)
+                {
+                    case 500:
+                        PS测试手臂取待测料流程.StepName = "路径规划";
+                        PS测试手臂取待测料流程.Condition = 飞梭前入料状态 == 2 && 飞梭后入料状态 == 0;
+                        PS测试手臂取待测料流程.Permit = !PS入料手臂吸放料流程.Processing;
+                        if (PS测试手臂取待测料流程.Condition && PS测试手臂取待测料流程.Permit)
+                        {
+                            open = new bool[]
+                            {
+                                飞梭后入料IC[0][0],飞梭后入料IC[0][1],飞梭后入料IC[0][2],飞梭后入料IC[0][3],
+                                飞梭后入料IC[1][0],飞梭后入料IC[1][1],飞梭后入料IC[1][2],飞梭后入料IC[1][3]
+                            };
+                            PS测试手臂取待测料流程.Processing = true;
+                            PS测试手臂取待测料流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        PS测试手臂取待测料流程.StepName = "测试吸嘴_张卡气缸输出";
+                        result = 测试吸嘴_张开气缸输出(false);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 510;
+                        }
+                        break;
+
+                    case 510:
+                        PS测试手臂取待测料流程.StepName = "测试手臂X轴到飞梭后入料吸料";
+                        result = 测试手臂X移动(100);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 515;
+                        }
+                        break;
+
+                    case 515:
+                        PS测试手臂取待测料流程.StepName = "测试吸嘴_张开气缸原位输出";
+                        result = 测试吸嘴_张开气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 520;
+                        }
+                        break;
+
+                    case 520:
+                        PS测试手臂取待测料流程.StepName = "测试手臂Z向下移动";
+                        result = 测试手臂Z移动(100);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 525;
+                        }
+                        break;
+
+                    case 525:
+                        PS测试手臂取待测料流程.StepName = "测试吸嘴吸料";
+                        result = 测试吸嘴_吸料(open, true);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 525;
+                        }
+                        break;
+
+                    case 530:
+                        PS测试手臂取待测料流程.StepName = "测试吸嘴真空检测";
+                        result = 测试吸嘴_真空检测(out string[] io);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 530;
+                        }
+                        break;
+
+                    case 535:
+                        PS测试手臂取待测料流程.StepName = "测试手臂Z向上移动";
+                        result = 测试手臂Z移动(0);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 530;
+                        }
+                        break;
+
+                    case 540:
+                        PS测试手臂取待测料流程.StepName = "测试吸嘴_张开";
+                        result = 测试吸嘴_张开气缸输出(true);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 545;
+                        }
+                        break;
+
+                    case 545:
+                        PS测试手臂取待测料流程.StepName = "测试手臂X移动到测试区放料";
+                        result = 测试手臂X移动(120);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 555;
+                        }
+                        break;
+
+                    case 550:
+                        PS测试手臂取待测料流程.StepName = "测试吸嘴_张开并检测输入";
+                        result = 测试吸嘴_张开气缸到位输出();
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 560;
+                        }
+                        break;
+
+                    case 555:
+                        PS测试手臂取待测料流程.StepName = "测试Z向下移动";
+                        result = 测试手臂Z移动(100);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 565;
+                        }
+                        break;
+
+                    case 560:
+                        PS测试手臂取待测料流程.StepName = "测试吸嘴放料";
+                        result = 测试吸嘴_吸料(open, false);
+                        if (result == "Success")
+                        {
+                            result = 测试吸嘴_放料(open, true);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(200);
+                                result = 测试吸嘴_放料(open, false);
+                                if (result == "Success")
+                                {
+                                    PS测试手臂取待测料流程.StepID = 565;
+                                }
+                            }
+                        }
+                        break;
+
+                    case 565:
+                        PS测试手臂取待测料流程.StepName = "测试Z向上移动";
+                        result = 测试手臂Z移动(0);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取待测料流程.StepID = 560;
+                        }
+                        break;
+
+
+                    case 570:
+                        PS入料手臂吸放料流程.StepName = "测试Z是否在原点";
+
+                        result = motionEx.GetDiHome(new string[] { "M19_测试手臂Z轴" }, out string[] home);
+                        //if (result == "Success")
+                        {
+                            Debug.WriteLine($"测试Z回原：{home[0]}");
+
+                            //for (int i = 0; i < lsopen.Length; i++)
+                            //{
+                            //    if (lsopen[i])
+                            //    {
+                            //        飞梭前入料IC[colums][i] = true;
+                            //    }
+                            //}
+
+                            PS入料手臂吸放料流程.StepID = 575;
+                        }
+                        break;
+
+                    case 599:
+                        PS测试手臂取待测料流程.StepName = $"测试手臂取待测料流程完成";
+                        PS测试手臂取待测料流程.Processing = false;
+                        PS测试手臂取待测料流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS测试手臂取待测料流程.StepID =" + PS测试手臂取待测料流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
+        public void 测试手臂取已测料流程()
+        {
+            string result;
+            bool[] open = new bool[8];
+            PS测试手臂取已测料流程.StepID = 500;
+            while (true)
+            {
+                Thread.Sleep(5);
+
+                switch (PS测试手臂取已测料流程.StepID)
+                {
+                    case 500:
+                        PS测试手臂取已测料流程.StepName = "路径规划";
+                        PS测试手臂取已测料流程.Condition = 飞梭前入料状态 == 2 && 飞梭后入料状态 == 0;
+                        PS测试手臂取已测料流程.Permit = !PS入料手臂吸放料流程.Processing;
+                        if (PS测试手臂取已测料流程.Condition && PS测试手臂取已测料流程.Permit)
+                        {
+                            open = new bool[]
+                            {
+                                飞梭后入料IC[0][0],飞梭后入料IC[0][1],飞梭后入料IC[0][2],飞梭后入料IC[0][3],
+                                飞梭后入料IC[1][0],飞梭后入料IC[1][1],飞梭后入料IC[1][2],飞梭后入料IC[1][3]
+                            };
+                            PS测试手臂取已测料流程.Processing = true;
+                            PS测试手臂取已测料流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        PS测试手臂取已测料流程.StepName = "测试吸嘴_张卡气缸输出";
+                        result = 测试吸嘴_张开气缸输出(true);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 510;
+                        }
+                        break;
+
+                    case 510:
+                        PS测试手臂取已测料流程.StepName = "测试手臂X轴到测试区吸料";
+                        result = 测试手臂X移动(100);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 515;
+                        }
+                        break;
+
+                    case 515:
+                        PS测试手臂取已测料流程.StepName = "测试吸嘴_张开气缸到位输出";
+                        result = 测试吸嘴_张开气缸到位输出();
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 520;
+                        }
+                        break;
+
+                    case 520:
+                        PS测试手臂取已测料流程.StepName = "测试手臂Z向下移动";
+                        result = 测试手臂Z移动(100);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 525;
+                        }
+                        break;
+
+                    case 525:
+                        PS测试手臂取已测料流程.StepName = "测试吸嘴吸料";
+                        result = 测试吸嘴_吸料(open, true);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 525;
+                        }
+                        break;
+
+                    case 530:
+                        PS测试手臂取已测料流程.StepName = "测试吸嘴真空检测";
+                        result = 测试吸嘴_真空检测(out string[] io);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 530;
+                        }
+                        break;
+
+                    case 535:
+                        PS测试手臂取已测料流程.StepName = "测试手臂Z向上移动";
+                        result = 测试手臂Z移动(0);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 530;
+                        }
+                        break;
+
+                    case 540:
+                        PS测试手臂取已测料流程.StepName = "测试吸嘴_缩小";
+                        result = 测试吸嘴_张开气缸输出(false);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 545;
+                        }
+                        break;
+
+                    case 545:
+                        PS测试手臂取已测料流程.StepName = "测试手臂X移动到梭车放料";
+                        result = 测试手臂X移动(120);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 555;
+                        }
+                        break;
+
+                    case 550:
+                        PS测试手臂取已测料流程.StepName = "测试吸嘴_缩小并检测输入";
+                        result = 测试吸嘴_张开气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 560;
+                        }
+                        break;
+
+                    case 555:
+                        PS测试手臂取已测料流程.StepName = "测试Z向下移动";
+                        result = 测试手臂Z移动(100);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 565;
+                        }
+                        break;
+
+                    case 560:
+                        PS测试手臂取已测料流程.StepName = "测试吸嘴放料";
+                        result = 测试吸嘴_吸料(open, false);
+                        if (result == "Success")
+                        {
+                            result = 测试吸嘴_放料(open, true);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(200);
+                                result = 测试吸嘴_放料(open, false);
+                                if (result == "Success")
+                                {
+                                    PS测试手臂取已测料流程.StepID = 565;
+                                }
+                            }
+                        }
+                        break;
+
+                    case 565:
+                        PS测试手臂取已测料流程.StepName = "测试Z向上移动";
+                        result = 测试手臂Z移动(0);
+                        if (result == "Success")
+                        {
+                            PS测试手臂取已测料流程.StepID = 560;
+                        }
+                        break;
+
+
+                    case 570:
+                        PS测试手臂取已测料流程.StepName = "测试Z是否在原点";
+
+                        result = motionEx.GetDiHome(new string[] { "M19_测试手臂Z轴" }, out string[] home);
+                        //if (result == "Success")
+                        {
+                            Debug.WriteLine($"测试Z回原：{home[0]}");
+
+                            //for (int i = 0; i < lsopen.Length; i++)
+                            //{
+                            //    if (lsopen[i])
+                            //    {
+                            //        飞梭前入料IC[colums][i] = true;
+                            //    }
+                            //}
+
+                            PS测试手臂取已测料流程.StepID = 575;
+                        }
+                        break;
+
+                    case 599:
+                        PS测试手臂取已测料流程.StepName = $"测试手臂取已测料流程完成";
+                        PS测试手臂取已测料流程.Processing = false;
+                        PS测试手臂取已测料流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS测试手臂取已测料流程.StepID =" + PS测试手臂取已测料流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
+        public void 测试区气缸动作流程()
+        {
+            string result;
+            short site = 0;
+            List<bool[]> open = new List<bool[]>();
+            while (true)
+            {
+                Thread.Sleep(5);
+
+                switch (PS测试区气缸动作流程.StepID)
+                {
+                    case 500:
+                        PS测试区气缸动作流程.StepName = "路径规划";
+                        PS测试区气缸动作流程.Condition = 飞梭前入料状态 == 2 && 飞梭后入料状态 == 0;
+                        PS测试区气缸动作流程.Permit = !PS入料手臂吸放料流程.Processing;
+                        if (PS测试区气缸动作流程.Condition && PS测试区气缸动作流程.Permit)
+                        {
+                            bool[][] siteopne = APPmaster.SiteSave[site];
+                            open = new List<bool[]>()
+                            {
+                                new bool[] { siteopne[0][0],siteopne[0][1],siteopne[0][2] ,siteopne[0][3]  },
+                                new bool[] { siteopne[1][0],siteopne[1][1],siteopne[1][2] ,siteopne[1][3]  },
+                            };
+                            PS测试区气缸动作流程.Processing = true;
+                            PS测试区气缸动作流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        PS测试区气缸动作流程.StepName = $"循环检测Site状态";
+                        if (site >= 16)
+                        {
+                            site = 0;
+                        }
+                        if (SiteTestState[site] == 1)
+                        {
+                            PS测试区气缸动作流程.StepID = 510;
+                        }
+                        else if (SiteTestState[site] == 3)
+                        {
+                            PS测试区气缸动作流程.StepID = 510;
+                        }
+                        site++;
+                        break;
+
+                    case 510:
+                        PS测试区气缸动作流程.StepName = $"测试区气缸前移";
+                        result = 测试区_位移气缸到位输出(site);
+                        if (result == "Success")
+                        {
+                            PS测试区气缸动作流程.StepID = 515;
+                        }
+                        break;
+
+                    case 515:
+                        PS测试区气缸动作流程.StepName = $"测试区气缸下压";
+                        result = 测试区_下压气缸到位输出(site);
+                        if (result == "Success")
+                        {
+                            PS测试区气缸动作流程.StepID = 520;
+                        }
+                        break;
+
+                    case 520:
+
+                        PS测试区气缸动作流程.StepName = $"测试区气缸下压";
+                        APPmaster.Com.Send(site, open);
+                        SiteTestState[site] = 2;
+                        PS测试区气缸动作流程.StepID = 525;
+                        break;
+
+                    case 599:
+                        PS测试区气缸动作流程.StepName = $"测试区气缸动作流程完成";
+                        PS测试区气缸动作流程.Processing = false;
+                        PS测试区气缸动作流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS测试区气缸动作流程.StepID =" + PS测试区气缸动作流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                        /*
+                         * if (site1状态 == 1:有料) //如果需要测试				
+                         {				
+                            TestAircylinderStarttest(testnum); //触发下压动作	
+                            com.Send(testnum, testgetsitestatus[testnum]);				
+                            site1状态 = 2: 测试中			
+                         }				
+                         else if(site1状态 == 3:已测试)				
+                         {				
+                            TestAircylinderEndtest(testnum); //触发抬升动作			
+                            site1状态 = 2: 待取料				
+                         }				
+                        */
+                }
+            }
+        }
+
+        //public void 入料()
+        //{
+
+        //    while (true)
+        //    {
+        //        switch (PS入料手臂吸料流程.StepID)
+        //        {
+        //            case 500:
+        //                {
+
+        //                    if (!参数对比(Data_飞梭前入料IC[0], Data_入料目标值[0]))
+        //                        PS入料手臂吸料流程.StepID = 510;
+        //                    else
+        //                        PS入料手臂吸料流程.StepID = 540;
+        //                }
+        //                break;
+
+        //            case 510:
+        //                {
+        //                    if (入料手臂抓料等待标记)
+        //                        PS入料手臂吸料流程.StepID = 520;
+        //                    else
+        //                        PS入料手臂吸料流程.StepID = 530;
+        //                }
+        //                break;
+        //            case 520:
+        //                {
+        //                    入料手臂放料在前梭车入料区1
+        //                    入料手臂抓料等待标记 = false;
+        //                    PS入料手臂吸料流程.StepID = 540;
+        //                }
+        //                break;
+        //            case 530:
+        //                {
+        //                    入料手臂从loder区吸料放到前梭车入料区1
+        //                        PS入料手臂吸料流程.StepID = 540;
+        //                }
+        //                break;
+        //            case 540:
+        //                {
+        //                    if (!参数对比(Data_飞梭前入料IC[1], Data_入料目标值[1]))
+        //                        PS入料手臂吸料流程.StepID = 550;
+        //                    else
+        //                        PS入料手臂吸料流程.StepID = 580;
+        //                }
+        //                break;
+        //            case 550:
+        //                {
+        //                    if (入料手臂抓料等待标记)
+        //                        PS入料手臂吸料流程.StepID = 560;
+        //                    else
+        //                        PS入料手臂吸料流程.StepID = 570;
+        //                }
+        //                break;
+        //            case 560:
+        //                {
+        //                    入料手臂放料在前梭车入料区2;
+        //                    入料手臂抓料等待标记 = false;
+        //                    PS入料手臂吸料流程.StepID = 580;
+        //                }
+        //                break;
+        //            case 570:
+        //                {
+        //                    入料手臂从loder区吸料放到前梭车入料区2
+        //                        PS入料手臂吸料流程.StepID = 580;
+        //                }
+        //                break;
+        //            case 580:
+        //                {
+        //                    入料手臂目标达成
+        //                    if (入料手臂抓料等待标记)
+        //                    {
+        //                        PS入料手臂吸料流程.StepID = 500;
+        //                        Thread.Sleep(10);
+        //                    }
+        //                    else
+        //                        PS入料手臂吸料流程.StepID = 590;
+
+        //                }
+        //                break;
+        //            case 590:
+        //                {
+
+        //                    if (参数对比(Data_飞梭后入料IC[0], Data_入料目标值[0]) && 参数对比(Data_飞梭后入料IC[1], Data_入料目标值[1]))
+        //                    {
+        //                        PS入料手臂吸料流程.StepID = 500;
+        //                        Thread.Sleep(10);
+        //                    }
+        //                    else
+        //                        PS入料手臂吸料流程.StepID = 600;
+        //                }
+        //                break;
+        //            case 600:
+        //                {
+        //                    if (!参数对比(Data_飞梭后入料IC[0], Data_入料目标值[0]))
+        //                        入料手臂根据Data_飞梭后入料IC[0]与目标目标值[0]差值吸料
+        //                    else
+        //                        入料手臂根据Data_飞梭后入料IC[1]与目标目标值[1]差值吸料
+
+
+        //                    PS入料手臂吸料流程.StepID = 610;
+        //                }
+        //                break;
+        //            case 610:
+        //                {
+        //                    入料手臂移动至梭车上方;
+        //                    入料手臂抓料等待标记 = true;
+        //                    PS入料手臂吸料流程.StepID = 500;
+        //                    Thread.Sleep(10);
+        //                }
+        //                break;
+        //        }
+        //    }
+        //}
+
         #endregion
     }
+
+    //public class 草稿
+    //{
+    //    public static int 飞梭Shuttle2位置; //1:后面 2:前面
+
+    //    public static int Data_入料手臂state;
+    //    public static int Data_出料手臂state;
+    //    public static int Data_测试手臂state;
+    //    public static int Data_飞梭state;
+
+    //    public static int Data_飞梭前入料state;
+    //    public static int Data_飞梭前出料state;
+    //    public static int Data_飞梭后入料state;
+    //    public static int Data_飞梭后出料state;
+
+    //    public static int[] Data_入料手臂吸料坐标;
+    //    public static short Data_吸料飞梭列;
+
+    //    public static bool[][] Data_入料手臂吸料IC;
+    //    public static bool[][] Data_出料手臂吸料IC;
+    //    public static bool[][] Data_测试手臂吸料IC;
+    //    public static bool[][] Data_测试手臂放料IC;
+
+    //    public static bool[][] Data_飞梭前入料IC;
+    //    public static bool[][] Data_飞梭前出料IC;
+    //    public static bool[][] Data_飞梭后入料IC;
+    //    public static bool[][] Data_飞梭后出料IC;
+
+    //    public static string[][] Data_飞梭前出料BIN项;
+    //    public static string[][] Data_飞梭后出料BIN项;
+    //    public static string[][] Data_测试手臂出料BIN项;
+
+    //    public static int[] Data_Site1_16state;
+
+    //    public static bool[][] Data_入料目标值;
+
+    //    public static bool 入料手臂抓料等待标记 = false;
+    //    public void 入料()
+    //    {
+
+    //        while (true)
+    //        {
+    //            switch (PS_入料手臂_Load吸料.StepID)
+    //            {
+    //                case 500:
+    //                    {
+
+    //                        if (!参数对比(Data_飞梭前入料IC[0], Data_入料目标值[0]))
+    //                            PS_入料手臂_Load吸料.StepID = 510;
+    //                        else
+    //                            PS_入料手臂_Load吸料.StepID = 540;
+    //                    }
+    //                    break;
+
+    //                case 510:
+    //                    {
+    //                        if (入料手臂抓料等待标记)
+    //                            PS_入料手臂_Load吸料.StepID = 520;
+    //                        else
+    //                            PS_入料手臂_Load吸料.StepID = 530;
+    //                    }
+    //                    break;
+    //                case 520:
+    //                    {
+    //                        入料手臂放料在前梭车入料区1
+    //                        入料手臂抓料等待标记 = false;
+    //                        PS_入料手臂_Load吸料.StepID = 540;
+    //                    }
+    //                    break;
+    //                case 530:
+    //                    {
+    //                        入料手臂从loder区吸料放到前梭车入料区1
+    //                            PS_入料手臂_Load吸料.StepID = 540;
+    //                    }
+    //                    break;
+    //                case 540:
+    //                    {
+    //                        if (!参数对比(Data_飞梭前入料IC[1], Data_入料目标值[1]))
+    //                            PS_入料手臂_Load吸料.StepID = 550;
+    //                        else
+    //                            PS_入料手臂_Load吸料.StepID = 580;
+    //                    }
+    //                    break;
+    //                case 550:
+    //                    {
+    //                        if (入料手臂抓料等待标记)
+    //                            PS_入料手臂_Load吸料.StepID = 560;
+    //                        else
+    //                            PS_入料手臂_Load吸料.StepID = 570;
+    //                    }
+    //                    break;
+    //                case 560:
+    //                    {
+    //                        入料手臂放料在前梭车入料区2;
+    //                        入料手臂抓料等待标记 = false;
+    //                        PS_入料手臂_Load吸料.StepID = 580;
+    //                    }
+    //                    break;
+    //                case 570:
+    //                    {
+    //                        入料手臂从loder区吸料放到前梭车入料区2
+    //                            PS_入料手臂_Load吸料.StepID = 580;
+    //                    }
+    //                    break;
+    //                case 580:
+    //                    {
+    //                        入料手臂目标达成
+    //                        if (入料手臂抓料等待标记)
+    //                        {
+    //                            PS_入料手臂_Load吸料.StepID = 500;
+    //                            Thread.Sleep(10);
+    //                        }
+    //                        else
+    //                            PS_入料手臂_Load吸料.StepID = 590;
+
+    //                    }
+    //                    break;
+    //                case 590:
+    //                    {
+
+    //                        if (参数对比(Data_飞梭后入料IC[0], Data_入料目标值[0]) && 参数对比(Data_飞梭后入料IC[1], Data_入料目标值[1]))
+    //                        {
+    //                            PS_入料手臂_Load吸料.StepID = 500;
+    //                            Thread.Sleep(10);
+    //                        }
+    //                        else
+    //                            PS_入料手臂_Load吸料.StepID = 600;
+    //                    }
+    //                    break;
+    //                case 600:
+    //                    {
+    //                        if (!参数对比(Data_飞梭后入料IC[0], Data_入料目标值[0]))
+    //                            入料手臂根据Data_飞梭后入料IC[0]与目标目标值[0]差值吸料
+    //                        else
+    //                            入料手臂根据Data_飞梭后入料IC[1]与目标目标值[1]差值吸料
+
+
+    //                        PS_入料手臂_Load吸料.StepID = 610;
+    //                    }
+    //                    break;
+    //                case 610:
+    //                    {
+    //                        入料手臂移动至梭车上方;
+    //                        入料手臂抓料等待标记 = true;
+    //                        PS_入料手臂_Load吸料.StepID = 500;
+    //                        Thread.Sleep(10);
+    //                    }
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    public void 入料手臂吸料_Load()
+    //    {
+    //        string result = "";
+    //        short colums = 0;
+
+    //        short index = 0;
+
+    //        double xPos = 0;
+    //        double yPos = 0;
+
+    //        bool[] lsopen = new bool[4];
+    //        short[] opens = new short[4];
+    //        bool[][] open = new bool[2][];
+
+    //        while (true)
+    //        {
+    //            switch (PS_入料手臂_Load吸料.StepID)
+    //            {
+    //                case 500:
+    //                    PS_入料手臂_Load吸料.StepName = "路径规划";
+    //                    PS_入料手臂_Load吸料.Condition = Data_入料手臂state == 0 && Data_飞梭前入料state == 0;
+    //                    PS_入料手臂_Load吸料.Permit = !PS_入料手臂_飞梭放料.Processing;
+    //                    if (PS_入料手臂_Load吸料.Condition && PS_入料手臂_Load吸料.Permit)
+    //                    {
+    //                        colums = 0;
+    //                        PS_入料手臂_Load吸料.Processing = true;
+    //                        PS_入料手臂_Load吸料.StepID = 505;
+    //                    }
+    //                    break;
+
+    //                case 505:
+    //                    PS_入料手臂_Load吸料.StepName = "检查开Site情况";
+    //                    if (Site是否开启(APPmaster.Sitestatus[0]))
+    //                    {
+    //                        open = APPmaster.Sitestatus[0];
+    //                        if (open[colums].Contains(true))
+    //                        {
+    //                            opens = 吸嘴是否吸料(open, colums);
+    //                            PS_入料手臂_Load吸料.StepID = 510;
+    //                        }
+    //                        colums++;
+    //                    }
+    //                    break;
+
+    //                case 510:
+    //                    PS_入料手臂_Load吸料.StepName = "获取吸料吸嘴";
+    //                    APPmaster.获取Load盘Open(opens, out lsopen, out index);
+    //                    Debug.WriteLine($"PS_入料手臂吸料_Load.StepID={PS_入料手臂_Load吸料.StepID}->{PS_入料手臂_Load吸料.StepName}");
+
+    //                    break;
+
+    //                case 515:
+    //                    PS_入料手臂_Load吸料.StepName = "获取IC位置";
+    //                    if (APPmaster.获取Load盘位置(out xPos, out yPos))
+    //                    {
+    //                        Debug.WriteLine($"PS_左吸料_梭车吸.StepID={PS_入料手臂_Load吸料.StepID}->{PS_入料手臂_Load吸料.StepName}");
+    //                        PS_入料手臂_Load吸料.StepID = 515;
+    //                    }
+    //                    break;
+
+    //                case 520:
+    //                    PS_入料手臂_Load吸料.StepName = "入料手臂到Load盘吸料位";
+    //                    result = 入料手臂移动(xPos, yPos, 100);
+    //                    if (result == "Success")
+    //                    {
+    //                        Debug.WriteLine($"PS_左吸料_梭车吸.StepID={PS_入料手臂_Load吸料.StepID}->{PS_入料手臂_Load吸料.StepName}");
+    //                        PS_入料手臂_Load吸料.StepID = 520;
+    //                    }
+    //                    break;
+
+    //                case 525:
+    //                    PS_入料手臂_Load吸料.StepName = "入料手臂Z向下移动";
+
+    //                    result = 入料手臂Z移动(lsopen, 10, true);
+    //                    if (result == "Success")
+    //                    {
+    //                        Debug.WriteLine($"PS_左吸料_梭车吸.StepID={PS_入料手臂_Load吸料.StepID}->{PS_入料手臂_Load吸料.StepName}");
+    //                        PS_入料手臂_Load吸料.StepID = 530;
+    //                    }
+
+    //                    break;
+
+    //                case 530:
+    //                    PS_入料手臂_Load吸料.StepName = "入料手臂Z向上移动";
+    //                    result = 入料手臂Z移动(lsopen, -0.2, false);
+    //                    if (result == "Success")
+    //                    {
+    //                        Debug.WriteLine($"PS_左吸料_梭车吸.StepID={PS_入料手臂_Load吸料.StepID}->{PS_入料手臂_Load吸料.StepName}");
+    //                        PS_入料手臂_Load吸料.StepID = 599;
+    //                    }
+    //                    break;
+
+    //                case 535:
+    //                    PS_入料手臂_Load吸料.StepName = "判断入料Z是否在原点";
+    //                    string[] axisNames = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
+    //                    result = motionEx.GetDiHome(axisNames, out string[] iovalues);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_入料手臂_Load吸料.StepID = 599;
+    //                    }
+    //                    break;
+
+    //                case 599:
+    //                    PS_入料手臂_Load吸料.StepName = "入料手臂Load吸料完成";
+    //                    PS_入料手臂_Load吸料.Processing = false;
+    //                    PS_入料手臂_Load吸料.StepID = 500;
+    //                    break;
+
+    //                default:
+    //                    Debug.WriteLine(("PS_入料手臂吸料.StepID =" + PS_入料手臂_Load吸料.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+
+    //            switch (PS_入料手臂_飞梭放料.StepID)
+    //            {
+    //                case 500:
+    //                    PS_入料手臂_飞梭放料.StepName = "路径规划";
+    //                    PS_入料手臂_飞梭放料.Condition = Data_入料手臂state == 0 && Data_飞梭前入料state == 0;
+    //                    PS_入料手臂_飞梭放料.Permit = !PS_入料手臂_Load吸料.Processing;
+    //                    if (PS_入料手臂_飞梭放料.Condition && PS_入料手臂_飞梭放料.Permit)
+    //                    {
+    //                        PS_入料手臂_飞梭放料.Processing = true;
+    //                        PS_入料手臂_飞梭放料.StepID = 505;
+    //                    }
+    //                    break;
+
+    //                case 510:
+    //                    result = 入料手臂移动(100, 100, 100);
+    //                    if (result == "Success")
+    //                    {
+
+    //                    }
+    //                    break;
+
+    //                case 515:
+    //                    lsopen = Data_入料手臂吸料IC[Data_吸料飞梭列];
+    //                    result = 入料手臂Z移动(lsopen, 100, true);
+    //                    if (result == "Success")
+    //                    {
+
+    //                    }
+    //                    break;
+
+    //                case 520:
+    //                    result = 入料吸嘴_吸料(lsopen, false);
+    //                    if (result == "Success")
+    //                    {
+    //                        result = 入料吸嘴_放料(lsopen, true);
+    //                        if (result == "Success")
+    //                        {
+    //                            Thread.Sleep(200);
+    //                            result = 入料吸嘴_放料(lsopen, false);
+    //                            if (result == "Success")
+    //                            {
+
+    //                            }
+    //                        }
+    //                    }
+    //                    break;
+
+    //                case 525:
+    //                    result = 入料手臂Z移动(lsopen, -0.2, false);
+    //                    if (result == "Success")
+    //                    {
+
+    //                    }
+    //                    break;
+
+    //                case 530:
+    //                    PS_入料手臂_Load吸料.StepName = "判断入料Z是否在原点";
+    //                    string[] axisNames = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
+    //                    result = motionEx.GetDiHome(axisNames, out string[] iovalues);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_入料手臂_飞梭放料.StepID = 599;
+    //                    }
+    //                    break;
+
+    //                case 599:
+    //                    PS_入料手臂_飞梭放料.StepName = "入料手臂_放料飞梭完成";
+    //                    PS_入料手臂_飞梭放料.Processing = false;
+    //                    PS_入料手臂_飞梭放料.StepID = 999;
+    //                    break;
+
+    //                default:
+    //                    Debug.WriteLine(("PS_入料手臂_放料飞梭.StepID =" + PS_入料手臂_飞梭放料.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    public void 飞梭手臂移动()
+    //    {
+    //        string result;
+    //        PS_飞梭手臂移动.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_飞梭手臂移动.StepID)
+    //            {
+    //                case 500:
+    //                    PS_飞梭手臂移动.StepName = "路径规划";
+    //                    PS_飞梭手臂移动.Condition = Data_飞梭前入料state == 2 && Data_飞梭前出料state == 0
+    //                                            && Data_飞梭后入料state == 0;
+
+    //                    PS_飞梭手臂移动.Permit = !PS_入料手臂放料_Shuttle.Processing;
+    //                    if (PS_飞梭手臂移动.Condition && PS_飞梭手臂移动.Permit)
+    //                    {
+    //                        Data_飞梭state = 1;
+    //                        PS_飞梭手臂移动.Processing = true;
+    //                        PS_飞梭手臂移动.StepID = 505;
+    //                    }
+    //                    break;
+
+    //                case 510:
+    //                    result = 飞梭_前后检测产品感应(out string[] iovalues);
+    //                    if (result == "Success")
+    //                    {
+    //                        if (iovalues.Contains("0"))
+    //                        {
+    //                            if (Data_飞梭前入料state == 2)
+    //                            {
+    //                                Data_飞梭后入料state = 1;
+    //                                Data_飞梭前入料state = 0;
+    //                            }
+    //                            if (Data_飞梭后出料state == 2)
+    //                            {
+    //                                Data_飞梭前出料BIN项 = Data_飞梭后出料BIN项;
+    //                                Data_飞梭前出料state = 1;
+    //                                Data_飞梭后出料state = 0;
+    //                            }
+    //                            PS_飞梭手臂移动.StepID = 515;
+    //                        }
+    //                    }
+    //                    break;
+
+    //                case 515:
+    //                    if (飞梭Shuttle2位置 == 1)
+    //                    {
+    //                        飞梭Shuttle2位置 = 2;
+    //                        result = 飞梭轴移动(60);
+    //                    }
+    //                    else
+    //                    {
+    //                        飞梭Shuttle2位置 = 1;
+    //                        result = 飞梭轴移动(200);
+    //                    }
+    //                    if (result == "Success")
+    //                    {
+    //                        Data_飞梭state = 0;
+    //                        PS_飞梭手臂移动.StepID = 599;
+    //                    }
+    //                    break;
+
+    //                case 599:
+    //                    PS_飞梭手臂移动.StepID = 500;
+    //                    break;
+
+    //                default:
+    //                    Debug.WriteLine(("PS_飞梭手臂移动.StepID =" + PS_飞梭手臂移动.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    public void 入料手臂_放料飞梭()
+    //    {
+    //        string result;
+    //        bool[] lsopen = new bool[4];
+    //        while (true)
+    //        {
+    //            if (PS_入料手臂_飞梭放料.StepID == 999) break;
+
+    //        }
+    //    }
+
+    //    public void 入料手臂吸料_Heat()
+    //    {
+
+    //        PS_入料手臂吸料_Heat.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_入料手臂吸料_Heat.StepID)
+    //            {
+    //                default:
+    //                    Debug.WriteLine(("PS_入料手臂吸料_Heat.StepID =" + PS_入料手臂吸料_Heat.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    #region 出料手臂流程
+
+    //    public void 出料手臂吸料_Shuttle()
+    //    {
+    //        string result = "";
+    //        short colums = 0;
+
+    //        bool[] lsopen = new bool[4];
+    //        short[] opens = new short[4];
+    //        bool[][] open = new bool[2][];
+    //        string[][] bins = new string[2][];
+
+    //        short index = 0;
+
+    //        PS_出料手臂吸料_Shuttle.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_出料手臂吸料_Shuttle.StepID)
+    //            {
+    //                case 500:
+    //                    PS_出料手臂吸料_Shuttle.StepName = "路径规划";
+    //                    PS_出料手臂吸料_Shuttle.Condition = Data_飞梭前出料state == 1;
+    //                    PS_出料手臂吸料_Shuttle.Permit = !PS_入料手臂放料_Shuttle.Processing;
+    //                    if (PS_出料手臂吸料_Shuttle.Condition && PS_出料手臂吸料_Shuttle.Permit)
+    //                    {
+    //                        open = new bool[2][];
+    //                        open[0] = new bool[] { Data_飞梭前出料IC[0][0], Data_飞梭前出料IC[0][1], Data_飞梭前出料IC[0][2], Data_飞梭前出料IC[0][3] };
+    //                        open[1] = new bool[] { Data_飞梭前出料IC[1][0], Data_飞梭前出料IC[1][1], Data_飞梭前出料IC[1][2], Data_飞梭前出料IC[1][3] };
+    //                        bins = new string[2][];
+    //                        bins[0] = new string[] { Data_飞梭前出料BIN项[0][0], Data_飞梭前出料BIN项[0][1], Data_飞梭前出料BIN项[0][2], Data_飞梭前出料BIN项[0][3] };
+    //                        bins[1] = new string[] { Data_飞梭前出料BIN项[1][0], Data_飞梭前出料BIN项[1][1], Data_飞梭前出料BIN项[1][2], Data_飞梭前出料BIN项[1][3] };
+
+    //                        PS_出料手臂吸料_Shuttle.Processing = true;
+    //                        PS_出料手臂吸料_Shuttle.StepID = 505;
+    //                    }
+    //                    break;
+
+    //                case 505:
+    //                    PS_出料手臂吸料_Shuttle.StepName = "检查开Site情况";
+    //                    if (Site是否开启(open))
+    //                    {
+    //                        if (open[colums].Contains(true))
+    //                        {
+    //                            opens = 吸嘴是否放料(open, colums);
+    //                            PS_入料手臂_Load吸料.StepID = 510;
+    //                        }
+    //                        colums++;
+    //                    }
+    //                    break;
+
+    //                case 510:
+    //                    PS_入料手臂_Load吸料.StepName = "获取吸料吸嘴";
+    //                    APPmaster.获取Load盘Open(opens, out lsopen, out index);
+    //                    Debug.WriteLine($"PS_入料手臂吸料_Load.StepID={PS_入料手臂_Load吸料.StepID}->{PS_入料手臂_Load吸料.StepName}");
+    //                    break;
+
+    //                case 599:
+    //                    PS_出料手臂吸料_Shuttle.StepID = 500;
+    //                    break;
+
+    //                default:
+    //                    Debug.WriteLine(("PS_出料手臂吸料_Shuttle.StepID =" + PS_出料手臂吸料_Shuttle.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    public void 出料手臂放料_Tray()
+    //    {
+
+    //        PS_出料手臂放料_Tray.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_出料手臂放料_Tray.StepID)
+    //            {
+    //                default:
+    //                    Debug.WriteLine(("PS_出料手臂放料_Tray.StepID =" + PS_出料手臂放料_Tray.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+    //    #endregion
+
+    //    #region 测试手臂流程
+
+    //    public void 测试手臂吸料_Shuttle()
+    //    {
+    //        string result;
+
+    //        PS_测试手臂吸料_Shuttle.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_测试手臂吸料_Shuttle.StepID)
+    //            {
+    //                case 500:
+    //                    PS_测试手臂吸料_Shuttle.StepName = "路径规划";
+    //                    PS_测试手臂吸料_Shuttle.Condition = Data_飞梭后入料state == 1;
+    //                    PS_测试手臂吸料_Shuttle.Permit = !PS_入料手臂放料_Shuttle.Processing;
+    //                    if (PS_测试手臂吸料_Shuttle.Condition && PS_测试手臂吸料_Shuttle.Permit)
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.Processing = true;
+    //                        PS_测试手臂吸料_Shuttle.StepID = 505;
+    //                    }
+    //                    break;
+
+    //                case 505:
+    //                    result = 测试吸嘴_张卡气缸输出(false);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 510;
+    //                    }
+
+    //                    break;
+
+    //                case 510:
+    //                    result = 测试手臂X移动(120);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+
+    //                case 511:
+    //                    result = 测试吸嘴_张开气缸原位输出();
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+    //                case 515:
+    //                    result = 测试手臂Z移动(100);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 520;
+    //                    }
+    //                    break;
+
+    //                case 520:
+    //                    result = 测试手臂Z移动(0);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 525;
+    //                    }
+    //                    break;
+
+    //                case 525:
+    //                    result = 测试吸嘴_张卡气缸输出(true);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 510;
+    //                    }
+    //                    break;
+
+    //                case 530:
+    //                    result = 测试手臂X移动(120);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+    //                case 531:
+    //                    result = 测试吸嘴_张开气缸到位输出();
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+    //                case 535:
+    //                    result = 测试手臂Z移动(100);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 520;
+    //                    }
+    //                    break;
+
+    //                case 540:
+    //                    result = 测试手臂Z移动(0);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 525;
+    //                    }
+    //                    break;
+
+    //                case 599:
+    //                    PS_测试手臂吸料_Shuttle.StepID = 500;
+    //                    break;
+
+    //                default:
+    //                    Debug.WriteLine(("PS_测试手臂吸料_Shuttle.StepID =" + PS_测试手臂吸料_Shuttle.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    public void 测试手臂吸料_TestArea()
+    //    {
+    //        string result;
+    //        PS_测试手臂吸料_TestArea.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_测试手臂吸料_TestArea.StepID)
+    //            {
+    //                case 500:
+    //                    PS_测试手臂吸料_TestArea.StepName = "路径规划";
+    //                    PS_测试手臂吸料_TestArea.Condition = Data_飞梭后入料state == 1;
+    //                    PS_测试手臂吸料_TestArea.Permit = !PS_入料手臂放料_Shuttle.Processing;
+    //                    if (PS_测试手臂吸料_TestArea.Condition && PS_测试手臂吸料_TestArea.Permit)
+    //                    {
+    //                        PS_测试手臂吸料_TestArea.Processing = true;
+    //                        PS_测试手臂吸料_TestArea.StepID = 505;
+    //                    }
+    //                    break;
+
+    //                case 505:
+    //                    result = 测试吸嘴_张卡气缸输出(true);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 510;
+    //                    }
+
+    //                    break;
+
+    //                case 510:
+    //                    result = 测试手臂X移动(120);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+
+    //                case 511:
+    //                    result = 测试吸嘴_张开气缸到位输出();
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+    //                case 515:
+    //                    result = 测试手臂Z移动(100);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 520;
+    //                    }
+    //                    break;
+
+    //                case 520:
+    //                    result = 测试手臂Z移动(0);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 525;
+    //                    }
+    //                    break;
+
+    //                case 525:
+    //                    result = 测试吸嘴_张卡气缸输出(true);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 510;
+    //                    }
+    //                    break;
+
+    //                case 530:
+    //                    result = 测试手臂X移动(120);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+    //                case 531:
+    //                    result = 测试吸嘴_张开气缸到位输出();
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 515;
+    //                    }
+    //                    break;
+
+    //                case 535:
+    //                    result = 测试手臂Z移动(100);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 520;
+    //                    }
+    //                    break;
+
+    //                case 540:
+    //                    result = 测试手臂Z移动(0);
+    //                    if (result == "Success")
+    //                    {
+    //                        PS_测试手臂吸料_Shuttle.StepID = 525;
+    //                    }
+    //                    break;
+
+    //                default:
+    //                    Debug.WriteLine(("PS_测试手臂吸料_TestArea.StepID =" + PS_测试手臂吸料_TestArea.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    public void 测试手臂放料_Shuttle()
+    //    {
+
+    //        PS_测试手臂放料_Shuttle.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_测试手臂放料_Shuttle.StepID)
+    //            {
+    //                default:
+    //                    Debug.WriteLine(("PS_测试手臂放料_Shuttle.StepID =" + PS_测试手臂放料_Shuttle.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    public void 测试手臂放料_TestArea()
+    //    {
+
+    //        PS_测试手臂放料_TestArea.StepID = 500;
+    //        while (true)
+    //        {
+    //            switch (PS_测试手臂放料_TestArea.StepID)
+    //            {
+    //                default:
+    //                    Debug.WriteLine(("PS_测试手臂放料_TestArea.StepID =" + PS_测试手臂放料_TestArea.StepID.ToString() + "对应流程不存在"));
+    //                    break;
+    //            }
+    //        }
+    //    }
+
+    //    #endregion 测试手臂流程
+    //}
 }

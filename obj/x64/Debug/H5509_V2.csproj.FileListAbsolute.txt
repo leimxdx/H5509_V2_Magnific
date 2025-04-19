@@ -4,9 +4,6 @@ D:\GitHub\H5509_V2\bin\Debug\LAFunc.dll
 D:\GitHub\H5509_V2\bin\Debug\MachineBuilding.dll
 D:\GitHub\H5509_V2\bin\Debug\PIFunc.dll
 D:\GitHub\H5509_V2\bin\Debug\VFunc.dll
-D:\GitHub\H5509_V2\bin\Debug\gtn_core1.cfg
-D:\GitHub\H5509_V2\bin\Debug\gtn_core2.cfg
-D:\GitHub\H5509_V2\bin\Debug\配置\SystemData
 D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe.config
 D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\bin\Debug\H5509_V2.pdb
