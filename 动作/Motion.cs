@@ -1007,8 +1007,9 @@ namespace H5509_V2
 
             try
             {
-                short error = GTN_GetDiBit(core, diType, diIndex, out value);
-                ErrorHandler($"GTN_GetDi({core}, {diIndex}, {value})", error);
+                short error = GTN_GetDiBit(core, diType, diIndex, out short v);
+                value = (short)(v == 1 ? 0 : 1);
+                ErrorHandler($"GTN_GetDi({core}, {diIndex}, {v})", error);
             }
             catch (Exception ex)
             {
@@ -1040,9 +1041,23 @@ namespace H5509_V2
             try
             {
                 short error = GTN_GetDo(core, doType, out int pValue);
+
+
                 ErrorHandler($"GTN_GetDo({core}, {doType}, out int {pValue})", error);
                 string pValuestr = Convert.ToString(pValue, 2).PadLeft(32, '0');
-                value = new string(pValuestr.Reverse().ToArray());
+                string v = new string(pValuestr.Reverse().ToArray());
+                for(int i = 0;i<v.Length; i++)
+                {
+                    if (v[i] == '1')
+                    {
+                        value += "0";
+                    }
+                    else
+                    {
+                        value += "1";
+                    }
+                }
+
                 //bool[] bools = value.Select(c => c == '1').ToArray();
             }
             catch (Exception ex)

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Sunny.UI;
 using System.Reflection;
 using Sunny.UI.Win32;
+using System.Diagnostics;
 
 
 namespace H5509_V2
@@ -109,6 +110,8 @@ namespace H5509_V2
             {
                 if (uiTabControl1.SelectedIndex == 0)
                 {
+                    Stopwatch stopwatch = new Stopwatch();
+                    stopwatch.Start();
                     //UIMessageTip.Show(currentIOPage, null, 1000, true);
                     UIFlowLayoutPanel uIFlow = uiTabControl2.SelectedTab.Controls["IOflp_" + currentIOPage.Substring(7)] as UIFlowLayoutPanel;
 
@@ -130,6 +133,9 @@ namespace H5509_V2
                     }
 
                     this.Refresh();
+                    stopwatch.Stop();
+                    UIMessageTip.Show(this, stopwatch.ElapsedMilliseconds.ToString(), null, 1000, true, true);
+
                 }
                 else
                 {
