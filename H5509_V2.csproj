@@ -143,6 +143,12 @@
     <Compile Include="界面\FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="界面\IOButton.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="界面\IOButton.Designer.cs">
+      <DependentUpon>IOButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="界面\_IO.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     <EmbeddedResource Include="界面\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="界面\IOButton.resx">
+      <DependentUpon>IOButton.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="界面\_IO.resx">
       <DependentUpon>_IO.cs</DependentUpon>
     </EmbeddedResource>
@@ -225,7 +234,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="配置\SystemData" />
+    <None Include="配置\SystemData">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -299,8 +310,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V2\bin\Debug \\Desktop-6177342\H5509_V2\bin\Debug</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

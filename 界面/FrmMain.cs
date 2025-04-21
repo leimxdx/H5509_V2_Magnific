@@ -97,6 +97,15 @@ namespace H5509_V2
         /// <param name="uc"></param>
         private void changeMainPanel(UserControl uc)
         {
+            if (uc == io)
+            {
+                io.IOUpdateTimer.Start();
+            }
+            else
+            {
+                io.IOUpdateTimer.Stop();
+            }
+
             MainPanel.Controls.Clear();
             uc.Dock = DockStyle.Fill;
             MainPanel.Controls.Add(uc);

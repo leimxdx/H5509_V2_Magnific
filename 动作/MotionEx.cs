@@ -453,7 +453,7 @@ namespace H5509_V2
             ioInfo = null;
             for (int i = 0; i < APPmaster.IOList.Count; i++)
             {
-                if (ioName.Split('_')[0] == APPmaster.IOList[i].IO编号)
+                if (ioName.Substring(0,4) == APPmaster.IOList[i].IO编号)
                 {
                     ioInfo = APPmaster.IOList[i];
                     break;

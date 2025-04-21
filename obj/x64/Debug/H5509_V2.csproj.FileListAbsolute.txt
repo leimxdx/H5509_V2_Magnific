@@ -41,3 +41,5 @@ D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V2\bin\Debug\配置\SystemData
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.IOButton.resources
