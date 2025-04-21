@@ -71,6 +71,20 @@ namespace H5509_V2
 
         public static short Interval = 2;
 
+        public static string GetAxisRunInfo(string axisInfo, out AxisRunInfo axisRun)
+        {
+            axisRun = new AxisRunInfo();
+            for (int i = 0; i < AxisRunInfoList.Count; i++)
+            {
+                if (axisInfo == AxisRunInfoList[i].轴名称)
+                {
+                    axisRun = AxisRunInfoList[i];
+                    return "Success";
+                }
+            }
+            return $"轴({axisInfo})信息不存在!";
+        }
+
         /// <summary>
         /// Loader TrayIC点位初始化
         /// </summary>

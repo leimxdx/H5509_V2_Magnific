@@ -17,6 +17,8 @@ namespace H5509_V2
         private MotionEx motionEx = MotionEx.GetInstance();
         private Motion motion;
 
+        public Handler handler = new Handler();
+
         private System.Timers.Timer RefreshTimer;
 
         public int 相对运动步长 = 1000;
@@ -366,7 +368,7 @@ namespace H5509_V2
                 button93.Enabled = false; //GNM601IO按钮
                 button156.Enabled = false;//回零按钮
                 button155.Enabled = false;//停止回零按钮
-                button52.Text = "开启读取轴信息"; 
+                button52.Text = "开启读取轴信息";
 
                 button1.Enabled = false;//正向运动按钮
                 button39.Enabled = false;//反向运动按钮
@@ -532,8 +534,6 @@ namespace H5509_V2
         {
             chk_home_rising.Checked = !chk_home_falling.Checked;
         }
-
-
 
         private AxisRun GetRunValue()
         {
@@ -1001,7 +1001,7 @@ namespace H5509_V2
 
         private void button78_Click(object sender, EventArgs e)
         {
-            Task task = Task.Run(() => 
+            Task task = Task.Run(() =>
             {
                 string result = 入料手臂Y回零();
                 if (result == "Success")
@@ -1010,6 +1010,130 @@ namespace H5509_V2
                 }
                 else MessageBox.Show("回零失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             });
+        }
+
+        private string 单轴绝对运动(string axisName, double pos)
+        {
+            string result = APPmaster.GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
+            if (result == "Success")
+            {
+                AxisRun axisRun = new AxisRun()
+                {
+                    核号 = axisRunInfo.核号,
+                    轴号 = axisRunInfo.轴号,
+                    目标位置 = Convert.ToInt32(Math.Round(pos / axisRunInfo.步长mm)),
+                    目标速度 = axisRunInfo.运行速度,
+                    目标加速度 = axisRunInfo.加速度,
+                    目标减速度 = axisRunInfo.减速度,
+                    平滑时间 = axisRunInfo.平滑时间,
+                };
+
+                return motion.UniaxialAbsoluteMoveAbs(axisRun);
+            }
+            return result;
+        }
+
+        public string 多轴绝对运动(string[] axisNames, double[] poss)
+        {
+            List<AxisRun> axisRuns = new List<AxisRun>();
+            for (int i = 0; i < axisNames.Length; i++)
+            {
+                string result = APPmaster.GetAxisRunInfo(axisNames[i], out AxisRunInfo axisRunInfo);
+                if (result == "Success")
+                {
+                    axisRuns.Add(new AxisRun()
+                    {
+                        核号 = axisRunInfo.核号,
+                        轴号 = axisRunInfo.轴号,
+                        目标位置 = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm)),
+                        目标速度 = axisRunInfo.运行速度,
+                        目标加速度 = axisRunInfo.加速度,
+                        目标减速度 = axisRunInfo.减速度,
+                        平滑时间 = axisRunInfo.平滑时间,
+                    });
+                }
+            }
+            return motion.MultiaxisAbsoluteMoveAbs(axisRuns);
+
+        }
+
+        private void 入料Z移动(bool[] isopen, bool isdown, double zpos)
+        { 
+            List<string> axisNames = new List<string>();
+            if (isopen[0]) axisNames.Add("M1_入料手臂Z1轴");
+            if (isopen[1]) axisNames.Add("M2_入料手臂Z2轴");
+            if (isopen[2]) axisNames.Add("M3_入料手臂Z3轴");
+            if (isopen[3]) axisNames.Add("M4_入料手臂Z4轴");
+            if (isdown) 
+            {
+                string result = 多轴绝对运动(axisNames.ToArray(),new double[] { zpos, zpos, zpos, zpos } );
+
+            }
+        }
+
+        private void button113_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(comboBox8.Text, out double pos))
+            {
+                string result = 单轴绝对运动("M22_入料手臂X轴", pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂X移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button114_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(comboBox9.Text, out double pos))
+            {
+                string result = 单轴绝对运动("M16_入料手臂Y轴", pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂Y移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button115_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox7.Text, out double pos))
+            {
+                string result = 单轴绝对运动("M5_入料手臂P轴", pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂P移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button116_Click(object sender, EventArgs e)
+        {
+            if (!double.TryParse(comboBox8.Text, out double xpos)) return;
+            if (!double.TryParse(comboBox9.Text, out double ypos)) return;
+            if (!double.TryParse(textBox7.Text, out double ppos)) return;
+
+            string[] axisNames = { "M22_入料手臂X轴", "M16_入料手臂Y轴", "M5_入料手臂P轴" };
+            double[] axisPoss = { xpos , ypos, ppos };
+
+            string result = 多轴绝对运动(axisNames, axisPoss);
+            if (result != "Success")
+            {
+                MessageBox.Show("入料手臂XYP移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void button117_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox3.Text, out double pos))
+            {
+                string result = 单轴绝对运动("M5_入料手臂P轴", pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂P移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

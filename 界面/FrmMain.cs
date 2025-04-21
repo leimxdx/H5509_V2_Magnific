@@ -72,6 +72,8 @@ namespace H5509_V2
             io = new _IO();
             log = new _log();
 
+            setting.handler = handler;
+
             //防止控件过多产生闪烁现象
             SetControlStyle();
             SetTablayoutDoubleBuffer();
@@ -223,22 +225,22 @@ namespace H5509_V2
             APPmaster.LoaderTrayICMapInit();
             handler.参数初始化();
 
-            Task.Run(() =>
-            {
-                handler.入料手臂吸放料流程();
-            });
-            Task.Run(() =>
-            {
-                handler.飞梭移动流程();
-            });
-            Task.Run(() =>
-            {
-                handler.测试手臂取待测料流程();
-            });
-            Task.Run(() =>
-            {
-                handler.测试手臂取已测料流程();
-            });
+            //Task.Run(() =>
+            //{
+            //    handler.入料手臂吸放料流程1();
+            //});
+            //Task.Run(() =>
+            //{
+            //    handler.飞梭移动流程();
+            //});
+            //Task.Run(() =>
+            //{
+            //    handler.测试手臂取待测料流程();
+            //});
+            //Task.Run(() =>
+            //{
+            //    handler.测试手臂取已测料流程();
+            //});
         }
 
         private void GetCoreAxis(string axisname, out short core, out short axis)
@@ -291,11 +293,11 @@ namespace H5509_V2
                     new bool[] { false, false, false, false },
                 });
 
-                APPmaster.SiteTestOpen[i] = new bool[2][] 
-                { 
+                APPmaster.SiteTestOpen.Add(new bool[2][]
+                {
                     new bool[] { false, false, false, false },
                     new bool[] { false, false, false, false },
-                };
+                });
             }
         }
     }
