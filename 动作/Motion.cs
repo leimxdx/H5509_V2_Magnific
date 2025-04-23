@@ -6,7 +6,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using Sunny.UI.Win32;
 using static GTN.mc;
 
 namespace H5509_V2
@@ -75,8 +77,13 @@ namespace H5509_V2
                 //writeDataHelper.RunLog($"GTN_StartEcatComm(1):({error})");
                 ErrorHandler("GTN_LoadConfig(2, gtn_core2.cfg)", error);
 
-                //清除轴标志
-                error = GTN_ClrSts(1, 1, 24);
+                //清除核1轴标志
+                error = GTN_ClrSts(1, 1, 12);
+                //writeDataHelper.RunLog($"GTN_ClrSts(1, 1, {advancedParam.AxisCount}):({error})");
+                ErrorHandler("GTN_ClrSts", error);
+
+                //清除核2轴标志
+                error = GTN_ClrSts(2, 1, 12);
                 //writeDataHelper.RunLog($"GTN_ClrSts(1, 1, {advancedParam.AxisCount}):({error})");
                 ErrorHandler("GTN_ClrSts", error);
 
@@ -807,8 +814,36 @@ namespace H5509_V2
             try
             {
                 short error;
+                int delay = 500;
 
                 THomePrm[] tHomePrm = new THomePrm[listAxisHome.Count];
+
+                for (int i = 0; i < listAxisHome.Count; i++)
+                {
+                    error = GTN_ClrSts(listAxisHome[i].核号, listAxisHome[i].轴号, 1);
+                    ErrorHandler($"GTN_ClrSts({listAxisHome[i].核号}, {listAxisHome[i].轴号}, 1)", error);
+
+                    int lAxisStatus = 0;
+                    error = GTN_GetSts(listAxisHome[i].核号, listAxisHome[i].轴号, out lAxisStatus, 1, out uint pClock);
+                    ErrorHandler($"GTN_GetSts({listAxisHome[i].核号}, {listAxisHome[i].轴号}, out {lAxisStatus}, 1)", error);
+
+                    if ((lAxisStatus & 0x200) == 0) //如果已经使能了则不用再使能
+                    {
+                        error = GTN_AxisOn(listAxisHome[i].核号, listAxisHome[i].轴号);
+                        do
+                        {
+                            error = GTN_GetSts(listAxisHome[i].核号, listAxisHome[i].轴号, out lAxisStatus, 1, out pClock);
+                            Thread.Sleep(1); //减少CPU和轴卡的压力
+                        } while ((lAxisStatus & 0x200) == 0);
+
+                        if (listAxisHome[i].核号 == 2 && (listAxisHome[i].轴号 == 10 || listAxisHome[i].轴号 == 11)) delay = 5000;
+                        //要注意第一次上电驱动器会寻相，要等5秒
+                        //如果寻相没完成就回零位置就不准
+                        //上电上使能，等5秒，再执行回零
+                    }
+                }
+
+                Thread.Sleep(delay);
 
                 for (int i = 0; i < listAxisHome.Count; i++)
                 {

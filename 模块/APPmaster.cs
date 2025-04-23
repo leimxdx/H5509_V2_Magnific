@@ -57,11 +57,11 @@ namespace H5509_V2
         public static Dictionary<string, bool> Fix2DicPoint = new Dictionary<string, bool>(); //手动盘2Map图
         public static Dictionary<string, bool> Fix3DicPoint = new Dictionary<string, bool>(); //手动盘3Map图
 
-        public static string Auto1 { get; set; }
-        public static string Auto2 { get; set; }
-        public static string Fix1 { get; set; }
-        public static string Fix2 { get; set; }
-        public static string Fix3 { get; set; }
+        public static string Auto1 { get; set; } = "01";
+        public static string Auto2 { get; set; } = "02";
+        public static string Fix1 { get; set; } = "03";
+        public static string Fix2 { get; set; } = "04";
+        public static string Fix3 { get; set; } = "05";
 
         public static List<bool[][]> Sitestatus = new List<bool[][]>();
         public static List<bool[][]> SiteSave = new List<bool[][]>();
@@ -69,7 +69,100 @@ namespace H5509_V2
         public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>();
         public static ConcurrentQueue<string> SiteSaveQueue = new ConcurrentQueue<string>();
 
-        public static short Interval = 2;
+        public static short Interval = 2; //吸料间隔
+
+        /// <summary>
+        /// 程序是否触发开始
+        /// </summary>
+        public bool IsProgramStart { get; set; } = false;
+        /// <summary>
+        /// 程序是否触发开始
+        /// </summary>
+        public bool IsProgramPause { get; set; } = false;
+        /// <summary>
+        /// 创建开始上升沿的缓存值
+        /// </summary>
+        public static bool StartRiseCache = false;
+        /// <summary>
+        /// 创建停止上升沿的缓存值
+        /// </summary>
+        public static bool StopRiseCache = false;
+        /// <summary>
+        /// 创建安全扭上升沿的缓存值
+        /// </summary>
+        public static bool SafeswRiseCache = false;
+        /// <summary>
+        /// 创建重试上升沿的缓存值
+        /// </summary>
+        public static bool AgainRiseCache = false;
+        /// <summary>
+        /// 创建忽略上升沿的缓存值
+        /// </summary>
+        public static bool IgnoreRiseCache = false;
+        /// <summary>
+        /// 创建定点停止上升沿的缓存值
+        /// </summary>
+        public static bool FixedStopRiseCache = false;
+        /// <summary>
+        /// 创建定点开始上升沿的缓存值
+        /// </summary>
+        public static bool FixedStartRiseCache = false;
+        /// <summary>
+        /// 创建结批上升沿的缓存值
+        /// </summary>
+        public static bool StopBatchRiseCache = false;
+        /// <summary>
+        /// 创建结批下降沿的缓存值
+        /// </summary>
+        public static bool StopBatchFallCache = false;
+        /// <summary>
+        /// 创建Loader开门上升沿的缓存值
+        /// </summary>
+        public static bool LoaderDoorRiseCache = false;
+        /// <summary>
+        /// 创建Loader开门下降沿的缓存值
+        /// </summary>
+        public static bool LoaderDoorFallCache = false;
+        /// <summary>
+        /// 创建Empty开门上升沿的缓存值
+        /// </summary>
+        public static bool EmptyDoorRiseCache = false;
+        /// <summary>
+        /// 创建Empty开门下降沿的缓存值
+        /// </summary>
+        public static bool EmptyDoorFallCache = false;
+        /// <summary>
+        /// 创建一个循环上升沿的缓存值
+        /// </summary>
+        public static bool OnecycleRiseCache = false;
+        /// <summary>
+        /// 创建归零上升沿的缓存值
+        /// </summary>
+        public static bool HomeRiseCache = false;
+        /// <summary>
+        /// 创建换Tray上升沿的缓存值
+        /// </summary>
+        public static bool ExchangetrayRiseCache = false;
+        /// <summary>
+        /// 创建暂停上升沿的缓存值
+        /// </summary>
+        public static bool EndRiseCache = false;
+        /// <summary>
+        /// 创建前门禁下降沿的缓存值
+        /// </summary>
+        public static bool FrontDoorFallCache = false;
+        /// <summary>
+        /// 创建后门禁下降沿的缓存值
+        /// </summary>
+        public static bool RearDoorFallCache = false;
+        /// <summary>
+        /// 创建左门禁下降沿的缓存值
+        /// </summary>
+        public static bool LeftDoorFallCache = false;
+        /// <summary>
+        /// 创建右门禁下降沿的缓存值
+        /// </summary>
+        public static bool RightDoorFallCache = false;
 
         public static string GetAxisRunInfo(string axisInfo, out AxisRunInfo axisRun)
         {
@@ -83,6 +176,43 @@ namespace H5509_V2
                 }
             }
             return $"轴({axisInfo})信息不存在!";
+        }
+
+        public static string GetAxisHomeInfo(string axisInfo, out AxisHomeInfo axisRun)
+        {
+            axisRun = new AxisHomeInfo();
+            for (int i = 0; i < AxisHomeInfoList.Count; i++)
+            {
+                if (axisInfo == AxisHomeInfoList[i].轴名称)
+                {
+                    axisRun = AxisHomeInfoList[i];
+                    return "Success";
+                }
+            }
+            return $"轴({axisInfo})信息不存在!";
+        }
+
+        public static string GetAxisHomeInfo(string[] axisName, out List<AxisHomeInfo> axisHomes)
+        {
+            axisHomes = new List<AxisHomeInfo>();
+
+            foreach (var item in AxisHomeInfoList)
+            {
+                for (int i = 0; i < axisName.Length; i++)
+                {
+                    if (axisName[i] == item.轴名称)
+                    {
+                        axisHomes.Add(item);
+                        break;
+                    }
+                }
+                if (axisHomes.Count == axisName.Length)
+                {
+                    break;
+                }
+            }
+            if (axisHomes.Count == axisName.Length) return "Success";
+            else return "有IO编号不存在";
         }
 
         /// <summary>
@@ -456,13 +586,13 @@ namespace H5509_V2
             }
         }
 
-        public static bool 获取Load盘位置(out double xPos, out double yPos)
+        public static bool 获取Load盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             if (获取Load盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = LoaderXPoint[xPoint];
-                yPos = LoaderYPoint[yPoint];
+                yPos = LoaderYPoint[yPoint] + index * Interval * 16.3;
                 return true;
             }
             else return false;
@@ -516,57 +646,57 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Auto1盘位置(out double xPos, out double yPos)
+        public static bool 获取Auto1盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             if (获取Auto1盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = Auto1XPoint[xPoint];
-                yPos = Auto1YPoint[yPoint];
+                yPos = Auto1YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
         }
-        public static bool 获取Auto2盘位置(out double xPos, out double yPos)
+        public static bool 获取Auto2盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             if (获取Auto2盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = Auto2XPoint[xPoint];
-                yPos = Auto2YPoint[yPoint];
+                yPos = Auto2YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
         }
-        public static bool 获取Fix1盘位置(out double xPos, out double yPos)
+        public static bool 获取Fix1盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             if (获取Fix1盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = Fix1XPoint[xPoint];
-                yPos = Fix1YPoint[yPoint];
+                yPos = Fix1YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
         }
-        public static bool 获取Fix2盘位置(out double xPos, out double yPos)
+        public static bool 获取Fix2盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             if (获取Fix2盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = Fix2XPoint[xPoint];
-                yPos = Fix2YPoint[yPoint];
+                yPos = Fix2YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
         }
-        public static bool 获取Fix3盘位置(out double xPos, out double yPos)
+        public static bool 获取Fix3盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             if (获取Fix3盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = Fix3XPoint[xPoint];
-                yPos = Fix3YPoint[yPoint];
+                yPos = Fix3YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch
                 return true;
             }
             else return false;
@@ -578,7 +708,7 @@ namespace H5509_V2
             lsopen = new bool[opens.Length];
 
             if (!获取吸嘴索引(opens, 0, out index)) return "获取入料吸嘴索引失败!";
-            if (!获取Load盘位置(out xPos, out yPos)) return "获取Load盘位置失败!";
+            if (!获取Load盘位置(index, out xPos, out yPos)) return "获取Load盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
@@ -603,7 +733,7 @@ namespace H5509_V2
             lsopen = new bool[opens.Length];
 
             if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Auto1盘位置(out xPos, out yPos)) return "获取Auto1盘位置失败!";
+            if (!获取Auto1盘位置(index, out xPos, out yPos)) return "获取Auto1盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
@@ -628,7 +758,7 @@ namespace H5509_V2
             lsopen = new bool[opens.Length];
 
             if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Auto2盘位置(out xPos, out yPos)) return "获取Auto2盘位置失败!";
+            if (!获取Auto2盘位置(index, out xPos, out yPos)) return "获取Auto2盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
@@ -653,7 +783,7 @@ namespace H5509_V2
             lsopen = new bool[opens.Length];
 
             if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Fix1盘位置(out xPos, out yPos)) return "获取Fix1盘位置失败!";
+            if (!获取Fix1盘位置(index, out xPos, out yPos)) return "获取Fix1盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
@@ -678,7 +808,7 @@ namespace H5509_V2
             lsopen = new bool[opens.Length];
 
             if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Fix2盘位置(out xPos, out yPos)) return "获取Fix2盘位置失败!";
+            if (!获取Fix2盘位置(index, out xPos, out yPos)) return "获取Fix2盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
@@ -703,7 +833,7 @@ namespace H5509_V2
             lsopen = new bool[opens.Length];
 
             if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Fix3盘位置(out xPos, out yPos)) return "获取Fix3盘位置失败!";
+            if (!获取Fix3盘位置(index, out xPos, out yPos)) return "获取Fix3盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {

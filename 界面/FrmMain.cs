@@ -240,6 +240,10 @@ namespace H5509_V2
             //});
             //Task.Run(() =>
             //{
+            //    handler.出料手臂吸放料流程();
+            //});
+            //Task.Run(() =>
+            //{
             //    handler.飞梭移动流程();
             //});
             //Task.Run(() =>
@@ -250,6 +254,18 @@ namespace H5509_V2
             //{
             //    handler.测试手臂取已测料流程();
             //});
+            //Task.Run(() =>
+            //{
+            //    handler.测试区气缸下压动作流程();
+            //});
+            //Task.Run(() =>
+            //{
+            //    handler.测试区气缸上抬动作流程();
+            //}); 
+            Task.Run(() =>
+            {
+                handler.系统按钮检测流程();
+            });
         }
 
         private void GetCoreAxis(string axisname, out short core, out short axis)

@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
 using Sunny.UI.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static GTN.mc;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -194,7 +199,7 @@ namespace H5509_V2
             string result = motion.GNM601_GetDiBit(core, GTN.mc.MC_HOME, axis, out short value);
             if (result == "Success")
             {
-                label1327.BackColor = value == 0 ? Color.LimeGreen : Color.Red;
+                label1327.BackColor = value == 1 ? Color.LimeGreen : Color.Red; //0处于触发状态，1处于未触发状态  
             }
         }
 
@@ -239,14 +244,14 @@ namespace H5509_V2
                 motion.GNM601_GetDi(1, GTN.mc.MC_LIMIT_NEGATIVE, out value);
                 for (int i = 0; i + j < value.Length && i < GNM601LimitN.Length; i++)
                 {
-                    if (value[i + j] == '0') GNM601LimitN[i].BackColor = Color.LimeGreen;
+                    if (value[i + j] == '1') GNM601LimitN[i].BackColor = Color.LimeGreen;
                     else GNM601LimitN[i].BackColor = Color.Silver;
                 }
 
                 motion.GNM601_GetDi(1, GTN.mc.MC_LIMIT_POSITIVE, out value);
                 for (int i = 0; i + j < value.Length && i < GNM601LimitP.Length; i++)
                 {
-                    if (value[i + j] == '0') GNM601LimitP[i].BackColor = Color.LimeGreen;
+                    if (value[i + j] == '1') GNM601LimitP[i].BackColor = Color.LimeGreen;
                     else GNM601LimitP[i].BackColor = Color.Silver;
                 }
 
@@ -254,7 +259,7 @@ namespace H5509_V2
                 motion.GNM601_GetDo(1, GTN.mc.MC_GPO, out value);
                 for (int i = 0; i + j < value.Length && i < GNM601DO.Length; i++)
                 {
-                    if (value[i + j] == '0') GNM601DO[i].BackColor = Color.LimeGreen;
+                    if (value[i + j] == '1') GNM601DO[i].BackColor = Color.LimeGreen;
                     else GNM601DO[i].BackColor = Color.Silver;
                 }
             }
@@ -279,14 +284,14 @@ namespace H5509_V2
                 motion.GNM601_GetDi(2, GTN.mc.MC_LIMIT_NEGATIVE, out value);
                 for (int i = 0; i + j < value.Length && i < GNM601LimitN.Length; i++)
                 {
-                    if (value[i + j] == '0') GNM601LimitN[i].BackColor = Color.LimeGreen;
+                    if (value[i + j] == '1') GNM601LimitN[i].BackColor = Color.LimeGreen;
                     else GNM601LimitN[i].BackColor = Color.Silver;
                 }
 
                 motion.GNM601_GetDi(2, GTN.mc.MC_LIMIT_POSITIVE, out value);
                 for (int i = 0; i + j < value.Length && i < GNM601LimitP.Length; i++)
                 {
-                    if (value[i + j] == '0') GNM601LimitP[i].BackColor = Color.LimeGreen;
+                    if (value[i + j] == '1') GNM601LimitP[i].BackColor = Color.LimeGreen;
                     else GNM601LimitP[i].BackColor = Color.Silver;
                 }
 
@@ -294,7 +299,7 @@ namespace H5509_V2
                 motion.GNM601_GetDo(2, GTN.mc.MC_GPO, out value);
                 for (int i = 0; i + j < value.Length && i < GNM601DO.Length; i++)
                 {
-                    if (value[i + j] == '0') GNM601DO[i].BackColor = Color.LimeGreen;
+                    if (value[i + j] == '1') GNM601DO[i].BackColor = Color.LimeGreen;
                     else GNM601DO[i].BackColor = Color.Silver;
                 }
             }
@@ -625,6 +630,12 @@ namespace H5509_V2
                 MessageBox.Show("减速度值异常，请输入数字!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
+            if (!int.TryParse(txt_escapeStep.Text, out int home_escapeStep))
+            {
+                txt_run_acc.Focus();
+                MessageBox.Show("反向脱离值异常，请输入数字!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
             if (!short.TryParse(txt_home_Smoothtime.Text, out short home_Smoothtime))
             {
                 txt_home_Smoothtime.Focus();
@@ -662,6 +673,7 @@ namespace H5509_V2
                 减速度 = home_dec,
                 平滑时间 = home_Smoothtime,
                 零点偏置 = home_offset,
+                反向脱离步长 = home_escapeStep,
             };
 
             return axisHome;
@@ -1012,6 +1024,78 @@ namespace H5509_V2
             });
         }
 
+        /// <summary>
+        /// 等待多轴回零
+        /// </summary>
+        /// <param name="axisHomes"></param>
+        /// <returns></returns>
+        private string WaitAxisHome(List<AxisHomeInfo> axisHomes)
+        {
+            bool[] bools = new bool[axisHomes.Count];
+            for (int i = 0; i < axisHomes.Count; i++)
+            {
+                string result = WaitAxisHome(axisHomes[i]);
+                if (result != "Success")
+                {
+                    Debug.WriteLine(axisHomes[i].轴名称 + "回零失败!");
+                    bools[i] = false;
+                }
+                else bools[i] = true;
+            }
+            if (bools.Contains(false))
+            {
+                return "Fail";
+            }
+            else return "Success";
+        }
+
+        /// <summary>
+        /// 等待单轴回零
+        /// </summary>
+        /// <param name="axisHome"></param>
+        /// <returns></returns>
+        private string WaitAxisHome(AxisHomeInfo axisHome)
+        {
+            string result = motion.CommonInitedValidate();
+
+            if (result != "Success") return result;
+
+            try
+            {
+                THomeStatus tHomeSts;
+                do
+                {
+                    short error = GTN_GetHomeStatus(axisHome.核号, axisHome.轴号, out tHomeSts);
+                    motion.ErrorHandler($"GTN_GetHomeStatus({axisHome.核号}, {axisHome.轴号}, out tHomeSts)", error);
+                    Thread.Sleep(1); //减少轴卡和CPU压力
+                }
+                while (tHomeSts.run == 1);
+
+                if (tHomeSts.error != HOME_ERROR_NONE) //未发生错误
+                {
+                    if (tHomeSts.error == HOME_ERROR_NOT_TRAP_MODE) return "执行Smart Home回原点的轴不是处于点位运动模式";
+                    else if (tHomeSts.error == HOME_ERROR_DISABLE) return "执行Smart Home回原点的轴未使能";
+                    else if (tHomeSts.error == HOME_ERROR_ALARM) return "执行Smart Home回原点的轴驱动报警";
+                    else if (tHomeSts.error == HOME_ERROR_STOP) return "未完成回原点，轴停止运动";
+                    else if (tHomeSts.error == HOME_ERROR_STAGE) return "回原点阶段错误";
+                    else if (tHomeSts.error == HOME_ERROR_HOME_MODE) return "模式错误，如已经启动Smart Home，勿重复调用回原点指令";
+                    else if (tHomeSts.error == HOME_ERROR_SET_CAPTURE_HOME) return "设置Home捕获模式失败";
+                    else if (tHomeSts.error == HOME_ERROR_NO_HOME) return "未找到Home";
+                    else if (tHomeSts.error == HOME_ERROR_SET_CAPTURE_INDEX) return "设置Index捕获模式失败";
+                    else if (tHomeSts.error == HOME_ERROR_NO_INDEX) return "未找到Index";
+                    else return "回零异常";
+                }
+
+                result = motion.AxisZeroPos(axisHome.核号, axisHome.轴号);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return result;
+        }
+
         private string 单轴绝对运动(string axisName, double pos)
         {
             string result = APPmaster.GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
@@ -1029,6 +1113,43 @@ namespace H5509_V2
                 };
 
                 return motion.UniaxialAbsoluteMoveAbs(axisRun);
+            }
+            return result;
+        }
+
+        private string 单轴回零(string axisName)
+        {
+            string result = GetAxisHomeInfo(axisName, out AxisHomeInfo axisHomeInfo);
+            if (result == "Success")
+            {
+                result = motion.UniaxialHome(axisHomeInfo);
+                if (result == "Success")
+                {
+                    Task<string> task = Task.Run(() =>
+                    {
+                        return WaitAxisHome(axisHomeInfo);
+                    });
+                    result = task.Result;
+                }
+            }
+            return result;
+        }
+
+        private string 多轴回零(string[] axisNames)
+        {
+            List<AxisHomeInfo> axisHomes = new List<AxisHomeInfo>();
+            string result = GetAxisHomeInfo(axisNames, out axisHomes);
+            if (result == "Success")
+            {
+                result = motion.MultiaxisHome(axisHomes);
+                if (result == "Success")
+                {
+                    Task<string> task = Task.Run(() =>
+                    {
+                        return WaitAxisHome(axisHomes);
+                    });
+                    result = task.Result;
+                }
             }
             return result;
         }
@@ -1054,22 +1175,21 @@ namespace H5509_V2
                 }
             }
             return motion.MultiaxisAbsoluteMoveAbs(axisRuns);
-
         }
 
-        private void 入料Z移动(bool[] isopen, bool isdown, double zpos)
-        { 
+        private string 入料Z移动(bool[] isopen, double zpos)
+        {
             List<string> axisNames = new List<string>();
             if (isopen[0]) axisNames.Add("M1_入料手臂Z1轴");
             if (isopen[1]) axisNames.Add("M2_入料手臂Z2轴");
             if (isopen[2]) axisNames.Add("M3_入料手臂Z3轴");
             if (isopen[3]) axisNames.Add("M4_入料手臂Z4轴");
-            if (isdown) 
-            {
-                string result = 多轴绝对运动(axisNames.ToArray(),new double[] { zpos, zpos, zpos, zpos } );
 
-            }
+            return 多轴绝对运动(axisNames.ToArray(), new double[] { zpos, zpos, zpos, zpos });
+
         }
+
+        #region 入料吸料
 
         private void button113_Click(object sender, EventArgs e)
         {
@@ -1114,7 +1234,7 @@ namespace H5509_V2
             if (!double.TryParse(textBox7.Text, out double ppos)) return;
 
             string[] axisNames = { "M22_入料手臂X轴", "M16_入料手臂Y轴", "M5_入料手臂P轴" };
-            double[] axisPoss = { xpos , ypos, ppos };
+            double[] axisPoss = { xpos, ypos, ppos };
 
             string result = 多轴绝对运动(axisNames, axisPoss);
             if (result != "Success")
@@ -1128,11 +1248,424 @@ namespace H5509_V2
         {
             if (double.TryParse(textBox3.Text, out double pos))
             {
+                bool[] isopen = { uiCheckBox18.Checked, uiCheckBox20.Checked, uiCheckBox19.Checked, uiCheckBox17.Checked };
+                string result = 入料Z移动(isopen, pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂Z移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button118_Click(object sender, EventArgs e)
+        {
+            string result = 入料吸嘴_吸放料(new bool[] { true, true, true, true }, true, true);
+
+            if (result == "Success")
+            {
+                string[] ioNames =
+                {
+                    "X068_IC上料_1_吸真空检测", "X069_IC上料_2_吸真空检测",
+                    "X070_IC上料_3_吸真空检测", "X071_IC上料_4_吸真空检测"
+                };
+
+                result = motionEx.GetDi(ioNames, out string[] iovalues);
+                if (result != "Success") Debug.WriteLine("入料吸嘴_真空检测IO读取失败!" + result);
+
+                uiCheckBox5.Checked = iovalues[0] == "1";
+                uiCheckBox8.Checked = iovalues[1] == "1";
+                uiCheckBox7.Checked = iovalues[2] == "1";
+                uiCheckBox6.Checked = iovalues[3] == "1";
+            }
+        }
+
+        private void button119_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox4.Text, out double pos))
+            {
+                bool[] isopen = { uiCheckBox26.Checked, uiCheckBox28.Checked, uiCheckBox27.Checked, uiCheckBox25.Checked };
+                string result = 入料Z移动(isopen, pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂Z移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button120_Click(object sender, EventArgs e)
+        {
+            string[] axisNames =
+            {
+                "M1_入料手臂Z1轴", "M2_入料手臂Z2轴",
+                "M3_入料手臂Z3轴", "M4_入料手臂Z4轴"
+            };
+            string result = motionEx.GetDiHome(axisNames, out string[] home);
+
+            if (result != "Success")
+            {
+                Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+                MessageBox.Show("读取入料Z原点失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            uiCheckBox14.Checked = home[0] == "0";
+            uiCheckBox16.Checked = home[1] == "0";
+            uiCheckBox15.Checked = home[2] == "0";
+            uiCheckBox13.Checked = home[3] == "0";
+        }
+
+        #endregion
+
+        #region 入料放料
+
+
+
+        #endregion
+
+        private void button98_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox8.Text, out double pos))
+            {
+                string result = 单轴绝对运动("M22_入料手臂X轴", pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂X移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button99_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox9.Text, out double pos))
+            {
+                string result = 单轴绝对运动("M16_入料手臂Y轴", pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂Y移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button100_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox10.Text, out double pos))
+            {
                 string result = 单轴绝对运动("M5_入料手臂P轴", pos);
                 if (result != "Success")
                 {
                     MessageBox.Show("入料手臂P移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void button101_Click(object sender, EventArgs e)
+        {
+            if (!double.TryParse(textBox8.Text, out double xpos)) return;
+            if (!double.TryParse(textBox9.Text, out double ypos)) return;
+            if (!double.TryParse(textBox10.Text, out double ppos)) return;
+
+            string[] axisNames = { "M22_入料手臂X轴", "M16_入料手臂Y轴", "M5_入料手臂P轴" };
+            double[] axisPoss = { xpos, ypos, ppos };
+
+            string result = 多轴绝对运动(axisNames, axisPoss);
+            if (result != "Success")
+            {
+                MessageBox.Show("入料手臂XYP移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button107_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox6.Text, out double pos))
+            {
+                bool[] isopen = { uiCheckBox11.Checked, uiCheckBox2.Checked, uiCheckBox10.Checked, uiCheckBox12.Checked };
+                string result = 入料Z移动(isopen, pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂Z移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        public string 入料吸嘴_吸放料(bool[] isopen, bool ison, bool value)
+        {
+            List<bool> znozzle = new List<bool>();
+            List<string> ioNames = new List<string>();
+            if (isopen[0])
+            {
+                znozzle.Add(value);
+                if (ison) ioNames.Add("Y056_上料1_吸真空");
+                else ioNames.Add("Y060_上料1_破真空");
+            }
+            if (isopen[1])
+            {
+                znozzle.Add(value);
+                if (ison) ioNames.Add("Y057_上料2_吸真空");
+                else ioNames.Add("Y061_上料2_破真空");
+            }
+            if (isopen[2])
+            {
+                znozzle.Add(value);
+                if (ison) ioNames.Add("Y058_上料3_吸真空");
+                else ioNames.Add("Y062_上料3_破真空");
+            }
+            if (isopen[3])
+            {
+                znozzle.Add(value);
+                if (ison) ioNames.Add("Y059_上料4_吸真空");
+                else ioNames.Add("Y063_上料4_破真空");
+            }
+            string result = motionEx.SetDo(ioNames.ToArray(), znozzle.ToArray());
+            if (result != "Success") Debug.WriteLine("入料吸嘴_吸真空IO输出失败!" + result);
+            return result;
+        }
+
+        private void button109_Click(object sender, EventArgs e)
+        {
+            string result = 入料吸嘴_吸放料(new bool[] { true, true, true, true }, true, false);
+
+            if (result == "Success")
+            {
+                result = 入料吸嘴_吸放料(new bool[] { true, true, true, true }, false, true);
+                if (result == "Success")
+                {
+                    Thread.Sleep(200);
+                    result = 入料吸嘴_吸放料(new bool[] { true, true, true, true }, false, false);
+                    if (result == "Success")
+                    {
+                        string[] ioNames =
+                    {
+                        "X068_IC上料_1_吸真空检测", "X069_IC上料_2_吸真空检测",
+                        "X070_IC上料_3_吸真空检测", "X071_IC上料_4_吸真空检测"
+                    };
+
+                        result = motionEx.GetDi(ioNames, out string[] iovalues);
+                        if (result != "Success") Debug.WriteLine("入料吸嘴_真空检测IO读取失败!" + result);
+
+                        uiCheckBox5.Checked = iovalues[0] == "1";
+                        uiCheckBox8.Checked = iovalues[1] == "1";
+                        uiCheckBox7.Checked = iovalues[2] == "1";
+                        uiCheckBox6.Checked = iovalues[3] == "1";
+                    }
+                }
+            }
+        }
+
+        private void button121_Click(object sender, EventArgs e)
+        {
+            if (double.TryParse(textBox5.Text, out double pos))
+            {
+                bool[] isopen = { uiCheckBox3.Checked, uiCheckBox4.Checked, uiCheckBox9.Checked, uiCheckBox1.Checked };
+                string result = 入料Z移动(isopen, pos);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂Z移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void button108_Click(object sender, EventArgs e)
+        {
+            string[] axisNames =
+            {
+                "M1_入料手臂Z1轴", "M2_入料手臂Z2轴",
+                "M3_入料手臂Z3轴", "M4_入料手臂Z4轴"
+            };
+            string result = motionEx.GetDiHome(axisNames, out string[] home);
+
+            if (result != "Success")
+            {
+                Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+                MessageBox.Show("读取入料Z原点失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            uiCheckBox29.Checked = home[0] == "0";
+            uiCheckBox32.Checked = home[1] == "0";
+            uiCheckBox31.Checked = home[2] == "0";
+            uiCheckBox23.Checked = home[3] == "0";
+        }
+
+        /// <summary>
+        /// 入料手臂X回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button102_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string result = 单轴回零("M22_入料手臂X轴");
+                if (result != "Success")
+                {
+                    MessageBox.Show("M22_入料手臂X轴回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("M22_入料手臂X轴回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂Y回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button111_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string result = 单轴回零("M16_入料手臂Y轴");
+                if (result != "Success")
+                {
+                    MessageBox.Show("M16_入料手臂Y轴回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("M16_入料手臂Y轴回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂P回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button112_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string result = 单轴回零("M5_入料手臂P轴");
+                if (result != "Success")
+                {
+                    MessageBox.Show("M5_入料手臂P轴回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("M5_入料手臂P轴回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂所有Z回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button110_Click(object sender, EventArgs e)
+        {
+            string[] axisNames = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
+            Task.Run(() =>
+            {
+                string result = 多轴回零(axisNames);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂所有Z回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("入料手臂所有Z回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂Z4回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button103_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string result = 单轴回零("M4_入料手臂Z4轴");
+                if (result != "Success")
+                {
+                    MessageBox.Show("M4_入料手臂Z4轴回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("M4_入料手臂Z4轴回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂Z3回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button105_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string result = 单轴回零("M3_入料手臂Z3轴");
+                if (result != "Success")
+                {
+                    MessageBox.Show("M3_入料手臂Z3轴回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("M3_入料手臂Z3轴回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂Z2回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button104_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string result = 单轴回零("M2_入料手臂Z2轴");
+                if (result != "Success")
+                {
+                    MessageBox.Show("M2_入料手臂Z2轴回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("M2_入料手臂Z2轴回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂Z1回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button106_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string result = 单轴回零("M1_入料手臂Z1轴");
+                if (result != "Success")
+                {
+                    MessageBox.Show("M1_入料手臂Z1轴回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("入料手臂Z1回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 入料手臂XYP回零
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button122_Click(object sender, EventArgs e)
+        {
+            Task.Run(() =>
+            {
+                string[] axisNames = { "M22_入料手臂X轴", "M16_入料手臂Y轴", "M5_入料手臂P轴" };
+                string result = 多轴回零(axisNames);
+                if (result != "Success")
+                {
+                    MessageBox.Show("入料手臂XYP回零失败!\n详细信息:" + result);
+                }
+                else MessageBox.Show("入料手臂XYP回零完成");
+            });
+        }
+
+        /// <summary>
+        /// 所有轴紧急停止
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void button123_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < AxisInfoList.Count; i++)
+            {
+                string result = motion.AxisStop(AxisInfoList[i].核号, AxisInfoList[i].轴号, 1);
+                if (result != "Success")
+                {
+                    Debug.WriteLine($"核号{AxisInfoList[i].核号},轴{AxisInfoList[i].轴号}停止失败!详细信息:" + result);
+                }
+                else MessageBox.Show("所有轴已紧急停止");
             }
         }
     }

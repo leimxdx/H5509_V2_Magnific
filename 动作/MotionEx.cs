@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using static System.Windows.Forms.LinkLabel;
 using static GTN.mc;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -52,44 +53,7 @@ namespace H5509_V2
         #endregion
 
         #region 轴回零
-
-        private string GetAxisHomeInfo(string axisName, out AxisHomeInfo axisHome)
-        {
-            axisHome = new AxisHomeInfo();
-            for (int i = 0; i < APPmaster.AxisHomeInfoList.Count; i++)
-            {
-                if (axisName.Split('_')[0] == APPmaster.AxisHomeInfoList[i].轴名称)
-                {
-                    axisHome = APPmaster.AxisHomeInfoList[i];
-                    return "Success";
-                }
-            }
-            return $"轴:{axisName}回零信息不存在";
-        }
-
-        private string GetAxisHomeInfo(string[] axisName, out List<AxisHomeInfo> axisHomes)
-        {
-            axisHomes = new List<AxisHomeInfo>();
-
-            foreach (var item in APPmaster.AxisHomeInfoList)
-            {
-                for (int i = 0; i < axisName.Length; i++)
-                {
-                    if (axisName[i].Split('_')[0] == item.轴名称)
-                    {
-                        axisHomes.Add(item);
-                        break;
-                    }
-                }
-                if (axisHomes.Count == axisName.Length)
-                {
-                    break;
-                }
-            }
-            if (axisHomes.Count == axisName.Length) return "Success";
-            else return "有IO编号不存在";
-        }
-
+        
         /// <summary>
         /// 等待多轴回零
         /// </summary>
@@ -163,8 +127,8 @@ namespace H5509_V2
             {
                 return ex.Message;
             }
-
-            return "Success";
+            
+            return result;
         }
 
         /// <summary>
@@ -186,11 +150,10 @@ namespace H5509_V2
                         return WaitAxisHome(axisHomes);
                     });
 
-                    return task.Result;
+                    result = task.Result;
                 }
-                else return result;
             }
-            else return result;
+            return result;
         }
 
         /// <summary>
@@ -200,7 +163,7 @@ namespace H5509_V2
         /// <returns></returns>
         public string AxisHome(string axisName)
         {
-            string result = GetAxisHomeInfo(axisName,out AxisHomeInfo axisHome);
+            string result = APPmaster.GetAxisHomeInfo(axisName,out AxisHomeInfo axisHome);
             if (result == "Success")
             {
                 result = Motion.UniaxialHome(axisHome);
@@ -211,11 +174,10 @@ namespace H5509_V2
                         return WaitAxisHome(axisHome);//等待回零完成
                     });
 
-                    return task.Result;
+                    result = task.Result;
                 }
-                else return result;
             }
-            else return result;
+            return result;
         }
 
         public string GetDiHome(string[] axisNames, out string[] iovalues)
@@ -226,10 +188,10 @@ namespace H5509_V2
             {
                 for (int i = 0; i < axisHomes.Count; i++)
                 {
-                    result = Motion.GNM601_GetDi(axisHomes[1].核号, GTN.mc.MC_HOME, out string value);
+                    result = Motion.GNM601_GetDi(axisHomes[i].核号, GTN.mc.MC_HOME, out string value);
                     if (result == "Success")
                     {
-                        iovalues[i] = value[axisHomes[1].轴号].ToString();
+                        iovalues[i] = value[axisHomes[i].轴号 - 1].ToString();
                     }
                     else return result;
                 }
@@ -668,6 +630,11 @@ namespace H5509_V2
             }
             else return "未知IO模块";
         }
+
+        //public string GetGNM601_DI_1()
+        //{
+
+        //}
 
         /// <summary>
         /// 单个IO输出
