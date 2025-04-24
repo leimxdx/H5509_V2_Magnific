@@ -168,7 +168,7 @@ namespace H5509_V2
             short error;
 
             //关闭所有轴
-            AxisAllClose();
+            AllAxisOff();
 
             //关闭卡
             try
@@ -237,7 +237,7 @@ namespace H5509_V2
         /// 关闭所有轴使能
         /// </summary>
         /// <returns></returns>
-        public string AxisAllClose()
+        public string AllAxisOff()
         {
             //判断是否初始化成功
             string result = CommonInitedValidate();
@@ -247,8 +247,28 @@ namespace H5509_V2
             {
                 for (short axis = 1; axis <= 12; axis++)
                 {
-                    result = AxisOn(core, axis, false);
-                    if (result != "Success") return result;
+                    AxisOn(core, axis, false);
+                }
+            }
+            return result;
+        }
+
+
+        /// <summary>
+        /// 停止所有轴运动
+        /// </summary>
+        /// <returns></returns>
+        public string AllAxisStop()
+        {
+            //判断是否初始化成功
+            string result = CommonInitedValidate();
+
+            if (result != "Success") return result;
+            for (short core = 1; core <= 2; core++)
+            {
+                for (short axis = 1; axis <= 12; axis++)
+                {
+                    AxisStop(core, axis, 1);
                 }
             }
             return result;

@@ -234,18 +234,18 @@ namespace H5509_V2
             APPmaster.LoaderTrayICMapInit();
             handler.参数初始化();
 
-            //Task.Run(() =>
-            //{
-            //    handler.入料手臂吸放料流程1();
-            //});
+            Task.Run(() =>
+            {
+                handler.入料手臂吸放料流程1();
+            });
             //Task.Run(() =>
             //{
             //    handler.出料手臂吸放料流程();
             //});
-            //Task.Run(() =>
-            //{
-            //    handler.飞梭移动流程();
-            //});
+            Task.Run(() =>
+            {
+                handler.飞梭移动流程();
+            });
             //Task.Run(() =>
             //{
             //    handler.测试手臂取待测料流程();

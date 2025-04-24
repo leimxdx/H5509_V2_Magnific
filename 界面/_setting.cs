@@ -199,7 +199,7 @@ namespace H5509_V2
             string result = motion.GNM601_GetDiBit(core, GTN.mc.MC_HOME, axis, out short value);
             if (result == "Success")
             {
-                label1327.BackColor = value == 1 ? Color.LimeGreen : Color.Red; //0处于触发状态，1处于未触发状态  
+                label1327.BackColor = value == 0 ? Color.Red : Color.LimeGreen; //0处于触发状态(原点常闭), 1处于未触发状态,挡住了原点
             }
         }
 
@@ -523,11 +523,6 @@ namespace H5509_V2
         private void uiCheckBox4_Click(object sender, EventArgs e)
         {
             chk_home_nmovedir.Checked = !chk_home_pmovedir.Checked;
-        }
-
-        private void uiCheckBox5_Click(object sender, EventArgs e)
-        {
-            chk_home_pmovedir.Checked = !chk_home_nmovedir.Checked;
         }
 
         private void uiCheckBox2_Click(object sender, EventArgs e)
@@ -1087,6 +1082,7 @@ namespace H5509_V2
                 }
 
                 result = motion.AxisZeroPos(axisHome.核号, axisHome.轴号);
+
             }
             catch (Exception ex)
             {
@@ -1094,6 +1090,99 @@ namespace H5509_V2
             }
 
             return result;
+        }
+
+        private string WaitAxisMove(AxisRun axisRun)
+        {
+            string result = motion.CommonInitedValidate();
+
+            if (result != "Success") return result;
+
+            try
+            {
+                int sts;
+                do
+                {
+                    short error = GTN_GetSts(axisRun.核号, axisRun.轴号, out sts, 1, out uint pClock);
+                    motion.ErrorHandler($"GTN_GetSts({axisRun.核号}, {axisRun.轴号}, out {sts}, 1, out uint pClock)", error);
+                    Thread.Sleep(1); //减少轴卡和CPU压力
+                }
+                while ((sts & 0x400) != 0);
+
+                double encPos = motion.GetCmdEncPos(axisRun.核号, axisRun.轴号);
+                double prfPos = motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号);
+                double posvalue = Math.Abs(prfPos - encPos);
+                Debug.WriteLine($"核心{axisRun.核号},轴号{axisRun.轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
+                if (posvalue > 跟随误差)
+                {
+                    return $"核心{axisRun.核号},轴号{axisRun.轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+
+            return "Success";
+        }
+
+        /// <summary>
+        /// 等待多轴移动
+        /// </summary>
+        /// <param name="axisRuns"></param>
+        /// <returns></returns>
+        private string WaitAxisMove(List<AxisRun> axisRuns)
+        {
+            string result = motion.CommonInitedValidate();
+
+            if (result != "Success") return result;
+
+            try
+            {
+                bool value = true;
+                int[] sts = new int[axisRuns.Count];
+                do
+                {
+                    for (int i = 0; i < axisRuns.Count; i++)
+                    {
+                        short error = GTN_GetSts(axisRuns[i].核号, axisRuns[i].轴号, out sts[i], 1, out uint pClock);
+                        motion.ErrorHandler($"GTN_GetSts({axisRuns[i].核号}, {axisRuns[i].轴号}, out {sts[i]}, 1, out uint pClock)", error);
+                    }
+
+                    value = false;
+
+                    for (int i = 0; i < sts.Length; i++)
+                    {
+                        if ((sts[i] & 0x400) != 0)
+                        {
+                            value = true;
+                            break;
+                        }
+                    }
+
+                    Thread.Sleep(1); //减少轴卡和CPU压力
+                }
+                while (value);
+
+                for (int i = 0; i < axisRuns.Count; i++)
+                {
+                    double encPos = motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号);
+                    double prfPos = motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号);
+                    double posvalue = Math.Abs(prfPos - encPos);
+                    Debug.WriteLine($"核心{axisRuns[i].核号},轴号{axisRuns[i].轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
+                    if (posvalue > 跟随误差)
+                    {
+                        return $"核心{axisRuns[i].核号},轴号{axisRuns[i].轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
+            return "Success";
         }
 
         private string 单轴绝对运动(string axisName, double pos)
@@ -1112,7 +1201,15 @@ namespace H5509_V2
                     平滑时间 = axisRunInfo.平滑时间,
                 };
 
-                return motion.UniaxialAbsoluteMoveAbs(axisRun);
+                result = motion.UniaxialAbsoluteMoveAbs(axisRun);
+                if (result == "Success")
+                {
+                    Task<string> task = Task.Run(() =>
+                    {
+                        return WaitAxisMove(axisRun);
+                    });
+                    result = task.Result;
+                }
             }
             return result;
         }
@@ -1156,10 +1253,11 @@ namespace H5509_V2
 
         public string 多轴绝对运动(string[] axisNames, double[] poss)
         {
+            string result;
             List<AxisRun> axisRuns = new List<AxisRun>();
             for (int i = 0; i < axisNames.Length; i++)
             {
-                string result = APPmaster.GetAxisRunInfo(axisNames[i], out AxisRunInfo axisRunInfo);
+                result = APPmaster.GetAxisRunInfo(axisNames[i], out AxisRunInfo axisRunInfo);
                 if (result == "Success")
                 {
                     axisRuns.Add(new AxisRun()
@@ -1174,7 +1272,16 @@ namespace H5509_V2
                     });
                 }
             }
-            return motion.MultiaxisAbsoluteMoveAbs(axisRuns);
+            result =  motion.MultiaxisAbsoluteMoveAbs(axisRuns);
+            if (result == "Success")
+            {
+                Task<string> task = Task.Run(() =>
+                {
+                    return WaitAxisMove(axisRuns);
+                });
+                result = task.Result;
+            }
+            return result;
         }
 
         private string 入料Z移动(bool[] isopen, double zpos)
@@ -1655,7 +1762,6 @@ namespace H5509_V2
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private void button123_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < AxisInfoList.Count; i++)
@@ -1667,6 +1773,66 @@ namespace H5509_V2
                 }
                 else MessageBox.Show("所有轴已紧急停止");
             }
+        }
+
+        private void cobox_axisname_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string result = APPmaster.GetAxisHomeInfo(cobox_axisname.Text, out AxisHomeInfo axisHomeInfo);
+            if (result == "Success")
+            {
+                if (axisHomeInfo.模式 == 11) txt_home_mode.Text = "限位+Home回零";
+                else if (axisHomeInfo.模式 == 20) txt_home_mode.Text = "Home回零";
+                else txt_home_mode.Text = "";
+
+                txt_home_vel.Text = axisHomeInfo.搜索速度.ToString();
+
+                txt_home_acc.Text = axisHomeInfo.加速度.ToString();
+                txt_home_dec.Text = axisHomeInfo.减速度.ToString();
+                txt_home_Smoothtime.Text = axisHomeInfo.平滑时间.ToString();
+                txt_home_offset.Text = axisHomeInfo.零点偏置.ToString();
+                txt_escapeStep.Text = axisHomeInfo.反向脱离步长.ToString();
+
+                if (axisHomeInfo.回零启动方向 == 1)
+                {
+                    chk_home_pmovedir.Checked = true;
+                    chk_home_nmovedir.Checked = false;
+                }
+                else
+                {
+                    chk_home_pmovedir.Checked = false;
+                    chk_home_nmovedir.Checked = true;
+                }
+                if (axisHomeInfo.捕获触发沿 == 1)
+                {
+                    chk_home_rising.Checked = true;
+                    chk_home_falling.Checked = false;
+                }
+                else
+                {
+                    chk_home_rising.Checked = false;
+                    chk_home_falling.Checked = true;
+                }
+            }
+        }
+
+        private void uiCheckBox5_Click(object sender, EventArgs e)
+        {
+            chk_home_pmovedir.Checked = !chk_home_nmovedir.Checked;
+        }
+
+        /// <summary>
+        /// 飞梭后入料清空
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button129_Click(object sender, EventArgs e)
+        {
+            飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+        }
+
+        private void button130_Click(object sender, EventArgs e)
+        {
+            飞梭后入料状态 = 0;
         }
     }
 }

@@ -24,11 +24,26 @@ namespace H5509_V2
 
         public static List<AxisHomeInfo> AxisHomeInfoList;
 
+        public static bool IsStart = false; //开始
+        public static bool ProgramStart = false; //程序开始
+        public static bool ProgramBtnStart = false; //程序按钮开始
+
         public static bool IsPause = false; //停止
+        public static bool ProgramPause = false; //程序暂停
+        public static bool ProgramBtnPause = false; //程序按钮暂停
 
         public static bool IsForecePause = false; //强制停止
 
+        public static bool H5509初始化 = false;
+
+        public static bool H5509正在初始化 = false;
+
+        public static bool 定点停止标记 = false;
+        public static bool 定点停止允许 = false;
+
         public static int 气缸动作超时时间 = 3000; //ms
+
+        public static int 跟随误差 = 150;
 
         public static Communication Com = new Communication();
 
@@ -70,6 +85,44 @@ namespace H5509_V2
         public static ConcurrentQueue<string> SiteSaveQueue = new ConcurrentQueue<string>();
 
         public static short Interval = 2; //吸料间隔
+        public static bool 结批标记;
+
+        public static short 入料手臂吸料状态;
+        public static bool 入料手臂抓料等待标记;
+
+        public static short 飞梭移动状态;
+        public static short 飞梭前入料状态;
+        public static short 飞梭前出料状态;
+        public static short 飞梭后入料状态;
+        public static short 飞梭后出料状态;
+
+        public static bool[][] 飞梭前入料IC;
+        public static bool[][] 飞梭前出料IC;
+        public static bool[][] 飞梭后入料IC;
+        public static bool[][] 飞梭后出料IC;
+
+        public static bool[][] 放料IC目标值;
+
+        public static string[][] 飞梭前出料BIN项;
+        public static string[][] 飞梭后出料BIN项;
+
+        public static ST_ProcessManage PS入料手臂吸放料流程;
+
+        public static ST_ProcessManage PS出料手臂吸放料流程;
+
+        public static ST_ProcessManage PS测试手臂取待测料流程;
+
+        public static ST_ProcessManage PS测试手臂取已测料流程;
+
+        public static ST_ProcessManage PS测试区气缸下压动作流程;
+
+        public static ST_ProcessManage PS测试区气缸上抬动作流程;
+
+        public static ST_ProcessManage PS入料手臂放料流程;
+
+        public static ST_ProcessManage PS入飞梭移动流程;
+
+        public static ST_ProcessManage PS整机回零流程;
 
         /// <summary>
         /// 程序是否触发开始
@@ -163,6 +216,30 @@ namespace H5509_V2
         /// 创建右门禁下降沿的缓存值
         /// </summary>
         public static bool RightDoorFallCache = false;
+
+        public static bool 是否可以开始运行()
+        {
+            if (IsPause == true || IsStart == false)
+            {
+                return false;
+            }
+            
+            if (H5509初始化 == false)
+            {
+                return false;
+            }
+
+            //if (定点停止允许 == true)
+            //{
+            //    if (定点停止标记 == true)
+            //    {
+            //        return false;
+            //    }
+            //    //按下开始 定点停止标记为true
+            //}
+
+            return true;
+        }
 
         public static string GetAxisRunInfo(string axisInfo, out AxisRunInfo axisRun)
         {

@@ -257,11 +257,21 @@ namespace H5509_V2
                     Thread.Sleep(1); //减少轴卡和CPU压力
                 }
                 while ((sts & 0x400) != 0);
+
+                double encPos = Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号);
+                double prfPos = Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号);
+                double posvalue = Math.Abs(prfPos - encPos);
+                Debug.WriteLine($"核心{axisRun.核号},轴号{axisRun.轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
+                if (posvalue > 200)
+                {
+                    return $"核心{axisRun.核号},轴号{axisRun.轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>200";
+                }
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
+
 
             return "Success";
         }
@@ -321,6 +331,18 @@ namespace H5509_V2
                     Thread.Sleep(1); //减少轴卡和CPU压力
                 }
                 while (value);
+
+                for (int i = 0; i < axisRuns.Count; i++)
+                {
+                    double encPos = Motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号);
+                    double prfPos = Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号);
+                    double posvalue = Math.Abs(prfPos - encPos);
+                    Debug.WriteLine($"核心{axisRuns[i].核号},轴号{axisRuns[i].轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
+                    if (posvalue > 200)
+                    {
+                        return $"核心{axisRuns[i].核号},轴号{axisRuns[i].轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>200";
+                    }
+                }
             }
             catch (Exception ex)
             {

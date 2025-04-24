@@ -255,6 +255,25 @@
             this.button78 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.uiCheckBox37 = new Sunny.UI.UICheckBox();
+            this.button128 = new System.Windows.Forms.Button();
+            this.uiCheckBox38 = new Sunny.UI.UICheckBox();
+            this.uiCheckBox39 = new Sunny.UI.UICheckBox();
+            this.uiCheckBox40 = new Sunny.UI.UICheckBox();
+            this.uiCheckBox33 = new Sunny.UI.UICheckBox();
+            this.button127 = new System.Windows.Forms.Button();
+            this.uiCheckBox34 = new Sunny.UI.UICheckBox();
+            this.button126 = new System.Windows.Forms.Button();
+            this.uiCheckBox35 = new Sunny.UI.UICheckBox();
+            this.button125 = new System.Windows.Forms.Button();
+            this.uiCheckBox36 = new Sunny.UI.UICheckBox();
+            this.textBox12 = new System.Windows.Forms.TextBox();
+            this.label196 = new System.Windows.Forms.Label();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label195 = new System.Windows.Forms.Label();
+            this.button124 = new System.Windows.Forms.Button();
+            this.button123 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.uiCheckBox1 = new Sunny.UI.UICheckBox();
@@ -298,12 +317,17 @@
             this.label190 = new System.Windows.Forms.Label();
             this.uiCheckBox31 = new Sunny.UI.UICheckBox();
             this.uiCheckBox32 = new Sunny.UI.UICheckBox();
+            this.button102 = new System.Windows.Forms.Button();
+            this.button112 = new System.Windows.Forms.Button();
+            this.button111 = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button122 = new System.Windows.Forms.Button();
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.uiCheckBox25 = new Sunny.UI.UICheckBox();
             this.uiCheckBox20 = new Sunny.UI.UICheckBox();
             this.uiCheckBox26 = new Sunny.UI.UICheckBox();
             this.uiCheckBox28 = new Sunny.UI.UICheckBox();
+            this.button110 = new System.Windows.Forms.Button();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.uiCheckBox27 = new Sunny.UI.UICheckBox();
             this.uiCheckBox19 = new Sunny.UI.UICheckBox();
@@ -341,13 +365,9 @@
             this.label288 = new System.Windows.Forms.Label();
             this.label289 = new System.Windows.Forms.Label();
             this.button103 = new System.Windows.Forms.Button();
-            this.button112 = new System.Windows.Forms.Button();
             this.button104 = new System.Windows.Forms.Button();
-            this.button111 = new System.Windows.Forms.Button();
             this.button105 = new System.Windows.Forms.Button();
-            this.button102 = new System.Windows.Forms.Button();
             this.button106 = new System.Windows.Forms.Button();
-            this.button110 = new System.Windows.Forms.Button();
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.tabPage20 = new System.Windows.Forms.TabPage();
             this.tabPage21 = new System.Windows.Forms.TabPage();
@@ -538,8 +558,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button122 = new System.Windows.Forms.Button();
-            this.button123 = new System.Windows.Forms.Button();
+            this.button129 = new System.Windows.Forms.Button();
+            this.button130 = new System.Windows.Forms.Button();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.uiTabControl3.SuspendLayout();
@@ -548,6 +568,7 @@
             this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabPage11.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -1461,6 +1482,7 @@
             this.cobox_axisname.Name = "cobox_axisname";
             this.cobox_axisname.Size = new System.Drawing.Size(413, 28);
             this.cobox_axisname.TabIndex = 3;
+            this.cobox_axisname.SelectedIndexChanged += new System.EventHandler(this.cobox_axisname_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -3346,6 +3368,7 @@
             // tabPage11
             // 
             this.tabPage11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage11.Controls.Add(this.groupBox7);
             this.tabPage11.Controls.Add(this.button123);
             this.tabPage11.Controls.Add(this.groupBox3);
             this.tabPage11.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -3354,6 +3377,262 @@
             this.tabPage11.Size = new System.Drawing.Size(1893, 904);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Text = "流程调试";
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.button130);
+            this.groupBox7.Controls.Add(this.button129);
+            this.groupBox7.Controls.Add(this.uiCheckBox37);
+            this.groupBox7.Controls.Add(this.button128);
+            this.groupBox7.Controls.Add(this.uiCheckBox38);
+            this.groupBox7.Controls.Add(this.uiCheckBox39);
+            this.groupBox7.Controls.Add(this.uiCheckBox40);
+            this.groupBox7.Controls.Add(this.uiCheckBox33);
+            this.groupBox7.Controls.Add(this.button127);
+            this.groupBox7.Controls.Add(this.uiCheckBox34);
+            this.groupBox7.Controls.Add(this.button126);
+            this.groupBox7.Controls.Add(this.uiCheckBox35);
+            this.groupBox7.Controls.Add(this.button125);
+            this.groupBox7.Controls.Add(this.uiCheckBox36);
+            this.groupBox7.Controls.Add(this.textBox12);
+            this.groupBox7.Controls.Add(this.label196);
+            this.groupBox7.Controls.Add(this.textBox11);
+            this.groupBox7.Controls.Add(this.label195);
+            this.groupBox7.Controls.Add(this.button124);
+            this.groupBox7.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.groupBox7.Location = new System.Drawing.Point(746, 21);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox7.Size = new System.Drawing.Size(553, 242);
+            this.groupBox7.TabIndex = 345;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Tag = "@02@#BCD#";
+            this.groupBox7.Text = "飞梭";
+            // 
+            // uiCheckBox37
+            // 
+            this.uiCheckBox37.AutoSize = true;
+            this.uiCheckBox37.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox37.CheckBoxSize = 20;
+            this.uiCheckBox37.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox37.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox37.Location = new System.Drawing.Point(250, 159);
+            this.uiCheckBox37.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox37.Name = "uiCheckBox37";
+            this.uiCheckBox37.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox37.TabIndex = 353;
+            this.uiCheckBox37.Text = "#2";
+            // 
+            // button128
+            // 
+            this.button128.Location = new System.Drawing.Point(23, 156);
+            this.button128.Margin = new System.Windows.Forms.Padding(2);
+            this.button128.Name = "button128";
+            this.button128.Size = new System.Drawing.Size(153, 30);
+            this.button128.TabIndex = 356;
+            this.button128.Text = "飞梭2放歪检测";
+            this.button128.UseVisualStyleBackColor = true;
+            // 
+            // uiCheckBox38
+            // 
+            this.uiCheckBox38.AutoSize = true;
+            this.uiCheckBox38.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox38.CheckBoxSize = 20;
+            this.uiCheckBox38.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox38.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox38.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox38.Location = new System.Drawing.Point(309, 159);
+            this.uiCheckBox38.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox38.Name = "uiCheckBox38";
+            this.uiCheckBox38.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox38.TabIndex = 354;
+            this.uiCheckBox38.Text = "#3";
+            // 
+            // uiCheckBox39
+            // 
+            this.uiCheckBox39.AutoSize = true;
+            this.uiCheckBox39.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox39.CheckBoxSize = 20;
+            this.uiCheckBox39.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox39.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox39.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox39.Location = new System.Drawing.Point(191, 159);
+            this.uiCheckBox39.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox39.Name = "uiCheckBox39";
+            this.uiCheckBox39.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox39.TabIndex = 352;
+            this.uiCheckBox39.Text = "#1";
+            // 
+            // uiCheckBox40
+            // 
+            this.uiCheckBox40.AutoSize = true;
+            this.uiCheckBox40.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox40.CheckBoxSize = 20;
+            this.uiCheckBox40.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox40.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox40.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox40.Location = new System.Drawing.Point(368, 159);
+            this.uiCheckBox40.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox40.Name = "uiCheckBox40";
+            this.uiCheckBox40.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox40.TabIndex = 355;
+            this.uiCheckBox40.Text = "#4";
+            // 
+            // uiCheckBox33
+            // 
+            this.uiCheckBox33.AutoSize = true;
+            this.uiCheckBox33.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox33.CheckBoxSize = 20;
+            this.uiCheckBox33.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox33.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox33.Location = new System.Drawing.Point(250, 126);
+            this.uiCheckBox33.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox33.Name = "uiCheckBox33";
+            this.uiCheckBox33.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox33.TabIndex = 346;
+            this.uiCheckBox33.Text = "#2";
+            // 
+            // button127
+            // 
+            this.button127.Location = new System.Drawing.Point(23, 123);
+            this.button127.Margin = new System.Windows.Forms.Padding(2);
+            this.button127.Name = "button127";
+            this.button127.Size = new System.Drawing.Size(153, 30);
+            this.button127.TabIndex = 351;
+            this.button127.Text = "飞梭1放歪检测";
+            this.button127.UseVisualStyleBackColor = true;
+            // 
+            // uiCheckBox34
+            // 
+            this.uiCheckBox34.AutoSize = true;
+            this.uiCheckBox34.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox34.CheckBoxSize = 20;
+            this.uiCheckBox34.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox34.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox34.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox34.Location = new System.Drawing.Point(309, 126);
+            this.uiCheckBox34.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox34.Name = "uiCheckBox34";
+            this.uiCheckBox34.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox34.TabIndex = 347;
+            this.uiCheckBox34.Text = "#3";
+            // 
+            // button126
+            // 
+            this.button126.Location = new System.Drawing.Point(23, 90);
+            this.button126.Margin = new System.Windows.Forms.Padding(2);
+            this.button126.Name = "button126";
+            this.button126.Size = new System.Drawing.Size(153, 30);
+            this.button126.TabIndex = 350;
+            this.button126.Text = "飞梭2 -> 后方";
+            this.button126.UseVisualStyleBackColor = true;
+            // 
+            // uiCheckBox35
+            // 
+            this.uiCheckBox35.AutoSize = true;
+            this.uiCheckBox35.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox35.CheckBoxSize = 20;
+            this.uiCheckBox35.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox35.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox35.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox35.Location = new System.Drawing.Point(191, 126);
+            this.uiCheckBox35.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox35.Name = "uiCheckBox35";
+            this.uiCheckBox35.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox35.TabIndex = 345;
+            this.uiCheckBox35.Text = "#1";
+            // 
+            // button125
+            // 
+            this.button125.Location = new System.Drawing.Point(23, 57);
+            this.button125.Margin = new System.Windows.Forms.Padding(2);
+            this.button125.Name = "button125";
+            this.button125.Size = new System.Drawing.Size(153, 30);
+            this.button125.TabIndex = 349;
+            this.button125.Text = "飞梭2 -> 前方";
+            this.button125.UseVisualStyleBackColor = true;
+            // 
+            // uiCheckBox36
+            // 
+            this.uiCheckBox36.AutoSize = true;
+            this.uiCheckBox36.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox36.CheckBoxSize = 20;
+            this.uiCheckBox36.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox36.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.uiCheckBox36.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox36.Location = new System.Drawing.Point(368, 126);
+            this.uiCheckBox36.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox36.Name = "uiCheckBox36";
+            this.uiCheckBox36.Size = new System.Drawing.Size(55, 25);
+            this.uiCheckBox36.TabIndex = 348;
+            this.uiCheckBox36.Text = "#4";
+            // 
+            // textBox12
+            // 
+            this.textBox12.Location = new System.Drawing.Point(192, 92);
+            this.textBox12.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox12.Name = "textBox12";
+            this.textBox12.Size = new System.Drawing.Size(72, 27);
+            this.textBox12.TabIndex = 348;
+            this.textBox12.Text = "10";
+            this.textBox12.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label196
+            // 
+            this.label196.AutoSize = true;
+            this.label196.Location = new System.Drawing.Point(268, 95);
+            this.label196.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label196.Name = "label196";
+            this.label196.Size = new System.Drawing.Size(37, 20);
+            this.label196.TabIndex = 347;
+            this.label196.Tag = "";
+            this.label196.Text = "mm";
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(192, 57);
+            this.textBox11.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(72, 27);
+            this.textBox11.TabIndex = 346;
+            this.textBox11.Text = "10";
+            this.textBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label195
+            // 
+            this.label195.AutoSize = true;
+            this.label195.Location = new System.Drawing.Point(268, 57);
+            this.label195.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label195.Name = "label195";
+            this.label195.Size = new System.Drawing.Size(37, 20);
+            this.label195.TabIndex = 345;
+            this.label195.Tag = "";
+            this.label195.Text = "mm";
+            // 
+            // button124
+            // 
+            this.button124.Location = new System.Drawing.Point(23, 24);
+            this.button124.Margin = new System.Windows.Forms.Padding(2);
+            this.button124.Name = "button124";
+            this.button124.Size = new System.Drawing.Size(153, 30);
+            this.button124.TabIndex = 344;
+            this.button124.Text = "飞梭回零";
+            this.button124.UseVisualStyleBackColor = true;
+            // 
+            // button123
+            // 
+            this.button123.BackColor = System.Drawing.Color.Red;
+            this.button123.Location = new System.Drawing.Point(746, 302);
+            this.button123.Margin = new System.Windows.Forms.Padding(2);
+            this.button123.Name = "button123";
+            this.button123.Size = new System.Drawing.Size(153, 80);
+            this.button123.TabIndex = 345;
+            this.button123.Text = "紧急停止";
+            this.button123.UseVisualStyleBackColor = false;
+            this.button123.Click += new System.EventHandler(this.button123_Click);
             // 
             // groupBox3
             // 
@@ -3367,7 +3646,7 @@
             this.groupBox3.Controls.Add(this.button105);
             this.groupBox3.Controls.Add(this.button106);
             this.groupBox3.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.groupBox3.Location = new System.Drawing.Point(31, 31);
+            this.groupBox3.Location = new System.Drawing.Point(18, 21);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
@@ -3949,6 +4228,39 @@
             this.uiCheckBox32.TabIndex = 351;
             this.uiCheckBox32.Text = "#2";
             // 
+            // button102
+            // 
+            this.button102.Location = new System.Drawing.Point(346, 58);
+            this.button102.Margin = new System.Windows.Forms.Padding(2);
+            this.button102.Name = "button102";
+            this.button102.Size = new System.Drawing.Size(153, 30);
+            this.button102.TabIndex = 292;
+            this.button102.Text = "入料手臂X回零";
+            this.button102.UseVisualStyleBackColor = true;
+            this.button102.Click += new System.EventHandler(this.button102_Click);
+            // 
+            // button112
+            // 
+            this.button112.Location = new System.Drawing.Point(28, 58);
+            this.button112.Margin = new System.Windows.Forms.Padding(2);
+            this.button112.Name = "button112";
+            this.button112.Size = new System.Drawing.Size(153, 30);
+            this.button112.TabIndex = 294;
+            this.button112.Text = "入料手臂P回零";
+            this.button112.UseVisualStyleBackColor = true;
+            this.button112.Click += new System.EventHandler(this.button112_Click);
+            // 
+            // button111
+            // 
+            this.button111.Location = new System.Drawing.Point(186, 57);
+            this.button111.Margin = new System.Windows.Forms.Padding(2);
+            this.button111.Name = "button111";
+            this.button111.Size = new System.Drawing.Size(155, 30);
+            this.button111.TabIndex = 293;
+            this.button111.Text = "入料手臂Y回零";
+            this.button111.UseVisualStyleBackColor = true;
+            this.button111.Click += new System.EventHandler(this.button111_Click);
+            // 
             // groupBox5
             // 
             this.groupBox5.Controls.Add(this.button122);
@@ -4004,6 +4316,17 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Tag = "@02@#BCD#";
             this.groupBox5.Text = "吸料";
+            // 
+            // button122
+            // 
+            this.button122.Location = new System.Drawing.Point(476, 78);
+            this.button122.Margin = new System.Windows.Forms.Padding(2);
+            this.button122.Name = "button122";
+            this.button122.Size = new System.Drawing.Size(153, 30);
+            this.button122.TabIndex = 344;
+            this.button122.Text = "入料手臂XYP回零";
+            this.button122.UseVisualStyleBackColor = true;
+            this.button122.Click += new System.EventHandler(this.button122_Click);
             // 
             // textBox7
             // 
@@ -4078,6 +4401,17 @@
             this.uiCheckBox28.Size = new System.Drawing.Size(55, 25);
             this.uiCheckBox28.TabIndex = 338;
             this.uiCheckBox28.Text = "#2";
+            // 
+            // button110
+            // 
+            this.button110.Location = new System.Drawing.Point(476, 40);
+            this.button110.Margin = new System.Windows.Forms.Padding(2);
+            this.button110.Name = "button110";
+            this.button110.Size = new System.Drawing.Size(153, 30);
+            this.button110.TabIndex = 188;
+            this.button110.Text = "入料手臂所有Z回零";
+            this.button110.UseVisualStyleBackColor = true;
+            this.button110.Click += new System.EventHandler(this.button110_Click);
             // 
             // textBox4
             // 
@@ -4552,17 +4886,6 @@
             this.button103.UseVisualStyleBackColor = true;
             this.button103.Click += new System.EventHandler(this.button103_Click);
             // 
-            // button112
-            // 
-            this.button112.Location = new System.Drawing.Point(28, 58);
-            this.button112.Margin = new System.Windows.Forms.Padding(2);
-            this.button112.Name = "button112";
-            this.button112.Size = new System.Drawing.Size(153, 30);
-            this.button112.TabIndex = 294;
-            this.button112.Text = "入料手臂P回零";
-            this.button112.UseVisualStyleBackColor = true;
-            this.button112.Click += new System.EventHandler(this.button112_Click);
-            // 
             // button104
             // 
             this.button104.Location = new System.Drawing.Point(186, 24);
@@ -4573,17 +4896,6 @@
             this.button104.Text = "入料手臂Z3回零";
             this.button104.UseVisualStyleBackColor = true;
             this.button104.Click += new System.EventHandler(this.button104_Click);
-            // 
-            // button111
-            // 
-            this.button111.Location = new System.Drawing.Point(186, 57);
-            this.button111.Margin = new System.Windows.Forms.Padding(2);
-            this.button111.Name = "button111";
-            this.button111.Size = new System.Drawing.Size(155, 30);
-            this.button111.TabIndex = 293;
-            this.button111.Text = "入料手臂Y回零";
-            this.button111.UseVisualStyleBackColor = true;
-            this.button111.Click += new System.EventHandler(this.button111_Click);
             // 
             // button105
             // 
@@ -4596,17 +4908,6 @@
             this.button105.UseVisualStyleBackColor = true;
             this.button105.Click += new System.EventHandler(this.button105_Click);
             // 
-            // button102
-            // 
-            this.button102.Location = new System.Drawing.Point(346, 58);
-            this.button102.Margin = new System.Windows.Forms.Padding(2);
-            this.button102.Name = "button102";
-            this.button102.Size = new System.Drawing.Size(153, 30);
-            this.button102.TabIndex = 292;
-            this.button102.Text = "入料手臂X回零";
-            this.button102.UseVisualStyleBackColor = true;
-            this.button102.Click += new System.EventHandler(this.button102_Click);
-            // 
             // button106
             // 
             this.button106.Location = new System.Drawing.Point(28, 24);
@@ -4618,23 +4919,12 @@
             this.button106.UseVisualStyleBackColor = true;
             this.button106.Click += new System.EventHandler(this.button106_Click);
             // 
-            // button110
-            // 
-            this.button110.Location = new System.Drawing.Point(476, 40);
-            this.button110.Margin = new System.Windows.Forms.Padding(2);
-            this.button110.Name = "button110";
-            this.button110.Size = new System.Drawing.Size(153, 30);
-            this.button110.TabIndex = 188;
-            this.button110.Text = "入料手臂所有Z回零";
-            this.button110.UseVisualStyleBackColor = true;
-            this.button110.Click += new System.EventHandler(this.button110_Click);
-            // 
             // tabPage12
             // 
             this.tabPage12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage12.Location = new System.Drawing.Point(0, 40);
             this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage12.Size = new System.Drawing.Size(200, 60);
             this.tabPage12.TabIndex = 2;
             this.tabPage12.Text = "备用";
             // 
@@ -6718,28 +7008,27 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "档案";
             // 
-            // button122
+            // button129
             // 
-            this.button122.Location = new System.Drawing.Point(476, 78);
-            this.button122.Margin = new System.Windows.Forms.Padding(2);
-            this.button122.Name = "button122";
-            this.button122.Size = new System.Drawing.Size(153, 30);
-            this.button122.TabIndex = 344;
-            this.button122.Text = "入料手臂XYP回零";
-            this.button122.UseVisualStyleBackColor = true;
-            this.button122.Click += new System.EventHandler(this.button122_Click);
+            this.button129.Location = new System.Drawing.Point(23, 190);
+            this.button129.Margin = new System.Windows.Forms.Padding(2);
+            this.button129.Name = "button129";
+            this.button129.Size = new System.Drawing.Size(153, 30);
+            this.button129.TabIndex = 357;
+            this.button129.Text = "飞梭后入料清空";
+            this.button129.UseVisualStyleBackColor = true;
+            this.button129.Click += new System.EventHandler(this.button129_Click);
             // 
-            // button123
+            // button130
             // 
-            this.button123.BackColor = System.Drawing.Color.Red;
-            this.button123.Location = new System.Drawing.Point(771, 54);
-            this.button123.Margin = new System.Windows.Forms.Padding(2);
-            this.button123.Name = "button123";
-            this.button123.Size = new System.Drawing.Size(153, 80);
-            this.button123.TabIndex = 345;
-            this.button123.Text = "紧急停止";
-            this.button123.UseVisualStyleBackColor = false;
-            this.button123.Click += new System.EventHandler(this.button123_Click);
+            this.button130.Location = new System.Drawing.Point(192, 190);
+            this.button130.Margin = new System.Windows.Forms.Padding(2);
+            this.button130.Name = "button130";
+            this.button130.Size = new System.Drawing.Size(153, 30);
+            this.button130.TabIndex = 358;
+            this.button130.Text = "飞梭后入料状态=0";
+            this.button130.UseVisualStyleBackColor = true;
+            this.button130.Click += new System.EventHandler(this.button130_Click);
             // 
             // _setting
             // 
@@ -6760,6 +7049,8 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.tabPage11.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox6.PerformLayout();
@@ -7299,5 +7590,25 @@
         public System.Windows.Forms.TextBox txt_escapeStep;
         private System.Windows.Forms.Button button122;
         private System.Windows.Forms.Button button123;
+        public System.Windows.Forms.GroupBox groupBox7;
+        public System.Windows.Forms.Button button124;
+        private Sunny.UI.UICheckBox uiCheckBox37;
+        public System.Windows.Forms.Button button128;
+        private Sunny.UI.UICheckBox uiCheckBox38;
+        private Sunny.UI.UICheckBox uiCheckBox39;
+        private Sunny.UI.UICheckBox uiCheckBox40;
+        private Sunny.UI.UICheckBox uiCheckBox33;
+        public System.Windows.Forms.Button button127;
+        private Sunny.UI.UICheckBox uiCheckBox34;
+        public System.Windows.Forms.Button button126;
+        private Sunny.UI.UICheckBox uiCheckBox35;
+        public System.Windows.Forms.Button button125;
+        private Sunny.UI.UICheckBox uiCheckBox36;
+        public System.Windows.Forms.TextBox textBox12;
+        public System.Windows.Forms.Label label196;
+        public System.Windows.Forms.TextBox textBox11;
+        public System.Windows.Forms.Label label195;
+        public System.Windows.Forms.Button button130;
+        public System.Windows.Forms.Button button129;
     }
 }
