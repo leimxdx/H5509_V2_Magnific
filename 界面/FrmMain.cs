@@ -230,38 +230,53 @@ namespace H5509_V2
 
             GetSiteStatus();
 
+            APPmaster.TestPointInit();
             APPmaster.LoaderTrayICPointInit();
+            APPmaster.HeatTrayICPointInit();
+            APPmaster.Auto1TrayICPointInit();
+            APPmaster.Auto2TrayICPointInit();
+            APPmaster.Fix1TrayICPointInit();
+            APPmaster.Fix2TrayICPointInit();
+            APPmaster.Fix3TrayICPointInit();
+
             APPmaster.LoaderTrayICMapInit();
+            APPmaster.HeatTrayICMapInit();
+            APPmaster.Auto1TrayICMapInit();
+            APPmaster.Auto2TrayICMapInit();
+            APPmaster.Fix1TrayICMapInit();
+            APPmaster.Fix2TrayICMapInit();
+            APPmaster.Fix3TrayICMapInit();
+
             handler.参数初始化();
 
             Task.Run(() =>
             {
                 handler.入料手臂吸放料流程1();
             });
-            //Task.Run(() =>
-            //{
-            //    handler.出料手臂吸放料流程();
-            //});
+            Task.Run(() =>
+            {
+                handler.出料手臂吸放料流程();
+            });
             Task.Run(() =>
             {
                 handler.飞梭移动流程();
             });
-            //Task.Run(() =>
-            //{
-            //    handler.测试手臂取待测料流程();
-            //});
-            //Task.Run(() =>
-            //{
-            //    handler.测试手臂取已测料流程();
-            //});
-            //Task.Run(() =>
-            //{
-            //    handler.测试区气缸下压动作流程();
-            //});
-            //Task.Run(() =>
-            //{
-            //    handler.测试区气缸上抬动作流程();
-            //}); 
+            Task.Run(() =>
+            {
+                handler.测试手臂取待测料流程();
+            });
+            Task.Run(() =>
+            {
+                handler.测试手臂取已测料流程();
+            });
+            Task.Run(() =>
+            {
+                handler.测试区气缸下压动作流程();
+            });
+            Task.Run(() =>
+            {
+                handler.测试区气缸上抬动作流程();
+            });
             Task.Run(() =>
             {
                 handler.系统按钮检测流程();
@@ -306,24 +321,46 @@ namespace H5509_V2
         {
             for (int i = 0; i < 16; i++)
             {
-                APPmaster.Sitestatus.Add(new bool[2][]
+                APPmaster.SiteStatus.Add(new bool[2][]
                 {
                     new bool[] { true, true, true, true },
                     new bool[] { true, true, true, true },
                 });
 
-                APPmaster.SiteSave.Add(new bool[2][]
+                APPmaster.SiteTestIC.Add(new bool[2][]
                 {
-                    new bool[] { false, false, false, false },
-                    new bool[] { false, false, false, false },
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true },
                 });
 
-                APPmaster.SiteTestOpen.Add(new bool[2][]
+                APPmaster.SiteTestBIN.Add(new string[2][]
                 {
-                    new bool[] { false, false, false, false },
-                    new bool[] { false, false, false, false },
+                    new string[] { "", "", "", "" },
+                    new string[] { "", "", "", "" },
                 });
+
+                
+
+                //APPmaster.SiteSave.Add(new bool[2][]
+                //{
+                //    new bool[] { false, false, false, false },
+                //    new bool[] { false, false, false, false },
+                //});
+
+                //APPmaster.SiteTestOpen.Add(new bool[2][]
+                //{
+                //    new bool[] { false, false, false, false },
+                //    new bool[] { false, false, false, false },
+                //});
             }
+            APPmaster.InSiteQueue.Enqueue(4);
+            APPmaster.InSiteQueue.Enqueue(5);
+            APPmaster.InSiteQueue.Enqueue(6);
+            APPmaster.InSiteQueue.Enqueue(7);
+            APPmaster.InSiteQueue.Enqueue(8);
+            APPmaster.InSiteQueue.Enqueue(9);
+            APPmaster.InSiteQueue.Enqueue(10);
+            APPmaster.InSiteQueue.Enqueue(11);
         }
     }
 }

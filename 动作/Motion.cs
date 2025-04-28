@@ -862,7 +862,7 @@ namespace H5509_V2
                         //上电上使能，等5秒，再执行回零
                     }
                 }
-
+                
                 Thread.Sleep(delay);
 
                 for (int i = 0; i < listAxisHome.Count; i++)

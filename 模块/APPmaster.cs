@@ -25,11 +25,15 @@ namespace H5509_V2
         public static List<AxisHomeInfo> AxisHomeInfoList;
 
         public static bool IsStart = false; //开始
+
         public static bool ProgramStart = false; //程序开始
+
         public static bool ProgramBtnStart = false; //程序按钮开始
 
         public static bool IsPause = false; //停止
+
         public static bool ProgramPause = false; //程序暂停
+
         public static bool ProgramBtnPause = false; //程序按钮暂停
 
         public static bool IsForecePause = false; //强制停止
@@ -39,6 +43,7 @@ namespace H5509_V2
         public static bool H5509正在初始化 = false;
 
         public static bool 定点停止标记 = false;
+
         public static bool 定点停止允许 = false;
 
         public static int 气缸动作超时时间 = 3000; //ms
@@ -47,7 +52,14 @@ namespace H5509_V2
 
         public static Communication Com = new Communication();
 
-        public static List<bool[][]> SiteTestOpen = new List<bool[][]>();
+        public static double TestShuttleLPos = 800;
+        public static double TestShuttleRPos = 900.6;
+
+        public static double Testx1pos = 12;
+        public static double Testx2pos = 401.4;
+        public static double Testx3pos = 1089.5;
+        public static double Testx4pos = 1478.8;
+        public static double[] TestXPoint; //Site点位坐标
 
         public static double[] LoaderXPoint; //Loader待测盘
         public static double[] LoaderYPoint; //Loader待测盘
@@ -65,24 +77,47 @@ namespace H5509_V2
         public static double[] Fix3YPoint; //手动盘3Y坐标
 
         public static Dictionary<string, bool> LoaderDicPoint = new Dictionary<string, bool>(); //待测盘Map图
+
         public static Dictionary<string, bool> HeatDicPoint = new Dictionary<string, bool>(); //加热盘Map图
+
         public static Dictionary<string, bool> Auto1DicPoint = new Dictionary<string, bool>(); //自动盘1Map图
+
         public static Dictionary<string, bool> Auto2DicPoint = new Dictionary<string, bool>(); //自动盘2Map图
+
         public static Dictionary<string, bool> Fix1DicPoint = new Dictionary<string, bool>(); //手动盘1Map图
+
         public static Dictionary<string, bool> Fix2DicPoint = new Dictionary<string, bool>(); //手动盘2Map图
+
         public static Dictionary<string, bool> Fix3DicPoint = new Dictionary<string, bool>(); //手动盘3Map图
 
+        public static Dictionary<string, string> HeatDicBin { get; set; } = new Dictionary<string, string>();
+        public static Dictionary<string, string> Auto1DicBin { get; set; } = new Dictionary<string, string>();
+        public static Dictionary<string, string> Auto2DicBin { get; set; } = new Dictionary<string, string>();
+        public static Dictionary<string, string> Fix1DicBin { get; set; } = new Dictionary<string, string>();
+        public static Dictionary<string, string> Fix2DicBin { get; set; } = new Dictionary<string, string>();
+        public static Dictionary<string, string> Fix3DicBin { get; set; } = new Dictionary<string, string>();
+
         public static string Auto1 { get; set; } = "01";
-        public static string Auto2 { get; set; } = "02";
-        public static string Fix1 { get; set; } = "03";
-        public static string Fix2 { get; set; } = "04";
-        public static string Fix3 { get; set; } = "05";
+        public static string Auto2 { get; set; } = "02,03,04,05,06";
+        public static string Fix1 { get; set; } = "07";
+        public static string Fix2 { get; set; } = "08";
+        public static string Fix3 { get; set; } = "09";
 
-        public static List<bool[][]> Sitestatus = new List<bool[][]>();
-        public static List<bool[][]> SiteSave = new List<bool[][]>();
+        public static int 飞梭2位置 = 0; //0:后面 1:前面
 
-        public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>();
-        public static ConcurrentQueue<string> SiteSaveQueue = new ConcurrentQueue<string>();
+        public static bool 调机标记 = true;
+
+        public static int[] SiteTestState = new int[16];
+
+        public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
+        public static List<bool[][]> SiteTestIC = new List<bool[][]>(); //保存Site放入的IC状态
+        public static List<string[][]> SiteTestBIN = new List<string[][]>(); //保存
+
+        public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>(); //用来保存接收的Bin数据的队列
+        public static ConcurrentQueue<string> SiteSaveQueue = new ConcurrentQueue<string>(); //用来保存接收的Site数据的队列
+
+        public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
+        public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
 
         public static short Interval = 2; //吸料间隔
         public static bool 结批标记;
@@ -128,50 +163,62 @@ namespace H5509_V2
         /// 程序是否触发开始
         /// </summary>
         public bool IsProgramStart { get; set; } = false;
+
         /// <summary>
         /// 程序是否触发开始
         /// </summary>
         public bool IsProgramPause { get; set; } = false;
+
         /// <summary>
         /// 创建开始上升沿的缓存值
         /// </summary>
         public static bool StartRiseCache = false;
+
         /// <summary>
         /// 创建停止上升沿的缓存值
         /// </summary>
         public static bool StopRiseCache = false;
+
         /// <summary>
         /// 创建安全扭上升沿的缓存值
         /// </summary>
         public static bool SafeswRiseCache = false;
+
         /// <summary>
         /// 创建重试上升沿的缓存值
         /// </summary>
         public static bool AgainRiseCache = false;
+
         /// <summary>
         /// 创建忽略上升沿的缓存值
         /// </summary>
         public static bool IgnoreRiseCache = false;
+
         /// <summary>
         /// 创建定点停止上升沿的缓存值
         /// </summary>
         public static bool FixedStopRiseCache = false;
+
         /// <summary>
         /// 创建定点开始上升沿的缓存值
         /// </summary>
         public static bool FixedStartRiseCache = false;
+
         /// <summary>
         /// 创建结批上升沿的缓存值
         /// </summary>
         public static bool StopBatchRiseCache = false;
+
         /// <summary>
         /// 创建结批下降沿的缓存值
         /// </summary>
         public static bool StopBatchFallCache = false;
+
         /// <summary>
         /// 创建Loader开门上升沿的缓存值
         /// </summary>
         public static bool LoaderDoorRiseCache = false;
+
         /// <summary>
         /// 创建Loader开门下降沿的缓存值
         /// </summary>
@@ -180,38 +227,47 @@ namespace H5509_V2
         /// 创建Empty开门上升沿的缓存值
         /// </summary>
         public static bool EmptyDoorRiseCache = false;
+
         /// <summary>
         /// 创建Empty开门下降沿的缓存值
         /// </summary>
         public static bool EmptyDoorFallCache = false;
+
         /// <summary>
         /// 创建一个循环上升沿的缓存值
         /// </summary>
         public static bool OnecycleRiseCache = false;
+
         /// <summary>
         /// 创建归零上升沿的缓存值
         /// </summary>
         public static bool HomeRiseCache = false;
+
         /// <summary>
         /// 创建换Tray上升沿的缓存值
         /// </summary>
         public static bool ExchangetrayRiseCache = false;
+
         /// <summary>
         /// 创建暂停上升沿的缓存值
         /// </summary>
         public static bool EndRiseCache = false;
+
         /// <summary>
         /// 创建前门禁下降沿的缓存值
         /// </summary>
         public static bool FrontDoorFallCache = false;
+
         /// <summary>
         /// 创建后门禁下降沿的缓存值
         /// </summary>
         public static bool RearDoorFallCache = false;
+
         /// <summary>
         /// 创建左门禁下降沿的缓存值
         /// </summary>
         public static bool LeftDoorFallCache = false;
+
         /// <summary>
         /// 创建右门禁下降沿的缓存值
         /// </summary>
@@ -223,7 +279,7 @@ namespace H5509_V2
             {
                 return false;
             }
-            
+
             if (H5509初始化 == false)
             {
                 return false;
@@ -322,6 +378,240 @@ namespace H5509_V2
             {
                 LoaderYPoint[i] = LoaderYPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+        }
+
+        /// <summary>
+        /// Heat TrayIC点位初始化
+        /// </summary>
+        public static void HeatTrayICPointInit()
+        {
+            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
+            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
+            double heatx = 240;// motionEx.InitPointParam.OutputArm_Auto1_X + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_X;
+            double heaty = 100;// motionEx.InitPointParam.OutputArm_Auto1_Y + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_Y; ;
+            double total = 41 - 10 * 2; //move 580
+            int move = (int)(total);
+            HeatXPoint = new double[xNum];
+            HeatYPoint = new double[yNum];
+
+            HeatXPoint[0] = heatx - xStart; //获取左上角第一颗芯片x轴坐标
+            for (int i = 1; i < xNum; i++)
+            {
+                HeatXPoint[i] = HeatXPoint[i - 1] - xPitch; //累加X轴坐标
+            }
+            HeatYPoint[0] = heaty - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+            for (int i = 1; i < yNum; i++)
+            {
+                HeatYPoint[i] = HeatYPoint[i - 1] - yPitch; //累加Y轴坐标
+            }
+        }
+
+        /// <summary>
+        /// Auto1 TrayIC点位初始化
+        /// </summary>
+        public static void Auto1TrayICPointInit()
+        {
+            double xStart = 15.45;// (int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
+            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
+            double auto1x = 500;// motionEx.InitPointParam.OutputArm_Auto1_X + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_X;
+            double auto1y = 500;// motionEx.InitPointParam.OutputArm_Auto1_Y + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_Y; ;
+            double total = 41 - 10 * 2; //move 580
+            int move = (int)(total);
+            Auto1XPoint = new double[xNum];
+            Auto1YPoint = new double[yNum];
+
+            Auto1XPoint[0] = auto1x - xStart; //获取左上角第一颗芯片x轴坐标
+            for (int i = 1; i < xNum; i++)
+            {
+                Auto1XPoint[i] = Auto1XPoint[i - 1] - xPitch; //累加X轴坐标
+            }
+            Auto1YPoint[0] = auto1y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+            for (int i = 1; i < yNum; i++)
+            {
+                Auto1YPoint[i] = Auto1YPoint[i - 1] - yPitch; //累加Y轴坐标
+            }
+        }
+
+        /// <summary>
+        /// Auto2 TrayIC点位初始化
+        /// </summary>
+        public static void Auto2TrayICPointInit()
+        {
+            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double xPitch = 15;//int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
+            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
+            double auto2x = 400;// motionEx.InitPointParam.OutputArm_Auto2_X + motionEx.OffsetParam.OutputArm.OutputArm_Auto2_X;
+            double auto2y = 400;// motionEx.InitPointParam.OutputArm_Auto2_Y + motionEx.OffsetParam.OutputArm.OutputArm_Auto2_Y;
+            double total = 41 - 10 * 2; //move 580
+            int move = (int)(total);
+            Auto2XPoint = new double[xNum];
+            Auto2YPoint = new double[yNum];
+
+            Auto2XPoint[0] = auto2x - xStart; //获取左上角第一颗芯片x轴坐标
+            for (int i = 1; i < xNum; i++)
+            {
+                Auto2XPoint[i] = Auto2XPoint[i - 1] - xPitch; //累加X轴坐标
+            }
+            Auto2YPoint[0] = auto2y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+            for (int i = 1; i < yNum; i++)
+            {
+                Auto2YPoint[i] = Auto2YPoint[i - 1] - yPitch; //累加Y轴坐标
+            }
+        }
+
+        /// <summary>
+        /// Fix1 TrayIC点位初始化
+        /// </summary>
+        public static void Fix1TrayICPointInit()
+        {
+            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
+            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
+            double fix1x = 300;// motionEx.InitPointParam.OutputArm_Fix1_X + motionEx.OffsetParam.OutputArm.OutputArm_Fix1_X;
+            double fix1y = 300;// motionEx.InitPointParam.OutputArm_Fix1_Y + motionEx.OffsetParam.OutputArm.OutputArm_Fix1_Y;
+            double total = 41 - 10 * 2; //move 580
+            int move = (int)(total);
+            Fix1XPoint = new double[xNum];
+            Fix1YPoint = new double[yNum];
+
+            Fix1XPoint[0] = fix1x - xStart; //获取左上角第一颗芯片x轴坐标
+            for (int i = 1; i < xNum; i++)
+            {
+                Fix1XPoint[i] = Fix1XPoint[i - 1] - xPitch; //累加X轴坐标
+            }
+            Fix1YPoint[0] = fix1y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+            for (int i = 1; i < yNum; i++)
+            {
+                Fix1YPoint[i] = Fix1YPoint[i - 1] - yPitch; //累加Y轴坐标
+            }
+        }
+
+        /// <summary>
+        /// Fix2 TrayIC点位初始化
+        /// </summary>
+        public static void Fix2TrayICPointInit()
+        {
+            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
+            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
+            double fix2x = 200;// motionEx.InitPointParam.OutputArm_Fix2_X + motionEx.OffsetParam.OutputArm.OutputArm_Fix2_X;
+            double fix2y = 200;// motionEx.InitPointParam.OutputArm_Fix2_Y + motionEx.OffsetParam.OutputArm.OutputArm_Fix2_Y;
+            double total = 41 - 10 * 2; //move 580
+            int move = (int)(total);
+            Fix2XPoint = new double[xNum];
+            Fix2YPoint = new double[yNum];
+
+            Fix2XPoint[0] = fix2x - xStart; //获取左上角第一颗芯片x轴坐标
+            for (int i = 1; i < xNum; i++)
+            {
+                Fix2XPoint[i] = Fix2XPoint[i - 1] - xPitch; //累加X轴坐标
+            }
+            Fix2YPoint[0] = fix2y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+            for (int i = 1; i < yNum; i++)
+            {
+                Fix2YPoint[i] = Fix2YPoint[i - 1] - yPitch; //累加Y轴坐标
+            }
+        }
+
+        /// <summary>
+        /// Fix3 TrayIC点位初始化
+        /// </summary>
+        public static void Fix3TrayICPointInit()
+        {
+            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double xPitch = 15;// (int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
+            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
+            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
+            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
+            double fix3x = 100;// motionEx.InitPointParam.OutputArm_Fix3_X + motionEx.OffsetParam.OutputArm.OutputArm_Fix3_X;
+            double fix3y = 100;// motionEx.InitPointParam.OutputArm_Fix3_Y + motionEx.OffsetParam.OutputArm.OutputArm_Fix3_Y;
+            double total = 41 - 10 * 2; //move 580
+            int move = (int)(total);
+            Fix3XPoint = new double[xNum];
+            Fix3YPoint = new double[yNum];
+
+            Fix3XPoint[0] = fix3x - xStart; //获取左上角第一颗芯片x轴坐标
+            for (int i = 1; i < xNum; i++)
+            {
+                Fix3XPoint[i] = Fix3XPoint[i - 1] - xPitch; //累加X轴坐标
+            }
+            Fix3YPoint[0] = fix3y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+            for (int i = 1; i < yNum; i++)
+            {
+                Fix3YPoint[i] = Fix3YPoint[i - 1] - yPitch; //累加Y轴坐标
+            }
+        }
+
+        /// <summary>
+        /// 测试手臂定位初始化
+        /// </summary>
+        public static string TestPointInit()
+        {
+            double[] testXPoint = new double[16];
+            for (short site = 0; site < testXPoint.Length; site++)
+            {
+                string result = GetTestXPoint(site, out double xPos);  
+                if (result == "Success")
+                {
+                    testXPoint[site] = xPos;
+                }
+                else return result;
+            }
+            TestXPoint = testXPoint;
+            return "Success";
+        }
+
+        /// <summary>
+        /// 获取测试手臂测试点位
+        /// </summary>
+        /// <param name="site"></param>
+        /// <returns></returns>
+        public static string GetTestXPoint(short site, out double xPos)
+        {
+            xPos = 0;
+            double testx1pos = Testx1pos;
+            double testx2pos = Testx2pos;
+            double testx3pos = Testx3pos;
+            double testx4pos = Testx4pos;
+            switch (site)
+            {
+                case 0: xPos = testx1pos; break;
+                case 1: xPos = testx1pos + 80; break;
+                case 2: xPos = testx1pos + 80 * 2; break;
+                case 3: xPos = testx1pos + 80 * 3; break;
+                case 4: xPos = testx2pos; break;
+                case 5: xPos = testx2pos + 80; break;
+                case 6: xPos = testx2pos + 80 * 2; break;
+                case 7: xPos = testx2pos + 80 * 3; break;
+                case 8: xPos = testx3pos; break;
+                case 9: xPos = testx3pos + 80; break;
+                case 10: xPos = testx3pos + 80 * 2; break;
+                case 11: xPos = testx3pos + 80 * 3; break;
+                case 12: xPos = testx4pos; break;
+                case 13: xPos = testx4pos + 80; break;
+                case 14: xPos = testx4pos + 80 * 2; break;
+                case 15: xPos = testx4pos + 80 * 3; break;
+                default: return $"site:{site}不存在";
+            }
+            return "Success";
         }
 
         ///// <summary>
@@ -523,6 +813,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public static bool 获取Heat盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -540,6 +831,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public static bool 获取Auto1盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -557,6 +849,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public static bool 获取Auto2盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -574,6 +867,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public static bool 获取Fix1盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -591,6 +885,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public static bool 获取Fix2盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -608,6 +903,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public static bool 获取Fix3盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -638,6 +934,84 @@ namespace H5509_V2
             }
         }
 
+        public static void HeatTrayICMapInit()
+        {
+            HeatDicPoint = new Dictionary<string, bool>();
+            for (int i = 0; i < HeatXPoint.Length; i++)
+            {
+                for (int j = 0; j < HeatYPoint.Length; j++)
+                {
+                    HeatDicPoint.Add($"{i},{j}", false);
+                    HeatDicBin.Add($"{i},{j}", "");
+                }
+            }
+        }
+
+        public static void Auto1TrayICMapInit()
+        {
+            Auto1DicPoint = new Dictionary<string, bool>();
+            for (int i = 0; i < Auto1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto1YPoint.Length; j++)
+                {
+                    Auto1DicPoint.Add($"{i},{j}", false);
+                    Auto1DicBin.Add($"{i},{j}", ""); //"0"
+                }
+            }
+        }
+
+        public static void Auto2TrayICMapInit()
+        {
+            Auto2DicPoint = new Dictionary<string, bool>();
+            for (int i = 0; i < Auto2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto2YPoint.Length; j++)
+                {
+                    Auto2DicPoint.Add($"{i},{j}", false);
+                    Auto2DicBin.Add($"{i},{j}", "");
+                }
+            }
+        }
+
+        public static void Fix1TrayICMapInit()
+        {
+            Fix1DicPoint = new Dictionary<string, bool>();
+            for (int i = 0; i < Fix1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix1YPoint.Length; j++)
+                {
+                    Fix1DicPoint.Add($"{i},{j}", false);
+                    Fix1DicBin.Add($"{i},{j}", "");
+                }
+            }
+        }
+
+        public static void Fix2TrayICMapInit()
+        {
+            Fix2DicPoint = new Dictionary<string, bool>();
+            for (int i = 0; i < Fix2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix2YPoint.Length; j++)
+                {
+                    Fix2DicPoint.Add($"{i},{j}", false);
+                    Fix2DicBin.Add($"{i},{j}", "");
+                }
+            }
+        }
+
+        public static void Fix3TrayICMapInit()
+        {
+            Fix3DicPoint = new Dictionary<string, bool>();
+            for (int i = 0; i < Fix3XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix3YPoint.Length; j++)
+                {
+                    Fix3DicPoint.Add($"{i},{j}", false);
+                    Fix3DicBin.Add($"{i},{j}", "");
+                }
+            }
+        }
+
         public static void LoaderTrayClear()
         {
             for (int i = 0; i < LoaderXPoint.Length; i++)
@@ -647,6 +1021,93 @@ namespace H5509_V2
                     LoaderDicPoint[$"{i},{j}"] = true;
                 }
             }
+        }
+
+        public static void Auto1TrayClear()
+        {
+            for (int i = 0; i < Auto1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto1YPoint.Length; j++)
+                {
+                    Auto1DicPoint[$"{i},{j}"] = false;
+                    Auto1DicBin[$"{i},{j}"] = "";
+                }
+            }
+        }
+
+        public static void Auto2TrayClear()
+        {
+            //trayTemp = "";
+            for (int i = 0; i < Auto2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto2YPoint.Length; j++)
+                {
+                    Auto2DicPoint[$"{i},{j}"] = false;
+                    //trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
+                    Auto2DicBin[$"{i},{j}"] = "";
+                }
+            }
+            //trayTemp = trayTemp.TrimEnd(',');
+            //if (trayTemp == "") return;
+            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}')";
+            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+
+        }
+
+        public static void Fix1TrayClear()
+        {
+            //trayTemp = "";
+            for (int i = 0; i < Fix1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix1YPoint.Length; j++)
+                {
+                    Fix1DicPoint[$"{i},{j}"] = false;
+                    //trayTemp += Fix1DicBin[$"{i},{j}"] + ",";
+                    Fix1DicBin[$"{i},{j}"] = "";
+                }
+            }
+            //trayTemp = trayTemp.TrimEnd(',');
+            //if (trayTemp == "") return;
+            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}')";
+            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+
+        }
+
+        public static void Fix2TrayClear()
+        {
+            //trayTemp = "";
+            for (int i = 0; i < Fix2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix2YPoint.Length; j++)
+                {
+                    Fix2DicPoint[$"{i},{j}"] = false;
+                    //trayTemp += Fix2DicBin[$"{i},{j}"] + ",";
+                    Fix2DicBin[$"{i},{j}"] = "";
+                }
+            }
+            //trayTemp = trayTemp.TrimEnd(',');
+            //if (trayTemp == "") return;
+            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}')";
+            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+        }
+
+        public static void Fix3TrayClear()
+        {
+            //trayTemp = "";
+            for (int i = 0; i < Fix3XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix3YPoint.Length; j++)
+                {
+                    Fix3DicPoint[$"{i},{j}"] = false;
+                    //trayTemp += Fix3DicBin[$"{i},{j}"] + ",";
+                    Fix3DicBin[$"{i},{j}"] = "";
+                }
+            }
+            //trayTemp = trayTemp.TrimEnd(',');
+            //if (trayTemp == "") return;
+            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}')";
+            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+
         }
 
         public static void GetAxisCore(string axisname, out short core, out short axis)
@@ -726,7 +1187,7 @@ namespace H5509_V2
         public static bool 获取Auto1盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
-            if (获取Auto1盘坐标(true, out short xPoint, out short yPoint))
+            if (获取Auto1盘坐标(false, out short xPoint, out short yPoint))
             {
                 xPos = Auto1XPoint[xPoint];
                 yPos = Auto1YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
@@ -734,10 +1195,11 @@ namespace H5509_V2
             }
             else return false;
         }
+
         public static bool 获取Auto2盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
-            if (获取Auto2盘坐标(true, out short xPoint, out short yPoint))
+            if (获取Auto2盘坐标(false, out short xPoint, out short yPoint))
             {
                 xPos = Auto2XPoint[xPoint];
                 yPos = Auto2YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
@@ -745,10 +1207,11 @@ namespace H5509_V2
             }
             else return false;
         }
+
         public static bool 获取Fix1盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
-            if (获取Fix1盘坐标(true, out short xPoint, out short yPoint))
+            if (获取Fix1盘坐标(false, out short xPoint, out short yPoint))
             {
                 xPos = Fix1XPoint[xPoint];
                 yPos = Fix1YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
@@ -756,10 +1219,11 @@ namespace H5509_V2
             }
             else return false;
         }
+
         public static bool 获取Fix2盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
-            if (获取Fix2盘坐标(true, out short xPoint, out short yPoint))
+            if (获取Fix2盘坐标(false, out short xPoint, out short yPoint))
             {
                 xPos = Fix2XPoint[xPoint];
                 yPos = Fix2YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
@@ -767,10 +1231,11 @@ namespace H5509_V2
             }
             else return false;
         }
+
         public static bool 获取Fix3盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
-            if (获取Fix3盘坐标(true, out short xPoint, out short yPoint))
+            if (获取Fix3盘坐标(false, out short xPoint, out short yPoint))
             {
                 xPos = Fix3XPoint[xPoint];
                 yPos = Fix3YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch
@@ -804,6 +1269,7 @@ namespace H5509_V2
             }
             return "Success";
         }
+
         public static string 获取Auto1盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
@@ -816,8 +1282,8 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * Interval >= Auto1YPoint.Length) break;
-                if (Auto1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == false) break;
-                if (opens[i + index] == 0)
+                if (Auto1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1)
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -829,6 +1295,7 @@ namespace H5509_V2
             }
             return "Success";
         }
+
         public static string 获取Auto2盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
@@ -841,8 +1308,8 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * Interval >= Auto2YPoint.Length) break;
-                if (Auto2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == false) break;
-                if (opens[i + index] == 0)
+                if (Auto2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1)
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -854,6 +1321,7 @@ namespace H5509_V2
             }
             return "Success";
         }
+
         public static string 获取Fix1盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
@@ -866,8 +1334,8 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * Interval >= Fix1YPoint.Length) break;
-                if (Fix1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == false) break;
-                if (opens[i + index] == 0)
+                if (Fix1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1)
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -879,6 +1347,7 @@ namespace H5509_V2
             }
             return "Success";
         }
+
         public static string 获取Fix2盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
@@ -891,8 +1360,8 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * Interval >= Fix2YPoint.Length) break;
-                if (Fix2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == false) break;
-                if (opens[i + index] == 0)
+                if (Fix2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1)
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -904,6 +1373,7 @@ namespace H5509_V2
             }
             return "Success";
         }
+
         public static string 获取Fix3盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
@@ -916,8 +1386,8 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * Interval >= Fix3YPoint.Length) break;
-                if (Fix3DicPoint[$"{xPoint},{yPoint + i * Interval}"] == false) break;
-                if (opens[i + index] == 0)
+                if (Fix3DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1)
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))

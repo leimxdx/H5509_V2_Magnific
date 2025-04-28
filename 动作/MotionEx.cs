@@ -53,7 +53,7 @@ namespace H5509_V2
         #endregion
 
         #region 轴回零
-        
+
         /// <summary>
         /// 等待多轴回零
         /// </summary>
@@ -67,7 +67,7 @@ namespace H5509_V2
                 string result = WaitAxisHome(axisHomes[i]);
                 if (result != "Success")
                 {
-                    Debug.WriteLine(result);
+                    Debug.WriteLine($"{axisHomes[i]}回零失败!" + result);
                     bools[i] = false;
                 }
                 else bools[i] = true;
@@ -127,7 +127,7 @@ namespace H5509_V2
             {
                 return ex.Message;
             }
-            
+
             return result;
         }
 
@@ -163,7 +163,7 @@ namespace H5509_V2
         /// <returns></returns>
         public string AxisHome(string axisName)
         {
-            string result = APPmaster.GetAxisHomeInfo(axisName,out AxisHomeInfo axisHome);
+            string result = APPmaster.GetAxisHomeInfo(axisName, out AxisHomeInfo axisHome);
             if (result == "Success")
             {
                 result = Motion.UniaxialHome(axisHome);
@@ -175,6 +175,10 @@ namespace H5509_V2
                     });
 
                     result = task.Result;
+                    if (result != "Success")
+                    {
+                        Debug.WriteLine($"{axisName}回零失败!" + result);
+                    }
                 }
             }
             return result;
@@ -261,10 +265,10 @@ namespace H5509_V2
                 double encPos = Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号);
                 double prfPos = Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号);
                 double posvalue = Math.Abs(prfPos - encPos);
-                Debug.WriteLine($"核心{axisRun.核号},轴号{axisRun.轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
-                if (posvalue > 200)
+                //Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
+                if (posvalue > 跟随误差)
                 {
-                    return $"核心{axisRun.核号},轴号{axisRun.轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>200";
+                    return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
                 }
             }
             catch (Exception ex)
@@ -337,10 +341,10 @@ namespace H5509_V2
                     double encPos = Motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号);
                     double prfPos = Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号);
                     double posvalue = Math.Abs(prfPos - encPos);
-                    Debug.WriteLine($"核心{axisRuns[i].核号},轴号{axisRuns[i].轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
-                    if (posvalue > 200)
+                    //Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
+                    if (posvalue > 跟随误差)
                     {
-                        return $"核心{axisRuns[i].核号},轴号{axisRuns[i].轴号}的规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>200";
+                        return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
                     }
                 }
             }
@@ -437,7 +441,7 @@ namespace H5509_V2
             ioInfo = null;
             for (int i = 0; i < APPmaster.IOList.Count; i++)
             {
-                if (ioName.Substring(0,4) == APPmaster.IOList[i].IO编号)
+                if (ioName.Substring(0, 4) == APPmaster.IOList[i].IO编号)
                 {
                     ioInfo = APPmaster.IOList[i];
                     break;

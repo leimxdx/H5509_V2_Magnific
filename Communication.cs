@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Diagnostics;
+using static H5509_V2.APPmaster;
 namespace H5509_V2
 {
     public class Communication
@@ -91,7 +92,7 @@ namespace H5509_V2
                 serialPort = new SerialPort();
                 serialPort.DataReceived += DataReceivedHandler;
             }
-            serialPort.PortName = "COM2";
+            serialPort.PortName = "COM11";
             serialPort.BaudRate = 9600; //波特率
             serialPort.Parity = Parity.None;
             serialPort.DataBits = 8;
@@ -113,7 +114,8 @@ namespace H5509_V2
                 str = " <= ";
             }
             string datestr = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}{str}";
-            RefrshLog(datestr + message);
+            Debug.WriteLine(datestr + message);
+            //RefrshLog(datestr + message);
         }
 
 
@@ -137,6 +139,7 @@ namespace H5509_V2
                 RefreshInfoLog(outdata, true);
                 if (outdata.Length < 1) return;
 
+                Debug.WriteLine(outdata);
                 //writeDataHelper.RunLog(outdata, 2, true);
 
                 while (outdata.Length > 0)
@@ -157,7 +160,7 @@ namespace H5509_V2
                             string[] bin = outdata.Substring(14, 23).Split(' ');
                             int site = Convert.ToInt32(outdata.Substring(11, 2));
 
-                            //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
+                            if (SiteTestState[site] == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                             {
                                 Isreceive[site] = true;
                                 Listtimer[site].Stop();
@@ -169,8 +172,11 @@ namespace H5509_V2
                                 }
                                 else Bin.Add(site, bin);
                                 listtesttimespan[site] = DateTime.Now - listtestdatetime[site];
-                                OutBin.Enqueue(bin); //给出料手臂单独保存
-                                Listtestsingal.Add(site);
+                                SiteTestState[site] = 3;
+                                OutSiteQueue.Enqueue(site);
+                                BinSaveQueue.Enqueue(bin);
+                                //OutBin.Enqueue(bin); //给出料手臂单独保存
+                                //Listtestsingal.Add(site);
                                 //writeDataHelper.RunLog($"获得Site:{site:D2},Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
                             }
                             //else writeDataHelper.RunLog($"site:{site:D2}未在测试!", 3);
@@ -178,7 +184,7 @@ namespace H5509_V2
                         }
                         catch (Exception ex)
                         {
-                            //writeDataHelper.RunLog("数据解析失败！详细信息：" + ex.Message, 2);
+                            Debug.WriteLine("数据解析失败！详细信息：" + ex.Message);
                             break;
                         }
                     }
