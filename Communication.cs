@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.IO.Ports;
+using System.Diagnostics;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Diagnostics;
 using static H5509_V2.APPmaster;
 namespace H5509_V2
 {
@@ -68,7 +69,6 @@ namespace H5509_V2
                 {
                     System.Timers.Timer timer = new System.Timers.Timer() { Interval = 600 * 1000 }; //默认测试超时时间修改为10分钟
                     Iswaitout[i] = false;
-                    Isreceive[i] = false;
                     Listtimer.Add(timer);
                     listtestdatetime.Add(DateTime.Now);
                     listtesttimespan.Add(new TimeSpan(0));
@@ -151,8 +151,6 @@ namespace H5509_V2
                         IsconnectTester = true;
                     }
 
-                    //@TEST_DONE 00 01 01 01 06 01 01 06 01+
-                    //@TEST_DONE测试完成
                     if (outdata.StartsWith("@TEST_DONE"))
                     {
                         try
@@ -162,7 +160,6 @@ namespace H5509_V2
 
                             if (SiteTestState[site] == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                             {
-                                Isreceive[site] = true;
                                 Listtimer[site].Stop();
                                 timeOutTimer[site].Stop();
 
@@ -175,8 +172,6 @@ namespace H5509_V2
                                 SiteTestState[site] = 3;
                                 OutSiteQueue.Enqueue(site);
                                 BinSaveQueue.Enqueue(bin);
-                                //OutBin.Enqueue(bin); //给出料手臂单独保存
-                                //Listtestsingal.Add(site);
                                 //writeDataHelper.RunLog($"获得Site:{site:D2},Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
                             }
                             //else writeDataHelper.RunLog($"site:{site:D2}未在测试!", 3);
@@ -245,7 +240,6 @@ namespace H5509_V2
                 listtestdatetime[site] = DateTime.Now;
                 Listtimer[site].Start();
                 Iswaitout[site] = false;
-                Isreceive[site] = false;
                 //启动定时器
             }
             catch (Exception ex)
@@ -270,14 +264,15 @@ namespace H5509_V2
             }
 
             Iswaitout[t] = true;
-            Isreceive[t] = true;
             string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
             if (Bin.ContainsKey(t))
             {
                 Bin[t] = bin;
             }
             else Bin.Add(t, bin);
-            Listtestsingal.Add(t); //放到给BIN信号后面看是否可以解决接收到stie超时但没有取出芯片的问题
+            SiteTestState[t] = 3;
+            OutSiteQueue.Enqueue(t);
+            BinSaveQueue.Enqueue(bin);
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
 
         }
@@ -307,14 +302,15 @@ namespace H5509_V2
 
 
             Iswaitout[t] = true;
-            Isreceive[t] = true;
             string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
             if (Bin.ContainsKey(t))
             {
                 Bin[t] = bin;
             }
             else Bin.Add(t, bin);
-            Listtestsingal.Add(t); //放到给BIN信号后面看是否可以解决接收到stie超时但没有取出芯片的问题
+            SiteTestState[t] = 3;
+            OutSiteQueue.Enqueue(t);
+            BinSaveQueue.Enqueue(bin);
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
         }
     }

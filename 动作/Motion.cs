@@ -253,7 +253,6 @@ namespace H5509_V2
             return result;
         }
 
-
         /// <summary>
         /// 停止所有轴运动
         /// </summary>
@@ -281,21 +280,22 @@ namespace H5509_V2
         public string GetAxisStatus(short core, short axis, out int sts)
         {
             sts = 0;
+
             string result = CommonInitedValidate();
-            if (result == "Success")
+
+            if (result != "Success") return result;
+
+            try
             {
-                try
-                {
-                    short error = GTN_GetSts(core, axis, out sts, 1, out uint pClock);
-                    //ErrorInfo(error, "GTN_GetSts");
-                    return result;
-                }
-                catch (Exception ex)
-                {
-                    return ex.Message;
-                }
+                short error = GTN_GetSts(core, axis, out sts, 1, out uint pClock);
+                //ErrorInfo(error, "GTN_GetSts");
+                return result;
             }
-            return result;
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+
         }
 
         /// <summary>
@@ -303,21 +303,23 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axis">轴号</param>
         /// <returns>实时位置</returns>
-        public double GetCmdEncPos(short core, short axis)
+        public string GetCmdEncPos(short core, short axis, out double pPos)
         {
+            pPos = 0;
+
             string result = CommonInitedValidate();
 
-            if (result != "Success") return -999999.0;
+            if (result != "Success") return result;
 
             try
             {
-                short error = GTN_GetEncPos(core, axis, out double pValue, 1, out uint pClock);
+                short error = GTN_GetEncPos(core, axis, out pPos, 1, out uint pClock);
                 //ErrorInfo(error, "GTN_GetPrfPos");
-                return pValue;
+                return result;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return -999999.0;
+                return ex.Message;
             }
         }
 
@@ -326,22 +328,24 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axis"></param>
         /// <returns></returns>
-        public double GetCmdEncVel(short core, short axis)
+        public string GetCmdEncVel(short core, short axis, out double pPos)
         {
+            pPos = 0;
+
             string result = CommonInitedValidate();
 
-            if (result != "Success") return -999999.0;
+            if (result != "Success") return result;
 
             try
             {
-                short error = GTN_GetEncVel(core, axis, out double pValue, 1, out uint pClock);
+                short error = GTN_GetEncVel(core, axis, out pPos, 1, out uint pClock);
                 //ErrorHandler("GTN_GetEncVel", error);
                 //return GetpValue(axis, pValue);
-                return pValue;
+                return "Success";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return -999999.0;
+                return ex.Message;
             }
         }
 
@@ -350,20 +354,22 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axis"></param>
         /// <returns></returns>
-        public double GetCmdPrfPos(short core, short axis)
+        public string GetCmdPrfPos(short core, short axis, out int pPos)
         {
+            pPos = 0;
+
             string result = CommonInitedValidate();
-            if (result != "Success") return -999999.0;
+            if (result != "Success") return result;
 
             try
             {
-                short error = GTN_GetPos(core, axis, out int pPos);
+                short error = GTN_GetPos(core, axis, out pPos);
                 //ErrorInfo(error, "GTN_GetPos");
-                return pPos;
+                return "Success";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return -999999.0;
+                return ex.Message;
             }
         }
 
@@ -372,24 +378,24 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axis"></param>
         /// <returns></returns>
-        public double GetCmdPrfVel(short core, short axis)
+        public string GetCmdPrfVel(short core, short axis, out double pPos)
         {
-            //判断是否初始化成功
+            pPos = 0;
 
             string result = CommonInitedValidate();
 
-            if (result != "Success") return -999999.0;
+            if (result != "Success") return result;
 
             try
             {
-                short error = GTN_GetPrfVel(core, axis, out double pValue, 1, out uint pClock);
+                short error = GTN_GetPrfVel(core, axis, out pPos, 1, out uint pClock);
                 //ErrorHandler("GTN_GetPrfVel", error);
                 //return GetpValue(axis, pValue);
-                return pValue;
+                return "Success";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return -999999.0;
+                return ex.Message;
             }
         }
 
@@ -438,7 +444,6 @@ namespace H5509_V2
             return "Success";
         }
 
-
         /// <summary>
         /// 轴停止运动
         /// </summary>
@@ -454,9 +459,19 @@ namespace H5509_V2
 
             try
             {
-                short error = GTN_Stop(core, 1 << (axis - 1), isSmoothStop);//1 << (axis - 1)
+                int sts = 0;
+                do
+                {
+                    short error = GTN_Stop(core, 1 << (axis - 1), isSmoothStop); //1 << (axis - 1)
 
-                ErrorHandler("GTN_Stop", error);
+                    ErrorHandler("GTN_Stop", error);
+
+                    error = GTN_GetSts(core, axis, out sts, 1, out uint pClock);
+
+                    ErrorHandler("GTN_GetSts", error);
+
+                }
+                while ((sts & 0x400) != 0);
             }
             catch (Exception ex)
             {
@@ -530,9 +545,10 @@ namespace H5509_V2
                 ErrorHandler("GTN_SetTrapPrm", error);
 
                 //获取当前规划位置
-                double current = GetCmdPrfPos(axisRun.核号, axisRun.轴号);
+                result = GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int pPos);
+                if (result != "Success") return result;
 
-                int posPulse = Convert.ToInt32(Math.Round((current + axisRun.目标位置)));
+                int posPulse = Convert.ToInt32(Math.Round(((double)pPos + axisRun.目标位置)));
 
                 // 设置AXIS轴的目标位置
                 error = GTN_SetPos(axisRun.核号, axisRun.轴号, posPulse);
@@ -757,6 +773,8 @@ namespace H5509_V2
                 //设置Smart Home回原点参数
                 THomePrm tHomePrm;
 
+                int delay = 400;
+
                 short error = GTN_ClrSts(axisHome.核号, axisHome.轴号, 1);
                 ErrorHandler($"GTN_ClrSts({axisHome.核号}, {axisHome.轴号}, 1)", error);
 
@@ -773,10 +791,10 @@ namespace H5509_V2
                         Thread.Sleep(1); //减少CPU和轴卡的压力
                     } while ((lAxisStatus & 0x200) == 0);
 
-                    //if (axis == advancedParam.Axis_InputArm_X || axis == advancedParam.Axis_OutputArm_X) Thread.Sleep(3000);
-                    //else Thread.Sleep(400); 
-                    Thread.Sleep(400);
+                    if (axisHome.轴名称 == "M22_入料手臂X轴" || axisHome.轴名称 == "M23_出料手臂X轴") delay = 5000;
                 }
+
+                Thread.Sleep(delay);
 
                 error = GTN_GetHomePrm(axisHome.核号, axisHome.轴号, out tHomePrm);
                 ErrorHandler($"GTN_GetHomePrm({axisHome.核号}, {axisHome.轴号}, {tHomePrm})", error);
@@ -794,6 +812,7 @@ namespace H5509_V2
                 tHomePrm.indexDir = 1; //必须赋值,否则报错
                 tHomePrm.edge = axisHome.捕获触发沿;
                 tHomePrm.velHigh = axisHome.搜索速度;
+                tHomePrm.velLow = axisHome.定位速度;
                 tHomePrm.velLow = 1; //必须赋值,否则报错
                 tHomePrm.acc = axisHome.加速度;
                 tHomePrm.dec = axisHome.减速度;
@@ -856,13 +875,13 @@ namespace H5509_V2
                             Thread.Sleep(1); //减少CPU和轴卡的压力
                         } while ((lAxisStatus & 0x200) == 0);
 
-                        if (listAxisHome[i].核号 == 2 && (listAxisHome[i].轴号 == 10 || listAxisHome[i].轴号 == 11)) delay = 5000;
+                        if (listAxisHome[i].轴名称 == "M22_入料手臂X轴" || listAxisHome[i].轴名称 == "M23_出料手臂X轴") delay = 5000;
                         //要注意第一次上电驱动器会寻相，要等5秒
                         //如果寻相没完成就回零位置就不准
                         //上电上使能，等5秒，再执行回零
                     }
                 }
-                
+
                 Thread.Sleep(delay);
 
                 for (int i = 0; i < listAxisHome.Count; i++)
@@ -886,7 +905,7 @@ namespace H5509_V2
                     tHomePrm[i].indexDir = 1; //必须赋值,否则报错
                     tHomePrm[i].edge = listAxisHome[i].捕获触发沿;
                     tHomePrm[i].velHigh = listAxisHome[i].搜索速度;
-                    tHomePrm[i].velLow = 1; //必须赋值,否则报错
+                    tHomePrm[i].velLow = listAxisHome[i].定位速度; //必须赋值,否则报错
                     tHomePrm[i].acc = listAxisHome[i].加速度;
                     tHomePrm[i].dec = listAxisHome[i].减速度;
                     tHomePrm[i].smoothTime = listAxisHome[i].平滑时间;
@@ -1101,7 +1120,7 @@ namespace H5509_V2
                 ErrorHandler($"GTN_GetDo({core}, {doType}, out int {pValue})", error);
                 string pValuestr = Convert.ToString(pValue, 2).PadLeft(32, '0');
                 string v = new string(pValuestr.Reverse().ToArray());
-                for(int i = 0;i<v.Length; i++)
+                for (int i = 0; i < v.Length; i++)
                 {
                     if (v[i] == '1')
                     {

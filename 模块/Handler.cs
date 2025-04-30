@@ -29,17 +29,17 @@ namespace H5509_V2
         #region 轴移动
         public string 入料手臂X移动(double pos)
         {
-            return motionEx.AxisMove("M22_入料手臂X轴", pos);
+            return motionEx.AxisAbsoluteMove("M22_入料手臂X轴", pos);
         }
 
         public string 入料手臂Y移动(double pos)
         {
-            return motionEx.AxisMove("M16_入料手臂Y轴", pos);
+            return motionEx.AxisAbsoluteMove("M16_入料手臂Y轴", pos);
         }
 
         public string 入料手臂P移动(double pos)
         {
-            return motionEx.AxisMove("M5_入料手臂P轴", pos);
+            return motionEx.AxisAbsoluteMove("M5_入料手臂P轴", pos);
         }
 
         public string 入料手臂移动(double xPos, double yPos, double pPos)
@@ -51,17 +51,17 @@ namespace H5509_V2
 
         public string 出料手臂X移动(double pos)
         {
-            return motionEx.AxisMove("M23_出料手臂X轴", pos);
+            return motionEx.AxisAbsoluteMove("M23_出料手臂X轴", pos);
         }
 
         public string 出料手臂Y移动(double pos)
         {
-            return motionEx.AxisMove("M17_出料手臂Y轴", pos);
+            return motionEx.AxisAbsoluteMove("M17_出料手臂Y轴", pos);
         }
 
         public string 出料手臂P移动(double pos)
         {
-            return motionEx.AxisMove("M10_出料手臂P轴", pos);
+            return motionEx.AxisAbsoluteMove("M10_出料手臂P轴", pos);
         }
 
         public string 出料手臂移动(double xPos, double yPos, double pPos)
@@ -214,47 +214,47 @@ namespace H5509_V2
         public string 测试手臂X移动(double pos)
         {
 
-            return motionEx.AxisMove("M21_测试手臂X轴", pos);
+            return motionEx.AxisAbsoluteMove("M21_测试手臂X轴", pos);
         }
 
         public string 测试手臂Z移动(double pos, bool isdown)
         {
-            return motionEx.AxisMove("M19_测试手臂Z轴", isdown ? pos : -0.2);
+            return motionEx.AxisAbsoluteMove("M19_测试手臂Z轴", isdown ? pos : -0.2);
         }
 
         public string 放Tary盘轴移动(double pos)
         {
-            return motionEx.AxisMove("M18_放Tary盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M18_放Tary盘轴", pos);
         }
 
         public string 飞梭轴移动(double pos)
         {
-            return motionEx.AxisMove("M20_飞梭轴", pos);
+            return motionEx.AxisAbsoluteMove("M20_飞梭轴", pos);
         }
 
         public string Fix3放IC盘轴移动(double pos)
         {
-            return motionEx.AxisMove("M11_Fix3放IC轴", pos);
+            return motionEx.AxisAbsoluteMove("M11_Fix3放IC轴", pos);
         }
 
         public string Empty顶盘轴移动(double pos)
         {
-            return motionEx.AxisMove("M12_Empty顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M12_Empty顶盘轴", pos);
         }
 
         public string Loader顶盘轴移动(double pos)
         {
-            return motionEx.AxisMove("M13_Loader顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M13_Loader顶盘轴", pos);
         }
 
         public string Auto1顶盘轴移动(double pos)
         {
-            return motionEx.AxisMove("M14_Auto1顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M14_Auto1顶盘轴", pos);
         }
 
         public string Auto2顶盘轴移动(double pos)
         {
-            return motionEx.AxisMove("M15_Auto2顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M15_Auto2顶盘轴", pos);
         }
 
         #endregion 轴移动
@@ -425,6 +425,7 @@ namespace H5509_V2
 
             return 测试吸嘴张开气缸到位输入读取();
         }
+
         public string 测试吸嘴_张开气缸原位输出()
         {
             string result = motionEx.SetDo("Y094_测试吸嘴张开气缸", false);
@@ -446,7 +447,6 @@ namespace H5509_V2
 
             return result;
         }
-
 
         public string 测试吸嘴张开气缸原位输入读取()
         {
@@ -1323,6 +1323,8 @@ namespace H5509_V2
 
         #region Load区
 
+
+
         public string Load_Tray前侧定位气缸到位输出()
         {
             string result = motionEx.SetDo("Y018_Load区Tray前侧定位", true);
@@ -1371,6 +1373,46 @@ namespace H5509_V2
         #endregion
 
         #region Auto1区
+
+        public string Auto1_Tray前侧定位气缸到位输出()
+        {
+            string result = motionEx.SetDo("Y023_AUTO1_Tray前定位", true);
+            if (result != "Success")
+            {
+                Debug.WriteLine("Auto1_Tray前定位气缸到位输出失败！" + result);
+                return result;
+            }
+
+            string result2 = motionEx.SetDo("Y024_AUTO1_Tray侧定位", true);
+            if (result2 != "Success")
+            {
+                Debug.WriteLine("Auto1_Tray侧定位气缸到位输出失败！" + result2);
+                return result2;
+            }
+
+            Thread.Sleep(300); //没有感应器，固定延时处理
+            return result;
+        }
+
+        public string Auto1_Tray前侧定位气缸原位输出()
+        {
+            string result = motionEx.SetDo("Y023_AUTO1_Tray前定位", false);
+            if (result != "Success")
+            {
+                Debug.WriteLine("Auto1_Tray前定位气缸原位输出失败！" + result);
+                return result;
+            }
+
+            string result2 = motionEx.SetDo("Y024_AUTO1_Tray侧定位", false);
+            if (result2 != "Success")
+            {
+                Debug.WriteLine("Auto1_Tray侧定位气缸原位输出失败！" + result2);
+                return result2;
+            }
+
+            Thread.Sleep(300); //没有感应器，固定延时处理
+            return result;
+        }
 
         public string Auto1_Tray前定位气缸到位输出()
         {
@@ -1468,6 +1510,46 @@ namespace H5509_V2
         #endregion
 
         #region Auto2
+
+        public string Auto2_Tray前侧定位气缸到位输出()
+        {
+            string result = motionEx.SetDo("Y025_AUTO2_Tray前定位", true);
+            if (result != "Success")
+            {
+                Debug.WriteLine("Auto2_Tray前定位气缸到位输出失败！" + result);
+                return result;
+            }
+
+            string result2 = motionEx.SetDo("Y026_AUTO2_Tray侧定位", true);
+            if (result2 != "Success")
+            {
+                Debug.WriteLine("Auto2_Tray侧定位气缸到位输出失败！" + result2);
+                return result2;
+            }
+
+            Thread.Sleep(300); //没有感应器，固定延时处理
+            return result;
+        }
+
+        public string Auto2_Tray前侧定位气缸原位输出()
+        {
+            string result = motionEx.SetDo("Y025_AUTO2_Tray前定位", false);
+            if (result != "Success")
+            {
+                Debug.WriteLine("Auto2_Tray前定位气缸原位输出失败！" + result);
+                return result;
+            }
+
+            string result2 = motionEx.SetDo("Y026_AUTO2_Tray侧定位", false);
+            if (result2 != "Success")
+            {
+                Debug.WriteLine("Auto2_Tray侧定位气缸原位输出失败！" + result2);
+                return result2;
+            }
+
+            Thread.Sleep(300); //没有感应器，固定延时处理
+            return result;
+        }
 
         public string Auto2_Tray前定位气缸到位输出()
         {
@@ -1605,10 +1687,7 @@ namespace H5509_V2
 
         #endregion IO控制与读取
 
-
         #region 动作流程
-
-
 
         /// <summary>
         /// 检测沿信号
@@ -1617,6 +1696,7 @@ namespace H5509_V2
         /// <param name="cache">缓存值</param>
         /// <param name="isRiseOrFall">上升沿或下降沿，True为上升沿，False为下降沿</param>
         /// <returns>是否检测到沿信号</returns>
+        
         public bool CheckEdgeSingal(bool current, ref bool cache, bool isRiseOrFall = true)
         {
             if (isRiseOrFall)
@@ -1647,6 +1727,461 @@ namespace H5509_V2
             }
         }
 
+        public string Empty向上移动()
+        {
+            string axisName = "M12_Empty顶盘轴";
+
+            string result = motionEx.AxisJogMove(axisName, 20);
+            if (result != "Success") return result;
+
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, 20);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Empty_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (value == "0") //返回0是挡到感应器
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+
+                    result = Empty_后Tray放歪感应(out string value2);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (prfpos + 12700 > 414400 + 12700 + 3175 || value2 == "0")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
+                        return $"{axisName}当前上升行程{prfpos + 12700}>{414400 + 12700 + 3175} || {value2}";
+                    }
+                }
+            }
+        }
+
+        public string Empty向下移动()
+        {
+            string axisName = "M12_Empty顶盘轴";
+
+            string result = motionEx.AxisJogMove(axisName, -5);
+            if (result != "Success") return result;
+
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, -5);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Empty_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (value == "1")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (prfpos < 30000)
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
+                        return $"{axisName}当前下降行程{prfpos} < 30000";
+                    }
+                }
+            }
+        }
+
+        public string Load向上移动()
+        {
+            string axisName = "M13_Loader顶盘轴";
+
+            string result = motionEx.AxisJogMove(axisName, 20);
+            if (result != "Success") return result;
+
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, 20);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Load_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (value == "0")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+
+                    result = Load_后Tray放歪感应(out string value2);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (prfpos + 12700 > 415580 + 12700 + 900 || value2 == "0")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
+                        return $"{axisName}当前上升行程{prfpos + 12700}>{414400 + 12700 + 3175} || {value2}";
+                    }
+                }
+            }
+        }
+
+        public string Load向下移动()
+        {
+            string axisName = "M13_Loader顶盘轴";
+
+            string result = motionEx.AxisJogMove(axisName, -5);
+            if (result != "Success") return result;
+
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, -5);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Load_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (value == "1")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (prfpos < 30000)
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return $"{axisName}当前下降行程{prfpos} < 30000";
+                    }
+                }
+            }
+        }
+
+        public string Auto1向上移动()
+        {
+            string axisName = "M14_Auto1顶盘轴";
+            string result = motionEx.AxisJogMove(axisName, 20);
+            if (result != "Success") return result;
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, 20);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Auto1_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+                    if (value == "0")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+                    result = Auto1_后Tray放歪感应(out string value2);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+                    if (prfpos + 12700 > 415580 + 12700 + 900 || value2 == "0")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
+                        return $"{axisName}当前上升行程{prfpos + 12700}>{415580 + 12700 + 900} || {value2}";
+                    }
+                }
+            }
+        }
+
+        public string Auto1向下移动()
+        {
+            string axisName = "M14_Auto1顶盘轴";
+
+            string result = motionEx.AxisJogMove(axisName, -15);
+            if (result != "Success") return result;
+
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, -15);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Auto1_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (value == "1")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (prfpos < 30000)
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
+                        return $"{axisName}当前下降行程{prfpos} < 30000";
+                    }
+                }
+            }
+        }
+
+        public string Auto2向上移动()
+        {
+            string axisName = "M15_Auto2顶盘轴";
+            string result = motionEx.AxisJogMove(axisName, 20);
+            if (result != "Success") return result;
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, 20);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Auto2_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+                    if (value == "0")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+                    result = Auto2_后Tray放歪感应(out string value2);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+                    if (prfpos > 429180 || value2 == "0")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
+                        return $"{axisName}当前上升行程{prfpos}>{429180} || {value2}";
+                    }
+                }
+            }
+        }
+
+        public string Auto2向下移动()
+        {
+            string axisName = "M15_Auto2顶盘轴";
+
+            string result = motionEx.AxisJogMove(axisName, -15);
+            if (result != "Success") return result;
+
+            while (true)
+            {
+                if (APPmaster.IsPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, -15);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else
+                {
+                    result = Auto2_前Tray存在感应(out string value);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (value == "1")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return "Success";
+                    }
+
+                    result = motionEx.GetCmdEncPos(axisName, out double prfpos);
+                    if (result != "Success")
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        return result;
+                    }
+
+                    if (prfpos < 30000)
+                    {
+                        motionEx.AxisStopMove(axisName, 1);
+                        //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
+                        return $"{axisName}当前下降行程{prfpos} < 30000";
+                    }
+                }
+            }
+        }
+
         #region 入料手臂流程
 
         public void 参数初始化()
@@ -1657,7 +2192,7 @@ namespace H5509_V2
             飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
 
             //飞梭前出料状态 = 1;
-            
+
             放料IC目标值 = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
             //飞梭前出料BIN项 = new string[][] { new string[] { "01", "01", "01", "01" }, new string[] { "01", "01", "01", "01" } };
         }
@@ -1819,16 +2354,20 @@ namespace H5509_V2
 
             task3 = Task.Run(() => { return 测试手臂X回零(); });
 
+            Task<string> task4 = Task.Run(() => { return 顶盘轴回零(); });
 
-            if (task1.Result != "Success" || task2.Result != "Success" || task3.Result != "Success")
+            Task<string> task5 = Task.Run(() => { return 飞梭回零(); });
+
+            Task<string> task6 = Task.Run(() => { return Fix3放IC轴回零(); });
+
+            if (task1.Result != "Success" || task2.Result != "Success" || task3.Result != "Success" || task4.Result != "Success" || task5.Result != "Success" || task6.Result != "Success")
             {
                 return "Fail";
             }
 
-            task1 = Task.Run(() => { return 飞梭回零(); });
-            task2 = Task.Run(() => { return 放Tary盘轴回零(); });
+            task1 = Task.Run(() => { return 放Tary盘轴回零(); });
 
-            if (task1.Result != "Success" || task2.Result != "Success")
+            if (task1.Result != "Success")
             {
                 return "Fail";
             }
@@ -2962,7 +3501,7 @@ namespace H5509_V2
                         PS测试手臂取待测料流程.StepName = "路径规划";
                         PS测试手臂取待测料流程.Condition = (飞梭后入料状态 == 1 && APPmaster.InSiteQueue.Count > 0)
                                                         && (飞梭后出料状态 == 1 || APPmaster.OutSiteQueue.Count == 0);
-                          PS测试手臂取待测料流程.Permit = !PS测试手臂取已测料流程.Processing;
+                        PS测试手臂取待测料流程.Permit = !PS测试手臂取已测料流程.Processing;
                         if (PS测试手臂取待测料流程.Condition && PS测试手臂取待测料流程.Permit)
                         {
                             PS测试手臂取待测料流程.Processing = true;
@@ -3055,7 +3594,7 @@ namespace H5509_V2
                         {
                             if (home[0] == "0") //如果有1说明有吸嘴没有挡住原点
                             {
-                                飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; 
+                                飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
                                 飞梭后入料状态 = 0;
                                 PS测试手臂取待测料流程.StepID = 545;
                             }
@@ -3328,7 +3867,7 @@ namespace H5509_V2
 
                     case 560:
                         PS测试手臂取已测料流程.StepName = "测试Z向下移动";
-                        result = 测试手臂Z移动(10,  true);
+                        result = 测试手臂Z移动(10, true);
                         if (result == "Success")
                         {
                             PS测试手臂取已测料流程.StepID = 565;
@@ -3418,7 +3957,7 @@ namespace H5509_V2
         {
             string result;
             short site = 0;
-            List<bool[]> open = new List<bool[]>(); 
+            List<bool[]> open = new List<bool[]>();
             PS测试区气缸下压动作流程.StepID = 500;
             while (true)
             {
@@ -3456,7 +3995,7 @@ namespace H5509_V2
                         }
                         else
                         {
-                            site++; 
+                            site++;
                             if (site >= 16)
                             {
                                 site = 0;
@@ -3628,6 +4167,7 @@ namespace H5509_V2
                 "X015_右门禁",
                 "X018_空盘门感应",
                 "X024_Load门感应",
+                "X038_BIN平移按键",
             };
 
             while (true)
@@ -3746,7 +4286,7 @@ namespace H5509_V2
                     {
                         Debug.WriteLine("按下换Tray");
                     }
-
+                    
                     bool x18 = io[15] == "1";  //X018_空盘门感应
                     if (CheckEdgeSingal(x18, ref EmptyDoorRiseCache, true))
                     {
@@ -3766,6 +4306,40 @@ namespace H5509_V2
                     {
                         Debug.WriteLine("Load仓门被打开");
                     }
+                    bool traymove = io[17] == "1"; //X038_BIN平移按键
+                    if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
+                    {
+                        Debug.WriteLine("按下Tray平移");
+                        if (!Tray平移运动标记)
+                        { 
+                            Tray平移运动标记 = true;
+
+                            motionEx.SetDo("Y040_BIN平移按键灯", true);
+                            Task.Run(() => 
+                            {
+                                if (Tray平移左右标记 == 0)
+                                {
+                                    Tray平移左右标记 = 1;
+                                    result = Fix3放IC盘轴移动(70);
+                                }
+
+                                else if (Tray平移左右标记 == 1)
+                                {
+                                    Tray平移左右标记 = 0;
+                                    result = Fix3放IC盘轴移动(0);
+                                }
+
+                                else return;
+
+                                if (result != "Success")
+                                {
+                                    Debug.WriteLine("放Tary盘轴移动失败!" + result);
+                                }
+                                motionEx.SetDo("Y040_BIN平移按键灯", false);
+                                Tray平移运动标记 = false;
+                            });
+                        }
+                    }
                 }
                 Thread.Sleep(5);
             }
@@ -3773,29 +4347,509 @@ namespace H5509_V2
 
         public void Empty顶盘流程()
         {
+            string result = "";
+            PS空盘上顶流程.StepID = 500;
+            Empty上顶标记 = 2;
+            while (true)
+            {
+                //if(!是否可以开始运行())
+                //{
+                //    continue;
+                //}
 
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS空盘上顶流程.StepID)
+                {
+                    case 500:
+                        PS空盘上顶流程.StepName = "路径规划";
+                        PS空盘上顶流程.Condition = Empty上顶标记 == 2; // Empty上顶标记 == 2;
+                        PS空盘上顶流程.Permit = !PS空盘上顶流程.Processing;
+                        if (PS空盘上顶流程.Condition && PS空盘上顶流程.Permit)
+                        {
+                            Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                            PS空盘上顶流程.Processing = true;
+                            PS空盘上顶流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        PS空盘上顶流程.StepName = "Empty向上移动";
+                        Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                        result = Empty向上移动();
+                        if (result == "Success")
+                        {
+                            PS空盘上顶流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 510:
+                        PS空盘上顶流程.StepName = "Empty向下移动";
+                        Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                        result = Empty向下移动();
+                        if (result == "Success")
+                        {
+                            PS空盘上顶流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine("Empty向下移动:"+result);
+                        }
+                        break;
+
+                    case 515:
+                        PS空盘上顶流程.StepName = "Empty向上移动固定距离";
+                        Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                        result = motionEx.AxisRelativeMove("M12_Empty顶盘轴", 1.6);//3175 1.5875
+                        if (result == "Success")
+                        {
+                            Empty上顶标记 = 1;
+                            PS空盘上顶流程.StepID = 599;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 599:
+                        PS空盘上顶流程.StepName = $"空盘上顶流程完成";
+                        Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                        PS空盘上顶流程.Processing = false;
+                        PS空盘上顶流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS空盘上顶流程.StepID =" + PS空盘上顶流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
         }
+
         public void Loader顶盘流程()
         {
+            string result = "";
+            PS待测盘上顶流程.StepID = 500;
+            Loader上顶标记 = 2;
+            while (true)
+            {
+                //if (!是否可以开始运行())
+                //{
+                //    continue;
+                //}
 
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS待测盘上顶流程.StepID)
+                {
+                    case 500:
+                        PS待测盘上顶流程.StepName = "路径规划";
+                        PS待测盘上顶流程.Condition = Loader上顶标记 == 2;
+                        PS待测盘上顶流程.Permit = !PS待测盘上顶流程.Processing;
+                        if (PS待测盘上顶流程.Condition && PS待测盘上顶流程.Permit)
+                        {
+                            PS待测盘上顶流程.Processing = true;
+                            PS待测盘上顶流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        PS待测盘上顶流程.StepName = "Load_Tray前侧定位气缸原位输出";
+                        Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                        result = Load_Tray前侧定位气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS待测盘上顶流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load_Tray前侧定位气缸原位输出失败！" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS待测盘上顶流程.StepName = "Load向上移动";
+                        Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                        result = Load向上移动();
+                        if (result == "Success")
+                        {
+                            PS待测盘上顶流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load向上移动失败！" + result);
+                        }
+                        break;
+
+                    case 515:
+                        PS待测盘上顶流程.StepName = "Load向下移动";
+                        Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                        result = Load向下移动();
+                        if (result == "Success")
+                        {
+                            PS待测盘上顶流程.StepID = 520;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load向下移动失败！" + result);
+                        }
+                        break;
+
+                    case 520:
+                        PS待测盘上顶流程.StepName = "Load向上移动固定距离";
+                        Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                        result = motionEx.AxisRelativeMove("M13_Loader顶盘轴", 1.6);//3175 1.5875
+                        if (result == "Success")
+                        {
+                            Loader上顶标记 = 1;
+                            PS待测盘上顶流程.StepID = 525;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load向上移动固定距离失败！" + result);
+                        }
+                        break;
+
+                    case 525:
+                        PS待测盘上顶流程.StepName = "Load_Tray前侧定位气缸到位输出";
+                        Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                        result = Load_Tray前侧定位气缸到位输出();
+                        if (result == "Success")
+                        {
+                            PS待测盘上顶流程.StepID = 599;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load_Tray前侧定位气缸到位输出失败！" + result);
+                        }
+                        break;
+
+                    case 599:
+                        PS待测盘上顶流程.StepName = $"待测盘上顶流程完成";
+                        Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                        PS待测盘上顶流程.Processing = false;
+                        PS待测盘上顶流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS待测盘上顶流程.StepID =" + PS待测盘上顶流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
         }
+
         public void Auto1顶盘流程()
         {
+            string result = "";
+            PS手动盘1上顶流程.StepID = 500;
+            Auto1上顶标记 = 2;
+            while (true)
+            {
+                //if (!是否可以开始运行())
+                //{
+                //    continue;
+                //}
 
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS手动盘1上顶流程.StepID)
+                {
+                    case 500:
+                        PS手动盘1上顶流程.StepName = "路径规划";
+                        PS手动盘1上顶流程.Condition = Auto1上顶标记 == 2;
+                        PS手动盘1上顶流程.Permit = !PS手动盘1上顶流程.Processing;
+                        if (PS手动盘1上顶流程.Condition && PS手动盘1上顶流程.Permit)
+                        {
+                            PS手动盘1上顶流程.Processing = true;
+                            PS手动盘1上顶流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        result = Auto1_Tray前侧定位气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 510:
+                        PS手动盘1上顶流程.StepName = "Auto1向上移动";
+                        result = Auto1向上移动();
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 515:
+                        PS手动盘1上顶流程.StepName = "Auto1向上移动固定距离";
+                        result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", 15);//3175 1.5875
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 520;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 520:
+                        result = Auto1_Tray上顶气缸到位输出();//3175 1.5875
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 525;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 525:
+                        PS手动盘1上顶流程.StepName = "Auto1向下移动";
+                        result = Auto1向下移动();
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 530;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 530:
+                        PS手动盘1上顶流程.StepName = "Auto1向下移动固定距离";
+                        result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", -5);//3175 1.5875
+                        if (result == "Success")
+                        {
+                            Auto1上顶标记 = 1;
+                            PS手动盘1上顶流程.StepID = 535;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 535:
+                        result = Auto1_Tray上顶气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 599;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 599:
+                        PS手动盘1上顶流程.StepName = $"手动盘1上顶流程完成";
+                        PS手动盘1上顶流程.Processing = false;
+                        PS手动盘1上顶流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS手动盘1上顶流程.StepID =" + PS手动盘1上顶流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
         }
+
         public void Auto2顶盘流程()
         {
+            string result = "";
+            PS手动盘2上顶流程.StepID = 500;
+            Auto2上顶标记 = 2;
+            while (true)
+            {
+                //if (!是否可以开始运行())
+                //{
+                //    continue;
+                //}
 
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS手动盘2上顶流程.StepID)
+                {
+                    case 500:
+                        PS手动盘2上顶流程.StepName = "路径规划";
+                        PS手动盘2上顶流程.Condition = Auto2上顶标记 == 2;
+                        PS手动盘2上顶流程.Permit = !PS手动盘2上顶流程.Processing;
+                        if (PS手动盘2上顶流程.Condition && PS手动盘2上顶流程.Permit)
+                        {
+                            PS手动盘2上顶流程.Processing = true;
+                            PS手动盘2上顶流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        result = Auto2_Tray前侧定位气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 510:
+                        PS手动盘2上顶流程.StepName = "Auto2向上移动";
+                        result = Auto2向上移动();
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 515:
+                        PS手动盘2上顶流程.StepName = "Auto2向上移动固定距离";
+                        result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", 15);//3175 1.5875
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 520;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 520:
+                        result = Auto2_Tray上顶气缸到位输出();//3175 1.5875
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 525;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 525:
+                        PS手动盘2上顶流程.StepName = "Auto2向下移动";
+                        result = Auto2向下移动();
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 530;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 530:
+                        PS手动盘2上顶流程.StepName = "Auto2向下移动固定距离";
+                        result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", -5);//3175 1.5875
+                        if (result == "Success")
+                        {
+                            Auto2上顶标记 = 1;
+                            PS手动盘2上顶流程.StepID = 535;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 535:
+                        result = Auto2_Tray上顶气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 599;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 599:
+                        PS手动盘2上顶流程.StepName = $"手动盘2上顶流程完成";
+                        PS手动盘2上顶流程.Processing = false;
+                        PS手动盘2上顶流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
         }
 
         public void Loader拿空盘()
         {
 
         }
+
         public void Auto1给空盘()
         {
 
         }
+
         public void Auto2给空盘()
         {
 

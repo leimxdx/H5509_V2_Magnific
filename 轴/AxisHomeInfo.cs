@@ -44,6 +44,9 @@ namespace H5509_V2
         /// </summary>
         public double 搜索速度 { get; set; }
 
+        /// <summary>
+        /// 定位速度（单位：pulse/ms），在搜索到原点后，继续运动到原点位置的速度
+        /// </summary>
         public double 定位速度 { get; set; }
 
         /// <summary>

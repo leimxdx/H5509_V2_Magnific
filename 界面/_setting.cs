@@ -309,10 +309,22 @@ namespace H5509_V2
         {
             APPmaster.GetAxisCore(cobox_axisname.Text, out short core, out short axis);
 
-            textBox17.Text = motion.GetCmdPrfPos(core, axis).ToString();//X轴规划位置
-            textBox16.Text = motion.GetCmdPrfVel(core, axis).ToString();//X轴规划速度
-            textBox15.Text = motion.GetCmdEncPos(core, axis).ToString();//X轴实时位置
-            textBox14.Text = motion.GetCmdEncVel(core, axis).ToString();//X轴实时速度
+            if (motion.GetCmdPrfPos(core, axis,out int pPos) == "Success") textBox17.Text = pPos.ToString();
+            else textBox17.Text = "获取失败"; //X轴规划位置
+            if (motion.GetCmdPrfVel(core, axis, out double pPos2) == "Success")
+            {
+                if (pPos2 == 0) textBox16.Text = "0";
+                else textBox16.Text = pPos2.ToString("F2");
+            }
+            else textBox16.Text = "获取失败"; //X轴规划速度
+            if (motion.GetCmdEncPos(core, axis, out double pPos3) == "Success") textBox15.Text = pPos3.ToString();
+            else textBox15.Text = "获取失败"; //X轴实时位置
+            if (motion.GetCmdEncVel(core, axis, out double pPos4) == "Success")
+            {
+                if (pPos4 == 0) textBox14.Text = "0";
+                else textBox14.Text = pPos4.ToString("F2");
+            }
+            else textBox14.Text = "获取失败"; //X轴实时速度
 
             bool[] axistatus = new bool[32];
             GetAxisStatus(core, axis, ref axistatus); //获取指定轴状态
@@ -616,6 +628,13 @@ namespace H5509_V2
                 MessageBox.Show("回零速度值异常，请输入数字!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
+            if (!double.TryParse(txt_home_dingwei_vel.Text, out double home_dw_vel))
+            {
+                txt_home_dingwei_vel.Focus();
+                MessageBox.Show("定位速度值异常，请输入数字!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+            
             if (!double.TryParse(txt_home_acc.Text, out double home_acc))
             {
                 txt_home_acc.Focus();
@@ -667,6 +686,7 @@ namespace H5509_V2
                 回零启动方向 = moveDir,
                 捕获触发沿 = edge,
                 搜索速度 = home_vel,
+                定位速度 = home_dw_vel,
                 加速度 = home_acc,
                 减速度 = home_dec,
                 平滑时间 = home_Smoothtime,
@@ -1112,8 +1132,8 @@ namespace H5509_V2
                 }
                 while ((sts & 0x400) != 0);
 
-                double encPos = motion.GetCmdEncPos(axisRun.核号, axisRun.轴号);
-                double prfPos = motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号);
+                motion.GetCmdEncPos(axisRun.核号, axisRun.轴号, out double encPos);
+                motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int prfPos);
                 double posvalue = Math.Abs(prfPos - encPos);
                 //Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
                 if (posvalue > 跟随误差)
@@ -1170,8 +1190,8 @@ namespace H5509_V2
 
                 for (int i = 0; i < axisRuns.Count; i++)
                 {
-                    double encPos = motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号);
-                    double prfPos = motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号);
+                    motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号, out double encPos);
+                    motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号, out int prfPos);
                     double posvalue = Math.Abs(prfPos - encPos);
                     //Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
                     if (posvalue > 跟随误差)
@@ -1352,7 +1372,6 @@ namespace H5509_V2
                 MessageBox.Show("入料手臂XYP移动失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void button117_Click(object sender, EventArgs e)
         {
@@ -1767,6 +1786,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button123_Click(object sender, EventArgs e)
         {
+            APPmaster.IsPause = true;
             for (int i = 0; i < AxisInfoList.Count; i++)
             {
                 string result = motion.AxisStop(AxisInfoList[i].核号, AxisInfoList[i].轴号, 1);
@@ -1774,8 +1794,8 @@ namespace H5509_V2
                 {
                     Debug.WriteLine($"核号{AxisInfoList[i].核号},轴{AxisInfoList[i].轴号}停止失败!详细信息:" + result);
                 }
-                else MessageBox.Show("所有轴已紧急停止");
             }
+            MessageBox.Show("所有轴已紧急停止");
         }
 
         private void cobox_axisname_SelectedIndexChanged(object sender, EventArgs e)
@@ -1788,7 +1808,7 @@ namespace H5509_V2
                 else txt_home_mode.Text = "";
 
                 txt_home_vel.Text = axisHomeInfo.搜索速度.ToString();
-
+                txt_home_dingwei_vel.Text = axisHomeInfo.定位速度.ToString();
                 txt_home_acc.Text = axisHomeInfo.加速度.ToString();
                 txt_home_dec.Text = axisHomeInfo.减速度.ToString();
                 txt_home_Smoothtime.Text = axisHomeInfo.平滑时间.ToString();
@@ -2079,6 +2099,33 @@ namespace H5509_V2
         {
             short site = Convert.ToInt16(comboBox7.Text);
             测试区_下压气缸原位输出(site);
+        }
+
+        private void button212_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => { handler.Empty顶盘流程(); });
+            
+        }
+
+        private void button213_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => {
+                handler.Loader顶盘流程();
+            });
+        }
+
+        private void button215_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => {
+                handler.Auto1顶盘流程();
+            });
+        }
+
+        private void button214_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => {
+                handler.Auto2顶盘流程();
+            });
         }
     }
 }

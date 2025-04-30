@@ -107,6 +107,10 @@ namespace H5509_V2
 
         public static bool 调机标记 = true;
 
+        public static int Tray平移左右标记 = 0;
+
+        public static bool Tray平移运动标记; 
+
         public static int[] SiteTestState = new int[16];
 
         public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
@@ -136,6 +140,11 @@ namespace H5509_V2
         public static bool[][] 飞梭后入料IC;
         public static bool[][] 飞梭后出料IC;
 
+        public static short Empty上顶标记;
+        public static short Loader上顶标记;
+        public static short Auto1上顶标记;
+        public static short Auto2上顶标记;
+
         public static bool[][] 放料IC目标值;
 
         public static string[][] 飞梭前出料BIN项;
@@ -152,6 +161,14 @@ namespace H5509_V2
         public static ST_ProcessManage PS测试区气缸下压动作流程;
 
         public static ST_ProcessManage PS测试区气缸上抬动作流程;
+
+        public static ST_ProcessManage PS空盘上顶流程;
+
+        public static ST_ProcessManage PS待测盘上顶流程;
+
+        public static ST_ProcessManage PS手动盘1上顶流程;
+
+        public static ST_ProcessManage PS手动盘2上顶流程;
 
         public static ST_ProcessManage PS入料手臂放料流程;
 
@@ -223,6 +240,7 @@ namespace H5509_V2
         /// 创建Loader开门下降沿的缓存值
         /// </summary>
         public static bool LoaderDoorFallCache = false;
+
         /// <summary>
         /// 创建Empty开门上升沿的缓存值
         /// </summary>
@@ -272,6 +290,11 @@ namespace H5509_V2
         /// 创建右门禁下降沿的缓存值
         /// </summary>
         public static bool RightDoorFallCache = false;
+
+        /// <summary>
+        /// 创建Fix盘平移按键上升沿的缓存值
+        /// </summary>
+        public static bool TrayMoveRiseCache = false;
 
         public static bool 是否可以开始运行()
         {

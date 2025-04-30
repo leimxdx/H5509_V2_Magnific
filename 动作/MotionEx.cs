@@ -52,6 +52,84 @@ namespace H5509_V2
 
         #endregion
 
+
+        #region 轴运行信息
+
+        /// <summary>
+        /// 获取轴状态
+        /// </summary>
+        /// <returns></returns>
+        public string GetAxisStatus(string axisName, out int sts)
+        {
+            sts = 0;
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRun);
+            if (result != "Success") return result;
+
+            return Motion.GetAxisStatus(axisRun.核号, axisRun.轴号, out sts);
+        }
+
+        /// <summary>
+        /// 获取实时位置
+        /// </summary>
+        /// <param name="axis">轴号</param>
+        /// <returns>实时位置</returns>
+        public string GetCmdEncPos(string axisName, out double pos)
+        {
+            pos = 0;
+
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRun);
+            if (result != "Success") return result;
+
+            return Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号, out pos);
+        }
+
+        /// <summary>
+        /// 获取实时速度
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <returns></returns>
+        public string GetCmdEncVel(string axisName, out double pos)
+        {
+            pos = 0;
+
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRun);
+            if (result != "Success") return result;
+
+            return Motion.GetCmdEncVel(axisRun.核号, axisRun.轴号, out pos);
+        }
+
+        /// <summary>
+        /// 获取规划位置
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <returns></returns>
+        public string GetCmdPrfPos(string axisName, out int pos)
+        {
+            pos = 0;
+
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRun);
+            if (result != "Success") return result;
+
+            return Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out pos);
+        }
+
+        /// <summary>
+        /// 获取规划速度
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <returns></returns>
+        public string GetCmdPrfVel(string axisName, out double pos)
+        {
+            pos = 0;
+
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRun);
+            if (result != "Success") return result;
+
+            return Motion.GetCmdPrfVel(axisRun.核号, axisRun.轴号, out pos);
+        }
+
+        #endregion
+
         #region 轴回零
 
         /// <summary>
@@ -67,7 +145,7 @@ namespace H5509_V2
                 string result = WaitAxisHome(axisHomes[i]);
                 if (result != "Success")
                 {
-                    Debug.WriteLine($"{axisHomes[i]}回零失败!" + result);
+                    Debug.WriteLine($"{axisHomes[i].轴名称}回零失败!" + result);
                     bools[i] = false;
                 }
                 else bools[i] = true;
@@ -100,7 +178,7 @@ namespace H5509_V2
                     if (APPmaster.IsPause)
                     {
                         Motion.AxisStop(axisHome.核号, axisHome.轴号, 1);
-                        return $"核号:{axisHome.核号},轴号:{axisHome.轴号})回零被停止";
+                        return "回零被停止";
                     }
                     Thread.Sleep(1); //减少轴卡和CPU压力
                 }
@@ -119,6 +197,22 @@ namespace H5509_V2
                     else if (tHomeSts.error == HOME_ERROR_SET_CAPTURE_INDEX) return "设置Index捕获模式失败";
                     else if (tHomeSts.error == HOME_ERROR_NO_INDEX) return "未找到Index";
                     else return "回零异常";
+                }
+                else
+                {
+                    if (axisHome.轴名称 == "M22_入料手臂X轴" || axisHome.轴名称 == "M23_出料手臂X轴")
+                    {
+                        result = Motion.GNM601_GetDi(axisHome.核号, GTN.mc.MC_HOME, out string value);
+                        if (result == "Success")
+                        {
+                            string iovalue = value[axisHome.轴号 - 1].ToString();
+                            if (iovalue != "0")
+                            {
+                                return "未在原点";
+                            }
+                        }
+                        else return result;
+                    }
                 }
 
                 result = Motion.AxisZeroPos(axisHome.核号, axisHome.轴号);
@@ -203,35 +297,17 @@ namespace H5509_V2
             else return result;
             return "Success";
         }
+
         #endregion
 
         #region 动作
-
-        /// <summary>
-        /// 获取轴移动信息
-        /// </summary>
-        /// <param name="axisInfo"></param>
-        /// <returns></returns>
-        private AxisRunInfo GetAxisRunInfo(string axisInfo)
-        {
-            AxisRunInfo axisRun = new AxisRunInfo();
-            for (int i = 0; i < APPmaster.AxisRunInfoList.Count; i++)
-            {
-                if (axisInfo == APPmaster.AxisRunInfoList[i].轴名称)
-                {
-                    axisRun = APPmaster.AxisRunInfoList[i];
-                    break;
-                }
-            }
-            return axisRun;
-        }
 
         /// <summary>
         /// 等待单轴移动
         /// </summary>
         /// <param name="axisRun"></param>
         /// <returns></returns>
-        private string WaitAxisMove(AxisRun axisRun)
+        private string WaitAxisMove(AxisRun axisRun, int type = 0)
         {
             string result = Motion.CommonInitedValidate();
 
@@ -244,7 +320,7 @@ namespace H5509_V2
                 {
                     short error = GTN_GetSts(axisRun.核号, axisRun.轴号, out sts, 1, out uint pClock);
                     Motion.ErrorHandler($"GTN_GetSts({axisRun.核号}, {axisRun.轴号}, out {sts}, 1, out uint pClock)", error);
-                    if (APPmaster.IsPause)
+                    if (APPmaster.IsPause && type == 0)
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
                         while (true)
@@ -262,8 +338,8 @@ namespace H5509_V2
                 }
                 while ((sts & 0x400) != 0);
 
-                double encPos = Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号);
-                double prfPos = Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号);
+                Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号, out double encPos);
+                Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int prfPos);
                 double posvalue = Math.Abs(prfPos - encPos);
                 //Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
                 if (posvalue > 跟随误差)
@@ -338,8 +414,8 @@ namespace H5509_V2
 
                 for (int i = 0; i < axisRuns.Count; i++)
                 {
-                    double encPos = Motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号);
-                    double prfPos = Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号);
+                    Motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号, out double encPos);
+                    Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号, out int prfPos);
                     double posvalue = Math.Abs(prfPos - encPos);
                     //Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
                     if (posvalue > 跟随误差)
@@ -362,9 +438,10 @@ namespace H5509_V2
         /// <param name="axisName"></param>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public string AxisMove(string axisName, double pos)
+        public string AxisAbsoluteMove(string axisName, double pos)
         {
-            AxisRunInfo axisRunInfo = GetAxisRunInfo(axisName);
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
+            if (result != "Success") return result;
 
             AxisRun axisRun = new AxisRun()
             {
@@ -377,17 +454,48 @@ namespace H5509_V2
                 平滑时间 = axisRunInfo.平滑时间,
             };
 
-            string result = Motion.UniaxialAbsoluteMoveAbs(axisRun);
-            if (result == "Success")
-            {
-                Task<string> task = Task.Run(() =>
-                {
-                    return WaitAxisMove(axisRun);//等待回零完成
-                });
+            result = Motion.UniaxialAbsoluteMoveAbs(axisRun);
+            if (result != "Success") return result;
 
-                return task.Result;
-            }
-            else return result;
+            Task<string> task = Task.Run(() =>
+            {
+                return WaitAxisMove(axisRun);
+            });
+
+            return task.Result;
+        }
+
+        /// <summary>
+        /// 单轴绝对移动
+        /// </summary>
+        /// <param name="axisName"></param>
+        /// <param name="pos"></param>
+        /// <returns></returns>
+        public string AxisRelativeMove(string axisName, double pos)
+        {
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
+            if (result != "Success") return result;
+
+            AxisRun axisRun = new AxisRun()
+            {
+                核号 = axisRunInfo.核号,
+                轴号 = axisRunInfo.轴号,
+                目标位置 = Convert.ToInt32(Math.Round(pos / axisRunInfo.步长mm)),
+                目标速度 = axisRunInfo.运行速度,
+                目标加速度 = axisRunInfo.加速度,
+                目标减速度 = axisRunInfo.减速度,
+                平滑时间 = axisRunInfo.平滑时间,
+            };
+
+            result = Motion.UniaxialRelativeMove(axisRun);
+            if (result != "Success") return result;
+
+            Task<string> task = Task.Run(() =>
+            {
+                return WaitAxisMove(axisRun, 1);//等待回零完成
+            });
+
+            return task.Result;
         }
 
         /// <summary>
@@ -401,7 +509,9 @@ namespace H5509_V2
             List<AxisRun> axisRuns = new List<AxisRun>();
             for (int i = 0; i < axisNames.Length; i++)
             {
-                AxisRunInfo axisRunInfo = GetAxisRunInfo(axisNames[i]);
+                string result = GetAxisRunInfo(axisNames[i], out AxisRunInfo axisRunInfo);
+                if (result != "Success") return result;
+
                 axisRuns.Add(new AxisRun()
                 {
                     核号 = axisRunInfo.核号,
@@ -413,18 +523,55 @@ namespace H5509_V2
                     平滑时间 = axisRunInfo.平滑时间,
                 });
             }
-            string result = Motion.MultiaxisAbsoluteMoveAbs(axisRuns);
-            if (result == "Success")
+
+            string result2 = Motion.MultiaxisAbsoluteMoveAbs(axisRuns);
+            if (result2 != "Success") return result2;
+
+            Task<string> task = Task.Run(() =>
             {
-                Task<string> task = Task.Run(() =>
-                {
-                    return WaitAxisMove(axisRuns);//等待回零完成
-                });
+                return WaitAxisMove(axisRuns);//等待回零完成
+            });
 
-                return task.Result;
-            }
-            else return result;
+            return task.Result;
 
+        }
+
+        /// <summary>
+        /// Jog运动
+        /// </summary>
+        /// <param name="axisName"></param>
+        /// <param name="jogspeed"></param>
+        /// <returns></returns>
+        public string AxisJogMove(string axisName, double jogspeed)
+        {
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
+            if (result != "Success") return result;
+
+            AxisRun axisRun = new AxisRun()
+            {
+                核号 = axisRunInfo.核号,
+                轴号 = axisRunInfo.轴号,
+                目标速度 = jogspeed,
+                目标加速度 = axisRunInfo.加速度,
+                目标减速度 = axisRunInfo.减速度,
+                Jog平滑时间 = axisRunInfo.平滑时间,
+            };
+
+            return Motion.JogMove(axisRun);
+        }
+
+        /// <summary>
+        /// 轴停止移动
+        /// </summary>
+        /// <param name="axisName"></param>
+        /// <param name="isSmoothStop"></param>
+        /// <returns></returns>
+        public string AxisStopMove(string axisName, int isSmoothStop)
+        {
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
+            if (result != "Success") return result;
+
+            return Motion.AxisStop(axisRunInfo.核号, axisRunInfo.轴号, isSmoothStop);
         }
 
         #endregion
