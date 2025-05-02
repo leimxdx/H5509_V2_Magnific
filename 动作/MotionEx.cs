@@ -433,7 +433,7 @@ namespace H5509_V2
         }
 
         /// <summary>
-        /// 单轴移动
+        /// 单轴绝对移动
         /// </summary>
         /// <param name="axisName"></param>
         /// <param name="pos"></param>
@@ -466,7 +466,7 @@ namespace H5509_V2
         }
 
         /// <summary>
-        /// 单轴绝对移动
+        /// 单轴相对移动
         /// </summary>
         /// <param name="axisName"></param>
         /// <param name="pos"></param>

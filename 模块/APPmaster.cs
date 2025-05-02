@@ -61,6 +61,12 @@ namespace H5509_V2
         public static double Testx4pos = 1478.8;
         public static double[] TestXPoint; //Site点位坐标
 
+        public static int 空盘上顶最大值 = 414400 + 12700 + 3175;
+        public static int 空盘下降最小值 = 30000;
+
+        public static int 待测盘上顶最大值 = 414400 + 12700 + 3175;
+        public static int 待测盘下降最小值 = 30000;
+
         public static double[] LoaderXPoint; //Loader待测盘
         public static double[] LoaderYPoint; //Loader待测盘
         public static double[] HeatXPoint;  //加热盘X坐标
@@ -141,9 +147,12 @@ namespace H5509_V2
         public static bool[][] 飞梭后出料IC;
 
         public static short Empty上顶标记;
-        public static short Loader上顶标记;
+        public static short Load上顶标记;
         public static short Auto1上顶标记;
         public static short Auto2上顶标记;
+
+        public static int 抓盘手臂取Empty空盘标记;
+        public static int 抓盘手臂取Load空盘标记;
 
         public static bool[][] 放料IC目标值;
 
@@ -171,6 +180,18 @@ namespace H5509_V2
         public static ST_ProcessManage PS手动盘2上顶流程;
 
         public static ST_ProcessManage PS入料手臂放料流程;
+
+        public static ST_ProcessManage PS抓盘手臂取Empty空盘流程;
+
+        public static ST_ProcessManage PS抓盘手臂取Load空盘流程;
+
+        public static ST_ProcessManage PS抓盘手臂给Auto1空盘流程;
+
+        public static ST_ProcessManage PS抓盘手臂给Auto2空盘流程;
+
+        public static ST_ProcessManage PS抓盘手臂换Auto1空盘流程;
+
+        public static ST_ProcessManage PS抓盘手臂换Auto2空盘流程;
 
         public static ST_ProcessManage PS入飞梭移动流程;
 

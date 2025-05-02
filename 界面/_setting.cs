@@ -2127,5 +2127,15 @@ namespace H5509_V2
                 handler.Auto2顶盘流程();
             });
         }
+
+        private void button221_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => { handler.抓盘手臂取Empty盘(); });
+        }
+
+        private void button216_Click(object sender, EventArgs e)
+        {
+            Task.Run(() => { handler.抓盘手臂取Load空盘(); });
+        }
     }
 }

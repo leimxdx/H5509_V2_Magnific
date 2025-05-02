@@ -257,6 +257,15 @@
             this.button78 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.button219 = new System.Windows.Forms.Button();
+            this.button220 = new System.Windows.Forms.Button();
+            this.button218 = new System.Windows.Forms.Button();
+            this.button217 = new System.Windows.Forms.Button();
+            this.button216 = new System.Windows.Forms.Button();
+            this.button214 = new System.Windows.Forms.Button();
+            this.button215 = new System.Windows.Forms.Button();
+            this.button213 = new System.Windows.Forms.Button();
+            this.button212 = new System.Windows.Forms.Button();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.comboBox6 = new System.Windows.Forms.ComboBox();
             this.button210 = new System.Windows.Forms.Button();
@@ -1052,15 +1061,7 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button212 = new System.Windows.Forms.Button();
-            this.button213 = new System.Windows.Forms.Button();
-            this.button214 = new System.Windows.Forms.Button();
-            this.button215 = new System.Windows.Forms.Button();
-            this.button216 = new System.Windows.Forms.Button();
-            this.button217 = new System.Windows.Forms.Button();
-            this.button218 = new System.Windows.Forms.Button();
-            this.button219 = new System.Windows.Forms.Button();
-            this.button220 = new System.Windows.Forms.Button();
+            this.button221 = new System.Windows.Forms.Button();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.uiTabControl3.SuspendLayout();
@@ -3918,6 +3919,7 @@
             // tabPage11
             // 
             this.tabPage11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage11.Controls.Add(this.button221);
             this.tabPage11.Controls.Add(this.button219);
             this.tabPage11.Controls.Add(this.button220);
             this.tabPage11.Controls.Add(this.button218);
@@ -3944,6 +3946,101 @@
             this.tabPage11.Size = new System.Drawing.Size(1893, 904);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Text = "流程调试";
+            // 
+            // button219
+            // 
+            this.button219.Location = new System.Drawing.Point(1112, 634);
+            this.button219.Margin = new System.Windows.Forms.Padding(2);
+            this.button219.Name = "button219";
+            this.button219.Size = new System.Drawing.Size(153, 30);
+            this.button219.TabIndex = 401;
+            this.button219.Text = "Auto2换空盘";
+            this.button219.UseVisualStyleBackColor = true;
+            // 
+            // button220
+            // 
+            this.button220.Location = new System.Drawing.Point(1269, 634);
+            this.button220.Margin = new System.Windows.Forms.Padding(2);
+            this.button220.Name = "button220";
+            this.button220.Size = new System.Drawing.Size(153, 30);
+            this.button220.TabIndex = 400;
+            this.button220.Text = "Auto1换空盘";
+            this.button220.UseVisualStyleBackColor = true;
+            // 
+            // button218
+            // 
+            this.button218.Location = new System.Drawing.Point(1269, 599);
+            this.button218.Margin = new System.Windows.Forms.Padding(2);
+            this.button218.Name = "button218";
+            this.button218.Size = new System.Drawing.Size(153, 30);
+            this.button218.TabIndex = 399;
+            this.button218.Text = "Auto2放空盘";
+            this.button218.UseVisualStyleBackColor = true;
+            // 
+            // button217
+            // 
+            this.button217.Location = new System.Drawing.Point(1112, 599);
+            this.button217.Margin = new System.Windows.Forms.Padding(2);
+            this.button217.Name = "button217";
+            this.button217.Size = new System.Drawing.Size(153, 30);
+            this.button217.TabIndex = 398;
+            this.button217.Text = "Auto1放空盘";
+            this.button217.UseVisualStyleBackColor = true;
+            // 
+            // button216
+            // 
+            this.button216.Location = new System.Drawing.Point(955, 599);
+            this.button216.Margin = new System.Windows.Forms.Padding(2);
+            this.button216.Name = "button216";
+            this.button216.Size = new System.Drawing.Size(153, 30);
+            this.button216.TabIndex = 397;
+            this.button216.Text = "Load去空盘";
+            this.button216.UseVisualStyleBackColor = true;
+            this.button216.Click += new System.EventHandler(this.button216_Click);
+            // 
+            // button214
+            // 
+            this.button214.Location = new System.Drawing.Point(1269, 564);
+            this.button214.Margin = new System.Windows.Forms.Padding(2);
+            this.button214.Name = "button214";
+            this.button214.Size = new System.Drawing.Size(153, 30);
+            this.button214.TabIndex = 396;
+            this.button214.Text = "Auto2顶盘";
+            this.button214.UseVisualStyleBackColor = true;
+            this.button214.Click += new System.EventHandler(this.button214_Click);
+            // 
+            // button215
+            // 
+            this.button215.Location = new System.Drawing.Point(1112, 564);
+            this.button215.Margin = new System.Windows.Forms.Padding(2);
+            this.button215.Name = "button215";
+            this.button215.Size = new System.Drawing.Size(153, 30);
+            this.button215.TabIndex = 395;
+            this.button215.Text = "Auto1顶盘";
+            this.button215.UseVisualStyleBackColor = true;
+            this.button215.Click += new System.EventHandler(this.button215_Click);
+            // 
+            // button213
+            // 
+            this.button213.Location = new System.Drawing.Point(955, 564);
+            this.button213.Margin = new System.Windows.Forms.Padding(2);
+            this.button213.Name = "button213";
+            this.button213.Size = new System.Drawing.Size(153, 30);
+            this.button213.TabIndex = 394;
+            this.button213.Text = "Load顶盘";
+            this.button213.UseVisualStyleBackColor = true;
+            this.button213.Click += new System.EventHandler(this.button213_Click);
+            // 
+            // button212
+            // 
+            this.button212.Location = new System.Drawing.Point(798, 564);
+            this.button212.Margin = new System.Windows.Forms.Padding(2);
+            this.button212.Name = "button212";
+            this.button212.Size = new System.Drawing.Size(153, 30);
+            this.button212.TabIndex = 393;
+            this.button212.Text = "Empty顶盘";
+            this.button212.UseVisualStyleBackColor = true;
+            this.button212.Click += new System.EventHandler(this.button212_Click);
             // 
             // comboBox7
             // 
@@ -10058,7 +10155,7 @@
             this.tabPage19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage19.Location = new System.Drawing.Point(0, 40);
             this.tabPage19.Name = "tabPage19";
-            this.tabPage19.Size = new System.Drawing.Size(760, 864);
+            this.tabPage19.Size = new System.Drawing.Size(200, 60);
             this.tabPage19.TabIndex = 4;
             this.tabPage19.Text = "备用";
             // 
@@ -10421,7 +10518,7 @@
             this.tabPage12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage12.Location = new System.Drawing.Point(0, 40);
             this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Size = new System.Drawing.Size(200, 60);
+            this.tabPage12.Size = new System.Drawing.Size(1893, 904);
             this.tabPage12.TabIndex = 2;
             this.tabPage12.Text = "备用";
             // 
@@ -11794,7 +11891,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage8.Size = new System.Drawing.Size(200, 60);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "出料手臂";
             // 
@@ -13993,7 +14090,7 @@
             this.tabPage17.Controls.Add(this.button74);
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(200, 60);
+            this.tabPage17.Size = new System.Drawing.Size(1893, 904);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
             // 
@@ -14044,6 +14141,7 @@
             // 
             // uiDoubleUpDown55
             // 
+            this.uiDoubleUpDown55.DecimalPlaces = 3;
             this.uiDoubleUpDown55.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown55.Location = new System.Drawing.Point(233, 19);
             this.uiDoubleUpDown55.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -14054,8 +14152,8 @@
             this.uiDoubleUpDown55.ShowText = false;
             this.uiDoubleUpDown55.Size = new System.Drawing.Size(116, 29);
             this.uiDoubleUpDown55.TabIndex = 286;
-            this.uiDoubleUpDown55.Text = "uiDoubleUpDown55";
             this.uiDoubleUpDown55.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown55.Value = 2.66D;
             // 
             // label96
             // 
@@ -14252,99 +14350,16 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "档案";
             // 
-            // button212
+            // button221
             // 
-            this.button212.Location = new System.Drawing.Point(798, 564);
-            this.button212.Margin = new System.Windows.Forms.Padding(2);
-            this.button212.Name = "button212";
-            this.button212.Size = new System.Drawing.Size(153, 30);
-            this.button212.TabIndex = 393;
-            this.button212.Text = "Empty顶盘";
-            this.button212.UseVisualStyleBackColor = true;
-            this.button212.Click += new System.EventHandler(this.button212_Click);
-            // 
-            // button213
-            // 
-            this.button213.Location = new System.Drawing.Point(955, 564);
-            this.button213.Margin = new System.Windows.Forms.Padding(2);
-            this.button213.Name = "button213";
-            this.button213.Size = new System.Drawing.Size(153, 30);
-            this.button213.TabIndex = 394;
-            this.button213.Text = "Load顶盘";
-            this.button213.UseVisualStyleBackColor = true;
-            this.button213.Click += new System.EventHandler(this.button213_Click);
-            // 
-            // button214
-            // 
-            this.button214.Location = new System.Drawing.Point(1269, 564);
-            this.button214.Margin = new System.Windows.Forms.Padding(2);
-            this.button214.Name = "button214";
-            this.button214.Size = new System.Drawing.Size(153, 30);
-            this.button214.TabIndex = 396;
-            this.button214.Text = "Auto2顶盘";
-            this.button214.UseVisualStyleBackColor = true;
-            this.button214.Click += new System.EventHandler(this.button214_Click);
-            // 
-            // button215
-            // 
-            this.button215.Location = new System.Drawing.Point(1112, 564);
-            this.button215.Margin = new System.Windows.Forms.Padding(2);
-            this.button215.Name = "button215";
-            this.button215.Size = new System.Drawing.Size(153, 30);
-            this.button215.TabIndex = 395;
-            this.button215.Text = "Auto1顶盘";
-            this.button215.UseVisualStyleBackColor = true;
-            this.button215.Click += new System.EventHandler(this.button215_Click);
-            // 
-            // button216
-            // 
-            this.button216.Location = new System.Drawing.Point(955, 599);
-            this.button216.Margin = new System.Windows.Forms.Padding(2);
-            this.button216.Name = "button216";
-            this.button216.Size = new System.Drawing.Size(153, 30);
-            this.button216.TabIndex = 397;
-            this.button216.Text = "Load去空盘";
-            this.button216.UseVisualStyleBackColor = true;
-            // 
-            // button217
-            // 
-            this.button217.Location = new System.Drawing.Point(1112, 599);
-            this.button217.Margin = new System.Windows.Forms.Padding(2);
-            this.button217.Name = "button217";
-            this.button217.Size = new System.Drawing.Size(153, 30);
-            this.button217.TabIndex = 398;
-            this.button217.Text = "Auto1放空盘";
-            this.button217.UseVisualStyleBackColor = true;
-            // 
-            // button218
-            // 
-            this.button218.Location = new System.Drawing.Point(1269, 599);
-            this.button218.Margin = new System.Windows.Forms.Padding(2);
-            this.button218.Name = "button218";
-            this.button218.Size = new System.Drawing.Size(153, 30);
-            this.button218.TabIndex = 399;
-            this.button218.Text = "Auto2放空盘";
-            this.button218.UseVisualStyleBackColor = true;
-            // 
-            // button219
-            // 
-            this.button219.Location = new System.Drawing.Point(1112, 634);
-            this.button219.Margin = new System.Windows.Forms.Padding(2);
-            this.button219.Name = "button219";
-            this.button219.Size = new System.Drawing.Size(153, 30);
-            this.button219.TabIndex = 401;
-            this.button219.Text = "Auto2换空盘";
-            this.button219.UseVisualStyleBackColor = true;
-            // 
-            // button220
-            // 
-            this.button220.Location = new System.Drawing.Point(1269, 634);
-            this.button220.Margin = new System.Windows.Forms.Padding(2);
-            this.button220.Name = "button220";
-            this.button220.Size = new System.Drawing.Size(153, 30);
-            this.button220.TabIndex = 400;
-            this.button220.Text = "Auto1换空盘";
-            this.button220.UseVisualStyleBackColor = true;
+            this.button221.Location = new System.Drawing.Point(798, 599);
+            this.button221.Margin = new System.Windows.Forms.Padding(2);
+            this.button221.Name = "button221";
+            this.button221.Size = new System.Drawing.Size(153, 30);
+            this.button221.TabIndex = 402;
+            this.button221.Text = "调试取盘";
+            this.button221.UseVisualStyleBackColor = true;
+            this.button221.Click += new System.EventHandler(this.button221_Click);
             // 
             // _setting
             // 
@@ -15479,5 +15494,6 @@
         public System.Windows.Forms.Button button220;
         public System.Windows.Forms.Button button218;
         public System.Windows.Forms.Button button217;
+        public System.Windows.Forms.Button button221;
     }
 }
