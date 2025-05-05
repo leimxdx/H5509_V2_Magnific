@@ -257,6 +257,7 @@
             this.button78 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.button221 = new System.Windows.Forms.Button();
             this.button219 = new System.Windows.Forms.Button();
             this.button220 = new System.Windows.Forms.Button();
             this.button218 = new System.Windows.Forms.Button();
@@ -757,224 +758,253 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.uiTabControl2 = new Sunny.UI.UITabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.uiDoubleUpDown109 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown110 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown111 = new Sunny.UI.UIDoubleUpDown();
+            this.uiButton9 = new Sunny.UI.UIButton();
+            this.uiButton10 = new Sunny.UI.UIButton();
+            this.uiButton7 = new Sunny.UI.UIButton();
+            this.uiButton8 = new Sunny.UI.UIButton();
+            this.uiTitlePanel6 = new Sunny.UI.UITitlePanel();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown1 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown2 = new Sunny.UI.UIDoubleUpDown();
+            this.label66 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown3 = new Sunny.UI.UIDoubleUpDown();
+            this.label70 = new System.Windows.Forms.Label();
+            this.label76 = new System.Windows.Forms.Label();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown4 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown5 = new Sunny.UI.UIDoubleUpDown();
+            this.label317 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown6 = new Sunny.UI.UIDoubleUpDown();
+            this.label318 = new System.Windows.Forms.Label();
+            this.label319 = new System.Windows.Forms.Label();
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown7 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown8 = new Sunny.UI.UIDoubleUpDown();
+            this.label320 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown9 = new Sunny.UI.UIDoubleUpDown();
+            this.label321 = new System.Windows.Forms.Label();
+            this.label322 = new System.Windows.Forms.Label();
+            this.groupBox14 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown10 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown11 = new Sunny.UI.UIDoubleUpDown();
+            this.label323 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown12 = new Sunny.UI.UIDoubleUpDown();
+            this.label324 = new System.Windows.Forms.Label();
+            this.label325 = new System.Windows.Forms.Label();
+            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown13 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown14 = new Sunny.UI.UIDoubleUpDown();
+            this.label326 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown15 = new Sunny.UI.UIDoubleUpDown();
+            this.label327 = new System.Windows.Forms.Label();
+            this.label328 = new System.Windows.Forms.Label();
+            this.groupBox22 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown79 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown80 = new Sunny.UI.UIDoubleUpDown();
+            this.label329 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown81 = new Sunny.UI.UIDoubleUpDown();
+            this.label330 = new System.Windows.Forms.Label();
+            this.label331 = new System.Windows.Forms.Label();
+            this.groupBox23 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown115 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown116 = new Sunny.UI.UIDoubleUpDown();
+            this.label375 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown117 = new Sunny.UI.UIDoubleUpDown();
+            this.label376 = new System.Windows.Forms.Label();
+            this.label377 = new System.Windows.Forms.Label();
+            this.uiTitlePanel4 = new Sunny.UI.UITitlePanel();
+            this.label335 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown19 = new Sunny.UI.UIDoubleUpDown();
+            this.label332 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown16 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown17 = new Sunny.UI.UIDoubleUpDown();
+            this.label333 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown18 = new Sunny.UI.UIDoubleUpDown();
+            this.label334 = new System.Windows.Forms.Label();
+            this.label57 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown112 = new Sunny.UI.UIDoubleUpDown();
+            this.label43 = new System.Windows.Forms.Label();
+            this.button32 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown113 = new Sunny.UI.UIDoubleUpDown();
+            this.label56 = new System.Windows.Forms.Label();
+            this.button20 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown114 = new Sunny.UI.UIDoubleUpDown();
+            this.label44 = new System.Windows.Forms.Label();
+            this.label372 = new System.Windows.Forms.Label();
+            this.button31 = new System.Windows.Forms.Button();
+            this.label55 = new System.Windows.Forms.Label();
+            this.button222 = new System.Windows.Forms.Button();
+            this.label45 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown99 = new Sunny.UI.UIDoubleUpDown();
+            this.label373 = new System.Windows.Forms.Label();
+            this.button30 = new System.Windows.Forms.Button();
+            this.label54 = new System.Windows.Forms.Label();
+            this.button223 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
+            this.label374 = new System.Windows.Forms.Label();
+            this.button18 = new System.Windows.Forms.Button();
             this.uiDoubleUpDown106 = new Sunny.UI.UIDoubleUpDown();
+            this.label51 = new System.Windows.Forms.Label();
+            this.button224 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
             this.uiDoubleUpDown103 = new Sunny.UI.UIDoubleUpDown();
+            this.label53 = new System.Windows.Forms.Label();
             this.uiDoubleUpDown107 = new Sunny.UI.UIDoubleUpDown();
+            this.button27 = new System.Windows.Forms.Button();
             this.uiDoubleUpDown100 = new Sunny.UI.UIDoubleUpDown();
+            this.label52 = new System.Windows.Forms.Label();
             this.uiDoubleUpDown108 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown104 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown98 = new Sunny.UI.UIDoubleUpDown();
+            this.label46 = new System.Windows.Forms.Label();
             this.uiDoubleUpDown105 = new Sunny.UI.UIDoubleUpDown();
+            this.label47 = new System.Windows.Forms.Label();
             this.uiDoubleUpDown101 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown97 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown102 = new Sunny.UI.UIDoubleUpDown();
-            this.groupBox28 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown19 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown20 = new Sunny.UI.UIDoubleUpDown();
-            this.label335 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown21 = new Sunny.UI.UIDoubleUpDown();
-            this.label336 = new System.Windows.Forms.Label();
-            this.label337 = new System.Windows.Forms.Label();
-            this.label57 = new System.Windows.Forms.Label();
-            this.button25 = new System.Windows.Forms.Button();
-            this.groupBox25 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown10 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown11 = new Sunny.UI.UIDoubleUpDown();
-            this.label325 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown12 = new Sunny.UI.UIDoubleUpDown();
-            this.label326 = new System.Windows.Forms.Label();
-            this.label327 = new System.Windows.Forms.Label();
-            this.groupBox24 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown7 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown8 = new Sunny.UI.UIDoubleUpDown();
-            this.label322 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown9 = new Sunny.UI.UIDoubleUpDown();
-            this.label323 = new System.Windows.Forms.Label();
-            this.label324 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.groupBox26 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown13 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown14 = new Sunny.UI.UIDoubleUpDown();
-            this.label328 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown15 = new Sunny.UI.UIDoubleUpDown();
-            this.label329 = new System.Windows.Forms.Label();
-            this.label330 = new System.Windows.Forms.Label();
-            this.label46 = new System.Windows.Forms.Label();
-            this.groupBox23 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown4 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown5 = new Sunny.UI.UIDoubleUpDown();
-            this.label319 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown6 = new Sunny.UI.UIDoubleUpDown();
-            this.label320 = new System.Windows.Forms.Label();
-            this.label321 = new System.Windows.Forms.Label();
-            this.groupBox27 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown16 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown17 = new Sunny.UI.UIDoubleUpDown();
-            this.label332 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown18 = new Sunny.UI.UIDoubleUpDown();
-            this.label333 = new System.Windows.Forms.Label();
-            this.label334 = new System.Windows.Forms.Label();
-            this.button26 = new System.Windows.Forms.Button();
-            this.groupBox22 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown3 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown2 = new Sunny.UI.UIDoubleUpDown();
-            this.label318 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown1 = new Sunny.UI.UIDoubleUpDown();
-            this.label317 = new System.Windows.Forms.Label();
-            this.label331 = new System.Windows.Forms.Label();
-            this.button24 = new System.Windows.Forms.Button();
-            this.label52 = new System.Windows.Forms.Label();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.label53 = new System.Windows.Forms.Label();
-            this.button28 = new System.Windows.Forms.Button();
-            this.label51 = new System.Windows.Forms.Label();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button18 = new System.Windows.Forms.Button();
-            this.button19 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
-            this.label54 = new System.Windows.Forms.Label();
-            this.button21 = new System.Windows.Forms.Button();
-            this.label50 = new System.Windows.Forms.Label();
-            this.button30 = new System.Windows.Forms.Button();
-            this.uiDoubleUpDown99 = new Sunny.UI.UIDoubleUpDown();
-            this.label45 = new System.Windows.Forms.Label();
-            this.label55 = new System.Windows.Forms.Label();
-            this.label49 = new System.Windows.Forms.Label();
-            this.button31 = new System.Windows.Forms.Button();
-            this.label44 = new System.Windows.Forms.Label();
-            this.button20 = new System.Windows.Forms.Button();
-            this.label56 = new System.Windows.Forms.Label();
-            this.button32 = new System.Windows.Forms.Button();
-            this.label48 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
             this.tabPage8 = new System.Windows.Forms.TabPage();
-            this.uiDoubleUpDown94 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown91 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown95 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown88 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown96 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown92 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown85 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown93 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown89 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown82 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown90 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown86 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown79 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown87 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown83 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown76 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown84 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown80 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown73 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown81 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown77 = new Sunny.UI.UIDoubleUpDown();
+            this.uiButton5 = new Sunny.UI.UIButton();
+            this.uiButton6 = new Sunny.UI.UIButton();
+            this.uiButton4 = new Sunny.UI.UIButton();
+            this.uiButton3 = new Sunny.UI.UIButton();
+            this.uiTitlePanel7 = new Sunny.UI.UITitlePanel();
+            this.groupBox24 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown118 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown119 = new Sunny.UI.UIDoubleUpDown();
+            this.label378 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown120 = new Sunny.UI.UIDoubleUpDown();
+            this.label379 = new System.Windows.Forms.Label();
+            this.label380 = new System.Windows.Forms.Label();
+            this.groupBox25 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown127 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown128 = new Sunny.UI.UIDoubleUpDown();
+            this.label387 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown129 = new Sunny.UI.UIDoubleUpDown();
+            this.label388 = new System.Windows.Forms.Label();
+            this.label389 = new System.Windows.Forms.Label();
+            this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown130 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown131 = new Sunny.UI.UIDoubleUpDown();
+            this.label390 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown132 = new Sunny.UI.UIDoubleUpDown();
+            this.label391 = new System.Windows.Forms.Label();
+            this.label392 = new System.Windows.Forms.Label();
+            this.groupBox27 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown133 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown134 = new Sunny.UI.UIDoubleUpDown();
+            this.label393 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown135 = new Sunny.UI.UIDoubleUpDown();
+            this.label394 = new System.Windows.Forms.Label();
+            this.label395 = new System.Windows.Forms.Label();
+            this.groupBox28 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown136 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown137 = new Sunny.UI.UIDoubleUpDown();
+            this.label396 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown138 = new Sunny.UI.UIDoubleUpDown();
+            this.label397 = new System.Windows.Forms.Label();
+            this.label398 = new System.Windows.Forms.Label();
+            this.groupBox39 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown139 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown140 = new Sunny.UI.UIDoubleUpDown();
+            this.label399 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown141 = new Sunny.UI.UIDoubleUpDown();
+            this.label400 = new System.Windows.Forms.Label();
+            this.label401 = new System.Windows.Forms.Label();
+            this.groupBox40 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown142 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown143 = new Sunny.UI.UIDoubleUpDown();
+            this.label402 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown144 = new Sunny.UI.UIDoubleUpDown();
+            this.label403 = new System.Windows.Forms.Label();
+            this.label404 = new System.Windows.Forms.Label();
+            this.uiTitlePanel14 = new Sunny.UI.UITitlePanel();
             this.label58 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown78 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown74 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown75 = new Sunny.UI.UIDoubleUpDown();
-            this.button33 = new System.Windows.Forms.Button();
-            this.button36 = new System.Windows.Forms.Button();
-            this.groupBox29 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown22 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown23 = new Sunny.UI.UIDoubleUpDown();
-            this.label338 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown24 = new Sunny.UI.UIDoubleUpDown();
-            this.label339 = new System.Windows.Forms.Label();
-            this.label340 = new System.Windows.Forms.Label();
-            this.button37 = new System.Windows.Forms.Button();
-            this.button38 = new System.Windows.Forms.Button();
-            this.button34 = new System.Windows.Forms.Button();
-            this.button40 = new System.Windows.Forms.Button();
-            this.groupBox30 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown25 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown26 = new Sunny.UI.UIDoubleUpDown();
-            this.label341 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown27 = new Sunny.UI.UIDoubleUpDown();
-            this.label342 = new System.Windows.Forms.Label();
-            this.label343 = new System.Windows.Forms.Label();
-            this.groupBox35 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown40 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown41 = new Sunny.UI.UIDoubleUpDown();
-            this.label356 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown42 = new Sunny.UI.UIDoubleUpDown();
-            this.label357 = new System.Windows.Forms.Label();
-            this.label358 = new System.Windows.Forms.Label();
-            this.button35 = new System.Windows.Forms.Button();
-            this.button41 = new System.Windows.Forms.Button();
-            this.groupBox31 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown28 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown29 = new Sunny.UI.UIDoubleUpDown();
-            this.label344 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown30 = new Sunny.UI.UIDoubleUpDown();
-            this.label345 = new System.Windows.Forms.Label();
-            this.label346 = new System.Windows.Forms.Label();
-            this.groupBox34 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown37 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown38 = new Sunny.UI.UIDoubleUpDown();
-            this.label353 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown39 = new Sunny.UI.UIDoubleUpDown();
-            this.label354 = new System.Windows.Forms.Label();
-            this.label355 = new System.Windows.Forms.Label();
-            this.button42 = new System.Windows.Forms.Button();
-            this.button47 = new System.Windows.Forms.Button();
-            this.button48 = new System.Windows.Forms.Button();
-            this.groupBox32 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown31 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown32 = new Sunny.UI.UIDoubleUpDown();
-            this.label347 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown33 = new Sunny.UI.UIDoubleUpDown();
-            this.label348 = new System.Windows.Forms.Label();
-            this.label349 = new System.Windows.Forms.Label();
-            this.button50 = new System.Windows.Forms.Button();
-            this.groupBox33 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown34 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown35 = new Sunny.UI.UIDoubleUpDown();
-            this.label350 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown36 = new Sunny.UI.UIDoubleUpDown();
-            this.label351 = new System.Windows.Forms.Label();
-            this.label352 = new System.Windows.Forms.Label();
-            this.label66 = new System.Windows.Forms.Label();
-            this.label59 = new System.Windows.Forms.Label();
-            this.button46 = new System.Windows.Forms.Button();
-            this.label67 = new System.Windows.Forms.Label();
-            this.label64 = new System.Windows.Forms.Label();
-            this.label63 = new System.Windows.Forms.Label();
-            this.label68 = new System.Windows.Forms.Label();
-            this.button56 = new System.Windows.Forms.Button();
-            this.label70 = new System.Windows.Forms.Label();
-            this.label62 = new System.Windows.Forms.Label();
-            this.label72 = new System.Windows.Forms.Label();
-            this.button49 = new System.Windows.Forms.Button();
-            this.label74 = new System.Windows.Forms.Label();
-            this.label75 = new System.Windows.Forms.Label();
-            this.label65 = new System.Windows.Forms.Label();
-            this.label76 = new System.Windows.Forms.Label();
-            this.button51 = new System.Windows.Forms.Button();
-            this.button45 = new System.Windows.Forms.Button();
-            this.label60 = new System.Windows.Forms.Label();
-            this.button53 = new System.Windows.Forms.Button();
-            this.button44 = new System.Windows.Forms.Button();
-            this.button43 = new System.Windows.Forms.Button();
-            this.label61 = new System.Windows.Forms.Label();
-            this.button54 = new System.Windows.Forms.Button();
-            this.label78 = new System.Windows.Forms.Label();
-            this.label81 = new System.Windows.Forms.Label();
-            this.button55 = new System.Windows.Forms.Button();
-            this.label80 = new System.Windows.Forms.Label();
-            this.label79 = new System.Windows.Forms.Label();
-            this.label69 = new System.Windows.Forms.Label();
-            this.label77 = new System.Windows.Forms.Label();
-            this.button58 = new System.Windows.Forms.Button();
-            this.label71 = new System.Windows.Forms.Label();
-            this.button57 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown126 = new Sunny.UI.UIDoubleUpDown();
             this.label73 = new System.Windows.Forms.Label();
+            this.button22 = new System.Windows.Forms.Button();
+            this.button57 = new System.Windows.Forms.Button();
+            this.label386 = new System.Windows.Forms.Label();
+            this.label71 = new System.Windows.Forms.Label();
+            this.label336 = new System.Windows.Forms.Label();
+            this.button58 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown20 = new Sunny.UI.UIDoubleUpDown();
+            this.label77 = new System.Windows.Forms.Label();
+            this.label337 = new System.Windows.Forms.Label();
+            this.label69 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown21 = new Sunny.UI.UIDoubleUpDown();
+            this.label79 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown121 = new Sunny.UI.UIDoubleUpDown();
+            this.label80 = new System.Windows.Forms.Label();
+            this.label381 = new System.Windows.Forms.Label();
+            this.button55 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown122 = new Sunny.UI.UIDoubleUpDown();
+            this.label81 = new System.Windows.Forms.Label();
+            this.label382 = new System.Windows.Forms.Label();
+            this.label78 = new System.Windows.Forms.Label();
+            this.label383 = new System.Windows.Forms.Label();
+            this.button54 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown123 = new Sunny.UI.UIDoubleUpDown();
+            this.label61 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown124 = new Sunny.UI.UIDoubleUpDown();
+            this.button43 = new System.Windows.Forms.Button();
+            this.label384 = new System.Windows.Forms.Label();
+            this.button44 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown125 = new Sunny.UI.UIDoubleUpDown();
+            this.button53 = new System.Windows.Forms.Button();
+            this.label385 = new System.Windows.Forms.Label();
+            this.label60 = new System.Windows.Forms.Label();
+            this.button21 = new System.Windows.Forms.Button();
+            this.button45 = new System.Windows.Forms.Button();
+            this.label72 = new System.Windows.Forms.Label();
+            this.button51 = new System.Windows.Forms.Button();
+            this.label74 = new System.Windows.Forms.Label();
+            this.label65 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown94 = new Sunny.UI.UIDoubleUpDown();
+            this.button49 = new System.Windows.Forms.Button();
+            this.label75 = new System.Windows.Forms.Label();
+            this.label62 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown91 = new Sunny.UI.UIDoubleUpDown();
+            this.button56 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown95 = new Sunny.UI.UIDoubleUpDown();
+            this.label68 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown88 = new Sunny.UI.UIDoubleUpDown();
+            this.label63 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown96 = new Sunny.UI.UIDoubleUpDown();
+            this.label64 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown92 = new Sunny.UI.UIDoubleUpDown();
+            this.label67 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown85 = new Sunny.UI.UIDoubleUpDown();
+            this.button46 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown93 = new Sunny.UI.UIDoubleUpDown();
+            this.label59 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown89 = new Sunny.UI.UIDoubleUpDown();
+            this.button48 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown82 = new Sunny.UI.UIDoubleUpDown();
+            this.button42 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown90 = new Sunny.UI.UIDoubleUpDown();
+            this.button40 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown86 = new Sunny.UI.UIDoubleUpDown();
+            this.button34 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown87 = new Sunny.UI.UIDoubleUpDown();
+            this.button38 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown83 = new Sunny.UI.UIDoubleUpDown();
+            this.button37 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown76 = new Sunny.UI.UIDoubleUpDown();
+            this.button36 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown84 = new Sunny.UI.UIDoubleUpDown();
+            this.button33 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown73 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown75 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown77 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown74 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown78 = new Sunny.UI.UIDoubleUpDown();
             this.tabPage9 = new System.Windows.Forms.TabPage();
-            this.uiDoubleUpDown71 = new Sunny.UI.UIDoubleUpDown();
+            this.uiButton13 = new Sunny.UI.UIButton();
+            this.uiButton14 = new Sunny.UI.UIButton();
+            this.uiButton11 = new Sunny.UI.UIButton();
+            this.uiButton12 = new Sunny.UI.UIButton();
+            this.uiTitlePanel9 = new Sunny.UI.UITitlePanel();
             this.groupBox36 = new System.Windows.Forms.GroupBox();
             this.uiDoubleUpDown43 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown44 = new Sunny.UI.UIDoubleUpDown();
@@ -982,7 +1012,6 @@
             this.uiDoubleUpDown45 = new Sunny.UI.UIDoubleUpDown();
             this.label360 = new System.Windows.Forms.Label();
             this.label361 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown69 = new Sunny.UI.UIDoubleUpDown();
             this.groupBox37 = new System.Windows.Forms.GroupBox();
             this.uiDoubleUpDown46 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown47 = new Sunny.UI.UIDoubleUpDown();
@@ -990,44 +1019,57 @@
             this.uiDoubleUpDown48 = new Sunny.UI.UIDoubleUpDown();
             this.label363 = new System.Windows.Forms.Label();
             this.label364 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown72 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown67 = new Sunny.UI.UIDoubleUpDown();
+            this.uiTitlePanel8 = new Sunny.UI.UITitlePanel();
             this.label82 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown27 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown28 = new Sunny.UI.UIDoubleUpDown();
+            this.label85 = new System.Windows.Forms.Label();
+            this.label338 = new System.Windows.Forms.Label();
+            this.button63 = new System.Windows.Forms.Button();
+            this.label340 = new System.Windows.Forms.Label();
+            this.button64 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown25 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown26 = new Sunny.UI.UIDoubleUpDown();
+            this.button62 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown23 = new Sunny.UI.UIDoubleUpDown();
+            this.label88 = new System.Windows.Forms.Label();
+            this.label339 = new System.Windows.Forms.Label();
+            this.button61 = new System.Windows.Forms.Button();
+            this.label83 = new System.Windows.Forms.Label();
+            this.label89 = new System.Windows.Forms.Label();
+            this.label84 = new System.Windows.Forms.Label();
+            this.button60 = new System.Windows.Forms.Button();
+            this.label86 = new System.Windows.Forms.Label();
+            this.button65 = new System.Windows.Forms.Button();
+            this.label87 = new System.Windows.Forms.Label();
+            this.button66 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown71 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown62 = new Sunny.UI.UIDoubleUpDown();
+            this.button67 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown69 = new Sunny.UI.UIDoubleUpDown();
+            this.button59 = new System.Windows.Forms.Button();
+            this.button68 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown72 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown64 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown67 = new Sunny.UI.UIDoubleUpDown();
+            this.button69 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown61 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown70 = new Sunny.UI.UIDoubleUpDown();
+            this.label90 = new System.Windows.Forms.Label();
             this.label93 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown66 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown65 = new Sunny.UI.UIDoubleUpDown();
+            this.label91 = new System.Windows.Forms.Label();
             this.button70 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown63 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown68 = new Sunny.UI.UIDoubleUpDown();
             this.label92 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown63 = new Sunny.UI.UIDoubleUpDown();
-            this.label91 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown66 = new Sunny.UI.UIDoubleUpDown();
-            this.label90 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown61 = new Sunny.UI.UIDoubleUpDown();
-            this.button69 = new System.Windows.Forms.Button();
-            this.uiDoubleUpDown64 = new Sunny.UI.UIDoubleUpDown();
-            this.button68 = new System.Windows.Forms.Button();
-            this.button59 = new System.Windows.Forms.Button();
-            this.button67 = new System.Windows.Forms.Button();
-            this.uiDoubleUpDown62 = new Sunny.UI.UIDoubleUpDown();
-            this.button66 = new System.Windows.Forms.Button();
-            this.button65 = new System.Windows.Forms.Button();
-            this.button60 = new System.Windows.Forms.Button();
-            this.label89 = new System.Windows.Forms.Label();
-            this.button61 = new System.Windows.Forms.Button();
-            this.label88 = new System.Windows.Forms.Label();
-            this.button62 = new System.Windows.Forms.Button();
-            this.button64 = new System.Windows.Forms.Button();
-            this.label83 = new System.Windows.Forms.Label();
-            this.label87 = new System.Windows.Forms.Label();
-            this.button63 = new System.Windows.Forms.Button();
-            this.label86 = new System.Windows.Forms.Label();
-            this.label84 = new System.Windows.Forms.Label();
-            this.label85 = new System.Windows.Forms.Label();
             this.tabPage16 = new System.Windows.Forms.TabPage();
-            this.button71 = new System.Windows.Forms.Button();
-            this.button72 = new System.Windows.Forms.Button();
-            this.uiDoubleUpDown56 = new Sunny.UI.UIDoubleUpDown();
+            this.uiButton17 = new Sunny.UI.UIButton();
+            this.uiButton18 = new Sunny.UI.UIButton();
+            this.uiButton15 = new Sunny.UI.UIButton();
+            this.uiButton16 = new Sunny.UI.UIButton();
+            this.uiTitlePanel10 = new Sunny.UI.UITitlePanel();
             this.groupBox38 = new System.Windows.Forms.GroupBox();
             this.uiDoubleUpDown49 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown50 = new Sunny.UI.UIDoubleUpDown();
@@ -1035,33 +1077,42 @@
             this.uiDoubleUpDown51 = new Sunny.UI.UIDoubleUpDown();
             this.label366 = new System.Windows.Forms.Label();
             this.label367 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown57 = new Sunny.UI.UIDoubleUpDown();
+            this.uiTitlePanel11 = new Sunny.UI.UITitlePanel();
             this.label94 = new System.Windows.Forms.Label();
             this.label95 = new System.Windows.Forms.Label();
+            this.button71 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown57 = new Sunny.UI.UIDoubleUpDown();
+            this.button72 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown56 = new Sunny.UI.UIDoubleUpDown();
             this.tabPage17 = new System.Windows.Forms.TabPage();
-            this.uiDoubleUpDown59 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown58 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown60 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown55 = new Sunny.UI.UIDoubleUpDown();
+            this.uiButton21 = new Sunny.UI.UIButton();
+            this.uiButton22 = new Sunny.UI.UIButton();
+            this.uiButton19 = new Sunny.UI.UIButton();
+            this.uiButton20 = new Sunny.UI.UIButton();
+            this.uiTitlePanel12 = new Sunny.UI.UITitlePanel();
+            this.groupBox29 = new System.Windows.Forms.GroupBox();
+            this.uiDoubleUpDown22 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown24 = new Sunny.UI.UIDoubleUpDown();
+            this.label341 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown29 = new Sunny.UI.UIDoubleUpDown();
+            this.label342 = new System.Windows.Forms.Label();
+            this.label343 = new System.Windows.Forms.Label();
+            this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
             this.label96 = new System.Windows.Forms.Label();
-            this.label97 = new System.Windows.Forms.Label();
-            this.groupBox39 = new System.Windows.Forms.GroupBox();
-            this.uiDoubleUpDown52 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown53 = new Sunny.UI.UIDoubleUpDown();
-            this.label368 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown54 = new Sunny.UI.UIDoubleUpDown();
-            this.label369 = new System.Windows.Forms.Label();
-            this.label370 = new System.Windows.Forms.Label();
-            this.label98 = new System.Windows.Forms.Label();
-            this.button73 = new System.Windows.Forms.Button();
-            this.button76 = new System.Windows.Forms.Button();
-            this.label99 = new System.Windows.Forms.Label();
-            this.button75 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown59 = new Sunny.UI.UIDoubleUpDown();
             this.button74 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown58 = new Sunny.UI.UIDoubleUpDown();
+            this.button75 = new System.Windows.Forms.Button();
+            this.uiDoubleUpDown60 = new Sunny.UI.UIDoubleUpDown();
+            this.label99 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown55 = new Sunny.UI.UIDoubleUpDown();
+            this.button76 = new System.Windows.Forms.Button();
+            this.button73 = new System.Windows.Forms.Button();
+            this.label97 = new System.Windows.Forms.Label();
+            this.label98 = new System.Windows.Forms.Label();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.button221 = new System.Windows.Forms.Button();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.uiTabControl3.SuspendLayout();
@@ -1091,28 +1142,40 @@
             this.tabPage3.SuspendLayout();
             this.uiTabControl2.SuspendLayout();
             this.tabPage7.SuspendLayout();
-            this.groupBox28.SuspendLayout();
-            this.groupBox25.SuspendLayout();
-            this.groupBox24.SuspendLayout();
-            this.groupBox26.SuspendLayout();
-            this.groupBox23.SuspendLayout();
-            this.groupBox27.SuspendLayout();
+            this.uiTitlePanel6.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            this.groupBox14.SuspendLayout();
+            this.groupBox15.SuspendLayout();
             this.groupBox22.SuspendLayout();
+            this.groupBox23.SuspendLayout();
+            this.uiTitlePanel4.SuspendLayout();
             this.tabPage8.SuspendLayout();
-            this.groupBox29.SuspendLayout();
-            this.groupBox30.SuspendLayout();
-            this.groupBox35.SuspendLayout();
-            this.groupBox31.SuspendLayout();
-            this.groupBox34.SuspendLayout();
-            this.groupBox32.SuspendLayout();
-            this.groupBox33.SuspendLayout();
+            this.uiTitlePanel7.SuspendLayout();
+            this.groupBox24.SuspendLayout();
+            this.groupBox25.SuspendLayout();
+            this.groupBox26.SuspendLayout();
+            this.groupBox27.SuspendLayout();
+            this.groupBox28.SuspendLayout();
+            this.groupBox39.SuspendLayout();
+            this.groupBox40.SuspendLayout();
+            this.uiTitlePanel14.SuspendLayout();
             this.tabPage9.SuspendLayout();
+            this.uiTitlePanel9.SuspendLayout();
             this.groupBox36.SuspendLayout();
             this.groupBox37.SuspendLayout();
+            this.uiTitlePanel8.SuspendLayout();
+            this.uiDoubleUpDown27.SuspendLayout();
+            this.uiDoubleUpDown25.SuspendLayout();
             this.tabPage16.SuspendLayout();
+            this.uiTitlePanel10.SuspendLayout();
             this.groupBox38.SuspendLayout();
+            this.uiTitlePanel11.SuspendLayout();
             this.tabPage17.SuspendLayout();
-            this.groupBox39.SuspendLayout();
+            this.uiTitlePanel12.SuspendLayout();
+            this.groupBox29.SuspendLayout();
+            this.uiTitlePanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiTabControl1
@@ -1124,7 +1187,7 @@
             this.uiTabControl1.Controls.Add(this.tabPage5);
             this.uiTabControl1.Controls.Add(this.tabPage6);
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
             this.uiTabControl1.Location = new System.Drawing.Point(3, 3);
             this.uiTabControl1.MainPage = "";
@@ -1147,6 +1210,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.tabPage1.Location = new System.Drawing.Point(0, 40);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Size = new System.Drawing.Size(1893, 944);
@@ -3947,6 +4011,17 @@
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Text = "流程调试";
             // 
+            // button221
+            // 
+            this.button221.Location = new System.Drawing.Point(798, 599);
+            this.button221.Margin = new System.Windows.Forms.Padding(2);
+            this.button221.Name = "button221";
+            this.button221.Size = new System.Drawing.Size(153, 30);
+            this.button221.TabIndex = 402;
+            this.button221.Text = "调试取盘";
+            this.button221.UseVisualStyleBackColor = true;
+            this.button221.Click += new System.EventHandler(this.button221_Click);
+            // 
             // button219
             // 
             this.button219.Location = new System.Drawing.Point(1112, 634);
@@ -3954,8 +4029,9 @@
             this.button219.Name = "button219";
             this.button219.Size = new System.Drawing.Size(153, 30);
             this.button219.TabIndex = 401;
-            this.button219.Text = "Auto2换空盘";
+            this.button219.Text = "Auto1换空盘";
             this.button219.UseVisualStyleBackColor = true;
+            this.button219.Click += new System.EventHandler(this.button219_Click);
             // 
             // button220
             // 
@@ -3964,8 +4040,9 @@
             this.button220.Name = "button220";
             this.button220.Size = new System.Drawing.Size(153, 30);
             this.button220.TabIndex = 400;
-            this.button220.Text = "Auto1换空盘";
+            this.button220.Text = "Auto2换空盘";
             this.button220.UseVisualStyleBackColor = true;
+            this.button220.Click += new System.EventHandler(this.button220_Click);
             // 
             // button218
             // 
@@ -3976,6 +4053,7 @@
             this.button218.TabIndex = 399;
             this.button218.Text = "Auto2放空盘";
             this.button218.UseVisualStyleBackColor = true;
+            this.button218.Click += new System.EventHandler(this.button218_Click);
             // 
             // button217
             // 
@@ -3986,6 +4064,7 @@
             this.button217.TabIndex = 398;
             this.button217.Text = "Auto1放空盘";
             this.button217.UseVisualStyleBackColor = true;
+            this.button217.Click += new System.EventHandler(this.button217_Click);
             // 
             // button216
             // 
@@ -5493,7 +5572,7 @@
             this.tabPage14.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage14.Location = new System.Drawing.Point(0, 40);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(760, 864);
+            this.tabPage14.Size = new System.Drawing.Size(200, 60);
             this.tabPage14.TabIndex = 1;
             this.tabPage14.Text = "出料流程";
             // 
@@ -7084,7 +7163,7 @@
             this.tabPage15.Controls.Add(this.groupBox16);
             this.tabPage15.Location = new System.Drawing.Point(0, 40);
             this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Size = new System.Drawing.Size(760, 864);
+            this.tabPage15.Size = new System.Drawing.Size(200, 60);
             this.tabPage15.TabIndex = 2;
             this.tabPage15.Text = "测试入料流程";
             // 
@@ -8620,7 +8699,7 @@
             this.tabPage18.Controls.Add(this.groupBox19);
             this.tabPage18.Location = new System.Drawing.Point(0, 40);
             this.tabPage18.Name = "tabPage18";
-            this.tabPage18.Size = new System.Drawing.Size(760, 864);
+            this.tabPage18.Size = new System.Drawing.Size(200, 60);
             this.tabPage18.TabIndex = 3;
             this.tabPage18.Text = "测试出料流程";
             // 
@@ -10518,7 +10597,7 @@
             this.tabPage12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage12.Location = new System.Drawing.Point(0, 40);
             this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage12.Size = new System.Drawing.Size(200, 60);
             this.tabPage12.TabIndex = 2;
             this.tabPage12.Text = "备用";
             // 
@@ -10553,9 +10632,10 @@
             // 
             this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage3.Controls.Add(this.uiTabControl2);
+            this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage3.Size = new System.Drawing.Size(200, 60);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "初始点位";
             // 
@@ -10576,7 +10656,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(1893, 944);
+            this.uiTabControl2.Size = new System.Drawing.Size(200, 60);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -10591,702 +10671,194 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown109);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown110);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown111);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown106);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown103);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown107);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown100);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown108);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown104);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown98);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown105);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown101);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown97);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown102);
-            this.tabPage7.Controls.Add(this.groupBox28);
-            this.tabPage7.Controls.Add(this.label57);
-            this.tabPage7.Controls.Add(this.button25);
-            this.tabPage7.Controls.Add(this.groupBox25);
-            this.tabPage7.Controls.Add(this.groupBox24);
-            this.tabPage7.Controls.Add(this.label47);
-            this.tabPage7.Controls.Add(this.groupBox26);
-            this.tabPage7.Controls.Add(this.label46);
-            this.tabPage7.Controls.Add(this.groupBox23);
-            this.tabPage7.Controls.Add(this.groupBox27);
-            this.tabPage7.Controls.Add(this.button26);
-            this.tabPage7.Controls.Add(this.groupBox22);
-            this.tabPage7.Controls.Add(this.button24);
-            this.tabPage7.Controls.Add(this.label52);
-            this.tabPage7.Controls.Add(this.button27);
-            this.tabPage7.Controls.Add(this.button23);
-            this.tabPage7.Controls.Add(this.label53);
-            this.tabPage7.Controls.Add(this.button28);
-            this.tabPage7.Controls.Add(this.label51);
-            this.tabPage7.Controls.Add(this.button22);
-            this.tabPage7.Controls.Add(this.button18);
-            this.tabPage7.Controls.Add(this.button19);
-            this.tabPage7.Controls.Add(this.button29);
-            this.tabPage7.Controls.Add(this.label54);
-            this.tabPage7.Controls.Add(this.button21);
-            this.tabPage7.Controls.Add(this.label50);
-            this.tabPage7.Controls.Add(this.button30);
-            this.tabPage7.Controls.Add(this.uiDoubleUpDown99);
-            this.tabPage7.Controls.Add(this.label45);
-            this.tabPage7.Controls.Add(this.label55);
-            this.tabPage7.Controls.Add(this.label49);
-            this.tabPage7.Controls.Add(this.button31);
-            this.tabPage7.Controls.Add(this.label44);
-            this.tabPage7.Controls.Add(this.button20);
-            this.tabPage7.Controls.Add(this.label56);
-            this.tabPage7.Controls.Add(this.button32);
-            this.tabPage7.Controls.Add(this.label48);
-            this.tabPage7.Controls.Add(this.label43);
+            this.tabPage7.Controls.Add(this.uiButton9);
+            this.tabPage7.Controls.Add(this.uiButton10);
+            this.tabPage7.Controls.Add(this.uiButton7);
+            this.tabPage7.Controls.Add(this.uiButton8);
+            this.tabPage7.Controls.Add(this.uiTitlePanel6);
+            this.tabPage7.Controls.Add(this.uiTitlePanel4);
+            this.tabPage7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage7.Location = new System.Drawing.Point(0, 40);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage7.Size = new System.Drawing.Size(200, 20);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "入料手臂";
             // 
-            // uiDoubleUpDown109
-            // 
-            this.uiDoubleUpDown109.DecimalPlaces = 3;
-            this.uiDoubleUpDown109.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown109.Location = new System.Drawing.Point(815, 208);
-            this.uiDoubleUpDown109.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown109.Maximum = 2000D;
-            this.uiDoubleUpDown109.Minimum = -100D;
-            this.uiDoubleUpDown109.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown109.Name = "uiDoubleUpDown109";
-            this.uiDoubleUpDown109.ShowText = false;
-            this.uiDoubleUpDown109.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown109.Step = 1D;
-            this.uiDoubleUpDown109.TabIndex = 300;
-            this.uiDoubleUpDown109.Text = "uiDoubleUpDown109";
-            this.uiDoubleUpDown109.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown110
-            // 
-            this.uiDoubleUpDown110.DecimalPlaces = 3;
-            this.uiDoubleUpDown110.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown110.Location = new System.Drawing.Point(815, 172);
-            this.uiDoubleUpDown110.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown110.Maximum = 2000D;
-            this.uiDoubleUpDown110.Minimum = -100D;
-            this.uiDoubleUpDown110.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown110.Name = "uiDoubleUpDown110";
-            this.uiDoubleUpDown110.ShowText = false;
-            this.uiDoubleUpDown110.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown110.Step = 1D;
-            this.uiDoubleUpDown110.TabIndex = 299;
-            this.uiDoubleUpDown110.Text = "uiDoubleUpDown110";
-            this.uiDoubleUpDown110.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown111
-            // 
-            this.uiDoubleUpDown111.DecimalPlaces = 3;
-            this.uiDoubleUpDown111.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown111.Location = new System.Drawing.Point(815, 136);
-            this.uiDoubleUpDown111.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown111.Maximum = 2000D;
-            this.uiDoubleUpDown111.Minimum = -100D;
-            this.uiDoubleUpDown111.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown111.Name = "uiDoubleUpDown111";
-            this.uiDoubleUpDown111.ShowText = false;
-            this.uiDoubleUpDown111.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown111.Step = 1D;
-            this.uiDoubleUpDown111.TabIndex = 298;
-            this.uiDoubleUpDown111.Text = "uiDoubleUpDown111";
-            this.uiDoubleUpDown111.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown106
-            // 
-            this.uiDoubleUpDown106.DecimalPlaces = 3;
-            this.uiDoubleUpDown106.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown106.Location = new System.Drawing.Point(815, 90);
-            this.uiDoubleUpDown106.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown106.Maximum = 2000D;
-            this.uiDoubleUpDown106.Minimum = -100D;
-            this.uiDoubleUpDown106.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown106.Name = "uiDoubleUpDown106";
-            this.uiDoubleUpDown106.ShowText = false;
-            this.uiDoubleUpDown106.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown106.Step = 1D;
-            this.uiDoubleUpDown106.TabIndex = 297;
-            this.uiDoubleUpDown106.Text = "uiDoubleUpDown106";
-            this.uiDoubleUpDown106.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown103
-            // 
-            this.uiDoubleUpDown103.DecimalPlaces = 3;
-            this.uiDoubleUpDown103.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown103.Location = new System.Drawing.Point(282, 329);
-            this.uiDoubleUpDown103.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown103.Maximum = 2000D;
-            this.uiDoubleUpDown103.Minimum = -100D;
-            this.uiDoubleUpDown103.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown103.Name = "uiDoubleUpDown103";
-            this.uiDoubleUpDown103.ShowText = false;
-            this.uiDoubleUpDown103.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown103.Step = 1D;
-            this.uiDoubleUpDown103.TabIndex = 294;
-            this.uiDoubleUpDown103.Text = "uiDoubleUpDown103";
-            this.uiDoubleUpDown103.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown107
-            // 
-            this.uiDoubleUpDown107.DecimalPlaces = 3;
-            this.uiDoubleUpDown107.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown107.Location = new System.Drawing.Point(815, 54);
-            this.uiDoubleUpDown107.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown107.Maximum = 2000D;
-            this.uiDoubleUpDown107.Minimum = -100D;
-            this.uiDoubleUpDown107.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown107.Name = "uiDoubleUpDown107";
-            this.uiDoubleUpDown107.ShowText = false;
-            this.uiDoubleUpDown107.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown107.Step = 1D;
-            this.uiDoubleUpDown107.TabIndex = 296;
-            this.uiDoubleUpDown107.Text = "uiDoubleUpDown107";
-            this.uiDoubleUpDown107.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown100
-            // 
-            this.uiDoubleUpDown100.DecimalPlaces = 3;
-            this.uiDoubleUpDown100.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown100.Location = new System.Drawing.Point(282, 208);
-            this.uiDoubleUpDown100.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown100.Maximum = 2000D;
-            this.uiDoubleUpDown100.Minimum = -100D;
-            this.uiDoubleUpDown100.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown100.Name = "uiDoubleUpDown100";
-            this.uiDoubleUpDown100.ShowText = false;
-            this.uiDoubleUpDown100.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown100.Step = 1D;
-            this.uiDoubleUpDown100.TabIndex = 294;
-            this.uiDoubleUpDown100.Text = "uiDoubleUpDown100";
-            this.uiDoubleUpDown100.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown108
-            // 
-            this.uiDoubleUpDown108.DecimalPlaces = 3;
-            this.uiDoubleUpDown108.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown108.Location = new System.Drawing.Point(815, 18);
-            this.uiDoubleUpDown108.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown108.Maximum = 2000D;
-            this.uiDoubleUpDown108.Minimum = -100D;
-            this.uiDoubleUpDown108.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown108.Name = "uiDoubleUpDown108";
-            this.uiDoubleUpDown108.ShowText = false;
-            this.uiDoubleUpDown108.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown108.Step = 1D;
-            this.uiDoubleUpDown108.TabIndex = 295;
-            this.uiDoubleUpDown108.Text = "uiDoubleUpDown108";
-            this.uiDoubleUpDown108.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown104
-            // 
-            this.uiDoubleUpDown104.DecimalPlaces = 3;
-            this.uiDoubleUpDown104.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown104.Location = new System.Drawing.Point(282, 292);
-            this.uiDoubleUpDown104.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown104.Maximum = 2000D;
-            this.uiDoubleUpDown104.Minimum = -100D;
-            this.uiDoubleUpDown104.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown104.Name = "uiDoubleUpDown104";
-            this.uiDoubleUpDown104.ShowText = false;
-            this.uiDoubleUpDown104.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown104.Step = 1D;
-            this.uiDoubleUpDown104.TabIndex = 293;
-            this.uiDoubleUpDown104.Text = "uiDoubleUpDown104";
-            this.uiDoubleUpDown104.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown98
-            // 
-            this.uiDoubleUpDown98.DecimalPlaces = 3;
-            this.uiDoubleUpDown98.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown98.Location = new System.Drawing.Point(282, 90);
-            this.uiDoubleUpDown98.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown98.Maximum = 2000D;
-            this.uiDoubleUpDown98.Minimum = -100D;
-            this.uiDoubleUpDown98.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown98.Name = "uiDoubleUpDown98";
-            this.uiDoubleUpDown98.ShowText = false;
-            this.uiDoubleUpDown98.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown98.Step = 1D;
-            this.uiDoubleUpDown98.TabIndex = 291;
-            this.uiDoubleUpDown98.Text = "uiDoubleUpDown98";
-            this.uiDoubleUpDown98.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown105
-            // 
-            this.uiDoubleUpDown105.DecimalPlaces = 3;
-            this.uiDoubleUpDown105.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown105.Location = new System.Drawing.Point(282, 256);
-            this.uiDoubleUpDown105.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown105.Maximum = 2000D;
-            this.uiDoubleUpDown105.Minimum = -100D;
-            this.uiDoubleUpDown105.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown105.Name = "uiDoubleUpDown105";
-            this.uiDoubleUpDown105.ShowText = false;
-            this.uiDoubleUpDown105.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown105.Step = 1D;
-            this.uiDoubleUpDown105.TabIndex = 292;
-            this.uiDoubleUpDown105.Text = "uiDoubleUpDown105";
-            this.uiDoubleUpDown105.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown101
-            // 
-            this.uiDoubleUpDown101.DecimalPlaces = 3;
-            this.uiDoubleUpDown101.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown101.Location = new System.Drawing.Point(282, 172);
-            this.uiDoubleUpDown101.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown101.Maximum = 2000D;
-            this.uiDoubleUpDown101.Minimum = -100D;
-            this.uiDoubleUpDown101.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown101.Name = "uiDoubleUpDown101";
-            this.uiDoubleUpDown101.ShowText = false;
-            this.uiDoubleUpDown101.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown101.Step = 1D;
-            this.uiDoubleUpDown101.TabIndex = 293;
-            this.uiDoubleUpDown101.Text = "uiDoubleUpDown101";
-            this.uiDoubleUpDown101.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown97
-            // 
-            this.uiDoubleUpDown97.DecimalPlaces = 3;
-            this.uiDoubleUpDown97.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown97.Location = new System.Drawing.Point(282, 54);
-            this.uiDoubleUpDown97.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown97.Maximum = 2000D;
-            this.uiDoubleUpDown97.Minimum = -100D;
-            this.uiDoubleUpDown97.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown97.Name = "uiDoubleUpDown97";
-            this.uiDoubleUpDown97.ShowText = false;
-            this.uiDoubleUpDown97.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown97.Step = 1D;
-            this.uiDoubleUpDown97.TabIndex = 291;
-            this.uiDoubleUpDown97.Text = "uiDoubleUpDown97";
-            this.uiDoubleUpDown97.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown102
-            // 
-            this.uiDoubleUpDown102.DecimalPlaces = 3;
-            this.uiDoubleUpDown102.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown102.Location = new System.Drawing.Point(282, 136);
-            this.uiDoubleUpDown102.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown102.Maximum = 2000D;
-            this.uiDoubleUpDown102.Minimum = -100D;
-            this.uiDoubleUpDown102.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown102.Name = "uiDoubleUpDown102";
-            this.uiDoubleUpDown102.ShowText = false;
-            this.uiDoubleUpDown102.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown102.Step = 1D;
-            this.uiDoubleUpDown102.TabIndex = 292;
-            this.uiDoubleUpDown102.Text = "uiDoubleUpDown102";
-            this.uiDoubleUpDown102.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // groupBox28
-            // 
-            this.groupBox28.Controls.Add(this.uiDoubleUpDown19);
-            this.groupBox28.Controls.Add(this.uiDoubleUpDown20);
-            this.groupBox28.Controls.Add(this.label335);
-            this.groupBox28.Controls.Add(this.uiDoubleUpDown21);
-            this.groupBox28.Controls.Add(this.label336);
-            this.groupBox28.Controls.Add(this.label337);
-            this.groupBox28.Location = new System.Drawing.Point(839, 552);
-            this.groupBox28.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox28.Name = "groupBox28";
-            this.groupBox28.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox28.Size = new System.Drawing.Size(261, 168);
-            this.groupBox28.TabIndex = 295;
-            this.groupBox28.TabStop = false;
-            this.groupBox28.Text = "入料手臂 Z4";
-            // 
-            // uiDoubleUpDown19
-            // 
-            this.uiDoubleUpDown19.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown19.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown19.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown19.Name = "uiDoubleUpDown19";
-            this.uiDoubleUpDown19.ShowText = false;
-            this.uiDoubleUpDown19.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown19.TabIndex = 289;
-            this.uiDoubleUpDown19.Text = "uiDoubleUpDown19";
-            this.uiDoubleUpDown19.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown20
-            // 
-            this.uiDoubleUpDown20.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown20.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown20.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown20.Name = "uiDoubleUpDown20";
-            this.uiDoubleUpDown20.ShowText = false;
-            this.uiDoubleUpDown20.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown20.TabIndex = 286;
-            this.uiDoubleUpDown20.Text = "uiDoubleUpDown20";
-            this.uiDoubleUpDown20.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label335
-            // 
-            this.label335.AutoSize = true;
-            this.label335.Location = new System.Drawing.Point(35, 121);
-            this.label335.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label335.Name = "label335";
-            this.label335.Size = new System.Drawing.Size(58, 21);
-            this.label335.TabIndex = 287;
-            this.label335.Text = "加速度";
-            // 
-            // uiDoubleUpDown21
-            // 
-            this.uiDoubleUpDown21.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown21.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown21.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown21.Name = "uiDoubleUpDown21";
-            this.uiDoubleUpDown21.ShowText = false;
-            this.uiDoubleUpDown21.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown21.TabIndex = 285;
-            this.uiDoubleUpDown21.Text = "uiDoubleUpDown21";
-            this.uiDoubleUpDown21.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label336
-            // 
-            this.label336.AutoSize = true;
-            this.label336.Location = new System.Drawing.Point(35, 80);
-            this.label336.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label336.Name = "label336";
-            this.label336.Size = new System.Drawing.Size(58, 21);
-            this.label336.TabIndex = 282;
-            this.label336.Text = "加速度";
-            // 
-            // label337
-            // 
-            this.label337.AutoSize = true;
-            this.label337.Location = new System.Drawing.Point(35, 39);
-            this.label337.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label337.Name = "label337";
-            this.label337.Size = new System.Drawing.Size(74, 21);
-            this.label337.TabIndex = 2;
-            this.label337.Text = "最大速度";
-            // 
-            // label57
-            // 
-            this.label57.AutoSize = true;
-            this.label57.Location = new System.Drawing.Point(22, 22);
-            this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label57.Name = "label57";
-            this.label57.Size = new System.Drawing.Size(226, 21);
-            this.label57.TabIndex = 2;
-            this.label57.Text = "InputArm -> Loader X (取料)";
-            // 
-            // button25
-            // 
-            this.button25.Location = new System.Drawing.Point(957, 169);
-            this.button25.Margin = new System.Windows.Forms.Padding(2);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(108, 34);
-            this.button25.TabIndex = 125;
-            this.button25.Text = "移动";
-            this.button25.UseVisualStyleBackColor = true;
-            // 
-            // groupBox25
-            // 
-            this.groupBox25.Controls.Add(this.uiDoubleUpDown10);
-            this.groupBox25.Controls.Add(this.uiDoubleUpDown11);
-            this.groupBox25.Controls.Add(this.label325);
-            this.groupBox25.Controls.Add(this.uiDoubleUpDown12);
-            this.groupBox25.Controls.Add(this.label326);
-            this.groupBox25.Controls.Add(this.label327);
-            this.groupBox25.Location = new System.Drawing.Point(568, 552);
-            this.groupBox25.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox25.Name = "groupBox25";
-            this.groupBox25.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox25.Size = new System.Drawing.Size(261, 168);
-            this.groupBox25.TabIndex = 294;
-            this.groupBox25.TabStop = false;
-            this.groupBox25.Text = "入料手臂 Z3";
-            // 
-            // uiDoubleUpDown10
-            // 
-            this.uiDoubleUpDown10.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown10.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown10.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown10.Name = "uiDoubleUpDown10";
-            this.uiDoubleUpDown10.ShowText = false;
-            this.uiDoubleUpDown10.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown10.TabIndex = 289;
-            this.uiDoubleUpDown10.Text = "uiDoubleUpDown10";
-            this.uiDoubleUpDown10.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown11
-            // 
-            this.uiDoubleUpDown11.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown11.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown11.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown11.Name = "uiDoubleUpDown11";
-            this.uiDoubleUpDown11.ShowText = false;
-            this.uiDoubleUpDown11.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown11.TabIndex = 286;
-            this.uiDoubleUpDown11.Text = "uiDoubleUpDown11";
-            this.uiDoubleUpDown11.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label325
-            // 
-            this.label325.AutoSize = true;
-            this.label325.Location = new System.Drawing.Point(35, 121);
-            this.label325.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label325.Name = "label325";
-            this.label325.Size = new System.Drawing.Size(58, 21);
-            this.label325.TabIndex = 287;
-            this.label325.Text = "加速度";
-            // 
-            // uiDoubleUpDown12
-            // 
-            this.uiDoubleUpDown12.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown12.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown12.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown12.Name = "uiDoubleUpDown12";
-            this.uiDoubleUpDown12.ShowText = false;
-            this.uiDoubleUpDown12.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown12.TabIndex = 285;
-            this.uiDoubleUpDown12.Text = "uiDoubleUpDown12";
-            this.uiDoubleUpDown12.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label326
-            // 
-            this.label326.AutoSize = true;
-            this.label326.Location = new System.Drawing.Point(35, 80);
-            this.label326.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label326.Name = "label326";
-            this.label326.Size = new System.Drawing.Size(58, 21);
-            this.label326.TabIndex = 282;
-            this.label326.Text = "加速度";
-            // 
-            // label327
-            // 
-            this.label327.AutoSize = true;
-            this.label327.Location = new System.Drawing.Point(35, 39);
-            this.label327.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label327.Name = "label327";
-            this.label327.Size = new System.Drawing.Size(74, 21);
-            this.label327.TabIndex = 2;
-            this.label327.Text = "最大速度";
-            // 
-            // groupBox24
-            // 
-            this.groupBox24.Controls.Add(this.uiDoubleUpDown7);
-            this.groupBox24.Controls.Add(this.uiDoubleUpDown8);
-            this.groupBox24.Controls.Add(this.label322);
-            this.groupBox24.Controls.Add(this.uiDoubleUpDown9);
-            this.groupBox24.Controls.Add(this.label323);
-            this.groupBox24.Controls.Add(this.label324);
-            this.groupBox24.Location = new System.Drawing.Point(568, 380);
-            this.groupBox24.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox24.Name = "groupBox24";
-            this.groupBox24.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox24.Size = new System.Drawing.Size(261, 168);
-            this.groupBox24.TabIndex = 291;
-            this.groupBox24.TabStop = false;
-            this.groupBox24.Text = "入料手臂 P";
-            // 
-            // uiDoubleUpDown7
-            // 
-            this.uiDoubleUpDown7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown7.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown7.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown7.Name = "uiDoubleUpDown7";
-            this.uiDoubleUpDown7.ShowText = false;
-            this.uiDoubleUpDown7.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown7.TabIndex = 289;
-            this.uiDoubleUpDown7.Text = "uiDoubleUpDown7";
-            this.uiDoubleUpDown7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown8
-            // 
-            this.uiDoubleUpDown8.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown8.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown8.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown8.Name = "uiDoubleUpDown8";
-            this.uiDoubleUpDown8.ShowText = false;
-            this.uiDoubleUpDown8.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown8.TabIndex = 286;
-            this.uiDoubleUpDown8.Text = "uiDoubleUpDown8";
-            this.uiDoubleUpDown8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label322
-            // 
-            this.label322.AutoSize = true;
-            this.label322.Location = new System.Drawing.Point(35, 121);
-            this.label322.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label322.Name = "label322";
-            this.label322.Size = new System.Drawing.Size(58, 21);
-            this.label322.TabIndex = 287;
-            this.label322.Text = "加速度";
-            // 
-            // uiDoubleUpDown9
-            // 
-            this.uiDoubleUpDown9.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown9.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown9.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown9.Name = "uiDoubleUpDown9";
-            this.uiDoubleUpDown9.ShowText = false;
-            this.uiDoubleUpDown9.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown9.TabIndex = 285;
-            this.uiDoubleUpDown9.Text = "uiDoubleUpDown9";
-            this.uiDoubleUpDown9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label323
-            // 
-            this.label323.AutoSize = true;
-            this.label323.Location = new System.Drawing.Point(35, 80);
-            this.label323.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label323.Name = "label323";
-            this.label323.Size = new System.Drawing.Size(58, 21);
-            this.label323.TabIndex = 282;
-            this.label323.Text = "加速度";
-            // 
-            // label324
-            // 
-            this.label324.AutoSize = true;
-            this.label324.Location = new System.Drawing.Point(35, 39);
-            this.label324.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label324.Name = "label324";
-            this.label324.Size = new System.Drawing.Size(74, 21);
-            this.label324.TabIndex = 2;
-            this.label324.Text = "最大速度";
-            // 
-            // label47
-            // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(22, 260);
-            this.label47.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(161, 21);
-            this.label47.TabIndex = 124;
-            this.label47.Text = "InputArm Pitch Min";
-            // 
-            // groupBox26
-            // 
-            this.groupBox26.Controls.Add(this.uiDoubleUpDown13);
-            this.groupBox26.Controls.Add(this.uiDoubleUpDown14);
-            this.groupBox26.Controls.Add(this.label328);
-            this.groupBox26.Controls.Add(this.uiDoubleUpDown15);
-            this.groupBox26.Controls.Add(this.label329);
-            this.groupBox26.Controls.Add(this.label330);
-            this.groupBox26.Location = new System.Drawing.Point(297, 552);
-            this.groupBox26.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox26.Name = "groupBox26";
-            this.groupBox26.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox26.Size = new System.Drawing.Size(261, 168);
-            this.groupBox26.TabIndex = 293;
-            this.groupBox26.TabStop = false;
-            this.groupBox26.Text = "入料手臂 Z2";
-            // 
-            // uiDoubleUpDown13
-            // 
-            this.uiDoubleUpDown13.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown13.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown13.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown13.Name = "uiDoubleUpDown13";
-            this.uiDoubleUpDown13.ShowText = false;
-            this.uiDoubleUpDown13.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown13.TabIndex = 289;
-            this.uiDoubleUpDown13.Text = "uiDoubleUpDown13";
-            this.uiDoubleUpDown13.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown14
-            // 
-            this.uiDoubleUpDown14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown14.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown14.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown14.Name = "uiDoubleUpDown14";
-            this.uiDoubleUpDown14.ShowText = false;
-            this.uiDoubleUpDown14.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown14.TabIndex = 286;
-            this.uiDoubleUpDown14.Text = "uiDoubleUpDown14";
-            this.uiDoubleUpDown14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label328
-            // 
-            this.label328.AutoSize = true;
-            this.label328.Location = new System.Drawing.Point(35, 121);
-            this.label328.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label328.Name = "label328";
-            this.label328.Size = new System.Drawing.Size(58, 21);
-            this.label328.TabIndex = 287;
-            this.label328.Text = "加速度";
-            // 
-            // uiDoubleUpDown15
-            // 
-            this.uiDoubleUpDown15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown15.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown15.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown15.Name = "uiDoubleUpDown15";
-            this.uiDoubleUpDown15.ShowText = false;
-            this.uiDoubleUpDown15.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown15.TabIndex = 285;
-            this.uiDoubleUpDown15.Text = "uiDoubleUpDown15";
-            this.uiDoubleUpDown15.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label329
-            // 
-            this.label329.AutoSize = true;
-            this.label329.Location = new System.Drawing.Point(35, 80);
-            this.label329.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label329.Name = "label329";
-            this.label329.Size = new System.Drawing.Size(58, 21);
-            this.label329.TabIndex = 282;
-            this.label329.Text = "加速度";
-            // 
-            // label330
-            // 
-            this.label330.AutoSize = true;
-            this.label330.Location = new System.Drawing.Point(35, 39);
-            this.label330.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label330.Name = "label330";
-            this.label330.Size = new System.Drawing.Size(74, 21);
-            this.label330.TabIndex = 2;
-            this.label330.Text = "最大速度";
-            // 
-            // label46
-            // 
-            this.label46.AutoSize = true;
-            this.label46.Location = new System.Drawing.Point(22, 296);
-            this.label46.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(164, 21);
-            this.label46.TabIndex = 125;
-            this.label46.Text = "InputArm Pitch Max";
-            // 
-            // groupBox23
-            // 
-            this.groupBox23.Controls.Add(this.uiDoubleUpDown4);
-            this.groupBox23.Controls.Add(this.uiDoubleUpDown5);
-            this.groupBox23.Controls.Add(this.label319);
-            this.groupBox23.Controls.Add(this.uiDoubleUpDown6);
-            this.groupBox23.Controls.Add(this.label320);
-            this.groupBox23.Controls.Add(this.label321);
-            this.groupBox23.Location = new System.Drawing.Point(297, 380);
-            this.groupBox23.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox23.Name = "groupBox23";
-            this.groupBox23.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox23.Size = new System.Drawing.Size(261, 168);
-            this.groupBox23.TabIndex = 290;
-            this.groupBox23.TabStop = false;
-            this.groupBox23.Text = "入料手臂 Y";
+            // uiButton9
+            // 
+            this.uiButton9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton9.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton9.Location = new System.Drawing.Point(1041, 821);
+            this.uiButton9.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton9.Name = "uiButton9";
+            this.uiButton9.RectColor = System.Drawing.Color.White;
+            this.uiButton9.Size = new System.Drawing.Size(98, 34);
+            this.uiButton9.TabIndex = 315;
+            this.uiButton9.Text = "恢复默认";
+            this.uiButton9.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton10
+            // 
+            this.uiButton10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton10.Location = new System.Drawing.Point(1166, 821);
+            this.uiButton10.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton10.Name = "uiButton10";
+            this.uiButton10.RectColor = System.Drawing.Color.White;
+            this.uiButton10.Size = new System.Drawing.Size(98, 34);
+            this.uiButton10.TabIndex = 314;
+            this.uiButton10.Text = "保存";
+            this.uiButton10.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton7
+            // 
+            this.uiButton7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton7.Location = new System.Drawing.Point(1041, 350);
+            this.uiButton7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton7.Name = "uiButton7";
+            this.uiButton7.RectColor = System.Drawing.Color.White;
+            this.uiButton7.Size = new System.Drawing.Size(98, 34);
+            this.uiButton7.TabIndex = 313;
+            this.uiButton7.Text = "恢复默认";
+            this.uiButton7.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton8
+            // 
+            this.uiButton8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton8.Location = new System.Drawing.Point(1166, 350);
+            this.uiButton8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton8.Name = "uiButton8";
+            this.uiButton8.RectColor = System.Drawing.Color.White;
+            this.uiButton8.Size = new System.Drawing.Size(98, 34);
+            this.uiButton8.TabIndex = 312;
+            this.uiButton8.Text = "保存";
+            this.uiButton8.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiTitlePanel6
+            // 
+            this.uiTitlePanel6.Controls.Add(this.groupBox11);
+            this.uiTitlePanel6.Controls.Add(this.groupBox12);
+            this.uiTitlePanel6.Controls.Add(this.groupBox13);
+            this.uiTitlePanel6.Controls.Add(this.groupBox14);
+            this.uiTitlePanel6.Controls.Add(this.groupBox15);
+            this.uiTitlePanel6.Controls.Add(this.groupBox22);
+            this.uiTitlePanel6.Controls.Add(this.groupBox23);
+            this.uiTitlePanel6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel6.Location = new System.Drawing.Point(16, 397);
+            this.uiTitlePanel6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel6.Name = "uiTitlePanel6";
+            this.uiTitlePanel6.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel6.ShowText = false;
+            this.uiTitlePanel6.Size = new System.Drawing.Size(1271, 413);
+            this.uiTitlePanel6.TabIndex = 311;
+            this.uiTitlePanel6.Text = "运行速度";
+            this.uiTitlePanel6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.uiDoubleUpDown1);
+            this.groupBox11.Controls.Add(this.uiDoubleUpDown2);
+            this.groupBox11.Controls.Add(this.label66);
+            this.groupBox11.Controls.Add(this.uiDoubleUpDown3);
+            this.groupBox11.Controls.Add(this.label70);
+            this.groupBox11.Controls.Add(this.label76);
+            this.groupBox11.Location = new System.Drawing.Point(833, 226);
+            this.groupBox11.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox11.Size = new System.Drawing.Size(261, 168);
+            this.groupBox11.TabIndex = 309;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "入料手臂 Z4";
+            // 
+            // uiDoubleUpDown1
+            // 
+            this.uiDoubleUpDown1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown1.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown1.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown1.Name = "uiDoubleUpDown1";
+            this.uiDoubleUpDown1.ShowText = false;
+            this.uiDoubleUpDown1.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown1.TabIndex = 289;
+            this.uiDoubleUpDown1.Text = "uiDoubleUpDown1";
+            this.uiDoubleUpDown1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown2
+            // 
+            this.uiDoubleUpDown2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown2.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown2.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown2.Name = "uiDoubleUpDown2";
+            this.uiDoubleUpDown2.ShowText = false;
+            this.uiDoubleUpDown2.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown2.TabIndex = 286;
+            this.uiDoubleUpDown2.Text = "uiDoubleUpDown2";
+            this.uiDoubleUpDown2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label66
+            // 
+            this.label66.AutoSize = true;
+            this.label66.Location = new System.Drawing.Point(35, 121);
+            this.label66.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(58, 21);
+            this.label66.TabIndex = 287;
+            this.label66.Text = "加速度";
+            // 
+            // uiDoubleUpDown3
+            // 
+            this.uiDoubleUpDown3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown3.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown3.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown3.Name = "uiDoubleUpDown3";
+            this.uiDoubleUpDown3.ShowText = false;
+            this.uiDoubleUpDown3.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown3.TabIndex = 285;
+            this.uiDoubleUpDown3.Text = "uiDoubleUpDown3";
+            this.uiDoubleUpDown3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label70
+            // 
+            this.label70.AutoSize = true;
+            this.label70.Location = new System.Drawing.Point(35, 80);
+            this.label70.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label70.Name = "label70";
+            this.label70.Size = new System.Drawing.Size(58, 21);
+            this.label70.TabIndex = 282;
+            this.label70.Text = "加速度";
+            // 
+            // label76
+            // 
+            this.label76.AutoSize = true;
+            this.label76.Location = new System.Drawing.Point(35, 39);
+            this.label76.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label76.Name = "label76";
+            this.label76.Size = new System.Drawing.Size(74, 21);
+            this.label76.TabIndex = 2;
+            this.label76.Text = "最大速度";
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.uiDoubleUpDown4);
+            this.groupBox12.Controls.Add(this.uiDoubleUpDown5);
+            this.groupBox12.Controls.Add(this.label317);
+            this.groupBox12.Controls.Add(this.uiDoubleUpDown6);
+            this.groupBox12.Controls.Add(this.label318);
+            this.groupBox12.Controls.Add(this.label319);
+            this.groupBox12.Location = new System.Drawing.Point(562, 226);
+            this.groupBox12.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox12.Size = new System.Drawing.Size(261, 168);
+            this.groupBox12.TabIndex = 308;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "入料手臂 Z3";
             // 
             // uiDoubleUpDown4
             // 
@@ -11314,15 +10886,15 @@
             this.uiDoubleUpDown5.Text = "uiDoubleUpDown5";
             this.uiDoubleUpDown5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label319
+            // label317
             // 
-            this.label319.AutoSize = true;
-            this.label319.Location = new System.Drawing.Point(35, 121);
-            this.label319.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label319.Name = "label319";
-            this.label319.Size = new System.Drawing.Size(58, 21);
-            this.label319.TabIndex = 287;
-            this.label319.Text = "加速度";
+            this.label317.AutoSize = true;
+            this.label317.Location = new System.Drawing.Point(35, 121);
+            this.label317.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label317.Name = "label317";
+            this.label317.Size = new System.Drawing.Size(58, 21);
+            this.label317.TabIndex = 287;
+            this.label317.Text = "加速度";
             // 
             // uiDoubleUpDown6
             // 
@@ -11337,197 +10909,359 @@
             this.uiDoubleUpDown6.Text = "uiDoubleUpDown6";
             this.uiDoubleUpDown6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label318
+            // 
+            this.label318.AutoSize = true;
+            this.label318.Location = new System.Drawing.Point(35, 80);
+            this.label318.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label318.Name = "label318";
+            this.label318.Size = new System.Drawing.Size(58, 21);
+            this.label318.TabIndex = 282;
+            this.label318.Text = "加速度";
+            // 
+            // label319
+            // 
+            this.label319.AutoSize = true;
+            this.label319.Location = new System.Drawing.Point(35, 39);
+            this.label319.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label319.Name = "label319";
+            this.label319.Size = new System.Drawing.Size(74, 21);
+            this.label319.TabIndex = 2;
+            this.label319.Text = "最大速度";
+            // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.uiDoubleUpDown7);
+            this.groupBox13.Controls.Add(this.uiDoubleUpDown8);
+            this.groupBox13.Controls.Add(this.label320);
+            this.groupBox13.Controls.Add(this.uiDoubleUpDown9);
+            this.groupBox13.Controls.Add(this.label321);
+            this.groupBox13.Controls.Add(this.label322);
+            this.groupBox13.Location = new System.Drawing.Point(20, 54);
+            this.groupBox13.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox13.Size = new System.Drawing.Size(261, 168);
+            this.groupBox13.TabIndex = 303;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "入料手臂 X";
+            // 
+            // uiDoubleUpDown7
+            // 
+            this.uiDoubleUpDown7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown7.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown7.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown7.Name = "uiDoubleUpDown7";
+            this.uiDoubleUpDown7.ShowText = false;
+            this.uiDoubleUpDown7.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown7.TabIndex = 289;
+            this.uiDoubleUpDown7.Text = "uiDoubleUpDown7";
+            this.uiDoubleUpDown7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown8
+            // 
+            this.uiDoubleUpDown8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown8.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown8.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown8.Name = "uiDoubleUpDown8";
+            this.uiDoubleUpDown8.ShowText = false;
+            this.uiDoubleUpDown8.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown8.TabIndex = 286;
+            this.uiDoubleUpDown8.Text = "uiDoubleUpDown8";
+            this.uiDoubleUpDown8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label320
             // 
             this.label320.AutoSize = true;
-            this.label320.Location = new System.Drawing.Point(35, 80);
+            this.label320.Location = new System.Drawing.Point(35, 121);
             this.label320.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label320.Name = "label320";
             this.label320.Size = new System.Drawing.Size(58, 21);
-            this.label320.TabIndex = 282;
+            this.label320.TabIndex = 287;
             this.label320.Text = "加速度";
+            // 
+            // uiDoubleUpDown9
+            // 
+            this.uiDoubleUpDown9.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown9.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown9.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown9.Name = "uiDoubleUpDown9";
+            this.uiDoubleUpDown9.ShowText = false;
+            this.uiDoubleUpDown9.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown9.TabIndex = 285;
+            this.uiDoubleUpDown9.Text = "uiDoubleUpDown9";
+            this.uiDoubleUpDown9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label321
             // 
             this.label321.AutoSize = true;
-            this.label321.Location = new System.Drawing.Point(35, 39);
+            this.label321.Location = new System.Drawing.Point(35, 80);
             this.label321.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label321.Name = "label321";
-            this.label321.Size = new System.Drawing.Size(74, 21);
-            this.label321.TabIndex = 2;
-            this.label321.Text = "最大速度";
+            this.label321.Size = new System.Drawing.Size(58, 21);
+            this.label321.TabIndex = 282;
+            this.label321.Text = "加速度";
             // 
-            // groupBox27
+            // label322
             // 
-            this.groupBox27.Controls.Add(this.uiDoubleUpDown16);
-            this.groupBox27.Controls.Add(this.uiDoubleUpDown17);
-            this.groupBox27.Controls.Add(this.label332);
-            this.groupBox27.Controls.Add(this.uiDoubleUpDown18);
-            this.groupBox27.Controls.Add(this.label333);
-            this.groupBox27.Controls.Add(this.label334);
-            this.groupBox27.Location = new System.Drawing.Point(26, 552);
-            this.groupBox27.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox27.Name = "groupBox27";
-            this.groupBox27.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox27.Size = new System.Drawing.Size(261, 168);
-            this.groupBox27.TabIndex = 292;
-            this.groupBox27.TabStop = false;
-            this.groupBox27.Text = "入料手臂 Z1";
+            this.label322.AutoSize = true;
+            this.label322.Location = new System.Drawing.Point(35, 39);
+            this.label322.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label322.Name = "label322";
+            this.label322.Size = new System.Drawing.Size(74, 21);
+            this.label322.TabIndex = 2;
+            this.label322.Text = "最大速度";
             // 
-            // uiDoubleUpDown16
+            // groupBox14
             // 
-            this.uiDoubleUpDown16.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown16.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown16.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown16.Name = "uiDoubleUpDown16";
-            this.uiDoubleUpDown16.ShowText = false;
-            this.uiDoubleUpDown16.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown16.TabIndex = 289;
-            this.uiDoubleUpDown16.Text = "uiDoubleUpDown16";
-            this.uiDoubleUpDown16.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox14.Controls.Add(this.uiDoubleUpDown10);
+            this.groupBox14.Controls.Add(this.uiDoubleUpDown11);
+            this.groupBox14.Controls.Add(this.label323);
+            this.groupBox14.Controls.Add(this.uiDoubleUpDown12);
+            this.groupBox14.Controls.Add(this.label324);
+            this.groupBox14.Controls.Add(this.label325);
+            this.groupBox14.Location = new System.Drawing.Point(562, 54);
+            this.groupBox14.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox14.Name = "groupBox14";
+            this.groupBox14.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox14.Size = new System.Drawing.Size(261, 168);
+            this.groupBox14.TabIndex = 305;
+            this.groupBox14.TabStop = false;
+            this.groupBox14.Text = "入料手臂 P";
             // 
-            // uiDoubleUpDown17
+            // uiDoubleUpDown10
             // 
-            this.uiDoubleUpDown17.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown17.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown17.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown17.Name = "uiDoubleUpDown17";
-            this.uiDoubleUpDown17.ShowText = false;
-            this.uiDoubleUpDown17.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown17.TabIndex = 286;
-            this.uiDoubleUpDown17.Text = "uiDoubleUpDown17";
-            this.uiDoubleUpDown17.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown10.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown10.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown10.Name = "uiDoubleUpDown10";
+            this.uiDoubleUpDown10.ShowText = false;
+            this.uiDoubleUpDown10.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown10.TabIndex = 289;
+            this.uiDoubleUpDown10.Text = "uiDoubleUpDown10";
+            this.uiDoubleUpDown10.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label332
+            // uiDoubleUpDown11
             // 
-            this.label332.AutoSize = true;
-            this.label332.Location = new System.Drawing.Point(35, 121);
-            this.label332.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label332.Name = "label332";
-            this.label332.Size = new System.Drawing.Size(58, 21);
-            this.label332.TabIndex = 287;
-            this.label332.Text = "加速度";
+            this.uiDoubleUpDown11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown11.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown11.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown11.Name = "uiDoubleUpDown11";
+            this.uiDoubleUpDown11.ShowText = false;
+            this.uiDoubleUpDown11.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown11.TabIndex = 286;
+            this.uiDoubleUpDown11.Text = "uiDoubleUpDown11";
+            this.uiDoubleUpDown11.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown18
+            // label323
             // 
-            this.uiDoubleUpDown18.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown18.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown18.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown18.Name = "uiDoubleUpDown18";
-            this.uiDoubleUpDown18.ShowText = false;
-            this.uiDoubleUpDown18.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown18.TabIndex = 285;
-            this.uiDoubleUpDown18.Text = "uiDoubleUpDown18";
-            this.uiDoubleUpDown18.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label323.AutoSize = true;
+            this.label323.Location = new System.Drawing.Point(35, 121);
+            this.label323.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label323.Name = "label323";
+            this.label323.Size = new System.Drawing.Size(58, 21);
+            this.label323.TabIndex = 287;
+            this.label323.Text = "加速度";
             // 
-            // label333
+            // uiDoubleUpDown12
             // 
-            this.label333.AutoSize = true;
-            this.label333.Location = new System.Drawing.Point(35, 80);
-            this.label333.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label333.Name = "label333";
-            this.label333.Size = new System.Drawing.Size(58, 21);
-            this.label333.TabIndex = 282;
-            this.label333.Text = "加速度";
+            this.uiDoubleUpDown12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown12.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown12.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown12.Name = "uiDoubleUpDown12";
+            this.uiDoubleUpDown12.ShowText = false;
+            this.uiDoubleUpDown12.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown12.TabIndex = 285;
+            this.uiDoubleUpDown12.Text = "uiDoubleUpDown12";
+            this.uiDoubleUpDown12.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label334
+            // label324
             // 
-            this.label334.AutoSize = true;
-            this.label334.Location = new System.Drawing.Point(35, 39);
-            this.label334.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label334.Name = "label334";
-            this.label334.Size = new System.Drawing.Size(74, 21);
-            this.label334.TabIndex = 2;
-            this.label334.Text = "最大速度";
+            this.label324.AutoSize = true;
+            this.label324.Location = new System.Drawing.Point(35, 80);
+            this.label324.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label324.Name = "label324";
+            this.label324.Size = new System.Drawing.Size(58, 21);
+            this.label324.TabIndex = 282;
+            this.label324.Text = "加速度";
             // 
-            // button26
+            // label325
             // 
-            this.button26.Location = new System.Drawing.Point(957, 133);
-            this.button26.Margin = new System.Windows.Forms.Padding(2);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(108, 34);
-            this.button26.TabIndex = 124;
-            this.button26.Text = "移动";
-            this.button26.UseVisualStyleBackColor = true;
+            this.label325.AutoSize = true;
+            this.label325.Location = new System.Drawing.Point(35, 39);
+            this.label325.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label325.Name = "label325";
+            this.label325.Size = new System.Drawing.Size(74, 21);
+            this.label325.TabIndex = 2;
+            this.label325.Text = "最大速度";
+            // 
+            // groupBox15
+            // 
+            this.groupBox15.Controls.Add(this.uiDoubleUpDown13);
+            this.groupBox15.Controls.Add(this.uiDoubleUpDown14);
+            this.groupBox15.Controls.Add(this.label326);
+            this.groupBox15.Controls.Add(this.uiDoubleUpDown15);
+            this.groupBox15.Controls.Add(this.label327);
+            this.groupBox15.Controls.Add(this.label328);
+            this.groupBox15.Location = new System.Drawing.Point(20, 226);
+            this.groupBox15.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox15.Name = "groupBox15";
+            this.groupBox15.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox15.Size = new System.Drawing.Size(261, 168);
+            this.groupBox15.TabIndex = 306;
+            this.groupBox15.TabStop = false;
+            this.groupBox15.Text = "入料手臂 Z1";
+            // 
+            // uiDoubleUpDown13
+            // 
+            this.uiDoubleUpDown13.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown13.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown13.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown13.Name = "uiDoubleUpDown13";
+            this.uiDoubleUpDown13.ShowText = false;
+            this.uiDoubleUpDown13.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown13.TabIndex = 289;
+            this.uiDoubleUpDown13.Text = "uiDoubleUpDown13";
+            this.uiDoubleUpDown13.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown14
+            // 
+            this.uiDoubleUpDown14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown14.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown14.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown14.Name = "uiDoubleUpDown14";
+            this.uiDoubleUpDown14.ShowText = false;
+            this.uiDoubleUpDown14.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown14.TabIndex = 286;
+            this.uiDoubleUpDown14.Text = "uiDoubleUpDown14";
+            this.uiDoubleUpDown14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label326
+            // 
+            this.label326.AutoSize = true;
+            this.label326.Location = new System.Drawing.Point(35, 121);
+            this.label326.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label326.Name = "label326";
+            this.label326.Size = new System.Drawing.Size(58, 21);
+            this.label326.TabIndex = 287;
+            this.label326.Text = "加速度";
+            // 
+            // uiDoubleUpDown15
+            // 
+            this.uiDoubleUpDown15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown15.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown15.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown15.Name = "uiDoubleUpDown15";
+            this.uiDoubleUpDown15.ShowText = false;
+            this.uiDoubleUpDown15.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown15.TabIndex = 285;
+            this.uiDoubleUpDown15.Text = "uiDoubleUpDown15";
+            this.uiDoubleUpDown15.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label327
+            // 
+            this.label327.AutoSize = true;
+            this.label327.Location = new System.Drawing.Point(35, 80);
+            this.label327.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label327.Name = "label327";
+            this.label327.Size = new System.Drawing.Size(58, 21);
+            this.label327.TabIndex = 282;
+            this.label327.Text = "加速度";
+            // 
+            // label328
+            // 
+            this.label328.AutoSize = true;
+            this.label328.Location = new System.Drawing.Point(35, 39);
+            this.label328.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label328.Name = "label328";
+            this.label328.Size = new System.Drawing.Size(74, 21);
+            this.label328.TabIndex = 2;
+            this.label328.Text = "最大速度";
             // 
             // groupBox22
             // 
-            this.groupBox22.Controls.Add(this.uiDoubleUpDown3);
-            this.groupBox22.Controls.Add(this.uiDoubleUpDown2);
-            this.groupBox22.Controls.Add(this.label318);
-            this.groupBox22.Controls.Add(this.uiDoubleUpDown1);
-            this.groupBox22.Controls.Add(this.label317);
+            this.groupBox22.Controls.Add(this.uiDoubleUpDown79);
+            this.groupBox22.Controls.Add(this.uiDoubleUpDown80);
+            this.groupBox22.Controls.Add(this.label329);
+            this.groupBox22.Controls.Add(this.uiDoubleUpDown81);
+            this.groupBox22.Controls.Add(this.label330);
             this.groupBox22.Controls.Add(this.label331);
-            this.groupBox22.Location = new System.Drawing.Point(26, 380);
+            this.groupBox22.Location = new System.Drawing.Point(291, 226);
             this.groupBox22.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox22.Name = "groupBox22";
             this.groupBox22.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox22.Size = new System.Drawing.Size(261, 168);
-            this.groupBox22.TabIndex = 284;
+            this.groupBox22.TabIndex = 307;
             this.groupBox22.TabStop = false;
-            this.groupBox22.Text = "入料手臂 X";
+            this.groupBox22.Text = "入料手臂 Z2";
             // 
-            // uiDoubleUpDown3
+            // uiDoubleUpDown79
             // 
-            this.uiDoubleUpDown3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown3.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown3.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown3.Name = "uiDoubleUpDown3";
-            this.uiDoubleUpDown3.ShowText = false;
-            this.uiDoubleUpDown3.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown3.TabIndex = 289;
-            this.uiDoubleUpDown3.Text = "uiDoubleUpDown3";
-            this.uiDoubleUpDown3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown79.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown79.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown79.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown79.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown79.Name = "uiDoubleUpDown79";
+            this.uiDoubleUpDown79.ShowText = false;
+            this.uiDoubleUpDown79.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown79.TabIndex = 289;
+            this.uiDoubleUpDown79.Text = "uiDoubleUpDown79";
+            this.uiDoubleUpDown79.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown2
+            // uiDoubleUpDown80
             // 
-            this.uiDoubleUpDown2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown2.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown2.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown2.Name = "uiDoubleUpDown2";
-            this.uiDoubleUpDown2.ShowText = false;
-            this.uiDoubleUpDown2.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown2.TabIndex = 286;
-            this.uiDoubleUpDown2.Text = "uiDoubleUpDown2";
-            this.uiDoubleUpDown2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown80.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown80.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown80.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown80.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown80.Name = "uiDoubleUpDown80";
+            this.uiDoubleUpDown80.ShowText = false;
+            this.uiDoubleUpDown80.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown80.TabIndex = 286;
+            this.uiDoubleUpDown80.Text = "uiDoubleUpDown80";
+            this.uiDoubleUpDown80.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label318
+            // label329
             // 
-            this.label318.AutoSize = true;
-            this.label318.Location = new System.Drawing.Point(35, 121);
-            this.label318.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label318.Name = "label318";
-            this.label318.Size = new System.Drawing.Size(58, 21);
-            this.label318.TabIndex = 287;
-            this.label318.Text = "加速度";
+            this.label329.AutoSize = true;
+            this.label329.Location = new System.Drawing.Point(35, 121);
+            this.label329.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label329.Name = "label329";
+            this.label329.Size = new System.Drawing.Size(58, 21);
+            this.label329.TabIndex = 287;
+            this.label329.Text = "加速度";
             // 
-            // uiDoubleUpDown1
+            // uiDoubleUpDown81
             // 
-            this.uiDoubleUpDown1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown1.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown1.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown1.Name = "uiDoubleUpDown1";
-            this.uiDoubleUpDown1.ShowText = false;
-            this.uiDoubleUpDown1.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown1.TabIndex = 285;
-            this.uiDoubleUpDown1.Text = "uiDoubleUpDown1";
-            this.uiDoubleUpDown1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown81.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown81.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown81.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown81.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown81.Name = "uiDoubleUpDown81";
+            this.uiDoubleUpDown81.ShowText = false;
+            this.uiDoubleUpDown81.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown81.TabIndex = 285;
+            this.uiDoubleUpDown81.Text = "uiDoubleUpDown81";
+            this.uiDoubleUpDown81.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label317
+            // label330
             // 
-            this.label317.AutoSize = true;
-            this.label317.Location = new System.Drawing.Point(35, 80);
-            this.label317.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label317.Name = "label317";
-            this.label317.Size = new System.Drawing.Size(58, 21);
-            this.label317.TabIndex = 282;
-            this.label317.Text = "加速度";
+            this.label330.AutoSize = true;
+            this.label330.Location = new System.Drawing.Point(35, 80);
+            this.label330.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label330.Name = "label330";
+            this.label330.Size = new System.Drawing.Size(58, 21);
+            this.label330.TabIndex = 282;
+            this.label330.Text = "加速度";
             // 
             // label331
             // 
@@ -11539,161 +11273,430 @@
             this.label331.TabIndex = 2;
             this.label331.Text = "最大速度";
             // 
-            // button24
+            // groupBox23
             // 
-            this.button24.Location = new System.Drawing.Point(957, 205);
-            this.button24.Margin = new System.Windows.Forms.Padding(2);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(108, 34);
-            this.button24.TabIndex = 126;
-            this.button24.Text = "移动";
-            this.button24.UseVisualStyleBackColor = true;
+            this.groupBox23.Controls.Add(this.uiDoubleUpDown115);
+            this.groupBox23.Controls.Add(this.uiDoubleUpDown116);
+            this.groupBox23.Controls.Add(this.label375);
+            this.groupBox23.Controls.Add(this.uiDoubleUpDown117);
+            this.groupBox23.Controls.Add(this.label376);
+            this.groupBox23.Controls.Add(this.label377);
+            this.groupBox23.Location = new System.Drawing.Point(291, 54);
+            this.groupBox23.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox23.Name = "groupBox23";
+            this.groupBox23.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox23.Size = new System.Drawing.Size(261, 168);
+            this.groupBox23.TabIndex = 304;
+            this.groupBox23.TabStop = false;
+            this.groupBox23.Text = "入料手臂 Y";
             // 
-            // label52
+            // uiDoubleUpDown115
             // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(22, 212);
-            this.label52.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(245, 21);
-            this.label52.TabIndex = 110;
-            this.label52.Text = "InputArm -> ShuttleL1 Z (放料)";
+            this.uiDoubleUpDown115.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown115.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown115.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown115.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown115.Name = "uiDoubleUpDown115";
+            this.uiDoubleUpDown115.ShowText = false;
+            this.uiDoubleUpDown115.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown115.TabIndex = 289;
+            this.uiDoubleUpDown115.Text = "uiDoubleUpDown115";
+            this.uiDoubleUpDown115.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button27
+            // uiDoubleUpDown116
             // 
-            this.button27.Location = new System.Drawing.Point(427, 205);
-            this.button27.Margin = new System.Windows.Forms.Padding(2);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(108, 34);
-            this.button27.TabIndex = 123;
-            this.button27.Text = "移动";
-            this.button27.UseVisualStyleBackColor = true;
+            this.uiDoubleUpDown116.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown116.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown116.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown116.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown116.Name = "uiDoubleUpDown116";
+            this.uiDoubleUpDown116.ShowText = false;
+            this.uiDoubleUpDown116.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown116.TabIndex = 286;
+            this.uiDoubleUpDown116.Text = "uiDoubleUpDown116";
+            this.uiDoubleUpDown116.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button23
+            // label375
             // 
-            this.button23.Location = new System.Drawing.Point(427, 326);
-            this.button23.Margin = new System.Windows.Forms.Padding(2);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(108, 34);
-            this.button23.TabIndex = 127;
-            this.button23.Text = "移动";
-            this.button23.UseVisualStyleBackColor = true;
+            this.label375.AutoSize = true;
+            this.label375.Location = new System.Drawing.Point(35, 121);
+            this.label375.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label375.Name = "label375";
+            this.label375.Size = new System.Drawing.Size(58, 21);
+            this.label375.TabIndex = 287;
+            this.label375.Text = "加速度";
             // 
-            // label53
+            // uiDoubleUpDown117
             // 
-            this.label53.AutoSize = true;
-            this.label53.Location = new System.Drawing.Point(22, 140);
-            this.label53.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(245, 21);
-            this.label53.TabIndex = 107;
-            this.label53.Text = "InputArm -> ShuttleL1 X (放料)";
+            this.uiDoubleUpDown117.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown117.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown117.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown117.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown117.Name = "uiDoubleUpDown117";
+            this.uiDoubleUpDown117.ShowText = false;
+            this.uiDoubleUpDown117.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown117.TabIndex = 285;
+            this.uiDoubleUpDown117.Text = "uiDoubleUpDown117";
+            this.uiDoubleUpDown117.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button28
+            // label376
             // 
-            this.button28.Location = new System.Drawing.Point(427, 169);
-            this.button28.Margin = new System.Windows.Forms.Padding(2);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(108, 34);
-            this.button28.TabIndex = 122;
-            this.button28.Text = "移动";
-            this.button28.UseVisualStyleBackColor = true;
+            this.label376.AutoSize = true;
+            this.label376.Location = new System.Drawing.Point(35, 80);
+            this.label376.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label376.Name = "label376";
+            this.label376.Size = new System.Drawing.Size(58, 21);
+            this.label376.TabIndex = 282;
+            this.label376.Text = "加速度";
             // 
-            // label51
+            // label377
             // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(22, 176);
-            this.label51.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(245, 21);
-            this.label51.TabIndex = 108;
-            this.label51.Text = "InputArm -> ShuttleL1 Y (放料)";
+            this.label377.AutoSize = true;
+            this.label377.Location = new System.Drawing.Point(35, 39);
+            this.label377.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label377.Name = "label377";
+            this.label377.Size = new System.Drawing.Size(74, 21);
+            this.label377.TabIndex = 2;
+            this.label377.Text = "最大速度";
             // 
-            // button22
+            // uiTitlePanel4
             // 
-            this.button22.Location = new System.Drawing.Point(427, 253);
-            this.button22.Margin = new System.Windows.Forms.Padding(2);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(108, 34);
-            this.button22.TabIndex = 126;
-            this.button22.Text = "移动";
-            this.button22.UseVisualStyleBackColor = true;
+            this.uiTitlePanel4.Controls.Add(this.label335);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown19);
+            this.uiTitlePanel4.Controls.Add(this.label332);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown16);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown17);
+            this.uiTitlePanel4.Controls.Add(this.label333);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown18);
+            this.uiTitlePanel4.Controls.Add(this.label334);
+            this.uiTitlePanel4.Controls.Add(this.label57);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown112);
+            this.uiTitlePanel4.Controls.Add(this.label43);
+            this.uiTitlePanel4.Controls.Add(this.button32);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown113);
+            this.uiTitlePanel4.Controls.Add(this.label56);
+            this.uiTitlePanel4.Controls.Add(this.button20);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown114);
+            this.uiTitlePanel4.Controls.Add(this.label44);
+            this.uiTitlePanel4.Controls.Add(this.label372);
+            this.uiTitlePanel4.Controls.Add(this.button31);
+            this.uiTitlePanel4.Controls.Add(this.label55);
+            this.uiTitlePanel4.Controls.Add(this.button222);
+            this.uiTitlePanel4.Controls.Add(this.label45);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown99);
+            this.uiTitlePanel4.Controls.Add(this.label373);
+            this.uiTitlePanel4.Controls.Add(this.button30);
+            this.uiTitlePanel4.Controls.Add(this.label54);
+            this.uiTitlePanel4.Controls.Add(this.button223);
+            this.uiTitlePanel4.Controls.Add(this.button29);
+            this.uiTitlePanel4.Controls.Add(this.button19);
+            this.uiTitlePanel4.Controls.Add(this.label374);
+            this.uiTitlePanel4.Controls.Add(this.button18);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown106);
+            this.uiTitlePanel4.Controls.Add(this.label51);
+            this.uiTitlePanel4.Controls.Add(this.button224);
+            this.uiTitlePanel4.Controls.Add(this.button28);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown103);
+            this.uiTitlePanel4.Controls.Add(this.label53);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown107);
+            this.uiTitlePanel4.Controls.Add(this.button27);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown100);
+            this.uiTitlePanel4.Controls.Add(this.label52);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown108);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown104);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown98);
+            this.uiTitlePanel4.Controls.Add(this.label46);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown105);
+            this.uiTitlePanel4.Controls.Add(this.label47);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown101);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown97);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown102);
+            this.uiTitlePanel4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel4.Location = new System.Drawing.Point(16, 17);
+            this.uiTitlePanel4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel4.Name = "uiTitlePanel4";
+            this.uiTitlePanel4.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel4.ShowText = false;
+            this.uiTitlePanel4.Size = new System.Drawing.Size(1271, 318);
+            this.uiTitlePanel4.TabIndex = 305;
+            this.uiTitlePanel4.Text = "点位（单位：mm）";
+            this.uiTitlePanel4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button18
+            // label335
             // 
-            this.button18.Location = new System.Drawing.Point(957, 87);
-            this.button18.Margin = new System.Windows.Forms.Padding(2);
-            this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(108, 34);
-            this.button18.TabIndex = 283;
-            this.button18.Text = "移动";
-            this.button18.UseVisualStyleBackColor = true;
+            this.label335.AutoSize = true;
+            this.label335.Location = new System.Drawing.Point(969, 276);
+            this.label335.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label335.Name = "label335";
+            this.label335.Size = new System.Drawing.Size(139, 21);
+            this.label335.TabIndex = 310;
+            this.label335.Text = "入料_Z4_硬件补偿";
             // 
-            // button19
+            // uiDoubleUpDown19
             // 
-            this.button19.Location = new System.Drawing.Point(957, 51);
-            this.button19.Margin = new System.Windows.Forms.Padding(2);
-            this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(108, 34);
-            this.button19.TabIndex = 282;
-            this.button19.Text = "移动";
-            this.button19.UseVisualStyleBackColor = true;
+            this.uiDoubleUpDown19.DecimalPlaces = 3;
+            this.uiDoubleUpDown19.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown19.Location = new System.Drawing.Point(1118, 271);
+            this.uiDoubleUpDown19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown19.Maximum = 2000D;
+            this.uiDoubleUpDown19.Minimum = -100D;
+            this.uiDoubleUpDown19.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown19.Name = "uiDoubleUpDown19";
+            this.uiDoubleUpDown19.ShowText = false;
+            this.uiDoubleUpDown19.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown19.Step = 1D;
+            this.uiDoubleUpDown19.TabIndex = 311;
+            this.uiDoubleUpDown19.Text = "uiDoubleUpDown19";
+            this.uiDoubleUpDown19.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button29
+            // label332
             // 
-            this.button29.Location = new System.Drawing.Point(427, 133);
-            this.button29.Margin = new System.Windows.Forms.Padding(2);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(108, 34);
-            this.button29.TabIndex = 121;
-            this.button29.Text = "移动";
-            this.button29.UseVisualStyleBackColor = true;
+            this.label332.AutoSize = true;
+            this.label332.Location = new System.Drawing.Point(969, 240);
+            this.label332.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label332.Name = "label332";
+            this.label332.Size = new System.Drawing.Size(139, 21);
+            this.label332.TabIndex = 304;
+            this.label332.Text = "入料_Z3_硬件补偿";
             // 
-            // label54
+            // uiDoubleUpDown16
             // 
-            this.label54.AutoSize = true;
-            this.label54.Location = new System.Drawing.Point(22, 333);
-            this.label54.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label54.Name = "label54";
-            this.label54.Size = new System.Drawing.Size(168, 21);
-            this.label54.TabIndex = 105;
-            this.label54.Text = "InputArm -> Work Z";
+            this.uiDoubleUpDown16.DecimalPlaces = 3;
+            this.uiDoubleUpDown16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown16.Location = new System.Drawing.Point(1118, 235);
+            this.uiDoubleUpDown16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown16.Maximum = 2000D;
+            this.uiDoubleUpDown16.Minimum = -100D;
+            this.uiDoubleUpDown16.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown16.Name = "uiDoubleUpDown16";
+            this.uiDoubleUpDown16.ShowText = false;
+            this.uiDoubleUpDown16.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown16.Step = 1D;
+            this.uiDoubleUpDown16.TabIndex = 309;
+            this.uiDoubleUpDown16.Text = "uiDoubleUpDown16";
+            this.uiDoubleUpDown16.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button21
+            // uiDoubleUpDown17
             // 
-            this.button21.Location = new System.Drawing.Point(427, 289);
-            this.button21.Margin = new System.Windows.Forms.Padding(2);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(108, 34);
-            this.button21.TabIndex = 129;
-            this.button21.Text = "移动";
-            this.button21.UseVisualStyleBackColor = true;
+            this.uiDoubleUpDown17.DecimalPlaces = 3;
+            this.uiDoubleUpDown17.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown17.Location = new System.Drawing.Point(1118, 199);
+            this.uiDoubleUpDown17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown17.Maximum = 2000D;
+            this.uiDoubleUpDown17.Minimum = -100D;
+            this.uiDoubleUpDown17.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown17.Name = "uiDoubleUpDown17";
+            this.uiDoubleUpDown17.ShowText = false;
+            this.uiDoubleUpDown17.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown17.Step = 1D;
+            this.uiDoubleUpDown17.TabIndex = 308;
+            this.uiDoubleUpDown17.Text = "uiDoubleUpDown17";
+            this.uiDoubleUpDown17.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label50
+            // label333
             // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(551, 140);
-            this.label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(245, 21);
-            this.label50.TabIndex = 113;
-            this.label50.Text = "InputArm -> ShuttleL2 X (放料)";
+            this.label333.AutoSize = true;
+            this.label333.Location = new System.Drawing.Point(969, 204);
+            this.label333.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label333.Name = "label333";
+            this.label333.Size = new System.Drawing.Size(139, 21);
+            this.label333.TabIndex = 306;
+            this.label333.Text = "入料_Z2_硬件补偿";
             // 
-            // button30
+            // uiDoubleUpDown18
             // 
-            this.button30.Location = new System.Drawing.Point(427, 87);
-            this.button30.Margin = new System.Windows.Forms.Padding(2);
-            this.button30.Name = "button30";
-            this.button30.Size = new System.Drawing.Size(108, 34);
-            this.button30.TabIndex = 120;
-            this.button30.Text = "移动";
-            this.button30.UseVisualStyleBackColor = true;
+            this.uiDoubleUpDown18.DecimalPlaces = 3;
+            this.uiDoubleUpDown18.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown18.Location = new System.Drawing.Point(1118, 163);
+            this.uiDoubleUpDown18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown18.Maximum = 2000D;
+            this.uiDoubleUpDown18.Minimum = -100D;
+            this.uiDoubleUpDown18.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown18.Name = "uiDoubleUpDown18";
+            this.uiDoubleUpDown18.ShowText = false;
+            this.uiDoubleUpDown18.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown18.Step = 1D;
+            this.uiDoubleUpDown18.TabIndex = 307;
+            this.uiDoubleUpDown18.Text = "uiDoubleUpDown18";
+            this.uiDoubleUpDown18.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label334
+            // 
+            this.label334.AutoSize = true;
+            this.label334.Location = new System.Drawing.Point(969, 168);
+            this.label334.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label334.Name = "label334";
+            this.label334.Size = new System.Drawing.Size(139, 21);
+            this.label334.TabIndex = 305;
+            this.label334.Text = "入料_Z1_硬件补偿";
+            // 
+            // label57
+            // 
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(16, 50);
+            this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(170, 21);
+            this.label57.TabIndex = 2;
+            this.label57.Text = "入料 -> Load X (吸料)";
+            // 
+            // uiDoubleUpDown112
+            // 
+            this.uiDoubleUpDown112.DecimalPlaces = 3;
+            this.uiDoubleUpDown112.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown112.Location = new System.Drawing.Point(687, 238);
+            this.uiDoubleUpDown112.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown112.Maximum = 2000D;
+            this.uiDoubleUpDown112.Minimum = -100D;
+            this.uiDoubleUpDown112.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown112.Name = "uiDoubleUpDown112";
+            this.uiDoubleUpDown112.ShowText = false;
+            this.uiDoubleUpDown112.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown112.Step = 1D;
+            this.uiDoubleUpDown112.TabIndex = 303;
+            this.uiDoubleUpDown112.Text = "uiDoubleUpDown112";
+            this.uiDoubleUpDown112.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(16, 204);
+            this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(185, 21);
+            this.label43.TabIndex = 276;
+            this.label43.Text = "入料 -> Heat Y (吸放料)";
+            // 
+            // button32
+            // 
+            this.button32.Location = new System.Drawing.Point(364, 45);
+            this.button32.Margin = new System.Windows.Forms.Padding(2);
+            this.button32.Name = "button32";
+            this.button32.Size = new System.Drawing.Size(108, 34);
+            this.button32.TabIndex = 101;
+            this.button32.Text = "移动";
+            this.button32.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown113
+            // 
+            this.uiDoubleUpDown113.DecimalPlaces = 3;
+            this.uiDoubleUpDown113.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown113.Location = new System.Drawing.Point(687, 202);
+            this.uiDoubleUpDown113.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown113.Maximum = 2000D;
+            this.uiDoubleUpDown113.Minimum = -100D;
+            this.uiDoubleUpDown113.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown113.Name = "uiDoubleUpDown113";
+            this.uiDoubleUpDown113.ShowText = false;
+            this.uiDoubleUpDown113.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown113.Step = 1D;
+            this.uiDoubleUpDown113.TabIndex = 302;
+            this.uiDoubleUpDown113.Text = "uiDoubleUpDown113";
+            this.uiDoubleUpDown113.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label56
+            // 
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(16, 122);
+            this.label56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(170, 21);
+            this.label56.TabIndex = 102;
+            this.label56.Text = "入料 -> Load Z (吸料)";
+            // 
+            // button20
+            // 
+            this.button20.Location = new System.Drawing.Point(364, 163);
+            this.button20.Margin = new System.Windows.Forms.Padding(2);
+            this.button20.Name = "button20";
+            this.button20.Size = new System.Drawing.Size(108, 34);
+            this.button20.TabIndex = 277;
+            this.button20.Text = "移动";
+            this.button20.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown114
+            // 
+            this.uiDoubleUpDown114.DecimalPlaces = 3;
+            this.uiDoubleUpDown114.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown114.Location = new System.Drawing.Point(687, 166);
+            this.uiDoubleUpDown114.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown114.Maximum = 2000D;
+            this.uiDoubleUpDown114.Minimum = -100D;
+            this.uiDoubleUpDown114.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown114.Name = "uiDoubleUpDown114";
+            this.uiDoubleUpDown114.ShowText = false;
+            this.uiDoubleUpDown114.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown114.Step = 1D;
+            this.uiDoubleUpDown114.TabIndex = 301;
+            this.uiDoubleUpDown114.Text = "uiDoubleUpDown114";
+            this.uiDoubleUpDown114.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(16, 240);
+            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(185, 21);
+            this.label44.TabIndex = 279;
+            this.label44.Text = "入料 -> Heat Z (吸放料)";
+            // 
+            // label372
+            // 
+            this.label372.AutoSize = true;
+            this.label372.Location = new System.Drawing.Point(489, 240);
+            this.label372.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label372.Name = "label372";
+            this.label372.Size = new System.Drawing.Size(174, 21);
+            this.label372.TabIndex = 297;
+            this.label372.Text = "入料 -> 梭车2 Z (放料)";
+            // 
+            // button31
+            // 
+            this.button31.Location = new System.Drawing.Point(364, 81);
+            this.button31.Margin = new System.Windows.Forms.Padding(2);
+            this.button31.Name = "button31";
+            this.button31.Size = new System.Drawing.Size(108, 34);
+            this.button31.TabIndex = 119;
+            this.button31.Text = "移动";
+            this.button31.UseVisualStyleBackColor = true;
+            // 
+            // label55
+            // 
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(16, 86);
+            this.label55.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(170, 21);
+            this.label55.TabIndex = 4;
+            this.label55.Text = "入料 -> Load Y (吸料)";
+            // 
+            // button222
+            // 
+            this.button222.Location = new System.Drawing.Point(837, 235);
+            this.button222.Margin = new System.Windows.Forms.Padding(2);
+            this.button222.Name = "button222";
+            this.button222.Size = new System.Drawing.Size(108, 34);
+            this.button222.TabIndex = 300;
+            this.button222.Text = "移动";
+            this.button222.UseVisualStyleBackColor = true;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(16, 168);
+            this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(185, 21);
+            this.label45.TabIndex = 275;
+            this.label45.Text = "入料 -> Heat X (吸放料)";
             // 
             // uiDoubleUpDown99
             // 
             this.uiDoubleUpDown99.DecimalPlaces = 3;
             this.uiDoubleUpDown99.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown99.Location = new System.Drawing.Point(282, 18);
+            this.uiDoubleUpDown99.Location = new System.Drawing.Point(209, 48);
             this.uiDoubleUpDown99.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown99.Maximum = 2000D;
             this.uiDoubleUpDown99.Minimum = -100D;
@@ -11706,188 +11709,362 @@
             this.uiDoubleUpDown99.Text = "uiDoubleUpDown99";
             this.uiDoubleUpDown99.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label45
+            // label373
             // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(551, 22);
-            this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(258, 21);
-            this.label45.TabIndex = 275;
-            this.label45.Text = "InputArm -> HeatTray X (取放料)";
+            this.label373.AutoSize = true;
+            this.label373.Location = new System.Drawing.Point(489, 168);
+            this.label373.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label373.Name = "label373";
+            this.label373.Size = new System.Drawing.Size(174, 21);
+            this.label373.TabIndex = 295;
+            this.label373.Text = "入料 -> 梭车2 X (放料)";
             // 
-            // label55
+            // button30
             // 
-            this.label55.AutoSize = true;
-            this.label55.Location = new System.Drawing.Point(22, 58);
-            this.label55.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label55.Name = "label55";
-            this.label55.Size = new System.Drawing.Size(226, 21);
-            this.label55.TabIndex = 4;
-            this.label55.Text = "InputArm -> Loader Y (取料)";
+            this.button30.Location = new System.Drawing.Point(364, 117);
+            this.button30.Margin = new System.Windows.Forms.Padding(2);
+            this.button30.Name = "button30";
+            this.button30.Size = new System.Drawing.Size(108, 34);
+            this.button30.TabIndex = 120;
+            this.button30.Text = "移动";
+            this.button30.UseVisualStyleBackColor = true;
             // 
-            // label49
+            // label54
             // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(551, 212);
-            this.label49.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(245, 21);
-            this.label49.TabIndex = 116;
-            this.label49.Text = "InputArm -> ShuttleL2 Z (放料)";
+            this.label54.AutoSize = true;
+            this.label54.Location = new System.Drawing.Point(969, 122);
+            this.label54.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(129, 21);
+            this.label54.TabIndex = 105;
+            this.label54.Text = "入料_梭车列间隔";
             // 
-            // button31
+            // button223
             // 
-            this.button31.Location = new System.Drawing.Point(427, 51);
-            this.button31.Margin = new System.Windows.Forms.Padding(2);
-            this.button31.Name = "button31";
-            this.button31.Size = new System.Drawing.Size(108, 34);
-            this.button31.TabIndex = 119;
-            this.button31.Text = "移动";
-            this.button31.UseVisualStyleBackColor = true;
+            this.button223.Location = new System.Drawing.Point(837, 199);
+            this.button223.Margin = new System.Windows.Forms.Padding(2);
+            this.button223.Name = "button223";
+            this.button223.Size = new System.Drawing.Size(108, 34);
+            this.button223.TabIndex = 299;
+            this.button223.Text = "移动";
+            this.button223.UseVisualStyleBackColor = true;
             // 
-            // label44
+            // button29
             // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(551, 94);
-            this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(258, 21);
-            this.label44.TabIndex = 279;
-            this.label44.Text = "InputArm -> HeatTray Z (取放料)";
+            this.button29.Location = new System.Drawing.Point(837, 45);
+            this.button29.Margin = new System.Windows.Forms.Padding(2);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(108, 34);
+            this.button29.TabIndex = 121;
+            this.button29.Text = "移动";
+            this.button29.UseVisualStyleBackColor = true;
             // 
-            // button20
+            // button19
             // 
-            this.button20.Location = new System.Drawing.Point(957, 15);
-            this.button20.Margin = new System.Windows.Forms.Padding(2);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(108, 34);
-            this.button20.TabIndex = 277;
-            this.button20.Text = "移动";
-            this.button20.UseVisualStyleBackColor = true;
+            this.button19.Location = new System.Drawing.Point(364, 199);
+            this.button19.Margin = new System.Windows.Forms.Padding(2);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(108, 34);
+            this.button19.TabIndex = 282;
+            this.button19.Text = "移动";
+            this.button19.UseVisualStyleBackColor = true;
             // 
-            // label56
+            // label374
             // 
-            this.label56.AutoSize = true;
-            this.label56.Location = new System.Drawing.Point(22, 94);
-            this.label56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label56.Name = "label56";
-            this.label56.Size = new System.Drawing.Size(226, 21);
-            this.label56.TabIndex = 102;
-            this.label56.Text = "InputArm -> Loader Z (取料)";
+            this.label374.AutoSize = true;
+            this.label374.Location = new System.Drawing.Point(489, 204);
+            this.label374.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label374.Name = "label374";
+            this.label374.Size = new System.Drawing.Size(174, 21);
+            this.label374.TabIndex = 296;
+            this.label374.Text = "入料 -> 梭车2 Y (放料)";
             // 
-            // button32
+            // button18
             // 
-            this.button32.Location = new System.Drawing.Point(427, 15);
-            this.button32.Margin = new System.Windows.Forms.Padding(2);
-            this.button32.Name = "button32";
-            this.button32.Size = new System.Drawing.Size(108, 34);
-            this.button32.TabIndex = 101;
-            this.button32.Text = "移动";
-            this.button32.UseVisualStyleBackColor = true;
+            this.button18.Location = new System.Drawing.Point(364, 235);
+            this.button18.Margin = new System.Windows.Forms.Padding(2);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(108, 34);
+            this.button18.TabIndex = 283;
+            this.button18.Text = "移动";
+            this.button18.UseVisualStyleBackColor = true;
             // 
-            // label48
+            // uiDoubleUpDown106
             // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(551, 176);
-            this.label48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(245, 21);
-            this.label48.TabIndex = 114;
-            this.label48.Text = "InputArm -> ShuttleL2 Y (放料)";
+            this.uiDoubleUpDown106.DecimalPlaces = 3;
+            this.uiDoubleUpDown106.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown106.Location = new System.Drawing.Point(209, 238);
+            this.uiDoubleUpDown106.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown106.Maximum = 2000D;
+            this.uiDoubleUpDown106.Minimum = -100D;
+            this.uiDoubleUpDown106.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown106.Name = "uiDoubleUpDown106";
+            this.uiDoubleUpDown106.ShowText = false;
+            this.uiDoubleUpDown106.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown106.Step = 1D;
+            this.uiDoubleUpDown106.TabIndex = 297;
+            this.uiDoubleUpDown106.Text = "uiDoubleUpDown106";
+            this.uiDoubleUpDown106.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label43
+            // label51
             // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(551, 58);
-            this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(258, 21);
-            this.label43.TabIndex = 276;
-            this.label43.Text = "InputArm -> HeatTray Y (取放料)";
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(489, 86);
+            this.label51.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(174, 21);
+            this.label51.TabIndex = 108;
+            this.label51.Text = "入料 -> 梭车1 Y (放料)";
+            // 
+            // button224
+            // 
+            this.button224.Location = new System.Drawing.Point(837, 163);
+            this.button224.Margin = new System.Windows.Forms.Padding(2);
+            this.button224.Name = "button224";
+            this.button224.Size = new System.Drawing.Size(108, 34);
+            this.button224.TabIndex = 298;
+            this.button224.Text = "移动";
+            this.button224.UseVisualStyleBackColor = true;
+            // 
+            // button28
+            // 
+            this.button28.Location = new System.Drawing.Point(837, 81);
+            this.button28.Margin = new System.Windows.Forms.Padding(2);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(108, 34);
+            this.button28.TabIndex = 122;
+            this.button28.Text = "移动";
+            this.button28.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown103
+            // 
+            this.uiDoubleUpDown103.DecimalPlaces = 3;
+            this.uiDoubleUpDown103.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown103.Location = new System.Drawing.Point(1118, 117);
+            this.uiDoubleUpDown103.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown103.Maximum = 2000D;
+            this.uiDoubleUpDown103.Minimum = -100D;
+            this.uiDoubleUpDown103.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown103.Name = "uiDoubleUpDown103";
+            this.uiDoubleUpDown103.ShowText = false;
+            this.uiDoubleUpDown103.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown103.Step = 1D;
+            this.uiDoubleUpDown103.TabIndex = 294;
+            this.uiDoubleUpDown103.Text = "uiDoubleUpDown103";
+            this.uiDoubleUpDown103.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(489, 50);
+            this.label53.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(174, 21);
+            this.label53.TabIndex = 107;
+            this.label53.Text = "入料 -> 梭车1 X (放料)";
+            // 
+            // uiDoubleUpDown107
+            // 
+            this.uiDoubleUpDown107.DecimalPlaces = 3;
+            this.uiDoubleUpDown107.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown107.Location = new System.Drawing.Point(209, 202);
+            this.uiDoubleUpDown107.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown107.Maximum = 2000D;
+            this.uiDoubleUpDown107.Minimum = -100D;
+            this.uiDoubleUpDown107.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown107.Name = "uiDoubleUpDown107";
+            this.uiDoubleUpDown107.ShowText = false;
+            this.uiDoubleUpDown107.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown107.Step = 1D;
+            this.uiDoubleUpDown107.TabIndex = 296;
+            this.uiDoubleUpDown107.Text = "uiDoubleUpDown107";
+            this.uiDoubleUpDown107.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button27
+            // 
+            this.button27.Location = new System.Drawing.Point(837, 117);
+            this.button27.Margin = new System.Windows.Forms.Padding(2);
+            this.button27.Name = "button27";
+            this.button27.Size = new System.Drawing.Size(108, 34);
+            this.button27.TabIndex = 123;
+            this.button27.Text = "移动";
+            this.button27.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown100
+            // 
+            this.uiDoubleUpDown100.DecimalPlaces = 3;
+            this.uiDoubleUpDown100.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown100.Location = new System.Drawing.Point(687, 120);
+            this.uiDoubleUpDown100.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown100.Maximum = 2000D;
+            this.uiDoubleUpDown100.Minimum = -100D;
+            this.uiDoubleUpDown100.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown100.Name = "uiDoubleUpDown100";
+            this.uiDoubleUpDown100.ShowText = false;
+            this.uiDoubleUpDown100.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown100.Step = 1D;
+            this.uiDoubleUpDown100.TabIndex = 294;
+            this.uiDoubleUpDown100.Text = "uiDoubleUpDown100";
+            this.uiDoubleUpDown100.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(489, 122);
+            this.label52.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(174, 21);
+            this.label52.TabIndex = 110;
+            this.label52.Text = "入料 -> 梭车1 Z (放料)";
+            // 
+            // uiDoubleUpDown108
+            // 
+            this.uiDoubleUpDown108.DecimalPlaces = 3;
+            this.uiDoubleUpDown108.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown108.Location = new System.Drawing.Point(209, 166);
+            this.uiDoubleUpDown108.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown108.Maximum = 2000D;
+            this.uiDoubleUpDown108.Minimum = -100D;
+            this.uiDoubleUpDown108.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown108.Name = "uiDoubleUpDown108";
+            this.uiDoubleUpDown108.ShowText = false;
+            this.uiDoubleUpDown108.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown108.Step = 1D;
+            this.uiDoubleUpDown108.TabIndex = 295;
+            this.uiDoubleUpDown108.Text = "uiDoubleUpDown108";
+            this.uiDoubleUpDown108.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown104
+            // 
+            this.uiDoubleUpDown104.DecimalPlaces = 3;
+            this.uiDoubleUpDown104.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown104.Location = new System.Drawing.Point(1118, 81);
+            this.uiDoubleUpDown104.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown104.Maximum = 2000D;
+            this.uiDoubleUpDown104.Minimum = -100D;
+            this.uiDoubleUpDown104.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown104.Name = "uiDoubleUpDown104";
+            this.uiDoubleUpDown104.ShowText = false;
+            this.uiDoubleUpDown104.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown104.Step = 1D;
+            this.uiDoubleUpDown104.TabIndex = 293;
+            this.uiDoubleUpDown104.Text = "uiDoubleUpDown104";
+            this.uiDoubleUpDown104.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown98
+            // 
+            this.uiDoubleUpDown98.DecimalPlaces = 3;
+            this.uiDoubleUpDown98.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown98.Location = new System.Drawing.Point(209, 120);
+            this.uiDoubleUpDown98.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown98.Maximum = 2000D;
+            this.uiDoubleUpDown98.Minimum = -100D;
+            this.uiDoubleUpDown98.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown98.Name = "uiDoubleUpDown98";
+            this.uiDoubleUpDown98.ShowText = false;
+            this.uiDoubleUpDown98.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown98.Step = 1D;
+            this.uiDoubleUpDown98.TabIndex = 291;
+            this.uiDoubleUpDown98.Text = "uiDoubleUpDown98";
+            this.uiDoubleUpDown98.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Location = new System.Drawing.Point(969, 86);
+            this.label46.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(129, 21);
+            this.label46.TabIndex = 125;
+            this.label46.Text = "入料_变距最大值";
+            // 
+            // uiDoubleUpDown105
+            // 
+            this.uiDoubleUpDown105.DecimalPlaces = 3;
+            this.uiDoubleUpDown105.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown105.Location = new System.Drawing.Point(1118, 45);
+            this.uiDoubleUpDown105.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown105.Maximum = 2000D;
+            this.uiDoubleUpDown105.Minimum = -100D;
+            this.uiDoubleUpDown105.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown105.Name = "uiDoubleUpDown105";
+            this.uiDoubleUpDown105.ShowText = false;
+            this.uiDoubleUpDown105.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown105.Step = 1D;
+            this.uiDoubleUpDown105.TabIndex = 292;
+            this.uiDoubleUpDown105.Text = "uiDoubleUpDown105";
+            this.uiDoubleUpDown105.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(969, 50);
+            this.label47.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(129, 21);
+            this.label47.TabIndex = 124;
+            this.label47.Text = "入料_变距最小值";
+            // 
+            // uiDoubleUpDown101
+            // 
+            this.uiDoubleUpDown101.DecimalPlaces = 3;
+            this.uiDoubleUpDown101.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown101.Location = new System.Drawing.Point(687, 84);
+            this.uiDoubleUpDown101.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown101.Maximum = 2000D;
+            this.uiDoubleUpDown101.Minimum = -100D;
+            this.uiDoubleUpDown101.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown101.Name = "uiDoubleUpDown101";
+            this.uiDoubleUpDown101.ShowText = false;
+            this.uiDoubleUpDown101.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown101.Step = 1D;
+            this.uiDoubleUpDown101.TabIndex = 293;
+            this.uiDoubleUpDown101.Text = "uiDoubleUpDown101";
+            this.uiDoubleUpDown101.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown97
+            // 
+            this.uiDoubleUpDown97.DecimalPlaces = 3;
+            this.uiDoubleUpDown97.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown97.Location = new System.Drawing.Point(209, 84);
+            this.uiDoubleUpDown97.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown97.Maximum = 2000D;
+            this.uiDoubleUpDown97.Minimum = -100D;
+            this.uiDoubleUpDown97.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown97.Name = "uiDoubleUpDown97";
+            this.uiDoubleUpDown97.ShowText = false;
+            this.uiDoubleUpDown97.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown97.Step = 1D;
+            this.uiDoubleUpDown97.TabIndex = 291;
+            this.uiDoubleUpDown97.Text = "uiDoubleUpDown97";
+            this.uiDoubleUpDown97.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown102
+            // 
+            this.uiDoubleUpDown102.DecimalPlaces = 3;
+            this.uiDoubleUpDown102.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown102.Location = new System.Drawing.Point(687, 48);
+            this.uiDoubleUpDown102.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown102.Maximum = 2000D;
+            this.uiDoubleUpDown102.Minimum = -100D;
+            this.uiDoubleUpDown102.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown102.Name = "uiDoubleUpDown102";
+            this.uiDoubleUpDown102.ShowText = false;
+            this.uiDoubleUpDown102.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown102.Step = 1D;
+            this.uiDoubleUpDown102.TabIndex = 292;
+            this.uiDoubleUpDown102.Text = "uiDoubleUpDown102";
+            this.uiDoubleUpDown102.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPage8
             // 
             this.tabPage8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown94);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown91);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown95);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown88);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown96);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown92);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown85);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown93);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown89);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown82);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown90);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown86);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown79);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown87);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown83);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown76);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown84);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown80);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown73);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown81);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown77);
-            this.tabPage8.Controls.Add(this.label58);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown78);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown74);
-            this.tabPage8.Controls.Add(this.uiDoubleUpDown75);
-            this.tabPage8.Controls.Add(this.button33);
-            this.tabPage8.Controls.Add(this.button36);
-            this.tabPage8.Controls.Add(this.groupBox29);
-            this.tabPage8.Controls.Add(this.button37);
-            this.tabPage8.Controls.Add(this.button38);
-            this.tabPage8.Controls.Add(this.button34);
-            this.tabPage8.Controls.Add(this.button40);
-            this.tabPage8.Controls.Add(this.groupBox30);
-            this.tabPage8.Controls.Add(this.groupBox35);
-            this.tabPage8.Controls.Add(this.button35);
-            this.tabPage8.Controls.Add(this.button41);
-            this.tabPage8.Controls.Add(this.groupBox31);
-            this.tabPage8.Controls.Add(this.groupBox34);
-            this.tabPage8.Controls.Add(this.button42);
-            this.tabPage8.Controls.Add(this.button47);
-            this.tabPage8.Controls.Add(this.button48);
-            this.tabPage8.Controls.Add(this.groupBox32);
-            this.tabPage8.Controls.Add(this.button50);
-            this.tabPage8.Controls.Add(this.groupBox33);
-            this.tabPage8.Controls.Add(this.label66);
-            this.tabPage8.Controls.Add(this.label59);
-            this.tabPage8.Controls.Add(this.button46);
-            this.tabPage8.Controls.Add(this.label67);
-            this.tabPage8.Controls.Add(this.label64);
-            this.tabPage8.Controls.Add(this.label63);
-            this.tabPage8.Controls.Add(this.label68);
-            this.tabPage8.Controls.Add(this.button56);
-            this.tabPage8.Controls.Add(this.label70);
-            this.tabPage8.Controls.Add(this.label62);
-            this.tabPage8.Controls.Add(this.label72);
-            this.tabPage8.Controls.Add(this.button49);
-            this.tabPage8.Controls.Add(this.label74);
-            this.tabPage8.Controls.Add(this.label75);
-            this.tabPage8.Controls.Add(this.label65);
-            this.tabPage8.Controls.Add(this.label76);
-            this.tabPage8.Controls.Add(this.button51);
-            this.tabPage8.Controls.Add(this.button45);
-            this.tabPage8.Controls.Add(this.label60);
-            this.tabPage8.Controls.Add(this.button53);
-            this.tabPage8.Controls.Add(this.button44);
-            this.tabPage8.Controls.Add(this.button43);
-            this.tabPage8.Controls.Add(this.label61);
-            this.tabPage8.Controls.Add(this.button54);
-            this.tabPage8.Controls.Add(this.label78);
-            this.tabPage8.Controls.Add(this.label81);
-            this.tabPage8.Controls.Add(this.button55);
-            this.tabPage8.Controls.Add(this.label80);
-            this.tabPage8.Controls.Add(this.label79);
-            this.tabPage8.Controls.Add(this.label69);
-            this.tabPage8.Controls.Add(this.label77);
-            this.tabPage8.Controls.Add(this.button58);
-            this.tabPage8.Controls.Add(this.label71);
-            this.tabPage8.Controls.Add(this.button57);
-            this.tabPage8.Controls.Add(this.label73);
+            this.tabPage8.Controls.Add(this.uiButton5);
+            this.tabPage8.Controls.Add(this.uiButton6);
+            this.tabPage8.Controls.Add(this.uiButton4);
+            this.tabPage8.Controls.Add(this.uiButton3);
+            this.tabPage8.Controls.Add(this.uiTitlePanel7);
+            this.tabPage8.Controls.Add(this.uiTitlePanel14);
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
@@ -11895,1383 +12072,821 @@
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "出料手臂";
             // 
-            // uiDoubleUpDown94
+            // uiButton5
             // 
-            this.uiDoubleUpDown94.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown94.Location = new System.Drawing.Point(1348, 208);
-            this.uiDoubleUpDown94.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown94.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown94.Name = "uiDoubleUpDown94";
-            this.uiDoubleUpDown94.ShowText = false;
-            this.uiDoubleUpDown94.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown94.TabIndex = 295;
-            this.uiDoubleUpDown94.Text = "uiDoubleUpDown94";
-            this.uiDoubleUpDown94.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiButton5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton5.Location = new System.Drawing.Point(1450, 853);
+            this.uiButton5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton5.Name = "uiButton5";
+            this.uiButton5.RectColor = System.Drawing.Color.White;
+            this.uiButton5.Size = new System.Drawing.Size(98, 34);
+            this.uiButton5.TabIndex = 332;
+            this.uiButton5.Text = "恢复默认";
+            this.uiButton5.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
-            // uiDoubleUpDown91
+            // uiButton6
             // 
-            this.uiDoubleUpDown91.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown91.Location = new System.Drawing.Point(1348, 91);
-            this.uiDoubleUpDown91.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown91.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown91.Name = "uiDoubleUpDown91";
-            this.uiDoubleUpDown91.ShowText = false;
-            this.uiDoubleUpDown91.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown91.TabIndex = 295;
-            this.uiDoubleUpDown91.Text = "uiDoubleUpDown91";
-            this.uiDoubleUpDown91.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiButton6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton6.Location = new System.Drawing.Point(1575, 853);
+            this.uiButton6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton6.Name = "uiButton6";
+            this.uiButton6.RectColor = System.Drawing.Color.White;
+            this.uiButton6.Size = new System.Drawing.Size(98, 34);
+            this.uiButton6.TabIndex = 331;
+            this.uiButton6.Text = "保存";
+            this.uiButton6.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
-            // uiDoubleUpDown95
+            // uiButton4
             // 
-            this.uiDoubleUpDown95.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown95.Location = new System.Drawing.Point(1348, 172);
-            this.uiDoubleUpDown95.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown95.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown95.Name = "uiDoubleUpDown95";
-            this.uiDoubleUpDown95.ShowText = false;
-            this.uiDoubleUpDown95.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown95.TabIndex = 294;
-            this.uiDoubleUpDown95.Text = "uiDoubleUpDown95";
-            this.uiDoubleUpDown95.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton4.Location = new System.Drawing.Point(1450, 433);
+            this.uiButton4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton4.Name = "uiButton4";
+            this.uiButton4.RectColor = System.Drawing.Color.White;
+            this.uiButton4.Size = new System.Drawing.Size(98, 34);
+            this.uiButton4.TabIndex = 330;
+            this.uiButton4.Text = "恢复默认";
+            this.uiButton4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
-            // uiDoubleUpDown88
+            // uiButton3
             // 
-            this.uiDoubleUpDown88.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown88.Location = new System.Drawing.Point(825, 91);
-            this.uiDoubleUpDown88.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown88.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown88.Name = "uiDoubleUpDown88";
-            this.uiDoubleUpDown88.ShowText = false;
-            this.uiDoubleUpDown88.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown88.TabIndex = 295;
-            this.uiDoubleUpDown88.Text = "uiDoubleUpDown88";
-            this.uiDoubleUpDown88.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton3.Location = new System.Drawing.Point(1575, 433);
+            this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton3.Name = "uiButton3";
+            this.uiButton3.RectColor = System.Drawing.Color.White;
+            this.uiButton3.Size = new System.Drawing.Size(98, 34);
+            this.uiButton3.TabIndex = 329;
+            this.uiButton3.Text = "保存";
+            this.uiButton3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
-            // uiDoubleUpDown96
+            // uiTitlePanel7
             // 
-            this.uiDoubleUpDown96.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown96.Location = new System.Drawing.Point(1348, 136);
-            this.uiDoubleUpDown96.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown96.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown96.Name = "uiDoubleUpDown96";
-            this.uiDoubleUpDown96.ShowText = false;
-            this.uiDoubleUpDown96.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown96.TabIndex = 293;
-            this.uiDoubleUpDown96.Text = "uiDoubleUpDown96";
-            this.uiDoubleUpDown96.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiTitlePanel7.Controls.Add(this.groupBox24);
+            this.uiTitlePanel7.Controls.Add(this.groupBox25);
+            this.uiTitlePanel7.Controls.Add(this.groupBox26);
+            this.uiTitlePanel7.Controls.Add(this.groupBox27);
+            this.uiTitlePanel7.Controls.Add(this.groupBox28);
+            this.uiTitlePanel7.Controls.Add(this.groupBox39);
+            this.uiTitlePanel7.Controls.Add(this.groupBox40);
+            this.uiTitlePanel7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel7.Location = new System.Drawing.Point(16, 477);
+            this.uiTitlePanel7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel7.Name = "uiTitlePanel7";
+            this.uiTitlePanel7.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel7.ShowText = false;
+            this.uiTitlePanel7.Size = new System.Drawing.Size(1408, 410);
+            this.uiTitlePanel7.TabIndex = 328;
+            this.uiTitlePanel7.Text = "运行速度";
+            this.uiTitlePanel7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown92
+            // groupBox24
             // 
-            this.uiDoubleUpDown92.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown92.Location = new System.Drawing.Point(1348, 55);
-            this.uiDoubleUpDown92.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown92.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown92.Name = "uiDoubleUpDown92";
-            this.uiDoubleUpDown92.ShowText = false;
-            this.uiDoubleUpDown92.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown92.TabIndex = 294;
-            this.uiDoubleUpDown92.Text = "uiDoubleUpDown92";
-            this.uiDoubleUpDown92.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox24.Controls.Add(this.uiDoubleUpDown118);
+            this.groupBox24.Controls.Add(this.uiDoubleUpDown119);
+            this.groupBox24.Controls.Add(this.label378);
+            this.groupBox24.Controls.Add(this.uiDoubleUpDown120);
+            this.groupBox24.Controls.Add(this.label379);
+            this.groupBox24.Controls.Add(this.label380);
+            this.groupBox24.Location = new System.Drawing.Point(837, 227);
+            this.groupBox24.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox24.Name = "groupBox24";
+            this.groupBox24.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox24.Size = new System.Drawing.Size(261, 168);
+            this.groupBox24.TabIndex = 309;
+            this.groupBox24.TabStop = false;
+            this.groupBox24.Text = "出料手臂 Z4";
             // 
-            // uiDoubleUpDown85
+            // uiDoubleUpDown118
             // 
-            this.uiDoubleUpDown85.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown85.Location = new System.Drawing.Point(825, 208);
-            this.uiDoubleUpDown85.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown85.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown85.Name = "uiDoubleUpDown85";
-            this.uiDoubleUpDown85.ShowText = false;
-            this.uiDoubleUpDown85.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown85.TabIndex = 292;
-            this.uiDoubleUpDown85.Text = "uiDoubleUpDown85";
-            this.uiDoubleUpDown85.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown118.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown118.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown118.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown118.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown118.Name = "uiDoubleUpDown118";
+            this.uiDoubleUpDown118.ShowText = false;
+            this.uiDoubleUpDown118.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown118.TabIndex = 289;
+            this.uiDoubleUpDown118.Text = "uiDoubleUpDown118";
+            this.uiDoubleUpDown118.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown93
+            // uiDoubleUpDown119
             // 
-            this.uiDoubleUpDown93.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown93.Location = new System.Drawing.Point(1348, 19);
-            this.uiDoubleUpDown93.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown93.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown93.Name = "uiDoubleUpDown93";
-            this.uiDoubleUpDown93.ShowText = false;
-            this.uiDoubleUpDown93.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown93.TabIndex = 293;
-            this.uiDoubleUpDown93.Text = "uiDoubleUpDown93";
-            this.uiDoubleUpDown93.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown119.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown119.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown119.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown119.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown119.Name = "uiDoubleUpDown119";
+            this.uiDoubleUpDown119.ShowText = false;
+            this.uiDoubleUpDown119.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown119.TabIndex = 286;
+            this.uiDoubleUpDown119.Text = "uiDoubleUpDown119";
+            this.uiDoubleUpDown119.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown89
+            // label378
             // 
-            this.uiDoubleUpDown89.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown89.Location = new System.Drawing.Point(825, 55);
-            this.uiDoubleUpDown89.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown89.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown89.Name = "uiDoubleUpDown89";
-            this.uiDoubleUpDown89.ShowText = false;
-            this.uiDoubleUpDown89.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown89.TabIndex = 294;
-            this.uiDoubleUpDown89.Text = "uiDoubleUpDown89";
-            this.uiDoubleUpDown89.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label378.AutoSize = true;
+            this.label378.Location = new System.Drawing.Point(35, 121);
+            this.label378.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label378.Name = "label378";
+            this.label378.Size = new System.Drawing.Size(58, 21);
+            this.label378.TabIndex = 287;
+            this.label378.Text = "加速度";
             // 
-            // uiDoubleUpDown82
+            // uiDoubleUpDown120
             // 
-            this.uiDoubleUpDown82.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown82.Location = new System.Drawing.Point(825, 329);
-            this.uiDoubleUpDown82.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown82.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown82.Name = "uiDoubleUpDown82";
-            this.uiDoubleUpDown82.ShowText = false;
-            this.uiDoubleUpDown82.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown82.TabIndex = 292;
-            this.uiDoubleUpDown82.Text = "uiDoubleUpDown82";
-            this.uiDoubleUpDown82.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown120.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown120.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown120.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown120.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown120.Name = "uiDoubleUpDown120";
+            this.uiDoubleUpDown120.ShowText = false;
+            this.uiDoubleUpDown120.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown120.TabIndex = 285;
+            this.uiDoubleUpDown120.Text = "uiDoubleUpDown120";
+            this.uiDoubleUpDown120.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown90
+            // label379
             // 
-            this.uiDoubleUpDown90.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown90.Location = new System.Drawing.Point(825, 19);
-            this.uiDoubleUpDown90.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown90.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown90.Name = "uiDoubleUpDown90";
-            this.uiDoubleUpDown90.ShowText = false;
-            this.uiDoubleUpDown90.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown90.TabIndex = 293;
-            this.uiDoubleUpDown90.Text = "uiDoubleUpDown90";
-            this.uiDoubleUpDown90.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label379.AutoSize = true;
+            this.label379.Location = new System.Drawing.Point(35, 80);
+            this.label379.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label379.Name = "label379";
+            this.label379.Size = new System.Drawing.Size(58, 21);
+            this.label379.TabIndex = 282;
+            this.label379.Text = "加速度";
             // 
-            // uiDoubleUpDown86
+            // label380
             // 
-            this.uiDoubleUpDown86.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown86.Location = new System.Drawing.Point(825, 172);
-            this.uiDoubleUpDown86.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown86.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown86.Name = "uiDoubleUpDown86";
-            this.uiDoubleUpDown86.ShowText = false;
-            this.uiDoubleUpDown86.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown86.TabIndex = 291;
-            this.uiDoubleUpDown86.Text = "uiDoubleUpDown86";
-            this.uiDoubleUpDown86.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label380.AutoSize = true;
+            this.label380.Location = new System.Drawing.Point(35, 39);
+            this.label380.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label380.Name = "label380";
+            this.label380.Size = new System.Drawing.Size(74, 21);
+            this.label380.TabIndex = 2;
+            this.label380.Text = "最大速度";
             // 
-            // uiDoubleUpDown79
+            // groupBox25
             // 
-            this.uiDoubleUpDown79.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown79.Location = new System.Drawing.Point(301, 329);
-            this.uiDoubleUpDown79.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown79.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown79.Name = "uiDoubleUpDown79";
-            this.uiDoubleUpDown79.ShowText = false;
-            this.uiDoubleUpDown79.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown79.TabIndex = 292;
-            this.uiDoubleUpDown79.Text = "uiDoubleUpDown79";
-            this.uiDoubleUpDown79.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox25.Controls.Add(this.uiDoubleUpDown127);
+            this.groupBox25.Controls.Add(this.uiDoubleUpDown128);
+            this.groupBox25.Controls.Add(this.label387);
+            this.groupBox25.Controls.Add(this.uiDoubleUpDown129);
+            this.groupBox25.Controls.Add(this.label388);
+            this.groupBox25.Controls.Add(this.label389);
+            this.groupBox25.Location = new System.Drawing.Point(566, 227);
+            this.groupBox25.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox25.Name = "groupBox25";
+            this.groupBox25.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox25.Size = new System.Drawing.Size(261, 168);
+            this.groupBox25.TabIndex = 308;
+            this.groupBox25.TabStop = false;
+            this.groupBox25.Text = "出料手臂 Z3";
             // 
-            // uiDoubleUpDown87
+            // uiDoubleUpDown127
             // 
-            this.uiDoubleUpDown87.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown87.Location = new System.Drawing.Point(825, 136);
-            this.uiDoubleUpDown87.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown87.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown87.Name = "uiDoubleUpDown87";
-            this.uiDoubleUpDown87.ShowText = false;
-            this.uiDoubleUpDown87.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown87.TabIndex = 290;
-            this.uiDoubleUpDown87.Text = "uiDoubleUpDown87";
-            this.uiDoubleUpDown87.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown127.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown127.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown127.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown127.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown127.Name = "uiDoubleUpDown127";
+            this.uiDoubleUpDown127.ShowText = false;
+            this.uiDoubleUpDown127.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown127.TabIndex = 289;
+            this.uiDoubleUpDown127.Text = "uiDoubleUpDown127";
+            this.uiDoubleUpDown127.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown83
+            // uiDoubleUpDown128
             // 
-            this.uiDoubleUpDown83.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown83.Location = new System.Drawing.Point(825, 293);
-            this.uiDoubleUpDown83.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown83.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown83.Name = "uiDoubleUpDown83";
-            this.uiDoubleUpDown83.ShowText = false;
-            this.uiDoubleUpDown83.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown83.TabIndex = 291;
-            this.uiDoubleUpDown83.Text = "uiDoubleUpDown83";
-            this.uiDoubleUpDown83.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown128.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown128.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown128.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown128.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown128.Name = "uiDoubleUpDown128";
+            this.uiDoubleUpDown128.ShowText = false;
+            this.uiDoubleUpDown128.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown128.TabIndex = 286;
+            this.uiDoubleUpDown128.Text = "uiDoubleUpDown128";
+            this.uiDoubleUpDown128.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown76
+            // label387
             // 
-            this.uiDoubleUpDown76.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown76.Location = new System.Drawing.Point(301, 208);
-            this.uiDoubleUpDown76.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown76.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown76.Name = "uiDoubleUpDown76";
-            this.uiDoubleUpDown76.ShowText = false;
-            this.uiDoubleUpDown76.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown76.TabIndex = 292;
-            this.uiDoubleUpDown76.Text = "uiDoubleUpDown76";
-            this.uiDoubleUpDown76.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label387.AutoSize = true;
+            this.label387.Location = new System.Drawing.Point(35, 121);
+            this.label387.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label387.Name = "label387";
+            this.label387.Size = new System.Drawing.Size(58, 21);
+            this.label387.TabIndex = 287;
+            this.label387.Text = "加速度";
             // 
-            // uiDoubleUpDown84
+            // uiDoubleUpDown129
             // 
-            this.uiDoubleUpDown84.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown84.Location = new System.Drawing.Point(825, 255);
-            this.uiDoubleUpDown84.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown84.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown84.Name = "uiDoubleUpDown84";
-            this.uiDoubleUpDown84.ShowText = false;
-            this.uiDoubleUpDown84.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown84.TabIndex = 290;
-            this.uiDoubleUpDown84.Text = "uiDoubleUpDown84";
-            this.uiDoubleUpDown84.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown129.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown129.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown129.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown129.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown129.Name = "uiDoubleUpDown129";
+            this.uiDoubleUpDown129.ShowText = false;
+            this.uiDoubleUpDown129.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown129.TabIndex = 285;
+            this.uiDoubleUpDown129.Text = "uiDoubleUpDown129";
+            this.uiDoubleUpDown129.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown80
+            // label388
             // 
-            this.uiDoubleUpDown80.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown80.Location = new System.Drawing.Point(301, 293);
-            this.uiDoubleUpDown80.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown80.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown80.Name = "uiDoubleUpDown80";
-            this.uiDoubleUpDown80.ShowText = false;
-            this.uiDoubleUpDown80.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown80.TabIndex = 291;
-            this.uiDoubleUpDown80.Text = "uiDoubleUpDown80";
-            this.uiDoubleUpDown80.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label388.AutoSize = true;
+            this.label388.Location = new System.Drawing.Point(35, 80);
+            this.label388.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label388.Name = "label388";
+            this.label388.Size = new System.Drawing.Size(58, 21);
+            this.label388.TabIndex = 282;
+            this.label388.Text = "加速度";
             // 
-            // uiDoubleUpDown73
+            // label389
             // 
-            this.uiDoubleUpDown73.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown73.Location = new System.Drawing.Point(301, 91);
-            this.uiDoubleUpDown73.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown73.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown73.Name = "uiDoubleUpDown73";
-            this.uiDoubleUpDown73.ShowText = false;
-            this.uiDoubleUpDown73.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown73.TabIndex = 292;
-            this.uiDoubleUpDown73.Text = "uiDoubleUpDown73";
-            this.uiDoubleUpDown73.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label389.AutoSize = true;
+            this.label389.Location = new System.Drawing.Point(35, 39);
+            this.label389.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label389.Name = "label389";
+            this.label389.Size = new System.Drawing.Size(74, 21);
+            this.label389.TabIndex = 2;
+            this.label389.Text = "最大速度";
             // 
-            // uiDoubleUpDown81
+            // groupBox26
             // 
-            this.uiDoubleUpDown81.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown81.Location = new System.Drawing.Point(301, 255);
-            this.uiDoubleUpDown81.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown81.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown81.Name = "uiDoubleUpDown81";
-            this.uiDoubleUpDown81.ShowText = false;
-            this.uiDoubleUpDown81.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown81.TabIndex = 290;
-            this.uiDoubleUpDown81.Text = "uiDoubleUpDown81";
-            this.uiDoubleUpDown81.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.groupBox26.Controls.Add(this.uiDoubleUpDown130);
+            this.groupBox26.Controls.Add(this.uiDoubleUpDown131);
+            this.groupBox26.Controls.Add(this.label390);
+            this.groupBox26.Controls.Add(this.uiDoubleUpDown132);
+            this.groupBox26.Controls.Add(this.label391);
+            this.groupBox26.Controls.Add(this.label392);
+            this.groupBox26.Location = new System.Drawing.Point(24, 55);
+            this.groupBox26.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox26.Name = "groupBox26";
+            this.groupBox26.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox26.Size = new System.Drawing.Size(261, 168);
+            this.groupBox26.TabIndex = 303;
+            this.groupBox26.TabStop = false;
+            this.groupBox26.Text = "出料手臂 X";
             // 
-            // uiDoubleUpDown77
+            // uiDoubleUpDown130
             // 
-            this.uiDoubleUpDown77.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown77.Location = new System.Drawing.Point(301, 172);
-            this.uiDoubleUpDown77.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown77.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown77.Name = "uiDoubleUpDown77";
-            this.uiDoubleUpDown77.ShowText = false;
-            this.uiDoubleUpDown77.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown77.TabIndex = 291;
-            this.uiDoubleUpDown77.Text = "uiDoubleUpDown77";
-            this.uiDoubleUpDown77.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown130.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown130.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown130.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown130.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown130.Name = "uiDoubleUpDown130";
+            this.uiDoubleUpDown130.ShowText = false;
+            this.uiDoubleUpDown130.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown130.TabIndex = 289;
+            this.uiDoubleUpDown130.Text = "uiDoubleUpDown130";
+            this.uiDoubleUpDown130.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown131
+            // 
+            this.uiDoubleUpDown131.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown131.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown131.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown131.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown131.Name = "uiDoubleUpDown131";
+            this.uiDoubleUpDown131.ShowText = false;
+            this.uiDoubleUpDown131.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown131.TabIndex = 286;
+            this.uiDoubleUpDown131.Text = "uiDoubleUpDown131";
+            this.uiDoubleUpDown131.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label390
+            // 
+            this.label390.AutoSize = true;
+            this.label390.Location = new System.Drawing.Point(35, 121);
+            this.label390.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label390.Name = "label390";
+            this.label390.Size = new System.Drawing.Size(58, 21);
+            this.label390.TabIndex = 287;
+            this.label390.Text = "加速度";
+            // 
+            // uiDoubleUpDown132
+            // 
+            this.uiDoubleUpDown132.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown132.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown132.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown132.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown132.Name = "uiDoubleUpDown132";
+            this.uiDoubleUpDown132.ShowText = false;
+            this.uiDoubleUpDown132.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown132.TabIndex = 285;
+            this.uiDoubleUpDown132.Text = "uiDoubleUpDown132";
+            this.uiDoubleUpDown132.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label391
+            // 
+            this.label391.AutoSize = true;
+            this.label391.Location = new System.Drawing.Point(35, 80);
+            this.label391.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label391.Name = "label391";
+            this.label391.Size = new System.Drawing.Size(58, 21);
+            this.label391.TabIndex = 282;
+            this.label391.Text = "加速度";
+            // 
+            // label392
+            // 
+            this.label392.AutoSize = true;
+            this.label392.Location = new System.Drawing.Point(35, 39);
+            this.label392.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label392.Name = "label392";
+            this.label392.Size = new System.Drawing.Size(74, 21);
+            this.label392.TabIndex = 2;
+            this.label392.Text = "最大速度";
+            // 
+            // groupBox27
+            // 
+            this.groupBox27.Controls.Add(this.uiDoubleUpDown133);
+            this.groupBox27.Controls.Add(this.uiDoubleUpDown134);
+            this.groupBox27.Controls.Add(this.label393);
+            this.groupBox27.Controls.Add(this.uiDoubleUpDown135);
+            this.groupBox27.Controls.Add(this.label394);
+            this.groupBox27.Controls.Add(this.label395);
+            this.groupBox27.Location = new System.Drawing.Point(566, 55);
+            this.groupBox27.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox27.Name = "groupBox27";
+            this.groupBox27.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox27.Size = new System.Drawing.Size(261, 168);
+            this.groupBox27.TabIndex = 305;
+            this.groupBox27.TabStop = false;
+            this.groupBox27.Text = "出料手臂 P";
+            // 
+            // uiDoubleUpDown133
+            // 
+            this.uiDoubleUpDown133.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown133.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown133.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown133.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown133.Name = "uiDoubleUpDown133";
+            this.uiDoubleUpDown133.ShowText = false;
+            this.uiDoubleUpDown133.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown133.TabIndex = 289;
+            this.uiDoubleUpDown133.Text = "uiDoubleUpDown133";
+            this.uiDoubleUpDown133.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown134
+            // 
+            this.uiDoubleUpDown134.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown134.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown134.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown134.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown134.Name = "uiDoubleUpDown134";
+            this.uiDoubleUpDown134.ShowText = false;
+            this.uiDoubleUpDown134.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown134.TabIndex = 286;
+            this.uiDoubleUpDown134.Text = "uiDoubleUpDown134";
+            this.uiDoubleUpDown134.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label393
+            // 
+            this.label393.AutoSize = true;
+            this.label393.Location = new System.Drawing.Point(35, 121);
+            this.label393.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label393.Name = "label393";
+            this.label393.Size = new System.Drawing.Size(58, 21);
+            this.label393.TabIndex = 287;
+            this.label393.Text = "加速度";
+            // 
+            // uiDoubleUpDown135
+            // 
+            this.uiDoubleUpDown135.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown135.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown135.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown135.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown135.Name = "uiDoubleUpDown135";
+            this.uiDoubleUpDown135.ShowText = false;
+            this.uiDoubleUpDown135.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown135.TabIndex = 285;
+            this.uiDoubleUpDown135.Text = "uiDoubleUpDown135";
+            this.uiDoubleUpDown135.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label394
+            // 
+            this.label394.AutoSize = true;
+            this.label394.Location = new System.Drawing.Point(35, 80);
+            this.label394.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label394.Name = "label394";
+            this.label394.Size = new System.Drawing.Size(58, 21);
+            this.label394.TabIndex = 282;
+            this.label394.Text = "加速度";
+            // 
+            // label395
+            // 
+            this.label395.AutoSize = true;
+            this.label395.Location = new System.Drawing.Point(35, 39);
+            this.label395.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label395.Name = "label395";
+            this.label395.Size = new System.Drawing.Size(74, 21);
+            this.label395.TabIndex = 2;
+            this.label395.Text = "最大速度";
+            // 
+            // groupBox28
+            // 
+            this.groupBox28.Controls.Add(this.uiDoubleUpDown136);
+            this.groupBox28.Controls.Add(this.uiDoubleUpDown137);
+            this.groupBox28.Controls.Add(this.label396);
+            this.groupBox28.Controls.Add(this.uiDoubleUpDown138);
+            this.groupBox28.Controls.Add(this.label397);
+            this.groupBox28.Controls.Add(this.label398);
+            this.groupBox28.Location = new System.Drawing.Point(24, 227);
+            this.groupBox28.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox28.Name = "groupBox28";
+            this.groupBox28.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox28.Size = new System.Drawing.Size(261, 168);
+            this.groupBox28.TabIndex = 306;
+            this.groupBox28.TabStop = false;
+            this.groupBox28.Text = "出料手臂 Z1";
+            // 
+            // uiDoubleUpDown136
+            // 
+            this.uiDoubleUpDown136.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown136.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown136.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown136.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown136.Name = "uiDoubleUpDown136";
+            this.uiDoubleUpDown136.ShowText = false;
+            this.uiDoubleUpDown136.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown136.TabIndex = 289;
+            this.uiDoubleUpDown136.Text = "uiDoubleUpDown136";
+            this.uiDoubleUpDown136.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown137
+            // 
+            this.uiDoubleUpDown137.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown137.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown137.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown137.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown137.Name = "uiDoubleUpDown137";
+            this.uiDoubleUpDown137.ShowText = false;
+            this.uiDoubleUpDown137.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown137.TabIndex = 286;
+            this.uiDoubleUpDown137.Text = "uiDoubleUpDown137";
+            this.uiDoubleUpDown137.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label396
+            // 
+            this.label396.AutoSize = true;
+            this.label396.Location = new System.Drawing.Point(35, 121);
+            this.label396.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label396.Name = "label396";
+            this.label396.Size = new System.Drawing.Size(58, 21);
+            this.label396.TabIndex = 287;
+            this.label396.Text = "加速度";
+            // 
+            // uiDoubleUpDown138
+            // 
+            this.uiDoubleUpDown138.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown138.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown138.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown138.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown138.Name = "uiDoubleUpDown138";
+            this.uiDoubleUpDown138.ShowText = false;
+            this.uiDoubleUpDown138.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown138.TabIndex = 285;
+            this.uiDoubleUpDown138.Text = "uiDoubleUpDown138";
+            this.uiDoubleUpDown138.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label397
+            // 
+            this.label397.AutoSize = true;
+            this.label397.Location = new System.Drawing.Point(35, 80);
+            this.label397.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label397.Name = "label397";
+            this.label397.Size = new System.Drawing.Size(58, 21);
+            this.label397.TabIndex = 282;
+            this.label397.Text = "加速度";
+            // 
+            // label398
+            // 
+            this.label398.AutoSize = true;
+            this.label398.Location = new System.Drawing.Point(35, 39);
+            this.label398.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label398.Name = "label398";
+            this.label398.Size = new System.Drawing.Size(74, 21);
+            this.label398.TabIndex = 2;
+            this.label398.Text = "最大速度";
+            // 
+            // groupBox39
+            // 
+            this.groupBox39.Controls.Add(this.uiDoubleUpDown139);
+            this.groupBox39.Controls.Add(this.uiDoubleUpDown140);
+            this.groupBox39.Controls.Add(this.label399);
+            this.groupBox39.Controls.Add(this.uiDoubleUpDown141);
+            this.groupBox39.Controls.Add(this.label400);
+            this.groupBox39.Controls.Add(this.label401);
+            this.groupBox39.Location = new System.Drawing.Point(295, 227);
+            this.groupBox39.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox39.Name = "groupBox39";
+            this.groupBox39.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox39.Size = new System.Drawing.Size(261, 168);
+            this.groupBox39.TabIndex = 307;
+            this.groupBox39.TabStop = false;
+            this.groupBox39.Text = "出料手臂 Z2";
+            // 
+            // uiDoubleUpDown139
+            // 
+            this.uiDoubleUpDown139.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown139.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown139.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown139.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown139.Name = "uiDoubleUpDown139";
+            this.uiDoubleUpDown139.ShowText = false;
+            this.uiDoubleUpDown139.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown139.TabIndex = 289;
+            this.uiDoubleUpDown139.Text = "uiDoubleUpDown139";
+            this.uiDoubleUpDown139.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown140
+            // 
+            this.uiDoubleUpDown140.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown140.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown140.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown140.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown140.Name = "uiDoubleUpDown140";
+            this.uiDoubleUpDown140.ShowText = false;
+            this.uiDoubleUpDown140.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown140.TabIndex = 286;
+            this.uiDoubleUpDown140.Text = "uiDoubleUpDown140";
+            this.uiDoubleUpDown140.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label399
+            // 
+            this.label399.AutoSize = true;
+            this.label399.Location = new System.Drawing.Point(35, 121);
+            this.label399.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label399.Name = "label399";
+            this.label399.Size = new System.Drawing.Size(58, 21);
+            this.label399.TabIndex = 287;
+            this.label399.Text = "加速度";
+            // 
+            // uiDoubleUpDown141
+            // 
+            this.uiDoubleUpDown141.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown141.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown141.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown141.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown141.Name = "uiDoubleUpDown141";
+            this.uiDoubleUpDown141.ShowText = false;
+            this.uiDoubleUpDown141.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown141.TabIndex = 285;
+            this.uiDoubleUpDown141.Text = "uiDoubleUpDown141";
+            this.uiDoubleUpDown141.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label400
+            // 
+            this.label400.AutoSize = true;
+            this.label400.Location = new System.Drawing.Point(35, 80);
+            this.label400.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label400.Name = "label400";
+            this.label400.Size = new System.Drawing.Size(58, 21);
+            this.label400.TabIndex = 282;
+            this.label400.Text = "加速度";
+            // 
+            // label401
+            // 
+            this.label401.AutoSize = true;
+            this.label401.Location = new System.Drawing.Point(35, 39);
+            this.label401.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label401.Name = "label401";
+            this.label401.Size = new System.Drawing.Size(74, 21);
+            this.label401.TabIndex = 2;
+            this.label401.Text = "最大速度";
+            // 
+            // groupBox40
+            // 
+            this.groupBox40.Controls.Add(this.uiDoubleUpDown142);
+            this.groupBox40.Controls.Add(this.uiDoubleUpDown143);
+            this.groupBox40.Controls.Add(this.label402);
+            this.groupBox40.Controls.Add(this.uiDoubleUpDown144);
+            this.groupBox40.Controls.Add(this.label403);
+            this.groupBox40.Controls.Add(this.label404);
+            this.groupBox40.Location = new System.Drawing.Point(295, 55);
+            this.groupBox40.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox40.Name = "groupBox40";
+            this.groupBox40.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox40.Size = new System.Drawing.Size(261, 168);
+            this.groupBox40.TabIndex = 304;
+            this.groupBox40.TabStop = false;
+            this.groupBox40.Text = "出料手臂 Y";
+            // 
+            // uiDoubleUpDown142
+            // 
+            this.uiDoubleUpDown142.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown142.Location = new System.Drawing.Point(119, 117);
+            this.uiDoubleUpDown142.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown142.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown142.Name = "uiDoubleUpDown142";
+            this.uiDoubleUpDown142.ShowText = false;
+            this.uiDoubleUpDown142.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown142.TabIndex = 289;
+            this.uiDoubleUpDown142.Text = "uiDoubleUpDown142";
+            this.uiDoubleUpDown142.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown143
+            // 
+            this.uiDoubleUpDown143.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown143.Location = new System.Drawing.Point(119, 76);
+            this.uiDoubleUpDown143.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown143.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown143.Name = "uiDoubleUpDown143";
+            this.uiDoubleUpDown143.ShowText = false;
+            this.uiDoubleUpDown143.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown143.TabIndex = 286;
+            this.uiDoubleUpDown143.Text = "uiDoubleUpDown143";
+            this.uiDoubleUpDown143.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label402
+            // 
+            this.label402.AutoSize = true;
+            this.label402.Location = new System.Drawing.Point(35, 121);
+            this.label402.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label402.Name = "label402";
+            this.label402.Size = new System.Drawing.Size(58, 21);
+            this.label402.TabIndex = 287;
+            this.label402.Text = "加速度";
+            // 
+            // uiDoubleUpDown144
+            // 
+            this.uiDoubleUpDown144.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown144.Location = new System.Drawing.Point(119, 35);
+            this.uiDoubleUpDown144.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown144.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown144.Name = "uiDoubleUpDown144";
+            this.uiDoubleUpDown144.ShowText = false;
+            this.uiDoubleUpDown144.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown144.TabIndex = 285;
+            this.uiDoubleUpDown144.Text = "uiDoubleUpDown144";
+            this.uiDoubleUpDown144.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label403
+            // 
+            this.label403.AutoSize = true;
+            this.label403.Location = new System.Drawing.Point(35, 80);
+            this.label403.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label403.Name = "label403";
+            this.label403.Size = new System.Drawing.Size(58, 21);
+            this.label403.TabIndex = 282;
+            this.label403.Text = "加速度";
+            // 
+            // label404
+            // 
+            this.label404.AutoSize = true;
+            this.label404.Location = new System.Drawing.Point(35, 39);
+            this.label404.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label404.Name = "label404";
+            this.label404.Size = new System.Drawing.Size(74, 21);
+            this.label404.TabIndex = 2;
+            this.label404.Text = "最大速度";
+            // 
+            // uiTitlePanel14
+            // 
+            this.uiTitlePanel14.Controls.Add(this.label58);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown126);
+            this.uiTitlePanel14.Controls.Add(this.label73);
+            this.uiTitlePanel14.Controls.Add(this.button22);
+            this.uiTitlePanel14.Controls.Add(this.button57);
+            this.uiTitlePanel14.Controls.Add(this.label386);
+            this.uiTitlePanel14.Controls.Add(this.label71);
+            this.uiTitlePanel14.Controls.Add(this.label336);
+            this.uiTitlePanel14.Controls.Add(this.button58);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown20);
+            this.uiTitlePanel14.Controls.Add(this.label77);
+            this.uiTitlePanel14.Controls.Add(this.label337);
+            this.uiTitlePanel14.Controls.Add(this.label69);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown21);
+            this.uiTitlePanel14.Controls.Add(this.label79);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown121);
+            this.uiTitlePanel14.Controls.Add(this.label80);
+            this.uiTitlePanel14.Controls.Add(this.label381);
+            this.uiTitlePanel14.Controls.Add(this.button55);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown122);
+            this.uiTitlePanel14.Controls.Add(this.label81);
+            this.uiTitlePanel14.Controls.Add(this.label382);
+            this.uiTitlePanel14.Controls.Add(this.label78);
+            this.uiTitlePanel14.Controls.Add(this.label383);
+            this.uiTitlePanel14.Controls.Add(this.button54);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown123);
+            this.uiTitlePanel14.Controls.Add(this.label61);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown124);
+            this.uiTitlePanel14.Controls.Add(this.button43);
+            this.uiTitlePanel14.Controls.Add(this.label384);
+            this.uiTitlePanel14.Controls.Add(this.button44);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown125);
+            this.uiTitlePanel14.Controls.Add(this.button53);
+            this.uiTitlePanel14.Controls.Add(this.label385);
+            this.uiTitlePanel14.Controls.Add(this.label60);
+            this.uiTitlePanel14.Controls.Add(this.button21);
+            this.uiTitlePanel14.Controls.Add(this.button45);
+            this.uiTitlePanel14.Controls.Add(this.label72);
+            this.uiTitlePanel14.Controls.Add(this.button51);
+            this.uiTitlePanel14.Controls.Add(this.label74);
+            this.uiTitlePanel14.Controls.Add(this.label65);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown94);
+            this.uiTitlePanel14.Controls.Add(this.button49);
+            this.uiTitlePanel14.Controls.Add(this.label75);
+            this.uiTitlePanel14.Controls.Add(this.label62);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown91);
+            this.uiTitlePanel14.Controls.Add(this.button56);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown95);
+            this.uiTitlePanel14.Controls.Add(this.label68);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown88);
+            this.uiTitlePanel14.Controls.Add(this.label63);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown96);
+            this.uiTitlePanel14.Controls.Add(this.label64);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown92);
+            this.uiTitlePanel14.Controls.Add(this.label67);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown85);
+            this.uiTitlePanel14.Controls.Add(this.button46);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown93);
+            this.uiTitlePanel14.Controls.Add(this.label59);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown89);
+            this.uiTitlePanel14.Controls.Add(this.button48);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown82);
+            this.uiTitlePanel14.Controls.Add(this.button42);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown90);
+            this.uiTitlePanel14.Controls.Add(this.button40);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown86);
+            this.uiTitlePanel14.Controls.Add(this.button34);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown87);
+            this.uiTitlePanel14.Controls.Add(this.button38);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown83);
+            this.uiTitlePanel14.Controls.Add(this.button37);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown76);
+            this.uiTitlePanel14.Controls.Add(this.button36);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown84);
+            this.uiTitlePanel14.Controls.Add(this.button33);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown73);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown75);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown77);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown74);
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown78);
+            this.uiTitlePanel14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel14.Location = new System.Drawing.Point(16, 17);
+            this.uiTitlePanel14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel14.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel14.Name = "uiTitlePanel14";
+            this.uiTitlePanel14.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel14.ShowText = false;
+            this.uiTitlePanel14.Size = new System.Drawing.Size(1408, 450);
+            this.uiTitlePanel14.TabIndex = 327;
+            this.uiTitlePanel14.Text = "点位（单位：mm）";
+            this.uiTitlePanel14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label58
             // 
             this.label58.AutoSize = true;
-            this.label58.Location = new System.Drawing.Point(21, 23);
+            this.label58.Location = new System.Drawing.Point(18, 50);
             this.label58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label58.Name = "label58";
-            this.label58.Size = new System.Drawing.Size(261, 21);
+            this.label58.Size = new System.Drawing.Size(174, 21);
             this.label58.TabIndex = 119;
-            this.label58.Text = "OutputArm -> ShuttleR1 X (取料)";
-            // 
-            // uiDoubleUpDown78
-            // 
-            this.uiDoubleUpDown78.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown78.Location = new System.Drawing.Point(301, 136);
-            this.uiDoubleUpDown78.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown78.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown78.Name = "uiDoubleUpDown78";
-            this.uiDoubleUpDown78.ShowText = false;
-            this.uiDoubleUpDown78.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown78.TabIndex = 290;
-            this.uiDoubleUpDown78.Text = "uiDoubleUpDown78";
-            this.uiDoubleUpDown78.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown74
-            // 
-            this.uiDoubleUpDown74.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown74.Location = new System.Drawing.Point(301, 55);
-            this.uiDoubleUpDown74.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown74.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown74.Name = "uiDoubleUpDown74";
-            this.uiDoubleUpDown74.ShowText = false;
-            this.uiDoubleUpDown74.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown74.TabIndex = 291;
-            this.uiDoubleUpDown74.Text = "uiDoubleUpDown74";
-            this.uiDoubleUpDown74.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown75
-            // 
-            this.uiDoubleUpDown75.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown75.Location = new System.Drawing.Point(301, 19);
-            this.uiDoubleUpDown75.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown75.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown75.Name = "uiDoubleUpDown75";
-            this.uiDoubleUpDown75.ShowText = false;
-            this.uiDoubleUpDown75.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown75.TabIndex = 290;
-            this.uiDoubleUpDown75.Text = "uiDoubleUpDown75";
-            this.uiDoubleUpDown75.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button33
-            // 
-            this.button33.Location = new System.Drawing.Point(963, 326);
-            this.button33.Margin = new System.Windows.Forms.Padding(2);
-            this.button33.Name = "button33";
-            this.button33.Size = new System.Drawing.Size(108, 34);
-            this.button33.TabIndex = 281;
-            this.button33.Text = "移动";
-            this.button33.UseVisualStyleBackColor = true;
-            // 
-            // button36
-            // 
-            this.button36.Location = new System.Drawing.Point(437, 133);
-            this.button36.Margin = new System.Windows.Forms.Padding(2);
-            this.button36.Name = "button36";
-            this.button36.Size = new System.Drawing.Size(108, 34);
-            this.button36.TabIndex = 244;
-            this.button36.Text = "移动";
-            this.button36.UseVisualStyleBackColor = true;
-            // 
-            // groupBox29
-            // 
-            this.groupBox29.Controls.Add(this.uiDoubleUpDown22);
-            this.groupBox29.Controls.Add(this.uiDoubleUpDown23);
-            this.groupBox29.Controls.Add(this.label338);
-            this.groupBox29.Controls.Add(this.uiDoubleUpDown24);
-            this.groupBox29.Controls.Add(this.label339);
-            this.groupBox29.Controls.Add(this.label340);
-            this.groupBox29.Location = new System.Drawing.Point(838, 551);
-            this.groupBox29.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox29.Name = "groupBox29";
-            this.groupBox29.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox29.Size = new System.Drawing.Size(261, 168);
-            this.groupBox29.TabIndex = 302;
-            this.groupBox29.TabStop = false;
-            this.groupBox29.Text = "出料手臂 Z4";
-            // 
-            // uiDoubleUpDown22
-            // 
-            this.uiDoubleUpDown22.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown22.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown22.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown22.Name = "uiDoubleUpDown22";
-            this.uiDoubleUpDown22.ShowText = false;
-            this.uiDoubleUpDown22.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown22.TabIndex = 289;
-            this.uiDoubleUpDown22.Text = "uiDoubleUpDown22";
-            this.uiDoubleUpDown22.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown23
-            // 
-            this.uiDoubleUpDown23.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown23.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown23.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown23.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown23.Name = "uiDoubleUpDown23";
-            this.uiDoubleUpDown23.ShowText = false;
-            this.uiDoubleUpDown23.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown23.TabIndex = 286;
-            this.uiDoubleUpDown23.Text = "uiDoubleUpDown23";
-            this.uiDoubleUpDown23.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label338
-            // 
-            this.label338.AutoSize = true;
-            this.label338.Location = new System.Drawing.Point(35, 121);
-            this.label338.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label338.Name = "label338";
-            this.label338.Size = new System.Drawing.Size(58, 21);
-            this.label338.TabIndex = 287;
-            this.label338.Text = "加速度";
-            // 
-            // uiDoubleUpDown24
-            // 
-            this.uiDoubleUpDown24.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown24.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown24.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown24.Name = "uiDoubleUpDown24";
-            this.uiDoubleUpDown24.ShowText = false;
-            this.uiDoubleUpDown24.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown24.TabIndex = 285;
-            this.uiDoubleUpDown24.Text = "uiDoubleUpDown24";
-            this.uiDoubleUpDown24.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label339
-            // 
-            this.label339.AutoSize = true;
-            this.label339.Location = new System.Drawing.Point(35, 80);
-            this.label339.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label339.Name = "label339";
-            this.label339.Size = new System.Drawing.Size(58, 21);
-            this.label339.TabIndex = 282;
-            this.label339.Text = "加速度";
-            // 
-            // label340
-            // 
-            this.label340.AutoSize = true;
-            this.label340.Location = new System.Drawing.Point(35, 39);
-            this.label340.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label340.Name = "label340";
-            this.label340.Size = new System.Drawing.Size(74, 21);
-            this.label340.TabIndex = 2;
-            this.label340.Text = "最大速度";
-            // 
-            // button37
-            // 
-            this.button37.Location = new System.Drawing.Point(437, 169);
-            this.button37.Margin = new System.Windows.Forms.Padding(2);
-            this.button37.Name = "button37";
-            this.button37.Size = new System.Drawing.Size(108, 34);
-            this.button37.TabIndex = 245;
-            this.button37.Text = "移动";
-            this.button37.UseVisualStyleBackColor = true;
-            // 
-            // button38
-            // 
-            this.button38.Location = new System.Drawing.Point(437, 205);
-            this.button38.Margin = new System.Windows.Forms.Padding(2);
-            this.button38.Name = "button38";
-            this.button38.Size = new System.Drawing.Size(108, 34);
-            this.button38.TabIndex = 246;
-            this.button38.Text = "移动";
-            this.button38.UseVisualStyleBackColor = true;
-            // 
-            // button34
-            // 
-            this.button34.Location = new System.Drawing.Point(963, 290);
-            this.button34.Margin = new System.Windows.Forms.Padding(2);
-            this.button34.Name = "button34";
-            this.button34.Size = new System.Drawing.Size(108, 34);
-            this.button34.TabIndex = 280;
-            this.button34.Text = "移动";
-            this.button34.UseVisualStyleBackColor = true;
-            // 
-            // button40
-            // 
-            this.button40.Location = new System.Drawing.Point(437, 88);
-            this.button40.Margin = new System.Windows.Forms.Padding(2);
-            this.button40.Name = "button40";
-            this.button40.Size = new System.Drawing.Size(108, 34);
-            this.button40.TabIndex = 243;
-            this.button40.Text = "移动";
-            this.button40.UseVisualStyleBackColor = true;
-            // 
-            // groupBox30
-            // 
-            this.groupBox30.Controls.Add(this.uiDoubleUpDown25);
-            this.groupBox30.Controls.Add(this.uiDoubleUpDown26);
-            this.groupBox30.Controls.Add(this.label341);
-            this.groupBox30.Controls.Add(this.uiDoubleUpDown27);
-            this.groupBox30.Controls.Add(this.label342);
-            this.groupBox30.Controls.Add(this.label343);
-            this.groupBox30.Location = new System.Drawing.Point(567, 551);
-            this.groupBox30.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox30.Name = "groupBox30";
-            this.groupBox30.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox30.Size = new System.Drawing.Size(261, 168);
-            this.groupBox30.TabIndex = 301;
-            this.groupBox30.TabStop = false;
-            this.groupBox30.Text = "出料手臂 Z3";
-            // 
-            // uiDoubleUpDown25
-            // 
-            this.uiDoubleUpDown25.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown25.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown25.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown25.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown25.Name = "uiDoubleUpDown25";
-            this.uiDoubleUpDown25.ShowText = false;
-            this.uiDoubleUpDown25.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown25.TabIndex = 289;
-            this.uiDoubleUpDown25.Text = "uiDoubleUpDown25";
-            this.uiDoubleUpDown25.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown26
-            // 
-            this.uiDoubleUpDown26.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown26.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown26.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown26.Name = "uiDoubleUpDown26";
-            this.uiDoubleUpDown26.ShowText = false;
-            this.uiDoubleUpDown26.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown26.TabIndex = 286;
-            this.uiDoubleUpDown26.Text = "uiDoubleUpDown26";
-            this.uiDoubleUpDown26.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label341
-            // 
-            this.label341.AutoSize = true;
-            this.label341.Location = new System.Drawing.Point(35, 121);
-            this.label341.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label341.Name = "label341";
-            this.label341.Size = new System.Drawing.Size(58, 21);
-            this.label341.TabIndex = 287;
-            this.label341.Text = "加速度";
-            // 
-            // uiDoubleUpDown27
-            // 
-            this.uiDoubleUpDown27.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown27.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown27.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown27.Name = "uiDoubleUpDown27";
-            this.uiDoubleUpDown27.ShowText = false;
-            this.uiDoubleUpDown27.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown27.TabIndex = 285;
-            this.uiDoubleUpDown27.Text = "uiDoubleUpDown27";
-            this.uiDoubleUpDown27.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label342
-            // 
-            this.label342.AutoSize = true;
-            this.label342.Location = new System.Drawing.Point(35, 80);
-            this.label342.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label342.Name = "label342";
-            this.label342.Size = new System.Drawing.Size(58, 21);
-            this.label342.TabIndex = 282;
-            this.label342.Text = "加速度";
-            // 
-            // label343
-            // 
-            this.label343.AutoSize = true;
-            this.label343.Location = new System.Drawing.Point(35, 39);
-            this.label343.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label343.Name = "label343";
-            this.label343.Size = new System.Drawing.Size(74, 21);
-            this.label343.TabIndex = 2;
-            this.label343.Text = "最大速度";
-            // 
-            // groupBox35
-            // 
-            this.groupBox35.Controls.Add(this.uiDoubleUpDown40);
-            this.groupBox35.Controls.Add(this.uiDoubleUpDown41);
-            this.groupBox35.Controls.Add(this.label356);
-            this.groupBox35.Controls.Add(this.uiDoubleUpDown42);
-            this.groupBox35.Controls.Add(this.label357);
-            this.groupBox35.Controls.Add(this.label358);
-            this.groupBox35.Location = new System.Drawing.Point(25, 379);
-            this.groupBox35.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox35.Name = "groupBox35";
-            this.groupBox35.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox35.Size = new System.Drawing.Size(261, 168);
-            this.groupBox35.TabIndex = 296;
-            this.groupBox35.TabStop = false;
-            this.groupBox35.Text = "出料手臂 X";
-            // 
-            // uiDoubleUpDown40
-            // 
-            this.uiDoubleUpDown40.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown40.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown40.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown40.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown40.Name = "uiDoubleUpDown40";
-            this.uiDoubleUpDown40.ShowText = false;
-            this.uiDoubleUpDown40.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown40.TabIndex = 289;
-            this.uiDoubleUpDown40.Text = "uiDoubleUpDown40";
-            this.uiDoubleUpDown40.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown41
-            // 
-            this.uiDoubleUpDown41.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown41.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown41.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown41.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown41.Name = "uiDoubleUpDown41";
-            this.uiDoubleUpDown41.ShowText = false;
-            this.uiDoubleUpDown41.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown41.TabIndex = 286;
-            this.uiDoubleUpDown41.Text = "uiDoubleUpDown41";
-            this.uiDoubleUpDown41.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label356
-            // 
-            this.label356.AutoSize = true;
-            this.label356.Location = new System.Drawing.Point(35, 121);
-            this.label356.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label356.Name = "label356";
-            this.label356.Size = new System.Drawing.Size(58, 21);
-            this.label356.TabIndex = 287;
-            this.label356.Text = "加速度";
-            // 
-            // uiDoubleUpDown42
-            // 
-            this.uiDoubleUpDown42.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown42.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown42.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown42.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown42.Name = "uiDoubleUpDown42";
-            this.uiDoubleUpDown42.ShowText = false;
-            this.uiDoubleUpDown42.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown42.TabIndex = 285;
-            this.uiDoubleUpDown42.Text = "uiDoubleUpDown42";
-            this.uiDoubleUpDown42.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label357
-            // 
-            this.label357.AutoSize = true;
-            this.label357.Location = new System.Drawing.Point(35, 80);
-            this.label357.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label357.Name = "label357";
-            this.label357.Size = new System.Drawing.Size(58, 21);
-            this.label357.TabIndex = 282;
-            this.label357.Text = "加速度";
-            // 
-            // label358
-            // 
-            this.label358.AutoSize = true;
-            this.label358.Location = new System.Drawing.Point(35, 39);
-            this.label358.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label358.Name = "label358";
-            this.label358.Size = new System.Drawing.Size(74, 21);
-            this.label358.TabIndex = 2;
-            this.label358.Text = "最大速度";
-            // 
-            // button35
-            // 
-            this.button35.Location = new System.Drawing.Point(963, 252);
-            this.button35.Margin = new System.Windows.Forms.Padding(2);
-            this.button35.Name = "button35";
-            this.button35.Size = new System.Drawing.Size(108, 34);
-            this.button35.TabIndex = 279;
-            this.button35.Text = "移动";
-            this.button35.UseVisualStyleBackColor = true;
-            // 
-            // button41
-            // 
-            this.button41.Location = new System.Drawing.Point(437, 326);
-            this.button41.Margin = new System.Windows.Forms.Padding(2);
-            this.button41.Name = "button41";
-            this.button41.Size = new System.Drawing.Size(108, 34);
-            this.button41.TabIndex = 247;
-            this.button41.Text = "移动";
-            this.button41.UseVisualStyleBackColor = true;
-            // 
-            // groupBox31
-            // 
-            this.groupBox31.Controls.Add(this.uiDoubleUpDown28);
-            this.groupBox31.Controls.Add(this.uiDoubleUpDown29);
-            this.groupBox31.Controls.Add(this.label344);
-            this.groupBox31.Controls.Add(this.uiDoubleUpDown30);
-            this.groupBox31.Controls.Add(this.label345);
-            this.groupBox31.Controls.Add(this.label346);
-            this.groupBox31.Location = new System.Drawing.Point(567, 379);
-            this.groupBox31.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox31.Name = "groupBox31";
-            this.groupBox31.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox31.Size = new System.Drawing.Size(261, 168);
-            this.groupBox31.TabIndex = 298;
-            this.groupBox31.TabStop = false;
-            this.groupBox31.Text = "出料手臂 P";
-            // 
-            // uiDoubleUpDown28
-            // 
-            this.uiDoubleUpDown28.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown28.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown28.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown28.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown28.Name = "uiDoubleUpDown28";
-            this.uiDoubleUpDown28.ShowText = false;
-            this.uiDoubleUpDown28.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown28.TabIndex = 289;
-            this.uiDoubleUpDown28.Text = "uiDoubleUpDown28";
-            this.uiDoubleUpDown28.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown29
-            // 
-            this.uiDoubleUpDown29.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown29.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown29.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown29.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown29.Name = "uiDoubleUpDown29";
-            this.uiDoubleUpDown29.ShowText = false;
-            this.uiDoubleUpDown29.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown29.TabIndex = 286;
-            this.uiDoubleUpDown29.Text = "uiDoubleUpDown29";
-            this.uiDoubleUpDown29.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label344
-            // 
-            this.label344.AutoSize = true;
-            this.label344.Location = new System.Drawing.Point(35, 121);
-            this.label344.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label344.Name = "label344";
-            this.label344.Size = new System.Drawing.Size(58, 21);
-            this.label344.TabIndex = 287;
-            this.label344.Text = "加速度";
-            // 
-            // uiDoubleUpDown30
-            // 
-            this.uiDoubleUpDown30.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown30.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown30.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown30.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown30.Name = "uiDoubleUpDown30";
-            this.uiDoubleUpDown30.ShowText = false;
-            this.uiDoubleUpDown30.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown30.TabIndex = 285;
-            this.uiDoubleUpDown30.Text = "uiDoubleUpDown30";
-            this.uiDoubleUpDown30.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label345
-            // 
-            this.label345.AutoSize = true;
-            this.label345.Location = new System.Drawing.Point(35, 80);
-            this.label345.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label345.Name = "label345";
-            this.label345.Size = new System.Drawing.Size(58, 21);
-            this.label345.TabIndex = 282;
-            this.label345.Text = "加速度";
-            // 
-            // label346
-            // 
-            this.label346.AutoSize = true;
-            this.label346.Location = new System.Drawing.Point(35, 39);
-            this.label346.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label346.Name = "label346";
-            this.label346.Size = new System.Drawing.Size(74, 21);
-            this.label346.TabIndex = 2;
-            this.label346.Text = "最大速度";
-            // 
-            // groupBox34
-            // 
-            this.groupBox34.Controls.Add(this.uiDoubleUpDown37);
-            this.groupBox34.Controls.Add(this.uiDoubleUpDown38);
-            this.groupBox34.Controls.Add(this.label353);
-            this.groupBox34.Controls.Add(this.uiDoubleUpDown39);
-            this.groupBox34.Controls.Add(this.label354);
-            this.groupBox34.Controls.Add(this.label355);
-            this.groupBox34.Location = new System.Drawing.Point(25, 551);
-            this.groupBox34.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox34.Name = "groupBox34";
-            this.groupBox34.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox34.Size = new System.Drawing.Size(261, 168);
-            this.groupBox34.TabIndex = 299;
-            this.groupBox34.TabStop = false;
-            this.groupBox34.Text = "出料手臂 Z1";
-            // 
-            // uiDoubleUpDown37
-            // 
-            this.uiDoubleUpDown37.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown37.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown37.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown37.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown37.Name = "uiDoubleUpDown37";
-            this.uiDoubleUpDown37.ShowText = false;
-            this.uiDoubleUpDown37.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown37.TabIndex = 289;
-            this.uiDoubleUpDown37.Text = "uiDoubleUpDown37";
-            this.uiDoubleUpDown37.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown38
-            // 
-            this.uiDoubleUpDown38.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown38.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown38.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown38.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown38.Name = "uiDoubleUpDown38";
-            this.uiDoubleUpDown38.ShowText = false;
-            this.uiDoubleUpDown38.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown38.TabIndex = 286;
-            this.uiDoubleUpDown38.Text = "uiDoubleUpDown38";
-            this.uiDoubleUpDown38.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label353
-            // 
-            this.label353.AutoSize = true;
-            this.label353.Location = new System.Drawing.Point(35, 121);
-            this.label353.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label353.Name = "label353";
-            this.label353.Size = new System.Drawing.Size(58, 21);
-            this.label353.TabIndex = 287;
-            this.label353.Text = "加速度";
-            // 
-            // uiDoubleUpDown39
-            // 
-            this.uiDoubleUpDown39.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown39.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown39.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown39.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown39.Name = "uiDoubleUpDown39";
-            this.uiDoubleUpDown39.ShowText = false;
-            this.uiDoubleUpDown39.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown39.TabIndex = 285;
-            this.uiDoubleUpDown39.Text = "uiDoubleUpDown39";
-            this.uiDoubleUpDown39.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label354
-            // 
-            this.label354.AutoSize = true;
-            this.label354.Location = new System.Drawing.Point(35, 80);
-            this.label354.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label354.Name = "label354";
-            this.label354.Size = new System.Drawing.Size(58, 21);
-            this.label354.TabIndex = 282;
-            this.label354.Text = "加速度";
-            // 
-            // label355
-            // 
-            this.label355.AutoSize = true;
-            this.label355.Location = new System.Drawing.Point(35, 39);
-            this.label355.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label355.Name = "label355";
-            this.label355.Size = new System.Drawing.Size(74, 21);
-            this.label355.TabIndex = 2;
-            this.label355.Text = "最大速度";
-            // 
-            // button42
-            // 
-            this.button42.Location = new System.Drawing.Point(963, 205);
-            this.button42.Margin = new System.Windows.Forms.Padding(2);
-            this.button42.Name = "button42";
-            this.button42.Size = new System.Drawing.Size(108, 34);
-            this.button42.TabIndex = 271;
-            this.button42.Text = "移动";
-            this.button42.UseVisualStyleBackColor = true;
-            // 
-            // button47
-            // 
-            this.button47.Location = new System.Drawing.Point(437, 290);
-            this.button47.Margin = new System.Windows.Forms.Padding(2);
-            this.button47.Name = "button47";
-            this.button47.Size = new System.Drawing.Size(108, 34);
-            this.button47.TabIndex = 131;
-            this.button47.Text = "移动";
-            this.button47.UseVisualStyleBackColor = true;
-            // 
-            // button48
-            // 
-            this.button48.Location = new System.Drawing.Point(437, 52);
-            this.button48.Margin = new System.Windows.Forms.Padding(2);
-            this.button48.Name = "button48";
-            this.button48.Size = new System.Drawing.Size(108, 34);
-            this.button48.TabIndex = 242;
-            this.button48.Text = "移动";
-            this.button48.UseVisualStyleBackColor = true;
-            // 
-            // groupBox32
-            // 
-            this.groupBox32.Controls.Add(this.uiDoubleUpDown31);
-            this.groupBox32.Controls.Add(this.uiDoubleUpDown32);
-            this.groupBox32.Controls.Add(this.label347);
-            this.groupBox32.Controls.Add(this.uiDoubleUpDown33);
-            this.groupBox32.Controls.Add(this.label348);
-            this.groupBox32.Controls.Add(this.label349);
-            this.groupBox32.Location = new System.Drawing.Point(296, 551);
-            this.groupBox32.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox32.Name = "groupBox32";
-            this.groupBox32.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox32.Size = new System.Drawing.Size(261, 168);
-            this.groupBox32.TabIndex = 300;
-            this.groupBox32.TabStop = false;
-            this.groupBox32.Text = "出料手臂 Z2";
-            // 
-            // uiDoubleUpDown31
-            // 
-            this.uiDoubleUpDown31.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown31.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown31.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown31.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown31.Name = "uiDoubleUpDown31";
-            this.uiDoubleUpDown31.ShowText = false;
-            this.uiDoubleUpDown31.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown31.TabIndex = 289;
-            this.uiDoubleUpDown31.Text = "uiDoubleUpDown31";
-            this.uiDoubleUpDown31.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown32
-            // 
-            this.uiDoubleUpDown32.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown32.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown32.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown32.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown32.Name = "uiDoubleUpDown32";
-            this.uiDoubleUpDown32.ShowText = false;
-            this.uiDoubleUpDown32.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown32.TabIndex = 286;
-            this.uiDoubleUpDown32.Text = "uiDoubleUpDown32";
-            this.uiDoubleUpDown32.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label347
-            // 
-            this.label347.AutoSize = true;
-            this.label347.Location = new System.Drawing.Point(35, 121);
-            this.label347.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label347.Name = "label347";
-            this.label347.Size = new System.Drawing.Size(58, 21);
-            this.label347.TabIndex = 287;
-            this.label347.Text = "加速度";
-            // 
-            // uiDoubleUpDown33
-            // 
-            this.uiDoubleUpDown33.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown33.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown33.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown33.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown33.Name = "uiDoubleUpDown33";
-            this.uiDoubleUpDown33.ShowText = false;
-            this.uiDoubleUpDown33.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown33.TabIndex = 285;
-            this.uiDoubleUpDown33.Text = "uiDoubleUpDown33";
-            this.uiDoubleUpDown33.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label348
-            // 
-            this.label348.AutoSize = true;
-            this.label348.Location = new System.Drawing.Point(35, 80);
-            this.label348.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label348.Name = "label348";
-            this.label348.Size = new System.Drawing.Size(58, 21);
-            this.label348.TabIndex = 282;
-            this.label348.Text = "加速度";
-            // 
-            // label349
-            // 
-            this.label349.AutoSize = true;
-            this.label349.Location = new System.Drawing.Point(35, 39);
-            this.label349.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label349.Name = "label349";
-            this.label349.Size = new System.Drawing.Size(74, 21);
-            this.label349.TabIndex = 2;
-            this.label349.Text = "最大速度";
-            // 
-            // button50
-            // 
-            this.button50.Location = new System.Drawing.Point(437, 252);
-            this.button50.Margin = new System.Windows.Forms.Padding(2);
-            this.button50.Name = "button50";
-            this.button50.Size = new System.Drawing.Size(108, 34);
-            this.button50.TabIndex = 130;
-            this.button50.Text = "移动";
-            this.button50.UseVisualStyleBackColor = true;
-            // 
-            // groupBox33
-            // 
-            this.groupBox33.Controls.Add(this.uiDoubleUpDown34);
-            this.groupBox33.Controls.Add(this.uiDoubleUpDown35);
-            this.groupBox33.Controls.Add(this.label350);
-            this.groupBox33.Controls.Add(this.uiDoubleUpDown36);
-            this.groupBox33.Controls.Add(this.label351);
-            this.groupBox33.Controls.Add(this.label352);
-            this.groupBox33.Location = new System.Drawing.Point(296, 379);
-            this.groupBox33.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox33.Name = "groupBox33";
-            this.groupBox33.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox33.Size = new System.Drawing.Size(261, 168);
-            this.groupBox33.TabIndex = 297;
-            this.groupBox33.TabStop = false;
-            this.groupBox33.Text = "出料手臂 Y";
-            // 
-            // uiDoubleUpDown34
-            // 
-            this.uiDoubleUpDown34.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown34.Location = new System.Drawing.Point(119, 117);
-            this.uiDoubleUpDown34.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown34.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown34.Name = "uiDoubleUpDown34";
-            this.uiDoubleUpDown34.ShowText = false;
-            this.uiDoubleUpDown34.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown34.TabIndex = 289;
-            this.uiDoubleUpDown34.Text = "uiDoubleUpDown34";
-            this.uiDoubleUpDown34.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown35
-            // 
-            this.uiDoubleUpDown35.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown35.Location = new System.Drawing.Point(119, 76);
-            this.uiDoubleUpDown35.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown35.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown35.Name = "uiDoubleUpDown35";
-            this.uiDoubleUpDown35.ShowText = false;
-            this.uiDoubleUpDown35.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown35.TabIndex = 286;
-            this.uiDoubleUpDown35.Text = "uiDoubleUpDown35";
-            this.uiDoubleUpDown35.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label350
-            // 
-            this.label350.AutoSize = true;
-            this.label350.Location = new System.Drawing.Point(35, 121);
-            this.label350.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label350.Name = "label350";
-            this.label350.Size = new System.Drawing.Size(58, 21);
-            this.label350.TabIndex = 287;
-            this.label350.Text = "加速度";
-            // 
-            // uiDoubleUpDown36
-            // 
-            this.uiDoubleUpDown36.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown36.Location = new System.Drawing.Point(119, 35);
-            this.uiDoubleUpDown36.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown36.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown36.Name = "uiDoubleUpDown36";
-            this.uiDoubleUpDown36.ShowText = false;
-            this.uiDoubleUpDown36.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown36.TabIndex = 285;
-            this.uiDoubleUpDown36.Text = "uiDoubleUpDown36";
-            this.uiDoubleUpDown36.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label351
-            // 
-            this.label351.AutoSize = true;
-            this.label351.Location = new System.Drawing.Point(35, 80);
-            this.label351.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label351.Name = "label351";
-            this.label351.Size = new System.Drawing.Size(58, 21);
-            this.label351.TabIndex = 282;
-            this.label351.Text = "加速度";
-            // 
-            // label352
-            // 
-            this.label352.AutoSize = true;
-            this.label352.Location = new System.Drawing.Point(35, 39);
-            this.label352.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label352.Name = "label352";
-            this.label352.Size = new System.Drawing.Size(74, 21);
-            this.label352.TabIndex = 2;
-            this.label352.Text = "最大速度";
-            // 
-            // label66
-            // 
-            this.label66.AutoSize = true;
-            this.label66.Location = new System.Drawing.Point(21, 333);
-            this.label66.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label66.Name = "label66";
-            this.label66.Size = new System.Drawing.Size(182, 21);
-            this.label66.TabIndex = 107;
-            this.label66.Text = "OutputArm -> Work Z";
-            // 
-            // label59
-            // 
-            this.label59.AutoSize = true;
-            this.label59.Location = new System.Drawing.Point(578, 297);
-            this.label59.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label59.Name = "label59";
-            this.label59.Size = new System.Drawing.Size(218, 21);
-            this.label59.TabIndex = 275;
-            this.label59.Text = "OutputArm -> Fix3 Y (放料)";
-            // 
-            // button46
-            // 
-            this.button46.Location = new System.Drawing.Point(963, 88);
-            this.button46.Margin = new System.Windows.Forms.Padding(2);
-            this.button46.Name = "button46";
-            this.button46.Size = new System.Drawing.Size(108, 34);
-            this.button46.TabIndex = 267;
-            this.button46.Text = "移动";
-            this.button46.UseVisualStyleBackColor = true;
-            // 
-            // label67
-            // 
-            this.label67.AutoSize = true;
-            this.label67.Location = new System.Drawing.Point(21, 59);
-            this.label67.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label67.Name = "label67";
-            this.label67.Size = new System.Drawing.Size(261, 21);
-            this.label67.TabIndex = 120;
-            this.label67.Text = "OutputArm -> ShuttleR1 Y (取料)";
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Location = new System.Drawing.Point(1094, 140);
-            this.label64.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(218, 21);
-            this.label64.TabIndex = 112;
-            this.label64.Text = "OutputArm -> Fix2 X (放料)";
-            // 
-            // label63
-            // 
-            this.label63.AutoSize = true;
-            this.label63.Location = new System.Drawing.Point(1094, 212);
-            this.label63.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label63.Name = "label63";
-            this.label63.Size = new System.Drawing.Size(218, 21);
-            this.label63.TabIndex = 117;
-            this.label63.Text = "OutputArm -> Fix2 Z (放料)";
-            // 
-            // label68
-            // 
-            this.label68.AutoSize = true;
-            this.label68.Location = new System.Drawing.Point(21, 95);
-            this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(261, 21);
-            this.label68.TabIndex = 122;
-            this.label68.Text = "OutputArm -> ShuttleR1 Z (取料)";
-            // 
-            // button56
-            // 
-            this.button56.Location = new System.Drawing.Point(437, 16);
-            this.button56.Margin = new System.Windows.Forms.Padding(2);
-            this.button56.Name = "button56";
-            this.button56.Size = new System.Drawing.Size(108, 34);
-            this.button56.TabIndex = 241;
-            this.button56.Text = "移动";
-            this.button56.UseVisualStyleBackColor = true;
-            // 
-            // label70
-            // 
-            this.label70.AutoSize = true;
-            this.label70.Location = new System.Drawing.Point(21, 297);
-            this.label70.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label70.Name = "label70";
-            this.label70.Size = new System.Drawing.Size(178, 21);
-            this.label70.TabIndex = 128;
-            this.label70.Text = "OutputArm Pitch Max";
-            // 
-            // label62
-            // 
-            this.label62.AutoSize = true;
-            this.label62.Location = new System.Drawing.Point(1094, 176);
-            this.label62.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label62.Name = "label62";
-            this.label62.Size = new System.Drawing.Size(218, 21);
-            this.label62.TabIndex = 115;
-            this.label62.Text = "OutputArm -> Fix2 Y (放料)";
-            // 
-            // label72
-            // 
-            this.label72.AutoSize = true;
-            this.label72.Location = new System.Drawing.Point(21, 140);
-            this.label72.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label72.Name = "label72";
-            this.label72.Size = new System.Drawing.Size(261, 21);
-            this.label72.TabIndex = 125;
-            this.label72.Text = "OutputArm -> ShuttleR2 X (取料)";
-            // 
-            // button49
-            // 
-            this.button49.Location = new System.Drawing.Point(963, 169);
-            this.button49.Margin = new System.Windows.Forms.Padding(2);
-            this.button49.Name = "button49";
-            this.button49.Size = new System.Drawing.Size(108, 34);
-            this.button49.TabIndex = 237;
-            this.button49.Text = "移动";
-            this.button49.UseVisualStyleBackColor = true;
-            // 
-            // label74
-            // 
-            this.label74.AutoSize = true;
-            this.label74.Location = new System.Drawing.Point(21, 212);
-            this.label74.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label74.Name = "label74";
-            this.label74.Size = new System.Drawing.Size(261, 21);
-            this.label74.TabIndex = 128;
-            this.label74.Text = "OutputArm -> ShuttleR2 Z (取料)";
-            // 
-            // label75
-            // 
-            this.label75.AutoSize = true;
-            this.label75.Location = new System.Drawing.Point(21, 176);
-            this.label75.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label75.Name = "label75";
-            this.label75.Size = new System.Drawing.Size(261, 21);
-            this.label75.TabIndex = 126;
-            this.label75.Text = "OutputArm -> ShuttleR2 Y (取料)";
-            // 
-            // label65
-            // 
-            this.label65.AutoSize = true;
-            this.label65.Location = new System.Drawing.Point(578, 212);
-            this.label65.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label65.Name = "label65";
-            this.label65.Size = new System.Drawing.Size(218, 21);
-            this.label65.TabIndex = 269;
-            this.label65.Text = "OutputArm -> Fix1 Z (放料)";
-            // 
-            // label76
-            // 
-            this.label76.AutoSize = true;
-            this.label76.Location = new System.Drawing.Point(21, 259);
-            this.label76.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label76.Name = "label76";
-            this.label76.Size = new System.Drawing.Size(175, 21);
-            this.label76.TabIndex = 126;
-            this.label76.Text = "OutputArm Pitch Min";
-            // 
-            // button51
-            // 
-            this.button51.Location = new System.Drawing.Point(963, 133);
-            this.button51.Margin = new System.Windows.Forms.Padding(2);
-            this.button51.Name = "button51";
-            this.button51.Size = new System.Drawing.Size(108, 34);
-            this.button51.TabIndex = 236;
-            this.button51.Text = "移动";
-            this.button51.UseVisualStyleBackColor = true;
-            // 
-            // button45
-            // 
-            this.button45.Location = new System.Drawing.Point(1486, 133);
-            this.button45.Margin = new System.Windows.Forms.Padding(2);
-            this.button45.Name = "button45";
-            this.button45.Size = new System.Drawing.Size(108, 34);
-            this.button45.TabIndex = 238;
-            this.button45.Text = "移动";
-            this.button45.UseVisualStyleBackColor = true;
-            // 
-            // label60
-            // 
-            this.label60.AutoSize = true;
-            this.label60.Location = new System.Drawing.Point(578, 333);
-            this.label60.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label60.Name = "label60";
-            this.label60.Size = new System.Drawing.Size(218, 21);
-            this.label60.TabIndex = 277;
-            this.label60.Text = "OutputArm -> Fix3 Z (放料)";
-            // 
-            // button53
-            // 
-            this.button53.Location = new System.Drawing.Point(1486, 88);
-            this.button53.Margin = new System.Windows.Forms.Padding(2);
-            this.button53.Name = "button53";
-            this.button53.Size = new System.Drawing.Size(108, 34);
-            this.button53.TabIndex = 235;
-            this.button53.Text = "移动";
-            this.button53.UseVisualStyleBackColor = true;
-            // 
-            // button44
-            // 
-            this.button44.Location = new System.Drawing.Point(1486, 169);
-            this.button44.Margin = new System.Windows.Forms.Padding(2);
-            this.button44.Name = "button44";
-            this.button44.Size = new System.Drawing.Size(108, 34);
-            this.button44.TabIndex = 239;
-            this.button44.Text = "移动";
-            this.button44.UseVisualStyleBackColor = true;
-            // 
-            // button43
-            // 
-            this.button43.Location = new System.Drawing.Point(1486, 205);
-            this.button43.Margin = new System.Windows.Forms.Padding(2);
-            this.button43.Name = "button43";
-            this.button43.Size = new System.Drawing.Size(108, 34);
-            this.button43.TabIndex = 240;
-            this.button43.Text = "移动";
-            this.button43.UseVisualStyleBackColor = true;
-            // 
-            // label61
-            // 
-            this.label61.AutoSize = true;
-            this.label61.Location = new System.Drawing.Point(578, 259);
-            this.label61.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(218, 21);
-            this.label61.TabIndex = 273;
-            this.label61.Text = "OutputArm -> Fix3 X (放料)";
-            // 
-            // button54
-            // 
-            this.button54.Location = new System.Drawing.Point(1486, 52);
-            this.button54.Margin = new System.Windows.Forms.Padding(2);
-            this.button54.Name = "button54";
-            this.button54.Size = new System.Drawing.Size(108, 34);
-            this.button54.TabIndex = 234;
-            this.button54.Text = "移动";
-            this.button54.UseVisualStyleBackColor = true;
-            // 
-            // label78
-            // 
-            this.label78.AutoSize = true;
-            this.label78.Location = new System.Drawing.Point(578, 23);
-            this.label78.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label78.Name = "label78";
-            this.label78.Size = new System.Drawing.Size(234, 21);
-            this.label78.TabIndex = 2;
-            this.label78.Text = "OutputArm -> Auto1 X (放料)";
-            // 
-            // label81
-            // 
-            this.label81.AutoSize = true;
-            this.label81.Location = new System.Drawing.Point(1094, 59);
-            this.label81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label81.Name = "label81";
-            this.label81.Size = new System.Drawing.Size(234, 21);
-            this.label81.TabIndex = 105;
-            this.label81.Text = "OutputArm -> Auto2 Y (放料)";
-            // 
-            // button55
-            // 
-            this.button55.Location = new System.Drawing.Point(1486, 16);
-            this.button55.Margin = new System.Windows.Forms.Padding(2);
-            this.button55.Name = "button55";
-            this.button55.Size = new System.Drawing.Size(108, 34);
-            this.button55.TabIndex = 233;
-            this.button55.Text = "移动";
-            this.button55.UseVisualStyleBackColor = true;
-            // 
-            // label80
-            // 
-            this.label80.AutoSize = true;
-            this.label80.Location = new System.Drawing.Point(578, 59);
-            this.label80.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label80.Name = "label80";
-            this.label80.Size = new System.Drawing.Size(234, 21);
-            this.label80.TabIndex = 4;
-            this.label80.Text = "OutputArm -> Auto1 Y (放料)";
-            // 
-            // label79
-            // 
-            this.label79.AutoSize = true;
-            this.label79.Location = new System.Drawing.Point(1094, 95);
-            this.label79.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label79.Name = "label79";
-            this.label79.Size = new System.Drawing.Size(234, 21);
-            this.label79.TabIndex = 107;
-            this.label79.Text = "OutputArm -> Auto2 Z (放料)";
-            // 
-            // label69
-            // 
-            this.label69.AutoSize = true;
-            this.label69.Location = new System.Drawing.Point(578, 176);
-            this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label69.Name = "label69";
-            this.label69.Size = new System.Drawing.Size(218, 21);
-            this.label69.TabIndex = 110;
-            this.label69.Text = "OutputArm -> Fix1 Y (放料)";
-            // 
-            // label77
-            // 
-            this.label77.AutoSize = true;
-            this.label77.Location = new System.Drawing.Point(1094, 23);
-            this.label77.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label77.Name = "label77";
-            this.label77.Size = new System.Drawing.Size(234, 21);
-            this.label77.TabIndex = 102;
-            this.label77.Text = "OutputArm -> Auto2 X (放料)";
-            // 
-            // button58
-            // 
-            this.button58.Location = new System.Drawing.Point(963, 16);
-            this.button58.Margin = new System.Windows.Forms.Padding(2);
-            this.button58.Name = "button58";
-            this.button58.Size = new System.Drawing.Size(108, 34);
-            this.button58.TabIndex = 231;
-            this.button58.Text = "移动";
-            this.button58.UseVisualStyleBackColor = true;
-            // 
-            // label71
-            // 
-            this.label71.AutoSize = true;
-            this.label71.Location = new System.Drawing.Point(578, 140);
-            this.label71.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label71.Name = "label71";
-            this.label71.Size = new System.Drawing.Size(218, 21);
-            this.label71.TabIndex = 109;
-            this.label71.Text = "OutputArm -> Fix1 X (放料)";
+            this.label58.Text = "出料 -> 梭车1 X (吸料)";
+            // 
+            // uiDoubleUpDown126
+            // 
+            this.uiDoubleUpDown126.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown126.Location = new System.Drawing.Point(675, 396);
+            this.uiDoubleUpDown126.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown126.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown126.Name = "uiDoubleUpDown126";
+            this.uiDoubleUpDown126.ShowText = false;
+            this.uiDoubleUpDown126.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown126.TabIndex = 294;
+            this.uiDoubleUpDown126.Text = "uiDoubleUpDown126";
+            this.uiDoubleUpDown126.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label73
+            // 
+            this.label73.AutoSize = true;
+            this.label73.Location = new System.Drawing.Point(18, 241);
+            this.label73.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label73.Name = "label73";
+            this.label73.Size = new System.Drawing.Size(179, 21);
+            this.label73.TabIndex = 265;
+            this.label73.Text = "出料 -> Auto1 Z (放料)";
+            // 
+            // button22
+            // 
+            this.button22.Location = new System.Drawing.Point(817, 393);
+            this.button22.Margin = new System.Windows.Forms.Padding(2);
+            this.button22.Name = "button22";
+            this.button22.Size = new System.Drawing.Size(108, 34);
+            this.button22.TabIndex = 293;
+            this.button22.Text = "移动";
+            this.button22.UseVisualStyleBackColor = true;
             // 
             // button57
             // 
-            this.button57.Location = new System.Drawing.Point(963, 52);
+            this.button57.Location = new System.Drawing.Point(353, 200);
             this.button57.Margin = new System.Windows.Forms.Padding(2);
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(108, 34);
@@ -13279,75 +12894,951 @@
             this.button57.Text = "移动";
             this.button57.UseVisualStyleBackColor = true;
             // 
-            // label73
+            // label386
             // 
-            this.label73.AutoSize = true;
-            this.label73.Location = new System.Drawing.Point(578, 95);
-            this.label73.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label73.Name = "label73";
-            this.label73.Size = new System.Drawing.Size(234, 21);
-            this.label73.TabIndex = 265;
-            this.label73.Text = "OutputArm -> Auto1 Z (放料)";
+            this.label386.AutoSize = true;
+            this.label386.Location = new System.Drawing.Point(481, 398);
+            this.label386.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label386.Name = "label386";
+            this.label386.Size = new System.Drawing.Size(154, 21);
+            this.label386.TabIndex = 326;
+            this.label386.Text = "出料 -> Fix3 右平移";
+            // 
+            // label71
+            // 
+            this.label71.AutoSize = true;
+            this.label71.Location = new System.Drawing.Point(481, 169);
+            this.label71.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label71.Name = "label71";
+            this.label71.Size = new System.Drawing.Size(163, 21);
+            this.label71.TabIndex = 109;
+            this.label71.Text = "出料 -> Fix1 X (放料)";
+            // 
+            // label336
+            // 
+            this.label336.AutoSize = true;
+            this.label336.Location = new System.Drawing.Point(949, 398);
+            this.label336.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label336.Name = "label336";
+            this.label336.Size = new System.Drawing.Size(139, 21);
+            this.label336.TabIndex = 324;
+            this.label336.Text = "出料_Z4_硬件补偿";
+            // 
+            // button58
+            // 
+            this.button58.Location = new System.Drawing.Point(353, 164);
+            this.button58.Margin = new System.Windows.Forms.Padding(2);
+            this.button58.Name = "button58";
+            this.button58.Size = new System.Drawing.Size(108, 34);
+            this.button58.TabIndex = 231;
+            this.button58.Text = "移动";
+            this.button58.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown20
+            // 
+            this.uiDoubleUpDown20.DecimalPlaces = 3;
+            this.uiDoubleUpDown20.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown20.Location = new System.Drawing.Point(1127, 397);
+            this.uiDoubleUpDown20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown20.Maximum = 2000D;
+            this.uiDoubleUpDown20.Minimum = -100D;
+            this.uiDoubleUpDown20.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown20.Name = "uiDoubleUpDown20";
+            this.uiDoubleUpDown20.ShowText = false;
+            this.uiDoubleUpDown20.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown20.Step = 1D;
+            this.uiDoubleUpDown20.TabIndex = 325;
+            this.uiDoubleUpDown20.Text = "uiDoubleUpDown20";
+            this.uiDoubleUpDown20.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label77
+            // 
+            this.label77.AutoSize = true;
+            this.label77.Location = new System.Drawing.Point(18, 290);
+            this.label77.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label77.Name = "label77";
+            this.label77.Size = new System.Drawing.Size(179, 21);
+            this.label77.TabIndex = 102;
+            this.label77.Text = "出料 -> Auto2 X (放料)";
+            // 
+            // label337
+            // 
+            this.label337.AutoSize = true;
+            this.label337.Location = new System.Drawing.Point(949, 362);
+            this.label337.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label337.Name = "label337";
+            this.label337.Size = new System.Drawing.Size(139, 21);
+            this.label337.TabIndex = 318;
+            this.label337.Text = "出料_Z3_硬件补偿";
+            // 
+            // label69
+            // 
+            this.label69.AutoSize = true;
+            this.label69.Location = new System.Drawing.Point(481, 205);
+            this.label69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label69.Name = "label69";
+            this.label69.Size = new System.Drawing.Size(163, 21);
+            this.label69.TabIndex = 110;
+            this.label69.Text = "出料 -> Fix1 Y (放料)";
+            // 
+            // uiDoubleUpDown21
+            // 
+            this.uiDoubleUpDown21.DecimalPlaces = 3;
+            this.uiDoubleUpDown21.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown21.Location = new System.Drawing.Point(1127, 360);
+            this.uiDoubleUpDown21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown21.Maximum = 2000D;
+            this.uiDoubleUpDown21.Minimum = -100D;
+            this.uiDoubleUpDown21.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown21.Name = "uiDoubleUpDown21";
+            this.uiDoubleUpDown21.ShowText = false;
+            this.uiDoubleUpDown21.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown21.Step = 1D;
+            this.uiDoubleUpDown21.TabIndex = 323;
+            this.uiDoubleUpDown21.Text = "uiDoubleUpDown21";
+            this.uiDoubleUpDown21.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label79
+            // 
+            this.label79.AutoSize = true;
+            this.label79.Location = new System.Drawing.Point(18, 362);
+            this.label79.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label79.Name = "label79";
+            this.label79.Size = new System.Drawing.Size(179, 21);
+            this.label79.TabIndex = 107;
+            this.label79.Text = "出料 -> Auto2 Z (放料)";
+            // 
+            // uiDoubleUpDown121
+            // 
+            this.uiDoubleUpDown121.DecimalPlaces = 3;
+            this.uiDoubleUpDown121.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown121.Location = new System.Drawing.Point(1127, 324);
+            this.uiDoubleUpDown121.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown121.Maximum = 2000D;
+            this.uiDoubleUpDown121.Minimum = -100D;
+            this.uiDoubleUpDown121.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown121.Name = "uiDoubleUpDown121";
+            this.uiDoubleUpDown121.ShowText = false;
+            this.uiDoubleUpDown121.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown121.Step = 1D;
+            this.uiDoubleUpDown121.TabIndex = 322;
+            this.uiDoubleUpDown121.Text = "uiDoubleUpDown121";
+            this.uiDoubleUpDown121.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label80
+            // 
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(18, 205);
+            this.label80.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(179, 21);
+            this.label80.TabIndex = 4;
+            this.label80.Text = "出料 -> Auto1 Y (放料)";
+            // 
+            // label381
+            // 
+            this.label381.AutoSize = true;
+            this.label381.Location = new System.Drawing.Point(949, 326);
+            this.label381.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label381.Name = "label381";
+            this.label381.Size = new System.Drawing.Size(139, 21);
+            this.label381.TabIndex = 320;
+            this.label381.Text = "出料_Z2_硬件补偿";
+            // 
+            // button55
+            // 
+            this.button55.Location = new System.Drawing.Point(353, 285);
+            this.button55.Margin = new System.Windows.Forms.Padding(2);
+            this.button55.Name = "button55";
+            this.button55.Size = new System.Drawing.Size(108, 34);
+            this.button55.TabIndex = 233;
+            this.button55.Text = "移动";
+            this.button55.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown122
+            // 
+            this.uiDoubleUpDown122.DecimalPlaces = 3;
+            this.uiDoubleUpDown122.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown122.Location = new System.Drawing.Point(1127, 288);
+            this.uiDoubleUpDown122.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown122.Maximum = 2000D;
+            this.uiDoubleUpDown122.Minimum = -100D;
+            this.uiDoubleUpDown122.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown122.Name = "uiDoubleUpDown122";
+            this.uiDoubleUpDown122.ShowText = false;
+            this.uiDoubleUpDown122.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown122.Step = 1D;
+            this.uiDoubleUpDown122.TabIndex = 321;
+            this.uiDoubleUpDown122.Text = "uiDoubleUpDown122";
+            this.uiDoubleUpDown122.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label81
+            // 
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(18, 326);
+            this.label81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(179, 21);
+            this.label81.TabIndex = 105;
+            this.label81.Text = "出料 -> Auto2 Y (放料)";
+            // 
+            // label382
+            // 
+            this.label382.AutoSize = true;
+            this.label382.Location = new System.Drawing.Point(949, 290);
+            this.label382.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label382.Name = "label382";
+            this.label382.Size = new System.Drawing.Size(139, 21);
+            this.label382.TabIndex = 319;
+            this.label382.Text = "出料_Z1_硬件补偿";
+            // 
+            // label78
+            // 
+            this.label78.AutoSize = true;
+            this.label78.Location = new System.Drawing.Point(18, 169);
+            this.label78.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label78.Name = "label78";
+            this.label78.Size = new System.Drawing.Size(179, 21);
+            this.label78.TabIndex = 2;
+            this.label78.Text = "出料 -> Auto1 X (放料)";
+            // 
+            // label383
+            // 
+            this.label383.AutoSize = true;
+            this.label383.Location = new System.Drawing.Point(949, 241);
+            this.label383.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label383.Name = "label383";
+            this.label383.Size = new System.Drawing.Size(129, 21);
+            this.label383.TabIndex = 312;
+            this.label383.Text = "出料_梭车列间隔";
+            // 
+            // button54
+            // 
+            this.button54.Location = new System.Drawing.Point(353, 321);
+            this.button54.Margin = new System.Windows.Forms.Padding(2);
+            this.button54.Name = "button54";
+            this.button54.Size = new System.Drawing.Size(108, 34);
+            this.button54.TabIndex = 234;
+            this.button54.Text = "移动";
+            this.button54.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown123
+            // 
+            this.uiDoubleUpDown123.DecimalPlaces = 3;
+            this.uiDoubleUpDown123.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown123.Location = new System.Drawing.Point(1127, 239);
+            this.uiDoubleUpDown123.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown123.Maximum = 2000D;
+            this.uiDoubleUpDown123.Minimum = -100D;
+            this.uiDoubleUpDown123.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown123.Name = "uiDoubleUpDown123";
+            this.uiDoubleUpDown123.ShowText = false;
+            this.uiDoubleUpDown123.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown123.Step = 1D;
+            this.uiDoubleUpDown123.TabIndex = 317;
+            this.uiDoubleUpDown123.Text = "uiDoubleUpDown123";
+            this.uiDoubleUpDown123.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label61
+            // 
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(481, 290);
+            this.label61.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(163, 21);
+            this.label61.TabIndex = 273;
+            this.label61.Text = "出料 -> Fix3 X (放料)";
+            // 
+            // uiDoubleUpDown124
+            // 
+            this.uiDoubleUpDown124.DecimalPlaces = 3;
+            this.uiDoubleUpDown124.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown124.Location = new System.Drawing.Point(1127, 203);
+            this.uiDoubleUpDown124.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown124.Maximum = 2000D;
+            this.uiDoubleUpDown124.Minimum = -100D;
+            this.uiDoubleUpDown124.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown124.Name = "uiDoubleUpDown124";
+            this.uiDoubleUpDown124.ShowText = false;
+            this.uiDoubleUpDown124.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown124.Step = 1D;
+            this.uiDoubleUpDown124.TabIndex = 316;
+            this.uiDoubleUpDown124.Text = "uiDoubleUpDown124";
+            this.uiDoubleUpDown124.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button43
+            // 
+            this.button43.Location = new System.Drawing.Point(1266, 117);
+            this.button43.Margin = new System.Windows.Forms.Padding(2);
+            this.button43.Name = "button43";
+            this.button43.Size = new System.Drawing.Size(108, 34);
+            this.button43.TabIndex = 240;
+            this.button43.Text = "移动";
+            this.button43.UseVisualStyleBackColor = true;
+            // 
+            // label384
+            // 
+            this.label384.AutoSize = true;
+            this.label384.Location = new System.Drawing.Point(949, 205);
+            this.label384.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label384.Name = "label384";
+            this.label384.Size = new System.Drawing.Size(129, 21);
+            this.label384.TabIndex = 314;
+            this.label384.Text = "出料_变距最大值";
+            // 
+            // button44
+            // 
+            this.button44.Location = new System.Drawing.Point(1266, 81);
+            this.button44.Margin = new System.Windows.Forms.Padding(2);
+            this.button44.Name = "button44";
+            this.button44.Size = new System.Drawing.Size(108, 34);
+            this.button44.TabIndex = 239;
+            this.button44.Text = "移动";
+            this.button44.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown125
+            // 
+            this.uiDoubleUpDown125.DecimalPlaces = 3;
+            this.uiDoubleUpDown125.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown125.Location = new System.Drawing.Point(1127, 167);
+            this.uiDoubleUpDown125.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown125.Maximum = 2000D;
+            this.uiDoubleUpDown125.Minimum = -100D;
+            this.uiDoubleUpDown125.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown125.Name = "uiDoubleUpDown125";
+            this.uiDoubleUpDown125.ShowText = false;
+            this.uiDoubleUpDown125.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown125.Step = 1D;
+            this.uiDoubleUpDown125.TabIndex = 315;
+            this.uiDoubleUpDown125.Text = "uiDoubleUpDown125";
+            this.uiDoubleUpDown125.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button53
+            // 
+            this.button53.Location = new System.Drawing.Point(353, 357);
+            this.button53.Margin = new System.Windows.Forms.Padding(2);
+            this.button53.Name = "button53";
+            this.button53.Size = new System.Drawing.Size(108, 34);
+            this.button53.TabIndex = 235;
+            this.button53.Text = "移动";
+            this.button53.UseVisualStyleBackColor = true;
+            // 
+            // label385
+            // 
+            this.label385.AutoSize = true;
+            this.label385.Location = new System.Drawing.Point(949, 169);
+            this.label385.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label385.Name = "label385";
+            this.label385.Size = new System.Drawing.Size(129, 21);
+            this.label385.TabIndex = 313;
+            this.label385.Text = "出料_变距最小值";
+            // 
+            // label60
+            // 
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(481, 362);
+            this.label60.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(163, 21);
+            this.label60.TabIndex = 277;
+            this.label60.Text = "出料 -> Fix3 Z (放料)";
+            // 
+            // button21
+            // 
+            this.button21.Location = new System.Drawing.Point(817, 285);
+            this.button21.Margin = new System.Windows.Forms.Padding(2);
+            this.button21.Name = "button21";
+            this.button21.Size = new System.Drawing.Size(108, 34);
+            this.button21.TabIndex = 303;
+            this.button21.Text = "移动";
+            this.button21.UseVisualStyleBackColor = true;
+            // 
+            // button45
+            // 
+            this.button45.Location = new System.Drawing.Point(1266, 45);
+            this.button45.Margin = new System.Windows.Forms.Padding(2);
+            this.button45.Name = "button45";
+            this.button45.Size = new System.Drawing.Size(108, 34);
+            this.button45.TabIndex = 238;
+            this.button45.Text = "移动";
+            this.button45.UseVisualStyleBackColor = true;
+            // 
+            // label72
+            // 
+            this.label72.AutoSize = true;
+            this.label72.Location = new System.Drawing.Point(482, 50);
+            this.label72.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label72.Name = "label72";
+            this.label72.Size = new System.Drawing.Size(174, 21);
+            this.label72.TabIndex = 123;
+            this.label72.Text = "出料 -> 梭车2 X (吸料)";
+            // 
+            // button51
+            // 
+            this.button51.Location = new System.Drawing.Point(817, 164);
+            this.button51.Margin = new System.Windows.Forms.Padding(2);
+            this.button51.Name = "button51";
+            this.button51.Size = new System.Drawing.Size(108, 34);
+            this.button51.TabIndex = 236;
+            this.button51.Text = "移动";
+            this.button51.UseVisualStyleBackColor = true;
+            // 
+            // label74
+            // 
+            this.label74.AutoSize = true;
+            this.label74.Location = new System.Drawing.Point(482, 86);
+            this.label74.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label74.Name = "label74";
+            this.label74.Size = new System.Drawing.Size(174, 21);
+            this.label74.TabIndex = 124;
+            this.label74.Text = "出料 -> 梭车2 Y (吸料)";
+            // 
+            // label65
+            // 
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(481, 241);
+            this.label65.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(163, 21);
+            this.label65.TabIndex = 269;
+            this.label65.Text = "出料 -> Fix1 Z (放料)";
+            // 
+            // uiDoubleUpDown94
+            // 
+            this.uiDoubleUpDown94.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown94.Location = new System.Drawing.Point(1127, 120);
+            this.uiDoubleUpDown94.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown94.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown94.Name = "uiDoubleUpDown94";
+            this.uiDoubleUpDown94.ShowText = false;
+            this.uiDoubleUpDown94.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown94.TabIndex = 295;
+            this.uiDoubleUpDown94.Text = "uiDoubleUpDown94";
+            this.uiDoubleUpDown94.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button49
+            // 
+            this.button49.Location = new System.Drawing.Point(817, 200);
+            this.button49.Margin = new System.Windows.Forms.Padding(2);
+            this.button49.Name = "button49";
+            this.button49.Size = new System.Drawing.Size(108, 34);
+            this.button49.TabIndex = 237;
+            this.button49.Text = "移动";
+            this.button49.UseVisualStyleBackColor = true;
+            // 
+            // label75
+            // 
+            this.label75.AutoSize = true;
+            this.label75.Location = new System.Drawing.Point(482, 122);
+            this.label75.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label75.Name = "label75";
+            this.label75.Size = new System.Drawing.Size(174, 21);
+            this.label75.TabIndex = 125;
+            this.label75.Text = "出料 -> 梭车2 Z (吸料)";
+            // 
+            // label62
+            // 
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(949, 86);
+            this.label62.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(163, 21);
+            this.label62.TabIndex = 115;
+            this.label62.Text = "出料 -> Fix2 Y (放料)";
+            // 
+            // uiDoubleUpDown91
+            // 
+            this.uiDoubleUpDown91.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown91.Location = new System.Drawing.Point(211, 360);
+            this.uiDoubleUpDown91.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown91.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown91.Name = "uiDoubleUpDown91";
+            this.uiDoubleUpDown91.ShowText = false;
+            this.uiDoubleUpDown91.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown91.TabIndex = 295;
+            this.uiDoubleUpDown91.Text = "uiDoubleUpDown91";
+            this.uiDoubleUpDown91.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button56
+            // 
+            this.button56.Location = new System.Drawing.Point(353, 45);
+            this.button56.Margin = new System.Windows.Forms.Padding(2);
+            this.button56.Name = "button56";
+            this.button56.Size = new System.Drawing.Size(108, 34);
+            this.button56.TabIndex = 241;
+            this.button56.Text = "移动";
+            this.button56.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown95
+            // 
+            this.uiDoubleUpDown95.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown95.Location = new System.Drawing.Point(1127, 84);
+            this.uiDoubleUpDown95.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown95.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown95.Name = "uiDoubleUpDown95";
+            this.uiDoubleUpDown95.ShowText = false;
+            this.uiDoubleUpDown95.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown95.TabIndex = 294;
+            this.uiDoubleUpDown95.Text = "uiDoubleUpDown95";
+            this.uiDoubleUpDown95.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label68
+            // 
+            this.label68.AutoSize = true;
+            this.label68.Location = new System.Drawing.Point(18, 122);
+            this.label68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label68.Name = "label68";
+            this.label68.Size = new System.Drawing.Size(174, 21);
+            this.label68.TabIndex = 122;
+            this.label68.Text = "出料 -> 梭车1 Z (吸料)";
+            // 
+            // uiDoubleUpDown88
+            // 
+            this.uiDoubleUpDown88.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown88.Location = new System.Drawing.Point(211, 239);
+            this.uiDoubleUpDown88.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown88.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown88.Name = "uiDoubleUpDown88";
+            this.uiDoubleUpDown88.ShowText = false;
+            this.uiDoubleUpDown88.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown88.TabIndex = 295;
+            this.uiDoubleUpDown88.Text = "uiDoubleUpDown88";
+            this.uiDoubleUpDown88.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label63
+            // 
+            this.label63.AutoSize = true;
+            this.label63.Location = new System.Drawing.Point(949, 122);
+            this.label63.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(163, 21);
+            this.label63.TabIndex = 117;
+            this.label63.Text = "出料 -> Fix2 Z (放料)";
+            // 
+            // uiDoubleUpDown96
+            // 
+            this.uiDoubleUpDown96.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown96.Location = new System.Drawing.Point(1127, 48);
+            this.uiDoubleUpDown96.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown96.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown96.Name = "uiDoubleUpDown96";
+            this.uiDoubleUpDown96.ShowText = false;
+            this.uiDoubleUpDown96.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown96.TabIndex = 293;
+            this.uiDoubleUpDown96.Text = "uiDoubleUpDown96";
+            this.uiDoubleUpDown96.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label64
+            // 
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(949, 50);
+            this.label64.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(163, 21);
+            this.label64.TabIndex = 112;
+            this.label64.Text = "出料 -> Fix2 X (放料)";
+            // 
+            // uiDoubleUpDown92
+            // 
+            this.uiDoubleUpDown92.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown92.Location = new System.Drawing.Point(211, 324);
+            this.uiDoubleUpDown92.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown92.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown92.Name = "uiDoubleUpDown92";
+            this.uiDoubleUpDown92.ShowText = false;
+            this.uiDoubleUpDown92.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown92.TabIndex = 294;
+            this.uiDoubleUpDown92.Text = "uiDoubleUpDown92";
+            this.uiDoubleUpDown92.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(18, 86);
+            this.label67.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(174, 21);
+            this.label67.TabIndex = 120;
+            this.label67.Text = "出料 -> 梭车1 Y (吸料)";
+            // 
+            // uiDoubleUpDown85
+            // 
+            this.uiDoubleUpDown85.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown85.Location = new System.Drawing.Point(675, 239);
+            this.uiDoubleUpDown85.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown85.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown85.Name = "uiDoubleUpDown85";
+            this.uiDoubleUpDown85.ShowText = false;
+            this.uiDoubleUpDown85.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown85.TabIndex = 292;
+            this.uiDoubleUpDown85.Text = "uiDoubleUpDown85";
+            this.uiDoubleUpDown85.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button46
+            // 
+            this.button46.Location = new System.Drawing.Point(353, 236);
+            this.button46.Margin = new System.Windows.Forms.Padding(2);
+            this.button46.Name = "button46";
+            this.button46.Size = new System.Drawing.Size(108, 34);
+            this.button46.TabIndex = 267;
+            this.button46.Text = "移动";
+            this.button46.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown93
+            // 
+            this.uiDoubleUpDown93.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown93.Location = new System.Drawing.Point(211, 288);
+            this.uiDoubleUpDown93.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown93.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown93.Name = "uiDoubleUpDown93";
+            this.uiDoubleUpDown93.ShowText = false;
+            this.uiDoubleUpDown93.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown93.TabIndex = 293;
+            this.uiDoubleUpDown93.Text = "uiDoubleUpDown93";
+            this.uiDoubleUpDown93.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label59
+            // 
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(481, 326);
+            this.label59.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(163, 21);
+            this.label59.TabIndex = 275;
+            this.label59.Text = "出料 -> Fix3 Y (放料)";
+            // 
+            // uiDoubleUpDown89
+            // 
+            this.uiDoubleUpDown89.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown89.Location = new System.Drawing.Point(211, 203);
+            this.uiDoubleUpDown89.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown89.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown89.Name = "uiDoubleUpDown89";
+            this.uiDoubleUpDown89.ShowText = false;
+            this.uiDoubleUpDown89.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown89.TabIndex = 294;
+            this.uiDoubleUpDown89.Text = "uiDoubleUpDown89";
+            this.uiDoubleUpDown89.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button48
+            // 
+            this.button48.Location = new System.Drawing.Point(353, 81);
+            this.button48.Margin = new System.Windows.Forms.Padding(2);
+            this.button48.Name = "button48";
+            this.button48.Size = new System.Drawing.Size(108, 34);
+            this.button48.TabIndex = 242;
+            this.button48.Text = "移动";
+            this.button48.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown82
+            // 
+            this.uiDoubleUpDown82.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown82.Location = new System.Drawing.Point(675, 360);
+            this.uiDoubleUpDown82.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown82.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown82.Name = "uiDoubleUpDown82";
+            this.uiDoubleUpDown82.ShowText = false;
+            this.uiDoubleUpDown82.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown82.TabIndex = 292;
+            this.uiDoubleUpDown82.Text = "uiDoubleUpDown82";
+            this.uiDoubleUpDown82.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button42
+            // 
+            this.button42.Location = new System.Drawing.Point(817, 236);
+            this.button42.Margin = new System.Windows.Forms.Padding(2);
+            this.button42.Name = "button42";
+            this.button42.Size = new System.Drawing.Size(108, 34);
+            this.button42.TabIndex = 271;
+            this.button42.Text = "移动";
+            this.button42.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown90
+            // 
+            this.uiDoubleUpDown90.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown90.Location = new System.Drawing.Point(211, 167);
+            this.uiDoubleUpDown90.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown90.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown90.Name = "uiDoubleUpDown90";
+            this.uiDoubleUpDown90.ShowText = false;
+            this.uiDoubleUpDown90.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown90.TabIndex = 293;
+            this.uiDoubleUpDown90.Text = "uiDoubleUpDown90";
+            this.uiDoubleUpDown90.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button40
+            // 
+            this.button40.Location = new System.Drawing.Point(353, 117);
+            this.button40.Margin = new System.Windows.Forms.Padding(2);
+            this.button40.Name = "button40";
+            this.button40.Size = new System.Drawing.Size(108, 34);
+            this.button40.TabIndex = 243;
+            this.button40.Text = "移动";
+            this.button40.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown86
+            // 
+            this.uiDoubleUpDown86.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown86.Location = new System.Drawing.Point(675, 203);
+            this.uiDoubleUpDown86.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown86.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown86.Name = "uiDoubleUpDown86";
+            this.uiDoubleUpDown86.ShowText = false;
+            this.uiDoubleUpDown86.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown86.TabIndex = 291;
+            this.uiDoubleUpDown86.Text = "uiDoubleUpDown86";
+            this.uiDoubleUpDown86.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button34
+            // 
+            this.button34.Location = new System.Drawing.Point(817, 321);
+            this.button34.Margin = new System.Windows.Forms.Padding(2);
+            this.button34.Name = "button34";
+            this.button34.Size = new System.Drawing.Size(108, 34);
+            this.button34.TabIndex = 280;
+            this.button34.Text = "移动";
+            this.button34.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown87
+            // 
+            this.uiDoubleUpDown87.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown87.Location = new System.Drawing.Point(675, 167);
+            this.uiDoubleUpDown87.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown87.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown87.Name = "uiDoubleUpDown87";
+            this.uiDoubleUpDown87.ShowText = false;
+            this.uiDoubleUpDown87.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown87.TabIndex = 290;
+            this.uiDoubleUpDown87.Text = "uiDoubleUpDown87";
+            this.uiDoubleUpDown87.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button38
+            // 
+            this.button38.Location = new System.Drawing.Point(817, 117);
+            this.button38.Margin = new System.Windows.Forms.Padding(2);
+            this.button38.Name = "button38";
+            this.button38.Size = new System.Drawing.Size(108, 34);
+            this.button38.TabIndex = 246;
+            this.button38.Text = "移动";
+            this.button38.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown83
+            // 
+            this.uiDoubleUpDown83.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown83.Location = new System.Drawing.Point(675, 324);
+            this.uiDoubleUpDown83.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown83.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown83.Name = "uiDoubleUpDown83";
+            this.uiDoubleUpDown83.ShowText = false;
+            this.uiDoubleUpDown83.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown83.TabIndex = 291;
+            this.uiDoubleUpDown83.Text = "uiDoubleUpDown83";
+            this.uiDoubleUpDown83.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button37
+            // 
+            this.button37.Location = new System.Drawing.Point(817, 81);
+            this.button37.Margin = new System.Windows.Forms.Padding(2);
+            this.button37.Name = "button37";
+            this.button37.Size = new System.Drawing.Size(108, 34);
+            this.button37.TabIndex = 245;
+            this.button37.Text = "移动";
+            this.button37.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown76
+            // 
+            this.uiDoubleUpDown76.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown76.Location = new System.Drawing.Point(675, 120);
+            this.uiDoubleUpDown76.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown76.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown76.Name = "uiDoubleUpDown76";
+            this.uiDoubleUpDown76.ShowText = false;
+            this.uiDoubleUpDown76.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown76.TabIndex = 292;
+            this.uiDoubleUpDown76.Text = "uiDoubleUpDown76";
+            this.uiDoubleUpDown76.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button36
+            // 
+            this.button36.Location = new System.Drawing.Point(817, 45);
+            this.button36.Margin = new System.Windows.Forms.Padding(2);
+            this.button36.Name = "button36";
+            this.button36.Size = new System.Drawing.Size(108, 34);
+            this.button36.TabIndex = 244;
+            this.button36.Text = "移动";
+            this.button36.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown84
+            // 
+            this.uiDoubleUpDown84.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown84.Location = new System.Drawing.Point(675, 288);
+            this.uiDoubleUpDown84.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown84.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown84.Name = "uiDoubleUpDown84";
+            this.uiDoubleUpDown84.ShowText = false;
+            this.uiDoubleUpDown84.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown84.TabIndex = 290;
+            this.uiDoubleUpDown84.Text = "uiDoubleUpDown84";
+            this.uiDoubleUpDown84.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button33
+            // 
+            this.button33.Location = new System.Drawing.Point(817, 357);
+            this.button33.Margin = new System.Windows.Forms.Padding(2);
+            this.button33.Name = "button33";
+            this.button33.Size = new System.Drawing.Size(108, 34);
+            this.button33.TabIndex = 281;
+            this.button33.Text = "移动";
+            this.button33.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown73
+            // 
+            this.uiDoubleUpDown73.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown73.Location = new System.Drawing.Point(211, 120);
+            this.uiDoubleUpDown73.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown73.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown73.Name = "uiDoubleUpDown73";
+            this.uiDoubleUpDown73.ShowText = false;
+            this.uiDoubleUpDown73.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown73.TabIndex = 292;
+            this.uiDoubleUpDown73.Text = "uiDoubleUpDown73";
+            this.uiDoubleUpDown73.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown75
+            // 
+            this.uiDoubleUpDown75.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown75.Location = new System.Drawing.Point(211, 48);
+            this.uiDoubleUpDown75.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown75.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown75.Name = "uiDoubleUpDown75";
+            this.uiDoubleUpDown75.ShowText = false;
+            this.uiDoubleUpDown75.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown75.TabIndex = 290;
+            this.uiDoubleUpDown75.Text = "uiDoubleUpDown75";
+            this.uiDoubleUpDown75.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown77
+            // 
+            this.uiDoubleUpDown77.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown77.Location = new System.Drawing.Point(675, 84);
+            this.uiDoubleUpDown77.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown77.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown77.Name = "uiDoubleUpDown77";
+            this.uiDoubleUpDown77.ShowText = false;
+            this.uiDoubleUpDown77.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown77.TabIndex = 291;
+            this.uiDoubleUpDown77.Text = "uiDoubleUpDown77";
+            this.uiDoubleUpDown77.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown74
+            // 
+            this.uiDoubleUpDown74.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown74.Location = new System.Drawing.Point(211, 84);
+            this.uiDoubleUpDown74.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown74.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown74.Name = "uiDoubleUpDown74";
+            this.uiDoubleUpDown74.ShowText = false;
+            this.uiDoubleUpDown74.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown74.TabIndex = 291;
+            this.uiDoubleUpDown74.Text = "uiDoubleUpDown74";
+            this.uiDoubleUpDown74.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown78
+            // 
+            this.uiDoubleUpDown78.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown78.Location = new System.Drawing.Point(675, 48);
+            this.uiDoubleUpDown78.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown78.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown78.Name = "uiDoubleUpDown78";
+            this.uiDoubleUpDown78.ShowText = false;
+            this.uiDoubleUpDown78.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown78.TabIndex = 290;
+            this.uiDoubleUpDown78.Text = "uiDoubleUpDown78";
+            this.uiDoubleUpDown78.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPage9
             // 
             this.tabPage9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown71);
-            this.tabPage9.Controls.Add(this.groupBox36);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown69);
-            this.tabPage9.Controls.Add(this.groupBox37);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown72);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown67);
-            this.tabPage9.Controls.Add(this.label82);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown70);
-            this.tabPage9.Controls.Add(this.label93);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown65);
-            this.tabPage9.Controls.Add(this.button70);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown68);
-            this.tabPage9.Controls.Add(this.label92);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown63);
-            this.tabPage9.Controls.Add(this.label91);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown66);
-            this.tabPage9.Controls.Add(this.label90);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown61);
-            this.tabPage9.Controls.Add(this.button69);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown64);
-            this.tabPage9.Controls.Add(this.button68);
-            this.tabPage9.Controls.Add(this.button59);
-            this.tabPage9.Controls.Add(this.button67);
-            this.tabPage9.Controls.Add(this.uiDoubleUpDown62);
-            this.tabPage9.Controls.Add(this.button66);
-            this.tabPage9.Controls.Add(this.button65);
-            this.tabPage9.Controls.Add(this.button60);
-            this.tabPage9.Controls.Add(this.label89);
-            this.tabPage9.Controls.Add(this.button61);
-            this.tabPage9.Controls.Add(this.label88);
-            this.tabPage9.Controls.Add(this.button62);
-            this.tabPage9.Controls.Add(this.button64);
-            this.tabPage9.Controls.Add(this.label83);
-            this.tabPage9.Controls.Add(this.label87);
-            this.tabPage9.Controls.Add(this.button63);
-            this.tabPage9.Controls.Add(this.label86);
-            this.tabPage9.Controls.Add(this.label84);
-            this.tabPage9.Controls.Add(this.label85);
+            this.tabPage9.Controls.Add(this.uiButton13);
+            this.tabPage9.Controls.Add(this.uiButton14);
+            this.tabPage9.Controls.Add(this.uiButton11);
+            this.tabPage9.Controls.Add(this.uiButton12);
+            this.tabPage9.Controls.Add(this.uiTitlePanel9);
+            this.tabPage9.Controls.Add(this.uiTitlePanel8);
+            this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(200, 60);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "测试手臂";
             // 
-            // uiDoubleUpDown71
+            // uiButton13
             // 
-            this.uiDoubleUpDown71.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown71.Location = new System.Drawing.Point(824, 140);
-            this.uiDoubleUpDown71.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown71.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown71.Name = "uiDoubleUpDown71";
-            this.uiDoubleUpDown71.ShowText = false;
-            this.uiDoubleUpDown71.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown71.TabIndex = 288;
-            this.uiDoubleUpDown71.Text = "uiDoubleUpDown71";
-            this.uiDoubleUpDown71.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiButton13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton13.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton13.Location = new System.Drawing.Point(721, 718);
+            this.uiButton13.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton13.Name = "uiButton13";
+            this.uiButton13.RectColor = System.Drawing.Color.White;
+            this.uiButton13.Size = new System.Drawing.Size(98, 34);
+            this.uiButton13.TabIndex = 315;
+            this.uiButton13.Text = "恢复默认";
+            this.uiButton13.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton14
+            // 
+            this.uiButton14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton14.Location = new System.Drawing.Point(846, 718);
+            this.uiButton14.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton14.Name = "uiButton14";
+            this.uiButton14.RectColor = System.Drawing.Color.White;
+            this.uiButton14.Size = new System.Drawing.Size(98, 34);
+            this.uiButton14.TabIndex = 314;
+            this.uiButton14.Text = "保存";
+            this.uiButton14.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton11
+            // 
+            this.uiButton11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton11.Location = new System.Drawing.Point(721, 411);
+            this.uiButton11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton11.Name = "uiButton11";
+            this.uiButton11.RectColor = System.Drawing.Color.White;
+            this.uiButton11.Size = new System.Drawing.Size(98, 34);
+            this.uiButton11.TabIndex = 313;
+            this.uiButton11.Text = "恢复默认";
+            this.uiButton11.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton12
+            // 
+            this.uiButton12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton12.Location = new System.Drawing.Point(846, 411);
+            this.uiButton12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton12.Name = "uiButton12";
+            this.uiButton12.RectColor = System.Drawing.Color.White;
+            this.uiButton12.Size = new System.Drawing.Size(98, 34);
+            this.uiButton12.TabIndex = 312;
+            this.uiButton12.Text = "保存";
+            this.uiButton12.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiTitlePanel9
+            // 
+            this.uiTitlePanel9.Controls.Add(this.groupBox36);
+            this.uiTitlePanel9.Controls.Add(this.groupBox37);
+            this.uiTitlePanel9.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel9.Location = new System.Drawing.Point(21, 461);
+            this.uiTitlePanel9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel9.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel9.Name = "uiTitlePanel9";
+            this.uiTitlePanel9.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel9.ShowText = false;
+            this.uiTitlePanel9.Size = new System.Drawing.Size(939, 242);
+            this.uiTitlePanel9.TabIndex = 311;
+            this.uiTitlePanel9.Text = "运行速度";
+            this.uiTitlePanel9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox36
             // 
@@ -13357,7 +13848,7 @@
             this.groupBox36.Controls.Add(this.uiDoubleUpDown45);
             this.groupBox36.Controls.Add(this.label360);
             this.groupBox36.Controls.Add(this.label361);
-            this.groupBox36.Location = new System.Drawing.Point(25, 355);
+            this.groupBox36.Location = new System.Drawing.Point(23, 50);
             this.groupBox36.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox36.Name = "groupBox36";
             this.groupBox36.Padding = new System.Windows.Forms.Padding(2);
@@ -13435,19 +13926,6 @@
             this.label361.TabIndex = 2;
             this.label361.Text = "最大速度";
             // 
-            // uiDoubleUpDown69
-            // 
-            this.uiDoubleUpDown69.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown69.Location = new System.Drawing.Point(824, 53);
-            this.uiDoubleUpDown69.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown69.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown69.Name = "uiDoubleUpDown69";
-            this.uiDoubleUpDown69.ShowText = false;
-            this.uiDoubleUpDown69.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown69.TabIndex = 288;
-            this.uiDoubleUpDown69.Text = "uiDoubleUpDown69";
-            this.uiDoubleUpDown69.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // groupBox37
             // 
             this.groupBox37.Controls.Add(this.uiDoubleUpDown46);
@@ -13456,7 +13934,7 @@
             this.groupBox37.Controls.Add(this.uiDoubleUpDown48);
             this.groupBox37.Controls.Add(this.label363);
             this.groupBox37.Controls.Add(this.label364);
-            this.groupBox37.Location = new System.Drawing.Point(290, 355);
+            this.groupBox37.Location = new System.Drawing.Point(288, 50);
             this.groupBox37.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox37.Name = "groupBox37";
             this.groupBox37.Padding = new System.Windows.Forms.Padding(2);
@@ -13534,10 +14012,382 @@
             this.label364.TabIndex = 2;
             this.label364.Text = "最大速度";
             // 
+            // uiTitlePanel8
+            // 
+            this.uiTitlePanel8.Controls.Add(this.label82);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown27);
+            this.uiTitlePanel8.Controls.Add(this.label85);
+            this.uiTitlePanel8.Controls.Add(this.label338);
+            this.uiTitlePanel8.Controls.Add(this.button63);
+            this.uiTitlePanel8.Controls.Add(this.label340);
+            this.uiTitlePanel8.Controls.Add(this.button64);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown25);
+            this.uiTitlePanel8.Controls.Add(this.button62);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown23);
+            this.uiTitlePanel8.Controls.Add(this.label88);
+            this.uiTitlePanel8.Controls.Add(this.label339);
+            this.uiTitlePanel8.Controls.Add(this.button61);
+            this.uiTitlePanel8.Controls.Add(this.label83);
+            this.uiTitlePanel8.Controls.Add(this.label89);
+            this.uiTitlePanel8.Controls.Add(this.label84);
+            this.uiTitlePanel8.Controls.Add(this.button60);
+            this.uiTitlePanel8.Controls.Add(this.label86);
+            this.uiTitlePanel8.Controls.Add(this.button65);
+            this.uiTitlePanel8.Controls.Add(this.label87);
+            this.uiTitlePanel8.Controls.Add(this.button66);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown71);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown62);
+            this.uiTitlePanel8.Controls.Add(this.button67);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown69);
+            this.uiTitlePanel8.Controls.Add(this.button59);
+            this.uiTitlePanel8.Controls.Add(this.button68);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown72);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown64);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown67);
+            this.uiTitlePanel8.Controls.Add(this.button69);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown61);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown70);
+            this.uiTitlePanel8.Controls.Add(this.label90);
+            this.uiTitlePanel8.Controls.Add(this.label93);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown66);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown65);
+            this.uiTitlePanel8.Controls.Add(this.label91);
+            this.uiTitlePanel8.Controls.Add(this.button70);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown63);
+            this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown68);
+            this.uiTitlePanel8.Controls.Add(this.label92);
+            this.uiTitlePanel8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel8.Location = new System.Drawing.Point(16, 17);
+            this.uiTitlePanel8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel8.Name = "uiTitlePanel8";
+            this.uiTitlePanel8.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel8.ShowText = false;
+            this.uiTitlePanel8.Size = new System.Drawing.Size(944, 382);
+            this.uiTitlePanel8.TabIndex = 310;
+            this.uiTitlePanel8.Text = "点位（单位：mm）";
+            this.uiTitlePanel8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label82
+            // 
+            this.label82.AutoSize = true;
+            this.label82.Location = new System.Drawing.Point(19, 51);
+            this.label82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label82.Name = "label82";
+            this.label82.Size = new System.Drawing.Size(174, 21);
+            this.label82.TabIndex = 2;
+            this.label82.Text = "测试 -> 梭车1 X (吸料)";
+            // 
+            // uiDoubleUpDown27
+            // 
+            this.uiDoubleUpDown27.Controls.Add(this.uiDoubleUpDown28);
+            this.uiDoubleUpDown27.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown27.Location = new System.Drawing.Point(667, 293);
+            this.uiDoubleUpDown27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown27.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown27.Name = "uiDoubleUpDown27";
+            this.uiDoubleUpDown27.ShowText = false;
+            this.uiDoubleUpDown27.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown27.TabIndex = 294;
+            this.uiDoubleUpDown27.Text = "uiDoubleUpDown27";
+            this.uiDoubleUpDown27.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown28
+            // 
+            this.uiDoubleUpDown28.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown28.Location = new System.Drawing.Point(80, 0);
+            this.uiDoubleUpDown28.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown28.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown28.Name = "uiDoubleUpDown28";
+            this.uiDoubleUpDown28.ShowText = false;
+            this.uiDoubleUpDown28.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown28.TabIndex = 291;
+            this.uiDoubleUpDown28.Text = "uiDoubleUpDown28";
+            this.uiDoubleUpDown28.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label85
+            // 
+            this.label85.AutoSize = true;
+            this.label85.Location = new System.Drawing.Point(19, 138);
+            this.label85.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label85.Name = "label85";
+            this.label85.Size = new System.Drawing.Size(174, 21);
+            this.label85.TabIndex = 111;
+            this.label85.Text = "测试 -> 梭车2 X (吸料)";
+            // 
+            // label338
+            // 
+            this.label338.AutoSize = true;
+            this.label338.Location = new System.Drawing.Point(19, 333);
+            this.label338.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label338.Name = "label338";
+            this.label338.Size = new System.Drawing.Size(190, 21);
+            this.label338.TabIndex = 289;
+            this.label338.Text = "测试 -> Test4区 (取放料)";
+            // 
+            // button63
+            // 
+            this.button63.Location = new System.Drawing.Point(357, 326);
+            this.button63.Margin = new System.Windows.Forms.Padding(2);
+            this.button63.Name = "button63";
+            this.button63.Size = new System.Drawing.Size(108, 34);
+            this.button63.TabIndex = 206;
+            this.button63.Text = "移动";
+            this.button63.UseVisualStyleBackColor = true;
+            // 
+            // label340
+            // 
+            this.label340.AutoSize = true;
+            this.label340.Location = new System.Drawing.Point(483, 297);
+            this.label340.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label340.Name = "label340";
+            this.label340.Size = new System.Drawing.Size(129, 21);
+            this.label340.TabIndex = 293;
+            this.label340.Text = "测试_Test区放_Z";
+            // 
+            // button64
+            // 
+            this.button64.Location = new System.Drawing.Point(796, 171);
+            this.button64.Margin = new System.Windows.Forms.Padding(2);
+            this.button64.Name = "button64";
+            this.button64.Size = new System.Drawing.Size(108, 34);
+            this.button64.TabIndex = 198;
+            this.button64.Text = "移动";
+            this.button64.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown25
+            // 
+            this.uiDoubleUpDown25.Controls.Add(this.uiDoubleUpDown26);
+            this.uiDoubleUpDown25.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown25.Location = new System.Drawing.Point(667, 257);
+            this.uiDoubleUpDown25.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown25.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown25.Name = "uiDoubleUpDown25";
+            this.uiDoubleUpDown25.ShowText = false;
+            this.uiDoubleUpDown25.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown25.TabIndex = 292;
+            this.uiDoubleUpDown25.Text = "uiDoubleUpDown25";
+            this.uiDoubleUpDown25.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown26
+            // 
+            this.uiDoubleUpDown26.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown26.Location = new System.Drawing.Point(80, 0);
+            this.uiDoubleUpDown26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown26.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown26.Name = "uiDoubleUpDown26";
+            this.uiDoubleUpDown26.ShowText = false;
+            this.uiDoubleUpDown26.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown26.TabIndex = 291;
+            this.uiDoubleUpDown26.Text = "uiDoubleUpDown26";
+            this.uiDoubleUpDown26.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button62
+            // 
+            this.button62.Location = new System.Drawing.Point(357, 48);
+            this.button62.Margin = new System.Windows.Forms.Padding(2);
+            this.button62.Name = "button62";
+            this.button62.Size = new System.Drawing.Size(108, 34);
+            this.button62.TabIndex = 128;
+            this.button62.Text = "移动";
+            this.button62.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown23
+            // 
+            this.uiDoubleUpDown23.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown23.Location = new System.Drawing.Point(667, 221);
+            this.uiDoubleUpDown23.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown23.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown23.Name = "uiDoubleUpDown23";
+            this.uiDoubleUpDown23.ShowText = false;
+            this.uiDoubleUpDown23.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown23.TabIndex = 289;
+            this.uiDoubleUpDown23.Text = "uiDoubleUpDown23";
+            this.uiDoubleUpDown23.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label88
+            // 
+            this.label88.AutoSize = true;
+            this.label88.Location = new System.Drawing.Point(19, 87);
+            this.label88.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label88.Name = "label88";
+            this.label88.Size = new System.Drawing.Size(174, 21);
+            this.label88.TabIndex = 102;
+            this.label88.Text = "测试 -> 梭车1 Z (吸料)";
+            // 
+            // label339
+            // 
+            this.label339.AutoSize = true;
+            this.label339.Location = new System.Drawing.Point(483, 261);
+            this.label339.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label339.Name = "label339";
+            this.label339.Size = new System.Drawing.Size(129, 21);
+            this.label339.TabIndex = 290;
+            this.label339.Text = "测试_Test区吸_Z";
+            // 
+            // button61
+            // 
+            this.button61.Location = new System.Drawing.Point(797, 84);
+            this.button61.Margin = new System.Windows.Forms.Padding(2);
+            this.button61.Name = "button61";
+            this.button61.Size = new System.Drawing.Size(108, 34);
+            this.button61.TabIndex = 190;
+            this.button61.Text = "移动";
+            this.button61.UseVisualStyleBackColor = true;
+            // 
+            // label83
+            // 
+            this.label83.AutoSize = true;
+            this.label83.Location = new System.Drawing.Point(483, 51);
+            this.label83.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label83.Name = "label83";
+            this.label83.Size = new System.Drawing.Size(174, 21);
+            this.label83.TabIndex = 302;
+            this.label83.Text = "测试 -> 梭车1 X (放料)";
+            // 
+            // label89
+            // 
+            this.label89.AutoSize = true;
+            this.label89.Location = new System.Drawing.Point(19, 174);
+            this.label89.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label89.Name = "label89";
+            this.label89.Size = new System.Drawing.Size(174, 21);
+            this.label89.TabIndex = 114;
+            this.label89.Text = "测试 -> 梭车2 Z (吸料)";
+            // 
+            // label84
+            // 
+            this.label84.AutoSize = true;
+            this.label84.Location = new System.Drawing.Point(483, 174);
+            this.label84.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label84.Name = "label84";
+            this.label84.Size = new System.Drawing.Size(174, 21);
+            this.label84.TabIndex = 305;
+            this.label84.Text = "测试 -> 梭车2 Z (放料)";
+            // 
+            // button60
+            // 
+            this.button60.Location = new System.Drawing.Point(357, 84);
+            this.button60.Margin = new System.Windows.Forms.Padding(2);
+            this.button60.Name = "button60";
+            this.button60.Size = new System.Drawing.Size(108, 34);
+            this.button60.TabIndex = 186;
+            this.button60.Text = "移动";
+            this.button60.UseVisualStyleBackColor = true;
+            // 
+            // label86
+            // 
+            this.label86.AutoSize = true;
+            this.label86.Location = new System.Drawing.Point(483, 87);
+            this.label86.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label86.Name = "label86";
+            this.label86.Size = new System.Drawing.Size(174, 21);
+            this.label86.TabIndex = 303;
+            this.label86.Text = "测试 -> 梭车1 Z (放料)";
+            // 
+            // button65
+            // 
+            this.button65.Location = new System.Drawing.Point(796, 135);
+            this.button65.Margin = new System.Windows.Forms.Padding(2);
+            this.button65.Name = "button65";
+            this.button65.Size = new System.Drawing.Size(108, 34);
+            this.button65.TabIndex = 196;
+            this.button65.Text = "移动";
+            this.button65.UseVisualStyleBackColor = true;
+            // 
+            // label87
+            // 
+            this.label87.AutoSize = true;
+            this.label87.Location = new System.Drawing.Point(483, 138);
+            this.label87.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label87.Name = "label87";
+            this.label87.Size = new System.Drawing.Size(174, 21);
+            this.label87.TabIndex = 304;
+            this.label87.Text = "测试 -> 梭车2 X (放料)";
+            // 
+            // button66
+            // 
+            this.button66.Location = new System.Drawing.Point(357, 290);
+            this.button66.Margin = new System.Windows.Forms.Padding(2);
+            this.button66.Name = "button66";
+            this.button66.Size = new System.Drawing.Size(108, 34);
+            this.button66.TabIndex = 204;
+            this.button66.Text = "移动";
+            this.button66.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown71
+            // 
+            this.uiDoubleUpDown71.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown71.Location = new System.Drawing.Point(667, 174);
+            this.uiDoubleUpDown71.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown71.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown71.Name = "uiDoubleUpDown71";
+            this.uiDoubleUpDown71.ShowText = false;
+            this.uiDoubleUpDown71.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown71.TabIndex = 288;
+            this.uiDoubleUpDown71.Text = "uiDoubleUpDown71";
+            this.uiDoubleUpDown71.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown62
+            // 
+            this.uiDoubleUpDown62.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown62.Location = new System.Drawing.Point(222, 51);
+            this.uiDoubleUpDown62.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown62.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown62.Name = "uiDoubleUpDown62";
+            this.uiDoubleUpDown62.ShowText = false;
+            this.uiDoubleUpDown62.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown62.TabIndex = 287;
+            this.uiDoubleUpDown62.Text = "uiDoubleUpDown62";
+            this.uiDoubleUpDown62.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button67
+            // 
+            this.button67.Location = new System.Drawing.Point(357, 135);
+            this.button67.Margin = new System.Windows.Forms.Padding(2);
+            this.button67.Name = "button67";
+            this.button67.Size = new System.Drawing.Size(108, 34);
+            this.button67.TabIndex = 192;
+            this.button67.Text = "移动";
+            this.button67.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown69
+            // 
+            this.uiDoubleUpDown69.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown69.Location = new System.Drawing.Point(667, 87);
+            this.uiDoubleUpDown69.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown69.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown69.Name = "uiDoubleUpDown69";
+            this.uiDoubleUpDown69.ShowText = false;
+            this.uiDoubleUpDown69.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown69.TabIndex = 288;
+            this.uiDoubleUpDown69.Text = "uiDoubleUpDown69";
+            this.uiDoubleUpDown69.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button59
+            // 
+            this.button59.Location = new System.Drawing.Point(797, 48);
+            this.button59.Margin = new System.Windows.Forms.Padding(2);
+            this.button59.Name = "button59";
+            this.button59.Size = new System.Drawing.Size(108, 34);
+            this.button59.TabIndex = 188;
+            this.button59.Text = "移动";
+            this.button59.UseVisualStyleBackColor = true;
+            // 
+            // button68
+            // 
+            this.button68.Location = new System.Drawing.Point(357, 171);
+            this.button68.Margin = new System.Windows.Forms.Padding(2);
+            this.button68.Name = "button68";
+            this.button68.Size = new System.Drawing.Size(108, 34);
+            this.button68.TabIndex = 194;
+            this.button68.Text = "移动";
+            this.button68.UseVisualStyleBackColor = true;
+            // 
             // uiDoubleUpDown72
             // 
             this.uiDoubleUpDown72.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown72.Location = new System.Drawing.Point(824, 104);
+            this.uiDoubleUpDown72.Location = new System.Drawing.Point(667, 138);
             this.uiDoubleUpDown72.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown72.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown72.Name = "uiDoubleUpDown72";
@@ -13547,10 +14397,23 @@
             this.uiDoubleUpDown72.Text = "uiDoubleUpDown72";
             this.uiDoubleUpDown72.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiDoubleUpDown64
+            // 
+            this.uiDoubleUpDown64.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown64.Location = new System.Drawing.Point(222, 138);
+            this.uiDoubleUpDown64.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown64.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown64.Name = "uiDoubleUpDown64";
+            this.uiDoubleUpDown64.ShowText = false;
+            this.uiDoubleUpDown64.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown64.TabIndex = 287;
+            this.uiDoubleUpDown64.Text = "uiDoubleUpDown64";
+            this.uiDoubleUpDown64.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // uiDoubleUpDown67
             // 
             this.uiDoubleUpDown67.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown67.Location = new System.Drawing.Point(284, 299);
+            this.uiDoubleUpDown67.Location = new System.Drawing.Point(222, 329);
             this.uiDoubleUpDown67.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown67.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown67.Name = "uiDoubleUpDown67";
@@ -13560,20 +14423,33 @@
             this.uiDoubleUpDown67.Text = "uiDoubleUpDown67";
             this.uiDoubleUpDown67.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label82
+            // button69
             // 
-            this.label82.AutoSize = true;
-            this.label82.Location = new System.Drawing.Point(21, 21);
-            this.label82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label82.Name = "label82";
-            this.label82.Size = new System.Drawing.Size(235, 21);
-            this.label82.TabIndex = 2;
-            this.label82.Text = "TestArm -> ShuttleL1 X (取料)";
+            this.button69.Location = new System.Drawing.Point(357, 254);
+            this.button69.Margin = new System.Windows.Forms.Padding(2);
+            this.button69.Name = "button69";
+            this.button69.Size = new System.Drawing.Size(108, 34);
+            this.button69.TabIndex = 202;
+            this.button69.Text = "移动";
+            this.button69.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown61
+            // 
+            this.uiDoubleUpDown61.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown61.Location = new System.Drawing.Point(222, 87);
+            this.uiDoubleUpDown61.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown61.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown61.Name = "uiDoubleUpDown61";
+            this.uiDoubleUpDown61.ShowText = false;
+            this.uiDoubleUpDown61.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown61.TabIndex = 288;
+            this.uiDoubleUpDown61.Text = "uiDoubleUpDown61";
+            this.uiDoubleUpDown61.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiDoubleUpDown70
             // 
             this.uiDoubleUpDown70.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown70.Location = new System.Drawing.Point(824, 17);
+            this.uiDoubleUpDown70.Location = new System.Drawing.Point(667, 51);
             this.uiDoubleUpDown70.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown70.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown70.Name = "uiDoubleUpDown70";
@@ -13583,20 +14459,43 @@
             this.uiDoubleUpDown70.Text = "uiDoubleUpDown70";
             this.uiDoubleUpDown70.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label90
+            // 
+            this.label90.AutoSize = true;
+            this.label90.Location = new System.Drawing.Point(19, 225);
+            this.label90.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label90.Name = "label90";
+            this.label90.Size = new System.Drawing.Size(190, 21);
+            this.label90.TabIndex = 155;
+            this.label90.Text = "测试 -> Test1区 (取放料)";
+            // 
             // label93
             // 
             this.label93.AutoSize = true;
-            this.label93.Location = new System.Drawing.Point(21, 231);
+            this.label93.Location = new System.Drawing.Point(19, 261);
             this.label93.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label93.Name = "label93";
-            this.label93.Size = new System.Drawing.Size(220, 21);
+            this.label93.Size = new System.Drawing.Size(190, 21);
             this.label93.TabIndex = 156;
-            this.label93.Text = "TestArm -> Tester2 (取放料)";
+            this.label93.Text = "测试 -> Test2区 (取放料)";
+            // 
+            // uiDoubleUpDown66
+            // 
+            this.uiDoubleUpDown66.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown66.Location = new System.Drawing.Point(222, 221);
+            this.uiDoubleUpDown66.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown66.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown66.Name = "uiDoubleUpDown66";
+            this.uiDoubleUpDown66.ShowText = false;
+            this.uiDoubleUpDown66.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown66.TabIndex = 287;
+            this.uiDoubleUpDown66.Text = "uiDoubleUpDown66";
+            this.uiDoubleUpDown66.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // uiDoubleUpDown65
             // 
             this.uiDoubleUpDown65.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown65.Location = new System.Drawing.Point(284, 227);
+            this.uiDoubleUpDown65.Location = new System.Drawing.Point(222, 257);
             this.uiDoubleUpDown65.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown65.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown65.Name = "uiDoubleUpDown65";
@@ -13606,9 +14505,19 @@
             this.uiDoubleUpDown65.Text = "uiDoubleUpDown65";
             this.uiDoubleUpDown65.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label91
+            // 
+            this.label91.AutoSize = true;
+            this.label91.Location = new System.Drawing.Point(483, 225);
+            this.label91.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label91.Name = "label91";
+            this.label91.Size = new System.Drawing.Size(156, 21);
+            this.label91.TabIndex = 160;
+            this.label91.Text = "测试_Test区Site间隔";
+            // 
             // button70
             // 
-            this.button70.Location = new System.Drawing.Point(419, 188);
+            this.button70.Location = new System.Drawing.Point(357, 218);
             this.button70.Margin = new System.Windows.Forms.Padding(2);
             this.button70.Name = "button70";
             this.button70.Size = new System.Drawing.Size(108, 34);
@@ -13616,10 +14525,23 @@
             this.button70.Text = "移动";
             this.button70.UseVisualStyleBackColor = true;
             // 
+            // uiDoubleUpDown63
+            // 
+            this.uiDoubleUpDown63.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown63.Location = new System.Drawing.Point(222, 174);
+            this.uiDoubleUpDown63.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown63.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown63.Name = "uiDoubleUpDown63";
+            this.uiDoubleUpDown63.ShowText = false;
+            this.uiDoubleUpDown63.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown63.TabIndex = 288;
+            this.uiDoubleUpDown63.Text = "uiDoubleUpDown63";
+            this.uiDoubleUpDown63.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // uiDoubleUpDown68
             // 
             this.uiDoubleUpDown68.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown68.Location = new System.Drawing.Point(284, 263);
+            this.uiDoubleUpDown68.Location = new System.Drawing.Point(222, 293);
             this.uiDoubleUpDown68.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown68.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown68.Name = "uiDoubleUpDown68";
@@ -13632,326 +14554,95 @@
             // label92
             // 
             this.label92.AutoSize = true;
-            this.label92.Location = new System.Drawing.Point(21, 267);
+            this.label92.Location = new System.Drawing.Point(19, 297);
             this.label92.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label92.Name = "label92";
-            this.label92.Size = new System.Drawing.Size(220, 21);
+            this.label92.Size = new System.Drawing.Size(190, 21);
             this.label92.TabIndex = 159;
-            this.label92.Text = "TestArm -> Tester3 (取放料)";
-            // 
-            // uiDoubleUpDown63
-            // 
-            this.uiDoubleUpDown63.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown63.Location = new System.Drawing.Point(284, 140);
-            this.uiDoubleUpDown63.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown63.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown63.Name = "uiDoubleUpDown63";
-            this.uiDoubleUpDown63.ShowText = false;
-            this.uiDoubleUpDown63.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown63.TabIndex = 288;
-            this.uiDoubleUpDown63.Text = "uiDoubleUpDown63";
-            this.uiDoubleUpDown63.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label91
-            // 
-            this.label91.AutoSize = true;
-            this.label91.Location = new System.Drawing.Point(21, 303);
-            this.label91.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label91.Name = "label91";
-            this.label91.Size = new System.Drawing.Size(220, 21);
-            this.label91.TabIndex = 160;
-            this.label91.Text = "TestArm -> Tester4 (取放料)";
-            // 
-            // uiDoubleUpDown66
-            // 
-            this.uiDoubleUpDown66.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown66.Location = new System.Drawing.Point(284, 191);
-            this.uiDoubleUpDown66.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown66.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown66.Name = "uiDoubleUpDown66";
-            this.uiDoubleUpDown66.ShowText = false;
-            this.uiDoubleUpDown66.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown66.TabIndex = 287;
-            this.uiDoubleUpDown66.Text = "uiDoubleUpDown66";
-            this.uiDoubleUpDown66.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label90
-            // 
-            this.label90.AutoSize = true;
-            this.label90.Location = new System.Drawing.Point(21, 195);
-            this.label90.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label90.Name = "label90";
-            this.label90.Size = new System.Drawing.Size(220, 21);
-            this.label90.TabIndex = 155;
-            this.label90.Text = "TestArm -> Tester1 (取放料)";
-            // 
-            // uiDoubleUpDown61
-            // 
-            this.uiDoubleUpDown61.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown61.Location = new System.Drawing.Point(284, 53);
-            this.uiDoubleUpDown61.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown61.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown61.Name = "uiDoubleUpDown61";
-            this.uiDoubleUpDown61.ShowText = false;
-            this.uiDoubleUpDown61.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown61.TabIndex = 288;
-            this.uiDoubleUpDown61.Text = "uiDoubleUpDown61";
-            this.uiDoubleUpDown61.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button69
-            // 
-            this.button69.Location = new System.Drawing.Point(419, 224);
-            this.button69.Margin = new System.Windows.Forms.Padding(2);
-            this.button69.Name = "button69";
-            this.button69.Size = new System.Drawing.Size(108, 34);
-            this.button69.TabIndex = 202;
-            this.button69.Text = "移动";
-            this.button69.UseVisualStyleBackColor = true;
-            // 
-            // uiDoubleUpDown64
-            // 
-            this.uiDoubleUpDown64.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown64.Location = new System.Drawing.Point(284, 104);
-            this.uiDoubleUpDown64.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown64.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown64.Name = "uiDoubleUpDown64";
-            this.uiDoubleUpDown64.ShowText = false;
-            this.uiDoubleUpDown64.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown64.TabIndex = 287;
-            this.uiDoubleUpDown64.Text = "uiDoubleUpDown64";
-            this.uiDoubleUpDown64.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button68
-            // 
-            this.button68.Location = new System.Drawing.Point(419, 137);
-            this.button68.Margin = new System.Windows.Forms.Padding(2);
-            this.button68.Name = "button68";
-            this.button68.Size = new System.Drawing.Size(108, 34);
-            this.button68.TabIndex = 194;
-            this.button68.Text = "移动";
-            this.button68.UseVisualStyleBackColor = true;
-            // 
-            // button59
-            // 
-            this.button59.Location = new System.Drawing.Point(965, 14);
-            this.button59.Margin = new System.Windows.Forms.Padding(2);
-            this.button59.Name = "button59";
-            this.button59.Size = new System.Drawing.Size(108, 34);
-            this.button59.TabIndex = 188;
-            this.button59.Text = "移动";
-            this.button59.UseVisualStyleBackColor = true;
-            // 
-            // button67
-            // 
-            this.button67.Location = new System.Drawing.Point(419, 101);
-            this.button67.Margin = new System.Windows.Forms.Padding(2);
-            this.button67.Name = "button67";
-            this.button67.Size = new System.Drawing.Size(108, 34);
-            this.button67.TabIndex = 192;
-            this.button67.Text = "移动";
-            this.button67.UseVisualStyleBackColor = true;
-            // 
-            // uiDoubleUpDown62
-            // 
-            this.uiDoubleUpDown62.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown62.Location = new System.Drawing.Point(284, 17);
-            this.uiDoubleUpDown62.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown62.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown62.Name = "uiDoubleUpDown62";
-            this.uiDoubleUpDown62.ShowText = false;
-            this.uiDoubleUpDown62.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown62.TabIndex = 287;
-            this.uiDoubleUpDown62.Text = "uiDoubleUpDown62";
-            this.uiDoubleUpDown62.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button66
-            // 
-            this.button66.Location = new System.Drawing.Point(419, 260);
-            this.button66.Margin = new System.Windows.Forms.Padding(2);
-            this.button66.Name = "button66";
-            this.button66.Size = new System.Drawing.Size(108, 34);
-            this.button66.TabIndex = 204;
-            this.button66.Text = "移动";
-            this.button66.UseVisualStyleBackColor = true;
-            // 
-            // button65
-            // 
-            this.button65.Location = new System.Drawing.Point(964, 101);
-            this.button65.Margin = new System.Windows.Forms.Padding(2);
-            this.button65.Name = "button65";
-            this.button65.Size = new System.Drawing.Size(108, 34);
-            this.button65.TabIndex = 196;
-            this.button65.Text = "移动";
-            this.button65.UseVisualStyleBackColor = true;
-            // 
-            // button60
-            // 
-            this.button60.Location = new System.Drawing.Point(419, 50);
-            this.button60.Margin = new System.Windows.Forms.Padding(2);
-            this.button60.Name = "button60";
-            this.button60.Size = new System.Drawing.Size(108, 34);
-            this.button60.TabIndex = 186;
-            this.button60.Text = "移动";
-            this.button60.UseVisualStyleBackColor = true;
-            // 
-            // label89
-            // 
-            this.label89.AutoSize = true;
-            this.label89.Location = new System.Drawing.Point(21, 144);
-            this.label89.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label89.Name = "label89";
-            this.label89.Size = new System.Drawing.Size(235, 21);
-            this.label89.TabIndex = 114;
-            this.label89.Text = "TestArm -> ShuttleL2 Z (取料)";
-            // 
-            // button61
-            // 
-            this.button61.Location = new System.Drawing.Point(965, 50);
-            this.button61.Margin = new System.Windows.Forms.Padding(2);
-            this.button61.Name = "button61";
-            this.button61.Size = new System.Drawing.Size(108, 34);
-            this.button61.TabIndex = 190;
-            this.button61.Text = "移动";
-            this.button61.UseVisualStyleBackColor = true;
-            // 
-            // label88
-            // 
-            this.label88.AutoSize = true;
-            this.label88.Location = new System.Drawing.Point(21, 57);
-            this.label88.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label88.Name = "label88";
-            this.label88.Size = new System.Drawing.Size(235, 21);
-            this.label88.TabIndex = 102;
-            this.label88.Text = "TestArm -> ShuttleL1 Z (取料)";
-            // 
-            // button62
-            // 
-            this.button62.Location = new System.Drawing.Point(419, 14);
-            this.button62.Margin = new System.Windows.Forms.Padding(2);
-            this.button62.Name = "button62";
-            this.button62.Size = new System.Drawing.Size(108, 34);
-            this.button62.TabIndex = 128;
-            this.button62.Text = "移动";
-            this.button62.UseVisualStyleBackColor = true;
-            // 
-            // button64
-            // 
-            this.button64.Location = new System.Drawing.Point(964, 137);
-            this.button64.Margin = new System.Windows.Forms.Padding(2);
-            this.button64.Name = "button64";
-            this.button64.Size = new System.Drawing.Size(108, 34);
-            this.button64.TabIndex = 198;
-            this.button64.Text = "移动";
-            this.button64.UseVisualStyleBackColor = true;
-            // 
-            // label83
-            // 
-            this.label83.AutoSize = true;
-            this.label83.Location = new System.Drawing.Point(549, 108);
-            this.label83.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label83.Name = "label83";
-            this.label83.Size = new System.Drawing.Size(237, 21);
-            this.label83.TabIndex = 117;
-            this.label83.Text = "TestArm -> ShuttleR2 X (放料)";
-            // 
-            // label87
-            // 
-            this.label87.AutoSize = true;
-            this.label87.Location = new System.Drawing.Point(550, 57);
-            this.label87.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label87.Name = "label87";
-            this.label87.Size = new System.Drawing.Size(237, 21);
-            this.label87.TabIndex = 108;
-            this.label87.Text = "TestArm -> ShuttleR1 Z (放料)";
-            // 
-            // button63
-            // 
-            this.button63.Location = new System.Drawing.Point(419, 296);
-            this.button63.Margin = new System.Windows.Forms.Padding(2);
-            this.button63.Name = "button63";
-            this.button63.Size = new System.Drawing.Size(108, 34);
-            this.button63.TabIndex = 206;
-            this.button63.Text = "移动";
-            this.button63.UseVisualStyleBackColor = true;
-            // 
-            // label86
-            // 
-            this.label86.AutoSize = true;
-            this.label86.Location = new System.Drawing.Point(550, 21);
-            this.label86.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label86.Name = "label86";
-            this.label86.Size = new System.Drawing.Size(237, 21);
-            this.label86.TabIndex = 105;
-            this.label86.Text = "TestArm -> ShuttleR1 X (放料)";
-            // 
-            // label84
-            // 
-            this.label84.AutoSize = true;
-            this.label84.Location = new System.Drawing.Point(549, 144);
-            this.label84.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label84.Name = "label84";
-            this.label84.Size = new System.Drawing.Size(237, 21);
-            this.label84.TabIndex = 120;
-            this.label84.Text = "TestArm -> ShuttleR2 Z (放料)";
-            // 
-            // label85
-            // 
-            this.label85.AutoSize = true;
-            this.label85.Location = new System.Drawing.Point(21, 108);
-            this.label85.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label85.Name = "label85";
-            this.label85.Size = new System.Drawing.Size(235, 21);
-            this.label85.TabIndex = 111;
-            this.label85.Text = "TestArm -> ShuttleL2 X (取料)";
+            this.label92.Text = "测试 -> Test3区 (取放料)";
             // 
             // tabPage16
             // 
             this.tabPage16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.tabPage16.Controls.Add(this.button71);
-            this.tabPage16.Controls.Add(this.button72);
-            this.tabPage16.Controls.Add(this.uiDoubleUpDown56);
-            this.tabPage16.Controls.Add(this.groupBox38);
-            this.tabPage16.Controls.Add(this.uiDoubleUpDown57);
-            this.tabPage16.Controls.Add(this.label94);
-            this.tabPage16.Controls.Add(this.label95);
+            this.tabPage16.Controls.Add(this.uiButton17);
+            this.tabPage16.Controls.Add(this.uiButton18);
+            this.tabPage16.Controls.Add(this.uiButton15);
+            this.tabPage16.Controls.Add(this.uiButton16);
+            this.tabPage16.Controls.Add(this.uiTitlePanel10);
+            this.tabPage16.Controls.Add(this.uiTitlePanel11);
+            this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
             this.tabPage16.Size = new System.Drawing.Size(200, 60);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "梭车";
             // 
-            // button71
+            // uiButton17
             // 
-            this.button71.Location = new System.Drawing.Point(279, 56);
-            this.button71.Margin = new System.Windows.Forms.Padding(2);
-            this.button71.Name = "button71";
-            this.button71.Size = new System.Drawing.Size(108, 34);
-            this.button71.TabIndex = 188;
-            this.button71.Text = "移动";
-            this.button71.UseVisualStyleBackColor = true;
+            this.uiButton17.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton17.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton17.Location = new System.Drawing.Point(196, 454);
+            this.uiButton17.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton17.Name = "uiButton17";
+            this.uiButton17.RectColor = System.Drawing.Color.White;
+            this.uiButton17.Size = new System.Drawing.Size(98, 34);
+            this.uiButton17.TabIndex = 316;
+            this.uiButton17.Text = "恢复默认";
+            this.uiButton17.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
-            // button72
+            // uiButton18
             // 
-            this.button72.Location = new System.Drawing.Point(279, 16);
-            this.button72.Margin = new System.Windows.Forms.Padding(2);
-            this.button72.Name = "button72";
-            this.button72.Size = new System.Drawing.Size(108, 34);
-            this.button72.TabIndex = 187;
-            this.button72.Text = "移动";
-            this.button72.UseVisualStyleBackColor = true;
+            this.uiButton18.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton18.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton18.Location = new System.Drawing.Point(321, 454);
+            this.uiButton18.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton18.Name = "uiButton18";
+            this.uiButton18.RectColor = System.Drawing.Color.White;
+            this.uiButton18.Size = new System.Drawing.Size(98, 34);
+            this.uiButton18.TabIndex = 315;
+            this.uiButton18.Text = "保存";
+            this.uiButton18.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
-            // uiDoubleUpDown56
+            // uiButton15
             // 
-            this.uiDoubleUpDown56.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown56.Location = new System.Drawing.Point(146, 59);
-            this.uiDoubleUpDown56.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown56.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown56.Name = "uiDoubleUpDown56";
-            this.uiDoubleUpDown56.ShowText = false;
-            this.uiDoubleUpDown56.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown56.TabIndex = 291;
-            this.uiDoubleUpDown56.Text = "uiDoubleUpDown56";
-            this.uiDoubleUpDown56.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiButton15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton15.Location = new System.Drawing.Point(196, 159);
+            this.uiButton15.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton15.Name = "uiButton15";
+            this.uiButton15.RectColor = System.Drawing.Color.White;
+            this.uiButton15.Size = new System.Drawing.Size(98, 34);
+            this.uiButton15.TabIndex = 314;
+            this.uiButton15.Text = "恢复默认";
+            this.uiButton15.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton16
+            // 
+            this.uiButton16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton16.Location = new System.Drawing.Point(321, 159);
+            this.uiButton16.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton16.Name = "uiButton16";
+            this.uiButton16.RectColor = System.Drawing.Color.White;
+            this.uiButton16.Size = new System.Drawing.Size(98, 34);
+            this.uiButton16.TabIndex = 313;
+            this.uiButton16.Text = "保存";
+            this.uiButton16.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiTitlePanel10
+            // 
+            this.uiTitlePanel10.Controls.Add(this.groupBox38);
+            this.uiTitlePanel10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel10.Location = new System.Drawing.Point(16, 207);
+            this.uiTitlePanel10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel10.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel10.Name = "uiTitlePanel10";
+            this.uiTitlePanel10.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel10.ShowText = false;
+            this.uiTitlePanel10.Size = new System.Drawing.Size(413, 230);
+            this.uiTitlePanel10.TabIndex = 312;
+            this.uiTitlePanel10.Text = "运行速度";
+            this.uiTitlePanel10.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // groupBox38
             // 
@@ -13961,7 +14652,7 @@
             this.groupBox38.Controls.Add(this.uiDoubleUpDown51);
             this.groupBox38.Controls.Add(this.label366);
             this.groupBox38.Controls.Add(this.label367);
-            this.groupBox38.Location = new System.Drawing.Point(16, 103);
+            this.groupBox38.Location = new System.Drawing.Point(17, 47);
             this.groupBox38.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox38.Name = "groupBox38";
             this.groupBox38.Padding = new System.Windows.Forms.Padding(2);
@@ -14039,23 +14730,30 @@
             this.label367.TabIndex = 2;
             this.label367.Text = "最大速度";
             // 
-            // uiDoubleUpDown57
+            // uiTitlePanel11
             // 
-            this.uiDoubleUpDown57.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown57.Location = new System.Drawing.Point(146, 19);
-            this.uiDoubleUpDown57.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown57.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown57.Name = "uiDoubleUpDown57";
-            this.uiDoubleUpDown57.ShowText = false;
-            this.uiDoubleUpDown57.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown57.TabIndex = 290;
-            this.uiDoubleUpDown57.Text = "uiDoubleUpDown57";
-            this.uiDoubleUpDown57.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiTitlePanel11.Controls.Add(this.label94);
+            this.uiTitlePanel11.Controls.Add(this.label95);
+            this.uiTitlePanel11.Controls.Add(this.button71);
+            this.uiTitlePanel11.Controls.Add(this.uiDoubleUpDown57);
+            this.uiTitlePanel11.Controls.Add(this.button72);
+            this.uiTitlePanel11.Controls.Add(this.uiDoubleUpDown56);
+            this.uiTitlePanel11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel11.Location = new System.Drawing.Point(16, 17);
+            this.uiTitlePanel11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel11.Name = "uiTitlePanel11";
+            this.uiTitlePanel11.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel11.ShowText = false;
+            this.uiTitlePanel11.Size = new System.Drawing.Size(413, 130);
+            this.uiTitlePanel11.TabIndex = 311;
+            this.uiTitlePanel11.Text = "点位（单位：mm）";
+            this.uiTitlePanel11.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label94
             // 
             this.label94.AutoSize = true;
-            this.label94.Location = new System.Drawing.Point(21, 23);
+            this.label94.Location = new System.Drawing.Point(16, 51);
             this.label94.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label94.Name = "label94";
             this.label94.Size = new System.Drawing.Size(104, 21);
@@ -14065,247 +14763,308 @@
             // label95
             // 
             this.label95.AutoSize = true;
-            this.label95.Location = new System.Drawing.Point(21, 63);
+            this.label95.Location = new System.Drawing.Point(16, 91);
             this.label95.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label95.Name = "label95";
-            this.label95.Size = new System.Drawing.Size(99, 21);
+            this.label95.Size = new System.Drawing.Size(104, 21);
             this.label95.TabIndex = 121;
-            this.label95.Text = "梭车2在后方";
+            this.label95.Text = "梭车2 在后方";
+            // 
+            // button71
+            // 
+            this.button71.Location = new System.Drawing.Point(274, 84);
+            this.button71.Margin = new System.Windows.Forms.Padding(2);
+            this.button71.Name = "button71";
+            this.button71.Size = new System.Drawing.Size(108, 34);
+            this.button71.TabIndex = 188;
+            this.button71.Text = "移动";
+            this.button71.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown57
+            // 
+            this.uiDoubleUpDown57.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown57.Location = new System.Drawing.Point(141, 47);
+            this.uiDoubleUpDown57.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown57.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown57.Name = "uiDoubleUpDown57";
+            this.uiDoubleUpDown57.ShowText = false;
+            this.uiDoubleUpDown57.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown57.TabIndex = 290;
+            this.uiDoubleUpDown57.Text = "uiDoubleUpDown57";
+            this.uiDoubleUpDown57.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button72
+            // 
+            this.button72.Location = new System.Drawing.Point(274, 44);
+            this.button72.Margin = new System.Windows.Forms.Padding(2);
+            this.button72.Name = "button72";
+            this.button72.Size = new System.Drawing.Size(108, 34);
+            this.button72.TabIndex = 187;
+            this.button72.Text = "移动";
+            this.button72.UseVisualStyleBackColor = true;
+            // 
+            // uiDoubleUpDown56
+            // 
+            this.uiDoubleUpDown56.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown56.Location = new System.Drawing.Point(141, 87);
+            this.uiDoubleUpDown56.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown56.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown56.Name = "uiDoubleUpDown56";
+            this.uiDoubleUpDown56.ShowText = false;
+            this.uiDoubleUpDown56.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown56.TabIndex = 291;
+            this.uiDoubleUpDown56.Text = "uiDoubleUpDown56";
+            this.uiDoubleUpDown56.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabPage17
             // 
             this.tabPage17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.tabPage17.Controls.Add(this.uiDoubleUpDown59);
-            this.tabPage17.Controls.Add(this.uiDoubleUpDown58);
-            this.tabPage17.Controls.Add(this.uiDoubleUpDown60);
-            this.tabPage17.Controls.Add(this.uiDoubleUpDown55);
-            this.tabPage17.Controls.Add(this.label96);
-            this.tabPage17.Controls.Add(this.label97);
-            this.tabPage17.Controls.Add(this.groupBox39);
-            this.tabPage17.Controls.Add(this.label98);
-            this.tabPage17.Controls.Add(this.button73);
-            this.tabPage17.Controls.Add(this.button76);
-            this.tabPage17.Controls.Add(this.label99);
-            this.tabPage17.Controls.Add(this.button75);
-            this.tabPage17.Controls.Add(this.button74);
+            this.tabPage17.Controls.Add(this.uiButton21);
+            this.tabPage17.Controls.Add(this.uiButton22);
+            this.tabPage17.Controls.Add(this.uiButton19);
+            this.tabPage17.Controls.Add(this.uiButton20);
+            this.tabPage17.Controls.Add(this.uiTitlePanel12);
+            this.tabPage17.Controls.Add(this.uiTitlePanel1);
+            this.tabPage17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage17.Size = new System.Drawing.Size(200, 60);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
+            // 
+            // uiButton21
+            // 
+            this.uiButton21.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton21.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton21.Location = new System.Drawing.Point(257, 525);
+            this.uiButton21.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton21.Name = "uiButton21";
+            this.uiButton21.RectColor = System.Drawing.Color.White;
+            this.uiButton21.Size = new System.Drawing.Size(98, 34);
+            this.uiButton21.TabIndex = 317;
+            this.uiButton21.Text = "恢复默认";
+            this.uiButton21.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton22
+            // 
+            this.uiButton22.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton22.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton22.Location = new System.Drawing.Point(382, 525);
+            this.uiButton22.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton22.Name = "uiButton22";
+            this.uiButton22.RectColor = System.Drawing.Color.White;
+            this.uiButton22.Size = new System.Drawing.Size(98, 34);
+            this.uiButton22.TabIndex = 316;
+            this.uiButton22.Text = "保存";
+            this.uiButton22.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton19
+            // 
+            this.uiButton19.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton19.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton19.Location = new System.Drawing.Point(257, 236);
+            this.uiButton19.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton19.Name = "uiButton19";
+            this.uiButton19.RectColor = System.Drawing.Color.White;
+            this.uiButton19.Size = new System.Drawing.Size(98, 34);
+            this.uiButton19.TabIndex = 315;
+            this.uiButton19.Text = "恢复默认";
+            this.uiButton19.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton20
+            // 
+            this.uiButton20.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton20.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton20.Location = new System.Drawing.Point(382, 236);
+            this.uiButton20.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton20.Name = "uiButton20";
+            this.uiButton20.RectColor = System.Drawing.Color.White;
+            this.uiButton20.Size = new System.Drawing.Size(98, 34);
+            this.uiButton20.TabIndex = 314;
+            this.uiButton20.Text = "保存";
+            this.uiButton20.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiTitlePanel12
+            // 
+            this.uiTitlePanel12.Controls.Add(this.groupBox29);
+            this.uiTitlePanel12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel12.Location = new System.Drawing.Point(16, 284);
+            this.uiTitlePanel12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel12.Name = "uiTitlePanel12";
+            this.uiTitlePanel12.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel12.ShowText = false;
+            this.uiTitlePanel12.Size = new System.Drawing.Size(473, 230);
+            this.uiTitlePanel12.TabIndex = 313;
+            this.uiTitlePanel12.Text = "运行速度";
+            this.uiTitlePanel12.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // groupBox29
+            // 
+            this.groupBox29.Controls.Add(this.uiDoubleUpDown22);
+            this.groupBox29.Controls.Add(this.uiDoubleUpDown24);
+            this.groupBox29.Controls.Add(this.label341);
+            this.groupBox29.Controls.Add(this.uiDoubleUpDown29);
+            this.groupBox29.Controls.Add(this.label342);
+            this.groupBox29.Controls.Add(this.label343);
+            this.groupBox29.Location = new System.Drawing.Point(17, 47);
+            this.groupBox29.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox29.Name = "groupBox29";
+            this.groupBox29.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox29.Size = new System.Drawing.Size(261, 168);
+            this.groupBox29.TabIndex = 301;
+            this.groupBox29.TabStop = false;
+            this.groupBox29.Text = "抓盘手臂 X";
+            // 
+            // uiDoubleUpDown22
+            // 
+            this.uiDoubleUpDown22.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown22.Location = new System.Drawing.Point(106, 117);
+            this.uiDoubleUpDown22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown22.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown22.Name = "uiDoubleUpDown22";
+            this.uiDoubleUpDown22.ShowText = false;
+            this.uiDoubleUpDown22.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown22.TabIndex = 289;
+            this.uiDoubleUpDown22.Text = "uiDoubleUpDown22";
+            this.uiDoubleUpDown22.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown24
+            // 
+            this.uiDoubleUpDown24.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown24.Location = new System.Drawing.Point(106, 76);
+            this.uiDoubleUpDown24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown24.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown24.Name = "uiDoubleUpDown24";
+            this.uiDoubleUpDown24.ShowText = false;
+            this.uiDoubleUpDown24.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown24.TabIndex = 286;
+            this.uiDoubleUpDown24.Text = "uiDoubleUpDown24";
+            this.uiDoubleUpDown24.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label341
+            // 
+            this.label341.AutoSize = true;
+            this.label341.Location = new System.Drawing.Point(22, 121);
+            this.label341.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label341.Name = "label341";
+            this.label341.Size = new System.Drawing.Size(58, 21);
+            this.label341.TabIndex = 287;
+            this.label341.Text = "加速度";
+            // 
+            // uiDoubleUpDown29
+            // 
+            this.uiDoubleUpDown29.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown29.Location = new System.Drawing.Point(106, 35);
+            this.uiDoubleUpDown29.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown29.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown29.Name = "uiDoubleUpDown29";
+            this.uiDoubleUpDown29.ShowText = false;
+            this.uiDoubleUpDown29.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown29.TabIndex = 285;
+            this.uiDoubleUpDown29.Text = "uiDoubleUpDown29";
+            this.uiDoubleUpDown29.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label342
+            // 
+            this.label342.AutoSize = true;
+            this.label342.Location = new System.Drawing.Point(22, 80);
+            this.label342.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label342.Name = "label342";
+            this.label342.Size = new System.Drawing.Size(58, 21);
+            this.label342.TabIndex = 282;
+            this.label342.Text = "加速度";
+            // 
+            // label343
+            // 
+            this.label343.AutoSize = true;
+            this.label343.Location = new System.Drawing.Point(22, 39);
+            this.label343.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label343.Name = "label343";
+            this.label343.Size = new System.Drawing.Size(74, 21);
+            this.label343.TabIndex = 2;
+            this.label343.Text = "最大速度";
+            // 
+            // uiTitlePanel1
+            // 
+            this.uiTitlePanel1.Controls.Add(this.label96);
+            this.uiTitlePanel1.Controls.Add(this.uiDoubleUpDown59);
+            this.uiTitlePanel1.Controls.Add(this.button74);
+            this.uiTitlePanel1.Controls.Add(this.uiDoubleUpDown58);
+            this.uiTitlePanel1.Controls.Add(this.button75);
+            this.uiTitlePanel1.Controls.Add(this.uiDoubleUpDown60);
+            this.uiTitlePanel1.Controls.Add(this.label99);
+            this.uiTitlePanel1.Controls.Add(this.uiDoubleUpDown55);
+            this.uiTitlePanel1.Controls.Add(this.button76);
+            this.uiTitlePanel1.Controls.Add(this.button73);
+            this.uiTitlePanel1.Controls.Add(this.label97);
+            this.uiTitlePanel1.Controls.Add(this.label98);
+            this.uiTitlePanel1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel1.Location = new System.Drawing.Point(16, 17);
+            this.uiTitlePanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel1.Name = "uiTitlePanel1";
+            this.uiTitlePanel1.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel1.ShowText = false;
+            this.uiTitlePanel1.Size = new System.Drawing.Size(473, 207);
+            this.uiTitlePanel1.TabIndex = 303;
+            this.uiTitlePanel1.Text = "点位（单位：mm）";
+            this.uiTitlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label96
+            // 
+            this.label96.AutoSize = true;
+            this.label96.Location = new System.Drawing.Point(17, 53);
+            this.label96.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label96.Name = "label96";
+            this.label96.Size = new System.Drawing.Size(182, 21);
+            this.label96.TabIndex = 2;
+            this.label96.Text = "抓盘 -> Empty (取放盘)";
             // 
             // uiDoubleUpDown59
             // 
             this.uiDoubleUpDown59.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown59.Location = new System.Drawing.Point(233, 130);
+            this.uiDoubleUpDown59.Location = new System.Drawing.Point(215, 162);
             this.uiDoubleUpDown59.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown59.Maximum = 2000D;
             this.uiDoubleUpDown59.Minimum = -100D;
             this.uiDoubleUpDown59.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown59.Name = "uiDoubleUpDown59";
             this.uiDoubleUpDown59.ShowText = false;
-            this.uiDoubleUpDown59.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown59.Size = new System.Drawing.Size(125, 29);
             this.uiDoubleUpDown59.TabIndex = 287;
             this.uiDoubleUpDown59.Text = "uiDoubleUpDown59";
             this.uiDoubleUpDown59.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // button74
+            // 
+            this.button74.Location = new System.Drawing.Point(353, 122);
+            this.button74.Margin = new System.Windows.Forms.Padding(2);
+            this.button74.Name = "button74";
+            this.button74.Size = new System.Drawing.Size(108, 34);
+            this.button74.TabIndex = 120;
+            this.button74.Text = "移动";
+            this.button74.UseVisualStyleBackColor = true;
+            // 
             // uiDoubleUpDown58
             // 
+            this.uiDoubleUpDown58.DecimalPlaces = 2;
             this.uiDoubleUpDown58.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown58.Location = new System.Drawing.Point(233, 56);
+            this.uiDoubleUpDown58.Location = new System.Drawing.Point(215, 88);
             this.uiDoubleUpDown58.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiDoubleUpDown58.Maximum = 2000D;
             this.uiDoubleUpDown58.Minimum = -100D;
             this.uiDoubleUpDown58.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown58.Name = "uiDoubleUpDown58";
             this.uiDoubleUpDown58.ShowText = false;
-            this.uiDoubleUpDown58.Size = new System.Drawing.Size(116, 29);
+            this.uiDoubleUpDown58.Size = new System.Drawing.Size(125, 29);
             this.uiDoubleUpDown58.TabIndex = 286;
             this.uiDoubleUpDown58.Text = "uiDoubleUpDown58";
             this.uiDoubleUpDown58.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // uiDoubleUpDown60
-            // 
-            this.uiDoubleUpDown60.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown60.Location = new System.Drawing.Point(233, 93);
-            this.uiDoubleUpDown60.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown60.Maximum = 2000D;
-            this.uiDoubleUpDown60.Minimum = -100D;
-            this.uiDoubleUpDown60.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown60.Name = "uiDoubleUpDown60";
-            this.uiDoubleUpDown60.ShowText = false;
-            this.uiDoubleUpDown60.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown60.TabIndex = 288;
-            this.uiDoubleUpDown60.Text = "uiDoubleUpDown60";
-            this.uiDoubleUpDown60.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown55
-            // 
-            this.uiDoubleUpDown55.DecimalPlaces = 3;
-            this.uiDoubleUpDown55.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown55.Location = new System.Drawing.Point(233, 19);
-            this.uiDoubleUpDown55.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown55.Maximum = 2000D;
-            this.uiDoubleUpDown55.Minimum = -100D;
-            this.uiDoubleUpDown55.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown55.Name = "uiDoubleUpDown55";
-            this.uiDoubleUpDown55.ShowText = false;
-            this.uiDoubleUpDown55.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown55.TabIndex = 286;
-            this.uiDoubleUpDown55.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.uiDoubleUpDown55.Value = 2.66D;
-            // 
-            // label96
-            // 
-            this.label96.AutoSize = true;
-            this.label96.Location = new System.Drawing.Point(22, 23);
-            this.label96.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label96.Name = "label96";
-            this.label96.Size = new System.Drawing.Size(198, 21);
-            this.label96.TabIndex = 2;
-            this.label96.Text = "TrayArm -> Empty (取盘)";
-            // 
-            // label97
-            // 
-            this.label97.AutoSize = true;
-            this.label97.Location = new System.Drawing.Point(22, 60);
-            this.label97.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label97.Name = "label97";
-            this.label97.Size = new System.Drawing.Size(202, 21);
-            this.label97.TabIndex = 4;
-            this.label97.Text = "TrayArm -> Loader (取盘)";
-            // 
-            // groupBox39
-            // 
-            this.groupBox39.Controls.Add(this.uiDoubleUpDown52);
-            this.groupBox39.Controls.Add(this.uiDoubleUpDown53);
-            this.groupBox39.Controls.Add(this.label368);
-            this.groupBox39.Controls.Add(this.uiDoubleUpDown54);
-            this.groupBox39.Controls.Add(this.label369);
-            this.groupBox39.Controls.Add(this.label370);
-            this.groupBox39.Location = new System.Drawing.Point(26, 174);
-            this.groupBox39.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox39.Name = "groupBox39";
-            this.groupBox39.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox39.Size = new System.Drawing.Size(261, 168);
-            this.groupBox39.TabIndex = 302;
-            this.groupBox39.TabStop = false;
-            this.groupBox39.Text = "抓盘手臂 X";
-            // 
-            // uiDoubleUpDown52
-            // 
-            this.uiDoubleUpDown52.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown52.Location = new System.Drawing.Point(111, 115);
-            this.uiDoubleUpDown52.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown52.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown52.Name = "uiDoubleUpDown52";
-            this.uiDoubleUpDown52.ShowText = false;
-            this.uiDoubleUpDown52.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown52.TabIndex = 289;
-            this.uiDoubleUpDown52.Text = "uiDoubleUpDown52";
-            this.uiDoubleUpDown52.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown53
-            // 
-            this.uiDoubleUpDown53.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown53.Location = new System.Drawing.Point(111, 74);
-            this.uiDoubleUpDown53.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown53.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown53.Name = "uiDoubleUpDown53";
-            this.uiDoubleUpDown53.ShowText = false;
-            this.uiDoubleUpDown53.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown53.TabIndex = 286;
-            this.uiDoubleUpDown53.Text = "uiDoubleUpDown53";
-            this.uiDoubleUpDown53.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label368
-            // 
-            this.label368.AutoSize = true;
-            this.label368.Location = new System.Drawing.Point(27, 119);
-            this.label368.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label368.Name = "label368";
-            this.label368.Size = new System.Drawing.Size(58, 21);
-            this.label368.TabIndex = 287;
-            this.label368.Text = "加速度";
-            // 
-            // uiDoubleUpDown54
-            // 
-            this.uiDoubleUpDown54.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown54.Location = new System.Drawing.Point(111, 33);
-            this.uiDoubleUpDown54.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown54.Maximum = 2000D;
-            this.uiDoubleUpDown54.Minimum = -100D;
-            this.uiDoubleUpDown54.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown54.Name = "uiDoubleUpDown54";
-            this.uiDoubleUpDown54.ShowText = false;
-            this.uiDoubleUpDown54.Size = new System.Drawing.Size(116, 29);
-            this.uiDoubleUpDown54.TabIndex = 285;
-            this.uiDoubleUpDown54.Text = "uiDoubleUpDown54";
-            this.uiDoubleUpDown54.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label369
-            // 
-            this.label369.AutoSize = true;
-            this.label369.Location = new System.Drawing.Point(27, 78);
-            this.label369.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label369.Name = "label369";
-            this.label369.Size = new System.Drawing.Size(58, 21);
-            this.label369.TabIndex = 282;
-            this.label369.Text = "加速度";
-            // 
-            // label370
-            // 
-            this.label370.AutoSize = true;
-            this.label370.Location = new System.Drawing.Point(27, 37);
-            this.label370.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label370.Name = "label370";
-            this.label370.Size = new System.Drawing.Size(74, 21);
-            this.label370.TabIndex = 2;
-            this.label370.Text = "最大速度";
-            // 
-            // label98
-            // 
-            this.label98.AutoSize = true;
-            this.label98.Location = new System.Drawing.Point(22, 97);
-            this.label98.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label98.Name = "label98";
-            this.label98.Size = new System.Drawing.Size(196, 21);
-            this.label98.TabIndex = 102;
-            this.label98.Text = "TrayArm -> Auto1 (放盘)";
-            // 
-            // button73
-            // 
-            this.button73.Location = new System.Drawing.Point(362, 127);
-            this.button73.Margin = new System.Windows.Forms.Padding(2);
-            this.button73.Name = "button73";
-            this.button73.Size = new System.Drawing.Size(108, 34);
-            this.button73.TabIndex = 121;
-            this.button73.Text = "移动";
-            this.button73.UseVisualStyleBackColor = true;
-            // 
-            // button76
-            // 
-            this.button76.Location = new System.Drawing.Point(362, 16);
-            this.button76.Margin = new System.Windows.Forms.Padding(2);
-            this.button76.Name = "button76";
-            this.button76.Size = new System.Drawing.Size(108, 34);
-            this.button76.TabIndex = 101;
-            this.button76.Text = "移动";
-            this.button76.UseVisualStyleBackColor = true;
-            // 
-            // label99
-            // 
-            this.label99.AutoSize = true;
-            this.label99.Location = new System.Drawing.Point(22, 134);
-            this.label99.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label99.Name = "label99";
-            this.label99.Size = new System.Drawing.Size(196, 21);
-            this.label99.TabIndex = 107;
-            this.label99.Text = "TrayArm -> Auto2 (放盘)";
-            // 
             // button75
             // 
-            this.button75.Location = new System.Drawing.Point(362, 53);
+            this.button75.Location = new System.Drawing.Point(353, 85);
             this.button75.Margin = new System.Windows.Forms.Padding(2);
             this.button75.Name = "button75";
             this.button75.Size = new System.Drawing.Size(108, 34);
@@ -14313,15 +15072,87 @@
             this.button75.Text = "移动";
             this.button75.UseVisualStyleBackColor = true;
             // 
-            // button74
+            // uiDoubleUpDown60
             // 
-            this.button74.Location = new System.Drawing.Point(362, 90);
-            this.button74.Margin = new System.Windows.Forms.Padding(2);
-            this.button74.Name = "button74";
-            this.button74.Size = new System.Drawing.Size(108, 34);
-            this.button74.TabIndex = 120;
-            this.button74.Text = "移动";
-            this.button74.UseVisualStyleBackColor = true;
+            this.uiDoubleUpDown60.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown60.Location = new System.Drawing.Point(215, 125);
+            this.uiDoubleUpDown60.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown60.Maximum = 2000D;
+            this.uiDoubleUpDown60.Minimum = -100D;
+            this.uiDoubleUpDown60.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown60.Name = "uiDoubleUpDown60";
+            this.uiDoubleUpDown60.ShowText = false;
+            this.uiDoubleUpDown60.Size = new System.Drawing.Size(125, 29);
+            this.uiDoubleUpDown60.TabIndex = 288;
+            this.uiDoubleUpDown60.Text = "uiDoubleUpDown60";
+            this.uiDoubleUpDown60.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label99
+            // 
+            this.label99.AutoSize = true;
+            this.label99.Location = new System.Drawing.Point(17, 164);
+            this.label99.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label99.Name = "label99";
+            this.label99.Size = new System.Drawing.Size(164, 21);
+            this.label99.TabIndex = 107;
+            this.label99.Text = "抓盘 -> Auto2 (放盘)";
+            // 
+            // uiDoubleUpDown55
+            // 
+            this.uiDoubleUpDown55.DecimalPlaces = 3;
+            this.uiDoubleUpDown55.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown55.Location = new System.Drawing.Point(215, 51);
+            this.uiDoubleUpDown55.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown55.Maximum = 2000D;
+            this.uiDoubleUpDown55.Minimum = -100D;
+            this.uiDoubleUpDown55.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown55.Name = "uiDoubleUpDown55";
+            this.uiDoubleUpDown55.ShowText = false;
+            this.uiDoubleUpDown55.Size = new System.Drawing.Size(125, 29);
+            this.uiDoubleUpDown55.TabIndex = 286;
+            this.uiDoubleUpDown55.Text = null;
+            this.uiDoubleUpDown55.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown55.Value = 2.66D;
+            // 
+            // button76
+            // 
+            this.button76.Location = new System.Drawing.Point(353, 48);
+            this.button76.Margin = new System.Windows.Forms.Padding(2);
+            this.button76.Name = "button76";
+            this.button76.Size = new System.Drawing.Size(108, 34);
+            this.button76.TabIndex = 101;
+            this.button76.Text = "移动";
+            this.button76.UseVisualStyleBackColor = true;
+            // 
+            // button73
+            // 
+            this.button73.Location = new System.Drawing.Point(353, 159);
+            this.button73.Margin = new System.Windows.Forms.Padding(2);
+            this.button73.Name = "button73";
+            this.button73.Size = new System.Drawing.Size(108, 34);
+            this.button73.TabIndex = 121;
+            this.button73.Text = "移动";
+            this.button73.UseVisualStyleBackColor = true;
+            // 
+            // label97
+            // 
+            this.label97.AutoSize = true;
+            this.label97.Location = new System.Drawing.Point(17, 90);
+            this.label97.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label97.Name = "label97";
+            this.label97.Size = new System.Drawing.Size(155, 21);
+            this.label97.TabIndex = 4;
+            this.label97.Text = "抓盘 -> Load (取盘)";
+            // 
+            // label98
+            // 
+            this.label98.AutoSize = true;
+            this.label98.Location = new System.Drawing.Point(17, 127);
+            this.label98.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label98.Name = "label98";
+            this.label98.Size = new System.Drawing.Size(164, 21);
+            this.label98.TabIndex = 102;
+            this.label98.Text = "抓盘 -> Auto1 (放盘)";
             // 
             // tabPage4
             // 
@@ -14349,17 +15180,6 @@
             this.tabPage6.Size = new System.Drawing.Size(200, 60);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "档案";
-            // 
-            // button221
-            // 
-            this.button221.Location = new System.Drawing.Point(798, 599);
-            this.button221.Margin = new System.Windows.Forms.Padding(2);
-            this.button221.Name = "button221";
-            this.button221.Size = new System.Drawing.Size(153, 30);
-            this.button221.TabIndex = 402;
-            this.button221.Text = "调试取盘";
-            this.button221.UseVisualStyleBackColor = true;
-            this.button221.Click += new System.EventHandler(this.button221_Click);
             // 
             // _setting
             // 
@@ -14411,51 +15231,63 @@
             this.tabPage3.ResumeLayout(false);
             this.uiTabControl2.ResumeLayout(false);
             this.tabPage7.ResumeLayout(false);
-            this.tabPage7.PerformLayout();
-            this.groupBox28.ResumeLayout(false);
-            this.groupBox28.PerformLayout();
-            this.groupBox25.ResumeLayout(false);
-            this.groupBox25.PerformLayout();
-            this.groupBox24.ResumeLayout(false);
-            this.groupBox24.PerformLayout();
-            this.groupBox26.ResumeLayout(false);
-            this.groupBox26.PerformLayout();
-            this.groupBox23.ResumeLayout(false);
-            this.groupBox23.PerformLayout();
-            this.groupBox27.ResumeLayout(false);
-            this.groupBox27.PerformLayout();
+            this.uiTitlePanel6.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            this.groupBox13.PerformLayout();
+            this.groupBox14.ResumeLayout(false);
+            this.groupBox14.PerformLayout();
+            this.groupBox15.ResumeLayout(false);
+            this.groupBox15.PerformLayout();
             this.groupBox22.ResumeLayout(false);
             this.groupBox22.PerformLayout();
+            this.groupBox23.ResumeLayout(false);
+            this.groupBox23.PerformLayout();
+            this.uiTitlePanel4.ResumeLayout(false);
+            this.uiTitlePanel4.PerformLayout();
             this.tabPage8.ResumeLayout(false);
-            this.tabPage8.PerformLayout();
-            this.groupBox29.ResumeLayout(false);
-            this.groupBox29.PerformLayout();
-            this.groupBox30.ResumeLayout(false);
-            this.groupBox30.PerformLayout();
-            this.groupBox35.ResumeLayout(false);
-            this.groupBox35.PerformLayout();
-            this.groupBox31.ResumeLayout(false);
-            this.groupBox31.PerformLayout();
-            this.groupBox34.ResumeLayout(false);
-            this.groupBox34.PerformLayout();
-            this.groupBox32.ResumeLayout(false);
-            this.groupBox32.PerformLayout();
-            this.groupBox33.ResumeLayout(false);
-            this.groupBox33.PerformLayout();
+            this.uiTitlePanel7.ResumeLayout(false);
+            this.groupBox24.ResumeLayout(false);
+            this.groupBox24.PerformLayout();
+            this.groupBox25.ResumeLayout(false);
+            this.groupBox25.PerformLayout();
+            this.groupBox26.ResumeLayout(false);
+            this.groupBox26.PerformLayout();
+            this.groupBox27.ResumeLayout(false);
+            this.groupBox27.PerformLayout();
+            this.groupBox28.ResumeLayout(false);
+            this.groupBox28.PerformLayout();
+            this.groupBox39.ResumeLayout(false);
+            this.groupBox39.PerformLayout();
+            this.groupBox40.ResumeLayout(false);
+            this.groupBox40.PerformLayout();
+            this.uiTitlePanel14.ResumeLayout(false);
+            this.uiTitlePanel14.PerformLayout();
             this.tabPage9.ResumeLayout(false);
-            this.tabPage9.PerformLayout();
+            this.uiTitlePanel9.ResumeLayout(false);
             this.groupBox36.ResumeLayout(false);
             this.groupBox36.PerformLayout();
             this.groupBox37.ResumeLayout(false);
             this.groupBox37.PerformLayout();
+            this.uiTitlePanel8.ResumeLayout(false);
+            this.uiTitlePanel8.PerformLayout();
+            this.uiDoubleUpDown27.ResumeLayout(false);
+            this.uiDoubleUpDown25.ResumeLayout(false);
             this.tabPage16.ResumeLayout(false);
-            this.tabPage16.PerformLayout();
+            this.uiTitlePanel10.ResumeLayout(false);
             this.groupBox38.ResumeLayout(false);
             this.groupBox38.PerformLayout();
+            this.uiTitlePanel11.ResumeLayout(false);
+            this.uiTitlePanel11.PerformLayout();
             this.tabPage17.ResumeLayout(false);
-            this.tabPage17.PerformLayout();
-            this.groupBox39.ResumeLayout(false);
-            this.groupBox39.PerformLayout();
+            this.uiTitlePanel12.ResumeLayout(false);
+            this.groupBox29.ResumeLayout(false);
+            this.groupBox29.PerformLayout();
+            this.uiTitlePanel1.ResumeLayout(false);
+            this.uiTitlePanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -14529,23 +15361,14 @@
         private System.Windows.Forms.Label label43;
         private System.Windows.Forms.Label label44;
         private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
         private System.Windows.Forms.Label label46;
-        private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Label label47;
-        private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button28;
         private System.Windows.Forms.Button button29;
         private System.Windows.Forms.Button button30;
         private System.Windows.Forms.Button button31;
         private System.Windows.Forms.Button button32;
-        private System.Windows.Forms.Label label48;
-        private System.Windows.Forms.Label label49;
-        private System.Windows.Forms.Label label50;
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Label label53;
@@ -14556,30 +15379,25 @@
         private System.Windows.Forms.Button button33;
         private System.Windows.Forms.Label label58;
         private System.Windows.Forms.Button button34;
-        private System.Windows.Forms.Button button35;
         private System.Windows.Forms.Button button36;
         private System.Windows.Forms.Button button37;
         private System.Windows.Forms.Label label59;
         private System.Windows.Forms.Button button38;
         private System.Windows.Forms.Button button40;
         private System.Windows.Forms.Label label60;
-        private System.Windows.Forms.Button button41;
         private System.Windows.Forms.Label label61;
         private System.Windows.Forms.Button button42;
         private System.Windows.Forms.Button button43;
         private System.Windows.Forms.Button button44;
         private System.Windows.Forms.Button button45;
         private System.Windows.Forms.Button button46;
-        private System.Windows.Forms.Button button47;
         private System.Windows.Forms.Label label62;
         private System.Windows.Forms.Button button48;
         private System.Windows.Forms.Label label63;
         private System.Windows.Forms.Button button49;
         private System.Windows.Forms.Label label64;
-        private System.Windows.Forms.Button button50;
         private System.Windows.Forms.Label label65;
         private System.Windows.Forms.Button button51;
-        private System.Windows.Forms.Label label66;
         private System.Windows.Forms.Button button53;
         private System.Windows.Forms.Button button54;
         private System.Windows.Forms.Label label67;
@@ -14587,15 +15405,10 @@
         private System.Windows.Forms.Label label68;
         private System.Windows.Forms.Label label69;
         private System.Windows.Forms.Button button56;
-        private System.Windows.Forms.Label label70;
         private System.Windows.Forms.Label label71;
-        private System.Windows.Forms.Label label72;
         private System.Windows.Forms.Label label73;
         private System.Windows.Forms.Button button57;
-        private System.Windows.Forms.Label label74;
         private System.Windows.Forms.Button button58;
-        private System.Windows.Forms.Label label75;
-        private System.Windows.Forms.Label label76;
         private System.Windows.Forms.Label label77;
         private System.Windows.Forms.Label label78;
         private System.Windows.Forms.Label label79;
@@ -14606,12 +15419,8 @@
         private System.Windows.Forms.Button button60;
         private System.Windows.Forms.Button button61;
         private System.Windows.Forms.Button button62;
-        private System.Windows.Forms.Label label83;
         private System.Windows.Forms.Button button63;
-        private System.Windows.Forms.Label label84;
         private System.Windows.Forms.Label label85;
-        private System.Windows.Forms.Label label86;
-        private System.Windows.Forms.Label label87;
         private System.Windows.Forms.Button button64;
         private System.Windows.Forms.Label label88;
         private System.Windows.Forms.Label label89;
@@ -15298,104 +16107,6 @@
         public System.Windows.Forms.Button button208;
         public System.Windows.Forms.ComboBox comboBox7;
         public System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.GroupBox groupBox22;
-        private System.Windows.Forms.Label label331;
-        private System.Windows.Forms.GroupBox groupBox28;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown19;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown20;
-        private System.Windows.Forms.Label label335;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown21;
-        private System.Windows.Forms.Label label336;
-        private System.Windows.Forms.Label label337;
-        private System.Windows.Forms.GroupBox groupBox25;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown10;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown11;
-        private System.Windows.Forms.Label label325;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown12;
-        private System.Windows.Forms.Label label326;
-        private System.Windows.Forms.Label label327;
-        private System.Windows.Forms.GroupBox groupBox24;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown7;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown8;
-        private System.Windows.Forms.Label label322;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown9;
-        private System.Windows.Forms.Label label323;
-        private System.Windows.Forms.Label label324;
-        private System.Windows.Forms.GroupBox groupBox26;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown13;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown14;
-        private System.Windows.Forms.Label label328;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown15;
-        private System.Windows.Forms.Label label329;
-        private System.Windows.Forms.Label label330;
-        private System.Windows.Forms.GroupBox groupBox23;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown4;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown5;
-        private System.Windows.Forms.Label label319;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown6;
-        private System.Windows.Forms.Label label320;
-        private System.Windows.Forms.Label label321;
-        private System.Windows.Forms.GroupBox groupBox27;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown16;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown17;
-        private System.Windows.Forms.Label label332;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown18;
-        private System.Windows.Forms.Label label333;
-        private System.Windows.Forms.Label label334;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown3;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown2;
-        private System.Windows.Forms.Label label318;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown1;
-        private System.Windows.Forms.Label label317;
-        private System.Windows.Forms.GroupBox groupBox29;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown22;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown23;
-        private System.Windows.Forms.Label label338;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown24;
-        private System.Windows.Forms.Label label339;
-        private System.Windows.Forms.Label label340;
-        private System.Windows.Forms.GroupBox groupBox30;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown25;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown26;
-        private System.Windows.Forms.Label label341;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown27;
-        private System.Windows.Forms.Label label342;
-        private System.Windows.Forms.Label label343;
-        private System.Windows.Forms.GroupBox groupBox35;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown40;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown41;
-        private System.Windows.Forms.Label label356;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown42;
-        private System.Windows.Forms.Label label357;
-        private System.Windows.Forms.Label label358;
-        private System.Windows.Forms.GroupBox groupBox31;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown28;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown29;
-        private System.Windows.Forms.Label label344;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown30;
-        private System.Windows.Forms.Label label345;
-        private System.Windows.Forms.Label label346;
-        private System.Windows.Forms.GroupBox groupBox34;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown37;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown38;
-        private System.Windows.Forms.Label label353;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown39;
-        private System.Windows.Forms.Label label354;
-        private System.Windows.Forms.Label label355;
-        private System.Windows.Forms.GroupBox groupBox32;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown31;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown32;
-        private System.Windows.Forms.Label label347;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown33;
-        private System.Windows.Forms.Label label348;
-        private System.Windows.Forms.Label label349;
-        private System.Windows.Forms.GroupBox groupBox33;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown34;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown35;
-        private System.Windows.Forms.Label label350;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown36;
-        private System.Windows.Forms.Label label351;
-        private System.Windows.Forms.Label label352;
         private System.Windows.Forms.GroupBox groupBox36;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown43;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown44;
@@ -15417,13 +16128,6 @@
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown51;
         private System.Windows.Forms.Label label366;
         private System.Windows.Forms.Label label367;
-        private System.Windows.Forms.GroupBox groupBox39;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown52;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown53;
-        private System.Windows.Forms.Label label368;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown54;
-        private System.Windows.Forms.Label label369;
-        private System.Windows.Forms.Label label370;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown56;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown57;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown71;
@@ -15450,14 +16154,11 @@
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown82;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown90;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown86;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown79;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown87;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown83;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown76;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown84;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown80;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown73;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown81;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown77;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown78;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown74;
@@ -15477,9 +16178,6 @@
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown101;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown97;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown102;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown109;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown110;
-        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown111;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown106;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown107;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown108;
@@ -15495,5 +16193,190 @@
         public System.Windows.Forms.Button button218;
         public System.Windows.Forms.Button button217;
         public System.Windows.Forms.Button button221;
+        private Sunny.UI.UITitlePanel uiTitlePanel1;
+        private Sunny.UI.UITitlePanel uiTitlePanel4;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown112;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown113;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown114;
+        private System.Windows.Forms.Label label372;
+        private System.Windows.Forms.Button button222;
+        private System.Windows.Forms.Label label373;
+        private System.Windows.Forms.Button button223;
+        private System.Windows.Forms.Label label374;
+        private System.Windows.Forms.Button button224;
+        private Sunny.UI.UITitlePanel uiTitlePanel6;
+        private System.Windows.Forms.Label label335;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown19;
+        private System.Windows.Forms.Label label332;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown16;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown17;
+        private System.Windows.Forms.Label label333;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown18;
+        private System.Windows.Forms.Label label334;
+        private System.Windows.Forms.Label label72;
+        private System.Windows.Forms.Label label74;
+        private System.Windows.Forms.Label label75;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown126;
+        private System.Windows.Forms.Button button22;
+        private System.Windows.Forms.Label label386;
+        private System.Windows.Forms.Label label336;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown20;
+        private System.Windows.Forms.Label label337;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown21;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown121;
+        private System.Windows.Forms.Label label381;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown122;
+        private System.Windows.Forms.Label label382;
+        private System.Windows.Forms.Label label383;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown123;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown124;
+        private System.Windows.Forms.Label label384;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown125;
+        private System.Windows.Forms.Label label385;
+        private System.Windows.Forms.Button button21;
+        private System.Windows.Forms.GroupBox groupBox11;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown1;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown2;
+        private System.Windows.Forms.Label label66;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown3;
+        private System.Windows.Forms.Label label70;
+        private System.Windows.Forms.Label label76;
+        private System.Windows.Forms.GroupBox groupBox12;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown4;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown5;
+        private System.Windows.Forms.Label label317;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown6;
+        private System.Windows.Forms.Label label318;
+        private System.Windows.Forms.Label label319;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown7;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown8;
+        private System.Windows.Forms.Label label320;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown9;
+        private System.Windows.Forms.Label label321;
+        private System.Windows.Forms.Label label322;
+        private System.Windows.Forms.GroupBox groupBox14;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown10;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown11;
+        private System.Windows.Forms.Label label323;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown12;
+        private System.Windows.Forms.Label label324;
+        private System.Windows.Forms.Label label325;
+        private System.Windows.Forms.GroupBox groupBox15;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown13;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown14;
+        private System.Windows.Forms.Label label326;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown15;
+        private System.Windows.Forms.Label label327;
+        private System.Windows.Forms.Label label328;
+        private System.Windows.Forms.GroupBox groupBox22;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown79;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown80;
+        private System.Windows.Forms.Label label329;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown81;
+        private System.Windows.Forms.Label label330;
+        private System.Windows.Forms.Label label331;
+        private System.Windows.Forms.GroupBox groupBox23;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown115;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown116;
+        private System.Windows.Forms.Label label375;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown117;
+        private System.Windows.Forms.Label label376;
+        private System.Windows.Forms.Label label377;
+        private Sunny.UI.UITitlePanel uiTitlePanel14;
+        private Sunny.UI.UITitlePanel uiTitlePanel7;
+        private System.Windows.Forms.GroupBox groupBox24;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown118;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown119;
+        private System.Windows.Forms.Label label378;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown120;
+        private System.Windows.Forms.Label label379;
+        private System.Windows.Forms.Label label380;
+        private System.Windows.Forms.GroupBox groupBox25;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown127;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown128;
+        private System.Windows.Forms.Label label387;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown129;
+        private System.Windows.Forms.Label label388;
+        private System.Windows.Forms.Label label389;
+        private System.Windows.Forms.GroupBox groupBox26;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown130;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown131;
+        private System.Windows.Forms.Label label390;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown132;
+        private System.Windows.Forms.Label label391;
+        private System.Windows.Forms.Label label392;
+        private System.Windows.Forms.GroupBox groupBox27;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown133;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown134;
+        private System.Windows.Forms.Label label393;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown135;
+        private System.Windows.Forms.Label label394;
+        private System.Windows.Forms.Label label395;
+        private System.Windows.Forms.GroupBox groupBox28;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown136;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown137;
+        private System.Windows.Forms.Label label396;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown138;
+        private System.Windows.Forms.Label label397;
+        private System.Windows.Forms.Label label398;
+        private System.Windows.Forms.GroupBox groupBox39;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown139;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown140;
+        private System.Windows.Forms.Label label399;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown141;
+        private System.Windows.Forms.Label label400;
+        private System.Windows.Forms.Label label401;
+        private System.Windows.Forms.GroupBox groupBox40;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown142;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown143;
+        private System.Windows.Forms.Label label402;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown144;
+        private System.Windows.Forms.Label label403;
+        private System.Windows.Forms.Label label404;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown23;
+        private System.Windows.Forms.Label label83;
+        private System.Windows.Forms.Label label84;
+        private System.Windows.Forms.Label label86;
+        private System.Windows.Forms.Label label87;
+        private System.Windows.Forms.Label label338;
+        private Sunny.UI.UITitlePanel uiTitlePanel9;
+        private Sunny.UI.UITitlePanel uiTitlePanel8;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown27;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown28;
+        private System.Windows.Forms.Label label340;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown25;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown26;
+        private System.Windows.Forms.Label label339;
+        private Sunny.UI.UITitlePanel uiTitlePanel10;
+        private Sunny.UI.UITitlePanel uiTitlePanel11;
+        private Sunny.UI.UITitlePanel uiTitlePanel12;
+        private System.Windows.Forms.GroupBox groupBox29;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown22;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown24;
+        private System.Windows.Forms.Label label341;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown29;
+        private System.Windows.Forms.Label label342;
+        private System.Windows.Forms.Label label343;
+        private Sunny.UI.UIButton uiButton9;
+        private Sunny.UI.UIButton uiButton10;
+        private Sunny.UI.UIButton uiButton7;
+        private Sunny.UI.UIButton uiButton8;
+        private Sunny.UI.UIButton uiButton5;
+        private Sunny.UI.UIButton uiButton6;
+        private Sunny.UI.UIButton uiButton4;
+        private Sunny.UI.UIButton uiButton3;
+        private Sunny.UI.UIButton uiButton13;
+        private Sunny.UI.UIButton uiButton14;
+        private Sunny.UI.UIButton uiButton11;
+        private Sunny.UI.UIButton uiButton12;
+        private Sunny.UI.UIButton uiButton17;
+        private Sunny.UI.UIButton uiButton18;
+        private Sunny.UI.UIButton uiButton15;
+        private Sunny.UI.UIButton uiButton16;
+        private Sunny.UI.UIButton uiButton21;
+        private Sunny.UI.UIButton uiButton22;
+        private Sunny.UI.UIButton uiButton19;
+        private Sunny.UI.UIButton uiButton20;
     }
 }

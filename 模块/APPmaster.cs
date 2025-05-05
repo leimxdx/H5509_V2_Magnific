@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace H5509_V2
@@ -23,6 +24,12 @@ namespace H5509_V2
         public static List<AxisRunInfo> AxisRunInfoList;
 
         public static List<AxisHomeInfo> AxisHomeInfoList;
+
+        public static InitPoint 初始点位 = new InitPoint();
+
+        public static SetupInfo 设置信息 = new SetupInfo();
+
+        public static string 当前档案;
 
         public static bool IsStart = false; //开始
 
@@ -60,12 +67,6 @@ namespace H5509_V2
         public static double Testx3pos = 1089.5;
         public static double Testx4pos = 1478.8;
         public static double[] TestXPoint; //Site点位坐标
-
-        public static int 空盘上顶最大值 = 414400 + 12700 + 3175;
-        public static int 空盘下降最小值 = 30000;
-
-        public static int 待测盘上顶最大值 = 414400 + 12700 + 3175;
-        public static int 待测盘下降最小值 = 30000;
 
         public static double[] LoaderXPoint; //Loader待测盘
         public static double[] LoaderYPoint; //Loader待测盘
@@ -132,6 +133,29 @@ namespace H5509_V2
         public static short Interval = 2; //吸料间隔
         public static bool 结批标记;
 
+        public static int 空盘上顶最大值 = 429895;
+        public static int 空盘下降最小值 = 10000;
+        public static int 空盘满盘判断值 = 12700;
+
+        public static int 待测盘上顶最大值 = 434675;
+        public static int 待测盘下降最小值 = 10000;
+
+        public static int Auto1上顶最大值 = 468000;
+        public static int Auto1下降最小值 = 10000;
+        public static int Auto1满盘判断值 = 25000;
+
+        public static int Auto2上顶最大值 = 468000;
+        public static int Auto2下降最小值 = 10000;
+        public static int Auto2满盘判断值 = 25000;
+
+        public static bool Auto1放盘等待标记;
+        public static bool Auto2放盘等待标记;
+
+        public static bool Empty料仓打开标记;
+        public static bool Load料仓打开标记;
+        public static bool Auto1料仓打开标记;
+        public static bool Auto2料仓打开标记;
+
         public static short 入料手臂吸料状态;
         public static bool 入料手臂抓料等待标记;
 
@@ -148,16 +172,32 @@ namespace H5509_V2
 
         public static short Empty上顶标记;
         public static short Load上顶标记;
+        public static short Empty下降标记;
+        public static short Load下降标记;
         public static short Auto1上顶标记;
         public static short Auto2上顶标记;
 
         public static int 抓盘手臂取Empty空盘标记;
         public static int 抓盘手臂取Load空盘标记;
 
+        public static int 抓盘手臂给Auto1空盘标记;
+        public static int 抓盘手臂给Auto2空盘标记;
+
+        public static int 抓盘手臂换Auto1空盘标记;
+        public static int 抓盘手臂换Auto2空盘标记;
+
+        public static int 抓盘手臂放空盘到Empty标记;
+        public static int 抓盘手臂放空盘到Auto1标记;
+        public static int 抓盘手臂放空盘到Auto2标记;
+
         public static bool[][] 放料IC目标值;
 
         public static string[][] 飞梭前出料BIN项;
         public static string[][] 飞梭后出料BIN项;
+
+        public static Task StartTask;
+
+        public static CancellationTokenSource cts;
 
         public static ST_ProcessManage PS入料手臂吸放料流程;
 
@@ -173,7 +213,11 @@ namespace H5509_V2
 
         public static ST_ProcessManage PS空盘上顶流程;
 
+        public static ST_ProcessManage PS空盘下降流程;
+
         public static ST_ProcessManage PS待测盘上顶流程;
+
+        public static ST_ProcessManage PS待测盘下降流程;
 
         public static ST_ProcessManage PS手动盘1上顶流程;
 
@@ -184,6 +228,12 @@ namespace H5509_V2
         public static ST_ProcessManage PS抓盘手臂取Empty空盘流程;
 
         public static ST_ProcessManage PS抓盘手臂取Load空盘流程;
+
+        public static ST_ProcessManage PS抓盘手臂放空盘到Empty流程;
+
+        public static ST_ProcessManage PS抓盘手臂放空盘到Auto1流程;
+
+        public static ST_ProcessManage PS抓盘手臂放空盘到Auto2流程;
 
         public static ST_ProcessManage PS抓盘手臂给Auto1空盘流程;
 
@@ -271,6 +321,25 @@ namespace H5509_V2
         /// 创建Empty开门下降沿的缓存值
         /// </summary>
         public static bool EmptyDoorFallCache = false;
+        /// <summary>
+        /// 创建Auto1开门上升沿的缓存值
+        /// </summary>
+        public static bool Auto1DoorRiseCache = false;
+
+        /// <summary>
+        /// 创建Auto1开门下降沿的缓存值
+        /// </summary>
+        public static bool Auto1DoorFallCache = false;
+
+        /// <summary>
+        /// 创建Auto2开门上升沿的缓存值
+        /// </summary>
+        public static bool Auto2DoorRiseCache = false;
+
+        /// <summary>
+        /// 创建Auto2开门下降沿的缓存值
+        /// </summary>
+        public static bool Auto2DoorFallCache = false;
 
         /// <summary>
         /// 创建一个循环上升沿的缓存值
@@ -397,27 +466,26 @@ namespace H5509_V2
         /// </summary>
         public static void LoaderTrayICPointInit()
         {
-            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_InputArm_X_Precision);
-            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_InputArm_X_Precision);
-            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_InputArm_Y_Precision);
-            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_InputArm_Y_Precision);
-            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
-            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
-            double loaderx = 120;//motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
-            double loadery = 40;// motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 41 - 10 * 2; //move 900
-            //double total = 38.4 - motionEx.trayParm.Y_Pitch * 2; //move 580
-            int ymove = (int)(total);// / motionEx.advancedParam.Axis_InputArm_Y_Precision);
-            int pmove = (int)(total);// / motionEx.advancedParam.Axis_InputArm_P_Precision);
+            TrayInfo trayInfo = 设置信息.Tray盘信息;
+            OffsetPoint 点位微调 = 设置信息.OffsetPoint;
+            double xStart = trayInfo.X_Start; //15.45;
+            double xPitch = trayInfo.X_Pitch; //15;
+            double yStart = trayInfo.Y_Start; //10.8;
+            double yPitch = trayInfo.Y_Pitch; //16.3;
+            int xNum = trayInfo.X_Num;
+            int yNum = trayInfo.Y_Num;
+            double loaderx = 初始点位.入料_Load_X + 点位微调.入料_Load吸_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double loadery = 初始点位.入料_Load_Y + 点位微调.入料_Load吸_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double total = 初始点位.入料_变距最大值 - yPitch * 2; //要缩小的距离
+
             LoaderXPoint = new double[xNum];
             LoaderYPoint = new double[yNum];
-
             LoaderXPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
                 LoaderXPoint[i] = LoaderXPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            LoaderYPoint[0] = loadery - yStart + Interval * ymove; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
+            LoaderYPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
                 LoaderYPoint[i] = LoaderYPoint[i - 1] - yPitch; //累加Y轴坐标

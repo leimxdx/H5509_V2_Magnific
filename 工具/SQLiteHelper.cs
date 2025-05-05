@@ -64,8 +64,9 @@ namespace H5509_V2
         /// <param name="cmdText">SQL语句或存储过程名称</param>
         /// <param name="paramArray">参数数组</param>
         /// <returns>受影响的行数</returns>
-        public static int ExecuteNonQuery(string cmdText, SQLiteParameter[] paramArray = null)
+        public string ExecuteNonQuery(string cmdText, out int line,  SQLiteParameter[] paramArray = null)
         {
+            line = 0;
             SQLiteConnection conn = new SQLiteConnection(ConnString);
             SQLiteCommand cmd = new SQLiteCommand(cmdText, conn);
             if (paramArray != null)
@@ -75,14 +76,14 @@ namespace H5509_V2
             try
             {
                 conn.Open();
-                return cmd.ExecuteNonQuery();
+                line = cmd.ExecuteNonQuery();
+                return "Success";
             }
             catch (Exception ex)
             {
-                string errorMsg = $"{DateTime.Now}  : 执行 public static int ExecuteNonQuery(string cmdText, SqlParameter[] paramArray = null)方法发生异常：{ex.Message}";
+                string errorMsg = $"{DateTime.Now}  : 执行 public static int ExecuteNonQuery(string cmdText, out int line, SqlParameter[] paramArray = null)方法发生异常：{ex.Message}";
                 //在这个地方写入日志...
-
-                throw new Exception("执行public static int ExecuteNonQuery(string cmdText, SqlParameter[] paramArray = null)方法发生异常：" + ex.Message);
+                return errorMsg;
             }
             finally   //以上不管是否发生异常，都会执行的代码
             {
@@ -150,7 +151,7 @@ namespace H5509_V2
         /// <param name="sql">查询语句</param>
         /// <param name="tableName">数据表的名称</param>
         /// <returns></returns>
-        public static DataSet GetDataSet(string sql, SQLiteParameter[] paramArray = null, string tableName = null)
+        public static string GetDataSet(string sql, out DataSet dt,  SQLiteParameter[] paramArray = null, string tableName = null)
         {
             SQLiteConnection conn = new SQLiteConnection(ConnString);
             SQLiteCommand cmd = new SQLiteCommand(sql, conn);
@@ -159,19 +160,19 @@ namespace H5509_V2
                 cmd.Parameters.AddRange(paramArray);
             }
             SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            DataSet ds = new DataSet();
+            dt = new DataSet();
             try
             {
                 conn.Open();
                 if (tableName == null)
-                    da.Fill(ds);
+                    da.Fill(dt);
                 else
-                    da.Fill(ds, tableName);
-                return ds;
+                    da.Fill(dt, tableName);
+                return "Success";
             }
             catch (Exception ex)
             {
-                throw new Exception("执行 public DataSet GetDataSet(string sql, string tableName = null)方法发生异常：" + ex.Message);
+                return "执行 public DataSet GetDataSet(string sql, string tableName = null)方法发生异常：" + ex.Message;
             }
             finally
             {
@@ -216,7 +217,7 @@ namespace H5509_V2
         /// <param name="sql">SQL语句</param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public static SQLiteDataReader GetDataReader(string sql)
+        public static string GetDataReader(string sql, out SQLiteDataReader sqlLiteDataReader)
         {
             SQLiteConnection conn = new SQLiteConnection(ConnString);
             SQLiteCommand cmd = conn.CreateCommand();
@@ -227,13 +228,14 @@ namespace H5509_V2
                 {
                     conn.Open();  //打开数据库连接
                 }
-                return cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                sqlLiteDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                return "Success";
             }
             catch (Exception ex)
             {
                 if (conn.State == ConnectionState.Open) conn.Close();
-                //throw new Exception("查询结果集异常！详细信息：" + ex.ToString());
-                throw new Exception(ex.Message);
+                sqlLiteDataReader = null;
+                return ex.Message;
             }
         }
     }

@@ -747,6 +747,7 @@ namespace H5509_V2
                 // 启动AXIS轴的运动
                 error = GTN_Update(axisRun.核号, 1 << (axisRun.轴号 - 1));
                 ErrorHandler("GTN_Update", error);
+
             }
             catch (Exception ex)
             {

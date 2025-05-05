@@ -2103,39 +2103,68 @@ namespace H5509_V2
 
         private void button212_Click(object sender, EventArgs e)
         {
-            Task.Run(() => { handler.Empty顶盘流程(); });
-            
+            Empty上顶标记 = 2;
         }
 
         private void button213_Click(object sender, EventArgs e)
         {
-            Task.Run(() => {
-                handler.Loader顶盘流程();
-            });
+            Load上顶标记 = 2;
         }
 
         private void button215_Click(object sender, EventArgs e)
         {
-            Task.Run(() => {
-                handler.Auto1顶盘流程();
-            });
+            Auto1上顶标记 = 2;
+            //Task.Run(() => {
+            //    handler.Auto1顶盘流程();
+            //});
         }
 
         private void button214_Click(object sender, EventArgs e)
         {
-            Task.Run(() => {
-                handler.Auto2顶盘流程();
-            });
+            Auto2上顶标记 = 2;
+            //Task.Run(() => {
+            //    handler.Auto2顶盘流程();
+            //});
         }
 
         private void button221_Click(object sender, EventArgs e)
         {
-            Task.Run(() => { handler.抓盘手臂取Empty盘(); });
+            抓盘手臂取Empty空盘标记 = 2;
+            //Task.Run(() => { handler.抓盘手臂取Empty盘(); });
         }
 
         private void button216_Click(object sender, EventArgs e)
         {
-            Task.Run(() => { handler.抓盘手臂取Load空盘(); });
+            抓盘手臂取Load空盘标记 = 2;
+            //抓盘手臂放空盘到Empty标记 = 2;
+        }
+
+        private void button217_Click(object sender, EventArgs e)
+        {
+            Auto1上顶标记 = 1;
+            抓盘手臂放空盘到Auto1标记 = 2;
+            //Task.Run(() => { handler.抓盘手臂放空盘到Auto1(); });
+        }
+
+        private void button218_Click(object sender, EventArgs e)
+        {
+            Auto2上顶标记 = 1;
+            抓盘手臂放空盘到Auto2标记 = 2;
+            //Task.Run(() => { handler.抓盘手臂放空盘到Auto2(); });
+        }
+
+        private void button219_Click(object sender, EventArgs e)
+        {
+            Auto1上顶标记 = 2;
+            抓盘手臂放空盘到Auto1标记 = 2;
+            //Task.Run(() => { handler.抓盘手臂换Auto1空盘(); });
+        }
+
+        private void button220_Click(object sender, EventArgs e)
+        {
+            Auto2上顶标记 = 2;
+            抓盘手臂放空盘到Auto2标记 = 2;
+            //Task.Run(() => { handler.抓盘手臂换Auto2空盘(); });
         }
     }
 }
