@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,6 +13,8 @@ namespace H5509_V2
 {
     public class APPmaster
     {
+        public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
+
         /// <summary>
         /// 板卡初始成功标志
         /// </summary>
@@ -44,6 +47,12 @@ namespace H5509_V2
         public static bool ProgramBtnPause = false; //程序按钮暂停
 
         public static bool IsForecePause = false; //强制停止
+
+        public static int 设备状态 = 0;
+
+        public static bool H5509归零 = false;
+
+        public static bool H5509正在归零 = false;
 
         public static bool H5509初始化 = false;
 
@@ -110,13 +119,43 @@ namespace H5509_V2
         public static string Fix2 { get; set; } = "08";
         public static string Fix3 { get; set; } = "09";
 
+        public static bool 入料IC忽略 { get; set; }
+
+        public static int 载入数 { get; set; }
+
         public static int 飞梭2位置 = 0; //0:后面 1:前面
 
         public static bool 调机标记 = true;
 
         public static int Tray平移左右标记 = 0;
 
-        public static bool Tray平移运动标记; 
+        public static bool Tray平移运动标记; //是否正在平移
+
+        public static short Interval = 2; //吸料间隔
+
+        public static double 梭车列间距 = 32; //mm
+
+        public static double 梭车行间距 = 40; //mm
+
+        public static double 入料吸料间距 //tray吸
+        {
+            get { return 初始点位.入料_变距最大值 - 设置信息.Tray盘信息.Y_Pitch * Interval; }
+        }
+
+        public static double 入料放料间距 //梭车放
+        {
+            get { return 初始点位.入料_变距最大值 - 梭车列间距; }
+        }
+
+        public static double 出料吸料间距 //梭车吸
+        {
+            get { return 初始点位.出料_变距最大值 - 梭车列间距; }
+        }
+
+        public static double 出料放料间距 //tray放
+        {
+            get { return 初始点位.出料_变距最大值 - 设置信息.Tray盘信息.Y_Pitch * Interval; }
+        }
 
         public static int[] SiteTestState = new int[16];
 
@@ -130,7 +169,6 @@ namespace H5509_V2
         public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
         public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
 
-        public static short Interval = 2; //吸料间隔
         public static bool 结批标记;
 
         public static int 空盘上顶最大值 = 429895;
@@ -198,6 +236,8 @@ namespace H5509_V2
         public static Task StartTask;
 
         public static CancellationTokenSource cts;
+
+        public static ST_ProcessManage PS初始化流程;
 
         public static ST_ProcessManage PS入料手臂吸放料流程;
 
@@ -386,6 +426,21 @@ namespace H5509_V2
         /// </summary>
         public static bool TrayMoveRiseCache = false;
 
+        public static bool 是否可以初始化()
+        {
+            if (IsPause == true || IsStart == false)
+            {
+                return false;
+            }
+
+            if (H5509归零 == false)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public static bool 是否可以开始运行()
         {
             if (IsPause == true || IsStart == false)
@@ -476,7 +531,7 @@ namespace H5509_V2
             int yNum = trayInfo.Y_Num;
             double loaderx = 初始点位.入料_Load_X + 点位微调.入料_Load吸_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
             double loadery = 初始点位.入料_Load_Y + 点位微调.入料_Load吸_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 初始点位.入料_变距最大值 - yPitch * 2; //要缩小的距离
+            double total = 初始点位.入料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             LoaderXPoint = new double[xNum];
             LoaderYPoint = new double[yNum];
@@ -485,7 +540,7 @@ namespace H5509_V2
             {
                 LoaderXPoint[i] = LoaderXPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            LoaderYPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
+            LoaderYPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
                 LoaderYPoint[i] = LoaderYPoint[i - 1] - yPitch; //累加Y轴坐标
@@ -1234,6 +1289,21 @@ namespace H5509_V2
                     break;
                 }
             }
+        }
+
+        public static bool JudgeNozzleSts(bool[] lsopen, int[] opens, int value)
+        {
+            for (int i = 0; i < opens.Length; i++)
+            {
+                if (lsopen[i])
+                {
+                    if (opens[i] == value)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public static bool 获取Load盘位置(int index, out double xPos, out double yPos)

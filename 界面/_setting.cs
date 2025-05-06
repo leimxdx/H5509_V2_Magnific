@@ -2166,5 +2166,73 @@ namespace H5509_V2
             抓盘手臂放空盘到Auto2标记 = 2;
             //Task.Run(() => { handler.抓盘手臂换Auto2空盘(); });
         }
+
+        private void 刷新入料手臂点位()
+        {
+
+        }
+        private void 刷新出料手臂点位()
+        {
+
+        }
+        private void 刷新测试手臂点位()
+        {
+
+        }
+        private void 刷新梭车点位()
+        {
+
+        }
+        private void 刷新抓盘手臂点位()
+        {
+
+        }
+
+        private void 刷新初始点位(string tabpagetext)
+        {
+            if (tabpagetext == "入料手臂")
+            {
+                Debug.WriteLine("入料手臂");
+            }
+            else if (tabpagetext == "出料手臂")
+            {
+                Debug.WriteLine("出料手臂");
+            }
+            else if (tabpagetext == "测试手臂")
+            {
+                Debug.WriteLine("测试手臂");
+            }
+            else if(tabpagetext == "梭车")
+            {
+                Debug.WriteLine("梭车");
+            }
+            else if(tabpagetext == "抓盘手臂")
+            {
+                Debug.WriteLine("抓盘手臂");
+            }
+        }
+
+        private void uiTabControl2_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新初始点位(e.TabPage.Text);
+        }
+
+        private void 刷新设置与维护界面(string tabpagetext)
+        {
+            if (tabpagetext == "初始点位")
+            {
+                刷新初始点位(uiTabControl2.SelectedTab.Text);
+            }
+        }
+
+        private void uiTabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新设置与维护界面(e.TabPage.Text);
+        }
+
+        public void 刷新设置与维护界面()
+        {
+            刷新设置与维护界面(uiTabControl1.SelectedTab.Text);
+        }
     }
 }

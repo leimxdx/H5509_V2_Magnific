@@ -1,242 +1,329 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
+using System.Data.SQLite;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SQLite;
 using static GTN.mc;
-using System.IO;
+
 
 namespace H5509_V2
 {
     public class SQLiteHelper
     {
 
-        public static string ConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
-
-
-
-        public string GetConnString(int mdb)
+        /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <param name="result">返回object类型</param>
+        /// <returns>成功返回"Success"，失败返回错误信息</returns>
+        public static string runSql(string connectionString, string sql, out object result)
         {
-            switch (mdb)
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+            try
             {
-                case 0: return ConnString;
-                default: return "";
+                connection.Open();
+                SQLiteDataReader reader = command.ExecuteReader();
+                reader.Read();
+                result = reader[0];
+            }
+            catch (SqlException e)
+            {
+                result = null;
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return e.Message;
+            }
+            connection.Close();
+            return "Success";
+        }
+
+        /// <summary>
+        /// 异步获取单条数据
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <returns>成功返回"Success"，失败返回错误信息</returns>
+        public static async Task<object> runSqlAsync(string connectionString, string sql)
+        {
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                DbDataReader reader = await command.ExecuteReaderAsync();
+                reader.Read();
+                object res = reader[0];
+                connection.Close();
+                return res;
+            }
+            catch (SqlException e)
+            {
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return e.Message;
             }
         }
 
         /// <summary>
-        /// 执行insert、update、delete类型的SQL语句
+        /// 获取单条数据
         /// </summary>
-        /// <param name="cmdText">SQL语句或存储过程名称</param>
-        /// <param name="paramArray">参数数组</param>
-        /// <returns>受影响的行数</returns>
-        public static int ExecuteNonQuery(string constring, string cmdText, SQLiteParameter[] paramArray = null)
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <param name="result">返回string类型</param>
+        /// <returns>成功返回"Success"，失败返回错误信息</returns>
+        public static string runSql(string connectionString, string sql, out string result)
         {
-            SQLiteConnection conn = new SQLiteConnection(constring);
-            SQLiteCommand cmd = new SQLiteCommand(cmdText, conn);
-            if (paramArray != null)
-            {
-                cmd.Parameters.AddRange(paramArray);
-            }
-            try
-            {
-                conn.Open();
-                return cmd.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                string errorMsg = $"{DateTime.Now}  : 执行 public static int ExecuteNonQuery(string cmdText, SqlParameter[] paramArray = null)方法发生异常：{ex.Message}";
-                //在这个地方写入日志...
+            string b = runSql(connectionString, sql, out object res);
 
-                throw new Exception("执行public static int ExecuteNonQuery(string cmdText, SqlParameter[] paramArray = null)方法发生异常：" + ex.Message);
-            }
-            finally   //以上不管是否发生异常，都会执行的代码
+            if (b == "Success")
             {
-                conn.Close();
-            }
-        }
-
-        /// <summary>
-        /// 执行insert、update、delete类型的SQL语句
-        /// </summary>
-        /// <param name="cmdText">SQL语句或存储过程名称</param>
-        /// <param name="paramArray">参数数组</param>
-        /// <returns>受影响的行数</returns>
-        public string ExecuteNonQuery(string cmdText, out int line,  SQLiteParameter[] paramArray = null)
-        {
-            line = 0;
-            SQLiteConnection conn = new SQLiteConnection(ConnString);
-            SQLiteCommand cmd = new SQLiteCommand(cmdText, conn);
-            if (paramArray != null)
-            {
-                cmd.Parameters.AddRange(paramArray);
-            }
-            try
-            {
-                conn.Open();
-                line = cmd.ExecuteNonQuery();
-                return "Success";
-            }
-            catch (Exception ex)
-            {
-                string errorMsg = $"{DateTime.Now}  : 执行 public static int ExecuteNonQuery(string cmdText, out int line, SqlParameter[] paramArray = null)方法发生异常：{ex.Message}";
-                //在这个地方写入日志...
-                return errorMsg;
-            }
-            finally   //以上不管是否发生异常，都会执行的代码
-            {
-                conn.Close();
-            }
-        }
-
-        /// <summary>
-        /// 返回单一结果的查询
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-        public static object ExecuteScalar(string cmdText, SQLiteParameter[] paramArray = null)
-        {
-            SQLiteConnection conn = new SQLiteConnection(ConnString);
-            SQLiteCommand cmd = new SQLiteCommand(cmdText, conn);
-            if (paramArray != null)
-            {
-                cmd.Parameters.AddRange(paramArray);
-            }
-            try
-            {
-                conn.Open();
-                return cmd.ExecuteScalar();
-            }
-            catch (Exception ex)
-            {
-                //在这个地方写入日志...
-
-                throw new Exception("执行 public object ExecuteScalar(string cmdText, SqlParameter[] paramArray = null方法发生异常：" + ex.Message);
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-        /// <summary>
-        /// 执行返回一个只读结果集的查询
-        /// </summary>
-        /// <param name="sql"></param>
-        /// <returns></returns>
-        public static SQLiteDataReader ExecuteReader(string cmdText, SQLiteParameter[] paramArray = null)
-        {
-            SQLiteConnection conn = new SQLiteConnection(ConnString);
-            SQLiteCommand cmd = new SQLiteCommand(cmdText, conn);
-            if (paramArray != null)
-            {
-                cmd.Parameters.AddRange(paramArray);
-            }
-            try
-            {
-                conn.Open();
-                return cmd.ExecuteReader(CommandBehavior.CloseConnection); //必须添加这个枚举
-            }
-            catch (Exception ex)
-            {
-                //在这个地方写入日志...
-
-                throw new Exception("执行 public object SqlDataReader(string cmdText, SqlParameter[] paramArray = null)方法发生异常：" + ex.Message);
-            }
-        }
-        /// <summary>
-        /// 返回包含一张数据表的数据集的查询
-        /// </summary>
-        /// <param name="sql">查询语句</param>
-        /// <param name="tableName">数据表的名称</param>
-        /// <returns></returns>
-        public static string GetDataSet(string sql, out DataSet dt,  SQLiteParameter[] paramArray = null, string tableName = null)
-        {
-            SQLiteConnection conn = new SQLiteConnection(ConnString);
-            SQLiteCommand cmd = new SQLiteCommand(sql, conn);
-            if (paramArray != null)
-            {
-                cmd.Parameters.AddRange(paramArray);
-            }
-            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            dt = new DataSet();
-            try
-            {
-                conn.Open();
-                if (tableName == null)
-                    da.Fill(dt);
-                else
-                    da.Fill(dt, tableName);
-                return "Success";
-            }
-            catch (Exception ex)
-            {
-                return "执行 public DataSet GetDataSet(string sql, string tableName = null)方法发生异常：" + ex.Message;
-            }
-            finally
-            {
-                conn.Close();
-            }
-        }
-        /// <summary>
-        /// 执行查询，返回一个或多个表的DataSet
-        /// </summary>
-        /// <param name="dicTableAndSql"></param>
-        /// <returns></returns>
-        public static DataSet GetDataSet(Dictionary<string, string> dicTableAndSql)
-        {
-            SQLiteConnection conn = new SQLiteConnection(ConnString);
-            SQLiteCommand cmd = new SQLiteCommand();
-            cmd.Connection = conn;
-            SQLiteDataAdapter da = new SQLiteDataAdapter(cmd);
-            DataSet ds = new DataSet();
-            try
-            {
-                conn.Open();
-                foreach (string tbName in dicTableAndSql.Keys)
+                try
                 {
-                    cmd.CommandText = dicTableAndSql[tbName];
-                    da.Fill(ds, tbName);
+                    result = res.ToString();
                 }
-                return ds;
+                catch (Exception ex)
+                {
+                    result = null;
+                    return ex.Message;
+                }
             }
-            catch (Exception ex)
+            else result = null;
+            return b;
+        }
+
+        /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <param name="result">返回int类型</param>
+        /// <returns>成功返回"Success"，失败返回错误信息，此时result=0</returns>
+        public static string runSql(string connectionString, string sql, out int result)
+        {
+            string b = runSql(connectionString, sql, out object res);
+            if (b == "Success")
             {
-                throw new Exception("执行 public DataSet GetDataSet(Dictionary<string,string> dicTableAndSql)方法发生异常：" + ex.Message);
+                try
+                {
+                    result = int.Parse(res.ToString());
+                    return b;
+                }
+                catch (Exception ex)
+                {
+                    result = 0;
+                    return ex.Message;
+                }
             }
-            finally
+            result = 0;
+            return b;
+        }
+
+        /// <summary>
+        /// 获取单条数据
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <param name="result">返回doubel类型</param>
+        /// <returns>成功返回"Success"，失败返回错误信息，此时result=0</returns>
+        public static string runSql(string connectionString, string sql, out double result)
+        {
+            string b = runSql(connectionString, sql, out object res);
+            if (b == "Success")
             {
-                conn.Close();
+                try
+                {
+                    result = double.Parse(res.ToString());
+                    return b;
+                }
+                catch (Exception ex)
+                {
+                    result = 0;
+                    return ex.Message;
+                }
+            }
+            result = 0;
+            return b;
+        }
+
+        /// <summary>
+        /// 获取DataTable
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <param name="result">返回DataTable类型</param>
+        /// <returns>成功返回"Success"，失败返回错误信息</returns>
+        public static string runSql(string connectionString, string sql, out DataTable result)
+        {
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, connection);
+            result = new DataTable();
+            try
+            {
+                connection.Open();
+                adapter.Fill(result);
+            }
+            catch (SqlException e)
+            {
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return e.Message;
+            }
+            connection.Close();
+            return "Success";
+        }
+
+
+        /// <summary>
+        /// 获取DataTable并装入DataSet中
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <param name="name">DataTable命名</param>
+        /// <param name="result">返回DataTable类型</param>
+        /// <returns>成功返回"Success"，失败返回错误信息</returns>
+        public static string runSql(string connectionString, string sql, string name, out DataSet result)
+        {
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteDataAdapter adapter = new SQLiteDataAdapter(sql, connection);
+            result = new DataSet();
+            try
+            {
+                connection.Open();
+                adapter.Fill(result, name);
+            }
+            catch (SqlException e)
+            {
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return e.Message;
+            }
+            connection.Close();
+            return "Success";
+        }
+
+        /// <summary>
+        /// 获取List<object>
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <param name="result">返回List<object>类型</param>
+        /// <returns>成功返回"Success"，失败返回错误信息</returns>
+        public static string runSql(string connectionString, string sql, out List<object> result)
+        {
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+            result = new List<object>();
+            try
+            {
+                connection.Open();
+                SQLiteDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    result.Add(reader[0]);
+                }
+            }
+            catch (SqlException e)
+            {
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return e.Message;
+            }
+            connection.Close();
+            return "Success";
+        }
+
+        /// <summary>
+        /// 执行非查询sql，返回影响的行数
+        /// </summary>
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <returns>执行错误返回-1</returns>
+        public static int runSqlNonQuery(string connectionString, string sql)
+        {
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                int res = command.ExecuteNonQuery();
+                connection.Close();
+                return res;
+
+            }
+            catch (SqlException e)
+            {
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return -1;
             }
         }
 
         /// <summary>
-        /// 查询结果集
+        /// 异步执行非查询sql，返回影响的行数
         /// </summary>
-        /// <param name="sql">SQL语句</param>
-        /// <returns></returns>
-        /// <exception cref="Exception"></exception>
-        public static string GetDataReader(string sql, out SQLiteDataReader sqlLiteDataReader)
+        /// <param name="connectionString">数据库连接字符串</param>
+        /// <param name="sql">sql语句</param>
+        /// <returns>执行错误返回-1</returns>
+        public static async Task<int> runSqlNonQueryAsync(string connectionString, string sql)
         {
-            SQLiteConnection conn = new SQLiteConnection(ConnString);
-            SQLiteCommand cmd = conn.CreateCommand();
-            cmd.CommandText = sql;  // = "select * from 表名";  mdb文件里的表名
+            //int res = runSql(connectionString, sql);
+            //return res;
+
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
             try
             {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();  //打开数据库连接
-                }
-                sqlLiteDataReader = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-                return "Success";
+                connection.Open();
+                int res = await command.ExecuteNonQueryAsync();
+                connection.Close();
+                return res;
+
             }
-            catch (Exception ex)
+            catch (SqlException e)
             {
-                if (conn.State == ConnectionState.Open) conn.Close();
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return -1;
+            }
+        }
+
+
+        public static string runSql(string connectionString, string sql, out SQLiteDataReader sqlLiteDataReader)
+        {
+            SQLiteConnection connection = new SQLiteConnection(connectionString);
+            SQLiteCommand command = new SQLiteCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                sqlLiteDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
+            }
+            catch (SqlException e)
+            {
                 sqlLiteDataReader = null;
-                return ex.Message;
+                connection.Close();
+                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                return e.Message;
             }
+            //connection.Close();
+            return "Success";
         }
+
+
+
+
+
+
+
+
+
     }
 }

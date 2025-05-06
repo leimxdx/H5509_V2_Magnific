@@ -1206,6 +1206,7 @@
             this.uiTabControl1.TabUnSelectedForeColor = System.Drawing.Color.Black;
             this.uiTabControl1.TipsFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.TipsForeColor = System.Drawing.Color.Black;
+            this.uiTabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl1_Selecting);
             // 
             // tabPage1
             // 
@@ -10635,7 +10636,7 @@
             this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(200, 60);
+            this.tabPage3.Size = new System.Drawing.Size(1893, 944);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "初始点位";
             // 
@@ -10656,7 +10657,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl2.Size = new System.Drawing.Size(1893, 944);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -10667,6 +10668,7 @@
             this.uiTabControl2.TabUnSelectedForeColor = System.Drawing.Color.Black;
             this.uiTabControl2.TipsFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl2.TipsForeColor = System.Drawing.Color.Black;
+            this.uiTabControl2.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl2_Selecting);
             // 
             // tabPage7
             // 
@@ -10680,7 +10682,7 @@
             this.tabPage7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage7.Location = new System.Drawing.Point(0, 40);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(200, 20);
+            this.tabPage7.Size = new System.Drawing.Size(1893, 904);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "入料手臂";
             // 
@@ -11435,7 +11437,7 @@
             // 
             // uiDoubleUpDown19
             // 
-            this.uiDoubleUpDown19.DecimalPlaces = 3;
+            this.uiDoubleUpDown19.DecimalPlaces = 2;
             this.uiDoubleUpDown19.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown19.Location = new System.Drawing.Point(1118, 271);
             this.uiDoubleUpDown19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11462,7 +11464,7 @@
             // 
             // uiDoubleUpDown16
             // 
-            this.uiDoubleUpDown16.DecimalPlaces = 3;
+            this.uiDoubleUpDown16.DecimalPlaces = 2;
             this.uiDoubleUpDown16.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown16.Location = new System.Drawing.Point(1118, 235);
             this.uiDoubleUpDown16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11479,7 +11481,7 @@
             // 
             // uiDoubleUpDown17
             // 
-            this.uiDoubleUpDown17.DecimalPlaces = 3;
+            this.uiDoubleUpDown17.DecimalPlaces = 2;
             this.uiDoubleUpDown17.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown17.Location = new System.Drawing.Point(1118, 199);
             this.uiDoubleUpDown17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11506,7 +11508,7 @@
             // 
             // uiDoubleUpDown18
             // 
-            this.uiDoubleUpDown18.DecimalPlaces = 3;
+            this.uiDoubleUpDown18.DecimalPlaces = 2;
             this.uiDoubleUpDown18.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown18.Location = new System.Drawing.Point(1118, 163);
             this.uiDoubleUpDown18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11543,7 +11545,7 @@
             // 
             // uiDoubleUpDown112
             // 
-            this.uiDoubleUpDown112.DecimalPlaces = 3;
+            this.uiDoubleUpDown112.DecimalPlaces = 2;
             this.uiDoubleUpDown112.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown112.Location = new System.Drawing.Point(687, 238);
             this.uiDoubleUpDown112.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11580,7 +11582,7 @@
             // 
             // uiDoubleUpDown113
             // 
-            this.uiDoubleUpDown113.DecimalPlaces = 3;
+            this.uiDoubleUpDown113.DecimalPlaces = 2;
             this.uiDoubleUpDown113.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown113.Location = new System.Drawing.Point(687, 202);
             this.uiDoubleUpDown113.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11617,7 +11619,7 @@
             // 
             // uiDoubleUpDown114
             // 
-            this.uiDoubleUpDown114.DecimalPlaces = 3;
+            this.uiDoubleUpDown114.DecimalPlaces = 2;
             this.uiDoubleUpDown114.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown114.Location = new System.Drawing.Point(687, 166);
             this.uiDoubleUpDown114.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11694,7 +11696,7 @@
             // 
             // uiDoubleUpDown99
             // 
-            this.uiDoubleUpDown99.DecimalPlaces = 3;
+            this.uiDoubleUpDown99.DecimalPlaces = 2;
             this.uiDoubleUpDown99.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown99.Location = new System.Drawing.Point(209, 48);
             this.uiDoubleUpDown99.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11791,7 +11793,7 @@
             // 
             // uiDoubleUpDown106
             // 
-            this.uiDoubleUpDown106.DecimalPlaces = 3;
+            this.uiDoubleUpDown106.DecimalPlaces = 2;
             this.uiDoubleUpDown106.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown106.Location = new System.Drawing.Point(209, 238);
             this.uiDoubleUpDown106.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11838,7 +11840,7 @@
             // 
             // uiDoubleUpDown103
             // 
-            this.uiDoubleUpDown103.DecimalPlaces = 3;
+            this.uiDoubleUpDown103.DecimalPlaces = 2;
             this.uiDoubleUpDown103.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown103.Location = new System.Drawing.Point(1118, 117);
             this.uiDoubleUpDown103.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11865,7 +11867,7 @@
             // 
             // uiDoubleUpDown107
             // 
-            this.uiDoubleUpDown107.DecimalPlaces = 3;
+            this.uiDoubleUpDown107.DecimalPlaces = 2;
             this.uiDoubleUpDown107.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown107.Location = new System.Drawing.Point(209, 202);
             this.uiDoubleUpDown107.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11892,7 +11894,7 @@
             // 
             // uiDoubleUpDown100
             // 
-            this.uiDoubleUpDown100.DecimalPlaces = 3;
+            this.uiDoubleUpDown100.DecimalPlaces = 2;
             this.uiDoubleUpDown100.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown100.Location = new System.Drawing.Point(687, 120);
             this.uiDoubleUpDown100.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11919,7 +11921,7 @@
             // 
             // uiDoubleUpDown108
             // 
-            this.uiDoubleUpDown108.DecimalPlaces = 3;
+            this.uiDoubleUpDown108.DecimalPlaces = 2;
             this.uiDoubleUpDown108.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown108.Location = new System.Drawing.Point(209, 166);
             this.uiDoubleUpDown108.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11936,7 +11938,7 @@
             // 
             // uiDoubleUpDown104
             // 
-            this.uiDoubleUpDown104.DecimalPlaces = 3;
+            this.uiDoubleUpDown104.DecimalPlaces = 2;
             this.uiDoubleUpDown104.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown104.Location = new System.Drawing.Point(1118, 81);
             this.uiDoubleUpDown104.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11953,7 +11955,7 @@
             // 
             // uiDoubleUpDown98
             // 
-            this.uiDoubleUpDown98.DecimalPlaces = 3;
+            this.uiDoubleUpDown98.DecimalPlaces = 2;
             this.uiDoubleUpDown98.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown98.Location = new System.Drawing.Point(209, 120);
             this.uiDoubleUpDown98.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -11980,7 +11982,7 @@
             // 
             // uiDoubleUpDown105
             // 
-            this.uiDoubleUpDown105.DecimalPlaces = 3;
+            this.uiDoubleUpDown105.DecimalPlaces = 2;
             this.uiDoubleUpDown105.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown105.Location = new System.Drawing.Point(1118, 45);
             this.uiDoubleUpDown105.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -12007,7 +12009,7 @@
             // 
             // uiDoubleUpDown101
             // 
-            this.uiDoubleUpDown101.DecimalPlaces = 3;
+            this.uiDoubleUpDown101.DecimalPlaces = 2;
             this.uiDoubleUpDown101.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown101.Location = new System.Drawing.Point(687, 84);
             this.uiDoubleUpDown101.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -12024,7 +12026,7 @@
             // 
             // uiDoubleUpDown97
             // 
-            this.uiDoubleUpDown97.DecimalPlaces = 3;
+            this.uiDoubleUpDown97.DecimalPlaces = 2;
             this.uiDoubleUpDown97.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown97.Location = new System.Drawing.Point(209, 84);
             this.uiDoubleUpDown97.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -12041,7 +12043,7 @@
             // 
             // uiDoubleUpDown102
             // 
-            this.uiDoubleUpDown102.DecimalPlaces = 3;
+            this.uiDoubleUpDown102.DecimalPlaces = 2;
             this.uiDoubleUpDown102.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown102.Location = new System.Drawing.Point(687, 48);
             this.uiDoubleUpDown102.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -12068,7 +12070,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 60);
+            this.tabPage8.Size = new System.Drawing.Size(1893, 904);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "出料手臂";
             // 
@@ -12853,6 +12855,7 @@
             // 
             // uiDoubleUpDown126
             // 
+            this.uiDoubleUpDown126.DecimalPlaces = 3;
             this.uiDoubleUpDown126.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown126.Location = new System.Drawing.Point(675, 396);
             this.uiDoubleUpDown126.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -12936,7 +12939,7 @@
             // 
             // uiDoubleUpDown20
             // 
-            this.uiDoubleUpDown20.DecimalPlaces = 3;
+            this.uiDoubleUpDown20.DecimalPlaces = 2;
             this.uiDoubleUpDown20.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown20.Location = new System.Drawing.Point(1127, 397);
             this.uiDoubleUpDown20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -12983,7 +12986,7 @@
             // 
             // uiDoubleUpDown21
             // 
-            this.uiDoubleUpDown21.DecimalPlaces = 3;
+            this.uiDoubleUpDown21.DecimalPlaces = 2;
             this.uiDoubleUpDown21.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown21.Location = new System.Drawing.Point(1127, 360);
             this.uiDoubleUpDown21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13010,7 +13013,7 @@
             // 
             // uiDoubleUpDown121
             // 
-            this.uiDoubleUpDown121.DecimalPlaces = 3;
+            this.uiDoubleUpDown121.DecimalPlaces = 2;
             this.uiDoubleUpDown121.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown121.Location = new System.Drawing.Point(1127, 324);
             this.uiDoubleUpDown121.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13057,7 +13060,7 @@
             // 
             // uiDoubleUpDown122
             // 
-            this.uiDoubleUpDown122.DecimalPlaces = 3;
+            this.uiDoubleUpDown122.DecimalPlaces = 2;
             this.uiDoubleUpDown122.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown122.Location = new System.Drawing.Point(1127, 288);
             this.uiDoubleUpDown122.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13124,7 +13127,7 @@
             // 
             // uiDoubleUpDown123
             // 
-            this.uiDoubleUpDown123.DecimalPlaces = 3;
+            this.uiDoubleUpDown123.DecimalPlaces = 2;
             this.uiDoubleUpDown123.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown123.Location = new System.Drawing.Point(1127, 239);
             this.uiDoubleUpDown123.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13151,7 +13154,7 @@
             // 
             // uiDoubleUpDown124
             // 
-            this.uiDoubleUpDown124.DecimalPlaces = 3;
+            this.uiDoubleUpDown124.DecimalPlaces = 2;
             this.uiDoubleUpDown124.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown124.Location = new System.Drawing.Point(1127, 203);
             this.uiDoubleUpDown124.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13198,7 +13201,7 @@
             // 
             // uiDoubleUpDown125
             // 
-            this.uiDoubleUpDown125.DecimalPlaces = 3;
+            this.uiDoubleUpDown125.DecimalPlaces = 2;
             this.uiDoubleUpDown125.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown125.Location = new System.Drawing.Point(1127, 167);
             this.uiDoubleUpDown125.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13305,6 +13308,7 @@
             // 
             // uiDoubleUpDown94
             // 
+            this.uiDoubleUpDown94.DecimalPlaces = 2;
             this.uiDoubleUpDown94.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown94.Location = new System.Drawing.Point(1127, 120);
             this.uiDoubleUpDown94.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13348,6 +13352,7 @@
             // 
             // uiDoubleUpDown91
             // 
+            this.uiDoubleUpDown91.DecimalPlaces = 2;
             this.uiDoubleUpDown91.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown91.Location = new System.Drawing.Point(211, 360);
             this.uiDoubleUpDown91.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13371,6 +13376,7 @@
             // 
             // uiDoubleUpDown95
             // 
+            this.uiDoubleUpDown95.DecimalPlaces = 2;
             this.uiDoubleUpDown95.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown95.Location = new System.Drawing.Point(1127, 84);
             this.uiDoubleUpDown95.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13394,6 +13400,7 @@
             // 
             // uiDoubleUpDown88
             // 
+            this.uiDoubleUpDown88.DecimalPlaces = 2;
             this.uiDoubleUpDown88.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown88.Location = new System.Drawing.Point(211, 239);
             this.uiDoubleUpDown88.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13417,6 +13424,7 @@
             // 
             // uiDoubleUpDown96
             // 
+            this.uiDoubleUpDown96.DecimalPlaces = 2;
             this.uiDoubleUpDown96.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown96.Location = new System.Drawing.Point(1127, 48);
             this.uiDoubleUpDown96.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13440,6 +13448,7 @@
             // 
             // uiDoubleUpDown92
             // 
+            this.uiDoubleUpDown92.DecimalPlaces = 2;
             this.uiDoubleUpDown92.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown92.Location = new System.Drawing.Point(211, 324);
             this.uiDoubleUpDown92.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13463,6 +13472,7 @@
             // 
             // uiDoubleUpDown85
             // 
+            this.uiDoubleUpDown85.DecimalPlaces = 2;
             this.uiDoubleUpDown85.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown85.Location = new System.Drawing.Point(675, 239);
             this.uiDoubleUpDown85.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13486,6 +13496,7 @@
             // 
             // uiDoubleUpDown93
             // 
+            this.uiDoubleUpDown93.DecimalPlaces = 2;
             this.uiDoubleUpDown93.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown93.Location = new System.Drawing.Point(211, 288);
             this.uiDoubleUpDown93.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13509,6 +13520,7 @@
             // 
             // uiDoubleUpDown89
             // 
+            this.uiDoubleUpDown89.DecimalPlaces = 2;
             this.uiDoubleUpDown89.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown89.Location = new System.Drawing.Point(211, 203);
             this.uiDoubleUpDown89.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13532,6 +13544,7 @@
             // 
             // uiDoubleUpDown82
             // 
+            this.uiDoubleUpDown82.DecimalPlaces = 2;
             this.uiDoubleUpDown82.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown82.Location = new System.Drawing.Point(675, 360);
             this.uiDoubleUpDown82.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13555,6 +13568,7 @@
             // 
             // uiDoubleUpDown90
             // 
+            this.uiDoubleUpDown90.DecimalPlaces = 2;
             this.uiDoubleUpDown90.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown90.Location = new System.Drawing.Point(211, 167);
             this.uiDoubleUpDown90.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13578,6 +13592,7 @@
             // 
             // uiDoubleUpDown86
             // 
+            this.uiDoubleUpDown86.DecimalPlaces = 2;
             this.uiDoubleUpDown86.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown86.Location = new System.Drawing.Point(675, 203);
             this.uiDoubleUpDown86.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13601,6 +13616,7 @@
             // 
             // uiDoubleUpDown87
             // 
+            this.uiDoubleUpDown87.DecimalPlaces = 2;
             this.uiDoubleUpDown87.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown87.Location = new System.Drawing.Point(675, 167);
             this.uiDoubleUpDown87.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13624,6 +13640,7 @@
             // 
             // uiDoubleUpDown83
             // 
+            this.uiDoubleUpDown83.DecimalPlaces = 2;
             this.uiDoubleUpDown83.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown83.Location = new System.Drawing.Point(675, 324);
             this.uiDoubleUpDown83.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13647,6 +13664,7 @@
             // 
             // uiDoubleUpDown76
             // 
+            this.uiDoubleUpDown76.DecimalPlaces = 2;
             this.uiDoubleUpDown76.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown76.Location = new System.Drawing.Point(675, 120);
             this.uiDoubleUpDown76.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13670,6 +13688,7 @@
             // 
             // uiDoubleUpDown84
             // 
+            this.uiDoubleUpDown84.DecimalPlaces = 2;
             this.uiDoubleUpDown84.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown84.Location = new System.Drawing.Point(675, 288);
             this.uiDoubleUpDown84.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13693,6 +13712,7 @@
             // 
             // uiDoubleUpDown73
             // 
+            this.uiDoubleUpDown73.DecimalPlaces = 2;
             this.uiDoubleUpDown73.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown73.Location = new System.Drawing.Point(211, 120);
             this.uiDoubleUpDown73.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13706,6 +13726,7 @@
             // 
             // uiDoubleUpDown75
             // 
+            this.uiDoubleUpDown75.DecimalPlaces = 2;
             this.uiDoubleUpDown75.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown75.Location = new System.Drawing.Point(211, 48);
             this.uiDoubleUpDown75.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13719,6 +13740,7 @@
             // 
             // uiDoubleUpDown77
             // 
+            this.uiDoubleUpDown77.DecimalPlaces = 2;
             this.uiDoubleUpDown77.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown77.Location = new System.Drawing.Point(675, 84);
             this.uiDoubleUpDown77.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13732,6 +13754,7 @@
             // 
             // uiDoubleUpDown74
             // 
+            this.uiDoubleUpDown74.DecimalPlaces = 2;
             this.uiDoubleUpDown74.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown74.Location = new System.Drawing.Point(211, 84);
             this.uiDoubleUpDown74.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13745,6 +13768,7 @@
             // 
             // uiDoubleUpDown78
             // 
+            this.uiDoubleUpDown78.DecimalPlaces = 2;
             this.uiDoubleUpDown78.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown78.Location = new System.Drawing.Point(675, 48);
             this.uiDoubleUpDown78.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -13768,7 +13792,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(200, 60);
+            this.tabPage9.Size = new System.Drawing.Size(1893, 904);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "测试手臂";
             // 
@@ -14573,7 +14597,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 60);
+            this.tabPage16.Size = new System.Drawing.Size(1893, 904);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "梭车";
             // 

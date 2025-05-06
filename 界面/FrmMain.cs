@@ -135,6 +135,7 @@ namespace H5509_V2
         private void button_setting_Click(object sender, EventArgs e)
         {
             changeMainPanel(setting);
+            setting.刷新设置与维护界面();
         }
 
         private void button_offset_Click(object sender, EventArgs e)
@@ -159,10 +160,9 @@ namespace H5509_V2
 
         private string GetIOInfo()
         {
-            string result = SQLiteHelper.GetDataSet("select * from IOInfo", out DataSet dt);
+            string result = SQLiteHelper.runSql(SQLiteConnString,"select * from IOInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                DataTable dataTable = dt.Tables[0];
                 APPmaster.IOList = new List<IOInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -186,10 +186,9 @@ namespace H5509_V2
 
         private string GetInitPoint()
         {
-            string result = SQLiteHelper.GetDataSet("select * from InitPoint", out DataSet dt);
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from InitPoint", out DataTable dataTable);
             if (result == "Success")
             {
-                DataTable dataTable = dt.Tables[0];
                 InitPoint initPoint = new InitPoint();
                 foreach (DataRow item in dataTable.Rows)
                 {
@@ -275,7 +274,7 @@ namespace H5509_V2
 
         private string GetOffsetPoint()
         {
-            string result = SQLiteHelper.GetDataReader($"select * from OffsetPoint where 微调点位名称 = '{设置信息.OffsetPoint.微调点位名称}'", out SQLiteDataReader reader);
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from OffsetPoint where 微调点位名称 = '{设置信息.OffsetPoint.微调点位名称}'", out SQLiteDataReader reader);
             if (result == "Success")
             {
                 if (reader.Read())
@@ -427,10 +426,9 @@ namespace H5509_V2
 
         private string GetAxisInfo()
         {
-            string result = SQLiteHelper.GetDataSet("select * from AxisInfo", out DataSet dt);
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                DataTable dataTable = dt.Tables[0];
                 APPmaster.AxisInfoList = new List<AxisInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -447,10 +445,9 @@ namespace H5509_V2
 
         private string GetAxisRunInfo()
         {
-            string result = SQLiteHelper.GetDataSet("select * from AxisRunInfo", out DataSet dt);
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisRunInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                DataTable dataTable = dt.Tables[0];
                 APPmaster.AxisRunInfoList = new List<AxisRunInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -472,10 +469,9 @@ namespace H5509_V2
 
         private string GetAxisHomeInfo()
         {
-            string result = SQLiteHelper.GetDataSet("select * from AxisHomeInfo", out DataSet dt);
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisHomeInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                DataTable dataTable = dt.Tables[0];
                 APPmaster.AxisHomeInfoList = new List<AxisHomeInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
@@ -506,11 +502,9 @@ namespace H5509_V2
 
         private string GetconfigData()
         {
-            string result = SQLiteHelper.GetDataSet("select * from config", out DataSet dt);
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from config", out DataTable dataTable);
             if (result == "Success")
             {
-                DataTable dataTable = dt.Tables[0];
-
                 foreach (DataRow item in dataTable.Rows)
                 {
                     string value = item["value"].ToString();
@@ -529,7 +523,7 @@ namespace H5509_V2
         /// <returns></returns>
         private string GetSetupInfo()
         {
-            string result = SQLiteHelper.GetDataReader($"select * from SetupInfo where 档案名称 = '{当前档案}'", out SQLiteDataReader reader);
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{当前档案}'", out SQLiteDataReader reader);
             if (result == "Success")
             {
                 if (reader.Read())
@@ -545,7 +539,7 @@ namespace H5509_V2
 
         private string GetTrayInfo()
         {
-            string result = SQLiteHelper.GetDataReader($"select * from TrayInfo where name = '{设置信息.Tray盘信息.TrayName}'", out SQLiteDataReader reader);
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{设置信息.Tray盘信息.TrayName}'", out SQLiteDataReader reader);
             if (result == "Success")
             {
                 TrayInfo trayInfo = new TrayInfo();
@@ -631,10 +625,15 @@ namespace H5509_V2
             APPmaster.Fix3TrayICMapInit();
 
             handler.参数初始化();
+
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
             {
                 cts = new CancellationTokenSource();
-
+                
+                Task.Run(() =>
+                {
+                    handler.初始化流程();
+                });
                 Task.Run(() =>
                 {
                     handler.入料手臂吸放料流程1();

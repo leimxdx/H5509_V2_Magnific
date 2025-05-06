@@ -2294,12 +2294,16 @@ namespace H5509_V2
 
         public void 参数初始化()
         {
+            Empty上顶标记 = 1;
+            Load上顶标记 = 1;
+            Auto1上顶标记 = 1;
+            Auto2上顶标记 = 1;
+
             飞梭前入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-            飞梭前出料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //飞梭前出料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            飞梭前出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
             飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
             飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-
-            //飞梭前出料状态 = 1;
 
             放料IC目标值 = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
             //飞梭前出料BIN项 = new string[][] { new string[] { "01", "01", "01", "01" }, new string[] { "01", "01", "01", "01" } };
@@ -2517,9 +2521,162 @@ namespace H5509_V2
             //}
         }
 
+        public void 初始化流程()
+        {
+            PS初始化流程.StepID = 500;
+            while (true)
+            {
+                Thread.Sleep(10);
+
+                if (!是否可以初始化())
+                {
+                    continue;
+                }
+
+                switch (PS初始化流程.StepID)
+                {
+                    case 500:
+                        PS初始化流程.StepName = "路径规划";
+                        PS初始化流程.Condition = !H5509初始化 && !H5509正在初始化 && 设备状态 == 1;
+                        PS初始化流程.Permit = !PS初始化流程.Processing;
+                        if (PS初始化流程.Condition && PS初始化流程.Permit)
+                        {
+                            H5509正在初始化 = true;
+                            Empty上顶标记 = 2;
+                            Load上顶标记 = 2;
+                            PS初始化流程.Processing = true;
+                            PS初始化流程.StepID = 505;
+                        }
+                        break;
+
+                    case 505:
+                        PS初始化流程.StepName = "各轴移动到初始点";
+                        Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
+                        Task<string> auto1 = Task.Run(() => { return Auto1顶盘轴移动(182.715); });
+                        Task<string> auto2 = Task.Run(() => { return Auto2顶盘轴移动(182.715); });
+                        Task<string> testp = Task.Run(() => { return 测试吸嘴_张开气缸输出(true); });
+                        Task<string> testx = Task.Run(() => { return 测试手臂X移动(TestShuttleLPos); });
+                        Task<string> shuttle = Task.Run(() => { return 飞梭轴移动(-10); });
+                        Task<string> inputp = Task.Run(() => { return 入料手臂P移动(7.5); });
+                        Task<string> outputxyp = Task.Run(() => { return 出料手臂移动(256.05, 222.55, 5.3); });
+                        Task<string> fix3 = Task.Run(() => { return Fix3放IC盘轴移动(72); });
+                        if (auto1.Result == "Success" && auto2.Result == "Success" && testp.Result == "Success" && testx.Result == "Success" && shuttle.Result == "Success" && inputp.Result == "Success" && outputxyp.Result == "Success" && fix3.Result == "Success")
+                        {
+                            飞梭2位置 = 0;
+                            Tray平移左右标记 = 1;
+                            PS初始化流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            if (auto1.Result != "Success") Debug.WriteLine("Auto1顶盘轴移动失败!" + auto1.Result);
+                            if (auto2.Result != "Success") Debug.WriteLine("Auto2顶盘轴移动失败!" + auto2.Result);
+                            if (testp.Result != "Success") Debug.WriteLine("测试吸嘴_张开气缸闭合失败!" + testp.Result);
+                            if (testx.Result != "Success") Debug.WriteLine("测试手臂X移动失败!" + testx.Result);
+                            if (shuttle.Result != "Success") Debug.WriteLine("入料手臂P移动失败!" + shuttle.Result);
+                            if (inputp.Result != "Success") Debug.WriteLine("入料手臂P移动失败!" + inputp.Result);
+                            if (outputxyp.Result != "Success") Debug.WriteLine("出料手臂移动失败!" + outputxyp.Result);
+                            if (fix3.Result != "Success") Debug.WriteLine("Fix3放IC盘轴移动失败!" + fix3.Result);
+                        }
+                        break;
+
+                    case 510:
+                        PS初始化流程.StepName = "检测Auto1/Auto2是否有盘";
+                        Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
+                        string result = Auto1_前Tray存在感应(out string value);
+                        string result2 = Auto2_前Tray存在感应(out string value2);
+                        if (result == "Success" && result2 == "Success")
+                        {
+                            if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                            {
+                                PS初始化流程.StepID = 515;
+                                Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->等待Empty上顶");
+                            }
+                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (value != "0")
+                                {
+                                    Debug.WriteLine($"Auto1前有盘感应到有Tray盘,value:" + value);
+                                }
+                                if (value2 != "0")
+                                {
+                                    Debug.WriteLine($"Auto2前有盘感应到有Tray盘,value:" + value2);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            if (result != "Success") Debug.WriteLine($"读取Auto1_前Tray存在感应失败！" + result);
+                            if (result2 != "Success") Debug.WriteLine($"读取Auto2_前Tray存在感应失败！" + result2);
+                        }
+                        break;
+
+                    case 515:
+                        PS初始化流程.StepName = "等待Empty上顶";
+                        if (Empty上顶标记 == 1)
+                        {
+                            抓盘手臂放空盘到Auto1标记 = 2;
+                            PS初始化流程.StepID = 520;
+                            Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->抓盘手臂放空盘到Auto1");
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 520:
+                        PS初始化流程.StepName = "抓盘手臂放空盘到Auto1";
+                        if (抓盘手臂放空盘到Auto1标记 == 1)
+                        {
+                            抓盘手臂放空盘到Auto2标记 = 2;
+                            PS初始化流程.StepID = 525;
+                            Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->抓盘手臂放空盘到Auto2");
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 525:
+                        PS初始化流程.StepName = "抓盘手臂放空盘到Auto2";
+                        if (抓盘手臂放空盘到Auto2标记 == 1)
+                        {
+                            PS初始化流程.StepID = 530;
+                            Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->等待Load上顶");
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 530:
+                        PS初始化流程.StepName = "等待Load上顶";
+                        if (Load上顶标记 == 1)
+                        {
+                            H5509初始化 = true;
+                            H5509正在初始化 = false;
+                            PS初始化流程.StepID = 599;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 599:
+                        PS初始化流程.StepName = $"初始化流程完成";
+                        Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
+                        PS初始化流程.Processing = false;
+                        PS初始化流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS初始化流程.StepID =" + PS初始化流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
         public void 入料手臂吸放料流程1()
         {
-            string result;
+            string result = "";
             short xPoint = 0;
             short yPoint = 0;
             short colums = 0;
@@ -2531,6 +2688,10 @@ namespace H5509_V2
             double yPos = 0;
             string[] home = new string[4];
             string[] ioval = new string[4];
+
+            bool firstdraw = true; //是否第一次重吸
+            bool firstdzhome = true; //是否第一次Z回原
+            Stopwatch stopwatch = new Stopwatch();
             PS入料手臂吸放料流程.StepID = 500;
             while (true)
             {
@@ -2551,11 +2712,13 @@ namespace H5509_V2
                         {
                             PS入料手臂吸放料流程.Processing = true;
                             PS入料手臂吸放料流程.StepID = 505;
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->计算放料IC颗数");
                         }
                         break;
 
                     case 505:
                         PS入料手臂吸放料流程.StepName = "计算放料IC颗数";
+
                         if (!参数对比(飞梭前入料IC[0], 放料IC目标值[0])) //飞梭移动状态 == 1
                         {
                             if (入料手臂抓料等待标记)
@@ -2608,7 +2771,8 @@ namespace H5509_V2
                         break;
 
                     case 510:
-                        PS入料手臂吸放料流程.StepName = "计算抓料标记";
+                        PS入料手臂吸放料流程.StepName = "判断后入料是否被抓走";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         if (参数对比(飞梭后入料IC[0], 放料IC目标值[0]) || 参数对比(飞梭后入料IC[1], 放料IC目标值[1]))
                         {
                             Thread.Sleep(10);
@@ -2645,6 +2809,7 @@ namespace H5509_V2
 
                     case 515:
                         PS入料手臂吸放料流程.StepName = "获取Load盘坐标";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         bool 坐标 = APPmaster.获取Load盘坐标(true, out xPoint, out yPoint);
                         if (坐标)
                         {
@@ -2659,6 +2824,7 @@ namespace H5509_V2
 
                     case 520:
                         PS入料手臂吸放料流程.StepName = "获取吸料信息";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = APPmaster.获取Load盘Open(opens, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
                         if (result == "Success")
                         {
@@ -2668,24 +2834,29 @@ namespace H5509_V2
 
                     case 525:
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到Load吸料位置";
-                        result = 入料手臂移动(50, 300, 10); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
+                        result = 入料手臂移动(xPos, yPos, 10); //50, 300, 10 写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
                         {
+                            firstdraw = true;
                             PS入料手臂吸放料流程.StepID = 530;
                         }
                         break;
 
                     case 530:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料手臂Z移动(lsopen, true);
                         if (result == "Success")
                         {
+                            firstdzhome = true;
                             PS入料手臂吸放料流程.StepID = 535;
                         }
                         break;
 
                     case 535:
-                        PS入料手臂吸放料流程.StepName = "入料吸嘴吸放料";
+                        PS入料手臂吸放料流程.StepName = "入料吸嘴吸料";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料吸嘴_吸放料(lsopen, true, true);
                         if (result == "Success")
                         {
@@ -2696,15 +2867,51 @@ namespace H5509_V2
 
                     case 540:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z真空检测";
-                        result = 入料吸嘴_真空检测(out ioval);
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
+                        stopwatch.Start();
+                        while (JudgeNozzleSts(lsopen, opens, 0))
+                        {
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{stopwatch.ElapsedMilliseconds}ms");
+                            if (stopwatch.ElapsedMilliseconds > 2000)
+                            {
+                                Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料吸料超时");
+                                break;
+                            }
+
+                            result = 入料吸嘴_真空检测(out ioval);
+                            if (result != "Success") break;
+
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}");
+
+                            for (int i = 0; i < ioval.Length; i++)
+                            {
+                                if (lsopen[i])
+                                {
+                                    if (ioval[i] == "1") opens[i] = 1;
+                                }
+                            }
+
+                            Thread.Sleep(20);
+                        }
+
+                        stopwatch.Stop();
+                        stopwatch.Reset();
+
                         if (result == "Success")
                         {
                             PS入料手臂吸放料流程.StepID = 545;
+                        }
+                        else
+                        {
+                            ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料真空检测失败" + result);
                         }
                         break;
 
                     case 545:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向上移动";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料手臂Z移动(lsopen, false);
                         if (result == "Success")
                         {
@@ -2714,32 +2921,145 @@ namespace H5509_V2
 
                     case 550:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z回原感应";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料吸嘴_回原检测(out home);
                         if (result == "Success")
                         {
                             if (!home.Contains("1")) //如果有1说明有吸嘴没有挡住原点
                             {
-                                PS入料手臂吸放料流程.StepID = 599;
+                                PS入料手臂吸放料流程.StepID = 552;
                             }
                             else
                             {
                                 for (int i = 0; i < home.Length; i++)
                                 {
-                                    if (home[i] == "1") { Debug.WriteLine($"吸嘴{i + 1}没有挡住原点"); }
+                                    if (home[i] == "1") { Debug.WriteLine($"入料Z{i + 1}没有挡住原点"); }
                                 }
-                                ProgramPause = true;
-                                APPmaster.IsPause = true;
+                                if (firstdzhome)
+                                {
+                                    firstdzhome = false;
+                                }
+                                else
+                                {
+                                    ProgramPause = true;
+                                    APPmaster.IsPause = true;
+                                }
+                                PS入料手臂吸放料流程.StepID = 551;
                             }
                         }
                         break;
 
+                    case 551:
+                        PS入料手臂吸放料流程.StepName = "入料手臂Z回原";
+                        bool[] homeopen = new bool[] { home[0] == "1", home[1] == "1", home[2] == "1", home[3] == "1" };
+                        result = 入料手臂Z回零(homeopen);
+                        if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 550;
+                        }
+                        break;
+
+                    case 552:
+                        PS入料手臂吸放料流程.StepName = "更新LoadMap";
+                        for (int i = 0; i < lsopen.Length; i++)
+                        {
+                            if (i + index == lsopen.Length) break;
+                            if (lsopen[i + index])
+                            {
+                                if (opens[i + index] == 1)
+                                {
+                                    lsopen[i + index] = false;
+                                    LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] = false;
+                                    Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料成功");
+                                }
+                                else Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料失败");
+                            }
+                        }
+                        if (lsopen.Contains(true)) //有ture说明还有吸嘴没吸上来
+                        {
+                            if (firstdraw)
+                            {
+                                firstdraw = false;
+                                PS入料手臂吸放料流程.StepID = 530; //重吸
+                            }
+                            else
+                            {
+                                for (int i = 0; i < lsopen.Length; i++)
+                                {
+                                    if (lsopen[i] && opens[i] == 0)
+                                    {
+                                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->302{i + 1:D2}00,入料Z{i + 1}吸料失败");
+                                    }
+                                }
+                                入料IC忽略 = false;
+                                ProgramPause = true;
+                                IsPause = true;
+                                PS入料手臂吸放料流程.StepID = 553;
+                            }
+                        }
+                        else
+                        {
+                            PS入料手臂吸放料流程.StepID = 555;
+                        }
+                        break;
+
+                    case 553:
+                        if (入料IC忽略)
+                        {
+                            for (int i = 0; i < lsopen.Length; i++)
+                            {
+                                if (i + index == lsopen.Length) break;
+                                if (lsopen[i + index])
+                                {
+                                    lsopen[i + index] = false;
+                                    LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] = false;
+                                }
+                            }
+                            PS入料手臂吸放料流程.StepID = 555;
+                        }
+                        else if (结批标记)
+                        {
+
+                        }
+                        else //直接点开始默认重吸
+                        {
+                            PS入料手臂吸放料流程.StepID = 530;
+                        }
+                        break;
+
+                    case 555:
+                        PS入料手臂吸放料流程.StepName = "更新opens";
+                        if (opens.Contains(0)) ////如果有0说明还有吸嘴需要吸料
+                        {
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{opens[0]} , {opens[1]} , {opens[2]} , {opens[3]}");
+                            PS入料手臂吸放料流程.StepID = 515;
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{opens[0]} , {opens[1]} , {opens[2]} , {opens[3]}");
+                            for (int i = 0; i < opens.Length; i++)
+                            {
+                                if (opens[i] == 1)
+                                {
+                                    载入数++;
+                                    lsopen[i] = true;
+                                }
+                                else lsopen[i] = false;
+                            }
+                            PS入料手臂吸放料流程.StepID = 599;
+                        }
+                        break;
+
+
                     case 599:
                         PS入料手臂吸放料流程.StepName = "入料手臂_吸料流程完成";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         PS入料手臂吸放料流程.StepID = 705;
                         break;
 
                     case 705: ////放料流程////
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到飞梭放料位置";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         double scPos = colums == 0 ? 400 : 450;
                         result = 入料手臂移动(scPos, 100, 5); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
@@ -2751,11 +3071,13 @@ namespace H5509_V2
 
                     case 710:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         if (飞梭移动状态 == 0) //梭车停止状态才能放
                         {
                             result = 入料手臂Z移动(lsopen, true);
                             if (result == "Success")
                             {
+                                firstdraw = true;
                                 PS入料手臂吸放料流程.StepID = 715;
                             }
                         }
@@ -2763,6 +3085,7 @@ namespace H5509_V2
 
                     case 715:
                         PS入料手臂吸放料流程.StepName = "入料吸嘴放料";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料吸嘴_吸放料(lsopen, true, false); //关吸真空
                         if (result == "Success")
                         {
@@ -2778,6 +3101,7 @@ namespace H5509_V2
 
                     case 720:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z真空检测";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料吸嘴_真空检测(out ioval);
                         if (result == "Success")
                         {
@@ -2787,6 +3111,7 @@ namespace H5509_V2
 
                     case 725:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向上移动";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料手臂Z移动(lsopen, false);
                         if (result == "Success")
                         {
@@ -2796,6 +3121,7 @@ namespace H5509_V2
 
                     case 730:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z回原感应";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料吸嘴_回原检测(out home);
                         if (result == "Success")
                         {
@@ -2807,11 +3133,29 @@ namespace H5509_V2
                             {
                                 for (int i = 0; i < home.Length; i++)
                                 {
-                                    if (home[i] == "1") { Debug.WriteLine($"入料吸嘴{i + 1}没有挡住原点"); }
+                                    if (home[i] == "1") { Debug.WriteLine($"入料Z{i + 1}没有挡住原点"); }
                                 }
-                                ProgramPause = true;
-                                APPmaster.IsPause = true;
+                                if (firstdzhome)
+                                {
+                                    firstdzhome = false;
+                                }
+                                else
+                                {
+                                    ProgramPause = true;
+                                    APPmaster.IsPause = true;
+                                }
+                                PS入料手臂吸放料流程.StepID = 731;
                             }
+                        }
+                        break;
+
+                    case 731:
+                        PS入料手臂吸放料流程.StepName = "入料手臂Z回原";
+                        homeopen = new bool[] { home[0] == "1", home[1] == "1", home[2] == "1", home[3] == "1" };
+                        result = 入料手臂Z回零(homeopen);
+                        if (result == "Success")
+                        {
+                            PS入料手臂吸放料流程.StepID = 730;
                         }
                         break;
 
@@ -2825,6 +3169,7 @@ namespace H5509_V2
                         }
                         入料手臂抓料等待标记 = false;
                         PS入料手臂吸放料流程.StepName = "入料手臂_放料流程完成";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         PS入料手臂吸放料流程.StepID = 505;
                         break;
 
@@ -4292,6 +4637,8 @@ namespace H5509_V2
                         ProgramStart = false;
                         APPmaster.IsPause = false;
                         APPmaster.IsStart = true;
+                        设备状态 = 1;
+
                         motionEx.SetDo("Y001_开始灯", true);
                         motionEx.SetDo("Y002_暂停灯", false);
                     }
@@ -4299,10 +4646,15 @@ namespace H5509_V2
                     if (CheckEdgeSingal(stop, ref StopRiseCache, true) || ProgramPause)
                     {
                         Debug.WriteLine("按下暂停");
+
                         ProgramPause = false;
                         APPmaster.IsPause = true;
                         APPmaster.IsStart = false;
+
+                        if (设备状态 == 1) 设备状态 = 2;
+
                         motionEx.Motion.AllAxisStop();
+
                         motionEx.SetDo("Y001_开始灯", false);
                         motionEx.SetDo("Y002_暂停灯", true);
                     }
@@ -4324,6 +4676,7 @@ namespace H5509_V2
                     if (CheckEdgeSingal(ignore, ref IgnoreRiseCache, true))
                     {
                         Debug.WriteLine("按下跳过");
+                        入料IC忽略 = true;
                         //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
                         //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
@@ -4365,10 +4718,10 @@ namespace H5509_V2
                     if (CheckEdgeSingal(home, ref HomeRiseCache, true))
                     {
                         Debug.WriteLine("按下归零");
-                        if (!H5509正在初始化)
+                        if (!H5509正在归零 && 设备状态 == 0)
                         {
-                            H5509正在初始化 = true;
-                            H5509初始化 = false;
+                            H5509正在归零 = true;
+                            H5509归零 = false;
                             IsPause = false;
                             motionEx.SetDo("Y001_开始灯", false);
                             motionEx.SetDo("Y002_暂停灯", false);
@@ -4378,13 +4731,12 @@ namespace H5509_V2
                                 result = 整机回零流程();
                                 if (result == "Success")
                                 {
-                                    H5509初始化 = true;
-                                    Debug.WriteLine("回零完成");
+                                    H5509归零 = true;
+                                    Debug.WriteLine("归零完成");
                                 }
-                                else Debug.WriteLine("回零失败");
+                                else Debug.WriteLine("归零失败");
 
-                                H5509正在初始化 = false;
-                                IsPause = false;
+                                H5509正在归零 = false;
                                 motionEx.SetDo("Y010_归零灯", false);
                                 motionEx.SetDo("Y001_开始灯", false);
                                 motionEx.SetDo("Y002_暂停灯", false);
@@ -4544,7 +4896,7 @@ namespace H5509_V2
                     case 515:
                         PS空盘上顶流程.StepName = "Empty向上移动固定距离";
                         Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = motionEx.AxisRelativeMove("M12_Empty顶盘轴", 0.4);//3175 1.5875
+                        result = motionEx.AxisRelativeMove("M12_Empty顶盘轴", 2.5);//3175 1.5875
                         if (result == "Success")
                         {
                             Empty上顶标记 = 1;

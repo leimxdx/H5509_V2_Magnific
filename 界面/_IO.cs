@@ -11,7 +11,7 @@ using Sunny.UI;
 using System.Reflection;
 using Sunny.UI.Win32;
 using System.Diagnostics;
-
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -31,10 +31,10 @@ namespace H5509_V2
             string sql = "SELECT '系统' UNION ALL SELECT '入料区'  UNION ALL SELECT '出料区'  UNION ALL SELECT '测试区'  UNION ALL SELECT '梭车' UNION ALL SELECT '抓盘手臂'";
 
             //DataRowCollection drs =
-            string result = SQLiteHelper.GetDataSet(sql, out DataSet dt);
+            string result = SQLiteHelper.runSql(SQLiteConnString, sql, out DataTable dataTable);
             if (result == "Success")
             {
-                DataRowCollection drs = dt.Tables[0].Rows;
+                DataRowCollection drs = dataTable.Rows;
                 for (int i = 0; i < drs.Count; i++)
                 {
                     TabPage tab = new TabPage();
