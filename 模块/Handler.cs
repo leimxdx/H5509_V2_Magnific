@@ -72,6 +72,7 @@ namespace H5509_V2
             return motionEx.AxisMove(axisNames, pos);
         }
 
+
         public string 入料手臂Z移动(bool[] isopen, double pos, bool isdown)
         {
             List<string> axisNames = new List<string>();
@@ -3060,8 +3061,8 @@ namespace H5509_V2
                     case 705: ////放料流程////
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到飞梭放料位置";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        double scPos = colums == 0 ? 400 : 450;
-                        result = 入料手臂移动(scPos, 100, 5); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
+                        double[] xypPos = 获取梭车xyp放料点位(colums);
+                        result = 入料手臂移动(xypPos[0], xypPos[1], xypPos[2]); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
                         {
                             if (入料手臂抓料等待标记) PS入料手臂吸放料流程.StepID = 505;
@@ -3074,7 +3075,8 @@ namespace H5509_V2
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         if (飞梭移动状态 == 0) //梭车停止状态才能放
                         {
-                            result = 入料手臂Z移动(lsopen, true);
+                            double zpos = 获取梭车Z放料点位(colums);
+                            result = 入料手臂Z移动(lsopen, zpos, true);
                             if (result == "Success")
                             {
                                 firstdraw = true;
@@ -3094,7 +3096,7 @@ namespace H5509_V2
                             {
                                 Thread.Sleep(200);
                                 result = 入料吸嘴_吸放料(lsopen, false, false); //关破真空
-                                PS入料手臂吸放料流程.StepID = 720;
+                                PS入料手臂吸放料流程.StepID = 725;
                             }
                         }
                         break;
@@ -3112,7 +3114,7 @@ namespace H5509_V2
                     case 725:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向上移动";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = 入料手臂Z移动(lsopen, false);
+                        result = 入料手臂Z移动(lsopen, -0.3, false);
                         if (result == "Success")
                         {
                             PS入料手臂吸放料流程.StepID = 730;
@@ -3879,17 +3881,21 @@ namespace H5509_V2
                     case 505:
                         if (飞梭2位置 == 0)
                         {
-                            飞梭2位置 = 1;
                             result = 飞梭轴移动(673);
+                            if (result == "Success")
+                            {
+                                飞梭2位置 = 1;
+                                PS入飞梭移动流程.StepID = 515;
+                            }
                         }
                         else
                         {
-                            飞梭2位置 = 0;
                             result = 飞梭轴移动(-10);
-                        }
-                        if (result == "Success")
-                        {
-                            PS入飞梭移动流程.StepID = 515;
+                            if (result == "Success")
+                            {
+                                飞梭2位置 = 0;
+                                PS入飞梭移动流程.StepID = 515;
+                            }
                         }
                         break;
 

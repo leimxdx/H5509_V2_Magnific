@@ -15,7 +15,7 @@ namespace H5509_V2
         public double 加速度 { get; set;}
         public double 减速度 { get; set;}
         public double 步长mm { get; set; }
-        public short 速度百分比 { get; set;}
+        public double 速度百分比 { get; set;}
         public short 平滑时间 { get; set; }
         public double 运行速度
         {

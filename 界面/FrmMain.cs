@@ -145,7 +145,8 @@ namespace H5509_V2
 
         private void button_speed_Click(object sender, EventArgs e)
         {
-            changeMainPanel(speed);
+            changeMainPanel(speed); 
+            speed.刷新速度值();
         }
 
         private void button_io_Click(object sender, EventArgs e)
@@ -458,7 +459,7 @@ namespace H5509_V2
                         加速度 = Convert.ToDouble(dr["加速度"].ToString()),
                         减速度 = Convert.ToDouble(dr["减速度"].ToString()),
                         步长mm = Convert.ToDouble(dr["步长mm"].ToString()),
-                        速度百分比 = Convert.ToInt16(dr["速度百分比"].ToString()),
+                        速度百分比 = Convert.ToDouble(dr["速度百分比"].ToString()),
                         平滑时间 = Convert.ToInt16(dr["平滑时间"].ToString()),
                     });
                 }
@@ -528,6 +529,7 @@ namespace H5509_V2
             {
                 if (reader.Read())
                 {
+                    设置信息.设置信息名称 = 当前档案;
                     设置信息.Tray盘信息.TrayName = reader["tray盘名称"].ToString();
                     设置信息.OffsetPoint.微调点位名称 = reader["偏移点位名称"].ToString();
                 }

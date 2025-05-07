@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Design;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -133,9 +134,9 @@ namespace H5509_V2
 
         public static short Interval = 2; //吸料间隔
 
-        public static double 梭车列间距 = 32; //mm
+        public static double 梭车列间距 = 40; //mm
 
-        public static double 梭车行间距 = 40; //mm
+        public static double 梭车行间距 = 32; //mm
 
         public static double 入料吸料间距 //tray吸
         {
@@ -144,12 +145,12 @@ namespace H5509_V2
 
         public static double 入料放料间距 //梭车放
         {
-            get { return 初始点位.入料_变距最大值 - 梭车列间距; }
+            get { return 初始点位.入料_变距最大值 - 梭车行间距; }
         }
 
         public static double 出料吸料间距 //梭车吸
         {
-            get { return 初始点位.出料_变距最大值 - 梭车列间距; }
+            get { return 初始点位.出料_变距最大值 - 梭车行间距; }
         }
 
         public static double 出料放料间距 //tray放
@@ -533,18 +534,23 @@ namespace H5509_V2
             double loadery = 初始点位.入料_Load_Y + 点位微调.入料_Load吸_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
             double total = 初始点位.入料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
-            LoaderXPoint = new double[xNum];
-            LoaderYPoint = new double[yNum];
-            LoaderXPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
+            double[] loaderXPoint = new double[xNum];
+            double[] loaderYPoint = new double[yNum];
+
+            loaderXPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                LoaderXPoint[i] = LoaderXPoint[i - 1] + xPitch; //累加X轴坐标
+                loaderXPoint[i] = loaderXPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            LoaderYPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
+
+            loaderYPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
-                LoaderYPoint[i] = LoaderYPoint[i - 1] - yPitch; //累加Y轴坐标
+                loaderYPoint[i] = loaderYPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+
+            LoaderXPoint = loaderXPoint;
+            LoaderYPoint = loaderYPoint;
         }
 
         /// <summary>
@@ -735,7 +741,7 @@ namespace H5509_V2
             double[] testXPoint = new double[16];
             for (short site = 0; site < testXPoint.Length; site++)
             {
-                string result = GetTestXPoint(site, out double xPos);  
+                string result = GetTestXPoint(site, out double xPos);
                 if (result == "Success")
                 {
                     testXPoint[site] = xPos;
@@ -1582,5 +1588,52 @@ namespace H5509_V2
             return "Success";
         }
 
+        public static double[] 获取梭车xyp放料点位(int colum)
+        {
+            double[] pos = new double[3];
+            if (飞梭2位置 == 0) //梭车2在后，梭车1在前
+            {
+                if (colum == 0) //梭车1第1列
+                {
+                    pos[0] = 初始点位.入料_梭车1_X;
+                    pos[1] = 初始点位.入料_梭车1_Y;
+                    pos[2] = 入料放料间距;
+                }
+                else  //梭车1第2列
+                {
+                    pos[0] = 初始点位.入料_梭车1_X + 梭车列间距;
+                    pos[1] = 初始点位.入料_梭车1_Y;
+                    pos[2] = 入料放料间距;
+                }
+            }
+            else //梭车2在前，梭车1后
+            {
+                if (colum == 0) //梭车2第1列
+                {
+                    pos[0] = 初始点位.入料_梭车2_X;
+                    pos[1] = 初始点位.入料_梭车2_Y;
+                    pos[2] = 入料放料间距;
+                }
+                else  //梭车2第2列
+                {
+                    pos[0] = 初始点位.入料_梭车2_X + 梭车列间距;
+                    pos[1] = 初始点位.入料_梭车2_Y;
+                    pos[2] = 入料放料间距;
+                }
+            }
+            return pos;
+        }
+
+        public static double 获取梭车Z放料点位(int colum)
+        {
+            if (飞梭2位置 == 0)
+            {
+                return 初始点位.入料_梭车1_Z;
+            }
+            else
+            {
+                return 初始点位.入料_梭车2_Z;
+            }
+        }
     }
 }

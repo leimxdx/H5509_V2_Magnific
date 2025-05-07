@@ -31,6 +31,14 @@
             this.uiButton4 = new Sunny.UI.UIButton();
             this.uiButton3 = new Sunny.UI.UIButton();
             this.uiTitlePanel4 = new Sunny.UI.UITitlePanel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown14 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown16 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown17 = new Sunny.UI.UIDoubleUpDown();
+            this.uiDoubleUpDown18 = new Sunny.UI.UIDoubleUpDown();
             this.label12 = new System.Windows.Forms.Label();
             this.uiDoubleUpDown12 = new Sunny.UI.UIDoubleUpDown();
             this.label14 = new System.Windows.Forms.Label();
@@ -57,14 +65,6 @@
             this.uiDoubleUpDown108 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown98 = new Sunny.UI.UIDoubleUpDown();
             this.uiDoubleUpDown97 = new Sunny.UI.UIDoubleUpDown();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.uiDoubleUpDown14 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown16 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown17 = new Sunny.UI.UIDoubleUpDown();
-            this.uiDoubleUpDown18 = new Sunny.UI.UIDoubleUpDown();
             this.uiTitlePanel4.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -80,6 +80,7 @@
             this.uiButton4.TabIndex = 313;
             this.uiButton4.Text = "恢复默认";
             this.uiButton4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton4.Click += new System.EventHandler(this.uiButton4_Click);
             // 
             // uiButton3
             // 
@@ -93,6 +94,7 @@
             this.uiButton3.TabIndex = 312;
             this.uiButton3.Text = "保存";
             this.uiButton3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click);
             // 
             // uiTitlePanel4
             // 
@@ -139,8 +141,120 @@
             this.uiTitlePanel4.ShowText = false;
             this.uiTitlePanel4.Size = new System.Drawing.Size(585, 408);
             this.uiTitlePanel4.TabIndex = 311;
-            this.uiTitlePanel4.Text = "速度（单位：mm）";
+            this.uiTitlePanel4.Text = "速度（单位：%）";
             this.uiTitlePanel4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label13.Location = new System.Drawing.Point(300, 50);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(89, 21);
+            this.label13.TabIndex = 349;
+            this.label13.Text = "出料手臂 X";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label16.Location = new System.Drawing.Point(300, 122);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 21);
+            this.label16.TabIndex = 351;
+            this.label16.Text = "出料手臂 Z";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label17.Location = new System.Drawing.Point(300, 86);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(89, 21);
+            this.label17.TabIndex = 350;
+            this.label17.Text = "出料手臂 Y";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label18.Location = new System.Drawing.Point(300, 158);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(111, 21);
+            this.label18.TabIndex = 352;
+            this.label18.Text = "出料手臂 变距";
+            // 
+            // uiDoubleUpDown14
+            // 
+            this.uiDoubleUpDown14.DecimalPlaces = 0;
+            this.uiDoubleUpDown14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown14.Location = new System.Drawing.Point(428, 50);
+            this.uiDoubleUpDown14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown14.Maximum = 100D;
+            this.uiDoubleUpDown14.Minimum = 10D;
+            this.uiDoubleUpDown14.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown14.Name = "uiDoubleUpDown14";
+            this.uiDoubleUpDown14.ShowText = false;
+            this.uiDoubleUpDown14.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown14.Step = 1D;
+            this.uiDoubleUpDown14.TabIndex = 353;
+            this.uiDoubleUpDown14.Text = "uiDoubleUpDown14";
+            this.uiDoubleUpDown14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown16
+            // 
+            this.uiDoubleUpDown16.DecimalPlaces = 0;
+            this.uiDoubleUpDown16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown16.Location = new System.Drawing.Point(428, 158);
+            this.uiDoubleUpDown16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown16.Maximum = 100D;
+            this.uiDoubleUpDown16.Minimum = 10D;
+            this.uiDoubleUpDown16.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown16.Name = "uiDoubleUpDown16";
+            this.uiDoubleUpDown16.ShowText = false;
+            this.uiDoubleUpDown16.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown16.Step = 1D;
+            this.uiDoubleUpDown16.TabIndex = 356;
+            this.uiDoubleUpDown16.Text = "uiDoubleUpDown16";
+            this.uiDoubleUpDown16.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown17
+            // 
+            this.uiDoubleUpDown17.DecimalPlaces = 0;
+            this.uiDoubleUpDown17.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown17.Location = new System.Drawing.Point(428, 122);
+            this.uiDoubleUpDown17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown17.Maximum = 100D;
+            this.uiDoubleUpDown17.Minimum = 10D;
+            this.uiDoubleUpDown17.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown17.Name = "uiDoubleUpDown17";
+            this.uiDoubleUpDown17.ShowText = false;
+            this.uiDoubleUpDown17.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown17.Step = 1D;
+            this.uiDoubleUpDown17.TabIndex = 354;
+            this.uiDoubleUpDown17.Text = "uiDoubleUpDown17";
+            this.uiDoubleUpDown17.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // uiDoubleUpDown18
+            // 
+            this.uiDoubleUpDown18.DecimalPlaces = 0;
+            this.uiDoubleUpDown18.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown18.Location = new System.Drawing.Point(428, 86);
+            this.uiDoubleUpDown18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown18.Maximum = 100D;
+            this.uiDoubleUpDown18.Minimum = 10D;
+            this.uiDoubleUpDown18.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown18.Name = "uiDoubleUpDown18";
+            this.uiDoubleUpDown18.ShowText = false;
+            this.uiDoubleUpDown18.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown18.Step = 1D;
+            this.uiDoubleUpDown18.TabIndex = 355;
+            this.uiDoubleUpDown18.Text = "uiDoubleUpDown18";
+            this.uiDoubleUpDown18.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label12
             // 
@@ -159,8 +273,8 @@
             this.uiDoubleUpDown12.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown12.Location = new System.Drawing.Point(428, 237);
             this.uiDoubleUpDown12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown12.Maximum = 2000D;
-            this.uiDoubleUpDown12.Minimum = -100D;
+            this.uiDoubleUpDown12.Maximum = 100D;
+            this.uiDoubleUpDown12.Minimum = 10D;
             this.uiDoubleUpDown12.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown12.Name = "uiDoubleUpDown12";
             this.uiDoubleUpDown12.ShowText = false;
@@ -187,8 +301,8 @@
             this.uiDoubleUpDown13.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown13.Location = new System.Drawing.Point(428, 201);
             this.uiDoubleUpDown13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown13.Maximum = 2000D;
-            this.uiDoubleUpDown13.Minimum = -100D;
+            this.uiDoubleUpDown13.Maximum = 100D;
+            this.uiDoubleUpDown13.Minimum = 10D;
             this.uiDoubleUpDown13.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown13.Name = "uiDoubleUpDown13";
             this.uiDoubleUpDown13.ShowText = false;
@@ -215,8 +329,8 @@
             this.uiDoubleUpDown5.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown5.Location = new System.Drawing.Point(428, 321);
             this.uiDoubleUpDown5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown5.Maximum = 2000D;
-            this.uiDoubleUpDown5.Minimum = -100D;
+            this.uiDoubleUpDown5.Maximum = 100D;
+            this.uiDoubleUpDown5.Minimum = 10D;
             this.uiDoubleUpDown5.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown5.Name = "uiDoubleUpDown5";
             this.uiDoubleUpDown5.ShowText = false;
@@ -265,8 +379,8 @@
             this.uiDoubleUpDown2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown2.Location = new System.Drawing.Point(141, 359);
             this.uiDoubleUpDown2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown2.Maximum = 2000D;
-            this.uiDoubleUpDown2.Minimum = -100D;
+            this.uiDoubleUpDown2.Maximum = 100D;
+            this.uiDoubleUpDown2.Minimum = 10D;
             this.uiDoubleUpDown2.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown2.Name = "uiDoubleUpDown2";
             this.uiDoubleUpDown2.ShowText = false;
@@ -282,8 +396,8 @@
             this.uiDoubleUpDown3.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown3.Location = new System.Drawing.Point(141, 323);
             this.uiDoubleUpDown3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown3.Maximum = 2000D;
-            this.uiDoubleUpDown3.Minimum = -100D;
+            this.uiDoubleUpDown3.Maximum = 100D;
+            this.uiDoubleUpDown3.Minimum = 10D;
             this.uiDoubleUpDown3.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown3.Name = "uiDoubleUpDown3";
             this.uiDoubleUpDown3.ShowText = false;
@@ -299,8 +413,8 @@
             this.uiDoubleUpDown4.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown4.Location = new System.Drawing.Point(141, 287);
             this.uiDoubleUpDown4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown4.Maximum = 2000D;
-            this.uiDoubleUpDown4.Minimum = -100D;
+            this.uiDoubleUpDown4.Maximum = 100D;
+            this.uiDoubleUpDown4.Minimum = 10D;
             this.uiDoubleUpDown4.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown4.Name = "uiDoubleUpDown4";
             this.uiDoubleUpDown4.ShowText = false;
@@ -327,8 +441,8 @@
             this.uiDoubleUpDown1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown1.Location = new System.Drawing.Point(428, 285);
             this.uiDoubleUpDown1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown1.Maximum = 2000D;
-            this.uiDoubleUpDown1.Minimum = -100D;
+            this.uiDoubleUpDown1.Maximum = 100D;
+            this.uiDoubleUpDown1.Minimum = 10D;
             this.uiDoubleUpDown1.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown1.Name = "uiDoubleUpDown1";
             this.uiDoubleUpDown1.ShowText = false;
@@ -410,8 +524,8 @@
             this.uiDoubleUpDown99.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown99.Location = new System.Drawing.Point(141, 50);
             this.uiDoubleUpDown99.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown99.Maximum = 2000D;
-            this.uiDoubleUpDown99.Minimum = -100D;
+            this.uiDoubleUpDown99.Maximum = 100D;
+            this.uiDoubleUpDown99.Minimum = 10D;
             this.uiDoubleUpDown99.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown99.Name = "uiDoubleUpDown99";
             this.uiDoubleUpDown99.ShowText = false;
@@ -427,8 +541,8 @@
             this.uiDoubleUpDown106.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown106.Location = new System.Drawing.Point(141, 239);
             this.uiDoubleUpDown106.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown106.Maximum = 2000D;
-            this.uiDoubleUpDown106.Minimum = -100D;
+            this.uiDoubleUpDown106.Maximum = 100D;
+            this.uiDoubleUpDown106.Minimum = 10D;
             this.uiDoubleUpDown106.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown106.Name = "uiDoubleUpDown106";
             this.uiDoubleUpDown106.ShowText = false;
@@ -444,8 +558,8 @@
             this.uiDoubleUpDown107.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown107.Location = new System.Drawing.Point(141, 203);
             this.uiDoubleUpDown107.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown107.Maximum = 2000D;
-            this.uiDoubleUpDown107.Minimum = -100D;
+            this.uiDoubleUpDown107.Maximum = 100D;
+            this.uiDoubleUpDown107.Minimum = 10D;
             this.uiDoubleUpDown107.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown107.Name = "uiDoubleUpDown107";
             this.uiDoubleUpDown107.ShowText = false;
@@ -461,8 +575,8 @@
             this.uiDoubleUpDown108.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown108.Location = new System.Drawing.Point(141, 158);
             this.uiDoubleUpDown108.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown108.Maximum = 2000D;
-            this.uiDoubleUpDown108.Minimum = -100D;
+            this.uiDoubleUpDown108.Maximum = 100D;
+            this.uiDoubleUpDown108.Minimum = 10D;
             this.uiDoubleUpDown108.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown108.Name = "uiDoubleUpDown108";
             this.uiDoubleUpDown108.ShowText = false;
@@ -478,8 +592,8 @@
             this.uiDoubleUpDown98.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown98.Location = new System.Drawing.Point(141, 122);
             this.uiDoubleUpDown98.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown98.Maximum = 2000D;
-            this.uiDoubleUpDown98.Minimum = -100D;
+            this.uiDoubleUpDown98.Maximum = 100D;
+            this.uiDoubleUpDown98.Minimum = 10D;
             this.uiDoubleUpDown98.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown98.Name = "uiDoubleUpDown98";
             this.uiDoubleUpDown98.ShowText = false;
@@ -495,8 +609,8 @@
             this.uiDoubleUpDown97.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiDoubleUpDown97.Location = new System.Drawing.Point(141, 86);
             this.uiDoubleUpDown97.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown97.Maximum = 2000D;
-            this.uiDoubleUpDown97.Minimum = -100D;
+            this.uiDoubleUpDown97.Maximum = 100D;
+            this.uiDoubleUpDown97.Minimum = 10D;
             this.uiDoubleUpDown97.MinimumSize = new System.Drawing.Size(100, 0);
             this.uiDoubleUpDown97.Name = "uiDoubleUpDown97";
             this.uiDoubleUpDown97.ShowText = false;
@@ -505,118 +619,6 @@
             this.uiDoubleUpDown97.TabIndex = 291;
             this.uiDoubleUpDown97.Text = "uiDoubleUpDown97";
             this.uiDoubleUpDown97.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label13.Location = new System.Drawing.Point(300, 50);
-            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(89, 21);
-            this.label13.TabIndex = 349;
-            this.label13.Text = "出料手臂 X";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label16.Location = new System.Drawing.Point(300, 122);
-            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(89, 21);
-            this.label16.TabIndex = 351;
-            this.label16.Text = "出料手臂 Z";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label17.Location = new System.Drawing.Point(300, 86);
-            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(89, 21);
-            this.label17.TabIndex = 350;
-            this.label17.Text = "出料手臂 Y";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label18.Location = new System.Drawing.Point(300, 158);
-            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(111, 21);
-            this.label18.TabIndex = 352;
-            this.label18.Text = "出料手臂 变距";
-            // 
-            // uiDoubleUpDown14
-            // 
-            this.uiDoubleUpDown14.DecimalPlaces = 0;
-            this.uiDoubleUpDown14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown14.Location = new System.Drawing.Point(428, 50);
-            this.uiDoubleUpDown14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown14.Maximum = 2000D;
-            this.uiDoubleUpDown14.Minimum = -100D;
-            this.uiDoubleUpDown14.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown14.Name = "uiDoubleUpDown14";
-            this.uiDoubleUpDown14.ShowText = false;
-            this.uiDoubleUpDown14.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown14.Step = 1D;
-            this.uiDoubleUpDown14.TabIndex = 353;
-            this.uiDoubleUpDown14.Text = "uiDoubleUpDown14";
-            this.uiDoubleUpDown14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown16
-            // 
-            this.uiDoubleUpDown16.DecimalPlaces = 0;
-            this.uiDoubleUpDown16.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown16.Location = new System.Drawing.Point(428, 158);
-            this.uiDoubleUpDown16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown16.Maximum = 2000D;
-            this.uiDoubleUpDown16.Minimum = -100D;
-            this.uiDoubleUpDown16.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown16.Name = "uiDoubleUpDown16";
-            this.uiDoubleUpDown16.ShowText = false;
-            this.uiDoubleUpDown16.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown16.Step = 1D;
-            this.uiDoubleUpDown16.TabIndex = 356;
-            this.uiDoubleUpDown16.Text = "uiDoubleUpDown16";
-            this.uiDoubleUpDown16.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown17
-            // 
-            this.uiDoubleUpDown17.DecimalPlaces = 0;
-            this.uiDoubleUpDown17.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown17.Location = new System.Drawing.Point(428, 122);
-            this.uiDoubleUpDown17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown17.Maximum = 2000D;
-            this.uiDoubleUpDown17.Minimum = -100D;
-            this.uiDoubleUpDown17.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown17.Name = "uiDoubleUpDown17";
-            this.uiDoubleUpDown17.ShowText = false;
-            this.uiDoubleUpDown17.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown17.Step = 1D;
-            this.uiDoubleUpDown17.TabIndex = 354;
-            this.uiDoubleUpDown17.Text = "uiDoubleUpDown17";
-            this.uiDoubleUpDown17.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // uiDoubleUpDown18
-            // 
-            this.uiDoubleUpDown18.DecimalPlaces = 0;
-            this.uiDoubleUpDown18.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDoubleUpDown18.Location = new System.Drawing.Point(428, 86);
-            this.uiDoubleUpDown18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiDoubleUpDown18.Maximum = 2000D;
-            this.uiDoubleUpDown18.Minimum = -100D;
-            this.uiDoubleUpDown18.MinimumSize = new System.Drawing.Size(100, 0);
-            this.uiDoubleUpDown18.Name = "uiDoubleUpDown18";
-            this.uiDoubleUpDown18.ShowText = false;
-            this.uiDoubleUpDown18.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown18.Step = 1D;
-            this.uiDoubleUpDown18.TabIndex = 355;
-            this.uiDoubleUpDown18.Text = "uiDoubleUpDown18";
-            this.uiDoubleUpDown18.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // _speed
             // 

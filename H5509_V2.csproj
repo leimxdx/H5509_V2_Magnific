@@ -239,9 +239,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="配置\SystemData">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="配置\SystemData" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

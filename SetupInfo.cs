@@ -11,6 +11,8 @@ namespace H5509_V2
     /// </summary>
     public class SetupInfo
     {
+        public string 设置信息名称 { get; set; }
+
         public TrayInfo Tray盘信息 { get; set; } = new TrayInfo();
 
         public OffsetPoint OffsetPoint { get; set; } = new OffsetPoint();
