@@ -758,6 +758,7 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.uiTabControl2 = new Sunny.UI.UITabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
+            this.button25 = new System.Windows.Forms.Button();
             this.uiButton9 = new Sunny.UI.UIButton();
             this.uiButton10 = new Sunny.UI.UIButton();
             this.uiTitlePanel6 = new Sunny.UI.UITitlePanel();
@@ -862,6 +863,7 @@
             this.label46 = new System.Windows.Forms.Label();
             this.label47 = new System.Windows.Forms.Label();
             this.tabPage8 = new System.Windows.Forms.TabPage();
+            this.button23 = new System.Windows.Forms.Button();
             this.uiButton5 = new Sunny.UI.UIButton();
             this.uiButton6 = new Sunny.UI.UIButton();
             this.uiTitlePanel7 = new Sunny.UI.UITitlePanel();
@@ -996,6 +998,7 @@
             this.button36 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.button24 = new System.Windows.Forms.Button();
             this.uiButton13 = new Sunny.UI.UIButton();
             this.uiButton14 = new Sunny.UI.UIButton();
             this.uiTitlePanel9 = new Sunny.UI.UITitlePanel();
@@ -1057,6 +1060,7 @@
             this.button70 = new System.Windows.Forms.Button();
             this.label92 = new System.Windows.Forms.Label();
             this.tabPage16 = new System.Windows.Forms.TabPage();
+            this.button26 = new System.Windows.Forms.Button();
             this.uiTitlePanel10 = new Sunny.UI.UITitlePanel();
             this.groupBox38 = new System.Windows.Forms.GroupBox();
             this.uiDoubleUpDown49 = new System.Windows.Forms.NumericUpDown();
@@ -1075,6 +1079,7 @@
             this.button71 = new System.Windows.Forms.Button();
             this.button72 = new System.Windows.Forms.Button();
             this.tabPage17 = new System.Windows.Forms.TabPage();
+            this.button35 = new System.Windows.Forms.Button();
             this.uiButton21 = new Sunny.UI.UIButton();
             this.uiButton22 = new Sunny.UI.UIButton();
             this.uiTitlePanel12 = new Sunny.UI.UITitlePanel();
@@ -1086,6 +1091,10 @@
             this.label342 = new System.Windows.Forms.Label();
             this.label343 = new System.Windows.Forms.Label();
             this.uiTitlePanel1 = new Sunny.UI.UITitlePanel();
+            this.uiDoubleUpDown59 = new System.Windows.Forms.NumericUpDown();
+            this.uiDoubleUpDown60 = new System.Windows.Forms.NumericUpDown();
+            this.uiDoubleUpDown58 = new System.Windows.Forms.NumericUpDown();
+            this.uiDoubleUpDown55 = new System.Windows.Forms.NumericUpDown();
             this.label96 = new System.Windows.Forms.Label();
             this.button74 = new System.Windows.Forms.Button();
             this.button75 = new System.Windows.Forms.Button();
@@ -1097,10 +1106,8 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.uiDoubleUpDown55 = new System.Windows.Forms.NumericUpDown();
-            this.uiDoubleUpDown58 = new System.Windows.Forms.NumericUpDown();
-            this.uiDoubleUpDown60 = new System.Windows.Forms.NumericUpDown();
-            this.uiDoubleUpDown59 = new System.Windows.Forms.NumericUpDown();
+            this.button41 = new System.Windows.Forms.Button();
+            this.button47 = new System.Windows.Forms.Button();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.uiTabControl3.SuspendLayout();
@@ -1281,10 +1288,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown29)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown24)).BeginInit();
             this.uiTitlePanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown59)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).BeginInit();
             this.SuspendLayout();
             // 
             // uiTabControl1
@@ -1334,7 +1341,7 @@
             this.tabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(200, 60);
+            this.tabPage2.Size = new System.Drawing.Size(1893, 944);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "调试";
             // 
@@ -1356,7 +1363,7 @@
             this.uiTabControl3.Name = "uiTabControl3";
             this.uiTabControl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl3.SelectedIndex = 0;
-            this.uiTabControl3.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl3.Size = new System.Drawing.Size(1893, 944);
             this.uiTabControl3.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl3.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl3.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -1376,7 +1383,7 @@
             this.tabPage10.Controls.Add(this.groupBox4);
             this.tabPage10.Location = new System.Drawing.Point(0, 40);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(200, 20);
+            this.tabPage10.Size = new System.Drawing.Size(1893, 904);
             this.tabPage10.TabIndex = 0;
             this.tabPage10.Text = "基础调试";
             // 
@@ -4117,7 +4124,7 @@
             this.tabPage11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage11.Location = new System.Drawing.Point(0, 40);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(200, 60);
+            this.tabPage11.Size = new System.Drawing.Size(1893, 904);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Text = "流程调试";
             // 
@@ -4368,7 +4375,7 @@
             this.uiTabControl4.Name = "uiTabControl4";
             this.uiTabControl4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl4.SelectedIndex = 0;
-            this.uiTabControl4.Size = new System.Drawing.Size(760, 60);
+            this.uiTabControl4.Size = new System.Drawing.Size(760, 904);
             this.uiTabControl4.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl4.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl4.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -4386,7 +4393,7 @@
             this.tabPage13.Controls.Add(this.groupBox3);
             this.tabPage13.Location = new System.Drawing.Point(0, 40);
             this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Size = new System.Drawing.Size(760, 20);
+            this.tabPage13.Size = new System.Drawing.Size(760, 864);
             this.tabPage13.TabIndex = 0;
             this.tabPage13.Text = "入料流程";
             // 
@@ -10782,6 +10789,7 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage7.Controls.Add(this.button25);
             this.tabPage7.Controls.Add(this.uiButton9);
             this.tabPage7.Controls.Add(this.uiButton10);
             this.tabPage7.Controls.Add(this.uiTitlePanel6);
@@ -10792,6 +10800,18 @@
             this.tabPage7.Size = new System.Drawing.Size(1893, 904);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "入料手臂";
+            // 
+            // button25
+            // 
+            this.button25.BackColor = System.Drawing.Color.Red;
+            this.button25.Location = new System.Drawing.Point(1293, 16);
+            this.button25.Margin = new System.Windows.Forms.Padding(2);
+            this.button25.Name = "button25";
+            this.button25.Size = new System.Drawing.Size(153, 80);
+            this.button25.TabIndex = 346;
+            this.button25.Text = "紧急停止";
+            this.button25.UseVisualStyleBackColor = false;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // uiButton9
             // 
@@ -11883,6 +11903,7 @@
             this.button32.TabIndex = 101;
             this.button32.Text = "移动";
             this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
             // uiDoubleUpDown107
             // 
@@ -11922,6 +11943,7 @@
             this.button20.TabIndex = 277;
             this.button20.Text = "移动";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // uiDoubleUpDown99
             // 
@@ -11971,6 +11993,7 @@
             this.button31.TabIndex = 119;
             this.button31.Text = "移动";
             this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
             // label55
             // 
@@ -12010,6 +12033,7 @@
             this.button222.TabIndex = 300;
             this.button222.Text = "移动";
             this.button222.UseVisualStyleBackColor = true;
+            this.button222.Click += new System.EventHandler(this.button222_Click);
             // 
             // uiDoubleUpDown97
             // 
@@ -12059,6 +12083,7 @@
             this.button30.TabIndex = 120;
             this.button30.Text = "移动";
             this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // label54
             // 
@@ -12079,6 +12104,7 @@
             this.button223.TabIndex = 299;
             this.button223.Text = "移动";
             this.button223.UseVisualStyleBackColor = true;
+            this.button223.Click += new System.EventHandler(this.button223_Click);
             // 
             // button29
             // 
@@ -12089,6 +12115,7 @@
             this.button29.TabIndex = 121;
             this.button29.Text = "移动";
             this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // button19
             // 
@@ -12099,6 +12126,7 @@
             this.button19.TabIndex = 282;
             this.button19.Text = "移动";
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // label374
             // 
@@ -12119,6 +12147,7 @@
             this.button18.TabIndex = 283;
             this.button18.Text = "移动";
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // label51
             // 
@@ -12139,6 +12168,7 @@
             this.button224.TabIndex = 298;
             this.button224.Text = "移动";
             this.button224.UseVisualStyleBackColor = true;
+            this.button224.Click += new System.EventHandler(this.button224_Click);
             // 
             // button28
             // 
@@ -12149,6 +12179,7 @@
             this.button28.TabIndex = 122;
             this.button28.Text = "移动";
             this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // label53
             // 
@@ -12169,6 +12200,7 @@
             this.button27.TabIndex = 123;
             this.button27.Text = "移动";
             this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // label52
             // 
@@ -12203,6 +12235,7 @@
             // tabPage8
             // 
             this.tabPage8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage8.Controls.Add(this.button23);
             this.tabPage8.Controls.Add(this.uiButton5);
             this.tabPage8.Controls.Add(this.uiButton6);
             this.tabPage8.Controls.Add(this.uiTitlePanel7);
@@ -12210,9 +12243,21 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 60);
+            this.tabPage8.Size = new System.Drawing.Size(1893, 904);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "出料手臂";
+            // 
+            // button23
+            // 
+            this.button23.BackColor = System.Drawing.Color.Red;
+            this.button23.Location = new System.Drawing.Point(1430, 17);
+            this.button23.Margin = new System.Windows.Forms.Padding(2);
+            this.button23.Name = "button23";
+            this.button23.Size = new System.Drawing.Size(153, 80);
+            this.button23.TabIndex = 346;
+            this.button23.Text = "紧急停止";
+            this.button23.UseVisualStyleBackColor = false;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // uiButton5
             // 
@@ -13012,7 +13057,7 @@
             // uiDoubleUpDown122
             // 
             this.uiDoubleUpDown122.DecimalPlaces = 2;
-            this.uiDoubleUpDown122.Location = new System.Drawing.Point(1117, 288);
+            this.uiDoubleUpDown122.Location = new System.Drawing.Point(1117, 286);
             this.uiDoubleUpDown122.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13041,7 +13086,7 @@
             // uiDoubleUpDown21
             // 
             this.uiDoubleUpDown21.DecimalPlaces = 2;
-            this.uiDoubleUpDown21.Location = new System.Drawing.Point(1117, 360);
+            this.uiDoubleUpDown21.Location = new System.Drawing.Point(1117, 358);
             this.uiDoubleUpDown21.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13070,7 +13115,7 @@
             // uiDoubleUpDown121
             // 
             this.uiDoubleUpDown121.DecimalPlaces = 2;
-            this.uiDoubleUpDown121.Location = new System.Drawing.Point(1117, 324);
+            this.uiDoubleUpDown121.Location = new System.Drawing.Point(1117, 322);
             this.uiDoubleUpDown121.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13095,6 +13140,7 @@
             this.button57.TabIndex = 232;
             this.button57.Text = "移动";
             this.button57.UseVisualStyleBackColor = true;
+            this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
             // uiDoubleUpDown125
             // 
@@ -13230,6 +13276,7 @@
             this.button58.TabIndex = 231;
             this.button58.Text = "移动";
             this.button58.UseVisualStyleBackColor = true;
+            this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
             // uiDoubleUpDown95
             // 
@@ -13302,7 +13349,7 @@
             // uiDoubleUpDown84
             // 
             this.uiDoubleUpDown84.DecimalPlaces = 2;
-            this.uiDoubleUpDown84.Location = new System.Drawing.Point(671, 288);
+            this.uiDoubleUpDown84.Location = new System.Drawing.Point(671, 286);
             this.uiDoubleUpDown84.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13331,7 +13378,7 @@
             // uiDoubleUpDown82
             // 
             this.uiDoubleUpDown82.DecimalPlaces = 2;
-            this.uiDoubleUpDown82.Location = new System.Drawing.Point(671, 360);
+            this.uiDoubleUpDown82.Location = new System.Drawing.Point(671, 358);
             this.uiDoubleUpDown82.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13360,7 +13407,7 @@
             // uiDoubleUpDown83
             // 
             this.uiDoubleUpDown83.DecimalPlaces = 2;
-            this.uiDoubleUpDown83.Location = new System.Drawing.Point(671, 324);
+            this.uiDoubleUpDown83.Location = new System.Drawing.Point(671, 322);
             this.uiDoubleUpDown83.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13407,13 +13454,14 @@
             // 
             // button55
             // 
-            this.button55.Location = new System.Drawing.Point(353, 297);
+            this.button55.Location = new System.Drawing.Point(353, 283);
             this.button55.Margin = new System.Windows.Forms.Padding(2);
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(108, 34);
             this.button55.TabIndex = 233;
             this.button55.Text = "移动";
             this.button55.UseVisualStyleBackColor = true;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
             // 
             // uiDoubleUpDown85
             // 
@@ -13552,18 +13600,19 @@
             // 
             // button54
             // 
-            this.button54.Location = new System.Drawing.Point(353, 333);
+            this.button54.Location = new System.Drawing.Point(353, 319);
             this.button54.Margin = new System.Windows.Forms.Padding(2);
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(108, 34);
             this.button54.TabIndex = 234;
             this.button54.Text = "移动";
             this.button54.UseVisualStyleBackColor = true;
+            this.button54.Click += new System.EventHandler(this.button54_Click);
             // 
             // uiDoubleUpDown93
             // 
             this.uiDoubleUpDown93.DecimalPlaces = 2;
-            this.uiDoubleUpDown93.Location = new System.Drawing.Point(207, 297);
+            this.uiDoubleUpDown93.Location = new System.Drawing.Point(207, 286);
             this.uiDoubleUpDown93.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13592,7 +13641,7 @@
             // uiDoubleUpDown91
             // 
             this.uiDoubleUpDown91.DecimalPlaces = 2;
-            this.uiDoubleUpDown91.Location = new System.Drawing.Point(207, 369);
+            this.uiDoubleUpDown91.Location = new System.Drawing.Point(207, 358);
             this.uiDoubleUpDown91.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13617,11 +13666,12 @@
             this.button43.TabIndex = 240;
             this.button43.Text = "移动";
             this.button43.UseVisualStyleBackColor = true;
+            this.button43.Click += new System.EventHandler(this.button43_Click);
             // 
             // uiDoubleUpDown92
             // 
             this.uiDoubleUpDown92.DecimalPlaces = 2;
-            this.uiDoubleUpDown92.Location = new System.Drawing.Point(207, 333);
+            this.uiDoubleUpDown92.Location = new System.Drawing.Point(207, 322);
             this.uiDoubleUpDown92.Maximum = new decimal(new int[] {
             2000,
             0,
@@ -13694,6 +13744,7 @@
             this.button44.TabIndex = 239;
             this.button44.Text = "移动";
             this.button44.UseVisualStyleBackColor = true;
+            this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
             // uiDoubleUpDown89
             // 
@@ -13716,13 +13767,14 @@
             // 
             // button53
             // 
-            this.button53.Location = new System.Drawing.Point(353, 369);
+            this.button53.Location = new System.Drawing.Point(353, 355);
             this.button53.Margin = new System.Windows.Forms.Padding(2);
             this.button53.Name = "button53";
             this.button53.Size = new System.Drawing.Size(108, 34);
             this.button53.TabIndex = 235;
             this.button53.Text = "移动";
             this.button53.UseVisualStyleBackColor = true;
+            this.button53.Click += new System.EventHandler(this.button53_Click);
             // 
             // label385
             // 
@@ -13803,13 +13855,14 @@
             // 
             // button21
             // 
-            this.button21.Location = new System.Drawing.Point(817, 285);
+            this.button21.Location = new System.Drawing.Point(817, 283);
             this.button21.Margin = new System.Windows.Forms.Padding(2);
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(108, 34);
             this.button21.TabIndex = 303;
             this.button21.Text = "移动";
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // button45
             // 
@@ -13820,6 +13873,7 @@
             this.button45.TabIndex = 238;
             this.button45.Text = "移动";
             this.button45.UseVisualStyleBackColor = true;
+            this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
             // label72
             // 
@@ -13840,6 +13894,7 @@
             this.button51.TabIndex = 236;
             this.button51.Text = "移动";
             this.button51.UseVisualStyleBackColor = true;
+            this.button51.Click += new System.EventHandler(this.button51_Click);
             // 
             // label74
             // 
@@ -13870,6 +13925,7 @@
             this.button49.TabIndex = 237;
             this.button49.Text = "移动";
             this.button49.UseVisualStyleBackColor = true;
+            this.button49.Click += new System.EventHandler(this.button49_Click);
             // 
             // label75
             // 
@@ -13900,6 +13956,7 @@
             this.button56.TabIndex = 241;
             this.button56.Text = "移动";
             this.button56.UseVisualStyleBackColor = true;
+            this.button56.Click += new System.EventHandler(this.button56_Click);
             // 
             // label68
             // 
@@ -13950,6 +14007,7 @@
             this.button46.TabIndex = 267;
             this.button46.Text = "移动";
             this.button46.UseVisualStyleBackColor = true;
+            this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
             // label59
             // 
@@ -13970,6 +14028,7 @@
             this.button48.TabIndex = 242;
             this.button48.Text = "移动";
             this.button48.UseVisualStyleBackColor = true;
+            this.button48.Click += new System.EventHandler(this.button48_Click);
             // 
             // button42
             // 
@@ -13980,6 +14039,7 @@
             this.button42.TabIndex = 271;
             this.button42.Text = "移动";
             this.button42.UseVisualStyleBackColor = true;
+            this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
             // button40
             // 
@@ -13990,16 +14050,18 @@
             this.button40.TabIndex = 243;
             this.button40.Text = "移动";
             this.button40.UseVisualStyleBackColor = true;
+            this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
             // button34
             // 
-            this.button34.Location = new System.Drawing.Point(817, 321);
+            this.button34.Location = new System.Drawing.Point(817, 319);
             this.button34.Margin = new System.Windows.Forms.Padding(2);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(108, 34);
             this.button34.TabIndex = 280;
             this.button34.Text = "移动";
             this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
             // button38
             // 
@@ -14010,6 +14072,7 @@
             this.button38.TabIndex = 246;
             this.button38.Text = "移动";
             this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
             // button37
             // 
@@ -14020,6 +14083,7 @@
             this.button37.TabIndex = 245;
             this.button37.Text = "移动";
             this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
             // button36
             // 
@@ -14030,20 +14094,23 @@
             this.button36.TabIndex = 244;
             this.button36.Text = "移动";
             this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
             // button33
             // 
-            this.button33.Location = new System.Drawing.Point(817, 357);
+            this.button33.Location = new System.Drawing.Point(817, 355);
             this.button33.Margin = new System.Windows.Forms.Padding(2);
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(108, 34);
             this.button33.TabIndex = 281;
             this.button33.Text = "移动";
             this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
             // tabPage9
             // 
             this.tabPage9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage9.Controls.Add(this.button24);
             this.tabPage9.Controls.Add(this.uiButton13);
             this.tabPage9.Controls.Add(this.uiButton14);
             this.tabPage9.Controls.Add(this.uiTitlePanel9);
@@ -14054,6 +14121,18 @@
             this.tabPage9.Size = new System.Drawing.Size(1893, 904);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "测试手臂";
+            // 
+            // button24
+            // 
+            this.button24.BackColor = System.Drawing.Color.Red;
+            this.button24.Location = new System.Drawing.Point(966, 17);
+            this.button24.Margin = new System.Windows.Forms.Padding(2);
+            this.button24.Name = "button24";
+            this.button24.Size = new System.Drawing.Size(153, 80);
+            this.button24.TabIndex = 346;
+            this.button24.Text = "紧急停止";
+            this.button24.UseVisualStyleBackColor = false;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
             // uiButton13
             // 
@@ -14309,6 +14388,8 @@
             // 
             // uiTitlePanel8
             // 
+            this.uiTitlePanel8.Controls.Add(this.button41);
+            this.uiTitlePanel8.Controls.Add(this.button47);
             this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown23);
             this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown27);
             this.uiTitlePanel8.Controls.Add(this.uiDoubleUpDown25);
@@ -14687,6 +14768,7 @@
             this.button63.TabIndex = 206;
             this.button63.Text = "移动";
             this.button63.UseVisualStyleBackColor = true;
+            this.button63.Click += new System.EventHandler(this.button63_Click);
             // 
             // label340
             // 
@@ -14707,6 +14789,7 @@
             this.button64.TabIndex = 198;
             this.button64.Text = "移动";
             this.button64.UseVisualStyleBackColor = true;
+            this.button64.Click += new System.EventHandler(this.button64_Click);
             // 
             // button62
             // 
@@ -14717,6 +14800,7 @@
             this.button62.TabIndex = 128;
             this.button62.Text = "移动";
             this.button62.UseVisualStyleBackColor = true;
+            this.button62.Click += new System.EventHandler(this.button62_Click);
             // 
             // label88
             // 
@@ -14747,6 +14831,7 @@
             this.button61.TabIndex = 190;
             this.button61.Text = "移动";
             this.button61.UseVisualStyleBackColor = true;
+            this.button61.Click += new System.EventHandler(this.button61_Click);
             // 
             // label83
             // 
@@ -14787,6 +14872,7 @@
             this.button60.TabIndex = 186;
             this.button60.Text = "移动";
             this.button60.UseVisualStyleBackColor = true;
+            this.button60.Click += new System.EventHandler(this.button60_Click);
             // 
             // label86
             // 
@@ -14807,6 +14893,7 @@
             this.button65.TabIndex = 196;
             this.button65.Text = "移动";
             this.button65.UseVisualStyleBackColor = true;
+            this.button65.Click += new System.EventHandler(this.button65_Click);
             // 
             // label87
             // 
@@ -14827,6 +14914,7 @@
             this.button66.TabIndex = 204;
             this.button66.Text = "移动";
             this.button66.UseVisualStyleBackColor = true;
+            this.button66.Click += new System.EventHandler(this.button66_Click);
             // 
             // button67
             // 
@@ -14837,6 +14925,7 @@
             this.button67.TabIndex = 192;
             this.button67.Text = "移动";
             this.button67.UseVisualStyleBackColor = true;
+            this.button67.Click += new System.EventHandler(this.button67_Click);
             // 
             // button59
             // 
@@ -14847,6 +14936,7 @@
             this.button59.TabIndex = 188;
             this.button59.Text = "移动";
             this.button59.UseVisualStyleBackColor = true;
+            this.button59.Click += new System.EventHandler(this.button59_Click);
             // 
             // button68
             // 
@@ -14857,6 +14947,7 @@
             this.button68.TabIndex = 194;
             this.button68.Text = "移动";
             this.button68.UseVisualStyleBackColor = true;
+            this.button68.Click += new System.EventHandler(this.button68_Click);
             // 
             // button69
             // 
@@ -14867,6 +14958,7 @@
             this.button69.TabIndex = 202;
             this.button69.Text = "移动";
             this.button69.UseVisualStyleBackColor = true;
+            this.button69.Click += new System.EventHandler(this.button69_Click);
             // 
             // label90
             // 
@@ -14907,6 +14999,7 @@
             this.button70.TabIndex = 200;
             this.button70.Text = "移动";
             this.button70.UseVisualStyleBackColor = true;
+            this.button70.Click += new System.EventHandler(this.button70_Click);
             // 
             // label92
             // 
@@ -14921,6 +15014,7 @@
             // tabPage16
             // 
             this.tabPage16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage16.Controls.Add(this.button26);
             this.tabPage16.Controls.Add(this.uiTitlePanel10);
             this.tabPage16.Controls.Add(this.uiButton17);
             this.tabPage16.Controls.Add(this.uiButton18);
@@ -14928,9 +15022,21 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 60);
+            this.tabPage16.Size = new System.Drawing.Size(1893, 904);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "梭车";
+            // 
+            // button26
+            // 
+            this.button26.BackColor = System.Drawing.Color.Red;
+            this.button26.Location = new System.Drawing.Point(508, 17);
+            this.button26.Margin = new System.Windows.Forms.Padding(2);
+            this.button26.Name = "button26";
+            this.button26.Size = new System.Drawing.Size(153, 80);
+            this.button26.TabIndex = 346;
+            this.button26.Text = "紧急停止";
+            this.button26.UseVisualStyleBackColor = false;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // uiTitlePanel10
             // 
@@ -15166,6 +15272,7 @@
             this.button71.TabIndex = 188;
             this.button71.Text = "移动";
             this.button71.UseVisualStyleBackColor = true;
+            this.button71.Click += new System.EventHandler(this.button71_Click);
             // 
             // button72
             // 
@@ -15176,10 +15283,12 @@
             this.button72.TabIndex = 187;
             this.button72.Text = "移动";
             this.button72.UseVisualStyleBackColor = true;
+            this.button72.Click += new System.EventHandler(this.button72_Click);
             // 
             // tabPage17
             // 
             this.tabPage17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage17.Controls.Add(this.button35);
             this.tabPage17.Controls.Add(this.uiButton21);
             this.tabPage17.Controls.Add(this.uiButton22);
             this.tabPage17.Controls.Add(this.uiTitlePanel12);
@@ -15190,6 +15299,18 @@
             this.tabPage17.Size = new System.Drawing.Size(1893, 904);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
+            // 
+            // button35
+            // 
+            this.button35.BackColor = System.Drawing.Color.Red;
+            this.button35.Location = new System.Drawing.Point(515, 17);
+            this.button35.Margin = new System.Windows.Forms.Padding(2);
+            this.button35.Name = "button35";
+            this.button35.Size = new System.Drawing.Size(153, 80);
+            this.button35.TabIndex = 346;
+            this.button35.Text = "紧急停止";
+            this.button35.UseVisualStyleBackColor = false;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
             // uiButton21
             // 
@@ -15364,6 +15485,82 @@
             this.uiTitlePanel1.Text = "点位（单位：mm）";
             this.uiTitlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiDoubleUpDown59
+            // 
+            this.uiDoubleUpDown59.DecimalPlaces = 3;
+            this.uiDoubleUpDown59.Location = new System.Drawing.Point(214, 164);
+            this.uiDoubleUpDown59.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.uiDoubleUpDown59.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.uiDoubleUpDown59.Name = "uiDoubleUpDown59";
+            this.uiDoubleUpDown59.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown59.TabIndex = 560;
+            this.uiDoubleUpDown59.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // uiDoubleUpDown60
+            // 
+            this.uiDoubleUpDown60.DecimalPlaces = 3;
+            this.uiDoubleUpDown60.Location = new System.Drawing.Point(214, 127);
+            this.uiDoubleUpDown60.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.uiDoubleUpDown60.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.uiDoubleUpDown60.Name = "uiDoubleUpDown60";
+            this.uiDoubleUpDown60.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown60.TabIndex = 559;
+            this.uiDoubleUpDown60.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // uiDoubleUpDown58
+            // 
+            this.uiDoubleUpDown58.DecimalPlaces = 3;
+            this.uiDoubleUpDown58.Location = new System.Drawing.Point(214, 88);
+            this.uiDoubleUpDown58.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.uiDoubleUpDown58.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.uiDoubleUpDown58.Name = "uiDoubleUpDown58";
+            this.uiDoubleUpDown58.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown58.TabIndex = 558;
+            this.uiDoubleUpDown58.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // uiDoubleUpDown55
+            // 
+            this.uiDoubleUpDown55.DecimalPlaces = 3;
+            this.uiDoubleUpDown55.Location = new System.Drawing.Point(214, 51);
+            this.uiDoubleUpDown55.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.uiDoubleUpDown55.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.uiDoubleUpDown55.Name = "uiDoubleUpDown55";
+            this.uiDoubleUpDown55.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown55.TabIndex = 557;
+            this.uiDoubleUpDown55.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // label96
             // 
             this.label96.AutoSize = true;
@@ -15383,6 +15580,7 @@
             this.button74.TabIndex = 120;
             this.button74.Text = "移动";
             this.button74.UseVisualStyleBackColor = true;
+            this.button74.Click += new System.EventHandler(this.button74_Click);
             // 
             // button75
             // 
@@ -15393,6 +15591,7 @@
             this.button75.TabIndex = 119;
             this.button75.Text = "移动";
             this.button75.UseVisualStyleBackColor = true;
+            this.button75.Click += new System.EventHandler(this.button75_Click);
             // 
             // label99
             // 
@@ -15413,6 +15612,7 @@
             this.button76.TabIndex = 101;
             this.button76.Text = "移动";
             this.button76.UseVisualStyleBackColor = true;
+            this.button76.Click += new System.EventHandler(this.button76_Click);
             // 
             // button73
             // 
@@ -15423,6 +15623,7 @@
             this.button73.TabIndex = 121;
             this.button73.Text = "移动";
             this.button73.UseVisualStyleBackColor = true;
+            this.button73.Click += new System.EventHandler(this.button73_Click);
             // 
             // label97
             // 
@@ -15471,81 +15672,27 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "档案";
             // 
-            // uiDoubleUpDown55
+            // button41
             // 
-            this.uiDoubleUpDown55.DecimalPlaces = 3;
-            this.uiDoubleUpDown55.Location = new System.Drawing.Point(214, 51);
-            this.uiDoubleUpDown55.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.uiDoubleUpDown55.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.uiDoubleUpDown55.Name = "uiDoubleUpDown55";
-            this.uiDoubleUpDown55.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown55.TabIndex = 557;
-            this.uiDoubleUpDown55.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.button41.Location = new System.Drawing.Point(815, 290);
+            this.button41.Margin = new System.Windows.Forms.Padding(2);
+            this.button41.Name = "button41";
+            this.button41.Size = new System.Drawing.Size(108, 34);
+            this.button41.TabIndex = 569;
+            this.button41.Text = "移动";
+            this.button41.UseVisualStyleBackColor = true;
+            this.button41.Click += new System.EventHandler(this.button41_Click);
             // 
-            // uiDoubleUpDown58
+            // button47
             // 
-            this.uiDoubleUpDown58.DecimalPlaces = 3;
-            this.uiDoubleUpDown58.Location = new System.Drawing.Point(214, 88);
-            this.uiDoubleUpDown58.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.uiDoubleUpDown58.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.uiDoubleUpDown58.Name = "uiDoubleUpDown58";
-            this.uiDoubleUpDown58.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown58.TabIndex = 558;
-            this.uiDoubleUpDown58.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // uiDoubleUpDown60
-            // 
-            this.uiDoubleUpDown60.DecimalPlaces = 3;
-            this.uiDoubleUpDown60.Location = new System.Drawing.Point(214, 127);
-            this.uiDoubleUpDown60.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.uiDoubleUpDown60.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.uiDoubleUpDown60.Name = "uiDoubleUpDown60";
-            this.uiDoubleUpDown60.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown60.TabIndex = 559;
-            this.uiDoubleUpDown60.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // uiDoubleUpDown59
-            // 
-            this.uiDoubleUpDown59.DecimalPlaces = 3;
-            this.uiDoubleUpDown59.Location = new System.Drawing.Point(214, 164);
-            this.uiDoubleUpDown59.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.uiDoubleUpDown59.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.uiDoubleUpDown59.Name = "uiDoubleUpDown59";
-            this.uiDoubleUpDown59.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown59.TabIndex = 560;
-            this.uiDoubleUpDown59.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.button47.Location = new System.Drawing.Point(815, 254);
+            this.button47.Margin = new System.Windows.Forms.Padding(2);
+            this.button47.Name = "button47";
+            this.button47.Size = new System.Drawing.Size(108, 34);
+            this.button47.TabIndex = 568;
+            this.button47.Text = "移动";
+            this.button47.UseVisualStyleBackColor = true;
+            this.button47.Click += new System.EventHandler(this.button47_Click);
             // 
             // _setting
             // 
@@ -15771,10 +15918,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown24)).EndInit();
             this.uiTitlePanel1.ResumeLayout(false);
             this.uiTitlePanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown59)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -16853,5 +17000,12 @@
         private System.Windows.Forms.NumericUpDown uiDoubleUpDown60;
         private System.Windows.Forms.NumericUpDown uiDoubleUpDown58;
         private System.Windows.Forms.NumericUpDown uiDoubleUpDown55;
+        private System.Windows.Forms.Button button25;
+        private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Button button24;
+        private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.Button button35;
+        private System.Windows.Forms.Button button41;
+        private System.Windows.Forms.Button button47;
     }
 }

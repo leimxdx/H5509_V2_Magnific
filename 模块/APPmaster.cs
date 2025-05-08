@@ -2,13 +2,17 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Drawing.Design;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Sunny.UI.Win32;
 
 namespace H5509_V2
 {
@@ -114,11 +118,30 @@ namespace H5509_V2
         public static Dictionary<string, string> Fix2DicBin { get; set; } = new Dictionary<string, string>();
         public static Dictionary<string, string> Fix3DicBin { get; set; } = new Dictionary<string, string>();
 
-        public static string Auto1 { get; set; } = "01";
-        public static string Auto2 { get; set; } = "02,03,04,05,06";
-        public static string Fix1 { get; set; } = "07";
-        public static string Fix2 { get; set; } = "08";
-        public static string Fix3 { get; set; } = "09";
+        public static int Fix1Num = 0;
+        public static int Fix2Num = 0;
+        public static int Fix3Num = 0;
+
+        public static string Auto1 = "01";
+        public static string Auto2 = "02,03,04,05,06";
+
+        public static string Fix1 = "07";
+        public static string Fix1_1 = "07";
+        public static string Fix1_2 = "07";
+        public static string Fix1_3 = "07";
+
+        public static string Fix2 = "08";
+        public static string Fix2_1 = "08";
+        public static string Fix2_2 = "08";
+        public static string Fix2_3 = "08";
+
+        public static string Fix3 = "09";
+        public static string Fix3_1 = "09";
+        public static string Fix3_2 = "09";
+        public static string Fix3_3 = "09";
+
+        public static string Oth;
+        public static string OthAll;
 
         public static bool 入料IC忽略 { get; set; }
 
@@ -138,9 +161,14 @@ namespace H5509_V2
 
         public static double 梭车行间距 = 32; //mm
 
+        public static double Tray_Y_Pitch
+        {
+            get { return 设置信息.Tray盘信息.Y_Pitch; }
+        }
+
         public static double 入料吸料间距 //tray吸
         {
-            get { return 初始点位.入料_变距最大值 - 设置信息.Tray盘信息.Y_Pitch * Interval; }
+            get { return 初始点位.入料_变距最大值 - Tray_Y_Pitch * Interval; }
         }
 
         public static double 入料放料间距 //梭车放
@@ -155,7 +183,7 @@ namespace H5509_V2
 
         public static double 出料放料间距 //tray放
         {
-            get { return 初始点位.出料_变距最大值 - 设置信息.Tray盘信息.Y_Pitch * Interval; }
+            get { return 初始点位.出料_变距最大值 - Tray_Y_Pitch * Interval; }
         }
 
         public static int[] SiteTestState = new int[16];
@@ -523,15 +551,15 @@ namespace H5509_V2
         public static void LoaderTrayICPointInit()
         {
             TrayInfo trayInfo = 设置信息.Tray盘信息;
-            OffsetPoint 点位微调 = 设置信息.OffsetPoint;
+            //OffsetPoint 点位微调 = 设置信息.OffsetPoint;
             double xStart = trayInfo.X_Start; //15.45;
             double xPitch = trayInfo.X_Pitch; //15;
             double yStart = trayInfo.Y_Start; //10.8;
             double yPitch = trayInfo.Y_Pitch; //16.3;
             int xNum = trayInfo.X_Num;
             int yNum = trayInfo.Y_Num;
-            double loaderx = 初始点位.入料_Load_X + 点位微调.入料_Load吸_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
-            double loadery = 初始点位.入料_Load_Y + 点位微调.入料_Load吸_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double loaderx = 初始点位.入料_Load_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double loadery = 初始点位.入料_Load_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
             double total = 初始点位.入料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             double[] loaderXPoint = new double[xNum];
@@ -588,29 +616,35 @@ namespace H5509_V2
         /// </summary>
         public static void Auto1TrayICPointInit()
         {
-            double xStart = 15.45;// (int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
-            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
-            double auto1x = 500;// motionEx.InitPointParam.OutputArm_Auto1_X + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_X;
-            double auto1y = 500;// motionEx.InitPointParam.OutputArm_Auto1_Y + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_Y; ;
-            double total = 41 - 10 * 2; //move 580
-            int move = (int)(total);
-            Auto1XPoint = new double[xNum];
-            Auto1YPoint = new double[yNum];
+            TrayInfo trayInfo = 设置信息.Tray盘信息;
+            //OffsetPoint 点位微调 = 设置信息.OffsetPoint;
+            double xStart = trayInfo.X_Start; //15.45;
+            double xPitch = trayInfo.X_Pitch; //15;
+            double yStart = trayInfo.Y_Start; //10.8;
+            double yPitch = trayInfo.Y_Pitch; //16.3;
+            int xNum = trayInfo.X_Num;
+            int yNum = trayInfo.Y_Num;
+            double loaderx = 初始点位.出料_Auto1_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double loadery = 初始点位.出料_Auto1_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
-            Auto1XPoint[0] = auto1x - xStart; //获取左上角第一颗芯片x轴坐标
+            double[] xPoint = new double[xNum];
+            double[] yPoint = new double[yNum];
+
+            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                Auto1XPoint[i] = Auto1XPoint[i - 1] - xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            Auto1YPoint[0] = auto1y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+
+            yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
-                Auto1YPoint[i] = Auto1YPoint[i - 1] - yPitch; //累加Y轴坐标
+                yPoint[i] = yPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+
+            Auto1XPoint = xPoint;
+            Auto1YPoint = yPoint;
         }
 
         /// <summary>
@@ -618,29 +652,35 @@ namespace H5509_V2
         /// </summary>
         public static void Auto2TrayICPointInit()
         {
-            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double xPitch = 15;//int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
-            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
-            double auto2x = 400;// motionEx.InitPointParam.OutputArm_Auto2_X + motionEx.OffsetParam.OutputArm.OutputArm_Auto2_X;
-            double auto2y = 400;// motionEx.InitPointParam.OutputArm_Auto2_Y + motionEx.OffsetParam.OutputArm.OutputArm_Auto2_Y;
-            double total = 41 - 10 * 2; //move 580
-            int move = (int)(total);
-            Auto2XPoint = new double[xNum];
-            Auto2YPoint = new double[yNum];
+            TrayInfo trayInfo = 设置信息.Tray盘信息;
+            //OffsetPoint 点位微调 = 设置信息.OffsetPoint;
+            double xStart = trayInfo.X_Start; //15.45;
+            double xPitch = trayInfo.X_Pitch; //15;
+            double yStart = trayInfo.Y_Start; //10.8;
+            double yPitch = trayInfo.Y_Pitch; //16.3;
+            int xNum = trayInfo.X_Num;
+            int yNum = trayInfo.Y_Num;
+            double loaderx = 初始点位.出料_Auto2_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double loadery = 初始点位.出料_Auto2_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
-            Auto2XPoint[0] = auto2x - xStart; //获取左上角第一颗芯片x轴坐标
+            double[] xPoint = new double[xNum];
+            double[] yPoint = new double[yNum];
+
+            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                Auto2XPoint[i] = Auto2XPoint[i - 1] - xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            Auto2YPoint[0] = auto2y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+
+            yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
-                Auto2YPoint[i] = Auto2YPoint[i - 1] - yPitch; //累加Y轴坐标
+                yPoint[i] = yPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+
+            Auto2XPoint = xPoint;
+            Auto2YPoint = yPoint;
         }
 
         /// <summary>
@@ -648,29 +688,35 @@ namespace H5509_V2
         /// </summary>
         public static void Fix1TrayICPointInit()
         {
-            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
-            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
-            double fix1x = 300;// motionEx.InitPointParam.OutputArm_Fix1_X + motionEx.OffsetParam.OutputArm.OutputArm_Fix1_X;
-            double fix1y = 300;// motionEx.InitPointParam.OutputArm_Fix1_Y + motionEx.OffsetParam.OutputArm.OutputArm_Fix1_Y;
-            double total = 41 - 10 * 2; //move 580
-            int move = (int)(total);
-            Fix1XPoint = new double[xNum];
-            Fix1YPoint = new double[yNum];
+            TrayInfo trayInfo = 设置信息.Tray盘信息;
+            //OffsetPoint 点位微调 = 设置信息.OffsetPoint;
+            double xStart = trayInfo.X_Start; //15.45;
+            double xPitch = trayInfo.X_Pitch; //15;
+            double yStart = trayInfo.Y_Start; //10.8;
+            double yPitch = trayInfo.Y_Pitch; //16.3;
+            int xNum = trayInfo.X_Num;
+            int yNum = trayInfo.Y_Num;
+            double loaderx = 初始点位.出料_Fix1_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double loadery = 初始点位.出料_Fix1_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
-            Fix1XPoint[0] = fix1x - xStart; //获取左上角第一颗芯片x轴坐标
+            double[] xPoint = new double[xNum];
+            double[] yPoint = new double[yNum];
+
+            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                Fix1XPoint[i] = Fix1XPoint[i - 1] - xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            Fix1YPoint[0] = fix1y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+
+            yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
-                Fix1YPoint[i] = Fix1YPoint[i - 1] - yPitch; //累加Y轴坐标
+                yPoint[i] = yPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+
+            Fix1XPoint = xPoint;
+            Fix1YPoint = yPoint;
         }
 
         /// <summary>
@@ -678,29 +724,35 @@ namespace H5509_V2
         /// </summary>
         public static void Fix2TrayICPointInit()
         {
-            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
-            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
-            double fix2x = 200;// motionEx.InitPointParam.OutputArm_Fix2_X + motionEx.OffsetParam.OutputArm.OutputArm_Fix2_X;
-            double fix2y = 200;// motionEx.InitPointParam.OutputArm_Fix2_Y + motionEx.OffsetParam.OutputArm.OutputArm_Fix2_Y;
-            double total = 41 - 10 * 2; //move 580
-            int move = (int)(total);
-            Fix2XPoint = new double[xNum];
-            Fix2YPoint = new double[yNum];
+            TrayInfo trayInfo = 设置信息.Tray盘信息;
+            //OffsetPoint 点位微调 = 设置信息.OffsetPoint;
+            double xStart = trayInfo.X_Start; //15.45;
+            double xPitch = trayInfo.X_Pitch; //15;
+            double yStart = trayInfo.Y_Start; //10.8;
+            double yPitch = trayInfo.Y_Pitch; //16.3;
+            int xNum = trayInfo.X_Num;
+            int yNum = trayInfo.Y_Num;
+            double loaderx = 初始点位.出料_Fix2_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double loadery = 初始点位.出料_Fix2_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
-            Fix2XPoint[0] = fix2x - xStart; //获取左上角第一颗芯片x轴坐标
+            double[] xPoint = new double[xNum];
+            double[] yPoint = new double[yNum];
+
+            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                Fix2XPoint[i] = Fix2XPoint[i - 1] - xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            Fix2YPoint[0] = fix2y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+
+            yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
-                Fix2YPoint[i] = Fix2YPoint[i - 1] - yPitch; //累加Y轴坐标
+                yPoint[i] = yPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+
+            Fix2XPoint = xPoint;
+            Fix2YPoint = yPoint;
         }
 
         /// <summary>
@@ -708,29 +760,35 @@ namespace H5509_V2
         /// </summary>
         public static void Fix3TrayICPointInit()
         {
-            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double xPitch = 15;// (int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
-            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
-            double fix3x = 100;// motionEx.InitPointParam.OutputArm_Fix3_X + motionEx.OffsetParam.OutputArm.OutputArm_Fix3_X;
-            double fix3y = 100;// motionEx.InitPointParam.OutputArm_Fix3_Y + motionEx.OffsetParam.OutputArm.OutputArm_Fix3_Y;
-            double total = 41 - 10 * 2; //move 580
-            int move = (int)(total);
-            Fix3XPoint = new double[xNum];
-            Fix3YPoint = new double[yNum];
+            TrayInfo trayInfo = 设置信息.Tray盘信息;
+            //OffsetPoint 点位微调 = 设置信息.OffsetPoint;
+            double xStart = trayInfo.X_Start; //15.45;
+            double xPitch = trayInfo.X_Pitch; //15;
+            double yStart = trayInfo.Y_Start; //10.8;
+            double yPitch = trayInfo.Y_Pitch; //16.3;
+            int xNum = trayInfo.X_Num;
+            int yNum = trayInfo.Y_Num;
+            double loaderx = 初始点位.出料_Fix3_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double loadery = 初始点位.出料_Fix3_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
-            Fix3XPoint[0] = fix3x - xStart; //获取左上角第一颗芯片x轴坐标
+            double[] xPoint = new double[xNum];
+            double[] yPoint = new double[yNum];
+
+            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                Fix3XPoint[i] = Fix3XPoint[i - 1] - xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            Fix3YPoint[0] = fix3y - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+
+            yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
-                Fix3YPoint[i] = Fix3YPoint[i - 1] - yPitch; //累加Y轴坐标
+                yPoint[i] = yPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+
+            Fix3XPoint = xPoint;
+            Fix3YPoint = yPoint;
         }
 
         /// <summary>
@@ -760,10 +818,10 @@ namespace H5509_V2
         public static string GetTestXPoint(short site, out double xPos)
         {
             xPos = 0;
-            double testx1pos = Testx1pos;
-            double testx2pos = Testx2pos;
-            double testx3pos = Testx3pos;
-            double testx4pos = Testx4pos;
+            double testx1pos = 初始点位.测试_Test1区_X;
+            double testx2pos = 初始点位.测试_Test2区_X;
+            double testx3pos = 初始点位.测试_Test3区_X;
+            double testx4pos = 初始点位.测试_Test4区_X;
             switch (site)
             {
                 case 0: xPos = testx1pos; break;
@@ -1005,7 +1063,7 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Auto1盘坐标(bool ishave, out short xPoint, out short yPoint)
+        public static bool 获取Auto1盘坐标(bool ishave, out int xPoint, out int yPoint)
         {
             xPoint = yPoint = 0;
             for (short x = 0; x < Auto1XPoint.Length; x++)
@@ -1023,7 +1081,7 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Auto2盘坐标(bool ishave, out short xPoint, out short yPoint)
+        public static bool 获取Auto2盘坐标(bool ishave, out int xPoint, out int yPoint)
         {
             xPoint = yPoint = 0;
             for (short x = 0; x < Auto2XPoint.Length; x++)
@@ -1041,14 +1099,15 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Fix1盘坐标(bool ishave, out short xPoint, out short yPoint)
+        public static bool 获取Fix1盘坐标(bool ishave, int min, int max,  out int xPoint, out int yPoint)
         {
-            xPoint = yPoint = 0;
-            for (short x = 0; x < Auto1XPoint.Length; x++)
+            xPoint = 0;
+            yPoint = min;
+            for (int x = 0; x < Fix1XPoint.Length; x++)
             {
-                for (short y = 0; y < Auto1YPoint.Length; y++)
+                for (int y = min; y < max; y++)
                 {
-                    if (Auto1DicPoint[$"{x},{y}"] == ishave)
+                    if (Fix1DicPoint[$"{x},{y}"] == ishave)
                     {
                         xPoint = x;
                         yPoint = y;
@@ -1059,12 +1118,13 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Fix2盘坐标(bool ishave, out short xPoint, out short yPoint)
+        public static bool 获取Fix2盘坐标(bool ishave, int min, int max, out int xPoint, out int yPoint)
         {
-            xPoint = yPoint = 0;
-            for (short x = 0; x < Fix2XPoint.Length; x++)
+            xPoint = 0;
+            yPoint = min;
+            for (int x = 0; x < Fix2XPoint.Length; x++)
             {
-                for (short y = 0; y < Fix2YPoint.Length; y++)
+                for (int y = min; y < max; y++)
                 {
                     if (Fix2DicPoint[$"{x},{y}"] == ishave)
                     {
@@ -1077,12 +1137,13 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Fix3盘坐标(bool ishave, out short xPoint, out short yPoint)
+        public static bool 获取Fix3盘坐标(bool ishave, int min, int max, out int xPoint, out int yPoint)
         {
-            xPoint = yPoint = 0;
-            for (short x = 0; x < Fix3XPoint.Length; x++)
+            xPoint = 0;
+            yPoint = min;
+            for (int x = 0; x < Fix3XPoint.Length; x++)
             {
-                for (short y = 0; y < Fix3YPoint.Length; y++)
+                for (int y = min; y < max; y++)
                 {
                     if (Fix3DicPoint[$"{x},{y}"] == ishave)
                     {
@@ -1375,7 +1436,7 @@ namespace H5509_V2
         public static bool 获取Auto1盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
-            if (获取Auto1盘坐标(false, out short xPoint, out short yPoint))
+            if (获取Auto1盘坐标(false, out int xPoint, out int yPoint))
             {
                 xPos = Auto1XPoint[xPoint];
                 yPos = Auto1YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
@@ -1387,7 +1448,7 @@ namespace H5509_V2
         public static bool 获取Auto2盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
-            if (获取Auto2盘坐标(false, out short xPoint, out short yPoint))
+            if (获取Auto2盘坐标(false, out int xPoint, out int yPoint))
             {
                 xPos = Auto2XPoint[xPoint];
                 yPos = Auto2YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
@@ -1396,43 +1457,10 @@ namespace H5509_V2
             else return false;
         }
 
-        public static bool 获取Fix1盘位置(int index, out double xPos, out double yPos)
-        {
-            xPos = yPos = 0;
-            if (获取Fix1盘坐标(false, out short xPoint, out short yPoint))
-            {
-                xPos = Fix1XPoint[xPoint];
-                yPos = Fix1YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
-                return true;
-            }
-            else return false;
-        }
+     
+      
 
-        public static bool 获取Fix2盘位置(int index, out double xPos, out double yPos)
-        {
-            xPos = yPos = 0;
-            if (获取Fix2盘坐标(false, out short xPoint, out short yPoint))
-            {
-                xPos = Fix2XPoint[xPoint];
-                yPos = Fix2YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
-                return true;
-            }
-            else return false;
-        }
-
-        public static bool 获取Fix3盘位置(int index, out double xPos, out double yPos)
-        {
-            xPos = yPos = 0;
-            if (获取Fix3盘坐标(false, out short xPoint, out short yPoint))
-            {
-                xPos = Fix3XPoint[xPoint];
-                yPos = Fix3YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch
-                return true;
-            }
-            else return false;
-        }
-
-        public static string 获取Load盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static string 获取Load盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             lsopen = new bool[opens.Length];
@@ -1458,7 +1486,7 @@ namespace H5509_V2
             return "Success";
         }
 
-        public static string 获取Auto1盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static string 获取Auto1盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             lsopen = new bool[opens.Length];
@@ -1484,7 +1512,7 @@ namespace H5509_V2
             return "Success";
         }
 
-        public static string 获取Auto2盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static string 获取Auto2盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             lsopen = new bool[opens.Length];
@@ -1510,20 +1538,193 @@ namespace H5509_V2
             return "Success";
         }
 
-        public static string 获取Fix1盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static void FixMinMax(int bintype, int binarea, int fixleng, out int min, out int max)
         {
-            xPos = yPos = 0;
+            min = 0;
+            max = fixleng; //19
+            if (bintype == 2) //分两区
+            {
+                if (binarea == 1) //分两区的1区
+                {
+                    min = 0;
+                    max = fixleng / 2;
+                }
+                else if (binarea == 2) //分两区的2区
+                {
+                    min = fixleng / 2 + 1; //+1
+                    max = fixleng;
+                }
+            }
+            else if (bintype == 3)//分三区
+            {
+                if (binarea == 1) //分两区的1区
+                {
+                    min = 0;
+                    max = fixleng / 3;
+                }
+                else if (binarea == 2) //分两区的2区
+                {
+                    min = fixleng / 3 + 1;
+                    max = fixleng / 3 * 2 + 1;
+                }
+                else if (binarea == 3) //分两区的2区
+                {
+                    min = fixleng / 3 * 2 + 2;
+                    max = fixleng;
+                }
+            }
+        }
+
+        public static string 判断Auto1BIN项(int[] open, string[] bin)
+        {
+            if (!open.Contains(1)) return "Fail"; //如果没有1说明吸嘴上已无料
+
+            if (判断BIN项(open, Auto1, bin, out int index))
+            {
+                return "Success";
+            }
+            else return "Fail";
+        }
+        public static string 判断Auto2BIN项(int[] open, string[] bin)
+        {
+            if (!open.Contains(1)) return "Fail"; //如果没有1说明吸嘴上已无料
+
+            if (判断BIN项(open, Auto2, bin, out int index))
+            {
+                return "Success";
+            }
+            else return "Fail";
+        }
+        public static string 判断Fix1BIN项(int[] open, string[] bin)
+        {
+            if (!open.Contains(1)) return "Fail"; //如果没有1说明吸嘴上已无料
+
+            if (Fix1Num == 1)
+            {
+                if (判断BIN项(open, Fix1, bin, out int index))
+                {
+                    return "Success";
+                }
+            }
+            else if (Fix1Num == 2)
+            {
+                if (判断BIN项(open, Fix1_1, bin, out int index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix1_2, bin, out index))
+                {
+                    return "Success";
+                }
+            }
+            else if (Fix1Num == 3)
+            {
+                if (判断BIN项(open, Fix1_1, bin, out int index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix1_2, bin, out index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix1_3, bin, out index))
+                {
+                    return "Success";
+                }
+            }
+            return "Fail";
+        }
+
+        public static string 判断Fix2BIN项(int[] open, string[] bin)
+        {
+            if (!open.Contains(1)) return "Fail"; //如果没有1说明吸嘴上已无料
+
+            if (Fix2Num == 1)
+            {
+                if (判断BIN项(open, Fix2, bin, out int index))
+                {
+                    return "Success";
+                }
+            }
+            else if (Fix2Num == 2)
+            {
+                if (判断BIN项(open, Fix2_1, bin, out int index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix2_2, bin, out index))
+                {
+                    return "Success";
+                }
+            }
+            else if (Fix2Num == 3)
+            {
+                if (判断BIN项(open, Fix2_1, bin, out int index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix2_2, bin, out index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix2_3, bin, out index))
+                {
+                    return "Success";
+                }
+            }
+            return "Fail";
+        }
+
+        public static string 判断Fix3BIN项(int[] open, string[] bin)
+        {
+            if (!open.Contains(1)) return "Fail"; //如果没有1说明吸嘴上已无料
+
+            if (Fix3Num == 1)
+            {
+                if (判断BIN项(open, Fix3, bin, out int index))
+                {
+                    return "Success";
+                }
+            }
+            else if (Fix3Num == 2)
+            {
+                if (判断BIN项(open, Fix3_1, bin, out int index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix3_2, bin, out index))
+                {
+                    return "Success";
+                }
+            }
+            else if (Fix3Num == 3)
+            {
+                if (判断BIN项(open, Fix3_1, bin, out int index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix3_2, bin, out index))
+                {
+                    return "Success";
+                }
+                else if (判断BIN项(open, Fix3_3, bin, out index))
+                {
+                    return "Success";
+                }
+            }
+            return "Fail";
+        }
+
+        public static void 获取Fix1盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, out int index)
+        {
             lsopen = new bool[opens.Length];
-
-            if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Fix1盘位置(index, out xPos, out yPos)) return "获取Fix1盘位置失败!";
-
+            获取吸嘴索引(opens, 1, out index);
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= Fix1YPoint.Length) break;
+                if (yPoint + i * Interval >= max) break;
                 if (Fix1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1)
+                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -1533,23 +1734,18 @@ namespace H5509_V2
                     }
                 }
             }
-            return "Success";
         }
 
-        public static string 获取Fix2盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static void 获取Fix2盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, out int index)
         {
-            xPos = yPos = 0;
             lsopen = new bool[opens.Length];
-
-            if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Fix2盘位置(index, out xPos, out yPos)) return "获取Fix2盘位置失败!";
-
+            获取吸嘴索引(opens, 1, out index);
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= Fix2YPoint.Length) break;
+                if (yPoint + i * Interval >= max) break;
                 if (Fix2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1)
+                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -1559,23 +1755,18 @@ namespace H5509_V2
                     }
                 }
             }
-            return "Success";
         }
 
-        public static string 获取Fix3盘Open(int[] opens, short xPoint, short yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static void 获取Fix3盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, out int index)
         {
-            xPos = yPos = 0;
             lsopen = new bool[opens.Length];
-
-            if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Fix3盘位置(index, out xPos, out yPos)) return "获取Fix3盘位置失败!";
-
+            获取吸嘴索引(opens, 1, out index);
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= Fix3YPoint.Length) break;
+                if (yPoint + i * Interval >= max) break;
                 if (Fix3DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1)
+                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -1585,7 +1776,6 @@ namespace H5509_V2
                     }
                 }
             }
-            return "Success";
         }
 
         public static double[] 获取梭车xyp放料点位(int colum)
@@ -1624,6 +1814,41 @@ namespace H5509_V2
             return pos;
         }
 
+        public static double[] 获取梭车xyp吸料点位(int colum)
+        {
+            double[] pos = new double[3];
+            if (飞梭2位置 == 0) //梭车2在后，梭车1在前
+            {
+                if (colum == 0) //梭车1第1列
+                {
+                    pos[0] = 初始点位.出料_梭车1_X;
+                    pos[1] = 初始点位.出料_梭车1_Y;
+                    pos[2] = 出料吸料间距;
+                }
+                else  //梭车1第2列
+                {
+                    pos[0] = 初始点位.出料_梭车1_X - 梭车列间距;
+                    pos[1] = 初始点位.出料_梭车1_Y;
+                    pos[2] = 出料吸料间距;
+                }
+            }
+            else //梭车2在前，梭车1后
+            {
+                if (colum == 0) //梭车2第1列
+                {
+                    pos[0] = 初始点位.出料_梭车2_X;
+                    pos[1] = 初始点位.出料_梭车2_Y;
+                    pos[2] = 出料吸料间距;
+                }
+                else  //梭车2第2列
+                {
+                    pos[0] = 初始点位.出料_梭车2_X - 梭车列间距;
+                    pos[1] = 初始点位.出料_梭车2_Y;
+                    pos[2] = 出料吸料间距;
+                }
+            }
+            return pos;
+        }
         public static double 获取梭车Z放料点位(int colum)
         {
             if (飞梭2位置 == 0)
@@ -1633,6 +1858,17 @@ namespace H5509_V2
             else
             {
                 return 初始点位.入料_梭车2_Z;
+            }
+        }
+        public static double 获取梭车Z吸料点位(int colum)
+        {
+            if (飞梭2位置 == 0)
+            {
+                return 初始点位.出料_梭车1_Z;
+            }
+            else
+            {
+                return 初始点位.出料_梭车2_Z;
             }
         }
     }

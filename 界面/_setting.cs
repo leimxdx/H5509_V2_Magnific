@@ -5,6 +5,9 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
+using System.Resources;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,6 +15,7 @@ using System.Windows.Forms;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
 
@@ -467,6 +471,289 @@ namespace H5509_V2
 
         private void button89_Click(object sender, EventArgs e)
         {
+            //放料
+            PS出料手臂吸放料流程.StepName = "计算放料盘位置";
+            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
+
+            int[] open = new int[4] { 1, 1, 1,1 };
+            string[] bin = new string[4] { "01", "01", "01","01" };
+            int xPoint = 0;
+            int yPoint = 0;
+            bool[] lsopen = new bool[4];
+            string result = "";
+            int trayid = 0;
+            int index = 0;
+            double xPos = 0;
+            double yPos = 0;
+
+            while (true)
+            {
+                if (判断Auto1BIN项(open, bin) == "Success")
+                {
+                    if (获取Auto1盘坐标(false, out xPoint, out yPoint))
+                    {
+                        result = APPmaster.获取Auto1盘Open(open, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                        if (result == "Success")
+                        {
+                            trayid = 0;
+                            PS出料手臂吸放料流程.StepID = 710;
+                            //break;
+                        }
+                    }
+                }
+                else if (判断Auto2BIN项(open, bin) == "Success")
+                {
+                    if (获取Auto2盘坐标(false, out xPoint, out yPoint))
+                    {
+                        result = APPmaster.获取Auto2盘Open(open, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+
+                        if (result == "Success")
+                        {
+                            trayid = 1;
+                            PS出料手臂吸放料流程.StepID = 710;
+                            // break;
+                        }
+                    }
+                }
+                else if (判断Fix1BIN项(open, bin) == "Success")
+                {
+                    if (Fix1Num == 1)
+                    {
+                        if (判断BIN项(open, Fix1, bin, out index))
+                        {
+                            FixMinMax(1, 1, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix1盘Open(open, xPoint, yPoint, Fix1, bin, max, out lsopen, out index);
+                                xPos = Fix1XPoint[xPoint];
+                                yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 3;
+                            }
+                        }
+                    }
+                    else if (Fix1Num == 2)
+                    {
+                        if (判断BIN项(open, Fix1_1, bin, out index))
+                        {
+                            FixMinMax(2, 1, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix1盘Open(open, xPoint, yPoint, Fix1_1, bin, max, out lsopen, out index);
+                                xPos = Fix1XPoint[xPoint];
+                                yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 3;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix1_2, bin, out index))
+                        {
+                            FixMinMax(2, 2, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix1盘Open(open, xPoint, yPoint, Fix1_2, bin, max, out lsopen, out index);
+                                xPos = Fix1XPoint[xPoint];
+                                yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 3;
+                            }
+                        }
+                    }
+                    else if (Fix1Num == 3)
+                    {
+                        if (判断BIN项(open, Fix1_1, bin, out index))
+                        {
+                            FixMinMax(3, 1, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix1盘Open(open, xPoint, yPoint, Fix1_1, bin, max, out lsopen, out index);
+                                xPos = Fix1XPoint[xPoint];
+                                yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 3;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix1_2, bin, out index))
+                        {
+                            FixMinMax(3, 2, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix1盘Open(open, xPoint, yPoint, Fix1_2, bin, max, out lsopen, out index);
+                                xPos = Fix1XPoint[xPoint];
+                                yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 3;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix1_3, bin, out index))
+                        {
+                            FixMinMax(3, 3, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix1盘Open(open, xPoint, yPoint, Fix1_3, bin, max, out lsopen, out index);
+                                xPos = Fix1XPoint[xPoint];
+                                yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 3;
+                            }
+                        }
+                    }
+                }
+                else if (判断Fix2BIN项(open, bin) == "Success")
+                {
+                    if (Fix2Num == 1)
+                    {
+                        if (判断BIN项(open, Fix2, bin, out index))
+                        {
+                            FixMinMax(1, 1, Fix2YPoint.Length, out int min, out int max);
+                            if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix2盘Open(open, xPoint, yPoint, Fix2, bin, max, out lsopen, out index);
+                                xPos = Fix2XPoint[xPoint];
+                                yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 4;
+                            }
+                        }
+                    }
+                    else if (Fix2Num == 2)
+                    {
+                        if (判断BIN项(open, Fix2_1, bin, out index))
+                        {
+                            FixMinMax(2, 1, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix2盘Open(open, xPoint, yPoint, Fix2_1, bin, max, out lsopen, out index);
+                                xPos = Fix2XPoint[xPoint];
+                                yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 4;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix2_2, bin, out index))
+                        {
+                            FixMinMax(2, 2, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix2盘Open(open, xPoint, yPoint, Fix2_2, bin, max, out lsopen, out index);
+                                xPos = Fix2XPoint[xPoint];
+                                yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 4;
+                            }
+                        }
+                    }
+                    else if (Fix2Num == 3)
+                    {
+                        if (判断BIN项(open, Fix2_1, bin, out index))
+                        {
+                            FixMinMax(3, 1, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix2盘Open(open, xPoint, yPoint, Fix2_1, bin, max, out lsopen, out index);
+                                xPos = Fix2XPoint[xPoint];
+                                yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 4;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix2_2, bin, out index))
+                        {
+                            FixMinMax(3, 2, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix2盘Open(open, xPoint, yPoint, Fix2_2, bin, max, out lsopen, out index);
+                                xPos = Fix2XPoint[xPoint];
+                                yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 4;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix2_3, bin, out index))
+                        {
+                            FixMinMax(3, 3, Fix1YPoint.Length, out int min, out int max);
+                            if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix2盘Open(open, xPoint, yPoint, Fix2_3, bin, max, out lsopen, out index);
+                                xPos = Fix2XPoint[xPoint];
+                                yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 4;
+                            }
+                        }
+                    }
+                }
+                else if (判断Fix3BIN项(open, bin) == "Success")
+                {
+                    if (Fix3Num == 1)
+                    {
+                        if (判断BIN项(open, Fix3, bin, out index))
+                        {
+                            FixMinMax(1, 1, Fix3YPoint.Length, out int min, out int max);
+                            if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix3盘Open(open, xPoint, yPoint, Fix3, bin, max, out lsopen, out index);
+                                xPos = Fix3XPoint[xPoint];
+                                yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 5;
+                            }
+                        }
+                    }
+                    else if (Fix3Num == 2)
+                    {
+                        if (判断BIN项(open, Fix3_1, bin, out index))
+                        {
+                            FixMinMax(2, 1, Fix3YPoint.Length, out int min, out int max);
+                            if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix3盘Open(open, xPoint, yPoint, Fix3_1, bin, max, out lsopen, out index);
+                                xPos = Fix3XPoint[xPoint];
+                                yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 5;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix3_2, bin, out index))
+                        {
+                            FixMinMax(2, 2, Fix3YPoint.Length, out int min, out int max);
+                            if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix3盘Open(open, xPoint, yPoint, Fix3_2, bin, max, out lsopen, out index);
+                                xPos = Fix3XPoint[xPoint];
+                                yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 5;
+                            }
+                        }
+                    }
+                    else if (Fix3Num == 3)
+                    {
+                        if (判断BIN项(open, Fix3_1, bin, out index))
+                        {
+                            FixMinMax(3, 1, Fix3YPoint.Length, out int min, out int max);
+                            if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix3盘Open(open, xPoint, yPoint, Fix3_1, bin, max, out lsopen, out index);
+                                xPos = Fix3XPoint[xPoint];
+                                yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 5;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix3_2, bin, out index))
+                        {
+                            FixMinMax(3, 2, Fix3YPoint.Length, out int min, out int max);
+                            if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix3盘Open(open, xPoint, yPoint, Fix3_2, bin, max, out lsopen, out index);
+                                xPos = Fix3XPoint[xPoint];
+                                yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 5;
+                            }
+                        }
+                        else if (判断BIN项(open, Fix3_3, bin, out index))
+                        {
+                            FixMinMax(3, 3, Fix3YPoint.Length, out int min, out int max);
+                            if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
+                            {
+                                获取Fix3盘Open(open, xPoint, yPoint, Fix3_3, bin, max, out lsopen, out index);
+                                xPos = Fix3XPoint[xPoint];
+                                yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                trayid = 5;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    PS出料手臂吸放料流程.StepID = 505;
+                }
+            }
             //PS测试手臂取已测料流程.Condition = 飞梭后出料状态 == 0 && APPmaster.SiteSaveQueue.Count > 0;
 
             //PS测试手臂取待测料流程.Condition = 飞梭后入料状态 == 1 && (飞梭后出料状态 == 1 || APPmaster.SiteSaveQueue.Count == 0);
@@ -791,16 +1078,17 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button156_Click(object sender, EventArgs e)
         {
-            APPmaster.GetAxisCore(cobox_axisname.Text, out short core, out short axis);
-
             AxisHomeInfo axisHome = GetHomeValue();
             if (axisHome != null)
             {
-                string result = motion.UniaxialHome(axisHome);
-                if (result != "Success")
+                Task.Run(() =>
                 {
-                    MessageBox.Show("执行失败!详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                    string result = 单轴回零(axisHome);
+                    if (result != "Success")
+                    {
+                        MessageBox.Show("执行失败!详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                });
             }
         }
 
@@ -1233,6 +1521,20 @@ namespace H5509_V2
                     });
                     result = task.Result;
                 }
+            }
+            return result;
+        }
+
+        private string 单轴回零(AxisHomeInfo axisHomeInfo)
+        {
+            string result = motion.UniaxialHome(axisHomeInfo);
+            if (result == "Success")
+            {
+                Task<string> task = Task.Run(() =>
+                {
+                    return WaitAxisHome(axisHomeInfo);
+                });
+                result = task.Result;
             }
             return result;
         }
@@ -1869,7 +2171,7 @@ namespace H5509_V2
 
         private void button131_Click(object sender, EventArgs e)
         {
-            飞梭后出料状态 = 1;
+            //飞梭后出料状态 = 1;
         }
 
         private void button165_Click(object sender, EventArgs e)
@@ -2446,7 +2748,7 @@ namespace H5509_V2
             return false;
         }
 
-        public bool UpdateRunInfoData(string pointname,string valuename,  double newvalue, double oldvalue)
+        public bool UpdateRunInfoData(string pointname, string valuename, double newvalue, double oldvalue)
         {
             if (newvalue != oldvalue)
             {
@@ -2472,94 +2774,94 @@ namespace H5509_V2
             DialogResult result = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
-                if (UpdateInitPointData("入料_Load_X",  Convert.ToDouble(uiDoubleUpDown99.Text), 初始点位.入料_Load_X))
+                if (UpdateInitPointData("入料_Load_X", Convert.ToDouble(uiDoubleUpDown99.Text), 初始点位.入料_Load_X))
                 {
                     初始点位.入料_Load_X = Convert.ToDouble(uiDoubleUpDown99.Value);
                     LoaderTrayICPointInit();
                 }
-                if (UpdateInitPointData("入料_Load_Y",  Convert.ToDouble(uiDoubleUpDown97.Text), 初始点位.入料_Load_Y))
+                if (UpdateInitPointData("入料_Load_Y", Convert.ToDouble(uiDoubleUpDown97.Text), 初始点位.入料_Load_Y))
                 {
                     初始点位.入料_Load_Y = Convert.ToDouble(uiDoubleUpDown97.Value);
                     LoaderTrayICPointInit();
                 }
-                if (UpdateInitPointData("入料_Load_Z",  Convert.ToDouble(uiDoubleUpDown98.Text), 初始点位.入料_Load_Z)) 初始点位.入料_Load_Z = Convert.ToDouble(uiDoubleUpDown98.Value);
-                if (UpdateInitPointData("入料_Heat_X",  Convert.ToDouble(uiDoubleUpDown108.Text), 初始点位.入料_Heat_X))
+                if (UpdateInitPointData("入料_Load_Z", Convert.ToDouble(uiDoubleUpDown98.Text), 初始点位.入料_Load_Z)) 初始点位.入料_Load_Z = Convert.ToDouble(uiDoubleUpDown98.Value);
+                if (UpdateInitPointData("入料_Heat_X", Convert.ToDouble(uiDoubleUpDown108.Text), 初始点位.入料_Heat_X))
                 {
                     初始点位.入料_Heat_X = Convert.ToDouble(uiDoubleUpDown108.Value);
                     HeatTrayICPointInit();
                 }
-                if (UpdateInitPointData("入料_Heat_Y",  Convert.ToDouble(uiDoubleUpDown107.Text), 初始点位.入料_Heat_Y))
+                if (UpdateInitPointData("入料_Heat_Y", Convert.ToDouble(uiDoubleUpDown107.Text), 初始点位.入料_Heat_Y))
                 {
                     初始点位.入料_Heat_Y = Convert.ToDouble(uiDoubleUpDown107.Value);
                     HeatTrayICPointInit();
                 }
-                if (UpdateInitPointData("入料_Heat_Z",  Convert.ToDouble(uiDoubleUpDown106.Text), 初始点位.入料_Heat_Z)) 初始点位.入料_Heat_Z = Convert.ToDouble(uiDoubleUpDown106.Value);
+                if (UpdateInitPointData("入料_Heat_Z", Convert.ToDouble(uiDoubleUpDown106.Text), 初始点位.入料_Heat_Z)) 初始点位.入料_Heat_Z = Convert.ToDouble(uiDoubleUpDown106.Value);
 
-                if (UpdateInitPointData("入料_梭车1_X",  Convert.ToDouble(uiDoubleUpDown102.Text), 初始点位.入料_梭车1_X)) 初始点位.入料_梭车1_X = Convert.ToDouble(uiDoubleUpDown102.Value);
-                if (UpdateInitPointData("入料_梭车1_Y",  Convert.ToDouble(uiDoubleUpDown101.Text), 初始点位.入料_梭车1_Y)) 初始点位.入料_梭车1_Y = Convert.ToDouble(uiDoubleUpDown101.Value);
-                if (UpdateInitPointData("入料_梭车1_Z",  Convert.ToDouble(uiDoubleUpDown100.Text), 初始点位.入料_梭车1_Z)) 初始点位.入料_梭车1_Z = Convert.ToDouble(uiDoubleUpDown100.Value);
-                if (UpdateInitPointData("入料_梭车2_X",  Convert.ToDouble(uiDoubleUpDown114.Text), 初始点位.入料_梭车2_X)) 初始点位.入料_梭车2_X = Convert.ToDouble(uiDoubleUpDown114.Value);
-                if (UpdateInitPointData("入料_梭车2_Y",  Convert.ToDouble(uiDoubleUpDown113.Text), 初始点位.入料_梭车2_Y)) 初始点位.入料_梭车2_Y = Convert.ToDouble(uiDoubleUpDown113.Value);
-                if (UpdateInitPointData("入料_梭车2_Z",  Convert.ToDouble(uiDoubleUpDown112.Text), 初始点位.入料_梭车2_Z)) 初始点位.入料_梭车2_Z = Convert.ToDouble(uiDoubleUpDown112.Value);
+                if (UpdateInitPointData("入料_梭车1_X", Convert.ToDouble(uiDoubleUpDown102.Text), 初始点位.入料_梭车1_X)) 初始点位.入料_梭车1_X = Convert.ToDouble(uiDoubleUpDown102.Value);
+                if (UpdateInitPointData("入料_梭车1_Y", Convert.ToDouble(uiDoubleUpDown101.Text), 初始点位.入料_梭车1_Y)) 初始点位.入料_梭车1_Y = Convert.ToDouble(uiDoubleUpDown101.Value);
+                if (UpdateInitPointData("入料_梭车1_Z", Convert.ToDouble(uiDoubleUpDown100.Text), 初始点位.入料_梭车1_Z)) 初始点位.入料_梭车1_Z = Convert.ToDouble(uiDoubleUpDown100.Value);
+                if (UpdateInitPointData("入料_梭车2_X", Convert.ToDouble(uiDoubleUpDown114.Text), 初始点位.入料_梭车2_X)) 初始点位.入料_梭车2_X = Convert.ToDouble(uiDoubleUpDown114.Value);
+                if (UpdateInitPointData("入料_梭车2_Y", Convert.ToDouble(uiDoubleUpDown113.Text), 初始点位.入料_梭车2_Y)) 初始点位.入料_梭车2_Y = Convert.ToDouble(uiDoubleUpDown113.Value);
+                if (UpdateInitPointData("入料_梭车2_Z", Convert.ToDouble(uiDoubleUpDown112.Text), 初始点位.入料_梭车2_Z)) 初始点位.入料_梭车2_Z = Convert.ToDouble(uiDoubleUpDown112.Value);
 
-                if (UpdateInitPointData("入料_变距最小值",  Convert.ToDouble(uiDoubleUpDown105.Text), 初始点位.入料_变距最小值))
+                if (UpdateInitPointData("入料_变距最小值", Convert.ToDouble(uiDoubleUpDown105.Text), 初始点位.入料_变距最小值))
                 {
                     初始点位.入料_变距最小值 = Convert.ToDouble(uiDoubleUpDown105.Value);
                     LoaderTrayICPointInit();
                     HeatTrayICPointInit();
                 }
-                if (UpdateInitPointData("入料_变距最大值",  Convert.ToDouble(uiDoubleUpDown104.Text), 初始点位.入料_变距最大值))
+                if (UpdateInitPointData("入料_变距最大值", Convert.ToDouble(uiDoubleUpDown104.Text), 初始点位.入料_变距最大值))
                 {
                     初始点位.入料_变距最大值 = Convert.ToDouble(uiDoubleUpDown104.Value);
                     LoaderTrayICPointInit();
                     HeatTrayICPointInit();
                 }
-                if (UpdateInitPointData("入料_梭车列间隔",  Convert.ToDouble(uiDoubleUpDown103.Text), 初始点位.入料_梭车列间隔)) 初始点位.入料_梭车列间隔 = Convert.ToDouble(uiDoubleUpDown103.Value);
-                if (UpdateInitPointData("入料_Z1_硬件补偿",  Convert.ToDouble(uiDoubleUpDown18.Text), 初始点位.入料_Z1_硬件补偿)) 初始点位.入料_Z1_硬件补偿 = Convert.ToDouble(uiDoubleUpDown18.Value);
-                if (UpdateInitPointData("入料_Z2_硬件补偿",  Convert.ToDouble(uiDoubleUpDown17.Text), 初始点位.入料_Z2_硬件补偿)) 初始点位.入料_Z2_硬件补偿 = Convert.ToDouble(uiDoubleUpDown17.Value);
-                if (UpdateInitPointData("入料_Z3_硬件补偿",  Convert.ToDouble(uiDoubleUpDown16.Text), 初始点位.入料_Z3_硬件补偿)) 初始点位.入料_Z3_硬件补偿 = Convert.ToDouble(uiDoubleUpDown16.Value);
-                if (UpdateInitPointData("入料_Z4_硬件补偿",  Convert.ToDouble(uiDoubleUpDown19.Text), 初始点位.入料_Z4_硬件补偿)) 初始点位.入料_Z4_硬件补偿 = Convert.ToDouble(uiDoubleUpDown19.Value);
+                if (UpdateInitPointData("入料_梭车列间隔", Convert.ToDouble(uiDoubleUpDown103.Text), 初始点位.入料_梭车列间隔)) 初始点位.入料_梭车列间隔 = Convert.ToDouble(uiDoubleUpDown103.Value);
+                if (UpdateInitPointData("入料_Z1_硬件补偿", Convert.ToDouble(uiDoubleUpDown18.Text), 初始点位.入料_Z1_硬件补偿)) 初始点位.入料_Z1_硬件补偿 = Convert.ToDouble(uiDoubleUpDown18.Value);
+                if (UpdateInitPointData("入料_Z2_硬件补偿", Convert.ToDouble(uiDoubleUpDown17.Text), 初始点位.入料_Z2_硬件补偿)) 初始点位.入料_Z2_硬件补偿 = Convert.ToDouble(uiDoubleUpDown17.Value);
+                if (UpdateInitPointData("入料_Z3_硬件补偿", Convert.ToDouble(uiDoubleUpDown16.Text), 初始点位.入料_Z3_硬件补偿)) 初始点位.入料_Z3_硬件补偿 = Convert.ToDouble(uiDoubleUpDown16.Value);
+                if (UpdateInitPointData("入料_Z4_硬件补偿", Convert.ToDouble(uiDoubleUpDown19.Text), 初始点位.入料_Z4_硬件补偿)) 初始点位.入料_Z4_硬件补偿 = Convert.ToDouble(uiDoubleUpDown19.Value);
 
                 GetAxisRunInfo("M22_入料手臂X轴", out AxisRunInfo axisRun);
-                if (UpdateRunInfoData("M22_入料手臂X轴", "最大速度",  Convert.ToDouble(uiDoubleUpDown9.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown9.Value);
-                if (UpdateRunInfoData("M22_入料手臂X轴", "加速度",  Convert.ToDouble(uiDoubleUpDown8.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown8.Value);
-                if (UpdateRunInfoData("M22_入料手臂X轴", "减速度",  Convert.ToDouble(uiDoubleUpDown7.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown7.Value);
+                if (UpdateRunInfoData("M22_入料手臂X轴", "最大速度", Convert.ToDouble(uiDoubleUpDown9.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown9.Value);
+                if (UpdateRunInfoData("M22_入料手臂X轴", "加速度", Convert.ToDouble(uiDoubleUpDown8.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown8.Value);
+                if (UpdateRunInfoData("M22_入料手臂X轴", "减速度", Convert.ToDouble(uiDoubleUpDown7.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown7.Value);
 
 
                 GetAxisRunInfo("M16_入料手臂Y轴", out axisRun);
-                if (UpdateRunInfoData("M16_入料手臂Y轴", "最大速度",  Convert.ToDouble(uiDoubleUpDown117.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown117.Value);
-                if (UpdateRunInfoData("M16_入料手臂Y轴", "加速度",  Convert.ToDouble(uiDoubleUpDown116.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown116.Value);
-                if (UpdateRunInfoData("M16_入料手臂Y轴", "减速度",  Convert.ToDouble(uiDoubleUpDown115.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown115.Value);
+                if (UpdateRunInfoData("M16_入料手臂Y轴", "最大速度", Convert.ToDouble(uiDoubleUpDown117.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown117.Value);
+                if (UpdateRunInfoData("M16_入料手臂Y轴", "加速度", Convert.ToDouble(uiDoubleUpDown116.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown116.Value);
+                if (UpdateRunInfoData("M16_入料手臂Y轴", "减速度", Convert.ToDouble(uiDoubleUpDown115.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown115.Value);
 
 
                 GetAxisRunInfo("M5_入料手臂P轴", out axisRun);
-                if (UpdateRunInfoData("M5_入料手臂P轴", "最大速度",  Convert.ToDouble(uiDoubleUpDown12.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown12.Value);
-                if (UpdateRunInfoData("M5_入料手臂P轴", "加速度",  Convert.ToDouble(uiDoubleUpDown11.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown11.Value);
-                if (UpdateRunInfoData("M5_入料手臂P轴", "减速度",  Convert.ToDouble(uiDoubleUpDown10.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown10.Value);
+                if (UpdateRunInfoData("M5_入料手臂P轴", "最大速度", Convert.ToDouble(uiDoubleUpDown12.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown12.Value);
+                if (UpdateRunInfoData("M5_入料手臂P轴", "加速度", Convert.ToDouble(uiDoubleUpDown11.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown11.Value);
+                if (UpdateRunInfoData("M5_入料手臂P轴", "减速度", Convert.ToDouble(uiDoubleUpDown10.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown10.Value);
 
 
                 GetAxisRunInfo("M1_入料手臂Z1轴", out axisRun);
-                if (UpdateRunInfoData("M1_入料手臂Z1轴", "最大速度",  Convert.ToDouble(uiDoubleUpDown15.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown15.Value);
-                if (UpdateRunInfoData("M1_入料手臂Z1轴", "加速度",  Convert.ToDouble(uiDoubleUpDown14.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown14.Value);
-                if (UpdateRunInfoData("M1_入料手臂Z1轴", "减速度",  Convert.ToDouble(uiDoubleUpDown13.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown13.Value);
+                if (UpdateRunInfoData("M1_入料手臂Z1轴", "最大速度", Convert.ToDouble(uiDoubleUpDown15.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown15.Value);
+                if (UpdateRunInfoData("M1_入料手臂Z1轴", "加速度", Convert.ToDouble(uiDoubleUpDown14.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown14.Value);
+                if (UpdateRunInfoData("M1_入料手臂Z1轴", "减速度", Convert.ToDouble(uiDoubleUpDown13.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown13.Value);
 
 
                 GetAxisRunInfo("M2_入料手臂Z2轴", out axisRun);
-                if (UpdateRunInfoData("M2_入料手臂Z2轴", "最大速度",  Convert.ToDouble(uiDoubleUpDown81.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown81.Value);
-                if (UpdateRunInfoData("M2_入料手臂Z2轴", "加速度",  Convert.ToDouble(uiDoubleUpDown80.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown80.Value);
-                if (UpdateRunInfoData("M2_入料手臂Z2轴", "减速度",  Convert.ToDouble(uiDoubleUpDown79.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown79.Value);
+                if (UpdateRunInfoData("M2_入料手臂Z2轴", "最大速度", Convert.ToDouble(uiDoubleUpDown81.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown81.Value);
+                if (UpdateRunInfoData("M2_入料手臂Z2轴", "加速度", Convert.ToDouble(uiDoubleUpDown80.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown80.Value);
+                if (UpdateRunInfoData("M2_入料手臂Z2轴", "减速度", Convert.ToDouble(uiDoubleUpDown79.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown79.Value);
 
 
                 GetAxisRunInfo("M3_入料手臂Z3轴", out axisRun);
-                if (UpdateRunInfoData("M3_入料手臂Z3轴", "最大速度",  Convert.ToDouble(uiDoubleUpDown6.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown6.Value);
-                if (UpdateRunInfoData("M3_入料手臂Z3轴", "加速度",  Convert.ToDouble(uiDoubleUpDown5.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown5.Value);
-                if (UpdateRunInfoData("M3_入料手臂Z3轴", "减速度",  Convert.ToDouble(uiDoubleUpDown4.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown4.Value);
+                if (UpdateRunInfoData("M3_入料手臂Z3轴", "最大速度", Convert.ToDouble(uiDoubleUpDown6.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown6.Value);
+                if (UpdateRunInfoData("M3_入料手臂Z3轴", "加速度", Convert.ToDouble(uiDoubleUpDown5.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown5.Value);
+                if (UpdateRunInfoData("M3_入料手臂Z3轴", "减速度", Convert.ToDouble(uiDoubleUpDown4.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown4.Value);
 
 
                 GetAxisRunInfo("M4_入料手臂Z4轴", out axisRun);
-                if (UpdateRunInfoData("M4_入料手臂Z4轴", "最大速度",  Convert.ToDouble(uiDoubleUpDown3.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown3.Value);
-                if (UpdateRunInfoData("M4_入料手臂Z4轴", "加速度",  Convert.ToDouble(uiDoubleUpDown2.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown2.Value);
-                if (UpdateRunInfoData("M4_入料手臂Z4轴", "减速度",  Convert.ToDouble(uiDoubleUpDown1.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown1.Value);
+                if (UpdateRunInfoData("M4_入料手臂Z4轴", "最大速度", Convert.ToDouble(uiDoubleUpDown3.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown3.Value);
+                if (UpdateRunInfoData("M4_入料手臂Z4轴", "加速度", Convert.ToDouble(uiDoubleUpDown2.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown2.Value);
+                if (UpdateRunInfoData("M4_入料手臂Z4轴", "减速度", Convert.ToDouble(uiDoubleUpDown1.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown1.Value);
             }
         }
 
@@ -2770,7 +3072,7 @@ namespace H5509_V2
                 if (UpdateInitPointData("测试_Test区Site间隔", Convert.ToDouble(uiDoubleUpDown23.Text), 初始点位.测试_Test区Site间隔)) 初始点位.测试_Test区Site间隔 = Convert.ToDouble(uiDoubleUpDown23.Text);
                 if (UpdateInitPointData("测试_Test区吸_Z", Convert.ToDouble(uiDoubleUpDown25.Text), 初始点位.测试_Test区吸_Z)) 初始点位.测试_Test区吸_Z = Convert.ToDouble(uiDoubleUpDown25.Text);
                 if (UpdateInitPointData("测试_Test区放_Z", Convert.ToDouble(uiDoubleUpDown27.Text), 初始点位.测试_Test区放_Z)) 初始点位.测试_Test区放_Z = Convert.ToDouble(uiDoubleUpDown27.Text);
-                
+
 
                 GetAxisRunInfo("M21_测试手臂X轴", out AxisRunInfo axisRun);
                 if (UpdateRunInfoData("M21_测试手臂X轴", "最大速度", Convert.ToDouble(uiDoubleUpDown45.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown45.Text);
@@ -2833,6 +3135,633 @@ namespace H5509_V2
         {
             刷新抓盘手臂初始点位();
             刷新抓盘手臂速度参数();
+        }
+
+        private void button72_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown57.Text);
+            button71.Enabled = false;
+            button72.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M20_飞梭轴", pos);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                this.Invoke(new Action(() =>
+                {
+                    button71.Enabled = true;
+                    button72.Enabled = true;
+                }));
+            });
+        }
+
+        private void button71_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown56.Text);
+            button71.Enabled = false;
+            button72.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M20_飞梭轴", pos);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                this.Invoke(new Action(() =>
+                {
+                    button71.Enabled = true;
+                    button72.Enabled = true;
+                }));
+            });
+        }
+
+        private void 入料手臂X移动初始点位(double mm)
+        {
+            button29.Enabled = false;
+            button224.Enabled = false;
+            button32.Enabled = false;
+            button20.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M22_入料手臂X轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button29.Enabled = true;
+                    button224.Enabled = true;
+                    button32.Enabled = true;
+                    button20.Enabled = true;
+                }));
+            });
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown102.Text);
+            入料手臂X移动初始点位(pos);
+        }
+
+        private void button224_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown114.Text);
+            入料手臂X移动初始点位(pos);
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown99.Text);
+            入料手臂X移动初始点位(pos);
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown108.Text);
+            入料手臂X移动初始点位(pos);
+        }
+
+
+        private void 入料手臂Y移动初始点位(double mm)
+        {
+            button28.Enabled = false;
+            button223.Enabled = false;
+            button31.Enabled = false;
+            button19.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M16_入料手臂Y轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button28.Enabled = true;
+                    button223.Enabled = true;
+                    button31.Enabled = true;
+                    button19.Enabled = true;
+                }));
+            });
+        }
+
+        private void 入料手臂Z移动初始点位(double mm)
+        {
+            button30.Enabled = false;
+            button18.Enabled = false;
+            button27.Enabled = false;
+            button222.Enabled = false;
+            Task.Run(() =>
+            {
+                double z1 = Convert.ToDouble(uiDoubleUpDown18.Text);
+                double z2 = Convert.ToDouble(uiDoubleUpDown17.Text);
+                double z3 = Convert.ToDouble(uiDoubleUpDown16.Text);
+                double z4 = Convert.ToDouble(uiDoubleUpDown19.Text);
+                string[] axis = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
+                double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
+                string result = 多轴绝对运动(axis, pos);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button30.Enabled = true;
+                    button18.Enabled = true;
+                    button27.Enabled = true;
+                    button222.Enabled = true;
+                }));
+            });
+        }
+
+        private void 出料手臂Z移动初始点位(double mm)
+        {
+            button40.Enabled = false;
+            button46.Enabled = false;
+            button53.Enabled = false;
+            button38.Enabled = false;
+            button42.Enabled = false;
+            button33.Enabled = false;
+            button43.Enabled = false;
+            Task.Run(() =>
+            {
+                double z1 = Convert.ToDouble(uiDoubleUpDown122.Text);
+                double z2 = Convert.ToDouble(uiDoubleUpDown121.Text);
+                double z3 = Convert.ToDouble(uiDoubleUpDown21.Text);
+                double z4 = Convert.ToDouble(uiDoubleUpDown20.Text);
+                string[] axis = { "M6_出料手臂Z1轴", "M7_出料手臂Z2轴", "M8_出料手臂Z3轴", "M9_出料手臂Z4轴" };
+                double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
+                string result = 多轴绝对运动(axis, pos);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button40.Enabled = true;
+                    button46.Enabled = true;
+                    button53.Enabled = true;
+                    button38.Enabled = true;
+                    button42.Enabled = true;
+                    button33.Enabled = true;
+                    button43.Enabled = true;
+                }));
+            });
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown101.Text);
+            入料手臂Y移动初始点位(pos);
+        }
+
+        private void button223_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown113.Text);
+            入料手臂Y移动初始点位(pos);
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown97.Text);
+            入料手臂Y移动初始点位(pos);
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown107.Text);
+            入料手臂Y移动初始点位(pos);
+        }
+
+        private void 所有轴紧急停止()
+        {
+            for (int i = 0; i < AxisInfoList.Count; i++)
+            {
+                string result = motion.AxisStop(AxisInfoList[i].核号, AxisInfoList[i].轴号, 1);
+                if (result != "Success")
+                {
+                    Debug.WriteLine($"核号{AxisInfoList[i].核号},轴{AxisInfoList[i].轴号}停止失败!详细信息:" + result);
+                }
+            }
+            MessageBox.Show("所有轴已紧急停止");
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            所有轴紧急停止();
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            所有轴紧急停止();
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            所有轴紧急停止();
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            所有轴紧急停止();
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            所有轴紧急停止();
+        }
+
+        private void 抓盘手臂X移动初始点位(double mm)
+        {
+            string result = handler.移Tray上下气缸原位输入读取(out string value);
+            if (result == "Success")
+            {
+                if (value == "1")
+                {
+                    button76.Enabled = false;
+                    button75.Enabled = false;
+                    button74.Enabled = false;
+                    button73.Enabled = false;
+                    Task.Run(() =>
+                    {
+                        result = 单轴绝对运动("M18_放Tary盘轴", mm);
+                        if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                        this.Invoke(new Action(() =>
+                        {
+                            button76.Enabled = true;
+                            button75.Enabled = true;
+                            button74.Enabled = true;
+                            button73.Enabled = true;
+                        }));
+                    });
+                }
+                else
+                {
+                    MessageBox.Show($"抓盘手臂上下气缸未在原位");
+                }
+            }
+            else
+            {
+                APPmaster.ProgramPause = true;
+                IsPause = true;
+                MessageBox.Show($"移Tray上下气缸原位输入读取失败！" + result);
+            }
+        }
+
+        private void button76_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown55.Text);
+            抓盘手臂X移动初始点位(pos);
+        }
+
+        private void button75_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown58.Text);
+            抓盘手臂X移动初始点位(pos);
+        }
+
+        private void button74_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown60.Text);
+            抓盘手臂X移动初始点位(pos);
+        }
+
+        private void button73_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown59.Text);
+            抓盘手臂X移动初始点位(pos);
+        }
+
+
+        private void 出料手臂X移动初始点位(double mm)
+        {
+            button56.Enabled = false;
+            button58.Enabled = false;
+            button55.Enabled = false;
+            button36.Enabled = false;
+            button51.Enabled = false;
+            button21.Enabled = false;
+            button45.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M23_出料手臂X轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button56.Enabled = true;
+                    button58.Enabled = true;
+                    button55.Enabled = true;
+                    button36.Enabled = true;
+                    button51.Enabled = true;
+                    button21.Enabled = true;
+                    button45.Enabled = true;
+                }));
+            });
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown75.Text);
+            出料手臂X移动初始点位(pos);
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown78.Text);
+            出料手臂X移动初始点位(pos);
+        }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown90.Text);
+            出料手臂X移动初始点位(pos);
+        }
+
+        private void button51_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown87.Text);
+            出料手臂X移动初始点位(pos);
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown93.Text);
+            出料手臂X移动初始点位(pos);
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown84.Text);
+            出料手臂X移动初始点位(pos);
+        }
+
+        private void button45_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown96.Text);
+            出料手臂X移动初始点位(pos);
+        }
+
+        private void 出料手臂Y移动初始点位(double mm)
+        {
+            button48.Enabled = false;
+            button57.Enabled = false;
+            button54.Enabled = false;
+            button37.Enabled = false;
+            button49.Enabled = false;
+            button34.Enabled = false;
+            button44.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M17_出料手臂Y轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button48.Enabled = true;
+                    button57.Enabled = true;
+                    button54.Enabled = true;
+                    button37.Enabled = true;
+                    button49.Enabled = true;
+                    button34.Enabled = true;
+                    button44.Enabled = true;
+                }));
+            });
+        }
+
+        private void button48_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown74.Text);
+            出料手臂Y移动初始点位(pos);
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown89.Text);
+            出料手臂Y移动初始点位(pos);
+        }
+
+        private void button54_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown92.Text);
+            出料手臂Y移动初始点位(pos);
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown77.Text);
+            出料手臂Y移动初始点位(pos);
+        }
+
+        private void button49_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown86.Text);
+            出料手臂Y移动初始点位(pos);
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown83.Text);
+            出料手臂Y移动初始点位(pos);
+        }
+
+        private void button44_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown95.Text);
+            出料手臂Y移动初始点位(pos);
+        }
+
+        private void 测试手臂X移动初始点位(double mm)
+        {
+            button62.Enabled = false;
+            button67.Enabled = false;
+            button70.Enabled = false;
+            button69.Enabled = false;
+            button66.Enabled = false;
+            button63.Enabled = false;
+            button59.Enabled = false;
+            button65.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M21_测试手臂X轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button56.Enabled = true;
+                    button58.Enabled = true;
+                    button55.Enabled = true;
+                    button36.Enabled = true;
+                    button51.Enabled = true;
+                    button21.Enabled = true;
+                    button45.Enabled = true;
+                }));
+            });
+        }
+
+
+        private void 测试手臂Z移动初始点位(double mm)
+        {
+            button60.Enabled = false;
+            button68.Enabled = false;
+            button61.Enabled = false;
+            button64.Enabled = false;
+            button47.Enabled = false;
+            button41.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M19_测试手臂Z轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button60.Enabled = true;
+                    button68.Enabled = true;
+                    button61.Enabled = true;
+                    button64.Enabled = true;
+                    button47.Enabled = true;
+                    button41.Enabled = true;
+                }));
+            });
+        }
+
+        private void button62_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown62.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown64.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button70_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown66.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown65.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown68.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown67.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown70.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown72.Text);
+            测试手臂X移动初始点位(pos);
+        }
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown61.Text);
+            测试手臂Z移动初始点位(pos);
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown63.Text);
+            测试手臂Z移动初始点位(pos);
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown69.Text);
+            测试手臂Z移动初始点位(pos);
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown71.Text);
+            测试手臂Z移动初始点位(pos);
+        }
+
+        private void button47_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown25.Text);
+            测试手臂Z移动初始点位(pos);
+        }
+
+        private void button41_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown27.Text);
+            测试手臂Z移动初始点位(pos);
+        }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown98.Text);
+            入料手臂Z移动初始点位(pos);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown106.Text);
+            入料手臂Z移动初始点位(pos);
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown100.Text);
+            入料手臂Z移动初始点位(pos);
+        }
+
+        private void button222_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown112.Text);
+            入料手臂Z移动初始点位(pos);
+        }
+
+        private void button40_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown73.Text);
+            出料手臂Z移动初始点位(pos);
+        }
+
+        private void button46_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown88.Text);
+            出料手臂Z移动初始点位(pos);
+        }
+
+        private void button53_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown91.Text);
+            出料手臂Z移动初始点位(pos);
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown76.Text);
+            出料手臂Z移动初始点位(pos);
+        }
+
+        private void button42_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown85.Text);
+            出料手臂Z移动初始点位(pos);
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown82.Text);
+            出料手臂Z移动初始点位(pos);
+        }
+
+        private void button43_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown94.Text);
+            出料手臂Z移动初始点位(pos);
         }
     }
 }
