@@ -475,8 +475,8 @@ namespace H5509_V2
             PS出料手臂吸放料流程.StepName = "计算放料盘位置";
             Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
 
-            int[] open = new int[4] { 1, 1, 1,1 };
-            string[] bin = new string[4] { "01", "01", "01","01" };
+            int[] open = new int[4] { 1, 1, 1, 1 };
+            string[] bin = new string[4] { "01", "01", "01", "01" };
             int xPoint = 0;
             int yPoint = 0;
             bool[] lsopen = new bool[4];
@@ -887,6 +887,7 @@ namespace H5509_V2
 
             AxisRun axisRun = new AxisRun()
             {
+                轴名称 = cobox_axisname.Text,
                 核号 = core,
                 轴号 = axis,
                 目标位置 = run_pos,
@@ -1424,9 +1425,28 @@ namespace H5509_V2
                 motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int prfPos);
                 double posvalue = Math.Abs(prfPos - encPos);
                 //Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
-                if (posvalue > 跟随误差)
+                int errorvalue = 跟随误差;
+                if (axisRun.轴名称 == "M19_测试手臂Z轴")
                 {
-                    return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
+                    if (posvalue > errorvalue * 2)
+                    {
+                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                    }
+                    else if (posvalue > 300)
+                    {
+                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                    }
+                }
+                else
+                {
+                    if (posvalue > errorvalue)
+                    {
+                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
+                    }
+                    else if (posvalue > 150)
+                    {
+                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                    }
                 }
             }
             catch (Exception ex)
@@ -1482,9 +1502,28 @@ namespace H5509_V2
                     motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号, out int prfPos);
                     double posvalue = Math.Abs(prfPos - encPos);
                     //Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
-                    if (posvalue > 跟随误差)
+                    int errorvalue = 跟随误差;
+                    if (axisRuns[i].轴名称 == "M19_测试手臂Z轴")
                     {
-                        return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
+                        if (posvalue > errorvalue * 2)
+                        {
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                        }
+                        else if (posvalue > 300)
+                        {
+                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                        }
+                    }
+                    else
+                    {
+                        if (posvalue > errorvalue)
+                        {
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
+                        }
+                        else if (posvalue > 150)
+                        {
+                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                        }
                     }
                 }
             }
@@ -1503,6 +1542,7 @@ namespace H5509_V2
             {
                 AxisRun axisRun = new AxisRun()
                 {
+                    轴名称 = axisRunInfo.轴名称,
                     核号 = axisRunInfo.核号,
                     轴号 = axisRunInfo.轴号,
                     目标位置 = Convert.ToInt32(Math.Round(pos / axisRunInfo.步长mm)),
@@ -1587,6 +1627,7 @@ namespace H5509_V2
                 {
                     axisRuns.Add(new AxisRun()
                     {
+                        轴名称 = axisRunInfo.轴名称,
                         核号 = axisRunInfo.核号,
                         轴号 = axisRunInfo.轴号,
                         目标位置 = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm)),
@@ -3577,13 +3618,14 @@ namespace H5509_V2
 
                 this.Invoke(new Action(() =>
                 {
-                    button56.Enabled = true;
-                    button58.Enabled = true;
-                    button55.Enabled = true;
-                    button36.Enabled = true;
-                    button51.Enabled = true;
-                    button21.Enabled = true;
-                    button45.Enabled = true;
+                    button62.Enabled = true;
+                    button67.Enabled = true;
+                    button70.Enabled = true;
+                    button69.Enabled = true;
+                    button66.Enabled = true;
+                    button63.Enabled = true;
+                    button59.Enabled = true;
+                    button65.Enabled = true;
                 }));
             });
         }

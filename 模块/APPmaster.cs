@@ -69,7 +69,7 @@ namespace H5509_V2
 
         public static int 气缸动作超时时间 = 3000; //ms
 
-        public static int 跟随误差 = 150;
+        public static int 跟随误差 = 250;
 
         public static Communication Com = new Communication();
 
@@ -118,12 +118,12 @@ namespace H5509_V2
         public static Dictionary<string, string> Fix2DicBin { get; set; } = new Dictionary<string, string>();
         public static Dictionary<string, string> Fix3DicBin { get; set; } = new Dictionary<string, string>();
 
-        public static int Fix1Num = 0;
-        public static int Fix2Num = 0;
-        public static int Fix3Num = 0;
+        public static int Fix1Num = 1;
+        public static int Fix2Num = 1;
+        public static int Fix3Num = 1;
 
-        public static string Auto1 = "01";
-        public static string Auto2 = "02,03,04,05,06";
+        public static string Auto1 = "02";
+        public static string Auto2 = "01,03,04,05,06";
 
         public static string Fix1 = "07";
         public static string Fix1_1 = "07";
@@ -144,6 +144,10 @@ namespace H5509_V2
         public static string OthAll;
 
         public static bool 入料IC忽略 { get; set; }
+
+        public static bool 出料IC忽略 { get; set; }
+
+        public static bool 测试IC忽略 { get; set; }
 
         public static int 载入数 { get; set; }
 
@@ -168,7 +172,7 @@ namespace H5509_V2
 
         public static double 入料吸料间距 //tray吸
         {
-            get { return 初始点位.入料_变距最大值 - Tray_Y_Pitch * Interval; }
+            get { return (初始点位.入料_变距最大值 - Tray_Y_Pitch * Interval) * 2; }
         }
 
         public static double 入料放料间距 //梭车放
@@ -183,12 +187,12 @@ namespace H5509_V2
 
         public static double 出料放料间距 //tray放
         {
-            get { return 初始点位.出料_变距最大值 - Tray_Y_Pitch * Interval; }
+            get { return (初始点位.出料_变距最大值 - Tray_Y_Pitch * Interval) * 2; }
         }
 
         public static int[] SiteTestState = new int[16];
 
-        public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
+        //public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
         public static List<bool[][]> SiteTestIC = new List<bool[][]>(); //保存Site放入的IC状态
         public static List<string[][]> SiteTestBIN = new List<string[][]>(); //保存
 
@@ -631,10 +635,10 @@ namespace H5509_V2
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
 
-            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
+            xPoint[0] = loaderx - xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] - xPitch; //累加X轴坐标
             }
 
             yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
@@ -667,10 +671,10 @@ namespace H5509_V2
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
 
-            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
+            xPoint[0] = loaderx - xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] - xPitch; //累加X轴坐标
             }
 
             yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
@@ -703,10 +707,10 @@ namespace H5509_V2
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
 
-            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
+            xPoint[0] = loaderx - xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] - xPitch; //累加X轴坐标
             }
 
             yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
@@ -739,10 +743,10 @@ namespace H5509_V2
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
 
-            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
+            xPoint[0] = loaderx - xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] - xPitch; //累加X轴坐标
             }
 
             yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
@@ -775,10 +779,10 @@ namespace H5509_V2
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
 
-            xPoint[0] = loaderx + xStart; //获取左上角第一颗芯片x轴坐标
+            xPoint[0] = loaderx - xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                xPoint[i] = xPoint[i - 1] + xPitch; //累加X轴坐标
+                xPoint[i] = xPoint[i - 1] - xPitch; //累加X轴坐标
             }
 
             yPoint[0] = loadery - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
@@ -1099,7 +1103,7 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Fix1盘坐标(bool ishave, int min, int max,  out int xPoint, out int yPoint)
+        public static bool 获取Fix1盘坐标(bool ishave, int min, int max, out int xPoint, out int yPoint)
         {
             xPoint = 0;
             yPoint = min;
@@ -1358,6 +1362,63 @@ namespace H5509_V2
             }
         }
 
+        public static bool[] GetSiteOpen(int site)
+        {
+            SiteStatus siteStatus = 设置信息.开site信息;
+            switch (site)
+            {
+                case 0:
+                    return new bool[] { siteStatus.Site1[0] == "1", siteStatus.Site1[1] == "1",siteStatus.Site1[2] == "1",siteStatus.Site1[3] == "1",
+                siteStatus.Site1[4] == "1",siteStatus.Site1[5] == "1",siteStatus.Site1[6] == "1",siteStatus.Site1[7] == "1"};
+                case 1:
+                    return new bool[] { siteStatus.Site2[0] == "1", siteStatus.Site2[1] == "1",siteStatus.Site2[2] == "1",siteStatus.Site2[3] == "1",
+                siteStatus.Site2[4] == "1",siteStatus.Site2[5] == "1",siteStatus.Site2[6] == "1",siteStatus.Site2[7] == "1"};
+                case 2:
+                    return new bool[] { siteStatus.Site3[0] == "1", siteStatus.Site3[1] == "1",siteStatus.Site3[2] == "1",siteStatus.Site3[3] == "1",
+                siteStatus.Site3[4] == "1",siteStatus.Site3[5] == "1",siteStatus.Site3[6] == "1",siteStatus.Site3[7] == "1"};
+                case 3:
+                    return new bool[] { siteStatus.Site4[0] == "1", siteStatus.Site4[1] == "1",siteStatus.Site4[2] == "1",siteStatus.Site4[3] == "1",
+                siteStatus.Site4[4] == "1",siteStatus.Site4[5] == "1",siteStatus.Site4[6] == "1",siteStatus.Site4[7] == "1"};
+                case 4:
+                    return new bool[] { siteStatus.Site5[0] == "1", siteStatus.Site5[1] == "1",siteStatus.Site5[2] == "1",siteStatus.Site5[3] == "1",
+                siteStatus.Site5[4] == "1",siteStatus.Site5[5] == "1",siteStatus.Site5[6] == "1",siteStatus.Site5[7] == "1"};
+                case 5:
+                    return new bool[] { siteStatus.Site6[0] == "1", siteStatus.Site6[1] == "1",siteStatus.Site6[2] == "1",siteStatus.Site6[3] == "1",
+                siteStatus.Site6[4] == "1",siteStatus.Site6[5] == "1",siteStatus.Site6[6] == "1",siteStatus.Site6[7] == "1"};
+                case 6:
+                    return new bool[] { siteStatus.Site7[0] == "1", siteStatus.Site7[1] == "1",siteStatus.Site7[2] == "1",siteStatus.Site7[3] == "1",
+                siteStatus.Site7[4] == "1",siteStatus.Site7[5] == "1",siteStatus.Site7[6] == "1",siteStatus.Site7[7] == "1"};
+                case 7:
+                    return new bool[] { siteStatus.Site8[0] == "1", siteStatus.Site8[1] == "1",siteStatus.Site8[2] == "1",siteStatus.Site8[3] == "1",
+                siteStatus.Site8[4] == "1",siteStatus.Site8[5] == "1",siteStatus.Site8[6] == "1",siteStatus.Site8[7] == "1"};
+                case 8:
+                    return new bool[] { siteStatus.Site9[0] == "1", siteStatus.Site9[1] == "1",siteStatus.Site9[2] == "1",siteStatus.Site9[3] == "1",
+                siteStatus.Site9[4] == "1",siteStatus.Site9[5] == "1",siteStatus.Site9[6] == "1",siteStatus.Site9[7] == "1"};
+                case 9:
+                    return new bool[] { siteStatus.Site10[0] == "1", siteStatus.Site10[1] == "1",siteStatus.Site10[2] == "1",siteStatus.Site10[3] == "1",
+                siteStatus.Site10[4] == "1",siteStatus.Site10[5] == "1",siteStatus.Site10[6] == "1",siteStatus.Site10[7] == "1"};
+                case 10:
+                    return new bool[] { siteStatus.Site11[0] == "1", siteStatus.Site11[1] == "1",siteStatus.Site11[2] == "1",siteStatus.Site11[3] == "1",
+                siteStatus.Site11[4] == "1",siteStatus.Site11[5] == "1",siteStatus.Site11[6] == "1",siteStatus.Site11[7] == "1"};
+                case 11:
+                    return new bool[] { siteStatus.Site12[0] == "1", siteStatus.Site12[1] == "1",siteStatus.Site12[2] == "1",siteStatus.Site12[3] == "1",
+                siteStatus.Site12[4] == "1",siteStatus.Site12[5] == "1",siteStatus.Site12[6] == "1",siteStatus.Site12[7] == "1"};
+                case 12:
+                    return new bool[] { siteStatus.Site13[0] == "1", siteStatus.Site13[1] == "1",siteStatus.Site13[2] == "1",siteStatus.Site13[3] == "1",
+                siteStatus.Site13[4] == "1",siteStatus.Site13[5] == "1",siteStatus.Site13[6] == "1",siteStatus.Site13[7] == "1"};
+                case 13:
+                    return new bool[] { siteStatus.Site14[0] == "1", siteStatus.Site14[1] == "1",siteStatus.Site14[2] == "1",siteStatus.Site14[3] == "1",
+                siteStatus.Site14[4] == "1",siteStatus.Site14[5] == "1",siteStatus.Site14[6] == "1",siteStatus.Site14[7] == "1"};
+                case 14:
+                    return new bool[] { siteStatus.Site15[0] == "1", siteStatus.Site15[1] == "1",siteStatus.Site15[2] == "1",siteStatus.Site15[3] == "1",
+                siteStatus.Site15[4] == "1",siteStatus.Site15[5] == "1",siteStatus.Site15[6] == "1",siteStatus.Site15[7] == "1"};
+                case 15:
+                    return new bool[] { siteStatus.Site16[0] == "1", siteStatus.Site16[1] == "1",siteStatus.Site16[2] == "1",siteStatus.Site16[3] == "1",
+                siteStatus.Site16[4] == "1",siteStatus.Site16[5] == "1",siteStatus.Site16[6] == "1",siteStatus.Site16[7] == "1"};
+                default: return new bool[] { false, false, false, false, false, false, false, false };
+            }
+        }
+
         public static bool JudgeNozzleSts(bool[] lsopen, int[] opens, int value)
         {
             for (int i = 0; i < opens.Length; i++)
@@ -1439,7 +1500,7 @@ namespace H5509_V2
             if (获取Auto1盘坐标(false, out int xPoint, out int yPoint))
             {
                 xPos = Auto1XPoint[xPoint];
-                yPos = Auto1YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                yPos = Auto1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
@@ -1451,14 +1512,14 @@ namespace H5509_V2
             if (获取Auto2盘坐标(false, out int xPoint, out int yPoint))
             {
                 xPos = Auto2XPoint[xPoint];
-                yPos = Auto2YPoint[yPoint] + index * Interval * 16.3; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                yPos = Auto2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
         }
 
-     
-      
+
+
 
         public static string 获取Load盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
@@ -1869,6 +1930,29 @@ namespace H5509_V2
             else
             {
                 return 初始点位.出料_梭车2_Z;
+            }
+        }
+        public static double 获取出料Z放料点位(int trayid)
+        {
+            if (trayid == 0)
+            {
+                return 初始点位.出料_Auto1_Z;
+            }
+            else if (trayid == 1)
+            {
+                return 初始点位.出料_Auto2_Z;
+            }
+            else if (trayid == 2)
+            {
+                return 初始点位.出料_Fix1_Z;
+            }
+            else if (trayid == 3)
+            {
+                return 初始点位.出料_Fix2_Z;
+            }
+            else
+            {
+                return 初始点位.出料_Fix3_Z;
             }
         }
     }

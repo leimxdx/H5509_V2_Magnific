@@ -16,5 +16,7 @@ namespace H5509_V2
         public TrayInfo Tray盘信息 { get; set; } = new TrayInfo();
 
         public OffsetPoint OffsetPoint { get; set; } = new OffsetPoint();
+
+        public SiteStatus 开site信息 { get; set; } = new SiteStatus();
     }
 }

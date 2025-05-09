@@ -342,9 +342,28 @@ namespace H5509_V2
                 Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int prfPos);
                 double posvalue = Math.Abs(prfPos - encPos);
                 //Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
-                if (posvalue > 跟随误差)
+                int errorvalue = 跟随误差;
+                if (axisRun.轴名称 == "M19_测试手臂Z轴")
                 {
-                    return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
+                    if (posvalue > errorvalue * 2)
+                    {
+                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                    }
+                    else if (posvalue > 300)
+                    {
+                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                    }
+                }
+                else
+                {
+                    if (posvalue > errorvalue)
+                    {
+                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
+                    }
+                    else if (posvalue > 150)
+                    {
+                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                    }
                 }
             }
             catch (Exception ex)
@@ -418,9 +437,29 @@ namespace H5509_V2
                     Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号, out int prfPos);
                     double posvalue = Math.Abs(prfPos - encPos);
                     //Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
-                    if (posvalue > 跟随误差)
+
+                    int errorvalue = 跟随误差;
+                    if (axisRuns[i].轴名称 == "M19_测试手臂Z轴")
                     {
-                        return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{跟随误差}";
+                        if (posvalue > errorvalue * 2)
+                        {
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                        }
+                        else if (posvalue > 300)
+                        {
+                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                        }
+                    }
+                    else
+                    {
+                        if (posvalue > errorvalue)
+                        {
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
+                        }
+                        else if (posvalue > 150)
+                        {
+                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                        }
                     }
                 }
             }
@@ -445,6 +484,7 @@ namespace H5509_V2
 
             AxisRun axisRun = new AxisRun()
             {
+                轴名称 = axisRunInfo.轴名称,
                 核号 = axisRunInfo.核号,
                 轴号 = axisRunInfo.轴号,
                 目标位置 = Convert.ToInt32(Math.Round(pos / axisRunInfo.步长mm)),
@@ -478,6 +518,7 @@ namespace H5509_V2
 
             AxisRun axisRun = new AxisRun()
             {
+                轴名称 = axisRunInfo.轴名称,
                 核号 = axisRunInfo.核号,
                 轴号 = axisRunInfo.轴号,
                 目标位置 = Convert.ToInt32(Math.Round(pos / axisRunInfo.步长mm)),
@@ -514,6 +555,7 @@ namespace H5509_V2
 
                 axisRuns.Add(new AxisRun()
                 {
+                    轴名称 = axisRunInfo.轴名称,
                     核号 = axisRunInfo.核号,
                     轴号 = axisRunInfo.轴号,
                     目标位置 = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm)),
@@ -549,6 +591,7 @@ namespace H5509_V2
 
             AxisRun axisRun = new AxisRun()
             {
+                轴名称 = axisRunInfo.轴名称,
                 核号 = axisRunInfo.核号,
                 轴号 = axisRunInfo.轴号,
                 目标速度 = jogspeed,

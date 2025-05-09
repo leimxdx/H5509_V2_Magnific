@@ -127,6 +127,7 @@
     <Compile Include="InitPoint.cs" />
     <Compile Include="OffsetPoint.cs" />
     <Compile Include="SetupInfo.cs" />
+    <Compile Include="SiteStatus.cs" />
     <Compile Include="TrayInfo.cs" />
     <Compile Include="工具\SqlServerHelper.cs" />
     <Compile Include="通信\Communication.cs" />

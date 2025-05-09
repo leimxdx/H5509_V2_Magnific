@@ -532,6 +532,7 @@ namespace H5509_V2
                     设置信息.设置信息名称 = 当前档案;
                     设置信息.Tray盘信息.TrayName = reader["tray盘名称"].ToString();
                     设置信息.OffsetPoint.微调点位名称 = reader["偏移点位名称"].ToString();
+                    设置信息.开site信息.Site名称 = reader["site名称"].ToString();
                 }
                 else result = "Fail";
                 reader.Close();
@@ -563,6 +564,39 @@ namespace H5509_V2
                 else result = $"无Tray盘{设置信息.Tray盘信息.TrayName}信息";
 
                 reader.Close();
+            }
+            return result;
+        }
+
+        private string GetSiteStatus()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SiteStatus where Site名称 = '{设置信息.开site信息.Site名称}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                DataRow dr = dataTable.Rows[0];
+
+                SiteStatus siteStatus = new SiteStatus()
+                {
+                    Site名称 = dr["Site名称"].ToString(),
+                    Site1 = dr["Site1"].ToString().ToCharArray().Select(c => c.ToString()) .ToArray(),
+                    Site2 = dr["Site2"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site3 = dr["Site3"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site4 = dr["Site4"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site5 = dr["Site5"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site6 = dr["Site6"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site7 = dr["Site7"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site8 = dr["Site8"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site9 = dr["Site9"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site10 = dr["Site10"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site11 = dr["Site11"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site12 = dr["Site12"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site13 = dr["Site13"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site14 = dr["Site14"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site15 = dr["Site15"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site16 = dr["Site16"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                };
+
+                设置信息.开site信息 = siteStatus;
             }
             return result;
         }
@@ -600,6 +634,10 @@ namespace H5509_V2
                 ///点位微调
                 result = GetOffsetPoint();
                 if (result != "Success") return result;
+
+                ///开Site信息
+                result = GetSiteStatus();
+                if (result != "Success") return result;
             }
             else return result;
 
@@ -607,7 +645,7 @@ namespace H5509_V2
             result = GetInitPoint();
             if (result != "Success") return result;
 
-            GetSiteStatus();
+            GetSiteStatus1(); //临时参数
 
             APPmaster.TestPointInit();
             APPmaster.LoaderTrayICPointInit();
@@ -627,6 +665,12 @@ namespace H5509_V2
             APPmaster.Fix3TrayICMapInit();
 
             handler.参数初始化();
+            int num = 45;
+            int[] intArray = new int[8];
+            for (int i = 0; i < 8; i++)
+            {
+                intArray[i] = ((num >> i) & 1); //00101101
+            }
 
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
             {
@@ -755,15 +799,15 @@ namespace H5509_V2
             }
         }
 
-        private void GetSiteStatus()
+        private void GetSiteStatus1()
         {
             for (int i = 0; i < 16; i++)
             {
-                APPmaster.SiteStatus.Add(new bool[2][]
-                {
-                    new bool[] { true, true, true, true },
-                    new bool[] { true, true, true, true },
-                });
+                //APPmaster.SiteStatus.Add(new bool[2][]
+                //{
+                //    new bool[] { true, true, true, true },
+                //    new bool[] { true, true, true, true },
+                //});
 
                 APPmaster.SiteTestIC.Add(new bool[2][]
                 {
@@ -792,13 +836,13 @@ namespace H5509_V2
                 //});
             }
             APPmaster.InSiteQueue.Enqueue(4);
-            APPmaster.InSiteQueue.Enqueue(5);
-            APPmaster.InSiteQueue.Enqueue(6);
-            APPmaster.InSiteQueue.Enqueue(7);
-            APPmaster.InSiteQueue.Enqueue(8);
-            APPmaster.InSiteQueue.Enqueue(9);
-            APPmaster.InSiteQueue.Enqueue(10);
-            APPmaster.InSiteQueue.Enqueue(11);
+            //APPmaster.InSiteQueue.Enqueue(5);
+            //APPmaster.InSiteQueue.Enqueue(6);
+            //APPmaster.InSiteQueue.Enqueue(7);
+            //APPmaster.InSiteQueue.Enqueue(8);
+            //APPmaster.InSiteQueue.Enqueue(9);
+            //APPmaster.InSiteQueue.Enqueue(10);
+            //APPmaster.InSiteQueue.Enqueue(11);
         }
 
     }
