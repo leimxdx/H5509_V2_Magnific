@@ -63,9 +63,18 @@ namespace H5509_V2
 
         public static bool H5509正在初始化 = false;
 
+        public static bool 结批标记 = false;
+
+        public static bool 正在结批 = false;
+
         public static bool 定点停止标记 = false;
 
         public static bool 定点停止允许 = false;
+
+        public static bool Load换盘标记 = false;
+        public static bool Auto1换盘标记 = false;
+        public static bool Auto2换盘标记 = false;
+        public static bool Auto等待换盘标记 = false;
 
         public static int 气缸动作超时时间 = 3000; //ms
 
@@ -122,20 +131,20 @@ namespace H5509_V2
         public static int Fix2Num = 1;
         public static int Fix3Num = 1;
 
-        public static string Auto1 = "02";
-        public static string Auto2 = "01,03,04,05,06";
+        public static string Auto1 = "01"; //"01"
+        public static string Auto2 = "02,03"; //"02,03,04,05,06"
 
-        public static string Fix1 = "07";
+        public static string Fix1 = "04";
         public static string Fix1_1 = "07";
         public static string Fix1_2 = "07";
         public static string Fix1_3 = "07";
 
-        public static string Fix2 = "08";
+        public static string Fix2 = "05";//07
         public static string Fix2_1 = "08";
         public static string Fix2_2 = "08";
         public static string Fix2_3 = "08";
 
-        public static string Fix3 = "09";
+        public static string Fix3 = "06";
         public static string Fix3_1 = "09";
         public static string Fix3_2 = "09";
         public static string Fix3_3 = "09";
@@ -201,8 +210,6 @@ namespace H5509_V2
 
         public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
         public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
-
-        public static bool 结批标记;
 
         public static int 空盘上顶最大值 = 429895;
         public static int 空盘下降最小值 = 10000;
@@ -271,6 +278,8 @@ namespace H5509_V2
         public static CancellationTokenSource cts;
 
         public static ST_ProcessManage PS初始化流程;
+
+        public static ST_ProcessManage PS结批流程;
 
         public static ST_ProcessManage PS入料手臂吸放料流程;
 
@@ -1547,20 +1556,16 @@ namespace H5509_V2
             return "Success";
         }
 
-        public static string 获取Auto1盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static void 获取Auto1盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, int index, string[] bin)
         {
-            xPos = yPos = 0;
             lsopen = new bool[opens.Length];
-
-            if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Auto1盘位置(index, out xPos, out yPos)) return "获取Auto1盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * Interval >= Auto1YPoint.Length) break;
                 if (Auto1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1)
+                if (opens[i + index] == 1 && Auto1.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -1570,23 +1575,18 @@ namespace H5509_V2
                     }
                 }
             }
-            return "Success";
         }
 
-        public static string 获取Auto2盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static void 获取Auto2盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, int index, string[] bin)
         {
-            xPos = yPos = 0;
             lsopen = new bool[opens.Length];
-
-            if (!获取吸嘴索引(opens, 1, out index)) return "获取出料吸嘴索引失败!";
-            if (!获取Auto2盘位置(index, out xPos, out yPos)) return "获取Auto2盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * Interval >= Auto2YPoint.Length) break;
                 if (Auto2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1)
+                if (opens[i + index] == 1 && Auto2.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
                     if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
@@ -1596,7 +1596,6 @@ namespace H5509_V2
                     }
                 }
             }
-            return "Success";
         }
 
         public static void FixMinMax(int bintype, int binarea, int fixleng, out int min, out int max)
@@ -1776,10 +1775,10 @@ namespace H5509_V2
             return "Fail";
         }
 
-        public static void 获取Fix1盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, out int index)
+        public static void 获取Fix1盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
         {
             lsopen = new bool[opens.Length];
-            获取吸嘴索引(opens, 1, out index);
+            //获取吸嘴索引(opens, 1, out index);
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
@@ -1797,10 +1796,10 @@ namespace H5509_V2
             }
         }
 
-        public static void 获取Fix2盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, out int index)
+        public static void 获取Fix2盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
         {
             lsopen = new bool[opens.Length];
-            获取吸嘴索引(opens, 1, out index);
+            //获取吸嘴索引(opens, 1, out index);
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
@@ -1818,10 +1817,10 @@ namespace H5509_V2
             }
         }
 
-        public static void 获取Fix3盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, out int index)
+        public static void 获取Fix3盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
         {
             lsopen = new bool[opens.Length];
-            获取吸嘴索引(opens, 1, out index);
+            //获取吸嘴索引(opens, 1, out index);
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;

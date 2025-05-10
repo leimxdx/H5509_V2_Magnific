@@ -78,6 +78,8 @@ namespace H5509_V2
 
             setting.handler = handler;
 
+            log.AddLog("debug", "run", "加载");
+
             //防止控件过多产生闪烁现象
             SetControlStyle();
             SetTablayoutDoubleBuffer();
