@@ -512,8 +512,10 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisRun">轴运行信息</param>
         /// <returns></returns>
-        public string UniaxialRelativeMove(AxisRun axisRun)
+        public string UniaxialRelativeMove(AxisRun axisRun, out int posPulse)
         {
+            posPulse = 0;
+
             //通用运行初始化验证
             string result = CommonMotionValidate(axisRun.核号, axisRun.轴号);
 
@@ -548,7 +550,7 @@ namespace H5509_V2
                 result = GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int pPos);
                 if (result != "Success") return result;
 
-                int posPulse = Convert.ToInt32(Math.Round(((double)pPos + axisRun.目标位置)));
+                posPulse = Convert.ToInt32(Math.Round(((double)pPos + axisRun.目标位置)));
 
                 // 设置AXIS轴的目标位置
                 error = GTN_SetPos(axisRun.核号, axisRun.轴号, posPulse);

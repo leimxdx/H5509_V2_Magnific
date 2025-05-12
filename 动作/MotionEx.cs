@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.Spreadsheet;
 using static System.Windows.Forms.LinkLabel;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
@@ -145,7 +147,7 @@ namespace H5509_V2
                 string result = WaitAxisHome(axisHomes[i]);
                 if (result != "Success")
                 {
-                    Debug.WriteLine($"{axisHomes[i].轴名称}回零失败!" + result);
+                    Debug.WriteLine(result);
                     bools[i] = false;
                 }
                 else bools[i] = true;
@@ -174,29 +176,40 @@ namespace H5509_V2
                 do
                 {
                     short error = GTN_GetHomeStatus(axisHome.核号, axisHome.轴号, out tHomeSts);
-                    Motion.ErrorHandler($"GTN_GetHomeStatus({axisHome.核号}, {axisHome.轴号}, out tHomeSts)", error);
+                    Motion.ErrorHandler($"GTN_GetHomeStatus({axisHome.核号}, {axisHome.轴号}, out {tHomeSts})", error);
+
+                    error = GTN_GetSts(axisHome.核号, axisHome.轴号, out int sts, 1, out uint pClock);
+                    Motion.ErrorHandler($"GTN_GetSts({axisHome.核号}, {axisHome.轴号}, out {sts}, 1, out uint {pClock})", error);
+
                     if (APPmaster.IsPause)
                     {
                         Motion.AxisStop(axisHome.核号, axisHome.轴号, 1);
-                        return "回零被停止";
+                        return $"{axisHome.轴名称}回零被停止";
                     }
+
+                    if ((sts & (1 << 1)) == 1)
+                    {
+                        Motion.AxisStop(axisHome.核号, axisHome.轴号, 1);
+                        return $"{axisHome.轴名称}回零被停止,轴报警";
+                    }
+
                     Thread.Sleep(1); //减少轴卡和CPU压力
                 }
                 while (tHomeSts.run == 1);
 
                 if (tHomeSts.error != HOME_ERROR_NONE) //未发生错误
                 {
-                    if (tHomeSts.error == HOME_ERROR_NOT_TRAP_MODE) return "执行Smart Home回原点的轴不是处于点位运动模式";
-                    else if (tHomeSts.error == HOME_ERROR_DISABLE) return "执行Smart Home回原点的轴未使能";
-                    else if (tHomeSts.error == HOME_ERROR_ALARM) return "执行Smart Home回原点的轴驱动报警";
-                    else if (tHomeSts.error == HOME_ERROR_STOP) return "未完成回原点，轴停止运动";
-                    else if (tHomeSts.error == HOME_ERROR_STAGE) return "回原点阶段错误";
-                    else if (tHomeSts.error == HOME_ERROR_HOME_MODE) return "模式错误，如已经启动Smart Home，勿重复调用回原点指令";
-                    else if (tHomeSts.error == HOME_ERROR_SET_CAPTURE_HOME) return "设置Home捕获模式失败";
-                    else if (tHomeSts.error == HOME_ERROR_NO_HOME) return "未找到Home";
-                    else if (tHomeSts.error == HOME_ERROR_SET_CAPTURE_INDEX) return "设置Index捕获模式失败";
-                    else if (tHomeSts.error == HOME_ERROR_NO_INDEX) return "未找到Index";
-                    else return "回零异常";
+                    if (tHomeSts.error == HOME_ERROR_NOT_TRAP_MODE) return $"{axisHome.轴名称}回零失败，执行Smart Home回原点的轴不是处于点位运动模式";
+                    else if (tHomeSts.error == HOME_ERROR_DISABLE) return $"{axisHome.轴名称}回零失败，执行Smart Home回原点的轴未使能";
+                    else if (tHomeSts.error == HOME_ERROR_ALARM) return $"{axisHome.轴名称}回零失败，执行Smart Home回原点的轴驱动报警";
+                    else if (tHomeSts.error == HOME_ERROR_STOP) return $"{axisHome.轴名称}回零失败，未完成回原点，轴停止运动";
+                    else if (tHomeSts.error == HOME_ERROR_STAGE) return $"{axisHome.轴名称}回零失败，回原点阶段错误";
+                    else if (tHomeSts.error == HOME_ERROR_HOME_MODE) return $"{axisHome.轴名称}回零失败，模式错误，如已经启动Smart Home，勿重复调用回原点指令";
+                    else if (tHomeSts.error == HOME_ERROR_SET_CAPTURE_HOME) return $"{axisHome.轴名称}回零失败，设置Home捕获模式失败";
+                    else if (tHomeSts.error == HOME_ERROR_NO_HOME) return $"{axisHome.轴名称}回零失败，未找到Home";
+                    else if (tHomeSts.error == HOME_ERROR_SET_CAPTURE_INDEX) return $"{axisHome.轴名称}回零失败，设置Index捕获模式失败";
+                    else if (tHomeSts.error == HOME_ERROR_NO_INDEX) return $"{axisHome.轴名称}回零失败，未找到Index";
+                    else return $"{axisHome.轴名称}回零异常";
                 }
                 else
                 {
@@ -208,7 +221,7 @@ namespace H5509_V2
                             string iovalue = value[axisHome.轴号 - 1].ToString();
                             if (iovalue != "0")
                             {
-                                return "未在原点";
+                                return $"{axisHome.轴名称}回零失败，回原后未在原点";
                             }
                         }
                         else return result;
@@ -271,7 +284,7 @@ namespace H5509_V2
                     result = task.Result;
                     if (result != "Success")
                     {
-                        Debug.WriteLine($"{axisName}回零失败!" + result);
+                        Debug.WriteLine(result);
                     }
                 }
             }
@@ -307,7 +320,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisRun"></param>
         /// <returns></returns>
-        private string WaitAxisMove(AxisRun axisRun, int type = 0)
+        private string WaitAxisMove(AxisRun axisRun, int prfPos, int type = 0)
         {
             string result = Motion.CommonInitedValidate();
 
@@ -316,16 +329,19 @@ namespace H5509_V2
             try
             {
                 int sts;
+                bool isException = false;
+                string errortxt = "";
                 do
                 {
                     short error = GTN_GetSts(axisRun.核号, axisRun.轴号, out sts, 1, out uint pClock);
                     Motion.ErrorHandler($"GTN_GetSts({axisRun.核号}, {axisRun.轴号}, out {sts}, 1, out uint pClock)", error);
+
                     if (APPmaster.IsPause && type == 0)
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
                         while (true)
                         {
-                            if (APPmaster.IsForecePause) break;
+                            if (APPmaster.IsForecePause) return "强制停止";
                             if (APPmaster.IsPause) Thread.Sleep(10);
                             else
                             {
@@ -334,15 +350,38 @@ namespace H5509_V2
                             }
                         }
                     }
+
+                    if ((sts & (1 << 1)) == 1)
+                    {
+                        GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
+                        errortxt = $"{axisRun.轴名称}运动被停止,轴报警";
+                        isException = true;
+                    }
+
+                    //if ((sts & (1 << 5)) == 1)
+                    //{
+                    //    GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
+                    //    return $"{axisRun.轴名称}运动被停止,正限位报警";
+                    //}
+
+                    //if ((sts & (1 << 6)) == 1)
+                    //{
+                    //    GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
+                    //    return $"{axisRun.轴名称}运动被停止,负限位报警";
+                    //}
+
                     Thread.Sleep(1); //减少轴卡和CPU压力
                 }
                 while ((sts & 0x400) != 0);
 
+                if (isException) return errortxt;
+
                 Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号, out double encPos);
-                Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int prfPos);
+                //Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int prfPos);
+
                 double posvalue = Math.Abs(prfPos - encPos);
-                //Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
                 int errorvalue = 跟随误差;
+
                 if (axisRun.轴名称 == "M19_测试手臂Z轴")
                 {
                     if (posvalue > errorvalue * 2)
@@ -380,7 +419,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisRuns"></param>
         /// <returns></returns>
-        private string WaitAxisMove(List<AxisRun> axisRuns)
+        private string WaitAxisMove(List<AxisRun> axisRuns, List<int> prfPos)
         {
             string result = Motion.CommonInitedValidate();
 
@@ -389,9 +428,16 @@ namespace H5509_V2
             try
             {
                 bool value = true;
+                bool isException = false;
+                string errortxt = "";
+
                 int[] sts = new int[axisRuns.Count];
                 do
                 {
+                    value = false;
+                    isException = false;
+                    errortxt = "";
+
                     for (int i = 0; i < axisRuns.Count; i++)
                     {
                         short error = GTN_GetSts(axisRuns[i].核号, axisRuns[i].轴号, out sts[i], 1, out uint pClock);
@@ -406,7 +452,7 @@ namespace H5509_V2
                         }
                         while (true)
                         {
-                            if (APPmaster.IsForecePause) break;
+                            if (APPmaster.IsForecePause) return "强制停止";
                             if (APPmaster.IsPause) Thread.Sleep(10);
                             else
                             {
@@ -416,10 +462,15 @@ namespace H5509_V2
                         }
                     }
 
-                    value = false;
-
                     for (int i = 0; i < sts.Length; i++)
                     {
+                        if (((sts[i] & (1 << 1)) == 1))
+                        {
+                            GTN_Stop(axisRuns[i].核号, 1 << (axisRuns[i].轴号 - 1), 1);
+                            errortxt += $"{axisRuns[i].轴名称}运动被停止,轴报警";
+                            isException = true;
+                        }
+
                         if ((sts[i] & 0x400) != 0)
                         {
                             value = true;
@@ -431,34 +482,36 @@ namespace H5509_V2
                 }
                 while (value);
 
+                if (isException) return errortxt;
+
                 for (int i = 0; i < axisRuns.Count; i++)
                 {
                     Motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号, out double encPos);
-                    Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号, out int prfPos);
-                    double posvalue = Math.Abs(prfPos - encPos);
-                    //Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}");
+                    //Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号, out int prfPos);
 
+                    double posvalue = Math.Abs(prfPos[i] - encPos);
                     int errorvalue = 跟随误差;
+
                     if (axisRuns[i].轴名称 == "M19_测试手臂Z轴")
                     {
                         if (posvalue > errorvalue * 2)
                         {
-                            return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
                         }
                         else if (posvalue > 300)
                         {
-                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{300}");
                         }
                     }
                     else
                     {
                         if (posvalue > errorvalue)
                         {
-                            return $"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
                         }
                         else if (posvalue > 150)
                         {
-                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{150}");
                         }
                     }
                 }
@@ -477,7 +530,7 @@ namespace H5509_V2
         /// <param name="axisName"></param>
         /// <param name="pos"></param>
         /// <returns></returns>
-        public string AxisAbsoluteMove(string axisName, double pos)
+        public string AxisAbsoluteMove(string axisName, double pos, int type = 0)
         {
             string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
             if (result != "Success") return result;
@@ -499,7 +552,7 @@ namespace H5509_V2
 
             Task<string> task = Task.Run(() =>
             {
-                return WaitAxisMove(axisRun);
+                return WaitAxisMove(axisRun, axisRun.目标位置, type);
             });
 
             return task.Result;
@@ -528,12 +581,12 @@ namespace H5509_V2
                 平滑时间 = axisRunInfo.平滑时间,
             };
 
-            result = Motion.UniaxialRelativeMove(axisRun);
+            result = Motion.UniaxialRelativeMove(axisRun, out int posPulse);
             if (result != "Success") return result;
 
             Task<string> task = Task.Run(() =>
             {
-                return WaitAxisMove(axisRun, 1);//等待回零完成
+                return WaitAxisMove(axisRun, posPulse, 1);
             });
 
             return task.Result;
@@ -547,23 +600,26 @@ namespace H5509_V2
         /// <returns></returns>
         public string AxisMove(string[] axisNames, double[] poss)
         {
+            List<int> prfPos = new List<int>();
             List<AxisRun> axisRuns = new List<AxisRun>();
             for (int i = 0; i < axisNames.Length; i++)
             {
                 string result = GetAxisRunInfo(axisNames[i], out AxisRunInfo axisRunInfo);
                 if (result != "Success") return result;
 
+                int move = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm));
                 axisRuns.Add(new AxisRun()
                 {
                     轴名称 = axisRunInfo.轴名称,
                     核号 = axisRunInfo.核号,
                     轴号 = axisRunInfo.轴号,
-                    目标位置 = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm)),
+                    目标位置 = move,
                     目标速度 = axisRunInfo.运行速度,
                     目标加速度 = axisRunInfo.加速度,
                     目标减速度 = axisRunInfo.减速度,
                     平滑时间 = axisRunInfo.平滑时间,
                 });
+                prfPos.Add(move);
             }
 
             string result2 = Motion.MultiaxisAbsoluteMoveAbs(axisRuns);
@@ -571,7 +627,7 @@ namespace H5509_V2
 
             Task<string> task = Task.Run(() =>
             {
-                return WaitAxisMove(axisRuns);//等待回零完成
+                return WaitAxisMove(axisRuns, prfPos);//等待回零完成
             });
 
             return task.Result;

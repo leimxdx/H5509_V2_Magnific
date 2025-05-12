@@ -236,9 +236,9 @@ namespace H5509_V2
             return motionEx.AxisAbsoluteMove("M20_飞梭轴", pos);
         }
 
-        public string Fix3放IC盘轴移动(double pos)
+        public string Fix3放IC盘轴移动(double pos, int type = 0)
         {
-            return motionEx.AxisAbsoluteMove("M11_Fix3放IC轴", pos);
+            return motionEx.AxisAbsoluteMove("M11_Fix3放IC轴", pos, type);
         }
 
         public string Empty顶盘轴移动(double pos)
@@ -2555,8 +2555,8 @@ namespace H5509_V2
                     case 505:
                         PS初始化流程.StepName = "各轴移动到初始点";
                         Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
-                        Task<string> auto1 = Task.Run(() => { return Auto1顶盘轴移动(182.715); });
-                        Task<string> auto2 = Task.Run(() => { return Auto2顶盘轴移动(182.715); });
+                        Task<string> auto1 = Task.Run(() => { return Auto1顶盘轴移动(183); });
+                        Task<string> auto2 = Task.Run(() => { return Auto2顶盘轴移动(183); });//182.715
                         Task<string> testp = Task.Run(() => { return 测试吸嘴_张开气缸输出(true); });
                         Task<string> testx = Task.Run(() => { return 测试手臂X移动(初始点位.测试_梭车1吸_X); });
                         Task<string> shuttle = Task.Run(() => { return 飞梭轴移动(初始点位.梭车2_后_Y); });
@@ -2728,7 +2728,7 @@ namespace H5509_V2
             }
         }
 
-        public void 入料手臂吸放料流程1()
+        public void 入料手臂吸放料流程()
         {
             string result = "";
             short xPoint = 0;
@@ -2760,7 +2760,7 @@ namespace H5509_V2
                 {
                     case 500:
                         PS入料手臂吸放料流程.StepName = "路径规划";
-                        PS入料手臂吸放料流程.Condition = Load上顶标记 == 1  && !Auto1换盘标记 && !Auto2换盘标记 && !结批标记;
+                        PS入料手臂吸放料流程.Condition = Load上顶标记 == 1 && !Auto1换盘标记 && !Auto2换盘标记 && !结批标记;
                         PS入料手臂吸放料流程.Permit = !PS入料手臂放料流程.Processing;
                         if (PS入料手臂吸放料流程.Condition && PS入料手臂吸放料流程.Permit)
                         {
@@ -3290,6 +3290,7 @@ namespace H5509_V2
 
                     case 731:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z回原";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         homeopen = new bool[] { home[0] == "1", home[1] == "1", home[2] == "1", home[3] == "1" };
                         result = 入料手臂Z回零(homeopen);
                         if (result == "Success")
@@ -3305,7 +3306,7 @@ namespace H5509_V2
                         break;
 
                     case 799:
-                        PS入料手臂吸放料流程.StepName = $"入料手臂_放料{colums + 1}流程完成";
+                        PS入料手臂吸放料流程.StepName = $"入料手臂_放料第{colums + 1}列流程完成";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         PS入料手臂吸放料流程.StepID = 505;
                         break;
@@ -3313,10 +3314,12 @@ namespace H5509_V2
 
                     case 805:
                         PS入料手臂吸放料流程.StepName = "入料手臂移到避让位";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料手臂移动(初始点位.入料_Heat_X, 0, 7.5);
                         if (result == "Success")
                         {
                             PS入料手臂吸放料流程.StepID = 810;
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->判断抓盘手臂放空盘到Empty标记");
                         }
                         else
                         {
@@ -3332,6 +3335,7 @@ namespace H5509_V2
                         {
                             抓盘手臂取Load空盘标记 = 2;
                             PS入料手臂吸放料流程.StepID = 815;
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->等待抓盘手臂取Load空盘完成");
                         }
                         else Thread.Sleep(10);
                         break;
@@ -3341,17 +3345,18 @@ namespace H5509_V2
                         if (抓盘手臂取Load空盘标记 == 1)
                         {
                             PS入料手臂吸放料流程.StepID = 820;
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->等待Load上顶完成");
                         }
                         else Thread.Sleep(10);
                         break;
 
                     case 820:
-
                         PS入料手臂吸放料流程.StepName = "等待Load上顶完成";
                         if (Load上顶标记 == 1)
                         {
                             Load换盘标记 = false;
                             LoaderTrayClear();
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Load上顶完成Map更新");
                             PS入料手臂吸放料流程.StepID = 515;
                         }
                         else Thread.Sleep(10);
@@ -3359,11 +3364,13 @@ namespace H5509_V2
 
                     case 905:
                         PS入料手臂吸放料流程.StepName = "入料手臂移到避让位";
+                        Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料手臂移动(初始点位.入料_Heat_X, 0, 7.5);
                         if (result == "Success")
                         {
                             Auto等待换盘标记 = true;
                             PS入料手臂吸放料流程.StepID = 910;
+                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->等待Auto1和Auto2换盘");
                         }
                         else
                         {
@@ -3378,6 +3385,8 @@ namespace H5509_V2
                         if (Auto1换盘标记 == false && Auto2换盘标记 == false)
                         {
                             Auto等待换盘标记 = false;
+                            if (!Auto1换盘标记) Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Auto1换盘完成");
+                            if (!Auto2换盘标记) Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Auto2换盘完成");
                             PS入料手臂吸放料流程.StepID = 500;
                         }
                         break;
@@ -4059,7 +4068,8 @@ namespace H5509_V2
                         break;
 
                     case 599:
-                        PS出料手臂吸放料流程.StepName = $"出料手臂_吸料第{colums}列流程完成";
+                        PS出料手臂吸放料流程.StepName = $"出料手臂_吸料第{colums + 1}列流程完成";
+                        Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
                         PS出料手臂吸放料流程.StepID = 705;
                         break;
 
@@ -4105,7 +4115,7 @@ namespace H5509_V2
                             {
                                 Auto等待换盘标记 = false;
                                 Auto2换盘标记 = true;
-                                Debug.WriteLine("进入Auto1换盘程序");
+                                Debug.WriteLine("进入Auto2换盘程序");
                                 PS出料手臂吸放料流程.StepID = 905;
                                 break;
                             }
@@ -4601,11 +4611,13 @@ namespace H5509_V2
 
                     case 805:
                         PS出料手臂吸放料流程.StepName = "出料手臂移到避让位";
+                        Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
                         result = 出料手臂移动(256.05, 初始点位.出料_Auto1_Y, 出料放料间距);
                         if (result == "Success")
                         {
                             Auto1上顶标记 = 2;
-                            PS入料手臂吸放料流程.StepID = 810;
+                            PS出料手臂吸放料流程.StepID = 810;
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->判断Load未在换盘");
                         }
                         else
                         {
@@ -4616,32 +4628,37 @@ namespace H5509_V2
                         break;
 
                     case 810:
-                        PS入料手臂吸放料流程.StepName = "判断Auto1或Auto2是否换盘";
+                        PS出料手臂吸放料流程.StepName = "判断Load未在换盘";
                         if (Load换盘标记 == false && 抓盘手臂放空盘到Empty标记 == 1)
                         {
                             抓盘手臂放空盘到Auto1标记 = 2;
-                            PS入料手臂吸放料流程.StepID = 815;
+                            PS出料手臂吸放料流程.StepID = 815;
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->抓盘手臂放空盘到Auto1");
                         }
                         else Thread.Sleep(10);
                         break;
 
                     case 815:
-                        PS入料手臂吸放料流程.StepName = "判断Auto1或Auto2是否换盘";
+                        PS出料手臂吸放料流程.StepName = "抓盘手臂放空盘到Auto1";
                         if (抓盘手臂放空盘到Auto1标记 == 1)
                         {
-                            Auto1TrayClear();
-                            PS入料手臂吸放料流程.StepID = 705;
+                            Auto1TrayClear(); 
+                            Auto1换盘标记 = false;
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->Auto1换盘完成Map更新");
+                            PS出料手臂吸放料流程.StepID = 705;
                         }
                         else Thread.Sleep(10);
                         break;
 
                     case 905:
                         PS出料手臂吸放料流程.StepName = "出料手臂移到避让位";
-                        result = 出料手臂移动(256.05, 初始点位.出料_Auto1_Y, 出料放料间距);
+                        result = 出料手臂移动(256.05, 初始点位.出料_Auto2_Y, 出料放料间距);
+                        Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
                         if (result == "Success")
                         {
                             Auto2上顶标记 = 2;
-                            PS入料手臂吸放料流程.StepID = 910;
+                            PS出料手臂吸放料流程.StepID = 910;
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->判断Load是否未在换盘");
                         }
                         else
                         {
@@ -4652,52 +4669,55 @@ namespace H5509_V2
                         break;
 
                     case 910:
-                        PS入料手臂吸放料流程.StepName = "判断Auto1或Auto2是否换盘";
+                        PS出料手臂吸放料流程.StepName = "判断Load是否未在换盘";
                         if (Load换盘标记 == false && 抓盘手臂放空盘到Empty标记 == 1)
                         {
                             抓盘手臂放空盘到Auto2标记 = 2;
-                            PS入料手臂吸放料流程.StepID = 915;
+                            PS出料手臂吸放料流程.StepID = 915;
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->判断Load是否未在换盘");
                         }
                         else Thread.Sleep(10);
                         break;
 
                     case 915:
-                        PS入料手臂吸放料流程.StepName = "判断Auto1或Auto2是否换盘";
+                        PS出料手臂吸放料流程.StepName = "抓盘手臂放空盘到Auto2";
                         if (抓盘手臂放空盘到Auto2标记 == 1)
                         {
                             Auto2TrayClear();
-                            PS入料手臂吸放料流程.StepID = 705;
+                            Auto2换盘标记 = false;
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->Auto2换盘完成Map更新");
+                            PS出料手臂吸放料流程.StepID = 705;
                         }
                         else Thread.Sleep(10);
                         break;
 
 
                     case 1005:
-                        PS入料手臂吸放料流程.StepName = "Fix1满盘报警";
+                        PS出料手臂吸放料流程.StepName = "Fix1满盘报警";
                         //if ()
                         {
                             Fix1TrayClear();
-                            PS入料手臂吸放料流程.StepID = 705;
+                            PS出料手臂吸放料流程.StepID = 705;
                         }
                         //else Thread.Sleep(10);
                         break;
 
                     case 1105:
-                        PS入料手臂吸放料流程.StepName = "Fix2满盘报警";
+                        PS出料手臂吸放料流程.StepName = "Fix2满盘报警";
                         //if ()
                         {
                             Fix2TrayClear();
-                            PS入料手臂吸放料流程.StepID = 705;
+                            PS出料手臂吸放料流程.StepID = 705;
                         }
                         //else Thread.Sleep(10);
                         break;
 
                     case 1205:
-                        PS入料手臂吸放料流程.StepName = "Fix3满盘报警";
+                        PS出料手臂吸放料流程.StepName = "Fix3满盘报警";
                         //if ()
                         {
                             Fix3TrayClear();
-                            PS入料手臂吸放料流程.StepID = 705;
+                            PS出料手臂吸放料流程.StepID = 705;
                         }
                         //else Thread.Sleep(10);
                         break;
@@ -5215,6 +5235,7 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             PS测试手臂取待测料流程.StepID = 720;
+                            Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试Z等待气缸动作完成");
                         }
                         else
                         {
@@ -5226,9 +5247,9 @@ namespace H5509_V2
 
                     case 720:
                         PS测试手臂取待测料流程.StepName = "测试Z向下移动";
-                        Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                         if (SiteTestState[site] == 0)
                         {
+                            Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                             zpos = 初始点位.测试_Test区放_Z;
                             result = 测试手臂Z移动(zpos, true); //测试区放
                             if (result == "Success")
@@ -5248,38 +5269,38 @@ namespace H5509_V2
                     case 725:
                         PS测试手臂取待测料流程.StepName = "测试吸嘴放料";
                         Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
-                        //result = 测试吸嘴_吸料(lsopen, false);
-                        //if (result == "Success")
-                        //{
-                        //    result = 测试吸嘴_放料(lsopen, true);
-                        //    if (result == "Success")
-                        //    {
-                        Thread.Sleep(200);
-                        //        result = 测试吸嘴_放料(lsopen, false);
-                        //        if (result == "Success")
-                        //        {
-                        PS测试手臂取待测料流程.StepID = 730;
-                        //        }
-                        //        else
-                        //        {
-                        //            Debug.WriteLine($"测试吸嘴_关破真空失败!" + result);
-                        //            ProgramPause = true;
-                        //            IsPause = true;
-                        //        }
-                        //    }
-                        //    else
-                        //    {
-                        //        Debug.WriteLine($"测试吸嘴_开破真空失败!" + result);
-                        //        ProgramPause = true;
-                        //        IsPause = true;
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    Debug.WriteLine($"测试吸嘴_关吸真空失败!" + result);
-                        //    ProgramPause = true;
-                        //    IsPause = true;
-                        //}
+                        result = 测试吸嘴_吸料(lsopen, false);
+                        if (result == "Success")
+                        {
+                            result = 测试吸嘴_放料(lsopen, true);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(200);
+                                result = 测试吸嘴_放料(lsopen, false);
+                                if (result == "Success")
+                                {
+                                    PS测试手臂取待测料流程.StepID = 730;
+                                }
+                                else
+                                {
+                                    Debug.WriteLine($"测试吸嘴_关破真空失败!" + result);
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"测试吸嘴_开破真空失败!" + result);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"测试吸嘴_关吸真空失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                         break;
 
                     case 730:
@@ -5474,6 +5495,7 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             PS测试手臂取已测料流程.StepID = 520;
+                            Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试Z等待气缸动作完成");
                         }
                         else
                         {
@@ -5485,9 +5507,9 @@ namespace H5509_V2
 
                     case 520:
                         PS测试手臂取已测料流程.StepName = "测试Z向下移动";
-                        Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                         if (SiteTestState[site] == 4) //待取出
                         {
+                            Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                             double testzpos = 初始点位.测试_Test区吸_Z; //后续还要加上offset
                             result = 测试手臂Z移动(testzpos, true);
                             if (result == "Success")
@@ -5758,6 +5780,7 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             PS测试手臂取已测料流程.StepID = 720;
+                            Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->等待梭车到达");
                         }
                         else
                         {
@@ -5769,9 +5792,9 @@ namespace H5509_V2
 
                     case 720:
                         PS测试手臂取已测料流程.StepName = "测试Z向下移动";
-                        Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                         if (飞梭后出料状态 == 0) //等梭车过来再放
                         {
+                            Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                             double zpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2放_Z : 初始点位.测试_梭车1放_Z;
                             result = 测试手臂Z移动(zpos, true);
                             if (result == "Success")
@@ -6342,7 +6365,7 @@ namespace H5509_V2
                     if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
                     {
                         Debug.WriteLine("按下Tray平移");
-                        if (!Tray平移运动标记)
+                        if (!Tray平移运动标记 && 设备状态 == 0)
                         {
                             Tray平移运动标记 = true;
 
@@ -6351,7 +6374,7 @@ namespace H5509_V2
                             {
                                 if (Tray平移左右标记 == 0)
                                 {
-                                    result = Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动);
+                                    result = Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动, 1);
                                     if (result == "Success")
                                     {
                                         Tray平移左右标记 = 1;
@@ -6361,7 +6384,7 @@ namespace H5509_V2
 
                                 else if (Tray平移左右标记 == 1)
                                 {
-                                    result = Fix3放IC盘轴移动(0);
+                                    result = Fix3放IC盘轴移动(0, 1);
                                     if (result == "Success")
                                     {
                                         Tray平移左右标记 = 0;
@@ -6536,6 +6559,7 @@ namespace H5509_V2
         {
             string result = "";
             string result2 = "";
+            double movepos = 0;
             PS空盘下降流程.StepID = 500;
             while (true)
             {
@@ -6560,15 +6584,41 @@ namespace H5509_V2
                         if (PS空盘下降流程.Condition && PS空盘下降流程.Permit)
                         {
                             PS空盘下降流程.Processing = true;
-                            PS空盘下降流程.StepID = 505;
+                            PS空盘下降流程.StepID = 501;
                         }
                         else Thread.Sleep(10);
                         break;
 
+                    case 501:
+                        PS空盘下降流程.StepName = "获取Empty下移绝对位置";
+                        result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos1);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) - Tray_厚度; //6.35
+                                PS空盘下降流程.StepID = 505;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Debug.WriteLine("M12_Empty顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine("M12_Empty顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
                     case 505:
-                        PS空盘下降流程.StepName = "Empty向下移动固定距离";
+                        PS空盘下降流程.StepName = $"Empty向下移动{Tray_厚度}mm";
                         Debug.WriteLine($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
-                        result = Empty顶盘轴相对移动(-6.35);
+                        result = Empty顶盘轴移动(movepos);
                         if (result == "Success")
                         {
                             PS空盘下降流程.StepID = 510;
@@ -6983,6 +7033,29 @@ namespace H5509_V2
                         result = Auto1_Tray上顶气缸原位输出();
                         if (result == "Success")
                         {
+                            PS手动盘1上顶流程.StepID = 540;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1_Tray上顶气缸原位输出失败!" + result);
+                        }
+                        break;
+
+                    case 540:
+                        PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
+                        if (result == "Success")
+                        {
+                            if (prfpos < Auto1满盘判断值)
+                            {
+                                Auto1料仓满盘标记 = true;
+                                Debug.WriteLine($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{Auto1满盘判断值}");
+                            }
+                            else Auto1料仓满盘标记 = false;
+
                             Auto1上顶标记 = 1;
                             PS手动盘1上顶流程.StepID = 599;
                         }
@@ -6990,7 +7063,211 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
+                            Debug.WriteLine($"判断Auto1料仓是否满盘失败！" + result);
+                        }
+                        break;
+
+                    case 599:
+                        PS手动盘1上顶流程.StepName = $"手动盘1上顶流程完成";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        PS手动盘1上顶流程.Processing = false;
+                        PS手动盘1上顶流程.StepID = 500;
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS手动盘1上顶流程.StepID =" + PS手动盘1上顶流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
+        public void Auto1顶盘流程2()
+        {
+            string result = "";
+            double movepos = 0;
+
+            PS手动盘1上顶流程.StepID = 500;
+            while (true)
+            {
+                Thread.Sleep(10);
+                //if (!是否可以开始运行())
+                //{
+                //    continue;
+                //}
+
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS手动盘1上顶流程.StepID)
+                {
+                    case 500:
+                        PS手动盘1上顶流程.StepName = "路径规划";
+                        PS手动盘1上顶流程.Condition = Auto1上顶标记 == 2;
+                        PS手动盘1上顶流程.Permit = !PS手动盘1上顶流程.Processing;
+                        if (PS手动盘1上顶流程.Condition && PS手动盘1上顶流程.Permit)
+                        {
+                            PS手动盘1上顶流程.Processing = true;
+                            PS手动盘1上顶流程.StepID = 505;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 505:
+                        PS手动盘1上顶流程.StepName = "Auto1_Tray前侧定位气缸原位输出";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = Auto1_Tray前侧定位气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 506;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1_Tray前侧定位气缸原位输出失败!" + result);
+                        }
+                        break;
+
+                    case 506:
+                        PS手动盘1上顶流程.StepName = "获取Auto1上移绝对位置";
+                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos1);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + Auto1上移固定距离; //6.35
+                                PS手动盘1上顶流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Debug.WriteLine("M14_Auto1顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine("M14_Auto1顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS手动盘1上顶流程.StepName = $"Auto1向上移动绝对位置{movepos}mm";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = Auto1顶盘轴移动(movepos);
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1向上移动失败!" + result);
+                        }
+                        break;
+
+                    case 515:
+                        PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸到位输出";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = Auto1_Tray上顶气缸到位输出();//3175 1.5875
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 520;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1_Tray上顶气缸到位输出失败!" + result);
+                        }
+                        break;
+
+                    case 520:
+                        PS手动盘1上顶流程.StepName = "获取Auto1下移绝对位置";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos2);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - Auto1上移固定距离 - Tray_厚度; //6.35
+                                PS手动盘1上顶流程.StepID = 525;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Debug.WriteLine("M14_Auto1顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine("M14_Auto1顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
+                    case 525:
+                        PS手动盘1上顶流程.StepName = $"Auto1向下移动绝对位置{movepos}mm";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = Auto1顶盘轴移动(movepos);
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 530;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1向下移动失败!" + result);
+                        }
+                        break;
+
+                    case 530:
+                        PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸原位输出";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = Auto1_Tray上顶气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘1上顶流程.StepID = 535;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
                             Debug.WriteLine($"Auto1_Tray上顶气缸原位输出失败!" + result);
+                        }
+                        break;
+
+                    case 535:
+                        PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
+                        Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
+                        if (result == "Success")
+                        {
+                            if (prfpos < Auto1满盘判断值)
+                            {
+                                Auto1料仓满盘标记 = true;
+                                Debug.WriteLine($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{Auto1满盘判断值}");
+                            }
+                            else Auto1料仓满盘标记 = false;
+
+                            Auto1上顶标记 = 1;
+                            PS手动盘1上顶流程.StepID = 599;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"判断Auto1料仓是否满盘失败！" + result);
                         }
                         break;
 
@@ -7141,8 +7418,7 @@ namespace H5509_V2
                         result = Auto2_Tray上顶气缸原位输出();
                         if (result == "Success")
                         {
-                            Auto2上顶标记 = 1;
-                            PS手动盘2上顶流程.StepID = 599;
+                            PS手动盘2上顶流程.StepID = 540;
                         }
                         else
                         {
@@ -7151,6 +7427,236 @@ namespace H5509_V2
                             Debug.WriteLine($"Auto2_Tray上顶气缸原位输出失败!" + result);
                         }
                         break;
+
+
+                    case 540:
+                        PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
+                        if (result == "Success")
+                        {
+                            if (prfpos < Auto2满盘判断值)
+                            {
+                                Auto2料仓满盘标记 = true;
+                                Debug.WriteLine($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
+                            }
+                            else Auto2料仓满盘标记 = false;
+
+                            Auto2上顶标记 = 1;
+                            PS手动盘2上顶流程.StepID = 599;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"判断Auto2料仓是否满盘失败！" + result);
+                        }
+                        break;
+
+
+                    case 599:
+                        PS手动盘2上顶流程.StepName = $"手动盘2上顶流程完成";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        PS手动盘2上顶流程.Processing = false;
+                        PS手动盘2上顶流程.StepID = 500;
+                        break;
+
+
+                    default:
+                        Debug.WriteLine(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+        public void Auto2顶盘流程2()
+        {
+            string result = "";
+            double movepos = 0;
+            PS手动盘2上顶流程.StepID = 500;
+            while (true)
+            {
+                Thread.Sleep(10);
+                //if (!是否可以开始运行())
+                //{
+                //    continue;
+                //}
+
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS手动盘2上顶流程.StepID)
+                {
+                    case 500:
+                        PS手动盘2上顶流程.StepName = "路径规划";
+                        PS手动盘2上顶流程.Condition = Auto2上顶标记 == 2;
+                        PS手动盘2上顶流程.Permit = !PS手动盘2上顶流程.Processing;
+                        if (PS手动盘2上顶流程.Condition && PS手动盘2上顶流程.Permit)
+                        {
+                            PS手动盘2上顶流程.Processing = true;
+                            PS手动盘2上顶流程.StepID = 505;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 505:
+                        PS手动盘2上顶流程.StepName = "Auto2_Tray前侧定位气缸原位输出";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = Auto2_Tray前侧定位气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 506;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2_Tray前侧定位气缸原位输出失败!" + result);
+                        }
+                        break;
+
+                    case 506:
+                        PS手动盘2上顶流程.StepName = "获取Auto2上移绝对位置";
+                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos1);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + Auto2上移固定距离; //6.35
+                                PS手动盘2上顶流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Debug.WriteLine("M15_Auto2顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine("M15_Auto2顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS手动盘2上顶流程.StepName = $"Auto2向上移动绝对位置{movepos}mm";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = Auto2顶盘轴移动(movepos);
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2向上移动失败!" + result);
+                        }
+                        break;
+
+                    case 515:
+                        PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸到位输出";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = Auto2_Tray上顶气缸到位输出();//3175 1.5875
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 520;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2_Tray上顶气缸到位输出失败!" + result);
+                        }
+                        break;
+
+                    case 520:
+                        PS手动盘2上顶流程.StepName = "获取Auto2下移绝对位置";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos2);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - Auto2上移固定距离 - Tray_厚度; //6.35
+                                PS手动盘2上顶流程.StepID = 525;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Debug.WriteLine("M15_Auto2顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine("M15_Auto2顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
+                    case 525:
+                        PS手动盘2上顶流程.StepName = $"Auto2向下移动绝对位置{movepos}mm";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = Auto2顶盘轴移动(movepos);
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 530;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2向下移动失败!" + result);
+                        }
+                        break;
+
+                    case 530:
+                        PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸原位输出";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = Auto2_Tray上顶气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS手动盘2上顶流程.StepID = 535;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2_Tray上顶气缸原位输出失败!" + result);
+                        }
+                        break;
+
+                    case 535:
+                        PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
+                        Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
+                        if (result == "Success")
+                        {
+                            if (prfpos < Auto2满盘判断值)
+                            {
+                                Auto2料仓满盘标记 = true;
+                                Debug.WriteLine($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
+                            }
+                            else Auto2料仓满盘标记 = false;
+
+                            Auto2上顶标记 = 1;
+                            PS手动盘2上顶流程.StepID = 599;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"判断Auto2料仓是否满盘失败！" + result);
+                        }
+                        break;
+
 
                     case 599:
                         PS手动盘2上顶流程.StepName = $"手动盘2上顶流程完成";
@@ -8243,6 +8749,7 @@ namespace H5509_V2
 
                     case 535:
                         PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否有空盘";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
                         result = Auto1_前Tray存在感应(out value);
                         result2 = Auto1_后Tray放歪感应(out string value2);
                         if (result == "Success" && result2 == "Success")
@@ -8297,7 +8804,245 @@ namespace H5509_V2
                         result = 放Tary盘轴移动(0);
                         if (result == "Success")
                         {
-                            抓盘手臂放空盘到Auto1标记 = 1;
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 550;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"放Tary盘轴回到原点失败！" + result);
+                        }
+                        break;
+
+                    case 550:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "判断Auto1料仓是否满盘";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        if (Auto1料仓满盘标记)
+                        {
+                            Auto1上顶标记 = 2;
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 551;
+                        }
+                        else PS抓盘手臂放空盘到Auto1流程.StepID = 599;
+                        break;
+
+
+                    case 551:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待Auto1上顶盖空盘";
+                        if (Auto1上顶标记 == 1)
+                        {
+                            Auto1料仓打开标记 = true;
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1料仓满料！");
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 555;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 555:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待料仓料拿走";
+                        if (Auto1料仓打开标记 == false) //料仓被打开
+                        {
+                            抓盘手臂取Empty空盘标记 = 2;
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 560;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1料仓满料");
+                        }
+                        break;
+
+                    case 560:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待抓盘手臂取Empty空盘";
+                        if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
+                        {
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 565;
+                        }
+                        Thread.Sleep(10);
+                        break;
+
+                    case 565:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴和Auto1顶盘轴移动到等待位";
+                        Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto1_X - 200); });
+                        Task<string> auto1u = Task.Run(() => { return Auto1顶盘轴移动(182.715); });
+                        if (trayx.Result == "Success" && auto1u.Result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 570;
+                        }
+                        else
+                        {
+                            if (trayx.Result != "Success")
+                            {
+                                Debug.WriteLine($"放Tary盘轴移动到等待位失败！" + trayx.Result);
+                            }
+                            if (auto1u.Result != "Success")
+                            {
+                                Debug.WriteLine($"Auto1顶盘轴移动到等待位失败！" + trayx.Result);
+                            }
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 570:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否无空盘";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = Auto1_前Tray存在感应(out value);
+                        result2 = Auto1_后Tray放歪感应(out value2);
+                        if (result == "Success" && result2 == "Success")
+                        {
+                            if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 575;
+                            }
+                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (value != "1")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto1有盘感应到Tray盘,value:" + value);
+                                }
+                                if (value2 != "1")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto1放歪感应到Tray盘,value:" + value2);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            if (result != "Success") Debug.WriteLine($"读取Auto1前Tray存在感应失败！" + result);
+                            if (result2 != "Success") Debug.WriteLine($"读取Auto1后Tray放歪感应失败！" + result2);
+                        }
+                        break;
+
+
+                    case 575:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到Auto1";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X);
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 580;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"放Tary盘轴移动到Auto1失败！" + result);
+                        }
+                        break;
+
+                    case 580:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸到位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = 移Tray上下气缸到位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 585;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"移Tray上下气缸到位输出失败！" + result);
+                        }
+                        break;
+
+                    case 585:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray夹爪气缸原位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = 移Tray夹爪气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 590;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"移Tray夹爪气缸原位输出失败！" + result);
+                        }
+                        break;
+
+                    case 590:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸原位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = 移Tray上下气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 591;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"移Tray上下气缸原位输出失败！" + result);
+                        }
+                        break;
+
+                    case 591:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否有空盘";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = Auto1_前Tray存在感应(out value);
+                        result2 = Auto1_后Tray放歪感应(out value2);
+                        if (result == "Success" && result2 == "Success")
+                        {
+                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 592;
+                            }
+                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (value != "0")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto1没有感应到Tray盘,value:" + value);
+                                }
+                                if (value2 != "1")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto1感应到Tray盘放歪,value:" + value2);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            if (result != "Success") Debug.WriteLine($"读取Auto1前Tray存在感应失败！" + result);
+                            if (result2 != "Success") Debug.WriteLine($"读取Auto1后Tray放歪感应失败！" + result2);
+                        }
+                        break;
+
+                    case 592:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = $"Auto1_Tray前侧定位气缸到位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = Auto1_Tray前侧定位气缸到位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 595;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1_Tray前侧定位气缸到位输出失败！" + result);
+                        }
+                        break;
+
+                    case 595:
+                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴回到原点";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                        result = 放Tary盘轴移动(0);
+                        if (result == "Success")
+                        {
                             PS抓盘手臂放空盘到Auto1流程.StepID = 599;
                         }
                         else
@@ -8309,6 +9054,7 @@ namespace H5509_V2
                         break;
 
                     case 599:
+                        抓盘手臂放空盘到Auto1标记 = 1;
                         PS抓盘手臂放空盘到Auto1流程.StepName = $"抓盘手臂放空盘到Auto1流程完成";
                         Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
                         PS抓盘手臂放空盘到Auto1流程.Processing = false;
@@ -8319,6 +9065,7 @@ namespace H5509_V2
                         Debug.WriteLine(("PS抓盘手臂放空盘到Auto1流程.StepID =" + PS抓盘手臂放空盘到Auto1流程.StepID.ToString() + "对应流程不存在"));
                         break;
                 }
+
             }
         }
 
@@ -8573,7 +9320,243 @@ namespace H5509_V2
                         result = 放Tary盘轴移动(0);
                         if (result == "Success")
                         {
-                            抓盘手臂放空盘到Auto2标记 = 1;
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 550;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"放Tary盘轴回到原点失败！" + result);
+                        }
+                        break;
+
+                    case 550:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "判断Auto2料仓是否满盘";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        if (Auto2料仓满盘标记)
+                        {
+                            Auto2上顶标记 = 2;
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 551;
+                        }
+                        else PS抓盘手臂放空盘到Auto2流程.StepID = 599;
+                        break;
+
+                    case 551:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "等待Auto2上顶盖空盘";
+                        if (Auto2上顶标记 == 1)
+                        {
+                            Auto2料仓打开标记 = true;
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2料仓满料！");
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 555;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 555:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "等待料仓料拿走";
+                        if (Auto2料仓打开标记 == false) //料仓被打开
+                        {
+                            抓盘手臂取Empty空盘标记 = 2;
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 560;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1料仓满料");
+                        }
+                        break;
+
+                    case 560:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "等待抓盘手臂取Empty空盘";
+                        if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
+                        {
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 565;
+                        }
+                        Thread.Sleep(10);
+                        break;
+
+                    case 565:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴和Auto2顶盘轴移动到等待位";
+                        Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto2_X - 200); });
+                        Task<string> auto2u = Task.Run(() => { return Auto2顶盘轴移动(182.715); });
+                        if (trayx.Result == "Success" && auto2u.Result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 570;
+                        }
+                        else
+                        {
+                            if (trayx.Result != "Success")
+                            {
+                                Debug.WriteLine($"放Tary盘轴移动到等待位失败！" + trayx.Result);
+                            }
+                            if (auto2u.Result != "Success")
+                            {
+                                Debug.WriteLine($"Auto2顶盘轴移动到等待位失败！" + trayx.Result);
+                            }
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 570:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否无空盘";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = Auto2_前Tray存在感应(out value);
+                        result2 = Auto2_后Tray放歪感应(out value2);
+                        if (result == "Success" && result2 == "Success")
+                        {
+                            if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 575;
+                            }
+                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (value != "1")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto2有盘感应到Tray盘,value:" + value);
+                                }
+                                if (value2 != "1")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto2放歪感应到Tray盘,value:" + value2);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            if (result != "Success") Debug.WriteLine($"读取Auto2前Tray存在感应失败！" + result);
+                            if (result2 != "Success") Debug.WriteLine($"读取Auto2后Tray放歪感应失败！" + result2);
+                        }
+                        break;
+
+                    case 575:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到Auto2";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X);
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 580;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"放Tary盘轴移动到Auto2失败！" + result);
+                        }
+                        break;
+
+                    case 580:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸到位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = 移Tray上下气缸到位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 585;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"移Tray上下气缸到位输出失败！" + result);
+                        }
+                        break;
+
+                    case 585:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray夹爪气缸原位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = 移Tray夹爪气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 590;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"移Tray夹爪气缸原位输出失败！" + result);
+                        }
+                        break;
+
+                    case 590:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸原位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = 移Tray上下气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 591;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"移Tray上下气缸原位输出失败！" + result);
+                        }
+                        break;
+
+                    case 591:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否有空盘";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = Auto2_前Tray存在感应(out value);
+                        result2 = Auto2_后Tray放歪感应(out value2);
+                        if (result == "Success" && result2 == "Success")
+                        {
+                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 592;
+                            }
+                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (value != "0")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto2没有感应到Tray盘,value:" + value);
+                                }
+                                if (value2 != "1")
+                                {
+                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto2感应到Tray盘放歪,value:" + value2);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            if (result != "Success") Debug.WriteLine($"读取Auto2前Tray存在感应失败！" + result);
+                            if (result2 != "Success") Debug.WriteLine($"读取Auto2后Tray放歪感应失败！" + result2);
+                        }
+                        break;
+
+                    case 592:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = $"Auto2_Tray前侧定位气缸到位输出";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = Auto2_Tray前侧定位气缸到位输出();
+                        if (result == "Success")
+                        {
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 595;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2_Tray前侧定位气缸到位输出失败！" + result);
+                        }
+                        break;
+
+                    case 595:
+                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴回到原点";
+                        Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                        result = 放Tary盘轴移动(0);
+                        if (result == "Success")
+                        {
                             PS抓盘手臂放空盘到Auto2流程.StepID = 599;
                         }
                         else
@@ -8585,6 +9568,7 @@ namespace H5509_V2
                         break;
 
                     case 599:
+                        抓盘手臂放空盘到Auto2标记 = 1;
                         PS抓盘手臂放空盘到Auto2流程.StepName = $"抓盘手臂放空盘到Auto2流程完成";
                         Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
                         PS抓盘手臂放空盘到Auto2流程.Processing = false;
@@ -8598,321 +9582,322 @@ namespace H5509_V2
             }
         }
 
-        public string 抓盘手臂换Auto1空盘()
-        {
-            string result = "";
-            string result2 = "";
-            PS抓盘手臂换Auto1空盘流程.StepID = 500;
-            while (true)
-            {
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
+        //public string 抓盘手臂换Auto1空盘()
+        //{
+        //    string result = "";
+        //    string result2 = "";
+        //    PS抓盘手臂换Auto1空盘流程.StepID = 500;
+        //    while (true)
+        //    {
+        //        //if (!是否可以开始运行())
+        //        //{
+        //        //    continue;
+        //        //}
 
-                if (APPmaster.IsPause)
-                {
-                    continue;
-                }
+        //        if (APPmaster.IsPause)
+        //        {
+        //            continue;
+        //        }
 
-                switch (PS抓盘手臂换Auto1空盘流程.StepID)
-                {
-                    case 500:
-                        PS抓盘手臂换Auto1空盘流程.StepName = "路径规划";
-                        PS抓盘手臂换Auto1空盘流程.Condition = 抓盘手臂换Auto1空盘标记 == 2;
-                        PS抓盘手臂换Auto1空盘流程.Permit = !PS抓盘手臂换Auto1空盘流程.Processing;
-                        if (PS抓盘手臂换Auto1空盘流程.Condition && PS抓盘手臂换Auto1空盘流程.Permit)
-                        {
-                            Auto1上顶标记 = 2;
-                            抓盘手臂放空盘到Auto1标记 = 2;
-                            PS抓盘手臂换Auto1空盘流程.Processing = true;
-                            PS抓盘手臂换Auto1空盘流程.StepID = 505;
-                        }
-                        break;
+        //        switch (PS抓盘手臂换Auto1空盘流程.StepID)
+        //        {
+        //            case 500:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = "路径规划";
+        //                PS抓盘手臂换Auto1空盘流程.Condition = 抓盘手臂换Auto1空盘标记 == 2;
+        //                PS抓盘手臂换Auto1空盘流程.Permit = !PS抓盘手臂换Auto1空盘流程.Processing;
+        //                if (PS抓盘手臂换Auto1空盘流程.Condition && PS抓盘手臂换Auto1空盘流程.Permit)
+        //                {
+        //                    Auto1上顶标记 = 2;
+        //                    抓盘手臂放空盘到Auto1标记 = 2;
+        //                    PS抓盘手臂换Auto1空盘流程.Processing = true;
+        //                    PS抓盘手臂换Auto1空盘流程.StepID = 505;
+        //                }
+        //                break;
 
-                    case 505:
-                        PS抓盘手臂换Auto1空盘流程.StepName = "等待抓盘手臂放空盘到Auto1";
-                        if (抓盘手臂放空盘到Auto1标记 == 1)
-                        {
-                            PS抓盘手臂换Auto1空盘流程.StepID = 510;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
+        //            case 505:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = "等待抓盘手臂放空盘到Auto1";
+        //                if (抓盘手臂放空盘到Auto1标记 == 1)
+        //                {
+        //                    PS抓盘手臂换Auto1空盘流程.StepID = 510;
+        //                }
+        //                else
+        //                {
+        //                    Thread.Sleep(10);
+        //                }
+        //                break;
 
-                    case 510:
-                        PS抓盘手臂换Auto1空盘流程.StepName = "判断Auto1料仓是否满盘";
-                        Debug.WriteLine($"PS抓盘手臂换Auto1空盘流程.StepID={PS抓盘手臂换Auto1空盘流程.StepID}->{PS抓盘手臂换Auto1空盘流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
-                        if (result == "Success")
-                        {
-                            if (prfpos < Auto1满盘判断值)
-                            {
-                                Auto1上顶标记 = 2;
-                                抓盘手臂放空盘到Auto1标记 = 2;
-                                Debug.WriteLine($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{Auto1满盘判断值}");
-                                PS抓盘手臂换Auto1空盘流程.StepID = 515;
-                            }
-                            else PS抓盘手臂换Auto1空盘流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Debug.WriteLine($"判断Auto1料仓是否满盘失败！" + result);
-                        }
-                        break;
+        //            case 510:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = "判断Auto1料仓是否满盘";
+        //                Debug.WriteLine($"PS抓盘手臂换Auto1空盘流程.StepID={PS抓盘手臂换Auto1空盘流程.StepID}->{PS抓盘手臂换Auto1空盘流程.StepName}");
+        //                result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
+        //                if (result == "Success")
+        //                {
+        //                    if (prfpos < Auto1满盘判断值)
+        //                    {
+        //                        Auto1上顶标记 = 2;
+        //                        抓盘手臂放空盘到Auto1标记 = 2;
+        //                        Debug.WriteLine($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{Auto1满盘判断值}");
+        //                        PS抓盘手臂换Auto1空盘流程.StepID = 515;
+        //                    }
+        //                    else PS抓盘手臂换Auto1空盘流程.StepID = 599;
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    Debug.WriteLine($"判断Auto1料仓是否满盘失败！" + result);
+        //                }
+        //                break;
 
-                    case 515:
-                        PS抓盘手臂换Auto1空盘流程.StepName = "等待抓盘手臂放空盘到Auto1";
-                        if (抓盘手臂放空盘到Auto1标记 == 1)
-                        {
-                            Auto1料仓打开标记 = true;
-                            PS抓盘手臂换Auto1空盘流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
+        //            case 515:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = "等待抓盘手臂放空盘到Auto1";
+        //                if (抓盘手臂放空盘到Auto1标记 == 1)
+        //                {
+        //                    Auto1料仓打开标记 = true;
+        //                    PS抓盘手臂换Auto1空盘流程.StepID = 520;
+        //                }
+        //                else
+        //                {
+        //                    Thread.Sleep(10);
+        //                }
+        //                break;
 
-                    case 520:
-                        PS抓盘手臂换Auto1空盘流程.StepName = "等待料仓料拿走";
-                        if (Auto1料仓打开标记 == false) //料仓被打开
-                        {
-                            PS抓盘手臂换Auto1空盘流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Debug.WriteLine($"Auto1料仓满料");
-                        }
-                        break;
+        //            case 520:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = "等待料仓料拿走";
+        //                if (Auto1料仓打开标记 == false) //料仓被打开
+        //                {
+        //                    PS抓盘手臂换Auto1空盘流程.StepID = 525;
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    Debug.WriteLine($"Auto1料仓满料");
+        //                }
+        //                break;
 
-                    case 525:
-                        PS抓盘手臂换Auto1空盘流程.StepName = "Auto1向上移动到等待位";
-                        result = Auto1顶盘轴移动(15);//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂换Auto1空盘流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Debug.WriteLine($"Auto1向上移动到等待位失败!" + result);
-                        }
-                        break;
+        //            case 525:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = "Auto1向上移动到等待位";
+        //                result = Auto1顶盘轴移动(15);//3175 1.5875
+        //                if (result == "Success")
+        //                {
+        //                    PS抓盘手臂换Auto1空盘流程.StepID = 530;
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    Debug.WriteLine($"Auto1向上移动到等待位失败!" + result);
+        //                }
+        //                break;
 
-                    case 530:
-                        PS抓盘手臂换Auto1空盘流程.StepName = "检测Auto1是否有空盘";
-                        result = Auto1_前Tray存在感应(out string value);
-                        result2 = Auto1_后Tray放歪感应(out string value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
-                            {
-                                抓盘手臂换Auto1空盘标记 = 1;
-                                PS抓盘手臂换Auto1空盘流程.StepID = 599;
-                            }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
-                            {
-                                APPmaster.ProgramPause = true;
-                                IsPause = true;
+        //            case 530:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = "检测Auto1是否有空盘";
+        //                result = Auto1_前Tray存在感应(out string value);
+        //                result2 = Auto1_后Tray放歪感应(out string value2);
+        //                Debug.WriteLine($"PS抓盘手臂换Auto1空盘流程.StepID={PS抓盘手臂换Auto1空盘流程.StepID}->{PS抓盘手臂换Auto1空盘流程.StepName}");
+        //                if (result == "Success" && result2 == "Success")
+        //                {
+        //                    if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+        //                    {
+        //                        抓盘手臂换Auto1空盘标记 = 1;
+        //                        PS抓盘手臂换Auto1空盘流程.StepID = 599;
+        //                    }
+        //                    else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+        //                    {
+        //                        APPmaster.ProgramPause = true;
+        //                        IsPause = true;
 
-                                if (value != "0")
-                                {
-                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto1没有感应到Tray盘" + result);
-                                }
-                                if (value2 != "1")
-                                {
-                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto1感应到Tray盘放歪" + result2);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") Debug.WriteLine($"读取Auto1前Tray存在感应失败！" + result);
-                            if (result2 != "Success") Debug.WriteLine($"读取Auto1后Tray放歪感应失败！" + result);
-                        }
-                        break;
+        //                        if (value != "0")
+        //                        {
+        //                            Debug.WriteLine($"抓盘手臂放盘失败！Auto1没有感应到Tray盘" + result);
+        //                        }
+        //                        if (value2 != "1")
+        //                        {
+        //                            Debug.WriteLine($"抓盘手臂放盘失败！Auto1感应到Tray盘放歪" + result2);
+        //                        }
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    if (result != "Success") Debug.WriteLine($"读取Auto1前Tray存在感应失败！" + result);
+        //                    if (result2 != "Success") Debug.WriteLine($"读取Auto1后Tray放歪感应失败！" + result);
+        //                }
+        //                break;
 
-                    case 599:
-                        PS抓盘手臂换Auto1空盘流程.StepName = $"抓盘手臂换Auto1空盘流程完成";
-                        Debug.WriteLine($"PS抓盘手臂换Auto1空盘流程.StepID={PS抓盘手臂换Auto1空盘流程.StepID}->{PS抓盘手臂换Auto1空盘流程.StepName}");
-                        PS抓盘手臂换Auto1空盘流程.Processing = false;
-                        PS抓盘手臂换Auto1空盘流程.StepID = 500;
-                        return "Success";
+        //            case 599:
+        //                PS抓盘手臂换Auto1空盘流程.StepName = $"抓盘手臂换Auto1空盘流程完成";
+        //                Debug.WriteLine($"PS抓盘手臂换Auto1空盘流程.StepID={PS抓盘手臂换Auto1空盘流程.StepID}->{PS抓盘手臂换Auto1空盘流程.StepName}");
+        //                PS抓盘手臂换Auto1空盘流程.Processing = false;
+        //                PS抓盘手臂换Auto1空盘流程.StepID = 500;
+        //                return "Success";
 
-                    default:
-                        Debug.WriteLine(("PS抓盘手臂换Auto1空盘流程.StepID =" + PS抓盘手臂换Auto1空盘流程.StepID.ToString() + "对应流程不存在"));
-                        return "Fail";
-                }
-            }
-        }
+        //            default:
+        //                Debug.WriteLine(("PS抓盘手臂换Auto1空盘流程.StepID =" + PS抓盘手臂换Auto1空盘流程.StepID.ToString() + "对应流程不存在"));
+        //                return "Fail";
+        //        }
+        //    }
+        //}
 
-        public string 抓盘手臂换Auto2空盘()
-        {
-            string result = "";
-            string result2 = "";
-            PS抓盘手臂换Auto2空盘流程.StepID = 500;
-            while (true)
-            {
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
+        //public string 抓盘手臂换Auto2空盘()
+        //{
+        //    string result = "";
+        //    string result2 = "";
+        //    PS抓盘手臂换Auto2空盘流程.StepID = 500;
+        //    while (true)
+        //    {
+        //        //if (!是否可以开始运行())
+        //        //{
+        //        //    continue;
+        //        //}
 
-                if (APPmaster.IsPause)
-                {
-                    continue;
-                }
+        //        if (APPmaster.IsPause)
+        //        {
+        //            continue;
+        //        }
 
-                switch (PS抓盘手臂换Auto2空盘流程.StepID)
-                {
-                    case 500:
-                        PS抓盘手臂换Auto2空盘流程.StepName = "路径规划";
-                        PS抓盘手臂换Auto2空盘流程.Condition = 抓盘手臂换Auto2空盘标记 == 2;
-                        PS抓盘手臂换Auto2空盘流程.Permit = !PS抓盘手臂换Auto2空盘流程.Processing;
-                        if (PS抓盘手臂换Auto2空盘流程.Condition && PS抓盘手臂换Auto2空盘流程.Permit)
-                        {
-                            Auto2上顶标记 = 2;
-                            抓盘手臂放空盘到Auto2标记 = 2;
-                            PS抓盘手臂换Auto2空盘流程.Processing = true;
-                            PS抓盘手臂换Auto2空盘流程.StepID = 505;
-                        }
-                        break;
+        //        switch (PS抓盘手臂换Auto2空盘流程.StepID)
+        //        {
+        //            case 500:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = "路径规划";
+        //                PS抓盘手臂换Auto2空盘流程.Condition = 抓盘手臂换Auto2空盘标记 == 2;
+        //                PS抓盘手臂换Auto2空盘流程.Permit = !PS抓盘手臂换Auto2空盘流程.Processing;
+        //                if (PS抓盘手臂换Auto2空盘流程.Condition && PS抓盘手臂换Auto2空盘流程.Permit)
+        //                {
+        //                    Auto2上顶标记 = 2;
+        //                    抓盘手臂放空盘到Auto2标记 = 2;
+        //                    PS抓盘手臂换Auto2空盘流程.Processing = true;
+        //                    PS抓盘手臂换Auto2空盘流程.StepID = 505;
+        //                }
+        //                break;
 
-                    case 505:
-                        PS抓盘手臂换Auto2空盘流程.StepName = "等待抓盘手臂放空盘到Auto2";
-                        if (抓盘手臂放空盘到Auto2标记 == 1)
-                        {
-                            PS抓盘手臂换Auto2空盘流程.StepID = 510;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
+        //            case 505:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = "等待抓盘手臂放空盘到Auto2";
+        //                if (抓盘手臂放空盘到Auto2标记 == 1)
+        //                {
+        //                    PS抓盘手臂换Auto2空盘流程.StepID = 510;
+        //                }
+        //                else
+        //                {
+        //                    Thread.Sleep(10);
+        //                }
+        //                break;
 
-                    case 510:
-                        PS抓盘手臂换Auto2空盘流程.StepName = "判断Auto2料仓是否满盘";
-                        Debug.WriteLine($"PS抓盘手臂换Auto2空盘流程.StepID={PS抓盘手臂换Auto2空盘流程.StepID}->{PS抓盘手臂换Auto2空盘流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
-                        if (result == "Success")
-                        {
-                            if (prfpos < Auto2满盘判断值)
-                            {
-                                Auto2上顶标记 = 2;
-                                抓盘手臂放空盘到Auto2标记 = 2;
-                                Debug.WriteLine($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
-                                PS抓盘手臂换Auto2空盘流程.StepID = 515;
-                            }
-                            else PS抓盘手臂换Auto2空盘流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Debug.WriteLine($"判断Auto2料仓是否满盘失败！" + result);
-                        }
-                        break;
+        //            case 510:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = "判断Auto2料仓是否满盘";
+        //                Debug.WriteLine($"PS抓盘手臂换Auto2空盘流程.StepID={PS抓盘手臂换Auto2空盘流程.StepID}->{PS抓盘手臂换Auto2空盘流程.StepName}");
+        //                result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
+        //                if (result == "Success")
+        //                {
+        //                    if (prfpos < Auto2满盘判断值)
+        //                    {
+        //                        Auto2上顶标记 = 2;
+        //                        抓盘手臂放空盘到Auto2标记 = 2;
+        //                        Debug.WriteLine($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
+        //                        PS抓盘手臂换Auto2空盘流程.StepID = 515;
+        //                    }
+        //                    else PS抓盘手臂换Auto2空盘流程.StepID = 599;
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    Debug.WriteLine($"判断Auto2料仓是否满盘失败！" + result);
+        //                }
+        //                break;
 
-                    case 515:
-                        PS抓盘手臂换Auto2空盘流程.StepName = "等待抓盘手臂放空盘到Auto2";
-                        if (抓盘手臂放空盘到Auto2标记 == 1)
-                        {
-                            Auto2料仓打开标记 = true;
-                            PS抓盘手臂换Auto2空盘流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
+        //            case 515:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = "等待抓盘手臂放空盘到Auto2";
+        //                if (抓盘手臂放空盘到Auto2标记 == 1)
+        //                {
+        //                    Auto2料仓打开标记 = true;
+        //                    PS抓盘手臂换Auto2空盘流程.StepID = 520;
+        //                }
+        //                else
+        //                {
+        //                    Thread.Sleep(10);
+        //                }
+        //                break;
 
-                    case 520:
-                        PS抓盘手臂换Auto2空盘流程.StepName = "等待料仓料拿走";
-                        if (Auto2料仓打开标记 == false) //料仓被打开
-                        {
-                            PS抓盘手臂换Auto2空盘流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Debug.WriteLine($"Auto2料仓满料");
-                        }
-                        break;
+        //            case 520:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = "等待料仓料拿走";
+        //                if (Auto2料仓打开标记 == false) //料仓被打开
+        //                {
+        //                    PS抓盘手臂换Auto2空盘流程.StepID = 525;
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    Debug.WriteLine($"Auto2料仓满料");
+        //                }
+        //                break;
 
-                    case 525:
-                        PS抓盘手臂换Auto2空盘流程.StepName = "Auto2向上移动到等待位";
-                        result = Auto2顶盘轴移动(15);//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂换Auto2空盘流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Debug.WriteLine($"Auto2向上移动到等待位失败!" + result);
-                        }
-                        break;
+        //            case 525:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = "Auto2向上移动到等待位";
+        //                result = Auto2顶盘轴移动(15);//3175 1.5875
+        //                if (result == "Success")
+        //                {
+        //                    PS抓盘手臂换Auto2空盘流程.StepID = 530;
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    Debug.WriteLine($"Auto2向上移动到等待位失败!" + result);
+        //                }
+        //                break;
 
-                    case 530:
-                        PS抓盘手臂换Auto2空盘流程.StepName = "检测Auto2是否有空盘";
-                        result = Auto2_前Tray存在感应(out string value);
-                        result2 = Auto2_后Tray放歪感应(out string value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
-                            {
-                                抓盘手臂换Auto2空盘标记 = 1;
-                                PS抓盘手臂换Auto2空盘流程.StepID = 599;
-                            }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
-                            {
-                                APPmaster.ProgramPause = true;
-                                IsPause = true;
+        //            case 530:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = "检测Auto2是否有空盘";
+        //                result = Auto2_前Tray存在感应(out string value);
+        //                result2 = Auto2_后Tray放歪感应(out string value2);
+        //                if (result == "Success" && result2 == "Success")
+        //                {
+        //                    if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+        //                    {
+        //                        抓盘手臂换Auto2空盘标记 = 1;
+        //                        PS抓盘手臂换Auto2空盘流程.StepID = 599;
+        //                    }
+        //                    else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+        //                    {
+        //                        APPmaster.ProgramPause = true;
+        //                        IsPause = true;
 
-                                if (value != "0")
-                                {
-                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto2没有感应到Tray盘" + result);
-                                }
-                                if (value2 != "1")
-                                {
-                                    Debug.WriteLine($"抓盘手臂放盘失败！Auto2感应到Tray盘放歪" + result2);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") Debug.WriteLine($"读取Auto2前Tray存在感应失败！" + result);
-                            if (result2 != "Success") Debug.WriteLine($"读取Auto2后Tray放歪感应失败！" + result);
-                        }
-                        break;
+        //                        if (value != "0")
+        //                        {
+        //                            Debug.WriteLine($"抓盘手臂放盘失败！Auto2没有感应到Tray盘" + result);
+        //                        }
+        //                        if (value2 != "1")
+        //                        {
+        //                            Debug.WriteLine($"抓盘手臂放盘失败！Auto2感应到Tray盘放歪" + result2);
+        //                        }
+        //                    }
+        //                }
+        //                else
+        //                {
+        //                    APPmaster.ProgramPause = true;
+        //                    IsPause = true;
+        //                    if (result != "Success") Debug.WriteLine($"读取Auto2前Tray存在感应失败！" + result);
+        //                    if (result2 != "Success") Debug.WriteLine($"读取Auto2后Tray放歪感应失败！" + result);
+        //                }
+        //                break;
 
-                    case 599:
-                        PS抓盘手臂换Auto2空盘流程.StepName = $"抓盘手臂换Auto2空盘流程完成";
-                        Debug.WriteLine($"PS抓盘手臂换Auto2空盘流程.StepID={PS抓盘手臂换Auto2空盘流程.StepID}->{PS抓盘手臂换Auto2空盘流程.StepName}");
-                        PS抓盘手臂换Auto2空盘流程.Processing = false;
-                        PS抓盘手臂换Auto2空盘流程.StepID = 500;
-                        return "Success";
+        //            case 599:
+        //                PS抓盘手臂换Auto2空盘流程.StepName = $"抓盘手臂换Auto2空盘流程完成";
+        //                Debug.WriteLine($"PS抓盘手臂换Auto2空盘流程.StepID={PS抓盘手臂换Auto2空盘流程.StepID}->{PS抓盘手臂换Auto2空盘流程.StepName}");
+        //                PS抓盘手臂换Auto2空盘流程.Processing = false;
+        //                PS抓盘手臂换Auto2空盘流程.StepID = 500;
+        //                return "Success";
 
-                    default:
-                        Debug.WriteLine(("PS抓盘手臂换Auto2空盘流程.StepID =" + PS抓盘手臂换Auto2空盘流程.StepID.ToString() + "对应流程不存在"));
-                        return "Fail";
-                }
-            }
-        }
+        //            default:
+        //                Debug.WriteLine(("PS抓盘手臂换Auto2空盘流程.StepID =" + PS抓盘手臂换Auto2空盘流程.StepID.ToString() + "对应流程不存在"));
+        //                return "Fail";
+        //        }
+        //    }
+        //}
 
         //public void 入料()
         //{

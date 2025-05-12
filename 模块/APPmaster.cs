@@ -174,6 +174,16 @@ namespace H5509_V2
 
         public static double 梭车行间距 = 32; //mm
 
+        public static double Auto1初始点 = 193;
+        public static double Auto2初始点 = 193;
+        public static double Auto1上移固定距离 = 29.5;
+        public static double Auto2上移固定距离 = 29.5;
+
+        public static double Tray_厚度
+        {
+            get { return 设置信息.Tray盘信息.Height; }
+        }
+
         public static double Tray_Y_Pitch
         {
             get { return 设置信息.Tray盘信息.Y_Pitch; }
@@ -226,6 +236,9 @@ namespace H5509_V2
         public static int Auto2下降最小值 = 10000;
         public static int Auto2满盘判断值 = 25000;
 
+        public static bool Auto1料仓满盘标记;
+        public static bool Auto2料仓满盘标记;
+
         public static bool Auto1放盘等待标记;
         public static bool Auto2放盘等待标记;
 
@@ -255,18 +268,15 @@ namespace H5509_V2
         public static short Auto1上顶标记;
         public static short Auto2上顶标记;
 
-        public static int 抓盘手臂取Empty空盘标记;
-        public static int 抓盘手臂取Load空盘标记;
+        public static int 抓盘手臂取Empty空盘标记 = 1;
+        public static int 抓盘手臂取Load空盘标记 = 1;
 
-        public static int 抓盘手臂给Auto1空盘标记;
-        public static int 抓盘手臂给Auto2空盘标记;
+        public static int 抓盘手臂给Auto1空盘标记 = 1;
+        public static int 抓盘手臂给Auto2空盘标记 = 1;
 
-        public static int 抓盘手臂换Auto1空盘标记;
-        public static int 抓盘手臂换Auto2空盘标记;
-
-        public static int 抓盘手臂放空盘到Empty标记;
-        public static int 抓盘手臂放空盘到Auto1标记;
-        public static int 抓盘手臂放空盘到Auto2标记;
+        public static int 抓盘手臂放空盘到Empty标记 = 1;
+        public static int 抓盘手臂放空盘到Auto1标记 = 1;
+        public static int 抓盘手臂放空盘到Auto2标记 = 1;
 
         public static bool[][] 放料IC目标值;
 

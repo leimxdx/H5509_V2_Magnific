@@ -64,7 +64,14 @@ namespace H5509_V2
         {
             InitializeComponent();
 
-            Init_APPmaster();
+            log = new _log();
+
+            string result = Init_APPmaster();
+            if (result != "Success")
+            {
+                log.AddLog("error", "run", "软件加载失败,请关闭软件重开!");
+                MessageBox.Show("软件加载失败,请关闭软件重开!", result);
+            }
 
         }
         private void ForMain_Load(object sender, EventArgs e)
@@ -74,11 +81,8 @@ namespace H5509_V2
             offset = new _offset();
             speed = new _speed();
             io = new _IO();
-            log = new _log();
 
             setting.handler = handler;
-
-            log.AddLog("debug", "run", "加载");
 
             //防止控件过多产生闪烁现象
             SetControlStyle();
@@ -673,7 +677,6 @@ namespace H5509_V2
             {
                 intArray[i] = ((num >> i) & 1); //00101101
             }
-
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
             {
                 cts = new CancellationTokenSource();
@@ -684,7 +687,7 @@ namespace H5509_V2
                 });
                 Task.Run(() =>
                 {
-                    handler.入料手臂吸放料流程1();
+                    handler.入料手臂吸放料流程();
                 });
                 Task.Run(() =>
                 {
@@ -740,11 +743,11 @@ namespace H5509_V2
                 });
                 Task.Run(() =>
                 {
-                    handler.Auto1顶盘流程();
+                    handler.Auto1顶盘流程2();
                 });
                 Task.Run(() =>
                 {
-                    handler.Auto2顶盘流程();
+                    handler.Auto2顶盘流程2();
                 });
                 Task.Run(() =>
                 {
