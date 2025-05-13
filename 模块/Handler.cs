@@ -29,6 +29,35 @@ namespace H5509_V2
     {
         public MotionEx motionEx = MotionEx.GetInstance();
 
+        public bool Approvallamp { get; set; } = false;
+
+        public System.Timers.Timer 结批触发定时器 = new System.Timers.Timer();
+        public System.Timers.Timer 结批按钮闪烁的定时器 = new System.Timers.Timer(); //结批按钮灯闪烁定时器
+
+        public Handler()
+        {
+            结批触发定时器.Interval = 2 * 1000; //5秒钟
+            结批触发定时器.Elapsed += ForcedBatchTick;
+
+            结批按钮闪烁的定时器.Interval = 400;
+            结批按钮闪烁的定时器.Elapsed += finalLampFlickertimerTick;
+        }
+
+        private void ForcedBatchTick(object sender, EventArgs eventArgs)
+        {
+            强制结批标记 = true;
+            结批标记 = true;
+            结批触发定时器.Stop();
+            结批按钮闪烁的定时器.Start();
+            Debug.WriteLine("结批按钮已按下5s");
+        }
+
+        private void finalLampFlickertimerTick(object sender, EventArgs eventArgs)
+        {
+            Approvallamp = !Approvallamp;
+            motionEx.SetDo("Y008_结批灯", Approvallamp);
+        }
+
         #region 轴移动
         public string 入料手臂X移动(double pos)
         {
@@ -2397,6 +2426,8 @@ namespace H5509_V2
                 飞梭前出料IC[i] = new bool[飞梭后出料IC[i].Length];
                 Array.Copy(飞梭后出料IC[i], 飞梭前出料IC[i], 飞梭后出料IC[i].Length);
             }
+
+            飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
         }
 
         private void 交换飞梭前后出料BIN数据()
@@ -2681,6 +2712,9 @@ namespace H5509_V2
 
         public void 结批流程()
         {
+            bool auto1isding = false;
+            bool auto2isding = false;
+            string result = "";
             PS结批流程.StepID = 500;
             while (true)
             {
@@ -2695,8 +2729,41 @@ namespace H5509_V2
                 {
                     case 500:
                         PS结批流程.StepName = "路径规划";
-                        PS结批流程.Condition = 结批标记 && !正在结批 && 设备状态 == 1;
-                        PS结批流程.Permit = !PS结批流程.Processing;
+
+                        PS结批流程.Condition = 结批标记 && !正在结批 && !结批完成 && 设备状态 == 1
+                                            //&& OutSiteQueue.Count == 0
+                                            //&& InSiteQueue.Count == 0
+                                            && !飞梭后入料IC[0].Contains(true) //飞梭后入料IC第1列无料
+                                            && !飞梭后入料IC[1].Contains(true) //飞梭后入料IC第2列无料
+                                            && !飞梭前入料IC[0].Contains(true) //飞梭前入料IC第1列无料
+                                            && !飞梭前入料IC[1].Contains(true) //飞梭前入料IC第2列无料
+                                            && !飞梭后出料IC[0].Contains(true) //飞梭后出料IC第1列无料
+                                            && !飞梭后出料IC[1].Contains(true) //飞梭后出料IC第2列无料
+                                            && !飞梭前出料IC[0].Contains(true) //飞梭前出料IC第1列无料
+                                            && !飞梭前出料IC[1].Contains(true) //飞梭前出料IC第2列无料
+                                            && SiteTestState.Contains(0) //测试区无料
+                                            && !SiteTestState.Contains(1) //测试区有料
+                                            && !SiteTestState.Contains(2) //测试区有料测试中
+                                            && !SiteTestState.Contains(3) //测试区有料已测试
+                                            && !SiteTestState.Contains(4); //测试区有料待取走
+
+                        PS结批流程.Permit = !PS结批流程.Processing
+                                            && !PS出料手臂吸放料流程.Processing
+                                            && !PS入料手臂吸放料流程.Processing
+                                            && !PS测试手臂取待测料流程.Processing
+                                            && !PS测试手臂取已测料流程.Processing
+                                            && !PS入飞梭移动流程.Processing
+                                            && !PS空盘上顶流程.Processing
+                                            && !PS空盘下降流程.Processing
+                                            && !PS待测盘上顶流程.Processing
+                                            && !PS手动盘1上顶流程.Processing
+                                            && !PS手动盘2上顶流程.Processing
+                                            && !PS抓盘手臂取Empty空盘流程.Processing
+                                            && !PS抓盘手臂取Load空盘流程.Processing
+                                            && !PS抓盘手臂放空盘到Empty流程.Processing
+                                            && !PS抓盘手臂放空盘到Auto1流程.Processing
+                                            && !PS抓盘手臂放空盘到Auto2流程.Processing;
+
                         if (PS结批流程.Condition && PS结批流程.Permit)
                         {
                             正在结批 = true;
@@ -2706,12 +2773,93 @@ namespace H5509_V2
                         break;
 
                     case 505:
-                        PS结批流程.StepName = $"停止入料，等待出料完成";
-                        if (OutSiteQueue.Count == 0)
+                        PS结批流程.StepName = $"出入料手臂走到避让位置";
+                        Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
+                        Task<string> input = Task.Run(() => { return 入料手臂移动(0, 0, 7.5); });
+                        Task<string> output = Task.Run(() => { return 出料手臂移动(0, 0, 0); });
+                        if (input.Result == "Success" && output.Result == "Success")
                         {
-
+                            Load下降回零标记 = 2;
+                            Auto1上顶标记 = 2;
+                            Auto2上顶标记 = 2;
+                            获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
+                            if (auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要盖空盘
+                            {
+                                auto1isding = true;
+                                抓盘手臂放空盘到Auto1标记 = 2;
+                            }
+                            PS结批流程.StepID = 510;
+                            Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->抓盘手臂抓空盘到Auto1");
                         }
-                        Thread.Sleep(10);
+                        else
+                        {
+                            ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->出入料手臂走到避让位置失败!" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS结批流程.StepName = $"抓盘手臂抓空盘到Auto1";
+                        if (抓盘手臂放空盘到Auto1标记 == 1)
+                        {
+                            获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
+                            if (auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
+                            {
+                                auto2isding = true;
+                                抓盘手臂放空盘到Auto2标记 = 2;
+                            }
+                            PS结批流程.StepID = 515;
+                            Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->抓盘手臂抓空盘到Auto2");
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 515:
+                        PS结批流程.StepName = $"抓盘手臂抓空盘到Auto2";
+                        if (抓盘手臂放空盘到Auto2标记 == 1)
+                        {
+                            if (auto1isding) Auto1上顶标记 = 2;
+                            if (auto2isding) Auto2上顶标记 = 2;
+                            PS结批流程.StepID = 520;
+                            Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->等待Auto1和Auto2上顶");
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 520:
+                        PS结批流程.StepName = $"等待Auto1和Auto2上顶";
+                        if (Auto1上顶标记 == 1 && Auto2上顶标记 == 1)
+                        {
+                            Empty下降回零标记 = 2;
+                            Auto1下降回零标记 = 2;
+                            Auto2下降回零标记 = 2;
+                            PS结批流程.StepID = 525;
+                            Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->等待Empty,Auto1和Auto2下降回零");
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 525:
+                        PS结批流程.StepName = $"等待Empty,Auto1和Auto2下降回零";
+                        if (Empty下降回零标记 == 1 && Auto1下降回零标记 == 1 && Auto2下降回零标记 == 1)
+                        {
+                            PS结批流程.StepID = 530;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 530:
+                        PS结批流程.StepName = $"数据处理";
+                        设备状态 = 0;
+                        正在结批 = false;
+                        结批标记 = false;
+                        结批完成 = true;
+
+                        结批按钮闪烁的定时器.Stop();
+                        motionEx.SetDo("Y008_结批灯", false);
+
+                        PS结批流程.StepID = 599;
                         break;
 
                     case 599:
@@ -2719,6 +2867,8 @@ namespace H5509_V2
                         Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
                         PS结批流程.Processing = false;
                         PS结批流程.StepID = 500;
+                        ProgramPause = true;
+                        IsPause = true;
                         break;
 
                     default:
@@ -2769,6 +2919,11 @@ namespace H5509_V2
                         }
                         else
                         {
+                            if (结批标记)
+                            {
+                                入料手臂停止工作标记 = true;
+                                入料手臂工作完成标记 = true;
+                            }
                             if (Auto1换盘标记 || Auto2换盘标记)
                             {
                                 PS入料手臂吸放料流程.StepID = 905;
@@ -2820,9 +2975,9 @@ namespace H5509_V2
                         {
                             if (!入料手臂抓料等待标记)
                             {
-                                if (飞梭前入料状态 == 0)
+                                if (入料手臂工作完成标记 == false)
                                 {
-                                    飞梭前入料状态 = 1; //入料手臂目标达成
+                                    入料手臂工作完成标记 = true; //入料手臂目标达成
                                     PS入料手臂吸放料流程.StepID = 500;
                                     PS入料手臂吸放料流程.Processing = false;
                                 }
@@ -4035,9 +4190,10 @@ namespace H5509_V2
                         }
                         else
                         {
+                            飞梭前出料IC[colums] = new bool[] { false, false, false, false };
                             if (colums == 1)
                             {
-                                ispass = true;
+                                ispass = true; 
                                 飞梭前出料状态 = 0;
                             }
                             PS出料手臂吸放料流程.StepID = 599;
@@ -4533,6 +4689,12 @@ namespace H5509_V2
                         {
                             PS出料手臂吸放料流程.StepID = 720;
                         }
+                        else
+                        {
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料手臂Z向下移动失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                         break;
 
                     case 720:
@@ -4561,6 +4723,12 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             PS出料手臂吸放料流程.StepID = 730;
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料手臂Z向上移动失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
                         }
                         break;
 
@@ -4642,7 +4810,7 @@ namespace H5509_V2
                         PS出料手臂吸放料流程.StepName = "抓盘手臂放空盘到Auto1";
                         if (抓盘手臂放空盘到Auto1标记 == 1)
                         {
-                            Auto1TrayClear(); 
+                            Auto1TrayClear();
                             Auto1换盘标记 = false;
                             Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->Auto1换盘完成Map更新");
                             PS出料手臂吸放料流程.StepID = 705;
@@ -4746,9 +4914,13 @@ namespace H5509_V2
                 {
                     case 500:
                         PS入飞梭移动流程.StepName = "路径规划";
-                        PS入飞梭移动流程.Condition = 飞梭前入料状态 == 1 && 飞梭后入料状态 == 0 && 飞梭前出料状态 == 0;
 
-                        PS入飞梭移动流程.Permit = true;// !PS入料手臂吸放料流程.Processing;
+                        PS入飞梭移动流程.Condition = 入料手臂工作完成标记// && 入料手臂停止工作标记  // || 结批标记) 
+                                                    && 飞梭后入料状态 == 0
+                                                    && 飞梭前出料状态 == 0;
+
+                        PS入飞梭移动流程.Permit = true;// (结批标记 && !PS入料手臂吸放料流程.Processing); //!PS入料手臂吸放料流程.Processing;
+
                         if (PS入飞梭移动流程.Condition && PS入飞梭移动流程.Permit)
                         {
                             飞梭移动状态 = 1;
@@ -4812,7 +4984,8 @@ namespace H5509_V2
                         交换飞梭前后入料IC数据();
 
                         飞梭后入料状态 = 1;
-                        飞梭前入料状态 = 0;
+                        //飞梭前入料状态 = 0;
+                        入料手臂工作完成标记 = false;
 
                         if (飞梭后出料状态 == 1)
                         {
@@ -4881,19 +5054,57 @@ namespace H5509_V2
                         if (InSiteQueue.TryDequeue(out site))
                         {
                             bool[] open = GetSiteOpen(site);
-                            opens = new int[]
+                            if (open.Contains(true)) //如果有开Site
                             {
-                                open[0] ? 0 : 2, open[1] ? 0 : 2, open[2] ? 0 : 2, open[3] ? 0 : 2,
-                                open[4] ? 0 : 2, open[5] ? 0 : 2, open[6] ? 0 : 2, open[7] ? 0 : 2
-                            };
-                            lsopen = new bool[8] { open[0], open[1], open[2], open[3], open[4], open[5], open[6], open[7] };
-                            PS测试手臂取待测料流程.StepID = 505;
+                                if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //如果梭车上有料
+                                {
+                                    opens = new int[8]
+                                    {
+                                        open[0] && 飞梭后入料IC[0][0] ? 0 : 2, open[1] && 飞梭后入料IC[0][1] ? 0 : 2, open[2] && 飞梭后入料IC[0][2] ? 0 : 2, open[3] && 飞梭后入料IC[0][3] ? 0 : 2,
+                                        open[4] && 飞梭后入料IC[1][0] ? 0 : 2, open[5] && 飞梭后入料IC[1][1] ? 0 : 2, open[6] && 飞梭后入料IC[1][2] ? 0 : 2, open[7] && 飞梭后入料IC[1][3] ? 0 : 2
+                                    };
+                                    lsopen = new bool[8]
+                                    {
+                                        opens[0] == 0, opens[1] == 0, opens[2] == 0, opens[3] == 0,
+                                        opens[4] == 0, opens[5] == 0, opens[6] == 0, opens[7] == 0
+                                    };
+                                    if (lsopen.Contains(true)) //梭车上只要有一颗就拿走
+                                    {
+                                        Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->拿到取IC信息:{opens[0]},{opens[1]},{opens[2]},{opens[3]},{opens[4]},{opens[5]},{opens[6]},{opens[7]}");
+                                        PS测试手臂取待测料流程.StepID = 505;
+                                    }
+                                    else //没有要拿的料就给下一个
+                                    {
+                                        Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}：在梭车上没有要取的IC");
+                                        InSiteQueue.Enqueue(site);
+                                        Thread.Sleep(10);
+                                    }
+                                }
+                                else //如果梭车没有料,则等梭车交换后到有料
+                                {
+                                    Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}：梭车上没有IC");
+                                    飞梭后入料状态 = 0;
+                                    InSiteQueue.Prepend(site);
+                                    SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+                                    SiteTestState[site] = 0; //无料
+                                    PS测试手臂取待测料流程.Processing = false;
+                                    PS测试手臂取待测料流程.StepID = 500;
+                                }
+                            }
+                            else //如果Site全部被关闭则拿下一个Site的料
+                            {
+                                Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}：Dut被全部关闭");
+                                SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+                                SiteTestState[site] = 0; //无料
+                                Thread.Sleep(10);
+                            }
                         }
                         else
                         {
-                            Debug.WriteLine($"获取开Site信息失败!");
-                            ProgramPause = true;
-                            IsPause = true;
+                            Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试入料队列为空：{InSiteQueue.Count}");
+                            飞梭后入料状态 = 0;
+                            PS测试手臂取待测料流程.Processing = false;
+                            PS测试手臂取待测料流程.StepID = 500;
                         }
                         break;
 
@@ -5191,7 +5402,6 @@ namespace H5509_V2
                         PS测试手臂取待测料流程.StepName = "测试手臂取待测料流程吸料完成";
                         Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                         PS测试手臂取待测料流程.StepID = 705;
-
                         break;
 
                     case 705:
@@ -5933,6 +6143,7 @@ namespace H5509_V2
                             飞梭后出料IC = new bool[][] { new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] }, new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] } }; //SitesTestIC
                             飞梭后出料BIN项 = new string[][] { new string[] { bin[0], bin[1], bin[2], bin[3] }, new string[] { bin[4], bin[5], bin[6], bin[7] } };
                             InSiteQueue.Enqueue(site);
+
                             PS测试手臂取已测料流程.StepID = 799;
                         }
                         else
@@ -6232,6 +6443,10 @@ namespace H5509_V2
 
                         motionEx.SetDo("Y001_开始灯", true);
                         motionEx.SetDo("Y002_暂停灯", false);
+                        motionEx.SetDo("Y004_重试灯", false);
+                        motionEx.SetDo("Y005_忽略灯", false);
+                        motionEx.SetDo("Y008_结批灯", false);
+                        motionEx.SetDo("Y011_换盘灯", false);
                     }
                     bool stop = io[1] == "1"; //"X002_暂停"
                     if (CheckEdgeSingal(stop, ref StopRiseCache, true) || ProgramPause)
@@ -6291,7 +6506,19 @@ namespace H5509_V2
                     bool stopbatch = io[7] == "1"; //X008_结批
                     if (CheckEdgeSingal(stopbatch, ref StopBatchRiseCache, true))
                     {
+                        if (!强制结批标记)
+                        {
+                            if (!结批触发定时器.Enabled)
+                            {
+                                结批触发定时器.Start();
+                                Debug.WriteLine("结批按钮开始计时");
+                            }
+                        }
                         Debug.WriteLine("按下结批");
+                        motionEx.SetDo("Y004_重试灯", false);
+                        motionEx.SetDo("Y005_忽略灯", false);
+                        motionEx.SetDo("Y008_结批灯", true);
+                        motionEx.SetDo("Y011_换盘灯", false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, true);
@@ -6299,6 +6526,7 @@ namespace H5509_V2
                     }
                     if (CheckEdgeSingal(stopbatch, ref StopBatchFallCache, false))
                     {
+                        结批触发定时器.Stop();
                         Debug.WriteLine("已松开结批按钮停止计时");
                     }
 
@@ -6722,6 +6950,78 @@ namespace H5509_V2
             }
         }
 
+        public void Empty下降回零流程()
+        {
+            string result = "";
+            PS空盘下降回零流程.StepID = 500;
+            while (true)
+            {
+                //if(!是否可以开始运行())
+                //{
+                //    continue;
+                //}
+
+                Thread.Sleep(10);
+
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS空盘下降回零流程.StepID)
+                {
+                    case 500:
+                        PS空盘下降回零流程.StepName = "路径规划";
+                        PS空盘下降回零流程.Condition = Empty下降回零标记 == 2;
+                        PS空盘下降回零流程.Permit = !PS空盘下降回零流程.Processing && !PS空盘下降流程.Processing && !PS空盘上顶流程.Processing;
+                        if (PS空盘下降回零流程.Condition && PS空盘下降回零流程.Permit)
+                        {
+                            PS空盘下降回零流程.Processing = true;
+                            PS空盘下降回零流程.StepID = 505;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 505:
+                        PS空盘下降回零流程.StepName = "Empty顶盘轴移动到原点";
+                        Debug.WriteLine($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
+                        result = Empty顶盘轴移动(1);
+                        if (result == "Success")
+                        {
+                            PS空盘下降回零流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Empty顶盘轴移动到原点失败！" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS空盘下降回零流程.StepName = "Empty顶盘轴回零";
+                        Debug.WriteLine($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
+                        result = Empty顶盘轴回零();
+                        if (result == "Success")
+                        {
+                            Empty下降回零标记 = 1;
+                            PS空盘下降回零流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Empty顶盘轴回零失败！" + result);
+                        }
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS空盘下降回零流程.StepID =" + PS空盘下降回零流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
         public void Load顶盘流程()
         {
             string result = "";
@@ -6898,6 +7198,94 @@ namespace H5509_V2
         public void Load下降流程()
         {
 
+        }
+
+        public void Load下降回零流程()
+        {
+            string result = "";
+            PS待测盘上顶回零流程.StepID = 500;
+            while (true)
+            {
+                //if(!是否可以开始运行())
+                //{
+                //    continue;
+                //}
+
+                Thread.Sleep(10);
+
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS待测盘上顶回零流程.StepID)
+                {
+                    case 500:
+                        PS待测盘上顶回零流程.StepName = "路径规划";
+                        PS待测盘上顶回零流程.Condition = Load下降回零标记 == 2;
+                        PS待测盘上顶回零流程.Permit = !PS待测盘上顶回零流程.Processing && !PS待测盘上顶流程.Processing;
+                        if (PS待测盘上顶回零流程.Condition && PS待测盘上顶回零流程.Permit)
+                        {
+                            PS待测盘上顶回零流程.Processing = true;
+                            PS待测盘上顶回零流程.StepID = 505;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 505:
+                        PS待测盘上顶回零流程.StepName = "Load_Tray前侧定位气缸原位输出";
+                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘上顶回零流程.StepID}->{PS待测盘上顶回零流程.StepName}");
+                        result = Load_Tray前侧定位气缸原位输出();
+                        if (result == "Success")
+                        {
+                            PS待测盘上顶回零流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load_Tray前侧定位气缸原位输出失败！" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS待测盘上顶回零流程.StepName = "Load顶盘轴移动到原点";
+                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘上顶回零流程.StepID}->{PS待测盘上顶回零流程.StepName}");
+                        result = Load顶盘轴移动(1);
+                        if (result == "Success")
+                        {
+                            PS待测盘上顶回零流程.StepID = 515;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load顶盘轴移动到原点失败！" + result);
+                        }
+                        break;
+
+                    case 515:
+                        PS待测盘上顶回零流程.StepName = "Load顶盘轴回零";
+                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘上顶回零流程.StepID}->{PS待测盘上顶回零流程.StepName}");
+                        result = Load顶盘轴回零();
+                        if (result == "Success")
+                        {
+                            Load下降回零标记 = 1;
+                            PS待测盘上顶回零流程.StepID = 500;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Load顶盘轴回零失败！" + result);
+                        }
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS待测盘上顶回零流程.StepID =" + PS待测盘上顶回零流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
         }
 
         public void Auto1顶盘流程()
@@ -7285,6 +7673,78 @@ namespace H5509_V2
             }
         }
 
+        public void Auto1下降回零流程()
+        {
+            string result = "";
+            PS手动盘1下降回零流程.StepID = 500;
+            while (true)
+            {
+                //if(!是否可以开始运行())
+                //{
+                //    continue;
+                //}
+
+                Thread.Sleep(10);
+
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS手动盘1下降回零流程.StepID)
+                {
+                    case 500:
+                        PS手动盘1下降回零流程.StepName = "路径规划";
+                        PS手动盘1下降回零流程.Condition = Auto1下降回零标记 == 2;
+                        PS手动盘1下降回零流程.Permit = !PS手动盘1下降回零流程.Processing && !PS手动盘1上顶流程.Processing;
+                        if (PS手动盘1下降回零流程.Condition && PS手动盘1下降回零流程.Permit)
+                        {
+                            PS手动盘1下降回零流程.Processing = true;
+                            PS手动盘1下降回零流程.StepID = 505;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 505:
+                        PS手动盘1下降回零流程.StepName = "Auto1顶盘轴移动到原点";
+                        Debug.WriteLine($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
+                        result = Auto1顶盘轴移动(1);
+                        if (result == "Success")
+                        {
+                            PS手动盘1下降回零流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1顶盘轴移动到原点失败！" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS手动盘1下降回零流程.StepName = "Auto1顶盘轴回零";
+                        Debug.WriteLine($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
+                        result = Auto1顶盘轴回零();
+                        if (result == "Success")
+                        {
+                            Auto1下降回零标记 = 1;
+                            PS手动盘1下降回零流程.StepID = 500;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto1顶盘轴回零失败！" + result);
+                        }
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS手动盘1下降回零流程.StepID =" + PS手动盘1下降回零流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
         public void Auto2顶盘流程()
         {
             string result = "";
@@ -7468,6 +7928,7 @@ namespace H5509_V2
                 }
             }
         }
+
         public void Auto2顶盘流程2()
         {
             string result = "";
@@ -7668,6 +8129,78 @@ namespace H5509_V2
 
                     default:
                         Debug.WriteLine(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));
+                        break;
+                }
+            }
+        }
+
+        public void Auto2下降回零流程()
+        {
+            string result = "";
+            PS手动盘2下降回零流程.StepID = 500;
+            while (true)
+            {
+                //if(!是否可以开始运行())
+                //{
+                //    continue;
+                //}
+
+                Thread.Sleep(10);
+
+                if (APPmaster.IsPause)
+                {
+                    continue;
+                }
+
+                switch (PS手动盘2下降回零流程.StepID)
+                {
+                    case 500:
+                        PS手动盘2下降回零流程.StepName = "路径规划";
+                        PS手动盘2下降回零流程.Condition = Auto2下降回零标记 == 2;
+                        PS手动盘2下降回零流程.Permit = !PS手动盘2下降回零流程.Processing && !PS手动盘2上顶流程.Processing;
+                        if (PS手动盘2下降回零流程.Condition && PS手动盘2下降回零流程.Permit)
+                        {
+                            PS手动盘2下降回零流程.Processing = true;
+                            PS手动盘2下降回零流程.StepID = 505;
+                        }
+                        else Thread.Sleep(10);
+                        break;
+
+                    case 505:
+                        PS手动盘2下降回零流程.StepName = "Auto2顶盘轴移动到原点";
+                        Debug.WriteLine($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
+                        result = Auto2顶盘轴移动(1);
+                        if (result == "Success")
+                        {
+                            PS手动盘2下降回零流程.StepID = 510;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2顶盘轴移动到原点失败！" + result);
+                        }
+                        break;
+
+                    case 510:
+                        PS手动盘2下降回零流程.StepName = "Auto2顶盘轴回零";
+                        Debug.WriteLine($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
+                        result = Auto2顶盘轴回零();
+                        if (result == "Success")
+                        {
+                            Auto2下降回零标记 = 1;
+                            PS手动盘2下降回零流程.StepID = 500;
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            Debug.WriteLine($"Auto2顶盘轴回零失败！" + result);
+                        }
+                        break;
+
+                    default:
+                        Debug.WriteLine(("PS手动盘2下降回零流程.StepID =" + PS手动盘2下降回零流程.StepID.ToString() + "对应流程不存在"));
                         break;
                 }
             }

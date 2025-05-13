@@ -687,6 +687,10 @@ namespace H5509_V2
                 });
                 Task.Run(() =>
                 {
+                    handler.结批流程();
+                });
+                Task.Run(() =>
+                {
                     handler.入料手臂吸放料流程();
                 });
                 Task.Run(() =>
@@ -739,15 +743,31 @@ namespace H5509_V2
                 });
                 Task.Run(() =>
                 {
+                    handler.Empty下降回零流程();
+                });
+                Task.Run(() =>
+                {
                     handler.Load顶盘流程();
                 });
+                Task.Run(() =>
+                {
+                    handler.Load下降回零流程();
+                }); 
                 Task.Run(() =>
                 {
                     handler.Auto1顶盘流程2();
                 });
                 Task.Run(() =>
                 {
+                    handler.Auto1下降回零流程();
+                });
+                Task.Run(() =>
+                {
                     handler.Auto2顶盘流程2();
+                });
+                Task.Run(() =>
+                {
+                    handler.Auto2下降回零流程();
                 });
                 Task.Run(() =>
                 {

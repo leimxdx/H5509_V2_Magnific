@@ -480,7 +480,67 @@ namespace H5509_V2
 
         private void button89_Click(object sender, EventArgs e)
         {
-
+            bool bool1 = !飞梭后入料IC[0].Contains(true);
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭后入料IC[0].Contains(true); //飞梭后入料IC第1列无料
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭后入料IC[1].Contains(true);//飞梭后入料IC第2列无料
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭前入料IC[0].Contains(true); //飞梭前入料IC第1列无料
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭前入料IC[1].Contains(true); //飞梭前入料IC第2列无料
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭后出料IC[0].Contains(true);//飞梭后出料IC第1列无料
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭后出料IC[1].Contains(true); //飞梭后出料IC第2列无料
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭前出料IC[0].Contains(true); //飞梭前出料IC第1列无料
+            Debug.WriteLine(bool1);
+            bool1 = !飞梭前出料IC[1].Contains(true); //飞梭前出料IC第2列无料
+            Debug.WriteLine(bool1);
+            bool1 = SiteTestState.Contains(0); //测试区无料
+            Debug.WriteLine(bool1);
+            bool1 = !SiteTestState.Contains(1); //测试区有料
+            Debug.WriteLine(bool1);
+            bool1 = !SiteTestState.Contains(2); //测试区有料测试中
+            Debug.WriteLine(bool1);
+            bool1 = !SiteTestState.Contains(3); //测试区有料已测试
+            Debug.WriteLine(bool1);
+            bool1 = !SiteTestState.Contains(4); //测试区有料待取走
+            Debug.WriteLine(bool1);
+            bool1 = !PS结批流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS出料手臂吸放料流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS入料手臂吸放料流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS测试手臂取待测料流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS测试手臂取已测料流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS入飞梭移动流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS空盘上顶流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS空盘下降流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS待测盘上顶流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS手动盘1上顶流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS手动盘2上顶流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS抓盘手臂取Empty空盘流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS抓盘手臂取Load空盘流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS抓盘手臂放空盘到Empty流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS抓盘手臂放空盘到Auto1流程.Processing;
+            Debug.WriteLine(bool1);
+            bool1 = !PS抓盘手臂放空盘到Auto2流程.Processing;
+            Debug.WriteLine(bool1);
+            //飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
         }
 
         private void uiCheckBox1_Click(object sender, EventArgs e)
@@ -1962,7 +2022,7 @@ namespace H5509_V2
 
         private void button164_Click(object sender, EventArgs e)
         {
-            飞梭前入料状态 = 1;
+            //飞梭前入料状态 = 1;
         }
 
         #region 测试区位移和上下位移气缸

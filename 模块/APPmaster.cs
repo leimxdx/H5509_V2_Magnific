@@ -67,6 +67,10 @@ namespace H5509_V2
 
         public static bool 正在结批 = false;
 
+        public static bool 结批完成 = false;
+
+        public static bool 强制结批标记 = false;
+
         public static bool 定点停止标记 = false;
 
         public static bool 定点停止允许 = false;
@@ -247,7 +251,10 @@ namespace H5509_V2
         public static bool Auto1料仓打开标记;
         public static bool Auto2料仓打开标记;
 
-        public static short 入料手臂吸料状态;
+        public static bool 入料手臂工作完成标记;
+        public static bool 入料手臂停止工作标记;
+        public static bool 出料手臂工作完成标记;
+        public static bool 测试手臂工作完成标记;
         public static bool 入料手臂抓料等待标记;
 
         public static short 飞梭移动状态;
@@ -261,12 +268,16 @@ namespace H5509_V2
         public static bool[][] 飞梭后入料IC;
         public static bool[][] 飞梭后出料IC;
 
-        public static short Empty上顶标记;
-        public static short Load上顶标记;
-        public static short Empty下降标记;
-        public static short Load下降标记;
-        public static short Auto1上顶标记;
-        public static short Auto2上顶标记;
+        public static short Empty上顶标记 = 1;
+        public static short Load上顶标记 = 1;
+        public static short Empty下降标记 = 1;
+        public static short Load下降标记 = 1;
+        public static short Auto1上顶标记 = 1;
+        public static short Auto2上顶标记 = 1;
+        public static short Empty下降回零标记 = 1;
+        public static short Load下降回零标记 = 1;
+        public static short Auto1下降回零标记 = 1;
+        public static short Auto2下降回零标记 = 1;
 
         public static int 抓盘手臂取Empty空盘标记 = 1;
         public static int 抓盘手臂取Load空盘标记 = 1;
@@ -307,13 +318,21 @@ namespace H5509_V2
 
         public static ST_ProcessManage PS空盘下降流程;
 
+        public static ST_ProcessManage PS空盘下降回零流程;
+
         public static ST_ProcessManage PS待测盘上顶流程;
+
+        public static ST_ProcessManage PS待测盘上顶回零流程;
 
         public static ST_ProcessManage PS待测盘下降流程;
 
         public static ST_ProcessManage PS手动盘1上顶流程;
 
+        public static ST_ProcessManage PS手动盘1下降回零流程;
+
         public static ST_ProcessManage PS手动盘2上顶流程;
+
+        public static ST_ProcessManage PS手动盘2下降回零流程;
 
         public static ST_ProcessManage PS入料手臂放料流程;
 

@@ -998,6 +998,10 @@
             this.button36 = new System.Windows.Forms.Button();
             this.button33 = new System.Windows.Forms.Button();
             this.tabPage9 = new System.Windows.Forms.TabPage();
+            this.uiTitlePanel2 = new Sunny.UI.UITitlePanel();
+            this.button225 = new System.Windows.Forms.Button();
+            this.button50 = new System.Windows.Forms.Button();
+            this.label48 = new System.Windows.Forms.Label();
             this.button24 = new System.Windows.Forms.Button();
             this.uiButton13 = new Sunny.UI.UIButton();
             this.uiButton14 = new Sunny.UI.UIButton();
@@ -1108,10 +1112,6 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
-            this.uiTitlePanel2 = new Sunny.UI.UITitlePanel();
-            this.label48 = new System.Windows.Forms.Label();
-            this.button50 = new System.Windows.Forms.Button();
-            this.button225 = new System.Windows.Forms.Button();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.uiTabControl3.SuspendLayout();
@@ -1251,6 +1251,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown75)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown74)).BeginInit();
             this.tabPage9.SuspendLayout();
+            this.uiTitlePanel2.SuspendLayout();
             this.uiTitlePanel9.SuspendLayout();
             this.groupBox36.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown45)).BeginInit();
@@ -1296,7 +1297,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).BeginInit();
-            this.uiTitlePanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiTabControl1
@@ -5694,7 +5694,7 @@
             this.tabPage14.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage14.Location = new System.Drawing.Point(0, 40);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(760, 864);
+            this.tabPage14.Size = new System.Drawing.Size(200, 60);
             this.tabPage14.TabIndex = 1;
             this.tabPage14.Text = "出料流程";
             // 
@@ -10759,7 +10759,7 @@
             this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage3.Size = new System.Drawing.Size(200, 60);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "初始点位";
             // 
@@ -10780,7 +10780,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(1893, 944);
+            this.uiTabControl2.Size = new System.Drawing.Size(200, 60);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -10804,7 +10804,7 @@
             this.tabPage7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage7.Location = new System.Drawing.Point(0, 40);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage7.Size = new System.Drawing.Size(200, 20);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "入料手臂";
             // 
@@ -12250,7 +12250,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage8.Size = new System.Drawing.Size(200, 60);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "出料手臂";
             // 
@@ -14126,9 +14126,58 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage9.Size = new System.Drawing.Size(200, 60);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "测试手臂";
+            // 
+            // uiTitlePanel2
+            // 
+            this.uiTitlePanel2.Controls.Add(this.button225);
+            this.uiTitlePanel2.Controls.Add(this.button50);
+            this.uiTitlePanel2.Controls.Add(this.label48);
+            this.uiTitlePanel2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTitlePanel2.Location = new System.Drawing.Point(968, 123);
+            this.uiTitlePanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiTitlePanel2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiTitlePanel2.Name = "uiTitlePanel2";
+            this.uiTitlePanel2.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
+            this.uiTitlePanel2.ShowText = false;
+            this.uiTitlePanel2.Size = new System.Drawing.Size(706, 528);
+            this.uiTitlePanel2.TabIndex = 312;
+            this.uiTitlePanel2.Text = "I/O";
+            this.uiTitlePanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // button225
+            // 
+            this.button225.Location = new System.Drawing.Point(248, 50);
+            this.button225.Margin = new System.Windows.Forms.Padding(2);
+            this.button225.Name = "button225";
+            this.button225.Size = new System.Drawing.Size(108, 34);
+            this.button225.TabIndex = 571;
+            this.button225.Text = "闭合";
+            this.button225.UseVisualStyleBackColor = true;
+            this.button225.Click += new System.EventHandler(this.button225_Click);
+            // 
+            // button50
+            // 
+            this.button50.Location = new System.Drawing.Point(136, 50);
+            this.button50.Margin = new System.Windows.Forms.Padding(2);
+            this.button50.Name = "button50";
+            this.button50.Size = new System.Drawing.Size(108, 34);
+            this.button50.TabIndex = 570;
+            this.button50.Text = "张开";
+            this.button50.UseVisualStyleBackColor = true;
+            this.button50.Click += new System.EventHandler(this.button50_Click);
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(26, 57);
+            this.label48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(106, 21);
+            this.label48.TabIndex = 570;
+            this.label48.Text = "吸嘴张开气缸";
             // 
             // button24
             // 
@@ -15052,7 +15101,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage16.Size = new System.Drawing.Size(200, 60);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "梭车";
             // 
@@ -15326,7 +15375,7 @@
             this.tabPage17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage17.Size = new System.Drawing.Size(200, 60);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
             // 
@@ -15702,55 +15751,6 @@
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "档案";
             // 
-            // uiTitlePanel2
-            // 
-            this.uiTitlePanel2.Controls.Add(this.button225);
-            this.uiTitlePanel2.Controls.Add(this.button50);
-            this.uiTitlePanel2.Controls.Add(this.label48);
-            this.uiTitlePanel2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTitlePanel2.Location = new System.Drawing.Point(968, 123);
-            this.uiTitlePanel2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTitlePanel2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiTitlePanel2.Name = "uiTitlePanel2";
-            this.uiTitlePanel2.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
-            this.uiTitlePanel2.ShowText = false;
-            this.uiTitlePanel2.Size = new System.Drawing.Size(706, 528);
-            this.uiTitlePanel2.TabIndex = 312;
-            this.uiTitlePanel2.Text = "I/O";
-            this.uiTitlePanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label48
-            // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(26, 57);
-            this.label48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(106, 21);
-            this.label48.TabIndex = 570;
-            this.label48.Text = "吸嘴张开气缸";
-            // 
-            // button50
-            // 
-            this.button50.Location = new System.Drawing.Point(136, 50);
-            this.button50.Margin = new System.Windows.Forms.Padding(2);
-            this.button50.Name = "button50";
-            this.button50.Size = new System.Drawing.Size(108, 34);
-            this.button50.TabIndex = 570;
-            this.button50.Text = "张开";
-            this.button50.UseVisualStyleBackColor = true;
-            this.button50.Click += new System.EventHandler(this.button50_Click);
-            // 
-            // button225
-            // 
-            this.button225.Location = new System.Drawing.Point(248, 50);
-            this.button225.Margin = new System.Windows.Forms.Padding(2);
-            this.button225.Name = "button225";
-            this.button225.Size = new System.Drawing.Size(108, 34);
-            this.button225.TabIndex = 571;
-            this.button225.Text = "闭合";
-            this.button225.UseVisualStyleBackColor = true;
-            this.button225.Click += new System.EventHandler(this.button225_Click);
-            // 
             // _setting
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -15927,6 +15927,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown75)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown74)).EndInit();
             this.tabPage9.ResumeLayout(false);
+            this.uiTitlePanel2.ResumeLayout(false);
+            this.uiTitlePanel2.PerformLayout();
             this.uiTitlePanel9.ResumeLayout(false);
             this.groupBox36.ResumeLayout(false);
             this.groupBox36.PerformLayout();
@@ -15979,8 +15981,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).EndInit();
-            this.uiTitlePanel2.ResumeLayout(false);
-            this.uiTitlePanel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
