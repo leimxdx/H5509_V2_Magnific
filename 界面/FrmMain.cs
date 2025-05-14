@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using H5509_alarm;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using static GTN.mc;
@@ -84,6 +85,8 @@ namespace H5509_V2
 
             setting.handler = handler;
 
+            //form_alarm = new Form_alarm();
+
             //防止控件过多产生闪烁现象
             SetControlStyle();
             SetTablayoutDoubleBuffer();
@@ -127,7 +130,7 @@ namespace H5509_V2
             if (result == DialogResult.OK)
             {
                 //writeDataHelper.PrintLog("软件退出");
-                //退出标记 = true; //让报警弹窗也退出，否则主程序退出不了
+                退出标记 = true; //让报警弹窗也退出，否则主程序退出不了
                 //gg.CloseCard(); //关闭轴卡
                 Application.Exit(); //退出软件
             }
@@ -535,10 +538,11 @@ namespace H5509_V2
             {
                 if (reader.Read())
                 {
-                    设置信息.设置信息名称 = 当前档案;
+                    设置信息.档案名称 = 当前档案;
                     设置信息.Tray盘信息.TrayName = reader["tray盘名称"].ToString();
                     设置信息.OffsetPoint.微调点位名称 = reader["偏移点位名称"].ToString();
                     设置信息.开site信息.Site名称 = reader["site名称"].ToString();
+                    设置信息.分BIN信息.分BIN名称 = reader["分BIN名称"].ToString();
                 }
                 else result = "Fail";
                 reader.Close();
@@ -607,6 +611,73 @@ namespace H5509_V2
             return result;
         }
 
+        private string GetBINParam()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{设置信息.分BIN信息.分BIN名称}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                DataRow dr = dataTable.Rows[0];
+
+                BinParam binParam = new BinParam()
+                {
+                    分BIN名称 = dr["分BIN名称"].ToString(),
+                    auto1 = dr["auto1"].ToString(),
+                    auto2 = dr["auto2"].ToString(),
+                    fix1 = dr["fix1"].ToString(),
+                    fix2 = dr["fix2"].ToString(),
+                    fix3 = dr["fix3"].ToString(),
+                    fix1num = Convert.ToInt32(dr["fix1num"].ToString()),
+                    fix2num = Convert.ToInt32(dr["fix2num"].ToString()),
+                    fix3num = Convert.ToInt32(dr["fix3num"].ToString()),
+                    color1 = Convert.ToInt32(dr["color1"].ToString()),
+                    color2 = Convert.ToInt32(dr["color2"].ToString()),
+                    color3 = Convert.ToInt32(dr["color3"].ToString()),
+                    color4 = Convert.ToInt32(dr["color4"].ToString()),
+                    color5 = Convert.ToInt32(dr["color5"].ToString()),
+                    name1 = dr["name1"].ToString(),
+                    name2 = dr["name2"].ToString(),
+                    name3 = dr["name3"].ToString(),
+                    name4 = dr["name4"].ToString(),
+                    name5 = dr["name5"].ToString(),
+                };
+
+                设置信息.分BIN信息 = binParam;
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// Form窗体刷新
+        /// </summary>
+        private void 屏幕刷新()
+        {
+            while (true)
+            {
+                try
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        if (listcode.Count != 0)
+                        {
+                            form_alarm.Show();
+                            for (int i = 0; i < listcode.Count; i++)
+                            {
+                                form_alarm.code(listcode[i], true);
+                                listcode.Remove(listcode[i]);
+                                //alarm_count++;
+                            }
+                        }
+                    }));
+
+                    Thread.Sleep(100);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("屏幕刷新异常!" + ex.Message);
+                    Thread.Sleep(100);
+                }
+            }
+        }
         private string Init_APPmaster()
         {
             ///IO信息
@@ -644,6 +715,10 @@ namespace H5509_V2
                 ///开Site信息
                 result = GetSiteStatus();
                 if (result != "Success") return result;
+
+                //分BIN参数
+                result = GetBINParam();
+                if (result != "Success") return result;
             }
             else return result;
 
@@ -680,7 +755,15 @@ namespace H5509_V2
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
             {
                 cts = new CancellationTokenSource();
-                
+
+                Task.Run(() =>
+                {
+                    handler.系统按钮检测流程();
+                });
+                Task.Run(()=>
+                {
+                    屏幕刷新();
+                });
                 Task.Run(() =>
                 {
                     handler.初始化流程();
@@ -716,10 +799,6 @@ namespace H5509_V2
                 Task.Run(() =>
                 {
                     handler.测试区气缸上抬动作流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.系统按钮检测流程();
                 });
                 Task.Run(() =>
                 {

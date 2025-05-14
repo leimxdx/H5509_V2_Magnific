@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -13,9 +14,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
-using Sunny.UI.Win32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
 
@@ -2514,6 +2512,7 @@ namespace H5509_V2
             uiDoubleUpDown60.Text = 初始点位.抓盘_Auto1_X.ToString();
             uiDoubleUpDown59.Text = 初始点位.抓盘_Auto2_X.ToString();
         }
+
         private void 刷新抓盘手臂速度参数()
         {
             GetAxisRunInfo("M18_放Tary盘轴", out AxisRunInfo axisRun);
@@ -2551,6 +2550,291 @@ namespace H5509_V2
             }
         }
 
+        private void 刷新设定(string name)
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dt);
+            if (result == "Success")
+            {
+                textBox24.Text = dt.Rows[0][0].ToString();
+                textBox25.Text = dt.Rows[0][1].ToString();
+            }
+        }
+        private void 刷新测试机(string name)
+        {
+
+        }
+        private void 刷新分BIN(string name)
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select 分BIN名称 from SetupInfo where 档案名称='{name}'", out string value).ToString();
+            if (result != "Success") return;
+
+            result = SQLiteHelper.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{value}'", out DataTable dataTable);
+            if (result != "Success") return;
+
+            DataRow dr = dataTable.Rows[0];
+
+            BinParam binParam = new BinParam()
+            {
+                分BIN名称 = dr["分BIN名称"].ToString(),
+                auto1 = dr["auto1"].ToString(),
+                auto2 = dr["auto2"].ToString(),
+                fix1 = dr["fix1"].ToString(),
+                fix2 = dr["fix2"].ToString(),
+                fix3 = dr["fix3"].ToString(),
+                fix1num = Convert.ToInt32(dr["fix1num"].ToString()),
+                fix2num = Convert.ToInt32(dr["fix2num"].ToString()),
+                fix3num = Convert.ToInt32(dr["fix3num"].ToString()),
+                color1 = Convert.ToInt32(dr["color1"].ToString()),
+                color2 = Convert.ToInt32(dr["color2"].ToString()),
+                color3 = Convert.ToInt32(dr["color3"].ToString()),
+                color4 = Convert.ToInt32(dr["color4"].ToString()),
+                color5 = Convert.ToInt32(dr["color5"].ToString()),
+                name1 = dr["name1"].ToString(),
+                name2 = dr["name2"].ToString(),
+                name3 = dr["name3"].ToString(),
+                name4 = dr["name4"].ToString(),
+                name5 = dr["name5"].ToString(),
+            };
+
+            (panel3.Controls["radioButton3_" + binParam.fix1num] as UIRadioButton).Checked = true;
+            (panel10.Controls["radioButton4_" + binParam.fix2num] as UIRadioButton).Checked = true;
+            (panel11.Controls["radioButton5_" + binParam.fix3num] as UIRadioButton).Checked = true;
+
+
+            foreach (object listbox in tabPage_bin.Controls)
+            {
+                if (listbox.GetType() != typeof(ListBox))
+                {
+                    continue;
+                }
+                (listbox as ListBox).Items.Clear();
+            }
+
+            foreach (string s1 in binParam.auto1.Split(','))
+            {
+                if (s1 == "") break;
+                listBox1.Items.Add(s1);
+            }
+            foreach (string s2 in binParam.auto2.Split(','))
+            {
+                if (s2 == "") break;
+                listBox2.Items.Add(s2);
+            }
+
+            string[] s = binParam.fix1.Split(';');
+            for (int i = 0; i < 3; i++)
+            {
+                if (s[i] == "") continue;
+                foreach (string ss in s[i].Split(','))
+                {
+                    (tabPage_bin.Controls["listBox3_" + (i + 1)] as ListBox).Items.Add(ss);
+                }
+
+            }
+            s = binParam.fix2.Split(';');
+            for (int i = 0; i < 3; i++)
+            {
+                if (s[i] == "") continue;
+                foreach (string ss in s[i].Split(','))
+                {
+                    (tabPage_bin.Controls["listBox4_" + (i + 1)] as ListBox).Items.Add(ss);
+                }
+
+            }
+            s = binParam.fix3.Split(';');
+            for (int i = 0; i < 3; i++)
+            {
+                if (s[i] == "") continue;
+                foreach (string ss in s[i].Split(','))
+                {
+                    (tabPage_bin.Controls["listBox5_" + (i + 1)] as ListBox).Items.Add(ss);
+                }
+
+            }
+
+            label_color1.BackColor = System.Drawing.Color.FromArgb(binParam.color1);
+            label_color2.BackColor = System.Drawing.Color.FromArgb(binParam.color2);
+            label_color3.BackColor = System.Drawing.Color.FromArgb(binParam.color3);
+            label_color4.BackColor = System.Drawing.Color.FromArgb(binParam.color4);
+            label_color5.BackColor = System.Drawing.Color.FromArgb(binParam.color5);
+
+            textBox_name1.Text = binParam.name1;
+            textBox_name2.Text = binParam.name2;
+            textBox_name3.Text = binParam.name3;
+            textBox_name4.Text = binParam.name4;
+            textBox_name5.Text = binParam.name5;
+
+            //设置信息.分BIN信息 = binParam;
+
+        }
+        private void 刷新开Site(string name)
+        {
+
+        }
+        private void 刷新点位偏移(string name)
+        {
+
+        }
+        private void 刷新加热盘(string name)
+        {
+
+        }
+        private void 刷新梭车(string name)
+        {
+
+        }
+
+        private void 刷新档案信息(string tabpagetext)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+                if (tabpagetext == "设定")
+                {
+                    刷新设定(name);
+                }
+                else if (tabpagetext == "测试机")
+                {
+                    刷新测试机(name);
+                }
+                else if (tabpagetext == "分BIN")
+                {
+                    刷新分BIN(name);
+                }
+                else if (tabpagetext == "开Site")
+                {
+                    刷新开Site(name);
+                }
+                else if (tabpagetext == "点位偏移")
+                {
+                    刷新点位偏移(name);
+                }
+                else if (tabpagetext == "加热盘")
+                {
+                    刷新加热盘(name);
+                }
+                else if (tabpagetext == "梭车")
+                {
+                    刷新梭车(name);
+                }
+            }
+        }
+
+        private void 刷新Tray盘(string name)
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dt);
+            if (result == "Success")
+            {
+                textBox30.Text = dt.Rows[0]["name"].ToString();
+                textBox29.Text = dt.Rows[0]["xnum"].ToString();
+                textBox28.Text = dt.Rows[0]["ynum"].ToString();
+                textBox27.Text = dt.Rows[0]["xstart"].ToString();
+                textBox31.Text = dt.Rows[0]["ystart"].ToString();
+                textBox33.Text = dt.Rows[0]["xpitch"].ToString();
+                textBox32.Text = dt.Rows[0]["ypitch"].ToString();
+                textBox36.Text = dt.Rows[0]["width"].ToString();
+                textBox35.Text = dt.Rows[0]["length"].ToString();
+                textBox34.Text = dt.Rows[0]["height"].ToString();
+            }
+        }
+
+        private void 刷新取放设定(string name)
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dt);
+            if (result == "Success")
+            {
+                textBox24.Text = dt.Rows[0][0].ToString();
+                textBox25.Text = dt.Rows[0][1].ToString();
+            }
+        }
+
+        private void 刷新Tray盘信息(string tabpagetext)
+        {
+            int rows = uiDataGridView2.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView2.Rows[rows].Cells[1].Value.ToString();
+                if (tabpagetext == "Tray盘")
+                {
+                    刷新Tray盘(name);
+                }
+                else if (tabpagetext == "取放设定")
+                {
+                    //刷新取放设定(name);
+                }
+            }
+        }
+
+        private void 刷新档案列表()
+        {
+            string reuslt = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', 档案名称 from SetupInfo", out DataTable dt);
+            if (reuslt == "Success")
+            {
+                uiDataGridView1.DataSource = dt;
+                uiDataGridView1.Columns[0].Width = 100;
+                uiDataGridView1.Columns[1].Width = 250;
+
+                uiDataGridView1.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
+
+                string result = SQLiteHelper.runSql(SQLiteConnString, "select value from config where name='当前档案'", out string value).ToString();
+
+                if (result == "Success")
+                {
+                    foreach (DataGridViewRow dr in uiDataGridView1.Rows)
+                    {
+                        if (dr.Cells[1].Value.Equals(value))
+                        {
+                            dr.Cells[0].Value = "当前档案";
+                            dr.Cells[0].Selected = true;
+                        }
+                    }
+
+                    刷新档案信息(uiTabControl6.SelectedTab.Text);
+                }
+            }
+        }
+
+        private void 刷新Tray盘列表()
+        {
+            string reuslt = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', name as Tray盘名称 from TrayInfo", out DataTable dt);
+            if (reuslt == "Success")
+            {
+                uiDataGridView2.DataSource = dt;
+                uiDataGridView2.Columns[0].Width = 100;
+                uiDataGridView2.Columns[1].Width = 250;
+
+                uiDataGridView2.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
+
+                string result = SQLiteHelper.runSql(SQLiteConnString, $"select tray盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
+
+                if (result == "Success")
+                {
+                    foreach (DataGridViewRow dr in uiDataGridView2.Rows)
+                    {
+                        if (dr.Cells[1].Value.Equals(value))
+                        {
+                            dr.Cells[0].Value = "当前Tray盘";
+                            dr.Cells[0].Selected = true;
+                        }
+                    }
+                }
+                刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+            }
+        }
+
+        private void 刷新产品(string tabpagetext)
+        {
+            if (tabpagetext == "档案列表")
+            {
+                刷新档案列表();
+            }
+            else if (tabpagetext == "Tray盘列表")
+            {
+                刷新Tray盘列表();
+            }
+        }
+
         private void uiTabControl2_Selecting(object sender, TabControlCancelEventArgs e)
         {
             刷新初始点位(e.TabPage.Text);
@@ -2561,6 +2845,10 @@ namespace H5509_V2
             if (tabpagetext == "初始点位")
             {
                 刷新初始点位(uiTabControl2.SelectedTab.Text);
+            }
+            else if (tabpagetext == "产品")
+            {
+                刷新产品(uiTabControl5.SelectedTab.Text);
             }
         }
 
@@ -2604,6 +2892,8 @@ namespace H5509_V2
             return false;
         }
 
+
+        #region 初始点位
 
         /// <summary>
         /// 保存入料手臂速度参数
@@ -2729,14 +3019,7 @@ namespace H5509_V2
 
         private void uiButton3_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (result == DialogResult.OK)
-            {
-            }
-        }
 
-        private void uiButton4_Click(object sender, EventArgs e)
-        {
         }
 
         private void uiButton6_Click(object sender, EventArgs e)
@@ -3616,6 +3899,8 @@ namespace H5509_V2
             Task.Run(() => { return handler.测试吸嘴_张开气缸输出(true); });
         }
 
+        #endregion
+
         private void button147_Click(object sender, EventArgs e)
         {
             string[] axisNames = { "M6_出料手臂Z1轴", "M7_出料手臂Z2轴", "M8_出料手臂Z3轴", "M9_出料手臂Z4轴" };
@@ -3642,6 +3927,198 @@ namespace H5509_V2
                 }
                 else MessageBox.Show("出料手臂XYP回零完成");
             });
+        }
+
+        private void uiTabControl5_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新产品(uiTabControl5.SelectedTab.Text);
+        }
+
+        private void uiTabControl6_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新档案信息(uiTabControl6.SelectedTab.Text);
+        }
+
+        private void uiTabControl7_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+        }
+
+        private void uiDataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index >= 0)
+            {
+                刷新档案信息(uiTabControl6.SelectedTab.Text);
+            }
+        }
+
+        private void uiDataGridView2_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index >= 0)
+            {
+                刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+            }
+        }
+
+        private void uiButton3_Click_1(object sender, EventArgs e)
+        {
+            //检查特殊Bin项是否全部分配
+            foreach (object o in comboBox10.Items)
+            {
+                bool ishere = false;
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    if ((listbox as ListBox).Items.Contains(o))
+                    {
+                        ishere = true;
+                        break;
+                    }
+                }
+
+                if (!ishere)
+                {
+                    MessageBox.Show("特殊Bin项\"" + o.ToString() + "\"未分配。请分配全部特殊Bin后再保存。");
+                    radioButton2.Checked = true;
+                    comboBox10.SelectedItem = o;
+                    return;
+                }
+            }
+
+
+            try
+            {
+                DialogResult issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (issave == DialogResult.OK)
+                {
+
+                    BinParam binParam = 设置信息.分BIN信息;
+                    binParam.auto1 = "";
+                    binParam.auto2 = "";
+                    binParam.fix1 = "";
+                    binParam.fix2 = "";
+                    binParam.fix3 = "";
+
+                    //auto1
+                    foreach (object o in listBox1.Items)
+                    {
+                        binParam.auto1 += o.ToString() + ",";
+                    }
+                    binParam.auto1 = binParam.auto1.TrimEnd(',');
+
+                    //auto2
+                    foreach (object o in listBox2.Items)
+                    {
+                        binParam.auto2 += o.ToString() + ",";
+                    }
+                    binParam.auto2 = binParam.auto2.TrimEnd(',');
+
+                    //fix1
+                    foreach (object o in listBox3_1.Items)
+                    {
+                        binParam.fix1 += o.ToString() + ",";
+                    }
+                    binParam.fix1 = binParam.fix1.TrimEnd(',') + ";";
+                    foreach (object o in listBox3_2.Items)
+                    {
+                        binParam.fix1 += o.ToString() + ",";
+                    }
+                    binParam.fix1 = binParam.fix1.TrimEnd(',') + ";";
+                    foreach (object o in listBox3_3.Items)
+                    {
+                        binParam.fix1 += o.ToString() + ",";
+                    }
+                    binParam.fix1 = binParam.fix1.TrimEnd(',');
+
+                    //fix2
+                    foreach (object o in listBox4_1.Items)
+                    {
+                        binParam.fix2 += o.ToString() + ",";
+                    }
+                    binParam.fix2 = binParam.fix2.TrimEnd(',') + ";";
+                    foreach (object o in listBox4_2.Items)
+                    {
+                        binParam.fix2 += o.ToString() + ",";
+                    }
+                    binParam.fix2 = binParam.fix2.TrimEnd(',') + ";";
+                    foreach (object o in listBox4_3.Items)
+                    {
+                        binParam.fix2 += o.ToString() + ",";
+                    }
+                    binParam.fix2 = binParam.fix2.TrimEnd(',');
+
+                    //fix3
+                    foreach (object o in listBox5_1.Items)
+                    {
+                        binParam.fix3 += o.ToString() + ",";
+                    }
+                    binParam.fix3 = binParam.fix3.TrimEnd(',') + ";";
+                    foreach (object o in listBox5_2.Items)
+                    {
+                        binParam.fix3 += o.ToString() + ",";
+                    }
+                    binParam.fix3 = binParam.fix3.TrimEnd(',') + ";";
+                    foreach (object o in listBox5_3.Items)
+                    {
+                        binParam.fix3 += o.ToString() + ",";
+                    }
+                    binParam.fix3 = binParam.fix3.TrimEnd(',');
+
+                    //auto1 = binParam.auto1;
+                    //auto2 = binParam.auto2;
+                    //fix1 = binParam.fix1;
+                    //fix2 = binParam.fix2;
+                    //fix3 = binParam.fix3;
+
+                    binParam.color1 = label_color1.BackColor.ToArgb();
+                    binParam.color2 = label_color2.BackColor.ToArgb();
+                    binParam.color3 = label_color3.BackColor.ToArgb();
+                    binParam.color4 = label_color4.BackColor.ToArgb();
+                    binParam.color5 = label_color5.BackColor.ToArgb();
+
+                    binParam.name1 = textBox_name1.Text;
+                    binParam.name2 = textBox_name2.Text;
+                    binParam.name3 = textBox_name3.Text;
+                    binParam.name4 = textBox_name4.Text;
+                    binParam.name5 = textBox_name5.Text;
+
+                    if (radioButton3_1.Checked) binParam.fix1num = 1;
+                    else if (radioButton3_2.Checked) binParam.fix1num = 2;
+                    else if (radioButton3_3.Checked) binParam.fix1num = 3;
+
+                    if (radioButton4_1.Checked) binParam.fix2num = 1;
+                    else if (radioButton4_2.Checked) binParam.fix2num = 2;
+                    else if (radioButton4_3.Checked) binParam.fix2num = 3;
+
+                    if (radioButton5_1.Checked) binParam.fix3num = 1;
+                    else if (radioButton5_2.Checked) binParam.fix3num = 2;
+                    else if (radioButton5_3.Checked) binParam.fix3num = 3;
+
+                    //string filepath = H5509Program + "\\ICSetup\\" + motionEx.SwStartParm.TrayName + "\\BinParam.xml";
+                    //DirectoryInfo directoryInfo = new DirectoryInfo(filepath);
+                    //try
+                    //{
+                    //    OperationResult result = motionEx.SaveBinParam(filepath);
+                    //    if (result.IsSuccess) MessageBox.Show($"保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //    else MessageBox.Show($"保存失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //}
+                    //catch (Exception ex)
+                    //{
+                    //    MessageBox.Show($"写入档案【{motionEx.SwStartParm.TrayName}】异常！\n详细信息：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    //    return;
+                    //}
+                }
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show($"保存档案【{motionEx.SwStartParm.TrayName}】异常！\n详细信息：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
     }
 }

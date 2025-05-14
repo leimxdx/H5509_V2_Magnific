@@ -149,6 +149,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinParam.cs" />
     <Compile Include="InitPoint.cs" />
     <Compile Include="模块\log.cs" />
     <Compile Include="OffsetPoint.cs" />
@@ -156,6 +157,18 @@
     <Compile Include="SiteStatus.cs" />
     <Compile Include="TrayInfo.cs" />
     <Compile Include="工具\SqlServerHelper.cs" />
+    <Compile Include="界面\Form_alarm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="界面\Form_alarm.Designer.cs">
+      <DependentUpon>Form_alarm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="界面\FrmInputPwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="界面\FrmInputPwd.Designer.cs">
+      <DependentUpon>FrmInputPwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="界面\UIProgressIndicatorEx.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -236,6 +249,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="界面\Form_alarm.resx">
+      <DependentUpon>Form_alarm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="界面\FrmInputPwd.resx">
+      <DependentUpon>FrmInputPwd.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="界面\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -265,6 +284,9 @@
     </EmbeddedResource>
     <None Include="gtn_core1.cfg" />
     <None Include="gtn_core2.cfg" />
+    <None Include="H5509_alarm.xlsx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

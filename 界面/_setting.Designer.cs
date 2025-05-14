@@ -28,6 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -1112,6 +1122,327 @@
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
             this.tabPage6 = new System.Windows.Forms.TabPage();
+            this.uiTabControl5 = new Sunny.UI.UITabControl();
+            this.tabPage23 = new System.Windows.Forms.TabPage();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.uiTabControl6 = new Sunny.UI.UITabControl();
+            this.tabPage25 = new System.Windows.Forms.TabPage();
+            this.textBox26 = new System.Windows.Forms.TextBox();
+            this.label344 = new System.Windows.Forms.Label();
+            this.textBox25 = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.textBox24 = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.tabPage27 = new System.Windows.Forms.TabPage();
+            this.tabPage_bin = new System.Windows.Forms.TabPage();
+            this.tabPage26 = new System.Windows.Forms.TabPage();
+            this.tabPage29 = new System.Windows.Forms.TabPage();
+            this.tabPage30 = new System.Windows.Forms.TabPage();
+            this.tabPage31 = new System.Windows.Forms.TabPage();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.uiButton4 = new Sunny.UI.UIButton();
+            this.uiButton3 = new Sunny.UI.UIButton();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.uiDataGridView1 = new Sunny.UI.UIDataGridView();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.uiButton1 = new Sunny.UI.UIButton();
+            this.uiButton8 = new Sunny.UI.UIButton();
+            this.uiButton11 = new Sunny.UI.UIButton();
+            this.uiButton12 = new Sunny.UI.UIButton();
+            this.tabPage32 = new System.Windows.Forms.TabPage();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.uiTabControl7 = new Sunny.UI.UITabControl();
+            this.tabPage24 = new System.Windows.Forms.TabPage();
+            this.textBox34 = new System.Windows.Forms.TextBox();
+            this.label352 = new System.Windows.Forms.Label();
+            this.textBox35 = new System.Windows.Forms.TextBox();
+            this.label353 = new System.Windows.Forms.Label();
+            this.textBox36 = new System.Windows.Forms.TextBox();
+            this.label354 = new System.Windows.Forms.Label();
+            this.textBox32 = new System.Windows.Forms.TextBox();
+            this.label350 = new System.Windows.Forms.Label();
+            this.textBox33 = new System.Windows.Forms.TextBox();
+            this.label351 = new System.Windows.Forms.Label();
+            this.textBox31 = new System.Windows.Forms.TextBox();
+            this.label349 = new System.Windows.Forms.Label();
+            this.textBox30 = new System.Windows.Forms.TextBox();
+            this.label348 = new System.Windows.Forms.Label();
+            this.textBox27 = new System.Windows.Forms.TextBox();
+            this.label345 = new System.Windows.Forms.Label();
+            this.textBox28 = new System.Windows.Forms.TextBox();
+            this.label346 = new System.Windows.Forms.Label();
+            this.textBox29 = new System.Windows.Forms.TextBox();
+            this.label347 = new System.Windows.Forms.Label();
+            this.tabPage33 = new System.Windows.Forms.TabPage();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.uiButton15 = new Sunny.UI.UIButton();
+            this.uiButton16 = new Sunny.UI.UIButton();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.uiDataGridView2 = new Sunny.UI.UIDataGridView();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.uiButton2 = new Sunny.UI.UIButton();
+            this.uiButton7 = new Sunny.UI.UIButton();
+            this.uiButton19 = new Sunny.UI.UIButton();
+            this.uiButton20 = new Sunny.UI.UIButton();
+            this.pal_dout1_8 = new System.Windows.Forms.Panel();
+            this.lbl_dout1 = new System.Windows.Forms.Label();
+            this.label355 = new System.Windows.Forms.Label();
+            this.lbl_dout8 = new System.Windows.Forms.Label();
+            this.lbl_dout7 = new System.Windows.Forms.Label();
+            this.lbl_dout6 = new System.Windows.Forms.Label();
+            this.lbl_dout5 = new System.Windows.Forms.Label();
+            this.lbl_dout4 = new System.Windows.Forms.Label();
+            this.lbl_dout3 = new System.Windows.Forms.Label();
+            this.lbl_dout2 = new System.Windows.Forms.Label();
+            this.Btn_close9 = new System.Windows.Forms.Button();
+            this.Btn_open9 = new System.Windows.Forms.Button();
+            this.pal_dout121_128 = new System.Windows.Forms.Panel();
+            this.lbl_dout121 = new System.Windows.Forms.Label();
+            this.label356 = new System.Windows.Forms.Label();
+            this.lbl_dout128 = new System.Windows.Forms.Label();
+            this.lbl_dout127 = new System.Windows.Forms.Label();
+            this.lbl_dout126 = new System.Windows.Forms.Label();
+            this.lbl_dout125 = new System.Windows.Forms.Label();
+            this.lbl_dout124 = new System.Windows.Forms.Label();
+            this.lbl_dout123 = new System.Windows.Forms.Label();
+            this.lbl_dout122 = new System.Windows.Forms.Label();
+            this.Btn_open8 = new System.Windows.Forms.Button();
+            this.pal_dout57_64 = new System.Windows.Forms.Panel();
+            this.lbl_dout57 = new System.Windows.Forms.Label();
+            this.label357 = new System.Windows.Forms.Label();
+            this.lbl_dout64 = new System.Windows.Forms.Label();
+            this.lbl_dout63 = new System.Windows.Forms.Label();
+            this.lbl_dout62 = new System.Windows.Forms.Label();
+            this.lbl_dout61 = new System.Windows.Forms.Label();
+            this.lbl_dout60 = new System.Windows.Forms.Label();
+            this.lbl_dout59 = new System.Windows.Forms.Label();
+            this.lbl_dout58 = new System.Windows.Forms.Label();
+            this.Btn_close10 = new System.Windows.Forms.Button();
+            this.pal_dout89_96 = new System.Windows.Forms.Panel();
+            this.lbl_dout89 = new System.Windows.Forms.Label();
+            this.label358 = new System.Windows.Forms.Label();
+            this.lbl_dout96 = new System.Windows.Forms.Label();
+            this.lbl_dout95 = new System.Windows.Forms.Label();
+            this.lbl_dout94 = new System.Windows.Forms.Label();
+            this.lbl_dout93 = new System.Windows.Forms.Label();
+            this.lbl_dout92 = new System.Windows.Forms.Label();
+            this.lbl_dout91 = new System.Windows.Forms.Label();
+            this.lbl_dout90 = new System.Windows.Forms.Label();
+            this.Btn_close8 = new System.Windows.Forms.Button();
+            this.pal_dout25_32 = new System.Windows.Forms.Panel();
+            this.lbl_dout25 = new System.Windows.Forms.Label();
+            this.label368 = new System.Windows.Forms.Label();
+            this.lbl_dout32 = new System.Windows.Forms.Label();
+            this.lbl_dout31 = new System.Windows.Forms.Label();
+            this.lbl_dout30 = new System.Windows.Forms.Label();
+            this.lbl_dout29 = new System.Windows.Forms.Label();
+            this.lbl_dout28 = new System.Windows.Forms.Label();
+            this.lbl_dout27 = new System.Windows.Forms.Label();
+            this.lbl_dout26 = new System.Windows.Forms.Label();
+            this.Btn_open10 = new System.Windows.Forms.Button();
+            this.pal_dout105_112 = new System.Windows.Forms.Panel();
+            this.lbl_dout105 = new System.Windows.Forms.Label();
+            this.label369 = new System.Windows.Forms.Label();
+            this.lbl_dout112 = new System.Windows.Forms.Label();
+            this.lbl_dout111 = new System.Windows.Forms.Label();
+            this.lbl_dout110 = new System.Windows.Forms.Label();
+            this.lbl_dout109 = new System.Windows.Forms.Label();
+            this.lbl_dout108 = new System.Windows.Forms.Label();
+            this.lbl_dout107 = new System.Windows.Forms.Label();
+            this.lbl_dout106 = new System.Windows.Forms.Label();
+            this.Btn_open7 = new System.Windows.Forms.Button();
+            this.pal_dout41_48 = new System.Windows.Forms.Panel();
+            this.lbl_dout41 = new System.Windows.Forms.Label();
+            this.label370 = new System.Windows.Forms.Label();
+            this.lbl_dout48 = new System.Windows.Forms.Label();
+            this.lbl_dout47 = new System.Windows.Forms.Label();
+            this.lbl_dout46 = new System.Windows.Forms.Label();
+            this.lbl_dout45 = new System.Windows.Forms.Label();
+            this.lbl_dout44 = new System.Windows.Forms.Label();
+            this.lbl_dout43 = new System.Windows.Forms.Label();
+            this.lbl_dout42 = new System.Windows.Forms.Label();
+            this.Btn_close11 = new System.Windows.Forms.Button();
+            this.pal_dout73_80 = new System.Windows.Forms.Panel();
+            this.lbl_dout73 = new System.Windows.Forms.Label();
+            this.label405 = new System.Windows.Forms.Label();
+            this.lbl_dout80 = new System.Windows.Forms.Label();
+            this.lbl_dout79 = new System.Windows.Forms.Label();
+            this.lbl_dout78 = new System.Windows.Forms.Label();
+            this.lbl_dout77 = new System.Windows.Forms.Label();
+            this.lbl_dout76 = new System.Windows.Forms.Label();
+            this.lbl_dout75 = new System.Windows.Forms.Label();
+            this.lbl_dout74 = new System.Windows.Forms.Label();
+            this.Btn_close7 = new System.Windows.Forms.Button();
+            this.pal_dout9_16 = new System.Windows.Forms.Panel();
+            this.lbl_dout9 = new System.Windows.Forms.Label();
+            this.label406 = new System.Windows.Forms.Label();
+            this.lbl_dout16 = new System.Windows.Forms.Label();
+            this.lbl_dout15 = new System.Windows.Forms.Label();
+            this.lbl_dout14 = new System.Windows.Forms.Label();
+            this.lbl_dout13 = new System.Windows.Forms.Label();
+            this.lbl_dout12 = new System.Windows.Forms.Label();
+            this.lbl_dout11 = new System.Windows.Forms.Label();
+            this.lbl_dout10 = new System.Windows.Forms.Label();
+            this.Btn_open11 = new System.Windows.Forms.Button();
+            this.pal_dout113_120 = new System.Windows.Forms.Panel();
+            this.lbl_dout113 = new System.Windows.Forms.Label();
+            this.label407 = new System.Windows.Forms.Label();
+            this.lbl_dout120 = new System.Windows.Forms.Label();
+            this.lbl_dout119 = new System.Windows.Forms.Label();
+            this.lbl_dout118 = new System.Windows.Forms.Label();
+            this.lbl_dout117 = new System.Windows.Forms.Label();
+            this.lbl_dout116 = new System.Windows.Forms.Label();
+            this.lbl_dout115 = new System.Windows.Forms.Label();
+            this.lbl_dout114 = new System.Windows.Forms.Label();
+            this.Btn_open6 = new System.Windows.Forms.Button();
+            this.pal_dout49_56 = new System.Windows.Forms.Panel();
+            this.lbl_dout49 = new System.Windows.Forms.Label();
+            this.label408 = new System.Windows.Forms.Label();
+            this.lbl_dout56 = new System.Windows.Forms.Label();
+            this.lbl_dout55 = new System.Windows.Forms.Label();
+            this.lbl_dout54 = new System.Windows.Forms.Label();
+            this.lbl_dout53 = new System.Windows.Forms.Label();
+            this.lbl_dout52 = new System.Windows.Forms.Label();
+            this.lbl_dout51 = new System.Windows.Forms.Label();
+            this.lbl_dout50 = new System.Windows.Forms.Label();
+            this.Btn_close12 = new System.Windows.Forms.Button();
+            this.pal_dout81_88 = new System.Windows.Forms.Panel();
+            this.lbl_dout81 = new System.Windows.Forms.Label();
+            this.label409 = new System.Windows.Forms.Label();
+            this.lbl_dout88 = new System.Windows.Forms.Label();
+            this.lbl_dout87 = new System.Windows.Forms.Label();
+            this.lbl_dout86 = new System.Windows.Forms.Label();
+            this.lbl_dout85 = new System.Windows.Forms.Label();
+            this.lbl_dout84 = new System.Windows.Forms.Label();
+            this.lbl_dout83 = new System.Windows.Forms.Label();
+            this.lbl_dout82 = new System.Windows.Forms.Label();
+            this.Btn_close6 = new System.Windows.Forms.Button();
+            this.pal_dout17_24 = new System.Windows.Forms.Panel();
+            this.lbl_dout17 = new System.Windows.Forms.Label();
+            this.label410 = new System.Windows.Forms.Label();
+            this.lbl_dout24 = new System.Windows.Forms.Label();
+            this.lbl_dout23 = new System.Windows.Forms.Label();
+            this.lbl_dout22 = new System.Windows.Forms.Label();
+            this.lbl_dout21 = new System.Windows.Forms.Label();
+            this.lbl_dout20 = new System.Windows.Forms.Label();
+            this.lbl_dout19 = new System.Windows.Forms.Label();
+            this.lbl_dout18 = new System.Windows.Forms.Label();
+            this.Btn_open12 = new System.Windows.Forms.Button();
+            this.pal_dout97_104 = new System.Windows.Forms.Panel();
+            this.lbl_dout97 = new System.Windows.Forms.Label();
+            this.label411 = new System.Windows.Forms.Label();
+            this.lbl_dout104 = new System.Windows.Forms.Label();
+            this.lbl_dout103 = new System.Windows.Forms.Label();
+            this.lbl_dout102 = new System.Windows.Forms.Label();
+            this.lbl_dout101 = new System.Windows.Forms.Label();
+            this.lbl_dout100 = new System.Windows.Forms.Label();
+            this.lbl_dout99 = new System.Windows.Forms.Label();
+            this.lbl_dout98 = new System.Windows.Forms.Label();
+            this.Btn_open5 = new System.Windows.Forms.Button();
+            this.pal_dout33_40 = new System.Windows.Forms.Panel();
+            this.lbl_dout33 = new System.Windows.Forms.Label();
+            this.label412 = new System.Windows.Forms.Label();
+            this.lbl_dout40 = new System.Windows.Forms.Label();
+            this.lbl_dout39 = new System.Windows.Forms.Label();
+            this.lbl_dout38 = new System.Windows.Forms.Label();
+            this.lbl_dout37 = new System.Windows.Forms.Label();
+            this.lbl_dout36 = new System.Windows.Forms.Label();
+            this.lbl_dout35 = new System.Windows.Forms.Label();
+            this.lbl_dout34 = new System.Windows.Forms.Label();
+            this.Btn_close13 = new System.Windows.Forms.Button();
+            this.pal_dout65_72 = new System.Windows.Forms.Panel();
+            this.lbl_dout65 = new System.Windows.Forms.Label();
+            this.label413 = new System.Windows.Forms.Label();
+            this.lbl_dout72 = new System.Windows.Forms.Label();
+            this.lbl_dout71 = new System.Windows.Forms.Label();
+            this.lbl_dout70 = new System.Windows.Forms.Label();
+            this.lbl_dout69 = new System.Windows.Forms.Label();
+            this.lbl_dout68 = new System.Windows.Forms.Label();
+            this.lbl_dout67 = new System.Windows.Forms.Label();
+            this.lbl_dout66 = new System.Windows.Forms.Label();
+            this.Btn_close5 = new System.Windows.Forms.Button();
+            this.Btn_close1 = new System.Windows.Forms.Button();
+            this.Btn_open13 = new System.Windows.Forms.Button();
+            this.Btn_open4 = new System.Windows.Forms.Button();
+            this.Btn_open1 = new System.Windows.Forms.Button();
+            this.Btn_close14 = new System.Windows.Forms.Button();
+            this.Btn_open16 = new System.Windows.Forms.Button();
+            this.Btn_close4 = new System.Windows.Forms.Button();
+            this.Btn_close2 = new System.Windows.Forms.Button();
+            this.Btn_open14 = new System.Windows.Forms.Button();
+            this.Btn_close16 = new System.Windows.Forms.Button();
+            this.Btn_open3 = new System.Windows.Forms.Button();
+            this.Btn_open2 = new System.Windows.Forms.Button();
+            this.Btn_close15 = new System.Windows.Forms.Button();
+            this.Btn_open15 = new System.Windows.Forms.Button();
+            this.Btn_close3 = new System.Windows.Forms.Button();
+            this.textBox37 = new System.Windows.Forms.TextBox();
+            this.label414 = new System.Windows.Forms.Label();
+            this.textBox38 = new System.Windows.Forms.TextBox();
+            this.label415 = new System.Windows.Forms.Label();
+            this.textBox39 = new System.Windows.Forms.TextBox();
+            this.label416 = new System.Windows.Forms.Label();
+            this.listBox5_3 = new System.Windows.Forms.ListBox();
+            this.listBox5_2 = new System.Windows.Forms.ListBox();
+            this.listBox4_3 = new System.Windows.Forms.ListBox();
+            this.listBox4_2 = new System.Windows.Forms.ListBox();
+            this.listBox3_3 = new System.Windows.Forms.ListBox();
+            this.listBox3_2 = new System.Windows.Forms.ListBox();
+            this.textBox_name5 = new System.Windows.Forms.TextBox();
+            this.textBox_name4 = new System.Windows.Forms.TextBox();
+            this.textBox_name3 = new System.Windows.Forms.TextBox();
+            this.textBox_name2 = new System.Windows.Forms.TextBox();
+            this.textBox_name1 = new System.Windows.Forms.TextBox();
+            this.label_color5 = new System.Windows.Forms.Label();
+            this.label_color4 = new System.Windows.Forms.Label();
+            this.label_color3 = new System.Windows.Forms.Label();
+            this.label_color2 = new System.Windows.Forms.Label();
+            this.label_color1 = new System.Windows.Forms.Label();
+            this.listBox5_1 = new System.Windows.Forms.ListBox();
+            this.listBox4_1 = new System.Windows.Forms.ListBox();
+            this.listBox3_1 = new System.Windows.Forms.ListBox();
+            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.label417 = new System.Windows.Forms.Label();
+            this.comboBox10 = new System.Windows.Forms.ComboBox();
+            this.textBox40 = new System.Windows.Forms.TextBox();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.button_add1 = new Sunny.UI.UIButton();
+            this.button_del1 = new Sunny.UI.UIButton();
+            this.button_del2 = new Sunny.UI.UIButton();
+            this.button_add2 = new Sunny.UI.UIButton();
+            this.label418 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.radioButton3_3 = new Sunny.UI.UIRadioButton();
+            this.button_del3_3 = new Sunny.UI.UIButton();
+            this.radioButton3_2 = new Sunny.UI.UIRadioButton();
+            this.button_add3_3 = new Sunny.UI.UIButton();
+            this.radioButton3_1 = new Sunny.UI.UIRadioButton();
+            this.button_del3_2 = new Sunny.UI.UIButton();
+            this.button_add3_2 = new Sunny.UI.UIButton();
+            this.button_del3_1 = new Sunny.UI.UIButton();
+            this.button_add3_1 = new Sunny.UI.UIButton();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.radioButton4_3 = new Sunny.UI.UIRadioButton();
+            this.button_del4_3 = new Sunny.UI.UIButton();
+            this.radioButton4_2 = new Sunny.UI.UIRadioButton();
+            this.button_add4_3 = new Sunny.UI.UIButton();
+            this.radioButton4_1 = new Sunny.UI.UIRadioButton();
+            this.button_del4_2 = new Sunny.UI.UIButton();
+            this.button_add4_2 = new Sunny.UI.UIButton();
+            this.button_del4_1 = new Sunny.UI.UIButton();
+            this.button_add4_1 = new Sunny.UI.UIButton();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.radioButton5_3 = new Sunny.UI.UIRadioButton();
+            this.button_del5_3 = new Sunny.UI.UIButton();
+            this.radioButton5_2 = new Sunny.UI.UIRadioButton();
+            this.button_add5_3 = new Sunny.UI.UIButton();
+            this.radioButton5_1 = new Sunny.UI.UIRadioButton();
+            this.button_del5_2 = new Sunny.UI.UIButton();
+            this.button_add5_2 = new Sunny.UI.UIButton();
+            this.button_del5_1 = new Sunny.UI.UIButton();
+            this.button_add5_1 = new Sunny.UI.UIButton();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.uiTabControl3.SuspendLayout();
@@ -1297,6 +1628,45 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).BeginInit();
+            this.tabPage6.SuspendLayout();
+            this.uiTabControl5.SuspendLayout();
+            this.tabPage23.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.uiTabControl6.SuspendLayout();
+            this.tabPage25.SuspendLayout();
+            this.tabPage_bin.SuspendLayout();
+            this.tabPage26.SuspendLayout();
+            this.panel4.SuspendLayout();
+            this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).BeginInit();
+            this.panel5.SuspendLayout();
+            this.tabPage32.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.uiTabControl7.SuspendLayout();
+            this.tabPage24.SuspendLayout();
+            this.panel6.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView2)).BeginInit();
+            this.panel7.SuspendLayout();
+            this.pal_dout1_8.SuspendLayout();
+            this.pal_dout121_128.SuspendLayout();
+            this.pal_dout57_64.SuspendLayout();
+            this.pal_dout89_96.SuspendLayout();
+            this.pal_dout25_32.SuspendLayout();
+            this.pal_dout105_112.SuspendLayout();
+            this.pal_dout41_48.SuspendLayout();
+            this.pal_dout73_80.SuspendLayout();
+            this.pal_dout9_16.SuspendLayout();
+            this.pal_dout113_120.SuspendLayout();
+            this.pal_dout49_56.SuspendLayout();
+            this.pal_dout81_88.SuspendLayout();
+            this.pal_dout17_24.SuspendLayout();
+            this.pal_dout97_104.SuspendLayout();
+            this.pal_dout33_40.SuspendLayout();
+            this.pal_dout65_72.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // uiTabControl1
@@ -4129,7 +4499,7 @@
             this.tabPage11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage11.Location = new System.Drawing.Point(0, 40);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage11.Size = new System.Drawing.Size(200, 60);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Text = "流程调试";
             // 
@@ -4380,7 +4750,7 @@
             this.uiTabControl4.Name = "uiTabControl4";
             this.uiTabControl4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl4.SelectedIndex = 0;
-            this.uiTabControl4.Size = new System.Drawing.Size(760, 904);
+            this.uiTabControl4.Size = new System.Drawing.Size(760, 60);
             this.uiTabControl4.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl4.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl4.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -4398,7 +4768,7 @@
             this.tabPage13.Controls.Add(this.groupBox3);
             this.tabPage13.Location = new System.Drawing.Point(0, 40);
             this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Size = new System.Drawing.Size(760, 864);
+            this.tabPage13.Size = new System.Drawing.Size(760, 20);
             this.tabPage13.TabIndex = 0;
             this.tabPage13.Text = "入料流程";
             // 
@@ -15745,11 +16115,4364 @@
             // tabPage6
             // 
             this.tabPage6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage6.Controls.Add(this.uiTabControl5);
             this.tabPage6.Location = new System.Drawing.Point(0, 40);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(200, 60);
+            this.tabPage6.Size = new System.Drawing.Size(1893, 944);
             this.tabPage6.TabIndex = 5;
-            this.tabPage6.Text = "档案";
+            this.tabPage6.Text = "产品";
+            // 
+            // uiTabControl5
+            // 
+            this.uiTabControl5.Controls.Add(this.tabPage23);
+            this.uiTabControl5.Controls.Add(this.tabPage32);
+            this.uiTabControl5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiTabControl5.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.uiTabControl5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTabControl5.ItemSize = new System.Drawing.Size(150, 40);
+            this.uiTabControl5.Location = new System.Drawing.Point(0, 0);
+            this.uiTabControl5.MainPage = "";
+            this.uiTabControl5.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            this.uiTabControl5.Name = "uiTabControl5";
+            this.uiTabControl5.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.uiTabControl5.SelectedIndex = 0;
+            this.uiTabControl5.Size = new System.Drawing.Size(1893, 944);
+            this.uiTabControl5.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.uiTabControl5.Style = Sunny.UI.UIStyle.Custom;
+            this.uiTabControl5.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiTabControl5.TabIndex = 176;
+            this.uiTabControl5.TabSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl5.TabSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl5.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl5.TabUnSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl5.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
+            this.uiTabControl5.TipsForeColor = System.Drawing.Color.Black;
+            this.uiTabControl5.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl5_Selecting);
+            // 
+            // tabPage23
+            // 
+            this.tabPage23.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage23.Controls.Add(this.panel2);
+            this.tabPage23.Controls.Add(this.panel1);
+            this.tabPage23.Location = new System.Drawing.Point(0, 40);
+            this.tabPage23.Name = "tabPage23";
+            this.tabPage23.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage23.TabIndex = 0;
+            this.tabPage23.Text = "档案列表";
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.uiTabControl6);
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(464, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1429, 904);
+            this.panel2.TabIndex = 313;
+            // 
+            // uiTabControl6
+            // 
+            this.uiTabControl6.Controls.Add(this.tabPage25);
+            this.uiTabControl6.Controls.Add(this.tabPage27);
+            this.uiTabControl6.Controls.Add(this.tabPage_bin);
+            this.uiTabControl6.Controls.Add(this.tabPage26);
+            this.uiTabControl6.Controls.Add(this.tabPage29);
+            this.uiTabControl6.Controls.Add(this.tabPage30);
+            this.uiTabControl6.Controls.Add(this.tabPage31);
+            this.uiTabControl6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiTabControl6.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.uiTabControl6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTabControl6.ItemSize = new System.Drawing.Size(150, 40);
+            this.uiTabControl6.Location = new System.Drawing.Point(0, 0);
+            this.uiTabControl6.MainPage = "";
+            this.uiTabControl6.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            this.uiTabControl6.Name = "uiTabControl6";
+            this.uiTabControl6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.uiTabControl6.SelectedIndex = 0;
+            this.uiTabControl6.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.uiTabControl6.Style = Sunny.UI.UIStyle.Custom;
+            this.uiTabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiTabControl6.TabIndex = 178;
+            this.uiTabControl6.TabSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl6.TabSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl6.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl6.TabUnSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl6.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
+            this.uiTabControl6.TipsForeColor = System.Drawing.Color.Black;
+            this.uiTabControl6.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl6_Selecting);
+            // 
+            // tabPage25
+            // 
+            this.tabPage25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage25.Controls.Add(this.textBox26);
+            this.tabPage25.Controls.Add(this.label344);
+            this.tabPage25.Controls.Add(this.textBox25);
+            this.tabPage25.Controls.Add(this.label50);
+            this.tabPage25.Controls.Add(this.textBox24);
+            this.tabPage25.Controls.Add(this.label49);
+            this.tabPage25.Location = new System.Drawing.Point(0, 40);
+            this.tabPage25.Name = "tabPage25";
+            this.tabPage25.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage25.TabIndex = 2;
+            this.tabPage25.Text = "设定";
+            // 
+            // textBox26
+            // 
+            this.textBox26.Location = new System.Drawing.Point(138, 116);
+            this.textBox26.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox26.Name = "textBox26";
+            this.textBox26.Size = new System.Drawing.Size(227, 29);
+            this.textBox26.TabIndex = 348;
+            this.textBox26.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label344
+            // 
+            this.label344.AutoSize = true;
+            this.label344.Location = new System.Drawing.Point(33, 119);
+            this.label344.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label344.Name = "label344";
+            this.label344.Size = new System.Drawing.Size(74, 21);
+            this.label344.TabIndex = 347;
+            this.label344.Tag = "";
+            this.label344.Text = "温度模式";
+            // 
+            // textBox25
+            // 
+            this.textBox25.Location = new System.Drawing.Point(138, 72);
+            this.textBox25.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox25.Name = "textBox25";
+            this.textBox25.Size = new System.Drawing.Size(227, 29);
+            this.textBox25.TabIndex = 346;
+            this.textBox25.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(33, 75);
+            this.label50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(90, 21);
+            this.label50.TabIndex = 345;
+            this.label50.Tag = "";
+            this.label50.Text = "Tray盘名称";
+            // 
+            // textBox24
+            // 
+            this.textBox24.Location = new System.Drawing.Point(138, 28);
+            this.textBox24.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox24.Name = "textBox24";
+            this.textBox24.Size = new System.Drawing.Size(227, 29);
+            this.textBox24.TabIndex = 344;
+            this.textBox24.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(33, 31);
+            this.label49.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(74, 21);
+            this.label49.TabIndex = 342;
+            this.label49.Tag = "";
+            this.label49.Text = "档案名称";
+            // 
+            // tabPage27
+            // 
+            this.tabPage27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage27.Location = new System.Drawing.Point(0, 40);
+            this.tabPage27.Name = "tabPage27";
+            this.tabPage27.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage27.TabIndex = 4;
+            this.tabPage27.Text = "测试机";
+            // 
+            // tabPage_bin
+            // 
+            this.tabPage_bin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage_bin.Controls.Add(this.panel11);
+            this.tabPage_bin.Controls.Add(this.panel10);
+            this.tabPage_bin.Controls.Add(this.panel3);
+            this.tabPage_bin.Controls.Add(this.label418);
+            this.tabPage_bin.Controls.Add(this.button_del2);
+            this.tabPage_bin.Controls.Add(this.button_add2);
+            this.tabPage_bin.Controls.Add(this.button_del1);
+            this.tabPage_bin.Controls.Add(this.button_add1);
+            this.tabPage_bin.Controls.Add(this.label417);
+            this.tabPage_bin.Controls.Add(this.comboBox10);
+            this.tabPage_bin.Controls.Add(this.textBox40);
+            this.tabPage_bin.Controls.Add(this.radioButton2);
+            this.tabPage_bin.Controls.Add(this.radioButton1);
+            this.tabPage_bin.Controls.Add(this.listBox5_3);
+            this.tabPage_bin.Controls.Add(this.listBox5_2);
+            this.tabPage_bin.Controls.Add(this.listBox4_3);
+            this.tabPage_bin.Controls.Add(this.listBox4_2);
+            this.tabPage_bin.Controls.Add(this.listBox3_3);
+            this.tabPage_bin.Controls.Add(this.listBox3_2);
+            this.tabPage_bin.Controls.Add(this.textBox_name5);
+            this.tabPage_bin.Controls.Add(this.textBox_name4);
+            this.tabPage_bin.Controls.Add(this.textBox_name3);
+            this.tabPage_bin.Controls.Add(this.textBox_name2);
+            this.tabPage_bin.Controls.Add(this.textBox_name1);
+            this.tabPage_bin.Controls.Add(this.label_color5);
+            this.tabPage_bin.Controls.Add(this.label_color4);
+            this.tabPage_bin.Controls.Add(this.label_color3);
+            this.tabPage_bin.Controls.Add(this.label_color2);
+            this.tabPage_bin.Controls.Add(this.label_color1);
+            this.tabPage_bin.Controls.Add(this.listBox5_1);
+            this.tabPage_bin.Controls.Add(this.listBox4_1);
+            this.tabPage_bin.Controls.Add(this.listBox3_1);
+            this.tabPage_bin.Controls.Add(this.listBox2);
+            this.tabPage_bin.Controls.Add(this.listBox1);
+            this.tabPage_bin.Location = new System.Drawing.Point(0, 40);
+            this.tabPage_bin.Name = "tabPage_bin";
+            this.tabPage_bin.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage_bin.TabIndex = 5;
+            this.tabPage_bin.Text = "分BIN";
+            // 
+            // tabPage26
+            // 
+            this.tabPage26.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage26.Controls.Add(this.textBox37);
+            this.tabPage26.Controls.Add(this.label414);
+            this.tabPage26.Controls.Add(this.textBox38);
+            this.tabPage26.Controls.Add(this.label415);
+            this.tabPage26.Controls.Add(this.textBox39);
+            this.tabPage26.Controls.Add(this.label416);
+            this.tabPage26.Controls.Add(this.pal_dout1_8);
+            this.tabPage26.Controls.Add(this.Btn_close9);
+            this.tabPage26.Controls.Add(this.Btn_open9);
+            this.tabPage26.Controls.Add(this.pal_dout121_128);
+            this.tabPage26.Controls.Add(this.Btn_open8);
+            this.tabPage26.Controls.Add(this.pal_dout57_64);
+            this.tabPage26.Controls.Add(this.Btn_close10);
+            this.tabPage26.Controls.Add(this.pal_dout89_96);
+            this.tabPage26.Controls.Add(this.Btn_close8);
+            this.tabPage26.Controls.Add(this.pal_dout25_32);
+            this.tabPage26.Controls.Add(this.Btn_open10);
+            this.tabPage26.Controls.Add(this.pal_dout105_112);
+            this.tabPage26.Controls.Add(this.Btn_open7);
+            this.tabPage26.Controls.Add(this.pal_dout41_48);
+            this.tabPage26.Controls.Add(this.Btn_close11);
+            this.tabPage26.Controls.Add(this.pal_dout73_80);
+            this.tabPage26.Controls.Add(this.Btn_close7);
+            this.tabPage26.Controls.Add(this.pal_dout9_16);
+            this.tabPage26.Controls.Add(this.Btn_open11);
+            this.tabPage26.Controls.Add(this.pal_dout113_120);
+            this.tabPage26.Controls.Add(this.Btn_open6);
+            this.tabPage26.Controls.Add(this.pal_dout49_56);
+            this.tabPage26.Controls.Add(this.Btn_close12);
+            this.tabPage26.Controls.Add(this.pal_dout81_88);
+            this.tabPage26.Controls.Add(this.Btn_close6);
+            this.tabPage26.Controls.Add(this.pal_dout17_24);
+            this.tabPage26.Controls.Add(this.Btn_open12);
+            this.tabPage26.Controls.Add(this.pal_dout97_104);
+            this.tabPage26.Controls.Add(this.Btn_open5);
+            this.tabPage26.Controls.Add(this.pal_dout33_40);
+            this.tabPage26.Controls.Add(this.Btn_close13);
+            this.tabPage26.Controls.Add(this.pal_dout65_72);
+            this.tabPage26.Controls.Add(this.Btn_close5);
+            this.tabPage26.Controls.Add(this.Btn_close1);
+            this.tabPage26.Controls.Add(this.Btn_open13);
+            this.tabPage26.Controls.Add(this.Btn_open4);
+            this.tabPage26.Controls.Add(this.Btn_open1);
+            this.tabPage26.Controls.Add(this.Btn_close14);
+            this.tabPage26.Controls.Add(this.Btn_open16);
+            this.tabPage26.Controls.Add(this.Btn_close4);
+            this.tabPage26.Controls.Add(this.Btn_close2);
+            this.tabPage26.Controls.Add(this.Btn_open14);
+            this.tabPage26.Controls.Add(this.Btn_close16);
+            this.tabPage26.Controls.Add(this.Btn_open3);
+            this.tabPage26.Controls.Add(this.Btn_open2);
+            this.tabPage26.Controls.Add(this.Btn_close15);
+            this.tabPage26.Controls.Add(this.Btn_open15);
+            this.tabPage26.Controls.Add(this.Btn_close3);
+            this.tabPage26.Location = new System.Drawing.Point(0, 40);
+            this.tabPage26.Name = "tabPage26";
+            this.tabPage26.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage26.TabIndex = 3;
+            this.tabPage26.Text = "开Site";
+            // 
+            // tabPage29
+            // 
+            this.tabPage29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage29.Location = new System.Drawing.Point(0, 40);
+            this.tabPage29.Name = "tabPage29";
+            this.tabPage29.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage29.TabIndex = 6;
+            this.tabPage29.Text = "点位偏移";
+            // 
+            // tabPage30
+            // 
+            this.tabPage30.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage30.Location = new System.Drawing.Point(0, 40);
+            this.tabPage30.Name = "tabPage30";
+            this.tabPage30.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage30.TabIndex = 7;
+            this.tabPage30.Text = "加热盘";
+            // 
+            // tabPage31
+            // 
+            this.tabPage31.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage31.Location = new System.Drawing.Point(0, 40);
+            this.tabPage31.Name = "tabPage31";
+            this.tabPage31.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage31.TabIndex = 8;
+            this.tabPage31.Text = "梭车";
+            // 
+            // panel4
+            // 
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.uiButton4);
+            this.panel4.Controls.Add(this.uiButton3);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel4.Location = new System.Drawing.Point(0, 842);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1425, 58);
+            this.panel4.TabIndex = 179;
+            // 
+            // uiButton4
+            // 
+            this.uiButton4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiButton4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton4.Location = new System.Drawing.Point(1181, 12);
+            this.uiButton4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton4.Name = "uiButton4";
+            this.uiButton4.RectColor = System.Drawing.Color.White;
+            this.uiButton4.Size = new System.Drawing.Size(98, 34);
+            this.uiButton4.TabIndex = 312;
+            this.uiButton4.Text = "恢复默认";
+            this.uiButton4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton3
+            // 
+            this.uiButton3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton3.Location = new System.Drawing.Point(1306, 12);
+            this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton3.Name = "uiButton3";
+            this.uiButton3.RectColor = System.Drawing.Color.White;
+            this.uiButton3.Size = new System.Drawing.Size(98, 34);
+            this.uiButton3.TabIndex = 311;
+            this.uiButton3.Text = "保存";
+            this.uiButton3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click_1);
+            // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Controls.Add(this.uiDataGridView1);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(464, 904);
+            this.panel1.TabIndex = 316;
+            // 
+            // uiDataGridView1
+            // 
+            this.uiDataGridView1.AllowUserToAddRows = false;
+            this.uiDataGridView1.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.uiDataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.uiDataGridView1.ColumnHeadersHeight = 32;
+            this.uiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            this.uiDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiDataGridView1.EnableHeadersVisualStyles = false;
+            this.uiDataGridView1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDataGridView1.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.uiDataGridView1.Location = new System.Drawing.Point(0, 0);
+            this.uiDataGridView1.Name = "uiDataGridView1";
+            this.uiDataGridView1.ReadOnly = true;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.uiDataGridView1.RowTemplate.Height = 23;
+            this.uiDataGridView1.SelectedIndex = -1;
+            this.uiDataGridView1.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView1.TabIndex = 0;
+            this.uiDataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView1_CellMouseClick);
+            // 
+            // panel5
+            // 
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel5.Controls.Add(this.uiButton1);
+            this.panel5.Controls.Add(this.uiButton8);
+            this.panel5.Controls.Add(this.uiButton11);
+            this.panel5.Controls.Add(this.uiButton12);
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel5.Location = new System.Drawing.Point(0, 842);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(460, 58);
+            this.panel5.TabIndex = 180;
+            // 
+            // uiButton1
+            // 
+            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton1.Location = new System.Drawing.Point(232, 12);
+            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.RectColor = System.Drawing.Color.White;
+            this.uiButton1.Size = new System.Drawing.Size(98, 34);
+            this.uiButton1.TabIndex = 316;
+            this.uiButton1.Text = "修改";
+            this.uiButton1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton8
+            // 
+            this.uiButton8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton8.Location = new System.Drawing.Point(125, 12);
+            this.uiButton8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton8.Name = "uiButton8";
+            this.uiButton8.RectColor = System.Drawing.Color.White;
+            this.uiButton8.Size = new System.Drawing.Size(98, 34);
+            this.uiButton8.TabIndex = 315;
+            this.uiButton8.Text = "复制";
+            this.uiButton8.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton11
+            // 
+            this.uiButton11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton11.Location = new System.Drawing.Point(339, 12);
+            this.uiButton11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton11.Name = "uiButton11";
+            this.uiButton11.RectColor = System.Drawing.Color.White;
+            this.uiButton11.Size = new System.Drawing.Size(98, 34);
+            this.uiButton11.TabIndex = 314;
+            this.uiButton11.Text = "删除";
+            this.uiButton11.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton12
+            // 
+            this.uiButton12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton12.Location = new System.Drawing.Point(18, 12);
+            this.uiButton12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton12.Name = "uiButton12";
+            this.uiButton12.RectColor = System.Drawing.Color.White;
+            this.uiButton12.Size = new System.Drawing.Size(98, 34);
+            this.uiButton12.TabIndex = 313;
+            this.uiButton12.Text = "新增";
+            this.uiButton12.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // tabPage32
+            // 
+            this.tabPage32.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage32.Controls.Add(this.panel9);
+            this.tabPage32.Controls.Add(this.panel8);
+            this.tabPage32.Location = new System.Drawing.Point(0, 40);
+            this.tabPage32.Name = "tabPage32";
+            this.tabPage32.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage32.TabIndex = 1;
+            this.tabPage32.Text = "Tray盘列表";
+            // 
+            // panel9
+            // 
+            this.panel9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel9.Controls.Add(this.uiTabControl7);
+            this.panel9.Controls.Add(this.panel6);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel9.Location = new System.Drawing.Point(464, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(1429, 904);
+            this.panel9.TabIndex = 183;
+            // 
+            // uiTabControl7
+            // 
+            this.uiTabControl7.Controls.Add(this.tabPage24);
+            this.uiTabControl7.Controls.Add(this.tabPage33);
+            this.uiTabControl7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiTabControl7.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.uiTabControl7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTabControl7.ItemSize = new System.Drawing.Size(150, 40);
+            this.uiTabControl7.Location = new System.Drawing.Point(0, 0);
+            this.uiTabControl7.MainPage = "";
+            this.uiTabControl7.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            this.uiTabControl7.Name = "uiTabControl7";
+            this.uiTabControl7.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.uiTabControl7.SelectedIndex = 0;
+            this.uiTabControl7.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl7.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.uiTabControl7.Style = Sunny.UI.UIStyle.Custom;
+            this.uiTabControl7.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiTabControl7.TabIndex = 179;
+            this.uiTabControl7.TabSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl7.TabSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl7.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl7.TabUnSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl7.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
+            this.uiTabControl7.TipsForeColor = System.Drawing.Color.Black;
+            this.uiTabControl7.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl7_Selecting);
+            // 
+            // tabPage24
+            // 
+            this.tabPage24.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage24.Controls.Add(this.textBox34);
+            this.tabPage24.Controls.Add(this.label352);
+            this.tabPage24.Controls.Add(this.textBox35);
+            this.tabPage24.Controls.Add(this.label353);
+            this.tabPage24.Controls.Add(this.textBox36);
+            this.tabPage24.Controls.Add(this.label354);
+            this.tabPage24.Controls.Add(this.textBox32);
+            this.tabPage24.Controls.Add(this.label350);
+            this.tabPage24.Controls.Add(this.textBox33);
+            this.tabPage24.Controls.Add(this.label351);
+            this.tabPage24.Controls.Add(this.textBox31);
+            this.tabPage24.Controls.Add(this.label349);
+            this.tabPage24.Controls.Add(this.textBox30);
+            this.tabPage24.Controls.Add(this.label348);
+            this.tabPage24.Controls.Add(this.textBox27);
+            this.tabPage24.Controls.Add(this.label345);
+            this.tabPage24.Controls.Add(this.textBox28);
+            this.tabPage24.Controls.Add(this.label346);
+            this.tabPage24.Controls.Add(this.textBox29);
+            this.tabPage24.Controls.Add(this.label347);
+            this.tabPage24.Location = new System.Drawing.Point(0, 40);
+            this.tabPage24.Name = "tabPage24";
+            this.tabPage24.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage24.TabIndex = 2;
+            this.tabPage24.Text = "Tray盘";
+            // 
+            // textBox34
+            // 
+            this.textBox34.Location = new System.Drawing.Point(140, 452);
+            this.textBox34.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox34.Name = "textBox34";
+            this.textBox34.Size = new System.Drawing.Size(227, 29);
+            this.textBox34.TabIndex = 368;
+            this.textBox34.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label352
+            // 
+            this.label352.AutoSize = true;
+            this.label352.Location = new System.Drawing.Point(35, 456);
+            this.label352.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label352.Name = "label352";
+            this.label352.Size = new System.Drawing.Size(61, 21);
+            this.label352.TabIndex = 367;
+            this.label352.Tag = "";
+            this.label352.Text = "(4)厚度";
+            // 
+            // textBox35
+            // 
+            this.textBox35.Location = new System.Drawing.Point(140, 405);
+            this.textBox35.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox35.Name = "textBox35";
+            this.textBox35.Size = new System.Drawing.Size(227, 29);
+            this.textBox35.TabIndex = 366;
+            this.textBox35.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label353
+            // 
+            this.label353.AutoSize = true;
+            this.label353.Location = new System.Drawing.Point(35, 409);
+            this.label353.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label353.Name = "label353";
+            this.label353.Size = new System.Drawing.Size(61, 21);
+            this.label353.TabIndex = 365;
+            this.label353.Tag = "";
+            this.label353.Text = "(3)长度";
+            // 
+            // textBox36
+            // 
+            this.textBox36.Location = new System.Drawing.Point(140, 358);
+            this.textBox36.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox36.Name = "textBox36";
+            this.textBox36.Size = new System.Drawing.Size(227, 29);
+            this.textBox36.TabIndex = 364;
+            this.textBox36.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label354
+            // 
+            this.label354.AutoSize = true;
+            this.label354.Location = new System.Drawing.Point(35, 362);
+            this.label354.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label354.Name = "label354";
+            this.label354.Size = new System.Drawing.Size(61, 21);
+            this.label354.TabIndex = 363;
+            this.label354.Tag = "";
+            this.label354.Text = "(5)宽度";
+            // 
+            // textBox32
+            // 
+            this.textBox32.Location = new System.Drawing.Point(140, 311);
+            this.textBox32.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox32.Name = "textBox32";
+            this.textBox32.Size = new System.Drawing.Size(227, 29);
+            this.textBox32.TabIndex = 362;
+            this.textBox32.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label350
+            // 
+            this.label350.AutoSize = true;
+            this.label350.Location = new System.Drawing.Point(35, 315);
+            this.label350.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label350.Name = "label350";
+            this.label350.Size = new System.Drawing.Size(84, 21);
+            this.label350.TabIndex = 361;
+            this.label350.Tag = "";
+            this.label350.Text = "(4)Y_Pitch";
+            // 
+            // textBox33
+            // 
+            this.textBox33.Location = new System.Drawing.Point(140, 264);
+            this.textBox33.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox33.Name = "textBox33";
+            this.textBox33.Size = new System.Drawing.Size(227, 29);
+            this.textBox33.TabIndex = 360;
+            this.textBox33.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label351
+            // 
+            this.label351.AutoSize = true;
+            this.label351.Location = new System.Drawing.Point(35, 268);
+            this.label351.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label351.Name = "label351";
+            this.label351.Size = new System.Drawing.Size(84, 21);
+            this.label351.TabIndex = 359;
+            this.label351.Tag = "";
+            this.label351.Text = "(3)X_Pitch";
+            // 
+            // textBox31
+            // 
+            this.textBox31.Location = new System.Drawing.Point(140, 217);
+            this.textBox31.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox31.Name = "textBox31";
+            this.textBox31.Size = new System.Drawing.Size(227, 29);
+            this.textBox31.TabIndex = 358;
+            this.textBox31.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label349
+            // 
+            this.label349.AutoSize = true;
+            this.label349.Location = new System.Drawing.Point(35, 221);
+            this.label349.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label349.Name = "label349";
+            this.label349.Size = new System.Drawing.Size(82, 21);
+            this.label349.TabIndex = 357;
+            this.label349.Tag = "";
+            this.label349.Text = "(2)Y_Start";
+            // 
+            // textBox30
+            // 
+            this.textBox30.Location = new System.Drawing.Point(140, 29);
+            this.textBox30.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox30.Name = "textBox30";
+            this.textBox30.Size = new System.Drawing.Size(227, 29);
+            this.textBox30.TabIndex = 356;
+            this.textBox30.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label348
+            // 
+            this.label348.AutoSize = true;
+            this.label348.Location = new System.Drawing.Point(35, 33);
+            this.label348.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label348.Name = "label348";
+            this.label348.Size = new System.Drawing.Size(90, 21);
+            this.label348.TabIndex = 355;
+            this.label348.Tag = "";
+            this.label348.Text = "Tray盘名称";
+            // 
+            // textBox27
+            // 
+            this.textBox27.Location = new System.Drawing.Point(140, 170);
+            this.textBox27.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox27.Name = "textBox27";
+            this.textBox27.Size = new System.Drawing.Size(227, 29);
+            this.textBox27.TabIndex = 354;
+            this.textBox27.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label345
+            // 
+            this.label345.AutoSize = true;
+            this.label345.Location = new System.Drawing.Point(35, 174);
+            this.label345.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label345.Name = "label345";
+            this.label345.Size = new System.Drawing.Size(82, 21);
+            this.label345.TabIndex = 353;
+            this.label345.Tag = "";
+            this.label345.Text = "(1)X_Start";
+            // 
+            // textBox28
+            // 
+            this.textBox28.Location = new System.Drawing.Point(140, 123);
+            this.textBox28.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox28.Name = "textBox28";
+            this.textBox28.Size = new System.Drawing.Size(227, 29);
+            this.textBox28.TabIndex = 352;
+            this.textBox28.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label346
+            // 
+            this.label346.AutoSize = true;
+            this.label346.Location = new System.Drawing.Point(35, 127);
+            this.label346.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label346.Name = "label346";
+            this.label346.Size = new System.Drawing.Size(52, 21);
+            this.label346.TabIndex = 351;
+            this.label346.Tag = "";
+            this.label346.Text = "Y数量";
+            // 
+            // textBox29
+            // 
+            this.textBox29.Location = new System.Drawing.Point(140, 76);
+            this.textBox29.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox29.Name = "textBox29";
+            this.textBox29.Size = new System.Drawing.Size(227, 29);
+            this.textBox29.TabIndex = 350;
+            this.textBox29.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label347
+            // 
+            this.label347.AutoSize = true;
+            this.label347.Location = new System.Drawing.Point(35, 80);
+            this.label347.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label347.Name = "label347";
+            this.label347.Size = new System.Drawing.Size(52, 21);
+            this.label347.TabIndex = 349;
+            this.label347.Tag = "";
+            this.label347.Text = "X数量";
+            // 
+            // tabPage33
+            // 
+            this.tabPage33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage33.Location = new System.Drawing.Point(0, 40);
+            this.tabPage33.Name = "tabPage33";
+            this.tabPage33.Size = new System.Drawing.Size(200, 60);
+            this.tabPage33.TabIndex = 4;
+            this.tabPage33.Text = "取放设定";
+            // 
+            // panel6
+            // 
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel6.Controls.Add(this.uiButton15);
+            this.panel6.Controls.Add(this.uiButton16);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel6.Location = new System.Drawing.Point(0, 842);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(1425, 58);
+            this.panel6.TabIndex = 180;
+            // 
+            // uiButton15
+            // 
+            this.uiButton15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiButton15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton15.Location = new System.Drawing.Point(1181, 12);
+            this.uiButton15.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton15.Name = "uiButton15";
+            this.uiButton15.RectColor = System.Drawing.Color.White;
+            this.uiButton15.Size = new System.Drawing.Size(98, 34);
+            this.uiButton15.TabIndex = 312;
+            this.uiButton15.Text = "恢复默认";
+            this.uiButton15.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton16
+            // 
+            this.uiButton16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiButton16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton16.Location = new System.Drawing.Point(1306, 12);
+            this.uiButton16.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton16.Name = "uiButton16";
+            this.uiButton16.RectColor = System.Drawing.Color.White;
+            this.uiButton16.Size = new System.Drawing.Size(98, 34);
+            this.uiButton16.TabIndex = 311;
+            this.uiButton16.Text = "保存";
+            this.uiButton16.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // panel8
+            // 
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel8.Controls.Add(this.uiDataGridView2);
+            this.panel8.Controls.Add(this.panel7);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel8.Location = new System.Drawing.Point(0, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(464, 904);
+            this.panel8.TabIndex = 182;
+            // 
+            // uiDataGridView2
+            // 
+            this.uiDataGridView2.AllowUserToAddRows = false;
+            this.uiDataGridView2.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            this.uiDataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiDataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            this.uiDataGridView2.ColumnHeadersHeight = 32;
+            this.uiDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
+            this.uiDataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiDataGridView2.EnableHeadersVisualStyles = false;
+            this.uiDataGridView2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDataGridView2.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            this.uiDataGridView2.Location = new System.Drawing.Point(0, 0);
+            this.uiDataGridView2.Name = "uiDataGridView2";
+            this.uiDataGridView2.ReadOnly = true;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle10;
+            this.uiDataGridView2.RowTemplate.Height = 23;
+            this.uiDataGridView2.SelectedIndex = -1;
+            this.uiDataGridView2.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView2.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView2.TabIndex = 1;
+            this.uiDataGridView2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView2_CellMouseClick);
+            // 
+            // panel7
+            // 
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel7.Controls.Add(this.uiButton2);
+            this.panel7.Controls.Add(this.uiButton7);
+            this.panel7.Controls.Add(this.uiButton19);
+            this.panel7.Controls.Add(this.uiButton20);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel7.Location = new System.Drawing.Point(0, 842);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(460, 58);
+            this.panel7.TabIndex = 181;
+            // 
+            // uiButton2
+            // 
+            this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton2.Location = new System.Drawing.Point(232, 12);
+            this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton2.Name = "uiButton2";
+            this.uiButton2.RectColor = System.Drawing.Color.White;
+            this.uiButton2.Size = new System.Drawing.Size(98, 34);
+            this.uiButton2.TabIndex = 320;
+            this.uiButton2.Text = "修改";
+            this.uiButton2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton7
+            // 
+            this.uiButton7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton7.Location = new System.Drawing.Point(125, 12);
+            this.uiButton7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton7.Name = "uiButton7";
+            this.uiButton7.RectColor = System.Drawing.Color.White;
+            this.uiButton7.Size = new System.Drawing.Size(98, 34);
+            this.uiButton7.TabIndex = 319;
+            this.uiButton7.Text = "复制";
+            this.uiButton7.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton19
+            // 
+            this.uiButton19.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton19.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton19.Location = new System.Drawing.Point(339, 12);
+            this.uiButton19.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton19.Name = "uiButton19";
+            this.uiButton19.RectColor = System.Drawing.Color.White;
+            this.uiButton19.Size = new System.Drawing.Size(98, 34);
+            this.uiButton19.TabIndex = 318;
+            this.uiButton19.Text = "删除";
+            this.uiButton19.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // uiButton20
+            // 
+            this.uiButton20.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton20.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton20.Location = new System.Drawing.Point(18, 12);
+            this.uiButton20.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton20.Name = "uiButton20";
+            this.uiButton20.RectColor = System.Drawing.Color.White;
+            this.uiButton20.Size = new System.Drawing.Size(98, 34);
+            this.uiButton20.TabIndex = 317;
+            this.uiButton20.Text = "新增";
+            this.uiButton20.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // pal_dout1_8
+            // 
+            this.pal_dout1_8.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout1_8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout1_8.Controls.Add(this.lbl_dout1);
+            this.pal_dout1_8.Controls.Add(this.label355);
+            this.pal_dout1_8.Controls.Add(this.lbl_dout8);
+            this.pal_dout1_8.Controls.Add(this.lbl_dout7);
+            this.pal_dout1_8.Controls.Add(this.lbl_dout6);
+            this.pal_dout1_8.Controls.Add(this.lbl_dout5);
+            this.pal_dout1_8.Controls.Add(this.lbl_dout4);
+            this.pal_dout1_8.Controls.Add(this.lbl_dout3);
+            this.pal_dout1_8.Controls.Add(this.lbl_dout2);
+            this.pal_dout1_8.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout1_8.Location = new System.Drawing.Point(35, 180);
+            this.pal_dout1_8.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout1_8.Name = "pal_dout1_8";
+            this.pal_dout1_8.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout1_8.TabIndex = 143;
+            // 
+            // lbl_dout1
+            // 
+            this.lbl_dout1.AutoSize = true;
+            this.lbl_dout1.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout1.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout1.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout1.Name = "lbl_dout1";
+            this.lbl_dout1.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout1.TabIndex = 0;
+            this.lbl_dout1.Text = "1";
+            this.lbl_dout1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label355
+            // 
+            this.label355.BackColor = System.Drawing.Color.Black;
+            this.label355.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label355.Location = new System.Drawing.Point(0, 0);
+            this.label355.Margin = new System.Windows.Forms.Padding(2);
+            this.label355.Name = "label355";
+            this.label355.Size = new System.Drawing.Size(11, 12);
+            this.label355.TabIndex = 143;
+            // 
+            // lbl_dout8
+            // 
+            this.lbl_dout8.AutoSize = true;
+            this.lbl_dout8.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout8.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout8.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout8.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout8.Name = "lbl_dout8";
+            this.lbl_dout8.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout8.TabIndex = 7;
+            this.lbl_dout8.Text = "8";
+            this.lbl_dout8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout7
+            // 
+            this.lbl_dout7.AutoSize = true;
+            this.lbl_dout7.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout7.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout7.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout7.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout7.Name = "lbl_dout7";
+            this.lbl_dout7.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout7.TabIndex = 6;
+            this.lbl_dout7.Text = "7";
+            this.lbl_dout7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout6
+            // 
+            this.lbl_dout6.AutoSize = true;
+            this.lbl_dout6.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout6.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout6.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout6.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout6.Name = "lbl_dout6";
+            this.lbl_dout6.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout6.TabIndex = 5;
+            this.lbl_dout6.Text = "6";
+            this.lbl_dout6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout5
+            // 
+            this.lbl_dout5.AutoSize = true;
+            this.lbl_dout5.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout5.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout5.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout5.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout5.Name = "lbl_dout5";
+            this.lbl_dout5.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout5.TabIndex = 4;
+            this.lbl_dout5.Text = "5";
+            this.lbl_dout5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout4
+            // 
+            this.lbl_dout4.AutoSize = true;
+            this.lbl_dout4.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout4.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout4.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout4.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout4.Name = "lbl_dout4";
+            this.lbl_dout4.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout4.TabIndex = 3;
+            this.lbl_dout4.Text = "4";
+            this.lbl_dout4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout3
+            // 
+            this.lbl_dout3.AutoSize = true;
+            this.lbl_dout3.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout3.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout3.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout3.Name = "lbl_dout3";
+            this.lbl_dout3.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout3.TabIndex = 2;
+            this.lbl_dout3.Text = "3";
+            this.lbl_dout3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout2
+            // 
+            this.lbl_dout2.AutoSize = true;
+            this.lbl_dout2.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout2.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout2.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout2.Name = "lbl_dout2";
+            this.lbl_dout2.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout2.TabIndex = 1;
+            this.lbl_dout2.Text = "2";
+            this.lbl_dout2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close9
+            // 
+            this.Btn_close9.Enabled = false;
+            this.Btn_close9.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close9.Location = new System.Drawing.Point(659, 308);
+            this.Btn_close9.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close9.Name = "Btn_close9";
+            this.Btn_close9.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close9.TabIndex = 175;
+            this.Btn_close9.Text = "关闭";
+            this.Btn_close9.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open9
+            // 
+            this.Btn_open9.Enabled = false;
+            this.Btn_open9.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open9.Location = new System.Drawing.Point(659, 339);
+            this.Btn_open9.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open9.Name = "Btn_open9";
+            this.Btn_open9.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open9.TabIndex = 176;
+            this.Btn_open9.Text = "打开";
+            this.Btn_open9.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout121_128
+            // 
+            this.pal_dout121_128.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout121_128.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout121_128.Controls.Add(this.lbl_dout121);
+            this.pal_dout121_128.Controls.Add(this.label356);
+            this.pal_dout121_128.Controls.Add(this.lbl_dout128);
+            this.pal_dout121_128.Controls.Add(this.lbl_dout127);
+            this.pal_dout121_128.Controls.Add(this.lbl_dout126);
+            this.pal_dout121_128.Controls.Add(this.lbl_dout125);
+            this.pal_dout121_128.Controls.Add(this.lbl_dout124);
+            this.pal_dout121_128.Controls.Add(this.lbl_dout123);
+            this.pal_dout121_128.Controls.Add(this.lbl_dout122);
+            this.pal_dout121_128.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.pal_dout121_128.Location = new System.Drawing.Point(1205, 180);
+            this.pal_dout121_128.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout121_128.Name = "pal_dout121_128";
+            this.pal_dout121_128.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout121_128.TabIndex = 158;
+            // 
+            // lbl_dout121
+            // 
+            this.lbl_dout121.AutoSize = true;
+            this.lbl_dout121.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout121.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout121.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout121.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout121.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout121.Name = "lbl_dout121";
+            this.lbl_dout121.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout121.TabIndex = 0;
+            this.lbl_dout121.Text = "1";
+            this.lbl_dout121.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label356
+            // 
+            this.label356.BackColor = System.Drawing.Color.Black;
+            this.label356.Location = new System.Drawing.Point(0, -1);
+            this.label356.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label356.Name = "label356";
+            this.label356.Size = new System.Drawing.Size(11, 12);
+            this.label356.TabIndex = 158;
+            // 
+            // lbl_dout128
+            // 
+            this.lbl_dout128.AutoSize = true;
+            this.lbl_dout128.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout128.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout128.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout128.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout128.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout128.Name = "lbl_dout128";
+            this.lbl_dout128.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout128.TabIndex = 7;
+            this.lbl_dout128.Text = "8";
+            this.lbl_dout128.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout127
+            // 
+            this.lbl_dout127.AutoSize = true;
+            this.lbl_dout127.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout127.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout127.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout127.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout127.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout127.Name = "lbl_dout127";
+            this.lbl_dout127.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout127.TabIndex = 6;
+            this.lbl_dout127.Text = "7";
+            this.lbl_dout127.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout126
+            // 
+            this.lbl_dout126.AutoSize = true;
+            this.lbl_dout126.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout126.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout126.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout126.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout126.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout126.Name = "lbl_dout126";
+            this.lbl_dout126.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout126.TabIndex = 5;
+            this.lbl_dout126.Text = "6";
+            this.lbl_dout126.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout125
+            // 
+            this.lbl_dout125.AutoSize = true;
+            this.lbl_dout125.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout125.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout125.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout125.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout125.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout125.Name = "lbl_dout125";
+            this.lbl_dout125.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout125.TabIndex = 4;
+            this.lbl_dout125.Text = "5";
+            this.lbl_dout125.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout124
+            // 
+            this.lbl_dout124.AutoSize = true;
+            this.lbl_dout124.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout124.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout124.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout124.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout124.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout124.Name = "lbl_dout124";
+            this.lbl_dout124.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout124.TabIndex = 3;
+            this.lbl_dout124.Text = "4";
+            this.lbl_dout124.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout123
+            // 
+            this.lbl_dout123.AutoSize = true;
+            this.lbl_dout123.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout123.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout123.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout123.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout123.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout123.Name = "lbl_dout123";
+            this.lbl_dout123.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout123.TabIndex = 2;
+            this.lbl_dout123.Text = "3";
+            this.lbl_dout123.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout122
+            // 
+            this.lbl_dout122.AutoSize = true;
+            this.lbl_dout122.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout122.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout122.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout122.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout122.Margin = new System.Windows.Forms.Padding(2);
+            this.lbl_dout122.Name = "lbl_dout122";
+            this.lbl_dout122.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout122.TabIndex = 1;
+            this.lbl_dout122.Text = "2";
+            this.lbl_dout122.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_open8
+            // 
+            this.Btn_open8.Enabled = false;
+            this.Btn_open8.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open8.Location = new System.Drawing.Point(581, 339);
+            this.Btn_open8.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open8.Name = "Btn_open8";
+            this.Btn_open8.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open8.TabIndex = 174;
+            this.Btn_open8.Text = "打开";
+            this.Btn_open8.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout57_64
+            // 
+            this.pal_dout57_64.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout57_64.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout57_64.Controls.Add(this.lbl_dout57);
+            this.pal_dout57_64.Controls.Add(this.label357);
+            this.pal_dout57_64.Controls.Add(this.lbl_dout64);
+            this.pal_dout57_64.Controls.Add(this.lbl_dout63);
+            this.pal_dout57_64.Controls.Add(this.lbl_dout62);
+            this.pal_dout57_64.Controls.Add(this.lbl_dout61);
+            this.pal_dout57_64.Controls.Add(this.lbl_dout60);
+            this.pal_dout57_64.Controls.Add(this.lbl_dout59);
+            this.pal_dout57_64.Controls.Add(this.lbl_dout58);
+            this.pal_dout57_64.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout57_64.Location = new System.Drawing.Point(581, 180);
+            this.pal_dout57_64.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout57_64.Name = "pal_dout57_64";
+            this.pal_dout57_64.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout57_64.TabIndex = 150;
+            // 
+            // lbl_dout57
+            // 
+            this.lbl_dout57.AutoSize = true;
+            this.lbl_dout57.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout57.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout57.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout57.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout57.Name = "lbl_dout57";
+            this.lbl_dout57.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout57.TabIndex = 0;
+            this.lbl_dout57.Text = "1";
+            this.lbl_dout57.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label357
+            // 
+            this.label357.BackColor = System.Drawing.Color.Black;
+            this.label357.Location = new System.Drawing.Point(0, -1);
+            this.label357.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label357.Name = "label357";
+            this.label357.Size = new System.Drawing.Size(11, 12);
+            this.label357.TabIndex = 150;
+            // 
+            // lbl_dout64
+            // 
+            this.lbl_dout64.AutoSize = true;
+            this.lbl_dout64.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout64.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout64.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout64.Location = new System.Drawing.Point(29, 93);
+            this.lbl_dout64.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout64.Name = "lbl_dout64";
+            this.lbl_dout64.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout64.TabIndex = 7;
+            this.lbl_dout64.Text = "8";
+            this.lbl_dout64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout63
+            // 
+            this.lbl_dout63.AutoSize = true;
+            this.lbl_dout63.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout63.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout63.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout63.Location = new System.Drawing.Point(29, 63);
+            this.lbl_dout63.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout63.Name = "lbl_dout63";
+            this.lbl_dout63.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout63.TabIndex = 6;
+            this.lbl_dout63.Text = "7";
+            this.lbl_dout63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout62
+            // 
+            this.lbl_dout62.AutoSize = true;
+            this.lbl_dout62.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout62.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout62.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout62.Location = new System.Drawing.Point(30, 32);
+            this.lbl_dout62.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout62.Name = "lbl_dout62";
+            this.lbl_dout62.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout62.TabIndex = 5;
+            this.lbl_dout62.Text = "6";
+            this.lbl_dout62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout61
+            // 
+            this.lbl_dout61.AutoSize = true;
+            this.lbl_dout61.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout61.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout61.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout61.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout61.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout61.Name = "lbl_dout61";
+            this.lbl_dout61.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout61.TabIndex = 4;
+            this.lbl_dout61.Text = "5";
+            this.lbl_dout61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout60
+            // 
+            this.lbl_dout60.AutoSize = true;
+            this.lbl_dout60.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout60.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout60.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout60.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout60.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout60.Name = "lbl_dout60";
+            this.lbl_dout60.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout60.TabIndex = 3;
+            this.lbl_dout60.Text = "4";
+            this.lbl_dout60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout59
+            // 
+            this.lbl_dout59.AutoSize = true;
+            this.lbl_dout59.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout59.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout59.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout59.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout59.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout59.Name = "lbl_dout59";
+            this.lbl_dout59.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout59.TabIndex = 2;
+            this.lbl_dout59.Text = "3";
+            this.lbl_dout59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout58
+            // 
+            this.lbl_dout58.AutoSize = true;
+            this.lbl_dout58.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout58.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout58.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout58.Location = new System.Drawing.Point(3, 32);
+            this.lbl_dout58.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout58.Name = "lbl_dout58";
+            this.lbl_dout58.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout58.TabIndex = 1;
+            this.lbl_dout58.Text = "2";
+            this.lbl_dout58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close10
+            // 
+            this.Btn_close10.Enabled = false;
+            this.Btn_close10.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close10.Location = new System.Drawing.Point(737, 308);
+            this.Btn_close10.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close10.Name = "Btn_close10";
+            this.Btn_close10.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close10.TabIndex = 177;
+            this.Btn_close10.Text = "关闭";
+            this.Btn_close10.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout89_96
+            // 
+            this.pal_dout89_96.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout89_96.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout89_96.Controls.Add(this.lbl_dout89);
+            this.pal_dout89_96.Controls.Add(this.label358);
+            this.pal_dout89_96.Controls.Add(this.lbl_dout96);
+            this.pal_dout89_96.Controls.Add(this.lbl_dout95);
+            this.pal_dout89_96.Controls.Add(this.lbl_dout94);
+            this.pal_dout89_96.Controls.Add(this.lbl_dout93);
+            this.pal_dout89_96.Controls.Add(this.lbl_dout92);
+            this.pal_dout89_96.Controls.Add(this.lbl_dout91);
+            this.pal_dout89_96.Controls.Add(this.lbl_dout90);
+            this.pal_dout89_96.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout89_96.Location = new System.Drawing.Point(893, 180);
+            this.pal_dout89_96.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout89_96.Name = "pal_dout89_96";
+            this.pal_dout89_96.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout89_96.TabIndex = 154;
+            // 
+            // lbl_dout89
+            // 
+            this.lbl_dout89.AutoSize = true;
+            this.lbl_dout89.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout89.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout89.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout89.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout89.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout89.Name = "lbl_dout89";
+            this.lbl_dout89.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout89.TabIndex = 0;
+            this.lbl_dout89.Text = "1";
+            this.lbl_dout89.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label358
+            // 
+            this.label358.BackColor = System.Drawing.Color.Black;
+            this.label358.Location = new System.Drawing.Point(0, -1);
+            this.label358.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label358.Name = "label358";
+            this.label358.Size = new System.Drawing.Size(11, 12);
+            this.label358.TabIndex = 154;
+            // 
+            // lbl_dout96
+            // 
+            this.lbl_dout96.AutoSize = true;
+            this.lbl_dout96.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout96.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout96.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout96.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout96.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout96.Name = "lbl_dout96";
+            this.lbl_dout96.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout96.TabIndex = 7;
+            this.lbl_dout96.Text = "8";
+            this.lbl_dout96.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout95
+            // 
+            this.lbl_dout95.AutoSize = true;
+            this.lbl_dout95.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout95.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout95.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout95.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout95.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout95.Name = "lbl_dout95";
+            this.lbl_dout95.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout95.TabIndex = 6;
+            this.lbl_dout95.Text = "7";
+            this.lbl_dout95.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout94
+            // 
+            this.lbl_dout94.AutoSize = true;
+            this.lbl_dout94.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout94.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout94.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout94.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout94.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout94.Name = "lbl_dout94";
+            this.lbl_dout94.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout94.TabIndex = 5;
+            this.lbl_dout94.Text = "6";
+            this.lbl_dout94.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout93
+            // 
+            this.lbl_dout93.AutoSize = true;
+            this.lbl_dout93.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout93.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout93.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout93.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout93.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout93.Name = "lbl_dout93";
+            this.lbl_dout93.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout93.TabIndex = 4;
+            this.lbl_dout93.Text = "5";
+            this.lbl_dout93.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout92
+            // 
+            this.lbl_dout92.AutoSize = true;
+            this.lbl_dout92.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout92.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout92.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout92.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout92.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout92.Name = "lbl_dout92";
+            this.lbl_dout92.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout92.TabIndex = 3;
+            this.lbl_dout92.Text = "4";
+            this.lbl_dout92.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout91
+            // 
+            this.lbl_dout91.AutoSize = true;
+            this.lbl_dout91.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout91.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout91.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout91.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout91.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout91.Name = "lbl_dout91";
+            this.lbl_dout91.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout91.TabIndex = 2;
+            this.lbl_dout91.Text = "3";
+            this.lbl_dout91.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout90
+            // 
+            this.lbl_dout90.AutoSize = true;
+            this.lbl_dout90.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout90.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout90.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout90.Location = new System.Drawing.Point(3, 32);
+            this.lbl_dout90.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout90.Name = "lbl_dout90";
+            this.lbl_dout90.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout90.TabIndex = 1;
+            this.lbl_dout90.Text = "2";
+            this.lbl_dout90.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close8
+            // 
+            this.Btn_close8.Enabled = false;
+            this.Btn_close8.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close8.Location = new System.Drawing.Point(581, 308);
+            this.Btn_close8.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close8.Name = "Btn_close8";
+            this.Btn_close8.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close8.TabIndex = 173;
+            this.Btn_close8.Text = "关闭";
+            this.Btn_close8.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout25_32
+            // 
+            this.pal_dout25_32.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout25_32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout25_32.Controls.Add(this.lbl_dout25);
+            this.pal_dout25_32.Controls.Add(this.label368);
+            this.pal_dout25_32.Controls.Add(this.lbl_dout32);
+            this.pal_dout25_32.Controls.Add(this.lbl_dout31);
+            this.pal_dout25_32.Controls.Add(this.lbl_dout30);
+            this.pal_dout25_32.Controls.Add(this.lbl_dout29);
+            this.pal_dout25_32.Controls.Add(this.lbl_dout28);
+            this.pal_dout25_32.Controls.Add(this.lbl_dout27);
+            this.pal_dout25_32.Controls.Add(this.lbl_dout26);
+            this.pal_dout25_32.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout25_32.Location = new System.Drawing.Point(269, 180);
+            this.pal_dout25_32.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout25_32.Name = "pal_dout25_32";
+            this.pal_dout25_32.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout25_32.TabIndex = 146;
+            // 
+            // lbl_dout25
+            // 
+            this.lbl_dout25.AutoSize = true;
+            this.lbl_dout25.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout25.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout25.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout25.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout25.Name = "lbl_dout25";
+            this.lbl_dout25.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout25.TabIndex = 0;
+            this.lbl_dout25.Text = "1";
+            this.lbl_dout25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label368
+            // 
+            this.label368.BackColor = System.Drawing.Color.Black;
+            this.label368.Location = new System.Drawing.Point(0, -1);
+            this.label368.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label368.Name = "label368";
+            this.label368.Size = new System.Drawing.Size(11, 12);
+            this.label368.TabIndex = 146;
+            // 
+            // lbl_dout32
+            // 
+            this.lbl_dout32.AutoSize = true;
+            this.lbl_dout32.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout32.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout32.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout32.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout32.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout32.Name = "lbl_dout32";
+            this.lbl_dout32.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout32.TabIndex = 7;
+            this.lbl_dout32.Text = "8";
+            this.lbl_dout32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout31
+            // 
+            this.lbl_dout31.AutoSize = true;
+            this.lbl_dout31.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout31.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout31.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout31.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout31.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout31.Name = "lbl_dout31";
+            this.lbl_dout31.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout31.TabIndex = 6;
+            this.lbl_dout31.Text = "7";
+            this.lbl_dout31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout30
+            // 
+            this.lbl_dout30.AutoSize = true;
+            this.lbl_dout30.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout30.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout30.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout30.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout30.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout30.Name = "lbl_dout30";
+            this.lbl_dout30.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout30.TabIndex = 5;
+            this.lbl_dout30.Text = "6";
+            this.lbl_dout30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout29
+            // 
+            this.lbl_dout29.AutoSize = true;
+            this.lbl_dout29.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout29.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout29.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout29.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout29.Name = "lbl_dout29";
+            this.lbl_dout29.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout29.TabIndex = 4;
+            this.lbl_dout29.Text = "5";
+            this.lbl_dout29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout28
+            // 
+            this.lbl_dout28.AutoSize = true;
+            this.lbl_dout28.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout28.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout28.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout28.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout28.Name = "lbl_dout28";
+            this.lbl_dout28.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout28.TabIndex = 3;
+            this.lbl_dout28.Text = "4";
+            this.lbl_dout28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout27
+            // 
+            this.lbl_dout27.AutoSize = true;
+            this.lbl_dout27.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout27.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout27.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout27.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout27.Name = "lbl_dout27";
+            this.lbl_dout27.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout27.TabIndex = 2;
+            this.lbl_dout27.Text = "3";
+            this.lbl_dout27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout26
+            // 
+            this.lbl_dout26.AutoSize = true;
+            this.lbl_dout26.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout26.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout26.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout26.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout26.Name = "lbl_dout26";
+            this.lbl_dout26.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout26.TabIndex = 1;
+            this.lbl_dout26.Text = "2";
+            this.lbl_dout26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_open10
+            // 
+            this.Btn_open10.Enabled = false;
+            this.Btn_open10.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open10.Location = new System.Drawing.Point(737, 339);
+            this.Btn_open10.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open10.Name = "Btn_open10";
+            this.Btn_open10.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open10.TabIndex = 178;
+            this.Btn_open10.Text = "打开";
+            this.Btn_open10.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout105_112
+            // 
+            this.pal_dout105_112.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout105_112.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout105_112.Controls.Add(this.lbl_dout105);
+            this.pal_dout105_112.Controls.Add(this.label369);
+            this.pal_dout105_112.Controls.Add(this.lbl_dout112);
+            this.pal_dout105_112.Controls.Add(this.lbl_dout111);
+            this.pal_dout105_112.Controls.Add(this.lbl_dout110);
+            this.pal_dout105_112.Controls.Add(this.lbl_dout109);
+            this.pal_dout105_112.Controls.Add(this.lbl_dout108);
+            this.pal_dout105_112.Controls.Add(this.lbl_dout107);
+            this.pal_dout105_112.Controls.Add(this.lbl_dout106);
+            this.pal_dout105_112.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout105_112.Location = new System.Drawing.Point(1049, 180);
+            this.pal_dout105_112.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout105_112.Name = "pal_dout105_112";
+            this.pal_dout105_112.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout105_112.TabIndex = 156;
+            // 
+            // lbl_dout105
+            // 
+            this.lbl_dout105.AutoSize = true;
+            this.lbl_dout105.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout105.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout105.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout105.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout105.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout105.Name = "lbl_dout105";
+            this.lbl_dout105.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout105.TabIndex = 0;
+            this.lbl_dout105.Text = "1";
+            this.lbl_dout105.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label369
+            // 
+            this.label369.BackColor = System.Drawing.Color.Black;
+            this.label369.Location = new System.Drawing.Point(0, -1);
+            this.label369.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label369.Name = "label369";
+            this.label369.Size = new System.Drawing.Size(11, 12);
+            this.label369.TabIndex = 156;
+            // 
+            // lbl_dout112
+            // 
+            this.lbl_dout112.AutoSize = true;
+            this.lbl_dout112.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout112.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout112.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout112.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout112.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout112.Name = "lbl_dout112";
+            this.lbl_dout112.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout112.TabIndex = 7;
+            this.lbl_dout112.Text = "8";
+            this.lbl_dout112.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout111
+            // 
+            this.lbl_dout111.AutoSize = true;
+            this.lbl_dout111.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout111.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout111.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout111.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout111.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout111.Name = "lbl_dout111";
+            this.lbl_dout111.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout111.TabIndex = 6;
+            this.lbl_dout111.Text = "7";
+            this.lbl_dout111.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout110
+            // 
+            this.lbl_dout110.AutoSize = true;
+            this.lbl_dout110.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout110.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout110.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout110.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout110.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout110.Name = "lbl_dout110";
+            this.lbl_dout110.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout110.TabIndex = 5;
+            this.lbl_dout110.Text = "6";
+            this.lbl_dout110.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout109
+            // 
+            this.lbl_dout109.AutoSize = true;
+            this.lbl_dout109.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout109.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout109.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout109.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout109.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout109.Name = "lbl_dout109";
+            this.lbl_dout109.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout109.TabIndex = 4;
+            this.lbl_dout109.Text = "5";
+            this.lbl_dout109.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout108
+            // 
+            this.lbl_dout108.AutoSize = true;
+            this.lbl_dout108.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout108.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout108.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout108.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout108.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout108.Name = "lbl_dout108";
+            this.lbl_dout108.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout108.TabIndex = 3;
+            this.lbl_dout108.Text = "4";
+            this.lbl_dout108.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout107
+            // 
+            this.lbl_dout107.AutoSize = true;
+            this.lbl_dout107.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout107.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout107.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout107.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout107.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout107.Name = "lbl_dout107";
+            this.lbl_dout107.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout107.TabIndex = 2;
+            this.lbl_dout107.Text = "3";
+            this.lbl_dout107.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout106
+            // 
+            this.lbl_dout106.AutoSize = true;
+            this.lbl_dout106.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout106.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout106.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout106.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout106.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout106.Name = "lbl_dout106";
+            this.lbl_dout106.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout106.TabIndex = 1;
+            this.lbl_dout106.Text = "2";
+            this.lbl_dout106.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_open7
+            // 
+            this.Btn_open7.Enabled = false;
+            this.Btn_open7.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open7.Location = new System.Drawing.Point(503, 339);
+            this.Btn_open7.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open7.Name = "Btn_open7";
+            this.Btn_open7.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open7.TabIndex = 172;
+            this.Btn_open7.Text = "打开";
+            this.Btn_open7.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout41_48
+            // 
+            this.pal_dout41_48.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout41_48.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout41_48.Controls.Add(this.lbl_dout41);
+            this.pal_dout41_48.Controls.Add(this.label370);
+            this.pal_dout41_48.Controls.Add(this.lbl_dout48);
+            this.pal_dout41_48.Controls.Add(this.lbl_dout47);
+            this.pal_dout41_48.Controls.Add(this.lbl_dout46);
+            this.pal_dout41_48.Controls.Add(this.lbl_dout45);
+            this.pal_dout41_48.Controls.Add(this.lbl_dout44);
+            this.pal_dout41_48.Controls.Add(this.lbl_dout43);
+            this.pal_dout41_48.Controls.Add(this.lbl_dout42);
+            this.pal_dout41_48.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout41_48.Location = new System.Drawing.Point(425, 180);
+            this.pal_dout41_48.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout41_48.Name = "pal_dout41_48";
+            this.pal_dout41_48.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout41_48.TabIndex = 148;
+            // 
+            // lbl_dout41
+            // 
+            this.lbl_dout41.AutoSize = true;
+            this.lbl_dout41.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout41.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout41.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout41.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout41.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout41.Name = "lbl_dout41";
+            this.lbl_dout41.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout41.TabIndex = 0;
+            this.lbl_dout41.Text = "1";
+            this.lbl_dout41.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label370
+            // 
+            this.label370.BackColor = System.Drawing.Color.Black;
+            this.label370.Location = new System.Drawing.Point(0, -1);
+            this.label370.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label370.Name = "label370";
+            this.label370.Size = new System.Drawing.Size(11, 12);
+            this.label370.TabIndex = 148;
+            // 
+            // lbl_dout48
+            // 
+            this.lbl_dout48.AutoSize = true;
+            this.lbl_dout48.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout48.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout48.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout48.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout48.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout48.Name = "lbl_dout48";
+            this.lbl_dout48.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout48.TabIndex = 7;
+            this.lbl_dout48.Text = "8";
+            this.lbl_dout48.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout47
+            // 
+            this.lbl_dout47.AutoSize = true;
+            this.lbl_dout47.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout47.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout47.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout47.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout47.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout47.Name = "lbl_dout47";
+            this.lbl_dout47.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout47.TabIndex = 6;
+            this.lbl_dout47.Text = "7";
+            this.lbl_dout47.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout46
+            // 
+            this.lbl_dout46.AutoSize = true;
+            this.lbl_dout46.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout46.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout46.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout46.Location = new System.Drawing.Point(30, 32);
+            this.lbl_dout46.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout46.Name = "lbl_dout46";
+            this.lbl_dout46.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout46.TabIndex = 5;
+            this.lbl_dout46.Text = "6";
+            this.lbl_dout46.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout45
+            // 
+            this.lbl_dout45.AutoSize = true;
+            this.lbl_dout45.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout45.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout45.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout45.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout45.Name = "lbl_dout45";
+            this.lbl_dout45.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout45.TabIndex = 4;
+            this.lbl_dout45.Text = "5";
+            this.lbl_dout45.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout44
+            // 
+            this.lbl_dout44.AutoSize = true;
+            this.lbl_dout44.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout44.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout44.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout44.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout44.Name = "lbl_dout44";
+            this.lbl_dout44.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout44.TabIndex = 3;
+            this.lbl_dout44.Text = "4";
+            this.lbl_dout44.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout43
+            // 
+            this.lbl_dout43.AutoSize = true;
+            this.lbl_dout43.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout43.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout43.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout43.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout43.Name = "lbl_dout43";
+            this.lbl_dout43.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout43.TabIndex = 2;
+            this.lbl_dout43.Text = "3";
+            this.lbl_dout43.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout42
+            // 
+            this.lbl_dout42.AutoSize = true;
+            this.lbl_dout42.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout42.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout42.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout42.Location = new System.Drawing.Point(3, 32);
+            this.lbl_dout42.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout42.Name = "lbl_dout42";
+            this.lbl_dout42.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout42.TabIndex = 1;
+            this.lbl_dout42.Text = "2";
+            this.lbl_dout42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close11
+            // 
+            this.Btn_close11.Enabled = false;
+            this.Btn_close11.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close11.Location = new System.Drawing.Point(815, 308);
+            this.Btn_close11.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close11.Name = "Btn_close11";
+            this.Btn_close11.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close11.TabIndex = 179;
+            this.Btn_close11.Text = "关闭";
+            this.Btn_close11.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout73_80
+            // 
+            this.pal_dout73_80.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout73_80.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout73_80.Controls.Add(this.lbl_dout73);
+            this.pal_dout73_80.Controls.Add(this.label405);
+            this.pal_dout73_80.Controls.Add(this.lbl_dout80);
+            this.pal_dout73_80.Controls.Add(this.lbl_dout79);
+            this.pal_dout73_80.Controls.Add(this.lbl_dout78);
+            this.pal_dout73_80.Controls.Add(this.lbl_dout77);
+            this.pal_dout73_80.Controls.Add(this.lbl_dout76);
+            this.pal_dout73_80.Controls.Add(this.lbl_dout75);
+            this.pal_dout73_80.Controls.Add(this.lbl_dout74);
+            this.pal_dout73_80.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout73_80.Location = new System.Drawing.Point(737, 180);
+            this.pal_dout73_80.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout73_80.Name = "pal_dout73_80";
+            this.pal_dout73_80.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout73_80.TabIndex = 152;
+            // 
+            // lbl_dout73
+            // 
+            this.lbl_dout73.AutoSize = true;
+            this.lbl_dout73.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout73.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout73.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout73.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout73.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout73.Name = "lbl_dout73";
+            this.lbl_dout73.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout73.TabIndex = 0;
+            this.lbl_dout73.Text = "1";
+            this.lbl_dout73.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label405
+            // 
+            this.label405.BackColor = System.Drawing.Color.Black;
+            this.label405.Location = new System.Drawing.Point(0, -1);
+            this.label405.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label405.Name = "label405";
+            this.label405.Size = new System.Drawing.Size(11, 12);
+            this.label405.TabIndex = 152;
+            // 
+            // lbl_dout80
+            // 
+            this.lbl_dout80.AutoSize = true;
+            this.lbl_dout80.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout80.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout80.Location = new System.Drawing.Point(29, 93);
+            this.lbl_dout80.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout80.Name = "lbl_dout80";
+            this.lbl_dout80.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout80.TabIndex = 7;
+            this.lbl_dout80.Text = "8";
+            this.lbl_dout80.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout79
+            // 
+            this.lbl_dout79.AutoSize = true;
+            this.lbl_dout79.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout79.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout79.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout79.Location = new System.Drawing.Point(29, 63);
+            this.lbl_dout79.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout79.Name = "lbl_dout79";
+            this.lbl_dout79.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout79.TabIndex = 6;
+            this.lbl_dout79.Text = "7";
+            this.lbl_dout79.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout78
+            // 
+            this.lbl_dout78.AutoSize = true;
+            this.lbl_dout78.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout78.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout78.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout78.Location = new System.Drawing.Point(29, 32);
+            this.lbl_dout78.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout78.Name = "lbl_dout78";
+            this.lbl_dout78.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout78.TabIndex = 5;
+            this.lbl_dout78.Text = "6";
+            this.lbl_dout78.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout77
+            // 
+            this.lbl_dout77.AutoSize = true;
+            this.lbl_dout77.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout77.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout77.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout77.Location = new System.Drawing.Point(29, 3);
+            this.lbl_dout77.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout77.Name = "lbl_dout77";
+            this.lbl_dout77.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout77.TabIndex = 4;
+            this.lbl_dout77.Text = "5";
+            this.lbl_dout77.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout76
+            // 
+            this.lbl_dout76.AutoSize = true;
+            this.lbl_dout76.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout76.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout76.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout76.Location = new System.Drawing.Point(2, 93);
+            this.lbl_dout76.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout76.Name = "lbl_dout76";
+            this.lbl_dout76.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout76.TabIndex = 3;
+            this.lbl_dout76.Text = "4";
+            this.lbl_dout76.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout75
+            // 
+            this.lbl_dout75.AutoSize = true;
+            this.lbl_dout75.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout75.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout75.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout75.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout75.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout75.Name = "lbl_dout75";
+            this.lbl_dout75.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout75.TabIndex = 2;
+            this.lbl_dout75.Text = "3";
+            this.lbl_dout75.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout74
+            // 
+            this.lbl_dout74.AutoSize = true;
+            this.lbl_dout74.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout74.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout74.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout74.Location = new System.Drawing.Point(3, 32);
+            this.lbl_dout74.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout74.Name = "lbl_dout74";
+            this.lbl_dout74.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout74.TabIndex = 1;
+            this.lbl_dout74.Text = "2";
+            this.lbl_dout74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close7
+            // 
+            this.Btn_close7.Enabled = false;
+            this.Btn_close7.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close7.Location = new System.Drawing.Point(503, 308);
+            this.Btn_close7.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close7.Name = "Btn_close7";
+            this.Btn_close7.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close7.TabIndex = 171;
+            this.Btn_close7.Text = "关闭";
+            this.Btn_close7.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout9_16
+            // 
+            this.pal_dout9_16.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout9_16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout9_16.Controls.Add(this.lbl_dout9);
+            this.pal_dout9_16.Controls.Add(this.label406);
+            this.pal_dout9_16.Controls.Add(this.lbl_dout16);
+            this.pal_dout9_16.Controls.Add(this.lbl_dout15);
+            this.pal_dout9_16.Controls.Add(this.lbl_dout14);
+            this.pal_dout9_16.Controls.Add(this.lbl_dout13);
+            this.pal_dout9_16.Controls.Add(this.lbl_dout12);
+            this.pal_dout9_16.Controls.Add(this.lbl_dout11);
+            this.pal_dout9_16.Controls.Add(this.lbl_dout10);
+            this.pal_dout9_16.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout9_16.Location = new System.Drawing.Point(113, 180);
+            this.pal_dout9_16.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout9_16.Name = "pal_dout9_16";
+            this.pal_dout9_16.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout9_16.TabIndex = 144;
+            // 
+            // lbl_dout9
+            // 
+            this.lbl_dout9.AutoSize = true;
+            this.lbl_dout9.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout9.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout9.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout9.Name = "lbl_dout9";
+            this.lbl_dout9.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout9.TabIndex = 0;
+            this.lbl_dout9.Text = "1";
+            this.lbl_dout9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label406
+            // 
+            this.label406.BackColor = System.Drawing.Color.Black;
+            this.label406.Location = new System.Drawing.Point(0, -1);
+            this.label406.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label406.Name = "label406";
+            this.label406.Size = new System.Drawing.Size(11, 12);
+            this.label406.TabIndex = 144;
+            // 
+            // lbl_dout16
+            // 
+            this.lbl_dout16.AutoSize = true;
+            this.lbl_dout16.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout16.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout16.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout16.Name = "lbl_dout16";
+            this.lbl_dout16.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout16.TabIndex = 7;
+            this.lbl_dout16.Text = "8";
+            this.lbl_dout16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout15
+            // 
+            this.lbl_dout15.AutoSize = true;
+            this.lbl_dout15.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout15.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout15.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout15.Name = "lbl_dout15";
+            this.lbl_dout15.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout15.TabIndex = 6;
+            this.lbl_dout15.Text = "7";
+            this.lbl_dout15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout14
+            // 
+            this.lbl_dout14.AutoSize = true;
+            this.lbl_dout14.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout14.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout14.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout14.Name = "lbl_dout14";
+            this.lbl_dout14.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout14.TabIndex = 5;
+            this.lbl_dout14.Text = "6";
+            this.lbl_dout14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout13
+            // 
+            this.lbl_dout13.AutoSize = true;
+            this.lbl_dout13.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout13.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout13.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout13.Name = "lbl_dout13";
+            this.lbl_dout13.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout13.TabIndex = 4;
+            this.lbl_dout13.Text = "5";
+            this.lbl_dout13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout12
+            // 
+            this.lbl_dout12.AutoSize = true;
+            this.lbl_dout12.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout12.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout12.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout12.Name = "lbl_dout12";
+            this.lbl_dout12.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout12.TabIndex = 3;
+            this.lbl_dout12.Text = "4";
+            this.lbl_dout12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout11
+            // 
+            this.lbl_dout11.AutoSize = true;
+            this.lbl_dout11.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout11.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout11.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout11.Name = "lbl_dout11";
+            this.lbl_dout11.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout11.TabIndex = 2;
+            this.lbl_dout11.Text = "3";
+            this.lbl_dout11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout10
+            // 
+            this.lbl_dout10.AutoSize = true;
+            this.lbl_dout10.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout10.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout10.Location = new System.Drawing.Point(3, 32);
+            this.lbl_dout10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout10.Name = "lbl_dout10";
+            this.lbl_dout10.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout10.TabIndex = 1;
+            this.lbl_dout10.Text = "2";
+            this.lbl_dout10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_open11
+            // 
+            this.Btn_open11.Enabled = false;
+            this.Btn_open11.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open11.Location = new System.Drawing.Point(815, 339);
+            this.Btn_open11.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open11.Name = "Btn_open11";
+            this.Btn_open11.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open11.TabIndex = 180;
+            this.Btn_open11.Text = "打开";
+            this.Btn_open11.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout113_120
+            // 
+            this.pal_dout113_120.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout113_120.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout113_120.Controls.Add(this.lbl_dout113);
+            this.pal_dout113_120.Controls.Add(this.label407);
+            this.pal_dout113_120.Controls.Add(this.lbl_dout120);
+            this.pal_dout113_120.Controls.Add(this.lbl_dout119);
+            this.pal_dout113_120.Controls.Add(this.lbl_dout118);
+            this.pal_dout113_120.Controls.Add(this.lbl_dout117);
+            this.pal_dout113_120.Controls.Add(this.lbl_dout116);
+            this.pal_dout113_120.Controls.Add(this.lbl_dout115);
+            this.pal_dout113_120.Controls.Add(this.lbl_dout114);
+            this.pal_dout113_120.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout113_120.Location = new System.Drawing.Point(1127, 180);
+            this.pal_dout113_120.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout113_120.Name = "pal_dout113_120";
+            this.pal_dout113_120.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout113_120.TabIndex = 157;
+            // 
+            // lbl_dout113
+            // 
+            this.lbl_dout113.AutoSize = true;
+            this.lbl_dout113.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout113.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout113.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout113.Location = new System.Drawing.Point(4, 3);
+            this.lbl_dout113.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout113.Name = "lbl_dout113";
+            this.lbl_dout113.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout113.TabIndex = 0;
+            this.lbl_dout113.Text = "1";
+            this.lbl_dout113.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label407
+            // 
+            this.label407.BackColor = System.Drawing.Color.Black;
+            this.label407.Location = new System.Drawing.Point(-1, -1);
+            this.label407.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label407.Name = "label407";
+            this.label407.Size = new System.Drawing.Size(11, 12);
+            this.label407.TabIndex = 157;
+            // 
+            // lbl_dout120
+            // 
+            this.lbl_dout120.AutoSize = true;
+            this.lbl_dout120.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout120.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout120.Location = new System.Drawing.Point(31, 93);
+            this.lbl_dout120.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout120.Name = "lbl_dout120";
+            this.lbl_dout120.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout120.TabIndex = 7;
+            this.lbl_dout120.Text = "8";
+            this.lbl_dout120.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout119
+            // 
+            this.lbl_dout119.AutoSize = true;
+            this.lbl_dout119.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout119.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout119.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout119.Location = new System.Drawing.Point(31, 63);
+            this.lbl_dout119.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout119.Name = "lbl_dout119";
+            this.lbl_dout119.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout119.TabIndex = 6;
+            this.lbl_dout119.Text = "7";
+            this.lbl_dout119.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout118
+            // 
+            this.lbl_dout118.AutoSize = true;
+            this.lbl_dout118.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout118.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout118.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout118.Location = new System.Drawing.Point(31, 33);
+            this.lbl_dout118.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout118.Name = "lbl_dout118";
+            this.lbl_dout118.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout118.TabIndex = 5;
+            this.lbl_dout118.Text = "6";
+            this.lbl_dout118.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout117
+            // 
+            this.lbl_dout117.AutoSize = true;
+            this.lbl_dout117.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout117.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout117.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout117.Location = new System.Drawing.Point(31, 3);
+            this.lbl_dout117.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout117.Name = "lbl_dout117";
+            this.lbl_dout117.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout117.TabIndex = 4;
+            this.lbl_dout117.Text = "5";
+            this.lbl_dout117.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout116
+            // 
+            this.lbl_dout116.AutoSize = true;
+            this.lbl_dout116.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout116.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout116.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout116.Location = new System.Drawing.Point(4, 93);
+            this.lbl_dout116.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout116.Name = "lbl_dout116";
+            this.lbl_dout116.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout116.TabIndex = 3;
+            this.lbl_dout116.Text = "4";
+            this.lbl_dout116.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout115
+            // 
+            this.lbl_dout115.AutoSize = true;
+            this.lbl_dout115.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout115.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout115.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout115.Location = new System.Drawing.Point(4, 63);
+            this.lbl_dout115.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout115.Name = "lbl_dout115";
+            this.lbl_dout115.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout115.TabIndex = 2;
+            this.lbl_dout115.Text = "3";
+            this.lbl_dout115.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout114
+            // 
+            this.lbl_dout114.AutoSize = true;
+            this.lbl_dout114.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout114.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout114.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout114.Location = new System.Drawing.Point(4, 33);
+            this.lbl_dout114.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout114.Name = "lbl_dout114";
+            this.lbl_dout114.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout114.TabIndex = 1;
+            this.lbl_dout114.Text = "2";
+            this.lbl_dout114.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_open6
+            // 
+            this.Btn_open6.Enabled = false;
+            this.Btn_open6.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open6.Location = new System.Drawing.Point(425, 339);
+            this.Btn_open6.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open6.Name = "Btn_open6";
+            this.Btn_open6.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open6.TabIndex = 170;
+            this.Btn_open6.Text = "打开";
+            this.Btn_open6.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout49_56
+            // 
+            this.pal_dout49_56.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout49_56.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout49_56.Controls.Add(this.lbl_dout49);
+            this.pal_dout49_56.Controls.Add(this.label408);
+            this.pal_dout49_56.Controls.Add(this.lbl_dout56);
+            this.pal_dout49_56.Controls.Add(this.lbl_dout55);
+            this.pal_dout49_56.Controls.Add(this.lbl_dout54);
+            this.pal_dout49_56.Controls.Add(this.lbl_dout53);
+            this.pal_dout49_56.Controls.Add(this.lbl_dout52);
+            this.pal_dout49_56.Controls.Add(this.lbl_dout51);
+            this.pal_dout49_56.Controls.Add(this.lbl_dout50);
+            this.pal_dout49_56.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout49_56.Location = new System.Drawing.Point(503, 180);
+            this.pal_dout49_56.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout49_56.Name = "pal_dout49_56";
+            this.pal_dout49_56.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout49_56.TabIndex = 149;
+            // 
+            // lbl_dout49
+            // 
+            this.lbl_dout49.AutoSize = true;
+            this.lbl_dout49.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout49.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout49.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout49.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout49.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout49.Name = "lbl_dout49";
+            this.lbl_dout49.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout49.TabIndex = 0;
+            this.lbl_dout49.Text = "1";
+            this.lbl_dout49.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label408
+            // 
+            this.label408.BackColor = System.Drawing.Color.Black;
+            this.label408.Location = new System.Drawing.Point(0, -1);
+            this.label408.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label408.Name = "label408";
+            this.label408.Size = new System.Drawing.Size(11, 12);
+            this.label408.TabIndex = 149;
+            // 
+            // lbl_dout56
+            // 
+            this.lbl_dout56.AutoSize = true;
+            this.lbl_dout56.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout56.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout56.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout56.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout56.Name = "lbl_dout56";
+            this.lbl_dout56.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout56.TabIndex = 7;
+            this.lbl_dout56.Text = "8";
+            this.lbl_dout56.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout55
+            // 
+            this.lbl_dout55.AutoSize = true;
+            this.lbl_dout55.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout55.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout55.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout55.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout55.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout55.Name = "lbl_dout55";
+            this.lbl_dout55.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout55.TabIndex = 6;
+            this.lbl_dout55.Text = "7";
+            this.lbl_dout55.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout54
+            // 
+            this.lbl_dout54.AutoSize = true;
+            this.lbl_dout54.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout54.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout54.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout54.Location = new System.Drawing.Point(30, 32);
+            this.lbl_dout54.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout54.Name = "lbl_dout54";
+            this.lbl_dout54.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout54.TabIndex = 5;
+            this.lbl_dout54.Text = "6";
+            this.lbl_dout54.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout53
+            // 
+            this.lbl_dout53.AutoSize = true;
+            this.lbl_dout53.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout53.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout53.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout53.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout53.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout53.Name = "lbl_dout53";
+            this.lbl_dout53.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout53.TabIndex = 4;
+            this.lbl_dout53.Text = "5";
+            this.lbl_dout53.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout52
+            // 
+            this.lbl_dout52.AutoSize = true;
+            this.lbl_dout52.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout52.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout52.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout52.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout52.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout52.Name = "lbl_dout52";
+            this.lbl_dout52.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout52.TabIndex = 3;
+            this.lbl_dout52.Text = "4";
+            this.lbl_dout52.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout51
+            // 
+            this.lbl_dout51.AutoSize = true;
+            this.lbl_dout51.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout51.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout51.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout51.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout51.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout51.Name = "lbl_dout51";
+            this.lbl_dout51.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout51.TabIndex = 2;
+            this.lbl_dout51.Text = "3";
+            this.lbl_dout51.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout50
+            // 
+            this.lbl_dout50.AutoSize = true;
+            this.lbl_dout50.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout50.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout50.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout50.Location = new System.Drawing.Point(3, 32);
+            this.lbl_dout50.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout50.Name = "lbl_dout50";
+            this.lbl_dout50.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout50.TabIndex = 1;
+            this.lbl_dout50.Text = "2";
+            this.lbl_dout50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close12
+            // 
+            this.Btn_close12.Enabled = false;
+            this.Btn_close12.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close12.Location = new System.Drawing.Point(893, 308);
+            this.Btn_close12.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close12.Name = "Btn_close12";
+            this.Btn_close12.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close12.TabIndex = 181;
+            this.Btn_close12.Text = "关闭";
+            this.Btn_close12.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout81_88
+            // 
+            this.pal_dout81_88.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout81_88.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout81_88.Controls.Add(this.lbl_dout81);
+            this.pal_dout81_88.Controls.Add(this.label409);
+            this.pal_dout81_88.Controls.Add(this.lbl_dout88);
+            this.pal_dout81_88.Controls.Add(this.lbl_dout87);
+            this.pal_dout81_88.Controls.Add(this.lbl_dout86);
+            this.pal_dout81_88.Controls.Add(this.lbl_dout85);
+            this.pal_dout81_88.Controls.Add(this.lbl_dout84);
+            this.pal_dout81_88.Controls.Add(this.lbl_dout83);
+            this.pal_dout81_88.Controls.Add(this.lbl_dout82);
+            this.pal_dout81_88.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout81_88.Location = new System.Drawing.Point(815, 180);
+            this.pal_dout81_88.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout81_88.Name = "pal_dout81_88";
+            this.pal_dout81_88.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout81_88.TabIndex = 153;
+            // 
+            // lbl_dout81
+            // 
+            this.lbl_dout81.AutoSize = true;
+            this.lbl_dout81.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout81.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout81.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout81.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout81.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout81.Name = "lbl_dout81";
+            this.lbl_dout81.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout81.TabIndex = 0;
+            this.lbl_dout81.Text = "1";
+            this.lbl_dout81.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label409
+            // 
+            this.label409.BackColor = System.Drawing.Color.Black;
+            this.label409.Location = new System.Drawing.Point(0, -1);
+            this.label409.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label409.Name = "label409";
+            this.label409.Size = new System.Drawing.Size(11, 12);
+            this.label409.TabIndex = 153;
+            // 
+            // lbl_dout88
+            // 
+            this.lbl_dout88.AutoSize = true;
+            this.lbl_dout88.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout88.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout88.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout88.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout88.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout88.Name = "lbl_dout88";
+            this.lbl_dout88.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout88.TabIndex = 7;
+            this.lbl_dout88.Text = "8";
+            this.lbl_dout88.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout87
+            // 
+            this.lbl_dout87.AutoSize = true;
+            this.lbl_dout87.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout87.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout87.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout87.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout87.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout87.Name = "lbl_dout87";
+            this.lbl_dout87.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout87.TabIndex = 6;
+            this.lbl_dout87.Text = "7";
+            this.lbl_dout87.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout86
+            // 
+            this.lbl_dout86.AutoSize = true;
+            this.lbl_dout86.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout86.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout86.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout86.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout86.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout86.Name = "lbl_dout86";
+            this.lbl_dout86.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout86.TabIndex = 5;
+            this.lbl_dout86.Text = "6";
+            this.lbl_dout86.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout85
+            // 
+            this.lbl_dout85.AutoSize = true;
+            this.lbl_dout85.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout85.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout85.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout85.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout85.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout85.Name = "lbl_dout85";
+            this.lbl_dout85.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout85.TabIndex = 4;
+            this.lbl_dout85.Text = "5";
+            this.lbl_dout85.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout84
+            // 
+            this.lbl_dout84.AutoSize = true;
+            this.lbl_dout84.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout84.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout84.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout84.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout84.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout84.Name = "lbl_dout84";
+            this.lbl_dout84.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout84.TabIndex = 3;
+            this.lbl_dout84.Text = "4";
+            this.lbl_dout84.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout83
+            // 
+            this.lbl_dout83.AutoSize = true;
+            this.lbl_dout83.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout83.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout83.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout83.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout83.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout83.Name = "lbl_dout83";
+            this.lbl_dout83.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout83.TabIndex = 2;
+            this.lbl_dout83.Text = "3";
+            this.lbl_dout83.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout82
+            // 
+            this.lbl_dout82.AutoSize = true;
+            this.lbl_dout82.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout82.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout82.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout82.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout82.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout82.Name = "lbl_dout82";
+            this.lbl_dout82.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout82.TabIndex = 1;
+            this.lbl_dout82.Text = "2";
+            this.lbl_dout82.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close6
+            // 
+            this.Btn_close6.Enabled = false;
+            this.Btn_close6.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close6.Location = new System.Drawing.Point(425, 308);
+            this.Btn_close6.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close6.Name = "Btn_close6";
+            this.Btn_close6.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close6.TabIndex = 169;
+            this.Btn_close6.Text = "关闭";
+            this.Btn_close6.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout17_24
+            // 
+            this.pal_dout17_24.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout17_24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout17_24.Controls.Add(this.lbl_dout17);
+            this.pal_dout17_24.Controls.Add(this.label410);
+            this.pal_dout17_24.Controls.Add(this.lbl_dout24);
+            this.pal_dout17_24.Controls.Add(this.lbl_dout23);
+            this.pal_dout17_24.Controls.Add(this.lbl_dout22);
+            this.pal_dout17_24.Controls.Add(this.lbl_dout21);
+            this.pal_dout17_24.Controls.Add(this.lbl_dout20);
+            this.pal_dout17_24.Controls.Add(this.lbl_dout19);
+            this.pal_dout17_24.Controls.Add(this.lbl_dout18);
+            this.pal_dout17_24.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout17_24.Location = new System.Drawing.Point(191, 180);
+            this.pal_dout17_24.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout17_24.Name = "pal_dout17_24";
+            this.pal_dout17_24.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout17_24.TabIndex = 145;
+            // 
+            // lbl_dout17
+            // 
+            this.lbl_dout17.AutoSize = true;
+            this.lbl_dout17.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout17.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout17.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout17.Name = "lbl_dout17";
+            this.lbl_dout17.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout17.TabIndex = 0;
+            this.lbl_dout17.Text = "1";
+            this.lbl_dout17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label410
+            // 
+            this.label410.BackColor = System.Drawing.Color.Black;
+            this.label410.Location = new System.Drawing.Point(0, -1);
+            this.label410.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label410.Name = "label410";
+            this.label410.Size = new System.Drawing.Size(11, 12);
+            this.label410.TabIndex = 145;
+            // 
+            // lbl_dout24
+            // 
+            this.lbl_dout24.AutoSize = true;
+            this.lbl_dout24.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout24.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout24.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout24.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout24.Name = "lbl_dout24";
+            this.lbl_dout24.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout24.TabIndex = 7;
+            this.lbl_dout24.Text = "8";
+            this.lbl_dout24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout23
+            // 
+            this.lbl_dout23.AutoSize = true;
+            this.lbl_dout23.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout23.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout23.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout23.Name = "lbl_dout23";
+            this.lbl_dout23.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout23.TabIndex = 6;
+            this.lbl_dout23.Text = "7";
+            this.lbl_dout23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout22
+            // 
+            this.lbl_dout22.AutoSize = true;
+            this.lbl_dout22.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout22.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout22.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout22.Name = "lbl_dout22";
+            this.lbl_dout22.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout22.TabIndex = 5;
+            this.lbl_dout22.Text = "6";
+            this.lbl_dout22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout21
+            // 
+            this.lbl_dout21.AutoSize = true;
+            this.lbl_dout21.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout21.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout21.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout21.Name = "lbl_dout21";
+            this.lbl_dout21.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout21.TabIndex = 4;
+            this.lbl_dout21.Text = "5";
+            this.lbl_dout21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout20
+            // 
+            this.lbl_dout20.AutoSize = true;
+            this.lbl_dout20.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout20.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout20.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout20.Name = "lbl_dout20";
+            this.lbl_dout20.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout20.TabIndex = 3;
+            this.lbl_dout20.Text = "4";
+            this.lbl_dout20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout19
+            // 
+            this.lbl_dout19.AutoSize = true;
+            this.lbl_dout19.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout19.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout19.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout19.Name = "lbl_dout19";
+            this.lbl_dout19.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout19.TabIndex = 2;
+            this.lbl_dout19.Text = "3";
+            this.lbl_dout19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout18
+            // 
+            this.lbl_dout18.AutoSize = true;
+            this.lbl_dout18.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout18.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout18.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout18.Name = "lbl_dout18";
+            this.lbl_dout18.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout18.TabIndex = 1;
+            this.lbl_dout18.Text = "2";
+            this.lbl_dout18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_open12
+            // 
+            this.Btn_open12.Enabled = false;
+            this.Btn_open12.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open12.Location = new System.Drawing.Point(893, 339);
+            this.Btn_open12.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open12.Name = "Btn_open12";
+            this.Btn_open12.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open12.TabIndex = 182;
+            this.Btn_open12.Text = "打开";
+            this.Btn_open12.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout97_104
+            // 
+            this.pal_dout97_104.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout97_104.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout97_104.Controls.Add(this.lbl_dout97);
+            this.pal_dout97_104.Controls.Add(this.label411);
+            this.pal_dout97_104.Controls.Add(this.lbl_dout104);
+            this.pal_dout97_104.Controls.Add(this.lbl_dout103);
+            this.pal_dout97_104.Controls.Add(this.lbl_dout102);
+            this.pal_dout97_104.Controls.Add(this.lbl_dout101);
+            this.pal_dout97_104.Controls.Add(this.lbl_dout100);
+            this.pal_dout97_104.Controls.Add(this.lbl_dout99);
+            this.pal_dout97_104.Controls.Add(this.lbl_dout98);
+            this.pal_dout97_104.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout97_104.Location = new System.Drawing.Point(971, 180);
+            this.pal_dout97_104.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout97_104.Name = "pal_dout97_104";
+            this.pal_dout97_104.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout97_104.TabIndex = 155;
+            // 
+            // lbl_dout97
+            // 
+            this.lbl_dout97.AutoSize = true;
+            this.lbl_dout97.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout97.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout97.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout97.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout97.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout97.Name = "lbl_dout97";
+            this.lbl_dout97.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout97.TabIndex = 0;
+            this.lbl_dout97.Text = "1";
+            this.lbl_dout97.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label411
+            // 
+            this.label411.BackColor = System.Drawing.Color.Black;
+            this.label411.Location = new System.Drawing.Point(0, -1);
+            this.label411.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label411.Name = "label411";
+            this.label411.Size = new System.Drawing.Size(11, 12);
+            this.label411.TabIndex = 155;
+            // 
+            // lbl_dout104
+            // 
+            this.lbl_dout104.AutoSize = true;
+            this.lbl_dout104.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout104.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout104.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout104.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout104.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout104.Name = "lbl_dout104";
+            this.lbl_dout104.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout104.TabIndex = 7;
+            this.lbl_dout104.Text = "8";
+            this.lbl_dout104.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout103
+            // 
+            this.lbl_dout103.AutoSize = true;
+            this.lbl_dout103.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout103.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout103.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout103.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout103.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout103.Name = "lbl_dout103";
+            this.lbl_dout103.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout103.TabIndex = 6;
+            this.lbl_dout103.Text = "7";
+            this.lbl_dout103.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout102
+            // 
+            this.lbl_dout102.AutoSize = true;
+            this.lbl_dout102.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout102.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout102.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout102.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout102.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout102.Name = "lbl_dout102";
+            this.lbl_dout102.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout102.TabIndex = 5;
+            this.lbl_dout102.Text = "6";
+            this.lbl_dout102.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout101
+            // 
+            this.lbl_dout101.AutoSize = true;
+            this.lbl_dout101.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout101.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout101.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout101.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout101.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout101.Name = "lbl_dout101";
+            this.lbl_dout101.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout101.TabIndex = 4;
+            this.lbl_dout101.Text = "5";
+            this.lbl_dout101.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout100
+            // 
+            this.lbl_dout100.AutoSize = true;
+            this.lbl_dout100.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout100.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout100.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout100.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout100.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout100.Name = "lbl_dout100";
+            this.lbl_dout100.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout100.TabIndex = 3;
+            this.lbl_dout100.Text = "4";
+            this.lbl_dout100.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout99
+            // 
+            this.lbl_dout99.AutoSize = true;
+            this.lbl_dout99.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout99.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout99.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout99.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout99.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout99.Name = "lbl_dout99";
+            this.lbl_dout99.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout99.TabIndex = 2;
+            this.lbl_dout99.Text = "3";
+            this.lbl_dout99.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout98
+            // 
+            this.lbl_dout98.AutoSize = true;
+            this.lbl_dout98.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout98.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout98.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout98.Location = new System.Drawing.Point(3, 32);
+            this.lbl_dout98.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout98.Name = "lbl_dout98";
+            this.lbl_dout98.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout98.TabIndex = 1;
+            this.lbl_dout98.Text = "2";
+            this.lbl_dout98.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_open5
+            // 
+            this.Btn_open5.Enabled = false;
+            this.Btn_open5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open5.Location = new System.Drawing.Point(347, 339);
+            this.Btn_open5.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open5.Name = "Btn_open5";
+            this.Btn_open5.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open5.TabIndex = 168;
+            this.Btn_open5.Text = "打开";
+            this.Btn_open5.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout33_40
+            // 
+            this.pal_dout33_40.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout33_40.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout33_40.Controls.Add(this.lbl_dout33);
+            this.pal_dout33_40.Controls.Add(this.label412);
+            this.pal_dout33_40.Controls.Add(this.lbl_dout40);
+            this.pal_dout33_40.Controls.Add(this.lbl_dout39);
+            this.pal_dout33_40.Controls.Add(this.lbl_dout38);
+            this.pal_dout33_40.Controls.Add(this.lbl_dout37);
+            this.pal_dout33_40.Controls.Add(this.lbl_dout36);
+            this.pal_dout33_40.Controls.Add(this.lbl_dout35);
+            this.pal_dout33_40.Controls.Add(this.lbl_dout34);
+            this.pal_dout33_40.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout33_40.Location = new System.Drawing.Point(347, 180);
+            this.pal_dout33_40.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout33_40.Name = "pal_dout33_40";
+            this.pal_dout33_40.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout33_40.TabIndex = 147;
+            // 
+            // lbl_dout33
+            // 
+            this.lbl_dout33.AutoSize = true;
+            this.lbl_dout33.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout33.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout33.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout33.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout33.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout33.Name = "lbl_dout33";
+            this.lbl_dout33.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout33.TabIndex = 0;
+            this.lbl_dout33.Text = "1";
+            this.lbl_dout33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label412
+            // 
+            this.label412.BackColor = System.Drawing.Color.Black;
+            this.label412.Location = new System.Drawing.Point(0, -1);
+            this.label412.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label412.Name = "label412";
+            this.label412.Size = new System.Drawing.Size(11, 12);
+            this.label412.TabIndex = 147;
+            // 
+            // lbl_dout40
+            // 
+            this.lbl_dout40.AutoSize = true;
+            this.lbl_dout40.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout40.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout40.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout40.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout40.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout40.Name = "lbl_dout40";
+            this.lbl_dout40.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout40.TabIndex = 7;
+            this.lbl_dout40.Text = "8";
+            this.lbl_dout40.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout39
+            // 
+            this.lbl_dout39.AutoSize = true;
+            this.lbl_dout39.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout39.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout39.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout39.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout39.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout39.Name = "lbl_dout39";
+            this.lbl_dout39.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout39.TabIndex = 6;
+            this.lbl_dout39.Text = "7";
+            this.lbl_dout39.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout38
+            // 
+            this.lbl_dout38.AutoSize = true;
+            this.lbl_dout38.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout38.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout38.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout38.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout38.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout38.Name = "lbl_dout38";
+            this.lbl_dout38.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout38.TabIndex = 5;
+            this.lbl_dout38.Text = "6";
+            this.lbl_dout38.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout37
+            // 
+            this.lbl_dout37.AutoSize = true;
+            this.lbl_dout37.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout37.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout37.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout37.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout37.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout37.Name = "lbl_dout37";
+            this.lbl_dout37.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout37.TabIndex = 4;
+            this.lbl_dout37.Text = "5";
+            this.lbl_dout37.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout36
+            // 
+            this.lbl_dout36.AutoSize = true;
+            this.lbl_dout36.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout36.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout36.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout36.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout36.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout36.Name = "lbl_dout36";
+            this.lbl_dout36.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout36.TabIndex = 3;
+            this.lbl_dout36.Text = "4";
+            this.lbl_dout36.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout35
+            // 
+            this.lbl_dout35.AutoSize = true;
+            this.lbl_dout35.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout35.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout35.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout35.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout35.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout35.Name = "lbl_dout35";
+            this.lbl_dout35.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout35.TabIndex = 2;
+            this.lbl_dout35.Text = "3";
+            this.lbl_dout35.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout34
+            // 
+            this.lbl_dout34.AutoSize = true;
+            this.lbl_dout34.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout34.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout34.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout34.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout34.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout34.Name = "lbl_dout34";
+            this.lbl_dout34.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout34.TabIndex = 1;
+            this.lbl_dout34.Text = "2";
+            this.lbl_dout34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close13
+            // 
+            this.Btn_close13.Enabled = false;
+            this.Btn_close13.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close13.Location = new System.Drawing.Point(971, 308);
+            this.Btn_close13.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close13.Name = "Btn_close13";
+            this.Btn_close13.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close13.TabIndex = 183;
+            this.Btn_close13.Text = "关闭";
+            this.Btn_close13.UseVisualStyleBackColor = true;
+            // 
+            // pal_dout65_72
+            // 
+            this.pal_dout65_72.BackColor = System.Drawing.Color.LightGray;
+            this.pal_dout65_72.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pal_dout65_72.Controls.Add(this.lbl_dout65);
+            this.pal_dout65_72.Controls.Add(this.label413);
+            this.pal_dout65_72.Controls.Add(this.lbl_dout72);
+            this.pal_dout65_72.Controls.Add(this.lbl_dout71);
+            this.pal_dout65_72.Controls.Add(this.lbl_dout70);
+            this.pal_dout65_72.Controls.Add(this.lbl_dout69);
+            this.pal_dout65_72.Controls.Add(this.lbl_dout68);
+            this.pal_dout65_72.Controls.Add(this.lbl_dout67);
+            this.pal_dout65_72.Controls.Add(this.lbl_dout66);
+            this.pal_dout65_72.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.pal_dout65_72.Location = new System.Drawing.Point(659, 180);
+            this.pal_dout65_72.Margin = new System.Windows.Forms.Padding(10);
+            this.pal_dout65_72.Name = "pal_dout65_72";
+            this.pal_dout65_72.Size = new System.Drawing.Size(58, 124);
+            this.pal_dout65_72.TabIndex = 151;
+            // 
+            // lbl_dout65
+            // 
+            this.lbl_dout65.AutoSize = true;
+            this.lbl_dout65.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout65.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout65.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout65.Location = new System.Drawing.Point(3, 3);
+            this.lbl_dout65.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout65.Name = "lbl_dout65";
+            this.lbl_dout65.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout65.TabIndex = 0;
+            this.lbl_dout65.Text = "1";
+            this.lbl_dout65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label413
+            // 
+            this.label413.BackColor = System.Drawing.Color.Black;
+            this.label413.Location = new System.Drawing.Point(0, -1);
+            this.label413.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label413.Name = "label413";
+            this.label413.Size = new System.Drawing.Size(11, 12);
+            this.label413.TabIndex = 151;
+            // 
+            // lbl_dout72
+            // 
+            this.lbl_dout72.AutoSize = true;
+            this.lbl_dout72.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout72.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout72.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout72.Location = new System.Drawing.Point(30, 93);
+            this.lbl_dout72.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout72.Name = "lbl_dout72";
+            this.lbl_dout72.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout72.TabIndex = 7;
+            this.lbl_dout72.Text = "8";
+            this.lbl_dout72.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout71
+            // 
+            this.lbl_dout71.AutoSize = true;
+            this.lbl_dout71.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout71.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout71.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout71.Location = new System.Drawing.Point(30, 63);
+            this.lbl_dout71.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout71.Name = "lbl_dout71";
+            this.lbl_dout71.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout71.TabIndex = 6;
+            this.lbl_dout71.Text = "7";
+            this.lbl_dout71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout70
+            // 
+            this.lbl_dout70.AutoSize = true;
+            this.lbl_dout70.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout70.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout70.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout70.Location = new System.Drawing.Point(30, 33);
+            this.lbl_dout70.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout70.Name = "lbl_dout70";
+            this.lbl_dout70.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout70.TabIndex = 5;
+            this.lbl_dout70.Text = "6";
+            this.lbl_dout70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout69
+            // 
+            this.lbl_dout69.AutoSize = true;
+            this.lbl_dout69.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout69.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout69.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout69.Location = new System.Drawing.Point(30, 3);
+            this.lbl_dout69.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout69.Name = "lbl_dout69";
+            this.lbl_dout69.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout69.TabIndex = 4;
+            this.lbl_dout69.Text = "5";
+            this.lbl_dout69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout68
+            // 
+            this.lbl_dout68.AutoSize = true;
+            this.lbl_dout68.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout68.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout68.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout68.Location = new System.Drawing.Point(3, 93);
+            this.lbl_dout68.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout68.Name = "lbl_dout68";
+            this.lbl_dout68.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout68.TabIndex = 3;
+            this.lbl_dout68.Text = "4";
+            this.lbl_dout68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout67
+            // 
+            this.lbl_dout67.AutoSize = true;
+            this.lbl_dout67.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout67.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout67.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout67.Location = new System.Drawing.Point(3, 63);
+            this.lbl_dout67.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout67.Name = "lbl_dout67";
+            this.lbl_dout67.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout67.TabIndex = 2;
+            this.lbl_dout67.Text = "3";
+            this.lbl_dout67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_dout66
+            // 
+            this.lbl_dout66.AutoSize = true;
+            this.lbl_dout66.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_dout66.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_dout66.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_dout66.Location = new System.Drawing.Point(3, 33);
+            this.lbl_dout66.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_dout66.Name = "lbl_dout66";
+            this.lbl_dout66.Size = new System.Drawing.Size(23, 26);
+            this.lbl_dout66.TabIndex = 1;
+            this.lbl_dout66.Text = "2";
+            this.lbl_dout66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Btn_close5
+            // 
+            this.Btn_close5.Enabled = false;
+            this.Btn_close5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close5.Location = new System.Drawing.Point(347, 308);
+            this.Btn_close5.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close5.Name = "Btn_close5";
+            this.Btn_close5.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close5.TabIndex = 167;
+            this.Btn_close5.Text = "关闭";
+            this.Btn_close5.UseVisualStyleBackColor = true;
+            // 
+            // Btn_close1
+            // 
+            this.Btn_close1.Enabled = false;
+            this.Btn_close1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close1.Location = new System.Drawing.Point(35, 308);
+            this.Btn_close1.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close1.Name = "Btn_close1";
+            this.Btn_close1.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close1.TabIndex = 159;
+            this.Btn_close1.Text = "关闭";
+            this.Btn_close1.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open13
+            // 
+            this.Btn_open13.Enabled = false;
+            this.Btn_open13.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open13.Location = new System.Drawing.Point(971, 339);
+            this.Btn_open13.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open13.Name = "Btn_open13";
+            this.Btn_open13.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open13.TabIndex = 184;
+            this.Btn_open13.Text = "打开";
+            this.Btn_open13.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open4
+            // 
+            this.Btn_open4.Enabled = false;
+            this.Btn_open4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open4.Location = new System.Drawing.Point(269, 339);
+            this.Btn_open4.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open4.Name = "Btn_open4";
+            this.Btn_open4.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open4.TabIndex = 166;
+            this.Btn_open4.Text = "打开";
+            this.Btn_open4.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open1
+            // 
+            this.Btn_open1.Enabled = false;
+            this.Btn_open1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open1.Location = new System.Drawing.Point(35, 339);
+            this.Btn_open1.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open1.Name = "Btn_open1";
+            this.Btn_open1.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open1.TabIndex = 160;
+            this.Btn_open1.Text = "打开";
+            this.Btn_open1.UseVisualStyleBackColor = true;
+            // 
+            // Btn_close14
+            // 
+            this.Btn_close14.Enabled = false;
+            this.Btn_close14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close14.Location = new System.Drawing.Point(1049, 308);
+            this.Btn_close14.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close14.Name = "Btn_close14";
+            this.Btn_close14.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close14.TabIndex = 185;
+            this.Btn_close14.Text = "关闭";
+            this.Btn_close14.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open16
+            // 
+            this.Btn_open16.Enabled = false;
+            this.Btn_open16.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open16.Location = new System.Drawing.Point(1205, 339);
+            this.Btn_open16.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open16.Name = "Btn_open16";
+            this.Btn_open16.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open16.TabIndex = 190;
+            this.Btn_open16.Text = "打开";
+            this.Btn_open16.UseVisualStyleBackColor = true;
+            // 
+            // Btn_close4
+            // 
+            this.Btn_close4.Enabled = false;
+            this.Btn_close4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close4.Location = new System.Drawing.Point(269, 308);
+            this.Btn_close4.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close4.Name = "Btn_close4";
+            this.Btn_close4.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close4.TabIndex = 165;
+            this.Btn_close4.Text = "关闭";
+            this.Btn_close4.UseVisualStyleBackColor = true;
+            // 
+            // Btn_close2
+            // 
+            this.Btn_close2.Enabled = false;
+            this.Btn_close2.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close2.Location = new System.Drawing.Point(113, 308);
+            this.Btn_close2.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close2.Name = "Btn_close2";
+            this.Btn_close2.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close2.TabIndex = 161;
+            this.Btn_close2.Text = "关闭";
+            this.Btn_close2.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open14
+            // 
+            this.Btn_open14.Enabled = false;
+            this.Btn_open14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open14.Location = new System.Drawing.Point(1049, 339);
+            this.Btn_open14.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open14.Name = "Btn_open14";
+            this.Btn_open14.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open14.TabIndex = 186;
+            this.Btn_open14.Text = "打开";
+            this.Btn_open14.UseVisualStyleBackColor = true;
+            // 
+            // Btn_close16
+            // 
+            this.Btn_close16.Enabled = false;
+            this.Btn_close16.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close16.Location = new System.Drawing.Point(1205, 308);
+            this.Btn_close16.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close16.Name = "Btn_close16";
+            this.Btn_close16.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close16.TabIndex = 189;
+            this.Btn_close16.Text = "关闭";
+            this.Btn_close16.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open3
+            // 
+            this.Btn_open3.Enabled = false;
+            this.Btn_open3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open3.Location = new System.Drawing.Point(191, 339);
+            this.Btn_open3.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open3.Name = "Btn_open3";
+            this.Btn_open3.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open3.TabIndex = 164;
+            this.Btn_open3.Text = "打开";
+            this.Btn_open3.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open2
+            // 
+            this.Btn_open2.Enabled = false;
+            this.Btn_open2.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open2.Location = new System.Drawing.Point(113, 339);
+            this.Btn_open2.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open2.Name = "Btn_open2";
+            this.Btn_open2.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open2.TabIndex = 162;
+            this.Btn_open2.Text = "打开";
+            this.Btn_open2.UseVisualStyleBackColor = true;
+            // 
+            // Btn_close15
+            // 
+            this.Btn_close15.Enabled = false;
+            this.Btn_close15.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close15.Location = new System.Drawing.Point(1127, 308);
+            this.Btn_close15.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close15.Name = "Btn_close15";
+            this.Btn_close15.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close15.TabIndex = 187;
+            this.Btn_close15.Text = "关闭";
+            this.Btn_close15.UseVisualStyleBackColor = true;
+            // 
+            // Btn_open15
+            // 
+            this.Btn_open15.Enabled = false;
+            this.Btn_open15.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open15.Location = new System.Drawing.Point(1127, 339);
+            this.Btn_open15.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_open15.Name = "Btn_open15";
+            this.Btn_open15.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open15.TabIndex = 188;
+            this.Btn_open15.Text = "打开";
+            this.Btn_open15.UseVisualStyleBackColor = true;
+            // 
+            // Btn_close3
+            // 
+            this.Btn_close3.Enabled = false;
+            this.Btn_close3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close3.Location = new System.Drawing.Point(191, 308);
+            this.Btn_close3.Margin = new System.Windows.Forms.Padding(2);
+            this.Btn_close3.Name = "Btn_close3";
+            this.Btn_close3.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close3.TabIndex = 163;
+            this.Btn_close3.Text = "关闭";
+            this.Btn_close3.UseVisualStyleBackColor = true;
+            // 
+            // textBox37
+            // 
+            this.textBox37.Location = new System.Drawing.Point(136, 115);
+            this.textBox37.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox37.Name = "textBox37";
+            this.textBox37.Size = new System.Drawing.Size(227, 29);
+            this.textBox37.TabIndex = 354;
+            this.textBox37.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label414
+            // 
+            this.label414.AutoSize = true;
+            this.label414.Location = new System.Drawing.Point(31, 118);
+            this.label414.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label414.Name = "label414";
+            this.label414.Size = new System.Drawing.Size(74, 21);
+            this.label414.TabIndex = 353;
+            this.label414.Tag = "";
+            this.label414.Text = "关闭数量";
+            // 
+            // textBox38
+            // 
+            this.textBox38.Location = new System.Drawing.Point(136, 71);
+            this.textBox38.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox38.Name = "textBox38";
+            this.textBox38.Size = new System.Drawing.Size(227, 29);
+            this.textBox38.TabIndex = 352;
+            this.textBox38.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label415
+            // 
+            this.label415.AutoSize = true;
+            this.label415.Location = new System.Drawing.Point(31, 74);
+            this.label415.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label415.Name = "label415";
+            this.label415.Size = new System.Drawing.Size(74, 21);
+            this.label415.TabIndex = 351;
+            this.label415.Tag = "";
+            this.label415.Text = "打开数量";
+            // 
+            // textBox39
+            // 
+            this.textBox39.Location = new System.Drawing.Point(136, 27);
+            this.textBox39.Margin = new System.Windows.Forms.Padding(2);
+            this.textBox39.Name = "textBox39";
+            this.textBox39.Size = new System.Drawing.Size(227, 29);
+            this.textBox39.TabIndex = 350;
+            this.textBox39.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label416
+            // 
+            this.label416.AutoSize = true;
+            this.label416.Location = new System.Drawing.Point(31, 30);
+            this.label416.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label416.Name = "label416";
+            this.label416.Size = new System.Drawing.Size(86, 21);
+            this.label416.TabIndex = 349;
+            this.label416.Tag = "";
+            this.label416.Text = "开Site名称";
+            // 
+            // listBox5_3
+            // 
+            this.listBox5_3.FormattingEnabled = true;
+            this.listBox5_3.ItemHeight = 21;
+            this.listBox5_3.Location = new System.Drawing.Point(1017, 428);
+            this.listBox5_3.Name = "listBox5_3";
+            this.listBox5_3.Size = new System.Drawing.Size(165, 172);
+            this.listBox5_3.Sorted = true;
+            this.listBox5_3.TabIndex = 76;
+            // 
+            // listBox5_2
+            // 
+            this.listBox5_2.FormattingEnabled = true;
+            this.listBox5_2.ItemHeight = 21;
+            this.listBox5_2.Location = new System.Drawing.Point(1017, 251);
+            this.listBox5_2.Name = "listBox5_2";
+            this.listBox5_2.Size = new System.Drawing.Size(165, 172);
+            this.listBox5_2.Sorted = true;
+            this.listBox5_2.TabIndex = 75;
+            // 
+            // listBox4_3
+            // 
+            this.listBox4_3.FormattingEnabled = true;
+            this.listBox4_3.ItemHeight = 21;
+            this.listBox4_3.Location = new System.Drawing.Point(711, 431);
+            this.listBox4_3.Name = "listBox4_3";
+            this.listBox4_3.Size = new System.Drawing.Size(165, 172);
+            this.listBox4_3.Sorted = true;
+            this.listBox4_3.TabIndex = 74;
+            // 
+            // listBox4_2
+            // 
+            this.listBox4_2.FormattingEnabled = true;
+            this.listBox4_2.ItemHeight = 21;
+            this.listBox4_2.Location = new System.Drawing.Point(711, 253);
+            this.listBox4_2.Name = "listBox4_2";
+            this.listBox4_2.Size = new System.Drawing.Size(165, 172);
+            this.listBox4_2.Sorted = true;
+            this.listBox4_2.TabIndex = 72;
+            // 
+            // listBox3_3
+            // 
+            this.listBox3_3.FormattingEnabled = true;
+            this.listBox3_3.ItemHeight = 21;
+            this.listBox3_3.Location = new System.Drawing.Point(395, 431);
+            this.listBox3_3.Name = "listBox3_3";
+            this.listBox3_3.Size = new System.Drawing.Size(165, 172);
+            this.listBox3_3.Sorted = true;
+            this.listBox3_3.TabIndex = 70;
+            // 
+            // listBox3_2
+            // 
+            this.listBox3_2.FormattingEnabled = true;
+            this.listBox3_2.ItemHeight = 21;
+            this.listBox3_2.Location = new System.Drawing.Point(395, 253);
+            this.listBox3_2.Name = "listBox3_2";
+            this.listBox3_2.Size = new System.Drawing.Size(165, 172);
+            this.listBox3_2.Sorted = true;
+            this.listBox3_2.TabIndex = 69;
+            // 
+            // textBox_name5
+            // 
+            this.textBox_name5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_name5.Location = new System.Drawing.Point(1017, 40);
+            this.textBox_name5.Name = "textBox_name5";
+            this.textBox_name5.Size = new System.Drawing.Size(69, 29);
+            this.textBox_name5.TabIndex = 68;
+            this.textBox_name5.Text = "Fix3";
+            // 
+            // textBox_name4
+            // 
+            this.textBox_name4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_name4.Location = new System.Drawing.Point(711, 40);
+            this.textBox_name4.Name = "textBox_name4";
+            this.textBox_name4.Size = new System.Drawing.Size(69, 29);
+            this.textBox_name4.TabIndex = 67;
+            this.textBox_name4.Text = "Fix2";
+            // 
+            // textBox_name3
+            // 
+            this.textBox_name3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_name3.Location = new System.Drawing.Point(395, 40);
+            this.textBox_name3.Name = "textBox_name3";
+            this.textBox_name3.Size = new System.Drawing.Size(69, 29);
+            this.textBox_name3.TabIndex = 66;
+            this.textBox_name3.Text = "Fix1";
+            // 
+            // textBox_name2
+            // 
+            this.textBox_name2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_name2.Location = new System.Drawing.Point(219, 40);
+            this.textBox_name2.Name = "textBox_name2";
+            this.textBox_name2.Size = new System.Drawing.Size(69, 29);
+            this.textBox_name2.TabIndex = 65;
+            this.textBox_name2.Text = "Auot2";
+            // 
+            // textBox_name1
+            // 
+            this.textBox_name1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textBox_name1.Location = new System.Drawing.Point(42, 40);
+            this.textBox_name1.Name = "textBox_name1";
+            this.textBox_name1.Size = new System.Drawing.Size(69, 29);
+            this.textBox_name1.TabIndex = 64;
+            this.textBox_name1.Text = "Auot1";
+            // 
+            // label_color5
+            // 
+            this.label_color5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_color5.Location = new System.Drawing.Point(1092, 39);
+            this.label_color5.Name = "label_color5";
+            this.label_color5.Size = new System.Drawing.Size(95, 31);
+            this.label_color5.TabIndex = 63;
+            this.label_color5.Text = "背景颜色";
+            this.label_color5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_color4
+            // 
+            this.label_color4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_color4.Location = new System.Drawing.Point(781, 39);
+            this.label_color4.Name = "label_color4";
+            this.label_color4.Size = new System.Drawing.Size(95, 31);
+            this.label_color4.TabIndex = 62;
+            this.label_color4.Text = "背景颜色";
+            this.label_color4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_color3
+            // 
+            this.label_color3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_color3.Location = new System.Drawing.Point(465, 39);
+            this.label_color3.Name = "label_color3";
+            this.label_color3.Size = new System.Drawing.Size(95, 31);
+            this.label_color3.TabIndex = 61;
+            this.label_color3.Text = "背景颜色";
+            this.label_color3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_color2
+            // 
+            this.label_color2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_color2.Location = new System.Drawing.Point(291, 39);
+            this.label_color2.Name = "label_color2";
+            this.label_color2.Size = new System.Drawing.Size(95, 31);
+            this.label_color2.TabIndex = 60;
+            this.label_color2.Text = "背景颜色";
+            this.label_color2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label_color1
+            // 
+            this.label_color1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label_color1.Location = new System.Drawing.Point(117, 39);
+            this.label_color1.Name = "label_color1";
+            this.label_color1.Size = new System.Drawing.Size(95, 31);
+            this.label_color1.TabIndex = 59;
+            this.label_color1.Text = "背景颜色";
+            this.label_color1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // listBox5_1
+            // 
+            this.listBox5_1.FormattingEnabled = true;
+            this.listBox5_1.ItemHeight = 21;
+            this.listBox5_1.Location = new System.Drawing.Point(1017, 75);
+            this.listBox5_1.Name = "listBox5_1";
+            this.listBox5_1.Size = new System.Drawing.Size(165, 172);
+            this.listBox5_1.Sorted = true;
+            this.listBox5_1.TabIndex = 54;
+            // 
+            // listBox4_1
+            // 
+            this.listBox4_1.FormattingEnabled = true;
+            this.listBox4_1.ItemHeight = 21;
+            this.listBox4_1.Location = new System.Drawing.Point(711, 74);
+            this.listBox4_1.Name = "listBox4_1";
+            this.listBox4_1.Size = new System.Drawing.Size(165, 172);
+            this.listBox4_1.Sorted = true;
+            this.listBox4_1.TabIndex = 53;
+            // 
+            // listBox3_1
+            // 
+            this.listBox3_1.FormattingEnabled = true;
+            this.listBox3_1.ItemHeight = 21;
+            this.listBox3_1.Location = new System.Drawing.Point(395, 75);
+            this.listBox3_1.Name = "listBox3_1";
+            this.listBox3_1.Size = new System.Drawing.Size(165, 172);
+            this.listBox3_1.Sorted = true;
+            this.listBox3_1.TabIndex = 52;
+            // 
+            // listBox2
+            // 
+            this.listBox2.FormattingEnabled = true;
+            this.listBox2.ItemHeight = 21;
+            this.listBox2.Location = new System.Drawing.Point(219, 75);
+            this.listBox2.Name = "listBox2";
+            this.listBox2.Size = new System.Drawing.Size(170, 487);
+            this.listBox2.Sorted = true;
+            this.listBox2.TabIndex = 51;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 21;
+            this.listBox1.Location = new System.Drawing.Point(42, 75);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(170, 487);
+            this.listBox1.Sorted = true;
+            this.listBox1.TabIndex = 50;
+            // 
+            // label417
+            // 
+            this.label417.AutoSize = true;
+            this.label417.Location = new System.Drawing.Point(636, 639);
+            this.label417.Name = "label417";
+            this.label417.Size = new System.Drawing.Size(116, 21);
+            this.label417.TabIndex = 82;
+            this.label417.Text = "OTH：未知Bin";
+            // 
+            // comboBox10
+            // 
+            this.comboBox10.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox10.FormattingEnabled = true;
+            this.comboBox10.Items.AddRange(new object[] {
+            "20A",
+            "OTH"});
+            this.comboBox10.Location = new System.Drawing.Point(396, 636);
+            this.comboBox10.Name = "comboBox10";
+            this.comboBox10.Size = new System.Drawing.Size(100, 29);
+            this.comboBox10.TabIndex = 81;
+            // 
+            // textBox40
+            // 
+            this.textBox40.Location = new System.Drawing.Point(152, 636);
+            this.textBox40.Name = "textBox40";
+            this.textBox40.Size = new System.Drawing.Size(100, 29);
+            this.textBox40.TabIndex = 78;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(281, 637);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(104, 25);
+            this.radioButton2.TabIndex = 80;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "特殊BIN项";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(42, 640);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(104, 25);
+            this.radioButton1.TabIndex = 79;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "常规BIN项";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // button_add1
+            // 
+            this.button_add1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add1.Location = new System.Drawing.Point(42, 572);
+            this.button_add1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add1.Name = "button_add1";
+            this.button_add1.RectColor = System.Drawing.Color.White;
+            this.button_add1.Size = new System.Drawing.Size(82, 31);
+            this.button_add1.TabIndex = 313;
+            this.button_add1.Text = "新增";
+            this.button_add1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_del1
+            // 
+            this.button_del1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del1.Location = new System.Drawing.Point(130, 572);
+            this.button_del1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del1.Name = "button_del1";
+            this.button_del1.RectColor = System.Drawing.Color.White;
+            this.button_del1.Size = new System.Drawing.Size(82, 31);
+            this.button_del1.TabIndex = 314;
+            this.button_del1.Text = "删除";
+            this.button_del1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_del2
+            // 
+            this.button_del2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del2.Location = new System.Drawing.Point(307, 572);
+            this.button_del2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del2.Name = "button_del2";
+            this.button_del2.RectColor = System.Drawing.Color.White;
+            this.button_del2.Size = new System.Drawing.Size(82, 31);
+            this.button_del2.TabIndex = 316;
+            this.button_del2.Text = "删除";
+            this.button_del2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_add2
+            // 
+            this.button_add2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add2.Location = new System.Drawing.Point(219, 572);
+            this.button_add2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add2.Name = "button_add2";
+            this.button_add2.RectColor = System.Drawing.Color.White;
+            this.button_add2.Size = new System.Drawing.Size(82, 31);
+            this.button_add2.TabIndex = 315;
+            this.button_add2.Text = "新增";
+            this.button_add2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // label418
+            // 
+            this.label418.AutoSize = true;
+            this.label418.Location = new System.Drawing.Point(516, 639);
+            this.label418.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label418.Name = "label418";
+            this.label418.Size = new System.Drawing.Size(111, 21);
+            this.label418.TabIndex = 343;
+            this.label418.Tag = "";
+            this.label418.Text = "20A：超时Bin";
+            // 
+            // panel3
+            // 
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.radioButton3_3);
+            this.panel3.Controls.Add(this.button_del3_3);
+            this.panel3.Controls.Add(this.radioButton3_2);
+            this.panel3.Controls.Add(this.button_add3_3);
+            this.panel3.Controls.Add(this.radioButton3_1);
+            this.panel3.Controls.Add(this.button_del3_2);
+            this.panel3.Controls.Add(this.button_add3_2);
+            this.panel3.Controls.Add(this.button_del3_1);
+            this.panel3.Controls.Add(this.button_add3_1);
+            this.panel3.Location = new System.Drawing.Point(567, 74);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(129, 529);
+            this.panel3.TabIndex = 354;
+            // 
+            // radioButton3_3
+            // 
+            this.radioButton3_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton3_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton3_3.Location = new System.Drawing.Point(18, 357);
+            this.radioButton3_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton3_3.Name = "radioButton3_3";
+            this.radioButton3_3.RadioButtonSize = 20;
+            this.radioButton3_3.Size = new System.Drawing.Size(95, 42);
+            this.radioButton3_3.TabIndex = 353;
+            this.radioButton3_3.Text = "分三区";
+            // 
+            // button_del3_3
+            // 
+            this.button_del3_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del3_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del3_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del3_3.Location = new System.Drawing.Point(22, 440);
+            this.button_del3_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del3_3.Name = "button_del3_3";
+            this.button_del3_3.RectColor = System.Drawing.Color.White;
+            this.button_del3_3.Size = new System.Drawing.Size(82, 31);
+            this.button_del3_3.TabIndex = 349;
+            this.button_del3_3.Text = "删除";
+            this.button_del3_3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // radioButton3_2
+            // 
+            this.radioButton3_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton3_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton3_2.Location = new System.Drawing.Point(18, 179);
+            this.radioButton3_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton3_2.Name = "radioButton3_2";
+            this.radioButton3_2.RadioButtonSize = 20;
+            this.radioButton3_2.Size = new System.Drawing.Size(95, 42);
+            this.radioButton3_2.TabIndex = 352;
+            this.radioButton3_2.Text = "分双区";
+            // 
+            // button_add3_3
+            // 
+            this.button_add3_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add3_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add3_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add3_3.Location = new System.Drawing.Point(22, 403);
+            this.button_add3_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add3_3.Name = "button_add3_3";
+            this.button_add3_3.RectColor = System.Drawing.Color.White;
+            this.button_add3_3.Size = new System.Drawing.Size(82, 31);
+            this.button_add3_3.TabIndex = 348;
+            this.button_add3_3.Text = "新增";
+            this.button_add3_3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // radioButton3_1
+            // 
+            this.radioButton3_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton3_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton3_1.Location = new System.Drawing.Point(18, 3);
+            this.radioButton3_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton3_1.Name = "radioButton3_1";
+            this.radioButton3_1.RadioButtonSize = 20;
+            this.radioButton3_1.Size = new System.Drawing.Size(95, 42);
+            this.radioButton3_1.TabIndex = 351;
+            this.radioButton3_1.Text = "不分区";
+            // 
+            // button_del3_2
+            // 
+            this.button_del3_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del3_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del3_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del3_2.Location = new System.Drawing.Point(22, 262);
+            this.button_del3_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del3_2.Name = "button_del3_2";
+            this.button_del3_2.RectColor = System.Drawing.Color.White;
+            this.button_del3_2.Size = new System.Drawing.Size(82, 31);
+            this.button_del3_2.TabIndex = 347;
+            this.button_del3_2.Text = "删除";
+            this.button_del3_2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_add3_2
+            // 
+            this.button_add3_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add3_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add3_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add3_2.Location = new System.Drawing.Point(22, 225);
+            this.button_add3_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add3_2.Name = "button_add3_2";
+            this.button_add3_2.RectColor = System.Drawing.Color.White;
+            this.button_add3_2.Size = new System.Drawing.Size(82, 31);
+            this.button_add3_2.TabIndex = 346;
+            this.button_add3_2.Text = "新增";
+            this.button_add3_2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_del3_1
+            // 
+            this.button_del3_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del3_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del3_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del3_1.Location = new System.Drawing.Point(22, 86);
+            this.button_del3_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del3_1.Name = "button_del3_1";
+            this.button_del3_1.RectColor = System.Drawing.Color.White;
+            this.button_del3_1.Size = new System.Drawing.Size(82, 31);
+            this.button_del3_1.TabIndex = 345;
+            this.button_del3_1.Text = "删除";
+            this.button_del3_1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_add3_1
+            // 
+            this.button_add3_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add3_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add3_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add3_1.Location = new System.Drawing.Point(22, 49);
+            this.button_add3_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add3_1.Name = "button_add3_1";
+            this.button_add3_1.RectColor = System.Drawing.Color.White;
+            this.button_add3_1.Size = new System.Drawing.Size(82, 31);
+            this.button_add3_1.TabIndex = 344;
+            this.button_add3_1.Text = "新增";
+            this.button_add3_1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // panel10
+            // 
+            this.panel10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel10.Controls.Add(this.radioButton4_3);
+            this.panel10.Controls.Add(this.button_del4_3);
+            this.panel10.Controls.Add(this.radioButton4_2);
+            this.panel10.Controls.Add(this.button_add4_3);
+            this.panel10.Controls.Add(this.radioButton4_1);
+            this.panel10.Controls.Add(this.button_del4_2);
+            this.panel10.Controls.Add(this.button_add4_2);
+            this.panel10.Controls.Add(this.button_del4_1);
+            this.panel10.Controls.Add(this.button_add4_1);
+            this.panel10.Location = new System.Drawing.Point(882, 75);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(129, 528);
+            this.panel10.TabIndex = 355;
+            // 
+            // radioButton4_3
+            // 
+            this.radioButton4_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton4_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton4_3.Location = new System.Drawing.Point(18, 357);
+            this.radioButton4_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton4_3.Name = "radioButton4_3";
+            this.radioButton4_3.RadioButtonSize = 20;
+            this.radioButton4_3.Size = new System.Drawing.Size(95, 42);
+            this.radioButton4_3.TabIndex = 353;
+            this.radioButton4_3.Text = "分三区";
+            // 
+            // button_del4_3
+            // 
+            this.button_del4_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del4_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del4_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del4_3.Location = new System.Drawing.Point(22, 439);
+            this.button_del4_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del4_3.Name = "button_del4_3";
+            this.button_del4_3.RectColor = System.Drawing.Color.White;
+            this.button_del4_3.Size = new System.Drawing.Size(82, 31);
+            this.button_del4_3.TabIndex = 349;
+            this.button_del4_3.Text = "删除";
+            this.button_del4_3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // radioButton4_2
+            // 
+            this.radioButton4_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton4_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton4_2.Location = new System.Drawing.Point(18, 179);
+            this.radioButton4_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton4_2.Name = "radioButton4_2";
+            this.radioButton4_2.RadioButtonSize = 20;
+            this.radioButton4_2.Size = new System.Drawing.Size(95, 42);
+            this.radioButton4_2.TabIndex = 352;
+            this.radioButton4_2.Text = "分双区";
+            // 
+            // button_add4_3
+            // 
+            this.button_add4_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add4_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add4_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add4_3.Location = new System.Drawing.Point(22, 402);
+            this.button_add4_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add4_3.Name = "button_add4_3";
+            this.button_add4_3.RectColor = System.Drawing.Color.White;
+            this.button_add4_3.Size = new System.Drawing.Size(82, 31);
+            this.button_add4_3.TabIndex = 348;
+            this.button_add4_3.Text = "新增";
+            this.button_add4_3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // radioButton4_1
+            // 
+            this.radioButton4_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton4_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton4_1.Location = new System.Drawing.Point(18, 3);
+            this.radioButton4_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton4_1.Name = "radioButton4_1";
+            this.radioButton4_1.RadioButtonSize = 20;
+            this.radioButton4_1.Size = new System.Drawing.Size(95, 42);
+            this.radioButton4_1.TabIndex = 351;
+            this.radioButton4_1.Text = "不分区";
+            // 
+            // button_del4_2
+            // 
+            this.button_del4_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del4_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del4_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del4_2.Location = new System.Drawing.Point(22, 261);
+            this.button_del4_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del4_2.Name = "button_del4_2";
+            this.button_del4_2.RectColor = System.Drawing.Color.White;
+            this.button_del4_2.Size = new System.Drawing.Size(82, 31);
+            this.button_del4_2.TabIndex = 347;
+            this.button_del4_2.Text = "删除";
+            this.button_del4_2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_add4_2
+            // 
+            this.button_add4_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add4_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add4_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add4_2.Location = new System.Drawing.Point(22, 224);
+            this.button_add4_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add4_2.Name = "button_add4_2";
+            this.button_add4_2.RectColor = System.Drawing.Color.White;
+            this.button_add4_2.Size = new System.Drawing.Size(82, 31);
+            this.button_add4_2.TabIndex = 346;
+            this.button_add4_2.Text = "新增";
+            this.button_add4_2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_del4_1
+            // 
+            this.button_del4_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del4_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del4_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del4_1.Location = new System.Drawing.Point(22, 85);
+            this.button_del4_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del4_1.Name = "button_del4_1";
+            this.button_del4_1.RectColor = System.Drawing.Color.White;
+            this.button_del4_1.Size = new System.Drawing.Size(82, 31);
+            this.button_del4_1.TabIndex = 345;
+            this.button_del4_1.Text = "删除";
+            this.button_del4_1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_add4_1
+            // 
+            this.button_add4_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add4_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add4_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add4_1.Location = new System.Drawing.Point(22, 48);
+            this.button_add4_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add4_1.Name = "button_add4_1";
+            this.button_add4_1.RectColor = System.Drawing.Color.White;
+            this.button_add4_1.Size = new System.Drawing.Size(82, 31);
+            this.button_add4_1.TabIndex = 344;
+            this.button_add4_1.Text = "新增";
+            this.button_add4_1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // panel11
+            // 
+            this.panel11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel11.Controls.Add(this.radioButton5_3);
+            this.panel11.Controls.Add(this.button_del5_3);
+            this.panel11.Controls.Add(this.radioButton5_2);
+            this.panel11.Controls.Add(this.button_add5_3);
+            this.panel11.Controls.Add(this.radioButton5_1);
+            this.panel11.Controls.Add(this.button_del5_2);
+            this.panel11.Controls.Add(this.button_add5_2);
+            this.panel11.Controls.Add(this.button_del5_1);
+            this.panel11.Controls.Add(this.button_add5_1);
+            this.panel11.Location = new System.Drawing.Point(1188, 75);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(129, 525);
+            this.panel11.TabIndex = 356;
+            // 
+            // radioButton5_3
+            // 
+            this.radioButton5_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton5_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton5_3.Location = new System.Drawing.Point(18, 357);
+            this.radioButton5_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton5_3.Name = "radioButton5_3";
+            this.radioButton5_3.RadioButtonSize = 20;
+            this.radioButton5_3.Size = new System.Drawing.Size(95, 42);
+            this.radioButton5_3.TabIndex = 353;
+            this.radioButton5_3.Text = "分三区";
+            // 
+            // button_del5_3
+            // 
+            this.button_del5_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del5_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del5_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del5_3.Location = new System.Drawing.Point(22, 436);
+            this.button_del5_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del5_3.Name = "button_del5_3";
+            this.button_del5_3.RectColor = System.Drawing.Color.White;
+            this.button_del5_3.Size = new System.Drawing.Size(82, 31);
+            this.button_del5_3.TabIndex = 349;
+            this.button_del5_3.Text = "删除";
+            this.button_del5_3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // radioButton5_2
+            // 
+            this.radioButton5_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton5_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton5_2.Location = new System.Drawing.Point(18, 179);
+            this.radioButton5_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton5_2.Name = "radioButton5_2";
+            this.radioButton5_2.RadioButtonSize = 20;
+            this.radioButton5_2.Size = new System.Drawing.Size(95, 42);
+            this.radioButton5_2.TabIndex = 352;
+            this.radioButton5_2.Text = "分双区";
+            // 
+            // button_add5_3
+            // 
+            this.button_add5_3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add5_3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add5_3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add5_3.Location = new System.Drawing.Point(22, 399);
+            this.button_add5_3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add5_3.Name = "button_add5_3";
+            this.button_add5_3.RectColor = System.Drawing.Color.White;
+            this.button_add5_3.Size = new System.Drawing.Size(82, 31);
+            this.button_add5_3.TabIndex = 348;
+            this.button_add5_3.Text = "新增";
+            this.button_add5_3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // radioButton5_1
+            // 
+            this.radioButton5_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.radioButton5_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.radioButton5_1.Location = new System.Drawing.Point(18, 3);
+            this.radioButton5_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.radioButton5_1.Name = "radioButton5_1";
+            this.radioButton5_1.RadioButtonSize = 20;
+            this.radioButton5_1.Size = new System.Drawing.Size(95, 42);
+            this.radioButton5_1.TabIndex = 351;
+            this.radioButton5_1.Text = "不分区";
+            // 
+            // button_del5_2
+            // 
+            this.button_del5_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del5_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del5_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del5_2.Location = new System.Drawing.Point(22, 258);
+            this.button_del5_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del5_2.Name = "button_del5_2";
+            this.button_del5_2.RectColor = System.Drawing.Color.White;
+            this.button_del5_2.Size = new System.Drawing.Size(82, 31);
+            this.button_del5_2.TabIndex = 347;
+            this.button_del5_2.Text = "删除";
+            this.button_del5_2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_add5_2
+            // 
+            this.button_add5_2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add5_2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add5_2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add5_2.Location = new System.Drawing.Point(22, 221);
+            this.button_add5_2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add5_2.Name = "button_add5_2";
+            this.button_add5_2.RectColor = System.Drawing.Color.White;
+            this.button_add5_2.Size = new System.Drawing.Size(82, 31);
+            this.button_add5_2.TabIndex = 346;
+            this.button_add5_2.Text = "新增";
+            this.button_add5_2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_del5_1
+            // 
+            this.button_del5_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_del5_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_del5_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_del5_1.Location = new System.Drawing.Point(22, 82);
+            this.button_del5_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_del5_1.Name = "button_del5_1";
+            this.button_del5_1.RectColor = System.Drawing.Color.White;
+            this.button_del5_1.Size = new System.Drawing.Size(82, 31);
+            this.button_del5_1.TabIndex = 345;
+            this.button_del5_1.Text = "删除";
+            this.button_del5_1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // button_add5_1
+            // 
+            this.button_add5_1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button_add5_1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_add5_1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button_add5_1.Location = new System.Drawing.Point(22, 45);
+            this.button_add5_1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.button_add5_1.Name = "button_add5_1";
+            this.button_add5_1.RectColor = System.Drawing.Color.White;
+            this.button_add5_1.Size = new System.Drawing.Size(82, 31);
+            this.button_add5_1.TabIndex = 344;
+            this.button_add5_1.Text = "新增";
+            this.button_add5_1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
             // _setting
             // 
@@ -15981,6 +20704,65 @@
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown60)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown58)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown55)).EndInit();
+            this.tabPage6.ResumeLayout(false);
+            this.uiTabControl5.ResumeLayout(false);
+            this.tabPage23.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.uiTabControl6.ResumeLayout(false);
+            this.tabPage25.ResumeLayout(false);
+            this.tabPage25.PerformLayout();
+            this.tabPage_bin.ResumeLayout(false);
+            this.tabPage_bin.PerformLayout();
+            this.tabPage26.ResumeLayout(false);
+            this.tabPage26.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView1)).EndInit();
+            this.panel5.ResumeLayout(false);
+            this.tabPage32.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
+            this.uiTabControl7.ResumeLayout(false);
+            this.tabPage24.ResumeLayout(false);
+            this.tabPage24.PerformLayout();
+            this.panel6.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.uiDataGridView2)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.pal_dout1_8.ResumeLayout(false);
+            this.pal_dout1_8.PerformLayout();
+            this.pal_dout121_128.ResumeLayout(false);
+            this.pal_dout121_128.PerformLayout();
+            this.pal_dout57_64.ResumeLayout(false);
+            this.pal_dout57_64.PerformLayout();
+            this.pal_dout89_96.ResumeLayout(false);
+            this.pal_dout89_96.PerformLayout();
+            this.pal_dout25_32.ResumeLayout(false);
+            this.pal_dout25_32.PerformLayout();
+            this.pal_dout105_112.ResumeLayout(false);
+            this.pal_dout105_112.PerformLayout();
+            this.pal_dout41_48.ResumeLayout(false);
+            this.pal_dout41_48.PerformLayout();
+            this.pal_dout73_80.ResumeLayout(false);
+            this.pal_dout73_80.PerformLayout();
+            this.pal_dout9_16.ResumeLayout(false);
+            this.pal_dout9_16.PerformLayout();
+            this.pal_dout113_120.ResumeLayout(false);
+            this.pal_dout113_120.PerformLayout();
+            this.pal_dout49_56.ResumeLayout(false);
+            this.pal_dout49_56.PerformLayout();
+            this.pal_dout81_88.ResumeLayout(false);
+            this.pal_dout81_88.PerformLayout();
+            this.pal_dout17_24.ResumeLayout(false);
+            this.pal_dout17_24.PerformLayout();
+            this.pal_dout97_104.ResumeLayout(false);
+            this.pal_dout97_104.PerformLayout();
+            this.pal_dout33_40.ResumeLayout(false);
+            this.pal_dout33_40.PerformLayout();
+            this.pal_dout65_72.ResumeLayout(false);
+            this.pal_dout65_72.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -17070,5 +21852,326 @@
         private System.Windows.Forms.Button button225;
         private System.Windows.Forms.Button button50;
         private System.Windows.Forms.Label label48;
+        private Sunny.UI.UITabControl uiTabControl5;
+        private System.Windows.Forms.TabPage tabPage23;
+        private Sunny.UI.UITabControl uiTabControl6;
+        private System.Windows.Forms.TabPage tabPage25;
+        private System.Windows.Forms.TabPage tabPage26;
+        private System.Windows.Forms.TabPage tabPage27;
+        private System.Windows.Forms.TabPage tabPage_bin;
+        private Sunny.UI.UIDataGridView uiDataGridView1;
+        private System.Windows.Forms.TabPage tabPage29;
+        private System.Windows.Forms.TabPage tabPage30;
+        private System.Windows.Forms.TabPage tabPage31;
+        private System.Windows.Forms.TabPage tabPage32;
+        private Sunny.UI.UIDataGridView uiDataGridView2;
+        private Sunny.UI.UITabControl uiTabControl7;
+        private System.Windows.Forms.TabPage tabPage24;
+        private System.Windows.Forms.TabPage tabPage33;
+        private Sunny.UI.UIButton uiButton4;
+        private Sunny.UI.UIButton uiButton3;
+        private System.Windows.Forms.Panel panel5;
+        private Sunny.UI.UIButton uiButton8;
+        private Sunny.UI.UIButton uiButton11;
+        private Sunny.UI.UIButton uiButton12;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel6;
+        private Sunny.UI.UIButton uiButton15;
+        private Sunny.UI.UIButton uiButton16;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel1;
+        private Sunny.UI.UIButton uiButton1;
+        private Sunny.UI.UIButton uiButton2;
+        private Sunny.UI.UIButton uiButton7;
+        private Sunny.UI.UIButton uiButton19;
+        private Sunny.UI.UIButton uiButton20;
+        public System.Windows.Forms.TextBox textBox26;
+        public System.Windows.Forms.Label label344;
+        public System.Windows.Forms.TextBox textBox25;
+        public System.Windows.Forms.Label label50;
+        public System.Windows.Forms.TextBox textBox24;
+        public System.Windows.Forms.Label label49;
+        public System.Windows.Forms.TextBox textBox34;
+        public System.Windows.Forms.Label label352;
+        public System.Windows.Forms.TextBox textBox35;
+        public System.Windows.Forms.Label label353;
+        public System.Windows.Forms.TextBox textBox36;
+        public System.Windows.Forms.Label label354;
+        public System.Windows.Forms.TextBox textBox32;
+        public System.Windows.Forms.Label label350;
+        public System.Windows.Forms.TextBox textBox33;
+        public System.Windows.Forms.Label label351;
+        public System.Windows.Forms.TextBox textBox31;
+        public System.Windows.Forms.Label label349;
+        public System.Windows.Forms.TextBox textBox30;
+        public System.Windows.Forms.Label label348;
+        public System.Windows.Forms.TextBox textBox27;
+        public System.Windows.Forms.Label label345;
+        public System.Windows.Forms.TextBox textBox28;
+        public System.Windows.Forms.Label label346;
+        public System.Windows.Forms.TextBox textBox29;
+        public System.Windows.Forms.Label label347;
+        public System.Windows.Forms.TextBox textBox37;
+        public System.Windows.Forms.Label label414;
+        public System.Windows.Forms.TextBox textBox38;
+        public System.Windows.Forms.Label label415;
+        public System.Windows.Forms.TextBox textBox39;
+        public System.Windows.Forms.Label label416;
+        private System.Windows.Forms.Panel pal_dout1_8;
+        private System.Windows.Forms.Label lbl_dout1;
+        private System.Windows.Forms.Label label355;
+        private System.Windows.Forms.Label lbl_dout8;
+        private System.Windows.Forms.Label lbl_dout7;
+        private System.Windows.Forms.Label lbl_dout6;
+        private System.Windows.Forms.Label lbl_dout5;
+        private System.Windows.Forms.Label lbl_dout4;
+        private System.Windows.Forms.Label lbl_dout3;
+        private System.Windows.Forms.Label lbl_dout2;
+        private System.Windows.Forms.Button Btn_close9;
+        private System.Windows.Forms.Button Btn_open9;
+        private System.Windows.Forms.Panel pal_dout121_128;
+        private System.Windows.Forms.Label lbl_dout121;
+        private System.Windows.Forms.Label label356;
+        private System.Windows.Forms.Label lbl_dout128;
+        private System.Windows.Forms.Label lbl_dout127;
+        private System.Windows.Forms.Label lbl_dout126;
+        private System.Windows.Forms.Label lbl_dout125;
+        private System.Windows.Forms.Label lbl_dout124;
+        private System.Windows.Forms.Label lbl_dout123;
+        private System.Windows.Forms.Label lbl_dout122;
+        private System.Windows.Forms.Button Btn_open8;
+        private System.Windows.Forms.Panel pal_dout57_64;
+        private System.Windows.Forms.Label lbl_dout57;
+        private System.Windows.Forms.Label label357;
+        private System.Windows.Forms.Label lbl_dout64;
+        private System.Windows.Forms.Label lbl_dout63;
+        private System.Windows.Forms.Label lbl_dout62;
+        private System.Windows.Forms.Label lbl_dout61;
+        private System.Windows.Forms.Label lbl_dout60;
+        private System.Windows.Forms.Label lbl_dout59;
+        private System.Windows.Forms.Label lbl_dout58;
+        private System.Windows.Forms.Button Btn_close10;
+        private System.Windows.Forms.Panel pal_dout89_96;
+        private System.Windows.Forms.Label lbl_dout89;
+        private System.Windows.Forms.Label label358;
+        private System.Windows.Forms.Label lbl_dout96;
+        private System.Windows.Forms.Label lbl_dout95;
+        private System.Windows.Forms.Label lbl_dout94;
+        private System.Windows.Forms.Label lbl_dout93;
+        private System.Windows.Forms.Label lbl_dout92;
+        private System.Windows.Forms.Label lbl_dout91;
+        private System.Windows.Forms.Label lbl_dout90;
+        private System.Windows.Forms.Button Btn_close8;
+        private System.Windows.Forms.Panel pal_dout25_32;
+        private System.Windows.Forms.Label lbl_dout25;
+        private System.Windows.Forms.Label label368;
+        private System.Windows.Forms.Label lbl_dout32;
+        private System.Windows.Forms.Label lbl_dout31;
+        private System.Windows.Forms.Label lbl_dout30;
+        private System.Windows.Forms.Label lbl_dout29;
+        private System.Windows.Forms.Label lbl_dout28;
+        private System.Windows.Forms.Label lbl_dout27;
+        private System.Windows.Forms.Label lbl_dout26;
+        private System.Windows.Forms.Button Btn_open10;
+        private System.Windows.Forms.Panel pal_dout105_112;
+        private System.Windows.Forms.Label lbl_dout105;
+        private System.Windows.Forms.Label label369;
+        private System.Windows.Forms.Label lbl_dout112;
+        private System.Windows.Forms.Label lbl_dout111;
+        private System.Windows.Forms.Label lbl_dout110;
+        private System.Windows.Forms.Label lbl_dout109;
+        private System.Windows.Forms.Label lbl_dout108;
+        private System.Windows.Forms.Label lbl_dout107;
+        private System.Windows.Forms.Label lbl_dout106;
+        private System.Windows.Forms.Button Btn_open7;
+        private System.Windows.Forms.Panel pal_dout41_48;
+        private System.Windows.Forms.Label lbl_dout41;
+        private System.Windows.Forms.Label label370;
+        private System.Windows.Forms.Label lbl_dout48;
+        private System.Windows.Forms.Label lbl_dout47;
+        private System.Windows.Forms.Label lbl_dout46;
+        private System.Windows.Forms.Label lbl_dout45;
+        private System.Windows.Forms.Label lbl_dout44;
+        private System.Windows.Forms.Label lbl_dout43;
+        private System.Windows.Forms.Label lbl_dout42;
+        private System.Windows.Forms.Button Btn_close11;
+        private System.Windows.Forms.Panel pal_dout73_80;
+        private System.Windows.Forms.Label lbl_dout73;
+        private System.Windows.Forms.Label label405;
+        private System.Windows.Forms.Label lbl_dout80;
+        private System.Windows.Forms.Label lbl_dout79;
+        private System.Windows.Forms.Label lbl_dout78;
+        private System.Windows.Forms.Label lbl_dout77;
+        private System.Windows.Forms.Label lbl_dout76;
+        private System.Windows.Forms.Label lbl_dout75;
+        private System.Windows.Forms.Label lbl_dout74;
+        private System.Windows.Forms.Button Btn_close7;
+        private System.Windows.Forms.Panel pal_dout9_16;
+        private System.Windows.Forms.Label lbl_dout9;
+        private System.Windows.Forms.Label label406;
+        private System.Windows.Forms.Label lbl_dout16;
+        private System.Windows.Forms.Label lbl_dout15;
+        private System.Windows.Forms.Label lbl_dout14;
+        private System.Windows.Forms.Label lbl_dout13;
+        private System.Windows.Forms.Label lbl_dout12;
+        private System.Windows.Forms.Label lbl_dout11;
+        private System.Windows.Forms.Label lbl_dout10;
+        private System.Windows.Forms.Button Btn_open11;
+        private System.Windows.Forms.Panel pal_dout113_120;
+        private System.Windows.Forms.Label lbl_dout113;
+        private System.Windows.Forms.Label label407;
+        private System.Windows.Forms.Label lbl_dout120;
+        private System.Windows.Forms.Label lbl_dout119;
+        private System.Windows.Forms.Label lbl_dout118;
+        private System.Windows.Forms.Label lbl_dout117;
+        private System.Windows.Forms.Label lbl_dout116;
+        private System.Windows.Forms.Label lbl_dout115;
+        private System.Windows.Forms.Label lbl_dout114;
+        private System.Windows.Forms.Button Btn_open6;
+        private System.Windows.Forms.Panel pal_dout49_56;
+        private System.Windows.Forms.Label lbl_dout49;
+        private System.Windows.Forms.Label label408;
+        private System.Windows.Forms.Label lbl_dout56;
+        private System.Windows.Forms.Label lbl_dout55;
+        private System.Windows.Forms.Label lbl_dout54;
+        private System.Windows.Forms.Label lbl_dout53;
+        private System.Windows.Forms.Label lbl_dout52;
+        private System.Windows.Forms.Label lbl_dout51;
+        private System.Windows.Forms.Label lbl_dout50;
+        private System.Windows.Forms.Button Btn_close12;
+        private System.Windows.Forms.Panel pal_dout81_88;
+        private System.Windows.Forms.Label lbl_dout81;
+        private System.Windows.Forms.Label label409;
+        private System.Windows.Forms.Label lbl_dout88;
+        private System.Windows.Forms.Label lbl_dout87;
+        private System.Windows.Forms.Label lbl_dout86;
+        private System.Windows.Forms.Label lbl_dout85;
+        private System.Windows.Forms.Label lbl_dout84;
+        private System.Windows.Forms.Label lbl_dout83;
+        private System.Windows.Forms.Label lbl_dout82;
+        private System.Windows.Forms.Button Btn_close6;
+        private System.Windows.Forms.Panel pal_dout17_24;
+        private System.Windows.Forms.Label lbl_dout17;
+        private System.Windows.Forms.Label label410;
+        private System.Windows.Forms.Label lbl_dout24;
+        private System.Windows.Forms.Label lbl_dout23;
+        private System.Windows.Forms.Label lbl_dout22;
+        private System.Windows.Forms.Label lbl_dout21;
+        private System.Windows.Forms.Label lbl_dout20;
+        private System.Windows.Forms.Label lbl_dout19;
+        private System.Windows.Forms.Label lbl_dout18;
+        private System.Windows.Forms.Button Btn_open12;
+        private System.Windows.Forms.Panel pal_dout97_104;
+        private System.Windows.Forms.Label lbl_dout97;
+        private System.Windows.Forms.Label label411;
+        private System.Windows.Forms.Label lbl_dout104;
+        private System.Windows.Forms.Label lbl_dout103;
+        private System.Windows.Forms.Label lbl_dout102;
+        private System.Windows.Forms.Label lbl_dout101;
+        private System.Windows.Forms.Label lbl_dout100;
+        private System.Windows.Forms.Label lbl_dout99;
+        private System.Windows.Forms.Label lbl_dout98;
+        private System.Windows.Forms.Button Btn_open5;
+        private System.Windows.Forms.Panel pal_dout33_40;
+        private System.Windows.Forms.Label lbl_dout33;
+        private System.Windows.Forms.Label label412;
+        private System.Windows.Forms.Label lbl_dout40;
+        private System.Windows.Forms.Label lbl_dout39;
+        private System.Windows.Forms.Label lbl_dout38;
+        private System.Windows.Forms.Label lbl_dout37;
+        private System.Windows.Forms.Label lbl_dout36;
+        private System.Windows.Forms.Label lbl_dout35;
+        private System.Windows.Forms.Label lbl_dout34;
+        private System.Windows.Forms.Button Btn_close13;
+        private System.Windows.Forms.Panel pal_dout65_72;
+        private System.Windows.Forms.Label lbl_dout65;
+        private System.Windows.Forms.Label label413;
+        private System.Windows.Forms.Label lbl_dout72;
+        private System.Windows.Forms.Label lbl_dout71;
+        private System.Windows.Forms.Label lbl_dout70;
+        private System.Windows.Forms.Label lbl_dout69;
+        private System.Windows.Forms.Label lbl_dout68;
+        private System.Windows.Forms.Label lbl_dout67;
+        private System.Windows.Forms.Label lbl_dout66;
+        private System.Windows.Forms.Button Btn_close5;
+        private System.Windows.Forms.Button Btn_close1;
+        private System.Windows.Forms.Button Btn_open13;
+        private System.Windows.Forms.Button Btn_open4;
+        private System.Windows.Forms.Button Btn_open1;
+        private System.Windows.Forms.Button Btn_close14;
+        private System.Windows.Forms.Button Btn_open16;
+        private System.Windows.Forms.Button Btn_close4;
+        private System.Windows.Forms.Button Btn_close2;
+        private System.Windows.Forms.Button Btn_open14;
+        private System.Windows.Forms.Button Btn_close16;
+        private System.Windows.Forms.Button Btn_open3;
+        private System.Windows.Forms.Button Btn_open2;
+        private System.Windows.Forms.Button Btn_close15;
+        private System.Windows.Forms.Button Btn_open15;
+        private System.Windows.Forms.Button Btn_close3;
+        public System.Windows.Forms.Label label418;
+        private Sunny.UI.UIButton button_del2;
+        private Sunny.UI.UIButton button_add2;
+        private Sunny.UI.UIButton button_del1;
+        private Sunny.UI.UIButton button_add1;
+        private System.Windows.Forms.Label label417;
+        private System.Windows.Forms.ComboBox comboBox10;
+        private System.Windows.Forms.TextBox textBox40;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.ListBox listBox5_3;
+        private System.Windows.Forms.ListBox listBox5_2;
+        private System.Windows.Forms.ListBox listBox4_3;
+        private System.Windows.Forms.ListBox listBox4_2;
+        private System.Windows.Forms.ListBox listBox3_3;
+        private System.Windows.Forms.ListBox listBox3_2;
+        private System.Windows.Forms.TextBox textBox_name5;
+        private System.Windows.Forms.TextBox textBox_name4;
+        private System.Windows.Forms.TextBox textBox_name3;
+        private System.Windows.Forms.TextBox textBox_name2;
+        private System.Windows.Forms.TextBox textBox_name1;
+        private System.Windows.Forms.Label label_color5;
+        private System.Windows.Forms.Label label_color4;
+        private System.Windows.Forms.Label label_color3;
+        private System.Windows.Forms.Label label_color2;
+        private System.Windows.Forms.Label label_color1;
+        private System.Windows.Forms.ListBox listBox5_1;
+        private System.Windows.Forms.ListBox listBox4_1;
+        private System.Windows.Forms.ListBox listBox3_1;
+        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Panel panel11;
+        private Sunny.UI.UIRadioButton radioButton5_3;
+        private Sunny.UI.UIButton button_del5_3;
+        private Sunny.UI.UIRadioButton radioButton5_2;
+        private Sunny.UI.UIButton button_add5_3;
+        private Sunny.UI.UIRadioButton radioButton5_1;
+        private Sunny.UI.UIButton button_del5_2;
+        private Sunny.UI.UIButton button_add5_2;
+        private Sunny.UI.UIButton button_del5_1;
+        private Sunny.UI.UIButton button_add5_1;
+        private System.Windows.Forms.Panel panel10;
+        private Sunny.UI.UIRadioButton radioButton4_3;
+        private Sunny.UI.UIButton button_del4_3;
+        private Sunny.UI.UIRadioButton radioButton4_2;
+        private Sunny.UI.UIButton button_add4_3;
+        private Sunny.UI.UIRadioButton radioButton4_1;
+        private Sunny.UI.UIButton button_del4_2;
+        private Sunny.UI.UIButton button_add4_2;
+        private Sunny.UI.UIButton button_del4_1;
+        private Sunny.UI.UIButton button_add4_1;
+        private System.Windows.Forms.Panel panel3;
+        private Sunny.UI.UIRadioButton radioButton3_3;
+        private Sunny.UI.UIButton button_del3_3;
+        private Sunny.UI.UIRadioButton radioButton3_2;
+        private Sunny.UI.UIButton button_add3_3;
+        private Sunny.UI.UIRadioButton radioButton3_1;
+        private Sunny.UI.UIButton button_del3_2;
+        private Sunny.UI.UIButton button_add3_2;
+        private Sunny.UI.UIButton button_del3_1;
+        private Sunny.UI.UIButton button_add3_1;
     }
 }

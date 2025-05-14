@@ -105,4 +105,7 @@ D:\GitHub\H5509_V2\bin\Debug\ExcelNumberFormat.xml
 D:\GitHub\H5509_V2\bin\Debug\Microsoft.Bcl.HashCode.xml
 D:\GitHub\H5509_V2\bin\Debug\RBush.xml
 D:\GitHub\H5509_V2\bin\Debug\SixLabors.Fonts.xml
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_alarm.Form_alarm.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509.FrmInputPwd.resources
+D:\GitHub\H5509_V2\bin\Debug\H5509_alarm.xlsx
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config

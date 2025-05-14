@@ -2440,8 +2440,6 @@ namespace H5509_V2
             }
         }
 
-        #endregion
-
         public string 入料手臂依次回零()
         {
             string result = 入料手臂Y回零();
@@ -2468,6 +2466,300 @@ namespace H5509_V2
             if (result != "Success") return result;
 
             return "Success";
+        }
+
+        private bool 开始检查()
+        {
+            bool iscanstart = true;
+
+            form_alarm.CancelAllAlarm();
+
+            if (!H5509归零)
+            {
+                iscanstart = false;
+                Debug.WriteLine("[Code]1400445,[Msg]设备未归零");
+                listcode.Add("1400445");
+            }
+
+
+            if (Com.IsOpenCom == false)
+            {
+                iscanstart = false;
+                Debug.WriteLine("[Code]1400430,[Msg]串口未连接");
+                listcode.Add("1400430");
+            }
+            else
+            {
+                if (Com.IsconnectTester == false)
+                {
+                    iscanstart = false;
+                    Debug.WriteLine("[Code]1400430,[Msg]未发送生产信息给测试机"); //listcode.Add("1400440");
+                    listcode.Add("1400440");
+                }
+            }
+            return iscanstart;
+        }
+
+        #endregion
+
+        public void 系统按钮检测流程()
+        {
+            string[] ioInfos =
+            {
+                "X001_开始",
+                "X002_暂停",
+                "X003_安全钮",
+                "X004_重试",
+                "X005_忽略",
+                "X006_定点停止",
+                "X007_定点开始",
+                "X008_结批",
+                "X009_一个循环",
+                "X010_归零",
+                "X011_换盘",
+                "X012_前门禁",
+                "X013_后门禁",
+                "X014_左门禁",
+                "X015_右门禁",
+                "X018_空盘门感应",
+                "X024_Load门感应",
+                "X038_BIN平移按键",
+                "X036_AUTO1门感应",
+                "X042_AUTO2门感应"
+            };
+
+            while (true)
+            {
+                string result = motionEx.GetDi(ioInfos, out string[] io);
+                if (result == "Success")
+                {
+                    bool start = io[0] == "1"; //"X001_开始"
+                    if (CheckEdgeSingal(start, ref StartRiseCache, true) || ProgramStart)
+                    {
+                        Debug.WriteLine("按下开始");
+                        ProgramStart = false;
+
+                        if (开始检查())
+                        {
+                            APPmaster.IsPause = false;
+                            APPmaster.IsStart = true;
+                            设备状态 = 1;
+
+                            结批完成 = false;
+                            motionEx.SetDo("Y001_开始灯", true);
+                            motionEx.SetDo("Y002_暂停灯", false);
+                            motionEx.SetDo("Y004_重试灯", false);
+                            motionEx.SetDo("Y005_忽略灯", false);
+                            motionEx.SetDo("Y008_结批灯", false);
+                            motionEx.SetDo("Y011_换盘灯", false);
+                        }
+                    }
+                    bool stop = io[1] == "1"; //"X002_暂停"
+                    if (CheckEdgeSingal(stop, ref StopRiseCache, true) || ProgramPause)
+                    {
+                        Debug.WriteLine("按下暂停");
+
+                        ProgramPause = false;
+                        APPmaster.IsPause = true;
+                        APPmaster.IsStart = false;
+
+                        if (设备状态 == 1) 设备状态 = 2;
+
+                        form_alarm.alarmLight(0, 1, 0, 0);
+                        motionEx.Motion.AllAxisStop();
+
+                        motionEx.SetDo("Y001_开始灯", false);
+                        motionEx.SetDo("Y002_暂停灯", true);
+                    }
+                    bool safesw = io[2] == "1"; //"X003_安全钮"
+                    if (CheckEdgeSingal(safesw, ref SafeswRiseCache, true))
+                    {
+                        Debug.WriteLine("按下安全钮");
+                    }
+                    bool again = io[3] == "1"; //X004_重试
+                    if (CheckEdgeSingal(again, ref AgainRiseCache, true))
+                    {
+                        Debug.WriteLine("按下重试");
+                        //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, true);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
+                    }
+                    bool ignore = io[4] == "1"; //X005_忽略/跳过
+                    if (CheckEdgeSingal(ignore, ref IgnoreRiseCache, true))
+                    {
+                        Debug.WriteLine("按下跳过");
+                        if (入料IC忽略 == false) 入料IC忽略 = true;
+                        if (出料IC忽略 == false) 出料IC忽略 = true;
+                        if (测试IC忽略 == false) 测试IC忽略 = true;
+                        //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
+                    }
+                    bool fixedstop = io[5] == "1"; //X006_定点停止
+                    if (CheckEdgeSingal(fixedstop, ref FixedStopRiseCache, true))
+                    {
+                        Debug.WriteLine("按下定点停止");
+                        定点停止允许 = false;
+                    }
+                    bool fixedstart = io[6] == "1"; //X007_定点开始
+                    if (CheckEdgeSingal(fixedstart, ref FixedStartRiseCache, true))
+                    {
+                        Debug.WriteLine("按下定点开始");
+                        定点停止允许 = true;
+                    }
+
+                    bool stopbatch = io[7] == "1"; //X008_结批
+                    if (CheckEdgeSingal(stopbatch, ref StopBatchRiseCache, true))
+                    {
+                        if (!强制结批标记)
+                        {
+                            if (!结批触发定时器.Enabled)
+                            {
+                                结批触发定时器.Start();
+                                Debug.WriteLine("结批按钮开始计时");
+                            }
+                        }
+                        Debug.WriteLine("按下结批");
+                        motionEx.SetDo("Y004_重试灯", false);
+                        motionEx.SetDo("Y005_忽略灯", false);
+                        motionEx.SetDo("Y008_结批灯", true);
+                        motionEx.SetDo("Y011_换盘灯", false);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, true);
+                        //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
+                    }
+                    if (CheckEdgeSingal(stopbatch, ref StopBatchFallCache, false))
+                    {
+                        结批触发定时器.Stop();
+                        Debug.WriteLine("已松开结批按钮停止计时");
+                    }
+
+                    bool onecycle = io[8] == "1"; //X009_一个循环
+                    if (CheckEdgeSingal(onecycle, ref OnecycleRiseCache, true))
+                    {
+                        Debug.WriteLine("按下一次循环");
+                    }
+                    bool home = io[9] == "1"; //X010_归零
+                    if (CheckEdgeSingal(home, ref HomeRiseCache, true))
+                    {
+                        Debug.WriteLine("按下归零");
+                        if (!H5509正在归零 && 设备状态 == 0)
+                        {
+                            H5509正在归零 = true;
+                            H5509归零 = false;
+                            IsPause = false;
+                            结批完成 = false;
+                            motionEx.SetDo("Y001_开始灯", false);
+                            motionEx.SetDo("Y002_暂停灯", false);
+                            motionEx.SetDo("Y010_归零灯", true);
+                            Task.Run(() =>
+                            {
+                                result = 整机回零流程();
+                                if (result == "Success")
+                                {
+                                    H5509归零 = true;
+                                    Debug.WriteLine("归零完成");
+                                }
+                                else Debug.WriteLine("归零失败");
+
+                                H5509正在归零 = false;
+                                motionEx.SetDo("Y010_归零灯", false);
+                                motionEx.SetDo("Y001_开始灯", false);
+                                motionEx.SetDo("Y002_暂停灯", false);
+                            });
+                        }
+                    }
+                    bool exchangetray = io[10] == "1"; //X011_换盘
+                    if (CheckEdgeSingal(exchangetray, ref ExchangetrayRiseCache, true))
+                    {
+                        Debug.WriteLine("按下换Tray");
+                    }
+
+                    bool x18 = io[15] == "1";  //X018_空盘门感应
+                    if (CheckEdgeSingal(x18, ref EmptyDoorRiseCache, true))
+                    {
+                        Debug.WriteLine("Empty仓门已关闭");
+                    }
+                    else if (CheckEdgeSingal(x18, ref EmptyDoorFallCache, false))
+                    {
+                        Debug.WriteLine("Empty仓门被打开");
+                    }
+
+                    bool x24 = io[16] == "1"; //X024_Load门感应
+                    if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
+                    {
+                        Debug.WriteLine("Load仓门已关闭");
+                    }
+                    else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
+                    {
+                        Debug.WriteLine("Load仓门被打开");
+                    }
+                    bool traymove = io[17] == "1"; //X038_BIN平移按键
+                    if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
+                    {
+                        Debug.WriteLine("按下Tray平移");
+                        if (!Tray平移运动标记 && H5509归零 && 设备状态 == 0)
+                        {
+                            Tray平移运动标记 = true;
+
+                            motionEx.SetDo("Y040_BIN平移按键灯", true);
+                            Task.Run(() =>
+                            {
+                                if (Tray平移左右标记 == 0)
+                                {
+                                    result = Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动, 1);
+                                    if (result == "Success")
+                                    {
+                                        Tray平移左右标记 = 1;
+                                    }
+                                    else Debug.WriteLine("放Tary盘轴移动失败!" + result);
+                                }
+
+                                else if (Tray平移左右标记 == 1)
+                                {
+                                    result = Fix3放IC盘轴移动(0, 1);
+                                    if (result == "Success")
+                                    {
+                                        Tray平移左右标记 = 0;
+                                    }
+                                    else Debug.WriteLine("放Tary盘轴移动失败!" + result);
+                                }
+
+                                motionEx.SetDo("Y040_BIN平移按键灯", false);
+
+                                Tray平移运动标记 = false;
+                            });
+                        }
+                    }
+
+
+                    bool x36 = io[18] == "1";  //X018_空盘门感应
+                    if (CheckEdgeSingal(x36, ref Auto1DoorRiseCache, true))
+                    {
+                        Debug.WriteLine("Auto1仓门已关闭");
+                    }
+                    else if (CheckEdgeSingal(x36, ref Auto1DoorFallCache, false))
+                    {
+                        Auto1料仓打开标记 = false;
+                        Debug.WriteLine("Auto1仓门被打开");
+                    }
+
+                    bool x42 = io[19] == "1"; //X024_Load门感应
+                    if (CheckEdgeSingal(x42, ref Auto2DoorRiseCache, true))
+                    {
+                        Debug.WriteLine("Auto2仓门已关闭");
+                    }
+                    else if (CheckEdgeSingal(x42, ref Auto2DoorFallCache, false))
+                    {
+                        Auto2料仓打开标记 = false;
+                        Debug.WriteLine("Auto2仓门被打开");
+                    }
+                }
+                Thread.Sleep(5);
+            }
         }
 
         public string 整机回零流程()
@@ -2586,8 +2878,8 @@ namespace H5509_V2
                     case 505:
                         PS初始化流程.StepName = "各轴移动到初始点";
                         Debug.WriteLine($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
-                        Task<string> auto1 = Task.Run(() => { return Auto1顶盘轴移动(183); });
-                        Task<string> auto2 = Task.Run(() => { return Auto2顶盘轴移动(183); });//182.715
+                        Task<string> auto1 = Task.Run(() => { return Auto1顶盘轴移动(Auto1初始点); });
+                        Task<string> auto2 = Task.Run(() => { return Auto2顶盘轴移动(Auto2初始点); });//182.715
                         Task<string> testp = Task.Run(() => { return 测试吸嘴_张开气缸输出(true); });
                         Task<string> testx = Task.Run(() => { return 测试手臂X移动(初始点位.测试_梭车1吸_X); });
                         Task<string> shuttle = Task.Run(() => { return 飞梭轴移动(初始点位.梭车2_后_Y); });
@@ -2730,7 +3022,7 @@ namespace H5509_V2
                     case 500:
                         PS结批流程.StepName = "路径规划";
 
-                        PS结批流程.Condition = 结批标记 && !正在结批 && !结批完成 && 设备状态 == 1
+                        PS结批流程.Condition = 结批标记 && H5509归零 && H5509初始化 && !正在结批 && !结批完成 && 设备状态 == 1
                                             //&& OutSiteQueue.Count == 0
                                             //&& InSiteQueue.Count == 0
                                             && !飞梭后入料IC[0].Contains(true) //飞梭后入料IC第1列无料
@@ -2782,6 +3074,7 @@ namespace H5509_V2
                             Load下降回零标记 = 2;
                             Auto1上顶标记 = 2;
                             Auto2上顶标记 = 2;
+                            Auto等待换盘标记 = true;
                             获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
                             if (auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要盖空盘
                             {
@@ -2855,6 +3148,9 @@ namespace H5509_V2
                         正在结批 = false;
                         结批标记 = false;
                         结批完成 = true;
+                        H5509归零 = false;
+                        H5509初始化 = false;
+                        Auto等待换盘标记 = false;
 
                         结批按钮闪烁的定时器.Stop();
                         motionEx.SetDo("Y008_结批灯", false);
@@ -4193,7 +4489,7 @@ namespace H5509_V2
                             飞梭前出料IC[colums] = new bool[] { false, false, false, false };
                             if (colums == 1)
                             {
-                                ispass = true; 
+                                ispass = true;
                                 飞梭前出料状态 = 0;
                             }
                             PS出料手臂吸放料流程.StepID = 599;
@@ -6401,259 +6697,6 @@ namespace H5509_V2
             }
         }
 
-        public void 系统按钮检测流程()
-        {
-            string[] ioInfos =
-            {
-                "X001_开始",
-                "X002_暂停",
-                "X003_安全钮",
-                "X004_重试",
-                "X005_忽略",
-                "X006_定点停止",
-                "X007_定点开始",
-                "X008_结批",
-                "X009_一个循环",
-                "X010_归零",
-                "X011_换盘",
-                "X012_前门禁",
-                "X013_后门禁",
-                "X014_左门禁",
-                "X015_右门禁",
-                "X018_空盘门感应",
-                "X024_Load门感应",
-                "X038_BIN平移按键",
-                "X036_AUTO1门感应",
-                "X042_AUTO2门感应"
-            };
-
-            while (true)
-            {
-                string result = motionEx.GetDi(ioInfos, out string[] io);
-                if (result == "Success")
-                {
-                    bool start = io[0] == "1"; //"X001_开始"
-                    if (CheckEdgeSingal(start, ref StartRiseCache, true) || ProgramStart)
-                    {
-                        Debug.WriteLine("按下开始");
-                        ProgramStart = false;
-                        APPmaster.IsPause = false;
-                        APPmaster.IsStart = true;
-                        设备状态 = 1;
-
-                        motionEx.SetDo("Y001_开始灯", true);
-                        motionEx.SetDo("Y002_暂停灯", false);
-                        motionEx.SetDo("Y004_重试灯", false);
-                        motionEx.SetDo("Y005_忽略灯", false);
-                        motionEx.SetDo("Y008_结批灯", false);
-                        motionEx.SetDo("Y011_换盘灯", false);
-                    }
-                    bool stop = io[1] == "1"; //"X002_暂停"
-                    if (CheckEdgeSingal(stop, ref StopRiseCache, true) || ProgramPause)
-                    {
-                        Debug.WriteLine("按下暂停");
-
-                        ProgramPause = false;
-                        APPmaster.IsPause = true;
-                        APPmaster.IsStart = false;
-
-                        if (设备状态 == 1) 设备状态 = 2;
-
-                        motionEx.Motion.AllAxisStop();
-
-                        motionEx.SetDo("Y001_开始灯", false);
-                        motionEx.SetDo("Y002_暂停灯", true);
-                    }
-                    bool safesw = io[2] == "1"; //"X003_安全钮"
-                    if (CheckEdgeSingal(safesw, ref SafeswRiseCache, true))
-                    {
-                        Debug.WriteLine("按下安全钮");
-                    }
-                    bool again = io[3] == "1"; //X004_重试
-                    if (CheckEdgeSingal(again, ref AgainRiseCache, true))
-                    {
-                        Debug.WriteLine("按下重试");
-                        //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, true);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
-                    }
-                    bool ignore = io[4] == "1"; //X005_忽略/跳过
-                    if (CheckEdgeSingal(ignore, ref IgnoreRiseCache, true))
-                    {
-                        Debug.WriteLine("按下跳过");
-                        if (入料IC忽略 == false) 入料IC忽略 = true;
-                        if (出料IC忽略 == false) 出料IC忽略 = true;
-                        if (测试IC忽略 == false) 测试IC忽略 = true;
-                        //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
-                    }
-                    bool fixedstop = io[5] == "1"; //X006_定点停止
-                    if (CheckEdgeSingal(fixedstop, ref FixedStopRiseCache, true))
-                    {
-                        Debug.WriteLine("按下定点停止");
-                        定点停止允许 = false;
-                    }
-                    bool fixedstart = io[6] == "1"; //X007_定点开始
-                    if (CheckEdgeSingal(fixedstart, ref FixedStartRiseCache, true))
-                    {
-                        Debug.WriteLine("按下定点开始");
-                        定点停止允许 = true;
-                    }
-
-                    bool stopbatch = io[7] == "1"; //X008_结批
-                    if (CheckEdgeSingal(stopbatch, ref StopBatchRiseCache, true))
-                    {
-                        if (!强制结批标记)
-                        {
-                            if (!结批触发定时器.Enabled)
-                            {
-                                结批触发定时器.Start();
-                                Debug.WriteLine("结批按钮开始计时");
-                            }
-                        }
-                        Debug.WriteLine("按下结批");
-                        motionEx.SetDo("Y004_重试灯", false);
-                        motionEx.SetDo("Y005_忽略灯", false);
-                        motionEx.SetDo("Y008_结批灯", true);
-                        motionEx.SetDo("Y011_换盘灯", false);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, true);
-                        //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
-                    }
-                    if (CheckEdgeSingal(stopbatch, ref StopBatchFallCache, false))
-                    {
-                        结批触发定时器.Stop();
-                        Debug.WriteLine("已松开结批按钮停止计时");
-                    }
-
-                    bool onecycle = io[8] == "1"; //X009_一个循环
-                    if (CheckEdgeSingal(onecycle, ref OnecycleRiseCache, true))
-                    {
-                        Debug.WriteLine("按下一次循环");
-                    }
-                    bool home = io[9] == "1"; //X010_归零
-                    if (CheckEdgeSingal(home, ref HomeRiseCache, true))
-                    {
-                        Debug.WriteLine("按下归零");
-                        if (!H5509正在归零 && 设备状态 == 0)
-                        {
-                            H5509正在归零 = true;
-                            H5509归零 = false;
-                            IsPause = false;
-                            motionEx.SetDo("Y001_开始灯", false);
-                            motionEx.SetDo("Y002_暂停灯", false);
-                            motionEx.SetDo("Y010_归零灯", true);
-                            Task.Run(() =>
-                            {
-                                result = 整机回零流程();
-                                if (result == "Success")
-                                {
-                                    H5509归零 = true;
-                                    Debug.WriteLine("归零完成");
-                                }
-                                else Debug.WriteLine("归零失败");
-
-                                H5509正在归零 = false;
-                                motionEx.SetDo("Y010_归零灯", false);
-                                motionEx.SetDo("Y001_开始灯", false);
-                                motionEx.SetDo("Y002_暂停灯", false);
-                            });
-                        }
-                    }
-                    bool exchangetray = io[10] == "1"; //X011_换盘
-                    if (CheckEdgeSingal(exchangetray, ref ExchangetrayRiseCache, true))
-                    {
-                        Debug.WriteLine("按下换Tray");
-                    }
-
-                    bool x18 = io[15] == "1";  //X018_空盘门感应
-                    if (CheckEdgeSingal(x18, ref EmptyDoorRiseCache, true))
-                    {
-                        Debug.WriteLine("Empty仓门已关闭");
-                    }
-                    else if (CheckEdgeSingal(x18, ref EmptyDoorFallCache, false))
-                    {
-                        Debug.WriteLine("Empty仓门被打开");
-                    }
-
-                    bool x24 = io[16] == "1"; //X024_Load门感应
-                    if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
-                    {
-                        Debug.WriteLine("Load仓门已关闭");
-                    }
-                    else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
-                    {
-                        Debug.WriteLine("Load仓门被打开");
-                    }
-                    bool traymove = io[17] == "1"; //X038_BIN平移按键
-                    if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
-                    {
-                        Debug.WriteLine("按下Tray平移");
-                        if (!Tray平移运动标记 && 设备状态 == 0)
-                        {
-                            Tray平移运动标记 = true;
-
-                            motionEx.SetDo("Y040_BIN平移按键灯", true);
-                            Task.Run(() =>
-                            {
-                                if (Tray平移左右标记 == 0)
-                                {
-                                    result = Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动, 1);
-                                    if (result == "Success")
-                                    {
-                                        Tray平移左右标记 = 1;
-                                    }
-                                    else Debug.WriteLine("放Tary盘轴移动失败!" + result);
-                                }
-
-                                else if (Tray平移左右标记 == 1)
-                                {
-                                    result = Fix3放IC盘轴移动(0, 1);
-                                    if (result == "Success")
-                                    {
-                                        Tray平移左右标记 = 0;
-                                    }
-                                    else Debug.WriteLine("放Tary盘轴移动失败!" + result);
-                                }
-
-                                motionEx.SetDo("Y040_BIN平移按键灯", false);
-
-                                Tray平移运动标记 = false;
-                            });
-                        }
-                    }
-
-
-                    bool x36 = io[18] == "1";  //X018_空盘门感应
-                    if (CheckEdgeSingal(x36, ref Auto1DoorRiseCache, true))
-                    {
-                        Debug.WriteLine("Auto1仓门已关闭");
-                    }
-                    else if (CheckEdgeSingal(x36, ref Auto1DoorFallCache, false))
-                    {
-                        Auto1料仓打开标记 = false;
-                        Debug.WriteLine("Auto1仓门被打开");
-                    }
-
-                    bool x42 = io[19] == "1"; //X024_Load门感应
-                    if (CheckEdgeSingal(x42, ref Auto2DoorRiseCache, true))
-                    {
-                        Debug.WriteLine("Auto2仓门已关闭");
-                    }
-                    else if (CheckEdgeSingal(x42, ref Auto2DoorFallCache, false))
-                    {
-                        Auto2料仓打开标记 = false;
-                        Debug.WriteLine("Auto2仓门被打开");
-                    }
-                }
-                Thread.Sleep(5);
-            }
-        }
-
         public void Empty顶盘流程()
         {
             string result = "";
@@ -7005,7 +7048,7 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             Empty下降回零标记 = 1;
-                            PS空盘下降回零流程.StepID = 515;
+                            PS空盘下降回零流程.StepID = 500;
                         }
                         else
                         {

@@ -308,7 +308,6 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox26 = new System.Windows.Forms.GroupBox();
             this.label1593 = new System.Windows.Forms.Label();
-            this.chk_AS = new System.Windows.Forms.CheckBox();
             this.textBoxtemprature = new System.Windows.Forms.TextBox();
             this.label1591 = new System.Windows.Forms.Label();
             this.textBoxtestflow = new System.Windows.Forms.TextBox();
@@ -360,6 +359,7 @@
             this.label144 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
+            this.uiCheckBox1 = new Sunny.UI.UICheckBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel_left.SuspendLayout();
             this.pal_setdutstate.SuspendLayout();
@@ -4332,8 +4332,8 @@
             // 
             this.groupBox26.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox26.Controls.Add(this.uiCheckBox1);
             this.groupBox26.Controls.Add(this.label1593);
-            this.groupBox26.Controls.Add(this.chk_AS);
             this.groupBox26.Controls.Add(this.textBoxtemprature);
             this.groupBox26.Controls.Add(this.label1591);
             this.groupBox26.Controls.Add(this.textBoxtestflow);
@@ -4386,19 +4386,6 @@
             this.label1593.Size = new System.Drawing.Size(50, 25);
             this.label1593.TabIndex = 103;
             this.label1593.Text = "温度";
-            // 
-            // chk_AS
-            // 
-            this.chk_AS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.chk_AS.AutoSize = true;
-            this.chk_AS.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.chk_AS.Location = new System.Drawing.Point(475, 365);
-            this.chk_AS.Name = "chk_AS";
-            this.chk_AS.Size = new System.Drawing.Size(69, 29);
-            this.chk_AS.TabIndex = 146;
-            this.chk_AS.Tag = "@0@";
-            this.chk_AS.Text = "手动";
-            this.chk_AS.UseVisualStyleBackColor = true;
             // 
             // textBoxtemprature
             // 
@@ -4482,7 +4469,6 @@
             this.label111.Size = new System.Drawing.Size(69, 25);
             this.label111.TabIndex = 96;
             this.label111.Text = "工单号";
-            this.label111.Click += new System.EventHandler(this.label111_Click);
             // 
             // label1601
             // 
@@ -4494,7 +4480,6 @@
             this.label1601.Size = new System.Drawing.Size(88, 25);
             this.label1601.TabIndex = 121;
             this.label1601.Text = "固件版本";
-            this.label1601.Click += new System.EventHandler(this.label1601_Click);
             // 
             // label148
             // 
@@ -4506,7 +4491,6 @@
             this.label148.Size = new System.Drawing.Size(88, 25);
             this.label148.TabIndex = 95;
             this.label148.Text = "机器编号";
-            this.label148.Click += new System.EventHandler(this.label148_Click);
             // 
             // textBoxmachine
             // 
@@ -4580,6 +4564,7 @@
             this.textBoxFlowcaedno.TabIndex = 97;
             this.textBoxFlowcaedno.Tag = "@0@";
             this.textBoxFlowcaedno.Text = "FT20241111TEST";
+            this.textBoxFlowcaedno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxFlowcaedno_KeyDown);
             // 
             // textBoxmark
             // 
@@ -4652,7 +4637,6 @@
             this.label1600.Size = new System.Drawing.Size(116, 25);
             this.label1600.TabIndex = 119;
             this.label1600.Text = "CheckCode";
-            this.label1600.Click += new System.EventHandler(this.label1600_Click);
             // 
             // label1596
             // 
@@ -4664,7 +4648,6 @@
             this.label1596.Size = new System.Drawing.Size(69, 25);
             this.label1596.TabIndex = 109;
             this.label1596.Text = "用户名";
-            this.label1596.Click += new System.EventHandler(this.label1596_Click);
             // 
             // label1603
             // 
@@ -4676,7 +4659,6 @@
             this.label1603.Size = new System.Drawing.Size(88, 25);
             this.label1603.TabIndex = 123;
             this.label1603.Text = "日期编码";
-            this.label1603.Click += new System.EventHandler(this.label1603_Click);
             // 
             // label1599
             // 
@@ -4723,7 +4705,6 @@
             this.labeltype.Size = new System.Drawing.Size(88, 25);
             this.labeltype.TabIndex = 93;
             this.labeltype.Text = "产品类型";
-            this.labeltype.Click += new System.EventHandler(this.labeltype_Click);
             // 
             // textBoxLotno
             // 
@@ -4747,7 +4728,6 @@
             this.CUSTOM.Size = new System.Drawing.Size(69, 25);
             this.CUSTOM.TabIndex = 125;
             this.CUSTOM.Text = "客户码";
-            this.CUSTOM.Click += new System.EventHandler(this.CUSTOM_Click);
             // 
             // textBoxdatecode
             // 
@@ -4772,7 +4752,6 @@
             this.label114.Size = new System.Drawing.Size(88, 25);
             this.label114.TabIndex = 98;
             this.label114.Text = "产品批号";
-            this.label114.Click += new System.EventHandler(this.label114_Click);
             // 
             // textBoxmqty
             // 
@@ -4783,7 +4762,7 @@
             this.textBoxmqty.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
             this.textBoxmqty.Name = "textBoxmqty";
             this.textBoxmqty.ReadOnly = true;
-            this.textBoxmqty.Size = new System.Drawing.Size(325, 33);
+            this.textBoxmqty.Size = new System.Drawing.Size(313, 33);
             this.textBoxmqty.TabIndex = 114;
             this.textBoxmqty.Text = "999";
             // 
@@ -5066,6 +5045,22 @@
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
             // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.AutoSize = true;
+            this.uiCheckBox1.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox1.CheckBoxSize = 20;
+            this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox1.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox1.Location = new System.Drawing.Point(467, 366);
+            this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.Size = new System.Drawing.Size(77, 30);
+            this.uiCheckBox1.TabIndex = 181;
+            this.uiCheckBox1.Text = "手动";
+            this.uiCheckBox1.CheckedChanged += new System.EventHandler(this.uiCheckBox1_CheckedChanged);
+            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -5084,6 +5079,7 @@
             this.Controls.Add(this.Panel_left);
             this.Name = "_main";
             this.Size = new System.Drawing.Size(1896, 990);
+            this.Load += new System.EventHandler(this._main_Load);
             this.Panel_left.ResumeLayout(false);
             this.pal_setdutstate.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -5163,7 +5159,6 @@
         private System.Windows.Forms.Label label143;
         private System.Windows.Forms.GroupBox groupBox26;
         private System.Windows.Forms.Label label1593;
-        private System.Windows.Forms.CheckBox chk_AS;
         private System.Windows.Forms.TextBox textBoxtemprature;
         private System.Windows.Forms.Label label1591;
         private System.Windows.Forms.TextBox textBoxtestflow;
@@ -5474,5 +5469,6 @@
         private Sunny.UI.UICheckBox Chk_switch5;
         private Sunny.UI.UIDigitalLabel uiDigitalLabel17;
         private System.Windows.Forms.Label label6;
+        private Sunny.UI.UICheckBox uiCheckBox1;
     }
 }

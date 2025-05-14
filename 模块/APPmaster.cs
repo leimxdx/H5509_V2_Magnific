@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using H5509_alarm;
 using Sunny.UI.Win32;
 
 namespace H5509_V2
@@ -19,7 +20,7 @@ namespace H5509_V2
     public class APPmaster
     {
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
-
+        public static string SQLServerConnString = "";
         /// <summary>
         /// 板卡初始成功标志
         /// </summary>
@@ -37,6 +38,10 @@ namespace H5509_V2
 
         public static SetupInfo 设置信息 = new SetupInfo();
 
+        public static Form_alarm form_alarm = new Form_alarm();
+
+        public static List<string> listcode = new List<string>(); //保存报警代码
+
         public static string 当前档案;
 
         public static bool IsStart = false; //开始
@@ -52,6 +57,8 @@ namespace H5509_V2
         public static bool ProgramBtnPause = false; //程序按钮暂停
 
         public static bool IsForecePause = false; //强制停止
+
+        public static bool 退出标记 = false;
 
         public static int 设备状态 = 0;
 

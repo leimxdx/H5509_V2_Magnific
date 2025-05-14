@@ -11,12 +11,14 @@ namespace H5509_V2
     /// </summary>
     public class SetupInfo
     {
-        public string 设置信息名称 { get; set; }
+        public string 档案名称 { get; set; }
 
         public TrayInfo Tray盘信息 { get; set; } = new TrayInfo();
 
         public OffsetPoint OffsetPoint { get; set; } = new OffsetPoint();
 
         public SiteStatus 开site信息 { get; set; } = new SiteStatus();
+
+        public BinParam 分BIN信息 { get; set; } = new BinParam();
     }
 }
