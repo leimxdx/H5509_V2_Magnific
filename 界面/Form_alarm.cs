@@ -2805,7 +2805,7 @@ namespace H5509_alarm
                         //添加动态报警信息
                         switch (alarmCode)
                         {
-                            case "1400500": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("oth",Oth).Replace("othAll",OthAll); break;
+                            case "1400500": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("oth",oth).Replace("othAll",othAll); break;
                             //case "1400600":
                             //    {
                             //        SqlServer.runSql(SQLServerConnString, "select id from SocketUse where num>" + motionEx.testerIFParam.socket使用次数,out List<object> res);

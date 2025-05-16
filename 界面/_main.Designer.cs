@@ -48,7 +48,39 @@
             this.uiDigitalLabel2 = new Sunny.UI.UIDigitalLabel();
             this.uiDigitalLabel1 = new Sunny.UI.UIDigitalLabel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.Btn_open16 = new Sunny.UI.UIButton();
+            this.Btn_open14 = new Sunny.UI.UIButton();
+            this.Btn_open12 = new Sunny.UI.UIButton();
+            this.Btn_open10 = new Sunny.UI.UIButton();
+            this.Btn_open8 = new Sunny.UI.UIButton();
+            this.Btn_open6 = new Sunny.UI.UIButton();
+            this.Btn_open4 = new Sunny.UI.UIButton();
+            this.Btn_open2 = new Sunny.UI.UIButton();
+            this.Btn_open15 = new Sunny.UI.UIButton();
+            this.Btn_open13 = new Sunny.UI.UIButton();
+            this.Btn_open11 = new Sunny.UI.UIButton();
+            this.Btn_open9 = new Sunny.UI.UIButton();
+            this.Btn_open7 = new Sunny.UI.UIButton();
+            this.Btn_open5 = new Sunny.UI.UIButton();
+            this.Btn_open3 = new Sunny.UI.UIButton();
+            this.Btn_open1 = new Sunny.UI.UIButton();
+            this.Btn_close16 = new Sunny.UI.UIButton();
+            this.Btn_close8 = new Sunny.UI.UIButton();
+            this.Btn_close2 = new Sunny.UI.UIButton();
+            this.Btn_close14 = new Sunny.UI.UIButton();
+            this.Btn_close10 = new Sunny.UI.UIButton();
+            this.Btn_close6 = new Sunny.UI.UIButton();
+            this.Btn_close12 = new Sunny.UI.UIButton();
+            this.Btn_close4 = new Sunny.UI.UIButton();
+            this.Btn_close15 = new Sunny.UI.UIButton();
+            this.Btn_close7 = new Sunny.UI.UIButton();
+            this.Btn_close1 = new Sunny.UI.UIButton();
+            this.Btn_close13 = new Sunny.UI.UIButton();
+            this.Btn_close9 = new Sunny.UI.UIButton();
+            this.Btn_close5 = new Sunny.UI.UIButton();
+            this.Btn_close11 = new Sunny.UI.UIButton();
             this.Chk_switch15 = new Sunny.UI.UICheckBox();
+            this.Btn_close3 = new Sunny.UI.UIButton();
             this.Chk_switch14 = new Sunny.UI.UICheckBox();
             this.Chk_switch13 = new Sunny.UI.UICheckBox();
             this.Chk_switch12 = new Sunny.UI.UICheckBox();
@@ -73,9 +105,7 @@
             this.lbl_dout3 = new System.Windows.Forms.Label();
             this.lbl_dout2 = new System.Windows.Forms.Label();
             this.Chk_switch16 = new Sunny.UI.UICheckBox();
-            this.Btn_close9 = new System.Windows.Forms.Button();
             this.Chk_switch1 = new Sunny.UI.UICheckBox();
-            this.Btn_open9 = new System.Windows.Forms.Button();
             this.pal_dout121_128 = new System.Windows.Forms.Panel();
             this.lbl_dout121 = new System.Windows.Forms.Label();
             this.label172 = new System.Windows.Forms.Label();
@@ -86,7 +116,6 @@
             this.lbl_dout124 = new System.Windows.Forms.Label();
             this.lbl_dout123 = new System.Windows.Forms.Label();
             this.lbl_dout122 = new System.Windows.Forms.Label();
-            this.Btn_open8 = new System.Windows.Forms.Button();
             this.pal_dout57_64 = new System.Windows.Forms.Panel();
             this.lbl_dout57 = new System.Windows.Forms.Label();
             this.label164 = new System.Windows.Forms.Label();
@@ -97,7 +126,6 @@
             this.lbl_dout60 = new System.Windows.Forms.Label();
             this.lbl_dout59 = new System.Windows.Forms.Label();
             this.lbl_dout58 = new System.Windows.Forms.Label();
-            this.Btn_close10 = new System.Windows.Forms.Button();
             this.pal_dout89_96 = new System.Windows.Forms.Panel();
             this.lbl_dout89 = new System.Windows.Forms.Label();
             this.label168 = new System.Windows.Forms.Label();
@@ -108,7 +136,6 @@
             this.lbl_dout92 = new System.Windows.Forms.Label();
             this.lbl_dout91 = new System.Windows.Forms.Label();
             this.lbl_dout90 = new System.Windows.Forms.Label();
-            this.Btn_close8 = new System.Windows.Forms.Button();
             this.pal_dout25_32 = new System.Windows.Forms.Panel();
             this.lbl_dout25 = new System.Windows.Forms.Label();
             this.label160 = new System.Windows.Forms.Label();
@@ -119,7 +146,6 @@
             this.lbl_dout28 = new System.Windows.Forms.Label();
             this.lbl_dout27 = new System.Windows.Forms.Label();
             this.lbl_dout26 = new System.Windows.Forms.Label();
-            this.Btn_open10 = new System.Windows.Forms.Button();
             this.pal_dout105_112 = new System.Windows.Forms.Panel();
             this.lbl_dout105 = new System.Windows.Forms.Label();
             this.label170 = new System.Windows.Forms.Label();
@@ -130,7 +156,6 @@
             this.lbl_dout108 = new System.Windows.Forms.Label();
             this.lbl_dout107 = new System.Windows.Forms.Label();
             this.lbl_dout106 = new System.Windows.Forms.Label();
-            this.Btn_open7 = new System.Windows.Forms.Button();
             this.pal_dout41_48 = new System.Windows.Forms.Panel();
             this.lbl_dout41 = new System.Windows.Forms.Label();
             this.label162 = new System.Windows.Forms.Label();
@@ -141,7 +166,6 @@
             this.lbl_dout44 = new System.Windows.Forms.Label();
             this.lbl_dout43 = new System.Windows.Forms.Label();
             this.lbl_dout42 = new System.Windows.Forms.Label();
-            this.Btn_close11 = new System.Windows.Forms.Button();
             this.pal_dout73_80 = new System.Windows.Forms.Panel();
             this.lbl_dout73 = new System.Windows.Forms.Label();
             this.label166 = new System.Windows.Forms.Label();
@@ -152,7 +176,6 @@
             this.lbl_dout76 = new System.Windows.Forms.Label();
             this.lbl_dout75 = new System.Windows.Forms.Label();
             this.lbl_dout74 = new System.Windows.Forms.Label();
-            this.Btn_close7 = new System.Windows.Forms.Button();
             this.pal_dout9_16 = new System.Windows.Forms.Panel();
             this.lbl_dout9 = new System.Windows.Forms.Label();
             this.label158 = new System.Windows.Forms.Label();
@@ -163,7 +186,6 @@
             this.lbl_dout12 = new System.Windows.Forms.Label();
             this.lbl_dout11 = new System.Windows.Forms.Label();
             this.lbl_dout10 = new System.Windows.Forms.Label();
-            this.Btn_open11 = new System.Windows.Forms.Button();
             this.pal_dout113_120 = new System.Windows.Forms.Panel();
             this.lbl_dout113 = new System.Windows.Forms.Label();
             this.label171 = new System.Windows.Forms.Label();
@@ -174,7 +196,6 @@
             this.lbl_dout116 = new System.Windows.Forms.Label();
             this.lbl_dout115 = new System.Windows.Forms.Label();
             this.lbl_dout114 = new System.Windows.Forms.Label();
-            this.Btn_open6 = new System.Windows.Forms.Button();
             this.pal_dout49_56 = new System.Windows.Forms.Panel();
             this.lbl_dout49 = new System.Windows.Forms.Label();
             this.label163 = new System.Windows.Forms.Label();
@@ -185,7 +206,6 @@
             this.lbl_dout52 = new System.Windows.Forms.Label();
             this.lbl_dout51 = new System.Windows.Forms.Label();
             this.lbl_dout50 = new System.Windows.Forms.Label();
-            this.Btn_close12 = new System.Windows.Forms.Button();
             this.pal_dout81_88 = new System.Windows.Forms.Panel();
             this.lbl_dout81 = new System.Windows.Forms.Label();
             this.label167 = new System.Windows.Forms.Label();
@@ -196,7 +216,6 @@
             this.lbl_dout84 = new System.Windows.Forms.Label();
             this.lbl_dout83 = new System.Windows.Forms.Label();
             this.lbl_dout82 = new System.Windows.Forms.Label();
-            this.Btn_close6 = new System.Windows.Forms.Button();
             this.pal_dout17_24 = new System.Windows.Forms.Panel();
             this.lbl_dout17 = new System.Windows.Forms.Label();
             this.label159 = new System.Windows.Forms.Label();
@@ -207,7 +226,6 @@
             this.lbl_dout20 = new System.Windows.Forms.Label();
             this.lbl_dout19 = new System.Windows.Forms.Label();
             this.lbl_dout18 = new System.Windows.Forms.Label();
-            this.Btn_open12 = new System.Windows.Forms.Button();
             this.pal_dout97_104 = new System.Windows.Forms.Panel();
             this.lbl_dout97 = new System.Windows.Forms.Label();
             this.label169 = new System.Windows.Forms.Label();
@@ -218,7 +236,6 @@
             this.lbl_dout100 = new System.Windows.Forms.Label();
             this.lbl_dout99 = new System.Windows.Forms.Label();
             this.lbl_dout98 = new System.Windows.Forms.Label();
-            this.Btn_open5 = new System.Windows.Forms.Button();
             this.pal_dout33_40 = new System.Windows.Forms.Panel();
             this.lbl_dout33 = new System.Windows.Forms.Label();
             this.label161 = new System.Windows.Forms.Label();
@@ -229,7 +246,6 @@
             this.lbl_dout36 = new System.Windows.Forms.Label();
             this.lbl_dout35 = new System.Windows.Forms.Label();
             this.lbl_dout34 = new System.Windows.Forms.Label();
-            this.Btn_close13 = new System.Windows.Forms.Button();
             this.pal_dout65_72 = new System.Windows.Forms.Panel();
             this.lbl_dout65 = new System.Windows.Forms.Label();
             this.label165 = new System.Windows.Forms.Label();
@@ -240,22 +256,6 @@
             this.lbl_dout68 = new System.Windows.Forms.Label();
             this.lbl_dout67 = new System.Windows.Forms.Label();
             this.lbl_dout66 = new System.Windows.Forms.Label();
-            this.Btn_close5 = new System.Windows.Forms.Button();
-            this.Btn_close1 = new System.Windows.Forms.Button();
-            this.Btn_open13 = new System.Windows.Forms.Button();
-            this.Btn_open4 = new System.Windows.Forms.Button();
-            this.Btn_open1 = new System.Windows.Forms.Button();
-            this.Btn_close14 = new System.Windows.Forms.Button();
-            this.Btn_open16 = new System.Windows.Forms.Button();
-            this.Btn_close4 = new System.Windows.Forms.Button();
-            this.Btn_close2 = new System.Windows.Forms.Button();
-            this.Btn_open14 = new System.Windows.Forms.Button();
-            this.Btn_close16 = new System.Windows.Forms.Button();
-            this.Btn_open3 = new System.Windows.Forms.Button();
-            this.Btn_open2 = new System.Windows.Forms.Button();
-            this.Btn_close15 = new System.Windows.Forms.Button();
-            this.Btn_open15 = new System.Windows.Forms.Button();
-            this.Btn_close3 = new System.Windows.Forms.Button();
             this.groupBox25 = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -301,12 +301,14 @@
             this.label123 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_driverStatus = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Txt_loadnum = new System.Windows.Forms.TextBox();
             this.label139 = new System.Windows.Forms.Label();
             this.Panel_right = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.groupBox26 = new System.Windows.Forms.GroupBox();
+            this.uiCheckBox1 = new Sunny.UI.UICheckBox();
             this.label1593 = new System.Windows.Forms.Label();
             this.textBoxtemprature = new System.Windows.Forms.TextBox();
             this.label1591 = new System.Windows.Forms.Label();
@@ -359,8 +361,6 @@
             this.label144 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
-            this.uiCheckBox1 = new Sunny.UI.UICheckBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel_left.SuspendLayout();
             this.pal_setdutstate.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -384,12 +384,12 @@
             this.groupBox25.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.panel31.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.Panel_right.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox26.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_left
@@ -734,7 +734,39 @@
             // panel4
             // 
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel4.Controls.Add(this.Btn_open16);
+            this.panel4.Controls.Add(this.Btn_open14);
+            this.panel4.Controls.Add(this.Btn_open12);
+            this.panel4.Controls.Add(this.Btn_open10);
+            this.panel4.Controls.Add(this.Btn_open8);
+            this.panel4.Controls.Add(this.Btn_open6);
+            this.panel4.Controls.Add(this.Btn_open4);
+            this.panel4.Controls.Add(this.Btn_open2);
+            this.panel4.Controls.Add(this.Btn_open15);
+            this.panel4.Controls.Add(this.Btn_open13);
+            this.panel4.Controls.Add(this.Btn_open11);
+            this.panel4.Controls.Add(this.Btn_open9);
+            this.panel4.Controls.Add(this.Btn_open7);
+            this.panel4.Controls.Add(this.Btn_open5);
+            this.panel4.Controls.Add(this.Btn_open3);
+            this.panel4.Controls.Add(this.Btn_open1);
+            this.panel4.Controls.Add(this.Btn_close16);
+            this.panel4.Controls.Add(this.Btn_close8);
+            this.panel4.Controls.Add(this.Btn_close2);
+            this.panel4.Controls.Add(this.Btn_close14);
+            this.panel4.Controls.Add(this.Btn_close10);
+            this.panel4.Controls.Add(this.Btn_close6);
+            this.panel4.Controls.Add(this.Btn_close12);
+            this.panel4.Controls.Add(this.Btn_close4);
+            this.panel4.Controls.Add(this.Btn_close15);
+            this.panel4.Controls.Add(this.Btn_close7);
+            this.panel4.Controls.Add(this.Btn_close1);
+            this.panel4.Controls.Add(this.Btn_close13);
+            this.panel4.Controls.Add(this.Btn_close9);
+            this.panel4.Controls.Add(this.Btn_close5);
+            this.panel4.Controls.Add(this.Btn_close11);
             this.panel4.Controls.Add(this.Chk_switch15);
+            this.panel4.Controls.Add(this.Btn_close3);
             this.panel4.Controls.Add(this.Chk_switch14);
             this.panel4.Controls.Add(this.Chk_switch13);
             this.panel4.Controls.Add(this.Chk_switch12);
@@ -750,58 +782,429 @@
             this.panel4.Controls.Add(this.Chk_switch2);
             this.panel4.Controls.Add(this.pal_dout1_8);
             this.panel4.Controls.Add(this.Chk_switch16);
-            this.panel4.Controls.Add(this.Btn_close9);
             this.panel4.Controls.Add(this.Chk_switch1);
-            this.panel4.Controls.Add(this.Btn_open9);
             this.panel4.Controls.Add(this.pal_dout121_128);
-            this.panel4.Controls.Add(this.Btn_open8);
             this.panel4.Controls.Add(this.pal_dout57_64);
-            this.panel4.Controls.Add(this.Btn_close10);
             this.panel4.Controls.Add(this.pal_dout89_96);
-            this.panel4.Controls.Add(this.Btn_close8);
             this.panel4.Controls.Add(this.pal_dout25_32);
-            this.panel4.Controls.Add(this.Btn_open10);
             this.panel4.Controls.Add(this.pal_dout105_112);
-            this.panel4.Controls.Add(this.Btn_open7);
             this.panel4.Controls.Add(this.pal_dout41_48);
-            this.panel4.Controls.Add(this.Btn_close11);
             this.panel4.Controls.Add(this.pal_dout73_80);
-            this.panel4.Controls.Add(this.Btn_close7);
             this.panel4.Controls.Add(this.pal_dout9_16);
-            this.panel4.Controls.Add(this.Btn_open11);
             this.panel4.Controls.Add(this.pal_dout113_120);
-            this.panel4.Controls.Add(this.Btn_open6);
             this.panel4.Controls.Add(this.pal_dout49_56);
-            this.panel4.Controls.Add(this.Btn_close12);
             this.panel4.Controls.Add(this.pal_dout81_88);
-            this.panel4.Controls.Add(this.Btn_close6);
             this.panel4.Controls.Add(this.pal_dout17_24);
-            this.panel4.Controls.Add(this.Btn_open12);
             this.panel4.Controls.Add(this.pal_dout97_104);
-            this.panel4.Controls.Add(this.Btn_open5);
             this.panel4.Controls.Add(this.pal_dout33_40);
-            this.panel4.Controls.Add(this.Btn_close13);
             this.panel4.Controls.Add(this.pal_dout65_72);
-            this.panel4.Controls.Add(this.Btn_close5);
-            this.panel4.Controls.Add(this.Btn_close1);
-            this.panel4.Controls.Add(this.Btn_open13);
-            this.panel4.Controls.Add(this.Btn_open4);
-            this.panel4.Controls.Add(this.Btn_open1);
-            this.panel4.Controls.Add(this.Btn_close14);
-            this.panel4.Controls.Add(this.Btn_open16);
-            this.panel4.Controls.Add(this.Btn_close4);
-            this.panel4.Controls.Add(this.Btn_close2);
-            this.panel4.Controls.Add(this.Btn_open14);
-            this.panel4.Controls.Add(this.Btn_close16);
-            this.panel4.Controls.Add(this.Btn_open3);
-            this.panel4.Controls.Add(this.Btn_open2);
-            this.panel4.Controls.Add(this.Btn_close15);
-            this.panel4.Controls.Add(this.Btn_open15);
-            this.panel4.Controls.Add(this.Btn_close3);
             this.panel4.Location = new System.Drawing.Point(7, 5);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1284, 229);
             this.panel4.TabIndex = 167;
+            // 
+            // Btn_open16
+            // 
+            this.Btn_open16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open16.Enabled = false;
+            this.Btn_open16.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open16.Location = new System.Drawing.Point(1197, 193);
+            this.Btn_open16.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open16.Name = "Btn_open16";
+            this.Btn_open16.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open16.TabIndex = 208;
+            this.Btn_open16.Text = "打开";
+            this.Btn_open16.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open14
+            // 
+            this.Btn_open14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open14.Enabled = false;
+            this.Btn_open14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open14.Location = new System.Drawing.Point(1041, 193);
+            this.Btn_open14.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open14.Name = "Btn_open14";
+            this.Btn_open14.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open14.TabIndex = 207;
+            this.Btn_open14.Text = "打开";
+            this.Btn_open14.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open12
+            // 
+            this.Btn_open12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open12.Enabled = false;
+            this.Btn_open12.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open12.Location = new System.Drawing.Point(885, 193);
+            this.Btn_open12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open12.Name = "Btn_open12";
+            this.Btn_open12.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open12.TabIndex = 206;
+            this.Btn_open12.Text = "打开";
+            this.Btn_open12.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open10
+            // 
+            this.Btn_open10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open10.Enabled = false;
+            this.Btn_open10.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open10.Location = new System.Drawing.Point(729, 193);
+            this.Btn_open10.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open10.Name = "Btn_open10";
+            this.Btn_open10.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open10.TabIndex = 205;
+            this.Btn_open10.Text = "打开";
+            this.Btn_open10.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open8
+            // 
+            this.Btn_open8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open8.Enabled = false;
+            this.Btn_open8.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open8.Location = new System.Drawing.Point(573, 193);
+            this.Btn_open8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open8.Name = "Btn_open8";
+            this.Btn_open8.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open8.TabIndex = 204;
+            this.Btn_open8.Text = "打开";
+            this.Btn_open8.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open6
+            // 
+            this.Btn_open6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open6.Enabled = false;
+            this.Btn_open6.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open6.Location = new System.Drawing.Point(417, 193);
+            this.Btn_open6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open6.Name = "Btn_open6";
+            this.Btn_open6.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open6.TabIndex = 203;
+            this.Btn_open6.Text = "打开";
+            this.Btn_open6.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open4
+            // 
+            this.Btn_open4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open4.Enabled = false;
+            this.Btn_open4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open4.Location = new System.Drawing.Point(261, 193);
+            this.Btn_open4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open4.Name = "Btn_open4";
+            this.Btn_open4.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open4.TabIndex = 202;
+            this.Btn_open4.Text = "打开";
+            this.Btn_open4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open2
+            // 
+            this.Btn_open2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open2.Enabled = false;
+            this.Btn_open2.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open2.Location = new System.Drawing.Point(105, 193);
+            this.Btn_open2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open2.Name = "Btn_open2";
+            this.Btn_open2.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open2.TabIndex = 201;
+            this.Btn_open2.Text = "打开";
+            this.Btn_open2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open15
+            // 
+            this.Btn_open15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open15.Enabled = false;
+            this.Btn_open15.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open15.Location = new System.Drawing.Point(1119, 193);
+            this.Btn_open15.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open15.Name = "Btn_open15";
+            this.Btn_open15.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open15.TabIndex = 200;
+            this.Btn_open15.Text = "打开";
+            this.Btn_open15.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open13
+            // 
+            this.Btn_open13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open13.Enabled = false;
+            this.Btn_open13.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open13.Location = new System.Drawing.Point(963, 193);
+            this.Btn_open13.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open13.Name = "Btn_open13";
+            this.Btn_open13.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open13.TabIndex = 199;
+            this.Btn_open13.Text = "打开";
+            this.Btn_open13.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open11
+            // 
+            this.Btn_open11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open11.Enabled = false;
+            this.Btn_open11.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open11.Location = new System.Drawing.Point(807, 193);
+            this.Btn_open11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open11.Name = "Btn_open11";
+            this.Btn_open11.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open11.TabIndex = 198;
+            this.Btn_open11.Text = "打开";
+            this.Btn_open11.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open9
+            // 
+            this.Btn_open9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open9.Enabled = false;
+            this.Btn_open9.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open9.Location = new System.Drawing.Point(651, 193);
+            this.Btn_open9.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open9.Name = "Btn_open9";
+            this.Btn_open9.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open9.TabIndex = 197;
+            this.Btn_open9.Text = "打开";
+            this.Btn_open9.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open7
+            // 
+            this.Btn_open7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open7.Enabled = false;
+            this.Btn_open7.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open7.Location = new System.Drawing.Point(495, 193);
+            this.Btn_open7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open7.Name = "Btn_open7";
+            this.Btn_open7.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open7.TabIndex = 196;
+            this.Btn_open7.Text = "打开";
+            this.Btn_open7.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open5
+            // 
+            this.Btn_open5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open5.Enabled = false;
+            this.Btn_open5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open5.Location = new System.Drawing.Point(339, 193);
+            this.Btn_open5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open5.Name = "Btn_open5";
+            this.Btn_open5.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open5.TabIndex = 195;
+            this.Btn_open5.Text = "打开";
+            this.Btn_open5.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open3
+            // 
+            this.Btn_open3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open3.Enabled = false;
+            this.Btn_open3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open3.Location = new System.Drawing.Point(183, 193);
+            this.Btn_open3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open3.Name = "Btn_open3";
+            this.Btn_open3.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open3.TabIndex = 194;
+            this.Btn_open3.Text = "打开";
+            this.Btn_open3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_open1
+            // 
+            this.Btn_open1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_open1.Enabled = false;
+            this.Btn_open1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_open1.Location = new System.Drawing.Point(27, 193);
+            this.Btn_open1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_open1.Name = "Btn_open1";
+            this.Btn_open1.Size = new System.Drawing.Size(58, 27);
+            this.Btn_open1.TabIndex = 193;
+            this.Btn_open1.Text = "打开";
+            this.Btn_open1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close16
+            // 
+            this.Btn_close16.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close16.Enabled = false;
+            this.Btn_close16.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close16.Location = new System.Drawing.Point(1197, 161);
+            this.Btn_close16.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close16.Name = "Btn_close16";
+            this.Btn_close16.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close16.TabIndex = 192;
+            this.Btn_close16.Text = "关闭";
+            this.Btn_close16.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close8
+            // 
+            this.Btn_close8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close8.Enabled = false;
+            this.Btn_close8.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close8.Location = new System.Drawing.Point(573, 161);
+            this.Btn_close8.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close8.Name = "Btn_close8";
+            this.Btn_close8.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close8.TabIndex = 188;
+            this.Btn_close8.Text = "关闭";
+            this.Btn_close8.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close2
+            // 
+            this.Btn_close2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close2.Enabled = false;
+            this.Btn_close2.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close2.Location = new System.Drawing.Point(105, 161);
+            this.Btn_close2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close2.Name = "Btn_close2";
+            this.Btn_close2.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close2.TabIndex = 185;
+            this.Btn_close2.Text = "关闭";
+            this.Btn_close2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close14
+            // 
+            this.Btn_close14.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close14.Enabled = false;
+            this.Btn_close14.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close14.Location = new System.Drawing.Point(1041, 161);
+            this.Btn_close14.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close14.Name = "Btn_close14";
+            this.Btn_close14.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close14.TabIndex = 191;
+            this.Btn_close14.Text = "关闭";
+            this.Btn_close14.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close10
+            // 
+            this.Btn_close10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close10.Enabled = false;
+            this.Btn_close10.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close10.Location = new System.Drawing.Point(729, 161);
+            this.Btn_close10.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close10.Name = "Btn_close10";
+            this.Btn_close10.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close10.TabIndex = 189;
+            this.Btn_close10.Text = "关闭";
+            this.Btn_close10.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close6
+            // 
+            this.Btn_close6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close6.Enabled = false;
+            this.Btn_close6.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close6.Location = new System.Drawing.Point(417, 161);
+            this.Btn_close6.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close6.Name = "Btn_close6";
+            this.Btn_close6.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close6.TabIndex = 187;
+            this.Btn_close6.Text = "关闭";
+            this.Btn_close6.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close12
+            // 
+            this.Btn_close12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close12.Enabled = false;
+            this.Btn_close12.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close12.Location = new System.Drawing.Point(885, 161);
+            this.Btn_close12.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close12.Name = "Btn_close12";
+            this.Btn_close12.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close12.TabIndex = 190;
+            this.Btn_close12.Text = "关闭";
+            this.Btn_close12.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close4
+            // 
+            this.Btn_close4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close4.Enabled = false;
+            this.Btn_close4.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close4.Location = new System.Drawing.Point(261, 161);
+            this.Btn_close4.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close4.Name = "Btn_close4";
+            this.Btn_close4.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close4.TabIndex = 186;
+            this.Btn_close4.Text = "关闭";
+            this.Btn_close4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close15
+            // 
+            this.Btn_close15.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close15.Enabled = false;
+            this.Btn_close15.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close15.Location = new System.Drawing.Point(1119, 161);
+            this.Btn_close15.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close15.Name = "Btn_close15";
+            this.Btn_close15.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close15.TabIndex = 184;
+            this.Btn_close15.Text = "关闭";
+            this.Btn_close15.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close7
+            // 
+            this.Btn_close7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close7.Enabled = false;
+            this.Btn_close7.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close7.Location = new System.Drawing.Point(495, 161);
+            this.Btn_close7.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close7.Name = "Btn_close7";
+            this.Btn_close7.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close7.TabIndex = 124;
+            this.Btn_close7.Text = "关闭";
+            this.Btn_close7.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close1
+            // 
+            this.Btn_close1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close1.Enabled = false;
+            this.Btn_close1.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close1.Location = new System.Drawing.Point(27, 161);
+            this.Btn_close1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close1.Name = "Btn_close1";
+            this.Btn_close1.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close1.TabIndex = 121;
+            this.Btn_close1.Text = "关闭";
+            this.Btn_close1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close13
+            // 
+            this.Btn_close13.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close13.Enabled = false;
+            this.Btn_close13.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close13.Location = new System.Drawing.Point(963, 161);
+            this.Btn_close13.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close13.Name = "Btn_close13";
+            this.Btn_close13.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close13.TabIndex = 183;
+            this.Btn_close13.Text = "关闭";
+            this.Btn_close13.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close9
+            // 
+            this.Btn_close9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close9.Enabled = false;
+            this.Btn_close9.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close9.Location = new System.Drawing.Point(651, 161);
+            this.Btn_close9.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close9.Name = "Btn_close9";
+            this.Btn_close9.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close9.TabIndex = 181;
+            this.Btn_close9.Text = "关闭";
+            this.Btn_close9.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close5
+            // 
+            this.Btn_close5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close5.Enabled = false;
+            this.Btn_close5.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close5.Location = new System.Drawing.Point(339, 161);
+            this.Btn_close5.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close5.Name = "Btn_close5";
+            this.Btn_close5.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close5.TabIndex = 123;
+            this.Btn_close5.Text = "关闭";
+            this.Btn_close5.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            // 
+            // Btn_close11
+            // 
+            this.Btn_close11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close11.Enabled = false;
+            this.Btn_close11.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close11.Location = new System.Drawing.Point(807, 161);
+            this.Btn_close11.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close11.Name = "Btn_close11";
+            this.Btn_close11.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close11.TabIndex = 182;
+            this.Btn_close11.Text = "关闭";
+            this.Btn_close11.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
             // Chk_switch15
             // 
@@ -816,6 +1219,19 @@
             this.Chk_switch15.Name = "Chk_switch15";
             this.Chk_switch15.Size = new System.Drawing.Size(27, 25);
             this.Chk_switch15.TabIndex = 180;
+            // 
+            // Btn_close3
+            // 
+            this.Btn_close3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Btn_close3.Enabled = false;
+            this.Btn_close3.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.Btn_close3.Location = new System.Drawing.Point(183, 161);
+            this.Btn_close3.MinimumSize = new System.Drawing.Size(1, 1);
+            this.Btn_close3.Name = "Btn_close3";
+            this.Btn_close3.Size = new System.Drawing.Size(58, 27);
+            this.Btn_close3.TabIndex = 122;
+            this.Btn_close3.Text = "关闭";
+            this.Btn_close3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
             // Chk_switch14
             // 
@@ -1021,7 +1437,6 @@
             // 
             // lbl_dout1
             // 
-            this.lbl_dout1.AutoSize = true;
             this.lbl_dout1.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout1.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1045,7 +1460,6 @@
             // 
             // lbl_dout8
             // 
-            this.lbl_dout8.AutoSize = true;
             this.lbl_dout8.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout8.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1059,7 +1473,6 @@
             // 
             // lbl_dout7
             // 
-            this.lbl_dout7.AutoSize = true;
             this.lbl_dout7.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout7.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1073,7 +1486,6 @@
             // 
             // lbl_dout6
             // 
-            this.lbl_dout6.AutoSize = true;
             this.lbl_dout6.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout6.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1087,7 +1499,6 @@
             // 
             // lbl_dout5
             // 
-            this.lbl_dout5.AutoSize = true;
             this.lbl_dout5.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout5.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1101,7 +1512,6 @@
             // 
             // lbl_dout4
             // 
-            this.lbl_dout4.AutoSize = true;
             this.lbl_dout4.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout4.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1115,7 +1525,6 @@
             // 
             // lbl_dout3
             // 
-            this.lbl_dout3.AutoSize = true;
             this.lbl_dout3.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout3.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1129,7 +1538,6 @@
             // 
             // lbl_dout2
             // 
-            this.lbl_dout2.AutoSize = true;
             this.lbl_dout2.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout2.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1155,18 +1563,6 @@
             this.Chk_switch16.Size = new System.Drawing.Size(27, 25);
             this.Chk_switch16.TabIndex = 166;
             // 
-            // Btn_close9
-            // 
-            this.Btn_close9.Enabled = false;
-            this.Btn_close9.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close9.Location = new System.Drawing.Point(651, 160);
-            this.Btn_close9.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close9.Name = "Btn_close9";
-            this.Btn_close9.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close9.TabIndex = 127;
-            this.Btn_close9.Text = "关闭";
-            this.Btn_close9.UseVisualStyleBackColor = true;
-            // 
             // Chk_switch1
             // 
             this.Chk_switch1.AutoSize = true;
@@ -1180,18 +1576,6 @@
             this.Chk_switch1.Name = "Chk_switch1";
             this.Chk_switch1.Size = new System.Drawing.Size(27, 25);
             this.Chk_switch1.TabIndex = 161;
-            // 
-            // Btn_open9
-            // 
-            this.Btn_open9.Enabled = false;
-            this.Btn_open9.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open9.Location = new System.Drawing.Point(651, 191);
-            this.Btn_open9.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open9.Name = "Btn_open9";
-            this.Btn_open9.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open9.TabIndex = 128;
-            this.Btn_open9.Text = "打开";
-            this.Btn_open9.UseVisualStyleBackColor = true;
             // 
             // pal_dout121_128
             // 
@@ -1215,7 +1599,6 @@
             // 
             // lbl_dout121
             // 
-            this.lbl_dout121.AutoSize = true;
             this.lbl_dout121.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout121.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout121.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1238,7 +1621,6 @@
             // 
             // lbl_dout128
             // 
-            this.lbl_dout128.AutoSize = true;
             this.lbl_dout128.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout128.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout128.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1252,7 +1634,6 @@
             // 
             // lbl_dout127
             // 
-            this.lbl_dout127.AutoSize = true;
             this.lbl_dout127.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout127.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout127.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1266,7 +1647,6 @@
             // 
             // lbl_dout126
             // 
-            this.lbl_dout126.AutoSize = true;
             this.lbl_dout126.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout126.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout126.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1280,7 +1660,6 @@
             // 
             // lbl_dout125
             // 
-            this.lbl_dout125.AutoSize = true;
             this.lbl_dout125.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout125.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout125.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1294,7 +1673,6 @@
             // 
             // lbl_dout124
             // 
-            this.lbl_dout124.AutoSize = true;
             this.lbl_dout124.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout124.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout124.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1308,7 +1686,6 @@
             // 
             // lbl_dout123
             // 
-            this.lbl_dout123.AutoSize = true;
             this.lbl_dout123.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout123.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout123.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1322,7 +1699,6 @@
             // 
             // lbl_dout122
             // 
-            this.lbl_dout122.AutoSize = true;
             this.lbl_dout122.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout122.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout122.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1333,18 +1709,6 @@
             this.lbl_dout122.TabIndex = 1;
             this.lbl_dout122.Text = "2";
             this.lbl_dout122.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_open8
-            // 
-            this.Btn_open8.Enabled = false;
-            this.Btn_open8.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open8.Location = new System.Drawing.Point(573, 191);
-            this.Btn_open8.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open8.Name = "Btn_open8";
-            this.Btn_open8.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open8.TabIndex = 126;
-            this.Btn_open8.Text = "打开";
-            this.Btn_open8.UseVisualStyleBackColor = true;
             // 
             // pal_dout57_64
             // 
@@ -1368,7 +1732,6 @@
             // 
             // lbl_dout57
             // 
-            this.lbl_dout57.AutoSize = true;
             this.lbl_dout57.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout57.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout57.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1391,7 +1754,6 @@
             // 
             // lbl_dout64
             // 
-            this.lbl_dout64.AutoSize = true;
             this.lbl_dout64.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout64.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout64.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1405,7 +1767,6 @@
             // 
             // lbl_dout63
             // 
-            this.lbl_dout63.AutoSize = true;
             this.lbl_dout63.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout63.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout63.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1419,7 +1780,6 @@
             // 
             // lbl_dout62
             // 
-            this.lbl_dout62.AutoSize = true;
             this.lbl_dout62.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout62.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout62.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1433,7 +1793,6 @@
             // 
             // lbl_dout61
             // 
-            this.lbl_dout61.AutoSize = true;
             this.lbl_dout61.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout61.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout61.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1447,7 +1806,6 @@
             // 
             // lbl_dout60
             // 
-            this.lbl_dout60.AutoSize = true;
             this.lbl_dout60.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout60.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout60.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1461,7 +1819,6 @@
             // 
             // lbl_dout59
             // 
-            this.lbl_dout59.AutoSize = true;
             this.lbl_dout59.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout59.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout59.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1475,7 +1832,6 @@
             // 
             // lbl_dout58
             // 
-            this.lbl_dout58.AutoSize = true;
             this.lbl_dout58.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout58.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout58.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1486,18 +1842,6 @@
             this.lbl_dout58.TabIndex = 1;
             this.lbl_dout58.Text = "2";
             this.lbl_dout58.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close10
-            // 
-            this.Btn_close10.Enabled = false;
-            this.Btn_close10.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close10.Location = new System.Drawing.Point(729, 160);
-            this.Btn_close10.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close10.Name = "Btn_close10";
-            this.Btn_close10.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close10.TabIndex = 129;
-            this.Btn_close10.Text = "关闭";
-            this.Btn_close10.UseVisualStyleBackColor = true;
             // 
             // pal_dout89_96
             // 
@@ -1521,7 +1865,6 @@
             // 
             // lbl_dout89
             // 
-            this.lbl_dout89.AutoSize = true;
             this.lbl_dout89.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout89.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout89.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1544,7 +1887,6 @@
             // 
             // lbl_dout96
             // 
-            this.lbl_dout96.AutoSize = true;
             this.lbl_dout96.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout96.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout96.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1558,7 +1900,6 @@
             // 
             // lbl_dout95
             // 
-            this.lbl_dout95.AutoSize = true;
             this.lbl_dout95.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout95.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout95.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1572,7 +1913,6 @@
             // 
             // lbl_dout94
             // 
-            this.lbl_dout94.AutoSize = true;
             this.lbl_dout94.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout94.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout94.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1586,7 +1926,6 @@
             // 
             // lbl_dout93
             // 
-            this.lbl_dout93.AutoSize = true;
             this.lbl_dout93.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout93.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout93.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1600,7 +1939,6 @@
             // 
             // lbl_dout92
             // 
-            this.lbl_dout92.AutoSize = true;
             this.lbl_dout92.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout92.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout92.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1614,7 +1952,6 @@
             // 
             // lbl_dout91
             // 
-            this.lbl_dout91.AutoSize = true;
             this.lbl_dout91.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout91.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout91.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1628,7 +1965,6 @@
             // 
             // lbl_dout90
             // 
-            this.lbl_dout90.AutoSize = true;
             this.lbl_dout90.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout90.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout90.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1639,18 +1975,6 @@
             this.lbl_dout90.TabIndex = 1;
             this.lbl_dout90.Text = "2";
             this.lbl_dout90.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close8
-            // 
-            this.Btn_close8.Enabled = false;
-            this.Btn_close8.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close8.Location = new System.Drawing.Point(573, 160);
-            this.Btn_close8.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close8.Name = "Btn_close8";
-            this.Btn_close8.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close8.TabIndex = 125;
-            this.Btn_close8.Text = "关闭";
-            this.Btn_close8.UseVisualStyleBackColor = true;
             // 
             // pal_dout25_32
             // 
@@ -1674,7 +1998,6 @@
             // 
             // lbl_dout25
             // 
-            this.lbl_dout25.AutoSize = true;
             this.lbl_dout25.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout25.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout25.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1697,7 +2020,6 @@
             // 
             // lbl_dout32
             // 
-            this.lbl_dout32.AutoSize = true;
             this.lbl_dout32.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout32.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout32.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1711,7 +2033,6 @@
             // 
             // lbl_dout31
             // 
-            this.lbl_dout31.AutoSize = true;
             this.lbl_dout31.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout31.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout31.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1725,7 +2046,6 @@
             // 
             // lbl_dout30
             // 
-            this.lbl_dout30.AutoSize = true;
             this.lbl_dout30.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout30.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout30.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1739,7 +2059,6 @@
             // 
             // lbl_dout29
             // 
-            this.lbl_dout29.AutoSize = true;
             this.lbl_dout29.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout29.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout29.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1753,7 +2072,6 @@
             // 
             // lbl_dout28
             // 
-            this.lbl_dout28.AutoSize = true;
             this.lbl_dout28.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout28.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout28.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1767,7 +2085,6 @@
             // 
             // lbl_dout27
             // 
-            this.lbl_dout27.AutoSize = true;
             this.lbl_dout27.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout27.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout27.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1781,7 +2098,6 @@
             // 
             // lbl_dout26
             // 
-            this.lbl_dout26.AutoSize = true;
             this.lbl_dout26.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout26.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout26.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1792,18 +2108,6 @@
             this.lbl_dout26.TabIndex = 1;
             this.lbl_dout26.Text = "2";
             this.lbl_dout26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_open10
-            // 
-            this.Btn_open10.Enabled = false;
-            this.Btn_open10.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open10.Location = new System.Drawing.Point(729, 191);
-            this.Btn_open10.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open10.Name = "Btn_open10";
-            this.Btn_open10.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open10.TabIndex = 130;
-            this.Btn_open10.Text = "打开";
-            this.Btn_open10.UseVisualStyleBackColor = true;
             // 
             // pal_dout105_112
             // 
@@ -1827,7 +2131,6 @@
             // 
             // lbl_dout105
             // 
-            this.lbl_dout105.AutoSize = true;
             this.lbl_dout105.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout105.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout105.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1850,7 +2153,6 @@
             // 
             // lbl_dout112
             // 
-            this.lbl_dout112.AutoSize = true;
             this.lbl_dout112.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout112.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout112.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1864,7 +2166,6 @@
             // 
             // lbl_dout111
             // 
-            this.lbl_dout111.AutoSize = true;
             this.lbl_dout111.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout111.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout111.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1878,7 +2179,6 @@
             // 
             // lbl_dout110
             // 
-            this.lbl_dout110.AutoSize = true;
             this.lbl_dout110.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout110.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout110.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1892,7 +2192,6 @@
             // 
             // lbl_dout109
             // 
-            this.lbl_dout109.AutoSize = true;
             this.lbl_dout109.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout109.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout109.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1906,7 +2205,6 @@
             // 
             // lbl_dout108
             // 
-            this.lbl_dout108.AutoSize = true;
             this.lbl_dout108.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout108.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout108.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1920,7 +2218,6 @@
             // 
             // lbl_dout107
             // 
-            this.lbl_dout107.AutoSize = true;
             this.lbl_dout107.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout107.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout107.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1934,7 +2231,6 @@
             // 
             // lbl_dout106
             // 
-            this.lbl_dout106.AutoSize = true;
             this.lbl_dout106.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout106.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout106.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -1945,18 +2241,6 @@
             this.lbl_dout106.TabIndex = 1;
             this.lbl_dout106.Text = "2";
             this.lbl_dout106.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_open7
-            // 
-            this.Btn_open7.Enabled = false;
-            this.Btn_open7.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open7.Location = new System.Drawing.Point(495, 191);
-            this.Btn_open7.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open7.Name = "Btn_open7";
-            this.Btn_open7.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open7.TabIndex = 124;
-            this.Btn_open7.Text = "打开";
-            this.Btn_open7.UseVisualStyleBackColor = true;
             // 
             // pal_dout41_48
             // 
@@ -1980,7 +2264,6 @@
             // 
             // lbl_dout41
             // 
-            this.lbl_dout41.AutoSize = true;
             this.lbl_dout41.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout41.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout41.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2003,7 +2286,6 @@
             // 
             // lbl_dout48
             // 
-            this.lbl_dout48.AutoSize = true;
             this.lbl_dout48.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout48.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout48.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2017,7 +2299,6 @@
             // 
             // lbl_dout47
             // 
-            this.lbl_dout47.AutoSize = true;
             this.lbl_dout47.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout47.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout47.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2031,7 +2312,6 @@
             // 
             // lbl_dout46
             // 
-            this.lbl_dout46.AutoSize = true;
             this.lbl_dout46.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout46.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout46.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2045,7 +2325,6 @@
             // 
             // lbl_dout45
             // 
-            this.lbl_dout45.AutoSize = true;
             this.lbl_dout45.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout45.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout45.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2059,7 +2338,6 @@
             // 
             // lbl_dout44
             // 
-            this.lbl_dout44.AutoSize = true;
             this.lbl_dout44.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout44.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout44.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2073,7 +2351,6 @@
             // 
             // lbl_dout43
             // 
-            this.lbl_dout43.AutoSize = true;
             this.lbl_dout43.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout43.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout43.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2087,7 +2364,6 @@
             // 
             // lbl_dout42
             // 
-            this.lbl_dout42.AutoSize = true;
             this.lbl_dout42.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout42.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout42.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2098,18 +2374,6 @@
             this.lbl_dout42.TabIndex = 1;
             this.lbl_dout42.Text = "2";
             this.lbl_dout42.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close11
-            // 
-            this.Btn_close11.Enabled = false;
-            this.Btn_close11.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close11.Location = new System.Drawing.Point(807, 160);
-            this.Btn_close11.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close11.Name = "Btn_close11";
-            this.Btn_close11.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close11.TabIndex = 131;
-            this.Btn_close11.Text = "关闭";
-            this.Btn_close11.UseVisualStyleBackColor = true;
             // 
             // pal_dout73_80
             // 
@@ -2133,7 +2397,6 @@
             // 
             // lbl_dout73
             // 
-            this.lbl_dout73.AutoSize = true;
             this.lbl_dout73.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout73.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout73.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2156,7 +2419,6 @@
             // 
             // lbl_dout80
             // 
-            this.lbl_dout80.AutoSize = true;
             this.lbl_dout80.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout80.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout80.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2170,7 +2432,6 @@
             // 
             // lbl_dout79
             // 
-            this.lbl_dout79.AutoSize = true;
             this.lbl_dout79.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout79.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout79.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2184,7 +2445,6 @@
             // 
             // lbl_dout78
             // 
-            this.lbl_dout78.AutoSize = true;
             this.lbl_dout78.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout78.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout78.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2198,7 +2458,6 @@
             // 
             // lbl_dout77
             // 
-            this.lbl_dout77.AutoSize = true;
             this.lbl_dout77.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout77.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout77.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2212,7 +2471,6 @@
             // 
             // lbl_dout76
             // 
-            this.lbl_dout76.AutoSize = true;
             this.lbl_dout76.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout76.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout76.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2226,7 +2484,6 @@
             // 
             // lbl_dout75
             // 
-            this.lbl_dout75.AutoSize = true;
             this.lbl_dout75.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout75.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout75.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2240,7 +2497,6 @@
             // 
             // lbl_dout74
             // 
-            this.lbl_dout74.AutoSize = true;
             this.lbl_dout74.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout74.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout74.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2251,18 +2507,6 @@
             this.lbl_dout74.TabIndex = 1;
             this.lbl_dout74.Text = "2";
             this.lbl_dout74.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close7
-            // 
-            this.Btn_close7.Enabled = false;
-            this.Btn_close7.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close7.Location = new System.Drawing.Point(495, 160);
-            this.Btn_close7.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close7.Name = "Btn_close7";
-            this.Btn_close7.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close7.TabIndex = 123;
-            this.Btn_close7.Text = "关闭";
-            this.Btn_close7.UseVisualStyleBackColor = true;
             // 
             // pal_dout9_16
             // 
@@ -2286,7 +2530,6 @@
             // 
             // lbl_dout9
             // 
-            this.lbl_dout9.AutoSize = true;
             this.lbl_dout9.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout9.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout9.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2309,7 +2552,6 @@
             // 
             // lbl_dout16
             // 
-            this.lbl_dout16.AutoSize = true;
             this.lbl_dout16.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout16.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout16.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2323,7 +2565,6 @@
             // 
             // lbl_dout15
             // 
-            this.lbl_dout15.AutoSize = true;
             this.lbl_dout15.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout15.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout15.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2337,7 +2578,6 @@
             // 
             // lbl_dout14
             // 
-            this.lbl_dout14.AutoSize = true;
             this.lbl_dout14.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout14.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout14.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2351,7 +2591,6 @@
             // 
             // lbl_dout13
             // 
-            this.lbl_dout13.AutoSize = true;
             this.lbl_dout13.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout13.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout13.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2365,7 +2604,6 @@
             // 
             // lbl_dout12
             // 
-            this.lbl_dout12.AutoSize = true;
             this.lbl_dout12.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout12.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout12.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2379,7 +2617,6 @@
             // 
             // lbl_dout11
             // 
-            this.lbl_dout11.AutoSize = true;
             this.lbl_dout11.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout11.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2393,7 +2630,6 @@
             // 
             // lbl_dout10
             // 
-            this.lbl_dout10.AutoSize = true;
             this.lbl_dout10.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout10.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2404,18 +2640,6 @@
             this.lbl_dout10.TabIndex = 1;
             this.lbl_dout10.Text = "2";
             this.lbl_dout10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_open11
-            // 
-            this.Btn_open11.Enabled = false;
-            this.Btn_open11.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open11.Location = new System.Drawing.Point(807, 191);
-            this.Btn_open11.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open11.Name = "Btn_open11";
-            this.Btn_open11.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open11.TabIndex = 132;
-            this.Btn_open11.Text = "打开";
-            this.Btn_open11.UseVisualStyleBackColor = true;
             // 
             // pal_dout113_120
             // 
@@ -2439,7 +2663,6 @@
             // 
             // lbl_dout113
             // 
-            this.lbl_dout113.AutoSize = true;
             this.lbl_dout113.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout113.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout113.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2462,7 +2685,6 @@
             // 
             // lbl_dout120
             // 
-            this.lbl_dout120.AutoSize = true;
             this.lbl_dout120.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout120.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout120.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2476,7 +2698,6 @@
             // 
             // lbl_dout119
             // 
-            this.lbl_dout119.AutoSize = true;
             this.lbl_dout119.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout119.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout119.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2490,7 +2711,6 @@
             // 
             // lbl_dout118
             // 
-            this.lbl_dout118.AutoSize = true;
             this.lbl_dout118.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout118.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout118.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2504,7 +2724,6 @@
             // 
             // lbl_dout117
             // 
-            this.lbl_dout117.AutoSize = true;
             this.lbl_dout117.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout117.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout117.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2518,7 +2737,6 @@
             // 
             // lbl_dout116
             // 
-            this.lbl_dout116.AutoSize = true;
             this.lbl_dout116.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout116.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout116.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2532,7 +2750,6 @@
             // 
             // lbl_dout115
             // 
-            this.lbl_dout115.AutoSize = true;
             this.lbl_dout115.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout115.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout115.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2546,7 +2763,6 @@
             // 
             // lbl_dout114
             // 
-            this.lbl_dout114.AutoSize = true;
             this.lbl_dout114.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout114.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout114.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2557,18 +2773,6 @@
             this.lbl_dout114.TabIndex = 1;
             this.lbl_dout114.Text = "2";
             this.lbl_dout114.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_open6
-            // 
-            this.Btn_open6.Enabled = false;
-            this.Btn_open6.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open6.Location = new System.Drawing.Point(417, 191);
-            this.Btn_open6.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open6.Name = "Btn_open6";
-            this.Btn_open6.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open6.TabIndex = 122;
-            this.Btn_open6.Text = "打开";
-            this.Btn_open6.UseVisualStyleBackColor = true;
             // 
             // pal_dout49_56
             // 
@@ -2592,7 +2796,6 @@
             // 
             // lbl_dout49
             // 
-            this.lbl_dout49.AutoSize = true;
             this.lbl_dout49.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout49.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout49.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2615,7 +2818,6 @@
             // 
             // lbl_dout56
             // 
-            this.lbl_dout56.AutoSize = true;
             this.lbl_dout56.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout56.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout56.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2629,7 +2831,6 @@
             // 
             // lbl_dout55
             // 
-            this.lbl_dout55.AutoSize = true;
             this.lbl_dout55.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout55.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout55.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2643,7 +2844,6 @@
             // 
             // lbl_dout54
             // 
-            this.lbl_dout54.AutoSize = true;
             this.lbl_dout54.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout54.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout54.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2657,7 +2857,6 @@
             // 
             // lbl_dout53
             // 
-            this.lbl_dout53.AutoSize = true;
             this.lbl_dout53.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout53.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout53.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2671,7 +2870,6 @@
             // 
             // lbl_dout52
             // 
-            this.lbl_dout52.AutoSize = true;
             this.lbl_dout52.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout52.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout52.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2685,7 +2883,6 @@
             // 
             // lbl_dout51
             // 
-            this.lbl_dout51.AutoSize = true;
             this.lbl_dout51.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout51.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout51.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2699,7 +2896,6 @@
             // 
             // lbl_dout50
             // 
-            this.lbl_dout50.AutoSize = true;
             this.lbl_dout50.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout50.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout50.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2710,18 +2906,6 @@
             this.lbl_dout50.TabIndex = 1;
             this.lbl_dout50.Text = "2";
             this.lbl_dout50.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close12
-            // 
-            this.Btn_close12.Enabled = false;
-            this.Btn_close12.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close12.Location = new System.Drawing.Point(885, 160);
-            this.Btn_close12.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close12.Name = "Btn_close12";
-            this.Btn_close12.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close12.TabIndex = 133;
-            this.Btn_close12.Text = "关闭";
-            this.Btn_close12.UseVisualStyleBackColor = true;
             // 
             // pal_dout81_88
             // 
@@ -2745,7 +2929,6 @@
             // 
             // lbl_dout81
             // 
-            this.lbl_dout81.AutoSize = true;
             this.lbl_dout81.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout81.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout81.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2768,7 +2951,6 @@
             // 
             // lbl_dout88
             // 
-            this.lbl_dout88.AutoSize = true;
             this.lbl_dout88.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout88.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout88.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2782,7 +2964,6 @@
             // 
             // lbl_dout87
             // 
-            this.lbl_dout87.AutoSize = true;
             this.lbl_dout87.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout87.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout87.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2796,7 +2977,6 @@
             // 
             // lbl_dout86
             // 
-            this.lbl_dout86.AutoSize = true;
             this.lbl_dout86.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout86.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout86.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2810,7 +2990,6 @@
             // 
             // lbl_dout85
             // 
-            this.lbl_dout85.AutoSize = true;
             this.lbl_dout85.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout85.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout85.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2824,7 +3003,6 @@
             // 
             // lbl_dout84
             // 
-            this.lbl_dout84.AutoSize = true;
             this.lbl_dout84.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout84.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout84.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2838,7 +3016,6 @@
             // 
             // lbl_dout83
             // 
-            this.lbl_dout83.AutoSize = true;
             this.lbl_dout83.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout83.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout83.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2852,7 +3029,6 @@
             // 
             // lbl_dout82
             // 
-            this.lbl_dout82.AutoSize = true;
             this.lbl_dout82.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout82.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout82.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2863,18 +3039,6 @@
             this.lbl_dout82.TabIndex = 1;
             this.lbl_dout82.Text = "2";
             this.lbl_dout82.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close6
-            // 
-            this.Btn_close6.Enabled = false;
-            this.Btn_close6.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close6.Location = new System.Drawing.Point(417, 160);
-            this.Btn_close6.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close6.Name = "Btn_close6";
-            this.Btn_close6.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close6.TabIndex = 121;
-            this.Btn_close6.Text = "关闭";
-            this.Btn_close6.UseVisualStyleBackColor = true;
             // 
             // pal_dout17_24
             // 
@@ -2898,7 +3062,6 @@
             // 
             // lbl_dout17
             // 
-            this.lbl_dout17.AutoSize = true;
             this.lbl_dout17.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout17.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout17.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2921,7 +3084,6 @@
             // 
             // lbl_dout24
             // 
-            this.lbl_dout24.AutoSize = true;
             this.lbl_dout24.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout24.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout24.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2935,7 +3097,6 @@
             // 
             // lbl_dout23
             // 
-            this.lbl_dout23.AutoSize = true;
             this.lbl_dout23.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout23.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout23.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2949,7 +3110,6 @@
             // 
             // lbl_dout22
             // 
-            this.lbl_dout22.AutoSize = true;
             this.lbl_dout22.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout22.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout22.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2963,7 +3123,6 @@
             // 
             // lbl_dout21
             // 
-            this.lbl_dout21.AutoSize = true;
             this.lbl_dout21.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout21.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2977,7 +3136,6 @@
             // 
             // lbl_dout20
             // 
-            this.lbl_dout20.AutoSize = true;
             this.lbl_dout20.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout20.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout20.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -2991,7 +3149,6 @@
             // 
             // lbl_dout19
             // 
-            this.lbl_dout19.AutoSize = true;
             this.lbl_dout19.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout19.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout19.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3005,7 +3162,6 @@
             // 
             // lbl_dout18
             // 
-            this.lbl_dout18.AutoSize = true;
             this.lbl_dout18.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout18.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout18.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3016,18 +3172,6 @@
             this.lbl_dout18.TabIndex = 1;
             this.lbl_dout18.Text = "2";
             this.lbl_dout18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_open12
-            // 
-            this.Btn_open12.Enabled = false;
-            this.Btn_open12.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open12.Location = new System.Drawing.Point(885, 191);
-            this.Btn_open12.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open12.Name = "Btn_open12";
-            this.Btn_open12.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open12.TabIndex = 134;
-            this.Btn_open12.Text = "打开";
-            this.Btn_open12.UseVisualStyleBackColor = true;
             // 
             // pal_dout97_104
             // 
@@ -3051,7 +3195,6 @@
             // 
             // lbl_dout97
             // 
-            this.lbl_dout97.AutoSize = true;
             this.lbl_dout97.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout97.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout97.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3074,7 +3217,6 @@
             // 
             // lbl_dout104
             // 
-            this.lbl_dout104.AutoSize = true;
             this.lbl_dout104.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout104.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout104.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3088,7 +3230,6 @@
             // 
             // lbl_dout103
             // 
-            this.lbl_dout103.AutoSize = true;
             this.lbl_dout103.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout103.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout103.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3102,7 +3243,6 @@
             // 
             // lbl_dout102
             // 
-            this.lbl_dout102.AutoSize = true;
             this.lbl_dout102.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout102.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout102.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3116,7 +3256,6 @@
             // 
             // lbl_dout101
             // 
-            this.lbl_dout101.AutoSize = true;
             this.lbl_dout101.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout101.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout101.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3130,7 +3269,6 @@
             // 
             // lbl_dout100
             // 
-            this.lbl_dout100.AutoSize = true;
             this.lbl_dout100.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout100.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout100.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3144,7 +3282,6 @@
             // 
             // lbl_dout99
             // 
-            this.lbl_dout99.AutoSize = true;
             this.lbl_dout99.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout99.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout99.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3158,7 +3295,6 @@
             // 
             // lbl_dout98
             // 
-            this.lbl_dout98.AutoSize = true;
             this.lbl_dout98.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout98.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout98.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3169,18 +3305,6 @@
             this.lbl_dout98.TabIndex = 1;
             this.lbl_dout98.Text = "2";
             this.lbl_dout98.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_open5
-            // 
-            this.Btn_open5.Enabled = false;
-            this.Btn_open5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open5.Location = new System.Drawing.Point(339, 191);
-            this.Btn_open5.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open5.Name = "Btn_open5";
-            this.Btn_open5.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open5.TabIndex = 120;
-            this.Btn_open5.Text = "打开";
-            this.Btn_open5.UseVisualStyleBackColor = true;
             // 
             // pal_dout33_40
             // 
@@ -3204,7 +3328,6 @@
             // 
             // lbl_dout33
             // 
-            this.lbl_dout33.AutoSize = true;
             this.lbl_dout33.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout33.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout33.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3227,7 +3350,6 @@
             // 
             // lbl_dout40
             // 
-            this.lbl_dout40.AutoSize = true;
             this.lbl_dout40.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout40.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout40.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3241,7 +3363,6 @@
             // 
             // lbl_dout39
             // 
-            this.lbl_dout39.AutoSize = true;
             this.lbl_dout39.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout39.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout39.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3255,7 +3376,6 @@
             // 
             // lbl_dout38
             // 
-            this.lbl_dout38.AutoSize = true;
             this.lbl_dout38.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout38.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout38.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3269,7 +3389,6 @@
             // 
             // lbl_dout37
             // 
-            this.lbl_dout37.AutoSize = true;
             this.lbl_dout37.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout37.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout37.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3283,7 +3402,6 @@
             // 
             // lbl_dout36
             // 
-            this.lbl_dout36.AutoSize = true;
             this.lbl_dout36.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout36.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout36.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3297,7 +3415,6 @@
             // 
             // lbl_dout35
             // 
-            this.lbl_dout35.AutoSize = true;
             this.lbl_dout35.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout35.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout35.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3311,7 +3428,6 @@
             // 
             // lbl_dout34
             // 
-            this.lbl_dout34.AutoSize = true;
             this.lbl_dout34.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout34.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout34.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3322,18 +3438,6 @@
             this.lbl_dout34.TabIndex = 1;
             this.lbl_dout34.Text = "2";
             this.lbl_dout34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close13
-            // 
-            this.Btn_close13.Enabled = false;
-            this.Btn_close13.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close13.Location = new System.Drawing.Point(963, 160);
-            this.Btn_close13.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close13.Name = "Btn_close13";
-            this.Btn_close13.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close13.TabIndex = 135;
-            this.Btn_close13.Text = "关闭";
-            this.Btn_close13.UseVisualStyleBackColor = true;
             // 
             // pal_dout65_72
             // 
@@ -3357,7 +3461,6 @@
             // 
             // lbl_dout65
             // 
-            this.lbl_dout65.AutoSize = true;
             this.lbl_dout65.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout65.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout65.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3380,7 +3483,6 @@
             // 
             // lbl_dout72
             // 
-            this.lbl_dout72.AutoSize = true;
             this.lbl_dout72.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout72.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout72.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3394,7 +3496,6 @@
             // 
             // lbl_dout71
             // 
-            this.lbl_dout71.AutoSize = true;
             this.lbl_dout71.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout71.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout71.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3408,7 +3509,6 @@
             // 
             // lbl_dout70
             // 
-            this.lbl_dout70.AutoSize = true;
             this.lbl_dout70.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout70.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout70.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3422,7 +3522,6 @@
             // 
             // lbl_dout69
             // 
-            this.lbl_dout69.AutoSize = true;
             this.lbl_dout69.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout69.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout69.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3436,7 +3535,6 @@
             // 
             // lbl_dout68
             // 
-            this.lbl_dout68.AutoSize = true;
             this.lbl_dout68.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout68.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout68.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3450,7 +3548,6 @@
             // 
             // lbl_dout67
             // 
-            this.lbl_dout67.AutoSize = true;
             this.lbl_dout67.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout67.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout67.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3464,7 +3561,6 @@
             // 
             // lbl_dout66
             // 
-            this.lbl_dout66.AutoSize = true;
             this.lbl_dout66.BackColor = System.Drawing.Color.Cyan;
             this.lbl_dout66.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_dout66.Font = new System.Drawing.Font("微软雅黑", 13F);
@@ -3475,198 +3571,6 @@
             this.lbl_dout66.TabIndex = 1;
             this.lbl_dout66.Text = "2";
             this.lbl_dout66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Btn_close5
-            // 
-            this.Btn_close5.Enabled = false;
-            this.Btn_close5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close5.Location = new System.Drawing.Point(339, 160);
-            this.Btn_close5.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close5.Name = "Btn_close5";
-            this.Btn_close5.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close5.TabIndex = 119;
-            this.Btn_close5.Text = "关闭";
-            this.Btn_close5.UseVisualStyleBackColor = true;
-            // 
-            // Btn_close1
-            // 
-            this.Btn_close1.Enabled = false;
-            this.Btn_close1.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close1.Location = new System.Drawing.Point(27, 160);
-            this.Btn_close1.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close1.Name = "Btn_close1";
-            this.Btn_close1.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close1.TabIndex = 111;
-            this.Btn_close1.Text = "关闭";
-            this.Btn_close1.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open13
-            // 
-            this.Btn_open13.Enabled = false;
-            this.Btn_open13.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open13.Location = new System.Drawing.Point(963, 191);
-            this.Btn_open13.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open13.Name = "Btn_open13";
-            this.Btn_open13.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open13.TabIndex = 136;
-            this.Btn_open13.Text = "打开";
-            this.Btn_open13.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open4
-            // 
-            this.Btn_open4.Enabled = false;
-            this.Btn_open4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open4.Location = new System.Drawing.Point(261, 191);
-            this.Btn_open4.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open4.Name = "Btn_open4";
-            this.Btn_open4.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open4.TabIndex = 118;
-            this.Btn_open4.Text = "打开";
-            this.Btn_open4.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open1
-            // 
-            this.Btn_open1.Enabled = false;
-            this.Btn_open1.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open1.Location = new System.Drawing.Point(27, 191);
-            this.Btn_open1.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open1.Name = "Btn_open1";
-            this.Btn_open1.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open1.TabIndex = 112;
-            this.Btn_open1.Text = "打开";
-            this.Btn_open1.UseVisualStyleBackColor = true;
-            // 
-            // Btn_close14
-            // 
-            this.Btn_close14.Enabled = false;
-            this.Btn_close14.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close14.Location = new System.Drawing.Point(1041, 160);
-            this.Btn_close14.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close14.Name = "Btn_close14";
-            this.Btn_close14.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close14.TabIndex = 137;
-            this.Btn_close14.Text = "关闭";
-            this.Btn_close14.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open16
-            // 
-            this.Btn_open16.Enabled = false;
-            this.Btn_open16.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open16.Location = new System.Drawing.Point(1197, 191);
-            this.Btn_open16.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open16.Name = "Btn_open16";
-            this.Btn_open16.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open16.TabIndex = 142;
-            this.Btn_open16.Text = "打开";
-            this.Btn_open16.UseVisualStyleBackColor = true;
-            // 
-            // Btn_close4
-            // 
-            this.Btn_close4.Enabled = false;
-            this.Btn_close4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close4.Location = new System.Drawing.Point(261, 160);
-            this.Btn_close4.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close4.Name = "Btn_close4";
-            this.Btn_close4.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close4.TabIndex = 117;
-            this.Btn_close4.Text = "关闭";
-            this.Btn_close4.UseVisualStyleBackColor = true;
-            // 
-            // Btn_close2
-            // 
-            this.Btn_close2.Enabled = false;
-            this.Btn_close2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close2.Location = new System.Drawing.Point(105, 160);
-            this.Btn_close2.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close2.Name = "Btn_close2";
-            this.Btn_close2.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close2.TabIndex = 113;
-            this.Btn_close2.Text = "关闭";
-            this.Btn_close2.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open14
-            // 
-            this.Btn_open14.Enabled = false;
-            this.Btn_open14.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open14.Location = new System.Drawing.Point(1041, 191);
-            this.Btn_open14.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open14.Name = "Btn_open14";
-            this.Btn_open14.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open14.TabIndex = 138;
-            this.Btn_open14.Text = "打开";
-            this.Btn_open14.UseVisualStyleBackColor = true;
-            // 
-            // Btn_close16
-            // 
-            this.Btn_close16.Enabled = false;
-            this.Btn_close16.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close16.Location = new System.Drawing.Point(1197, 160);
-            this.Btn_close16.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close16.Name = "Btn_close16";
-            this.Btn_close16.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close16.TabIndex = 141;
-            this.Btn_close16.Text = "关闭";
-            this.Btn_close16.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open3
-            // 
-            this.Btn_open3.Enabled = false;
-            this.Btn_open3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open3.Location = new System.Drawing.Point(183, 191);
-            this.Btn_open3.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open3.Name = "Btn_open3";
-            this.Btn_open3.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open3.TabIndex = 116;
-            this.Btn_open3.Text = "打开";
-            this.Btn_open3.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open2
-            // 
-            this.Btn_open2.Enabled = false;
-            this.Btn_open2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open2.Location = new System.Drawing.Point(105, 191);
-            this.Btn_open2.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open2.Name = "Btn_open2";
-            this.Btn_open2.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open2.TabIndex = 114;
-            this.Btn_open2.Text = "打开";
-            this.Btn_open2.UseVisualStyleBackColor = true;
-            // 
-            // Btn_close15
-            // 
-            this.Btn_close15.Enabled = false;
-            this.Btn_close15.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close15.Location = new System.Drawing.Point(1119, 160);
-            this.Btn_close15.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close15.Name = "Btn_close15";
-            this.Btn_close15.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close15.TabIndex = 139;
-            this.Btn_close15.Text = "关闭";
-            this.Btn_close15.UseVisualStyleBackColor = true;
-            // 
-            // Btn_open15
-            // 
-            this.Btn_open15.Enabled = false;
-            this.Btn_open15.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open15.Location = new System.Drawing.Point(1119, 191);
-            this.Btn_open15.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_open15.Name = "Btn_open15";
-            this.Btn_open15.Size = new System.Drawing.Size(58, 27);
-            this.Btn_open15.TabIndex = 140;
-            this.Btn_open15.Text = "打开";
-            this.Btn_open15.UseVisualStyleBackColor = true;
-            // 
-            // Btn_close3
-            // 
-            this.Btn_close3.Enabled = false;
-            this.Btn_close3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close3.Location = new System.Drawing.Point(183, 160);
-            this.Btn_close3.Margin = new System.Windows.Forms.Padding(2);
-            this.Btn_close3.Name = "Btn_close3";
-            this.Btn_close3.Size = new System.Drawing.Size(58, 27);
-            this.Btn_close3.TabIndex = 115;
-            this.Btn_close3.Text = "关闭";
-            this.Btn_close3.UseVisualStyleBackColor = true;
             // 
             // groupBox25
             // 
@@ -3698,7 +3602,7 @@
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.ReadOnly = true;
-            this.textBox4.Size = new System.Drawing.Size(230, 80);
+            this.textBox4.Size = new System.Drawing.Size(230, 85);
             this.textBox4.TabIndex = 120;
             // 
             // textBox1
@@ -3709,7 +3613,7 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(230, 80);
+            this.textBox1.Size = new System.Drawing.Size(230, 85);
             this.textBox1.TabIndex = 112;
             // 
             // textBox2
@@ -3720,12 +3624,12 @@
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(230, 80);
+            this.textBox2.Size = new System.Drawing.Size(230, 85);
             this.textBox2.TabIndex = 119;
             // 
             // label149
             // 
-            this.label149.Location = new System.Drawing.Point(38, 29);
+            this.label149.Location = new System.Drawing.Point(38, 28);
             this.label149.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label149.Name = "label149";
             this.label149.Size = new System.Drawing.Size(230, 23);
@@ -3741,12 +3645,12 @@
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(230, 80);
+            this.textBox3.Size = new System.Drawing.Size(230, 85);
             this.textBox3.TabIndex = 118;
             // 
             // label1590
             // 
-            this.label1590.Location = new System.Drawing.Point(1034, 29);
+            this.label1590.Location = new System.Drawing.Point(1034, 28);
             this.label1590.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1590.Name = "label1590";
             this.label1590.Size = new System.Drawing.Size(230, 23);
@@ -3756,7 +3660,7 @@
             // 
             // label150
             // 
-            this.label150.Location = new System.Drawing.Point(287, 29);
+            this.label150.Location = new System.Drawing.Point(287, 28);
             this.label150.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label150.Name = "label150";
             this.label150.Size = new System.Drawing.Size(230, 23);
@@ -3766,7 +3670,7 @@
             // 
             // label151
             // 
-            this.label151.Location = new System.Drawing.Point(785, 29);
+            this.label151.Location = new System.Drawing.Point(785, 28);
             this.label151.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(230, 23);
@@ -3782,12 +3686,12 @@
             this.textBox9.Multiline = true;
             this.textBox9.Name = "textBox9";
             this.textBox9.ReadOnly = true;
-            this.textBox9.Size = new System.Drawing.Size(230, 80);
+            this.textBox9.Size = new System.Drawing.Size(230, 85);
             this.textBox9.TabIndex = 117;
             // 
             // label152
             // 
-            this.label152.Location = new System.Drawing.Point(536, 29);
+            this.label152.Location = new System.Drawing.Point(536, 28);
             this.label152.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label152.Name = "label152";
             this.label152.Size = new System.Drawing.Size(230, 23);
@@ -3857,7 +3761,7 @@
             this.label153.AutoSize = true;
             this.label153.BackColor = System.Drawing.Color.Transparent;
             this.label153.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.label153.Location = new System.Drawing.Point(366, 422);
+            this.label153.Location = new System.Drawing.Point(293, 419);
             this.label153.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label153.Name = "label153";
             this.label153.Size = new System.Drawing.Size(39, 27);
@@ -4220,6 +4124,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(375, 35);
             this.comboBox1.TabIndex = 84;
+            this.comboBox1.Tag = "@0@#BCD#";
             // 
             // label123
             // 
@@ -4261,6 +4166,17 @@
             this.label_driverStatus.TabIndex = 1;
             this.label_driverStatus.Text = "HALT";
             this.label_driverStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
+            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 161;
+            this.pictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -4375,6 +4291,22 @@
             this.groupBox26.TabIndex = 1;
             this.groupBox26.TabStop = false;
             this.groupBox26.Text = "批次信息";
+            // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.AutoSize = true;
+            this.uiCheckBox1.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox1.CheckBoxSize = 20;
+            this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox1.Font = new System.Drawing.Font("微软雅黑", 14F);
+            this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox1.Location = new System.Drawing.Point(467, 366);
+            this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.Size = new System.Drawing.Size(77, 30);
+            this.uiCheckBox1.TabIndex = 181;
+            this.uiCheckBox1.Text = "手动";
+            this.uiCheckBox1.CheckedChanged += new System.EventHandler(this.uiCheckBox1_CheckedChanged);
             // 
             // label1593
             // 
@@ -5045,33 +4977,6 @@
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
             // 
-            // uiCheckBox1
-            // 
-            this.uiCheckBox1.AutoSize = true;
-            this.uiCheckBox1.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox1.CheckBoxSize = 20;
-            this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiCheckBox1.Font = new System.Drawing.Font("微软雅黑", 14F);
-            this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox1.Location = new System.Drawing.Point(467, 366);
-            this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiCheckBox1.Name = "uiCheckBox1";
-            this.uiCheckBox1.Size = new System.Drawing.Size(77, 30);
-            this.uiCheckBox1.TabIndex = 181;
-            this.uiCheckBox1.Text = "手动";
-            this.uiCheckBox1.CheckedChanged += new System.EventHandler(this.uiCheckBox1_CheckedChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
-            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 161;
-            this.pictureBox1.TabStop = false;
-            // 
             // _main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5086,42 +4991,27 @@
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.pal_dout1_8.ResumeLayout(false);
-            this.pal_dout1_8.PerformLayout();
             this.pal_dout121_128.ResumeLayout(false);
-            this.pal_dout121_128.PerformLayout();
             this.pal_dout57_64.ResumeLayout(false);
-            this.pal_dout57_64.PerformLayout();
             this.pal_dout89_96.ResumeLayout(false);
-            this.pal_dout89_96.PerformLayout();
             this.pal_dout25_32.ResumeLayout(false);
-            this.pal_dout25_32.PerformLayout();
             this.pal_dout105_112.ResumeLayout(false);
-            this.pal_dout105_112.PerformLayout();
             this.pal_dout41_48.ResumeLayout(false);
-            this.pal_dout41_48.PerformLayout();
             this.pal_dout73_80.ResumeLayout(false);
-            this.pal_dout73_80.PerformLayout();
             this.pal_dout9_16.ResumeLayout(false);
-            this.pal_dout9_16.PerformLayout();
             this.pal_dout113_120.ResumeLayout(false);
-            this.pal_dout113_120.PerformLayout();
             this.pal_dout49_56.ResumeLayout(false);
-            this.pal_dout49_56.PerformLayout();
             this.pal_dout81_88.ResumeLayout(false);
-            this.pal_dout81_88.PerformLayout();
             this.pal_dout17_24.ResumeLayout(false);
-            this.pal_dout17_24.PerformLayout();
             this.pal_dout97_104.ResumeLayout(false);
-            this.pal_dout97_104.PerformLayout();
             this.pal_dout33_40.ResumeLayout(false);
-            this.pal_dout33_40.PerformLayout();
             this.pal_dout65_72.ResumeLayout(false);
-            this.pal_dout65_72.PerformLayout();
             this.groupBox25.ResumeLayout(false);
             this.groupBox25.PerformLayout();
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
             this.panel31.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.Panel_right.ResumeLayout(false);
@@ -5130,7 +5020,6 @@
             this.groupBox26.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -5358,7 +5247,6 @@
         private System.Windows.Forms.Label lbl_dout68;
         private System.Windows.Forms.Label lbl_dout67;
         private System.Windows.Forms.Label lbl_dout66;
-        private System.Windows.Forms.Button Btn_close1;
         private System.Windows.Forms.Panel pal_dout1_8;
         private System.Windows.Forms.Label lbl_dout1;
         private System.Windows.Forms.Label label157;
@@ -5369,37 +5257,6 @@
         private System.Windows.Forms.Label lbl_dout4;
         private System.Windows.Forms.Label lbl_dout3;
         private System.Windows.Forms.Label lbl_dout2;
-        private System.Windows.Forms.Button Btn_open1;
-        private System.Windows.Forms.Button Btn_open16;
-        private System.Windows.Forms.Button Btn_close2;
-        private System.Windows.Forms.Button Btn_close16;
-        private System.Windows.Forms.Button Btn_open2;
-        private System.Windows.Forms.Button Btn_open15;
-        private System.Windows.Forms.Button Btn_close3;
-        private System.Windows.Forms.Button Btn_close15;
-        private System.Windows.Forms.Button Btn_open3;
-        private System.Windows.Forms.Button Btn_open14;
-        private System.Windows.Forms.Button Btn_close4;
-        private System.Windows.Forms.Button Btn_close14;
-        private System.Windows.Forms.Button Btn_open4;
-        private System.Windows.Forms.Button Btn_open13;
-        private System.Windows.Forms.Button Btn_close5;
-        private System.Windows.Forms.Button Btn_close13;
-        private System.Windows.Forms.Button Btn_open5;
-        private System.Windows.Forms.Button Btn_open12;
-        private System.Windows.Forms.Button Btn_close6;
-        private System.Windows.Forms.Button Btn_close12;
-        private System.Windows.Forms.Button Btn_open6;
-        private System.Windows.Forms.Button Btn_open11;
-        private System.Windows.Forms.Button Btn_close7;
-        private System.Windows.Forms.Button Btn_close11;
-        private System.Windows.Forms.Button Btn_open7;
-        private System.Windows.Forms.Button Btn_open10;
-        private System.Windows.Forms.Button Btn_close8;
-        private System.Windows.Forms.Button Btn_close10;
-        private System.Windows.Forms.Button Btn_open8;
-        private System.Windows.Forms.Button Btn_open9;
-        private System.Windows.Forms.Button Btn_close9;
         private Sunny.UI.UIPanel uiPanel1;
         private System.Windows.Forms.Label label_driverStatus;
         private System.Windows.Forms.Panel panel31;
@@ -5470,5 +5327,37 @@
         private Sunny.UI.UIDigitalLabel uiDigitalLabel17;
         private System.Windows.Forms.Label label6;
         private Sunny.UI.UICheckBox uiCheckBox1;
+        private Sunny.UI.UIButton Btn_close1;
+        private Sunny.UI.UIButton Btn_close7;
+        private Sunny.UI.UIButton Btn_close5;
+        private Sunny.UI.UIButton Btn_close3;
+        private Sunny.UI.UIButton Btn_open16;
+        private Sunny.UI.UIButton Btn_open14;
+        private Sunny.UI.UIButton Btn_open12;
+        private Sunny.UI.UIButton Btn_open10;
+        private Sunny.UI.UIButton Btn_open8;
+        private Sunny.UI.UIButton Btn_open6;
+        private Sunny.UI.UIButton Btn_open4;
+        private Sunny.UI.UIButton Btn_open2;
+        private Sunny.UI.UIButton Btn_open15;
+        private Sunny.UI.UIButton Btn_open13;
+        private Sunny.UI.UIButton Btn_open11;
+        private Sunny.UI.UIButton Btn_open9;
+        private Sunny.UI.UIButton Btn_open7;
+        private Sunny.UI.UIButton Btn_open5;
+        private Sunny.UI.UIButton Btn_open3;
+        private Sunny.UI.UIButton Btn_open1;
+        private Sunny.UI.UIButton Btn_close16;
+        private Sunny.UI.UIButton Btn_close8;
+        private Sunny.UI.UIButton Btn_close2;
+        private Sunny.UI.UIButton Btn_close14;
+        private Sunny.UI.UIButton Btn_close10;
+        private Sunny.UI.UIButton Btn_close6;
+        private Sunny.UI.UIButton Btn_close12;
+        private Sunny.UI.UIButton Btn_close4;
+        private Sunny.UI.UIButton Btn_close15;
+        private Sunny.UI.UIButton Btn_close13;
+        private Sunny.UI.UIButton Btn_close9;
+        private Sunny.UI.UIButton Btn_close11;
     }
 }

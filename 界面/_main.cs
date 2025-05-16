@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Spreadsheet;
+using H5509;
 using Sunny.UI;
 using static H5509_V2.APPmaster;
-using System.Threading;
-using System.Diagnostics;
+using Color = System.Drawing.Color;
+using Control = System.Windows.Forms.Control;
 
 namespace H5509_V2
 {
@@ -35,11 +40,110 @@ namespace H5509_V2
         /// </summary>
         private bool isGreenFlicker { get; set; } = true;
 
+        private int 开Site数量 = 0;
+
+        private int 关Site数量 = 0;
+
+        private DateTime mousemovetime = DateTime.Now;
+
+        private System.Drawing.Point windowsPoint = Control.MousePosition;
+
+        private System.Timers.Timer windowstimer = new System.Timers.Timer();
+
         private System.Windows.Forms.Timer currenttime = new System.Windows.Forms.Timer();
+
+        private System.Windows.Forms.Timer[] Chk_timer;
+
+        private Label[] Lbl_Dout;
+
+        private UICheckBox[] Chk_SW;
+
+        private UIButton[] Btn_Open;
+
+        private UIButton[] Btn_Close;
 
         public _main()
         {
             InitializeComponent();
+
+            Lbl_Dout = new Label[]
+            {
+                lbl_dout1, lbl_dout2, lbl_dout3, lbl_dout4, lbl_dout5, lbl_dout6, lbl_dout7, lbl_dout8, lbl_dout9, lbl_dout10,
+                lbl_dout11, lbl_dout12, lbl_dout13, lbl_dout14, lbl_dout15, lbl_dout16, lbl_dout17, lbl_dout18, lbl_dout19, lbl_dout20,
+                lbl_dout21, lbl_dout22, lbl_dout23, lbl_dout24, lbl_dout25, lbl_dout26, lbl_dout27, lbl_dout28, lbl_dout29, lbl_dout30,
+                lbl_dout31, lbl_dout32, lbl_dout33, lbl_dout34, lbl_dout35, lbl_dout36, lbl_dout37, lbl_dout38, lbl_dout39, lbl_dout40,
+                lbl_dout41, lbl_dout42, lbl_dout43, lbl_dout44, lbl_dout45, lbl_dout46, lbl_dout47, lbl_dout48, lbl_dout49, lbl_dout50,
+                lbl_dout51, lbl_dout52, lbl_dout53, lbl_dout54, lbl_dout55, lbl_dout56, lbl_dout57, lbl_dout58, lbl_dout59, lbl_dout60,
+                lbl_dout61, lbl_dout62, lbl_dout63, lbl_dout64, lbl_dout65, lbl_dout66, lbl_dout67, lbl_dout68, lbl_dout69, lbl_dout70,
+                lbl_dout71, lbl_dout72, lbl_dout73, lbl_dout74, lbl_dout75, lbl_dout76, lbl_dout77, lbl_dout78, lbl_dout79, lbl_dout80,
+                lbl_dout81, lbl_dout82, lbl_dout83, lbl_dout84, lbl_dout85, lbl_dout86, lbl_dout87, lbl_dout88, lbl_dout89, lbl_dout90,
+                lbl_dout91, lbl_dout92, lbl_dout93, lbl_dout94, lbl_dout95, lbl_dout96, lbl_dout97, lbl_dout98, lbl_dout99, lbl_dout100,
+                lbl_dout101, lbl_dout102, lbl_dout103, lbl_dout104, lbl_dout105, lbl_dout106, lbl_dout107, lbl_dout108, lbl_dout109, lbl_dout110,
+                lbl_dout111, lbl_dout112, lbl_dout113, lbl_dout114, lbl_dout115, lbl_dout116, lbl_dout117, lbl_dout118, lbl_dout119, lbl_dout120,
+                lbl_dout121, lbl_dout122, lbl_dout123, lbl_dout124, lbl_dout125, lbl_dout126, lbl_dout127, lbl_dout128,
+            };
+
+            Chk_SW = new UICheckBox[]
+            {
+                Chk_switch1, Chk_switch2, Chk_switch3, Chk_switch4,
+                Chk_switch5, Chk_switch6, Chk_switch7, Chk_switch8,
+                Chk_switch9, Chk_switch10, Chk_switch11, Chk_switch12,
+                Chk_switch13, Chk_switch14, Chk_switch15, Chk_switch16,
+            };
+
+            Btn_Open = new UIButton[]
+            {
+                Btn_open1, Btn_open2, Btn_open3, Btn_open4,
+                Btn_open5, Btn_open6, Btn_open7, Btn_open8,
+                Btn_open9, Btn_open10, Btn_open11, Btn_open12,
+                Btn_open13, Btn_open14, Btn_open15, Btn_open16,
+            };
+
+            Btn_Close = new UIButton[]
+            {
+                Btn_close1, Btn_close2, Btn_close3, Btn_close4,
+                Btn_close5, Btn_close6, Btn_close7, Btn_close8,
+                Btn_close9, Btn_close10, Btn_close11, Btn_close12,
+                Btn_close13, Btn_close14, Btn_close15, Btn_close16,
+            };
+        }
+
+        private void _main_Load(object sender, EventArgs e)
+        {
+            //1s刷新一次当前时间
+            currenttime = new System.Windows.Forms.Timer() { Interval = 1000 };
+            currenttime.Tick += Currenttime_Tick;
+            currenttime.Start(); //开始实时时间刷新
+
+            //鼠标实时位置捕捉定时器
+            windowstimer.Interval = 200; //200ms
+            windowstimer.Elapsed += WindowstimerTick;
+
+            Chk_timer = new System.Windows.Forms.Timer[Chk_SW.Length];
+            for (int i = 0; i < Chk_SW.Length; i++)
+            {
+                System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer() { Interval = 10000 }; //10s
+                timer.Tick += TimerCloseSelcet;
+                Chk_timer[i] = timer;
+            }
+
+            //comboBox1.SelectedIndexChanged += comboBox1_SelectedValueChanged;
+
+            //Open/Close按钮绑定
+            WindowsButtonBind();
+
+            刷新开Site状态();
+
+            刷新分BIN信息();
+
+            刷新档案选项();
+
+            刷新权限选项();
+
+            RefreshData = Task.Run(() =>
+            {
+                屏幕刷新();
+            });
         }
 
         private void textBoxFlowcaedno_KeyDown(object sender, KeyEventArgs e)
@@ -150,10 +254,6 @@ namespace H5509_V2
             //}
         }
 
-        /// <summary>
-        /// 三灯闪烁
-        /// </summary>
-        /// <param name="flicker"></param>
         private void RefreshLightState(bool flicker)
         {
             if (flicker)
@@ -170,11 +270,6 @@ namespace H5509_V2
             }
         }
 
-        /// <summary>
-        /// 1s定时器
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Currenttime_Tick(object sender, EventArgs e)
         {
             RefreshCurrentTime();
@@ -182,9 +277,594 @@ namespace H5509_V2
             flicker = !flicker;
         }
 
-        /// <summary>
-        /// 主界面刷新
-        /// </summary>
+        private void TimerCloseSelcet(object sender, EventArgs e)
+        {
+            if (sender is System.Windows.Forms.Timer timer)
+            {
+                for (int i = 0; i < Chk_timer.Length; i++)
+                {
+                    if (timer.Equals(Chk_timer[i]))
+                    {
+                        Chk_timer[i].Stop();
+                        Chk_SW[i].Checked = false;
+                        Btn_Close[i].Enabled = false;
+                        Btn_Open[i].Enabled = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private void ClicKCloseButton(object sender, EventArgs e)
+        {
+            if (sender is UIButton button)
+            {
+                for (int i = 0; i < Btn_Close.Length; i++)
+                {
+                    if (button.Equals(Btn_Close[i]))
+                    {
+                        Chk_timer[i].Stop();
+                        Chk_timer[i].Start();
+                        设置信息.开site信息.SetSiteNum(i, "0");
+                        string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
+                        if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                        result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                        if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                        设置信息.开site信息 = siteStatus;
+                    }
+                }
+                刷新开Site状态();
+            }
+        }
+
+        private void ClicKOpenButton(object sender, EventArgs e)
+        {
+            if (sender is UIButton button)
+            {
+                for (int i = 0; i < Btn_Open.Length; i++)
+                {
+                    if (button.Equals(Btn_Open[i]))
+                    {
+                        Chk_timer[i].Stop();
+                        Chk_timer[i].Start();
+                        设置信息.开site信息.SetSiteNum(i, "1");
+                        string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
+                        if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                        result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                        if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                        设置信息.开site信息 = siteStatus;
+                    }
+                }
+                刷新开Site状态();
+            }
+        }
+
+        private void WindowsButtonBind()
+        {
+            for (int i = 0; i < Btn_Open.Length; i++)
+            {
+                Btn_Open[i].MouseClick += ClicKOpenButton;
+            }
+            for (int i = 0; i < Btn_Close.Length; i++)
+            {
+                Btn_Close[i].MouseClick += ClicKCloseButton;
+            }
+            for (int i = 0; i < Chk_SW.Length; i++)
+            {
+                Chk_SW[i].MouseClick += CheckChanged;
+            }
+            for (int i = 0; i < Lbl_Dout.Length; i++)
+            {
+                Lbl_Dout[i].MouseClick += DoutChanged;
+            }
+        }
+
+        private void DoutChanged(object sender, EventArgs e)
+        {
+            if (sender is Label label)
+            {
+                for (int i = 0; i < Lbl_Dout.Length; i++)
+                {
+                    if (label.Equals(Lbl_Dout[i]))
+                    {
+                        int site = i / 8;
+                        if (!Chk_SW[site].Checked) break;
+                        if (Chk_timer[site].Enabled)
+                        {
+                            Chk_timer[site].Stop();
+                            Chk_timer[site].Start();
+                        }
+                        int dut = i % 8;
+                        设置信息.开site信息.SetSiteNum(site, dut, label.Text == "" ? "1" : "0");
+                        string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+                        if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                        result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                        if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                        设置信息.开site信息 = siteStatus;
+                        break;
+                    }
+                }
+                刷新开Site状态();
+            }
+        }
+
+        private void CheckChanged(object sender, EventArgs e)
+        {
+            if (sender is UICheckBox checkBox)
+            {
+                for (int i = 0; i < Chk_SW.Length; i++)
+                {
+                    if (checkBox.Equals(Chk_SW[i]))
+                    {
+                        if (checkBox.Checked)
+                        {
+                            Chk_timer[i].Start();
+                            Btn_Open[i].Enabled = true;
+                            Btn_Close[i].Enabled = true;
+                        }
+                        else
+                        {
+                            Chk_timer[i].Start();
+                            Btn_Open[i].Enabled = false;
+                            Btn_Close[i].Enabled = false;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void canVisable(Control cons)
+        {
+            foreach (Control con in cons.Controls)
+            {
+                if (con.Tag != null)
+                {
+                    //根据操作权限控制visable与enable
+                    if (con.Tag.ToString().Contains("#"))
+                    {
+                        string t = con.Tag.ToString();
+                        t = t.Substring(t.IndexOf("#") + 1);
+                        t = t.Substring(0, t.IndexOf("#"));
+
+                        if (t.Contains("0"))
+                        {
+                            if (t.Contains(操作权限))
+                            {
+                                con.Visible = true;
+                            }
+                            else
+                            {
+                                con.Visible = false;
+                                continue;
+                            }
+                        }
+                        else //if (t.Contains("1"))没有设置默认都是1
+                        {
+                            if (t.Contains(操作权限))
+                            {
+                                con.Enabled = true;
+                            }
+                            else
+                            {
+                                con.Enabled = false;
+                                continue;
+                            }
+                        }
+                    }
+
+                    //根据运行状态控制enable
+                    if (con.Tag.ToString().Contains("@"))
+                    {
+                        string t = con.Tag.ToString();
+                        t = t.Substring(t.IndexOf("@") + 1);
+                        t = t.Substring(0, t.IndexOf("@"));
+                        if (t.Contains(设备状态.ToString()))
+                        {
+                            con.Enabled = true;
+                        }
+                        else
+                        {
+                            con.Enabled = false;
+                        }
+                    }
+
+                }
+                if (con.Controls.Count > 0)
+                {
+                    canVisable(con);
+                }
+            }
+        }
+
+        private void Changeoperator()
+        {
+            windowstimer.Stop();
+            当前权限 = "Operator";
+            操作权限 = "A";
+            this.Invoke(new Action(() =>
+            {
+                //checkBox_doorbear.Checked = true;
+                this.combox_juris.SelectedIndexChanged -= new System.EventHandler(this.combox_juris_SelectedIndexChanged);
+                combox_juris.Text = 当前权限;
+                this.combox_juris.SelectedIndexChanged += new System.EventHandler(this.combox_juris_SelectedIndexChanged);
+                canVisable(this);
+            }));
+        }
+
+        private void WindowstimerTick(object sender, EventArgs eventArgs)
+        {
+            System.Drawing.Point mousePosition = Control.MousePosition;
+            if (windowsPoint.X != mousePosition.X || windowsPoint.Y != mousePosition.Y)
+            {
+                mousemovetime = DateTime.Now;
+                windowsPoint = mousePosition;
+            }
+            else //如果长时间没有动过鼠标
+            {
+                TimeSpan remainingTime = TimeSpan.FromMilliseconds(权限时间 * 1000) - (DateTime.Now - mousemovetime);
+                if (remainingTime.Seconds < 0)
+                {
+                    Changeoperator();
+                }
+            }
+            //this.Invoke(new Action(() =>
+            //{
+            //    label153.Text = $"鼠标坐标: X={mousePosition.X}, Y={mousePosition.Y}";
+            //}));
+        }
+
+        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        {
+            bool canchange = true;
+            bool ischange = false;
+            if (设备状态 != 0)
+            {
+                canchange = false;
+                MessageBox.Show($"请结批后更改档案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (当前档案 == comboBox1.Text.Trim()) return;
+
+            if (当前权限 == "Operator")
+            {
+                canchange = false;
+                MessageBox.Show($"权限不足!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (canchange)
+            {
+                DialogResult dialogResult = MessageBox.Show($"请确认是否将工作档案更改为【{comboBox1.Text}】", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialogResult == DialogResult.OK)
+                {
+                    string result = UpdateRecord(comboBox1.Text); //(1)更新config当前档案
+                    if (result == "Success")
+                    {
+                        result = GetconfigValue("当前档案", out string value); //(2)读取config当前档案
+                        if (result == "Success")
+                        {
+                            result = GetSetupInfoData(value); //(3)读取当前档案信息
+                            if (result == "Success") //(4)更新当前档案信息
+                            {
+                                result = Init_TrayPoint();
+                                if (result == "Success") //(5)更新tray点位
+                                {
+                                    刷新分BIN信息();
+                                    刷新开Site状态();
+                                    ischange = true;
+                                    Debug.WriteLine($"档案切换[{当前档案}]->[{comboBox1.Text.Trim()}]");
+                                    当前档案 = value;
+                                }
+                                else
+                                {
+                                    Debug.WriteLine($"更新Tray盘点位失败!" + result);
+                                    MessageBox.Show($"更新Tray盘点位失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"读取当前档案信息失败!" + result);
+                                MessageBox.Show($"读取当前档案信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"读取当前档案失败!" + result);
+                            MessageBox.Show($"读取当前档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"更新档案失败!" + result);
+                        MessageBox.Show($"更新档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            if (!ischange)
+            {
+                this.comboBox1.SelectedValueChanged -= new System.EventHandler(this.comboBox1_SelectedValueChanged);
+                comboBox1.Text = 当前档案;
+                this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
+            }
+        }
+
+        private void combox_juris_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool ischange = false;
+
+            if (当前权限 != combox_juris.Text)
+            {
+                DialogResult result = MessageBox.Show($"是否修改权限为({combox_juris.Text})", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    if (combox_juris.Text == "Operator")
+                    {
+                        当前权限 = combox_juris.Text;
+                        操作权限 = "A";
+
+                        windowstimer.Stop();
+                        //checkBox_doorbear.Checked = true;
+                    }
+                    else
+                    {
+                        FrmInputPwd frmInputPwd = new FrmInputPwd();
+                        if (frmInputPwd.ShowDialog() == DialogResult.OK)
+                        {
+                            string get = GetPassWord(combox_juris.Text, out string value);
+                            if (get == "Success")
+                            {
+                                if (frmInputPwd.Password == value)
+                                {
+                                    当前权限 = combox_juris.Text;
+                                    ischange = true;
+
+                                    switch (当前权限)
+                                    {
+                                        //case "operator": operation = "A"; break;
+                                        case "Engineer":
+                                            操作权限 = "B";
+                                            windowstimer.Start();
+                                            mousemovetime = DateTime.Now;
+                                            break;
+                                        case "Administrator":
+                                            操作权限 = "C";
+                                            windowstimer.Start();
+                                            mousemovetime = DateTime.Now;
+                                            break;
+                                        case "Supplier":
+                                            操作权限 = "D";
+                                            windowstimer.Start();
+                                            mousemovetime = DateTime.Now;
+                                            break;
+                                    }
+                                }
+                                else
+                                {
+                                    Debug.WriteLine($"密码{frmInputPwd.Password}错误！");
+                                    MessageBox.Show($"密码{frmInputPwd.Password}错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"获取{combox_juris.Text}密码失败！" + get);
+                                MessageBox.Show($"获取{combox_juris.Text}密码失败！" + get, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+
+                }
+            }
+
+            if (ischange == false)
+            {
+                this.combox_juris.SelectedIndexChanged -= new System.EventHandler(this.combox_juris_SelectedIndexChanged);
+                combox_juris.Text = 当前权限;
+                this.combox_juris.SelectedIndexChanged += new System.EventHandler(this.combox_juris_SelectedIndexChanged);
+            }
+
+            canVisable(this);
+        }
+
+        public void 刷新档案选项()
+        {
+            string result = GetSetupInfoName(out DataTable dt);
+            if (result != "Success")
+            {
+                Debug.WriteLine("刷新档案选项失败!" + result);
+                return;
+            }
+            comboBox1.DataSource = dt;
+            comboBox1.DisplayMember = "档案名称";
+
+            comboBox1.SelectedIndexChanged -= comboBox1_SelectedValueChanged;
+            comboBox1.Text = 当前档案;
+            comboBox1.SelectedIndexChanged += comboBox1_SelectedValueChanged;
+        }
+
+        public void 刷新权限选项()
+        {
+            string result = GetJurisdictionName(out DataTable dt);
+            if (result != "Success")
+            {
+                Debug.WriteLine("刷新权限选项失败!" + result);
+                return;
+            }
+
+            combox_juris.DataSource = dt;
+            combox_juris.DisplayMember = "realName";
+            当前权限 = "Operator";
+
+            combox_juris.SelectedIndexChanged -= combox_juris_SelectedIndexChanged;
+            comboBox1.Text = 当前权限;
+            combox_juris.SelectedIndexChanged += combox_juris_SelectedIndexChanged;
+        }
+
+        public void 刷新开Site状态()
+        {
+            int open = 0;
+            int close = 0;
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    string ison = 设置信息.开site信息.GetSiteNum(i, j);
+                    if (ison == "1")
+                    {
+                        open++;
+                        Lbl_Dout[i * 8 + j].Text = (j + 1).ToString();
+                    }
+                    else
+                    {
+                        close++;
+                        Lbl_Dout[i * 8 + j].Text = "";
+                    }
+                }
+            }
+            ;
+            开Site数量 = open;
+            关Site数量 = close;
+        }
+
+        public void 刷新分BIN信息()
+        {
+            BinParam binParam = 设置信息.分BIN信息;
+
+            textBox1.Text = Auto1 = binParam.auto1;
+            textBox9.Text = Auto2 = binParam.auto2;
+            //textBox3.Text = fix1 = motionEx.binParam.fix1;
+            //textBox2.Text = fix2 = motionEx.binParam.fix2;
+            //textBox4.Text = fix3 = motionEx.binParam.fix3;
+
+            Fix1 = Fix1_1 = binParam.fix1.Split(';')[0];
+            Fix1_2 = binParam.fix1.Split(';')[1];
+            Fix1_3 = binParam.fix1.Split(';')[2];
+            Fix2 = Fix2_1 = binParam.fix2.Split(';')[0];
+            Fix2_2 = binParam.fix2.Split(';')[1];
+            Fix2_3 = binParam.fix2.Split(';')[2];
+            Fix3 = Fix3_1 = binParam.fix3.Split(';')[0];
+            Fix3_2 = binParam.fix3.Split(';')[1];
+            Fix3_3 = binParam.fix3.Split(';')[2];
+
+            switch (binParam.fix1num)
+            {
+                case 1: textBox3.Text = Fix1_1; break;
+                case 2:
+                    {
+                        textBox3.Text = "分区一：" + Fix1_1 + "\r\n分区二：" + Fix1_2;
+                        Fix1 += "," + Fix1_2;
+                    }
+                    break;
+                case 3:
+                    {
+                        textBox3.Text = "分区一：" + Fix1_1 + "\r\n分区二：" + Fix1_2 + "\r\n分区三：" + Fix1_3;
+                        Fix1 += "," + Fix1_2 + "," + Fix1_3;
+                    }
+                    break;
+            }
+            switch (binParam.fix2num)
+            {
+                case 1: textBox2.Text = Fix2_1; break;
+                case 2:
+                    {
+                        textBox2.Text = "分区一：" + Fix2_1 + "\r\n分区二：" + Fix2_2;
+                        Fix2 += "," + Fix2_2;
+                    }
+                    break;
+                case 3:
+                    {
+                        textBox2.Text = "分区一：" + Fix2_1 + "\r\n分区二：" + Fix2_2 + "\r\n分区三：" + Fix2_3;
+                        Fix2 += "," + Fix2_2 + "," + Fix2_3;
+                    }
+                    break;
+            }
+            switch (binParam.fix3num)
+            {
+                case 1: textBox4.Text = Fix3_1; break;
+                case 2:
+                    {
+                        textBox4.Text = "分区一：" + Fix3_1 + "\r\n分区二：" + Fix3_2;
+                        Fix3 += "," + Fix3_2;
+                    }
+                    break;
+                case 3:
+                    {
+                        textBox4.Text = "分区一：" + Fix3_1 + "\r\n分区二：" + Fix3_2 + "\r\n分区三：" + Fix3_3;
+                        Fix3 += "," + Fix3_2 + "," + Fix3_3;
+                    }
+                    break;
+            }
+
+            //分bin.Clear();
+
+            //if (auto1.Length > 0)
+            //    foreach (string s in auto1.Split(','))
+            //    {
+            //        if (s == "") continue;
+            //        分bin.Add(new 分Bin(s, "auto1", 0));
+            //    }
+            //if (auto2.Length > 0)
+            //    foreach (string s in auto2.Split(','))
+            //    {
+            //        if (s == "") continue;
+            //        分bin.Add(new 分Bin(s, "auto2", 0));
+            //    }
+            //if (fix1.Length > 0)
+            //    foreach (string s in fix1.Split(','))
+            //    {
+            //        if (s == "") continue;
+            //        分bin.Add(new 分Bin(s, "fix1", 0));
+            //    }
+            //if (fix2.Length > 0)
+            //    foreach (string s in fix2.Split(','))
+            //    {
+            //        if (s == "") continue;
+            //        分bin.Add(new 分Bin(s, "fix2", 0));
+            //    }
+            //if (fix3.Length > 0)
+            //    foreach (string s in fix3.Split(','))
+            //    {
+            //        if (s == "") continue;
+            //        分bin.Add(new 分Bin(s, "fix3", 0));
+            //    }
+            //int[] 分bin_fix = { motionEx.binParam.fix1num, motionEx.binParam.fix2num, motionEx.binParam.fix3num };
+            //string[] 分bin_fix1 = { fix1_1, fix1_2, fix1_3 };
+            //string[] 分bin_fix2 = { fix2_1, fix2_2, fix2_3 };
+            //string[] 分bin_fix3 = { fix3_1, fix3_2, fix3_3 };
+            //string[][] 分bin_fix_ = { 分bin_fix1, 分bin_fix2, 分bin_fix3 };
+
+            //for (int j = 0; j < 3; j++)
+            //{
+            //    for (int i = 0; i < 分bin_fix[j]; i++)
+            //    {
+            //        if (分bin_fix_[j][i].Length > 0)
+            //        {
+            //            foreach (string s in 分bin_fix_[j][i].Split(','))
+            //            {
+            //                分bin.Add(new 分Bin(s, "fix" + (j + 1) + "_" + (i + 1), 0));
+            //            }
+            //        }
+            //    }
+            //}
+
+
+            txt_auto1.BackColor = System.Drawing.Color.FromArgb(binParam.color1);
+            txt_auto2.BackColor = System.Drawing.Color.FromArgb(binParam.color2);
+            txt_fix1.BackColor = System.Drawing.Color.FromArgb(binParam.color3);
+            txt_fix2.BackColor = System.Drawing.Color.FromArgb(binParam.color4);
+            txt_fix3.BackColor = System.Drawing.Color.FromArgb(binParam.color5);
+
+            label149.Text = "Auto1(" + binParam.name1 + ")";
+            label150.Text = "Auto2(" + binParam.name2 + ")";
+            label152.Text = "Fix1(" + binParam.name3 + ")";
+            label151.Text = "Fix2(" + binParam.name4 + ")";
+            label1590.Text = "Fix3(" + binParam.name5 + ")";
+            label141.Text = "Auto1(" + binParam.name1 + ")";
+            label143.Text = "Auto2(" + binParam.name2 + ")";
+            label142.Text = "Fix1(" + binParam.name3 + ")";
+            label144.Text = "Fix2(" + binParam.name4 + ")";
+            label1.Text = "Fix3(" + binParam.name5 + ")";
+
+
+        }
+
         private void 屏幕刷新()
         {
             while (true)
@@ -259,6 +939,18 @@ namespace H5509_V2
                             isYellowFlicker = false;
                             isGreenFlicker = false;
                         }
+                        lbl_opennum.Text = "Open=" + 开Site数量.ToString();
+                        lbl_closenum.Text = "Close=" + 关Site数量.ToString();
+
+
+                        if (windowstimer.Enabled)
+                        {
+                            label153.Visible = true;
+                            TimeSpan remainingTime = TimeSpan.FromMilliseconds(权限时间 * 1000) - (DateTime.Now - mousemovetime);
+                            label153.Text = $"权限剩余时间: {remainingTime.Seconds} 秒";
+                        }
+                        else label153.Visible = false;
+
                     }));
                     Thread.Sleep(100);
                 }
@@ -268,19 +960,6 @@ namespace H5509_V2
                     Thread.Sleep(100);
                 }
             }
-        }
-
-        private void _main_Load(object sender, EventArgs e)
-        {
-            //1s刷新一次当前时间
-            currenttime = new System.Windows.Forms.Timer() { Interval = 1000 };
-            currenttime.Tick += Currenttime_Tick;
-            currenttime.Start(); //开始实时时间刷新
-
-            RefreshData = Task.Run(() =>
-            {
-                屏幕刷新();
-            });
         }
     }
 }

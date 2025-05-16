@@ -20,5 +20,7 @@ namespace H5509_V2
         public SiteStatus 开site信息 { get; set; } = new SiteStatus();
 
         public BinParam 分BIN信息 { get; set; } = new BinParam();
+
+        public TesterIFParam 测试机信息 { get; set; } = new TesterIFParam();
     }
 }

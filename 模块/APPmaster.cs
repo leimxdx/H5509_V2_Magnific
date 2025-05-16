@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
@@ -8,10 +10,16 @@ using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Vml;
+using DocumentFormat.OpenXml.Wordprocessing;
 using H5509_alarm;
 using Sunny.UI.Win32;
 
@@ -20,10 +28,9 @@ namespace H5509_V2
     public class APPmaster
     {
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
+
         public static string SQLServerConnString = "";
-        /// <summary>
-        /// 板卡初始成功标志
-        /// </summary>
+
         public static bool InitedOK = false;
 
         public static List<IOInfo> IOList;
@@ -43,6 +50,12 @@ namespace H5509_V2
         public static List<string> listcode = new List<string>(); //保存报警代码
 
         public static string 当前档案;
+
+        public static string 当前权限;
+
+        public static int 权限时间 { get; set; } = 60;
+
+        static public string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
 
         public static bool IsStart = false; //开始
 
@@ -83,8 +96,11 @@ namespace H5509_V2
         public static bool 定点停止允许 = false;
 
         public static bool Load换盘标记 = false;
+
         public static bool Auto1换盘标记 = false;
+
         public static bool Auto2换盘标记 = false;
+
         public static bool Auto等待换盘标记 = false;
 
         public static int 气缸动作超时时间 = 3000; //ms
@@ -94,27 +110,45 @@ namespace H5509_V2
         public static Communication Com = new Communication();
 
         public static double TestShuttleLPos = 800;
+
         public static double TestShuttleRPos = 900.6;
 
         public static double Testx1pos = 12;
+
         public static double Testx2pos = 401.4;
+
         public static double Testx3pos = 1089.5;
+
         public static double Testx4pos = 1478.8;
+
         public static double[] TestXPoint; //Site点位坐标
 
         public static double[] LoaderXPoint; //Loader待测盘
+
         public static double[] LoaderYPoint; //Loader待测盘
+
         public static double[] HeatXPoint;  //加热盘X坐标
+
         public static double[] HeatYPoint; //加热盘Y坐标
+
         public static double[] Auto1XPoint; //自动盘1X坐标
+
         public static double[] Auto1YPoint; //自动盘1Y坐标
+
         public static double[] Auto2XPoint; //自动盘2X坐标
+
         public static double[] Auto2YPoint; //自动盘2Y坐标
+
         public static double[] Fix1XPoint; //手动盘1X坐标
+
         public static double[] Fix1YPoint; //手动盘1Y坐标
+
         public static double[] Fix2XPoint; //手动盘2X坐标
+
         public static double[] Fix2YPoint; //手动盘2Y坐标
+
         public static double[] Fix3XPoint; //手动盘3X坐标
+
         public static double[] Fix3YPoint; //手动盘3Y坐标
 
         public static Dictionary<string, bool> LoaderDicPoint = new Dictionary<string, bool>(); //待测盘Map图
@@ -131,39 +165,59 @@ namespace H5509_V2
 
         public static Dictionary<string, bool> Fix3DicPoint = new Dictionary<string, bool>(); //手动盘3Map图
 
-        public static Dictionary<string, string> HeatDicBin { get; set; } = new Dictionary<string, string>();
         public static Dictionary<string, string> Auto1DicBin { get; set; } = new Dictionary<string, string>();
+
         public static Dictionary<string, string> Auto2DicBin { get; set; } = new Dictionary<string, string>();
+
         public static Dictionary<string, string> Fix1DicBin { get; set; } = new Dictionary<string, string>();
+
         public static Dictionary<string, string> Fix2DicBin { get; set; } = new Dictionary<string, string>();
+
         public static Dictionary<string, string> Fix3DicBin { get; set; } = new Dictionary<string, string>();
 
         public static int Fix1Num = 1;
+
         public static int Fix2Num = 1;
+
         public static int Fix3Num = 1;
 
         public static string Auto1 = "01"; //"01"
+
         public static string Auto2 = "02,03"; //"02,03,04,05,06"
 
         public static string Fix1 = "04";
+
         public static string Fix1_1 = "07";
+
         public static string Fix1_2 = "07";
+
         public static string Fix1_3 = "07";
 
         public static string Fix2 = "05";//07
+
         public static string Fix2_1 = "08";
+
         public static string Fix2_2 = "08";
+
         public static string Fix2_3 = "08";
 
         public static string Fix3 = "06";
+
         public static string Fix3_1 = "09";
+
         public static string Fix3_2 = "09";
+
         public static string Fix3_3 = "09";
 
-        public static string Oth;
-        public static string OthAll;
+        public static string oth;
+
+        public static string othAll;
 
         public static bool 入料IC忽略 { get; set; }
+
+        public static bool 入料IC吸不起结批 { get; set; }
+
+        public static bool 无待测盘结批 { get; set; }
 
         public static bool 出料IC忽略 { get; set; }
 
@@ -186,8 +240,11 @@ namespace H5509_V2
         public static double 梭车行间距 = 32; //mm
 
         public static double Auto1初始点 = 193;
+
         public static double Auto2初始点 = 193;
+
         public static double Auto1上移固定距离 = 29.5;
+
         public static double Auto2上移固定距离 = 29.5;
 
         public static double Tray_厚度
@@ -223,82 +280,123 @@ namespace H5509_V2
         public static int[] SiteTestState = new int[16];
 
         //public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
+
         public static List<bool[][]> SiteTestIC = new List<bool[][]>(); //保存Site放入的IC状态
+
         public static List<string[][]> SiteTestBIN = new List<string[][]>(); //保存
 
         public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>(); //用来保存接收的Bin数据的队列
+
         public static ConcurrentQueue<string> SiteSaveQueue = new ConcurrentQueue<string>(); //用来保存接收的Site数据的队列
 
         public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
+
         public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
 
         public static int 空盘上顶最大值 = 429895;
+
         public static int 空盘下降最小值 = 10000;
+
         public static int 空盘满盘判断值 = 12700;
 
         public static int 待测盘上顶最大值 = 434675;
+
         public static int 待测盘下降最小值 = 10000;
 
         public static int Auto1上顶最大值 = 468000;
+
         public static int Auto1下降最小值 = 10000;
+
         public static int Auto1满盘判断值 = 25000;
 
         public static int Auto2上顶最大值 = 468000;
+
         public static int Auto2下降最小值 = 10000;
+
         public static int Auto2满盘判断值 = 25000;
 
         public static bool Auto1料仓满盘标记;
+
         public static bool Auto2料仓满盘标记;
 
         public static bool Auto1放盘等待标记;
+
         public static bool Auto2放盘等待标记;
 
         public static bool Empty料仓打开标记;
+
         public static bool Load料仓打开标记;
+
         public static bool Auto1料仓打开标记;
+
         public static bool Auto2料仓打开标记;
 
         public static bool 入料手臂工作完成标记;
+
         public static bool 入料手臂停止工作标记;
+
         public static bool 出料手臂工作完成标记;
+
         public static bool 测试手臂工作完成标记;
+
         public static bool 入料手臂抓料等待标记;
 
         public static short 飞梭移动状态;
+
         public static short 飞梭前入料状态;
+
         public static short 飞梭前出料状态;
+
         public static short 飞梭后入料状态;
+
         public static short 飞梭后出料状态;
 
         public static bool[][] 飞梭前入料IC;
+
         public static bool[][] 飞梭前出料IC;
+
         public static bool[][] 飞梭后入料IC;
+
         public static bool[][] 飞梭后出料IC;
 
         public static short Empty上顶标记 = 1;
+
         public static short Load上顶标记 = 1;
+
         public static short Empty下降标记 = 1;
+
         public static short Load下降标记 = 1;
+
         public static short Auto1上顶标记 = 1;
+
         public static short Auto2上顶标记 = 1;
+
         public static short Empty下降回零标记 = 1;
+
         public static short Load下降回零标记 = 1;
+
         public static short Auto1下降回零标记 = 1;
+
         public static short Auto2下降回零标记 = 1;
 
         public static int 抓盘手臂取Empty空盘标记 = 1;
+
         public static int 抓盘手臂取Load空盘标记 = 1;
 
         public static int 抓盘手臂给Auto1空盘标记 = 1;
+
         public static int 抓盘手臂给Auto2空盘标记 = 1;
 
         public static int 抓盘手臂放空盘到Empty标记 = 1;
+
         public static int 抓盘手臂放空盘到Auto1标记 = 1;
+
         public static int 抓盘手臂放空盘到Auto2标记 = 1;
 
         public static bool[][] 放料IC目标值;
 
         public static string[][] 飞梭前出料BIN项;
+
         public static string[][] 飞梭后出料BIN项;
 
         public static Task StartTask;
@@ -543,6 +641,672 @@ namespace H5509_V2
             return true;
         }
 
+        public static void GetCoreAxis(string axisname, out short core, out short axis)
+        {
+            AxisInfo axisInfo = new AxisInfo();
+            for (int i = 0; i < AxisInfoList.Count; i++)
+            {
+                if (AxisInfoList[i].轴名称 == axisname)
+                {
+                    axisInfo = AxisInfoList[i];
+                }
+            }
+            core = axisInfo.核号;
+            axis = axisInfo.轴号;
+        }
+
+        public static void AxisRunGetCoreAxis()
+        {
+            for (int i = 0; i < AxisRunInfoList.Count; i++)
+            {
+                GetCoreAxis(AxisRunInfoList[i].轴名称, out short core, out short axis);
+                AxisRunInfoList[i].核号 = core;
+                AxisRunInfoList[i].轴号 = axis;
+            }
+        }
+
+        public static void AxisHomeGetCoreAxis()
+        {
+            for (int i = 0; i < AxisHomeInfoList.Count; i++)
+            {
+                GetCoreAxis(AxisHomeInfoList[i].轴名称, out short core, out short axis);
+                AxisHomeInfoList[i].核号 = core;
+                AxisHomeInfoList[i].轴号 = axis;
+            }
+        }
+
+        public static string GetIOInfo()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from IOInfo", out DataTable dataTable);
+            if (result == "Success")
+            {
+                APPmaster.IOList = new List<IOInfo>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    APPmaster.IOList.Add(new IOInfo()
+                    {
+                        模块类型 = dr["模块型号"].ToString(),
+                        输入 = Convert.ToInt16(dr["输入"].ToString()),
+                        输出 = Convert.ToInt16(dr["输出"].ToString()),
+                        核号 = Convert.ToInt16(dr["核号"].ToString()),
+                        模块号 = Convert.ToInt16(dr["模块号"].ToString()),
+                        硬件索引 = Convert.ToInt16(dr["硬件索引"].ToString()),
+                        软件索引 = Convert.ToInt16(dr["软件索引"].ToString()),
+                        IO编号 = dr["IO编号"].ToString(),
+                        IO名称 = dr["IO名称"].ToString(),
+                        IO区域 = dr["区域"].ToString()
+                    });
+                }
+            }
+            return result;
+        }
+
+        public static string GetInitPoint()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from InitPoint", out DataTable dataTable);
+            if (result == "Success")
+            {
+                InitPoint initPoint = new InitPoint();
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    double value = Convert.ToDouble(item["value"].ToString());
+                    switch (item["ptname"].ToString())
+                    {
+                        case "入料_Load_X": initPoint.入料_Load_X = value; break;
+                        case "入料_Load_Y": initPoint.入料_Load_Y = value; break;
+                        case "入料_Load_Z": initPoint.入料_Load_Z = value; break;
+                        case "入料_Heat_X": initPoint.入料_Heat_X = value; break;
+                        case "入料_Heat_Y": initPoint.入料_Heat_Y = value; break;
+                        case "入料_Heat_Z": initPoint.入料_Heat_Z = value; break;
+                        case "入料_梭车1_X": initPoint.入料_梭车1_X = value; break;
+                        case "入料_梭车1_Y": initPoint.入料_梭车1_Y = value; break;
+                        case "入料_梭车1_Z": initPoint.入料_梭车1_Z = value; break;
+                        case "入料_梭车2_X": initPoint.入料_梭车2_X = value; break;
+                        case "入料_梭车2_Y": initPoint.入料_梭车2_Y = value; break;
+                        case "入料_梭车2_Z": initPoint.入料_梭车2_Z = value; break;
+                        case "入料_梭车列间隔": initPoint.入料_梭车列间隔 = value; break;
+                        case "入料_变距最大值": initPoint.入料_变距最大值 = value; break;
+                        case "入料_变距最小值": initPoint.入料_变距最小值 = value; break;
+                        case "入料_Z1_硬件补偿": initPoint.入料_Z1_硬件补偿 = value; break;
+                        case "入料_Z2_硬件补偿": initPoint.入料_Z2_硬件补偿 = value; break;
+                        case "入料_Z3_硬件补偿": initPoint.入料_Z3_硬件补偿 = value; break;
+                        case "入料_Z4_硬件补偿": initPoint.入料_Z4_硬件补偿 = value; break;
+                        case "出料_梭车1_X": initPoint.出料_梭车1_X = value; break;
+                        case "出料_梭车1_Y": initPoint.出料_梭车1_Y = value; break;
+                        case "出料_梭车1_Z": initPoint.出料_梭车1_Z = value; break;
+                        case "出料_梭车2_X": initPoint.出料_梭车2_X = value; break;
+                        case "出料_梭车2_Y": initPoint.出料_梭车2_Y = value; break;
+                        case "出料_梭车2_Z": initPoint.出料_梭车2_Z = value; break;
+                        case "出料_Auto1_X": initPoint.出料_Auto1_X = value; break;
+                        case "出料_Auto1_Y": initPoint.出料_Auto1_Y = value; break;
+                        case "出料_Auto1_Z": initPoint.出料_Auto1_Z = value; break;
+                        case "出料_Auto2_X": initPoint.出料_Auto2_X = value; break;
+                        case "出料_Auto2_Y": initPoint.出料_Auto2_Y = value; break;
+                        case "出料_Auto2_Z": initPoint.出料_Auto2_Z = value; break;
+                        case "出料_Fix1_X": initPoint.出料_Fix1_X = value; break;
+                        case "出料_Fix1_Y": initPoint.出料_Fix1_Y = value; break;
+                        case "出料_Fix1_Z": initPoint.出料_Fix1_Z = value; break;
+                        case "出料_Fix2_X": initPoint.出料_Fix2_X = value; break;
+                        case "出料_Fix2_Y": initPoint.出料_Fix2_Y = value; break;
+                        case "出料_Fix2_Z": initPoint.出料_Fix2_Z = value; break;
+                        case "出料_Fix3_X": initPoint.出料_Fix3_X = value; break;
+                        case "出料_Fix3_Y": initPoint.出料_Fix3_Y = value; break;
+                        case "出料_Fix3_Z": initPoint.出料_Fix3_Z = value; break;
+                        case "出料_梭车列间隔": initPoint.出料_梭车列间隔 = value; break;
+                        case "出料_变距最大值": initPoint.出料_变距最大值 = value; break;
+                        case "出料_变距最小值": initPoint.出料_变距最小值 = value; break;
+                        case "出料_Fix3_右移动": initPoint.出料_Fix3_右移动 = value; break;
+                        case "出料_Z1_硬件补偿": initPoint.出料_Z1_硬件补偿 = value; break;
+                        case "出料_Z2_硬件补偿": initPoint.出料_Z2_硬件补偿 = value; break;
+                        case "出料_Z3_硬件补偿": initPoint.出料_Z3_硬件补偿 = value; break;
+                        case "出料_Z4_硬件补偿": initPoint.出料_Z4_硬件补偿 = value; break;
+                        case "测试_梭车1吸_X": initPoint.测试_梭车1吸_X = value; break;
+                        case "测试_梭车1吸_Z": initPoint.测试_梭车1吸_Z = value; break;
+                        case "测试_梭车2吸_X": initPoint.测试_梭车2吸_X = value; break;
+                        case "测试_梭车2吸_Z": initPoint.测试_梭车2吸_Z = value; break;
+                        case "测试_梭车1放_X": initPoint.测试_梭车1放_X = value; break;
+                        case "测试_梭车1放_Z": initPoint.测试_梭车1放_Z = value; break;
+                        case "测试_梭车2放_X": initPoint.测试_梭车2放_X = value; break;
+                        case "测试_梭车2放_Z": initPoint.测试_梭车2放_Z = value; break;
+                        case "测试_梭车列间隔": initPoint.测试_梭车列间隔 = value; break;
+                        case "测试_Test1区_X": initPoint.测试_Test1区_X = value; break;
+                        case "测试_Test2区_X": initPoint.测试_Test2区_X = value; break;
+                        case "测试_Test3区_X": initPoint.测试_Test3区_X = value; break;
+                        case "测试_Test4区_X": initPoint.测试_Test4区_X = value; break;
+                        case "测试_Test区Site间隔": initPoint.测试_Test区Site间隔 = value; break;
+                        case "测试_Test区吸_Z": initPoint.测试_Test区吸_Z = value; break;
+                        case "测试_Test区放_Z": initPoint.测试_Test区放_Z = value; break;
+                        case "梭车2_前_Y": initPoint.梭车2_前_Y = value; break;
+                        case "梭车2_后_Y": initPoint.梭车2_后_Y = value; break;
+                        case "抓盘_Empty_X": initPoint.抓盘_Empty_X = value; break;
+                        case "抓盘_Load_X": initPoint.抓盘_Load_X = value; break;
+                        case "抓盘_Auto1_X": initPoint.抓盘_Auto1_X = value; break;
+                        case "抓盘_Auto2_X": initPoint.抓盘_Auto2_X = value; break;
+                    }
+                }
+                初始点位 = initPoint;
+            }
+            return result;
+        }
+
+        public static string GetOffsetPoint(string name, out OffsetPoint offsetPoint)
+        {
+            offsetPoint = new OffsetPoint();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from OffsetPoint where 微调点位名称 = '{name}'", out SQLiteDataReader reader);
+            if (result == "Success")
+            {
+                if (reader.Read())
+                {
+                    offsetPoint = new OffsetPoint()
+                    {
+                        微调点位名称 = reader["微调点位名称"].ToString(),
+                        入料_Load吸_X = Convert.ToDouble(reader["入料_Load吸_X"].ToString()),
+                        入料_Load吸_Y = Convert.ToDouble(reader["入料_Load吸_Y"].ToString()),
+                        入料_Load吸_Z = Convert.ToDouble(reader["入料_Load吸_Z"].ToString()),
+                        入料_Load_变距 = Convert.ToDouble(reader["入料_Load_变距"].ToString()),
+                        入料_Heat吸_X = Convert.ToDouble(reader["入料_Heat吸_X"].ToString()),
+                        入料_Heat吸_Y = Convert.ToDouble(reader["入料_Heat吸_Y"].ToString()),
+                        入料_Heat吸_Z = Convert.ToDouble(reader["入料_Heat吸_Z"].ToString()),
+                        入料_Heat放_X = Convert.ToDouble(reader["入料_Heat放_X"].ToString()),
+                        入料_Heat放_Y = Convert.ToDouble(reader["入料_Heat放_Y"].ToString()),
+                        入料_Heat放_Z = Convert.ToDouble(reader["入料_Heat放_Z"].ToString()),
+                        入料_Heat_变距 = Convert.ToDouble(reader["入料_Heat_变距"].ToString()),
+                        入料_梭车1第1列放_X = Convert.ToDouble(reader["入料_梭车1第1列放_X"].ToString()),
+                        入料_梭车1第1列放_Y = Convert.ToDouble(reader["入料_梭车1第1列放_Y"].ToString()),
+                        入料_梭车1第1列放_Z = Convert.ToDouble(reader["入料_梭车1第1列放_Z"].ToString()),
+                        入料_梭车1第2列放_X = Convert.ToDouble(reader["入料_梭车1第2列放_X"].ToString()),
+                        入料_梭车1第2列放_Y = Convert.ToDouble(reader["入料_梭车1第2列放_Y"].ToString()),
+                        入料_梭车1第2列放_Z = Convert.ToDouble(reader["入料_梭车1第2列放_Z"].ToString()),
+                        入料_梭车2第1列放_X = Convert.ToDouble(reader["入料_梭车2第1列放_X"].ToString()),
+                        入料_梭车2第1列放_Y = Convert.ToDouble(reader["入料_梭车2第1列放_Y"].ToString()),
+                        入料_梭车2第1列放_Z = Convert.ToDouble(reader["入料_梭车2第1列放_Z"].ToString()),
+                        入料_梭车2第2列放_X = Convert.ToDouble(reader["入料_梭车2第2列放_X"].ToString()),
+                        入料_梭车2第2列放_Y = Convert.ToDouble(reader["入料_梭车2第2列放_Y"].ToString()),
+                        入料_梭车2第2列放_Z = Convert.ToDouble(reader["入料_梭车2第2列放_Z"].ToString()),
+                        入料_梭车_变距 = Convert.ToDouble(reader["入料_梭车_变距"].ToString()),
+                        出料_梭车1第1列吸_X = Convert.ToDouble(reader["出料_梭车1第1列吸_X"].ToString()),
+                        出料_梭车1第1列吸_Y = Convert.ToDouble(reader["出料_梭车1第1列吸_Y"].ToString()),
+                        出料_梭车1第1列吸_Z = Convert.ToDouble(reader["出料_梭车1第1列吸_Z"].ToString()),
+                        出料_梭车1第2列吸_X = Convert.ToDouble(reader["出料_梭车1第2列吸_X"].ToString()),
+                        出料_梭车1第2列吸_Y = Convert.ToDouble(reader["出料_梭车1第2列吸_Y"].ToString()),
+                        出料_梭车1第2列吸_Z = Convert.ToDouble(reader["出料_梭车1第2列吸_Z"].ToString()),
+                        出料_梭车2第1列吸_X = Convert.ToDouble(reader["出料_梭车2第1列吸_X"].ToString()),
+                        出料_梭车2第1列吸_Y = Convert.ToDouble(reader["出料_梭车2第1列吸_Y"].ToString()),
+                        出料_梭车2第1列吸_Z = Convert.ToDouble(reader["出料_梭车2第1列吸_Z"].ToString()),
+                        出料_梭车2第2列吸_X = Convert.ToDouble(reader["出料_梭车2第2列吸_X"].ToString()),
+                        出料_梭车2第2列吸_Y = Convert.ToDouble(reader["出料_梭车2第2列吸_Y"].ToString()),
+                        出料_梭车2第2列吸_Z = Convert.ToDouble(reader["出料_梭车2第2列吸_Z"].ToString()),
+                        出料_梭车_变距 = Convert.ToDouble(reader["出料_梭车_变距"].ToString()),
+                        出料_Auto1放_X = Convert.ToDouble(reader["出料_Auto1放_X"].ToString()),
+                        出料_Auto1放_Y = Convert.ToDouble(reader["出料_Auto1放_Y"].ToString()),
+                        出料_Auto1放_Z = Convert.ToDouble(reader["出料_Auto1放_Z"].ToString()),
+                        出料_Auto2放_X = Convert.ToDouble(reader["出料_Auto2放_X"].ToString()),
+                        出料_Auto2放_Y = Convert.ToDouble(reader["出料_Auto2放_Y"].ToString()),
+                        出料_Auto2放_Z = Convert.ToDouble(reader["出料_Auto2放_Z"].ToString()),
+                        出料_Fix1放_X = Convert.ToDouble(reader["出料_Fix1放_X"].ToString()),
+                        出料_Fix1放_Y = Convert.ToDouble(reader["出料_Fix1放_Y"].ToString()),
+                        出料_Fix1放_Z = Convert.ToDouble(reader["出料_Fix1放_Z"].ToString()),
+                        出料_Fix2放_X = Convert.ToDouble(reader["出料_Fix2放_X"].ToString()),
+                        出料_Fix2放_Y = Convert.ToDouble(reader["出料_Fix2放_Y"].ToString()),
+                        出料_Fix2放_Z = Convert.ToDouble(reader["出料_Fix2放_Z"].ToString()),
+                        出料_Fix3放_X = Convert.ToDouble(reader["出料_Fix3放_X"].ToString()),
+                        出料_Fix3放_Y = Convert.ToDouble(reader["出料_Fix3放_Y"].ToString()),
+                        出料_Fix3放_Z = Convert.ToDouble(reader["出料_Fix3放_Z"].ToString()),
+                        出料_AF_变距 = Convert.ToDouble(reader["出料_AF_变距"].ToString()),
+                        测试_梭车1左吸_X = Convert.ToDouble(reader["测试_梭车1左吸_X"].ToString()),
+                        测试_梭车1左吸_Z = Convert.ToDouble(reader["测试_梭车1左吸_Z"].ToString()),
+                        测试_梭车2左吸_X = Convert.ToDouble(reader["测试_梭车2左吸_X"].ToString()),
+                        测试_梭车2左吸_Z = Convert.ToDouble(reader["测试_梭车2左吸_Z"].ToString()),
+                        测试_梭车1右放_X = Convert.ToDouble(reader["测试_梭车1右放_X"].ToString()),
+                        测试_梭车1右放_Z = Convert.ToDouble(reader["测试_梭车1右放_Z"].ToString()),
+                        测试_梭车2右放_X = Convert.ToDouble(reader["测试_梭车2右放_X"].ToString()),
+                        测试_梭车2右放_Z = Convert.ToDouble(reader["测试_梭车2右放_Z"].ToString()),
+                        测试_Site1吸_X = Convert.ToDouble(reader["测试_Site1吸_X"].ToString()),
+                        测试_Site2吸_X = Convert.ToDouble(reader["测试_Site2吸_X"].ToString()),
+                        测试_Site3吸_X = Convert.ToDouble(reader["测试_Site3吸_X"].ToString()),
+                        测试_Site4吸_X = Convert.ToDouble(reader["测试_Site4吸_X"].ToString()),
+                        测试_Site5吸_X = Convert.ToDouble(reader["测试_Site5吸_X"].ToString()),
+                        测试_Site6吸_X = Convert.ToDouble(reader["测试_Site6吸_X"].ToString()),
+                        测试_Site7吸_X = Convert.ToDouble(reader["测试_Site7吸_X"].ToString()),
+                        测试_Site8吸_X = Convert.ToDouble(reader["测试_Site8吸_X"].ToString()),
+                        测试_Site9吸_X = Convert.ToDouble(reader["测试_Site9吸_X"].ToString()),
+                        测试_Site10吸_X = Convert.ToDouble(reader["测试_Site10吸_X"].ToString()),
+                        测试_Site11吸_X = Convert.ToDouble(reader["测试_Site11吸_X"].ToString()),
+                        测试_Site12吸_X = Convert.ToDouble(reader["测试_Site12吸_X"].ToString()),
+                        测试_Site13吸_X = Convert.ToDouble(reader["测试_Site13吸_X"].ToString()),
+                        测试_Site14吸_X = Convert.ToDouble(reader["测试_Site14吸_X"].ToString()),
+                        测试_Site15吸_X = Convert.ToDouble(reader["测试_Site15吸_X"].ToString()),
+                        测试_Site16吸_X = Convert.ToDouble(reader["测试_Site16吸_X"].ToString()),
+                        测试_Site1吸_Z = Convert.ToDouble(reader["测试_Site1吸_Z"].ToString()),
+                        测试_Site2吸_Z = Convert.ToDouble(reader["测试_Site2吸_Z"].ToString()),
+                        测试_Site3吸_Z = Convert.ToDouble(reader["测试_Site3吸_Z"].ToString()),
+                        测试_Site4吸_Z = Convert.ToDouble(reader["测试_Site4吸_Z"].ToString()),
+                        测试_Site5吸_Z = Convert.ToDouble(reader["测试_Site5吸_Z"].ToString()),
+                        测试_Site6吸_Z = Convert.ToDouble(reader["测试_Site6吸_Z"].ToString()),
+                        测试_Site7吸_Z = Convert.ToDouble(reader["测试_Site7吸_Z"].ToString()),
+                        测试_Site8吸_Z = Convert.ToDouble(reader["测试_Site8吸_Z"].ToString()),
+                        测试_Site9吸_Z = Convert.ToDouble(reader["测试_Site9吸_Z"].ToString()),
+                        测试_Site10吸_Z = Convert.ToDouble(reader["测试_Site10吸_Z"].ToString()),
+                        测试_Site11吸_Z = Convert.ToDouble(reader["测试_Site11吸_Z"].ToString()),
+                        测试_Site12吸_Z = Convert.ToDouble(reader["测试_Site12吸_Z"].ToString()),
+                        测试_Site13吸_Z = Convert.ToDouble(reader["测试_Site13吸_Z"].ToString()),
+                        测试_Site14吸_Z = Convert.ToDouble(reader["测试_Site14吸_Z"].ToString()),
+                        测试_Site15吸_Z = Convert.ToDouble(reader["测试_Site15吸_Z"].ToString()),
+                        测试_Site16吸_Z = Convert.ToDouble(reader["测试_Site16吸_Z"].ToString()),
+                        测试_Site1放_X = Convert.ToDouble(reader["测试_Site1放_X"].ToString()),
+                        测试_Site2放_X = Convert.ToDouble(reader["测试_Site2放_X"].ToString()),
+                        测试_Site3放_X = Convert.ToDouble(reader["测试_Site3放_X"].ToString()),
+                        测试_Site4放_X = Convert.ToDouble(reader["测试_Site4放_X"].ToString()),
+                        测试_Site5放_X = Convert.ToDouble(reader["测试_Site5放_X"].ToString()),
+                        测试_Site6放_X = Convert.ToDouble(reader["测试_Site6放_X"].ToString()),
+                        测试_Site7放_X = Convert.ToDouble(reader["测试_Site7放_X"].ToString()),
+                        测试_Site8放_X = Convert.ToDouble(reader["测试_Site8放_X"].ToString()),
+                        测试_Site9放_X = Convert.ToDouble(reader["测试_Site9放_X"].ToString()),
+                        测试_Site10放_X = Convert.ToDouble(reader["测试_Site10放_X"].ToString()),
+                        测试_Site11放_X = Convert.ToDouble(reader["测试_Site11放_X"].ToString()),
+                        测试_Site12放_X = Convert.ToDouble(reader["测试_Site12放_X"].ToString()),
+                        测试_Site13放_X = Convert.ToDouble(reader["测试_Site13放_X"].ToString()),
+                        测试_Site14放_X = Convert.ToDouble(reader["测试_Site14放_X"].ToString()),
+                        测试_Site15放_X = Convert.ToDouble(reader["测试_Site15放_X"].ToString()),
+                        测试_Site16放_X = Convert.ToDouble(reader["测试_Site16放_X"].ToString()),
+                        测试_Site1放_Z = Convert.ToDouble(reader["测试_Site1放_Z"].ToString()),
+                        测试_Site2放_Z = Convert.ToDouble(reader["测试_Site2放_Z"].ToString()),
+                        测试_Site3放_Z = Convert.ToDouble(reader["测试_Site3放_Z"].ToString()),
+                        测试_Site4放_Z = Convert.ToDouble(reader["测试_Site4放_Z"].ToString()),
+                        测试_Site5放_Z = Convert.ToDouble(reader["测试_Site5放_Z"].ToString()),
+                        测试_Site6放_Z = Convert.ToDouble(reader["测试_Site6放_Z"].ToString()),
+                        测试_Site7放_Z = Convert.ToDouble(reader["测试_Site7放_Z"].ToString()),
+                        测试_Site8放_Z = Convert.ToDouble(reader["测试_Site8放_Z"].ToString()),
+                        测试_Site9放_Z = Convert.ToDouble(reader["测试_Site9放_Z"].ToString()),
+                        测试_Site10放_Z = Convert.ToDouble(reader["测试_Site10放_Z"].ToString()),
+                        测试_Site11放_Z = Convert.ToDouble(reader["测试_Site11放_Z"].ToString()),
+                        测试_Site12放_Z = Convert.ToDouble(reader["测试_Site12放_Z"].ToString()),
+                        测试_Site13放_Z = Convert.ToDouble(reader["测试_Site13放_Z"].ToString()),
+                        测试_Site14放_Z = Convert.ToDouble(reader["测试_Site14放_Z"].ToString()),
+                        测试_Site15放_Z = Convert.ToDouble(reader["测试_Site15放_Z"].ToString()),
+                        测试_Site16放_Z = Convert.ToDouble(reader["测试_Site16放_Z"].ToString()),
+                        梭车2_前_Y = Convert.ToDouble(reader["梭车2_前_Y"].ToString()),
+                        梭车2_后_Y = Convert.ToDouble(reader["梭车2_后_Y"].ToString()),
+                        抓盘_Empty_X = Convert.ToDouble(reader["抓盘_Empty_X"].ToString()),
+                        抓盘_Load_X = Convert.ToDouble(reader["抓盘_Load_X"].ToString()),
+                        抓盘_Auto1_X = Convert.ToDouble(reader["抓盘_Auto1_X"].ToString()),
+                        抓盘_Auto2_X = Convert.ToDouble(reader["抓盘_Auto2_X"].ToString()),
+                    };
+                }
+                else result = $"无点位微调({设置信息.OffsetPoint.微调点位名称})信息";
+
+                reader.Close();
+            }
+            return result;
+        }
+
+        public static string GetAxisInfo()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisInfo", out DataTable dataTable);
+            if (result == "Success")
+            {
+                APPmaster.AxisInfoList = new List<AxisInfo>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    APPmaster.AxisInfoList.Add(new AxisInfo()
+                    {
+                        轴名称 = dr["轴名称"].ToString(),
+                        核号 = Convert.ToInt16(dr["核号"].ToString()),
+                        轴号 = Convert.ToInt16(dr["轴号"].ToString()),
+                    });
+                }
+            }
+            return result;
+        }
+
+        public static string GetAxisRunInfo()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisRunInfo", out DataTable dataTable);
+            if (result == "Success")
+            {
+                AxisRunInfoList = new List<AxisRunInfo>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    AxisRunInfoList.Add(new AxisRunInfo()
+                    {
+                        轴名称 = dr["轴名称"].ToString(),
+                        最大速度 = Convert.ToDouble(dr["最大速度"].ToString()),
+                        加速度 = Convert.ToDouble(dr["加速度"].ToString()),
+                        减速度 = Convert.ToDouble(dr["减速度"].ToString()),
+                        步长mm = Convert.ToDouble(dr["步长mm"].ToString()),
+                        速度百分比 = Convert.ToDouble(dr["速度百分比"].ToString()),
+                        平滑时间 = Convert.ToInt16(dr["平滑时间"].ToString()),
+                    });
+                }
+                AxisRunGetCoreAxis();
+            }
+            return result;
+        }
+
+        public static string GetAxisHomeInfo()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisHomeInfo", out DataTable dataTable);
+            if (result == "Success")
+            {
+                APPmaster.AxisHomeInfoList = new List<AxisHomeInfo>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    APPmaster.AxisHomeInfoList.Add(new AxisHomeInfo()
+                    {
+                        轴名称 = dr["轴名称"].ToString(),
+                        模式 = Convert.ToInt16(dr["模式"].ToString()),
+                        回零启动方向 = Convert.ToInt16(dr["回零启动方向"].ToString()),
+                        Index搜索方向 = Convert.ToInt16(dr["Index搜索方向"].ToString()),
+                        捕获触发沿 = Convert.ToInt16(dr["捕获触发沿"].ToString()),
+                        捕获触发器 = Convert.ToInt16(dr["捕获触发器"].ToString()),
+                        搜索速度 = Convert.ToDouble(dr["搜索速度"].ToString()),
+                        搜索Index速度 = Convert.ToDouble(dr["搜索Index速度"].ToString()),
+                        定位速度 = Convert.ToDouble(dr["定位速度"].ToString()),
+                        加速度 = Convert.ToDouble(dr["加速度"].ToString()),
+                        减速度 = Convert.ToDouble(dr["减速度"].ToString()),
+                        平滑时间 = Convert.ToInt16(dr["平滑时间"].ToString()),
+                        零点偏置 = Convert.ToInt32(dr["零点偏置"].ToString()),
+                        Home最大搜索距离 = Convert.ToInt32(dr["Home最大搜索距离"].ToString()),
+                        Index最大搜索距离 = Convert.ToInt32(dr["Index最大搜索距离"].ToString()),
+                        反向脱离步长 = Convert.ToInt32(dr["反向脱离步长"].ToString()),
+                    });
+                }
+                AxisHomeGetCoreAxis();
+            }
+            return result;
+        }
+
+        public static string GetconfigValue(string name, out string value)
+        {
+            return SQLiteHelper.runSql(SQLiteConnString, $"select value from config where name = '{name}'", out value);
+        }
+        public static string GetconfigData()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from config", out DataTable dataTable);
+            if (result == "Success")
+            {
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    string value = item["value"].ToString();
+                    switch (item["name"].ToString())
+                    {
+                        case "当前档案": 当前档案 = value; break;
+                    }
+                }
+            }
+            return result;
+        }
+
+        public static string GetSetupValue(string name, string field, out string value)
+        {
+            return SQLiteHelper.runSql(SQLiteConnString, $"select {field} from SetupInfo where 档案名称 = '{name}'", out value);
+        }
+
+        public static string GetPassWord(string name, out string value)
+        {
+            return SQLiteHelper.runSql(SQLiteConnString, $"select password from Jurisdiction where realName = '{name}'", out value);
+        }
+
+        public static string GetSetupInfo(string name)
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out SQLiteDataReader reader);
+            if (result == "Success")
+            {
+                if (reader.Read())
+                {
+                    设置信息.档案名称 = reader["档案名称"].ToString();
+                    设置信息.Tray盘信息.TrayName = reader["tray盘名称"].ToString();
+                    设置信息.OffsetPoint.微调点位名称 = reader["偏移点位名称"].ToString();
+                    设置信息.开site信息.Site名称 = reader["site名称"].ToString();
+                    设置信息.分BIN信息.分BIN名称 = reader["分BIN名称"].ToString();
+                    设置信息.测试机信息.测试机名称 = reader["测试机名称"].ToString();
+                }
+                else result = "Fail";
+                reader.Close();
+            }
+            return result;
+        }
+
+        public static string GetSetupInfoName(out DataTable dt)
+        {
+            return SQLiteHelper.runSql(SQLiteConnString, "select 档案名称 from SetupInfo", out dt);
+        }
+
+        public static string GetJurisdictionName(out DataTable dt)
+        {
+            return SQLiteHelper.runSql(SQLiteConnString, "select realName from Jurisdiction", out dt);
+        }
+
+        public static string GetTrayInfo(string name, out TrayInfo trayInfo)
+        {
+            trayInfo = new TrayInfo();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out SQLiteDataReader reader);
+            if (result == "Success")
+            {
+                if (reader.Read())
+                {
+                    trayInfo.TrayName = reader["name"].ToString();
+                    trayInfo.X_Num = Convert.ToInt32(reader["xnum"].ToString());
+                    trayInfo.Y_Num = Convert.ToInt32(reader["ynum"].ToString());
+                    trayInfo.X_Start = Convert.ToDouble(reader["xstart"].ToString());
+                    trayInfo.Y_Start = Convert.ToDouble(reader["ystart"].ToString());
+                    trayInfo.X_Pitch = Convert.ToDouble(reader["xpitch"].ToString());
+                    trayInfo.Y_Pitch = Convert.ToDouble(reader["ypitch"].ToString());
+                    trayInfo.Width = Convert.ToDouble(reader["width"].ToString());
+                    trayInfo.Length = Convert.ToDouble(reader["length"].ToString());
+                    trayInfo.Height = Convert.ToDouble(reader["height"].ToString());
+                }
+                else result = $"无Tray盘{设置信息.Tray盘信息.TrayName}信息";
+
+                reader.Close();
+            }
+            return result;
+        }
+
+        public static string GetSiteStatus(string name, out SiteStatus siteStatus)
+        {
+            siteStatus = new SiteStatus();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SiteStatus where Site名称 = '{name}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                DataRow dr = dataTable.Rows[0];
+
+                siteStatus = new SiteStatus()
+                {
+                    Site名称 = dr["Site名称"].ToString(),
+                    Site1 = dr["Site1"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site2 = dr["Site2"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site3 = dr["Site3"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site4 = dr["Site4"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site5 = dr["Site5"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site6 = dr["Site6"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site7 = dr["Site7"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site8 = dr["Site8"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site9 = dr["Site9"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site10 = dr["Site10"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site11 = dr["Site11"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site12 = dr["Site12"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site13 = dr["Site13"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site14 = dr["Site14"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site15 = dr["Site15"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                    Site16 = dr["Site16"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                };
+            }
+            return result;
+        }
+
+        public static string GetBINParam(string name, out BinParam binParam)
+        {
+            binParam = new BinParam();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{name}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                DataRow dr = dataTable.Rows[0];
+                try
+                {
+                    binParam = new BinParam()
+                    {
+                        分BIN名称 = dr["分BIN名称"].ToString(),
+                        auto1 = dr["auto1"].ToString(),
+                        auto2 = dr["auto2"].ToString(),
+                        fix1 = dr["fix1"].ToString(),
+                        fix2 = dr["fix2"].ToString(),
+                        fix3 = dr["fix3"].ToString(),
+                        fix1num = Convert.ToInt32(dr["fix1num"].ToString()),
+                        fix2num = Convert.ToInt32(dr["fix2num"].ToString()),
+                        fix3num = Convert.ToInt32(dr["fix3num"].ToString()),
+                        color1 = Convert.ToInt32(dr["color1"].ToString()),
+                        color2 = Convert.ToInt32(dr["color2"].ToString()),
+                        color3 = Convert.ToInt32(dr["color3"].ToString()),
+                        color4 = Convert.ToInt32(dr["color4"].ToString()),
+                        color5 = Convert.ToInt32(dr["color5"].ToString()),
+                        name1 = dr["name1"].ToString(),
+                        name2 = dr["name2"].ToString(),
+                        name3 = dr["name3"].ToString(),
+                        name4 = dr["name4"].ToString(),
+                        name5 = dr["name5"].ToString(),
+                    };
+                }
+                catch (Exception ex)
+                {
+                    return "获取分BIN数据异常!" + ex.Message;
+                }
+            }
+            return result;
+        }
+
+        public static string GetTesterIFParam(string name, out TesterIFParam tester)
+        {
+            tester = new TesterIFParam();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TesterIFParam where 测试机名称 = '{name}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                DataRow dr = dataTable.Rows[0];
+
+                tester = new TesterIFParam()
+                {
+                    测试机名称 = dr["测试机名称"].ToString(),
+                    Dout连续不良个数 = Convert.ToInt32(dr["Dout连续不良个数"].ToString()),
+                    Dout连续不良自动关闭 = Convert.ToBoolean(dr["Dout连续不良自动关闭"].ToString()),
+                    Dout连续不良报警 = Convert.ToBoolean(dr["Dout连续不良报警"].ToString()),
+                    Dut累计不良报警个数 = Convert.ToInt32(dr["Dut累计不良报警个数"].ToString()),
+                    Dut累计不良报警使能 = Convert.ToBoolean(dr["Dut累计不良报警使能"].ToString()),
+                    总良率报警百分比 = Convert.ToDouble(dr["总良率报警百分比"].ToString()),
+                    总良率报警基数 = Convert.ToInt32(dr["总良率报警基数"].ToString()),
+                    总良率报警间隔 = Convert.ToInt32(dr["总良率报警间隔"].ToString()),
+                    总良率报警使能 = Convert.ToBoolean(dr["总良率报警使能"].ToString()),
+                    socket使用次数 = Convert.ToInt32(dr["socket使用次数"].ToString()),
+                    测试超时时间 = Convert.ToInt32(dr["测试超时时间"].ToString()),
+                    timeout超时时间 = Convert.ToInt32(dr["timeout超时时间"].ToString()),
+                    超时发送timeout = Convert.ToBoolean(dr["超时发送timeout"].ToString()),
+                };
+            }
+            return result;
+        }
+
+        public static string GetSetupInfoData(string name)
+        {
+            ///设备档案
+            string result = GetSetupInfo(name);
+            if (result == "Success")
+            {
+                ///tray盘信息
+                result = GetTrayInfo(设置信息.Tray盘信息.TrayName, out TrayInfo trayInfo);
+                if (result != "Success") return result;
+
+                ///点位微调
+                result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offsetPoint);
+                if (result != "Success") return result;
+
+                ///开Site信息
+                result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                if (result != "Success") return result;
+
+                //分BIN参数
+                result = GetBINParam(设置信息.分BIN信息.分BIN名称, out BinParam binparam);
+                if (result != "Success") return result;
+
+                //测试机参数
+                result = GetTesterIFParam(设置信息.测试机信息.测试机名称, out TesterIFParam tester);
+                if (result != "Success") return result;
+
+                设置信息.Tray盘信息 = trayInfo;
+                设置信息.OffsetPoint = offsetPoint;
+                设置信息.开site信息 = siteStatus;
+                设置信息.分BIN信息 = binparam;
+                设置信息.测试机信息 = tester;
+            }
+            return result;
+        }
+
+        public static string Init_TrayPoint()
+        {
+            try
+            {
+                LoaderTrayICPointInit();
+                HeatTrayICPointInit();
+                Auto1TrayICPointInit();
+                Auto2TrayICPointInit();
+                Fix1TrayICPointInit();
+                Fix2TrayICPointInit();
+                Fix3TrayICPointInit();
+
+                LoaderTrayICMapInit();
+                HeatTrayICMapInit();
+                Auto1TrayICMapInit();
+                Auto2TrayICMapInit();
+                Fix1TrayICMapInit();
+                Fix2TrayICMapInit();
+                Fix3TrayICMapInit();
+            }
+            catch (Exception ex)
+            {
+                return $"点位初始化失败:{ex.Message}";
+            }
+
+            return "Success";
+        }
+
+        public static string Init_APPmaster()
+        {
+            ///IO信息
+            string result = GetIOInfo();
+            if (result != "Success") return result;
+
+            ///轴信息
+            result = GetAxisInfo();
+            if (result != "Success") return result;
+
+            ///轴运行信息
+            result = GetAxisRunInfo();
+            if (result != "Success") return result;
+
+            ///轴回零信息
+            result = GetAxisHomeInfo();
+            if (result != "Success") return result;
+
+            ///设备config
+            result = GetconfigData();
+            if (result != "Success") return result;
+
+            ///档案信息
+            result = GetSetupInfoData(当前档案);
+            if (result != "Success") return result;
+
+            ///初始点位
+            result = GetInitPoint();
+            if (result != "Success") return result;
+
+            ///测试区点位
+            result = TestPointInit();
+            if (result != "Success") return result;
+
+            ///Tray盘点位
+            result = Init_TrayPoint();
+            if (result != "Success") return result;
+            return "Success";
+        }
+
         public static string GetAxisRunInfo(string axisInfo, out AxisRunInfo axisRun)
         {
             axisRun = new AxisRunInfo();
@@ -593,6 +1357,76 @@ namespace H5509_V2
             if (axisHomes.Count == axisName.Length) return "Success";
             else return "有IO编号不存在";
         }
+
+        public static string UpdateSiteStatus(string name, int site, string value)
+        {
+            string sql = $"update SiteStatus set Site{site} = '{value}' where Site名称 = '{name}'";
+            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            if (line <= 0) return "保存失败";
+            else return "Success";
+        }
+
+        public static string UpdateRecord(string value)
+        {
+            string sql = $"update config set value = '{value}' where name = '当前档案'";
+            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            if (line <= 0) return "保存失败";
+            else return "Success";
+        }
+
+        public static string UpdateBinParam(string name, BinParam binParam)
+        {
+            string sql = $"update BinParam set " +
+                $"auto1 = '{binParam.auto1}'," +
+                $"auto2 = '{binParam.auto2}'," +
+                $"fix1 = '{binParam.fix1}'," +
+                $"fix2 = '{binParam.fix2}'," +
+                $"fix3 = '{binParam.fix3}'," +
+                $"fix1num = '{binParam.fix1num}'," +
+                $"fix2num = '{binParam.fix2num}'," +
+                $"fix3num = '{binParam.fix3num}'," +
+                $"color1 = '{binParam.color1}'," +
+                $"color2 = '{binParam.color2}'," +
+                $"color3 = '{binParam.color3}'," +
+                $"color4 = '{binParam.color4}'," +
+                $"color5 = '{binParam.color5}'," +
+                $"name1 = '{binParam.name1}'," +
+                $"name2 = '{binParam.name2}'," +
+                $"name3 = '{binParam.name3}'," +
+                $"name4 = '{binParam.name4}'," +
+                $"name5 = '{binParam.name5}'" +
+                $"where 分BIN名称 = '{name}'";
+
+            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            if (line <= 0) return "保存失败";
+
+            else return "Success";
+        }
+
+        public static string UpdateTesterIFParam(string name, TesterIFParam tester)
+        {
+            string sql = $"update TesterIFParam set " +
+                $"Dout连续不良个数 = '{tester.Dout连续不良个数}'," +
+                $"Dout连续不良自动关闭 = '{tester.Dout连续不良自动关闭}'," +
+                $"Dout连续不良报警 = '{tester.Dout连续不良报警}'," +
+                $"Dut累计不良报警个数 = '{tester.Dut累计不良报警个数}'," +
+                $"Dut累计不良报警使能 = '{tester.Dut累计不良报警使能}'," +
+                $"总良率报警百分比 = '{tester.总良率报警百分比}'," +
+                $"总良率报警基数 = '{tester.总良率报警基数}'," +
+                $"总良率报警间隔 = '{tester.总良率报警间隔}'," +
+                $"总良率报警使能 = '{tester.总良率报警使能}'," +
+                $"socket使用次数 = '{tester.socket使用次数}'," +
+                $"测试超时时间 = '{tester.测试超时时间}'," +
+                $"timeout超时时间 = '{tester.timeout超时时间}'," +
+                $"超时发送timeout = '{tester.超时发送timeout}'" +
+                $"where 测试机名称 = '{name}'";
+
+            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            if (line <= 0) return "保存失败";
+
+            else return "Success";
+        }
+
 
         /// <summary>
         /// Loader TrayIC点位初始化
@@ -1225,7 +2059,6 @@ namespace H5509_V2
                 for (int j = 0; j < HeatYPoint.Length; j++)
                 {
                     HeatDicPoint.Add($"{i},{j}", false);
-                    HeatDicBin.Add($"{i},{j}", "");
                 }
             }
         }
@@ -1233,6 +2066,7 @@ namespace H5509_V2
         public static void Auto1TrayICMapInit()
         {
             Auto1DicPoint = new Dictionary<string, bool>();
+            Auto1DicBin = new Dictionary<string, string>();
             for (int i = 0; i < Auto1XPoint.Length; i++)
             {
                 for (int j = 0; j < Auto1YPoint.Length; j++)
@@ -1246,6 +2080,7 @@ namespace H5509_V2
         public static void Auto2TrayICMapInit()
         {
             Auto2DicPoint = new Dictionary<string, bool>();
+            Auto2DicBin = new Dictionary<string, string>();
             for (int i = 0; i < Auto2XPoint.Length; i++)
             {
                 for (int j = 0; j < Auto2YPoint.Length; j++)
@@ -1259,6 +2094,7 @@ namespace H5509_V2
         public static void Fix1TrayICMapInit()
         {
             Fix1DicPoint = new Dictionary<string, bool>();
+            Fix1DicBin = new Dictionary<string, string>();
             for (int i = 0; i < Fix1XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix1YPoint.Length; j++)
@@ -1272,6 +2108,7 @@ namespace H5509_V2
         public static void Fix2TrayICMapInit()
         {
             Fix2DicPoint = new Dictionary<string, bool>();
+            Fix2DicBin = new Dictionary<string, string>();
             for (int i = 0; i < Fix2XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix2YPoint.Length; j++)
@@ -1285,6 +2122,7 @@ namespace H5509_V2
         public static void Fix3TrayICMapInit()
         {
             Fix3DicPoint = new Dictionary<string, bool>();
+            Fix3DicBin = new Dictionary<string, string>();
             for (int i = 0; i < Fix3XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix3YPoint.Length; j++)
@@ -1302,6 +2140,16 @@ namespace H5509_V2
                 for (int j = 0; j < LoaderYPoint.Length; j++)
                 {
                     LoaderDicPoint[$"{i},{j}"] = true;
+                }
+            }
+        }
+        public static void HeatTrayClear()
+        {
+            for (int i = 0; i < HeatXPoint.Length; i++)
+            {
+                for (int j = 0; j < HeatYPoint.Length; j++)
+                {
+                    HeatDicPoint[$"{i},{j}"] = false;
                 }
             }
         }
@@ -1563,9 +2411,6 @@ namespace H5509_V2
             else return false;
         }
 
-
-
-
         public static string 获取Load盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
@@ -1634,6 +2479,69 @@ namespace H5509_V2
             }
         }
 
+        public static void 获取Fix1盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
+        {
+            lsopen = new bool[opens.Length];
+            //获取吸嘴索引(opens, 1, out index);
+            for (int i = 0; i < opens.Length; i++)
+            {
+                if (index + i == opens.Length) break;
+                if (yPoint + i * Interval >= max) break;
+                if (Fix1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
+                {
+                    lsopen[i + index] = true;
+                    if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
+                    {
+                        lsopen[i + index] = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public static void 获取Fix2盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
+        {
+            lsopen = new bool[opens.Length];
+            //获取吸嘴索引(opens, 1, out index);
+            for (int i = 0; i < opens.Length; i++)
+            {
+                if (index + i == opens.Length) break;
+                if (yPoint + i * Interval >= max) break;
+                if (Fix2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
+                {
+                    lsopen[i + index] = true;
+                    if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
+                    {
+                        lsopen[i + index] = false;
+                        break;
+                    }
+                }
+            }
+        }
+
+        public static void 获取Fix3盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
+        {
+            lsopen = new bool[opens.Length];
+            //获取吸嘴索引(opens, 1, out index);
+            for (int i = 0; i < opens.Length; i++)
+            {
+                if (index + i == opens.Length) break;
+                if (yPoint + i * Interval >= max) break;
+                if (Fix3DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
+                {
+                    lsopen[i + index] = true;
+                    if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
+                    {
+                        lsopen[i + index] = false;
+                        break;
+                    }
+                }
+            }
+        }
+
         public static void FixMinMax(int bintype, int binarea, int fixleng, out int min, out int max)
         {
             min = 0;
@@ -1681,6 +2589,7 @@ namespace H5509_V2
             }
             else return "Fail";
         }
+
         public static string 判断Auto2BIN项(int[] open, string[] bin)
         {
             if (!open.Contains(1)) return "Fail"; //如果没有1说明吸嘴上已无料
@@ -1691,6 +2600,7 @@ namespace H5509_V2
             }
             else return "Fail";
         }
+
         public static string 判断Fix1BIN项(int[] open, string[] bin)
         {
             if (!open.Contains(1)) return "Fail"; //如果没有1说明吸嘴上已无料
@@ -1811,69 +2721,6 @@ namespace H5509_V2
             return "Fail";
         }
 
-        public static void 获取Fix1盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
-        {
-            lsopen = new bool[opens.Length];
-            //获取吸嘴索引(opens, 1, out index);
-            for (int i = 0; i < opens.Length; i++)
-            {
-                if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= max) break;
-                if (Fix1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
-                {
-                    lsopen[i + index] = true;
-                    if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
-                    {
-                        lsopen[i + index] = false;
-                        break;
-                    }
-                }
-            }
-        }
-
-        public static void 获取Fix2盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
-        {
-            lsopen = new bool[opens.Length];
-            //获取吸嘴索引(opens, 1, out index);
-            for (int i = 0; i < opens.Length; i++)
-            {
-                if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= max) break;
-                if (Fix2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
-                {
-                    lsopen[i + index] = true;
-                    if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
-                    {
-                        lsopen[i + index] = false;
-                        break;
-                    }
-                }
-            }
-        }
-
-        public static void 获取Fix3盘Open(int[] opens, int xPoint, int yPoint, string tray, string[] bin, int max, out bool[] lsopen, int index)
-        {
-            lsopen = new bool[opens.Length];
-            //获取吸嘴索引(opens, 1, out index);
-            for (int i = 0; i < opens.Length; i++)
-            {
-                if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= max) break;
-                if (Fix3DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
-                if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
-                {
-                    lsopen[i + index] = true;
-                    if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
-                    {
-                        lsopen[i + index] = false;
-                        break;
-                    }
-                }
-            }
-        }
-
         public static double[] 获取梭车xyp放料点位(int colum)
         {
             double[] pos = new double[3];
@@ -1945,6 +2792,7 @@ namespace H5509_V2
             }
             return pos;
         }
+
         public static double 获取梭车Z放料点位(int colum)
         {
             if (飞梭2位置 == 0)
@@ -1956,6 +2804,7 @@ namespace H5509_V2
                 return 初始点位.入料_梭车2_Z;
             }
         }
+
         public static double 获取梭车Z吸料点位(int colum)
         {
             if (飞梭2位置 == 0)
@@ -1967,6 +2816,7 @@ namespace H5509_V2
                 return 初始点位.出料_梭车2_Z;
             }
         }
+
         public static double 获取出料Z放料点位(int trayid)
         {
             if (trayid == 0)

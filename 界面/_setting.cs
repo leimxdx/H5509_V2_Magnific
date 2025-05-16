@@ -13,9 +13,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Sunny.UI;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
+using Color = System.Drawing.Color;
+using Control = System.Windows.Forms.Control;
 
 namespace H5509_V2
 {
@@ -38,6 +42,8 @@ namespace H5509_V2
         public Control[] GNM601Home = new Control[6];
         public Control[] GNM601LimitN = new Control[6];
         public Control[] GNM601LimitP = new Control[6];
+
+        public Action 刷新分BIN信息;
 
         public _setting()
         {
@@ -2559,43 +2565,39 @@ namespace H5509_V2
                 textBox25.Text = dt.Rows[0][1].ToString();
             }
         }
+
         private void 刷新测试机(string name)
         {
+            string result = GetSetupValue(name, "测试机名称", out string value);
+            if (result != "Success") return;
 
+            result = GetTesterIFParam(value, out TesterIFParam tester);
+            if (result != "Success") return;
+
+            刷新测试机(tester);
         }
-        private void 刷新分BIN(string name)
+
+        private void 刷新测试机(TesterIFParam tester)
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select 分BIN名称 from SetupInfo where 档案名称='{name}'", out string value).ToString();
-            if (result != "Success") return;
+            numericUpDown12.Text = tester.Dout连续不良个数.ToString();
+            checkBox1.Checked = tester.Dout连续不良自动关闭;
+            checkBox2.Checked = tester.Dout连续不良报警;
 
-            result = SQLiteHelper.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{value}'", out DataTable dataTable);
-            if (result != "Success") return;
+            numericUpDown5.Text = tester.Dut累计不良报警个数.ToString();
+            checkBox3.Checked = tester.Dut累计不良报警使能;
+            numericUpDown13.Text = tester.总良率报警百分比.ToString();
+            numericUpDown14.Text = tester.总良率报警基数.ToString();
+            numericUpDown15.Text = tester.总良率报警间隔.ToString();
+            checkBox4.Checked = tester.总良率报警使能;
+            numericUpDown16.Text = tester.socket使用次数.ToString();
+            numericUpDown_测试超时时间.Text = tester.测试超时时间.ToString();
+            numericUpDown_timeout超时时间.Text = tester.timeout超时时间.ToString();
+            checkBox_timeout.Checked = tester.超时发送timeout;
+        }
 
-            DataRow dr = dataTable.Rows[0];
 
-            BinParam binParam = new BinParam()
-            {
-                分BIN名称 = dr["分BIN名称"].ToString(),
-                auto1 = dr["auto1"].ToString(),
-                auto2 = dr["auto2"].ToString(),
-                fix1 = dr["fix1"].ToString(),
-                fix2 = dr["fix2"].ToString(),
-                fix3 = dr["fix3"].ToString(),
-                fix1num = Convert.ToInt32(dr["fix1num"].ToString()),
-                fix2num = Convert.ToInt32(dr["fix2num"].ToString()),
-                fix3num = Convert.ToInt32(dr["fix3num"].ToString()),
-                color1 = Convert.ToInt32(dr["color1"].ToString()),
-                color2 = Convert.ToInt32(dr["color2"].ToString()),
-                color3 = Convert.ToInt32(dr["color3"].ToString()),
-                color4 = Convert.ToInt32(dr["color4"].ToString()),
-                color5 = Convert.ToInt32(dr["color5"].ToString()),
-                name1 = dr["name1"].ToString(),
-                name2 = dr["name2"].ToString(),
-                name3 = dr["name3"].ToString(),
-                name4 = dr["name4"].ToString(),
-                name5 = dr["name5"].ToString(),
-            };
-
+        private void 刷新分BIN(BinParam binParam)
+        {
             (panel3.Controls["radioButton3_" + binParam.fix1num] as UIRadioButton).Checked = true;
             (panel10.Controls["radioButton4_" + binParam.fix2num] as UIRadioButton).Checked = true;
             (panel11.Controls["radioButton5_" + binParam.fix3num] as UIRadioButton).Checked = true;
@@ -2663,10 +2665,19 @@ namespace H5509_V2
             textBox_name3.Text = binParam.name3;
             textBox_name4.Text = binParam.name4;
             textBox_name5.Text = binParam.name5;
-
-            //设置信息.分BIN信息 = binParam;
-
         }
+
+        private void 刷新分BIN(string name)
+        {
+            string result = GetSetupValue(name, "分BIN名称", out string value);
+            if (result != "Success") return;
+
+            result = GetBINParam(value, out BinParam binParam);
+            if (result != "Success") return;
+
+            刷新分BIN(binParam);
+        }
+
         private void 刷新开Site(string name)
         {
 
@@ -3015,11 +3026,6 @@ namespace H5509_V2
         {
             刷新入料手臂初始点位();
             刷新入料手臂速度参数();
-        }
-
-        private void uiButton3_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void uiButton6_Click(object sender, EventArgs e)
@@ -3962,8 +3968,98 @@ namespace H5509_V2
             }
         }
 
-        private void uiButton3_Click_1(object sender, EventArgs e)
+        private void 保存测试机信息()
         {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+                try
+                {
+                    DialogResult issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (issave == DialogResult.OK)
+                    {
+                        string result = GetSetupValue(name, "测试机名称", out string value);
+                        if (result != "Success")
+                        {
+                            MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        result = GetTesterIFParam(value, out TesterIFParam oldtester);
+                        if (result != "Success")
+                        {
+                            MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        TesterIFParam newtester = new TesterIFParam();
+
+                        ;
+                        newtester.Dout连续不良个数 = Convert.ToInt32(numericUpDown12.Text);
+                        newtester.Dout连续不良自动关闭 = checkBox1.Checked;
+                        newtester.Dout连续不良报警 = checkBox2.Checked;
+                        newtester.Dut累计不良报警个数 = Convert.ToInt32(numericUpDown5.Text);
+                        newtester.Dut累计不良报警使能 = checkBox3.Checked;
+                        newtester.总良率报警百分比 = Convert.ToDouble(numericUpDown13.Text);
+                        newtester.总良率报警基数 = Convert.ToInt32(numericUpDown14.Text);
+                        newtester.总良率报警间隔 = Convert.ToInt32(numericUpDown15.Text);
+                        newtester.总良率报警使能 = checkBox4.Checked ;
+                        newtester.socket使用次数 = Convert.ToInt32(numericUpDown16.Text);
+                        newtester.测试超时时间 = Convert.ToInt32(numericUpDown_测试超时时间.Text);
+                        newtester.timeout超时时间 = Convert.ToInt32(numericUpDown_timeout超时时间.Text);
+                        newtester.超时发送timeout = checkBox_timeout.Checked;
+
+                        result = UpdateTesterIFParam(value, newtester);
+                        if (result != "Success")
+                        {
+                            MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功");
+                            if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功");
+                            if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功");
+                            if (oldtester.Dut累计不良报警个数 != newtester.Dut累计不良报警个数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警个数]:{oldtester.Dut累计不良报警个数}->{newtester.Dut累计不良报警个数}:更新成功");
+                            if (oldtester.Dut累计不良报警使能 != newtester.Dut累计不良报警使能) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警使能]:{oldtester.Dut累计不良报警使能}->{newtester.Dut累计不良报警使能}:更新成功");
+                            if (oldtester.总良率报警百分比 != newtester.总良率报警百分比) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警百分比]:{oldtester.总良率报警百分比}->{newtester.总良率报警百分比}:更新成功");
+                            if (oldtester.总良率报警基数 != newtester.总良率报警基数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警基数]:{oldtester.总良率报警基数}->{newtester.总良率报警基数}:更新成功");
+                            if (oldtester.总良率报警间隔 != newtester.总良率报警间隔) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警间隔]:{oldtester.总良率报警间隔}->{newtester.总良率报警间隔}:更新成功");
+                            if (oldtester.总良率报警使能 != newtester.总良率报警使能) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警使能]:{oldtester.总良率报警使能}->{newtester.总良率报警使能}:更新成功");
+                            if (oldtester.socket使用次数 != newtester.socket使用次数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[socket使用次数]:{oldtester.socket使用次数}->{newtester.socket使用次数}:更新成功");
+                            if (oldtester.测试超时时间 != newtester.测试超时时间) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功");
+                            if (oldtester.timeout超时时间 != newtester.timeout超时时间) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功");
+                            if (oldtester.超时发送timeout != newtester.超时发送timeout) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.超时发送timeout}->{newtester.超时发送timeout}:更新成功");
+                        }
+
+                        if (value == 设置信息.测试机信息.测试机名称)
+                        {
+                            result = GetTesterIFParam(value, out newtester);
+                            if (result == "Success")
+                            {
+                                设置信息.测试机信息 = newtester;
+                            }
+                        }
+
+                        刷新测试机(newtester);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("保存测试机信息()异常!" + ex.Message);
+                    return;
+                }
+            }
+        }
+        private void 保存分BIN信息()
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows < 0) return;
+
+            DialogResult issave = DialogResult.Cancel;
+
+            string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+
             //检查特殊Bin项是否全部分配
             foreach (object o in comboBox10.Items)
             {
@@ -3990,135 +4086,1056 @@ namespace H5509_V2
                 }
             }
 
+            if (radioButton3_1.Checked)
+            {
+                if (listBox3_1.Items.Count == 0)
+                {
+                    issave = MessageBox.Show($"{textBox_name3.Text}分BIN—1区BIN项为空,请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (issave == DialogResult.Cancel) return;
+                }
+            }
+            else if (radioButton3_2.Checked)
+            {
+                if (listBox3_1.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name3.Text}分BIN—1区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox3_2.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name3.Text}分BIN—2区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+
+                if (listBox3_1.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name3.Text}分BIN—1区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox3_2.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name3.Text}分BIN—2区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox3_3.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name3.Text}分BIN—3区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            if (radioButton4_1.Checked)
+            {
+                if (listBox4_1.Items.Count == 0)
+                {
+                    issave = MessageBox.Show($"{textBox_name4.Text}分BIN—1区BIN项为空,请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (issave == DialogResult.Cancel) return;
+                }
+            }
+            else if (radioButton4_2.Checked)
+            {
+                if (listBox4_1.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name4.Text}分BIN—1区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox4_2.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name4.Text}分BIN—2区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+
+                if (listBox4_1.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name4.Text}分BIN—1区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox4_2.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name4.Text}分BIN—2区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox4_3.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name4.Text}分BIN—3区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+
+            if (radioButton5_1.Checked)
+            {
+                if (listBox5_1.Items.Count == 0)
+                {
+                    issave = MessageBox.Show($"{textBox_name5.Text}分BIN—1区BIN项为空,请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+                    if (issave == DialogResult.Cancel) return;
+                }
+            }
+            else if (radioButton5_2.Checked)
+            {
+                if (listBox5_1.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name5.Text}分BIN—1区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox5_2.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name5.Text}分BIN—2区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+
+                if (listBox5_1.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name5.Text}分BIN—1区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox5_2.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name5.Text}分BIN—2区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (listBox5_3.Items.Count == 0)
+                {
+                    MessageBox.Show($"{textBox_name5.Text}分BIN—3区BIN项不能为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
 
             try
             {
-                DialogResult issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (issave == DialogResult.Cancel)
+                {
+                    issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                }
                 if (issave == DialogResult.OK)
                 {
+                    string result = GetSetupValue(name, "分BIN名称", out string value);
+                    if (result != "Success")
+                    {
+                        MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
 
-                    BinParam binParam = 设置信息.分BIN信息;
-                    binParam.auto1 = "";
-                    binParam.auto2 = "";
-                    binParam.fix1 = "";
-                    binParam.fix2 = "";
-                    binParam.fix3 = "";
+                    result = GetBINParam(value, out BinParam oldbinParam);
+                    if (result != "Success")
+                    {
+                        MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    BinParam newbinParam = new BinParam();
+
+                    newbinParam.auto1 = "";
+                    newbinParam.auto2 = "";
+                    newbinParam.fix1 = "";
+                    newbinParam.fix2 = "";
+                    newbinParam.fix3 = "";
 
                     //auto1
                     foreach (object o in listBox1.Items)
                     {
-                        binParam.auto1 += o.ToString() + ",";
+                        newbinParam.auto1 += o.ToString() + ",";
                     }
-                    binParam.auto1 = binParam.auto1.TrimEnd(',');
+                    newbinParam.auto1 = newbinParam.auto1.TrimEnd(',');
 
                     //auto2
                     foreach (object o in listBox2.Items)
                     {
-                        binParam.auto2 += o.ToString() + ",";
+                        newbinParam.auto2 += o.ToString() + ",";
                     }
-                    binParam.auto2 = binParam.auto2.TrimEnd(',');
+                    newbinParam.auto2 = newbinParam.auto2.TrimEnd(',');
 
                     //fix1
                     foreach (object o in listBox3_1.Items)
                     {
-                        binParam.fix1 += o.ToString() + ",";
+                        newbinParam.fix1 += o.ToString() + ",";
                     }
-                    binParam.fix1 = binParam.fix1.TrimEnd(',') + ";";
+                    newbinParam.fix1 = newbinParam.fix1.TrimEnd(',') + ";";
                     foreach (object o in listBox3_2.Items)
                     {
-                        binParam.fix1 += o.ToString() + ",";
+                        newbinParam.fix1 += o.ToString() + ",";
                     }
-                    binParam.fix1 = binParam.fix1.TrimEnd(',') + ";";
+                    newbinParam.fix1 = newbinParam.fix1.TrimEnd(',') + ";";
                     foreach (object o in listBox3_3.Items)
                     {
-                        binParam.fix1 += o.ToString() + ",";
+                        newbinParam.fix1 += o.ToString() + ",";
                     }
-                    binParam.fix1 = binParam.fix1.TrimEnd(',');
+                    newbinParam.fix1 = newbinParam.fix1.TrimEnd(',');
 
                     //fix2
                     foreach (object o in listBox4_1.Items)
                     {
-                        binParam.fix2 += o.ToString() + ",";
+                        newbinParam.fix2 += o.ToString() + ",";
                     }
-                    binParam.fix2 = binParam.fix2.TrimEnd(',') + ";";
+                    newbinParam.fix2 = newbinParam.fix2.TrimEnd(',') + ";";
                     foreach (object o in listBox4_2.Items)
                     {
-                        binParam.fix2 += o.ToString() + ",";
+                        newbinParam.fix2 += o.ToString() + ",";
                     }
-                    binParam.fix2 = binParam.fix2.TrimEnd(',') + ";";
+                    newbinParam.fix2 = newbinParam.fix2.TrimEnd(',') + ";";
                     foreach (object o in listBox4_3.Items)
                     {
-                        binParam.fix2 += o.ToString() + ",";
+                        newbinParam.fix2 += o.ToString() + ",";
                     }
-                    binParam.fix2 = binParam.fix2.TrimEnd(',');
+                    newbinParam.fix2 = newbinParam.fix2.TrimEnd(',');
 
                     //fix3
                     foreach (object o in listBox5_1.Items)
                     {
-                        binParam.fix3 += o.ToString() + ",";
+                        newbinParam.fix3 += o.ToString() + ",";
                     }
-                    binParam.fix3 = binParam.fix3.TrimEnd(',') + ";";
+                    newbinParam.fix3 = newbinParam.fix3.TrimEnd(',') + ";";
                     foreach (object o in listBox5_2.Items)
                     {
-                        binParam.fix3 += o.ToString() + ",";
+                        newbinParam.fix3 += o.ToString() + ",";
                     }
-                    binParam.fix3 = binParam.fix3.TrimEnd(',') + ";";
+                    newbinParam.fix3 = newbinParam.fix3.TrimEnd(',') + ";";
                     foreach (object o in listBox5_3.Items)
                     {
-                        binParam.fix3 += o.ToString() + ",";
+                        newbinParam.fix3 += o.ToString() + ",";
                     }
-                    binParam.fix3 = binParam.fix3.TrimEnd(',');
+                    newbinParam.fix3 = newbinParam.fix3.TrimEnd(',');
 
-                    //auto1 = binParam.auto1;
-                    //auto2 = binParam.auto2;
-                    //fix1 = binParam.fix1;
-                    //fix2 = binParam.fix2;
-                    //fix3 = binParam.fix3;
+                    newbinParam.color1 = label_color1.BackColor.ToArgb();
+                    newbinParam.color2 = label_color2.BackColor.ToArgb();
+                    newbinParam.color3 = label_color3.BackColor.ToArgb();
+                    newbinParam.color4 = label_color4.BackColor.ToArgb();
+                    newbinParam.color5 = label_color5.BackColor.ToArgb();
 
-                    binParam.color1 = label_color1.BackColor.ToArgb();
-                    binParam.color2 = label_color2.BackColor.ToArgb();
-                    binParam.color3 = label_color3.BackColor.ToArgb();
-                    binParam.color4 = label_color4.BackColor.ToArgb();
-                    binParam.color5 = label_color5.BackColor.ToArgb();
+                    newbinParam.name1 = textBox_name1.Text;
+                    newbinParam.name2 = textBox_name2.Text;
+                    newbinParam.name3 = textBox_name3.Text;
+                    newbinParam.name4 = textBox_name4.Text;
+                    newbinParam.name5 = textBox_name5.Text;
 
-                    binParam.name1 = textBox_name1.Text;
-                    binParam.name2 = textBox_name2.Text;
-                    binParam.name3 = textBox_name3.Text;
-                    binParam.name4 = textBox_name4.Text;
-                    binParam.name5 = textBox_name5.Text;
+                    if (radioButton3_1.Checked) newbinParam.fix1num = 1;
+                    else if (radioButton3_2.Checked) newbinParam.fix1num = 2;
+                    else if (radioButton3_3.Checked) newbinParam.fix1num = 3;
 
-                    if (radioButton3_1.Checked) binParam.fix1num = 1;
-                    else if (radioButton3_2.Checked) binParam.fix1num = 2;
-                    else if (radioButton3_3.Checked) binParam.fix1num = 3;
+                    if (radioButton4_1.Checked) newbinParam.fix2num = 1;
+                    else if (radioButton4_2.Checked) newbinParam.fix2num = 2;
+                    else if (radioButton4_3.Checked) newbinParam.fix2num = 3;
 
-                    if (radioButton4_1.Checked) binParam.fix2num = 1;
-                    else if (radioButton4_2.Checked) binParam.fix2num = 2;
-                    else if (radioButton4_3.Checked) binParam.fix2num = 3;
+                    if (radioButton5_1.Checked) newbinParam.fix3num = 1;
+                    else if (radioButton5_2.Checked) newbinParam.fix3num = 2;
+                    else if (radioButton5_3.Checked) newbinParam.fix3num = 3;
 
-                    if (radioButton5_1.Checked) binParam.fix3num = 1;
-                    else if (radioButton5_2.Checked) binParam.fix3num = 2;
-                    else if (radioButton5_3.Checked) binParam.fix3num = 3;
+                    result = UpdateBinParam(value, newbinParam);
+                    if (result != "Success")
+                    {
+                        MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        if (oldbinParam.auto1 != newbinParam.auto1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[auto1]:{oldbinParam.auto1}->{newbinParam.auto1}:更新成功");
+                        if (oldbinParam.auto2 != newbinParam.auto2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[auto2]:{oldbinParam.auto2}->{newbinParam.auto2}:更新成功");
+                        if (oldbinParam.fix1 != newbinParam.fix1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1]:{oldbinParam.fix1}->{newbinParam.fix1}:更新成功");
+                        if (oldbinParam.fix2 != newbinParam.fix2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2]:{oldbinParam.fix2}->{newbinParam.fix2}:更新成功");
+                        if (oldbinParam.fix3 != newbinParam.fix3) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3]:{oldbinParam.fix3}->{newbinParam.fix3}:更新成功");
+                        if (oldbinParam.fix1num != newbinParam.fix1num) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1num]:{oldbinParam.fix1num}->{newbinParam.fix1num}:更新成功");
+                        if (oldbinParam.fix2num != newbinParam.fix2num) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2num]:{oldbinParam.fix2num}->{newbinParam.fix2num}:更新成功");
+                        if (oldbinParam.fix3num != newbinParam.fix3num) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3num]:{oldbinParam.fix3num}->{newbinParam.fix3num}:更新成功");
+                        if (oldbinParam.color1 != newbinParam.color1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color1]:{oldbinParam.color1}->{newbinParam.color1}:更新成功");
+                        if (oldbinParam.color2 != newbinParam.color2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color2]:{oldbinParam.color2}->{newbinParam.color2}:更新成功");
+                        if (oldbinParam.color3 != newbinParam.color3) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color3]:{oldbinParam.color3}->{newbinParam.color3}:更新成功");
+                        if (oldbinParam.color4 != newbinParam.color4) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color4]:{oldbinParam.color4}->{newbinParam.color4}:更新成功");
+                        if (oldbinParam.color5 != newbinParam.color5) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color5]:{oldbinParam.color5}->{newbinParam.color5}:更新成功");
+                        if (oldbinParam.name1 != newbinParam.name1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name1]:{oldbinParam.name1}->{newbinParam.name1}:更新成功");
+                        if (oldbinParam.name2 != newbinParam.name2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name2]:{oldbinParam.name2}->{newbinParam.name2}:更新成功");
+                        if (oldbinParam.name3 != newbinParam.name3) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name3]:{oldbinParam.name3}->{newbinParam.name3}:更新成功");
+                        if (oldbinParam.name4 != newbinParam.name4) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name4]:{oldbinParam.name4}->{newbinParam.name4}:更新成功");
+                        if (oldbinParam.name5 != newbinParam.name5) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name5]:{oldbinParam.name5}->{newbinParam.name5}:更新成功");
+                    }
 
-                    //string filepath = H5509Program + "\\ICSetup\\" + motionEx.SwStartParm.TrayName + "\\BinParam.xml";
-                    //DirectoryInfo directoryInfo = new DirectoryInfo(filepath);
-                    //try
-                    //{
-                    //    OperationResult result = motionEx.SaveBinParam(filepath);
-                    //    if (result.IsSuccess) MessageBox.Show($"保存成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //    else MessageBox.Show($"保存失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //}
-                    //catch (Exception ex)
-                    //{
-                    //    MessageBox.Show($"写入档案【{motionEx.SwStartParm.TrayName}】异常！\n详细信息：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //    return;
-                    //}
+                    if (value == 设置信息.分BIN信息.分BIN名称)
+                    {
+                        result = GetBINParam(value, out newbinParam);
+                        if (result == "Success")
+                        {
+                            设置信息.分BIN信息 = newbinParam;
+                            刷新分BIN信息();
+                        }
+                    }
+
+                    刷新分BIN(newbinParam);
                 }
             }
             catch (Exception ex)
             {
-                //MessageBox.Show($"保存档案【{motionEx.SwStartParm.TrayName}】异常！\n详细信息：" + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Debug.WriteLine($"保存档案名称:[{name}]异常！\n详细信息：" + ex.Message);
                 return;
             }
+
+        }
+
+        private void uiButton3_Click_1(object sender, EventArgs e)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string tabtext = uiTabControl6.SelectedTab.Text;
+                if(tabtext == "分BIN")
+                {
+                    保存分BIN信息(); 
+                }
+                else if (tabtext == "测试机")
+                {
+                    保存测试机信息();
+                }
+                
+            }
+        }
+
+        private void button_add1_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del1_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add2_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del2_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add3_1_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del3_1_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add3_2_Click(object sender, EventArgs e)
+        {
+
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del3_2_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add3_3_Click(object sender, EventArgs e)
+        {
+
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del3_3_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add4_1_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del4_1_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add4_2_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del4_2_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add4_3_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del4_3_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add5_1_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del5_1_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add5_2_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del5_2_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void button_add5_3_Click(object sender, EventArgs e)
+        {
+            if (radioButton1.Checked)
+            {
+                if (textBox40.Text == "") return;
+                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                if (textBox40.Text == "00")
+                {
+                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                    return;
+                }
+
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (textBox40.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(textBox40.Text);
+            }
+            else
+            {
+                foreach (object listbox in tabPage_bin.Controls)
+                {
+                    if (listbox.GetType() != typeof(ListBox))
+                    {
+                        continue;
+                    }
+                    foreach (object it in (listbox as ListBox).Items)
+                    {
+                        if (comboBox10.Text == it.ToString())
+                        {
+                            MessageBox.Show("Bin项目重复");
+                            return;
+                        }
+                    }
+                }
+                (tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox).Items.Add(comboBox10.Text);
+            }
+            textBox40.Text = "";
+        }
+
+        private void button_del5_3_Click(object sender, EventArgs e)
+        {
+            ListBox l = tabPage_bin.Controls["listBox" + (sender as UIButton).Name.Substring(10)] as ListBox;
+            l.Items.Remove(l.SelectedItem);
+        }
+
+        private void textBox40_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 8)
+            {
+                return;
+            }
+
+            if (textBox1.Text.Length > 1)
+            {
+                e.Handled = true;
+                return;
+            }
+
+            if (e.KeyChar >= 97 && e.KeyChar <= 122)
+            {
+                e.KeyChar = (char)(e.KeyChar - 32);
+            }
+
+            if (!((e.KeyChar >= 48 && e.KeyChar <= 57) || (e.KeyChar >= 65 && e.KeyChar <= 90)))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void uiButton4_Click(object sender, EventArgs e)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string tabtext = uiTabControl6.SelectedTab.Text;
+                if (tabtext == "分BIN")
+                {
+                    刷新分BIN(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
+                }
+                else if (tabtext == "测试机")
+                {
+                    刷新测试机(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
+                }
+                
+            }
+        }
+
+        private void label_color1_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+
+            (sender as Label).BackColor = colorDialog1.Color;
+        }
+
+        private void label_color2_Click(object sender, EventArgs e)
+        {
+
+            colorDialog1.ShowDialog();
+
+            (sender as Label).BackColor = colorDialog1.Color;
+        }
+
+        private void label_color3_Click(object sender, EventArgs e)
+        {
+
+            colorDialog1.ShowDialog();
+
+            (sender as Label).BackColor = colorDialog1.Color;
+        }
+
+        private void label_color4_Click(object sender, EventArgs e)
+        {
+
+            colorDialog1.ShowDialog();
+
+            (sender as Label).BackColor = colorDialog1.Color;
+        }
+
+        private void label_color5_Click(object sender, EventArgs e)
+        {
+
+            colorDialog1.ShowDialog();
+
+            (sender as Label).BackColor = colorDialog1.Color;
         }
     }
 }

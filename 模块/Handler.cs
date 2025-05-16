@@ -2579,6 +2579,8 @@ namespace H5509_V2
                     bool again = io[3] == "1"; //X004_重试
                     if (CheckEdgeSingal(again, ref AgainRiseCache, true))
                     {
+                        入料IC忽略 = false;
+                        入料IC吸不起结批 = false;
                         Debug.WriteLine("按下重试");
                         //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, true);
                         //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
@@ -2621,6 +2623,9 @@ namespace H5509_V2
                                 Debug.WriteLine("结批按钮开始计时");
                             }
                         }
+                        入料IC忽略 = false;
+                        if(!入料IC吸不起结批) 入料IC吸不起结批 = true;
+                        if(!无待测盘结批) 无待测盘结批 = true;
                         Debug.WriteLine("按下结批");
                         motionEx.SetDo("Y004_重试灯", false);
                         motionEx.SetDo("Y005_忽略灯", false);
@@ -3206,7 +3211,7 @@ namespace H5509_V2
                 {
                     case 500:
                         PS入料手臂吸放料流程.StepName = "路径规划";
-                        PS入料手臂吸放料流程.Condition = Load上顶标记 == 1 && !Auto1换盘标记 && !Auto2换盘标记 && !结批标记;
+                        PS入料手臂吸放料流程.Condition = Load上顶标记 == 1 && !Auto1换盘标记 && !Auto2换盘标记 && !结批标记 && !结批触发定时器.Enabled;
                         PS入料手臂吸放料流程.Permit = !PS入料手臂放料流程.Processing;
                         if (PS入料手臂吸放料流程.Condition && PS入料手臂吸放料流程.Permit)
                         {
@@ -3284,6 +3289,8 @@ namespace H5509_V2
                         break;
 
                     case 510:
+                        PS入料手臂吸放料流程.StepName = "检测后入料IC是否被拿走";
+
                         if (参数对比(飞梭后入料IC[0], 放料IC目标值[0]) || 参数对比(飞梭后入料IC[1], 放料IC目标值[1]))
                         {
                             PS入料手臂吸放料流程.StepName = "梭车后入料IC被取走";
@@ -3516,6 +3523,7 @@ namespace H5509_V2
                                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->302{i + 1:D2}00,入料Z{i + 1}吸料失败");
                                     }
                                 }
+                                入料IC吸不起结批 = false;
                                 入料IC忽略 = false;
                                 ProgramPause = true;
                                 IsPause = true;
@@ -3542,9 +3550,29 @@ namespace H5509_V2
                             }
                             PS入料手臂吸放料流程.StepID = 555;
                         }
-                        else if (结批标记)
+                        else if (入料IC吸不起结批)
                         {
-
+                            if (opens.Contains(1)) //如果吸嘴上有料
+                            {
+                                for (int i = 0; i < lsopen.Length; i++)
+                                {
+                                    if (lsopen[i])
+                                    {
+                                        opens[i] = 2;
+                                        lsopen[i] = false;
+                                    }
+                                }
+                                PS入料手臂吸放料流程.StepID = 555;
+                            }
+                            else //如果吸嘴上没有料,则直接停止放料
+                            {
+                                for (int i = 0; i < opens.Length; i++)
+                                {
+                                    opens[i] = 2;
+                                    lsopen[i] = false;
+                                }
+                                PS入料手臂吸放料流程.StepID = 555;
+                            }
                         }
                         else //直接点开始默认重吸
                         {
@@ -3579,7 +3607,12 @@ namespace H5509_V2
                     case 599:
                         PS入料手臂吸放料流程.StepName = "入料手臂_吸料流程完成";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        PS入料手臂吸放料流程.StepID = 705;
+                        if (opens.Contains(1)) PS入料手臂吸放料流程.StepID = 705;
+                        else
+                        {
+                            if (结批标记 || 结批触发定时器.Enabled) PS入料手臂吸放料流程.StepID = 500;
+                            else PS入料手臂吸放料流程.StepID = 505;
+                        }
                         break;
 
                     case 705: ////放料流程////
@@ -3759,7 +3792,8 @@ namespace H5509_V2
                     case 799:
                         PS入料手臂吸放料流程.StepName = $"入料手臂_放料第{colums + 1}列流程完成";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        PS入料手臂吸放料流程.StepID = 505;
+                        if (结批标记 || 结批触发定时器.Enabled) PS入料手臂吸放料流程.StepID = 500;
+                        else PS入料手臂吸放料流程.StepID = 505;
                         break;
 
 
@@ -3806,9 +3840,17 @@ namespace H5509_V2
                         if (Load上顶标记 == 1)
                         {
                             Load换盘标记 = false;
-                            LoaderTrayClear();
-                            Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Load上顶完成Map更新");
-                            PS入料手臂吸放料流程.StepID = 515;
+                            if (结批标记)
+                            {
+                                Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->无待测盘结批");
+                                PS入料手臂吸放料流程.StepID = 500;
+                            }
+                            else
+                            {
+                                LoaderTrayClear();
+                                Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Load上顶完成Map更新");
+                                PS入料手臂吸放料流程.StepID = 515;
+                            }
                         }
                         else Thread.Sleep(10);
                         break;
@@ -4184,9 +4226,6 @@ namespace H5509_V2
             string[][] bins = new string[2][];
             string[] bin = new string[4];
             short colums = 0;
-            double shuttlex = 0;
-            double shuttley = 0;
-            double shuttlep = 0;
             int index = 0;
             double xPos = 0;
             double yPos = 0;
@@ -4509,7 +4548,8 @@ namespace H5509_V2
                             }
                             else //吸嘴上没有IC,则直接返回
                             {
-                                open[colums] = new bool[] { false, false, false, false };
+                                飞梭前出料IC[colums] = new bool[] { false, false, false, false }; //梭车清空
+                                open[colums] = new bool[] { false, false, false, false }; //吸嘴清空
                                 PS出料手臂吸放料流程.StepID = 505;
                             }
                         }
@@ -7205,6 +7245,7 @@ namespace H5509_V2
                         result = Load顶盘轴回零();
                         if (result == "Success")
                         {
+                            无待测盘结批 = false;
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             Debug.WriteLine("待测区没有盘");
@@ -7220,8 +7261,9 @@ namespace H5509_V2
 
                     case 610:
                         PS待测盘上顶流程.StepName = "待测区没有盘";
-                        if (结批标记)
+                        if (无待测盘结批)
                         {
+                            结批标记 = true;
                             Load上顶标记 = 1;
                             PS待测盘上顶流程.StepID = 599;
                         }
