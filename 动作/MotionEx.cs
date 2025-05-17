@@ -640,17 +640,19 @@ namespace H5509_V2
         /// <param name="axisName"></param>
         /// <param name="jogspeed"></param>
         /// <returns></returns>
-        public string AxisJogMove(string axisName, double jogspeed)
+        public string AxisJogMove(string axisName, bool ispositive)
         {
             string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
             if (result != "Success") return result;
+
+            int pn = ispositive ? 1 : -1; //1:正方向Jog运动 -1:负方向运动
 
             AxisRun axisRun = new AxisRun()
             {
                 轴名称 = axisRunInfo.轴名称,
                 核号 = axisRunInfo.核号,
                 轴号 = axisRunInfo.轴号,
-                目标速度 = jogspeed,
+                目标速度 = axisRunInfo.运行速度 * pn, //jogspeed
                 目标加速度 = axisRunInfo.加速度,
                 目标减速度 = axisRunInfo.减速度,
                 Jog平滑时间 = axisRunInfo.平滑时间,

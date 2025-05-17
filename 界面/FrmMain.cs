@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -369,7 +370,7 @@ namespace H5509_V2
                 //    new bool[] { false, false, false, false },
                 //});
             }
-            APPmaster.InSiteQueue.Enqueue(4);
+            //APPmaster.InSiteQueue.Enqueue(2);
             //APPmaster.InSiteQueue.Enqueue(5);
             //APPmaster.InSiteQueue.Enqueue(6);
             //APPmaster.InSiteQueue.Enqueue(7);

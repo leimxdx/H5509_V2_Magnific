@@ -51,7 +51,7 @@ namespace H5509_V2
             }
         }
 
-        public string GetSiteNum(int site, int dut)
+        public string GetSiteValue(int site, int dut)
         {
             switch (site)
             {
@@ -74,7 +74,7 @@ namespace H5509_V2
                 default: return "Error";
             }
         }
-        public string SetSiteNum(int site, int dut, string value)
+        public string SetSiteValue(int site, int dut, string value)
         {
             switch (site)
             {
@@ -98,7 +98,7 @@ namespace H5509_V2
             }
         }
 
-        public void SetSiteNum(int site, string value)
+        public void SetSiteValue(int site, string value)
         {
             switch (site)
             {

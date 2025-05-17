@@ -305,7 +305,7 @@ namespace H5509_V2
                     {
                         Chk_timer[i].Stop();
                         Chk_timer[i].Start();
-                        设置信息.开site信息.SetSiteNum(i, "0");
+                        设置信息.开site信息.SetSiteValue(i, "0");
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
                         if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                         result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -327,7 +327,7 @@ namespace H5509_V2
                     {
                         Chk_timer[i].Stop();
                         Chk_timer[i].Start();
-                        设置信息.开site信息.SetSiteNum(i, "1");
+                        设置信息.开site信息.SetSiteValue(i, "1");
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
                         if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                         result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -375,7 +375,7 @@ namespace H5509_V2
                             Chk_timer[site].Start();
                         }
                         int dut = i % 8;
-                        设置信息.开site信息.SetSiteNum(site, dut, label.Text == "" ? "1" : "0");
+                        设置信息.开site信息.SetSiteValue(site, dut, label.Text == "" ? "1" : "0");
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
                         if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                         result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -705,7 +705,7 @@ namespace H5509_V2
             {
                 for (int j = 0; j < 8; j++)
                 {
-                    string ison = 设置信息.开site信息.GetSiteNum(i, j);
+                    string ison = 设置信息.开site信息.GetSiteValue(i, j);
                     if (ison == "1")
                     {
                         open++;
@@ -942,7 +942,7 @@ namespace H5509_V2
                         lbl_opennum.Text = "Open=" + 开Site数量.ToString();
                         lbl_closenum.Text = "Close=" + 关Site数量.ToString();
 
-
+                        Txt_loadnum.Text = 载入数.ToString();
                         if (windowstimer.Enabled)
                         {
                             label153.Visible = true;

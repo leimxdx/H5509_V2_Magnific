@@ -335,6 +335,14 @@ namespace H5509_V2
 
         public static bool 入料手臂停止工作标记;
 
+        public static bool 测试手臂入料停止工作标记;
+
+        public static bool 测试手臂出料停止工作标记;
+
+        public static bool 出料手臂出料停止工作标记;
+
+        public static bool 飞梭停止工作;
+
         public static bool 出料手臂工作完成标记;
 
         public static bool 测试手臂工作完成标记;
@@ -639,6 +647,11 @@ namespace H5509_V2
             //}
 
             return true;
+        }
+
+        public static void CheckStatus()
+        { 
+            
         }
 
         public static void GetCoreAxis(string axisname, out short core, out short axis)
@@ -1020,6 +1033,7 @@ namespace H5509_V2
         {
             return SQLiteHelper.runSql(SQLiteConnString, $"select value from config where name = '{name}'", out value);
         }
+
         public static string GetconfigData()
         {
             string result = SQLiteHelper.runSql(SQLiteConnString, "select * from config", out DataTable dataTable);
@@ -2046,9 +2060,29 @@ namespace H5509_V2
             {
                 for (int j = 0; j < LoaderYPoint.Length; j++)
                 {
-                    LoaderDicPoint.Add($"{i},{j}", true);
+                    LoaderDicPoint.Add($"{i},{j}", false);
                 }
             }
+
+            LoaderDicPoint[$"{0},{0}"] = true;
+            LoaderDicPoint[$"{0},{1}"] = true;
+            LoaderDicPoint[$"{0},{2}"] = true;
+            LoaderDicPoint[$"{0},{3}"] = true;
+            LoaderDicPoint[$"{0},{4}"] = true;
+            LoaderDicPoint[$"{0},{5}"] = true;
+            LoaderDicPoint[$"{0},{6}"] = true;
+            LoaderDicPoint[$"{0},{7}"] = true;
+            LoaderDicPoint[$"{0},{8}"] = true;
+            LoaderDicPoint[$"{0},{9}"] = true;
+            LoaderDicPoint[$"{0},{10}"] = true;
+            LoaderDicPoint[$"{0},{11}"] = true;
+            LoaderDicPoint[$"{0},{12}"] = true;
+            LoaderDicPoint[$"{0},{13}"] = true;
+            LoaderDicPoint[$"{0},{14}"] = true;
+            LoaderDicPoint[$"{0},{15}"] = true;
+            LoaderDicPoint[$"{0},{16}"] = true;
+            LoaderDicPoint[$"{0},{17}"] = true;
+            LoaderDicPoint[$"{0},{18}"] = true;
         }
 
         public static void HeatTrayICMapInit()
@@ -2143,6 +2177,7 @@ namespace H5509_V2
                 }
             }
         }
+
         public static void HeatTrayClear()
         {
             for (int i = 0; i < HeatXPoint.Length; i++)
@@ -2325,6 +2360,60 @@ namespace H5509_V2
                 }
             }
             return false;
+        }
+
+        public static void StartRunIn()
+        {
+            APPmaster.InSiteQueue = new ConcurrentQueue<int>();
+            SiteStatus siteStatus = 设置信息.开site信息;
+            bool[] siteopen = new bool[16] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+
+            for (int site = 0; site < 16; site++)
+            {
+                for (int dut = 0; dut < 8; dut++)
+                {
+                    if (siteStatus.GetSiteValue(site, dut) == "1")
+                    {
+                        siteopen[site] = true;
+                        break;
+                    }
+                    if (siteopen[site]) break;
+                }
+            }
+            
+            for (int site = 0; site < siteopen.Length; site++)
+            {
+                if (siteopen[site])
+                {
+                    Debug.WriteLine($"开始前入料添加Site:{site + 1}");
+                    APPmaster.InSiteQueue.Enqueue(site);
+                }
+            }
+        }
+
+        public static void 放料目标值()
+        {
+            SiteStatus siteStatus = 设置信息.开site信息;
+            bool[] siteopen = new bool[8] { false, false, false, false, false, false, false, false };
+            
+            for (int dut = 0; dut < 8; dut++)
+            {
+                for (int site = 0; site < 16; site++)
+                {
+                    if (siteStatus.GetSiteValue(site, dut) == "1")
+                    { 
+                        siteopen[dut] = true;
+                        break; 
+                    }
+                    if (siteopen[dut]) break;
+                }
+            }
+
+            放料IC目标值 = new bool[][] 
+            {
+                new bool[] { siteopen[0], siteopen[1], siteopen[2], siteopen[3] },
+                new bool[] { siteopen[4], siteopen[5], siteopen[6], siteopen[7] } 
+            };
         }
 
         public static bool 获取Load盘位置(int index, out double xPos, out double yPos)
