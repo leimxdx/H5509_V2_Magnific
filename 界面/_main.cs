@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Security.Policy;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Spreadsheet;
 using H5509;
 using Sunny.UI;
 using static H5509_V2.APPmaster;
@@ -49,6 +42,8 @@ namespace H5509_V2
         private System.Drawing.Point windowsPoint = Control.MousePosition;
 
         private System.Timers.Timer windowstimer = new System.Timers.Timer();
+
+        private System.Timers.Timer uphtimer = new System.Timers.Timer(); //uph定时器
 
         private System.Windows.Forms.Timer currenttime = new System.Windows.Forms.Timer();
 
@@ -118,6 +113,10 @@ namespace H5509_V2
             //鼠标实时位置捕捉定时器
             windowstimer.Interval = 200; //200ms
             windowstimer.Elapsed += WindowstimerTick;
+
+            uphtimer.Interval = 10 * 1000; //10s
+            uphtimer.Elapsed += uphtimeTick;
+            uphtimer.Start();
 
             Chk_timer = new System.Windows.Forms.Timer[Chk_SW.Length];
             for (int i = 0; i < Chk_SW.Length; i++)
@@ -243,15 +242,38 @@ namespace H5509_V2
             }
         }
 
+        private void uphtimeTick(object sender, EventArgs eventArgs)
+        {
+            if (设备状态 == 0) return;
+
+            int uph = 0;
+
+            if (出料数 != UphNumber)
+            {
+                uph = 3600 / 10 * (出料数 - UphNumber);
+
+                UphNumber = 出料数;
+            }
+
+            if (uph >= 0)
+            {
+                lab_uph.Invoke(new Action(() =>
+                {
+                    lab_uph.Text = $"UPH={uph}";
+                }));
+            }
+            Debug.WriteLine($"UPH={uph}");
+        }
+
         private void RefreshCurrentTime()
         {
             lbl_currenttime.Text = DateTime.Now.ToString("HH:mm:ss");
-            //if (H5509IsRuningTime) //显示运行时间标记
-            //{
-            //    TimeSpan timeSpan = DateTime.Now - machinestarttime;
-            //    if (timeSpan.TotalDays >= 1) lbl_runtime.Text = "RunTime " + timeSpan.ToString(@"dd\.hh\:mm\:ss");
-            //    else lbl_runtime.Text = "RunTime " + timeSpan.ToString(@"hh\:mm\:ss");
-            //}
+            if (设备状态 != 0) //显示运行时间标记
+            {
+                TimeSpan timeSpan = DateTime.Now - 开始时间;
+                if (timeSpan.TotalDays >= 1) lbl_runtime.Text = "RunTime " + timeSpan.ToString(@"dd\.hh\:mm\:ss");
+                else lbl_runtime.Text = "RunTime " + timeSpan.ToString(@"hh\:mm\:ss");
+            }
         }
 
         private void RefreshLightState(bool flicker)
@@ -943,6 +965,19 @@ namespace H5509_V2
                         lbl_closenum.Text = "Close=" + 关Site数量.ToString();
 
                         Txt_loadnum.Text = 载入数.ToString();
+                        float total = 出料数;
+                        txt_total.Text = total.ToString();
+                        txt_auto1.Text = Auto1数量.ToString();
+                        txt_auto2.Text = Auto2数量.ToString();
+                        txt_fix1.Text = Fix1数量.ToString();
+                        txt_fix2.Text = Fix2数量.ToString();
+                        txt_fix3.Text = Fix3数量.ToString();
+                        txt_auto1yield.Text = (Auto1数量 / total * 100).ToString("0.0") + '%';
+                        txt_auto2yield.Text = (Auto2数量 / total * 100).ToString("0.0") + '%';
+                        txt_fix1yield.Text = (Fix1数量 / total * 100).ToString("0.0") + '%';
+                        txt_fix2yield.Text = (Fix2数量 / total * 100).ToString("0.0") + '%';
+                        txt_fix3yield.Text = (Fix3数量 / total * 100).ToString("0.0") + '%';
+
                         if (windowstimer.Enabled)
                         {
                             label153.Visible = true;

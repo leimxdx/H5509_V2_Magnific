@@ -22,7 +22,7 @@ using DocumentFormat.OpenXml.Vml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using H5509_alarm;
 using Sunny.UI.Win32;
-
+using Ttimer = System.Timers.Timer;
 namespace H5509_V2
 {
     public class APPmaster
@@ -155,6 +155,8 @@ namespace H5509_V2
 
         public static Dictionary<string, bool> HeatDicPoint = new Dictionary<string, bool>(); //加热盘Map图
 
+        public static Dictionary<string, HeatMapTimer> HeatDicTimer = new Dictionary<string, HeatMapTimer>(); //加热盘状态图
+
         public static Dictionary<string, bool> Auto1DicPoint = new Dictionary<string, bool>(); //自动盘1Map图
 
         public static Dictionary<string, bool> Auto2DicPoint = new Dictionary<string, bool>(); //自动盘2Map图
@@ -223,7 +225,6 @@ namespace H5509_V2
 
         public static bool 测试IC忽略 { get; set; }
 
-        public static int 载入数 { get; set; }
 
         public static int 飞梭2位置 = 0; //0:后面 1:前面
 
@@ -246,6 +247,32 @@ namespace H5509_V2
         public static double Auto1上移固定距离 = 29.5;
 
         public static double Auto2上移固定距离 = 29.5;
+
+        public static DateTime 软件开启时间 = DateTime.Now;
+
+        public static DateTime 开始时间 = DateTime.Now;
+
+        public static DateTime 按下结批时间 = DateTime.Now;
+
+        public static DateTime 结束时间 = DateTime.Now;
+
+        public static TimeSpan 结批时间 { get { return 按下结批时间 - 结束时间; } }
+
+        public static int UphNumber = 0;
+
+        public static int 载入数 = 0;
+
+        public static int 出料数 { get { return Auto1数量 + Auto2数量 + Fix1数量 + Fix2数量 + Fix3数量; } }
+
+        public static int Auto1数量 = 0;
+
+        public static int Auto2数量 = 0;
+
+        public static int Fix1数量 = 0;
+
+        public static int Fix2数量 = 0;
+
+        public static int Fix3数量 = 0;
 
         public static double Tray_厚度
         {
@@ -1318,6 +1345,22 @@ namespace H5509_V2
             ///Tray盘点位
             result = Init_TrayPoint();
             if (result != "Success") return result;
+
+            for (int i = 0; i < 16; i++)
+            {
+                APPmaster.SiteTestIC.Add(new bool[2][]
+                {
+                    new bool[] { false, false, false, false },
+                    new bool[] { false, false, false, false },
+                });
+
+                APPmaster.SiteTestBIN.Add(new string[2][]
+                {
+                    new string[] { "", "", "", "" },
+                    new string[] { "", "", "", "" },
+                });
+            }
+
             return "Success";
         }
 
@@ -1960,6 +2003,24 @@ namespace H5509_V2
             return false;
         }
 
+        public static bool 获取Load盘状态(int status, out short xPoint, out short yPoint)
+        {
+            xPoint = yPoint = 0;
+            for (short x = 0; x < HeatXPoint.Length; x++)
+            {
+                for (short y = 0; y < HeatYPoint.Length; y++)
+                {
+                    if (HeatDicTimer[$"{x},{y}"].Status == status)
+                    {
+                        xPoint = x;
+                        yPoint = y;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public static bool 获取Auto1盘坐标(bool ishave, out int xPoint, out int yPoint)
         {
             xPoint = yPoint = 0;
@@ -2060,39 +2121,41 @@ namespace H5509_V2
             {
                 for (int j = 0; j < LoaderYPoint.Length; j++)
                 {
-                    LoaderDicPoint.Add($"{i},{j}", false);
+                    LoaderDicPoint.Add($"{i},{j}", true);
                 }
             }
 
-            LoaderDicPoint[$"{0},{0}"] = true;
-            LoaderDicPoint[$"{0},{1}"] = true;
-            LoaderDicPoint[$"{0},{2}"] = true;
-            LoaderDicPoint[$"{0},{3}"] = true;
-            LoaderDicPoint[$"{0},{4}"] = true;
-            LoaderDicPoint[$"{0},{5}"] = true;
-            LoaderDicPoint[$"{0},{6}"] = true;
-            LoaderDicPoint[$"{0},{7}"] = true;
-            LoaderDicPoint[$"{0},{8}"] = true;
-            LoaderDicPoint[$"{0},{9}"] = true;
-            LoaderDicPoint[$"{0},{10}"] = true;
-            LoaderDicPoint[$"{0},{11}"] = true;
-            LoaderDicPoint[$"{0},{12}"] = true;
-            LoaderDicPoint[$"{0},{13}"] = true;
-            LoaderDicPoint[$"{0},{14}"] = true;
-            LoaderDicPoint[$"{0},{15}"] = true;
-            LoaderDicPoint[$"{0},{16}"] = true;
-            LoaderDicPoint[$"{0},{17}"] = true;
-            LoaderDicPoint[$"{0},{18}"] = true;
+            //LoaderDicPoint[$"{0},{0}"] = true;
+            //LoaderDicPoint[$"{0},{1}"] = true;
+            //LoaderDicPoint[$"{0},{2}"] = true;
+            //LoaderDicPoint[$"{0},{3}"] = true;
+            //LoaderDicPoint[$"{0},{4}"] = true;
+            //LoaderDicPoint[$"{0},{5}"] = true;
+            //LoaderDicPoint[$"{0},{6}"] = true;
+            //LoaderDicPoint[$"{0},{7}"] = true;
+            //LoaderDicPoint[$"{0},{8}"] = true;
+            //LoaderDicPoint[$"{0},{9}"] = true;
+            //LoaderDicPoint[$"{0},{10}"] = true;
+            //LoaderDicPoint[$"{0},{11}"] = true;
+            //LoaderDicPoint[$"{0},{12}"] = true;
+            //LoaderDicPoint[$"{0},{13}"] = true;
+            //LoaderDicPoint[$"{0},{14}"] = true;
+            //LoaderDicPoint[$"{0},{15}"] = true;
+            //LoaderDicPoint[$"{0},{16}"] = true;
+            //LoaderDicPoint[$"{0},{17}"] = true;
+            //LoaderDicPoint[$"{0},{18}"] = true;
         }
 
         public static void HeatTrayICMapInit()
         {
             HeatDicPoint = new Dictionary<string, bool>();
+            HeatDicTimer = new Dictionary<string, HeatMapTimer>();
             for (int i = 0; i < HeatXPoint.Length; i++)
             {
                 for (int j = 0; j < HeatYPoint.Length; j++)
                 {
                     HeatDicPoint.Add($"{i},{j}", false);
+                    HeatDicTimer.Add($"{i},{j}", new HeatMapTimer());
                 }
             }
         }

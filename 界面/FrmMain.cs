@@ -97,6 +97,8 @@ namespace H5509_V2
 
             changeMainPanel(main);
 
+            handler.参数初始化();
+
             string result = motionEx.GSNInitCard();
             if (result != "Success")
             {
@@ -213,10 +215,6 @@ namespace H5509_V2
 
         private string Init_FrMain()
         {
-            GetSiteStatus1(); //临时参数
-
-            handler.参数初始化();
-
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
             {
                 cts = new CancellationTokenSource();
@@ -321,64 +319,9 @@ namespace H5509_V2
                 {
                     handler.抓盘手臂放空盘到Auto2();
                 });
-                //Task.Run(() =>
-                //{
-                //    handler.抓盘手臂放空盘到Auto1();
-                //});
-                //Task.Run(() =>
-                //{
-                //    handler.抓盘手臂放空盘到Auto2();
-                //});
             });
 
             return "Success";
         }
-
-        private void GetSiteStatus1()
-        {
-            for (int i = 0; i < 16; i++)
-            {
-                //APPmaster.SiteStatus.Add(new bool[2][]
-                //{
-                //    new bool[] { true, true, true, true },
-                //    new bool[] { true, true, true, true },
-                //});
-
-                APPmaster.SiteTestIC.Add(new bool[2][]
-                {
-                    new bool[] { true, true, true, true },
-                    new bool[] { true, true, true, true },
-                });
-
-                APPmaster.SiteTestBIN.Add(new string[2][]
-                {
-                    new string[] { "", "", "", "" },
-                    new string[] { "", "", "", "" },
-                });
-
-
-
-                //APPmaster.SiteSave.Add(new bool[2][]
-                //{
-                //    new bool[] { false, false, false, false },
-                //    new bool[] { false, false, false, false },
-                //});
-
-                //APPmaster.SiteTestOpen.Add(new bool[2][]
-                //{
-                //    new bool[] { false, false, false, false },
-                //    new bool[] { false, false, false, false },
-                //});
-            }
-            //APPmaster.InSiteQueue.Enqueue(2);
-            //APPmaster.InSiteQueue.Enqueue(5);
-            //APPmaster.InSiteQueue.Enqueue(6);
-            //APPmaster.InSiteQueue.Enqueue(7);
-            //APPmaster.InSiteQueue.Enqueue(8);
-            //APPmaster.InSiteQueue.Enqueue(9);
-            //APPmaster.InSiteQueue.Enqueue(10);
-            //APPmaster.InSiteQueue.Enqueue(11);
-        }
-
     }
 }

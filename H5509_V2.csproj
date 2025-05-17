@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinParam.cs" />
+    <Compile Include="HeatMapTimer.cs" />
     <Compile Include="InitPoint.cs" />
     <Compile Include="TesterIFParam.cs" />
     <Compile Include="模块\log.cs" />
@@ -371,7 +372,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V2\bin\Debug \\desktop-4168527\GitHub\H5509_V2\bin\Debug</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

@@ -3780,7 +3780,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(191, 27);
             this.label8.TabIndex = 159;
-            this.label8.Text = "V.2.0.22 20250331";
+            this.label8.Text = "V.0.0.27 20250517";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9
@@ -4028,7 +4028,7 @@
             this.lab_uph.Name = "lab_uph";
             this.lab_uph.Size = new System.Drawing.Size(120, 45);
             this.lab_uph.TabIndex = 2;
-            this.lab_uph.Text = "UPH=6000";
+            this.lab_uph.Text = "UPH=0";
             this.lab_uph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_closenum
