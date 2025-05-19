@@ -376,6 +376,8 @@ namespace H5509_V2
 
         public static bool 入料手臂工作完成标记;
 
+        public static bool 加热盘停止入料标记;
+
         public static bool 入料手臂停止工作标记;
 
         public static bool 测试手臂入料停止工作标记;
@@ -2113,9 +2115,9 @@ namespace H5509_V2
             else return true;
         }
 
-        public static bool 获取Heat盘加热好的指定IC个数(int status, int num)
+        public static bool 获取Heat盘加热好的指定IC个数(int status, int num, out int num2)
         {
-            int num2 = 0;
+            num2 = 0;
             for (short x = 0; x < HeatXPoint.Length; x++)
             {
                 for (short y = 0; y < HeatYPoint.Length; y++)
