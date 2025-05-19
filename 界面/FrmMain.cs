@@ -113,6 +113,8 @@ namespace H5509_V2
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
 
+            main.canVisable(this);
+
             //TimeSpan time = new TimeSpan(0,11,31);
             //int x = (int)(449 / (time.TotalMinutes / 60));
             //handler.DebugIO(out string[] iovalues);

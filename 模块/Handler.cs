@@ -4036,19 +4036,31 @@ namespace H5509_V2
                         {
                             if (!入料手臂抓料等待标记)
                             {
-                                int count = open.Count(b => b); //获取true的个数
-                                if (获取Heat盘加热好的指定IC个数(2, count)) //如果已经加热好需要的IC个数
+                                if (温度模式 == 1)
                                 {
-                                    opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
-                                    入料手臂抓料等待标记 = false;
-                                    PS入料手臂吸放料流程.StepID = 615;
+                                    int count = open.Count(b => b); //获取true的个数
+                                    if (获取Heat盘加热好的指定IC个数(2, count)) //如果已经加热好需要的IC个数
+                                    {
+                                        opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
+                                        入料手臂抓料等待标记 = false;
+                                        PS入料手臂吸放料流程.StepID = 615;
+                                    }
+                                    else //如果没有加热好
+                                    {
+                                        PS入料手臂吸放料流程.StepID = 511;
+                                    }
                                 }
-                                else //如果没有加热好
+                                else
                                 {
-                                    PS入料手臂吸放料流程.StepID = 511;
+                                    opens = 吸嘴是否吸料(open);
+                                    入料手臂抓料等待标记 = false;
+                                    PS入料手臂吸放料流程.StepID = 515;
                                 }
                             }
-                            else PS入料手臂吸放料流程.StepID = 710;
+                            else
+                            {
+                                PS入料手臂吸放料流程.StepID = 710;
+                            }
                         }
                         else
                         {
@@ -4070,16 +4082,25 @@ namespace H5509_V2
                         PS入料手臂吸放料流程.StepName = "检测后入料IC是否被拿走";
                         if (飞梭后入料放料参数(out colums, out open))
                         {
-                            int count = open.Count(b => b); //获取true的个数
-                            if (获取Heat盘加热好的指定IC个数(2, count)) //如果已经加热好需要的IC个数
+                            if (温度模式 == 1)
                             {
-                                opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
-                                入料手臂抓料等待标记 = true;
-                                PS入料手臂吸放料流程.StepID = 615;
+                                int count = open.Count(b => b); //获取true的个数
+                                if (获取Heat盘加热好的指定IC个数(2, count)) //如果已经加热好需要的IC个数
+                                {
+                                    opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
+                                    入料手臂抓料等待标记 = true;
+                                    PS入料手臂吸放料流程.StepID = 615;
+                                }
+                                else //如果没有加热好
+                                {
+                                    PS入料手臂吸放料流程.StepID = 511;
+                                }
                             }
-                            else //如果没有加热好
+                            else
                             {
-                                PS入料手臂吸放料流程.StepID = 511;
+                                opens = 吸嘴是否吸料(open);
+                                入料手臂抓料等待标记 = true;
+                                PS入料手臂吸放料流程.StepID = 515;
                             }
                         }
                         else
@@ -4091,27 +4112,24 @@ namespace H5509_V2
                         break;
 
                     case 511:
-                        if (温度模式 == 0)
+                        if (获取Heat盘加热好的指定IC个数(0, 1)) //如果State：0的状态数量 >= 1 说明加热盘还没有放满
                         {
-                            if (获取Heat盘加热好的指定IC个数(0, 1)) //如果State：0的状态数量 >= 1 说明加热盘还没有放满
+                            if (获取Heat盘未放IC的指定IC个数(0, out int num)) //如果需要放置的IC个数 >=1 && <=4
                             {
-                                if (获取Heat盘未放IC的指定IC个数(0, out int num)) //如果需要放置的IC个数 >=1 && <=4
+                                opens = new int[] { 2, 2, 2, 2 }; //到Load吸取IC -> 加热盘
+                                for (int i = 0; i < num; i++)
                                 {
-                                    opens = new int[] { 2, 2, 2, 2 }; //到Load吸取IC -> 加热盘
-                                    for (int i = 0; i < num; i++)
-                                    {
-                                        opens[i] = 0;
-                                    }
+                                    opens[i] = 0;
                                 }
-                                PS入料手臂吸放料流程.StepID = 515;
                             }
-                            else
-                            {
-                                PS入料手臂吸放料流程.StepID = 500;
-                                PS入料手臂吸放料流程.Processing = false;
-                            }
+                            PS入料手臂吸放料流程.StepID = 515;
                         }
-                        else PS入料手臂吸放料流程.StepID = 515;
+                        else
+                        {
+                            PS入料手臂吸放料流程.StepID = 500;
+                            PS入料手臂吸放料流程.Processing = false;
+                        }
+
                         break;
 
                     case 615:
@@ -4674,6 +4692,7 @@ namespace H5509_V2
                         }
                         break;
 
+
                     case 705: ////放料流程////
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到飞梭放料位置";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
@@ -4900,7 +4919,7 @@ namespace H5509_V2
                         if (飞梭移动状态 == 0) //梭车停止状态才能放
                         {
                             double zpos = 获取梭车Z放料点位(colums);
-                            result = 入料手臂Z移动(lsopen, zpos, true);
+                            result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat_Z, true);
                             if (result == "Success")
                             {
                                 firstdraw = true;
@@ -5167,7 +5186,7 @@ namespace H5509_V2
                         }
                         else //直接点开始默认重放
                         {
-                            PS入料手臂吸放料流程.StepID = 1050;
+                            PS入料手臂吸放料流程.StepID = 1015;
                         }
                         break;
 
