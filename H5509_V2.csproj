@@ -150,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinParam.cs" />
+    <Compile Include="HeatInfo.cs" />
     <Compile Include="HeatMapTimer.cs" />
     <Compile Include="InitPoint.cs" />
     <Compile Include="TesterIFParam.cs" />

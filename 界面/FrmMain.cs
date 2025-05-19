@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using H5509_alarm;
 using Sunny.UI;
 using Sunny.UI.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
 
@@ -111,8 +112,6 @@ namespace H5509_V2
                 log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
-
-            main.canVisable(this);
 
             //TimeSpan time = new TimeSpan(0,11,31);
             //int x = (int)(449 / (time.TotalMinutes / 60));

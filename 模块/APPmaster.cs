@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
@@ -22,6 +23,7 @@ using DocumentFormat.OpenXml.Vml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using H5509_alarm;
 using Sunny.UI.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using Ttimer = System.Timers.Timer;
 namespace H5509_V2
 {
@@ -228,6 +230,8 @@ namespace H5509_V2
 
         public static int 飞梭2位置 = 0; //0:后面 1:前面
 
+        public static int 温度模式 = 0; //0:常温 1:高温
+
         public static bool 调机标记 = true;
 
         public static int Tray平移左右标记 = 0;
@@ -235,6 +239,8 @@ namespace H5509_V2
         public static bool Tray平移运动标记; //是否正在平移
 
         public static short Interval = 2; //吸料间隔
+
+        public static short HeatInterval = 1; //Heat吸放料间隔
 
         public static double 梭车列间距 = 40; //mm
 
@@ -284,6 +290,11 @@ namespace H5509_V2
             get { return 设置信息.Tray盘信息.Y_Pitch; }
         }
 
+        public static double Heat_Y_Pitch
+        {
+            get { return 设置信息.Heat盘信息.Y_Pitch; }
+        }
+
         public static double 入料吸料间距 //tray吸
         {
             get { return (初始点位.入料_变距最大值 - Tray_Y_Pitch * Interval) * 2; }
@@ -302,6 +313,11 @@ namespace H5509_V2
         public static double 出料放料间距 //tray放
         {
             get { return (初始点位.出料_变距最大值 - Tray_Y_Pitch * Interval) * 2; }
+        }
+
+        public static double 入料吸放料Heat间距 //Heat吸放
+        {
+            get { return (初始点位.入料_变距最大值 - Heat_Y_Pitch * HeatInterval) * 2; }
         }
 
         public static int[] SiteTestState = new int[16];
@@ -1967,6 +1983,83 @@ namespace H5509_V2
         //    }
         //}
 
+        public static bool 梭车是否需要放料(bool[] 实际值, bool[] 目标值)
+        {
+            for (int i = 0; i < 实际值.Length; i++)
+            {
+                if (目标值[i] == false) break; //如果不需要放
+                if (实际值[i] != 目标值[i]) return true;
+            }
+            return false;
+        }
+
+        public static bool[] 梭车放料ICopen(bool[] 实际值, bool[] 目标值)
+        {
+            bool[] open = new bool[实际值.Length];
+            for (int i = 0; i < 实际值.Length; i++)
+            {
+                if (目标值[i])
+                {
+                    if (!实际值[i])
+                    {
+                        open[i] = true;
+                    }
+                }
+            }
+            return open;
+        }
+
+        public static bool 飞梭前入料放料参数(out short colums, out bool[] open)
+        {
+            colums = 0;
+            open = new bool[4];
+            if (梭车是否需要放料(飞梭前入料IC[0], 放料IC目标值[0]))
+            {
+                open = 梭车放料ICopen(飞梭前入料IC[0], 放料IC目标值[0]);
+                if (open.Contains(true))
+                {
+                    colums = 0;
+                    return true;
+                }
+            }
+            else if (梭车是否需要放料(飞梭前入料IC[1], 放料IC目标值[1]))
+            {
+                open = 梭车放料ICopen(飞梭前入料IC[1], 放料IC目标值[1]);
+                if (open.Contains(true))
+                {
+                    colums = 1;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public static bool 飞梭后入料放料参数(out short colums, out bool[] open)
+        {
+            colums = 0;
+            open = new bool[4];
+            if (梭车是否需要放料(飞梭后入料IC[0], 放料IC目标值[0]))
+            {
+                open = 梭车放料ICopen(飞梭后入料IC[0], 放料IC目标值[0]);
+                if (open.Contains(true))
+                {
+                    colums = 0;
+                    return true;
+                }
+            }
+            else if (梭车是否需要放料(飞梭后入料IC[1], 放料IC目标值[1]))
+            {
+                open = 梭车放料ICopen(飞梭后入料IC[1], 放料IC目标值[1]);
+                if (open.Contains(true))
+                {
+                    colums = 1;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         public static bool 获取Load盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -1985,14 +2078,14 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Heat盘坐标(bool ishave, out short xPoint, out short yPoint)
+        public static bool 获取Heat盘坐标(int status, bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
             for (short x = 0; x < HeatXPoint.Length; x++)
             {
                 for (short y = 0; y < HeatYPoint.Length; y++)
                 {
-                    if (HeatDicPoint[$"{x},{y}"] == ishave)
+                    if (HeatDicTimer[$"{x},{y}"].Status == status && HeatDicPoint[$"{x},{y}"] == ishave)
                     {
                         xPoint = x;
                         yPoint = y;
@@ -2003,18 +2096,51 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Load盘状态(int status, out short xPoint, out short yPoint)
+        public static bool 获取Heat盘未放IC的指定IC个数(int status, out int num)
         {
+            num = 0;
+            for (short x = 0; x < HeatXPoint.Length; x++)
+            {
+                for (short y = 0; y < HeatYPoint.Length; y++)
+                {
+                    if (HeatDicTimer[$"{x},{y}"].Status == status && HeatDicPoint[$"{x},{y}"] == false)
+                    {
+                        if (++num >= 4) return true;
+                    }
+                }
+            }
+            if (num == 0) return false;
+            else return true;
+        }
+
+        public static bool 获取Heat盘加热好的指定IC个数(int status, int num)
+        {
+            int num2 = 0;
+            for (short x = 0; x < HeatXPoint.Length; x++)
+            {
+                for (short y = 0; y < HeatYPoint.Length; y++)
+                {
+                    if (HeatDicTimer[$"{x},{y}"].Status == status && HeatDicPoint[$"{x},{y}"] == true)
+                    {
+                        if (++num2 == num) return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static bool 获取Heat盘状态(int status, int num,  out short xPoint, out short yPoint)
+        {
+            int num2 = 0;
             xPoint = yPoint = 0;
             for (short x = 0; x < HeatXPoint.Length; x++)
             {
                 for (short y = 0; y < HeatYPoint.Length; y++)
                 {
-                    if (HeatDicTimer[$"{x},{y}"].Status == status)
+                    if (HeatDicTimer[$"{x},{y}"].Status == status && HeatDicPoint[$"{x},{y}"] == true)
                     {
-                        xPoint = x;
-                        yPoint = y;
-                        return true;
+                        if (num2++ == 0) { xPoint = x; yPoint = y; }
+                        if (num2 == num) return true;
                     }
                 }
             }
@@ -2485,7 +2611,19 @@ namespace H5509_V2
             if (获取Load盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = LoaderXPoint[xPoint];
-                yPos = LoaderYPoint[yPoint] + index * Interval * 16.3;
+                yPos = LoaderYPoint[yPoint] + index * Interval * Tray_Y_Pitch;
+                return true;
+            }
+            else return false;
+        }
+
+        public static bool 获取Heat盘位置(int index, out double xPos, out double yPos)
+        {
+            xPos = yPos = 0;
+            if (获取Load盘坐标(true, out short xPoint, out short yPoint))
+            {
+                xPos = HeatXPoint[xPoint];
+                yPos = HeatYPoint[yPoint] + index * HeatInterval * Heat_Y_Pitch;
                 return true;
             }
             else return false;
@@ -2588,6 +2726,31 @@ namespace H5509_V2
             }
             return "Success";
         }
+
+        public static string 获取Heat盘Open(int[] opens, int xPoint, int yPoint, short status, bool ishave,  out bool[] lsopen, out int index)
+        {
+            lsopen = new bool[opens.Length];
+
+            if (!获取吸嘴索引(opens, status, out index)) return "获取入料吸嘴索引失败!";
+
+            for (int i = 0; i < opens.Length; i++)
+            {
+                if (index + i == opens.Length) break;
+                if (yPoint + i * HeatInterval >= HeatYPoint.Length) break;
+                if (HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] == ishave) break;
+                if (opens[i + index] == status)
+                {
+                    lsopen[i + index] = true;
+                    if (i > 0 && (lsopen[i + index] != lsopen[i + index - 1]))
+                    {
+                        lsopen[i + index] = false;
+                        break;
+                    }
+                }
+            }
+            return "Success";
+        }
+
 
         public static void 获取Auto1盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, int index, string[] bin)
         {

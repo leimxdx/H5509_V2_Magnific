@@ -18,16 +18,27 @@ namespace H5509_V2
             Timer.Elapsed += TimerHeatTick;
         }
 
+        public DateTime StartHeatTime = DateTime.Now;
+
+        public DateTime HeatTime = DateTime.Now;
+
+        public TimeSpan CountDownTime
+        {
+            get { return StartHeatTime.AddSeconds(Timer.Interval / 1000) - DateTime.Now; }
+        }
+
+        private int status;
+
         public int Status 
         {
             get 
             {
-                return Status;
+                return status;
             }
             set 
             {
-                Status = value;
-                if (Status == 1)
+                status = value;
+                if (status == 1)
                 {
                     Timer.Start();
                 }
