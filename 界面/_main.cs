@@ -996,5 +996,68 @@ namespace H5509_V2
                 }
             }
         }
+
+        private void label116_Click(object sender, EventArgs e)
+        {
+            if (设备状态 == 0)
+            {
+                if (label116.Text == "常温")
+                {
+                    DialogResult dialog = MessageBox.Show($"请确认是否切换为高温模式", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.OK)
+                    {
+                        温度模式 = 1;
+                        label10.Text = "停止";
+                        label10.Enabled = true;
+                        label116.Text = "高温";
+                    }
+                }
+                else
+                {
+                    DialogResult dialog = MessageBox.Show($"请确认是否切换为常温模式", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.OK)
+                    {
+                        温度模式 = 0;
+                        label10.Text = "开启";
+                        label10.Enabled = false;
+                        label116.Text = "常温";
+                    }
+                }
+            }
+        }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+            if (设备状态 == 0)
+            {
+                if (label10.Text == "停止")
+                {
+                    DialogResult dialog = MessageBox.Show($"请确认是否停止加热", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.OK)
+                    {
+                        label10.Text = "开启";
+                    }
+                }
+                else
+                {
+                    DialogResult dialog = MessageBox.Show($"请确认是否开启加热", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.OK)
+                    {
+                        label10.Text = "停止";
+                    }
+                }
+            }
+        }
+
+        private void label139_Click(object sender, EventArgs e)
+        {
+            LoadMap loadMap = new LoadMap();
+
+            loadMap.LoadXPoint = LoaderXPoint;
+            loadMap.LoadYPoint = LoaderYPoint;
+            loadMap.LoadDicPoint = LoaderDicPoint;
+
+            loadMap.ShowDialog();
+        }
     }
 }

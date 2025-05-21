@@ -13,7 +13,8 @@ namespace H5509_V2
         public double 入料_Load_Z { get; set; }
         public double 入料_Heat_X { get; set; }
         public double 入料_Heat_Y { get; set; }
-        public double 入料_Heat_Z { get; set; }
+        public double 入料_Heat吸_Z { get; set; }
+        public double 入料_Heat放_Z { get; set; }
         public double 入料_梭车1_X { get; set; }
         public double 入料_梭车1_Y { get; set; }
         public double 入料_梭车1_Z { get; set; }

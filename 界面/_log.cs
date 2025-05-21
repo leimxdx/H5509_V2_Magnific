@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
-using System.IO;
+using System.Data;
 using System.Linq;
-using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using ClosedXML.Excel;
-using H5509_V2.界面;
 using Sunny.UI;
+using ClosedXML.Excel;
+using System.IO;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Sunny.UI.Win32;
+using System.Diagnostics;
+using DocumentFormat.OpenXml.Wordprocessing;
+using System.Globalization;
+using System.Runtime.InteropServices.ComTypes;
+using H5509_V2.界面;
+using System.Threading;
 
 namespace H5509_V2
 {
@@ -28,6 +31,15 @@ namespace H5509_V2
         private string currentSearchKeyword = "";  // 当前搜索关键词
         private 界面.UIProgressIndicatorEx progressIndicator; // 进度条实例
         private bool isProcessing = false;
+        private static Dictionary<string, FileCounter> _fileCounters = new Dictionary<string, FileCounter>();
+
+        class FileCounter
+        {
+            public const int MaxRows = 60000; // 最大行数常量
+            public string FilePath { get; set; }
+            public int RowCount { get; set; }  // 仅数据行数（不包含表头）
+            public DateTime FirstLogTime { get; set; }
+        }
         public _log()
         {
             InitializeComponent();
@@ -37,6 +49,7 @@ namespace H5509_V2
             this.startTime.Value = DateTime.Now;
             this.endTime.Value = DateTime.Now;
             this.Load += _log_Load;
+            lblTotalNum.Text = "总记录数:0";
             // 初始化进度条相关设置
             // 初始化进度指示器
             progressIndicator = new 界面.UIProgressIndicatorEx
@@ -50,7 +63,8 @@ namespace H5509_V2
             {
                 Directory.CreateDirectory(logsDirectory);
             }
-          
+          startTime.Value = DateTime.Today;//0时
+            endTime.Value = DateTime.Today.AddDays(1);
         }
 
         private void _log_Load(object sender, EventArgs e)
@@ -89,112 +103,109 @@ namespace H5509_V2
                 }
             }
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="level">全部输出-all 正常-normal 调试-debug 错误-error 警告-warning</param>
-        /// <param name="logType"></param>
-        /// <param name="info"></param>
         public void AddLog(string level, string logType, string info)
         {
-           string monthDir = DateTime.Now.ToString("yyyyMM");
-            string monthlyLogDir = Path.Combine(logsDirectory, monthDir);
-            // 确保日期目录存在
-            if (!Directory.Exists(monthlyLogDir))
+            string monthlyDir = Path.Combine(logsDirectory, DateTime.Now.ToString("yyyyMM"));
+            var currentFile = GetCurrentLogFile(monthlyDir);
+
+            var logs = new List<(string, string, string)>
+    {
+        (level, logType, info)
+    };
+
+            WriteLogToExcel(currentFile, logs); // 单条也作为列表传入
+
+            this.Invoke((Action)(() =>
             {
-                Directory.CreateDirectory(monthlyLogDir);
-            }
-            string Excelpath = Path.Combine(monthlyLogDir, $"Log_{DateTime.Now:yyyyMMdd-HH}.xlsx");
-            log logs = new log();
-            logs.Time = DateTime.Now;
-            logs.LogLevel = level;
-            logs.LogType = logType;
-            logs.LogContent = info;
-            if (this.InvokeRequired)
-            {
-                this.Invoke((Action)(() =>
+                logsList.Add(new log
                 {
-                    logsList.Add(logs);
-                    this.dgv_data.DataSource = null;
-                    this.dgv_data.DataSource = logsList;
-                }));
-            }
-            else 
-            {
-                logsList.Add(logs);
-                this.dgv_data.DataSource = null;
-                this.dgv_data.DataSource = logsList;
-            }
-                XLWorkbook workbook;
-            IXLWorksheet worksheet;
-            log newLog = new log
-            {
-                Time = DateTime.Now,
-                LogLevel = level,
-                LogType = logType,
-                LogContent = info
-            };
+                    Time = DateTime.Now,
+                    LogLevel = level,
+                    LogType = logType,
+                    LogContent = info
+                });
+                dgv_data.DataSource = null;
+                dgv_data.DataSource = logsList;
+            }));
+            
+        }
+       
+
+        private void WriteLogToExcel(FileCounter fileCounter, List<(string level, string logType, string info)> logs)
+        {
             try
             {
-                if (!File.Exists(Excelpath))
+                int remainingSpace = FileCounter.MaxRows - fileCounter.RowCount;
+                int logsToWrite = Math.Min(logs.Count, remainingSpace);
+
+                if (logsToWrite > 0)
                 {
-                    workbook = new XLWorkbook();
-                    worksheet = workbook.AddWorksheet("sheet1");    // 创建名称为sheet1的工作表
-                    worksheet.Cell(1, 1).Value = "日志时间";
-                    worksheet.Cell(1, 2).Value = "日志等级";
-                    worksheet.Cell(1, 3).Value = "日志类型";
-                    worksheet.Cell(1, 4).Value = "日志内容";
-                    // 确定起始行（现有数据最后一行+1）
-                    int startRow = worksheet.LastRowUsed()?.RowNumber()?? 2;
+                    // 写入当前文件能容纳的部分
+                    using (var workbook = new XLWorkbook(fileCounter.FilePath))
+                    {
+                        var worksheet = workbook.Worksheet(1);
+                        int startRow = worksheet.LastRowUsed().RowNumber() + 1;
 
-                    // 写入数据
-               
-                        int currentRow = startRow + 1;
+                        for (int i = 0; i < logsToWrite; i++)
+                        {
+                            var (level, logType, info) = logs[i];
+                            worksheet.Cell(startRow + i, 1).Value = DateTime.Now;
+                            worksheet.Cell(startRow + i, 2).Value = level;
+                            worksheet.Cell(startRow + i, 3).Value = logType;
+                            worksheet.Cell(startRow + i, 4).Value = info;
+                        }
 
-                        worksheet.Cell(currentRow, 1).Value = newLog.Time;
-                        worksheet.Cell(currentRow, 2).Value = newLog.LogLevel;
-                        worksheet.Cell(currentRow, 3).Value = newLog.LogType;
-                        worksheet.Cell(currentRow, 4).Value = newLog.LogContent;
+                        workbook.Save();
+                        fileCounter.RowCount += logsToWrite;
+                        Debug.WriteLine($"写入文件: {Path.GetFileName(fileCounter.FilePath)}，新增行数: {logsToWrite}，总行数: {fileCounter.RowCount}");
+                    }
 
-                    //}
-                    workbook.SaveAs(Excelpath);
+                    // 处理剩余日志
+                    if (logs.Count > logsToWrite)
+                    {
+                        var remainingLogs = logs.Skip(logsToWrite).ToList();
+                        var newFile = GetCurrentLogFile(Path.GetDirectoryName(fileCounter.FilePath));
+                        WriteLogToExcel(newFile, remainingLogs);
+                    }
                 }
                 else
                 {
-                    workbook = new XLWorkbook(Excelpath);
-                    worksheet = workbook.Worksheet("sheet1");
-                    if (worksheet == null)
-                    {
-                        // 如果工作表不存在，创建新的工作表并设置表头
-                        worksheet = workbook.AddWorksheet("sheet1");
-                        worksheet.Cell(1, 1).Value = "日志时间";
-                        worksheet.Cell(1, 2).Value = "日志等级";
-                        worksheet.Cell(1, 3).Value = "日志类型";
-                        worksheet.Cell(1, 4).Value = "日志内容";
-                    }
-                    // 确定起始行（现有数据最后一行+1）
-                    int startRow = worksheet.LastRowUsed()?.RowNumber()?? 2;
-
-                    // 写入数据
-                                     
-                        int currentRow = startRow + 1;
-
-                        worksheet.Cell(currentRow, 1).Value = newLog.Time;
-                        worksheet.Cell(currentRow, 2).Value = newLog.LogLevel;
-                        worksheet.Cell(currentRow, 3).Value = newLog.LogType;
-                        worksheet.Cell(currentRow, 4).Value = newLog.LogContent;
-
-                    workbook.SaveAs(Excelpath);
+                    // 当前文件已满，创建新文件
+                    var newFile = GetCurrentLogFile(Path.GetDirectoryName(fileCounter.FilePath));
+                    WriteLogToExcel(newFile, logs);
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"日志写入失败：{ex.Message}");
+                Debug.WriteLine($"写入失败: {fileCounter.FilePath}\n{ex.Message}");
+                _fileCounters.Remove(fileCounter.FilePath);
+                var newFile = GetCurrentLogFile(Path.GetDirectoryName(fileCounter.FilePath));
+                WriteLogToExcel(newFile, logs);
+            }
+        }
+      
+        private void InternalWrite(FileCounter fileCounter, List<(string level, string logType, string info)> logs)
+        {
+            using (var workbook = new XLWorkbook(fileCounter.FilePath))
+            {
+                var worksheet = workbook.Worksheet(1);
+                int startRow = worksheet.LastRowUsed()?.RowNumber() + 1 ?? 2;
+
+                for (int i = 0; i < logs.Count; i++)
+                {
+                    var (level, logType, info) = logs[i];
+                    worksheet.Cell(startRow + i, 1).Value = DateTime.Now;
+                    worksheet.Cell(startRow + i, 2).Value = level;
+                    worksheet.Cell(startRow + i, 3).Value = logType;
+                    worksheet.Cell(startRow + i, 4).Value = info;
+                }
+
+                workbook.Save();
             }
 
+            fileCounter.RowCount += logs.Count;
         }
-
-        private void cbbLogLevel_SelectedIndexChanged(object sender, EventArgs e)
+            private void cbbLogLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 获取当前选中的日志等级
             currentLevelFilter = cbbLogLevel.SelectedItem.ToString();
@@ -257,23 +268,7 @@ namespace H5509_V2
 
             return logs;
         }
-        private void btnWriteLog_Click(object sender, EventArgs e)
-        {
-            
-            AddLog("debug", "operate", "这是一条debug调试日志");
-            AddLog("all", "run", "这是一条调试日志");
-            AddLog("error", "spc", "这是一条error调试日志");
-            AddLog("warning", "spc", "这是一条warning调试日志");
-            AddLog("warning", "spc", "这是一条warning调试日志");
-            AddLog("normal", "run", "这是一条调试日志");
-            AddLog("debug", "operate", "这是一条debug调试日志");
-            AddLog("all", "run", "这是一条调试日志");
-            AddLog("error", "spc", "这是一条error调试日志");
-            AddLog("warning", "all", "这是一条warning调试日志");
-            AddLog("warning", "spc", "这是一条warning调试日志");
-            AddLog("all", "run", "这是一条调试日志");
-
-        }
+        
         // 当前筛选条件
         private string currentLevelFilter = "";
         private string currentTypeFilter = "";
@@ -295,15 +290,7 @@ namespace H5509_V2
                 Debug.WriteLine($"从 {file} 加载了 {fileLogs.Count} 条数据"); // 验证每个文件的数据量
                 allLogs.AddRange(fileLogs);
             }
-            //// 并行读取文件提升性能
-            //Parallel.ForEach(logFiles, file =>
-            //{
-            //    var fileLogs = ReadExcel(file, start, end);
-            //    lock (allLogs)
-            //    {
-            //        allLogs.AddRange(fileLogs);
-            //    }
-            //});
+        
 
             // 应用其他筛选条件
             var query = allLogs.AsQueryable();
@@ -327,70 +314,59 @@ namespace H5509_V2
            
         }
         // 统一刷新DataGridView
-        private void RefreshDataGrid()
+        private async void RefreshDataGrid()
         {
             if (isProcessing) return;
             isProcessing = true;
-       
+
+            // 创建并显示进度指示器
+            this.Invoke((Action)(() =>
+            {
+                progressIndicator = new UIProgressIndicatorEx
+                {
+                    BackColor = System.Drawing.Color.Transparent
+                };
+                this.Controls.Add(progressIndicator);
+                progressIndicator.BringToFront();
+                progressIndicator.CenterToParent();
+                progressIndicator.Start();
+            }));
+
             try
-            {// 创建并显示进度条
-             // 创建并显示进度指示器
+            {
+                // 使用Task.Run将数据加载放到后台线程
+                var filteredLogs = await Task.Run(() => GetFilteredLogs());
+
                 this.Invoke((Action)(() =>
                 {
-                    progressIndicator = new UIProgressIndicatorEx
-                    {
-                        //Size = new Size(220, 153),
-                       
-                        BackColor = System.Drawing.Color.Transparent
-                    };              
-                    this.Controls.Add(progressIndicator);
-                    progressIndicator.BringToFront();
-                    // 调用居中方法
-                    progressIndicator.CenterToParent();
-                    progressIndicator.Start();
+                    dgv_data.DataSource = null;
+                    dgv_data.DataSource = filteredLogs;
+                    lblTotalNum.Text = $"总记录数: {dgv_data.RowCount}";
                 }));
 
-                Application.DoEvents();        
-                try
-                { 
-                    var filteredLogs = GetFilteredLogs();
-
-                    this.Invoke((Action)(() =>
-                    {
-                        dgv_data.DataSource = null;
-                        dgv_data.DataSource = filteredLogs;
-                        lblTotalNum.Text = $"总记录数: {dgv_data.RowCount}";
-                      
-                    }));
-
-                    currentSearchIndex = -1;
-                    currentSearchKeyword = "";
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"查询失败: {ex.Message}");
-                    UIMessageTip.ShowError(this, $"查询失败: {ex.Message}", 2000);
-                }
-                finally
-                {               
-                    // 延迟关闭进度指示器
-                    Task.Delay(300).ContinueWith(_ =>
-                    {
-                        this.Invoke((Action)(() =>
-                        {
-                            progressIndicator.Stop();
-                            this.Controls.Remove(progressIndicator);
-                           
-                        }));
-                    });
-                }
+                currentSearchIndex = -1;
+                currentSearchKeyword = "";
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"查询失败: {ex.Message}");
+                UIMessageTip.ShowError(this, $"查询失败: {ex.Message}", 2000);
             }
             finally
             {
-                isProcessing = false;
+                // 确保进度指示器在数据完全加载后才关闭
+                this.Invoke((Action)(() =>
+                {
+                    progressIndicator.Stop();
+                    this.Controls.Remove(progressIndicator);
+                    progressIndicator.Dispose();
+                }));
             }
+
+            isProcessing = false;
         }
-            
+       
+
         private void endTime_ValueChanged(object sender, DateTime value)
         {
             if (startTime.Value > endTime.Value)
@@ -425,90 +401,47 @@ namespace H5509_V2
         }
         //获取日期范围内的日志文件
         private List<string> GetLogFilesInDateRange(DateTime startDate, DateTime endDate)
-        {         
+        {
             var logFiles = new List<string>();
 
-            //try
-            //{
-            //    // 遍历所有日期子目录（格式：yyyyMMdd）
-            //    foreach (var monthDir in Directory.GetDirectories(logsDirectory))
-            //    {
-            //        string dirName = Path.GetFileName(monthDir);
-
-            //        // 解析目录名中的日期（如 "202505" → DateTime）
-            //        if (DateTime.TryParseExact(dirName, "yyyyMM", null, DateTimeStyles.None, out DateTime dirDate))
-            //        {// 检查月份是否在查询范围内
-            //            DateTime firstDayOfMonth = new DateTime(dirDate.Year, dirDate.Month, 1);
-            //            DateTime lastDayOfMonth = firstDayOfMonth.AddMonths(1).AddDays(-1);
-
-            //            // 如果目录日期不在查询范围内，跳过
-            //            if (dirDate.Date < startDate.Date || dirDate.Date > endDate.Date)
-            //                continue;
-
-            //            // 遍历该日期目录下的所有日志文件
-            //            foreach (var file in Directory.GetFiles(monthDir, "Log_*.xlsx"))
-            //            {
-            //                string fileName = Path.GetFileNameWithoutExtension(file);
-
-            //                // 从文件名解析小时（格式：Log_yyyyMMdd-HH.xlsx）
-            //                if (fileName.Length >= 13) // 确保文件名足够长
-            //                {
-            //                    string dateHourStr = fileName.Substring(4, 11); // 提取 "yyyyMMdd-HH"
-
-            //                    if (DateTime.TryParseExact(dateHourStr, "yyyyMMdd-HH", null, DateTimeStyles.None, out DateTime fileTime))
-            //                    {
-            //                        // 检查文件时间是否在查询范围内
-            //                        if (fileTime >= startDate && fileTime <= endDate)
-            //                        {
-            //                            logFiles.Add(file);
-            //                        }
-            //                    }
-            //                }
-            //            }
-            //        }
-
-            try
+            // 遍历所有月份目录
+            foreach (var monthDir in Directory.GetDirectories(logsDirectory))
             {
-                // 生成需要查询的所有月份范围
-                for (DateTime month = new DateTime(startDate.Year, startDate.Month, 1);
-                     month <= endDate;
-                     month = month.AddMonths(1))
+                // 从目录名获取月份（格式：yyyyMM）
+                string dirName = Path.GetFileName(monthDir);
+                if (DateTime.TryParseExact(dirName, "yyyyMM", null, DateTimeStyles.None, out DateTime dirDate))
                 {
-                    string monthDir = Path.Combine(logsDirectory, month.ToString("yyyyMM"));
-
-                    if (!Directory.Exists(monthDir))
+                    // 检查月份是否在查询时间范围内（优化：先粗略按月份筛选）
+                    if (dirDate.Year < startDate.Year || dirDate.Year > endDate.Year)
+                        continue;
+                    if (dirDate.Year == startDate.Year && dirDate.Month < startDate.Month)
+                        continue;
+                    if (dirDate.Year == endDate.Year && dirDate.Month > endDate.Month)
                         continue;
 
-                    // 获取该月文件夹下所有日志文件
+                    // 遍历该月所有日志文件
                     foreach (var file in Directory.GetFiles(monthDir, "Log_*.xlsx"))
                     {
+                        // 从文件名解析时间（格式：Log_yyyyMMdd-HHmmss.xlsx）
                         string fileName = Path.GetFileNameWithoutExtension(file);
+                        string timePart = fileName.Substring(4); // 去掉"Log_"
 
-                        // 从文件名解析日期和时间（格式：Log_yyyyMMdd-HH.xlsx）
-                        if (fileName.Length >= 13) // 确保文件名足够长
+                        if (DateTime.TryParseExact(timePart, "yyyyMMdd-HHmmss", null, DateTimeStyles.None, out DateTime fileTime))
                         {
-                            string datePart = fileName.Substring(4, 8);  // yyyyMMdd
-                            string hourPart = fileName.Substring(13, 2); // HH
-
-                            if (DateTime.TryParseExact($"{datePart}{hourPart}", "yyyyMMddHH", null, DateTimeStyles.None, out DateTime fileTime))
-                            {
-                                // 检查文件时间是否在查询范围内
-                                if (fileTime >= startDate && fileTime <= endDate)
-                                {
-                                    logFiles.Add(file);
-                                }
-                            }
+                            // 优化：如果文件创建时间完全不在查询范围内，则跳过（减少文件打开次数）
+                            if (fileTime.Date > endDate.Date || fileTime.Date < startDate.Date)
+                                continue;
                         }
+
+                        // 如果文件名时间在范围内，或无法解析时间，则加入待检查列表
+                        logFiles.Add(file);
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"获取日志文件失败: {ex.Message}");
             }
 
             return logFiles.OrderBy(f => f).ToList();
         }
+        
 
         private void LogTimer_Tick(object sender, EventArgs e)
         {
@@ -581,6 +514,88 @@ namespace H5509_V2
                 }
             }
             btnTimeSelect.Enabled = true;
+        }
+        private FileCounter GetCurrentLogFile(string monthlyDir)
+        {
+            // 1. 尝试查找已有文件
+            var existingFiles = Directory.GetFiles(monthlyDir, "Log_*.xlsx")
+                .OrderByDescending(f => f)
+                .ToList();
+
+            foreach (var file in existingFiles)
+            {
+                // 如果已有计数器记录，直接返回
+                if (_fileCounters.TryGetValue(file, out var counter))
+                {
+                    if (counter.RowCount < FileCounter.MaxRows)
+                        return counter;
+                    continue;
+                }
+
+                // 新发现的文件，初始化计数器
+                try
+                {
+                    using (var workbook = new XLWorkbook(file))
+                    {
+                        var worksheet = workbook.Worksheet(1);
+                        int rowCount = worksheet.LastRowUsed().RowNumber() - 1; // 减去表头行
+
+                        var newCounters = new FileCounter
+                        {
+                            FilePath = file,
+                            RowCount = rowCount,
+                            FirstLogTime = GetFileTimeFromName(file)
+                        };
+
+                        _fileCounters[file] = newCounters;
+                        Debug.WriteLine($"发现已有文件: {file}，行数: {rowCount}");
+
+                        if (rowCount < FileCounter.MaxRows)
+                            return newCounters;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"加载已有文件失败: {file}\n{ex.Message}");
+                }
+            }
+
+            // 2. 没有可用文件，创建新文件
+            string timestamp = DateTime.Now.ToString("yyyyMMdd-HHmmss");
+            string newFilePath = Path.Combine(monthlyDir, $"Log_{timestamp}.xlsx");
+
+            using (var workbook = new XLWorkbook())
+            {
+                var worksheet = workbook.AddWorksheet("Logs");
+                worksheet.Cell(1, 1).Value = "日志时间";
+                worksheet.Cell(1, 2).Value = "日志等级";
+                worksheet.Cell(1, 3).Value = "日志类型";
+                worksheet.Cell(1, 4).Value = "日志内容";
+                workbook.SaveAs(newFilePath);
+            }
+
+            var newCounter = new FileCounter
+            {
+                FilePath = newFilePath,
+                RowCount = 0,
+                FirstLogTime = DateTime.Now
+            };
+
+            _fileCounters.Add(newFilePath, newCounter);
+            Debug.WriteLine($"创建新文件: {newFilePath}");
+
+            return newCounter;
+        }
+
+        private DateTime GetFileTimeFromName(string filePath)
+        {
+            string fileName = Path.GetFileNameWithoutExtension(filePath);
+            string timePart = fileName.Substring(4); // 去掉"Log_"
+
+            if (DateTime.TryParseExact(timePart, "yyyyMMdd-HHmmss", null, DateTimeStyles.None, out DateTime result))
+                return result;
+
+            return File.GetCreationTime(filePath); // 回退使用文件创建时间
         }
     }
 }

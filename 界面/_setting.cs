@@ -13,7 +13,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Bibliography;
+using System.Xml.Linq;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Vml.Office;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Sunny.UI;
 using static GTN.mc;
@@ -2320,7 +2322,8 @@ namespace H5509_V2
 
             uiDoubleUpDown108.Text = 初始点位.入料_Heat_X.ToString();
             uiDoubleUpDown107.Text = 初始点位.入料_Heat_Y.ToString();
-            uiDoubleUpDown106.Text = 初始点位.入料_Heat_Z.ToString();
+            uiDoubleUpDown106.Text = 初始点位.入料_Heat吸_Z.ToString();
+            uinumericUpDown126.Text = 初始点位.入料_Heat放_Z.ToString();
 
             uiDoubleUpDown102.Text = 初始点位.入料_梭车1_X.ToString();
             uiDoubleUpDown101.Text = 初始点位.入料_梭车1_Y.ToString();
@@ -2556,12 +2559,22 @@ namespace H5509_V2
 
         private void 刷新设定(string name)
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dt);
-            if (result == "Success")
-            {
-                textBox24.Text = dt.Rows[0][0].ToString();
-                textBox25.Text = dt.Rows[0][1].ToString();
-            }
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select name from TrayInfo", out DataTable traydt);
+            if (result != "Success") return;
+            uiComboBox1.DataSource = traydt;
+            uiComboBox1.DisplayMember = "name";
+
+            result = SQLiteHelper.runSql(SQLiteConnString, $"select name from HeatInfo", out DataTable heatdt);
+            if (result != "Success") return;
+            uiComboBox2.DataSource = heatdt;
+            uiComboBox2.DisplayMember = "name";
+
+            result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dt);
+            if (result != "Success") return;
+
+            uiTextBox1.Text = dt.Rows[0]["档案名称"].ToString();
+            uiComboBox1.Text = dt.Rows[0]["tray盘名称"].ToString();
+            uiComboBox2.Text = dt.Rows[0]["加热盘名称"].ToString();
         }
 
         private void 刷新测试机(string name)
@@ -2676,18 +2689,218 @@ namespace H5509_V2
             刷新分BIN(binParam);
         }
 
+        private void 刷新手臂点位(string name, string page)
+        {
+            string result = GetOffsetPoint(name, out OffsetPoint offset);
+            if (result != "Success") return;
+
+            if (page == "入料手臂")
+            {
+                numericUpDown33.Text = offset.入料_Load吸_X.ToString();
+                numericUpDown30.Text = offset.入料_Load吸_Y.ToString();
+                numericUpDown28.Text = offset.入料_Load吸_Z.ToString();
+
+                numericUpDown39.Text = offset.入料_Heat吸_X.ToString();
+                numericUpDown38.Text = offset.入料_Heat吸_Y.ToString();
+                numericUpDown37.Text = offset.入料_Heat吸_Z.ToString();
+
+                numericUpDown36.Text = offset.入料_Heat放_X.ToString();
+                numericUpDown35.Text = offset.入料_Heat放_Y.ToString();
+                numericUpDown34.Text = offset.入料_Heat放_Z.ToString();
+
+                numericUpDown32.Text = offset.入料_梭车1第1列放_X.ToString();
+                numericUpDown31.Text = offset.入料_梭车1第1列放_Y.ToString();
+                numericUpDown29.Text = offset.入料_梭车1第1列放_Z.ToString();
+
+                numericUpDown27.Text = offset.入料_梭车1第2列放_X.ToString();
+                numericUpDown26.Text = offset.入料_梭车1第2列放_Y.ToString();
+                numericUpDown25.Text = offset.入料_梭车1第2列放_Z.ToString();
+
+                numericUpDown24.Text = offset.入料_Load_变距.ToString();
+                numericUpDown23.Text = offset.入料_Heat_变距.ToString();
+                numericUpDown22.Text = offset.入料_梭车_变距.ToString();
+
+                numericUpDown21.Text = offset.入料_梭车2第1列放_X.ToString();
+                numericUpDown20.Text = offset.入料_梭车2第1列放_Y.ToString();
+                numericUpDown19.Text = offset.入料_梭车2第1列放_Z.ToString();
+
+                numericUpDown18.Text = offset.入料_梭车2第2列放_X.ToString();
+                numericUpDown17.Text = offset.入料_梭车2第2列放_Y.ToString();
+                numericUpDown1.Text = offset.入料_梭车2第2列放_Z.ToString();
+
+
+            }
+            else if (page == "出料手臂")
+            {
+                numericUpDown63.Text = offset.出料_梭车1第1列吸_X.ToString();
+                numericUpDown62.Text = offset.出料_梭车1第1列吸_Y.ToString();
+                numericUpDown61.Text = offset.出料_梭车1第1列吸_Z.ToString();
+
+                numericUpDown60.Text = offset.出料_梭车1第2列吸_X.ToString();
+                numericUpDown59.Text = offset.出料_梭车1第2列吸_Y.ToString();
+                numericUpDown58.Text = offset.出料_梭车1第2列吸_Z.ToString();
+
+                numericUpDown57.Text = offset.出料_Fix1放_X.ToString();
+                numericUpDown56.Text = offset.出料_Fix1放_Y.ToString();
+                numericUpDown55.Text = offset.出料_Fix1放_Z.ToString();
+
+                uiDoubleUpDown33.Text = offset.出料_梭车_变距.ToString();
+                uiDoubleUpDown34.Text = offset.出料_AF_变距.ToString();
+                uiDoubleUpDown31.Text = offset.出料_梭车2第1列吸_X.ToString();
+                uiDoubleUpDown32.Text = offset.出料_梭车2第1列吸_Y.ToString();
+                uiDoubleUpDown30.Text = offset.出料_梭车2第1列吸_Z.ToString();
+
+                numericUpDown54.Text = offset.出料_梭车2第2列吸_X.ToString();
+                numericUpDown53.Text = offset.出料_梭车2第2列吸_Y.ToString();
+                numericUpDown52.Text = offset.出料_梭车2第2列吸_Z.ToString();
+
+                numericUpDown51.Text = offset.出料_Fix2放_X.ToString();
+                numericUpDown50.Text = offset.出料_Fix2放_Y.ToString();
+                numericUpDown49.Text = offset.出料_Fix2放_Z.ToString();
+                numericUpDown48.Text = offset.出料_Auto1放_X.ToString();
+                numericUpDown47.Text = offset.出料_Auto1放_Y.ToString();
+                numericUpDown46.Text = offset.出料_Auto1放_Z.ToString();
+
+                numericUpDown45.Text = offset.出料_Auto2放_X.ToString();
+                numericUpDown44.Text = offset.出料_Auto2放_Y.ToString();
+                numericUpDown43.Text = offset.出料_Auto2放_Z.ToString();
+
+                numericUpDown42.Text = offset.出料_Fix3放_X.ToString();
+                numericUpDown41.Text = offset.出料_Fix3放_Y.ToString();
+                numericUpDown40.Text = offset.出料_Fix3放_Z.ToString();
+            }
+            else if (page == "测试手臂")
+            {
+                numericUpDown78.Text = offset.测试_梭车1左吸_X.ToString();
+                numericUpDown75.Text = offset.测试_梭车1左吸_Z.ToString();
+                numericUpDown73.Text = offset.测试_梭车1右放_X.ToString();
+                numericUpDown72.Text = offset.测试_梭车1右放_Z.ToString();
+                numericUpDown70.Text = offset.测试_梭车2左吸_X.ToString();
+                numericUpDown68.Text = offset.测试_梭车2左吸_Z.ToString();
+                numericUpDown66.Text = offset.测试_梭车2右放_X.ToString();
+                numericUpDown64.Text = offset.测试_梭车2右放_Z.ToString();
+                numericUpDown119.Text = offset.测试_Site1吸_X.ToString();
+                numericUpDown118.Text = offset.测试_Site2吸_X.ToString();
+                uiDoubleUpDown26.Text = offset.测试_Site3吸_X.ToString();
+                numericUpDown117.Text = offset.测试_Site4吸_X.ToString();
+                uiDoubleUpDown36.Text = offset.测试_Site5吸_X.ToString();
+                uiDoubleUpDown35.Text = offset.测试_Site6吸_X.ToString();
+                uiDoubleUpDown28.Text = offset.测试_Site7吸_X.ToString();
+                numericUpDown116.Text = offset.测试_Site8吸_X.ToString();
+                numericUpDown115.Text = offset.测试_Site9吸_X.ToString();
+                numericUpDown114.Text = offset.测试_Site10吸_X.ToString();
+                uiDoubleUpDown42.Text = offset.测试_Site11吸_X.ToString();
+                uiDoubleUpDown41.Text = offset.测试_Site12吸_X.ToString();
+                uiDoubleUpDown40.Text = offset.测试_Site13吸_X.ToString();
+                uiDoubleUpDown39.Text = offset.测试_Site14吸_X.ToString();
+                uiDoubleUpDown38.Text = offset.测试_Site15吸_X.ToString();
+                uiDoubleUpDown37.Text = offset.测试_Site16吸_X.ToString();
+                numericUpDown113.Text = offset.测试_Site1吸_Z.ToString();
+                numericUpDown109.Text = offset.测试_Site2吸_Z.ToString();
+                numericUpDown104.Text = offset.测试_Site3吸_Z.ToString();
+                numericUpDown105.Text = offset.测试_Site4吸_Z.ToString();
+                numericUpDown112.Text = offset.测试_Site5吸_Z.ToString();
+                numericUpDown108.Text = offset.测试_Site6吸_Z.ToString();
+                numericUpDown103.Text = offset.测试_Site7吸_Z.ToString();
+                numericUpDown100.Text = offset.测试_Site8吸_Z.ToString();
+                numericUpDown111.Text = offset.测试_Site9吸_Z.ToString();
+                numericUpDown107.Text = offset.测试_Site10吸_Z.ToString();
+                numericUpDown102.Text = offset.测试_Site11吸_Z.ToString();
+                numericUpDown99.Text = offset.测试_Site12吸_Z.ToString();
+                numericUpDown110.Text = offset.测试_Site13吸_Z.ToString();
+                numericUpDown106.Text = offset.测试_Site14吸_Z.ToString();
+                numericUpDown101.Text = offset.测试_Site15吸_Z.ToString();
+                numericUpDown98.Text = offset.测试_Site16吸_Z.ToString();
+                numericUpDown97.Text = offset.测试_Site1放_X.ToString();
+                numericUpDown95.Text = offset.测试_Site2放_X.ToString();
+                numericUpDown93.Text = offset.测试_Site3放_X.ToString();
+                numericUpDown91.Text = offset.测试_Site4放_X.ToString();
+                numericUpDown89.Text = offset.测试_Site5放_X.ToString();
+                numericUpDown87.Text = offset.测试_Site6放_X.ToString();
+                numericUpDown84.Text = offset.测试_Site7放_X.ToString();
+                numericUpDown81.Text = offset.测试_Site8放_X.ToString();
+                numericUpDown85.Text = offset.测试_Site9放_X.ToString();
+                uiDoubleUpDown54.Text = offset.测试_Site10放_X.ToString();
+                uiDoubleUpDown53.Text = offset.测试_Site11放_X.ToString();
+                uiDoubleUpDown52.Text = offset.测试_Site12放_X.ToString();
+                numericUpDown76.Text = offset.测试_Site13放_X.ToString();
+                numericUpDown71.Text = offset.测试_Site14放_X.ToString();
+                numericUpDown77.Text = offset.测试_Site15放_X.ToString();
+                numericUpDown67.Text = offset.测试_Site16放_X.ToString();
+                numericUpDown96.Text = offset.测试_Site1放_Z.ToString();
+                numericUpDown94.Text = offset.测试_Site2放_Z.ToString();
+                numericUpDown92.Text = offset.测试_Site3放_Z.ToString();
+                numericUpDown90.Text = offset.测试_Site4放_Z.ToString();
+                numericUpDown88.Text = offset.测试_Site5放_Z.ToString();
+                numericUpDown86.Text = offset.测试_Site6放_Z.ToString();
+                numericUpDown82.Text = offset.测试_Site7放_Z.ToString();
+                numericUpDown80.Text = offset.测试_Site8放_Z.ToString();
+                numericUpDown83.Text = offset.测试_Site9放_Z.ToString();
+                numericUpDown79.Text = offset.测试_Site10放_Z.ToString();
+                uiDoubleUpDown111.Text = offset.测试_Site11放_Z.ToString();
+                uiDoubleUpDown110.Text = offset.测试_Site12放_Z.ToString();
+                uiDoubleUpDown109.Text = offset.测试_Site13放_Z.ToString();
+                numericUpDown69.Text = offset.测试_Site14放_Z.ToString();
+                numericUpDown74.Text = offset.测试_Site15放_Z.ToString();
+                numericUpDown65.Text = offset.测试_Site16放_Z.ToString();
+            }
+            else if (page == "梭车")
+            {
+                numericUpDown121.Text = offset.梭车2_前_Y.ToString();
+                numericUpDown120.Text = offset.梭车2_后_Y.ToString();
+            }
+            else if (page == "抓盘手臂")
+            {
+                numericUpDown125.Text = offset.抓盘_Empty_X.ToString();
+                numericUpDown124.Text = offset.抓盘_Load_X.ToString();
+                numericUpDown123.Text = offset.抓盘_Auto1_X.ToString();
+                numericUpDown122.Text = offset.抓盘_Auto2_X.ToString();
+            }
+        }
+
         private void 刷新开Site(string name)
         {
 
         }
-        private void 刷新点位偏移(string name)
-        {
 
+        public void 刷新点位偏移(string name)
+        {
+            string result = GetSetupValue(name, "偏移点位名称", out string value);
+            if (result != "Success") return;
+
+            刷新手臂点位(value, uiTabControl8.SelectedTab.Text);
         }
+
         private void 刷新加热盘(string name)
         {
-
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from HeatInfo where name = '{name}'", out DataTable dt);
+            if (result == "Success")
+            {
+                try
+                {
+                    if (dt.Rows.Count > 0)
+                    {
+                        DataRow datarow = dt.Rows[0];
+                        textBox57.Text = datarow["name"].ToString();
+                        textBox60.Text = datarow["xnum"].ToString();
+                        textBox59.Text = datarow["ynum"].ToString();
+                        textBox58.Text = datarow["xstart"].ToString();
+                        textBox56.Text = datarow["ystart"].ToString();
+                        textBox55.Text = datarow["xpitch"].ToString();
+                        textBox54.Text = datarow["ypitch"].ToString();
+                        textBox53.Text = datarow["width"].ToString();
+                        textBox52.Text = datarow["length"].ToString();
+                        textBox51.Text = datarow["height"].ToString();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"刷新加热盘{name}信息异常!" + ex.Message);
+                    MessageBox.Show($"刷新加热盘{name}信息异常!" + ex.Message);
+                }
+            }
         }
+
         private void 刷新梭车(string name)
         {
 
@@ -2719,10 +2932,6 @@ namespace H5509_V2
                 {
                     刷新点位偏移(name);
                 }
-                else if (tabpagetext == "加热盘")
-                {
-                    刷新加热盘(name);
-                }
                 else if (tabpagetext == "梭车")
                 {
                     刷新梭车(name);
@@ -2753,8 +2962,8 @@ namespace H5509_V2
             string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dt);
             if (result == "Success")
             {
-                textBox24.Text = dt.Rows[0][0].ToString();
-                textBox25.Text = dt.Rows[0][1].ToString();
+                //uiComboBox1.Text = dt.Rows[0][0].ToString();
+                //textBox25.Text = dt.Rows[0][1].ToString();
             }
         }
 
@@ -2767,6 +2976,22 @@ namespace H5509_V2
                 if (tabpagetext == "Tray盘")
                 {
                     刷新Tray盘(name);
+                }
+                else if (tabpagetext == "取放设定")
+                {
+                    //刷新取放设定(name);
+                }
+            }
+        }
+        private void 刷新加热盘信息(string tabpagetext)
+        {
+            int rows = uiDataGridView3.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView3.Rows[rows].Cells[1].Value.ToString();
+                if (tabpagetext == "加热盘")
+                {
+                    刷新加热盘(name);
                 }
                 else if (tabpagetext == "取放设定")
                 {
@@ -2803,7 +3028,6 @@ namespace H5509_V2
                 }
             }
         }
-
         private void 刷新Tray盘列表()
         {
             string reuslt = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', name as Tray盘名称 from TrayInfo", out DataTable dt);
@@ -2831,7 +3055,33 @@ namespace H5509_V2
                 刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
             }
         }
+        private void 刷新加热盘列表()
+        {
+            string reuslt = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', name as 加热盘名称 from HeatInfo", out DataTable dt);
+            if (reuslt == "Success")
+            {
+                uiDataGridView3.DataSource = dt;
+                uiDataGridView3.Columns[0].Width = 100;
+                uiDataGridView3.Columns[1].Width = 250;
 
+                uiDataGridView3.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
+
+                string result = SQLiteHelper.runSql(SQLiteConnString, $"select 加热盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
+
+                if (result == "Success")
+                {
+                    foreach (DataGridViewRow dr in uiDataGridView3.Rows)
+                    {
+                        if (dr.Cells[1].Value.Equals(value))
+                        {
+                            dr.Cells[0].Value = "当前加热盘";
+                            dr.Cells[0].Selected = true;
+                        }
+                    }
+                }
+                刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+            }
+        }
         private void 刷新产品(string tabpagetext)
         {
             if (tabpagetext == "档案列表")
@@ -2841,6 +3091,10 @@ namespace H5509_V2
             else if (tabpagetext == "Tray盘列表")
             {
                 刷新Tray盘列表();
+            }
+            else if (tabpagetext == "加热盘列表")
+            {
+                刷新加热盘列表();
             }
         }
 
@@ -2935,7 +3189,8 @@ namespace H5509_V2
                     初始点位.入料_Heat_Y = Convert.ToDouble(uiDoubleUpDown107.Value);
                     HeatTrayICPointInit();
                 }
-                if (UpdateInitPointData("入料_Heat_Z", Convert.ToDouble(uiDoubleUpDown106.Text), 初始点位.入料_Heat_Z)) 初始点位.入料_Heat_Z = Convert.ToDouble(uiDoubleUpDown106.Value);
+                if (UpdateInitPointData("入料_Heat吸_Z", Convert.ToDouble(uiDoubleUpDown106.Text), 初始点位.入料_Heat吸_Z)) 初始点位.入料_Heat吸_Z = Convert.ToDouble(uiDoubleUpDown106.Value);
+                if (UpdateInitPointData("入料_Heat放_Z", Convert.ToDouble(uinumericUpDown126.Text), 初始点位.入料_Heat放_Z)) 初始点位.入料_Heat放_Z = Convert.ToDouble(uinumericUpDown126.Value);
 
                 if (UpdateInitPointData("入料_梭车1_X", Convert.ToDouble(uiDoubleUpDown102.Text), 初始点位.入料_梭车1_X)) 初始点位.入料_梭车1_X = Convert.ToDouble(uiDoubleUpDown102.Value);
                 if (UpdateInitPointData("入料_梭车1_Y", Convert.ToDouble(uiDoubleUpDown101.Text), 初始点位.入料_梭车1_Y)) 初始点位.入料_梭车1_Y = Convert.ToDouble(uiDoubleUpDown101.Value);
@@ -3372,6 +3627,7 @@ namespace H5509_V2
             button18.Enabled = false;
             button27.Enabled = false;
             button222.Enabled = false;
+            button226.Enabled = false;
             Task.Run(() =>
             {
                 double z1 = Convert.ToDouble(uiDoubleUpDown18.Text);
@@ -3389,6 +3645,7 @@ namespace H5509_V2
                     button18.Enabled = true;
                     button27.Enabled = true;
                     button222.Enabled = true;
+                    button226.Enabled = true;
                 }));
             });
         }
@@ -3839,6 +4096,12 @@ namespace H5509_V2
             入料手臂Z移动初始点位(pos);
         }
 
+        private void button226_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uinumericUpDown126.Text);
+            入料手臂Z移动初始点位(pos);
+        }
+
         private void button27_Click(object sender, EventArgs e)
         {
             double pos = Convert.ToDouble(uiDoubleUpDown100.Text);
@@ -3966,6 +4229,82 @@ namespace H5509_V2
             }
         }
 
+        private void 保存设定信息()
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+                try
+                {
+                    DialogResult issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (issave == DialogResult.OK)
+                    {
+                        string result = GetSetupInfo(name, out SetupInfo setupInfo);
+                        if (result != "Success")
+                        {
+                            MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        string trayname = uiComboBox1.Text;
+                        string heatname = uiComboBox2.Text;
+
+                        if (trayname != setupInfo.Tray盘信息.TrayName)
+                        {
+                            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set tray盘名称 = '{trayname}' where 档案名称 = '{name}'");
+                            if (line >= 1)
+                            {
+                                Debug.WriteLine($"档案名称:[{name}]:Tray名称:{setupInfo.Tray盘信息.TrayName}->{trayname}:更新成功");
+                                if (trayname != 设置信息.Tray盘信息.TrayName)
+                                {
+                                    result = GetTrayInfo(trayname, out TrayInfo trayInfo);
+                                    if (result == "Success")
+                                    {
+                                        设置信息.Tray盘信息 = trayInfo;
+                                        result = Init_TrayPoint();
+                                        if (result != "Success")
+                                        {
+                                            MessageBox.Show("获取tray盘信息保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("tray盘名称保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        if (heatname != setupInfo.Heat盘信息.HeatName)
+                        {
+                            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 加热盘名称 = '{heatname}' where 档案名称 = '{name}'");
+                            if (line >= 1)
+                            {
+                                Debug.WriteLine($"档案名称:[{name}]:加热盘名称:{setupInfo.Heat盘信息.HeatName}->{heatname}:更新成功");
+                                if (heatname != 设置信息.Heat盘信息.HeatName)
+                                {
+                                    result = GetHeatInfo(heatname, out HeatInfo heatInfo);
+                                    if (result == "Success")
+                                    {
+                                        设置信息.Heat盘信息 = heatInfo;
+                                        HeatTrayICPointInit();
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Heat盘名称保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("档案保存失败!" + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         private void 保存测试机信息()
         {
             int rows = uiDataGridView1.SelectedIndex;
@@ -3992,8 +4331,6 @@ namespace H5509_V2
                         }
 
                         TesterIFParam newtester = new TesterIFParam();
-
-                        ;
                         newtester.Dout连续不良个数 = Convert.ToInt32(numericUpDown12.Text);
                         newtester.Dout连续不良自动关闭 = checkBox1.Checked;
                         newtester.Dout连续不良报警 = checkBox2.Checked;
@@ -4002,7 +4339,7 @@ namespace H5509_V2
                         newtester.总良率报警百分比 = Convert.ToDouble(numericUpDown13.Text);
                         newtester.总良率报警基数 = Convert.ToInt32(numericUpDown14.Text);
                         newtester.总良率报警间隔 = Convert.ToInt32(numericUpDown15.Text);
-                        newtester.总良率报警使能 = checkBox4.Checked ;
+                        newtester.总良率报警使能 = checkBox4.Checked;
                         newtester.socket使用次数 = Convert.ToInt32(numericUpDown16.Text);
                         newtester.测试超时时间 = Convert.ToInt32(numericUpDown_测试超时时间.Text);
                         newtester.timeout超时时间 = Convert.ToInt32(numericUpDown_timeout超时时间.Text);
@@ -4049,6 +4386,7 @@ namespace H5509_V2
                 }
             }
         }
+
         private void 保存分BIN信息()
         {
             int rows = uiDataGridView1.SelectedIndex;
@@ -4375,21 +4713,310 @@ namespace H5509_V2
 
         }
 
+        private void 保存入料手臂Offset(string name, string page, OffsetPoint offset)
+        {
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                try
+                {
+                    UpdateOffsetPointData(name, page, "入料_Load吸_X", Convert.ToDouble(numericUpDown33.Text), offset.入料_Load吸_X);
+                    UpdateOffsetPointData(name, page, "入料_Load吸_Y", Convert.ToDouble(numericUpDown30.Text), offset.入料_Load吸_Y);
+                    UpdateOffsetPointData(name, page, "入料_Load吸_Z", Convert.ToDouble(numericUpDown28.Text), offset.入料_Load吸_Z);
+
+                    UpdateOffsetPointData(name, page, "入料_Heat吸_X", Convert.ToDouble(numericUpDown39.Text), offset.入料_Heat吸_X);
+                    UpdateOffsetPointData(name, page, "入料_Heat吸_Y", Convert.ToDouble(numericUpDown38.Text), offset.入料_Heat吸_Y);
+                    UpdateOffsetPointData(name, page, "入料_Heat吸_Z", Convert.ToDouble(numericUpDown37.Text), offset.入料_Heat吸_Z);
+
+                    UpdateOffsetPointData(name, page, "入料_Heat放_X", Convert.ToDouble(numericUpDown36.Text), offset.入料_Heat放_X);
+                    UpdateOffsetPointData(name, page, "入料_Heat放_Y", Convert.ToDouble(numericUpDown35.Text), offset.入料_Heat放_Y);
+                    UpdateOffsetPointData(name, page, "入料_Heat放_Z", Convert.ToDouble(numericUpDown34.Text), offset.入料_Heat放_Z);
+
+                    UpdateOffsetPointData(name, page, "入料_梭车1第1列放_X", Convert.ToDouble(numericUpDown32.Text), offset.入料_梭车1第1列放_X);
+                    UpdateOffsetPointData(name, page, "入料_梭车1第1列放_Y", Convert.ToDouble(numericUpDown31.Text), offset.入料_梭车1第1列放_Y);
+                    UpdateOffsetPointData(name, page, "入料_梭车1第1列放_Z", Convert.ToDouble(numericUpDown29.Text), offset.入料_梭车1第1列放_Z);
+
+                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_X", Convert.ToDouble(numericUpDown27.Text), offset.入料_梭车1第2列放_X);
+                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_Y", Convert.ToDouble(numericUpDown26.Text), offset.入料_梭车1第2列放_Y);
+                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_Z", Convert.ToDouble(numericUpDown25.Text), offset.入料_梭车1第2列放_Z);
+
+                    UpdateOffsetPointData(name, page, "入料_Load_变距", Convert.ToDouble(numericUpDown24.Text), offset.入料_Load_变距);
+                    UpdateOffsetPointData(name, page, "入料_Heat_变距", Convert.ToDouble(numericUpDown23.Text), offset.入料_Heat_变距);
+                    UpdateOffsetPointData(name, page, "入料_梭车_变距", Convert.ToDouble(numericUpDown22.Text), offset.入料_梭车_变距);
+
+                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_X", Convert.ToDouble(numericUpDown21.Text), offset.入料_梭车2第1列放_X);
+                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_Y", Convert.ToDouble(numericUpDown20.Text), offset.入料_梭车2第1列放_Y);
+                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_Z", Convert.ToDouble(numericUpDown19.Text), offset.入料_梭车2第1列放_Z);
+
+                    UpdateOffsetPointData(name, page, "入料_梭车2第2列放_X", Convert.ToDouble(numericUpDown18.Text), offset.入料_梭车2第2列放_X);
+                    UpdateOffsetPointData(name, page, "入料_梭车2第2列放_Y", Convert.ToDouble(numericUpDown17.Text), offset.入料_梭车2第2列放_Y);
+                    UpdateOffsetPointData(name, page, "入料_梭车2第2列放_Z", Convert.ToDouble(numericUpDown1.Text), offset.入料_梭车2第2列放_Z);
+
+                    if (page == 设置信息.OffsetPoint.微调点位名称)
+                    {
+                        设置信息.OffsetPoint = offset;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"保存失败,请检查数据格式是否正确!{ex.Message}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        private void 保存出料手臂Offset(string name, string page, OffsetPoint offset)
+        {
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                try
+                {
+                    UpdateOffsetPointData(name, page, "出料_梭车1第1列吸_X", Convert.ToDouble(numericUpDown63.Text), offset.出料_梭车1第1列吸_X);
+                    UpdateOffsetPointData(name, page, "出料_梭车1第1列吸_Y", Convert.ToDouble(numericUpDown62.Text), offset.出料_梭车1第1列吸_Y);
+                    UpdateOffsetPointData(name, page, "出料_梭车1第1列吸_Z", Convert.ToDouble(numericUpDown61.Text), offset.出料_梭车1第1列吸_Z);
+
+                    UpdateOffsetPointData(name, page, "出料_梭车1第2列吸_X", Convert.ToDouble(numericUpDown60.Text), offset.出料_梭车1第2列吸_X);
+                    UpdateOffsetPointData(name, page, "出料_梭车1第2列吸_Y", Convert.ToDouble(numericUpDown59.Text), offset.出料_梭车1第2列吸_Y);
+                    UpdateOffsetPointData(name, page, "出料_梭车1第2列吸_Z", Convert.ToDouble(numericUpDown58.Text), offset.出料_梭车1第2列吸_Z);
+
+                    UpdateOffsetPointData(name, page, "出料_Fix1放_X", Convert.ToDouble(numericUpDown57.Text), offset.出料_Fix1放_X);
+                    UpdateOffsetPointData(name, page, "出料_Fix1放_Y", Convert.ToDouble(numericUpDown56.Text), offset.出料_Fix1放_Y);
+                    UpdateOffsetPointData(name, page, "出料_Fix1放_Z", Convert.ToDouble(numericUpDown55.Text), offset.出料_Fix1放_Z);
+
+                    UpdateOffsetPointData(name, page, "出料_梭车_变距", Convert.ToDouble(uiDoubleUpDown33.Text), offset.出料_梭车_变距);
+                    UpdateOffsetPointData(name, page, "出料_AF_变距", Convert.ToDouble(uiDoubleUpDown34.Text), offset.出料_AF_变距);
+                    UpdateOffsetPointData(name, page, "出料_梭车2第1列吸_X", Convert.ToDouble(uiDoubleUpDown31.Text), offset.出料_梭车2第1列吸_X);
+                    UpdateOffsetPointData(name, page, "出料_梭车2第1列吸_Y", Convert.ToDouble(uiDoubleUpDown32.Text), offset.出料_梭车2第1列吸_Y);
+                    UpdateOffsetPointData(name, page, "出料_梭车2第1列吸_Z", Convert.ToDouble(uiDoubleUpDown30.Text), offset.出料_梭车2第1列吸_Z);
+
+                    UpdateOffsetPointData(name, page, "出料_梭车2第2列吸_X", Convert.ToDouble(numericUpDown54.Text), offset.出料_梭车2第2列吸_X);
+                    UpdateOffsetPointData(name, page, "出料_梭车2第2列吸_Y", Convert.ToDouble(numericUpDown53.Text), offset.出料_梭车2第2列吸_Y);
+                    UpdateOffsetPointData(name, page, "出料_梭车2第2列吸_Z", Convert.ToDouble(numericUpDown52.Text), offset.出料_梭车2第2列吸_Z);
+
+                    UpdateOffsetPointData(name, page, "出料_Fix2放_X", Convert.ToDouble(numericUpDown51.Text), offset.出料_Fix2放_X);
+                    UpdateOffsetPointData(name, page, "出料_Fix2放_Y", Convert.ToDouble(numericUpDown50.Text), offset.出料_Fix2放_Y);
+                    UpdateOffsetPointData(name, page, "出料_Fix2放_Z", Convert.ToDouble(numericUpDown49.Text), offset.出料_Fix2放_Z);
+                    UpdateOffsetPointData(name, page, "出料_Auto1放_X", Convert.ToDouble(numericUpDown48.Text), offset.出料_Auto1放_X);
+                    UpdateOffsetPointData(name, page, "出料_Auto1放_Y", Convert.ToDouble(numericUpDown47.Text), offset.出料_Auto1放_Y);
+                    UpdateOffsetPointData(name, page, "出料_Auto1放_Z", Convert.ToDouble(numericUpDown46.Text), offset.出料_Auto1放_Z);
+
+                    UpdateOffsetPointData(name, page, "出料_Auto2放_X", Convert.ToDouble(numericUpDown45.Text), offset.出料_Auto2放_X);
+                    UpdateOffsetPointData(name, page, "出料_Auto2放_Y", Convert.ToDouble(numericUpDown44.Text), offset.出料_Auto2放_Y);
+                    UpdateOffsetPointData(name, page, "出料_Auto2放_Z", Convert.ToDouble(numericUpDown43.Text), offset.出料_Auto2放_Z);
+
+                    UpdateOffsetPointData(name, page, "出料_Fix3放_X", Convert.ToDouble(numericUpDown42.Text), offset.出料_Fix3放_X);
+                    UpdateOffsetPointData(name, page, "出料_Fix3放_Y", Convert.ToDouble(numericUpDown41.Text), offset.出料_Fix3放_Y);
+                    UpdateOffsetPointData(name, page, "出料_Fix3放_Z", Convert.ToDouble(numericUpDown40.Text), offset.出料_Fix3放_Z);
+
+
+                    if (page == 设置信息.OffsetPoint.微调点位名称)
+                    {
+                        设置信息.OffsetPoint = offset;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"保存失败,请检查数据格式是否正确!{ex.Message}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        private void 保存测试手臂Offset(string name, string page, OffsetPoint offset)
+        {
+
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                try
+                {
+
+                    UpdateOffsetPointData(name, page, "测试_梭车1左吸_X", Convert.ToDouble(numericUpDown78.Text), offset.测试_梭车1左吸_X);
+                    UpdateOffsetPointData(name, page, "测试_梭车1左吸_Z", Convert.ToDouble(numericUpDown75.Text), offset.测试_梭车1左吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_梭车1右放_X", Convert.ToDouble(numericUpDown73.Text), offset.测试_梭车1右放_X);
+                    UpdateOffsetPointData(name, page, "测试_梭车1右放_Z", Convert.ToDouble(numericUpDown72.Text), offset.测试_梭车1右放_Z);
+                    UpdateOffsetPointData(name, page, "测试_梭车2左吸_X", Convert.ToDouble(numericUpDown70.Text), offset.测试_梭车2左吸_X);
+                    UpdateOffsetPointData(name, page, "测试_梭车2左吸_Z", Convert.ToDouble(numericUpDown68.Text), offset.测试_梭车2左吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_梭车2右放_X", Convert.ToDouble(numericUpDown66.Text), offset.测试_梭车2右放_X);
+                    UpdateOffsetPointData(name, page, "测试_梭车2右放_Z", Convert.ToDouble(numericUpDown64.Text), offset.测试_梭车2右放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site1吸_X", Convert.ToDouble(numericUpDown119.Text), offset.测试_Site1吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site2吸_X", Convert.ToDouble(numericUpDown118.Text), offset.测试_Site2吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site3吸_X", Convert.ToDouble(uiDoubleUpDown26.Text), offset.测试_Site3吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site4吸_X", Convert.ToDouble(numericUpDown117.Text), offset.测试_Site4吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site5吸_X", Convert.ToDouble(uiDoubleUpDown36.Text), offset.测试_Site5吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site6吸_X", Convert.ToDouble(uiDoubleUpDown35.Text), offset.测试_Site6吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site7吸_X", Convert.ToDouble(uiDoubleUpDown28.Text), offset.测试_Site7吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site8吸_X", Convert.ToDouble(numericUpDown116.Text), offset.测试_Site8吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site9吸_X", Convert.ToDouble(numericUpDown115.Text), offset.测试_Site9吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site10吸_X", Convert.ToDouble(numericUpDown114.Text), offset.测试_Site10吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site11吸_X", Convert.ToDouble(uiDoubleUpDown42.Text), offset.测试_Site11吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site12吸_X", Convert.ToDouble(uiDoubleUpDown41.Text), offset.测试_Site12吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site13吸_X", Convert.ToDouble(uiDoubleUpDown40.Text), offset.测试_Site13吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site14吸_X", Convert.ToDouble(uiDoubleUpDown39.Text), offset.测试_Site14吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site15吸_X", Convert.ToDouble(uiDoubleUpDown38.Text), offset.测试_Site15吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site16吸_X", Convert.ToDouble(uiDoubleUpDown37.Text), offset.测试_Site16吸_X);
+                    UpdateOffsetPointData(name, page, "测试_Site1吸_Z", Convert.ToDouble(numericUpDown113.Text), offset.测试_Site1吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site2吸_Z", Convert.ToDouble(numericUpDown109.Text), offset.测试_Site2吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site3吸_Z", Convert.ToDouble(numericUpDown104.Text), offset.测试_Site3吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site4吸_Z", Convert.ToDouble(numericUpDown105.Text), offset.测试_Site4吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site5吸_Z", Convert.ToDouble(numericUpDown112.Text), offset.测试_Site5吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site6吸_Z", Convert.ToDouble(numericUpDown108.Text), offset.测试_Site6吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site7吸_Z", Convert.ToDouble(numericUpDown103.Text), offset.测试_Site7吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site8吸_Z", Convert.ToDouble(numericUpDown100.Text), offset.测试_Site8吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site9吸_Z", Convert.ToDouble(numericUpDown111.Text), offset.测试_Site9吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site10吸_Z", Convert.ToDouble(numericUpDown107.Text), offset.测试_Site10吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site11吸_Z", Convert.ToDouble(numericUpDown102.Text), offset.测试_Site11吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site12吸_Z", Convert.ToDouble(numericUpDown99.Text), offset.测试_Site12吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site13吸_Z", Convert.ToDouble(numericUpDown110.Text), offset.测试_Site13吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site14吸_Z", Convert.ToDouble(numericUpDown106.Text), offset.测试_Site14吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site15吸_Z", Convert.ToDouble(numericUpDown101.Text), offset.测试_Site15吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site16吸_Z", Convert.ToDouble(numericUpDown98.Text), offset.测试_Site16吸_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site1放_X", Convert.ToDouble(numericUpDown97.Text), offset.测试_Site1放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site2放_X", Convert.ToDouble(numericUpDown95.Text), offset.测试_Site2放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site3放_X", Convert.ToDouble(numericUpDown93.Text), offset.测试_Site3放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site4放_X", Convert.ToDouble(numericUpDown91.Text), offset.测试_Site4放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site5放_X", Convert.ToDouble(numericUpDown89.Text), offset.测试_Site5放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site6放_X", Convert.ToDouble(numericUpDown87.Text), offset.测试_Site6放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site7放_X", Convert.ToDouble(numericUpDown84.Text), offset.测试_Site7放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site8放_X", Convert.ToDouble(numericUpDown81.Text), offset.测试_Site8放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site9放_X", Convert.ToDouble(numericUpDown85.Text), offset.测试_Site9放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site10放_X", Convert.ToDouble(uiDoubleUpDown54.Text), offset.测试_Site10放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site11放_X", Convert.ToDouble(uiDoubleUpDown53.Text), offset.测试_Site11放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site12放_X", Convert.ToDouble(uiDoubleUpDown52.Text), offset.测试_Site12放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site13放_X", Convert.ToDouble(numericUpDown76.Text), offset.测试_Site13放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site14放_X", Convert.ToDouble(numericUpDown71.Text), offset.测试_Site14放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site15放_X", Convert.ToDouble(numericUpDown77.Text), offset.测试_Site15放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site16放_X", Convert.ToDouble(numericUpDown67.Text), offset.测试_Site16放_X);
+                    UpdateOffsetPointData(name, page, "测试_Site1放_Z", Convert.ToDouble(numericUpDown96.Text), offset.测试_Site1放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site2放_Z", Convert.ToDouble(numericUpDown94.Text), offset.测试_Site2放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site3放_Z", Convert.ToDouble(numericUpDown92.Text), offset.测试_Site3放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site4放_Z", Convert.ToDouble(numericUpDown90.Text), offset.测试_Site4放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site5放_Z", Convert.ToDouble(numericUpDown88.Text), offset.测试_Site5放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site6放_Z", Convert.ToDouble(numericUpDown86.Text), offset.测试_Site6放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site7放_Z", Convert.ToDouble(numericUpDown82.Text), offset.测试_Site7放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site8放_Z", Convert.ToDouble(numericUpDown80.Text), offset.测试_Site8放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site9放_Z", Convert.ToDouble(numericUpDown83.Text), offset.测试_Site9放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site10放_Z", Convert.ToDouble(numericUpDown79.Text), offset.测试_Site10放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site11放_Z", Convert.ToDouble(uiDoubleUpDown111.Text), offset.测试_Site11放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site12放_Z", Convert.ToDouble(uiDoubleUpDown110.Text), offset.测试_Site12放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site13放_Z", Convert.ToDouble(uiDoubleUpDown109.Text), offset.测试_Site13放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site14放_Z", Convert.ToDouble(numericUpDown69.Text), offset.测试_Site14放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site15放_Z", Convert.ToDouble(numericUpDown74.Text), offset.测试_Site15放_Z);
+                    UpdateOffsetPointData(name, page, "测试_Site16放_Z", Convert.ToDouble(numericUpDown65.Text), offset.测试_Site16放_Z);
+
+                    if (page == 设置信息.OffsetPoint.微调点位名称)
+                    {
+                        设置信息.OffsetPoint = offset;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"保存失败,请检查数据格式是否正确!{ex.Message}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        private void 保存梭车Offset(string name, string page, OffsetPoint offset)
+        {
+
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                try
+                {
+                    UpdateOffsetPointData(name, page, "梭车2_前_Y", Convert.ToDouble(numericUpDown121.Text), offset.梭车2_前_Y);
+                    UpdateOffsetPointData(name, page, "梭车2_后_Y", Convert.ToDouble(numericUpDown120.Text), offset.梭车2_后_Y);
+
+                    if (page == 设置信息.OffsetPoint.微调点位名称)
+                    {
+                        设置信息.OffsetPoint = offset;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"保存失败,请检查数据格式是否正确!{ex.Message}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+        private void 保存抓料手臂Offset(string name, string page, OffsetPoint offset)
+        {
+
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                try
+                {
+                    UpdateOffsetPointData(name, page, "抓盘_Empty_X", Convert.ToDouble(numericUpDown125.Text), offset.抓盘_Empty_X);
+                    UpdateOffsetPointData(name, page, "抓盘_Load_X", Convert.ToDouble(numericUpDown124.Text), offset.抓盘_Load_X);
+                    UpdateOffsetPointData(name, page, "抓盘_Auto1_X", Convert.ToDouble(numericUpDown123.Text), offset.抓盘_Auto1_X);
+                    UpdateOffsetPointData(name, page, "抓盘_Auto2_X", Convert.ToDouble(numericUpDown122.Text), offset.抓盘_Auto2_X);
+
+                    if (page == 设置信息.OffsetPoint.微调点位名称)
+                    {
+                        设置信息.OffsetPoint = offset;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"保存失败,请检查数据格式是否正确!{ex.Message}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void 保存点位信息(string tabpage)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+
+                string result = GetSetupValue(name, "偏移点位名称", out string value);
+                if (result != "Success") return;
+
+                result = GetOffsetPoint(value, out OffsetPoint oldoffset);
+                if (result != "Success") return;
+
+                if (tabpage == "入料手臂")
+                {
+                    保存入料手臂Offset(name, value, oldoffset);
+                }
+                else if (tabpage == "出料手臂")
+                {
+                    保存出料手臂Offset(name, value, oldoffset);
+                }
+                else if (tabpage == "测试手臂")
+                {
+                    保存测试手臂Offset(name, value, oldoffset);
+                }
+                else if (tabpage == "梭车")
+                {
+                    保存梭车Offset(name, value, oldoffset);
+                }
+                else if (tabpage == "抓盘手臂")
+                {
+                    保存抓料手臂Offset(name, value, oldoffset);
+                }
+            }
+        }
+
         private void uiButton3_Click_1(object sender, EventArgs e)
         {
             int rows = uiDataGridView1.SelectedIndex;
             if (rows >= 0)
             {
                 string tabtext = uiTabControl6.SelectedTab.Text;
-                if(tabtext == "分BIN")
+                if (tabtext == "分BIN")
                 {
-                    保存分BIN信息(); 
+                    保存分BIN信息();
                 }
                 else if (tabtext == "测试机")
                 {
                     保存测试机信息();
                 }
-                
+                else if (tabtext == "设定")
+                {
+                    保存设定信息();
+                }
+                else if (tabtext == "点位偏移")
+                {
+                    保存点位信息(uiTabControl8.SelectedTab.Text);
+                }
             }
         }
 
@@ -5093,7 +5720,10 @@ namespace H5509_V2
                 {
                     刷新测试机(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
                 }
-                
+                else if (tabtext == "点位偏移")
+                {
+                    刷新点位偏移(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
+                }
             }
         }
 
@@ -5134,6 +5764,204 @@ namespace H5509_V2
             colorDialog1.ShowDialog();
 
             (sender as Label).BackColor = colorDialog1.Color;
+        }
+
+        private void uiDataGridView3_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            int index = e.RowIndex;
+            if (index >= 0)
+            {
+                刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+            }
+        }
+
+        private void 保存Tray盘()
+        {
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                TrayInfo newtrayInfo = new TrayInfo()
+                {
+                    TrayName = textBox30.Text,
+                    X_Num = Convert.ToInt32(textBox29.Text),
+                    Y_Num = Convert.ToInt32(textBox28.Text),
+                    X_Start = Convert.ToDouble(textBox27.Text),
+                    Y_Start = Convert.ToDouble(textBox31.Text),
+                    X_Pitch = Convert.ToDouble(textBox33.Text),
+                    Y_Pitch = Convert.ToDouble(textBox32.Text),
+                    Width = Convert.ToDouble(textBox36.Text),
+                    Length = Convert.ToDouble(textBox35.Text),
+                    Height = Convert.ToDouble(textBox34.Text),
+                };
+
+                int rows = uiDataGridView2.SelectedIndex;
+                if (rows >= 0)
+                {
+                    string name = uiDataGridView2.Rows[rows].Cells[1].Value.ToString();
+
+                    string result = GetTrayInfo(name, out TrayInfo oldtrayInfo);
+                    if (result == "Success")
+                    {
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "xnum", newtrayInfo.X_Num, oldtrayInfo.X_Num);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "ynum", newtrayInfo.Y_Num, oldtrayInfo.Y_Num);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "xstart", newtrayInfo.X_Start, oldtrayInfo.X_Start);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "ystart", newtrayInfo.Y_Start, oldtrayInfo.Y_Start);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "xpitch", newtrayInfo.X_Pitch, oldtrayInfo.X_Pitch);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "ypitch", newtrayInfo.Y_Pitch, oldtrayInfo.Y_Pitch);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "width", newtrayInfo.Width, oldtrayInfo.Width);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "length", newtrayInfo.Length, oldtrayInfo.Length);
+                        UpdateTrayInfo(name, oldtrayInfo.TrayName, "height", newtrayInfo.Height, oldtrayInfo.Height);
+
+                        if (oldtrayInfo.TrayName == 设置信息.Tray盘信息.TrayName)
+                        {
+                            设置信息.Tray盘信息 = newtrayInfo;
+                            result = Init_TrayPoint();
+                            if (result != "Success")
+                            {
+                                MessageBox.Show("获取tray盘信息保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                    }
+                    else MessageBox.Show("获取Tray盘信息失败!" + result);
+                }
+            }
+        }
+
+        private void 保存Heat盘()
+        {
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                HeatInfo newheatInfo = new HeatInfo()
+                {
+                    HeatName = textBox57.Text,
+                    X_Num = Convert.ToInt32(textBox60.Text),
+                    Y_Num = Convert.ToInt32(textBox59.Text),
+                    X_Start = Convert.ToDouble(textBox58.Text),
+                    Y_Start = Convert.ToDouble(textBox56.Text),
+                    X_Pitch = Convert.ToDouble(textBox55.Text),
+                    Y_Pitch = Convert.ToDouble(textBox54.Text),
+                    Width = Convert.ToDouble(textBox53.Text),
+                    Length = Convert.ToDouble(textBox52.Text),
+                    Height = Convert.ToDouble(textBox51.Text),
+                };
+
+                int rows = uiDataGridView3.SelectedIndex;
+                if (rows >= 0)
+                {
+                    string name = uiDataGridView3.Rows[rows].Cells[1].Value.ToString();
+
+                    string result = GetHeatInfo(name, out HeatInfo oldheatInfo);
+                    if (result == "Success")
+                    {
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "xnum", newheatInfo.X_Num, oldheatInfo.X_Num);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "ynum", newheatInfo.Y_Num, oldheatInfo.Y_Num);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "xstart", newheatInfo.X_Start, oldheatInfo.X_Start);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "ystart", newheatInfo.Y_Start, oldheatInfo.Y_Start);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "xpitch", newheatInfo.X_Pitch, oldheatInfo.X_Pitch);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "ypitch", newheatInfo.Y_Pitch, oldheatInfo.Y_Pitch);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "width", newheatInfo.Width, oldheatInfo.Width);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "length", newheatInfo.Length, oldheatInfo.Length);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "height", newheatInfo.Height, oldheatInfo.Height);
+
+                        if (oldheatInfo.HeatName == 设置信息.Heat盘信息.HeatName)
+                        {
+                            设置信息.Heat盘信息 = newheatInfo;
+                            HeatTrayICPointInit();
+                        }
+                    }
+                    else MessageBox.Show("获取Heat盘信息失败!" + result);
+                }
+            }
+        }
+
+        private void uiButton16_保存Tray盘信息Click(object sender, EventArgs e)
+        {
+
+            int rows = uiDataGridView2.SelectedIndex;
+            if (rows >= 0)
+            {
+                string tabtext = uiTabControl7.SelectedTab.Text;
+                if (tabtext == "Tray盘")
+                {
+                    保存Tray盘();
+                }
+                else if (tabtext == "取放设定")
+                {
+
+                }
+            }
+
+        }
+
+        private void uiButton28_保存加热盘信息Click(object sender, EventArgs e)
+        {
+            int rows = uiDataGridView3.SelectedIndex;
+            if (rows >= 0)
+            {
+                string tabtext = uiTabControl9.SelectedTab.Text;
+                if (tabtext == "加热盘")
+                {
+                    保存Heat盘();
+                }
+                else if (tabtext == "取放设定")
+                {
+
+                }
+            }
+        }
+
+        private void uiTabControl8_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                刷新点位偏移(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
+            }
+        }
+
+        public bool UpdateTrayInfo(string name, string trayname, string fiedname, double newvalue, double oldvalue)
+        {
+            if (newvalue != oldvalue)
+            {
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update TrayInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
+                if (line >= 1)
+                {
+                    Debug.WriteLine($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    return true;
+                }
+                else Debug.WriteLine($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+            }
+            return false;
+        }
+        public bool UpdateHeatInfo(string name, string trayname, string fiedname, double newvalue, double oldvalue)
+        {
+            if (newvalue != oldvalue)
+            {
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
+                if (line >= 1)
+                {
+                    Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    return true;
+                }
+                else Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+            }
+            return false;
+        }
+
+        public bool UpdateOffsetPointData(string icname, string otname, string ptname, double newvalue, double oldvalue)
+        {
+            if (newvalue != oldvalue)
+            {
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
+                if (line >= 1)
+                {
+                    Debug.WriteLine($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功");
+                    return true;
+                }
+                else Debug.WriteLine($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败");
+            }
+            return false;
         }
     }
 }

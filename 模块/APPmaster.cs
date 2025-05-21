@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -24,6 +25,7 @@ using DocumentFormat.OpenXml.Wordprocessing;
 using H5509_alarm;
 using Sunny.UI.Win32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static GTN.mc;
 using Ttimer = System.Timers.Timer;
 namespace H5509_V2
 {
@@ -283,6 +285,15 @@ namespace H5509_V2
         public static double Tray_厚度
         {
             get { return 设置信息.Tray盘信息.Height; }
+        }
+
+        public static int Tray_X_Num
+        {
+            get { return 设置信息.Tray盘信息.X_Num; }
+        }
+        public static int Tray_Y_Num
+        {
+            get { return 设置信息.Tray盘信息.Y_Num; }
         }
 
         public static double Tray_Y_Pitch
@@ -695,8 +706,8 @@ namespace H5509_V2
         }
 
         public static void CheckStatus()
-        { 
-            
+        {
+
         }
 
         public static void GetCoreAxis(string axisname, out short core, out short axis)
@@ -775,7 +786,8 @@ namespace H5509_V2
                         case "入料_Load_Z": initPoint.入料_Load_Z = value; break;
                         case "入料_Heat_X": initPoint.入料_Heat_X = value; break;
                         case "入料_Heat_Y": initPoint.入料_Heat_Y = value; break;
-                        case "入料_Heat_Z": initPoint.入料_Heat_Z = value; break;
+                        case "入料_Heat吸_Z": initPoint.入料_Heat吸_Z = value; break;
+                        case "入料_Heat放_Z": initPoint.入料_Heat放_Z = value; break;
                         case "入料_梭车1_X": initPoint.入料_梭车1_X = value; break;
                         case "入料_梭车1_Y": initPoint.入料_梭车1_Y = value; break;
                         case "入料_梭车1_Z": initPoint.入料_梭车1_Z = value; break;
@@ -847,153 +859,195 @@ namespace H5509_V2
             return result;
         }
 
+        public static string GetHeatInfo(string name, out HeatInfo heatInfo)
+        {
+            heatInfo = new HeatInfo();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from HeatInfo where name = '{name}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                try
+                {
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        DataRow dr = dataTable.Rows[0];
+
+                        heatInfo = new HeatInfo()
+                        {
+                            HeatName = dr["name"].ToString(),
+                            X_Num = Convert.ToInt32(dr["xnum"].ToString()),
+                            Y_Num = Convert.ToInt32(dr["ynum"].ToString()),
+                            X_Start = Convert.ToDouble(dr["xstart"].ToString()),
+                            Y_Start = Convert.ToDouble(dr["ystart"].ToString()),
+                            X_Pitch = Convert.ToDouble(dr["xpitch"].ToString()),
+                            Y_Pitch = Convert.ToDouble(dr["ypitch"].ToString()),
+                            Width = Convert.ToDouble(dr["width"].ToString()),
+                            Length = Convert.ToDouble(dr["length"].ToString()),
+                            Height = Convert.ToDouble(dr["height"].ToString()),
+                        };
+                    }
+                    else result = $"无加热盘{name}信息";
+                }
+                catch (Exception ex)
+                {
+                    return "获取加热盘数据异常!" + ex.Message;
+                }
+            }
+            return result;
+        }
+
         public static string GetOffsetPoint(string name, out OffsetPoint offsetPoint)
         {
             offsetPoint = new OffsetPoint();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from OffsetPoint where 微调点位名称 = '{name}'", out SQLiteDataReader reader);
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from OffsetPoint where 微调点位名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
-                if (reader.Read())
+                try
                 {
-                    offsetPoint = new OffsetPoint()
+                    if (dataTable.Rows.Count > 0)
                     {
-                        微调点位名称 = reader["微调点位名称"].ToString(),
-                        入料_Load吸_X = Convert.ToDouble(reader["入料_Load吸_X"].ToString()),
-                        入料_Load吸_Y = Convert.ToDouble(reader["入料_Load吸_Y"].ToString()),
-                        入料_Load吸_Z = Convert.ToDouble(reader["入料_Load吸_Z"].ToString()),
-                        入料_Load_变距 = Convert.ToDouble(reader["入料_Load_变距"].ToString()),
-                        入料_Heat吸_X = Convert.ToDouble(reader["入料_Heat吸_X"].ToString()),
-                        入料_Heat吸_Y = Convert.ToDouble(reader["入料_Heat吸_Y"].ToString()),
-                        入料_Heat吸_Z = Convert.ToDouble(reader["入料_Heat吸_Z"].ToString()),
-                        入料_Heat放_X = Convert.ToDouble(reader["入料_Heat放_X"].ToString()),
-                        入料_Heat放_Y = Convert.ToDouble(reader["入料_Heat放_Y"].ToString()),
-                        入料_Heat放_Z = Convert.ToDouble(reader["入料_Heat放_Z"].ToString()),
-                        入料_Heat_变距 = Convert.ToDouble(reader["入料_Heat_变距"].ToString()),
-                        入料_梭车1第1列放_X = Convert.ToDouble(reader["入料_梭车1第1列放_X"].ToString()),
-                        入料_梭车1第1列放_Y = Convert.ToDouble(reader["入料_梭车1第1列放_Y"].ToString()),
-                        入料_梭车1第1列放_Z = Convert.ToDouble(reader["入料_梭车1第1列放_Z"].ToString()),
-                        入料_梭车1第2列放_X = Convert.ToDouble(reader["入料_梭车1第2列放_X"].ToString()),
-                        入料_梭车1第2列放_Y = Convert.ToDouble(reader["入料_梭车1第2列放_Y"].ToString()),
-                        入料_梭车1第2列放_Z = Convert.ToDouble(reader["入料_梭车1第2列放_Z"].ToString()),
-                        入料_梭车2第1列放_X = Convert.ToDouble(reader["入料_梭车2第1列放_X"].ToString()),
-                        入料_梭车2第1列放_Y = Convert.ToDouble(reader["入料_梭车2第1列放_Y"].ToString()),
-                        入料_梭车2第1列放_Z = Convert.ToDouble(reader["入料_梭车2第1列放_Z"].ToString()),
-                        入料_梭车2第2列放_X = Convert.ToDouble(reader["入料_梭车2第2列放_X"].ToString()),
-                        入料_梭车2第2列放_Y = Convert.ToDouble(reader["入料_梭车2第2列放_Y"].ToString()),
-                        入料_梭车2第2列放_Z = Convert.ToDouble(reader["入料_梭车2第2列放_Z"].ToString()),
-                        入料_梭车_变距 = Convert.ToDouble(reader["入料_梭车_变距"].ToString()),
-                        出料_梭车1第1列吸_X = Convert.ToDouble(reader["出料_梭车1第1列吸_X"].ToString()),
-                        出料_梭车1第1列吸_Y = Convert.ToDouble(reader["出料_梭车1第1列吸_Y"].ToString()),
-                        出料_梭车1第1列吸_Z = Convert.ToDouble(reader["出料_梭车1第1列吸_Z"].ToString()),
-                        出料_梭车1第2列吸_X = Convert.ToDouble(reader["出料_梭车1第2列吸_X"].ToString()),
-                        出料_梭车1第2列吸_Y = Convert.ToDouble(reader["出料_梭车1第2列吸_Y"].ToString()),
-                        出料_梭车1第2列吸_Z = Convert.ToDouble(reader["出料_梭车1第2列吸_Z"].ToString()),
-                        出料_梭车2第1列吸_X = Convert.ToDouble(reader["出料_梭车2第1列吸_X"].ToString()),
-                        出料_梭车2第1列吸_Y = Convert.ToDouble(reader["出料_梭车2第1列吸_Y"].ToString()),
-                        出料_梭车2第1列吸_Z = Convert.ToDouble(reader["出料_梭车2第1列吸_Z"].ToString()),
-                        出料_梭车2第2列吸_X = Convert.ToDouble(reader["出料_梭车2第2列吸_X"].ToString()),
-                        出料_梭车2第2列吸_Y = Convert.ToDouble(reader["出料_梭车2第2列吸_Y"].ToString()),
-                        出料_梭车2第2列吸_Z = Convert.ToDouble(reader["出料_梭车2第2列吸_Z"].ToString()),
-                        出料_梭车_变距 = Convert.ToDouble(reader["出料_梭车_变距"].ToString()),
-                        出料_Auto1放_X = Convert.ToDouble(reader["出料_Auto1放_X"].ToString()),
-                        出料_Auto1放_Y = Convert.ToDouble(reader["出料_Auto1放_Y"].ToString()),
-                        出料_Auto1放_Z = Convert.ToDouble(reader["出料_Auto1放_Z"].ToString()),
-                        出料_Auto2放_X = Convert.ToDouble(reader["出料_Auto2放_X"].ToString()),
-                        出料_Auto2放_Y = Convert.ToDouble(reader["出料_Auto2放_Y"].ToString()),
-                        出料_Auto2放_Z = Convert.ToDouble(reader["出料_Auto2放_Z"].ToString()),
-                        出料_Fix1放_X = Convert.ToDouble(reader["出料_Fix1放_X"].ToString()),
-                        出料_Fix1放_Y = Convert.ToDouble(reader["出料_Fix1放_Y"].ToString()),
-                        出料_Fix1放_Z = Convert.ToDouble(reader["出料_Fix1放_Z"].ToString()),
-                        出料_Fix2放_X = Convert.ToDouble(reader["出料_Fix2放_X"].ToString()),
-                        出料_Fix2放_Y = Convert.ToDouble(reader["出料_Fix2放_Y"].ToString()),
-                        出料_Fix2放_Z = Convert.ToDouble(reader["出料_Fix2放_Z"].ToString()),
-                        出料_Fix3放_X = Convert.ToDouble(reader["出料_Fix3放_X"].ToString()),
-                        出料_Fix3放_Y = Convert.ToDouble(reader["出料_Fix3放_Y"].ToString()),
-                        出料_Fix3放_Z = Convert.ToDouble(reader["出料_Fix3放_Z"].ToString()),
-                        出料_AF_变距 = Convert.ToDouble(reader["出料_AF_变距"].ToString()),
-                        测试_梭车1左吸_X = Convert.ToDouble(reader["测试_梭车1左吸_X"].ToString()),
-                        测试_梭车1左吸_Z = Convert.ToDouble(reader["测试_梭车1左吸_Z"].ToString()),
-                        测试_梭车2左吸_X = Convert.ToDouble(reader["测试_梭车2左吸_X"].ToString()),
-                        测试_梭车2左吸_Z = Convert.ToDouble(reader["测试_梭车2左吸_Z"].ToString()),
-                        测试_梭车1右放_X = Convert.ToDouble(reader["测试_梭车1右放_X"].ToString()),
-                        测试_梭车1右放_Z = Convert.ToDouble(reader["测试_梭车1右放_Z"].ToString()),
-                        测试_梭车2右放_X = Convert.ToDouble(reader["测试_梭车2右放_X"].ToString()),
-                        测试_梭车2右放_Z = Convert.ToDouble(reader["测试_梭车2右放_Z"].ToString()),
-                        测试_Site1吸_X = Convert.ToDouble(reader["测试_Site1吸_X"].ToString()),
-                        测试_Site2吸_X = Convert.ToDouble(reader["测试_Site2吸_X"].ToString()),
-                        测试_Site3吸_X = Convert.ToDouble(reader["测试_Site3吸_X"].ToString()),
-                        测试_Site4吸_X = Convert.ToDouble(reader["测试_Site4吸_X"].ToString()),
-                        测试_Site5吸_X = Convert.ToDouble(reader["测试_Site5吸_X"].ToString()),
-                        测试_Site6吸_X = Convert.ToDouble(reader["测试_Site6吸_X"].ToString()),
-                        测试_Site7吸_X = Convert.ToDouble(reader["测试_Site7吸_X"].ToString()),
-                        测试_Site8吸_X = Convert.ToDouble(reader["测试_Site8吸_X"].ToString()),
-                        测试_Site9吸_X = Convert.ToDouble(reader["测试_Site9吸_X"].ToString()),
-                        测试_Site10吸_X = Convert.ToDouble(reader["测试_Site10吸_X"].ToString()),
-                        测试_Site11吸_X = Convert.ToDouble(reader["测试_Site11吸_X"].ToString()),
-                        测试_Site12吸_X = Convert.ToDouble(reader["测试_Site12吸_X"].ToString()),
-                        测试_Site13吸_X = Convert.ToDouble(reader["测试_Site13吸_X"].ToString()),
-                        测试_Site14吸_X = Convert.ToDouble(reader["测试_Site14吸_X"].ToString()),
-                        测试_Site15吸_X = Convert.ToDouble(reader["测试_Site15吸_X"].ToString()),
-                        测试_Site16吸_X = Convert.ToDouble(reader["测试_Site16吸_X"].ToString()),
-                        测试_Site1吸_Z = Convert.ToDouble(reader["测试_Site1吸_Z"].ToString()),
-                        测试_Site2吸_Z = Convert.ToDouble(reader["测试_Site2吸_Z"].ToString()),
-                        测试_Site3吸_Z = Convert.ToDouble(reader["测试_Site3吸_Z"].ToString()),
-                        测试_Site4吸_Z = Convert.ToDouble(reader["测试_Site4吸_Z"].ToString()),
-                        测试_Site5吸_Z = Convert.ToDouble(reader["测试_Site5吸_Z"].ToString()),
-                        测试_Site6吸_Z = Convert.ToDouble(reader["测试_Site6吸_Z"].ToString()),
-                        测试_Site7吸_Z = Convert.ToDouble(reader["测试_Site7吸_Z"].ToString()),
-                        测试_Site8吸_Z = Convert.ToDouble(reader["测试_Site8吸_Z"].ToString()),
-                        测试_Site9吸_Z = Convert.ToDouble(reader["测试_Site9吸_Z"].ToString()),
-                        测试_Site10吸_Z = Convert.ToDouble(reader["测试_Site10吸_Z"].ToString()),
-                        测试_Site11吸_Z = Convert.ToDouble(reader["测试_Site11吸_Z"].ToString()),
-                        测试_Site12吸_Z = Convert.ToDouble(reader["测试_Site12吸_Z"].ToString()),
-                        测试_Site13吸_Z = Convert.ToDouble(reader["测试_Site13吸_Z"].ToString()),
-                        测试_Site14吸_Z = Convert.ToDouble(reader["测试_Site14吸_Z"].ToString()),
-                        测试_Site15吸_Z = Convert.ToDouble(reader["测试_Site15吸_Z"].ToString()),
-                        测试_Site16吸_Z = Convert.ToDouble(reader["测试_Site16吸_Z"].ToString()),
-                        测试_Site1放_X = Convert.ToDouble(reader["测试_Site1放_X"].ToString()),
-                        测试_Site2放_X = Convert.ToDouble(reader["测试_Site2放_X"].ToString()),
-                        测试_Site3放_X = Convert.ToDouble(reader["测试_Site3放_X"].ToString()),
-                        测试_Site4放_X = Convert.ToDouble(reader["测试_Site4放_X"].ToString()),
-                        测试_Site5放_X = Convert.ToDouble(reader["测试_Site5放_X"].ToString()),
-                        测试_Site6放_X = Convert.ToDouble(reader["测试_Site6放_X"].ToString()),
-                        测试_Site7放_X = Convert.ToDouble(reader["测试_Site7放_X"].ToString()),
-                        测试_Site8放_X = Convert.ToDouble(reader["测试_Site8放_X"].ToString()),
-                        测试_Site9放_X = Convert.ToDouble(reader["测试_Site9放_X"].ToString()),
-                        测试_Site10放_X = Convert.ToDouble(reader["测试_Site10放_X"].ToString()),
-                        测试_Site11放_X = Convert.ToDouble(reader["测试_Site11放_X"].ToString()),
-                        测试_Site12放_X = Convert.ToDouble(reader["测试_Site12放_X"].ToString()),
-                        测试_Site13放_X = Convert.ToDouble(reader["测试_Site13放_X"].ToString()),
-                        测试_Site14放_X = Convert.ToDouble(reader["测试_Site14放_X"].ToString()),
-                        测试_Site15放_X = Convert.ToDouble(reader["测试_Site15放_X"].ToString()),
-                        测试_Site16放_X = Convert.ToDouble(reader["测试_Site16放_X"].ToString()),
-                        测试_Site1放_Z = Convert.ToDouble(reader["测试_Site1放_Z"].ToString()),
-                        测试_Site2放_Z = Convert.ToDouble(reader["测试_Site2放_Z"].ToString()),
-                        测试_Site3放_Z = Convert.ToDouble(reader["测试_Site3放_Z"].ToString()),
-                        测试_Site4放_Z = Convert.ToDouble(reader["测试_Site4放_Z"].ToString()),
-                        测试_Site5放_Z = Convert.ToDouble(reader["测试_Site5放_Z"].ToString()),
-                        测试_Site6放_Z = Convert.ToDouble(reader["测试_Site6放_Z"].ToString()),
-                        测试_Site7放_Z = Convert.ToDouble(reader["测试_Site7放_Z"].ToString()),
-                        测试_Site8放_Z = Convert.ToDouble(reader["测试_Site8放_Z"].ToString()),
-                        测试_Site9放_Z = Convert.ToDouble(reader["测试_Site9放_Z"].ToString()),
-                        测试_Site10放_Z = Convert.ToDouble(reader["测试_Site10放_Z"].ToString()),
-                        测试_Site11放_Z = Convert.ToDouble(reader["测试_Site11放_Z"].ToString()),
-                        测试_Site12放_Z = Convert.ToDouble(reader["测试_Site12放_Z"].ToString()),
-                        测试_Site13放_Z = Convert.ToDouble(reader["测试_Site13放_Z"].ToString()),
-                        测试_Site14放_Z = Convert.ToDouble(reader["测试_Site14放_Z"].ToString()),
-                        测试_Site15放_Z = Convert.ToDouble(reader["测试_Site15放_Z"].ToString()),
-                        测试_Site16放_Z = Convert.ToDouble(reader["测试_Site16放_Z"].ToString()),
-                        梭车2_前_Y = Convert.ToDouble(reader["梭车2_前_Y"].ToString()),
-                        梭车2_后_Y = Convert.ToDouble(reader["梭车2_后_Y"].ToString()),
-                        抓盘_Empty_X = Convert.ToDouble(reader["抓盘_Empty_X"].ToString()),
-                        抓盘_Load_X = Convert.ToDouble(reader["抓盘_Load_X"].ToString()),
-                        抓盘_Auto1_X = Convert.ToDouble(reader["抓盘_Auto1_X"].ToString()),
-                        抓盘_Auto2_X = Convert.ToDouble(reader["抓盘_Auto2_X"].ToString()),
-                    };
+                        DataRow reader = dataTable.Rows[0];
+                        offsetPoint = new OffsetPoint()
+                        {
+                            微调点位名称 = reader["微调点位名称"].ToString(),
+                            入料_Load吸_X = Convert.ToDouble(reader["入料_Load吸_X"].ToString()),
+                            入料_Load吸_Y = Convert.ToDouble(reader["入料_Load吸_Y"].ToString()),
+                            入料_Load吸_Z = Convert.ToDouble(reader["入料_Load吸_Z"].ToString()),
+                            入料_Load_变距 = Convert.ToDouble(reader["入料_Load_变距"].ToString()),
+                            入料_Heat吸_X = Convert.ToDouble(reader["入料_Heat吸_X"].ToString()),
+                            入料_Heat吸_Y = Convert.ToDouble(reader["入料_Heat吸_Y"].ToString()),
+                            入料_Heat吸_Z = Convert.ToDouble(reader["入料_Heat吸_Z"].ToString()),
+                            入料_Heat放_X = Convert.ToDouble(reader["入料_Heat放_X"].ToString()),
+                            入料_Heat放_Y = Convert.ToDouble(reader["入料_Heat放_Y"].ToString()),
+                            入料_Heat放_Z = Convert.ToDouble(reader["入料_Heat放_Z"].ToString()),
+                            入料_Heat_变距 = Convert.ToDouble(reader["入料_Heat_变距"].ToString()),
+                            入料_梭车1第1列放_X = Convert.ToDouble(reader["入料_梭车1第1列放_X"].ToString()),
+                            入料_梭车1第1列放_Y = Convert.ToDouble(reader["入料_梭车1第1列放_Y"].ToString()),
+                            入料_梭车1第1列放_Z = Convert.ToDouble(reader["入料_梭车1第1列放_Z"].ToString()),
+                            入料_梭车1第2列放_X = Convert.ToDouble(reader["入料_梭车1第2列放_X"].ToString()),
+                            入料_梭车1第2列放_Y = Convert.ToDouble(reader["入料_梭车1第2列放_Y"].ToString()),
+                            入料_梭车1第2列放_Z = Convert.ToDouble(reader["入料_梭车1第2列放_Z"].ToString()),
+                            入料_梭车2第1列放_X = Convert.ToDouble(reader["入料_梭车2第1列放_X"].ToString()),
+                            入料_梭车2第1列放_Y = Convert.ToDouble(reader["入料_梭车2第1列放_Y"].ToString()),
+                            入料_梭车2第1列放_Z = Convert.ToDouble(reader["入料_梭车2第1列放_Z"].ToString()),
+                            入料_梭车2第2列放_X = Convert.ToDouble(reader["入料_梭车2第2列放_X"].ToString()),
+                            入料_梭车2第2列放_Y = Convert.ToDouble(reader["入料_梭车2第2列放_Y"].ToString()),
+                            入料_梭车2第2列放_Z = Convert.ToDouble(reader["入料_梭车2第2列放_Z"].ToString()),
+                            入料_梭车_变距 = Convert.ToDouble(reader["入料_梭车_变距"].ToString()),
+                            出料_梭车1第1列吸_X = Convert.ToDouble(reader["出料_梭车1第1列吸_X"].ToString()),
+                            出料_梭车1第1列吸_Y = Convert.ToDouble(reader["出料_梭车1第1列吸_Y"].ToString()),
+                            出料_梭车1第1列吸_Z = Convert.ToDouble(reader["出料_梭车1第1列吸_Z"].ToString()),
+                            出料_梭车1第2列吸_X = Convert.ToDouble(reader["出料_梭车1第2列吸_X"].ToString()),
+                            出料_梭车1第2列吸_Y = Convert.ToDouble(reader["出料_梭车1第2列吸_Y"].ToString()),
+                            出料_梭车1第2列吸_Z = Convert.ToDouble(reader["出料_梭车1第2列吸_Z"].ToString()),
+                            出料_梭车2第1列吸_X = Convert.ToDouble(reader["出料_梭车2第1列吸_X"].ToString()),
+                            出料_梭车2第1列吸_Y = Convert.ToDouble(reader["出料_梭车2第1列吸_Y"].ToString()),
+                            出料_梭车2第1列吸_Z = Convert.ToDouble(reader["出料_梭车2第1列吸_Z"].ToString()),
+                            出料_梭车2第2列吸_X = Convert.ToDouble(reader["出料_梭车2第2列吸_X"].ToString()),
+                            出料_梭车2第2列吸_Y = Convert.ToDouble(reader["出料_梭车2第2列吸_Y"].ToString()),
+                            出料_梭车2第2列吸_Z = Convert.ToDouble(reader["出料_梭车2第2列吸_Z"].ToString()),
+                            出料_梭车_变距 = Convert.ToDouble(reader["出料_梭车_变距"].ToString()),
+                            出料_Auto1放_X = Convert.ToDouble(reader["出料_Auto1放_X"].ToString()),
+                            出料_Auto1放_Y = Convert.ToDouble(reader["出料_Auto1放_Y"].ToString()),
+                            出料_Auto1放_Z = Convert.ToDouble(reader["出料_Auto1放_Z"].ToString()),
+                            出料_Auto2放_X = Convert.ToDouble(reader["出料_Auto2放_X"].ToString()),
+                            出料_Auto2放_Y = Convert.ToDouble(reader["出料_Auto2放_Y"].ToString()),
+                            出料_Auto2放_Z = Convert.ToDouble(reader["出料_Auto2放_Z"].ToString()),
+                            出料_Fix1放_X = Convert.ToDouble(reader["出料_Fix1放_X"].ToString()),
+                            出料_Fix1放_Y = Convert.ToDouble(reader["出料_Fix1放_Y"].ToString()),
+                            出料_Fix1放_Z = Convert.ToDouble(reader["出料_Fix1放_Z"].ToString()),
+                            出料_Fix2放_X = Convert.ToDouble(reader["出料_Fix2放_X"].ToString()),
+                            出料_Fix2放_Y = Convert.ToDouble(reader["出料_Fix2放_Y"].ToString()),
+                            出料_Fix2放_Z = Convert.ToDouble(reader["出料_Fix2放_Z"].ToString()),
+                            出料_Fix3放_X = Convert.ToDouble(reader["出料_Fix3放_X"].ToString()),
+                            出料_Fix3放_Y = Convert.ToDouble(reader["出料_Fix3放_Y"].ToString()),
+                            出料_Fix3放_Z = Convert.ToDouble(reader["出料_Fix3放_Z"].ToString()),
+                            出料_AF_变距 = Convert.ToDouble(reader["出料_AF_变距"].ToString()),
+                            测试_梭车1左吸_X = Convert.ToDouble(reader["测试_梭车1左吸_X"].ToString()),
+                            测试_梭车1左吸_Z = Convert.ToDouble(reader["测试_梭车1左吸_Z"].ToString()),
+                            测试_梭车2左吸_X = Convert.ToDouble(reader["测试_梭车2左吸_X"].ToString()),
+                            测试_梭车2左吸_Z = Convert.ToDouble(reader["测试_梭车2左吸_Z"].ToString()),
+                            测试_梭车1右放_X = Convert.ToDouble(reader["测试_梭车1右放_X"].ToString()),
+                            测试_梭车1右放_Z = Convert.ToDouble(reader["测试_梭车1右放_Z"].ToString()),
+                            测试_梭车2右放_X = Convert.ToDouble(reader["测试_梭车2右放_X"].ToString()),
+                            测试_梭车2右放_Z = Convert.ToDouble(reader["测试_梭车2右放_Z"].ToString()),
+                            测试_Site1吸_X = Convert.ToDouble(reader["测试_Site1吸_X"].ToString()),
+                            测试_Site2吸_X = Convert.ToDouble(reader["测试_Site2吸_X"].ToString()),
+                            测试_Site3吸_X = Convert.ToDouble(reader["测试_Site3吸_X"].ToString()),
+                            测试_Site4吸_X = Convert.ToDouble(reader["测试_Site4吸_X"].ToString()),
+                            测试_Site5吸_X = Convert.ToDouble(reader["测试_Site5吸_X"].ToString()),
+                            测试_Site6吸_X = Convert.ToDouble(reader["测试_Site6吸_X"].ToString()),
+                            测试_Site7吸_X = Convert.ToDouble(reader["测试_Site7吸_X"].ToString()),
+                            测试_Site8吸_X = Convert.ToDouble(reader["测试_Site8吸_X"].ToString()),
+                            测试_Site9吸_X = Convert.ToDouble(reader["测试_Site9吸_X"].ToString()),
+                            测试_Site10吸_X = Convert.ToDouble(reader["测试_Site10吸_X"].ToString()),
+                            测试_Site11吸_X = Convert.ToDouble(reader["测试_Site11吸_X"].ToString()),
+                            测试_Site12吸_X = Convert.ToDouble(reader["测试_Site12吸_X"].ToString()),
+                            测试_Site13吸_X = Convert.ToDouble(reader["测试_Site13吸_X"].ToString()),
+                            测试_Site14吸_X = Convert.ToDouble(reader["测试_Site14吸_X"].ToString()),
+                            测试_Site15吸_X = Convert.ToDouble(reader["测试_Site15吸_X"].ToString()),
+                            测试_Site16吸_X = Convert.ToDouble(reader["测试_Site16吸_X"].ToString()),
+                            测试_Site1吸_Z = Convert.ToDouble(reader["测试_Site1吸_Z"].ToString()),
+                            测试_Site2吸_Z = Convert.ToDouble(reader["测试_Site2吸_Z"].ToString()),
+                            测试_Site3吸_Z = Convert.ToDouble(reader["测试_Site3吸_Z"].ToString()),
+                            测试_Site4吸_Z = Convert.ToDouble(reader["测试_Site4吸_Z"].ToString()),
+                            测试_Site5吸_Z = Convert.ToDouble(reader["测试_Site5吸_Z"].ToString()),
+                            测试_Site6吸_Z = Convert.ToDouble(reader["测试_Site6吸_Z"].ToString()),
+                            测试_Site7吸_Z = Convert.ToDouble(reader["测试_Site7吸_Z"].ToString()),
+                            测试_Site8吸_Z = Convert.ToDouble(reader["测试_Site8吸_Z"].ToString()),
+                            测试_Site9吸_Z = Convert.ToDouble(reader["测试_Site9吸_Z"].ToString()),
+                            测试_Site10吸_Z = Convert.ToDouble(reader["测试_Site10吸_Z"].ToString()),
+                            测试_Site11吸_Z = Convert.ToDouble(reader["测试_Site11吸_Z"].ToString()),
+                            测试_Site12吸_Z = Convert.ToDouble(reader["测试_Site12吸_Z"].ToString()),
+                            测试_Site13吸_Z = Convert.ToDouble(reader["测试_Site13吸_Z"].ToString()),
+                            测试_Site14吸_Z = Convert.ToDouble(reader["测试_Site14吸_Z"].ToString()),
+                            测试_Site15吸_Z = Convert.ToDouble(reader["测试_Site15吸_Z"].ToString()),
+                            测试_Site16吸_Z = Convert.ToDouble(reader["测试_Site16吸_Z"].ToString()),
+                            测试_Site1放_X = Convert.ToDouble(reader["测试_Site1放_X"].ToString()),
+                            测试_Site2放_X = Convert.ToDouble(reader["测试_Site2放_X"].ToString()),
+                            测试_Site3放_X = Convert.ToDouble(reader["测试_Site3放_X"].ToString()),
+                            测试_Site4放_X = Convert.ToDouble(reader["测试_Site4放_X"].ToString()),
+                            测试_Site5放_X = Convert.ToDouble(reader["测试_Site5放_X"].ToString()),
+                            测试_Site6放_X = Convert.ToDouble(reader["测试_Site6放_X"].ToString()),
+                            测试_Site7放_X = Convert.ToDouble(reader["测试_Site7放_X"].ToString()),
+                            测试_Site8放_X = Convert.ToDouble(reader["测试_Site8放_X"].ToString()),
+                            测试_Site9放_X = Convert.ToDouble(reader["测试_Site9放_X"].ToString()),
+                            测试_Site10放_X = Convert.ToDouble(reader["测试_Site10放_X"].ToString()),
+                            测试_Site11放_X = Convert.ToDouble(reader["测试_Site11放_X"].ToString()),
+                            测试_Site12放_X = Convert.ToDouble(reader["测试_Site12放_X"].ToString()),
+                            测试_Site13放_X = Convert.ToDouble(reader["测试_Site13放_X"].ToString()),
+                            测试_Site14放_X = Convert.ToDouble(reader["测试_Site14放_X"].ToString()),
+                            测试_Site15放_X = Convert.ToDouble(reader["测试_Site15放_X"].ToString()),
+                            测试_Site16放_X = Convert.ToDouble(reader["测试_Site16放_X"].ToString()),
+                            测试_Site1放_Z = Convert.ToDouble(reader["测试_Site1放_Z"].ToString()),
+                            测试_Site2放_Z = Convert.ToDouble(reader["测试_Site2放_Z"].ToString()),
+                            测试_Site3放_Z = Convert.ToDouble(reader["测试_Site3放_Z"].ToString()),
+                            测试_Site4放_Z = Convert.ToDouble(reader["测试_Site4放_Z"].ToString()),
+                            测试_Site5放_Z = Convert.ToDouble(reader["测试_Site5放_Z"].ToString()),
+                            测试_Site6放_Z = Convert.ToDouble(reader["测试_Site6放_Z"].ToString()),
+                            测试_Site7放_Z = Convert.ToDouble(reader["测试_Site7放_Z"].ToString()),
+                            测试_Site8放_Z = Convert.ToDouble(reader["测试_Site8放_Z"].ToString()),
+                            测试_Site9放_Z = Convert.ToDouble(reader["测试_Site9放_Z"].ToString()),
+                            测试_Site10放_Z = Convert.ToDouble(reader["测试_Site10放_Z"].ToString()),
+                            测试_Site11放_Z = Convert.ToDouble(reader["测试_Site11放_Z"].ToString()),
+                            测试_Site12放_Z = Convert.ToDouble(reader["测试_Site12放_Z"].ToString()),
+                            测试_Site13放_Z = Convert.ToDouble(reader["测试_Site13放_Z"].ToString()),
+                            测试_Site14放_Z = Convert.ToDouble(reader["测试_Site14放_Z"].ToString()),
+                            测试_Site15放_Z = Convert.ToDouble(reader["测试_Site15放_Z"].ToString()),
+                            测试_Site16放_Z = Convert.ToDouble(reader["测试_Site16放_Z"].ToString()),
+                            梭车2_前_Y = Convert.ToDouble(reader["梭车2_前_Y"].ToString()),
+                            梭车2_后_Y = Convert.ToDouble(reader["梭车2_后_Y"].ToString()),
+                            抓盘_Empty_X = Convert.ToDouble(reader["抓盘_Empty_X"].ToString()),
+                            抓盘_Load_X = Convert.ToDouble(reader["抓盘_Load_X"].ToString()),
+                            抓盘_Auto1_X = Convert.ToDouble(reader["抓盘_Auto1_X"].ToString()),
+                            抓盘_Auto2_X = Convert.ToDouble(reader["抓盘_Auto2_X"].ToString()),
+                        };
+                    }
+                    else result = $"无点位微调{name}信息";
                 }
-                else result = $"无点位微调({设置信息.OffsetPoint.微调点位名称})信息";
-
-                reader.Close();
+                catch (Exception ex)
+                {
+                    return "获取点位微调数据异常!" + ex.Message;
+                }
             }
             return result;
         }
@@ -1106,22 +1160,53 @@ namespace H5509_V2
             return SQLiteHelper.runSql(SQLiteConnString, $"select password from Jurisdiction where realName = '{name}'", out value);
         }
 
-        public static string GetSetupInfo(string name)
+        public static string GetSetupInfo(string name, out SetupInfo setupInfo)
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out SQLiteDataReader reader);
+            setupInfo = new SetupInfo();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
-                if (reader.Read())
+                try
                 {
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        DataRow dr = dataTable.Rows[0];
+
+                        setupInfo = new SetupInfo()
+                        {
+                            档案名称 = dr["档案名称"].ToString(),
+                            Tray盘信息 = new TrayInfo() { TrayName = dr["tray盘名称"].ToString() },
+                            Heat盘信息 = new HeatInfo() { HeatName = dr["加热盘名称"].ToString() },
+                        };
+                    }
+                    else result = $"无档案{name}信息";
+                }
+                catch (Exception ex)
+                {
+                    return "获取档案数据信息异常" + ex.Message;
+                }
+            }
+            return result;
+        }
+
+        public static string GetSetupInfo(string name)
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                if (dataTable.Rows.Count > 0)
+                {
+                    DataRow reader = dataTable.Rows[0];
+
                     设置信息.档案名称 = reader["档案名称"].ToString();
                     设置信息.Tray盘信息.TrayName = reader["tray盘名称"].ToString();
+                    设置信息.Heat盘信息.HeatName = reader["加热盘名称"].ToString();
                     设置信息.OffsetPoint.微调点位名称 = reader["偏移点位名称"].ToString();
                     设置信息.开site信息.Site名称 = reader["site名称"].ToString();
                     设置信息.分BIN信息.分BIN名称 = reader["分BIN名称"].ToString();
                     设置信息.测试机信息.测试机名称 = reader["测试机名称"].ToString();
                 }
-                else result = "Fail";
-                reader.Close();
+                else result = $"无档案{name}信息";
             }
             return result;
         }
@@ -1139,25 +1224,35 @@ namespace H5509_V2
         public static string GetTrayInfo(string name, out TrayInfo trayInfo)
         {
             trayInfo = new TrayInfo();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out SQLiteDataReader reader);
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
-                if (reader.Read())
+                try
                 {
-                    trayInfo.TrayName = reader["name"].ToString();
-                    trayInfo.X_Num = Convert.ToInt32(reader["xnum"].ToString());
-                    trayInfo.Y_Num = Convert.ToInt32(reader["ynum"].ToString());
-                    trayInfo.X_Start = Convert.ToDouble(reader["xstart"].ToString());
-                    trayInfo.Y_Start = Convert.ToDouble(reader["ystart"].ToString());
-                    trayInfo.X_Pitch = Convert.ToDouble(reader["xpitch"].ToString());
-                    trayInfo.Y_Pitch = Convert.ToDouble(reader["ypitch"].ToString());
-                    trayInfo.Width = Convert.ToDouble(reader["width"].ToString());
-                    trayInfo.Length = Convert.ToDouble(reader["length"].ToString());
-                    trayInfo.Height = Convert.ToDouble(reader["height"].ToString());
-                }
-                else result = $"无Tray盘{设置信息.Tray盘信息.TrayName}信息";
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        DataRow dr = dataTable.Rows[0];
 
-                reader.Close();
+                        trayInfo = new TrayInfo()
+                        {
+                            TrayName = dr["name"].ToString(),
+                            X_Num = Convert.ToInt32(dr["xnum"].ToString()),
+                            Y_Num = Convert.ToInt32(dr["ynum"].ToString()),
+                            X_Start = Convert.ToDouble(dr["xstart"].ToString()),
+                            Y_Start = Convert.ToDouble(dr["ystart"].ToString()),
+                            X_Pitch = Convert.ToDouble(dr["xpitch"].ToString()),
+                            Y_Pitch = Convert.ToDouble(dr["ypitch"].ToString()),
+                            Width = Convert.ToDouble(dr["width"].ToString()),
+                            Length = Convert.ToDouble(dr["length"].ToString()),
+                            Height = Convert.ToDouble(dr["height"].ToString()),
+                        };
+                    }
+                    else result = $"无Tray盘{设置信息.Tray盘信息.TrayName}信息";
+                }
+                catch (Exception ex)
+                {
+                    return "获取tray盘数据信息异常" + ex.Message;
+                }
             }
             return result;
         }
@@ -1168,28 +1263,39 @@ namespace H5509_V2
             string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SiteStatus where Site名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
-                DataRow dr = dataTable.Rows[0];
-
-                siteStatus = new SiteStatus()
+                try
                 {
-                    Site名称 = dr["Site名称"].ToString(),
-                    Site1 = dr["Site1"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site2 = dr["Site2"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site3 = dr["Site3"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site4 = dr["Site4"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site5 = dr["Site5"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site6 = dr["Site6"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site7 = dr["Site7"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site8 = dr["Site8"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site9 = dr["Site9"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site10 = dr["Site10"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site11 = dr["Site11"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site12 = dr["Site12"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site13 = dr["Site13"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site14 = dr["Site14"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site15 = dr["Site15"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                    Site16 = dr["Site16"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
-                };
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        DataRow dr = dataTable.Rows[0];
+
+                        siteStatus = new SiteStatus()
+                        {
+                            Site名称 = dr["Site名称"].ToString(),
+                            Site1 = dr["Site1"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site2 = dr["Site2"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site3 = dr["Site3"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site4 = dr["Site4"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site5 = dr["Site5"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site6 = dr["Site6"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site7 = dr["Site7"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site8 = dr["Site8"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site9 = dr["Site9"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site10 = dr["Site10"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site11 = dr["Site11"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site12 = dr["Site12"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site13 = dr["Site13"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site14 = dr["Site14"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site15 = dr["Site15"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                            Site16 = dr["Site16"].ToString().ToCharArray().Select(c => c.ToString()).ToArray(),
+                        };
+                    }
+                    else result = $"无Site名称{name}信息";
+                }
+                catch (Exception ex)
+                {
+                    return "获取开Site数据异常!" + ex.Message;
+                }
             }
             return result;
         }
@@ -1200,31 +1306,35 @@ namespace H5509_V2
             string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
-                DataRow dr = dataTable.Rows[0];
                 try
                 {
-                    binParam = new BinParam()
+                    if (dataTable.Rows.Count > 0)
                     {
-                        分BIN名称 = dr["分BIN名称"].ToString(),
-                        auto1 = dr["auto1"].ToString(),
-                        auto2 = dr["auto2"].ToString(),
-                        fix1 = dr["fix1"].ToString(),
-                        fix2 = dr["fix2"].ToString(),
-                        fix3 = dr["fix3"].ToString(),
-                        fix1num = Convert.ToInt32(dr["fix1num"].ToString()),
-                        fix2num = Convert.ToInt32(dr["fix2num"].ToString()),
-                        fix3num = Convert.ToInt32(dr["fix3num"].ToString()),
-                        color1 = Convert.ToInt32(dr["color1"].ToString()),
-                        color2 = Convert.ToInt32(dr["color2"].ToString()),
-                        color3 = Convert.ToInt32(dr["color3"].ToString()),
-                        color4 = Convert.ToInt32(dr["color4"].ToString()),
-                        color5 = Convert.ToInt32(dr["color5"].ToString()),
-                        name1 = dr["name1"].ToString(),
-                        name2 = dr["name2"].ToString(),
-                        name3 = dr["name3"].ToString(),
-                        name4 = dr["name4"].ToString(),
-                        name5 = dr["name5"].ToString(),
-                    };
+                        DataRow dr = dataTable.Rows[0];
+                        binParam = new BinParam()
+                        {
+                            分BIN名称 = dr["分BIN名称"].ToString(),
+                            auto1 = dr["auto1"].ToString(),
+                            auto2 = dr["auto2"].ToString(),
+                            fix1 = dr["fix1"].ToString(),
+                            fix2 = dr["fix2"].ToString(),
+                            fix3 = dr["fix3"].ToString(),
+                            fix1num = Convert.ToInt32(dr["fix1num"].ToString()),
+                            fix2num = Convert.ToInt32(dr["fix2num"].ToString()),
+                            fix3num = Convert.ToInt32(dr["fix3num"].ToString()),
+                            color1 = Convert.ToInt32(dr["color1"].ToString()),
+                            color2 = Convert.ToInt32(dr["color2"].ToString()),
+                            color3 = Convert.ToInt32(dr["color3"].ToString()),
+                            color4 = Convert.ToInt32(dr["color4"].ToString()),
+                            color5 = Convert.ToInt32(dr["color5"].ToString()),
+                            name1 = dr["name1"].ToString(),
+                            name2 = dr["name2"].ToString(),
+                            name3 = dr["name3"].ToString(),
+                            name4 = dr["name4"].ToString(),
+                            name5 = dr["name5"].ToString(),
+                        };
+                    }
+                    else result = $"无分BIN名称{name}信息";
                 }
                 catch (Exception ex)
                 {
@@ -1240,28 +1350,41 @@ namespace H5509_V2
             string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TesterIFParam where 测试机名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
-                DataRow dr = dataTable.Rows[0];
-
-                tester = new TesterIFParam()
+                try
                 {
-                    测试机名称 = dr["测试机名称"].ToString(),
-                    Dout连续不良个数 = Convert.ToInt32(dr["Dout连续不良个数"].ToString()),
-                    Dout连续不良自动关闭 = Convert.ToBoolean(dr["Dout连续不良自动关闭"].ToString()),
-                    Dout连续不良报警 = Convert.ToBoolean(dr["Dout连续不良报警"].ToString()),
-                    Dut累计不良报警个数 = Convert.ToInt32(dr["Dut累计不良报警个数"].ToString()),
-                    Dut累计不良报警使能 = Convert.ToBoolean(dr["Dut累计不良报警使能"].ToString()),
-                    总良率报警百分比 = Convert.ToDouble(dr["总良率报警百分比"].ToString()),
-                    总良率报警基数 = Convert.ToInt32(dr["总良率报警基数"].ToString()),
-                    总良率报警间隔 = Convert.ToInt32(dr["总良率报警间隔"].ToString()),
-                    总良率报警使能 = Convert.ToBoolean(dr["总良率报警使能"].ToString()),
-                    socket使用次数 = Convert.ToInt32(dr["socket使用次数"].ToString()),
-                    测试超时时间 = Convert.ToInt32(dr["测试超时时间"].ToString()),
-                    timeout超时时间 = Convert.ToInt32(dr["timeout超时时间"].ToString()),
-                    超时发送timeout = Convert.ToBoolean(dr["超时发送timeout"].ToString()),
-                };
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        DataRow dr = dataTable.Rows[0];
+
+                        tester = new TesterIFParam()
+                        {
+                            测试机名称 = dr["测试机名称"].ToString(),
+                            Dout连续不良个数 = Convert.ToInt32(dr["Dout连续不良个数"].ToString()),
+                            Dout连续不良自动关闭 = Convert.ToBoolean(dr["Dout连续不良自动关闭"].ToString()),
+                            Dout连续不良报警 = Convert.ToBoolean(dr["Dout连续不良报警"].ToString()),
+                            Dut累计不良报警个数 = Convert.ToInt32(dr["Dut累计不良报警个数"].ToString()),
+                            Dut累计不良报警使能 = Convert.ToBoolean(dr["Dut累计不良报警使能"].ToString()),
+                            总良率报警百分比 = Convert.ToDouble(dr["总良率报警百分比"].ToString()),
+                            总良率报警基数 = Convert.ToInt32(dr["总良率报警基数"].ToString()),
+                            总良率报警间隔 = Convert.ToInt32(dr["总良率报警间隔"].ToString()),
+                            总良率报警使能 = Convert.ToBoolean(dr["总良率报警使能"].ToString()),
+                            socket使用次数 = Convert.ToInt32(dr["socket使用次数"].ToString()),
+                            测试超时时间 = Convert.ToInt32(dr["测试超时时间"].ToString()),
+                            timeout超时时间 = Convert.ToInt32(dr["timeout超时时间"].ToString()),
+                            超时发送timeout = Convert.ToBoolean(dr["超时发送timeout"].ToString()),
+                        };
+                    }
+                    else result = $"无测试机名称{name}信息";
+                }
+                catch (Exception ex)
+                {
+                    return "获取测试机名称数据异常!" + ex.Message;
+                }
             }
             return result;
         }
+
+        //public static string GetLightSet(
 
         public static string GetSetupInfoData(string name)
         {
@@ -1271,6 +1394,10 @@ namespace H5509_V2
             {
                 ///tray盘信息
                 result = GetTrayInfo(设置信息.Tray盘信息.TrayName, out TrayInfo trayInfo);
+                if (result != "Success") return result;
+
+                ///加热盘信息
+                result = GetHeatInfo(设置信息.Heat盘信息.HeatName, out HeatInfo heatInfo);
                 if (result != "Success") return result;
 
                 ///点位微调
@@ -1290,6 +1417,7 @@ namespace H5509_V2
                 if (result != "Success") return result;
 
                 设置信息.Tray盘信息 = trayInfo;
+                设置信息.Heat盘信息 = heatInfo;
                 设置信息.OffsetPoint = offsetPoint;
                 设置信息.开site信息 = siteStatus;
                 设置信息.分BIN信息 = binparam;
@@ -1544,29 +1672,35 @@ namespace H5509_V2
         /// </summary>
         public static void HeatTrayICPointInit()
         {
-            double xStart = 15.45;//(int)(motionEx.trayParm.X_Start / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double xPitch = 15;//(int)(motionEx.trayParm.X_Pitch / motionEx.advancedParam.Axis_OutputArm_X_Precision);
-            double yStart = 10.8;//(int)(motionEx.trayParm.Y_Start / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            double yPitch = 16.3;//(int)(motionEx.trayParm.Y_Pitch / motionEx.advancedParam.Axis_OutputArm_Y_Precision);
-            int xNum = 8;//(int)motionEx.trayParm.X_Quantity;
-            int yNum = 19;//(int)motionEx.trayParm.Y_Quantity;
-            double heatx = 240;// motionEx.InitPointParam.OutputArm_Auto1_X + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_X;
-            double heaty = 100;// motionEx.InitPointParam.OutputArm_Auto1_Y + motionEx.OffsetParam.OutputArm.OutputArm_Auto1_Y; ;
-            double total = 41 - 10 * 2; //move 580
-            int move = (int)(total);
-            HeatXPoint = new double[xNum];
-            HeatYPoint = new double[yNum];
+            HeatInfo heatInfo = 设置信息.Heat盘信息;
+            double xStart = heatInfo.X_Start; //15.45;
+            double xPitch = heatInfo.X_Pitch; //15;
+            double yStart = heatInfo.Y_Start; //10.8;
+            double yPitch = heatInfo.Y_Pitch; //16.3;
 
-            HeatXPoint[0] = heatx - xStart; //获取左上角第一颗芯片x轴坐标
+            int xNum = heatInfo.X_Num;
+            int yNum = heatInfo.Y_Num;
+            double heatx = 初始点位.入料_Heat_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
+            double heaty = 初始点位.入料_Heat_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
+            double total = 初始点位.入料_变距最大值 - yPitch * HeatInterval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
+
+            double[] heatXPoint = new double[xNum];
+            double[] heatYPoint = new double[yNum];
+
+            heatXPoint[0] = heatx + xStart; //获取左上角第一颗芯片x轴坐标
             for (int i = 1; i < xNum; i++)
             {
-                HeatXPoint[i] = HeatXPoint[i - 1] - xPitch; //累加X轴坐标
+                heatXPoint[i] = heatXPoint[i - 1] + xPitch; //累加X轴坐标
             }
-            HeatYPoint[0] = heaty - yStart + 2 * move; //以第一根吸嘴为点位 //获取左上角第一颗芯片y轴坐标
+
+            heatYPoint[0] = heaty - yStart + 2 * total; //以第一根吸嘴为点位, 固定吸嘴在Z3,Y轴左上角初始点用的Z1，所以对于Y轴来说走了两倍的距离 //获取左上角第一颗芯片y轴坐标 33.900000000000006 50
             for (int i = 1; i < yNum; i++)
             {
-                HeatYPoint[i] = HeatYPoint[i - 1] - yPitch; //累加Y轴坐标
+                heatYPoint[i] = heatYPoint[i - 1] - yPitch; //累加Y轴坐标
             }
+
+            HeatXPoint = heatXPoint;
+            HeatYPoint = heatYPoint;
         }
 
         /// <summary>
@@ -2115,6 +2249,23 @@ namespace H5509_V2
             else return true;
         }
 
+        public static bool 获取Heat盘指定状态IC个数(int status, out int num)
+        {
+            num = 0;
+            for (short x = 0; x < HeatXPoint.Length; x++)
+            {
+                for (short y = 0; y < HeatYPoint.Length; y++)
+                {
+                    if (HeatDicTimer[$"{x},{y}"].Status == status && HeatDicPoint[$"{x},{y}"] == true)
+                    {
+                        num++;
+                    }
+                }
+            }
+            if (num > 0) return true;
+            else return false;
+        }
+
         public static bool 获取Heat盘加热好的指定IC个数(int status, int num, out int num2)
         {
             num2 = 0;
@@ -2131,7 +2282,7 @@ namespace H5509_V2
             return false;
         }
 
-        public static bool 获取Heat盘状态(int status, int num,  out short xPoint, out short yPoint)
+        public static bool 获取Heat盘状态(int status, int num, out short xPoint, out short yPoint)
         {
             int num2 = 0;
             xPoint = yPoint = 0;
@@ -2571,7 +2722,7 @@ namespace H5509_V2
                     if (siteopen[site]) break;
                 }
             }
-            
+
             for (int site = 0; site < siteopen.Length; site++)
             {
                 if (siteopen[site])
@@ -2586,24 +2737,24 @@ namespace H5509_V2
         {
             SiteStatus siteStatus = 设置信息.开site信息;
             bool[] siteopen = new bool[8] { false, false, false, false, false, false, false, false };
-            
+
             for (int dut = 0; dut < 8; dut++)
             {
                 for (int site = 0; site < 16; site++)
                 {
                     if (siteStatus.GetSiteValue(site, dut) == "1")
-                    { 
+                    {
                         siteopen[dut] = true;
-                        break; 
+                        break;
                     }
                     if (siteopen[dut]) break;
                 }
             }
 
-            放料IC目标值 = new bool[][] 
+            放料IC目标值 = new bool[][]
             {
                 new bool[] { siteopen[0], siteopen[1], siteopen[2], siteopen[3] },
-                new bool[] { siteopen[4], siteopen[5], siteopen[6], siteopen[7] } 
+                new bool[] { siteopen[4], siteopen[5], siteopen[6], siteopen[7] }
             };
         }
 
@@ -2729,7 +2880,7 @@ namespace H5509_V2
             return "Success";
         }
 
-        public static string 获取Heat盘Open(int[] opens, int xPoint, int yPoint, short status, bool ishave,  out bool[] lsopen, out int index)
+        public static string 获取Heat盘Open(int[] opens, int xPoint, int yPoint, short status, bool ishave, out bool[] lsopen, out int index)
         {
             lsopen = new bool[opens.Length];
 
@@ -2739,7 +2890,7 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * HeatInterval >= HeatYPoint.Length) break;
-                if (HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] == ishave) break;
+                if (HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] == !ishave) break;
                 if (opens[i + index] == status)
                 {
                     lsopen[i + index] = true;

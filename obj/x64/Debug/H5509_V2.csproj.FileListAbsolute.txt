@@ -38,7 +38,6 @@ D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._setting.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._speed.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
-D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.pdb
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.IOButton.resources
@@ -108,4 +107,5 @@ D:\GitHub\H5509_V2\bin\Debug\SixLabors.Fonts.xml
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_alarm.Form_alarm.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509.FrmInputPwd.resources
 D:\GitHub\H5509_V2\bin\Debug\H5509_alarm.xlsx
-D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
+D:\github\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CopyComplete
+D:\github\H5509_V2\obj\x64\Debug\H5509_V2.LoadMap.resources

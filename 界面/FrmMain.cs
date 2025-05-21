@@ -113,6 +113,22 @@ namespace H5509_V2
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
 
+            #region 调试参数
+
+            温度模式 = 0;
+            //结批标记 = true;
+            放料目标值();
+            飞梭前入料IC = new bool[2][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            HeatDicTimer["5,11"].Status = 2;
+            HeatDicTimer["5,10"].Status = 2;
+            HeatDicTimer["5,9"].Status = 2;
+            HeatDicPoint["5,11"] = true;
+            HeatDicPoint["5,10"] = true;
+            HeatDicPoint["5,9"] = true;
+            //handler.debug();
+
+            #endregion
+
             main.canVisable(this);
 
             //TimeSpan time = new TimeSpan(0,11,31);
@@ -166,6 +182,7 @@ namespace H5509_V2
         private void button_offset_Click(object sender, EventArgs e)
         {
             changeMainPanel(offset);
+            offset.刷新Offset();
         }
 
         private void button_speed_Click(object sender, EventArgs e)
@@ -236,9 +253,13 @@ namespace H5509_V2
                 {
                     handler.结批流程();
                 });
+                //Task.Run(() =>
+                //{
+                //    handler.入料手臂吸放料流程();
+                //});
                 Task.Run(() =>
                 {
-                    handler.入料手臂吸放料流程();
+                    handler.入料手臂吸放料流程1();
                 });
                 Task.Run(() =>
                 {

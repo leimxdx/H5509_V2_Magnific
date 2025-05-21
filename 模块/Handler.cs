@@ -2504,6 +2504,93 @@ namespace H5509_V2
         }
 
         #endregion
+        public void debug()
+        {
+            short colums = 0;
+            bool[] open = new bool[4];
+            int num2 = 0;
+            int[] opens = new int[4];
+
+            if (飞梭前入料放料参数(out colums, out open))
+            {
+                if (!入料手臂抓料等待标记)
+                {
+                    if (温度模式 == 1)
+                    {
+                        int count = open.Count(b => b); //获取true的个数
+                        if (获取Heat盘加热好的指定IC个数(2, count, out num2)) //如果已经加热好需要的IC个数
+                        {
+                            opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
+                            入料手臂抓料等待标记 = false;
+                            PS入料手臂吸放料流程.StepID = 615;
+                        }
+                        else //如果没有加热好
+                        {
+                            if (!结批标记)
+                            {
+                                PS入料手臂吸放料流程.StepID = 511;
+                            }
+                            else
+                            {
+                                if (!获取Heat盘加热好的指定IC个数(1, 1, out num2)) //如果所有IC都已加热完成
+                                {
+                                    if (获取Heat盘加热好的指定IC个数(2, 1, out num2)) //如果至少有一个加热好的IC
+                                    {
+                                        int num3 = 0;
+                                        opens = new int[] { 2, 2, 2, 2 };
+                                        for (int i = 0; i < open.Length; i++)
+                                        {
+                                            if (open[i])
+                                            {
+                                                opens[i] = 0;
+                                                if (++num3 >= num2) break;
+                                            }
+                                        }
+                                        入料手臂抓料等待标记 = false;
+                                        PS入料手臂吸放料流程.StepID = 615;
+                                    }
+                                    else
+                                    {
+                                        加热盘停止入料标记 = true;
+                                        PS入料手臂吸放料流程.StepID = 500;
+                                        PS入料手臂吸放料流程.Processing = false;
+                                    }
+                                }
+                                else //所有放在加热盘的IC已经加热好
+                                {
+                                    Thread.Sleep(10);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        opens = 吸嘴是否吸料(open);
+                        入料手臂抓料等待标记 = false;
+                        PS入料手臂吸放料流程.StepID = 515;
+                    }
+                }
+                else
+                {
+                    PS入料手臂吸放料流程.StepID = 710;
+                }
+            }
+            else
+            {
+                if (!入料手臂抓料等待标记)
+                {
+                    if (入料手臂工作完成标记 == false)
+                    {
+                        入料手臂工作完成标记 = true; //入料手臂目标达成
+                        PS入料手臂吸放料流程.StepID = 500;
+                        PS入料手臂吸放料流程.Processing = false;
+                    }
+                    else PS入料手臂吸放料流程.StepID = 510;
+                }
+                else Thread.Sleep(10);
+            }
+
+        }
 
         public void 系统按钮检测流程()
         {
@@ -4009,22 +4096,22 @@ namespace H5509_V2
                     case 500:
                         PS入料手臂吸放料流程.StepName = "路径规划";
 
-                        bool ispass = false;
+                        bool ispass = true;
 
                         if (温度模式 == 0) //常温
                         {
-                            if (!结批标记)
+                            if (结批标记)
                             {
-                                ispass = true;
+                                ispass = false;
                             }
                         }
                         else
                         {
-                            if (!结批标记)
+                            if (结批标记)
                             {
-                                if (!加热盘停止入料标记)
+                                if (加热盘停止入料标记)
                                 {
-                                    ispass = true;
+                                    ispass = false;
                                 }
                             }
                         }
@@ -4088,18 +4175,34 @@ namespace H5509_V2
                                             PS入料手臂吸放料流程.StepID = 511;
                                         }
                                         else
-                                        { 
-                                            if (获取Heat盘加热好的指定IC个数(1, 1, out num2)) //如果还有没加热好的IC
+                                        {
+                                            if (!获取Heat盘加热好的指定IC个数(1, 1, out num2)) //如果所有IC都已加热完成
                                             {
-                                                Thread.Sleep(10); //如果还有IC没有加热完成, 则先把已经加热好的IC放到梭车
-                                                if (num2 > 0) //如果已经加热好的IC > 0
+                                                if (获取Heat盘指定状态IC个数(2, out num2)) //如果至少有一个加热好的IC
                                                 {
-                                                    
+                                                    int num3 = 0;
+                                                    opens = new int[] { 2, 2, 2, 2 };
+                                                    for (int i = 0; i < open.Length; i++)
+                                                    {
+                                                        if (open[i])
+                                                        {
+                                                            opens[i] = 0;
+                                                            if (++num3 >= num2) break;
+                                                        }
+                                                    }
+                                                    入料手臂抓料等待标记 = false;
+                                                    PS入料手臂吸放料流程.StepID = 615;
+                                                }
+                                                else
+                                                {
+                                                    加热盘停止入料标记 = true;
+                                                    PS入料手臂吸放料流程.StepID = 500;
+                                                    PS入料手臂吸放料流程.Processing = false;
                                                 }
                                             }
                                             else //所有放在加热盘的IC已经加热好
                                             {
-
+                                                Thread.Sleep(10);
                                             }
                                         }
                                     }
@@ -4150,6 +4253,37 @@ namespace H5509_V2
                                     if (!结批标记)
                                     {
                                         PS入料手臂吸放料流程.StepID = 511;
+                                    }
+                                    else
+                                    {
+                                        if (!获取Heat盘加热好的指定IC个数(1, 1, out num2)) //如果所有IC都已加热完成
+                                        {
+                                            if (获取Heat盘指定状态IC个数(2, out num2)) //如果至少有一个加热好的IC
+                                            {
+                                                int num3 = 0;
+                                                opens = new int[] { 2, 2, 2, 2 };
+                                                for (int i = 0; i < open.Length; i++)
+                                                {
+                                                    if (open[i])
+                                                    {
+                                                        opens[i] = 0;
+                                                        if (++num3 >= num2) break;
+                                                    }
+                                                }
+                                                入料手臂抓料等待标记 = true;
+                                                PS入料手臂吸放料流程.StepID = 615;
+                                            }
+                                            else
+                                            {
+                                                加热盘停止入料标记 = true;
+                                                PS入料手臂吸放料流程.StepID = 500;
+                                                PS入料手臂吸放料流程.Processing = false;
+                                            }
+                                        }
+                                        else //所有放在加热盘的IC已经加热好
+                                        {
+                                            Thread.Sleep(10);
+                                        }
                                     }
                                 }
                             }
@@ -4231,7 +4365,7 @@ namespace H5509_V2
                     case 630:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat_Z, true);
+                        result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat吸_Z, true);
                         if (result == "Success")
                         {
                             firstdzhome = true;
@@ -4407,7 +4541,9 @@ namespace H5509_V2
                                 if (lsopen[i + index])
                                 {
                                     lsopen[i + index] = false;
+                                    opens[i + index] = 2;
                                     HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] = false;
+                                    HeatDicTimer[$"{xPoint},{yPoint + i * HeatInterval}"].Status = 0;
                                 }
                             }
                             PS入料手臂吸放料流程.StepID = 655;
@@ -4981,7 +5117,7 @@ namespace H5509_V2
                         if (飞梭移动状态 == 0) //梭车停止状态才能放
                         {
                             double zpos = 获取梭车Z放料点位(colums);
-                            result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat_Z, true);
+                            result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat放_Z, true);
                             if (result == "Success")
                             {
                                 firstdraw = true;
@@ -5328,7 +5464,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                LoaderTrayClear();
+                                if (!获取Load盘坐标(true, out xPoint, out yPoint)) //如果获取坐标成功说明Load盘被框选了，则不用清空
+                                {
+                                    LoaderTrayClear();
+                                }
                                 Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Load上顶完成Map更新");
                                 PS入料手臂吸放料流程.StepID = 515;
                             }
