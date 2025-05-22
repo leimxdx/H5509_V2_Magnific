@@ -268,6 +268,7 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label152 = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.label10 = new System.Windows.Forms.Label();
             this.uiDigitalLabel17 = new Sunny.UI.UIDigitalLabel();
             this.label153 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -301,6 +302,7 @@
             this.label123 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_driverStatus = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Txt_loadnum = new System.Windows.Forms.TextBox();
             this.label139 = new System.Windows.Forms.Label();
@@ -360,8 +362,6 @@
             this.label144 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel_left.SuspendLayout();
             this.pal_setdutstate.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -385,12 +385,12 @@
             this.groupBox25.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.panel31.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.Panel_right.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox26.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_left
@@ -3740,6 +3740,21 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label10
+            // 
+            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label10.Enabled = false;
+            this.label10.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(738, 113);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(87, 35);
+            this.label10.TabIndex = 177;
+            this.label10.Text = "开启";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label10.Click += new System.EventHandler(this.label10_Click);
+            // 
             // uiDigitalLabel17
             // 
             this.uiDigitalLabel17.BackColor = System.Drawing.Color.Lime;
@@ -4169,6 +4184,17 @@
             this.label_driverStatus.TabIndex = 1;
             this.label_driverStatus.Text = "HALT";
             this.label_driverStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
+            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 161;
+            this.pictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -4970,32 +4996,6 @@
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
             // 
-            // label10
-            // 
-            this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label10.Enabled = false;
-            this.label10.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(738, 113);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(87, 35);
-            this.label10.TabIndex = 177;
-            this.label10.Text = "开启";
-            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label10.Click += new System.EventHandler(this.label10_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
-            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 161;
-            this.pictureBox1.TabStop = false;
-            // 
             // _main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5030,6 +5030,7 @@
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
             this.panel31.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.Panel_right.ResumeLayout(false);
@@ -5038,7 +5039,6 @@
             this.groupBox26.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

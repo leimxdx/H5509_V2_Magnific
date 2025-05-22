@@ -88,7 +88,7 @@ namespace H5509_V2
             motionEx = MotionEx.GetInstance();
 
             setting.刷新分BIN信息 = main.刷新分BIN信息;
-
+            handler.刷新批次信息 = main.刷新批次信息;
             setting.handler = handler;
 
             //防止控件过多产生闪烁现象
@@ -115,16 +115,16 @@ namespace H5509_V2
 
             #region 调试参数
 
-            温度模式 = 0;
-            //结批标记 = true;
-            放料目标值();
-            飞梭前入料IC = new bool[2][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
-            HeatDicTimer["5,11"].Status = 2;
-            HeatDicTimer["5,10"].Status = 2;
-            HeatDicTimer["5,9"].Status = 2;
-            HeatDicPoint["5,11"] = true;
-            HeatDicPoint["5,10"] = true;
-            HeatDicPoint["5,9"] = true;
+            //温度模式 = 0;
+            ////结批标记 = true;
+            //放料目标值();
+            //飞梭前入料IC = new bool[2][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //HeatDicTimer["5,11"].Status = 2;
+            //HeatDicTimer["5,10"].Status = 2;
+            //HeatDicTimer["5,9"].Status = 2;
+            //HeatDicPoint["5,11"] = true;
+            //HeatDicPoint["5,10"] = true;
+            //HeatDicPoint["5,9"] = true;
             //handler.debug();
 
             #endregion

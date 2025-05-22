@@ -125,7 +125,7 @@ namespace H5509_V2
                 timer.Tick += TimerCloseSelcet;
                 Chk_timer[i] = timer;
             }
-
+            textBoxmachine.Text = Environment.MachineName;
             //comboBox1.SelectedIndexChanged += comboBox1_SelectedValueChanged;
 
             //Open/Close按钮绑定
@@ -887,6 +887,35 @@ namespace H5509_V2
 
         }
 
+        public void 刷新批次信息()
+        {
+            if (this.InvokeRequired)
+            {
+                this.Invoke(new Action(() =>
+                {
+                    foreach (Control c in groupBox26.Controls)
+                    {
+                        if (c is TextBox)
+                        {
+                            if (c.Name == "textBoxmachine") (c as TextBox).Text = Environment.MachineName;
+                            else (c as TextBox).Text = "";
+                        }
+                    }
+                }));
+            }
+            else
+            {
+                foreach (Control c in groupBox26.Controls)
+                {
+                    if (c is TextBox)
+                    {
+                        if (c.Name == "textBoxmachine") (c as TextBox).Text = Environment.MachineName; //continue;
+                        else (c as TextBox).Text = "";
+                    }
+                }
+            }
+        }
+
         private void 屏幕刷新()
         {
             while (true)
@@ -1010,6 +1039,7 @@ namespace H5509_V2
                         label10.Text = "停止";
                         label10.Enabled = true;
                         label116.Text = "高温";
+                        label116.BackColor = Color.Red;
                     }
                 }
                 else
@@ -1021,6 +1051,7 @@ namespace H5509_V2
                         label10.Text = "开启";
                         label10.Enabled = false;
                         label116.Text = "常温";
+                        label116.BackColor = System.Drawing.SystemColors.ControlDark;
                     }
                 }
             }

@@ -107,5 +107,6 @@ D:\GitHub\H5509_V2\bin\Debug\SixLabors.Fonts.xml
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_alarm.Form_alarm.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509.FrmInputPwd.resources
 D:\GitHub\H5509_V2\bin\Debug\H5509_alarm.xlsx
-D:\github\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CopyComplete
 D:\github\H5509_V2\obj\x64\Debug\H5509_V2.LoadMap.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date

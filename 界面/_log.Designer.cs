@@ -48,22 +48,22 @@
             this.cbbLogType = new Sunny.UI.UIComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgv_data = new System.Windows.Forms.DataGridView();
+            this.LogTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LogLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LogType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LogContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblTotalNum = new Sunny.UI.UILabel();
             this.LogTimer = new System.Windows.Forms.Timer(this.components);
             this.txtLog = new Sunny.UI.UITextBox();
             this.txtkeyWords = new Sunny.UI.UITextBox();
             this.btnSelectKey = new Sunny.UI.UIButton();
-            this.LogTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LogLevel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LogType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LogContent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).BeginInit();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(239, 29);
+            this.label2.Location = new System.Drawing.Point(20, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 16);
             this.label2.TabIndex = 3;
@@ -72,7 +72,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(953, 29);
+            this.label3.Location = new System.Drawing.Point(734, 13);
             this.label3.Margin = new System.Windows.Forms.Padding(30, 0, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 16);
@@ -92,7 +92,7 @@
             "错误-error",
             "警告-warning"});
             this.cbbLogLevel.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.cbbLogLevel.Location = new System.Drawing.Point(317, 23);
+            this.cbbLogLevel.Location = new System.Drawing.Point(98, 7);
             this.cbbLogLevel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbbLogLevel.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbbLogLevel.Name = "cbbLogLevel";
@@ -108,7 +108,7 @@
             // 
             this.startTime.FillColor = System.Drawing.Color.White;
             this.startTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.startTime.Location = new System.Drawing.Point(1031, 23);
+            this.startTime.Location = new System.Drawing.Point(812, 7);
             this.startTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startTime.MaxLength = 19;
             this.startTime.MinimumSize = new System.Drawing.Size(63, 0);
@@ -130,7 +130,7 @@
             // 
             this.endTime.FillColor = System.Drawing.Color.White;
             this.endTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.endTime.Location = new System.Drawing.Point(1388, 23);
+            this.endTime.Location = new System.Drawing.Point(1169, 7);
             this.endTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.endTime.MaxLength = 19;
             this.endTime.MinimumSize = new System.Drawing.Size(63, 0);
@@ -150,7 +150,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1310, 29);
+            this.label4.Location = new System.Drawing.Point(1091, 13);
             this.label4.Margin = new System.Windows.Forms.Padding(30, 0, 3, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 16);
@@ -161,7 +161,7 @@
             // 
             this.btnTimeSelect.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTimeSelect.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTimeSelect.Location = new System.Drawing.Point(799, 67);
+            this.btnTimeSelect.Location = new System.Drawing.Point(580, 51);
             this.btnTimeSelect.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.btnTimeSelect.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTimeSelect.Name = "btnTimeSelect";
@@ -183,7 +183,7 @@
             "设备运行-run",
             "产能信息-spc"});
             this.cbbLogType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.cbbLogType.Location = new System.Drawing.Point(674, 23);
+            this.cbbLogType.Location = new System.Drawing.Point(455, 7);
             this.cbbLogType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbbLogType.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbbLogType.Name = "cbbLogType";
@@ -198,7 +198,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(596, 29);
+            this.label1.Location = new System.Drawing.Point(377, 13);
             this.label1.Margin = new System.Windows.Forms.Padding(30, 0, 3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 16);
@@ -274,64 +274,6 @@
             this.dgv_data.TabIndex = 85;
             this.dgv_data.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_data_RowPostPaint);
             // 
-            // lblTotalNum
-            // 
-            this.lblTotalNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblTotalNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.lblTotalNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.lblTotalNum.Location = new System.Drawing.Point(1542, 908);
-            this.lblTotalNum.Name = "lblTotalNum";
-            this.lblTotalNum.Size = new System.Drawing.Size(224, 51);
-            this.lblTotalNum.TabIndex = 87;
-            this.lblTotalNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // LogTimer
-            // 
-            this.LogTimer.Tick += new System.EventHandler(this.LogTimer_Tick);
-            // 
-            // txtLog
-            // 
-            this.txtLog.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtLog.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtLog.Location = new System.Drawing.Point(534, 70);
-            this.txtLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtLog.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtLog.Name = "txtLog";
-            this.txtLog.Padding = new System.Windows.Forms.Padding(5);
-            this.txtLog.ShowText = false;
-            this.txtLog.Size = new System.Drawing.Size(245, 29);
-            this.txtLog.TabIndex = 88;
-            this.txtLog.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtLog.Watermark = "";
-            // 
-            // txtkeyWords
-            // 
-            this.txtkeyWords.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtkeyWords.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtkeyWords.Location = new System.Drawing.Point(956, 70);
-            this.txtkeyWords.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.txtkeyWords.MinimumSize = new System.Drawing.Size(1, 16);
-            this.txtkeyWords.Name = "txtkeyWords";
-            this.txtkeyWords.Padding = new System.Windows.Forms.Padding(5);
-            this.txtkeyWords.ShowText = false;
-            this.txtkeyWords.Size = new System.Drawing.Size(245, 29);
-            this.txtkeyWords.TabIndex = 89;
-            this.txtkeyWords.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.txtkeyWords.Watermark = "";
-            // 
-            // btnSelectKey
-            // 
-            this.btnSelectKey.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectKey.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSelectKey.Location = new System.Drawing.Point(1221, 67);
-            this.btnSelectKey.MinimumSize = new System.Drawing.Size(1, 1);
-            this.btnSelectKey.Name = "btnSelectKey";
-            this.btnSelectKey.Size = new System.Drawing.Size(120, 35);
-            this.btnSelectKey.TabIndex = 90;
-            this.btnSelectKey.Text = "查找下一个";
-            this.btnSelectKey.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSelectKey.Click += new System.EventHandler(this.btnSelectKey_Click);
-            // 
             // LogTime
             // 
             this.LogTime.DataPropertyName = "Time";
@@ -376,6 +318,64 @@
             this.LogContent.ReadOnly = true;
             this.LogContent.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.LogContent.Width = 1075;
+            // 
+            // lblTotalNum
+            // 
+            this.lblTotalNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTotalNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.lblTotalNum.Location = new System.Drawing.Point(1542, 908);
+            this.lblTotalNum.Name = "lblTotalNum";
+            this.lblTotalNum.Size = new System.Drawing.Size(224, 51);
+            this.lblTotalNum.TabIndex = 87;
+            this.lblTotalNum.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // LogTimer
+            // 
+            this.LogTimer.Tick += new System.EventHandler(this.LogTimer_Tick);
+            // 
+            // txtLog
+            // 
+            this.txtLog.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtLog.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtLog.Location = new System.Drawing.Point(315, 54);
+            this.txtLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtLog.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtLog.Name = "txtLog";
+            this.txtLog.Padding = new System.Windows.Forms.Padding(5);
+            this.txtLog.ShowText = false;
+            this.txtLog.Size = new System.Drawing.Size(245, 29);
+            this.txtLog.TabIndex = 88;
+            this.txtLog.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtLog.Watermark = "";
+            // 
+            // txtkeyWords
+            // 
+            this.txtkeyWords.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtkeyWords.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtkeyWords.Location = new System.Drawing.Point(737, 54);
+            this.txtkeyWords.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.txtkeyWords.MinimumSize = new System.Drawing.Size(1, 16);
+            this.txtkeyWords.Name = "txtkeyWords";
+            this.txtkeyWords.Padding = new System.Windows.Forms.Padding(5);
+            this.txtkeyWords.ShowText = false;
+            this.txtkeyWords.Size = new System.Drawing.Size(245, 29);
+            this.txtkeyWords.TabIndex = 89;
+            this.txtkeyWords.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.txtkeyWords.Watermark = "";
+            // 
+            // btnSelectKey
+            // 
+            this.btnSelectKey.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSelectKey.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSelectKey.Location = new System.Drawing.Point(1002, 51);
+            this.btnSelectKey.MinimumSize = new System.Drawing.Size(1, 1);
+            this.btnSelectKey.Name = "btnSelectKey";
+            this.btnSelectKey.Size = new System.Drawing.Size(120, 35);
+            this.btnSelectKey.TabIndex = 90;
+            this.btnSelectKey.Text = "查找下一个";
+            this.btnSelectKey.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btnSelectKey.Click += new System.EventHandler(this.btnSelectKey_Click);
             // 
             // _log
             // 

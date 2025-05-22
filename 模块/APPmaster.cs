@@ -219,16 +219,15 @@ namespace H5509_V2
 
         public static string othAll;
 
-        public static bool 入料IC忽略 { get; set; }
+        public static bool 入料IC忽略;
 
-        public static bool 入料IC吸不起结批 { get; set; }
+        public static bool 入料IC吸不起结批;
 
-        public static bool 无待测盘结批 { get; set; }
+        public static bool 无待测盘结批;
 
-        public static bool 出料IC忽略 { get; set; }
+        public static bool 出料IC忽略;
 
-        public static bool 测试IC忽略 { get; set; }
-
+        public static bool 测试IC忽略;
 
         public static int 飞梭2位置 = 0; //0:后面 1:前面
 
@@ -246,7 +245,7 @@ namespace H5509_V2
 
         public static double 梭车列间距 = 40; //mm
 
-        public static double 梭车行间距 = 32; //mm
+        public static double 梭车行间距 = 36; //mm
 
         public static double Auto1初始点 = 193;
 
@@ -313,7 +312,7 @@ namespace H5509_V2
 
         public static double 入料吸料间距 //tray吸
         {
-            get { return (初始点位.入料_变距最大值 - Tray_Y_Pitch * Interval) * 2; }
+            get { return 初始点位.入料_变距最大值 - Tray_Y_Pitch * Interval; }
         }
 
         public static double 入料放料间距 //梭车放
@@ -328,12 +327,12 @@ namespace H5509_V2
 
         public static double 出料放料间距 //tray放
         {
-            get { return (初始点位.出料_变距最大值 - Tray_Y_Pitch * Interval) * 2; }
+            get { return 初始点位.出料_变距最大值 - Tray_Y_Pitch * Interval; }
         }
 
         public static double 入料吸放料Heat间距 //Heat吸放
         {
-            get { return (初始点位.入料_变距最大值 - Heat_Y_Pitch * HeatInterval) * 2; }
+            get { return 初始点位.入料_变距最大值 - Heat_Y_Pitch * HeatInterval; }
         }
 
         public static int[] SiteTestState = new int[16];
@@ -342,11 +341,7 @@ namespace H5509_V2
 
         public static List<bool[][]> SiteTestIC = new List<bool[][]>(); //保存Site放入的IC状态
 
-        public static List<string[][]> SiteTestBIN = new List<string[][]>(); //保存
-
         public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>(); //用来保存接收的Bin数据的队列
-
-        public static ConcurrentQueue<string> SiteSaveQueue = new ConcurrentQueue<string>(); //用来保存接收的Site数据的队列
 
         public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
 
@@ -428,39 +423,39 @@ namespace H5509_V2
 
         public static bool[][] 飞梭后出料IC;
 
-        public static short Empty上顶标记 = 1;
+        public static short Empty上顶标记;
 
-        public static short Load上顶标记 = 1;
+        public static short Load上顶标记;
 
-        public static short Empty下降标记 = 1;
+        public static short Empty下降标记;
 
-        public static short Load下降标记 = 1;
+        public static short Load下降标记;
 
-        public static short Auto1上顶标记 = 1;
+        public static short Auto1上顶标记;
 
-        public static short Auto2上顶标记 = 1;
+        public static short Auto2上顶标记;
 
-        public static short Empty下降回零标记 = 1;
+        public static short Empty下降回零标记;
 
-        public static short Load下降回零标记 = 1;
+        public static short Load下降回零标记;
 
-        public static short Auto1下降回零标记 = 1;
+        public static short Auto1下降回零标记;
 
-        public static short Auto2下降回零标记 = 1;
+        public static short Auto2下降回零标记;
 
-        public static int 抓盘手臂取Empty空盘标记 = 1;
+        public static int 抓盘手臂取Empty空盘标记;
 
-        public static int 抓盘手臂取Load空盘标记 = 1;
+        public static int 抓盘手臂取Load空盘标记;
 
-        public static int 抓盘手臂给Auto1空盘标记 = 1;
+        public static int 抓盘手臂给Auto1空盘标记;
 
-        public static int 抓盘手臂给Auto2空盘标记 = 1;
+        public static int 抓盘手臂给Auto2空盘标记;
 
-        public static int 抓盘手臂放空盘到Empty标记 = 1;
+        public static int 抓盘手臂放空盘到Empty标记;
 
-        public static int 抓盘手臂放空盘到Auto1标记 = 1;
+        public static int 抓盘手臂放空盘到Auto1标记;
 
-        public static int 抓盘手臂放空盘到Auto2标记 = 1;
+        public static int 抓盘手臂放空盘到Auto2标记;
 
         public static bool[][] 放料IC目标值;
 
@@ -1504,14 +1499,7 @@ namespace H5509_V2
                     new bool[] { false, false, false, false },
                     new bool[] { false, false, false, false },
                 });
-
-                APPmaster.SiteTestBIN.Add(new string[2][]
-                {
-                    new string[] { "", "", "", "" },
-                    new string[] { "", "", "", "" },
-                });
             }
-
             return "Success";
         }
 
@@ -2271,14 +2259,14 @@ namespace H5509_V2
             else return false;
         }
 
-        public static bool 获取Heat盘加热好的指定IC个数(int status, int num, out int num2)
+        public static bool 获取Heat盘加热好的指定IC个数(int status, bool ishave,  int num, out int num2)
         {
             num2 = 0;
             for (short x = 0; x < HeatXPoint.Length; x++)
             {
                 for (short y = 0; y < HeatYPoint.Length; y++)
                 {
-                    if (HeatDicTimer[$"{x},{y}"].Status == status && HeatDicPoint[$"{x},{y}"] == true)
+                    if (HeatDicTimer[$"{x},{y}"].Status == status && HeatDicPoint[$"{x},{y}"] == ishave)
                     {
                         if (++num2 == num) return true;
                     }
@@ -2885,7 +2873,7 @@ namespace H5509_V2
             return "Success";
         }
 
-        public static string 获取Heat盘Open(int[] opens, int xPoint, int yPoint, short status, bool ishave, out bool[] lsopen, out int index)
+        public static string 获取Heat盘Open(int[] opens, int xPoint, int yPoint, short status, bool ishave, short instatus, out bool[] lsopen, out int index)
         {
             lsopen = new bool[opens.Length];
 
@@ -2895,7 +2883,7 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * HeatInterval >= HeatYPoint.Length) break;
-                if (HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] == !ishave) break;
+                if (HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] == !ishave && HeatDicTimer[$"{xPoint},{yPoint + i * HeatInterval}"].Status == instatus) break;
                 if (opens[i + index] == status)
                 {
                     lsopen[i + index] = true;

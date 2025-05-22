@@ -36,6 +36,8 @@ namespace H5509_V2
 
         public System.Timers.Timer 结批按钮闪烁的定时器 = new System.Timers.Timer(); //结批按钮灯闪烁定时器
 
+        public Action 刷新批次信息;
+
         public Handler()
         {
             结批触发定时器.Interval = 2 * 1000; //5秒钟
@@ -2328,16 +2330,134 @@ namespace H5509_V2
 
         public void 参数初始化()
         {
+            //温度模式 = 0;
+            设备状态 = 0;
+            H5509归零 = false;
+            H5509正在归零 = false;
+            H5509初始化 = false;
+            H5509正在初始化 = false;
+            结批标记 = false;
+            正在结批 = false;
+            结批完成 = false;
+            强制结批标记 = false;
+            定点停止标记 = false;
+            定点停止允许 = false;
+            Load换盘标记 = false;
+            Auto1换盘标记 = false;
+            Auto2换盘标记 = false;
+            Auto等待换盘标记 = false;
+            for (int i = 0; i < SiteTestIC.Count; i++)
+            {
+                Com.Iswaitout[i] = false;
+                Com.Isreceive[i] = false;
+                SiteTestIC[i] = new bool[2][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false }, };
+            }
+            入料IC忽略 = false;
+            入料IC吸不起结批 = false;
+            无待测盘结批 = false;
+            出料IC忽略 = false;
+            测试IC忽略 = false;
+            //Com.IsconnectTester = false;
+            InSiteQueue = new ConcurrentQueue<int>();
+            OutSiteQueue = new ConcurrentQueue<int>();
+            Auto1TrayClear();
+            Auto2TrayClear();
+            Fix1TrayClear();
+            Fix2TrayClear();
+            Fix3TrayClear();
+            SiteTestState = new int[16];
+            Auto1料仓满盘标记 = false;
+            Auto2料仓满盘标记 = false;
+            Auto1放盘等待标记 = false;
+            Auto2放盘等待标记 = false;
+            Empty料仓打开标记 = false;
+            Load料仓打开标记 = false;
+            Auto1料仓打开标记 = false;
+            Auto2料仓打开标记 = false;
+            入料手臂工作完成标记 = false;
+            加热盘停止入料标记 = false;
+            入料手臂停止工作标记 = false;
+            测试手臂入料停止工作标记 = false;
+            测试手臂出料停止工作标记 = false;
+            出料手臂出料停止工作标记 = false;
+            飞梭停止工作 = false;
+            出料手臂工作完成标记 = false;
+            测试手臂工作完成标记 = false;
+            入料手臂抓料等待标记 = false;
+            飞梭移动状态 = 0;
+            飞梭前入料状态 = 0;
+            飞梭前出料状态 = 0;
+            飞梭后入料状态 = 0;
+            飞梭后出料状态 = 0;
             Empty上顶标记 = 1;
             Load上顶标记 = 1;
             Auto1上顶标记 = 1;
             Auto2上顶标记 = 1;
+            Empty下降标记 = 1;
+            Load下降标记 = 1;
+            Empty下降回零标记 = 1;
+            Load下降回零标记 = 1;
+            Auto1下降回零标记 = 1;
+            Auto2下降回零标记 = 1;
+            抓盘手臂取Empty空盘标记 = 1;
+            抓盘手臂取Load空盘标记 = 1;
+            抓盘手臂给Auto1空盘标记 = 1;
+            抓盘手臂给Auto2空盘标记 = 1;
+            抓盘手臂放空盘到Empty标记 = 1;
+            抓盘手臂放空盘到Auto1标记 = 1;
+            抓盘手臂放空盘到Auto2标记 = 1;
 
             飞梭前入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-            //飞梭前出料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
             飞梭前出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
             飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
             飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+
+            PS初始化流程.StepID = 500;
+            PS初始化流程.Processing = false;
+            PS结批流程.StepID = 500;
+            PS结批流程.Processing = false;
+            PS入料手臂吸放料流程.StepID = 500;
+            PS入料手臂吸放料流程.Processing = false;
+            PS出料手臂吸放料流程.StepID = 500;
+            PS出料手臂吸放料流程.Processing = false;
+            PS入飞梭移动流程.StepID = 500;
+            PS入飞梭移动流程.Processing = false;
+            PS测试手臂取待测料流程.StepID = 500;
+            PS测试手臂取待测料流程.Processing = false;
+            PS测试手臂取已测料流程.StepID = 500;
+            PS测试手臂取已测料流程.Processing = false;
+            PS测试区气缸下压动作流程.StepID = 500;
+            PS测试区气缸下压动作流程.Processing = false;
+            PS测试区气缸上抬动作流程.StepID = 500;
+            PS测试区气缸上抬动作流程.Processing = false;
+            PS空盘上顶流程.StepID = 500;
+            PS空盘上顶流程.Processing = false;
+            PS空盘下降流程.StepID = 500;
+            PS空盘下降流程.Processing = false;
+            PS空盘下降回零流程.StepID = 500;
+            PS空盘下降回零流程.Processing = false;
+            PS待测盘上顶流程.StepID = 500;
+            PS待测盘上顶流程.Processing = false;
+            PS待测盘上顶回零流程.StepID = 500;
+            PS待测盘上顶回零流程.Processing = false;
+            PS手动盘1上顶流程.StepID = 500;
+            PS手动盘1上顶流程.Processing = false;
+            PS手动盘1下降回零流程.StepID = 500;
+            PS手动盘1下降回零流程.Processing = false;
+            PS手动盘2上顶流程.StepID = 500;
+            PS手动盘2上顶流程.Processing = false;
+            PS手动盘2下降回零流程.StepID = 500;
+            PS手动盘2下降回零流程.Processing = false;
+            PS抓盘手臂取Empty空盘流程.StepID = 500;
+            PS抓盘手臂取Empty空盘流程.Processing = false;
+            PS抓盘手臂取Load空盘流程.StepID = 500;
+            PS抓盘手臂取Load空盘流程.Processing = false;
+            PS抓盘手臂放空盘到Empty流程.StepID = 500;
+            PS抓盘手臂放空盘到Empty流程.Processing = false;
+            PS抓盘手臂放空盘到Auto1流程.StepID = 500;
+            PS抓盘手臂放空盘到Auto1流程.Processing = false;
+            PS抓盘手臂放空盘到Auto2流程.StepID = 500;
+            PS抓盘手臂放空盘到Auto2流程.Processing = false;
 
             //放料IC目标值 = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
             //飞梭前出料BIN项 = new string[][] { new string[] { "01", "01", "01", "01" }, new string[] { "01", "01", "01", "01" } };
@@ -2516,7 +2636,7 @@ namespace H5509_V2
                     if (温度模式 == 1)
                     {
                         int count = open.Count(b => b); //获取true的个数
-                        if (获取Heat盘加热好的指定IC个数(2, count, out num2)) //如果已经加热好需要的IC个数
+                        if (获取Heat盘加热好的指定IC个数(2, true, count, out num2)) //如果已经加热好需要的IC个数
                         {
                             opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
                             入料手臂抓料等待标记 = false;
@@ -2530,9 +2650,9 @@ namespace H5509_V2
                             }
                             else
                             {
-                                if (!获取Heat盘加热好的指定IC个数(1, 1, out num2)) //如果所有IC都已加热完成
+                                if (!获取Heat盘加热好的指定IC个数(1, true, 1, out num2)) //如果所有IC都已加热完成
                                 {
-                                    if (获取Heat盘加热好的指定IC个数(2, 1, out num2)) //如果至少有一个加热好的IC
+                                    if (获取Heat盘加热好的指定IC个数(2, true, 1, out num2)) //如果至少有一个加热好的IC
                                     {
                                         int num3 = 0;
                                         opens = new int[] { 2, 2, 2, 2 };
@@ -2618,6 +2738,12 @@ namespace H5509_V2
 
             while (true)
             {
+                if (!InitedOK)
+                {
+                    Thread.Sleep(100);
+                    continue;
+                }
+
                 string result = motionEx.GetDi(ioInfos, out string[] io);
                 if (result == "Success")
                 {
@@ -2766,6 +2892,11 @@ namespace H5509_V2
                         Debug.WriteLine("按下归零");
                         if (!H5509正在归零 && 设备状态 == 0)
                         {
+                            参数初始化();
+                            if (!Com.IsconnectTester)
+                            {
+                                刷新批次信息();
+                            }
                             H5509正在归零 = true;
                             H5509归零 = false;
                             IsPause = false;
@@ -3283,8 +3414,9 @@ namespace H5509_V2
                         H5509归零 = false;
                         H5509初始化 = false;
                         Auto等待换盘标记 = false;
-
+                        Com.IsconnectTester = false;
                         结束时间 = DateTime.Now;
+                        LoaderTrayClear();
 
                         Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->开始时间:{开始时间:yyyy-MM-dd HH:mm:ss.fff}");
                         Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->按下结批时间:{按下结批时间:yyyy-MM-dd HH:mm:ss.fff}");
@@ -4160,7 +4292,7 @@ namespace H5509_V2
                                 if (温度模式 == 1)
                                 {
                                     int count = open.Count(b => b); //获取true的个数
-                                    if (获取Heat盘加热好的指定IC个数(2, count, out num2)) //如果已经加热好需要的IC个数
+                                    if (获取Heat盘加热好的指定IC个数(2, true, count, out num2)) //如果已经加热好需要的IC个数
                                     {
                                         opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
                                         入料手臂抓料等待标记 = false;
@@ -4174,7 +4306,7 @@ namespace H5509_V2
                                         }
                                         else
                                         {
-                                            if (!获取Heat盘加热好的指定IC个数(1, 1, out num2)) //如果所有IC都已加热完成
+                                            if (!获取Heat盘加热好的指定IC个数(1, true, 1, out num2)) //如果所有IC都已加热完成
                                             {
                                                 if (获取Heat盘指定状态IC个数(2, out num2)) //如果至少有一个加热好的IC
                                                 {
@@ -4240,7 +4372,7 @@ namespace H5509_V2
                             if (温度模式 == 1)
                             {
                                 int count = open.Count(b => b); //获取true的个数
-                                if (获取Heat盘加热好的指定IC个数(2, count, out num2)) //如果已经加热好需要的IC个数
+                                if (获取Heat盘加热好的指定IC个数(2, true, count, out num2)) //如果已经加热好需要的IC个数
                                 {
                                     opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
                                     入料手臂抓料等待标记 = true;
@@ -4254,7 +4386,7 @@ namespace H5509_V2
                                     }
                                     else
                                     {
-                                        if (!获取Heat盘加热好的指定IC个数(1, 1, out num2)) //如果所有IC都已加热完成
+                                        if (!获取Heat盘加热好的指定IC个数(1, true, 1, out num2)) //如果所有IC都已加热完成
                                         {
                                             if (获取Heat盘指定状态IC个数(2, out num2)) //如果至少有一个加热好的IC
                                             {
@@ -4294,14 +4426,18 @@ namespace H5509_V2
                         }
                         else
                         {
-                            Thread.Sleep(10);
-                            PS入料手臂吸放料流程.StepID = 500;
-                            PS入料手臂吸放料流程.Processing = false;
+                            if(温度模式 == 0)
+                            {
+                                Thread.Sleep(10);
+                                PS入料手臂吸放料流程.StepID = 500;
+                                PS入料手臂吸放料流程.Processing = false;
+                            }
+                            else PS入料手臂吸放料流程.StepID = 511;
                         }
                         break;
 
                     case 511:
-                        if (!结批标记 && 获取Heat盘加热好的指定IC个数(0, 1, out num2)) //如果State：0的状态数量 >= 1 说明加热盘还没有放满
+                        if (!结批标记 && 获取Heat盘加热好的指定IC个数(0, false, 1, out num2)) //如果State：0的状态数量 >= 1 说明加热盘还没有放满
                         {
                             if (获取Heat盘未放IC的指定IC个数(0, out int num)) //如果需要放置的IC个数 >=1 && <=4
                             {
@@ -4313,7 +4449,7 @@ namespace H5509_V2
                             }
                             PS入料手臂吸放料流程.StepID = 515;
                         }
-                        else
+                        else //加热盘已经放满
                         {
                             PS入料手臂吸放料流程.StepID = 500;
                             PS入料手臂吸放料流程.Processing = false;
@@ -4340,7 +4476,7 @@ namespace H5509_V2
                     case 620:
                         PS入料手臂吸放料流程.StepName = "获取Heat盘吸料信息";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 0, true, out lsopen, out index);
+                        result = APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 0, true, 2, out lsopen, out index);
                         if (result == "Success")
                         {
                             xPos = HeatXPoint[xPoint];
@@ -4438,7 +4574,8 @@ namespace H5509_V2
                                     if (opens[i + index] == 1)
                                     {
                                         lsopen[i + index] = false;
-                                        LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] = false;
+                                        HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] = false;
+                                        HeatDicTimer[$"{xPoint},{yPoint + i * HeatInterval}"].Status = 0;
                                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料成功");
                                     }
                                     else Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料失败");
@@ -4596,8 +4733,37 @@ namespace H5509_V2
                             //Thread.Sleep(1000);
                             //Debug.WriteLine("进入换盘程序");
                             //LoaderTrayClear();
-                            Load换盘标记 = true;
-                            PS入料手臂吸放料流程.StepID = 805;
+                            if (!结批标记) //在这里判断为True，说明无待测盘时点了结批
+                            {
+                                Load换盘标记 = true;
+                                PS入料手臂吸放料流程.StepID = 805;
+                            }
+                            else //判断吸嘴上有没有料
+                            {
+                                if (opens.Contains(1)) //如果吸嘴上有料
+                                {
+                                    for (int i = 0; i < opens.Length; i++)
+                                    {
+                                        if (opens[i] != 1)
+                                        {
+                                            opens[i] = 2;
+                                            lsopen[i] = false;
+                                        }
+                                    }
+                                    入料吸嘴_吸放料(new bool[] { opens[0] == 2, opens[1] == 2, opens[2] == 2, opens[3] == 2 }, true, false); //防止一直吸真空
+                                    PS入料手臂吸放料流程.StepID = 555;
+                                }
+                                else //如果吸嘴上没有料,则直接停止放料
+                                {
+                                    for (int i = 0; i < opens.Length; i++)
+                                    {
+                                        opens[i] = 2;
+                                        lsopen[i] = false;
+                                    }
+                                    入料吸嘴_吸放料(new bool[] { true, true, true, true }, true, false); //防止一直吸真空
+                                    PS入料手臂吸放料流程.StepID = 555;
+                                }
+                            }
                         }
                         break;
 
@@ -5082,10 +5248,10 @@ namespace H5509_V2
                         if (获取Heat盘坐标(0, false, out xPoint, out yPoint))
                         {
                             Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->获取Heat盘坐标位置");
-                            APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 1, false, out lsopen, out index);
+                            APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 1, false, 0, out lsopen, out index);
                             xPos = HeatXPoint[xPoint];
                             yPos = HeatYPoint[yPoint] + index * HeatInterval * Heat_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
-                            PS出料手臂吸放料流程.StepID = 1010;
+                            PS入料手臂吸放料流程.StepID = 1010;
                         }
                         else
                         {
@@ -5457,8 +5623,7 @@ namespace H5509_V2
                             if (结批标记)
                             {
                                 Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->无待测盘结批");
-                                PS入料手臂吸放料流程.StepID = 500;
-                                PS入料手臂吸放料流程.Processing = false;
+                                PS入料手臂吸放料流程.StepID = 515;
                             }
                             else
                             {

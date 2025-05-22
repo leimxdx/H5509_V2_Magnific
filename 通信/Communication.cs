@@ -162,7 +162,6 @@ namespace H5509_V2
                             {
                                 Listtimer[site].Stop();
                                 timeOutTimer[site].Stop();
-
                                 if (Bin.ContainsKey(Convert.ToInt32(site)))
                                 {
                                     Bin[site] = bin;
@@ -262,7 +261,7 @@ namespace H5509_V2
                     break;
                 }
             }
-
+            SiteTestState[t] = 3;
             Iswaitout[t] = true;
             string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
             if (Bin.ContainsKey(t))
@@ -270,7 +269,6 @@ namespace H5509_V2
                 Bin[t] = bin;
             }
             else Bin.Add(t, bin);
-            SiteTestState[t] = 3;
             OutSiteQueue.Enqueue(t);
             BinSaveQueue.Enqueue(bin);
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
@@ -300,7 +298,7 @@ namespace H5509_V2
             }
 
 
-
+            SiteTestState[t] = 3;
             Iswaitout[t] = true;
             string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
             if (Bin.ContainsKey(t))
@@ -308,7 +306,6 @@ namespace H5509_V2
                 Bin[t] = bin;
             }
             else Bin.Add(t, bin);
-            SiteTestState[t] = 3;
             OutSiteQueue.Enqueue(t);
             BinSaveQueue.Enqueue(bin);
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
