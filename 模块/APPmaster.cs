@@ -287,6 +287,11 @@ namespace H5509_V2
             get { return 设置信息.Tray盘信息.Height; }
         }
 
+        public static OffsetPoint 点位微调
+        {
+            get { return 设置信息.OffsetPoint; }
+        }
+
         public static int Tray_X_Num
         {
             get { return 设置信息.Tray盘信息.X_Num; }

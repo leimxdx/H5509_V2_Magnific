@@ -1782,10 +1782,6 @@ namespace H5509_V2
             return result;
         }
 
-        #endregion IO控制与读取
-
-        #region 动作流程
-
         /// <summary>
         /// 检测沿信号
         /// </summary>
@@ -1823,6 +1819,11 @@ namespace H5509_V2
                 }
             }
         }
+
+        #endregion IO控制与读取
+
+
+        #region 动作流程
 
         public string Empty向上移动()
         {
@@ -2325,8 +2326,6 @@ namespace H5509_V2
             }
         }
 
-        #region 入料手臂流程
-
         public void 参数初始化()
         {
             Empty上顶标记 = 1;
@@ -2503,7 +2502,6 @@ namespace H5509_V2
             return iscanstart;
         }
 
-        #endregion
         public void debug()
         {
             short colums = 0;
