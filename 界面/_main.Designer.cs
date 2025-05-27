@@ -274,7 +274,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBox12 = new System.Windows.Forms.ComboBox();
             this.label147 = new System.Windows.Forms.Label();
@@ -362,6 +361,7 @@
             this.label144 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
+            this.uiDigitalLabel18 = new Sunny.UI.UIDigitalLabel();
             this.Panel_left.SuspendLayout();
             this.pal_setdutstate.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -3702,13 +3702,13 @@
             // 
             // uiPanel1
             // 
+            this.uiPanel1.Controls.Add(this.uiDigitalLabel18);
             this.uiPanel1.Controls.Add(this.label10);
             this.uiPanel1.Controls.Add(this.uiDigitalLabel17);
             this.uiPanel1.Controls.Add(this.label153);
             this.uiPanel1.Controls.Add(this.label8);
             this.uiPanel1.Controls.Add(this.label9);
             this.uiPanel1.Controls.Add(this.label7);
-            this.uiPanel1.Controls.Add(this.label5);
             this.uiPanel1.Controls.Add(this.label4);
             this.uiPanel1.Controls.Add(this.comboBox12);
             this.uiPanel1.Controls.Add(this.label147);
@@ -3746,7 +3746,7 @@
             this.label10.Enabled = false;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(738, 113);
+            this.label10.Location = new System.Drawing.Point(738, 114);
             this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 35);
@@ -3760,9 +3760,9 @@
             this.uiDigitalLabel17.BackColor = System.Drawing.Color.Lime;
             this.uiDigitalLabel17.DecimalPlaces = 1;
             this.uiDigitalLabel17.DigitalSize = 15;
-            this.uiDigitalLabel17.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiDigitalLabel17.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.uiDigitalLabel17.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel17.Location = new System.Drawing.Point(645, 214);
+            this.uiDigitalLabel17.Location = new System.Drawing.Point(645, 212);
             this.uiDigitalLabel17.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel17.Name = "uiDigitalLabel17";
             this.uiDigitalLabel17.RectSize = 2;
@@ -3820,24 +3820,12 @@
             this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold);
             this.label7.ForeColor = System.Drawing.Color.DarkViolet;
-            this.label7.Location = new System.Drawing.Point(529, 217);
+            this.label7.Location = new System.Drawing.Point(529, 216);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(92, 27);
             this.label7.TabIndex = 156;
             this.label7.Text = "当前温度";
-            // 
-            // label5
-            // 
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(645, 163);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(180, 35);
-            this.label5.TabIndex = 155;
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label4
             // 
@@ -3850,7 +3838,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(92, 27);
             this.label4.TabIndex = 154;
-            this.label4.Text = "温度设置";
+            this.label4.Text = "设定温度";
             // 
             // comboBox12
             // 
@@ -3862,7 +3850,7 @@
             "RT",
             "Eng",
             "Q-Test"});
-            this.comboBox12.Location = new System.Drawing.Point(645, 263);
+            this.comboBox12.Location = new System.Drawing.Point(645, 261);
             this.comboBox12.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox12.Name = "comboBox12";
             this.comboBox12.Size = new System.Drawing.Size(180, 35);
@@ -3886,14 +3874,13 @@
             this.label116.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label116.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.label116.ForeColor = System.Drawing.Color.Black;
-            this.label116.Location = new System.Drawing.Point(645, 113);
+            this.label116.Location = new System.Drawing.Point(645, 114);
             this.label116.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label116.Name = "label116";
             this.label116.Size = new System.Drawing.Size(89, 35);
             this.label116.TabIndex = 151;
             this.label116.Text = "常温";
             this.label116.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label116.Click += new System.EventHandler(this.label116_Click);
             // 
             // label117
             // 
@@ -3901,7 +3888,7 @@
             this.label117.BackColor = System.Drawing.Color.Transparent;
             this.label117.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold);
             this.label117.ForeColor = System.Drawing.Color.DarkViolet;
-            this.label117.Location = new System.Drawing.Point(529, 117);
+            this.label117.Location = new System.Drawing.Point(529, 118);
             this.label117.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label117.Name = "label117";
             this.label117.Size = new System.Drawing.Size(92, 27);
@@ -3913,7 +3900,7 @@
             this.Lbl_connectstate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Lbl_connectstate.Font = new System.Drawing.Font("微软雅黑", 15F);
             this.Lbl_connectstate.ForeColor = System.Drawing.Color.Black;
-            this.Lbl_connectstate.Location = new System.Drawing.Point(645, 63);
+            this.Lbl_connectstate.Location = new System.Drawing.Point(645, 65);
             this.Lbl_connectstate.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.Lbl_connectstate.Name = "Lbl_connectstate";
             this.Lbl_connectstate.Size = new System.Drawing.Size(180, 35);
@@ -3938,7 +3925,7 @@
             this.label132.BackColor = System.Drawing.Color.Transparent;
             this.label132.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold);
             this.label132.ForeColor = System.Drawing.Color.DarkViolet;
-            this.label132.Location = new System.Drawing.Point(529, 67);
+            this.label132.Location = new System.Drawing.Point(529, 69);
             this.label132.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(92, 27);
@@ -4996,6 +4983,24 @@
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
             // 
+            // uiDigitalLabel18
+            // 
+            this.uiDigitalLabel18.BackColor = System.Drawing.Color.White;
+            this.uiDigitalLabel18.DecimalPlaces = 1;
+            this.uiDigitalLabel18.DigitalSize = 15;
+            this.uiDigitalLabel18.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.uiDigitalLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel18.Location = new System.Drawing.Point(645, 163);
+            this.uiDigitalLabel18.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel18.Name = "uiDigitalLabel18";
+            this.uiDigitalLabel18.RectSize = 2;
+            this.uiDigitalLabel18.Size = new System.Drawing.Size(180, 35);
+            this.uiDigitalLabel18.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel18.TabIndex = 178;
+            this.uiDigitalLabel18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel18.Value = 36.1D;
+            this.uiDigitalLabel18.ZoomScaleDisabled = true;
+            // 
             // _main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5305,7 +5310,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label153;
         private Sunny.UI.UICheckBox Chk_switch1;
@@ -5379,5 +5383,6 @@
         private Sunny.UI.UIButton Btn_close9;
         private Sunny.UI.UIButton Btn_close11;
         private System.Windows.Forms.Label label10;
+        private Sunny.UI.UIDigitalLabel uiDigitalLabel18;
     }
 }

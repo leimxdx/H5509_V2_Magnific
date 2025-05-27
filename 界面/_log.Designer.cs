@@ -57,25 +57,33 @@
             this.txtLog = new Sunny.UI.UITextBox();
             this.txtkeyWords = new Sunny.UI.UITextBox();
             this.btnSelectKey = new Sunny.UI.UIButton();
+            this.uiTabControl6 = new Sunny.UI.UITabControl();
+            this.tabPage25 = new System.Windows.Forms.TabPage();
+            this.tabPage27 = new System.Windows.Forms.TabPage();
+            this.tabPage29 = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).BeginInit();
+            this.uiTabControl6.SuspendLayout();
+            this.tabPage25.SuspendLayout();
             this.SuspendLayout();
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(20, 13);
+            this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label2.Location = new System.Drawing.Point(25, 26);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(71, 16);
+            this.label2.Size = new System.Drawing.Size(74, 21);
             this.label2.TabIndex = 3;
             this.label2.Text = "日志等级";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(734, 13);
+            this.label3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label3.Location = new System.Drawing.Point(739, 26);
             this.label3.Margin = new System.Windows.Forms.Padding(30, 0, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(71, 16);
+            this.label3.Size = new System.Drawing.Size(74, 21);
             this.label3.TabIndex = 4;
             this.label3.Text = "开始时间";
             // 
@@ -83,7 +91,7 @@
             // 
             this.cbbLogLevel.DataSource = null;
             this.cbbLogLevel.FillColor = System.Drawing.Color.White;
-            this.cbbLogLevel.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbbLogLevel.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.cbbLogLevel.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.cbbLogLevel.Items.AddRange(new object[] {
             "全部输出-all",
@@ -92,7 +100,7 @@
             "错误-error",
             "警告-warning"});
             this.cbbLogLevel.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.cbbLogLevel.Location = new System.Drawing.Point(98, 7);
+            this.cbbLogLevel.Location = new System.Drawing.Point(103, 20);
             this.cbbLogLevel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbbLogLevel.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbbLogLevel.Name = "cbbLogLevel";
@@ -107,8 +115,8 @@
             // startTime
             // 
             this.startTime.FillColor = System.Drawing.Color.White;
-            this.startTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.startTime.Location = new System.Drawing.Point(812, 7);
+            this.startTime.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.startTime.Location = new System.Drawing.Point(817, 20);
             this.startTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.startTime.MaxLength = 19;
             this.startTime.MinimumSize = new System.Drawing.Size(63, 0);
@@ -129,8 +137,8 @@
             // endTime
             // 
             this.endTime.FillColor = System.Drawing.Color.White;
-            this.endTime.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.endTime.Location = new System.Drawing.Point(1169, 7);
+            this.endTime.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.endTime.Location = new System.Drawing.Point(1174, 20);
             this.endTime.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.endTime.MaxLength = 19;
             this.endTime.MinimumSize = new System.Drawing.Size(63, 0);
@@ -150,18 +158,19 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1091, 13);
+            this.label4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label4.Location = new System.Drawing.Point(1096, 26);
             this.label4.Margin = new System.Windows.Forms.Padding(30, 0, 3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 16);
+            this.label4.Size = new System.Drawing.Size(74, 21);
             this.label4.TabIndex = 8;
             this.label4.Text = "结束时间";
             // 
             // btnTimeSelect
             // 
             this.btnTimeSelect.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTimeSelect.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnTimeSelect.Location = new System.Drawing.Point(580, 51);
+            this.btnTimeSelect.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnTimeSelect.Location = new System.Drawing.Point(585, 64);
             this.btnTimeSelect.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.btnTimeSelect.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnTimeSelect.Name = "btnTimeSelect";
@@ -175,7 +184,7 @@
             // 
             this.cbbLogType.DataSource = null;
             this.cbbLogType.FillColor = System.Drawing.Color.White;
-            this.cbbLogType.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.cbbLogType.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.cbbLogType.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.cbbLogType.Items.AddRange(new object[] {
             "全部类型-all",
@@ -183,7 +192,7 @@
             "设备运行-run",
             "产能信息-spc"});
             this.cbbLogType.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.cbbLogType.Location = new System.Drawing.Point(455, 7);
+            this.cbbLogType.Location = new System.Drawing.Point(460, 20);
             this.cbbLogType.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cbbLogType.MinimumSize = new System.Drawing.Size(63, 0);
             this.cbbLogType.Name = "cbbLogType";
@@ -198,10 +207,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(377, 13);
+            this.label1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label1.Location = new System.Drawing.Point(382, 26);
             this.label1.Margin = new System.Windows.Forms.Padding(30, 0, 3, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 16);
+            this.label1.Size = new System.Drawing.Size(74, 21);
             this.label1.TabIndex = 11;
             this.label1.Text = "日志类型";
             // 
@@ -223,7 +233,7 @@
             this.dgv_data.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
@@ -246,14 +256,14 @@
             this.dgv_data.DefaultCellStyle = dataGridViewCellStyle7;
             this.dgv_data.EnableHeadersVisualStyles = false;
             this.dgv_data.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
-            this.dgv_data.Location = new System.Drawing.Point(90, 115);
+            this.dgv_data.Location = new System.Drawing.Point(29, 123);
             this.dgv_data.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
             this.dgv_data.Name = "dgv_data";
             this.dgv_data.ReadOnly = true;
             this.dgv_data.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F);
             dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
@@ -270,7 +280,7 @@
             this.dgv_data.RowTemplate.Height = 35;
             this.dgv_data.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_data.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_data.Size = new System.Drawing.Size(1242, 790);
+            this.dgv_data.Size = new System.Drawing.Size(1285, 712);
             this.dgv_data.TabIndex = 85;
             this.dgv_data.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_data_RowPostPaint);
             // 
@@ -322,9 +332,9 @@
             // lblTotalNum
             // 
             this.lblTotalNum.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblTotalNum.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lblTotalNum.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.lblTotalNum.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.lblTotalNum.Location = new System.Drawing.Point(1542, 908);
+            this.lblTotalNum.Location = new System.Drawing.Point(1104, 872);
             this.lblTotalNum.Name = "lblTotalNum";
             this.lblTotalNum.Size = new System.Drawing.Size(224, 51);
             this.lblTotalNum.TabIndex = 87;
@@ -337,8 +347,8 @@
             // txtLog
             // 
             this.txtLog.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtLog.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtLog.Location = new System.Drawing.Point(315, 54);
+            this.txtLog.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtLog.Location = new System.Drawing.Point(320, 67);
             this.txtLog.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtLog.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtLog.Name = "txtLog";
@@ -352,8 +362,8 @@
             // txtkeyWords
             // 
             this.txtkeyWords.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtkeyWords.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.txtkeyWords.Location = new System.Drawing.Point(737, 54);
+            this.txtkeyWords.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.txtkeyWords.Location = new System.Drawing.Point(742, 67);
             this.txtkeyWords.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtkeyWords.MinimumSize = new System.Drawing.Size(1, 16);
             this.txtkeyWords.Name = "txtkeyWords";
@@ -367,8 +377,8 @@
             // btnSelectKey
             // 
             this.btnSelectKey.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectKey.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnSelectKey.Location = new System.Drawing.Point(1002, 51);
+            this.btnSelectKey.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.btnSelectKey.Location = new System.Drawing.Point(1007, 64);
             this.btnSelectKey.MinimumSize = new System.Drawing.Size(1, 1);
             this.btnSelectKey.Name = "btnSelectKey";
             this.btnSelectKey.Size = new System.Drawing.Size(120, 35);
@@ -377,28 +387,85 @@
             this.btnSelectKey.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnSelectKey.Click += new System.EventHandler(this.btnSelectKey_Click);
             // 
+            // uiTabControl6
+            // 
+            this.uiTabControl6.Controls.Add(this.tabPage25);
+            this.uiTabControl6.Controls.Add(this.tabPage27);
+            this.uiTabControl6.Controls.Add(this.tabPage29);
+            this.uiTabControl6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.uiTabControl6.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
+            this.uiTabControl6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiTabControl6.ItemSize = new System.Drawing.Size(150, 40);
+            this.uiTabControl6.Location = new System.Drawing.Point(0, 0);
+            this.uiTabControl6.MainPage = "";
+            this.uiTabControl6.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            this.uiTabControl6.Name = "uiTabControl6";
+            this.uiTabControl6.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.uiTabControl6.SelectedIndex = 0;
+            this.uiTabControl6.Size = new System.Drawing.Size(1468, 990);
+            this.uiTabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
+            this.uiTabControl6.Style = Sunny.UI.UIStyle.Custom;
+            this.uiTabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.uiTabControl6.TabIndex = 179;
+            this.uiTabControl6.TabSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl6.TabSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl6.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
+            this.uiTabControl6.TabUnSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl6.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
+            this.uiTabControl6.TipsForeColor = System.Drawing.Color.Black;
+            // 
+            // tabPage25
+            // 
+            this.tabPage25.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage25.Controls.Add(this.label2);
+            this.tabPage25.Controls.Add(this.lblTotalNum);
+            this.tabPage25.Controls.Add(this.btnSelectKey);
+            this.tabPage25.Controls.Add(this.dgv_data);
+            this.tabPage25.Controls.Add(this.label3);
+            this.tabPage25.Controls.Add(this.txtkeyWords);
+            this.tabPage25.Controls.Add(this.cbbLogLevel);
+            this.tabPage25.Controls.Add(this.txtLog);
+            this.tabPage25.Controls.Add(this.startTime);
+            this.tabPage25.Controls.Add(this.label4);
+            this.tabPage25.Controls.Add(this.endTime);
+            this.tabPage25.Controls.Add(this.cbbLogType);
+            this.tabPage25.Controls.Add(this.btnTimeSelect);
+            this.tabPage25.Controls.Add(this.label1);
+            this.tabPage25.Location = new System.Drawing.Point(0, 40);
+            this.tabPage25.Name = "tabPage25";
+            this.tabPage25.Size = new System.Drawing.Size(1468, 950);
+            this.tabPage25.TabIndex = 2;
+            this.tabPage25.Text = "日志log";
+            // 
+            // tabPage27
+            // 
+            this.tabPage27.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage27.Location = new System.Drawing.Point(0, 40);
+            this.tabPage27.Name = "tabPage27";
+            this.tabPage27.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage27.TabIndex = 4;
+            this.tabPage27.Text = "通讯log";
+            // 
+            // tabPage29
+            // 
+            this.tabPage29.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage29.Location = new System.Drawing.Point(0, 40);
+            this.tabPage29.Name = "tabPage29";
+            this.tabPage29.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage29.TabIndex = 6;
+            this.tabPage29.Text = "温控器log";
+            // 
             // _log
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.btnSelectKey);
-            this.Controls.Add(this.txtkeyWords);
-            this.Controls.Add(this.txtLog);
-            this.Controls.Add(this.lblTotalNum);
-            this.Controls.Add(this.dgv_data);
-            this.Controls.Add(this.cbbLogType);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnTimeSelect);
-            this.Controls.Add(this.endTime);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.startTime);
-            this.Controls.Add(this.cbbLogLevel);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.uiTabControl6);
             this.Name = "_log";
             this.Size = new System.Drawing.Size(1468, 990);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).EndInit();
+            this.uiTabControl6.ResumeLayout(false);
+            this.tabPage25.ResumeLayout(false);
+            this.tabPage25.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -422,5 +489,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn LogLevel;
         private System.Windows.Forms.DataGridViewTextBoxColumn LogType;
         private System.Windows.Forms.DataGridViewTextBoxColumn LogContent;
+        private Sunny.UI.UITabControl uiTabControl6;
+        private System.Windows.Forms.TabPage tabPage25;
+        private System.Windows.Forms.TabPage tabPage27;
+        private System.Windows.Forms.TabPage tabPage29;
     }
 }

@@ -13,6 +13,8 @@ namespace H5509_V2
     {
         public string 档案名称 { get; set; }
 
+        public string 温度模式 { get; set; }
+
         public TrayInfo Tray盘信息 { get; set; } = new TrayInfo();
 
         public HeatInfo Heat盘信息 { get; set; } = new HeatInfo();

@@ -37,6 +37,12 @@ namespace H5509_V2
 
         public static bool InitedOK = false;
 
+        public static bool TCPConnect = false;
+
+        public static string TCPIP;
+
+        public static int TCPPort;
+
         public static List<IOInfo> IOList;
 
         public static List<AxisInfo> AxisInfoList;
@@ -53,13 +59,17 @@ namespace H5509_V2
 
         public static List<string> listcode = new List<string>(); //保存报警代码
 
+        public static DTMHelper dTMHelper; //温控器
+
         public static string 当前档案;
 
         public static string 当前权限;
 
+        public static bool 空跑模式;
+
         public static int 权限时间 { get; set; } = 60;
 
-        static public string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
+        public static string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
 
         public static bool IsStart = false; //开始
 
@@ -75,9 +85,28 @@ namespace H5509_V2
 
         public static bool IsForecePause = false; //强制停止
 
+        public static double 第二段速度 = 0.5;
+
         public static bool 退出标记 = false;
 
         public static int 设备状态 = 0;
+
+        public static int 温控状态 = 0;
+
+        public static bool 温控加热 = false;
+
+        public static bool 温控达温 = false;
+
+        public static double 设定温度
+        {
+            get { return 设置信息.Heat盘信息.设定温度; }
+            set { 设置信息.Heat盘信息.设定温度 = value; }
+        }
+
+        public static string 温度模式
+        {
+            get { return 设置信息.温度模式; }
+        }
 
         public static bool H5509归零 = false;
 
@@ -231,8 +260,6 @@ namespace H5509_V2
 
         public static int 飞梭2位置 = 0; //0:后面 1:前面
 
-        public static int 温度模式 = 0; //0:常温 1:高温
-
         public static bool 调机标记 = true;
 
         public static int Tray平移左右标记 = 0;
@@ -259,11 +286,19 @@ namespace H5509_V2
 
         public static DateTime 开始时间 = DateTime.Now;
 
+        public static DateTime 达温时间 = DateTime.Now;
+
         public static DateTime 按下结批时间 = DateTime.Now;
 
         public static DateTime 结束时间 = DateTime.Now;
 
+        public static double[] SiteTemp = new double[16];
+
+        public static double HeatTrayTemp = 0;
+
         public static TimeSpan 结批时间 { get { return 按下结批时间 - 结束时间; } }
+
+        public static TimeSpan 升温时间 { get { return 开始时间 - 达温时间; } }
 
         public static int UphNumber = 0;
 
@@ -286,6 +321,11 @@ namespace H5509_V2
             get { return 设置信息.Tray盘信息.Height; }
         }
 
+        public static HeatInfo 加热盘
+        {
+            get { return 设置信息.Heat盘信息; }
+        }
+
         public static OffsetPoint 点位微调
         {
             get { return 设置信息.OffsetPoint; }
@@ -295,6 +335,7 @@ namespace H5509_V2
         {
             get { return 设置信息.Tray盘信息.X_Num; }
         }
+
         public static int Tray_Y_Num
         {
             get { return 设置信息.Tray盘信息.Y_Num; }
@@ -883,6 +924,32 @@ namespace H5509_V2
                             Width = Convert.ToDouble(dr["width"].ToString()),
                             Length = Convert.ToDouble(dr["length"].ToString()),
                             Height = Convert.ToDouble(dr["height"].ToString()),
+                            设定温度 = Convert.ToDouble(dr["设定温度"].ToString()),
+                            波动温度 = Convert.ToDouble(dr["波动温度"].ToString()),
+                            波动延时报警 = Convert.ToInt32(dr["波动延时报警"].ToString()),
+                            达温波动报警 = Convert.ToInt32(dr["达温波动报警"].ToString()),
+                            报警温度 = Convert.ToDouble(dr["报警温度"].ToString()),
+                            超温温度 = Convert.ToDouble(dr["超温温度"].ToString()),
+                            升温超时报警 = Convert.ToInt32(dr["升温超时报警"].ToString()),
+                            达温标准 = dr["达温标准"].ToString(),
+                            探头类型 = dr["探头类型"].ToString(),
+                            温控器温度补偿 = Convert.ToDouble(dr["温控器温度补偿"].ToString()),
+                            Site1温度补偿 = Convert.ToDouble(dr["Site1温度补偿"].ToString()),
+                            Site2温度补偿 = Convert.ToDouble(dr["Site2温度补偿"].ToString()),
+                            Site3温度补偿 = Convert.ToDouble(dr["Site3温度补偿"].ToString()),
+                            Site4温度补偿 = Convert.ToDouble(dr["Site4温度补偿"].ToString()),
+                            Site5温度补偿 = Convert.ToDouble(dr["Site5温度补偿"].ToString()),
+                            Site6温度补偿 = Convert.ToDouble(dr["Site6温度补偿"].ToString()),
+                            Site7温度补偿 = Convert.ToDouble(dr["Site7温度补偿"].ToString()),
+                            Site8温度补偿 = Convert.ToDouble(dr["Site8温度补偿"].ToString()),
+                            Site9温度补偿 = Convert.ToDouble(dr["Site9温度补偿"].ToString()),
+                            Site10温度补偿 = Convert.ToDouble(dr["Site10温度补偿"].ToString()),
+                            Site11温度补偿 = Convert.ToDouble(dr["Site11温度补偿"].ToString()),
+                            Site12温度补偿 = Convert.ToDouble(dr["Site12温度补偿"].ToString()),
+                            Site13温度补偿 = Convert.ToDouble(dr["Site13温度补偿"].ToString()),
+                            Site14温度补偿 = Convert.ToDouble(dr["Site14温度补偿"].ToString()),
+                            Site15温度补偿 = Convert.ToDouble(dr["Site15温度补偿"].ToString()),
+                            Site16温度补偿 = Convert.ToDouble(dr["Site16温度补偿"].ToString()),
                         };
                     }
                     else result = $"无加热盘{name}信息";
@@ -1144,6 +1211,8 @@ namespace H5509_V2
                     switch (item["name"].ToString())
                     {
                         case "当前档案": 当前档案 = value; break;
+                        case "TCPIP": TCPIP = value; break;
+                        case "TCPPort": TCPPort = Convert.ToInt32(value); break;
                     }
                 }
             }
@@ -1205,6 +1274,7 @@ namespace H5509_V2
                     设置信息.开site信息.Site名称 = reader["site名称"].ToString();
                     设置信息.分BIN信息.分BIN名称 = reader["分BIN名称"].ToString();
                     设置信息.测试机信息.测试机名称 = reader["测试机名称"].ToString();
+                    设置信息.温度模式 = reader["温度模式"].ToString();
                 }
                 else result = $"无档案{name}信息";
             }
@@ -1622,7 +1692,6 @@ namespace H5509_V2
 
             else return "Success";
         }
-
 
         /// <summary>
         /// Loader TrayIC点位初始化
@@ -2188,7 +2257,6 @@ namespace H5509_V2
             return false;
         }
 
-
         public static bool 获取Load盘坐标(bool ishave, out short xPoint, out short yPoint)
         {
             xPoint = yPoint = 0;
@@ -2259,7 +2327,7 @@ namespace H5509_V2
             else return false;
         }
 
-        public static bool 获取Heat盘加热好的指定IC个数(int status, bool ishave,  int num, out int num2)
+        public static bool 获取Heat盘加热好的指定IC个数(int status, bool ishave, int num, out int num2)
         {
             num2 = 0;
             for (short x = 0; x < HeatXPoint.Length; x++)
@@ -2726,6 +2794,37 @@ namespace H5509_V2
             }
         }
 
+        public static bool[] 检测温度(double tempmin, double tempmax)
+        {
+            bool[] tempopen = new bool[17];
+
+            if (HeatTrayTemp != 32770)
+            {
+                if (HeatTrayTemp < tempmax && HeatTrayTemp > tempmin)
+                {
+                    tempopen[0] = true;
+                }
+            }
+
+            for (int i = 0; i < SiteTemp.Length; i++)
+            {
+                bool[] open = GetSiteOpen(i);
+                if (open.Contains(true))
+                {
+                    if (SiteTemp[i] != 32770)
+                    {
+                        if (SiteTemp[i] < tempmax && HeatTrayTemp > tempmin)
+                        {
+                            tempopen[i + 1] = true;
+                        }
+                    }
+                }
+                else tempopen[i + 1] = true; //没有开Site默认达温
+            }
+
+            return tempopen;
+        }
+
         public static void 放料目标值()
         {
             SiteStatus siteStatus = 设置信息.开site信息;
@@ -2896,7 +2995,6 @@ namespace H5509_V2
             }
             return "Success";
         }
-
 
         public static void 获取Auto1盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, int index, string[] bin)
         {

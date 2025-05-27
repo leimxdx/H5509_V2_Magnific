@@ -9,6 +9,7 @@ using System.Linq;
 using System.Reflection;
 using System.Resources;
 using System.Security.Cryptography;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -46,6 +47,7 @@ namespace H5509_V2
         public Control[] GNM601LimitP = new Control[6];
 
         public Action 刷新分BIN信息;
+        public Action 刷新温度信息;
 
         public _setting()
         {
@@ -1177,7 +1179,7 @@ namespace H5509_V2
             return result;
         }
 
-        private string WaitAxisMove(AxisRun axisRun, int prfPos)
+        private string WaitAxisMove(AxisRun axisRun, int prfPos, int type = 0, int move = 0, int pos2 = 0)
         {
             string result = motion.CommonInitedValidate();
 
@@ -1188,10 +1190,31 @@ namespace H5509_V2
                 int sts;
                 bool isException = false;
                 string errortxt = "";
+                bool issecond = false;
                 do
                 {
                     short error = GTN_GetSts(axisRun.核号, axisRun.轴号, out sts, 1, out uint pClock);
                     motion.ErrorHandler($"GTN_GetSts({axisRun.核号}, {axisRun.轴号}, out {sts}, 1, out uint pClock)", error);
+
+                    if (move == 1 && !issecond)
+                    {
+                        motionEx.GetCmdPrfPos(axisRun.轴名称, out int prfPos1); //规划位置
+                        motionEx.GetCmdEncPos(axisRun.轴名称, out double encPos1); //实时位置
+                        double posvalue1 = Math.Abs(prfPos1 - encPos1);
+                        if (posvalue1 > pos2)
+                        {
+                            issecond = true;
+                            axisRun.目标速度 = axisRun.目标速度 * 第二段速度;
+
+                            // 设置AXIS轴的目标速度
+                            error = GTN_SetVel(axisRun.核号, axisRun.轴号, axisRun.目标速度);
+                            motion.ErrorHandler("GTN_SetVel", error);
+
+                            // 启动AXIS轴的运动
+                            error = GTN_Update(axisRun.核号, 1 << (axisRun.轴号 - 1));
+                            motion.ErrorHandler("GTN_Update", error);
+                        }
+                    }
 
                     if (((sts & (1 << 1)) == 1))
                     {
@@ -1336,7 +1359,7 @@ namespace H5509_V2
             return "Success";
         }
 
-        private string 单轴绝对运动(string axisName, double pos)
+        private string 单轴绝对运动(string axisName, double pos, int type = 0, int move = 0, int pos2 = 0)
         {
             string result = APPmaster.GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
             if (result == "Success")
@@ -1358,7 +1381,7 @@ namespace H5509_V2
                 {
                     Task<string> task = Task.Run(() =>
                     {
-                        return WaitAxisMove(axisRun, axisRun.目标位置);
+                        return WaitAxisMove(axisRun, axisRun.目标位置, type, move, pos2);
                     });
                     result = task.Result;
                 }
@@ -2575,6 +2598,19 @@ namespace H5509_V2
             uiTextBox1.Text = dt.Rows[0]["档案名称"].ToString();
             uiComboBox1.Text = dt.Rows[0]["tray盘名称"].ToString();
             uiComboBox2.Text = dt.Rows[0]["加热盘名称"].ToString();
+            string tempmode = dt.Rows[0]["温度模式"].ToString();
+            if (tempmode == "常温")
+            {
+                uiCheckBox192.Checked = true;
+                uiCheckBox193.Checked = false;
+            }
+            else
+            {
+                uiCheckBox192.Checked = false;
+                uiCheckBox193.Checked = true;
+            }
+            label355.Visible = uiCheckBox193.Checked;
+            uiComboBox2.Visible = uiCheckBox193.Checked;
         }
 
         private void 刷新测试机(string name)
@@ -2871,34 +2907,50 @@ namespace H5509_V2
             刷新手臂点位(value, uiTabControl8.SelectedTab.Text);
         }
 
-        private void 刷新加热盘(string name)
+        private void 刷新加热盘(HeatInfo heatInfo)
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from HeatInfo where name = '{name}'", out DataTable dt);
-            if (result == "Success")
-            {
-                try
-                {
-                    if (dt.Rows.Count > 0)
-                    {
-                        DataRow datarow = dt.Rows[0];
-                        textBox57.Text = datarow["name"].ToString();
-                        textBox60.Text = datarow["xnum"].ToString();
-                        textBox59.Text = datarow["ynum"].ToString();
-                        textBox58.Text = datarow["xstart"].ToString();
-                        textBox56.Text = datarow["ystart"].ToString();
-                        textBox55.Text = datarow["xpitch"].ToString();
-                        textBox54.Text = datarow["ypitch"].ToString();
-                        textBox53.Text = datarow["width"].ToString();
-                        textBox52.Text = datarow["length"].ToString();
-                        textBox51.Text = datarow["height"].ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine($"刷新加热盘{name}信息异常!" + ex.Message);
-                    MessageBox.Show($"刷新加热盘{name}信息异常!" + ex.Message);
-                }
-            }
+            uiComboBox8.Items.Clear();
+            uiComboBox8.Items.AddRange(new string[] { "平均数", "中位数", "最小值", "最大值", "去极值平均" });
+            uiComboBox9.Items.Clear();
+            uiComboBox9.Items.AddRange(new string[] { "PT100", "K" });
+
+            textBox57.Text = heatInfo.HeatName;
+            textBox60.Text = heatInfo.X_Num.ToString();
+            textBox59.Text = heatInfo.Y_Num.ToString();
+            textBox58.Text = heatInfo.X_Start.ToString();
+            textBox56.Text = heatInfo.Y_Start.ToString();
+            textBox55.Text = heatInfo.X_Pitch.ToString();
+            textBox54.Text = heatInfo.Y_Pitch.ToString();
+            textBox53.Text = heatInfo.Width.ToString();
+            textBox52.Text = heatInfo.Length.ToString();
+            textBox51.Text = heatInfo.Height.ToString();
+            textBox24.Text = heatInfo.HeatName;
+            numericUpDown129.Text = heatInfo.设定温度.ToString();
+            numericUpDown130.Text = heatInfo.波动温度.ToString();
+            numericUpDown134.Text = heatInfo.波动延时报警.ToString();
+            numericUpDown154.Text = heatInfo.达温波动报警.ToString();
+            numericUpDown131.Text = heatInfo.报警温度.ToString();
+            numericUpDown132.Text = heatInfo.超温温度.ToString();
+            numericUpDown133.Text = heatInfo.升温超时报警.ToString();
+            uiComboBox8.Text = heatInfo.达温标准.ToString();
+            uiComboBox9.Text = heatInfo.探头类型.ToString();
+            numericUpDown135.Text = heatInfo.温控器温度补偿.ToString();
+            numericUpDown136.Text = heatInfo.Site1温度补偿.ToString();
+            numericUpDown137.Text = heatInfo.Site2温度补偿.ToString();
+            numericUpDown139.Text = heatInfo.Site3温度补偿.ToString();
+            numericUpDown138.Text = heatInfo.Site4温度补偿.ToString();
+            numericUpDown143.Text = heatInfo.Site5温度补偿.ToString();
+            numericUpDown142.Text = heatInfo.Site6温度补偿.ToString();
+            numericUpDown141.Text = heatInfo.Site7温度补偿.ToString();
+            numericUpDown140.Text = heatInfo.Site8温度补偿.ToString();
+            numericUpDown147.Text = heatInfo.Site9温度补偿.ToString();
+            numericUpDown146.Text = heatInfo.Site10温度补偿.ToString();
+            numericUpDown145.Text = heatInfo.Site11温度补偿.ToString();
+            numericUpDown144.Text = heatInfo.Site12温度补偿.ToString();
+            numericUpDown151.Text = heatInfo.Site13温度补偿.ToString();
+            numericUpDown150.Text = heatInfo.Site14温度补偿.ToString();
+            numericUpDown149.Text = heatInfo.Site15温度补偿.ToString();
+            numericUpDown148.Text = heatInfo.Site16温度补偿.ToString();
         }
 
         private void 刷新梭车(string name)
@@ -2989,13 +3041,12 @@ namespace H5509_V2
             if (rows >= 0)
             {
                 string name = uiDataGridView3.Rows[rows].Cells[1].Value.ToString();
-                if (tabpagetext == "加热盘")
+
+                string result = GetHeatInfo(name, out HeatInfo heatInfo);
+
+                if (result == "Success")
                 {
-                    刷新加热盘(name);
-                }
-                else if (tabpagetext == "取放设定")
-                {
-                    //刷新取放设定(name);
+                    刷新加热盘(heatInfo);
                 }
             }
         }
@@ -3527,7 +3578,7 @@ namespace H5509_V2
             button72.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M20_飞梭轴", pos);
+                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 5000);
                 if (result != "Success") Debug.WriteLine("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
@@ -3544,7 +3595,7 @@ namespace H5509_V2
             button72.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M20_飞梭轴", pos);
+                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 5000);
                 if (result != "Success") Debug.WriteLine("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
@@ -4246,9 +4297,12 @@ namespace H5509_V2
                             MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
+                        string tempmode = uiCheckBox192.Checked ? "常温" : "高温";
+
+                        string heatname = uiCheckBox192.Checked ? "默认" : uiComboBox2.Text;
 
                         string trayname = uiComboBox1.Text;
-                        string heatname = uiComboBox2.Text;
+
 
                         if (trayname != setupInfo.Tray盘信息.TrayName)
                         {
@@ -4275,6 +4329,7 @@ namespace H5509_V2
                                 MessageBox.Show("tray盘名称保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
+
                         if (heatname != setupInfo.Heat盘信息.HeatName)
                         {
                             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 加热盘名称 = '{heatname}' where 档案名称 = '{name}'");
@@ -4286,14 +4341,34 @@ namespace H5509_V2
                                     result = GetHeatInfo(heatname, out HeatInfo heatInfo);
                                     if (result == "Success")
                                     {
+                                        设置信息.温度模式 = tempmode;
                                         设置信息.Heat盘信息 = heatInfo;
                                         HeatTrayICPointInit();
+                                        刷新温度信息();
                                     }
                                 }
                             }
                             else
                             {
                                 MessageBox.Show("Heat盘名称保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+
+                        if (tempmode != setupInfo.温度模式)
+                        {
+                            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 温度模式 = '{tempmode}' where 档案名称 = '{name}'");
+                            if (line >= 1)
+                            {
+                                Debug.WriteLine($"档案名称:[{name}]:温度模式:{setupInfo.温度模式}->{tempmode}:更新成功");
+                                if (tempmode != 设置信息.温度模式)
+                                {
+                                    设置信息.温度模式 = tempmode;
+                                    刷新温度信息();
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("温度模式保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
@@ -5844,6 +5919,33 @@ namespace H5509_V2
                     Width = Convert.ToDouble(textBox53.Text),
                     Length = Convert.ToDouble(textBox52.Text),
                     Height = Convert.ToDouble(textBox51.Text),
+                    设定温度 = Convert.ToDouble(numericUpDown129.Text),
+                    波动温度 = Convert.ToDouble(numericUpDown130.Text),
+                    波动延时报警 = Convert.ToInt32(numericUpDown134.Text),
+                    达温波动报警 = Convert.ToInt32(numericUpDown154.Text),
+                    报警温度 = Convert.ToDouble(numericUpDown131.Text),
+                    超温温度 = Convert.ToDouble(numericUpDown132.Text),
+                    升温超时报警 = Convert.ToInt32(numericUpDown133.Text),
+                    达温标准 = uiComboBox8.Text,
+                    探头类型 = uiComboBox9.Text,
+                    温控器温度补偿 = Convert.ToDouble(numericUpDown135.Text),
+                    Site1温度补偿 = Convert.ToDouble(numericUpDown136.Text),
+                    Site2温度补偿 = Convert.ToDouble(numericUpDown137.Text),
+                    Site3温度补偿 = Convert.ToDouble(numericUpDown139.Text),
+                    Site4温度补偿 = Convert.ToDouble(numericUpDown138.Text),
+                    Site5温度补偿 = Convert.ToDouble(numericUpDown143.Text),
+                    Site6温度补偿 = Convert.ToDouble(numericUpDown142.Text),
+                    Site7温度补偿 = Convert.ToDouble(numericUpDown141.Text),
+                    Site8温度补偿 = Convert.ToDouble(numericUpDown140.Text),
+                    Site9温度补偿 = Convert.ToDouble(numericUpDown147.Text),
+                    Site10温度补偿 = Convert.ToDouble(numericUpDown146.Text),
+                    Site11温度补偿 = Convert.ToDouble(numericUpDown145.Text),
+                    Site12温度补偿 = Convert.ToDouble(numericUpDown144.Text),
+                    Site13温度补偿 = Convert.ToDouble(numericUpDown151.Text),
+                    Site14温度补偿 = Convert.ToDouble(numericUpDown150.Text),
+                    Site15温度补偿 = Convert.ToDouble(numericUpDown149.Text),
+                    Site16温度补偿 = Convert.ToDouble(numericUpDown148.Text),
+
                 };
 
                 int rows = uiDataGridView3.SelectedIndex;
@@ -5863,11 +5965,37 @@ namespace H5509_V2
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "width", newheatInfo.Width, oldheatInfo.Width);
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "length", newheatInfo.Length, oldheatInfo.Length);
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "height", newheatInfo.Height, oldheatInfo.Height);
-
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "设定温度", newheatInfo.设定温度, oldheatInfo.设定温度);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "波动温度", newheatInfo.波动温度, oldheatInfo.波动温度);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "波动延时报警", newheatInfo.波动延时报警, oldheatInfo.波动延时报警);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "达温波动报警", newheatInfo.达温波动报警, oldheatInfo.达温波动报警);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "报警温度", newheatInfo.报警温度, oldheatInfo.报警温度);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "超温温度", newheatInfo.超温温度, oldheatInfo.超温温度);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "升温超时报警", newheatInfo.升温超时报警, oldheatInfo.升温超时报警);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "达温标准", newheatInfo.达温标准, oldheatInfo.达温标准);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "探头类型", newheatInfo.探头类型, oldheatInfo.探头类型);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "温控器温度补偿", newheatInfo.温控器温度补偿, oldheatInfo.温控器温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site1温度补偿", newheatInfo.Site1温度补偿, oldheatInfo.Site1温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site2温度补偿", newheatInfo.Site2温度补偿, oldheatInfo.Site2温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site3温度补偿", newheatInfo.Site3温度补偿, oldheatInfo.Site3温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site4温度补偿", newheatInfo.Site4温度补偿, oldheatInfo.Site4温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site5温度补偿", newheatInfo.Site5温度补偿, oldheatInfo.Site5温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site6温度补偿", newheatInfo.Site6温度补偿, oldheatInfo.Site6温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site7温度补偿", newheatInfo.Site7温度补偿, oldheatInfo.Site7温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site8温度补偿", newheatInfo.Site8温度补偿, oldheatInfo.Site8温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site9温度补偿", newheatInfo.Site9温度补偿, oldheatInfo.Site9温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site10温度补偿", newheatInfo.Site10温度补偿, oldheatInfo.Site10温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site11温度补偿", newheatInfo.Site11温度补偿, oldheatInfo.Site11温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site12温度补偿", newheatInfo.Site12温度补偿, oldheatInfo.Site12温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site13温度补偿", newheatInfo.Site13温度补偿, oldheatInfo.Site13温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site14温度补偿", newheatInfo.Site14温度补偿, oldheatInfo.Site14温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site15温度补偿", newheatInfo.Site15温度补偿, oldheatInfo.Site15温度补偿);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "Site16温度补偿", newheatInfo.Site16温度补偿, oldheatInfo.Site16温度补偿);
                         if (oldheatInfo.HeatName == 设置信息.Heat盘信息.HeatName)
                         {
                             设置信息.Heat盘信息 = newheatInfo;
                             HeatTrayICPointInit();
+                            刷新温度信息();
                         }
                     }
                     else MessageBox.Show("获取Heat盘信息失败!" + result);
@@ -5900,14 +6028,8 @@ namespace H5509_V2
             if (rows >= 0)
             {
                 string tabtext = uiTabControl9.SelectedTab.Text;
-                if (tabtext == "加热盘")
-                {
-                    保存Heat盘();
-                }
-                else if (tabtext == "取放设定")
-                {
 
-                }
+                保存Heat盘();
             }
         }
 
@@ -5948,6 +6070,20 @@ namespace H5509_V2
             }
             return false;
         }
+        public bool UpdateHeatInfo(string name, string trayname, string fiedname, string newvalue, string oldvalue)
+        {
+            if (newvalue != oldvalue)
+            {
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
+                if (line >= 1)
+                {
+                    Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    return true;
+                }
+                else Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+            }
+            return false;
+        }
 
         public bool UpdateOffsetPointData(string icname, string otname, string ptname, double newvalue, double oldvalue)
         {
@@ -5962,6 +6098,142 @@ namespace H5509_V2
                 else Debug.WriteLine($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
+        }
+
+        private void button227_Click(object sender, EventArgs e)
+        {
+            handler.debug();
+        }
+
+        private void button228_Click(object sender, EventArgs e)
+        {
+            int chl = Convert.ToInt32(numericUpDown128.Value);
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            double vaule = Convert.ToDouble(numericUpDown126.Value);
+            string result = dTMHelper.WriteSv(staID, chl, vaule);
+            if (result != "Success")
+            {
+                MessageBox.Show("设定失败!" + result);
+            }
+        }
+
+        private void button229_Click(object sender, EventArgs e)
+        {
+            int chl = Convert.ToInt32(numericUpDown128.Value);
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            string result = dTMHelper.ReadSv(staID, chl, out short[] value);
+            if (result != "Success")
+            {
+                MessageBox.Show("读取失败!" + result);
+            }
+            else uiTextBox3.Text = ((double)value[0] / 10).ToString(); //(value / 10).Tostring();
+        }
+
+        private void button230_Click(object sender, EventArgs e)
+        {
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            string result = dTMHelper.ReadSv(staID, out short[] value);
+            if (result != "Success")
+            {
+                MessageBox.Show("读取失败!" + result);
+            }
+            string strvaue = (value[0] / 10).ToString() + ",";
+            for (int i = 1; i < value.Length; i++)
+            {
+                strvaue += (value[i] / 10).ToString() + ",";
+            }
+            Debug.WriteLine(strvaue);
+            uiTextBox4.Text = strvaue;
+        }
+
+        private void button231_Click(object sender, EventArgs e)
+        {
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            double vaule = Convert.ToDouble(numericUpDown126.Value);
+            for (int i = 0; i < 8; i++)
+            {
+                string result = dTMHelper.WriteSv(staID, i, vaule);
+                if (result != "Success")
+                {
+                    MessageBox.Show("设定失败!" + result);
+                }
+            }
+        }
+
+        private void button232_Click(object sender, EventArgs e)
+        {
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            string result = dTMHelper.ReadSvMax(staID, out short[] value);
+            if (result != "Success")
+            {
+                MessageBox.Show("读取失败!" + result);
+            }
+            string strvaue = (value[0] / 10).ToString() + ",";
+            for (int i = 1; i < value.Length; i++)
+            {
+                strvaue += (value[i] / 10).ToString() + ",";
+            }
+            Debug.WriteLine(strvaue);
+            uiTextBox5.Text = strvaue;
+        }
+
+        private void button233_Click(object sender, EventArgs e)
+        {
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            string result = dTMHelper.ReadSvMin(staID, out short[] value);
+            if (result != "Success")
+            {
+                MessageBox.Show("读取失败!" + result);
+            }
+            string strvaue = (value[0] / 10).ToString() + ",";
+            for (int i = 1; i < value.Length; i++)
+            {
+                strvaue += (value[i] / 10).ToString() + ",";
+            }
+            Debug.WriteLine(strvaue);
+            uiTextBox6.Text = strvaue;
+        }
+
+        private void button234_Click(object sender, EventArgs e)
+        {
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            double vaule = Convert.ToDouble(numericUpDown126.Value);
+            for (int i = 0; i < 8; i++)
+            {
+                string result = dTMHelper.WriteSvMax(staID, i, vaule);
+                if (result != "Success")
+                {
+                    MessageBox.Show("设定失败!" + result);
+                }
+            }
+        }
+
+        private void button235_Click(object sender, EventArgs e)
+        {
+            int staID = Convert.ToInt32(numericUpDown127.Value);
+            double vaule = Convert.ToDouble(numericUpDown126.Value);
+            for (int i = 0; i < 8; i++)
+            {
+                string result = dTMHelper.WriteSvMin(staID, i, vaule);
+                if (result != "Success")
+                {
+                    MessageBox.Show("设定失败!" + result);
+                }
+            }
+        }
+
+        private void uiCheckBox192_Click(object sender, EventArgs e)
+        {
+            uiCheckBox193.Checked = !uiCheckBox192.Checked;
+            label355.Visible = uiCheckBox193.Checked;
+            uiComboBox2.Visible = uiCheckBox193.Checked;
+        }
+
+        private void uiCheckBox193_Click(object sender, EventArgs e)
+        {
+            uiCheckBox192.Checked = !uiCheckBox193.Checked;
+            label355.Visible = uiCheckBox193.Checked;
+            uiComboBox2.Visible = uiCheckBox193.Checked;
         }
     }
 }

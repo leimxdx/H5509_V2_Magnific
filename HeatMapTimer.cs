@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ttimer = System.Timers.Timer;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -11,11 +12,17 @@ namespace H5509_V2
     {
         public Ttimer Timer { get; set; }
 
+        public Ttimer WaitTimer { get; set; }
+
         public HeatMapTimer()
         {
             Timer = new Ttimer();
             Timer.Interval = 120 * 1000; //2分钟
             Timer.Elapsed += TimerHeatTick;
+
+            WaitTimer = new Ttimer();
+            WaitTimer.Interval = 500;
+            WaitTimer.Elapsed += WaitTimerHeatTick;
         }
 
         public DateTime StartHeatTime = DateTime.Now;
@@ -29,28 +36,45 @@ namespace H5509_V2
 
         private int status;
 
-        public int Status 
+        public int Status
         {
-            get 
+            get
             {
                 return status;
             }
-            set 
+            set
             {
                 status = value;
                 if (status == 1)
                 {
-                    Timer.Start();
+                    if (温度模式 == "常温") Timer.Start();
+                    else
+                    {
+                        if (温控达温) //如果达温了直接开始倒计时
+                        {
+                            Timer.Start();
+                        }
+                        else //如果未达温则等达温后再开始倒计时
+                        {
+                            WaitTimer.Start();
+                        }
+                    }
                 }
             }
         }
 
         private void TimerHeatTick(object sender, EventArgs e)
         {
-            if (sender is Ttimer timer)
+            Timer.Stop();
+            Status = 2;
+        }
+
+        private void WaitTimerHeatTick(object sender, EventArgs e)
+        {
+            if (温控达温)
             {
-                timer.Stop();
-                Status = 2;
+                WaitTimer.Stop();
+                Timer.Start();
             }
         }
     }

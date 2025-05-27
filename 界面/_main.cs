@@ -16,6 +16,10 @@ namespace H5509_V2
     {
         public Task RefreshData;
 
+        public MotionEx motionEx = MotionEx.GetInstance();
+
+        public Handler handler = new Handler();
+
         /// <summary>
         /// 设备状态灯闪烁
         /// </summary>
@@ -56,6 +60,8 @@ namespace H5509_V2
         private UIButton[] Btn_Open;
 
         private UIButton[] Btn_Close;
+
+        private UIDigitalLabel[] Lbl_Temp;
 
         public _main()
         {
@@ -101,6 +107,26 @@ namespace H5509_V2
                 Btn_close9, Btn_close10, Btn_close11, Btn_close12,
                 Btn_close13, Btn_close14, Btn_close15, Btn_close16,
             };
+
+            Lbl_Temp = new UIDigitalLabel[]
+            {
+                uiDigitalLabel1,
+                uiDigitalLabel2,
+                uiDigitalLabel3,
+                uiDigitalLabel4,
+                uiDigitalLabel5,
+                uiDigitalLabel6,
+                uiDigitalLabel7,
+                uiDigitalLabel8,
+                uiDigitalLabel9,
+                uiDigitalLabel10,
+                uiDigitalLabel11,
+                uiDigitalLabel12,
+                uiDigitalLabel13,
+                uiDigitalLabel14,
+                uiDigitalLabel15,
+                uiDigitalLabel16,
+            };
         }
 
         private void _main_Load(object sender, EventArgs e)
@@ -127,6 +153,8 @@ namespace H5509_V2
             }
             textBoxmachine.Text = Environment.MachineName;
             //comboBox1.SelectedIndexChanged += comboBox1_SelectedValueChanged;
+
+            //刷新温度显示();
 
             //Open/Close按钮绑定
             WindowsButtonBind();
@@ -571,6 +599,7 @@ namespace H5509_V2
                                 {
                                     刷新分BIN信息();
                                     刷新开Site状态();
+                                    刷新温度显示();
                                     ischange = true;
                                     Debug.WriteLine($"档案切换[{当前档案}]->[{comboBox1.Text.Trim()}]");
                                     当前档案 = value;
@@ -740,7 +769,7 @@ namespace H5509_V2
                     }
                 }
             }
-            ;
+            
             开Site数量 = open;
             关Site数量 = close;
         }
@@ -1015,6 +1044,22 @@ namespace H5509_V2
                         }
                         else label153.Visible = false;
 
+                        if (TCPConnect)
+                        {
+                            for (int i = 0; i < Lbl_Temp.Length; i++)
+                            {
+                                if (SiteTemp[i] != 32770)
+                                {
+                                    Lbl_Temp[i].Value = SiteTemp[i];
+                                }
+                                else
+                                {
+                                    Lbl_Temp[i].Value = 0;
+                                }
+                            }
+                            uiDigitalLabel17.Value = HeatTrayTemp;
+                        }
+
                     }));
                     Thread.Sleep(100);
                 }
@@ -1026,36 +1071,45 @@ namespace H5509_V2
             }
         }
 
-        private void label116_Click(object sender, EventArgs e)
-        {
-            if (设备状态 == 0)
-            {
-                if (label116.Text == "常温")
-                {
-                    DialogResult dialog = MessageBox.Show($"请确认是否切换为高温模式", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    if (dialog == DialogResult.OK)
-                    {
-                        温度模式 = 1;
-                        label10.Text = "停止";
-                        label10.Enabled = true;
-                        label116.Text = "高温";
-                        label116.BackColor = Color.Red;
-                    }
-                }
-                else
-                {
-                    DialogResult dialog = MessageBox.Show($"请确认是否切换为常温模式", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                    if (dialog == DialogResult.OK)
-                    {
-                        温度模式 = 0;
-                        label10.Text = "开启";
-                        label10.Enabled = false;
-                        label116.Text = "常温";
-                        label116.BackColor = System.Drawing.SystemColors.ControlDark;
-                    }
-                }
-            }
-        }
+        //private void label116_Click(object sender, EventArgs e)
+        //{
+        //    if (设备状态 == 0)
+        //    {
+        //        if (label116.Text == "常温")
+        //        {
+        //            DialogResult dialog = MessageBox.Show($"请确认是否切换为高温模式", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+        //            if (dialog == DialogResult.OK)
+        //            {
+        //                温度模式 = "高温";
+        //                label10.Text = "开启";
+        //                label10.Enabled = true;
+        //                label116.Text = 温度模式;
+        //                label116.BackColor = Color.Red;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            DialogResult dialog = MessageBox.Show($"请确认是否切换为常温模式", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+        //            if (dialog == DialogResult.OK)
+        //            {
+        //                if (label10.Text == "停止")
+        //                {
+        //                    string result = motionEx.SetDo("Y095_加热盘加热", false);
+        //                    if (result != "Success")
+        //                    {
+        //                        MessageBox.Show("停止加热失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //                        return;
+        //                    }
+        //                }
+        //                温度模式 = "常温";
+        //                label10.Text = "开启";
+        //                label10.Enabled = false;
+        //                label116.Text = 温度模式;
+        //                label116.BackColor = System.Drawing.SystemColors.Control;
+        //            }
+        //        }
+        //    }
+        //}
 
         private void label10_Click(object sender, EventArgs e)
         {
@@ -1066,7 +1120,19 @@ namespace H5509_V2
                     DialogResult dialog = MessageBox.Show($"请确认是否停止加热", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (dialog == DialogResult.OK)
                     {
-                        label10.Text = "开启";
+                        string result = handler.加热盘加热关闭();
+                        string result2 = handler.梭车加热关闭();
+                        string result3 = handler.Site加热关闭();
+                        if (result == "Success" && result2 == "Success" && result3 == "Success")
+                        {
+                            label10.Text = "开启";
+                            温控加热 = false;
+                            温控达温 = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("停止加热失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
                 else
@@ -1074,7 +1140,19 @@ namespace H5509_V2
                     DialogResult dialog = MessageBox.Show($"请确认是否开启加热", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (dialog == DialogResult.OK)
                     {
-                        label10.Text = "停止";
+                        string result = handler.加热盘加热开启();
+                        string result2 = handler.梭车加热开启();
+                        string result3 = handler.Site加热开启();
+                        if (result == "Success" && result2 == "Success" && result3 == "Success")
+                        {
+                            label10.Text = "停止";
+                            温控加热 = true;
+                            温控达温 = false;
+                        }
+                        else
+                        {
+                            MessageBox.Show("开启加热失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
@@ -1089,6 +1167,84 @@ namespace H5509_V2
             loadMap.LoadDicPoint = LoaderDicPoint;
 
             loadMap.ShowDialog();
+        }
+
+        public void 刷新温度显示()
+        {
+            uiDigitalLabel18.Value = 设定温度;
+
+            if (温度模式 == "常温")
+            {
+                if (label10.Text == "停止")
+                {
+                    string result = handler.加热盘加热关闭();
+                    string result2 = handler.梭车加热关闭();
+                    string result3 = handler.Site加热关闭();
+                    if (result != "Success" || result2 != "Success" || result3 != "Success")
+                    {
+                        MessageBox.Show("停止加热失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                label10.Enabled = false;
+                label116.BackColor = Color.White;// System.Drawing.SystemColors.Control;
+            }
+            else
+            {
+                label10.Enabled = true;
+                label116.BackColor = Color.Red;
+            }
+
+            string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
+            if (result4 == "Success")
+            {
+                string result5 = dTMHelper.WriteSv(1, 设定温度);
+                string result6 = dTMHelper.WriteSv(0, 设定温度);
+                if (result5 != "Success" || result6 != "Success")
+                {
+                    MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            //this.uiDoubleUpDown14.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
+            //uiDoubleUpDown14.Value = 设定温度;
+            //this.uiDoubleUpDown14.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
+        }
+
+        private void uiDoubleUpDown14_ValueChanged(object sender, double value)
+        {
+            if (设定温度 != value)
+            {
+                DialogResult dialog = MessageBox.Show($"请确认是否将温度设置为【{value}】℃", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialog == DialogResult.OK)
+                {
+                    string result = dTMHelper.WriteSv(2, 0, value);
+                    if (result != "Success")
+                    {
+                        MessageBox.Show($"温度设置为【{value}】℃失败!\n详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //this.uiDoubleUpDown14.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
+                        //uiDoubleUpDown14.Value = 设定温度;
+                        //this.uiDoubleUpDown14.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
+                    }
+                    else
+                    {
+                        设定温度 = value;
+                    }
+                }
+                else
+                {
+                    //this.uiDoubleUpDown14.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
+                    //uiDoubleUpDown14.Value = 设定温度;
+                    //this.uiDoubleUpDown14.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
+                }
+            }
         }
     }
 }

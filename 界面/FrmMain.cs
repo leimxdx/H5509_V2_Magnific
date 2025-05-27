@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
@@ -79,6 +80,7 @@ namespace H5509_V2
         }
         private void ForMain_Load(object sender, EventArgs e)
         {
+            string result = "";
             main = new _main();
             setting = new _setting();
             offset = new _offset();
@@ -87,9 +89,35 @@ namespace H5509_V2
             handler = new Handler();
             motionEx = MotionEx.GetInstance();
 
+
             setting.刷新分BIN信息 = main.刷新分BIN信息;
+            setting.刷新温度信息 = main.刷新温度显示;
             handler.刷新批次信息 = main.刷新批次信息;
             setting.handler = handler;
+            main.handler = handler;
+
+            dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
+
+            if (!dTMHelper.Connect())
+            {
+                TCPConnect = false;
+                MessageBox.Show("温控器连接失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                TCPConnect = true;
+                main.刷新温度显示();
+                //result = dTMHelper.ReadSv(2, 0, out short[] value);
+                //if ((value[0] / 10) != 设定温度)
+                //{
+                //    result = dTMHelper.WriteSv(2, 0, 设定温度);
+                //    if (result != "Success")
+                //    {
+                //        MessageBox.Show($"温度设置为【{value}】℃失败!\n详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    }
+                //}
+                //else MessageBox.Show($"读取温控器温度失败!\n详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             //防止控件过多产生闪烁现象
             SetControlStyle();
@@ -100,7 +128,7 @@ namespace H5509_V2
 
             handler.参数初始化();
 
-            string result = motionEx.GSNInitCard();
+            result = motionEx.GSNInitCard();
             if (result != "Success")
             {
                 MessageBox.Show("系统加载失败！详细信息：\n" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -207,6 +235,8 @@ namespace H5509_V2
             {
                 try
                 {
+                    if (退出标记) break;
+
                     this.Invoke(new Action(() =>
                     {
                         if (listcode.Count != 0)
@@ -231,6 +261,104 @@ namespace H5509_V2
             }
         }
 
+        private void 温度读取()
+        {
+            while (true)
+            {
+                try
+                {
+                    if (TCPConnect)
+                    {
+                        string result = dTMHelper.ReadPv(0, out ushort[] value);
+                        if (result == "Success")
+                        {
+                            for (int i = 0; i < value.Length; i++)
+                            {
+                                if (value[i] != 32770)
+                                {
+                                    SiteTemp[i] = (double)value[i] / 10 + 加热盘.Site温度补偿(i);
+                                }
+                                else SiteTemp[i] = value[i];
+                            }
+                        }
+                        result = dTMHelper.ReadPv(1, out ushort[] value2);
+                        if (result == "Success")
+                        {
+                            for (int i = 0; i < value2.Length; i++)
+                            {
+                                if (value2[i] != 32770)
+                                {
+                                    SiteTemp[i + 8] = (double)value2[i] / 10 + 加热盘.Site温度补偿(i + 8);
+                                }
+                                else SiteTemp[i + 8] = value2[i];
+                            }
+                        }
+                        result = dTMHelper.ReadPv(2, 0, out ushort[] value3);
+                        if (result == "Success")
+                        {
+                            if (value3[0] != 32770)
+                            {
+                                HeatTrayTemp = (double)value3[0] / 10 + 加热盘.温控器温度补偿;
+                            }
+                            else HeatTrayTemp = value3[0];
+                        }
+
+                        if (温度模式 == "高温" && !IsPause)
+                        {
+                            double tempwavemax = 加热盘.波动温度上限;
+                            double tempwavemin = 加热盘.波动温度下限;
+                            if (温控达温)
+                            {
+                                bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
+                                if (!tempopen.Contains(false)) //有false说明还有Site没有达温
+                                {
+                                    温控达温 = true;
+                                    达温时间 = DateTime.Now;
+                                    Debug.WriteLine("加热盘已达温");
+                                    Debug.WriteLine("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+                                    Debug.WriteLine("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+                                }
+                            }
+                            else
+                            {
+                                bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
+                                if (tempopen.Contains(false)) //有false说明还有Site超出波动范围
+                                {
+                                    Debug.WriteLine("超波动温度");
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                    for (int i = 0; i < 16; i++)
+                                    {
+                                        if (SiteTemp[i] != 32770)
+                                        {
+                                            if (SiteTemp[i] < tempwavemax && SiteTemp[i] > tempwavemin)
+                                            {
+                                                Debug.WriteLine($"Site{i + 1}:【{SiteTemp[i]}】℃超波动温度");
+                                            }
+                                        }
+                                    }
+                                    if (HeatTrayTemp != 32770)
+                                    {
+                                        if (HeatTrayTemp < tempwavemax && HeatTrayTemp > tempwavemin)
+                                        {
+                                            Debug.WriteLine($"温控器:【{HeatTrayTemp}】℃超波动温度");
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    Thread.Sleep(500);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("温度读取异常!" + ex.Message);
+                    Thread.Sleep(100);
+                }
+            }
+        }
+
         private string Init_FrMain()
         {
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
@@ -245,6 +373,10 @@ namespace H5509_V2
                 {
                     屏幕刷新();
                 });
+                Task.Run((() =>
+                {
+                    温度读取();
+                }));
                 Task.Run(() =>
                 {
                     handler.初始化流程();
@@ -259,7 +391,7 @@ namespace H5509_V2
                 //});
                 Task.Run(() =>
                 {
-                    handler.入料手臂吸放料流程1();
+                    handler.入料手臂吸放料流程();
                 });
                 Task.Run(() =>
                 {

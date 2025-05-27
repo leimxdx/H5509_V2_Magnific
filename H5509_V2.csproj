@@ -98,6 +98,9 @@
     <Reference Include="RBush, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\RBush.4.0.0\lib\net47\RBush.dll</HintPath>
     </Reference>
+    <Reference Include="SiCommunication">
+      <HintPath>.\SiCommunication.dll</HintPath>
+    </Reference>
     <Reference Include="SixLabors.Fonts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d998eea7b14cab13, processorArchitecture=MSIL">
       <HintPath>packages\SixLabors.Fonts.1.0.0\lib\netstandard2.0\SixLabors.Fonts.dll</HintPath>
     </Reference>
@@ -150,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinParam.cs" />
+    <Compile Include="DTMHelper.cs" />
     <Compile Include="HeatInfo.cs" />
     <Compile Include="HeatMapTimer.cs" />
     <Compile Include="InitPoint.cs" />
@@ -384,7 +388,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V2\bin\Debug \\desktop-4168527\GitHub\H5509_V2\bin\Debug</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
