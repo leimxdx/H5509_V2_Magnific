@@ -1200,11 +1200,17 @@ namespace H5509_V2
                     {
                         motionEx.GetCmdPrfPos(axisRun.轴名称, out int prfPos1); //规划位置
                         motionEx.GetCmdEncPos(axisRun.轴名称, out double encPos1); //实时位置
+
                         double posvalue1 = Math.Abs(prfPos1 - encPos1);
-                        if (posvalue1 > pos2)
+
+                        if (posvalue1 < pos2)
                         {
                             issecond = true;
+                            //Debug.WriteLine($"{axisRun.轴名称}修改前第一段目标速度:{axisRun.目标速度}");
+
                             axisRun.目标速度 = axisRun.目标速度 * 第二段速度;
+
+                            //Debug.WriteLine($"{axisRun.轴名称}修改后第二段目标速度:{axisRun.目标速度}");
 
                             // 设置AXIS轴的目标速度
                             error = GTN_SetVel(axisRun.核号, axisRun.轴号, axisRun.目标速度);
@@ -2963,10 +2969,16 @@ namespace H5509_V2
             int rows = uiDataGridView1.SelectedIndex;
             if (rows >= 0)
             {
+                uiCheckBox194.Visible = false;
+                uiCheckBox195.Visible = false;
+                uiCheckBox196.Visible = false;
                 string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
                 if (tabpagetext == "设定")
                 {
                     刷新设定(name);
+                    uiCheckBox194.Visible = true;
+                    uiCheckBox195.Visible = true;
+                    uiCheckBox196.Visible = true;
                 }
                 else if (tabpagetext == "测试机")
                 {
@@ -3024,9 +3036,15 @@ namespace H5509_V2
             int rows = uiDataGridView2.SelectedIndex;
             if (rows >= 0)
             {
+                uiCheckBox197.Visible = false;
+                uiCheckBox198.Visible = false;
+                uiCheckBox199.Visible = false;
                 string name = uiDataGridView2.Rows[rows].Cells[1].Value.ToString();
                 if (tabpagetext == "Tray盘")
                 {
+                    uiCheckBox197.Visible = true;
+                    uiCheckBox198.Visible = true;
+                    uiCheckBox199.Visible = true;
                     刷新Tray盘(name);
                 }
                 else if (tabpagetext == "取放设定")
@@ -3035,6 +3053,7 @@ namespace H5509_V2
                 }
             }
         }
+
         private void 刷新加热盘信息(string tabpagetext)
         {
             int rows = uiDataGridView3.SelectedIndex;
@@ -3044,9 +3063,23 @@ namespace H5509_V2
 
                 string result = GetHeatInfo(name, out HeatInfo heatInfo);
 
+                uiCheckBox200.Visible = false;
+                uiCheckBox201.Visible = false;
+                uiCheckBox202.Visible = false;
+
                 if (result == "Success")
                 {
-                    刷新加热盘(heatInfo);
+                    if (tabpagetext == "加热盘")
+                    {
+                        uiCheckBox200.Visible = true;
+                        uiCheckBox201.Visible = true;
+                        uiCheckBox202.Visible = true;
+                        刷新加热盘(heatInfo);
+                    }
+                    else if (tabpagetext == "温度设定")
+                    {
+                        刷新加热盘(heatInfo);
+                    }
                 }
             }
         }
@@ -3578,7 +3611,7 @@ namespace H5509_V2
             button72.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 5000);
+                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 15000);
                 if (result != "Success") Debug.WriteLine("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
@@ -3595,7 +3628,7 @@ namespace H5509_V2
             button72.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 5000);
+                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 15000);
                 if (result != "Success") Debug.WriteLine("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
@@ -6029,7 +6062,14 @@ namespace H5509_V2
             {
                 string tabtext = uiTabControl9.SelectedTab.Text;
 
-                保存Heat盘();
+                if (tabtext == "加热盘")
+                {
+                    保存Heat盘();
+                }
+                else if (tabtext == "温度设定")
+                {
+                    保存Heat盘();
+                }
             }
         }
 
@@ -6234,6 +6274,167 @@ namespace H5509_V2
             uiCheckBox192.Checked = !uiCheckBox193.Checked;
             label355.Visible = uiCheckBox193.Checked;
             uiComboBox2.Visible = uiCheckBox193.Checked;
+        }
+
+        /// <summary>
+        /// 新增档案
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uiButton12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiTabControl9_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+        }
+
+        private void uiCheckBox196_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox196.Checked)
+            {
+                uiCheckBox194.Checked = false;
+                uiCheckBox195.Checked = false;
+            }
+            else uiCheckBox196.Checked = true;
+        }
+
+        private void uiCheckBox194_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox194.Checked)
+            {
+                uiCheckBox195.Checked = false;
+                uiCheckBox196.Checked = false;
+            }
+            else uiCheckBox194.Checked = true;
+        }
+
+        private void uiCheckBox195_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox195.Checked)
+            {
+                uiCheckBox194.Checked = false;
+                uiCheckBox196.Checked = false;
+            }
+            else uiCheckBox195.Checked = true;
+        }
+
+        private void uiCheckBox197_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox197.Checked)
+            {
+                uiCheckBox198.Checked = false;
+                uiCheckBox199.Checked = false;
+            }
+            else uiCheckBox197.Checked = true;
+        }
+
+        private void uiCheckBox199_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox199.Checked)
+            {
+                uiCheckBox198.Checked = false;
+                uiCheckBox197.Checked = false;
+            }
+            else uiCheckBox199.Checked = true;
+        }
+
+        private void uiCheckBox198_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox198.Checked)
+            {
+                uiCheckBox199.Checked = false;
+                uiCheckBox197.Checked = false;
+            }
+            else uiCheckBox198.Checked = true;
+        }
+
+        private void uiCheckBox200_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox200.Checked)
+            {
+                uiCheckBox201.Checked = false;
+                uiCheckBox202.Checked = false;
+            }
+            else uiCheckBox200.Checked = true;
+        }
+
+        private void uiCheckBox202_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox202.Checked)
+            {
+                uiCheckBox200.Checked = false;
+                uiCheckBox201.Checked = false;
+            }
+            else uiCheckBox202.Checked = true;
+        }
+
+        private void uiCheckBox201_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox201.Checked)
+            {
+                uiCheckBox200.Checked = false;
+                uiCheckBox202.Checked = false;
+            }
+            else uiCheckBox201.Checked = true;
+        }
+
+        private void button239_Click(object sender, EventArgs e)
+        {
+            short site = Convert.ToInt16(uiComboBox10.Text.Split("_")[1]);
+            string result = handler.测试区_位移气缸到位输出((short)(site - 1));
+            if (result != "Success")
+            {
+                MessageBox.Show("动作失败!" + result);
+            }
+            else
+            {
+                MessageBox.Show("动作成功!");
+            }
+        }
+
+        private void button238_Click(object sender, EventArgs e)
+        {
+            short site = Convert.ToInt16(uiComboBox10.Text.Split("_")[1]);
+            string result = handler.测试区_位移气缸原位输出((short)(site - 1));
+            if (result != "Success")
+            {
+                MessageBox.Show("动作失败!" + result);
+            }
+            else
+            {
+                MessageBox.Show("动作成功!");
+            }
+        }
+
+        private void button236_Click(object sender, EventArgs e)
+        {
+            short site = Convert.ToInt16(uiComboBox10.Text.Split("_")[1]);
+            string result = handler.测试区_下压气缸原位输出((short)(site - 1));
+            if (result != "Success")
+            {
+                MessageBox.Show("动作失败!" + result);
+            }
+            else
+            {
+                MessageBox.Show("动作成功!");
+            }
+        }
+
+        private void button237_Click(object sender, EventArgs e)
+        {
+            short site = Convert.ToInt16(uiComboBox10.Text.Split("_")[1]);
+            string result = handler.测试区_下压气缸到位输出((short)(site - 1));
+            if (result != "Success")
+            {
+                MessageBox.Show("动作失败!" + result);
+            }
+            else
+            {
+                MessageBox.Show("动作成功!");
+            }
         }
     }
 }

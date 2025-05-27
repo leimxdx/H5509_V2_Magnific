@@ -268,6 +268,7 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label152 = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.uiDigitalLabel18 = new Sunny.UI.UIDigitalLabel();
             this.label10 = new System.Windows.Forms.Label();
             this.uiDigitalLabel17 = new Sunny.UI.UIDigitalLabel();
             this.label153 = new System.Windows.Forms.Label();
@@ -301,7 +302,6 @@
             this.label123 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_driverStatus = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Txt_loadnum = new System.Windows.Forms.TextBox();
             this.label139 = new System.Windows.Forms.Label();
@@ -361,7 +361,7 @@
             this.label144 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
-            this.uiDigitalLabel18 = new Sunny.UI.UIDigitalLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel_left.SuspendLayout();
             this.pal_setdutstate.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -385,12 +385,12 @@
             this.groupBox25.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.panel31.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.Panel_right.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox26.SuspendLayout();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_left
@@ -3740,6 +3740,24 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiDigitalLabel18
+            // 
+            this.uiDigitalLabel18.BackColor = System.Drawing.Color.White;
+            this.uiDigitalLabel18.DecimalPlaces = 1;
+            this.uiDigitalLabel18.DigitalSize = 15;
+            this.uiDigitalLabel18.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.uiDigitalLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiDigitalLabel18.Location = new System.Drawing.Point(645, 163);
+            this.uiDigitalLabel18.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiDigitalLabel18.Name = "uiDigitalLabel18";
+            this.uiDigitalLabel18.RectSize = 2;
+            this.uiDigitalLabel18.Size = new System.Drawing.Size(180, 35);
+            this.uiDigitalLabel18.Style = Sunny.UI.UIStyle.Custom;
+            this.uiDigitalLabel18.TabIndex = 178;
+            this.uiDigitalLabel18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.uiDigitalLabel18.Value = 36.1D;
+            this.uiDigitalLabel18.ZoomScaleDisabled = true;
+            // 
             // label10
             // 
             this.label10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -3772,6 +3790,7 @@
             this.uiDigitalLabel17.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.uiDigitalLabel17.Value = 36.1D;
             this.uiDigitalLabel17.ZoomScaleDisabled = true;
+            this.uiDigitalLabel17.Click += new System.EventHandler(this.uiDigitalLabel17_Click);
             // 
             // label153
             // 
@@ -4171,17 +4190,6 @@
             this.label_driverStatus.TabIndex = 1;
             this.label_driverStatus.Text = "HALT";
             this.label_driverStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
-            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 161;
-            this.pictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -4983,23 +4991,16 @@
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
             // 
-            // uiDigitalLabel18
+            // pictureBox1
             // 
-            this.uiDigitalLabel18.BackColor = System.Drawing.Color.White;
-            this.uiDigitalLabel18.DecimalPlaces = 1;
-            this.uiDigitalLabel18.DigitalSize = 15;
-            this.uiDigitalLabel18.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.uiDigitalLabel18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel18.Location = new System.Drawing.Point(645, 163);
-            this.uiDigitalLabel18.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiDigitalLabel18.Name = "uiDigitalLabel18";
-            this.uiDigitalLabel18.RectSize = 2;
-            this.uiDigitalLabel18.Size = new System.Drawing.Size(180, 35);
-            this.uiDigitalLabel18.Style = Sunny.UI.UIStyle.Custom;
-            this.uiDigitalLabel18.TabIndex = 178;
-            this.uiDigitalLabel18.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.uiDigitalLabel18.Value = 36.1D;
-            this.uiDigitalLabel18.ZoomScaleDisabled = true;
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
+            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 161;
+            this.pictureBox1.TabStop = false;
             // 
             // _main
             // 
@@ -5035,7 +5036,6 @@
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
             this.panel31.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.Panel_right.ResumeLayout(false);
@@ -5044,6 +5044,7 @@
             this.groupBox26.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

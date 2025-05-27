@@ -673,7 +673,7 @@ namespace H5509_V2
                 return result;
             }
 
-            result = 读取气缸输入信号(xIoName, "0", out long ms);
+            result = 读取气缸输入信号(xIoName, "1", out long ms);
             if (result != "Success") Debug.WriteLine($"{yIoName}原位输出超时({ms}ms)");
             else Debug.WriteLine($"{yIoName}原位输出成功({ms}ms)");
             return result;
@@ -681,14 +681,14 @@ namespace H5509_V2
 
         public string 测试区_下压气缸到位输出(string yIoName, string xIoName)
         {
-            string result = motionEx.SetDo(yIoName, false);
+            string result = motionEx.SetDo(yIoName, true);
             if (result != "Success")
             {
                 Debug.WriteLine($"{yIoName}到位输出失败！" + result);
                 return result;
             }
 
-            result = 读取气缸输入信号(xIoName, "0", out long ms);
+            result = 读取气缸输入信号(xIoName, "1", out long ms);
             if (result != "Success") Debug.WriteLine($"{yIoName}到位输出超时({ms}ms)");
             else Debug.WriteLine($"{yIoName}到位输出成功({ms}ms)");
             return result;
@@ -696,7 +696,7 @@ namespace H5509_V2
 
         public string 测试区_下压气缸原位输出(string yIoName, string xIoName)
         {
-            string result = motionEx.SetDo(yIoName, true);
+            string result = motionEx.SetDo(yIoName, false);
             if (result != "Success")
             {
                 Debug.WriteLine($"{yIoName}原位输出失败！" + result);
@@ -704,117 +704,197 @@ namespace H5509_V2
             }
             result = 读取气缸输入信号(xIoName, "1", out long ms);
 
-            if (result == "Success") Debug.WriteLine($"{yIoName}原位输出超时({ms}ms)");
+            if (result != "Success") Debug.WriteLine($"{yIoName}原位输出超时({ms}ms)");
             else Debug.WriteLine($"{yIoName}原位输出成功({ms}ms)");
             return result;
         }
 
-        public string 测试区_位移气缸到位输出(short site)
+        public string 获取位移气缸(int site, out string yIoName)
         {
-            string yIoName;
-            string xIoName;
+            yIoName = "Fail";
             switch (site)
             {
-                case 0: yIoName = "Y096_1_位移气缸"; xIoName = "X092_1_测试模组位移气缸后感应"; break;
-                case 1: yIoName = "Y098_2_位移气缸"; xIoName = "X097_2_测试模组位移气缸后感应"; break;
-                case 2: yIoName = "Y100_3_位移气缸"; xIoName = "X102_3_测试模组位移气缸后感应"; break;
-                case 3: yIoName = "Y102_4_位移气缸"; xIoName = "X107_4_测试模组位移气缸后感应"; break;
-                case 4: yIoName = "Y104_5_位移气缸"; xIoName = "X112_5_测试模组位移气缸后感应"; break;
-                case 5: yIoName = "Y106_6_位移气缸"; xIoName = "X117_6_测试模组位移气缸后感应"; break;
-                case 6: yIoName = "Y108_7_位移气缸"; xIoName = "X122_7_测试模组位移气缸后感应"; break;
-                case 7: yIoName = "Y110_8_位移气缸"; xIoName = "X127_8_测试模组位移气缸后感应"; break;
-                case 8: yIoName = "Y112_9_位移气缸"; xIoName = "X132_9_测试模组位移气缸后感应"; break;
-                case 9: yIoName = "Y114_10_位移气缸"; xIoName = "X137_10_测试模组位移气缸后感应"; break;
-                case 10: yIoName = "Y116_11_位移气缸"; xIoName = "X142_11_测试模组位移气缸后感应"; break;
-                case 11: yIoName = "Y118_12_位移气缸"; xIoName = "X147_12_测试模组位移气缸后感应"; break;
-                case 12: yIoName = "Y120_13_位移气缸"; xIoName = "X152_13_测试模组位移气缸后感应"; break;
-                case 13: yIoName = "Y122_14_位移气缸"; xIoName = "X157_14_测试模组位移气缸后感应"; break;
-                case 14: yIoName = "Y124_15_位移气缸"; xIoName = "X162_15_测试模组位移气缸后感应"; break;
-                case 15: yIoName = "Y126_16_位移气缸"; xIoName = "X167_16_测试模组位移气缸后感应"; break;
+                case 0: yIoName = "Y096_1_位移气缸"; break;
+                case 1: yIoName = "Y098_2_位移气缸"; break;
+                case 2: yIoName = "Y100_3_位移气缸"; break;
+                case 3: yIoName = "Y102_4_位移气缸"; break;
+                case 4: yIoName = "Y104_5_位移气缸"; break;
+                case 5: yIoName = "Y106_6_位移气缸"; break;
+                case 6: yIoName = "Y108_7_位移气缸"; break;
+                case 7: yIoName = "Y110_8_位移气缸"; break;
+                case 8: yIoName = "Y112_9_位移气缸"; break;
+                case 9: yIoName = "Y114_10_位移气缸"; break;
+                case 10: yIoName = "Y116_11_位移气缸"; break;
+                case 11: yIoName = "Y118_12_位移气缸"; break;
+                case 12: yIoName = "Y120_13_位移气缸"; break;
+                case 13: yIoName = "Y122_14_位移气缸"; break;
+                case 14: yIoName = "Y124_15_位移气缸"; break;
+                case 15: yIoName = "Y126_16_位移气缸"; break;
                 default: return $"site:{site}不存在";
             }
-            return 测试区_位移气缸到位输出(yIoName, xIoName);
+            return "Success";
+        }
+
+        public string 获取下压气缸(int site, out string yIoName)
+        {
+            yIoName = "Fail";
+            switch (site)
+            {
+                case 0: yIoName = "Y097_1_下压气缸"; break;
+                case 1: yIoName = "Y099_2_下压气缸"; break;
+                case 2: yIoName = "Y101_3_下压气缸"; break;
+                case 3: yIoName = "Y103_4_下压气缸"; break;
+                case 4: yIoName = "Y105_5_下压气缸"; break;
+                case 5: yIoName = "Y107_6_下压气缸"; break;
+                case 6: yIoName = "Y109_7_下压气缸"; break;
+                case 7: yIoName = "Y111_8_下压气缸"; break;
+                case 8: yIoName = "Y113_9_下压气缸"; break;
+                case 9: yIoName = "Y115_10_下压气缸"; break;
+                case 10: yIoName = "Y117_11_下压气缸"; break;
+                case 11: yIoName = "Y119_12_下压气缸"; break;
+                case 12: yIoName = "Y121_13_下压气缸"; break;
+                case 13: yIoName = "Y123_14_下压气缸"; break;
+                case 14: yIoName = "Y125_15_下压气缸"; break;
+                case 15: yIoName = "Y127_16_下压气缸"; break;
+                default: return $"site:{site}不存在";
+            }
+            return "Success";
+        }
+
+        public string 获取位移气缸到位感应(int site, out string xIoName)
+        {
+            xIoName = "Fail";
+            switch (site)
+            {
+                case 0: xIoName = "X093_1_测试模组位移气缸前感应"; break;
+                case 1: xIoName = "X098_2_测试模组位移气缸前感应"; break;
+                case 2: xIoName = "X103_3_测试模组位移气缸前感应"; break;
+                case 3: xIoName = "X108_4_测试模组位移气缸前感应"; break;
+                case 4: xIoName = "X113_5_测试模组位移气缸前感应"; break;
+                case 5: xIoName = "X118_6_测试模组位移气缸前感应"; break;
+                case 6: xIoName = "X123_7_测试模组位移气缸前感应"; break;
+                case 7: xIoName = "X128_8_测试模组位移气缸前感应"; break;
+                case 8: xIoName = "X133_9_测试模组位移气缸前感应"; break;
+                case 9: xIoName = "X138_10_测试模组位移气缸前感应"; break;
+                case 10: xIoName = "X143_11_测试模组位移气缸前感应"; break;
+                case 11: xIoName = "X148_12_测试模组位移气缸前感应"; break;
+                case 12: xIoName = "X153_13_测试模组位移气缸前感应"; break;
+                case 13: xIoName = "X158_14_测试模组位移气缸前感应"; break;
+                case 14: xIoName = "X163_15_测试模组位移气缸前感应"; break;
+                case 15: xIoName = "X168_16_测试模组位移气缸前感应"; break;
+                default: return $"site:{site}不存在";
+            }
+            return "Success";
+        }
+
+        public string 获取位移气缸原位感应(int site, out string xIoName)
+        {
+            xIoName = "Fail";
+            switch (site)
+            {
+                case 0: xIoName = "X092_1_测试模组位移气缸后感应"; break;
+                case 1: xIoName = "X097_2_测试模组位移气缸后感应"; break;
+                case 2: xIoName = "X102_3_测试模组位移气缸后感应"; break;
+                case 3: xIoName = "X107_4_测试模组位移气缸后感应"; break;
+                case 4: xIoName = "X112_5_测试模组位移气缸后感应"; break;
+                case 5: xIoName = "X117_6_测试模组位移气缸后感应"; break;
+                case 6: xIoName = "X122_7_测试模组位移气缸后感应"; break;
+                case 7: xIoName = "X127_8_测试模组位移气缸后感应"; break;
+                case 8: xIoName = "X132_9_测试模组位移气缸后感应"; break;
+                case 9: xIoName = "X137_10_测试模组位移气缸后感应"; break;
+                case 10: xIoName = "X142_11_测试模组位移气缸后感应"; break;
+                case 11: xIoName = "X147_12_测试模组位移气缸后感应"; break;
+                case 12: xIoName = "X152_13_测试模组位移气缸后感应"; break;
+                case 13: xIoName = "X157_14_测试模组位移气缸后感应"; break;
+                case 14: xIoName = "X162_15_测试模组位移气缸后感应"; break;
+                case 15: xIoName = "X167_16_测试模组位移气缸后感应"; break;
+                default: return $"site:{site}不存在";
+            }
+            return "Success";
+        }
+
+        public string 获取下压气缸到位感应(int site, out string xIoName)
+        {
+            xIoName = "Fail";
+            switch (site)
+            {
+                case 0: xIoName = "X095_1_测试模组下压感应"; break;
+                case 1: xIoName = "X100_2_测试模组下压感应"; break;
+                case 2: xIoName = "X105_3_测试模组下压感应"; break;
+                case 3: xIoName = "X110_4_测试模组下压感应"; break;
+                case 4: xIoName = "X115_5_测试模组下压感应"; break;
+                case 5: xIoName = "X120_6_测试模组下压感应"; break;
+                case 6: xIoName = "X125_7_测试模组下压感应"; break;
+                case 7: xIoName = "X130_8_测试模组下压感应"; break;
+                case 8: xIoName = "X135_9_测试模组下压感应"; break;
+                case 9: xIoName = "X140_10_测试模组下压感应"; break;
+                case 10: xIoName = "X145_11_测试模组下压感应"; break;
+                case 11: xIoName = "X150_12_测试模组下压感应"; break;
+                case 12: xIoName = "X155_13_测试模组下压感应"; break;
+                case 13: xIoName = "X160_14_测试模组下压感应"; break;
+                case 14: xIoName = "X165_15_测试模组下压感应"; break;
+                case 15: xIoName = "X170_16_测试模组下压感应"; break;
+                default: return $"site:{site}不存在";
+            }
+            return "Success";
+        }
+
+        public string 获取下压气缸原位感应(int site, out string xIoName)
+        {
+            xIoName = "Fail";
+            switch (site)
+            {
+                case 0: xIoName = "X094_1_测试模组上升感应"; break;
+                case 1: xIoName = "X099_2_测试模组上升感应"; break;
+                case 2: xIoName = "X104_3_测试模组上升感应"; break;
+                case 3: xIoName = "X109_4_测试模组上升感应"; break;
+                case 4: xIoName = "X114_5_测试模组上升感应"; break;
+                case 5: xIoName = "X119_6_测试模组上升感应"; break;
+                case 6: xIoName = "X124_7_测试模组上升感应"; break;
+                case 7: xIoName = "X129_8_测试模组上升感应"; break;
+                case 8: xIoName = "X139_10_测试模组上升感应"; break;
+                case 9: xIoName = "X139_10_测试模组上升感应"; break;
+                case 10: xIoName = "X144_11_测试模组上升感应"; break;
+                case 11: xIoName = "X149_12_测试模组上升感应"; break;
+                case 12: xIoName = "X154_13_测试模组上升感应"; break;
+                case 13: xIoName = "X159_14_测试模组上升感应"; break;
+                case 14: xIoName = "X164_15_测试模组上升感应"; break;
+                case 15: xIoName = "X169_16_测试模组上升感应"; break;
+                default: return $"site:{site}不存在";
+            }
+            return "Success";
+        }
+
+        public string 测试区_位移气缸到位输出(short site)
+        {
+            string result = 获取位移气缸(site, out string yIoName);
+            string result2 = 获取位移气缸到位感应(site, out string xIoName);
+            if (result == "Success" && result2 == "Success") return 测试区_位移气缸到位输出(yIoName, xIoName);
+            return result;
         }
 
         public string 测试区_位移气缸原位输出(short site)
         {
-            string yIoName;
-            string xIoName;
-            switch (site)
-            {
-                case 0: yIoName = "Y096_1_位移气缸"; xIoName = "X093_1_测试模组位移气缸前感应"; break;
-                case 1: yIoName = "Y098_2_位移气缸"; xIoName = "X098_2_测试模组位移气缸前感应"; break;
-                case 2: yIoName = "Y100_3_位移气缸"; xIoName = "X103_3_测试模组位移气缸前感应"; break;
-                case 3: yIoName = "Y102_4_位移气缸"; xIoName = "X108_4_测试模组位移气缸前感应"; break;
-                case 4: yIoName = "Y104_5_位移气缸"; xIoName = "X113_5_测试模组位移气缸前感应"; break;
-                case 5: yIoName = "Y106_6_位移气缸"; xIoName = "X118_6_测试模组位移气缸前感应"; break;
-                case 6: yIoName = "Y108_7_位移气缸"; xIoName = "X123_7_测试模组位移气缸前感应"; break;
-                case 7: yIoName = "Y110_8_位移气缸"; xIoName = "X128_8_测试模组位移气缸前感应"; break;
-                case 8: yIoName = "Y112_9_位移气缸"; xIoName = "X133_9_测试模组位移气缸前感应"; break;
-                case 9: yIoName = "Y114_10_位移气缸"; xIoName = "X138_10_测试模组位移气缸前感应"; break;
-                case 10: yIoName = "Y116_11_位移气缸"; xIoName = "X143_11_测试模组位移气缸前感应"; break;
-                case 11: yIoName = "Y118_12_位移气缸"; xIoName = "X148_12_测试模组位移气缸前感应"; break;
-                case 12: yIoName = "Y120_13_位移气缸"; xIoName = "X153_13_测试模组位移气缸前感应"; break;
-                case 13: yIoName = "Y122_14_位移气缸"; xIoName = "X158_14_测试模组位移气缸前感应"; break;
-                case 14: yIoName = "Y124_15_位移气缸"; xIoName = "X163_15_测试模组位移气缸前感应"; break;
-                case 15: yIoName = "Y126_16_位移气缸"; xIoName = "X168_16_测试模组位移气缸前感应"; break;
-                default: return $"site:{site}不存在";
-            }
-            return 测试区_位移气缸原位输出(yIoName, xIoName);
-        }
-
-        public string 测试区_下压气缸原位输出(short site)
-        {
-            string yIoName;
-            string xIoName;
-            switch (site)
-            {
-                case 0: yIoName = "Y097_1_下压气缸"; xIoName = "X094_1_测试模组上升感应"; break;
-                case 1: yIoName = "Y099_2_下压气缸"; xIoName = "X099_2_测试模组上升感应"; break;
-                case 2: yIoName = "Y101_3_下压气缸"; xIoName = "X104_3_测试模组上升感应"; break;
-                case 3: yIoName = "Y103_4_下压气缸"; xIoName = "X109_4_测试模组上升感应"; break;
-                case 4: yIoName = "Y105_5_下压气缸"; xIoName = "X114_5_测试模组上升感应"; break;
-                case 5: yIoName = "Y107_6_下压气缸"; xIoName = "X119_6_测试模组上升感应"; break;
-                case 6: yIoName = "Y109_7_下压气缸"; xIoName = "X124_7_测试模组上升感应"; break;
-                case 7: yIoName = "Y111_8_下压气缸"; xIoName = "X129_8_测试模组上升感应"; break;
-                case 8: yIoName = "Y113_9_下压气缸"; xIoName = "X139_10_测试模组上升感应"; break;
-                case 9: yIoName = "Y115_10_下压气缸"; xIoName = "X139_10_测试模组上升感应"; break;
-                case 10: yIoName = "Y117_11_下压气缸"; xIoName = "X144_11_测试模组上升感应"; break;
-                case 11: yIoName = "Y119_12_下压气缸"; xIoName = "X149_12_测试模组上升感应"; break;
-                case 12: yIoName = "Y121_13_下压气缸"; xIoName = "X154_13_测试模组上升感应"; break;
-                case 13: yIoName = "Y123_14_下压气缸"; xIoName = "X159_14_测试模组上升感应"; break;
-                case 14: yIoName = "Y125_15_下压气缸"; xIoName = "X164_15_测试模组上升感应"; break;
-                case 15: yIoName = "Y127_16_下压气缸"; xIoName = "X169_16_测试模组上升感应"; break;
-                default: return $"site:{site}不存在";
-            }
-            return 测试区_下压气缸到位输出(yIoName, xIoName);
+            string result = 获取位移气缸(site, out string yIoName);
+            string result2 = 获取位移气缸原位感应(site, out string xIoName);
+            if (result == "Success" && result2 == "Success") return 测试区_位移气缸原位输出(yIoName, xIoName);
+            return result;
         }
 
         public string 测试区_下压气缸到位输出(short site)
         {
-            string yIoName;
-            string xIoName;
-            switch (site)
-            {
-                case 0: yIoName = "Y097_1_下压气缸"; xIoName = "X095_1_测试模组下压感应"; break;
-                case 1: yIoName = "Y099_2_下压气缸"; xIoName = "X100_2_测试模组下压感应"; break;
-                case 2: yIoName = "Y101_3_下压气缸"; xIoName = "X105_3_测试模组下压感应"; break;
-                case 3: yIoName = "Y103_4_下压气缸"; xIoName = "X110_4_测试模组下压感应"; break;
-                case 4: yIoName = "Y105_5_下压气缸"; xIoName = "X115_5_测试模组下压感应"; break;
-                case 5: yIoName = "Y107_6_下压气缸"; xIoName = "X120_6_测试模组下压感应"; break;
-                case 6: yIoName = "Y109_7_下压气缸"; xIoName = "X125_7_测试模组下压感应"; break;
-                case 7: yIoName = "Y111_8_下压气缸"; xIoName = "X130_8_测试模组下压感应"; break;
-                case 8: yIoName = "Y113_9_下压气缸"; xIoName = "X135_9_测试模组下压感应"; break;
-                case 9: yIoName = "Y115_10_下压气缸"; xIoName = "X140_10_测试模组下压感应"; break;
-                case 10: yIoName = "Y117_11_下压气缸"; xIoName = "X145_11_测试模组下压感应"; break;
-                case 11: yIoName = "Y119_12_下压气缸"; xIoName = "X150_12_测试模组下压感应"; break;
-                case 12: yIoName = "Y121_13_下压气缸"; xIoName = "X155_13_测试模组下压感应"; break;
-                case 13: yIoName = "Y123_14_下压气缸"; xIoName = "X160_14_测试模组下压感应"; break;
-                case 14: yIoName = "Y125_15_下压气缸"; xIoName = "X165_15_测试模组下压感应"; break;
-                case 15: yIoName = "Y127_16_下压气缸"; xIoName = "X170_16_测试模组下压感应"; break;
-                default: return $"site:{site}不存在";
-            }
-            return 测试区_下压气缸原位输出(yIoName, xIoName);
+            string result = 获取下压气缸(site, out string yIoName);
+            string result2 = 获取下压气缸到位感应(site, out string xIoName);
+            if (result == "Success" && result2 == "Success") return 测试区_下压气缸到位输出(yIoName, xIoName);
+            return result;
+        }
+
+        public string 测试区_下压气缸原位输出(short site)
+        {
+            string result = 获取下压气缸(site, out string yIoName);
+            string result2 = 获取下压气缸原位感应(site, out string xIoName);
+            if (result == "Success" && result2 == "Success") return 测试区_下压气缸原位输出(yIoName, xIoName);
+            return result;
         }
 
         #endregion
@@ -1308,9 +1388,9 @@ namespace H5509_V2
             switch (site)
             {
                 case 0: case 1: case 2: case 3: ioNames = new string[] { "X051_1_4_模组左右对射感应", "X050_1_3_模组左右对射感应", "X049_1_2_模组左右对射感应", "X048_1_1_模组左右对射感应" }; break;
-                case 4: case 5: case 6: case 7: ioNames = new string[] { "X055_2_4_模组左右对射感应", "X054_2_3_模组左右对射感应", "X053_2_2_模组左右对射感应","X052_2_1_模组左右对射感应" }; break;
+                case 4: case 5: case 6: case 7: ioNames = new string[] { "X055_2_4_模组左右对射感应", "X054_2_3_模组左右对射感应", "X053_2_2_模组左右对射感应", "X052_2_1_模组左右对射感应" }; break;
                 case 8: case 9: case 10: case 11: ioNames = new string[] { "X059_3_4_模组左右对射感应", "X058_3_3_模组左右对射感应", "X057_3_2_模组左右对射感应", "X056_3_1_模组左右对射感应" }; break;
-                case 12: case 13: case 14: case 15: ioNames = new string[] { "X063_4_4_模组左右对射感应", "X062_4_3_模组左右对射感应", "X061_4_2_模组左右对射感应", "X060_4_1_模组左右对射感应"  }; break;
+                case 12: case 13: case 14: case 15: ioNames = new string[] { "X063_4_4_模组左右对射感应", "X062_4_3_模组左右对射感应", "X061_4_2_模组左右对射感应", "X060_4_1_模组左右对射感应" }; break;
                 default: return $"site:{site}不存在";
             }
 
@@ -1471,8 +1551,8 @@ namespace H5509_V2
             {
                 //if (GetSiteOpen(site).Contains(true))
                 //{
-                    string result = Site加热关闭(site);
-                    if (result != "Success") return result;
+                string result = Site加热关闭(site);
+                if (result != "Success") return result;
                 //}
             }
             return "Success";
@@ -2863,7 +2943,7 @@ namespace H5509_V2
                     bool safesw = io[2] == "1"; //"X003_安全钮"
                     if (CheckEdgeSingal(safesw, ref SafeswRiseCache, true))
                     {
-                        Debug.WriteLine("按下安全钮");
+                        //Debug.WriteLine("按下安全钮");
                     }
                     bool again = io[3] == "1"; //X004_重试
                     if (CheckEdgeSingal(again, ref AgainRiseCache, true))
@@ -2961,6 +3041,7 @@ namespace H5509_V2
                             motionEx.SetDo("Y001_开始灯", false);
                             motionEx.SetDo("Y002_暂停灯", false);
                             motionEx.SetDo("Y010_归零灯", true);
+                            if(温控加热 && 温度模式 == "高温") 梭车加热关闭();
                             Task.Run(() =>
                             {
                                 result = 整机回零流程();
@@ -3115,6 +3196,15 @@ namespace H5509_V2
             if (task1.Result != "Success" || task2.Result != "Success")
             {
                 return "Fail";
+            }
+
+            if (温控加热 && 温度模式 == "高温")
+            {
+                result = 梭车加热开启();
+                if (result != "Success")
+                { 
+                    return result;
+                }
             }
 
             return "Success";
@@ -4664,7 +4754,6 @@ namespace H5509_V2
                     case 1025:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z真空检测";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        Thread.Sleep(200);
                         stopwatch.Start();
                         while (JudgeNozzleSts(lsopen, opens, 1))
                         {
@@ -6448,19 +6537,43 @@ namespace H5509_V2
                         {
                             飞梭移动状态 = 1;
                             PS入飞梭移动流程.Processing = true;
-                            PS入飞梭移动流程.StepID = 505;
+                            PS入飞梭移动流程.StepID = 501;
                         }
                         break;
+
+                    case 501:
+                        PS入飞梭移动流程.StepName = $"关闭梭车加热防止火花";
+                        if (温控加热 && 温度模式 == "高温")
+                        {
+                            Debug.WriteLine($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                            if(梭车加热关闭() != "Success")
+                            { 
+                                Debug.WriteLine("梭车加热关闭失败");
+                                ProgramPause = true;
+                                IsPause = true;
+                                break;
+                            }
+                            Thread.Sleep(100);
+                        }
+                        PS入飞梭移动流程.StepID = 505;
+                        break;
+                        
 
                     case 505:
                         PS入飞梭移动流程.StepName = $"飞梭_前后检测产品感应";
                         Debug.WriteLine($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                         result = 飞梭_前后检测产品感应(out string[] iovalues);
-                        //if (result == "Success")
+                        if (result == "Success")
                         {
-                            //if (iovalues.Contains("0"))
+                            if (iovalues.Contains("0"))
                             {
                                 PS入飞梭移动流程.StepID = 515;
+                            }
+                            else
+                            { 
+                                Debug.WriteLine("飞梭前后检测产品感应有IC放歪");
+                                ProgramPause = true;
+                                IsPause = true;
                             }
                         }
                         break;
@@ -6501,6 +6614,23 @@ namespace H5509_V2
                         break;
 
                     case 520:
+                        PS入飞梭移动流程.StepName = $"开启梭车加热";
+                        if (温控加热 && 温度模式 == "高温")
+                        {
+                            Debug.WriteLine($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                            Thread.Sleep(100);
+                            if(梭车加热开启() != "Success")
+                            {
+                                Debug.WriteLine("梭车加热开启失败");
+                                ProgramPause = true;
+                                IsPause = true;
+                                break;
+                            }
+                        }
+                        PS入飞梭移动流程.StepID = 525;
+                        break;
+
+                    case 525:
                         PS入飞梭移动流程.StepName = $"数据交换";
                         Debug.WriteLine($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
 
@@ -7189,7 +7319,7 @@ namespace H5509_V2
                                 SiteTestState[site] = 1; //有料
                                 PS测试手臂取待测料流程.StepID = 799;
                             }
-                            else 
+                            else
                             {
                                 PS测试手臂取待测料流程.StepID = 745;
                             }
@@ -7210,7 +7340,7 @@ namespace H5509_V2
                         break;
 
                     case 745:
-                        PS测试手臂取待测料流程.StepName = $"测试手臂X走到梭车避让"; 
+                        PS测试手臂取待测料流程.StepName = $"测试手臂X走到梭车避让";
                         Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                         result = 测试手臂X移动(初始点位.测试_梭车1吸_X);
                         if (result == "Success")
@@ -7920,32 +8050,34 @@ namespace H5509_V2
                         PS测试区气缸下压动作流程.StepName = $"测试区气缸前移";
                         Debug.WriteLine($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
                         result = 测试区_位移气缸到位输出(site);
-                        //if (result == "Success")
+                        if (result == "Success")
                         {
+                            Thread.Sleep(100);
                             PS测试区气缸下压动作流程.StepID = 515;
                         }
-                        //else
-                        //{
-                        //    Debug.WriteLine($"测试区Site{site + 1}气缸前移失败!" + result);
-                        //    ProgramPause = true;
-                        //    IsPause = true;
-                        //}
+                        else
+                        {
+                            Debug.WriteLine($"测试区Site{site + 1}气缸前移失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                         break;
 
                     case 515:
                         PS测试区气缸下压动作流程.StepName = $"测试区气缸下压";
                         Debug.WriteLine($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
                         result = 测试区_下压气缸到位输出(site);
-                        //if (result == "Success")
+                        if (result == "Success")
                         {
+                            Thread.Sleep(100);
                             PS测试区气缸下压动作流程.StepID = 520;
                         }
-                        //else
-                        //{
-                        //    Debug.WriteLine($"测试区Site{site + 1}气缸下压失败!" + result);
-                        //    ProgramPause = true;
-                        //    IsPause = true;
-                        //}
+                        else
+                        {
+                            Debug.WriteLine($"测试区Site{site + 1}气缸下压失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                         break;
 
                     case 520:
@@ -8047,33 +8179,35 @@ namespace H5509_V2
                         PS测试区气缸上抬动作流程.StepName = $"测试区气缸抬升";
                         Debug.WriteLine($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
                         result = 测试区_下压气缸原位输出(site);
-                        //if (result == "Success")
+                        if (result == "Success")
                         {
+                            Thread.Sleep(100);
                             PS测试区气缸上抬动作流程.StepID = 515;
                         }
-                        //else
-                        //{
-                        //    Debug.WriteLine($"测试区Site{site + 1}气缸抬升失败!" + result);
-                        //    ProgramPause = true;
-                        //    IsPause = true;
-                        //}
+                        else
+                        {
+                            Debug.WriteLine($"测试区Site{site + 1}气缸抬升失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                         break;
 
                     case 515:
                         PS测试区气缸上抬动作流程.StepName = $"测试区气缸后移";
                         Debug.WriteLine($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
                         result = 测试区_位移气缸原位输出(site);
-                        //if (result == "Success")
+                        if (result == "Success")
                         {
+                            Thread.Sleep(100);
                             SiteTestState[site] = 4;
                             PS测试区气缸上抬动作流程.StepID = 599;
                         }
-                        //else
-                        //{
-                        //    Debug.WriteLine($"测试区Site{site + 1}气缸后移失败!" + result);
-                        //    ProgramPause = true;
-                        //    IsPause = true;
-                        //}
+                        else
+                        {
+                            Debug.WriteLine($"测试区Site{site + 1}气缸后移失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                         break;
 
                     case 599:

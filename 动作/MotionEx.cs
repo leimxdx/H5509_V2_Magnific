@@ -343,7 +343,7 @@ namespace H5509_V2
                         GetCmdPrfPos(axisRun.轴名称, out int prfPos1); //规划位置
                         GetCmdEncPos(axisRun.轴名称, out double encPos1); //实时位置
                         double posvalue1 = Math.Abs(prfPos1 - encPos1);
-                        if (posvalue1 > pos2)
+                        if (posvalue1 < pos2)
                         {
                             issecond = true;
                             axisRun.目标速度 = axisRun.目标速度 * 第二段速度;

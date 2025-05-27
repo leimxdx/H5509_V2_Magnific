@@ -85,7 +85,7 @@ namespace H5509_V2
 
         public static bool IsForecePause = false; //强制停止
 
-        public static double 第二段速度 = 0.5;
+        public static double 第二段速度 = 0.3;
 
         public static bool 退出标记 = false;
 
@@ -331,6 +331,15 @@ namespace H5509_V2
             get { return 设置信息.OffsetPoint; }
         }
 
+        public static int Heat_X_Num
+        {
+            get { return 设置信息.Heat盘信息.X_Num; }
+        }
+
+        public static int Heat_Y_Num
+        {
+            get { return 设置信息.Heat盘信息.Y_Num; }
+        }
         public static int Tray_X_Num
         {
             get { return 设置信息.Tray盘信息.X_Num; }
@@ -2794,7 +2803,7 @@ namespace H5509_V2
             }
         }
 
-        public static bool[] 检测温度(double tempmin, double tempmax)
+        public static bool[] 检测温度(double tempmax, double tempmin)
         {
             bool[] tempopen = new bool[17];
 

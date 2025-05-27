@@ -53,11 +53,11 @@ namespace H5509_V2
 
         public double 波动温度上限
         {
-            get { return 波动温度 + 波动温度; }
+            get { return 设定温度 + 波动温度; }
         }
         public double 波动温度下限
         {
-            get { return 波动温度 - 波动温度; }
+            get { return 设定温度 - 波动温度; }
         }
 
         public double 报警温度 { get; set; }

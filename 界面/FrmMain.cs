@@ -303,11 +303,11 @@ namespace H5509_V2
                             else HeatTrayTemp = value3[0];
                         }
 
-                        if (温度模式 == "高温" && !IsPause)
+                        if (设备状态 == 1 && 温度模式 == "高温" && !IsPause)
                         {
                             double tempwavemax = 加热盘.波动温度上限;
                             double tempwavemin = 加热盘.波动温度下限;
-                            if (温控达温)
+                            if (!温控达温)
                             {
                                 bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
                                 if (!tempopen.Contains(false)) //有false说明还有Site没有达温
@@ -321,30 +321,30 @@ namespace H5509_V2
                             }
                             else
                             {
-                                bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
-                                if (tempopen.Contains(false)) //有false说明还有Site超出波动范围
-                                {
-                                    Debug.WriteLine("超波动温度");
-                                    ProgramPause = true;
-                                    IsPause = true;
-                                    for (int i = 0; i < 16; i++)
-                                    {
-                                        if (SiteTemp[i] != 32770)
-                                        {
-                                            if (SiteTemp[i] < tempwavemax && SiteTemp[i] > tempwavemin)
-                                            {
-                                                Debug.WriteLine($"Site{i + 1}:【{SiteTemp[i]}】℃超波动温度");
-                                            }
-                                        }
-                                    }
-                                    if (HeatTrayTemp != 32770)
-                                    {
-                                        if (HeatTrayTemp < tempwavemax && HeatTrayTemp > tempwavemin)
-                                        {
-                                            Debug.WriteLine($"温控器:【{HeatTrayTemp}】℃超波动温度");
-                                        }
-                                    }
-                                }
+                                //bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
+                                //if (tempopen.Contains(false)) //有false说明还有Site超出波动范围
+                                //{
+                                //    Debug.WriteLine("超波动温度");
+                                //    ProgramPause = true;
+                                //    IsPause = true;
+                                //    for (int i = 0; i < 16; i++)
+                                //    {
+                                //        if (SiteTemp[i] != 32770)
+                                //        {
+                                //            if (SiteTemp[i] > tempwavemax && SiteTemp[i] < tempwavemin)
+                                //            {
+                                //                Debug.WriteLine($"Site{i + 1}:【{SiteTemp[i]}】℃超波动温度");
+                                //            }
+                                //        }
+                                //    }
+                                //    if (HeatTrayTemp != 32770)
+                                //    {
+                                //        if (HeatTrayTemp > tempwavemax && HeatTrayTemp < tempwavemin)
+                                //        {
+                                //            Debug.WriteLine($"温控器:【{HeatTrayTemp}】℃超波动温度");
+                                //        }
+                                //    }
+                                //}
                             }
                         }
                     }

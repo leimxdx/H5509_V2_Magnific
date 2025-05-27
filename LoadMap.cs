@@ -63,7 +63,6 @@ namespace H5509_V2
                     LsLoadDicPoint.Add($"{i},{j}", LoadDicPoint[$"{i},{j}"]);
                 }
             }
-
         }
         private void LoadMap_Load(object sender, EventArgs e)
         {

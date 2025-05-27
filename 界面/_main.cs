@@ -1141,7 +1141,7 @@ namespace H5509_V2
                     if (dialog == DialogResult.OK)
                     {
                         string result = handler.加热盘加热开启();
-                        string result2 = handler.梭车加热开启();
+                        string result2 = H5509归零 ? handler.梭车加热开启() : "Success";
                         string result3 = handler.Site加热开启();
                         if (result == "Success" && result2 == "Success" && result3 == "Success")
                         {
@@ -1172,7 +1172,7 @@ namespace H5509_V2
         public void 刷新温度显示()
         {
             uiDigitalLabel18.Value = 设定温度;
-
+            label116.Text = 温度模式;
             if (温度模式 == "常温")
             {
                 if (label10.Text == "停止")
@@ -1245,6 +1245,13 @@ namespace H5509_V2
                     //this.uiDoubleUpDown14.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
                 }
             }
+        }
+
+        private void uiDigitalLabel17_Click(object sender, EventArgs e)
+        {
+            HeatMap heatMap = new HeatMap();
+
+            heatMap.ShowDialog();
         }
     }
 }

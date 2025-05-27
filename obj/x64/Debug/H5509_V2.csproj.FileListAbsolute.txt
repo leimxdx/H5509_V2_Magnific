@@ -111,4 +111,6 @@ D:\github\H5509_V2\obj\x64\Debug\H5509_V2.LoadMap.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
 D:\GitHub\H5509_V2\bin\Debug\SiCommunication.dll
 D:\GitHub\H5509_V2\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewStetup.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.HeatMap.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
