@@ -6501,5 +6501,35 @@ namespace H5509_V2
                 MessageBox.Show("动作成功!");
             }
         }
+
+        private void uiCheckBox203_Click(object sender, EventArgs e)
+        {
+            空跑模式 = uiCheckBox203.Checked;
+            if (!空跑模式)
+            {
+                uiCheckBox204.Enabled = false;
+                uiCheckBox206.Enabled = false;
+            }
+            else
+            {
+                uiCheckBox204.Enabled = true;
+                uiCheckBox206.Enabled = true;
+            }
+        }
+
+        private void uiCheckBox204_Click(object sender, EventArgs e)
+        {
+            Tray盘模式 = uiCheckBox204.Checked;
+        }
+
+        private void uiCheckBox205_Click(object sender, EventArgs e)
+        {
+            安全门禁用 = uiCheckBox205.Checked;
+        }
+
+        private void uiCheckBox206_Click(object sender, EventArgs e)
+        {
+            无测试机模式 = uiCheckBox206.Checked;
+        }
     }
 }

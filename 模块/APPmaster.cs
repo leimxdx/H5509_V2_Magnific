@@ -65,8 +65,6 @@ namespace H5509_V2
 
         public static string 当前权限;
 
-        public static bool 空跑模式;
-
         public static int 权限时间 { get; set; } = 60;
 
         public static string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
@@ -96,6 +94,14 @@ namespace H5509_V2
         public static bool 退出标记 = false;
 
         public static int 设备状态 = 0;
+
+        public static bool 空跑模式 = false;
+
+        public static bool Tray盘模式 = true;
+
+        public static bool 无测试机模式 = false;
+
+        public static bool 安全门禁用 = false;
 
         public static int 温控状态 = 0;
 
@@ -441,6 +447,18 @@ namespace H5509_V2
 
         public static bool Auto2料仓打开标记;
 
+        public static bool Fix1Tray盘放置标记;
+
+        public static bool Fix1Tray盘拿走标记;
+
+        public static bool Fix2Tray盘放置标记;
+
+        public static bool Fix2Tray盘拿走标记;
+
+        public static bool Fix3Tray盘放置标记;
+
+        public static bool Fix3Tray盘拿走标记;
+
         public static bool 入料手臂工作完成标记;
 
         public static bool 加热盘停止入料标记;
@@ -676,6 +694,36 @@ namespace H5509_V2
         /// 创建Auto2开门下降沿的缓存值
         /// </summary>
         public static bool Auto2DoorFallCache = false;
+
+        /// <summary>
+        /// 创建Fix1上升沿的缓存值
+        /// </summary>
+        public static bool Fix1TrayRiseCache = false;
+
+        /// <summary>
+        /// 创建Fix1下降沿的缓存值
+        /// </summary>
+        public static bool Fix1TrayFallCache = false;
+
+        /// <summary>
+        /// 创建Fix2上升沿的缓存值
+        /// </summary>
+        public static bool Fix2TrayRiseCache = false;
+
+        /// <summary>
+        /// 创建Fix2下降沿的缓存值
+        /// </summary>
+        public static bool Fix2TrayFallCache = false;
+
+        /// <summary>
+        /// 创建Fix3上升沿的缓存值
+        /// </summary>
+        public static bool Fix3TrayRiseCache = false;
+
+        /// <summary>
+        /// 创建Fix3下降沿的缓存值
+        /// </summary>
+        public static bool Fix3TrayFallCache = false;
 
         /// <summary>
         /// 创建一个循环上升沿的缓存值
