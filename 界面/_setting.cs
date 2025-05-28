@@ -1278,7 +1278,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisRuns"></param>
         /// <returns></returns>
-        private string WaitAxisMove(List<AxisRun> axisRuns, List<int> prfPos)
+        private string WaitAxisMove(List<AxisRun> axisRuns, List<int> prfPos, int type = 0, int move = 0, int pos2 = 0)
         {
             string result = motion.CommonInitedValidate();
 
@@ -1291,6 +1291,7 @@ namespace H5509_V2
                 string errortxt = "";
 
                 int[] sts = new int[axisRuns.Count];
+                bool[] issecond = new bool[axisRuns.Count];
                 do
                 {
                     value = false;
@@ -1301,6 +1302,66 @@ namespace H5509_V2
                     {
                         short error = GTN_GetSts(axisRuns[i].核号, axisRuns[i].轴号, out sts[i], 1, out uint pClock);
                         motion.ErrorHandler($"GTN_GetSts({axisRuns[i].核号}, {axisRuns[i].轴号}, out {sts[i]}, 1, out uint pClock)", error);
+                    }
+
+
+                    if (move == 1 && issecond.Contains(false))
+                    {
+                        for (int i = 0; i < axisRuns.Count; i++)
+                        {
+                            if (!issecond[i]) //只要有一个Z到达减速区间则全部减速，这样才会一致
+                            {
+                                motionEx.GetCmdPrfPos(axisRuns[i].轴名称, out int prfPos1); //规划位置
+                                motionEx.GetCmdEncPos(axisRuns[i].轴名称, out double encPos1); //实时位置
+                                double posvalue1 = Math.Abs(prfPos1 - encPos1);
+
+                                if (posvalue1 < pos2)
+                                {
+                                    if (axisRuns[i].轴名称.Contains("入料手臂Z") || axisRuns[i].轴名称.Contains("出料手臂Z"))
+                                    {
+                                        for (int se = 0; se < axisRuns.Count; se++)
+                                        {
+                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
+
+                                            issecond[se] = true;
+                                            axisRuns[se].目标速度 = axisRuns[se].目标速度 * 出入料Z第二段速度;
+
+                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
+
+                                            // 设置AXIS轴的目标速度
+                                            short error = GTN_SetVel(axisRuns[se].核号, axisRuns[se].轴号, axisRuns[se].目标速度);
+                                            motion.ErrorHandler("GTN_SetVel", error);
+                                        }
+
+                                        for (int se = 0; se < issecond.Length; se++)
+                                        {
+                                            // 启动AXIS轴的运动
+                                            short error1 = GTN_Update(axisRuns[se].核号, 1 << (axisRuns[se].轴号 - 1));
+                                            motion.ErrorHandler("GTN_Update", error1);
+                                        }
+
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
+
+                                        issecond[i] = true;
+                                        axisRuns[i].目标速度 = axisRuns[i].目标速度 * 第二段速度;
+
+                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
+
+                                        // 设置AXIS轴的目标速度
+                                        short error = GTN_SetVel(axisRuns[i].核号, axisRuns[i].轴号, axisRuns[i].目标速度);
+                                        motion.ErrorHandler("GTN_SetVel", error);
+
+                                        // 启动AXIS轴的运动
+                                        short error1 = GTN_Update(axisRuns[i].核号, 1 << (axisRuns[i].轴号 - 1));
+                                        motion.ErrorHandler("GTN_Update", error1);
+                                    }
+                                }
+                            }
+                        }
                     }
 
                     for (int i = 0; i < sts.Length; i++)
@@ -1446,7 +1507,7 @@ namespace H5509_V2
             return result;
         }
 
-        public string 多轴绝对运动(string[] axisNames, double[] poss)
+        public string 多轴绝对运动(string[] axisNames, double[] poss, int type = 0, int move = 0, int pos2 = 0)
         {
             string result;
             List<int> listpos = new List<int>();
@@ -1456,19 +1517,19 @@ namespace H5509_V2
                 result = APPmaster.GetAxisRunInfo(axisNames[i], out AxisRunInfo axisRunInfo);
                 if (result == "Success")
                 {
-                    int move = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm));
+                    int movepos = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm));
                     axisRuns.Add(new AxisRun()
                     {
                         轴名称 = axisRunInfo.轴名称,
                         核号 = axisRunInfo.核号,
                         轴号 = axisRunInfo.轴号,
-                        目标位置 = move,
+                        目标位置 = movepos,
                         目标速度 = axisRunInfo.运行速度,
                         目标加速度 = axisRunInfo.加速度,
                         目标减速度 = axisRunInfo.减速度,
                         平滑时间 = axisRunInfo.平滑时间,
                     });
-                    listpos.Add(move);
+                    listpos.Add(movepos);
                 }
             }
             result = motion.MultiaxisAbsoluteMoveAbs(axisRuns);
@@ -1476,7 +1537,7 @@ namespace H5509_V2
             {
                 Task<string> task = Task.Run(() =>
                 {
-                    return WaitAxisMove(axisRuns, listpos);
+                    return WaitAxisMove(axisRuns, listpos, type, move, pos2);
                 });
                 result = task.Result;
             }
@@ -3705,6 +3766,7 @@ namespace H5509_V2
             });
         }
 
+        double inoldpos = 0;
         private void 入料手臂Z移动初始点位(double mm)
         {
             button30.Enabled = false;
@@ -3720,9 +3782,9 @@ namespace H5509_V2
                 double z4 = Convert.ToDouble(uiDoubleUpDown19.Text);
                 string[] axis = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
-                string result = 多轴绝对运动(axis, pos);
+                string result = 多轴绝对运动(axis, pos, 1, inoldpos < mm ? 1 : 0, 出入料Z第二段距离);
                 if (result != "Success") Debug.WriteLine("移动失败!" + result);
-
+                inoldpos = mm;
                 this.Invoke(new Action(() =>
                 {
                     button30.Enabled = true;
@@ -3734,6 +3796,7 @@ namespace H5509_V2
             });
         }
 
+        double outoldpos = 0;
         private void 出料手臂Z移动初始点位(double mm)
         {
             button40.Enabled = false;
@@ -3751,8 +3814,10 @@ namespace H5509_V2
                 double z4 = Convert.ToDouble(uiDoubleUpDown20.Text);
                 string[] axis = { "M6_出料手臂Z1轴", "M7_出料手臂Z2轴", "M8_出料手臂Z3轴", "M9_出料手臂Z4轴" };
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
-                string result = 多轴绝对运动(axis, pos);
+
+                string result = 多轴绝对运动(axis, pos, 1, outoldpos < mm ? 1 : 0, 出入料Z第二段距离);
                 if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                outoldpos = mm;
 
                 this.Invoke(new Action(() =>
                 {

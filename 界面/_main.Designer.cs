@@ -302,6 +302,7 @@
             this.label123 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_driverStatus = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Txt_loadnum = new System.Windows.Forms.TextBox();
             this.label139 = new System.Windows.Forms.Label();
@@ -361,7 +362,6 @@
             this.label144 = new System.Windows.Forms.Label();
             this.label141 = new System.Windows.Forms.Label();
             this.label143 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Panel_left.SuspendLayout();
             this.pal_setdutstate.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -385,12 +385,12 @@
             this.groupBox25.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.panel31.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.Panel_right.SuspendLayout();
             this.panel3.SuspendLayout();
             this.groupBox26.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // Panel_left
@@ -4191,6 +4191,17 @@
             this.label_driverStatus.Text = "HALT";
             this.label_driverStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
+            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 161;
+            this.pictureBox1.TabStop = false;
+            // 
             // panel1
             // 
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -4367,7 +4378,6 @@
             this.textBoxtestflow.ReadOnly = true;
             this.textBoxtestflow.Size = new System.Drawing.Size(400, 33);
             this.textBoxtestflow.TabIndex = 102;
-            this.textBoxtestflow.Text = "FT3";
             // 
             // textBoxstate
             // 
@@ -4392,7 +4402,6 @@
             this.textBoxuser.Size = new System.Drawing.Size(400, 33);
             this.textBoxuser.TabIndex = 112;
             this.textBoxuser.Tag = "@0@";
-            this.textBoxuser.Text = "TEST";
             // 
             // label1592
             // 
@@ -4449,7 +4458,6 @@
             this.textBoxmachine.ReadOnly = true;
             this.textBoxmachine.Size = new System.Drawing.Size(400, 33);
             this.textBoxmachine.TabIndex = 145;
-            this.textBoxmachine.Text = "H5509";
             // 
             // textBoxstation
             // 
@@ -4462,7 +4470,6 @@
             this.textBoxstation.ReadOnly = true;
             this.textBoxstation.Size = new System.Drawing.Size(400, 33);
             this.textBoxstation.TabIndex = 108;
-            this.textBoxstation.Text = "FT";
             // 
             // label1595
             // 
@@ -4509,7 +4516,6 @@
             this.textBoxFlowcaedno.Size = new System.Drawing.Size(400, 33);
             this.textBoxFlowcaedno.TabIndex = 97;
             this.textBoxFlowcaedno.Tag = "@0@";
-            this.textBoxFlowcaedno.Text = "FT20241111TEST";
             this.textBoxFlowcaedno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxFlowcaedno_KeyDown);
             // 
             // textBoxmark
@@ -4535,7 +4541,6 @@
             this.textBoxfwversion.ReadOnly = true;
             this.textBoxfwversion.Size = new System.Drawing.Size(400, 33);
             this.textBoxfwversion.TabIndex = 122;
-            this.textBoxfwversion.Text = "FT3_RS80AT7G4M08B_002000002005";
             // 
             // textBoxcode
             // 
@@ -4560,7 +4565,6 @@
             this.textBoxproduct.ReadOnly = true;
             this.textBoxproduct.Size = new System.Drawing.Size(400, 33);
             this.textBoxproduct.TabIndex = 94;
-            this.textBoxproduct.Text = "RS80AT7G4M08B";
             // 
             // label1597
             // 
@@ -4686,7 +4690,6 @@
             this.textBoxdatecode.ReadOnly = true;
             this.textBoxdatecode.Size = new System.Drawing.Size(400, 33);
             this.textBoxdatecode.TabIndex = 124;
-            this.textBoxdatecode.Text = "20241025";
             // 
             // label114
             // 
@@ -4710,7 +4713,6 @@
             this.textBoxmqty.ReadOnly = true;
             this.textBoxmqty.Size = new System.Drawing.Size(313, 33);
             this.textBoxmqty.TabIndex = 114;
-            this.textBoxmqty.Text = "999";
             // 
             // label1598
             // 
@@ -4991,17 +4993,6 @@
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
-            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 161;
-            this.pictureBox1.TabStop = false;
-            // 
             // _main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -5036,6 +5027,7 @@
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
             this.panel31.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.Panel_right.ResumeLayout(false);
@@ -5044,7 +5036,6 @@
             this.groupBox26.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

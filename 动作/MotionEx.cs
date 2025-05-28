@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using DocumentFormat.OpenXml.Office2019.Excel.ThreadedComments;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Sunny.UI.Win32;
 using static System.Windows.Forms.LinkLabel;
@@ -338,7 +339,7 @@ namespace H5509_V2
                     short error = GTN_GetSts(axisRun.核号, axisRun.轴号, out sts, 1, out uint pClock);
                     Motion.ErrorHandler($"GTN_GetSts({axisRun.核号}, {axisRun.轴号}, out {sts}, 1, out uint pClock)", error);
 
-                    if(move == 1 && !issecond)
+                    if (move == 1 && !issecond)
                     {
                         GetCmdPrfPos(axisRun.轴名称, out int prfPos1); //规划位置
                         GetCmdEncPos(axisRun.轴名称, out double encPos1); //实时位置
@@ -467,26 +468,61 @@ namespace H5509_V2
                         Motion.ErrorHandler($"GTN_GetSts({axisRuns[i].核号}, {axisRuns[i].轴号}, out {sts[i]}, 1, out uint pClock)", error);
                     }
 
-                    for (int i = 0; i < axisRuns.Count; i++)
+                    if (move == 1 && issecond.Contains(false))
                     {
-                        if (move == 1 && !issecond[i])
+                        for (int i = 0; i < axisRuns.Count; i++)
                         {
-                            GetCmdPrfPos(axisRuns[i].轴名称, out int prfPos1); //规划位置
-                            GetCmdEncPos(axisRuns[i].轴名称, out double encPos1); //实时位置
-                            double posvalue1 = Math.Abs(prfPos1 - encPos1);
-
-                            if (posvalue1 > pos2)
+                            if (!issecond[i]) //只要有一个Z到达减速区间则全部减速，这样才会一致
                             {
-                                issecond[i] = true;
-                                axisRuns[i].目标速度 = axisRuns[i].目标速度 * 第二段速度;
+                                GetCmdPrfPos(axisRuns[i].轴名称, out int prfPos1); //规划位置
+                                GetCmdEncPos(axisRuns[i].轴名称, out double encPos1); //实时位置
+                                double posvalue1 = Math.Abs(prfPos1 - encPos1);
 
-                                // 设置AXIS轴的目标速度
-                                short error = GTN_SetVel(axisRuns[i].核号, axisRuns[i].轴号, axisRuns[i].目标速度);
-                                Motion.ErrorHandler("GTN_SetVel", error);
+                                if (posvalue1 < pos2)
+                                {
+                                    if (axisRuns[i].轴名称.Contains("入料手臂Z") || axisRuns[i].轴名称.Contains("出料手臂Z"))
+                                    {
+                                        for (int se = 0; se < axisRuns.Count; se++)
+                                        {
+                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
 
-                                // 启动AXIS轴的运动
-                                error = GTN_Update(axisRuns[i].核号, 1 << (axisRuns[i].轴号 - 1));
-                                Motion.ErrorHandler("GTN_Update", error);
+                                            issecond[se] = true;
+                                            axisRuns[se].目标速度 = axisRuns[se].目标速度 * 出入料Z第二段速度;
+
+                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
+
+                                            // 设置AXIS轴的目标速度
+                                            short error = GTN_SetVel(axisRuns[se].核号, axisRuns[se].轴号, axisRuns[se].目标速度);
+                                            Motion.ErrorHandler("GTN_SetVel", error);
+                                        }
+
+                                        for (int se = 0; se < issecond.Length; se++)
+                                        {
+                                            // 启动AXIS轴的运动
+                                            short error1 = GTN_Update(axisRuns[se].核号, 1 << (axisRuns[se].轴号 - 1));
+                                            Motion.ErrorHandler("GTN_Update", error1);
+                                        }
+
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
+
+                                        issecond[i] = true;
+                                        axisRuns[i].目标速度 = axisRuns[i].目标速度 * 第二段速度;
+
+                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
+
+                                        // 设置AXIS轴的目标速度
+                                        short error = GTN_SetVel(axisRuns[i].核号, axisRuns[i].轴号, axisRuns[i].目标速度);
+                                        Motion.ErrorHandler("GTN_SetVel", error);
+
+                                        // 启动AXIS轴的运动
+                                        short error1 = GTN_Update(axisRuns[i].核号, 1 << (axisRuns[i].轴号 - 1));
+                                        Motion.ErrorHandler("GTN_Update", error1);
+                                    }
+                                }
                             }
                         }
                     }
@@ -645,7 +681,7 @@ namespace H5509_V2
         /// <param name="axisNames"></param>
         /// <param name="poss"></param>
         /// <returns></returns>
-        public string AxisMove(string[] axisNames, double[] poss)
+        public string AxisMove(string[] axisNames, double[] poss, int type = 0, int move = 0, int pos2 = 0)//
         {
             List<int> prfPos = new List<int>();
             List<AxisRun> axisRuns = new List<AxisRun>();
@@ -654,19 +690,19 @@ namespace H5509_V2
                 string result = GetAxisRunInfo(axisNames[i], out AxisRunInfo axisRunInfo);
                 if (result != "Success") return result;
 
-                int move = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm));
+                int movepos = Convert.ToInt32(Math.Round(poss[i] / axisRunInfo.步长mm));
                 axisRuns.Add(new AxisRun()
                 {
                     轴名称 = axisRunInfo.轴名称,
                     核号 = axisRunInfo.核号,
                     轴号 = axisRunInfo.轴号,
-                    目标位置 = move,
+                    目标位置 = movepos,
                     目标速度 = axisRunInfo.运行速度,
                     目标加速度 = axisRunInfo.加速度,
                     目标减速度 = axisRunInfo.减速度,
                     平滑时间 = axisRunInfo.平滑时间,
                 });
-                prfPos.Add(move);
+                prfPos.Add(movepos);
             }
 
             string result2 = Motion.MultiaxisAbsoluteMoveAbs(axisRuns);
@@ -674,7 +710,7 @@ namespace H5509_V2
 
             Task<string> task = Task.Run(() =>
             {
-                return WaitAxisMove(axisRuns, prfPos);//等待回零完成
+                return WaitAxisMove(axisRuns, prfPos, type, move, pos2);//等待回零完成
             });
 
             return task.Result;

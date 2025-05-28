@@ -85,7 +85,13 @@ namespace H5509_V2
 
         public static bool IsForecePause = false; //强制停止
 
+        public static int 第二段距离 = 5000;
+
         public static double 第二段速度 = 0.3;
+
+        public static int 出入料Z第二段距离 = 600;
+
+        public static double 出入料Z第二段速度 = 0.1;
 
         public static bool 退出标记 = false;
 

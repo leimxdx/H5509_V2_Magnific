@@ -151,7 +151,7 @@ namespace H5509_V2
                 axisNames.Add("M4_入料手臂Z4轴");
             }
 
-            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray());
+            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray(), 0, isdown ? 1 : 0, 600);
         }
 
         public string 入料手臂Z移动(bool[] isopen, bool isdown)
@@ -258,7 +258,7 @@ namespace H5509_V2
                 axisNames.Add("M9_出料手臂Z4轴");
             }
 
-            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray());
+            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray(), 0, isdown ? 1 : 0, 600);
         }
 
         public string 测试手臂X移动(double pos)
@@ -2525,6 +2525,13 @@ namespace H5509_V2
             //Com.IsconnectTester = false;
             InSiteQueue = new ConcurrentQueue<int>();
             OutSiteQueue = new ConcurrentQueue<int>();
+            载入数 = 0;
+            UphNumber = 0;
+            Auto1数量 = 0;
+            Auto2数量 = 0;
+            Fix1数量 = 0;
+            Fix2数量 = 0;
+            Fix3数量 = 0;
             Auto1TrayClear();
             Auto2TrayClear();
             Fix1TrayClear();
@@ -3041,7 +3048,7 @@ namespace H5509_V2
                             motionEx.SetDo("Y001_开始灯", false);
                             motionEx.SetDo("Y002_暂停灯", false);
                             motionEx.SetDo("Y010_归零灯", true);
-                            if(温控加热 && 温度模式 == "高温") 梭车加热关闭();
+                            if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
                             Task.Run(() =>
                             {
                                 result = 整机回零流程();
@@ -3202,7 +3209,7 @@ namespace H5509_V2
             {
                 result = 梭车加热开启();
                 if (result != "Success")
-                { 
+                {
                     return result;
                 }
             }
@@ -6546,8 +6553,8 @@ namespace H5509_V2
                         if (温控加热 && 温度模式 == "高温")
                         {
                             Debug.WriteLine($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
-                            if(梭车加热关闭() != "Success")
-                            { 
+                            if (梭车加热关闭() != "Success")
+                            {
                                 Debug.WriteLine("梭车加热关闭失败");
                                 ProgramPause = true;
                                 IsPause = true;
@@ -6557,7 +6564,7 @@ namespace H5509_V2
                         }
                         PS入飞梭移动流程.StepID = 505;
                         break;
-                        
+
 
                     case 505:
                         PS入飞梭移动流程.StepName = $"飞梭_前后检测产品感应";
@@ -6570,7 +6577,7 @@ namespace H5509_V2
                                 PS入飞梭移动流程.StepID = 515;
                             }
                             else
-                            { 
+                            {
                                 Debug.WriteLine("飞梭前后检测产品感应有IC放歪");
                                 ProgramPause = true;
                                 IsPause = true;
@@ -6619,7 +6626,7 @@ namespace H5509_V2
                         {
                             Debug.WriteLine($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                             Thread.Sleep(100);
-                            if(梭车加热开启() != "Success")
+                            if (梭车加热开启() != "Success")
                             {
                                 Debug.WriteLine("梭车加热开启失败");
                                 ProgramPause = true;
