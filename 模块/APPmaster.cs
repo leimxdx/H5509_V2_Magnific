@@ -302,9 +302,9 @@ namespace H5509_V2
 
         public static string Fix3_3 = "09";
 
-        public static string oth;
+        public static string oth = "";
 
-        public static string othAll;
+        public static string othAll = "";
 
         public static bool 入料IC忽略;
 

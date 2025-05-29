@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Vml.Office;
 using DocumentFormat.OpenXml.Wordprocessing;
@@ -2422,6 +2423,9 @@ namespace H5509_V2
             uiDoubleUpDown114.Text = 初始点位.入料_梭车2_X.ToString();
             uiDoubleUpDown113.Text = 初始点位.入料_梭车2_Y.ToString();
             uiDoubleUpDown112.Text = 初始点位.入料_梭车2_Z.ToString();
+            numericUpDown152.Text = 入料吸料间距.ToString();
+            numericUpDown155.Text = 入料吸放料Heat间距.ToString();
+            numericUpDown153.Text = 入料放料间距.ToString();
 
             uiDoubleUpDown105.Text = 初始点位.入料_变距最小值.ToString();
             uiDoubleUpDown104.Text = 初始点位.入料_变距最大值.ToString();
@@ -2484,6 +2488,8 @@ namespace H5509_V2
             uiDoubleUpDown93.Text = 初始点位.出料_Auto2_X.ToString();
             uiDoubleUpDown92.Text = 初始点位.出料_Auto2_Y.ToString();
             uiDoubleUpDown91.Text = 初始点位.出料_Auto2_Z.ToString();
+            numericUpDown158.Text = 出料放料间距.ToString();
+            numericUpDown157.Text = 出料吸料间距.ToString();
 
             uiDoubleUpDown78.Text = 初始点位.出料_梭车2_X.ToString();
             uiDoubleUpDown77.Text = 初始点位.出料_梭车2_Y.ToString();
@@ -3792,6 +3798,40 @@ namespace H5509_V2
                     button27.Enabled = true;
                     button222.Enabled = true;
                     button226.Enabled = true;
+                }));
+            });
+        }
+        private void 入料手臂变距轴移动初始点位(double mm)
+        {
+            button240.Enabled = false;
+            button241.Enabled = false;
+            button242.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M5_入料手臂P轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button240.Enabled = true;
+                    button241.Enabled = true;
+                    button242.Enabled = true;
+                }));
+            });
+        }
+        private void 出料手臂变距轴移动初始点位(double mm)
+        {
+            button245.Enabled = false;
+            button244.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = 单轴绝对运动("M10_出料手臂P轴", mm);
+                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button245.Enabled = true;
+                    button244.Enabled = true;
                 }));
             });
         }
@@ -6207,7 +6247,30 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
-            handler.debug();
+            //飞梭前出料BIN项 = new string[][] { new string[] { "01", "02", "03", "04" }, new string[] { "05", "06", "07", "08" } };
+
+            //string[][] bins = new string[2][]
+            // {
+            //    new string[]{ 飞梭前出料BIN项[0][0], 飞梭前出料BIN项[0][1], 飞梭前出料BIN项[0][2], 飞梭前出料BIN项[0][3]},
+            //    new string[]{ 飞梭前出料BIN项[1][0], 飞梭前出料BIN项[1][1], 飞梭前出料BIN项[1][2], 飞梭前出料BIN项[1][3]},
+            // };
+
+            //for (int i = 0; i < bins.Length; i++)
+            //{
+            //    for (int j = 0; j < bins[i].Length; j++)
+            //    {
+            //        oth = bins[i][j];
+            //        if (!Auto1.Split(",").Contains(oth) && !Auto2.Split(",").Contains(oth) && !Fix1.Split(",").Contains(oth) && !Fix2.Split(",").Contains(oth) && !Fix3.Split(",").Contains(oth))
+            //        {
+            //            if (!othAll.Contains(oth))
+            //            {
+            //                othAll += oth + ",";
+            //            }
+            //            bins[i][j] = "OTH";
+            //        }
+            //    }
+            //}
+            //handler.debug();
         }
 
         private void button228_Click(object sender, EventArgs e)
@@ -6536,6 +6599,36 @@ namespace H5509_V2
         private void uiCheckBox206_Click(object sender, EventArgs e)
         {
             无测试机模式 = uiCheckBox206.Checked;
+        }
+
+        private void button240_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown152.Text);
+            入料手臂变距轴移动初始点位(pos);
+        }
+
+        private void button242_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown155.Text);
+            入料手臂变距轴移动初始点位(pos);
+        }
+
+        private void button241_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown153.Text);
+            入料手臂变距轴移动初始点位(pos);
+        }
+
+        private void button245_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown158.Text);
+            出料手臂变距轴移动初始点位(pos);
+        }
+
+        private void button244_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown157.Text);
+            出料手臂变距轴移动初始点位(pos);
         }
     }
 }

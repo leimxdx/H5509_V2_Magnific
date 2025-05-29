@@ -5953,6 +5953,23 @@ namespace H5509_V2
                                 new string[]{ 飞梭前出料BIN项[0][0], 飞梭前出料BIN项[0][1], 飞梭前出料BIN项[0][2], 飞梭前出料BIN项[0][3]},
                                 new string[]{ 飞梭前出料BIN项[1][0], 飞梭前出料BIN项[1][1], 飞梭前出料BIN项[1][2], 飞梭前出料BIN项[1][3]},
                             };
+
+                            for (int i = 0; i < bins.Length; i++)
+                            {
+                                for (int j = 0; j < bins[i].Length; j++)
+                                {
+                                    oth = bins[i][j];
+                                    if (!Auto1.Split(",").Contains(oth) && !Auto2.Split(",").Contains(oth) && !Fix1.Split(",").Contains(oth) && !Fix2.Split(",").Contains(oth) && !Fix3.Split(",").Contains(oth))
+                                    {
+                                        if (!othAll.Contains(oth))
+                                        {
+                                            othAll += oth + ",";
+                                        }
+                                        bins[i][j] = "OTH";
+                                    }
+                                }
+                            }
+
                             PS出料手臂吸放料流程.Processing = true;
                             PS出料手臂吸放料流程.StepID = 505;
                         }
@@ -5992,6 +6009,8 @@ namespace H5509_V2
                             opens = new int[] { open[1][0] ? 0 : 2, open[1][1] ? 0 : 2, open[1][2] ? 0 : 2, open[1][3] ? 0 : 2 };
                             lsopen = new bool[] { open[1][0], open[1][1], open[1][2], open[1][3] };
                             bin = new string[] { bins[1][0], bins[1][1], bins[1][2], bins[1][3] };
+
+
                             PS出料手臂吸放料流程.StepID = 515;
                         }
                         else //放料完成
@@ -6292,6 +6311,8 @@ namespace H5509_V2
 
                     case 705: //放料
                         PS出料手臂吸放料流程.StepName = "计算放料盘位置";
+
+
 
                         if (判断BIN项(opens, Auto1, bin, out index))
                         {

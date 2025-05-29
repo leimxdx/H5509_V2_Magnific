@@ -3,35 +3,59 @@
   "WorkspaceRootPath": "D:\\GitHub\\H5509_V2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|d:\\github\\h5509_v2\\\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\motionex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u52A8\u4F5C\\motionex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_setting.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|H5509_V2||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|d:\\github\\h5509_v2\\\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|H5509_V2||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\setupinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:setupinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\offsetpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:offsetpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\sitestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:sitestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\motionex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u52A8\u4F5C\\motionex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -58,20 +82,8 @@
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:heatmaptimer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_setting.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\heatinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -108,14 +120,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\_io.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_io.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\setupinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:setupinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\sitestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:sitestatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -198,15 +202,11 @@
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\st_processmanage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\offsetpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:offsetpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\\u754C\u9762\\uiprogressindicatorex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\uiprogressindicatorex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|d:\\github\\h5509_v2\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|6185191f-1008-4fb2-a715-3a4e4f27e610"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|d:\\github\\h5509_v2\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|1e78f8db-6c07-4d61-a18f-7514010abd56"
     }
   ],
   "DocumentGroupContainers": [
@@ -216,17 +216,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "FrmMain.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\FrmMain.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
               "RelativeToolTip": "\u754C\u9762\\FrmMain.cs",
-              "ViewState": "AgIAAGMBAAAAAAAAAAAmwHEBAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAAcBAAAAAAAAAAA5wBEBAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T02:19:51.081Z",
               "IsPinned": true,
@@ -234,7 +234,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
               "Title": "MotionEx.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\MotionEx.cs",
               "RelativeDocumentMoniker": "\u52A8\u4F5C\\MotionEx.cs",
@@ -243,18 +243,17 @@
               "ViewState": "AgIAAFkBAAAAAAAAAAAAAGoBAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T00:50:20.361Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "_setting.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_setting.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.cs",
               "RelativeToolTip": "\u754C\u9762\\_setting.cs",
-              "ViewState": "AgIAAGQZAAAAAAAAAAAmwG0ZAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAANEZAAAAAAAAAAAiwOIZAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T00:45:16.835Z",
               "IsPinned": true,
@@ -262,7 +261,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 1,
               "Title": "_setting.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_setting.cs",
@@ -275,13 +274,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "APPmaster.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u6A21\u5757\\APPmaster.cs",
               "RelativeDocumentMoniker": "\u6A21\u5757\\APPmaster.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\\u6A21\u5757\\APPmaster.cs",
               "RelativeToolTip": "\u6A21\u5757\\APPmaster.cs",
-              "ViewState": "AgIAAE0DAAAAAAAAAAAuwFsDAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAJoBAAAAAAAAAAAswK4BAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-22T00:45:11.019Z",
               "IsPinned": true,
@@ -289,13 +288,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "_main.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_main.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs",
               "RelativeToolTip": "\u754C\u9762\\_main.cs",
-              "ViewState": "AgIAAMwDAAAAAAAAAAAQwNsDAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAAH4CAAAAAAAAAAAUwBIDAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-23T11:09:47.121Z",
               "IsPinned": true,
@@ -303,13 +302,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "Handler.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u6A21\u5757\\Handler.cs",
               "RelativeDocumentMoniker": "\u6A21\u5757\\Handler.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\\u6A21\u5757\\Handler.cs*",
-              "RelativeToolTip": "\u6A21\u5757\\Handler.cs*",
-              "ViewState": "AgIAAAYMAAAAAAAAAAAQwBMMAAA4AAAAAAAAAA==",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\\u6A21\u5757\\Handler.cs",
+              "RelativeToolTip": "\u6A21\u5757\\Handler.cs",
+              "ViewState": "AgIAADAXAAAAAAAAAAAuwEwXAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-12T08:48:09.423Z",
               "IsPinned": true,
@@ -317,7 +316,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 19,
               "Title": "HeatMapTimer.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HeatMapTimer.cs",
               "RelativeDocumentMoniker": "HeatMapTimer.cs",
@@ -326,12 +325,11 @@
               "ViewState": "AgIAADUAAAAAAAAAAAAiwEUAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-17T12:48:53.897Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 18,
               "Title": "LoadMap.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\LoadMap.cs",
               "RelativeDocumentMoniker": "LoadMap.cs",
@@ -340,62 +338,37 @@
               "ViewState": "AgIAAHgAAAAAAAAAAAAowIAAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-27T11:31:35.5Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "Motion.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\Motion.cs",
-              "RelativeDocumentMoniker": "\u52A8\u4F5C\\Motion.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\Motion.cs",
-              "RelativeToolTip": "\u52A8\u4F5C\\Motion.cs",
-              "ViewState": "AgIAAL8CAAAAAAAAAAAAwMsCAAAWAAAAAAAAAA==",
+              "Title": "SiteStatus.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\SiteStatus.cs",
+              "RelativeDocumentMoniker": "SiteStatus.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\SiteStatus.cs",
+              "RelativeToolTip": "SiteStatus.cs",
+              "ViewState": "AgIAAGQAAAAAAAAAAAAkwAgAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T11:23:57.415Z",
+              "WhenOpened": "2025-05-09T10:54:21.981Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "HeatMap.Designer.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HeatMap.Designer.cs",
-              "RelativeDocumentMoniker": "HeatMap.Designer.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\HeatMap.Designer.cs",
-              "RelativeToolTip": "HeatMap.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "_setting.Designer.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.Designer.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\_setting.Designer.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.Designer.cs",
+              "RelativeToolTip": "\u754C\u9762\\_setting.Designer.cs",
+              "ViewState": "AgIAAMFnAAAAAAAAAAAuwM9nAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T11:33:50.64Z",
+              "WhenOpened": "2025-04-28T03:39:17.77Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "LoadMap.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\LoadMap.cs",
-              "RelativeDocumentMoniker": "LoadMap.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\LoadMap.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "LoadMap.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-27T11:29:45.779Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "_main.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\_main.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\_main.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-07T07:40:46.79Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "H5509_V2",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2.csproj",
               "RelativeDocumentMoniker": "H5509_V2.csproj",
@@ -407,7 +380,92 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "SetupInfo.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\SetupInfo.cs",
+              "RelativeDocumentMoniker": "SetupInfo.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\SetupInfo.cs",
+              "RelativeToolTip": "SetupInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T07:10:40.439Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "OffsetPoint.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\OffsetPoint.cs",
+              "RelativeDocumentMoniker": "OffsetPoint.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\OffsetPoint.cs",
+              "RelativeToolTip": "OffsetPoint.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAQwAgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-05T12:11:39.017Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "FrmMain.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\FrmMain.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-22T06:12:49.111Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_main.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\_main.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\_main.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-07T07:40:46.79Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "LoadMap.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\LoadMap.cs",
+              "RelativeDocumentMoniker": "LoadMap.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\LoadMap.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "LoadMap.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T11:29:45.779Z"
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 16,
+              "Title": "HeatMap.Designer.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HeatMap.Designer.cs",
+              "RelativeDocumentMoniker": "HeatMap.Designer.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\HeatMap.Designer.cs",
+              "RelativeToolTip": "HeatMap.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T11:33:50.64Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Motion.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\Motion.cs",
+              "RelativeDocumentMoniker": "\u52A8\u4F5C\\Motion.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\Motion.cs",
+              "RelativeToolTip": "\u52A8\u4F5C\\Motion.cs",
+              "ViewState": "AgIAAL8CAAAAAAAAAAAAwMsCAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-27T11:23:57.415Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
               "Title": "_main.Designer.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_main.Designer.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_main.Designer.cs",
@@ -420,19 +478,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "FrmMain.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\FrmMain.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-22T06:12:49.111Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -440,25 +486,11 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAQAAAAAAAAAAAAQwBIAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-25T14:24:45.497Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-04-25T14:24:45.497Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "_setting.Designer.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.Designer.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\_setting.Designer.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_setting.Designer.cs",
-              "RelativeToolTip": "\u754C\u9762\\_setting.Designer.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAqwBYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T03:39:17.77Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 23,
               "Title": "HeatMap.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HeatMap.cs",
               "RelativeDocumentMoniker": "HeatMap.cs",
@@ -470,7 +502,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "HeatInfo.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HeatInfo.cs",
               "RelativeDocumentMoniker": "HeatInfo.cs",
@@ -482,7 +514,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "HeatMap.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HeatMap.cs",
               "RelativeDocumentMoniker": "HeatMap.cs",
@@ -493,7 +525,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 24,
               "Title": "InitPoint.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\InitPoint.cs",
               "RelativeDocumentMoniker": "InitPoint.cs",
@@ -505,31 +537,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "SetupInfo.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\SetupInfo.cs",
-              "RelativeDocumentMoniker": "SetupInfo.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\SetupInfo.cs",
-              "RelativeToolTip": "SetupInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAA4AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T07:10:40.439Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "SiteStatus.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\SiteStatus.cs",
-              "RelativeDocumentMoniker": "SiteStatus.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\SiteStatus.cs",
-              "RelativeToolTip": "SiteStatus.cs",
-              "ViewState": "AgIAAAcAAAAAAAAAAAAAAB0AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T10:54:21.981Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "_IO.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_IO.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_IO.cs",
@@ -540,7 +548,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "_log.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_log.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_log.cs",
@@ -551,7 +559,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 27,
               "Title": "DTMHelper.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\DTMHelper.cs",
               "RelativeDocumentMoniker": "DTMHelper.cs",
@@ -563,7 +571,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 25,
               "Title": "NewStetup.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\NewStetup.cs",
               "RelativeDocumentMoniker": "NewStetup.cs",
@@ -574,7 +582,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "Form_alarm.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\Form_alarm.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\Form_alarm.cs",
@@ -586,7 +594,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 26,
               "Title": "_IO.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_IO.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_IO.cs",
@@ -598,7 +606,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "AxisRunInfo.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u8F74\\AxisRunInfo.cs",
               "RelativeDocumentMoniker": "\u8F74\\AxisRunInfo.cs",
@@ -610,7 +618,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "Communication.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u901A\u4FE1\\Communication.cs",
               "RelativeDocumentMoniker": "\u901A\u4FE1\\Communication.cs",
@@ -622,7 +630,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "log.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u6A21\u5757\\log.cs",
               "RelativeDocumentMoniker": "\u6A21\u5757\\log.cs",
@@ -634,7 +642,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "_speed.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_speed.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_speed.cs",
@@ -645,7 +653,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "FrmMain.Designer.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\FrmMain.Designer.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\FrmMain.Designer.cs",
@@ -658,7 +666,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "_speed.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_speed.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_speed.cs",
@@ -670,7 +678,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "_log.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_log.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_log.cs",
@@ -682,7 +690,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "Form_alarm.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\Form_alarm.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\Form_alarm.cs",
@@ -693,7 +701,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 41,
               "Title": "SqlServerHelper.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u5DE5\u5177\\SqlServerHelper.cs",
               "RelativeDocumentMoniker": "\u5DE5\u5177\\SqlServerHelper.cs",
@@ -705,7 +713,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "TrayInfo.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\TrayInfo.cs",
               "RelativeDocumentMoniker": "TrayInfo.cs",
@@ -717,7 +725,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "TesterIFParam.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\TesterIFParam.cs",
               "RelativeDocumentMoniker": "TesterIFParam.cs",
@@ -729,7 +737,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 41,
+              "DocumentIndex": 42,
               "Title": "BinParam.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\BinParam.cs",
               "RelativeDocumentMoniker": "BinParam.cs",
@@ -741,7 +749,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 43,
+              "DocumentIndex": 44,
               "Title": "SQLiteHelper.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u5DE5\u5177\\SQLiteHelper.cs",
               "RelativeDocumentMoniker": "\u5DE5\u5177\\SQLiteHelper.cs",
@@ -753,7 +761,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 42,
+              "DocumentIndex": 43,
               "Title": "_offset.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_offset.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_offset.cs",
@@ -765,7 +773,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 45,
               "Title": "_offset.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u754C\u9762\\_offset.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_offset.cs",
@@ -776,7 +784,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 46,
               "Title": "App.config",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\App.config",
               "RelativeDocumentMoniker": "App.config",
@@ -789,7 +797,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 47,
               "Title": "AxisHomeInfo.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u8F74\\AxisHomeInfo.cs",
               "RelativeDocumentMoniker": "\u8F74\\AxisHomeInfo.cs",
@@ -801,7 +809,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 49,
               "Title": "ST_ProcessManage.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u6A21\u5757\\ST_ProcessManage.cs",
               "RelativeDocumentMoniker": "\u6A21\u5757\\ST_ProcessManage.cs",
@@ -813,7 +821,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 48,
               "Title": "gts.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\\u52A8\u4F5C\\gts.cs",
               "RelativeDocumentMoniker": "\u52A8\u4F5C\\gts.cs",
@@ -822,18 +830,6 @@
               "ViewState": "AgIAAFcBAAAAAAAAAAArwGcBAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-24T02:12:46.14Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 49,
-              "Title": "OffsetPoint.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\OffsetPoint.cs",
-              "RelativeDocumentMoniker": "OffsetPoint.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\OffsetPoint.cs",
-              "RelativeToolTip": "OffsetPoint.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-05T12:11:39.017Z"
             },
             {
               "$type": "Document",
