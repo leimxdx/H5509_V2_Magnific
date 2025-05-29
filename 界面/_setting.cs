@@ -6505,15 +6505,21 @@ namespace H5509_V2
         private void uiCheckBox203_Click(object sender, EventArgs e)
         {
             空跑模式 = uiCheckBox203.Checked;
-            if (!空跑模式)
-            {
-                uiCheckBox204.Enabled = false;
-                uiCheckBox206.Enabled = false;
-            }
-            else
+            if (空跑模式)
             {
                 uiCheckBox204.Enabled = true;
                 uiCheckBox206.Enabled = true;
+            }
+            else
+            {
+                Tray盘模式 = true; //不是空跑模式时，Tray盘模式默认开启
+                uiCheckBox204.Checked = true;
+
+                无测试机模式 = false; //不是空跑模式时，默认关闭无测试机模式
+                uiCheckBox206.Checked = false;
+
+                uiCheckBox204.Enabled = false;
+                uiCheckBox206.Enabled = false;
             }
         }
 

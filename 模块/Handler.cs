@@ -287,34 +287,72 @@ namespace H5509_V2
             return motionEx.AxisAbsoluteMove("M11_Fix3放IC轴", pos, type);
         }
 
-        public string Empty顶盘轴移动(double pos)
+        public string Empty顶盘轴移动(double pos, int type = 0)
         {
-            return motionEx.AxisAbsoluteMove("M12_Empty顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M12_Empty顶盘轴", pos, type);
         }
 
-        public string Empty顶盘轴相对移动(double pos)
+        public string Empty顶盘轴移动2(double pos, int type = 0)
         {
-            return motionEx.AxisRelativeMove("M12_Empty顶盘轴", pos);
+            string result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos1);
+            if (result == "Success")
+            {
+                result = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo);
+                if (result == "Success")
+                {
+                    double movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + pos; //6.35
+                    return motionEx.AxisAbsoluteMove("M12_Empty顶盘轴", movepos, type);
+                }
+                else
+                {
+                    Debug.WriteLine("M12_Empty顶盘轴信息获取失败!" + result);
+                    return "M12_Empty顶盘轴信息获取失败!" + result;
+                }
+            }
+            else
+            {
+                Debug.WriteLine("M12_Empty顶盘轴实时位置失败!" + result);
+                return "M12_Empty顶盘轴实时位置失败!" + result;
+            }
         }
 
-        public string Load顶盘轴移动(double pos)
+        public string Load顶盘轴移动(double pos, int type = 0)
         {
-            return motionEx.AxisAbsoluteMove("M13_Loader顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M13_Loader顶盘轴", pos, type);
         }
 
-        public string Load顶盘轴相对移动(double pos)
+        public string Load顶盘轴移动2(double pos, int type = 0)
         {
-            return motionEx.AxisRelativeMove("M13_Loader顶盘轴", pos);
+            string result = motionEx.GetCmdEncPos("M13_Loader顶盘轴", out double prfpos1);
+            if (result == "Success")
+            {
+                result = GetAxisRunInfo("M13_Loader顶盘轴", out AxisRunInfo axisRunInfo);
+                if (result == "Success")
+                {
+                    double movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + pos; //6.35
+                    return motionEx.AxisAbsoluteMove("M13_Loader顶盘轴", movepos, type);
+                }
+                else
+                {
+                    Debug.WriteLine("M13_Loader顶盘轴信息获取失败!" + result);
+                    return "M13_Loader顶盘轴信息获取失败!" + result;
+                }
+            }
+            else
+            {
+                Debug.WriteLine("M13_Loader顶盘轴实时位置失败!" + result);
+                return "M13_Loader顶盘轴实时位置失败!" + result;
+            }
         }
 
-        public string Auto1顶盘轴移动(double pos)
+        public string Auto1顶盘轴移动(double pos, int type = 0)
         {
-            return motionEx.AxisAbsoluteMove("M14_Auto1顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M14_Auto1顶盘轴", pos, type);
         }
 
-        public string Auto2顶盘轴移动(double pos)
+        public string Auto2顶盘轴移动(double pos, int type = 0)
         {
-            return motionEx.AxisAbsoluteMove("M15_Auto2顶盘轴", pos);
+            return motionEx.AxisAbsoluteMove("M15_Auto2顶盘轴", pos, type);
         }
 
         #endregion 轴移动
@@ -397,24 +435,24 @@ namespace H5509_V2
             return motionEx.AxisHome("M19_测试手臂Z轴");
         }
 
-        public string Empty顶盘轴回零()
+        public string Empty顶盘轴回零(int type = 0)
         {
-            return motionEx.AxisHome("M12_Empty顶盘轴");
+            return motionEx.AxisHome("M12_Empty顶盘轴", type);
         }
 
-        public string Load顶盘轴回零()
+        public string Load顶盘轴回零(int type = 0)
         {
-            return motionEx.AxisHome("M13_Loader顶盘轴");
+            return motionEx.AxisHome("M13_Loader顶盘轴", type);
         }
 
-        public string Auto1顶盘轴回零()
+        public string Auto1顶盘轴回零(int type = 0)
         {
-            return motionEx.AxisHome("M14_Auto1顶盘轴");
+            return motionEx.AxisHome("M14_Auto1顶盘轴", type);
         }
 
-        public string Auto2顶盘轴回零()
+        public string Auto2顶盘轴回零(int type = 0)
         {
-            return motionEx.AxisHome("M15_Auto2顶盘轴");
+            return motionEx.AxisHome("M15_Auto2顶盘轴", type);
         }
 
         public string 顶盘轴回零()
@@ -1992,7 +2030,7 @@ namespace H5509_V2
 
         #region 动作流程
 
-        public string Empty向上移动()
+        public string Empty向上移动(int type = 0)
         {
             string axisName = "M12_Empty顶盘轴";
 
@@ -2001,12 +2039,26 @@ namespace H5509_V2
 
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
                     {
                         if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, true);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else if (APPmaster.IsEmptyPause && axisName == "M12_Empty顶盘轴")
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsEmptyPause) Thread.Sleep(10);
                         else
                         {
                             result = motionEx.AxisJogMove(axisName, true);
@@ -2056,7 +2108,7 @@ namespace H5509_V2
             }
         }
 
-        public string Empty向下移动()
+        public string Empty向下移动(int type = 0)
         {
             string axisName = "M12_Empty顶盘轴";
 
@@ -2065,7 +2117,7 @@ namespace H5509_V2
 
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
@@ -2074,6 +2126,20 @@ namespace H5509_V2
                         else
                         {
                             result = motionEx.AxisJogMove(axisName, false);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else if (APPmaster.IsEmptyPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsEmptyPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, true);
                             if (result != "Success") return result;
                             break;
                         }
@@ -2111,7 +2177,7 @@ namespace H5509_V2
             }
         }
 
-        public string Load向上移动()
+        public string Load向上移动(int type = 0)
         {
             string axisName = "M13_Loader顶盘轴";
 
@@ -2120,12 +2186,26 @@ namespace H5509_V2
 
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
                     {
                         if (APPmaster.IsPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, true);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else if (APPmaster.IsLoadPause && axisName == "M13_Loader顶盘轴")
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsLoadPause) Thread.Sleep(10);
                         else
                         {
                             result = motionEx.AxisJogMove(axisName, true);
@@ -2166,6 +2246,7 @@ namespace H5509_V2
                     if (prfpos > 待测盘上顶最大值 || value2 == "0")
                     {
                         motionEx.AxisStopMove(axisName, 1);
+                        待测盘上顶到最大值 = true;
                         //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
                         return $"{axisName}当前上升行程{prfpos}>{待测盘上顶最大值} || {value2}";
                     }
@@ -2174,7 +2255,7 @@ namespace H5509_V2
             }
         }
 
-        public string Load向下移动()
+        public string Load向下移动(int type = 0)
         {
             string axisName = "M13_Loader顶盘轴";
 
@@ -2183,7 +2264,7 @@ namespace H5509_V2
 
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
@@ -2192,6 +2273,20 @@ namespace H5509_V2
                         else
                         {
                             result = motionEx.AxisJogMove(axisName, false);
+                            if (result != "Success") return result;
+                            break;
+                        }
+                    }
+                }
+                else if (APPmaster.IsLoadPause)
+                {
+                    motionEx.AxisStopMove(axisName, 1);
+                    while (true)
+                    {
+                        if (APPmaster.IsLoadPause) Thread.Sleep(10);
+                        else
+                        {
+                            result = motionEx.AxisJogMove(axisName, true);
                             if (result != "Success") return result;
                             break;
                         }
@@ -2228,14 +2323,14 @@ namespace H5509_V2
             }
         }
 
-        public string Auto1向上移动()
+        public string Auto1向上移动(int type = 0)
         {
             string axisName = "M14_Auto1顶盘轴";
             string result = motionEx.AxisJogMove(axisName, true);
             if (result != "Success") return result;
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
@@ -2281,7 +2376,7 @@ namespace H5509_V2
             }
         }
 
-        public string Auto1向下移动()
+        public string Auto1向下移动(int type = 0)
         {
             bool iostatus = false;
 
@@ -2304,7 +2399,7 @@ namespace H5509_V2
 
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
@@ -2360,14 +2455,14 @@ namespace H5509_V2
             }
         }
 
-        public string Auto2向上移动()
+        public string Auto2向上移动(int type = 0)
         {
             string axisName = "M15_Auto2顶盘轴";
             string result = motionEx.AxisJogMove(axisName, true);
             if (result != "Success") return result;
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
@@ -2414,7 +2509,7 @@ namespace H5509_V2
             }
         }
 
-        public string Auto2向下移动()
+        public string Auto2向下移动(int type = 0)
         {
             bool iostatus = false;
 
@@ -2437,7 +2532,7 @@ namespace H5509_V2
 
             while (true)
             {
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && type == 0)
                 {
                     motionEx.AxisStopMove(axisName, 1);
                     while (true)
@@ -2507,6 +2602,14 @@ namespace H5509_V2
             强制结批标记 = false;
             定点停止标记 = false;
             定点停止允许 = false;
+            Load舱门开启标记 = 0;
+            Empty舱门开启标记 = 0;
+            Auto1舱门开启标记 = 0;
+            Auto2舱门开启标记 = 0;
+            Empty下降回零开关 = false;
+            Load下降回零开关 = false;
+            Auto1下降回零开关 = false;
+            Auto2下降回零开关 = false;
             Load换盘标记 = false;
             Auto1换盘标记 = false;
             Auto2换盘标记 = false;
@@ -2610,8 +2713,8 @@ namespace H5509_V2
             PS空盘下降回零流程.Processing = false;
             PS待测盘上顶流程.StepID = 500;
             PS待测盘上顶流程.Processing = false;
-            PS待测盘上顶回零流程.StepID = 500;
-            PS待测盘上顶回零流程.Processing = false;
+            PS待测盘下降回零流程.StepID = 500;
+            PS待测盘下降回零流程.Processing = false;
             PS手动盘1上顶流程.StepID = 500;
             PS手动盘1上顶流程.Processing = false;
             PS手动盘1下降回零流程.StepID = 500;
@@ -2900,22 +3003,29 @@ namespace H5509_V2
                         Debug.WriteLine("按下开始");
                         ProgramStart = false;
 
-                        if (开始检查())
-                        {
-                            APPmaster.IsPause = false;
-                            APPmaster.IsStart = true;
+                        bool isstart = true;
 
+                        if (Load正在下降回零 || Empty正在下降回零)
+                        {
+                            isstart = false;
+                            Debug.WriteLine("Load或Empty正在下降回零，无法开始");
+
+                            if (Empty正在下降回零)
+                            {
+                                IsEmptyPause = false;
+                            }
+                            if (Load正在下降回零)
+                            {
+                                IsLoadPause = false;
+                            }
+                        }
+
+                        if (isstart && 开始检查())
+                        {
                             if (设备状态 == 0)
                             {
                                 StartRunIn(); //根据开Site情况添加入料队列
                                 放料目标值();
-                                载入数 = 0;
-                                UphNumber = 0;
-                                Auto1数量 = 0;
-                                Auto2数量 = 0;
-                                Fix1数量 = 0;
-                                Fix2数量 = 0;
-                                Fix3数量 = 0;
                                 开始时间 = DateTime.Now;
                                 //开始前的IO检查
                             }
@@ -2924,9 +3034,102 @@ namespace H5509_V2
                                 //每次开始前的IO检查
                             }
 
-                            设备状态 = 1;
+                            if (Empty舱门上顶标记)
+                            {
+                                if (!Empty舱门正在上顶)
+                                {
+                                    Empty舱门正在上顶 = true;
+                                    IsEmptyPause = false;
+                                    Empty舱门开启标记 = 1;
+                                    Empty上顶标记 = 2;
+                                    Debug.WriteLine("Empty正在执行上顶...");
+                                    Task task = Task.Run(() =>
+                                    {
+                                        while (true)
+                                        {
+                                            if (Empty上顶标记 == 1)
+                                            {
+                                                Empty舱门开启标记 = 0;
+                                                Empty舱门正在上顶 = false;
+                                                Empty舱门上顶标记 = false;
+                                                break;
+                                            }
+                                            else Thread.Sleep(10);
+                                        }
+                                        Empty舱门正在上顶 = false;
+                                        Debug.WriteLine("Empty执行上顶完成");
+                                    });
+                                }
+                                else IsEmptyPause = false;
+                            }
 
+                            if (Load舱门上顶标记)
+                            {
+                                if (!Load舱门正在上顶)
+                                {
+                                    Load舱门正在上顶 = true;
+                                    IsLoadPause = false;
+                                    Load舱门开启标记 = 1;
+                                    Load上顶标记 = 2;
+                                    Debug.WriteLine("Load正在执行上顶...");
+                                    Task task = Task.Run(() =>
+                                    {
+                                        while (true)
+                                        {
+                                            if (Load上顶标记 == 1)
+                                            {
+                                                Load舱门开启标记 = 0;
+                                                Load舱门正在上顶 = false;
+                                                Load舱门上顶标记 = false;
+                                                break;
+                                            }
+                                            else Thread.Sleep(10);
+                                        }
+                                        Load舱门正在上顶 = false;
+                                        Debug.WriteLine("Load执行上顶完成");
+                                    });
+                                }
+                                else IsLoadPause = false;
+                            }
+
+                            if (Load舱门上顶标记 || Empty舱门上顶标记)
+                            {
+                                if (!开舱门上顶标记)
+                                {
+                                    开舱门上顶标记 = true;
+                                    Task task = Task.Run(() =>
+                                    {
+                                        while (true)
+                                        {
+                                            if (!Load舱门上顶标记 && !Empty舱门正在上顶)
+                                            {
+                                                APPmaster.IsPause = false;
+                                                APPmaster.IsStart = true;
+                                                APPmaster.IsLoadPause = false;
+                                                APPmaster.IsEmptyPause = false;
+                                                break;
+                                            }
+                                            Thread.Sleep(10);
+                                        }
+                                        开舱门上顶标记 = false;
+                                    });
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.IsPause = false;
+                                APPmaster.IsStart = true;
+                                APPmaster.IsLoadPause = false;
+                                APPmaster.IsEmptyPause = false;
+                            }
+
+                            设备状态 = 1;
                             结批完成 = false;
+                            Load下降回零开关 = false;
+                            Empty下降回零开关 = false;
+                            Auto1下降回零开关 = false;
+                            Auto2下降回零开关 = false;
+
                             motionEx.SetDo("Y001_开始灯", true);
                             motionEx.SetDo("Y002_暂停灯", false);
                             motionEx.SetDo("Y004_重试灯", false);
@@ -2946,11 +3149,32 @@ namespace H5509_V2
                         ProgramPause = false;
                         APPmaster.IsPause = true;
                         APPmaster.IsStart = false;
+                        if (Empty正在下降回零 || Empty舱门上顶标记) APPmaster.IsEmptyPause = true;
+                        if (Load正在下降回零 || Load舱门上顶标记) APPmaster.IsLoadPause = true;
 
                         if (设备状态 == 1) 设备状态 = 2;
 
                         form_alarm.alarmLight(0, 1, 0, 0);
-                        motionEx.Motion.AllAxisStop();
+                        //motionEx.Motion.AllAxisStop();
+
+                        if (设备状态 != 0 && H5509归零 && H5509初始化 && Tray盘模式)
+                        {
+                            if (!Empty正在下降回零 && !Load正在下降回零 && !Empty舱门正在上顶 && !Load舱门正在上顶)
+                            {
+                                if (!Load换盘标记)
+                                {
+                                    Load下降回零开关 = true;
+                                    Debug.WriteLine("Load下降开关打开");
+                                }
+                                if (!Auto1换盘标记 && !Auto2换盘标记)
+                                {
+                                    Empty下降回零开关 = true;
+                                    Auto1下降回零开关 = true;
+                                    Auto2下降回零开关 = true;
+                                    Debug.WriteLine("Empty/Auto下降开关打开");
+                                }
+                            }
+                        }
 
                         motionEx.SetDo("Y001_开始灯", false);
                         motionEx.SetDo("Y002_暂停灯", true);
@@ -3084,21 +3308,78 @@ namespace H5509_V2
                     if (CheckEdgeSingal(x18, ref EmptyDoorRiseCache, true))
                     {
                         Debug.WriteLine("Empty仓门已关闭");
+                        if(Empty正在下降回零 && Tray盘模式) IsEmptyPause = true;
                     }
                     else if (CheckEdgeSingal(x18, ref EmptyDoorFallCache, false))
                     {
                         Debug.WriteLine("Empty仓门被打开");
+                        if (Empty下降回零开关 && 设备状态 == 2)
+                        {
+                            if (!Empty正在下降回零)
+                            {
+                                Empty正在下降回零 = true;
+                                IsEmptyPause = false;
+                                Empty舱门开启标记 = 1;
+                                Empty下降回零标记 = 2;
+                                Debug.WriteLine("Empty正在执行下降回零...");
+                                Task task = Task.Run(() =>
+                                {
+                                    while (true)
+                                    {
+                                        if (Empty下降回零标记 == 1)
+                                        {
+                                            Empty舱门上顶标记 = true;
+                                            Empty舱门开启标记 = 0;
+                                            break;
+                                        }
+                                        else Thread.Sleep(10);
+                                    }
+                                    Empty正在下降回零 = false;
+                                    Debug.WriteLine("Empty下降回零完成");
+                                });
+                            }
+                            else IsEmptyPause = false;
+                        }
                     }
 
                     bool x24 = io[16] == "1"; //X024_Load门感应
                     if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
                     {
                         Debug.WriteLine("Load仓门已关闭");
+                        if(Load正在下降回零 && Tray盘模式) IsLoadPause = true;
                     }
                     else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
                     {
                         Debug.WriteLine("Load仓门被打开");
+                        if (Load下降回零开关 && 设备状态 == 2)
+                        {
+                            if (!Load正在下降回零)
+                            {
+                                Load正在下降回零 = true;
+                                IsLoadPause = false;
+                                Load舱门开启标记 = 1;
+                                Load下降回零标记 = 2;
+                                Debug.WriteLine("Load正在执行下降回零...");
+                                Task task = Task.Run(() =>
+                                {
+                                    while (true)
+                                    {
+                                        if (Load下降回零标记 == 1)
+                                        {
+                                            Load舱门上顶标记 = true;
+                                            Load舱门开启标记 = 0;
+                                            break;
+                                        }
+                                        else Thread.Sleep(10);
+                                    }
+                                    Load正在下降回零 = false;
+                                    Debug.WriteLine("Load下降回零完成");
+                                });
+                            }
+                            else IsLoadPause = false;
+                        }
                     }
+
                     bool traymove = io[17] == "1"; //X038_BIN平移按键
                     if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
                     {
@@ -3651,6 +3932,7 @@ namespace H5509_V2
 
                         Debug.WriteLine($"PS结批流程.StepID={PS结批流程.StepID}->结批流程完成");
                         PS结批流程.StepID = 500;
+                        PS结批流程.Processing = false;
                         ProgramPause = true;
                         IsPause = true;
                         break;
@@ -8660,7 +8942,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Empty舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -8682,7 +8964,7 @@ namespace H5509_V2
                     case 505:
                         PS空盘上顶流程.StepName = "Empty向上移动";
                         Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty向上移动();
+                        result = Empty向上移动(Empty舱门开启标记);
                         if (result == "Success")
                         {
                             PS空盘上顶流程.StepID = 510;
@@ -8697,7 +8979,7 @@ namespace H5509_V2
                     case 510:
                         PS空盘上顶流程.StepName = "Empty向下移动";
                         Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty向下移动();
+                        result = Empty向下移动(Empty舱门开启标记);
                         if (result == "Success")
                         {
                             PS空盘上顶流程.StepID = 515;
@@ -8713,7 +8995,7 @@ namespace H5509_V2
                     case 515:
                         PS空盘上顶流程.StepName = "Empty向上移动固定距离";
                         Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = motionEx.AxisRelativeMove("M12_Empty顶盘轴", 2.5);//3175 1.5875
+                        result = Empty顶盘轴移动2(2.5, Empty舱门开启标记);//3175 1.5875
                         if (result == "Success")
                         {
                             Empty上顶标记 = 1;
@@ -8737,7 +9019,7 @@ namespace H5509_V2
                     case 600:
                         PS空盘上顶流程.StepName = "Empty顶盘轴移动到原点";
                         Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty顶盘轴移动(1);
+                        result = Empty顶盘轴移动(1, Empty舱门开启标记);
                         if (result == "Success")
                         {
                             PS空盘上顶流程.StepID = 605;
@@ -8753,7 +9035,7 @@ namespace H5509_V2
                     case 605:
                         PS空盘上顶流程.StepName = "Empty顶盘轴回零";
                         Debug.WriteLine($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty顶盘轴回零();
+                        result = Empty顶盘轴回零(Empty舱门开启标记);
                         if (result == "Success")
                         {
                             APPmaster.ProgramPause = true;
@@ -8797,7 +9079,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Empty舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -8845,7 +9127,7 @@ namespace H5509_V2
                     case 505:
                         PS空盘下降流程.StepName = $"Empty向下移动{Tray_厚度}mm";
                         Debug.WriteLine($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
-                        result = Empty顶盘轴移动(movepos);
+                        result = Empty顶盘轴移动(movepos, Empty舱门开启标记);
                         if (result == "Success")
                         {
                             PS空盘下降流程.StepID = 510;
@@ -8968,7 +9250,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Empty舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -8990,7 +9272,7 @@ namespace H5509_V2
                     case 505:
                         PS空盘下降回零流程.StepName = "Empty顶盘轴移动到原点";
                         Debug.WriteLine($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
-                        result = Empty顶盘轴移动(1);
+                        result = Empty顶盘轴移动(1, Empty舱门开启标记);
                         if (result == "Success")
                         {
                             PS空盘下降回零流程.StepID = 510;
@@ -9006,11 +9288,12 @@ namespace H5509_V2
                     case 510:
                         PS空盘下降回零流程.StepName = "Empty顶盘轴回零";
                         Debug.WriteLine($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
-                        result = Empty顶盘轴回零();
+                        result = Empty顶盘轴回零(Empty舱门开启标记);
                         if (result == "Success")
                         {
                             Empty下降回零标记 = 1;
                             PS空盘下降回零流程.StepID = 500;
+                            PS空盘下降回零流程.Processing = false;
                         }
                         else
                         {
@@ -9045,7 +9328,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Load舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -9082,7 +9365,7 @@ namespace H5509_V2
                     case 510:
                         PS待测盘上顶流程.StepName = "Load向上移动";
                         Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load向上移动();
+                        result = Load向上移动(Load舱门开启标记);
                         if (result == "Success")
                         {
                             PS待测盘上顶流程.StepID = 515;
@@ -9097,7 +9380,7 @@ namespace H5509_V2
                     case 515:
                         PS待测盘上顶流程.StepName = "Load向下移动";
                         Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load向下移动();
+                        result = Load向下移动(Load舱门开启标记);
                         if (result == "Success")
                         {
                             PS待测盘上顶流程.StepID = 520;
@@ -9113,7 +9396,7 @@ namespace H5509_V2
                     case 520:
                         PS待测盘上顶流程.StepName = "Load向上移动固定距离";
                         Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = motionEx.AxisRelativeMove("M13_Loader顶盘轴", 0.5);//3175 1.5875
+                        result = Load顶盘轴移动2(0.5, Load舱门开启标记); //3175 1.5875
                         if (result == "Success")
                         {
                             PS待测盘上顶流程.StepID = 525;
@@ -9154,7 +9437,7 @@ namespace H5509_V2
                     case 600:
                         PS待测盘上顶流程.StepName = "Load顶盘轴移动到原点";
                         Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load顶盘轴移动(1);
+                        result = Load顶盘轴移动(1, Load舱门开启标记);
                         if (result == "Success")
                         {
                             PS待测盘上顶流程.StepID = 605;
@@ -9170,7 +9453,7 @@ namespace H5509_V2
                     case 605:
                         PS待测盘上顶流程.StepName = "Load顶盘轴回零";
                         Debug.WriteLine($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load顶盘轴回零();
+                        result = Load顶盘轴回零(Load舱门开启标记);
                         if (result == "Success")
                         {
                             无待测盘结批 = false;
@@ -9211,7 +9494,7 @@ namespace H5509_V2
         public void Load下降回零流程()
         {
             string result = "";
-            PS待测盘上顶回零流程.StepID = 500;
+            PS待测盘下降回零流程.StepID = 500;
             while (true)
             {
                 //if(!是否可以开始运行())
@@ -9227,32 +9510,32 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Load舱门开启标记 == 0)
                 {
                     continue;
                 }
 
-                switch (PS待测盘上顶回零流程.StepID)
+                switch (PS待测盘下降回零流程.StepID)
                 {
                     case 500:
-                        PS待测盘上顶回零流程.StepName = "路径规划";
-                        PS待测盘上顶回零流程.Condition = Load下降回零标记 == 2;
-                        PS待测盘上顶回零流程.Permit = !PS待测盘上顶回零流程.Processing && !PS待测盘上顶流程.Processing;
-                        if (PS待测盘上顶回零流程.Condition && PS待测盘上顶回零流程.Permit)
+                        PS待测盘下降回零流程.StepName = "路径规划";
+                        PS待测盘下降回零流程.Condition = Load下降回零标记 == 2;
+                        PS待测盘下降回零流程.Permit = !PS待测盘下降回零流程.Processing && !PS待测盘上顶流程.Processing;
+                        if (PS待测盘下降回零流程.Condition && PS待测盘下降回零流程.Permit)
                         {
-                            PS待测盘上顶回零流程.Processing = true;
-                            PS待测盘上顶回零流程.StepID = 505;
+                            PS待测盘下降回零流程.Processing = true;
+                            PS待测盘下降回零流程.StepID = 505;
                         }
                         else Thread.Sleep(10);
                         break;
 
                     case 505:
-                        PS待测盘上顶回零流程.StepName = "Load_Tray前侧定位气缸原位输出";
-                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘上顶回零流程.StepID}->{PS待测盘上顶回零流程.StepName}");
+                        PS待测盘下降回零流程.StepName = "Load_Tray前侧定位气缸原位输出";
+                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
                         result = Load_Tray前侧定位气缸原位输出();
                         if (result == "Success")
                         {
-                            PS待测盘上顶回零流程.StepID = 510;
+                            PS待测盘下降回零流程.StepID = 510;
                         }
                         else
                         {
@@ -9263,12 +9546,12 @@ namespace H5509_V2
                         break;
 
                     case 510:
-                        PS待测盘上顶回零流程.StepName = "Load顶盘轴移动到原点";
-                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘上顶回零流程.StepID}->{PS待测盘上顶回零流程.StepName}");
-                        result = Load顶盘轴移动(1);
+                        PS待测盘下降回零流程.StepName = "Load顶盘轴移动到原点";
+                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
+                        result = Load顶盘轴移动(1, Load舱门开启标记);
                         if (result == "Success")
                         {
-                            PS待测盘上顶回零流程.StepID = 515;
+                            PS待测盘下降回零流程.StepID = 515;
                         }
                         else
                         {
@@ -9279,13 +9562,14 @@ namespace H5509_V2
                         break;
 
                     case 515:
-                        PS待测盘上顶回零流程.StepName = "Load顶盘轴回零";
-                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘上顶回零流程.StepID}->{PS待测盘上顶回零流程.StepName}");
-                        result = Load顶盘轴回零();
+                        PS待测盘下降回零流程.StepName = "Load顶盘轴回零";
+                        Debug.WriteLine($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
+                        result = Load顶盘轴回零(Load舱门开启标记);
                         if (result == "Success")
                         {
                             Load下降回零标记 = 1;
-                            PS待测盘上顶回零流程.StepID = 500;
+                            PS待测盘下降回零流程.StepID = 500;
+                            PS待测盘下降回零流程.Processing = false;
                         }
                         else
                         {
@@ -9296,7 +9580,7 @@ namespace H5509_V2
                         break;
 
                     default:
-                        Debug.WriteLine(("PS待测盘上顶回零流程.StepID =" + PS待测盘上顶回零流程.StepID.ToString() + "对应流程不存在"));
+                        Debug.WriteLine(("PS待测盘上顶回零流程.StepID =" + PS待测盘下降回零流程.StepID.ToString() + "对应流程不存在"));
                         break;
                 }
             }
@@ -9320,7 +9604,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -9358,7 +9642,7 @@ namespace H5509_V2
                     case 510:
                         PS手动盘1上顶流程.StepName = "Auto1向上移动";
                         Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1向上移动();
+                        result = Auto1向上移动(Auto1舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘1上顶流程.StepID = 515;
@@ -9406,7 +9690,7 @@ namespace H5509_V2
                     case 525:
                         PS手动盘1上顶流程.StepName = "Auto1向下移动";
                         Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1向下移动();
+                        result = Auto1向下移动(Auto1舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘1上顶流程.StepID = 530;
@@ -9509,7 +9793,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -9573,7 +9857,7 @@ namespace H5509_V2
                     case 510:
                         PS手动盘1上顶流程.StepName = $"Auto1向上移动绝对位置{movepos}mm";
                         Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1顶盘轴移动(movepos);
+                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘1上顶流程.StepID = 515;
@@ -9632,7 +9916,7 @@ namespace H5509_V2
                     case 525:
                         PS手动盘1上顶流程.StepName = $"Auto1向下移动绝对位置{movepos}mm";
                         Debug.WriteLine($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1顶盘轴移动(movepos);
+                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘1上顶流程.StepID = 530;
@@ -9718,7 +10002,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -9740,7 +10024,7 @@ namespace H5509_V2
                     case 505:
                         PS手动盘1下降回零流程.StepName = "Auto1顶盘轴移动到原点";
                         Debug.WriteLine($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
-                        result = Auto1顶盘轴移动(1);
+                        result = Auto1顶盘轴移动(1, Auto1舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘1下降回零流程.StepID = 510;
@@ -9756,11 +10040,12 @@ namespace H5509_V2
                     case 510:
                         PS手动盘1下降回零流程.StepName = "Auto1顶盘轴回零";
                         Debug.WriteLine($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
-                        result = Auto1顶盘轴回零();
+                        result = Auto1顶盘轴回零(Auto1舱门开启标记);
                         if (result == "Success")
                         {
                             Auto1下降回零标记 = 1;
                             PS手动盘1下降回零流程.StepID = 500;
+                            PS手动盘1下降回零流程.Processing = false;
                         }
                         else
                         {
@@ -9795,7 +10080,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -9833,7 +10118,7 @@ namespace H5509_V2
                     case 510:
                         PS手动盘2上顶流程.StepName = "Auto2向上移动";
                         Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2向上移动();
+                        result = Auto2向上移动(Auto2舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘2上顶流程.StepID = 515;
@@ -9881,7 +10166,7 @@ namespace H5509_V2
                     case 525:
                         PS手动盘2上顶流程.StepName = "Auto2向下移动";
                         Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2向下移动();
+                        result = Auto2向下移动(Auto2舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘2上顶流程.StepID = 530;
@@ -9986,7 +10271,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -10050,7 +10335,7 @@ namespace H5509_V2
                     case 510:
                         PS手动盘2上顶流程.StepName = $"Auto2向上移动绝对位置{movepos}mm";
                         Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2顶盘轴移动(movepos);
+                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘2上顶流程.StepID = 515;
@@ -10109,7 +10394,7 @@ namespace H5509_V2
                     case 525:
                         PS手动盘2上顶流程.StepName = $"Auto2向下移动绝对位置{movepos}mm";
                         Debug.WriteLine($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2顶盘轴移动(movepos);
+                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘2上顶流程.StepID = 530;
@@ -10197,7 +10482,7 @@ namespace H5509_V2
                     break;
                 }
 
-                if (APPmaster.IsPause)
+                if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
                 {
                     continue;
                 }
@@ -10219,7 +10504,7 @@ namespace H5509_V2
                     case 505:
                         PS手动盘2下降回零流程.StepName = "Auto2顶盘轴移动到原点";
                         Debug.WriteLine($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
-                        result = Auto2顶盘轴移动(1);
+                        result = Auto2顶盘轴移动(1, Auto2舱门开启标记);
                         if (result == "Success")
                         {
                             PS手动盘2下降回零流程.StepID = 510;
@@ -10235,11 +10520,12 @@ namespace H5509_V2
                     case 510:
                         PS手动盘2下降回零流程.StepName = "Auto2顶盘轴回零";
                         Debug.WriteLine($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
-                        result = Auto2顶盘轴回零();
+                        result = Auto2顶盘轴回零(Auto2舱门开启标记);
                         if (result == "Success")
                         {
                             Auto2下降回零标记 = 1;
                             PS手动盘2下降回零流程.StepID = 500;
+                            PS手动盘2下降回零流程.Processing = false;
                         }
                         else
                         {

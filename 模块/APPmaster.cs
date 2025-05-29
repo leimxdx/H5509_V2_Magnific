@@ -77,6 +77,10 @@ namespace H5509_V2
 
         public static bool IsPause = false; //停止
 
+        public static bool IsLoadPause = false; //停止
+
+        public static bool IsEmptyPause = false; //停止
+
         public static bool ProgramPause = false; //程序暂停
 
         public static bool ProgramBtnPause = false; //程序按钮暂停
@@ -139,6 +143,48 @@ namespace H5509_V2
         public static bool 定点停止标记 = false;
 
         public static bool 定点停止允许 = false;
+
+        public static bool 开舱门上顶标记 = false;
+
+        public static bool Load舱门上顶标记 = false;
+
+        public static bool Empty舱门上顶标记 = false;
+
+        public static bool Auto1舱门上顶标记 = false;
+
+        public static bool Auto2舱门上顶标记 = false;
+
+        public static int Load舱门开启标记 = 0;
+
+        public static int Empty舱门开启标记 = 0;
+
+        public static int Auto1舱门开启标记 = 0;
+
+        public static int Auto2舱门开启标记 = 0;
+
+        public static bool Empty下降回零开关 = false;
+
+        public static bool Load下降回零开关 = false;
+
+        public static bool Auto1下降回零开关 = false;
+
+        public static bool Auto2下降回零开关 = false;
+
+        public static bool Empty正在下降回零 = false;
+
+        public static bool Load正在下降回零 = false;
+
+        public static bool Auto1正在下降回零 = false;
+
+        public static bool Auto2正在下降回零 = false;
+
+        public static bool Empty舱门正在上顶 = false;
+
+        public static bool Load舱门正在上顶 = false;
+
+        public static bool Auto1舱门正在上顶 = false;
+
+        public static bool Auto2舱门正在上顶 = false;
 
         public static bool Load换盘标记 = false;
 
@@ -409,11 +455,19 @@ namespace H5509_V2
 
         public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
 
+        public static bool 空盘上顶到最大值 = false;
+
+        public static bool 空盘下降到最小值 = false;
+
         public static int 空盘上顶最大值 = 429895;
 
         public static int 空盘下降最小值 = 10000;
 
         public static int 空盘满盘判断值 = 12700;
+
+        public static bool 待测盘上顶到最大值 = false;
+
+        public static bool 待测盘下降到最小值 = false;
 
         public static int 待测盘上顶最大值 = 434675;
 
@@ -565,7 +619,7 @@ namespace H5509_V2
 
         public static ST_ProcessManage PS待测盘上顶流程;
 
-        public static ST_ProcessManage PS待测盘上顶回零流程;
+        public static ST_ProcessManage PS待测盘下降回零流程;
 
         public static ST_ProcessManage PS待测盘下降流程;
 

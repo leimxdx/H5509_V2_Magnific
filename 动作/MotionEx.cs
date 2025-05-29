@@ -141,12 +141,12 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisHomes"></param>
         /// <returns></returns>
-        private string WaitAxisHome(List<AxisHomeInfo> axisHomes)
+        private string WaitAxisHome(List<AxisHomeInfo> axisHomes, int type = 0)
         {
             bool[] bools = new bool[axisHomes.Count];
             for (int i = 0; i < axisHomes.Count; i++)
             {
-                string result = WaitAxisHome(axisHomes[i]);
+                string result = WaitAxisHome(axisHomes[i], type);
                 if (result != "Success")
                 {
                     Debug.WriteLine(result);
@@ -166,7 +166,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisHome"></param>
         /// <returns></returns>
-        private string WaitAxisHome(AxisHomeInfo axisHome)
+        private string WaitAxisHome(AxisHomeInfo axisHome, int type = 0)
         {
             string result = Motion.CommonInitedValidate();
 
@@ -183,7 +183,7 @@ namespace H5509_V2
                     error = GTN_GetSts(axisHome.核号, axisHome.轴号, out int sts, 1, out uint pClock);
                     Motion.ErrorHandler($"GTN_GetSts({axisHome.核号}, {axisHome.轴号}, out {sts}, 1, out uint {pClock})", error);
 
-                    if (APPmaster.IsPause)
+                    if (APPmaster.IsPause && type == 0)
                     {
                         Motion.AxisStop(axisHome.核号, axisHome.轴号, 1);
                         return $"{axisHome.轴名称}回零被停止";
@@ -270,7 +270,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axisName"></param>
         /// <returns></returns>
-        public string AxisHome(string axisName)
+        public string AxisHome(string axisName, int type = 0)
         {
             string result = APPmaster.GetAxisHomeInfo(axisName, out AxisHomeInfo axisHome);
             if (result == "Success")
@@ -280,7 +280,7 @@ namespace H5509_V2
                 {
                     Task<string> task = Task.Run(() =>
                     {
-                        return WaitAxisHome(axisHome);//等待回零完成
+                        return WaitAxisHome(axisHome, type);//等待回零完成
                     });
 
                     result = task.Result;
@@ -366,6 +366,34 @@ namespace H5509_V2
                         {
                             if (APPmaster.IsForecePause) return "强制停止";
                             if (APPmaster.IsPause) Thread.Sleep(10);
+                            else
+                            {
+                                result = Motion.UniaxialAbsoluteMoveAbs(axisRun);
+                                break;
+                            }
+                        }
+                    }
+                    else if (APPmaster.IsEmptyPause && axisRun.轴名称 == "M12_Empty顶盘轴")
+                    {
+                        GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
+                        while (true)
+                        {
+                            if (APPmaster.IsForecePause) return "强制停止";
+                            if (APPmaster.IsEmptyPause) Thread.Sleep(10);
+                            else
+                            {
+                                result = Motion.UniaxialAbsoluteMoveAbs(axisRun);
+                                break;
+                            }
+                        }
+                    }
+                    else if (APPmaster.IsLoadPause && axisRun.轴名称 == "M13_Loader顶盘轴")
+                    {
+                        GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
+                        while (true)
+                        {
+                            if (APPmaster.IsForecePause) return "强制停止";
+                            if (APPmaster.IsLoadPause) Thread.Sleep(10);
                             else
                             {
                                 result = Motion.UniaxialAbsoluteMoveAbs(axisRun);
