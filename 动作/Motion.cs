@@ -204,8 +204,14 @@ namespace H5509_V2
         {
             string result = CommonInitedValidate();
             if (result != "Success") return result;
-            if (IsMoving(core, axis)) return "正在运动";
-            else return "Success";
+
+            result = IsMoving(core, axis, out bool ismove);
+            if (result == "Success")
+            {
+                if (ismove) return "正在运动";
+                else return "Success";
+            }
+            else return result;
         }
 
         #region 轴信息
@@ -215,7 +221,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="axis"></param>
         /// <returns></returns>
-        public bool IsMoving(short core, short axis)
+        public string IsMoving(short core, short axis, out bool ismove)
         {
             try
             {
@@ -225,11 +231,42 @@ namespace H5509_V2
 
                 ErrorHandler("GTN_GetSts", error);
 
-                return (sts & 0x400) != 0;
+                ismove = (sts & 0x400) == 1;
+
+                return "Success";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return true;
+                ismove = true;
+
+                return ex.Message;
+            }
+        }
+
+        /// <summary>
+        /// 判断某个轴是否使能
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <returns></returns>
+        public string IsEnable(short core, short axis, out bool isEnable)
+        {
+            try
+            {
+                short error = 0;
+
+                error = GTN_GetSts(core, axis, out int sts, 1, out uint pClock);
+
+                ErrorHandler("GTN_GetSts", error);
+
+                isEnable = !((sts & 0x200) == 0);
+
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                isEnable = false;
+
+                return ex.Message;
             }
         }
 

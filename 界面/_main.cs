@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -126,6 +127,7 @@ namespace H5509_V2
                 uiDigitalLabel14,
                 uiDigitalLabel15,
                 uiDigitalLabel16,
+                uiDigitalLabel17,
             };
         }
 
@@ -769,7 +771,7 @@ namespace H5509_V2
                     }
                 }
             }
-            
+
             开Site数量 = open;
             关Site数量 = close;
         }
@@ -793,6 +795,10 @@ namespace H5509_V2
             Fix3 = Fix3_1 = binParam.fix3.Split(';')[0];
             Fix3_2 = binParam.fix3.Split(';')[1];
             Fix3_3 = binParam.fix3.Split(';')[2];
+
+            Fix1Num = binParam.fix1num;
+            Fix2Num = binParam.fix2num;
+            Fix3Num = binParam.fix3num;
 
             switch (binParam.fix1num)
             {
@@ -1046,18 +1052,42 @@ namespace H5509_V2
 
                         if (TCPConnect)
                         {
+                            //检测温度();
+
                             for (int i = 0; i < Lbl_Temp.Length; i++)
                             {
                                 if (SiteTemp[i] != 32770)
                                 {
                                     Lbl_Temp[i].Value = SiteTemp[i];
+
+                                    //if (温度模式 == "高温")
+                                    //{
+                                    if (GetSiteOpen(i).Contains(true))
+                                    {
+                                        if (SiteTemp[i] < 加热盘.波动温度上限 && SiteTemp[i] >= 加热盘.波动温度下限)
+                                        {
+                                            Lbl_Temp[i].BackColor = Color.Lime;
+                                        }
+                                        else
+                                        {
+                                            if (温控达温)
+                                            {
+                                                Lbl_Temp[i].BackColor = Color.Red;
+                                            }
+                                            else Lbl_Temp[i].BackColor = Color.Gold;
+                                        }
+                                    }
+                                    else Lbl_Temp[i].BackColor = Color.Silver;
+
+                                    //}
+                                    //else Lbl_Temp[i].BackColor = Color.Lime;
                                 }
                                 else
                                 {
                                     Lbl_Temp[i].Value = 0;
+                                    Lbl_Temp[i].BackColor = Color.Silver;
                                 }
                             }
-                            uiDigitalLabel17.Value = HeatTrayTemp;
                         }
 
                     }));

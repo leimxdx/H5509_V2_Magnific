@@ -67,15 +67,15 @@ namespace H5509_V2
                     {
                         if (!温控达温)
                         {
-                            aa.Style.BackColor = Color.White;
                             aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(升温)";
+                            aa.Style.BackColor = Color.White;
                         }
                         else
                         {
                             if (HeatDicTimer[$"{i},{j}"].Status == 1) //显示倒计时
                             {
-                                aa.Value = HeatDicTimer[$"{i},{j}"].CountDownTime.TotalSeconds.ToString("0.0");
-                                aa.Style.BackColor = Color.White;
+                                aa.Value = HeatDicTimer[$"{i},{j}"].CountDownTime.TotalSeconds.ToString("0.0") + "s";
+                                aa.Style.BackColor = Color.Gold;
                             }
                             else
                             {

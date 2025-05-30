@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ttimer = System.Timers.Timer;
 using static H5509_V2.APPmaster;
+using System.Diagnostics;
 
 namespace H5509_V2
 {
@@ -47,12 +48,19 @@ namespace H5509_V2
                 status = value;
                 if (status == 1)
                 {
-                    if (温度模式 == "常温") Timer.Start();
+                    if (温度模式 == "常温")
+                    {
+                        Timer.Start();
+                        StartHeatTime = DateTime.Now;
+                        Debug.WriteLine("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                    }
                     else
                     {
                         if (温控达温) //如果达温了直接开始倒计时
                         {
                             Timer.Start();
+                            StartHeatTime = DateTime.Now;
+                            Debug.WriteLine("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                         }
                         else //如果未达温则等达温后再开始倒计时
                         {
@@ -75,6 +83,8 @@ namespace H5509_V2
             {
                 WaitTimer.Stop();
                 Timer.Start();
+                StartHeatTime = DateTime.Now;
+                Debug.WriteLine("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             }
         }
     }

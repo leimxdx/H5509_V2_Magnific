@@ -128,6 +128,10 @@ namespace H5509_V2
 
             handler.参数初始化();
 
+            //温控达温 = true;
+            //HeatDicPoint["0,0"] = true;
+            //HeatDicTimer["0,0"].Status = 1; //设置温控器0,0的状态为1
+
             result = motionEx.GSNInitCard();
             if (result != "Success")
             {
@@ -298,9 +302,9 @@ namespace H5509_V2
                         {
                             if (value3[0] != 32770)
                             {
-                                HeatTrayTemp = (double)value3[0] / 10 + 加热盘.温控器温度补偿;
+                                SiteTemp[16] = (double)value3[0] / 10 + 加热盘.温控器温度补偿;
                             }
-                            else HeatTrayTemp = value3[0];
+                            else SiteTemp[16] = value3[0];
                         }
 
                         if (设备状态 == 1 && 温度模式 == "高温" && !IsPause)

@@ -87,13 +87,13 @@ namespace H5509_V2
 
         public static bool IsForecePause = false; //强制停止
 
-        public static int 第二段距离 = 5000;
+        public static int 第二段距离 = 8000;
 
         public static double 第二段速度 = 0.3;
 
-        public static int 出入料Z第二段距离 = 600;
+        public static int 出入料Z第二段距离 = 300;
 
-        public static double 出入料Z第二段速度 = 0.1;
+        public static double 出入料Z第二段速度 = 0.5;
 
         public static bool 退出标记 = false;
 
@@ -350,9 +350,12 @@ namespace H5509_V2
 
         public static DateTime 结束时间 = DateTime.Now;
 
-        public static double[] SiteTemp = new double[16];
+        public static double[] SiteTemp = new double[17];
 
-        public static double HeatTrayTemp = 0;
+        public static double HeatTrayTemp
+        {
+            get { return SiteTemp[16]; }
+        }
 
         public static TimeSpan 结批时间 { get { return 按下结批时间 - 结束时间; } }
 
@@ -463,7 +466,7 @@ namespace H5509_V2
 
         public static int 空盘下降最小值 = 10000;
 
-        public static int 空盘满盘判断值 = 12700;
+        public static int 空盘满盘判断值 = 367864;//12700
 
         public static bool 待测盘上顶到最大值 = false;
 
@@ -483,7 +486,7 @@ namespace H5509_V2
 
         public static int Auto2下降最小值 = 10000;
 
-        public static int Auto2满盘判断值 = 25000;
+        public static int Auto2满盘判断值 = 360000; //25000
 
         public static bool Auto1料仓满盘标记;
 
@@ -2863,6 +2866,8 @@ namespace H5509_V2
                 case 15:
                     return new bool[] { siteStatus.Site16[0] == "1", siteStatus.Site16[1] == "1",siteStatus.Site16[2] == "1",siteStatus.Site16[3] == "1",
                 siteStatus.Site16[4] == "1",siteStatus.Site16[5] == "1",siteStatus.Site16[6] == "1",siteStatus.Site16[7] == "1"};
+                case 16:
+                    return new bool[] { true, true, true, true, true, true, true, true };
                 default: return new bool[] { false, false, false, false, false, false, false, false };
             }
         }
@@ -2915,28 +2920,20 @@ namespace H5509_V2
         {
             bool[] tempopen = new bool[17];
 
-            if (HeatTrayTemp != 32770)
-            {
-                if (HeatTrayTemp < tempmax && HeatTrayTemp > tempmin)
-                {
-                    tempopen[0] = true;
-                }
-            }
-
             for (int i = 0; i < SiteTemp.Length; i++)
             {
-                bool[] open = GetSiteOpen(i);
-                if (open.Contains(true))
+                if (GetSiteOpen(i).Contains(true))
                 {
                     if (SiteTemp[i] != 32770)
                     {
-                        if (SiteTemp[i] < tempmax && HeatTrayTemp > tempmin)
+                        if (SiteTemp[i] < tempmax && SiteTemp[i] >= tempmin)
                         {
-                            tempopen[i + 1] = true;
+                            tempopen[i] = true;
                         }
+                        else tempopen[i] = false;
                     }
                 }
-                else tempopen[i + 1] = true; //没有开Site默认达温
+                else tempopen[i] = true; //没有开Site默认达温
             }
 
             return tempopen;

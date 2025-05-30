@@ -6247,6 +6247,20 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            //string result = handler.飞梭_前后检测产品感应(out string[] iovalues);
+            //if (result == "Success")
+            //{
+            //    if (!iovalues.Contains("0"))
+            //    {
+            //       //PS入飞梭移动流程.StepID = 515;
+            //    }
+            //    else
+            //    {
+            //        Debug.WriteLine("飞梭前后检测产品感应有IC放歪");
+            //        //ProgramPause = true;
+            //        //IsPause = true;
+            //    }
+            //}
             //飞梭前出料BIN项 = new string[][] { new string[] { "01", "02", "03", "04" }, new string[] { "05", "06", "07", "08" } };
 
             //string[][] bins = new string[2][]

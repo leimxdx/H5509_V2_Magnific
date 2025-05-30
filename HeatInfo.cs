@@ -103,6 +103,8 @@ namespace H5509_V2
                 case 13: return Site14温度补偿;
                 case 14: return Site15温度补偿;
                 case 15: return Site16温度补偿;
+                case 16: return 温控器温度补偿;
+
             }
             return 0;
         }

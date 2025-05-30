@@ -73,6 +73,20 @@ namespace H5509_V2
         }
 
         /// <summary>
+        /// 轴是否使能
+        /// </summary>
+        /// <param name="axisName"></param>
+        /// <param name="enable"></param>
+        /// <returns></returns>
+        public string GetAxisEnable(string axisName, out bool enable)
+        {
+            enable = false;
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRun);
+            if (result != "Success") return result;
+            return Motion.IsEnable(axisRun.核号, axisRun.轴号, out enable);
+        }
+
+        /// <summary>
         /// 获取实时位置
         /// </summary>
         /// <param name="axis">轴号</param>
