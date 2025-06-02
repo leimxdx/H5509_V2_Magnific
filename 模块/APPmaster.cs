@@ -57,7 +57,7 @@ namespace H5509_V2
 
         public static Form_alarm form_alarm = new Form_alarm();
 
-        public static List<string> listcode = new List<string>(); //保存报警代码
+        public static List<string> Listcode = new List<string>(); //保存报警代码
 
         public static DTMHelper dTMHelper; //温控器
 
@@ -340,6 +340,12 @@ namespace H5509_V2
 
         public static double Auto2上移固定距离 = 29.5;
 
+        public static DateTime IndexTime = DateTime.Now;
+
+        public static TimeSpan DIndexTime = new TimeSpan(0);
+
+        public static TimeSpan TestTime = new TimeSpan(0);
+
         public static DateTime 软件开启时间 = DateTime.Now;
 
         public static DateTime 开始时间 = DateTime.Now;
@@ -359,7 +365,7 @@ namespace H5509_V2
 
         public static TimeSpan 结批时间 { get { return 按下结批时间 - 结束时间; } }
 
-        public static TimeSpan 升温时间 { get { return 开始时间 - 达温时间; } }
+        public static TimeSpan 升温时间 { get { return 达温时间 - 开始时间; } }
 
         public static int UphNumber = 0;
 
@@ -545,6 +551,14 @@ namespace H5509_V2
         public static short 飞梭后入料状态;
 
         public static short 飞梭后出料状态;
+
+        public static bool[] 保存开Site更改;
+
+        public static bool[][] 保存关Site更改;
+
+        public static bool[] 正在吸取后入料;
+
+        public static bool[][] 正在放置前入料;
 
         public static bool[][] 飞梭前入料IC;
 
@@ -2891,18 +2905,13 @@ namespace H5509_V2
         {
             APPmaster.InSiteQueue = new ConcurrentQueue<int>();
             SiteStatus siteStatus = 设置信息.开site信息;
-            bool[] siteopen = new bool[16] { false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false };
+            bool[] siteopen = new bool[16];
 
             for (int site = 0; site < 16; site++)
             {
-                for (int dut = 0; dut < 8; dut++)
+                if (siteStatus.GetSiteValue(site).Contains("1"))
                 {
-                    if (siteStatus.GetSiteValue(site, dut) == "1")
-                    {
-                        siteopen[site] = true;
-                        break;
-                    }
-                    if (siteopen[site]) break;
+                    siteopen[site] = true;
                 }
             }
 
@@ -2914,6 +2923,11 @@ namespace H5509_V2
                     APPmaster.InSiteQueue.Enqueue(site);
                 }
             }
+        }
+
+        public static void 整组开site()
+        {
+
         }
 
         public static bool[] 检测温度(double tempmax, double tempmin)
@@ -2939,7 +2953,7 @@ namespace H5509_V2
             return tempopen;
         }
 
-        public static void 放料目标值()
+        public static void 更新入料目标值()
         {
             SiteStatus siteStatus = 设置信息.开site信息;
             bool[] siteopen = new bool[8] { false, false, false, false, false, false, false, false };
@@ -2964,13 +2978,53 @@ namespace H5509_V2
             };
         }
 
+        public static void 更新关site更改(bool[][] 修改前入料目标值)
+        {
+            bool[][] 新关site更改 = new bool[2][] { new bool[4], new bool[4] };
+            for (int colum = 0; colum < 放料IC目标值.Length; colum++)
+            {
+                for (int dut = 0; dut < 放料IC目标值[colum].Length; dut++)
+                {
+                    if (放料IC目标值[colum][dut] != 修改前入料目标值[colum][dut])
+                    {
+                        if (!放料IC目标值[colum][dut] && 修改前入料目标值[colum][dut])
+                        {
+                            新关site更改[colum][dut] = true;
+                            //Debug.WriteLine($"放料目标值dut:{colum * 4 + dut + 1},{放料IC目标值[colum][dut]}->{save[colum][dut]}");
+                        }
+                        //else Debug.WriteLine($"放料目标值dut:{colum * 4 + dut + 1},{放料IC目标值[colum][dut]}->{save[colum][dut]}");
+                    }
+                }
+            }
+
+            保存关Site更改 = 新关site更改;
+        }
+
+        public static void 更新开Site更改(bool[] 修改前开Site更改)
+        {
+            SiteStatus siteStatus = 设置信息.开site信息;
+
+            bool[] siteopen = new bool[16];
+
+            for (int site = 0; site < 16; site++)
+            {
+                if (siteStatus.GetSiteValue(site).Contains("1"))
+                {
+                    siteopen[site] = true;
+                }
+            }
+
+            保存开Site更改 = siteopen;
+        }
+
+
         public static bool 获取Load盘位置(int index, out double xPos, out double yPos)
         {
             xPos = yPos = 0;
             if (获取Load盘坐标(true, out short xPoint, out short yPoint))
             {
-                xPos = LoaderXPoint[xPoint];
-                yPos = LoaderYPoint[yPoint] + index * Interval * Tray_Y_Pitch;
+                xPos = LoaderXPoint[xPoint] + 点位微调.入料_Load吸_X;
+                yPos = (LoaderYPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.入料_Load吸_Y;
                 return true;
             }
             else return false;
@@ -3060,13 +3114,12 @@ namespace H5509_V2
             else return false;
         }
 
-        public static string 获取Load盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index, out double xPos, out double yPos)
+        public static string 获取Load盘Open(int[] opens, int xPoint, int yPoint, out bool[] lsopen, out int index)
         {
-            xPos = yPos = 0;
             lsopen = new bool[opens.Length];
 
             if (!获取吸嘴索引(opens, 0, out index)) return "获取入料吸嘴索引失败!";
-            if (!获取Load盘位置(index, out xPos, out yPos)) return "获取Load盘位置失败!";
+            //if (!获取Load盘位置(index, out xPos, out yPos)) return "获取Load盘位置失败!";
 
             for (int i = 0; i < opens.Length; i++)
             {
@@ -3401,30 +3454,30 @@ namespace H5509_V2
             {
                 if (colum == 0) //梭车1第1列
                 {
-                    pos[0] = 初始点位.入料_梭车1_X;
-                    pos[1] = 初始点位.入料_梭车1_Y;
-                    pos[2] = 入料放料间距;
+                    pos[0] = 初始点位.入料_梭车1_X + 点位微调.入料_梭车1第1列放_X;
+                    pos[1] = 初始点位.入料_梭车1_Y + 点位微调.入料_梭车1第1列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
                 }
                 else  //梭车1第2列
                 {
-                    pos[0] = 初始点位.入料_梭车1_X + 梭车列间距;
-                    pos[1] = 初始点位.入料_梭车1_Y;
-                    pos[2] = 入料放料间距;
+                    pos[0] = 初始点位.入料_梭车1_X + 梭车列间距 + 点位微调.入料_梭车1第2列放_X;
+                    pos[1] = 初始点位.入料_梭车1_Y + 点位微调.入料_梭车1第2列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
                 }
             }
             else //梭车2在前，梭车1后
             {
                 if (colum == 0) //梭车2第1列
                 {
-                    pos[0] = 初始点位.入料_梭车2_X;
-                    pos[1] = 初始点位.入料_梭车2_Y;
-                    pos[2] = 入料放料间距;
+                    pos[0] = 初始点位.入料_梭车2_X + 点位微调.入料_梭车2第1列放_X;
+                    pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第1列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距; ;
                 }
                 else  //梭车2第2列
                 {
-                    pos[0] = 初始点位.入料_梭车2_X + 梭车列间距;
-                    pos[1] = 初始点位.入料_梭车2_Y;
-                    pos[2] = 入料放料间距;
+                    pos[0] = 初始点位.入料_梭车2_X + 梭车列间距 + 点位微调.入料_梭车2第2列放_X;
+                    pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第2列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
                 }
             }
             return pos;
@@ -3437,30 +3490,30 @@ namespace H5509_V2
             {
                 if (colum == 0) //梭车1第1列
                 {
-                    pos[0] = 初始点位.出料_梭车1_X;
-                    pos[1] = 初始点位.出料_梭车1_Y;
-                    pos[2] = 出料吸料间距;
+                    pos[0] = 初始点位.出料_梭车1_X + 点位微调.出料_梭车1第1列吸_X;
+                    pos[1] = 初始点位.出料_梭车1_Y + 点位微调.出料_梭车1第1列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
                 }
                 else  //梭车1第2列
                 {
-                    pos[0] = 初始点位.出料_梭车1_X - 梭车列间距;
-                    pos[1] = 初始点位.出料_梭车1_Y;
-                    pos[2] = 出料吸料间距;
+                    pos[0] = 初始点位.出料_梭车1_X - 梭车列间距 + 点位微调.出料_梭车1第2列吸_X;
+                    pos[1] = 初始点位.出料_梭车1_Y + 点位微调.出料_梭车1第2列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
                 }
             }
             else //梭车2在前，梭车1后
             {
                 if (colum == 0) //梭车2第1列
                 {
-                    pos[0] = 初始点位.出料_梭车2_X;
-                    pos[1] = 初始点位.出料_梭车2_Y;
-                    pos[2] = 出料吸料间距;
+                    pos[0] = 初始点位.出料_梭车2_X + 点位微调.出料_梭车2第1列吸_X;
+                    pos[1] = 初始点位.出料_梭车2_Y + 点位微调.出料_梭车2第1列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
                 }
                 else  //梭车2第2列
                 {
-                    pos[0] = 初始点位.出料_梭车2_X - 梭车列间距;
-                    pos[1] = 初始点位.出料_梭车2_Y;
-                    pos[2] = 出料吸料间距;
+                    pos[0] = 初始点位.出料_梭车2_X - 梭车列间距 + 点位微调.出料_梭车2第2列吸_X;
+                    pos[1] = 初始点位.出料_梭车2_Y + 点位微调.出料_梭车2第2列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
                 }
             }
             return pos;
@@ -3470,11 +3523,19 @@ namespace H5509_V2
         {
             if (飞梭2位置 == 0)
             {
-                return 初始点位.入料_梭车1_Z;
+                if (colum == 0)
+                {
+                    return 初始点位.入料_梭车1_Z + 点位微调.入料_梭车1第1列放_Z;
+                }
+                else return 初始点位.入料_梭车1_Z + 点位微调.入料_梭车1第2列放_Z;
             }
             else
             {
-                return 初始点位.入料_梭车2_Z;
+                if (colum == 0)
+                {
+                    return 初始点位.入料_梭车2_Z + 点位微调.入料_梭车2第1列放_Z;
+                }
+                else return 初始点位.入料_梭车2_Z + 点位微调.入料_梭车2第2列放_Z;
             }
         }
 
@@ -3482,11 +3543,19 @@ namespace H5509_V2
         {
             if (飞梭2位置 == 0)
             {
-                return 初始点位.出料_梭车1_Z;
+                if (colum == 0)
+                {
+                    return 初始点位.出料_梭车1_Z + 点位微调.出料_梭车1第1列吸_Z;
+                }
+                else return 初始点位.出料_梭车1_Z + 点位微调.出料_梭车1第2列吸_Z;
             }
             else
             {
-                return 初始点位.出料_梭车2_Z;
+                if (colum == 0)
+                {
+                    return 初始点位.出料_梭车2_Z + 点位微调.出料_梭车2第1列吸_Z;
+                }
+                else return 初始点位.出料_梭车2_Z + 点位微调.出料_梭车2第2列吸_Z;
             }
         }
 
@@ -3494,24 +3563,129 @@ namespace H5509_V2
         {
             if (trayid == 0)
             {
-                return 初始点位.出料_Auto1_Z;
+                return 初始点位.出料_Auto1_Z + 点位微调.出料_Auto1放_Z;
             }
             else if (trayid == 1)
             {
-                return 初始点位.出料_Auto2_Z;
+                return 初始点位.出料_Auto2_Z + 点位微调.出料_Auto2放_Z;
             }
             else if (trayid == 2)
             {
-                return 初始点位.出料_Fix1_Z;
+                return 初始点位.出料_Fix1_Z + 点位微调.出料_Fix1放_Z;
             }
             else if (trayid == 3)
             {
-                return 初始点位.出料_Fix2_Z;
+                return 初始点位.出料_Fix2_Z + 点位微调.出料_Fix2放_Z;
             }
             else
             {
-                return 初始点位.出料_Fix3_Z;
+                return 初始点位.出料_Fix3_Z + 点位微调.出料_Fix3放_Z;
             }
+        }
+
+        public static string 获取测试X吸料补偿(int site, out double sitex)
+        {
+            sitex = 0;
+            switch (site)
+            {
+                case 0: sitex = 点位微调.测试_Site1吸_X; break;
+                case 1: sitex = 点位微调.测试_Site2吸_X; break;
+                case 2: sitex = 点位微调.测试_Site3吸_X; break;
+                case 3: sitex = 点位微调.测试_Site4吸_X; break;
+                case 4: sitex = 点位微调.测试_Site5吸_X; break;
+                case 5: sitex = 点位微调.测试_Site6吸_X; break;
+                case 6: sitex = 点位微调.测试_Site7吸_X; break;
+                case 7: sitex = 点位微调.测试_Site8吸_X; break;
+                case 8: sitex = 点位微调.测试_Site9吸_X; break;
+                case 9: sitex = 点位微调.测试_Site10吸_X; break;
+                case 10: sitex = 点位微调.测试_Site11吸_X; break;
+                case 11: sitex = 点位微调.测试_Site12吸_X; break;
+                case 12: sitex = 点位微调.测试_Site13吸_X; break;
+                case 13: sitex = 点位微调.测试_Site14吸_X; break;
+                case 14: sitex = 点位微调.测试_Site15吸_X; break;
+                case 15: sitex = 点位微调.测试_Site16吸_X; break;
+                default: return "Fail";
+            }
+            return "Success";
+        }
+
+        public static string 获取测试Z吸料补偿(int site, out double sitez)
+        {
+            sitez = 0;
+            switch (site)
+            {
+                case 0: sitez = 点位微调.测试_Site1吸_Z; break;
+                case 1: sitez = 点位微调.测试_Site2吸_Z; break;
+                case 2: sitez = 点位微调.测试_Site3吸_Z; break;
+                case 3: sitez = 点位微调.测试_Site4吸_Z; break;
+                case 4: sitez = 点位微调.测试_Site5吸_Z; break;
+                case 5: sitez = 点位微调.测试_Site6吸_Z; break;
+                case 6: sitez = 点位微调.测试_Site7吸_Z; break;
+                case 7: sitez = 点位微调.测试_Site8吸_Z; break;
+                case 8: sitez = 点位微调.测试_Site9吸_Z; break;
+                case 9: sitez = 点位微调.测试_Site10吸_Z; break;
+                case 10: sitez = 点位微调.测试_Site11吸_Z; break;
+                case 11: sitez = 点位微调.测试_Site12吸_Z; break;
+                case 12: sitez = 点位微调.测试_Site13吸_Z; break;
+                case 13: sitez = 点位微调.测试_Site14吸_Z; break;
+                case 14: sitez = 点位微调.测试_Site15吸_Z; break;
+                case 15: sitez = 点位微调.测试_Site16吸_Z; break;
+                default: return "Fail";
+            }
+            return "Success";
+        }
+
+
+        public static string 获取测试X放料补偿(int site, out double sitex)
+        {
+            sitex = 0;
+            switch (site)
+            {
+                case 0: sitex = 点位微调.测试_Site1放_X; break;
+                case 1: sitex = 点位微调.测试_Site2放_X; break;
+                case 2: sitex = 点位微调.测试_Site3放_X; break;
+                case 3: sitex = 点位微调.测试_Site4放_X; break;
+                case 4: sitex = 点位微调.测试_Site5放_X; break;
+                case 5: sitex = 点位微调.测试_Site6放_X; break;
+                case 6: sitex = 点位微调.测试_Site7放_X; break;
+                case 7: sitex = 点位微调.测试_Site8放_X; break;
+                case 8: sitex = 点位微调.测试_Site9放_X; break;
+                case 9: sitex = 点位微调.测试_Site10放_X; break;
+                case 10: sitex = 点位微调.测试_Site11放_X; break;
+                case 11: sitex = 点位微调.测试_Site12放_X; break;
+                case 12: sitex = 点位微调.测试_Site13放_X; break;
+                case 13: sitex = 点位微调.测试_Site14放_X; break;
+                case 14: sitex = 点位微调.测试_Site15放_X; break;
+                case 15: sitex = 点位微调.测试_Site16放_X; break;
+                default: return "Fail";
+            }
+            return "Success";
+        }
+
+        public static string 获取测试Z放料补偿(int site, out double sitez)
+        {
+            sitez = 0;
+            switch (site)
+            {
+                case 0: sitez = 点位微调.测试_Site1放_Z; break;
+                case 1: sitez = 点位微调.测试_Site2放_Z; break;
+                case 2: sitez = 点位微调.测试_Site3放_Z; break;
+                case 3: sitez = 点位微调.测试_Site4放_Z; break;
+                case 4: sitez = 点位微调.测试_Site5放_Z; break;
+                case 5: sitez = 点位微调.测试_Site6放_Z; break;
+                case 6: sitez = 点位微调.测试_Site7放_Z; break;
+                case 7: sitez = 点位微调.测试_Site8放_Z; break;
+                case 8: sitez = 点位微调.测试_Site9放_Z; break;
+                case 9: sitez = 点位微调.测试_Site10放_Z; break;
+                case 10: sitez = 点位微调.测试_Site11放_Z; break;
+                case 11: sitez = 点位微调.测试_Site12放_Z; break;
+                case 12: sitez = 点位微调.测试_Site13放_Z; break;
+                case 13: sitez = 点位微调.测试_Site14放_Z; break;
+                case 14: sitez = 点位微调.测试_Site15放_Z; break;
+                case 15: sitez = 点位微调.测试_Site16放_Z; break;
+                default: return "Fail";
+            }
+            return "Success";
         }
     }
 }

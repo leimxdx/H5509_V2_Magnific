@@ -153,15 +153,16 @@ namespace H5509_V2
                 timer.Tick += TimerCloseSelcet;
                 Chk_timer[i] = timer;
             }
+
             textBoxmachine.Text = Environment.MachineName;
-            //comboBox1.SelectedIndexChanged += comboBox1_SelectedValueChanged;
 
-            //刷新温度显示();
+            放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; //防止报错
 
-            //Open/Close按钮绑定
-            WindowsButtonBind();
+            //Site状态
 
             刷新开Site状态();
+
+            WindowsButtonBind(); //Open/Close按钮绑定
 
             刷新分BIN信息();
 
@@ -415,10 +416,12 @@ namespace H5509_V2
         {
             if (sender is Label label)
             {
+                bool ischange = false;
                 for (int i = 0; i < Lbl_Dout.Length; i++)
                 {
                     if (label.Equals(Lbl_Dout[i]))
                     {
+
                         int site = i / 8;
                         if (!Chk_SW[site].Checked) break;
                         if (Chk_timer[site].Enabled)
@@ -426,6 +429,7 @@ namespace H5509_V2
                             Chk_timer[site].Stop();
                             Chk_timer[site].Start();
                         }
+                        ischange = true;
                         int dut = i % 8;
                         设置信息.开site信息.SetSiteValue(site, dut, label.Text == "" ? "1" : "0");
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
@@ -436,7 +440,7 @@ namespace H5509_V2
                         break;
                     }
                 }
-                刷新开Site状态();
+                if (ischange) 刷新开Site状态();
             }
         }
 
@@ -774,6 +778,75 @@ namespace H5509_V2
 
             开Site数量 = open;
             关Site数量 = close;
+
+            bool[][] 修改前入料目标值 = new bool[2][]
+            {
+                new bool[] { 放料IC目标值[0][0], 放料IC目标值[0][1], 放料IC目标值[0][2], 放料IC目标值[0][3] },
+                new bool[] { 放料IC目标值[1][0], 放料IC目标值[1][1], 放料IC目标值[1][2], 放料IC目标值[1][3] }
+            };
+
+            if (保存开Site更改 == null) 保存开Site更改 = new bool[16];
+            bool[] 修改前开Site更改 = new bool[保存开Site更改.Length];
+
+            for (int i = 0; i < 保存开Site更改.Length; i++)
+            {
+                修改前开Site更改[i] = 保存开Site更改[i];
+            }
+
+            更新入料目标值();
+
+            更新关site更改(修改前入料目标值);
+
+            更新开Site更改(修改前开Site更改);
+
+            //飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+
+            //正在放置前入料 = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+
+            //if (设备状态 != 0)
+            {
+                bool[][] 关site更改 = 保存关Site更改;
+
+                if (关site更改[0].Contains(true) || 关site更改[1].Contains(true))// 
+                {
+                    for (int cloum = 0; cloum < 关site更改.Length; cloum++)
+                    {
+                        if (!关site更改[cloum].Contains(true)) continue;
+
+                        for (int dut = 0; dut < 关site更改[cloum].Length; dut++)
+                        {
+                            if (关site更改[cloum][dut])
+                            {
+                                if (飞梭后入料IC[cloum][dut] && !正在吸取后入料[cloum * 4 + dut])
+                                {
+                                    Debug.WriteLine($"后梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出");
+                                    MessageBox.Show($"后梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                                if (飞梭前入料IC[cloum][dut] || 正在放置前入料[cloum][dut]) //入料4个吸嘴
+                                {
+                                    Debug.WriteLine($"前梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
+                                    MessageBox.Show($"前梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                for (int i = 0; i < 修改前开Site更改.Length; i++)
+                {
+                    if (!修改前开Site更改[i] && 保存开Site更改[i])
+                    {
+                        Debug.WriteLine($"新开Site{i}");
+
+                    }
+                    else if (修改前开Site更改[i] && !保存开Site更改[i])
+                    {
+                        Debug.WriteLine($"新关Site{i}");
+
+                    }
+                }
+            }
         }
 
         public void 刷新分BIN信息()
@@ -1025,8 +1098,18 @@ namespace H5509_V2
                             isYellowFlicker = false;
                             isGreenFlicker = false;
                         }
+
                         lbl_opennum.Text = "Open=" + 开Site数量.ToString();
                         lbl_closenum.Text = "Close=" + 关Site数量.ToString();
+                        label653.Text = $"IndexTime={DIndexTime.TotalSeconds:0.0}s";
+                        label652.Text = $"TestTime={TestTime.TotalSeconds:0.0}s";
+
+                        if (温度模式 == "高温")
+                        {
+                            label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
+                            //if (升温时间.TotalHours >= 1) label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
+                            //else label6.Text = "HeatingTime=" + 升温时间.ToString(@"mm\:ss");
+                        }
 
                         Txt_loadnum.Text = 载入数.ToString();
                         float total = 出料数;
@@ -1050,44 +1133,31 @@ namespace H5509_V2
                         }
                         else label153.Visible = false;
 
-                        if (TCPConnect)
+                        for (int i = 0; i < Lbl_Temp.Length; i++)
                         {
-                            //检测温度();
-
-                            for (int i = 0; i < Lbl_Temp.Length; i++)
+                            double value = 0;
+                            Color color = Color.Silver;
+                            if (TCPConnect && SiteTemp[i] != 32770)
                             {
-                                if (SiteTemp[i] != 32770)
+                                value = SiteTemp[i];
+                                if (温度模式 == "高温")
                                 {
-                                    Lbl_Temp[i].Value = SiteTemp[i];
-
-                                    //if (温度模式 == "高温")
-                                    //{
                                     if (GetSiteOpen(i).Contains(true))
                                     {
                                         if (SiteTemp[i] < 加热盘.波动温度上限 && SiteTemp[i] >= 加热盘.波动温度下限)
                                         {
-                                            Lbl_Temp[i].BackColor = Color.Lime;
+                                            color = Color.Lime;
                                         }
                                         else
                                         {
-                                            if (温控达温)
-                                            {
-                                                Lbl_Temp[i].BackColor = Color.Red;
-                                            }
-                                            else Lbl_Temp[i].BackColor = Color.Gold;
+                                            if (温控达温) color = Color.Red;
+                                            else color = Color.Gold;
                                         }
                                     }
-                                    else Lbl_Temp[i].BackColor = Color.Silver;
-
-                                    //}
-                                    //else Lbl_Temp[i].BackColor = Color.Lime;
-                                }
-                                else
-                                {
-                                    Lbl_Temp[i].Value = 0;
-                                    Lbl_Temp[i].BackColor = Color.Silver;
                                 }
                             }
+                            Lbl_Temp[i].Value = value;
+                            Lbl_Temp[i].BackColor = color;
                         }
 
                     }));
@@ -1216,11 +1286,13 @@ namespace H5509_V2
                         return;
                     }
                 }
+                label10.Text = "关闭";
                 label10.Enabled = false;
                 label116.BackColor = Color.White;// System.Drawing.SystemColors.Control;
             }
             else
             {
+                label10.Text = "开启";
                 label10.Enabled = true;
                 label116.BackColor = Color.Red;
             }

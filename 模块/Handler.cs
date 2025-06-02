@@ -263,7 +263,6 @@ namespace H5509_V2
 
         public string 测试手臂X移动(double pos)
         {
-
             return motionEx.AxisAbsoluteMove("M21_测试手臂X轴", pos);
         }
 
@@ -2682,6 +2681,10 @@ namespace H5509_V2
             抓盘手臂放空盘到Auto1标记 = 1;
             抓盘手臂放空盘到Auto2标记 = 1;
 
+            正在吸取后入料 = new bool[] { false, false, false, false, false, false, false, false };
+            正在放置前入料 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+
+            //放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
             飞梭前入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
             飞梭前出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
             飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
@@ -2875,7 +2878,7 @@ namespace H5509_V2
             {
                 iscanstart = false;
                 Debug.WriteLine("[Code]1400445,[Msg]设备未归零");
-                listcode.Add("1400445");
+                Listcode.Add("1400445");
             }
 
             if (温度模式 == "高温")
@@ -2891,7 +2894,7 @@ namespace H5509_V2
             {
                 iscanstart = false;
                 Debug.WriteLine("[Code]1400430,[Msg]串口未连接");
-                listcode.Add("1400430");
+                Listcode.Add("1400430");
             }
             else
             {
@@ -2899,7 +2902,7 @@ namespace H5509_V2
                 {
                     iscanstart = false;
                     Debug.WriteLine("[Code]1400430,[Msg]未发送生产信息给测试机"); //listcode.Add("1400440");
-                    listcode.Add("1400440");
+                    Listcode.Add("1400440");
                 }
             }
             return iscanstart;
@@ -3025,7 +3028,7 @@ namespace H5509_V2
                             if (设备状态 == 0)
                             {
                                 StartRunIn(); //根据开Site情况添加入料队列
-                                放料目标值();
+                                ///更新入料目标值();
                                 开始时间 = DateTime.Now;
                                 //开始前的IO检查
                             }
@@ -3287,14 +3290,19 @@ namespace H5509_V2
                                 if (result == "Success")
                                 {
                                     H5509归零 = true;
+                                    Listcode.Add("1400444");
                                     Debug.WriteLine("归零完成");
                                 }
-                                else Debug.WriteLine("归零失败");
+                                else
+                                {
+                                    Listcode.Add("1400420");
+                                    Debug.WriteLine("归零失败");
+                                }
 
                                 H5509正在归零 = false;
-                                motionEx.SetDo("Y010_归零灯", false);
                                 motionEx.SetDo("Y001_开始灯", false);
                                 motionEx.SetDo("Y002_暂停灯", false);
+                                motionEx.SetDo("Y010_归零灯", false);
                             });
                         }
                     }
@@ -3726,6 +3734,7 @@ namespace H5509_V2
                         PS初始化流程.StepName = "等待Load上顶";
                         if (Load上顶标记 == 1)
                         {
+                            IndexTime = DateTime.Now;
                             Auto等待换盘标记 = false;
                             H5509初始化 = true;
                             H5509正在初始化 = false;
@@ -3774,37 +3783,20 @@ namespace H5509_V2
                     case 500:
                         PS结批流程.StepName = "路径规划";
                         bool process = !PS出料手臂吸放料流程.Processing
-                                            && !PS入料手臂吸放料流程.Processing
-                                            && !PS测试手臂取待测料流程.Processing
-                                            && !PS测试手臂取已测料流程.Processing
-                                            && !PS入飞梭移动流程.Processing
-                                            && !PS空盘上顶流程.Processing
-                                            && !PS空盘下降流程.Processing
-                                            && !PS待测盘上顶流程.Processing
-                                            && !PS手动盘1上顶流程.Processing
-                                            && !PS手动盘2上顶流程.Processing
-                                            && !PS抓盘手臂取Empty空盘流程.Processing
-                                            && !PS抓盘手臂取Load空盘流程.Processing
-                                            && !PS抓盘手臂放空盘到Empty流程.Processing
-                                            && !PS抓盘手臂放空盘到Auto1流程.Processing
-                                            && !PS抓盘手臂放空盘到Auto2流程.Processing;
-
-                        //bool bb2 = !飞梭后入料IC[0].Contains(true) //飞梭后入料IC第1列无料
-                        //                    && !飞梭后入料IC[1].Contains(true) //飞梭后入料IC第2列无料
-                        //                    && !飞梭前入料IC[0].Contains(true) //飞梭前入料IC第1列无料
-                        //                    && !飞梭前入料IC[1].Contains(true) //飞梭前入料IC第2列无料
-                        //                    && !飞梭后出料IC[0].Contains(true) //飞梭后出料IC第1列无料
-                        //                    && !飞梭后出料IC[1].Contains(true) //飞梭后出料IC第2列无料
-                        //                    && !飞梭前出料IC[0].Contains(true) //飞梭前出料IC第1列无料
-                        //                    && !飞梭前出料IC[1].Contains(true) //飞梭前出料IC第2列无料
-                        //                    && SiteTestState.Contains(0) //测试区无料
-                        //                    && !SiteTestState.Contains(1) //测试区有料
-                        //                    && !SiteTestState.Contains(2) //测试区有料测试中
-                        //                    && !SiteTestState.Contains(3) //测试区有料已测试
-                        //                    && !SiteTestState.Contains(4) //测试区有料待取走
-                        //                    && 入料手臂停止工作标记
-                        //                    && 测试手臂入料停止工作标记
-                        //                    && 测试手臂出料停止工作标记;
+                                    && !PS入料手臂吸放料流程.Processing
+                                    && !PS测试手臂取待测料流程.Processing
+                                    && !PS测试手臂取已测料流程.Processing
+                                    && !PS入飞梭移动流程.Processing
+                                    && !PS空盘上顶流程.Processing
+                                    && !PS空盘下降流程.Processing
+                                    && !PS待测盘上顶流程.Processing
+                                    && !PS手动盘1上顶流程.Processing
+                                    && !PS手动盘2上顶流程.Processing
+                                    && !PS抓盘手臂取Empty空盘流程.Processing
+                                    && !PS抓盘手臂取Load空盘流程.Processing
+                                    && !PS抓盘手臂放空盘到Empty流程.Processing
+                                    && !PS抓盘手臂放空盘到Auto1流程.Processing
+                                    && !PS抓盘手臂放空盘到Auto2流程.Processing;
 
                         PS结批流程.Condition = 结批标记 && H5509归零 && H5509初始化 && !正在结批 && !结批完成 && 设备状态 == 1 && 飞梭停止工作;
 
@@ -3831,8 +3823,8 @@ namespace H5509_V2
                                 Auto1上顶标记 = 2;
                                 Auto2上顶标记 = 2;
                                 Auto等待换盘标记 = true;
-                                获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
-                                if (auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要盖空盘
+                                bool isIC1 = 获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
+                                if (!isIC1 || auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要盖空盘
                                 {
                                     auto1isding = true;
                                     抓盘手臂放空盘到Auto1标记 = 2;
@@ -3854,8 +3846,8 @@ namespace H5509_V2
                         PS结批流程.StepName = $"抓盘手臂抓空盘到Auto1";
                         if (抓盘手臂放空盘到Auto1标记 == 1 && Auto1上顶标记 == 1) //给Auto2盖空盘时要等Auto1上顶完成
                         {
-                            获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
-                            if (auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
+                            bool isIC2 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
+                            if (!isIC2 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
                             {
                                 auto2isding = true;
                                 抓盘手臂放空盘到Auto2标记 = 2;
@@ -4061,6 +4053,7 @@ namespace H5509_V2
                                     if (获取Heat盘加热好的指定IC个数(2, true, count, out num2)) //如果已经加热好需要的IC个数
                                     {
                                         opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
+                                        正在放置前入料[colums] = new bool[] { open[0], open[1], open[2], open[3] };
                                         入料手臂抓料等待标记 = false;
                                         PS入料手臂吸放料流程.StepID = 615;
                                     }
@@ -4086,6 +4079,7 @@ namespace H5509_V2
                                                             if (++num3 >= num2) break;
                                                         }
                                                     }
+                                                    正在放置前入料[colums] = new bool[] { opens[0] == 0, opens[1] == 0, opens[2] == 0, opens[3] == 0 };
                                                     入料手臂抓料等待标记 = false;
                                                     PS入料手臂吸放料流程.StepID = 615;
                                                 }
@@ -4106,6 +4100,7 @@ namespace H5509_V2
                                 else
                                 {
                                     opens = 吸嘴是否吸料(open);
+                                    正在放置前入料[colums] = new bool[] { open[0], open[1], open[2], open[3] };
                                     入料手臂抓料等待标记 = false;
                                     PS入料手臂吸放料流程.StepID = 515;
                                 }
@@ -4141,6 +4136,7 @@ namespace H5509_V2
                                 if (获取Heat盘加热好的指定IC个数(2, true, count, out num2)) //如果已经加热好需要的IC个数
                                 {
                                     opens = 吸嘴是否吸料(open);  //到加热盘吸取IC -> 放到梭车(直接放)
+                                    正在放置前入料[colums] = new bool[] { open[0], open[1], open[2], open[3] };
                                     入料手臂抓料等待标记 = true;
                                     PS入料手臂吸放料流程.StepID = 615;
                                 }
@@ -4166,6 +4162,7 @@ namespace H5509_V2
                                                         if (++num3 >= num2) break;
                                                     }
                                                 }
+                                                正在放置前入料[colums] = new bool[] { opens[0] == 0, opens[1] == 0, opens[2] == 0, opens[3] == 0 };
                                                 入料手臂抓料等待标记 = true;
                                                 PS入料手臂吸放料流程.StepID = 615;
                                             }
@@ -4186,6 +4183,7 @@ namespace H5509_V2
                             else
                             {
                                 opens = 吸嘴是否吸料(open);
+                                正在放置前入料[colums] = new bool[] { open[0], open[1], open[2], open[3] };
                                 入料手臂抓料等待标记 = true;
                                 PS入料手臂吸放料流程.StepID = 515;
                             }
@@ -4215,6 +4213,7 @@ namespace H5509_V2
                                 {
                                     opens[i] = 0;
                                 }
+                                正在放置前入料[colums] = new bool[] { opens[0] == 0, opens[1] == 0, opens[2] == 0, opens[3] == 0 };
                             }
                             PS入料手臂吸放料流程.StepID = 515;
                         }
@@ -4301,8 +4300,8 @@ namespace H5509_V2
                         result = APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 0, true, 2, out lsopen, out index);
                         if (result == "Success")
                         {
-                            xPos = HeatXPoint[xPoint];
-                            yPos = HeatYPoint[yPoint] + index * HeatInterval * Heat_Y_Pitch;
+                            xPos = HeatXPoint[xPoint] + 点位微调.入料_Heat吸_X;
+                            yPos = (HeatYPoint[yPoint] + index * HeatInterval * Heat_Y_Pitch) + 点位微调.入料_Heat吸_Y;
                             PS入料手臂吸放料流程.StepID = 625;
                         }
                         break;
@@ -4310,7 +4309,7 @@ namespace H5509_V2
                     case 625:
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到Heat吸料位置";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = 入料手臂移动(xPos, yPos, 入料吸放料Heat间距); //50, 300, 10 写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
+                        result = 入料手臂移动(xPos, yPos, 入料吸放料Heat间距 + 点位微调.入料_Heat_变距); //50, 300, 10 写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
                         {
                             firstdraw = true;
@@ -4322,7 +4321,7 @@ namespace H5509_V2
                     case 630:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat吸_Z, true);
+                        result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat吸_Z + 点位微调.入料_Heat吸_Z, true);
                         if (result == "Success")
                         {
                             firstdzhome = true;
@@ -4610,9 +4609,11 @@ namespace H5509_V2
                     case 520:
                         PS入料手臂吸放料流程.StepName = "获取吸料信息";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = APPmaster.获取Load盘Open(opens, xPoint, yPoint, out lsopen, out index, out xPos, out yPos);
+                        result = APPmaster.获取Load盘Open(opens, xPoint, yPoint, out lsopen, out index);
                         if (result == "Success")
                         {
+                            xPos = LoaderXPoint[xPoint] + 点位微调.入料_Load吸_X;
+                            yPos = (LoaderYPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.入料_Load吸_Y;
                             PS入料手臂吸放料流程.StepID = 525;
                         }
                         else
@@ -4626,7 +4627,7 @@ namespace H5509_V2
                     case 525:
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到Load吸料位置";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = 入料手臂移动(xPos, yPos, 入料吸料间距); //50, 300, 10 写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
+                        result = 入料手臂移动(xPos, yPos, 入料吸料间距 + 点位微调.入料_Load_变距); //50, 300, 10 写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
                         {
                             ismovewait = false;
@@ -4644,7 +4645,7 @@ namespace H5509_V2
                     case 530:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = 入料手臂Z移动(lsopen, 初始点位.入料_Load_Z, true);
+                        result = 入料手臂Z移动(lsopen, 初始点位.入料_Load_Z + 点位微调.入料_Load吸_Z, true);
                         if (result == "Success")
                         {
                             firstdzhome = true;
@@ -5127,8 +5128,8 @@ namespace H5509_V2
                         {
                             Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->获取Heat盘坐标位置");
                             APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 1, false, 0, out lsopen, out index);
-                            xPos = HeatXPoint[xPoint];
-                            yPos = HeatYPoint[yPoint] + index * HeatInterval * Heat_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                            xPos = HeatXPoint[xPoint] + 点位微调.入料_Heat放_X;
+                            yPos = (HeatYPoint[yPoint] + index * HeatInterval * Heat_Y_Pitch) + 点位微调.入料_Heat放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                             PS入料手臂吸放料流程.StepID = 1010;
                         }
                         else
@@ -5140,7 +5141,7 @@ namespace H5509_V2
                     case 1010:
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到加热盘放料位置";
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        result = 入料手臂移动(xPos, yPos, 入料吸放料Heat间距); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
+                        result = 入料手臂移动(xPos, yPos, 入料吸放料Heat间距 + 点位微调.入料_Heat_变距); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
                         {
                             PS入料手臂吸放料流程.StepID = 1015;
@@ -5158,8 +5159,7 @@ namespace H5509_V2
                         Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         if (飞梭移动状态 == 0) //梭车停止状态才能放
                         {
-                            double zpos = 获取梭车Z放料点位(colums);
-                            result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat放_Z, true);
+                            result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat放_Z + 点位微调.入料_Heat放_Z, true);
                             if (result == "Success")
                             {
                                 firstdraw = true;
@@ -5544,7 +5544,7 @@ namespace H5509_V2
                         result = 入料手臂移动(初始点位.入料_Heat_X, 0, 7.5);
                         if (result == "Success")
                         {
-                            ismovewait = false;
+                            if (!入料手臂工作完成标记) ismovewait = false;
                             Auto等待换盘标记 = true;
                             PS入料手臂吸放料流程.StepID = 910;
                             Debug.WriteLine($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->等待Auto1和Auto2换盘");
@@ -6078,7 +6078,7 @@ namespace H5509_V2
                     case 520:
                         PS出料手臂吸放料流程.StepName = "出料手臂Z向下移动";
                         Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
-                        double zpos = 飞梭2位置 == 0 ? 初始点位.出料_梭车1_Z : 初始点位.出料_梭车2_Z;
+                        double zpos = 获取梭车Z吸料点位(colums);
                         result = 出料手臂Z移动(lsopen, zpos, true);
                         if (result == "Success")
                         {
@@ -6325,8 +6325,8 @@ namespace H5509_V2
                             {
                                 Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->获取Auto1坐标位置");
                                 APPmaster.获取Auto1盘Open(opens, xPoint, yPoint, out lsopen, index, bin);
-                                xPos = Auto1XPoint[xPoint];
-                                yPos = Auto1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                xPos = Auto1XPoint[xPoint] + 点位微调.出料_Auto1放_X;
+                                yPos = (Auto1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Auto1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                 PS出料手臂吸放料流程.StepID = 710;
                                 break;
 
@@ -6351,8 +6351,8 @@ namespace H5509_V2
                             {
                                 Debug.WriteLine($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->获取Auto2坐标位置");
                                 APPmaster.获取Auto2盘Open(opens, xPoint, yPoint, out lsopen, index, bin);
-                                xPos = Auto2XPoint[xPoint];
-                                yPos = Auto2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                xPos = Auto2XPoint[xPoint] + 点位微调.出料_Auto2放_X;
+                                yPos = (Auto2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Auto2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                 PS出料手臂吸放料流程.StepID = 710;
                                 break;
 
@@ -6381,8 +6381,8 @@ namespace H5509_V2
                                     if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1, bin, max, out lsopen, index);
-                                        xPos = Fix1XPoint[xPoint];
-                                        yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
+                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6401,8 +6401,8 @@ namespace H5509_V2
                                     if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_1, bin, max, out lsopen, index);
-                                        xPos = Fix1XPoint[xPoint];
-                                        yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
+                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6418,8 +6418,8 @@ namespace H5509_V2
                                     if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_2, bin, max, out lsopen, index);
-                                        xPos = Fix1XPoint[xPoint];
-                                        yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
+                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6438,8 +6438,8 @@ namespace H5509_V2
                                     if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_1, bin, max, out lsopen, index);
-                                        xPos = Fix1XPoint[xPoint];
-                                        yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
+                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6455,8 +6455,8 @@ namespace H5509_V2
                                     if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_2, bin, max, out lsopen, index);
-                                        xPos = Fix1XPoint[xPoint];
-                                        yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
+                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6472,8 +6472,8 @@ namespace H5509_V2
                                     if (获取Fix1盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_3, bin, max, out lsopen, index);
-                                        xPos = Fix1XPoint[xPoint];
-                                        yPos = Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
+                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6496,8 +6496,8 @@ namespace H5509_V2
                                     if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2, bin, max, out lsopen, index);
-                                        xPos = Fix2XPoint[xPoint];
-                                        yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
+                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6516,8 +6516,8 @@ namespace H5509_V2
                                     if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_1, bin, max, out lsopen, index);
-                                        xPos = Fix2XPoint[xPoint];
-                                        yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
+                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6533,8 +6533,8 @@ namespace H5509_V2
                                     if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_2, bin, max, out lsopen, index);
-                                        xPos = Fix2XPoint[xPoint];
-                                        yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
+                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6553,8 +6553,8 @@ namespace H5509_V2
                                     if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_1, bin, max, out lsopen, index);
-                                        xPos = Fix2XPoint[xPoint];
-                                        yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
+                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6570,8 +6570,8 @@ namespace H5509_V2
                                     if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_2, bin, max, out lsopen, index);
-                                        xPos = Fix2XPoint[xPoint];
-                                        yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
+                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6587,8 +6587,8 @@ namespace H5509_V2
                                     if (获取Fix2盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_3, bin, max, out lsopen, index);
-                                        xPos = Fix2XPoint[xPoint];
-                                        yPos = Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
+                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6611,8 +6611,8 @@ namespace H5509_V2
                                     if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3, bin, max, out lsopen, index);
-                                        xPos = Fix3XPoint[xPoint];
-                                        yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
+                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6631,8 +6631,8 @@ namespace H5509_V2
                                     if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_1, bin, max, out lsopen, index);
-                                        xPos = Fix3XPoint[xPoint];
-                                        yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
+                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6648,8 +6648,8 @@ namespace H5509_V2
                                     if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_2, bin, max, out lsopen, index);
-                                        xPos = Fix3XPoint[xPoint];
-                                        yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
+                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6668,8 +6668,8 @@ namespace H5509_V2
                                     if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_1, bin, max, out lsopen, index);
-                                        xPos = Fix3XPoint[xPoint];
-                                        yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
+                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6685,8 +6685,8 @@ namespace H5509_V2
                                     if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_2, bin, max, out lsopen, index);
-                                        xPos = Fix3XPoint[xPoint];
-                                        yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
+                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6702,8 +6702,8 @@ namespace H5509_V2
                                     if (获取Fix3盘坐标(false, min, max, out xPoint, out yPoint))
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_3, bin, max, out lsopen, index);
-                                        xPos = Fix3XPoint[xPoint];
-                                        yPos = Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
+                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -6740,7 +6740,7 @@ namespace H5509_V2
                                 Tray平移左右标记 = 1;
                             }
                         }
-                        Task<string> outputx = Task.Run(() => { return 出料手臂移动(xPos, yPos, 出料放料间距); });
+                        Task<string> outputx = Task.Run(() => { return 出料手臂移动(xPos, yPos, 出料放料间距 + 点位微调.出料_AF_变距); });
                         if (outputx.Result == "Success" && fix3move.Result == "Success")
                         {
                             Tray平移运动标记 = false;
@@ -7364,7 +7364,7 @@ namespace H5509_V2
                         Debug.WriteLine($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                         if (飞梭2位置 == 0)
                         {
-                            result = 飞梭轴移动(初始点位.梭车2_前_Y);
+                            result = 飞梭轴移动(初始点位.梭车2_前_Y + 点位微调.梭车2_前_Y);
                             if (result == "Success")
                             {
                                 飞梭2位置 = 1;
@@ -7379,7 +7379,7 @@ namespace H5509_V2
                         }
                         else
                         {
-                            result = 飞梭轴移动(初始点位.梭车2_后_Y);
+                            result = 飞梭轴移动(初始点位.梭车2_后_Y + 点位微调.梭车2_后_Y);
                             if (result == "Success")
                             {
                                 飞梭2位置 = 0;
@@ -7485,7 +7485,6 @@ namespace H5509_V2
                         PS测试手臂取待测料流程.Condition = (飞梭后入料状态 == 1 && APPmaster.InSiteQueue.Count > 0)
                                                         && (飞梭后出料状态 == 1 || APPmaster.OutSiteQueue.Count == 0)
                                                         && !测试手臂入料停止工作标记;
-                        //&& !正在结批
 
                         PS测试手臂取待测料流程.Permit = !PS测试手臂取已测料流程.Processing;
                         if (PS测试手臂取待测料流程.Condition && PS测试手臂取待测料流程.Permit)
@@ -7514,18 +7513,23 @@ namespace H5509_V2
                             && !飞梭后入料IC[1].Contains(true) //飞梭后入料IC第2列无料
                             && !飞梭前入料IC[0].Contains(true) //飞梭前入料IC第1列无料
                             && !飞梭前入料IC[1].Contains(true) //飞梭前入料IC第2列无料
-                                                          //&& !飞梭后出料IC[0].Contains(true) //飞梭后出料IC第1列无料
-                                                          //&& !飞梭后出料IC[1].Contains(true) //飞梭后出料IC第2列无料
-                                                          //&& !飞梭前出料IC[0].Contains(true) //飞梭前出料IC第1列无料
-                                                          //&& !飞梭前出料IC[1].Contains(true) //飞梭前出料IC第2列无料
                             && 入料手臂停止工作标记
                             && 结批标记)
                         {
-
                             测试手臂入料停止工作标记 = true;
                             PS测试手臂取待测料流程.Processing = false;
                             PS测试手臂取待测料流程.StepID = 500;
                         }
+                        //else
+                        //{
+                        //    if (入料手臂停止工作标记 && 结批标记)
+                        //    { 
+                        //        if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true))
+                        //        {
+
+                        //        }
+                        //    }
+                        //}
 
                         if (InSiteQueue.Count > 0)
                         {
@@ -7540,11 +7544,15 @@ namespace H5509_V2
                                         open[0] && 飞梭后入料IC[0][0] ? 0 : 2, open[1] && 飞梭后入料IC[0][1] ? 0 : 2, open[2] && 飞梭后入料IC[0][2] ? 0 : 2, open[3] && 飞梭后入料IC[0][3] ? 0 : 2,
                                         open[4] && 飞梭后入料IC[1][0] ? 0 : 2, open[5] && 飞梭后入料IC[1][1] ? 0 : 2, open[6] && 飞梭后入料IC[1][2] ? 0 : 2, open[7] && 飞梭后入料IC[1][3] ? 0 : 2
                                     };
+
                                     lsopen = new bool[8]
                                     {
                                         opens[0] == 0, opens[1] == 0, opens[2] == 0, opens[3] == 0,
-                                        opens[4] == 0, opens[5] == 0, opens[6] == 0, opens[7] == 0
+                                        opens[4] == 0, opens[5] == 0, opens[6] == 0, opens[7] == 0,
                                     };
+
+                                    正在吸取后入料 = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7], };
+
                                     if (lsopen.Contains(true)) //梭车上只要有一颗就拿走
                                     {
                                         InSiteQueue.TryDequeue(out movesite);
@@ -7566,6 +7574,12 @@ namespace H5509_V2
                                             InSiteQueue.TryDequeue(out movesite);
                                             InSiteQueue.Enqueue(site);
                                             Thread.Sleep(10);
+
+                                            //for (int i = 0; i < InSiteQueue.Count; i++)
+                                            //{
+                                                
+                                            //}
+                                            //InSiteQueue.Contains(site);
                                         }
                                     }
                                 }
@@ -7620,7 +7634,7 @@ namespace H5509_V2
                     case 510:
                         PS测试手臂取待测料流程.StepName = "测试手臂X轴到飞梭后入料吸料";
                         Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
-                        double xpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2吸_X : 初始点位.测试_梭车1吸_X;
+                        double xpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2吸_X + 点位微调.测试_梭车2左吸_X : 初始点位.测试_梭车1吸_X + 点位微调.测试_梭车1左吸_X;
                         result = 测试手臂X移动(xpos);
                         if (result == "Success")
                         {
@@ -7655,7 +7669,7 @@ namespace H5509_V2
                     case 520:
                         PS测试手臂取待测料流程.StepName = "测试Z向下移动"; //飞梭吸
                         Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
-                        double zpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2吸_Z : 初始点位.测试_梭车1吸_Z;
+                        double zpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2吸_Z + 点位微调.测试_梭车2左吸_Z : 初始点位.测试_梭车1吸_Z + 点位微调.测试_梭车1左吸_Z;
                         result = 测试手臂Z移动(zpos, true);
                         if (result == "Success")
                         {
@@ -7867,6 +7881,8 @@ namespace H5509_V2
                                 new bool[] { temp[4], temp[5], temp[6], temp[7] }
                             };
 
+                            正在吸取后入料 = new bool[] { false, false, false, false, false, false, false, false };
+
                             飞梭后入料状态 = 0;
                             PS测试手臂取待测料流程.StepID = 599;
                         }
@@ -7929,18 +7945,22 @@ namespace H5509_V2
                     case 710:
                         PS测试手臂取待测料流程.StepName = "测试手臂X移动到测试区放料";
                         Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
-                        result = 测试手臂X移动(TestXPoint[site]);
+                        result = 获取测试X放料补偿(site, out double sitex);
                         if (result == "Success")
                         {
-                            firstdraw = true;
-                            firstdzhome = true;
-                            PS测试手臂取待测料流程.StepID = 715;
-                        }
-                        else
-                        {
-                            Debug.WriteLine($"测试手臂X轴移动到Site{site + 1}上方失败!" + result);
-                            ProgramPause = true;
-                            IsPause = true;
+                            result = 测试手臂X移动(TestXPoint[site] + sitex);
+                            if (result == "Success")
+                            {
+                                firstdraw = true;
+                                firstdzhome = true;
+                                PS测试手臂取待测料流程.StepID = 715;
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"测试手臂X轴移动到Site{site + 1}上方失败!" + result);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
                         }
                         break;
 
@@ -7966,17 +7986,20 @@ namespace H5509_V2
                         if (SiteTestState[site] == 0)
                         {
                             Debug.WriteLine($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
-                            zpos = 初始点位.测试_Test区放_Z;
-                            result = 测试手臂Z移动(zpos, true); //测试区放
+                            result = 获取测试Z放料补偿(site, out double sitez);
                             if (result == "Success")
                             {
-                                PS测试手臂取待测料流程.StepID = 725;
-                            }
-                            else
-                            {
-                                Debug.WriteLine($"测试Z向下移动失败!" + result);
-                                ProgramPause = true;
-                                IsPause = true;
+                                result = 测试手臂Z移动(初始点位.测试_Test区放_Z + sitez, true); //测试区放
+                                if (result == "Success")
+                                {
+                                    PS测试手臂取待测料流程.StepID = 725;
+                                }
+                                else
+                                {
+                                    Debug.WriteLine($"测试Z向下移动失败!" + result);
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
                         else Thread.Sleep(10);
@@ -8111,6 +8134,12 @@ namespace H5509_V2
                                     new bool[] { opens[4] == 1, opens[5] == 1, opens[6] == 1, opens[7] == 1 }
                                 };
                                 SiteTestState[site] = 1; //有料
+
+                                if (飞梭后出料状态 == 1)
+                                {
+                                    DIndexTime = DateTime.Now - IndexTime;
+                                }
+
                                 PS测试手臂取待测料流程.StepID = 799;
                             }
                             else
@@ -8145,7 +8174,7 @@ namespace H5509_V2
                                 {
                                     if (iovalues[i] == "0")
                                     {
-                                        listcode.Add($"7005{i + 1}{site:D2}");
+                                        Listcode.Add($"7005{i + 1}{site:D2}");
                                         Debug.WriteLine($"Code:{$"7005{i + 1}{site:D2}"},Msg:Site{site + 1} Test X Sensor {i + 1} IC放歪");
                                     }
                                 }
@@ -8156,7 +8185,7 @@ namespace H5509_V2
                                 {
                                     if (iovalues2[i] == "0")
                                     {
-                                        listcode.Add($"7007{i + 8}{site:D2}");
+                                        Listcode.Add($"7007{i + 8}{site:D2}");
                                         Debug.WriteLine($"Code:{$"7007{i + 8}{site:D2}"},Msg:Site{site + 1} Test Site Y{i + 1} Sensor IC放歪");
                                     }
                                 }
@@ -8244,6 +8273,7 @@ namespace H5509_V2
 
                         if (OutSiteQueue.TryDequeue(out site))
                         {
+                            IndexTime = DateTime.Now;
                             bool[][] open = SiteTestIC[site];
                             opens = new int[8]
                             {
@@ -8280,18 +8310,22 @@ namespace H5509_V2
                     case 510:
                         PS测试手臂取已测料流程.StepName = "测试手臂X轴移动到Site上方";
                         Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                        result = 测试手臂X移动(TestXPoint[site]);
+                        result = 获取测试X吸料补偿(site, out double sitex);
                         if (result == "Success")
                         {
-                            firstdraw = true;
-                            firstdzhome = true;
-                            PS测试手臂取已测料流程.StepID = 515;
-                        }
-                        else
-                        {
-                            Debug.WriteLine($"测试手臂X轴移动到Site{site + 1}上方失败!" + result);
-                            ProgramPause = true;
-                            IsPause = true;
+                            result = 测试手臂X移动(TestXPoint[site] + sitex);
+                            if (result == "Success")
+                            {
+                                firstdraw = true;
+                                firstdzhome = true;
+                                PS测试手臂取已测料流程.StepID = 515;
+                            }
+                            else
+                            {
+                                Debug.WriteLine($"测试手臂X轴移动到Site{site + 1}上方失败!" + result);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
                         }
                         break;
 
@@ -8317,17 +8351,20 @@ namespace H5509_V2
                         if (SiteTestState[site] == 4) //待取出
                         {
                             Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                            double testzpos = 初始点位.测试_Test区吸_Z; //后续还要加上offset
-                            result = 测试手臂Z移动(testzpos, true);
+                            result = 获取测试Z吸料补偿(site, out double sitez);
                             if (result == "Success")
                             {
-                                PS测试手臂取已测料流程.StepID = 525;
-                            }
-                            else
-                            {
-                                Debug.WriteLine($"测试Z向下移动失败!" + result);
-                                ProgramPause = true;
-                                IsPause = true;
+                                result = 测试手臂Z移动(初始点位.测试_Test区吸_Z + sitez, true);
+                                if (result == "Success")
+                                {
+                                    PS测试手臂取已测料流程.StepID = 525;
+                                }
+                                else
+                                {
+                                    Debug.WriteLine($"测试Z向下移动失败!" + result);
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
                         else Thread.Sleep(10);
@@ -8593,7 +8630,7 @@ namespace H5509_V2
                     case 710:
                         PS测试手臂取已测料流程.StepName = "测试手臂X移动到梭车";
                         Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                        double xpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2放_X : 初始点位.测试_梭车1放_X;
+                        double xpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X : 初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X;
                         result = 测试手臂X移动(xpos);
                         if (result == "Success")
                         {
@@ -8631,7 +8668,7 @@ namespace H5509_V2
                         if (飞梭后出料状态 == 0) //等梭车过来再放
                         {
                             Debug.WriteLine($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                            double zpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2放_Z : 初始点位.测试_梭车1放_Z;
+                            double zpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2放_Z + 点位微调.测试_梭车2右放_Z : 初始点位.测试_梭车1放_Z + 点位微调.测试_梭车1右放_Z;
                             result = 测试手臂Z移动(zpos, true);
                             if (result == "Success")
                             {
@@ -10753,7 +10790,7 @@ namespace H5509_V2
                     case 515:
                         PS抓盘手臂取Empty空盘流程.StepName = "放Tary盘轴移动到Empty";
                         Debug.WriteLine($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
                         if (result == "Success")
                         {
                             PS抓盘手臂取Empty空盘流程.StepID = 520;
@@ -11065,7 +11102,7 @@ namespace H5509_V2
                     case 515:
                         PS抓盘手臂取Load空盘流程.StepName = "放Tary盘轴移动到Load";
                         Debug.WriteLine($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Load_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Load_X + 点位微调.抓盘_Load_X);
                         if (result == "Success")
                         {
                             PS抓盘手臂取Load空盘流程.StepID = 520;
@@ -11187,7 +11224,7 @@ namespace H5509_V2
                     case 540:
                         PS抓盘手臂取Load空盘流程.StepName = "放Tary盘轴移动到Empty";
                         Debug.WriteLine($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
                         if (result == "Success")
                         {
                             抓盘手臂取Load空盘标记 = 1;
@@ -11421,7 +11458,7 @@ namespace H5509_V2
                     case 515:
                         PS抓盘手臂放空盘到Empty流程.StepName = "放Tary盘轴移动到Empty";
                         Debug.WriteLine($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
                         if (result == "Success")
                         {
                             PS抓盘手臂放空盘到Empty流程.StepID = 516;
@@ -11736,7 +11773,7 @@ namespace H5509_V2
                     case 515:
                         PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到Auto1";
                         Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X + 点位微调.抓盘_Auto1_X);
                         if (result == "Success")
                         {
                             PS抓盘手臂放空盘到Auto1流程.StepID = 520;
@@ -11975,7 +12012,7 @@ namespace H5509_V2
                     case 575:
                         PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到Auto1";
                         Debug.WriteLine($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X + 点位微调.抓盘_Auto1_X);
                         if (result == "Success")
                         {
                             PS抓盘手臂放空盘到Auto1流程.StepID = 580;
@@ -12294,7 +12331,7 @@ namespace H5509_V2
                     case 515:
                         PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到Auto2";
                         Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X + 点位微调.抓盘_Auto2_X);
                         if (result == "Success")
                         {
                             PS抓盘手臂放空盘到Auto2流程.StepID = 520;
@@ -12531,7 +12568,7 @@ namespace H5509_V2
                     case 575:
                         PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到Auto2";
                         Debug.WriteLine($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X);
+                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X + 点位微调.抓盘_Auto2_X);
                         if (result == "Success")
                         {
                             PS抓盘手臂放空盘到Auto2流程.StepID = 580;

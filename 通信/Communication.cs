@@ -168,6 +168,7 @@ namespace H5509_V2
                                 }
                                 else Bin.Add(site, bin);
                                 listtesttimespan[site] = DateTime.Now - listtestdatetime[site];
+                                TestTime = DateTime.Now - listtestdatetime[site];
                                 SiteTestState[site] = 3;
                                 OutSiteQueue.Enqueue(site);
                                 BinSaveQueue.Enqueue(bin);

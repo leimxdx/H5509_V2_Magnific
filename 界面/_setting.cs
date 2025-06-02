@@ -6247,6 +6247,61 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true))
+            {
+                if (放料IC目标值[0].Contains(true))
+                {
+                    if (飞梭后入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true))
+                    {
+                        for (int i = 0; i < 放料IC目标值[0].Length; i++)
+                        {
+                            if (!放料IC目标值[0][i])
+                            {
+                                if (飞梭后入料IC[0][i] || 飞梭前入料IC[0][i])
+                                {
+                                    Debug.WriteLine($"梭车后入料：Dut{i + 1}中IC无法被取出");
+                                }
+                            }
+                        }
+                    }
+                }
+                if (放料IC目标值[1].Contains(true))
+                {
+                    if (飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[1].Contains(true))
+                    {
+                        for (int i = 0; i < 放料IC目标值[1].Length; i++)
+                        {
+                            if (!放料IC目标值[1][i])
+                            {
+                                if (飞梭后入料IC[1][i] || 飞梭前入料IC[1][i])
+                                {
+                                    Debug.WriteLine($"梭车后入料：Dut{i + 4 + 1}中IC无法被取出");
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            //for (int i = 0; i < Auto2XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Auto2YPoint.Length; j++)
+            //    {
+            //        Auto2DicPoint[$"{i},{j}"] = false;
+            //        //trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
+            //        //Auto2DicBin[$"{i},{j}"] = "";
+            //    }
+            //}
+            //Auto2DicPoint[$"0,0"] = true;
+            //bool isIC1 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
+            //if (!isIC1 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
+            //{
+            //    Debug.WriteLine("食醋胡");
+            //    //auto2isding = true;
+            //    //抓盘手臂放空盘到Auto2标记 = 2;
+            //}
             //string result = handler.飞梭_前后检测产品感应(out string[] iovalues);
             //if (result == "Success")
             //{

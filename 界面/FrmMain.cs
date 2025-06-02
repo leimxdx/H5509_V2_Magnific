@@ -78,6 +78,7 @@ namespace H5509_V2
             }
 
         }
+
         private void ForMain_Load(object sender, EventArgs e)
         {
             string result = "";
@@ -243,13 +244,13 @@ namespace H5509_V2
 
                     this.Invoke(new Action(() =>
                     {
-                        if (listcode.Count != 0)
+                        if (Listcode.Count != 0)
                         {
                             form_alarm.Show();
-                            for (int i = 0; i < listcode.Count; i++)
+                            for (int i = 0; i < Listcode.Count; i++)
                             {
-                                form_alarm.code(listcode[i], true);
-                                listcode.Remove(listcode[i]);
+                                form_alarm.code(Listcode[i], true);
+                                Listcode.Remove(Listcode[i]);
                                 //alarm_count++;
                             }
                         }

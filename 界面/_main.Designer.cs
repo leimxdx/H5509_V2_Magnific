@@ -469,7 +469,7 @@
             this.uiDigitalLabel15.DigitalSize = 15;
             this.uiDigitalLabel15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel15.Location = new System.Drawing.Point(1116, 4);
+            this.uiDigitalLabel15.Location = new System.Drawing.Point(1119, 4);
             this.uiDigitalLabel15.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel15.Name = "uiDigitalLabel15";
             this.uiDigitalLabel15.RectSize = 2;
@@ -487,7 +487,7 @@
             this.uiDigitalLabel14.DigitalSize = 15;
             this.uiDigitalLabel14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel14.Location = new System.Drawing.Point(1038, 4);
+            this.uiDigitalLabel14.Location = new System.Drawing.Point(1044, 4);
             this.uiDigitalLabel14.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel14.Name = "uiDigitalLabel14";
             this.uiDigitalLabel14.RectSize = 2;
@@ -505,7 +505,7 @@
             this.uiDigitalLabel13.DigitalSize = 15;
             this.uiDigitalLabel13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel13.Location = new System.Drawing.Point(960, 4);
+            this.uiDigitalLabel13.Location = new System.Drawing.Point(969, 4);
             this.uiDigitalLabel13.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel13.Name = "uiDigitalLabel13";
             this.uiDigitalLabel13.RectSize = 2;
@@ -523,7 +523,7 @@
             this.uiDigitalLabel12.DigitalSize = 15;
             this.uiDigitalLabel12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel12.Location = new System.Drawing.Point(882, 4);
+            this.uiDigitalLabel12.Location = new System.Drawing.Point(880, 4);
             this.uiDigitalLabel12.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel12.Name = "uiDigitalLabel12";
             this.uiDigitalLabel12.RectSize = 2;
@@ -541,7 +541,7 @@
             this.uiDigitalLabel11.DigitalSize = 15;
             this.uiDigitalLabel11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel11.Location = new System.Drawing.Point(804, 4);
+            this.uiDigitalLabel11.Location = new System.Drawing.Point(805, 4);
             this.uiDigitalLabel11.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel11.Name = "uiDigitalLabel11";
             this.uiDigitalLabel11.RectSize = 2;
@@ -559,7 +559,7 @@
             this.uiDigitalLabel10.DigitalSize = 15;
             this.uiDigitalLabel10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel10.Location = new System.Drawing.Point(726, 4);
+            this.uiDigitalLabel10.Location = new System.Drawing.Point(730, 4);
             this.uiDigitalLabel10.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel10.Name = "uiDigitalLabel10";
             this.uiDigitalLabel10.RectSize = 2;
@@ -577,7 +577,7 @@
             this.uiDigitalLabel9.DigitalSize = 15;
             this.uiDigitalLabel9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel9.Location = new System.Drawing.Point(648, 4);
+            this.uiDigitalLabel9.Location = new System.Drawing.Point(655, 4);
             this.uiDigitalLabel9.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel9.Name = "uiDigitalLabel9";
             this.uiDigitalLabel9.RectSize = 2;
@@ -595,7 +595,7 @@
             this.uiDigitalLabel8.DigitalSize = 15;
             this.uiDigitalLabel8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel8.Location = new System.Drawing.Point(570, 4);
+            this.uiDigitalLabel8.Location = new System.Drawing.Point(566, 4);
             this.uiDigitalLabel8.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel8.Name = "uiDigitalLabel8";
             this.uiDigitalLabel8.RectSize = 2;
@@ -613,7 +613,7 @@
             this.uiDigitalLabel7.DigitalSize = 15;
             this.uiDigitalLabel7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel7.Location = new System.Drawing.Point(492, 4);
+            this.uiDigitalLabel7.Location = new System.Drawing.Point(491, 4);
             this.uiDigitalLabel7.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel7.Name = "uiDigitalLabel7";
             this.uiDigitalLabel7.RectSize = 2;
@@ -631,7 +631,7 @@
             this.uiDigitalLabel6.DigitalSize = 15;
             this.uiDigitalLabel6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel6.Location = new System.Drawing.Point(414, 4);
+            this.uiDigitalLabel6.Location = new System.Drawing.Point(416, 4);
             this.uiDigitalLabel6.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel6.Name = "uiDigitalLabel6";
             this.uiDigitalLabel6.RectSize = 2;
@@ -649,7 +649,7 @@
             this.uiDigitalLabel5.DigitalSize = 15;
             this.uiDigitalLabel5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel5.Location = new System.Drawing.Point(336, 4);
+            this.uiDigitalLabel5.Location = new System.Drawing.Point(341, 4);
             this.uiDigitalLabel5.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel5.Name = "uiDigitalLabel5";
             this.uiDigitalLabel5.RectSize = 2;
@@ -667,7 +667,7 @@
             this.uiDigitalLabel4.DigitalSize = 15;
             this.uiDigitalLabel4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel4.Location = new System.Drawing.Point(258, 4);
+            this.uiDigitalLabel4.Location = new System.Drawing.Point(250, 4);
             this.uiDigitalLabel4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel4.Name = "uiDigitalLabel4";
             this.uiDigitalLabel4.RectSize = 2;
@@ -685,7 +685,7 @@
             this.uiDigitalLabel3.DigitalSize = 15;
             this.uiDigitalLabel3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel3.Location = new System.Drawing.Point(180, 4);
+            this.uiDigitalLabel3.Location = new System.Drawing.Point(175, 4);
             this.uiDigitalLabel3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel3.Name = "uiDigitalLabel3";
             this.uiDigitalLabel3.RectSize = 2;
@@ -703,7 +703,7 @@
             this.uiDigitalLabel2.DigitalSize = 15;
             this.uiDigitalLabel2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiDigitalLabel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel2.Location = new System.Drawing.Point(102, 4);
+            this.uiDigitalLabel2.Location = new System.Drawing.Point(100, 4);
             this.uiDigitalLabel2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel2.Name = "uiDigitalLabel2";
             this.uiDigitalLabel2.RectSize = 2;
@@ -721,7 +721,7 @@
             this.uiDigitalLabel1.DigitalSize = 15;
             this.uiDigitalLabel1.Font = new System.Drawing.Font("宋体", 12F);
             this.uiDigitalLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiDigitalLabel1.Location = new System.Drawing.Point(24, 4);
+            this.uiDigitalLabel1.Location = new System.Drawing.Point(25, 4);
             this.uiDigitalLabel1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiDigitalLabel1.Name = "uiDigitalLabel1";
             this.uiDigitalLabel1.RectSize = 2;
@@ -822,7 +822,7 @@
             this.Btn_open14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open14.Enabled = false;
             this.Btn_open14.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open14.Location = new System.Drawing.Point(1041, 193);
+            this.Btn_open14.Location = new System.Drawing.Point(1047, 193);
             this.Btn_open14.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open14.Name = "Btn_open14";
             this.Btn_open14.Size = new System.Drawing.Size(58, 27);
@@ -835,7 +835,7 @@
             this.Btn_open12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open12.Enabled = false;
             this.Btn_open12.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open12.Location = new System.Drawing.Point(885, 193);
+            this.Btn_open12.Location = new System.Drawing.Point(883, 193);
             this.Btn_open12.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open12.Name = "Btn_open12";
             this.Btn_open12.Size = new System.Drawing.Size(58, 27);
@@ -848,7 +848,7 @@
             this.Btn_open10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open10.Enabled = false;
             this.Btn_open10.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open10.Location = new System.Drawing.Point(729, 193);
+            this.Btn_open10.Location = new System.Drawing.Point(733, 193);
             this.Btn_open10.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open10.Name = "Btn_open10";
             this.Btn_open10.Size = new System.Drawing.Size(58, 27);
@@ -861,7 +861,7 @@
             this.Btn_open8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open8.Enabled = false;
             this.Btn_open8.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open8.Location = new System.Drawing.Point(573, 193);
+            this.Btn_open8.Location = new System.Drawing.Point(569, 193);
             this.Btn_open8.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open8.Name = "Btn_open8";
             this.Btn_open8.Size = new System.Drawing.Size(58, 27);
@@ -874,7 +874,7 @@
             this.Btn_open6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open6.Enabled = false;
             this.Btn_open6.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open6.Location = new System.Drawing.Point(417, 193);
+            this.Btn_open6.Location = new System.Drawing.Point(419, 193);
             this.Btn_open6.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open6.Name = "Btn_open6";
             this.Btn_open6.Size = new System.Drawing.Size(58, 27);
@@ -887,7 +887,7 @@
             this.Btn_open4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open4.Enabled = false;
             this.Btn_open4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open4.Location = new System.Drawing.Point(261, 193);
+            this.Btn_open4.Location = new System.Drawing.Point(253, 193);
             this.Btn_open4.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open4.Name = "Btn_open4";
             this.Btn_open4.Size = new System.Drawing.Size(58, 27);
@@ -900,7 +900,7 @@
             this.Btn_open2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open2.Enabled = false;
             this.Btn_open2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open2.Location = new System.Drawing.Point(105, 193);
+            this.Btn_open2.Location = new System.Drawing.Point(103, 193);
             this.Btn_open2.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open2.Name = "Btn_open2";
             this.Btn_open2.Size = new System.Drawing.Size(58, 27);
@@ -913,7 +913,7 @@
             this.Btn_open15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open15.Enabled = false;
             this.Btn_open15.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open15.Location = new System.Drawing.Point(1119, 193);
+            this.Btn_open15.Location = new System.Drawing.Point(1122, 193);
             this.Btn_open15.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open15.Name = "Btn_open15";
             this.Btn_open15.Size = new System.Drawing.Size(58, 27);
@@ -926,7 +926,7 @@
             this.Btn_open13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open13.Enabled = false;
             this.Btn_open13.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open13.Location = new System.Drawing.Point(963, 193);
+            this.Btn_open13.Location = new System.Drawing.Point(972, 193);
             this.Btn_open13.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open13.Name = "Btn_open13";
             this.Btn_open13.Size = new System.Drawing.Size(58, 27);
@@ -939,7 +939,7 @@
             this.Btn_open11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open11.Enabled = false;
             this.Btn_open11.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open11.Location = new System.Drawing.Point(807, 193);
+            this.Btn_open11.Location = new System.Drawing.Point(808, 193);
             this.Btn_open11.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open11.Name = "Btn_open11";
             this.Btn_open11.Size = new System.Drawing.Size(58, 27);
@@ -952,7 +952,7 @@
             this.Btn_open9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open9.Enabled = false;
             this.Btn_open9.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open9.Location = new System.Drawing.Point(651, 193);
+            this.Btn_open9.Location = new System.Drawing.Point(658, 193);
             this.Btn_open9.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open9.Name = "Btn_open9";
             this.Btn_open9.Size = new System.Drawing.Size(58, 27);
@@ -965,7 +965,7 @@
             this.Btn_open7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open7.Enabled = false;
             this.Btn_open7.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open7.Location = new System.Drawing.Point(495, 193);
+            this.Btn_open7.Location = new System.Drawing.Point(494, 193);
             this.Btn_open7.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open7.Name = "Btn_open7";
             this.Btn_open7.Size = new System.Drawing.Size(58, 27);
@@ -978,7 +978,7 @@
             this.Btn_open5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open5.Enabled = false;
             this.Btn_open5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open5.Location = new System.Drawing.Point(339, 193);
+            this.Btn_open5.Location = new System.Drawing.Point(344, 193);
             this.Btn_open5.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open5.Name = "Btn_open5";
             this.Btn_open5.Size = new System.Drawing.Size(58, 27);
@@ -991,7 +991,7 @@
             this.Btn_open3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open3.Enabled = false;
             this.Btn_open3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open3.Location = new System.Drawing.Point(183, 193);
+            this.Btn_open3.Location = new System.Drawing.Point(178, 193);
             this.Btn_open3.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open3.Name = "Btn_open3";
             this.Btn_open3.Size = new System.Drawing.Size(58, 27);
@@ -1004,7 +1004,7 @@
             this.Btn_open1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_open1.Enabled = false;
             this.Btn_open1.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_open1.Location = new System.Drawing.Point(27, 193);
+            this.Btn_open1.Location = new System.Drawing.Point(28, 193);
             this.Btn_open1.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_open1.Name = "Btn_open1";
             this.Btn_open1.Size = new System.Drawing.Size(58, 27);
@@ -1030,7 +1030,7 @@
             this.Btn_close8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close8.Enabled = false;
             this.Btn_close8.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close8.Location = new System.Drawing.Point(573, 161);
+            this.Btn_close8.Location = new System.Drawing.Point(569, 161);
             this.Btn_close8.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close8.Name = "Btn_close8";
             this.Btn_close8.Size = new System.Drawing.Size(58, 27);
@@ -1043,7 +1043,7 @@
             this.Btn_close2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close2.Enabled = false;
             this.Btn_close2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close2.Location = new System.Drawing.Point(105, 161);
+            this.Btn_close2.Location = new System.Drawing.Point(103, 161);
             this.Btn_close2.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close2.Name = "Btn_close2";
             this.Btn_close2.Size = new System.Drawing.Size(58, 27);
@@ -1056,7 +1056,7 @@
             this.Btn_close14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close14.Enabled = false;
             this.Btn_close14.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close14.Location = new System.Drawing.Point(1041, 161);
+            this.Btn_close14.Location = new System.Drawing.Point(1047, 161);
             this.Btn_close14.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close14.Name = "Btn_close14";
             this.Btn_close14.Size = new System.Drawing.Size(58, 27);
@@ -1069,7 +1069,7 @@
             this.Btn_close10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close10.Enabled = false;
             this.Btn_close10.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close10.Location = new System.Drawing.Point(729, 161);
+            this.Btn_close10.Location = new System.Drawing.Point(733, 161);
             this.Btn_close10.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close10.Name = "Btn_close10";
             this.Btn_close10.Size = new System.Drawing.Size(58, 27);
@@ -1082,7 +1082,7 @@
             this.Btn_close6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close6.Enabled = false;
             this.Btn_close6.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close6.Location = new System.Drawing.Point(417, 161);
+            this.Btn_close6.Location = new System.Drawing.Point(419, 161);
             this.Btn_close6.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close6.Name = "Btn_close6";
             this.Btn_close6.Size = new System.Drawing.Size(58, 27);
@@ -1095,7 +1095,7 @@
             this.Btn_close12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close12.Enabled = false;
             this.Btn_close12.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close12.Location = new System.Drawing.Point(885, 161);
+            this.Btn_close12.Location = new System.Drawing.Point(883, 161);
             this.Btn_close12.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close12.Name = "Btn_close12";
             this.Btn_close12.Size = new System.Drawing.Size(58, 27);
@@ -1108,7 +1108,7 @@
             this.Btn_close4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close4.Enabled = false;
             this.Btn_close4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close4.Location = new System.Drawing.Point(261, 161);
+            this.Btn_close4.Location = new System.Drawing.Point(253, 161);
             this.Btn_close4.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close4.Name = "Btn_close4";
             this.Btn_close4.Size = new System.Drawing.Size(58, 27);
@@ -1121,7 +1121,7 @@
             this.Btn_close15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close15.Enabled = false;
             this.Btn_close15.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close15.Location = new System.Drawing.Point(1119, 161);
+            this.Btn_close15.Location = new System.Drawing.Point(1122, 161);
             this.Btn_close15.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close15.Name = "Btn_close15";
             this.Btn_close15.Size = new System.Drawing.Size(58, 27);
@@ -1134,7 +1134,7 @@
             this.Btn_close7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close7.Enabled = false;
             this.Btn_close7.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close7.Location = new System.Drawing.Point(495, 161);
+            this.Btn_close7.Location = new System.Drawing.Point(494, 161);
             this.Btn_close7.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close7.Name = "Btn_close7";
             this.Btn_close7.Size = new System.Drawing.Size(58, 27);
@@ -1147,7 +1147,7 @@
             this.Btn_close1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close1.Enabled = false;
             this.Btn_close1.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close1.Location = new System.Drawing.Point(27, 161);
+            this.Btn_close1.Location = new System.Drawing.Point(28, 161);
             this.Btn_close1.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close1.Name = "Btn_close1";
             this.Btn_close1.Size = new System.Drawing.Size(58, 27);
@@ -1160,7 +1160,7 @@
             this.Btn_close13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close13.Enabled = false;
             this.Btn_close13.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close13.Location = new System.Drawing.Point(963, 161);
+            this.Btn_close13.Location = new System.Drawing.Point(972, 161);
             this.Btn_close13.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close13.Name = "Btn_close13";
             this.Btn_close13.Size = new System.Drawing.Size(58, 27);
@@ -1173,7 +1173,7 @@
             this.Btn_close9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close9.Enabled = false;
             this.Btn_close9.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close9.Location = new System.Drawing.Point(651, 161);
+            this.Btn_close9.Location = new System.Drawing.Point(658, 161);
             this.Btn_close9.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close9.Name = "Btn_close9";
             this.Btn_close9.Size = new System.Drawing.Size(58, 27);
@@ -1186,7 +1186,7 @@
             this.Btn_close5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close5.Enabled = false;
             this.Btn_close5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close5.Location = new System.Drawing.Point(339, 161);
+            this.Btn_close5.Location = new System.Drawing.Point(344, 161);
             this.Btn_close5.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close5.Name = "Btn_close5";
             this.Btn_close5.Size = new System.Drawing.Size(58, 27);
@@ -1199,7 +1199,7 @@
             this.Btn_close11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close11.Enabled = false;
             this.Btn_close11.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close11.Location = new System.Drawing.Point(807, 161);
+            this.Btn_close11.Location = new System.Drawing.Point(808, 161);
             this.Btn_close11.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close11.Name = "Btn_close11";
             this.Btn_close11.Size = new System.Drawing.Size(58, 27);
@@ -1215,7 +1215,7 @@
             this.Chk_switch15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch15.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch15.Location = new System.Drawing.Point(1134, 4);
+            this.Chk_switch15.Location = new System.Drawing.Point(1137, 4);
             this.Chk_switch15.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch15.Name = "Chk_switch15";
             this.Chk_switch15.Size = new System.Drawing.Size(27, 25);
@@ -1226,7 +1226,7 @@
             this.Btn_close3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Btn_close3.Enabled = false;
             this.Btn_close3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.Btn_close3.Location = new System.Drawing.Point(183, 161);
+            this.Btn_close3.Location = new System.Drawing.Point(178, 161);
             this.Btn_close3.MinimumSize = new System.Drawing.Size(1, 1);
             this.Btn_close3.Name = "Btn_close3";
             this.Btn_close3.Size = new System.Drawing.Size(58, 27);
@@ -1242,7 +1242,7 @@
             this.Chk_switch14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch14.Location = new System.Drawing.Point(1056, 4);
+            this.Chk_switch14.Location = new System.Drawing.Point(1062, 4);
             this.Chk_switch14.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch14.Name = "Chk_switch14";
             this.Chk_switch14.Size = new System.Drawing.Size(27, 25);
@@ -1256,7 +1256,7 @@
             this.Chk_switch13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch13.Location = new System.Drawing.Point(978, 4);
+            this.Chk_switch13.Location = new System.Drawing.Point(987, 4);
             this.Chk_switch13.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch13.Name = "Chk_switch13";
             this.Chk_switch13.Size = new System.Drawing.Size(27, 25);
@@ -1270,7 +1270,7 @@
             this.Chk_switch12.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch12.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch12.Location = new System.Drawing.Point(900, 4);
+            this.Chk_switch12.Location = new System.Drawing.Point(898, 4);
             this.Chk_switch12.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch12.Name = "Chk_switch12";
             this.Chk_switch12.Size = new System.Drawing.Size(27, 25);
@@ -1284,7 +1284,7 @@
             this.Chk_switch11.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch11.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch11.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch11.Location = new System.Drawing.Point(822, 4);
+            this.Chk_switch11.Location = new System.Drawing.Point(823, 4);
             this.Chk_switch11.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch11.Name = "Chk_switch11";
             this.Chk_switch11.Size = new System.Drawing.Size(27, 25);
@@ -1298,7 +1298,7 @@
             this.Chk_switch10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch10.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch10.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch10.Location = new System.Drawing.Point(744, 4);
+            this.Chk_switch10.Location = new System.Drawing.Point(748, 4);
             this.Chk_switch10.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch10.Name = "Chk_switch10";
             this.Chk_switch10.Size = new System.Drawing.Size(27, 25);
@@ -1312,7 +1312,7 @@
             this.Chk_switch9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch9.Location = new System.Drawing.Point(666, 4);
+            this.Chk_switch9.Location = new System.Drawing.Point(673, 4);
             this.Chk_switch9.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch9.Name = "Chk_switch9";
             this.Chk_switch9.Size = new System.Drawing.Size(27, 25);
@@ -1326,7 +1326,7 @@
             this.Chk_switch8.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch8.Location = new System.Drawing.Point(588, 4);
+            this.Chk_switch8.Location = new System.Drawing.Point(584, 4);
             this.Chk_switch8.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch8.Name = "Chk_switch8";
             this.Chk_switch8.Size = new System.Drawing.Size(27, 25);
@@ -1340,7 +1340,7 @@
             this.Chk_switch7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch7.Location = new System.Drawing.Point(510, 4);
+            this.Chk_switch7.Location = new System.Drawing.Point(509, 4);
             this.Chk_switch7.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch7.Name = "Chk_switch7";
             this.Chk_switch7.Size = new System.Drawing.Size(27, 25);
@@ -1354,7 +1354,7 @@
             this.Chk_switch6.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch6.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch6.Location = new System.Drawing.Point(432, 4);
+            this.Chk_switch6.Location = new System.Drawing.Point(434, 4);
             this.Chk_switch6.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch6.Name = "Chk_switch6";
             this.Chk_switch6.Size = new System.Drawing.Size(27, 25);
@@ -1368,7 +1368,7 @@
             this.Chk_switch5.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch5.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch5.Location = new System.Drawing.Point(354, 4);
+            this.Chk_switch5.Location = new System.Drawing.Point(359, 4);
             this.Chk_switch5.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch5.Name = "Chk_switch5";
             this.Chk_switch5.Size = new System.Drawing.Size(27, 25);
@@ -1382,7 +1382,7 @@
             this.Chk_switch4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch4.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch4.Location = new System.Drawing.Point(276, 4);
+            this.Chk_switch4.Location = new System.Drawing.Point(268, 4);
             this.Chk_switch4.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch4.Name = "Chk_switch4";
             this.Chk_switch4.Size = new System.Drawing.Size(27, 25);
@@ -1396,7 +1396,7 @@
             this.Chk_switch3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch3.Location = new System.Drawing.Point(198, 4);
+            this.Chk_switch3.Location = new System.Drawing.Point(193, 4);
             this.Chk_switch3.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch3.Name = "Chk_switch3";
             this.Chk_switch3.Size = new System.Drawing.Size(27, 25);
@@ -1410,7 +1410,7 @@
             this.Chk_switch2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch2.Location = new System.Drawing.Point(120, 4);
+            this.Chk_switch2.Location = new System.Drawing.Point(118, 4);
             this.Chk_switch2.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch2.Name = "Chk_switch2";
             this.Chk_switch2.Size = new System.Drawing.Size(27, 25);
@@ -1430,7 +1430,7 @@
             this.pal_dout1_8.Controls.Add(this.lbl_dout3);
             this.pal_dout1_8.Controls.Add(this.lbl_dout2);
             this.pal_dout1_8.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout1_8.Location = new System.Drawing.Point(27, 32);
+            this.pal_dout1_8.Location = new System.Drawing.Point(28, 32);
             this.pal_dout1_8.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout1_8.Name = "pal_dout1_8";
             this.pal_dout1_8.Size = new System.Drawing.Size(58, 124);
@@ -1572,7 +1572,7 @@
             this.Chk_switch1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Chk_switch1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Chk_switch1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.Chk_switch1.Location = new System.Drawing.Point(42, 4);
+            this.Chk_switch1.Location = new System.Drawing.Point(43, 4);
             this.Chk_switch1.MinimumSize = new System.Drawing.Size(1, 1);
             this.Chk_switch1.Name = "Chk_switch1";
             this.Chk_switch1.Size = new System.Drawing.Size(27, 25);
@@ -1725,7 +1725,7 @@
             this.pal_dout57_64.Controls.Add(this.lbl_dout59);
             this.pal_dout57_64.Controls.Add(this.lbl_dout58);
             this.pal_dout57_64.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout57_64.Location = new System.Drawing.Point(573, 32);
+            this.pal_dout57_64.Location = new System.Drawing.Point(569, 32);
             this.pal_dout57_64.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout57_64.Name = "pal_dout57_64";
             this.pal_dout57_64.Size = new System.Drawing.Size(58, 124);
@@ -1858,7 +1858,7 @@
             this.pal_dout89_96.Controls.Add(this.lbl_dout91);
             this.pal_dout89_96.Controls.Add(this.lbl_dout90);
             this.pal_dout89_96.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout89_96.Location = new System.Drawing.Point(885, 32);
+            this.pal_dout89_96.Location = new System.Drawing.Point(883, 32);
             this.pal_dout89_96.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout89_96.Name = "pal_dout89_96";
             this.pal_dout89_96.Size = new System.Drawing.Size(58, 124);
@@ -1991,7 +1991,7 @@
             this.pal_dout25_32.Controls.Add(this.lbl_dout27);
             this.pal_dout25_32.Controls.Add(this.lbl_dout26);
             this.pal_dout25_32.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout25_32.Location = new System.Drawing.Point(261, 32);
+            this.pal_dout25_32.Location = new System.Drawing.Point(253, 32);
             this.pal_dout25_32.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout25_32.Name = "pal_dout25_32";
             this.pal_dout25_32.Size = new System.Drawing.Size(58, 124);
@@ -2124,7 +2124,7 @@
             this.pal_dout105_112.Controls.Add(this.lbl_dout107);
             this.pal_dout105_112.Controls.Add(this.lbl_dout106);
             this.pal_dout105_112.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout105_112.Location = new System.Drawing.Point(1041, 32);
+            this.pal_dout105_112.Location = new System.Drawing.Point(1047, 32);
             this.pal_dout105_112.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout105_112.Name = "pal_dout105_112";
             this.pal_dout105_112.Size = new System.Drawing.Size(58, 124);
@@ -2257,7 +2257,7 @@
             this.pal_dout41_48.Controls.Add(this.lbl_dout43);
             this.pal_dout41_48.Controls.Add(this.lbl_dout42);
             this.pal_dout41_48.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout41_48.Location = new System.Drawing.Point(417, 32);
+            this.pal_dout41_48.Location = new System.Drawing.Point(419, 32);
             this.pal_dout41_48.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout41_48.Name = "pal_dout41_48";
             this.pal_dout41_48.Size = new System.Drawing.Size(58, 124);
@@ -2390,7 +2390,7 @@
             this.pal_dout73_80.Controls.Add(this.lbl_dout75);
             this.pal_dout73_80.Controls.Add(this.lbl_dout74);
             this.pal_dout73_80.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout73_80.Location = new System.Drawing.Point(729, 32);
+            this.pal_dout73_80.Location = new System.Drawing.Point(733, 32);
             this.pal_dout73_80.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout73_80.Name = "pal_dout73_80";
             this.pal_dout73_80.Size = new System.Drawing.Size(58, 124);
@@ -2523,7 +2523,7 @@
             this.pal_dout9_16.Controls.Add(this.lbl_dout11);
             this.pal_dout9_16.Controls.Add(this.lbl_dout10);
             this.pal_dout9_16.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout9_16.Location = new System.Drawing.Point(105, 32);
+            this.pal_dout9_16.Location = new System.Drawing.Point(103, 32);
             this.pal_dout9_16.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout9_16.Name = "pal_dout9_16";
             this.pal_dout9_16.Size = new System.Drawing.Size(58, 124);
@@ -2656,7 +2656,7 @@
             this.pal_dout113_120.Controls.Add(this.lbl_dout115);
             this.pal_dout113_120.Controls.Add(this.lbl_dout114);
             this.pal_dout113_120.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout113_120.Location = new System.Drawing.Point(1119, 32);
+            this.pal_dout113_120.Location = new System.Drawing.Point(1122, 32);
             this.pal_dout113_120.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout113_120.Name = "pal_dout113_120";
             this.pal_dout113_120.Size = new System.Drawing.Size(58, 124);
@@ -2789,7 +2789,7 @@
             this.pal_dout49_56.Controls.Add(this.lbl_dout51);
             this.pal_dout49_56.Controls.Add(this.lbl_dout50);
             this.pal_dout49_56.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout49_56.Location = new System.Drawing.Point(495, 32);
+            this.pal_dout49_56.Location = new System.Drawing.Point(494, 32);
             this.pal_dout49_56.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout49_56.Name = "pal_dout49_56";
             this.pal_dout49_56.Size = new System.Drawing.Size(58, 124);
@@ -2922,7 +2922,7 @@
             this.pal_dout81_88.Controls.Add(this.lbl_dout83);
             this.pal_dout81_88.Controls.Add(this.lbl_dout82);
             this.pal_dout81_88.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout81_88.Location = new System.Drawing.Point(807, 32);
+            this.pal_dout81_88.Location = new System.Drawing.Point(808, 32);
             this.pal_dout81_88.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout81_88.Name = "pal_dout81_88";
             this.pal_dout81_88.Size = new System.Drawing.Size(58, 124);
@@ -3055,7 +3055,7 @@
             this.pal_dout17_24.Controls.Add(this.lbl_dout19);
             this.pal_dout17_24.Controls.Add(this.lbl_dout18);
             this.pal_dout17_24.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout17_24.Location = new System.Drawing.Point(183, 32);
+            this.pal_dout17_24.Location = new System.Drawing.Point(178, 32);
             this.pal_dout17_24.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout17_24.Name = "pal_dout17_24";
             this.pal_dout17_24.Size = new System.Drawing.Size(58, 124);
@@ -3188,7 +3188,7 @@
             this.pal_dout97_104.Controls.Add(this.lbl_dout99);
             this.pal_dout97_104.Controls.Add(this.lbl_dout98);
             this.pal_dout97_104.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout97_104.Location = new System.Drawing.Point(963, 32);
+            this.pal_dout97_104.Location = new System.Drawing.Point(972, 32);
             this.pal_dout97_104.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout97_104.Name = "pal_dout97_104";
             this.pal_dout97_104.Size = new System.Drawing.Size(58, 124);
@@ -3321,7 +3321,7 @@
             this.pal_dout33_40.Controls.Add(this.lbl_dout35);
             this.pal_dout33_40.Controls.Add(this.lbl_dout34);
             this.pal_dout33_40.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout33_40.Location = new System.Drawing.Point(339, 32);
+            this.pal_dout33_40.Location = new System.Drawing.Point(344, 32);
             this.pal_dout33_40.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout33_40.Name = "pal_dout33_40";
             this.pal_dout33_40.Size = new System.Drawing.Size(58, 124);
@@ -3454,7 +3454,7 @@
             this.pal_dout65_72.Controls.Add(this.lbl_dout67);
             this.pal_dout65_72.Controls.Add(this.lbl_dout66);
             this.pal_dout65_72.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.pal_dout65_72.Location = new System.Drawing.Point(651, 32);
+            this.pal_dout65_72.Location = new System.Drawing.Point(658, 32);
             this.pal_dout65_72.Margin = new System.Windows.Forms.Padding(10);
             this.pal_dout65_72.Name = "pal_dout65_72";
             this.pal_dout65_72.Size = new System.Drawing.Size(58, 124);
@@ -3769,7 +3769,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 35);
             this.label10.TabIndex = 177;
-            this.label10.Text = "开启";
+            this.label10.Text = "关闭";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label10.Click += new System.EventHandler(this.label10_Click);
             // 
@@ -3987,22 +3987,22 @@
             // 
             this.lbl_runtime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_runtime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_runtime.Location = new System.Drawing.Point(1030, 0);
+            this.lbl_runtime.Location = new System.Drawing.Point(1072, 0);
             this.lbl_runtime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_runtime.Name = "lbl_runtime";
-            this.lbl_runtime.Size = new System.Drawing.Size(283, 45);
+            this.lbl_runtime.Size = new System.Drawing.Size(241, 45);
             this.lbl_runtime.TabIndex = 7;
-            this.lbl_runtime.Text = "RunTime";
+            this.lbl_runtime.Text = "RunTime=dd.HH:mm:ss";
             this.lbl_runtime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_currenttime
             // 
             this.lbl_currenttime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_currenttime.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lbl_currenttime.Location = new System.Drawing.Point(880, 0);
+            this.lbl_currenttime.Location = new System.Drawing.Point(962, 0);
             this.lbl_currenttime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_currenttime.Name = "lbl_currenttime";
-            this.lbl_currenttime.Size = new System.Drawing.Size(150, 45);
+            this.lbl_currenttime.Size = new System.Drawing.Size(110, 45);
             this.lbl_currenttime.TabIndex = 6;
             this.lbl_currenttime.Text = "HH:mm:ss";
             this.lbl_currenttime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4011,36 +4011,36 @@
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label6.Location = new System.Drawing.Point(690, 0);
+            this.label6.Location = new System.Drawing.Point(716, 0);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(190, 45);
+            this.label6.Size = new System.Drawing.Size(246, 45);
             this.label6.TabIndex = 8;
-            this.label6.Text = "HeatingTime";
+            this.label6.Text = "HeatingTime=HH:mm:ss";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label653
             // 
             this.label653.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label653.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label653.Location = new System.Drawing.Point(520, 0);
+            this.label653.Location = new System.Drawing.Point(545, 0);
             this.label653.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label653.Name = "label653";
-            this.label653.Size = new System.Drawing.Size(170, 45);
+            this.label653.Size = new System.Drawing.Size(171, 45);
             this.label653.TabIndex = 4;
-            this.label653.Text = "IndexTime";
+            this.label653.Text = "IndexTime=99.9s";
             this.label653.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label652
             // 
             this.label652.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label652.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label652.Location = new System.Drawing.Point(360, 0);
+            this.label652.Location = new System.Drawing.Point(367, 0);
             this.label652.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label652.Name = "label652";
-            this.label652.Size = new System.Drawing.Size(160, 45);
+            this.label652.Size = new System.Drawing.Size(178, 45);
             this.label652.TabIndex = 3;
-            this.label652.Text = "TestTime";
+            this.label652.Text = "TestTime=MM:ss";
             this.label652.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lab_uph
@@ -4050,9 +4050,9 @@
             this.lab_uph.Location = new System.Drawing.Point(240, 0);
             this.lab_uph.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lab_uph.Name = "lab_uph";
-            this.lab_uph.Size = new System.Drawing.Size(120, 45);
+            this.lab_uph.Size = new System.Drawing.Size(127, 45);
             this.lab_uph.TabIndex = 2;
-            this.lab_uph.Text = "UPH=0";
+            this.lab_uph.Text = "UPH=10000";
             this.lab_uph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_closenum
