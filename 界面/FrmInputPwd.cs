@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace H5509
+namespace H5509_V2
 {
     public partial class FrmInputPwd : Form
     {

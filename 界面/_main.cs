@@ -2,11 +2,12 @@
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using H5509;
 using Sunny.UI;
+using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
 using Color = System.Drawing.Color;
 using Control = System.Windows.Forms.Control;
@@ -158,7 +159,6 @@ namespace H5509_V2
 
             放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; //防止报错
 
-            //Site状态
 
             刷新开Site状态();
 
@@ -187,6 +187,7 @@ namespace H5509_V2
 
                     //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
                     string[] getstr = textBoxFlowcaedno.Text.Split(':');
+                    LotNo = getstr;
                     if (getstr.Length == 17)
                     {
                         textBoxFlowcaedno.Text = getstr[0].Replace("-", "_"); //ZRS240929001A:
@@ -293,7 +294,7 @@ namespace H5509_V2
                     lab_uph.Text = $"UPH={uph}";
                 }));
             }
-            Debug.WriteLine($"UPH={uph}");
+            //RunLog($"UPH={uph}");
         }
 
         private void RefreshCurrentTime()
@@ -412,35 +413,39 @@ namespace H5509_V2
             }
         }
 
+        private void DoutChanged(Label label)
+        {
+            bool ischange = false;
+            for (int i = 0; i < Lbl_Dout.Length; i++)
+            {
+                if (label.Equals(Lbl_Dout[i]))
+                {
+                    int site = i / 8;
+                    if (!Chk_SW[site].Checked) break;
+                    if (Chk_timer[site].Enabled)
+                    {
+                        Chk_timer[site].Stop();
+                        Chk_timer[site].Start();
+                    }
+                    ischange = true;
+                    int dut = i % 8;
+                    设置信息.开site信息.SetSiteValue(site, dut, label.Text == "" ? "1" : "0");
+                    string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+                    if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                    result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                    if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
+                    设置信息.开site信息 = siteStatus;
+                    break;
+                }
+            }
+            if (ischange) 刷新开Site状态();
+        }
+
         private void DoutChanged(object sender, EventArgs e)
         {
             if (sender is Label label)
             {
-                bool ischange = false;
-                for (int i = 0; i < Lbl_Dout.Length; i++)
-                {
-                    if (label.Equals(Lbl_Dout[i]))
-                    {
-
-                        int site = i / 8;
-                        if (!Chk_SW[site].Checked) break;
-                        if (Chk_timer[site].Enabled)
-                        {
-                            Chk_timer[site].Stop();
-                            Chk_timer[site].Start();
-                        }
-                        ischange = true;
-                        int dut = i % 8;
-                        设置信息.开site信息.SetSiteValue(site, dut, label.Text == "" ? "1" : "0");
-                        string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
-                        if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
-                        result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
-                        if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
-                        设置信息.开site信息 = siteStatus;
-                        break;
-                    }
-                }
-                if (ischange) 刷新开Site状态();
+                DoutChanged(label);
             }
         }
 
@@ -607,30 +612,30 @@ namespace H5509_V2
                                     刷新开Site状态();
                                     刷新温度显示();
                                     ischange = true;
-                                    Debug.WriteLine($"档案切换[{当前档案}]->[{comboBox1.Text.Trim()}]");
+                                    RunLog($"档案切换[{当前档案}]->[{comboBox1.Text.Trim()}]");
                                     当前档案 = value;
                                 }
                                 else
                                 {
-                                    Debug.WriteLine($"更新Tray盘点位失败!" + result);
+                                    RunLog($"更新Tray盘点位失败!" + result);
                                     MessageBox.Show($"更新Tray盘点位失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
                             {
-                                Debug.WriteLine($"读取当前档案信息失败!" + result);
+                                RunLog($"读取当前档案信息失败!" + result);
                                 MessageBox.Show($"读取当前档案信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
                         {
-                            Debug.WriteLine($"读取当前档案失败!" + result);
+                            RunLog($"读取当前档案失败!" + result);
                             MessageBox.Show($"读取当前档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        Debug.WriteLine($"更新档案失败!" + result);
+                        RunLog($"更新档案失败!" + result);
                         MessageBox.Show($"更新档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
@@ -695,13 +700,13 @@ namespace H5509_V2
                                 }
                                 else
                                 {
-                                    Debug.WriteLine($"密码{frmInputPwd.Password}错误！");
+                                    RunLog($"密码{frmInputPwd.Password}错误！");
                                     MessageBox.Show($"密码{frmInputPwd.Password}错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
                             else
                             {
-                                Debug.WriteLine($"获取{combox_juris.Text}密码失败！" + get);
+                                RunLog($"获取{combox_juris.Text}密码失败！" + get);
                                 MessageBox.Show($"获取{combox_juris.Text}密码失败！" + get, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
@@ -725,7 +730,7 @@ namespace H5509_V2
             string result = GetSetupInfoName(out DataTable dt);
             if (result != "Success")
             {
-                Debug.WriteLine("刷新档案选项失败!" + result);
+                RunLog("刷新档案选项失败!" + result);
                 return;
             }
             comboBox1.DataSource = dt;
@@ -741,7 +746,7 @@ namespace H5509_V2
             string result = GetJurisdictionName(out DataTable dt);
             if (result != "Success")
             {
-                Debug.WriteLine("刷新权限选项失败!" + result);
+                RunLog("刷新权限选项失败!" + result);
                 return;
             }
 
@@ -804,7 +809,7 @@ namespace H5509_V2
 
             //正在放置前入料 = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
 
-            //if (设备状态 != 0)
+            if (设备状态 != 0)
             {
                 bool[][] 关site更改 = 保存关Site更改;
 
@@ -820,12 +825,12 @@ namespace H5509_V2
                             {
                                 if (飞梭后入料IC[cloum][dut] && !正在吸取后入料[cloum * 4 + dut])
                                 {
-                                    Debug.WriteLine($"后梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出");
+                                    RunLog($"后梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出");
                                     MessageBox.Show($"后梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                                 if (飞梭前入料IC[cloum][dut] || 正在放置前入料[cloum][dut]) //入料4个吸嘴
                                 {
-                                    Debug.WriteLine($"前梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
+                                    RunLog($"前梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
                                     MessageBox.Show($"前梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
                             }
@@ -837,12 +842,12 @@ namespace H5509_V2
                 {
                     if (!修改前开Site更改[i] && 保存开Site更改[i])
                     {
-                        Debug.WriteLine($"新开Site{i}");
+                        RunLog($"新开Site{i}");
 
                     }
                     else if (修改前开Site更改[i] && !保存开Site更改[i])
                     {
-                        Debug.WriteLine($"新关Site{i}");
+                        RunLog($"新关Site{i}");
 
                     }
                 }
@@ -1165,10 +1170,61 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine($"屏幕刷新异常：{ex.Message}");
+                    RunLog($"屏幕刷新异常：{ex.Message}");
                     Thread.Sleep(100);
                 }
             }
+        }
+
+        public void 刷新温度显示()
+        {
+            uiDigitalLabel18.Value = 设定温度;
+            label116.Text = 温度模式;
+            if (温度模式 == "常温")
+            {
+                if (label10.Text == "停止")
+                {
+                    string result = handler.加热盘加热关闭();
+                    string result2 = handler.梭车加热关闭();
+                    string result3 = handler.Site加热关闭();
+                    if (result != "Success" || result2 != "Success" || result3 != "Success")
+                    {
+                        MessageBox.Show("停止加热失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+                label10.Text = "关闭";
+                label10.Enabled = false;
+                label116.BackColor = Color.White;// System.Drawing.SystemColors.Control;
+            }
+            else
+            {
+                label10.Text = "开启";
+                label10.Enabled = true;
+                label116.BackColor = Color.Red;
+            }
+
+            string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
+            if (result4 == "Success")
+            {
+                string result5 = dTMHelper.WriteSv(1, 设定温度);
+                string result6 = dTMHelper.WriteSv(0, 设定温度);
+                if (result5 != "Success" || result6 != "Success")
+                {
+                    MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+
+            //this.uiDoubleUpDown14.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
+            //uiDoubleUpDown14.Value = 设定温度;
+            //this.uiDoubleUpDown14.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
         }
 
         //private void label116_Click(object sender, EventArgs e)
@@ -1269,57 +1325,6 @@ namespace H5509_V2
             loadMap.ShowDialog();
         }
 
-        public void 刷新温度显示()
-        {
-            uiDigitalLabel18.Value = 设定温度;
-            label116.Text = 温度模式;
-            if (温度模式 == "常温")
-            {
-                if (label10.Text == "停止")
-                {
-                    string result = handler.加热盘加热关闭();
-                    string result2 = handler.梭车加热关闭();
-                    string result3 = handler.Site加热关闭();
-                    if (result != "Success" || result2 != "Success" || result3 != "Success")
-                    {
-                        MessageBox.Show("停止加热失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-                label10.Text = "关闭";
-                label10.Enabled = false;
-                label116.BackColor = Color.White;// System.Drawing.SystemColors.Control;
-            }
-            else
-            {
-                label10.Text = "开启";
-                label10.Enabled = true;
-                label116.BackColor = Color.Red;
-            }
-
-            string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
-            if (result4 == "Success")
-            {
-                string result5 = dTMHelper.WriteSv(1, 设定温度);
-                string result6 = dTMHelper.WriteSv(0, 设定温度);
-                if (result5 != "Success" || result6 != "Success")
-                {
-                    MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-
-            //this.uiDoubleUpDown14.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
-            //uiDoubleUpDown14.Value = 设定温度;
-            //this.uiDoubleUpDown14.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
-        }
-
         private void uiDoubleUpDown14_ValueChanged(object sender, double value)
         {
             if (设定温度 != value)
@@ -1354,6 +1359,25 @@ namespace H5509_V2
             HeatMap heatMap = new HeatMap();
 
             heatMap.ShowDialog();
+        }
+
+        private void Lbl_IClistenmode_Click(object sender, EventArgs e)
+        {
+            Com.OutBin.Enqueue(new string[] { "02", "02", "02", "02", "02", "02", "02", "02" });
+            Com.Listtestsingal.Add(1);
+            SiteTestIC[1] = new bool[2][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+
+            //int site = 6;
+            //int dut = 4;
+
+            //设置信息.开site信息.SetSiteValue(site, dut, "0");
+            //string result = UpdateSiteStatus(设置信息.开site信息.Site名称, 6 + 1, 设置信息.开site信息.GetSiteValue(site));
+            //if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            //result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+            //if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            //设置信息.开site信息 = siteStatus;
+
+            //刷新开Site状态();
         }
     }
 }

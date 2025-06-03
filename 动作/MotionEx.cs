@@ -163,7 +163,7 @@ namespace H5509_V2
                 string result = WaitAxisHome(axisHomes[i], type);
                 if (result != "Success")
                 {
-                    Debug.WriteLine(result);
+                    RunLog(result);
                     bools[i] = false;
                 }
                 else bools[i] = true;
@@ -300,7 +300,7 @@ namespace H5509_V2
                     result = task.Result;
                     if (result != "Success")
                     {
-                        Debug.WriteLine(result);
+                        RunLog(result);
                     }
                 }
             }
@@ -455,7 +455,7 @@ namespace H5509_V2
                     }
                     else if (posvalue > 300)
                     {
-                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
                     }
                 }
                 else
@@ -466,7 +466,7 @@ namespace H5509_V2
                     }
                     else if (posvalue > 150)
                     {
-                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
                     }
                 }
             }
@@ -526,12 +526,12 @@ namespace H5509_V2
                                     {
                                         for (int se = 0; se < axisRuns.Count; se++)
                                         {
-                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
+                                            RunLog($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
 
                                             issecond[se] = true;
                                             axisRuns[se].目标速度 = axisRuns[se].目标速度 * 出入料Z第二段速度;
 
-                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
+                                            RunLog($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
 
                                             // 设置AXIS轴的目标速度
                                             short error = GTN_SetVel(axisRuns[se].核号, axisRuns[se].轴号, axisRuns[se].目标速度);
@@ -549,12 +549,12 @@ namespace H5509_V2
                                     }
                                     else
                                     {
-                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
+                                        RunLog($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
 
                                         issecond[i] = true;
                                         axisRuns[i].目标速度 = axisRuns[i].目标速度 * 第二段速度;
 
-                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
+                                        RunLog($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
 
                                         // 设置AXIS轴的目标速度
                                         short error = GTN_SetVel(axisRuns[i].核号, axisRuns[i].轴号, axisRuns[i].目标速度);
@@ -625,7 +625,7 @@ namespace H5509_V2
                         }
                         else if (posvalue > 300)
                         {
-                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{300}");
                         }
                     }
                     else
@@ -636,7 +636,7 @@ namespace H5509_V2
                         }
                         else if (posvalue > 150)
                         {
-                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{150}");
                         }
                     }
                 }

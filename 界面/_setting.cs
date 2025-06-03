@@ -490,63 +490,63 @@ namespace H5509_V2
         private void button89_Click(object sender, EventArgs e)
         {
             bool bool1 = !飞梭后入料IC[0].Contains(true); //飞梭后入料IC第1列无料
-            Debug.WriteLine("!飞梭后入料IC[0]:" + bool1);
+            RunLog("!飞梭后入料IC[0]:" + bool1);
             bool1 = !飞梭后入料IC[1].Contains(true);//飞梭后入料IC第2列无料
-            Debug.WriteLine("!飞梭后入料IC[1]:" + bool1);
+            RunLog("!飞梭后入料IC[1]:" + bool1);
             bool1 = !飞梭前入料IC[0].Contains(true); //飞梭前入料IC第1列无料
-            Debug.WriteLine("!飞梭前入料IC[0]:" + bool1);
+            RunLog("!飞梭前入料IC[0]:" + bool1);
             bool1 = !飞梭前入料IC[1].Contains(true); //飞梭前入料IC第2列无料
-            Debug.WriteLine("!飞梭前入料IC[1]:" + bool1);
+            RunLog("!飞梭前入料IC[1]:" + bool1);
             bool1 = !飞梭后出料IC[0].Contains(true);//飞梭后出料IC第1列无料
-            Debug.WriteLine("!飞梭后出料IC[0]:" + bool1);
+            RunLog("!飞梭后出料IC[0]:" + bool1);
             bool1 = !飞梭后出料IC[1].Contains(true); //飞梭后出料IC第2列无料
-            Debug.WriteLine("!飞梭后出料IC[1]:" + bool1);
+            RunLog("!飞梭后出料IC[1]:" + bool1);
             bool1 = !飞梭前出料IC[0].Contains(true); //飞梭前出料IC第1列无料
-            Debug.WriteLine("!飞梭前出料IC[0]:" + bool1);
+            RunLog("!飞梭前出料IC[0]:" + bool1);
             bool1 = !飞梭前出料IC[1].Contains(true); //飞梭前出料IC第2列无料
-            Debug.WriteLine("!飞梭前出料IC[1]:" + bool1);
+            RunLog("!飞梭前出料IC[1]:" + bool1);
             bool1 = SiteTestState.Contains(0); //测试区无料
-            Debug.WriteLine("SiteTestState.Contains(0):" + bool1);
+            RunLog("SiteTestState.Contains(0):" + bool1);
             bool1 = !SiteTestState.Contains(1); //测试区有料
-            Debug.WriteLine("!SiteTestState.Contains(1):" + bool1);
+            RunLog("!SiteTestState.Contains(1):" + bool1);
             bool1 = !SiteTestState.Contains(2); //测试区有料测试中
-            Debug.WriteLine("!SiteTestState.Contains(2):" + bool1);
+            RunLog("!SiteTestState.Contains(2):" + bool1);
             bool1 = !SiteTestState.Contains(3); //测试区有料已测试
-            Debug.WriteLine("!SiteTestState.Contains(3):" + bool1);
+            RunLog("!SiteTestState.Contains(3):" + bool1);
             bool1 = !SiteTestState.Contains(4); //测试区有料待取走
-            Debug.WriteLine("!SiteTestState.Contains(4):" + bool1);
+            RunLog("!SiteTestState.Contains(4):" + bool1);
             bool1 = !PS结批流程.Processing;
-            Debug.WriteLine("!PS结批流程:" + bool1);
+            RunLog("!PS结批流程:" + bool1);
             bool1 = !PS出料手臂吸放料流程.Processing;
-            Debug.WriteLine("!PS出料手臂吸放料流程:" + bool1);
+            RunLog("!PS出料手臂吸放料流程:" + bool1);
             bool1 = !PS入料手臂吸放料流程.Processing;
-            Debug.WriteLine("!PS入料手臂吸放料流程:" + bool1);
+            RunLog("!PS入料手臂吸放料流程:" + bool1);
             bool1 = !PS测试手臂取待测料流程.Processing;
-            Debug.WriteLine("!PS测试手臂取待测料流程:" + bool1);
+            RunLog("!PS测试手臂取待测料流程:" + bool1);
             bool1 = !PS测试手臂取已测料流程.Processing;
-            Debug.WriteLine("!PS测试手臂取已测料流程:" + bool1);
+            RunLog("!PS测试手臂取已测料流程:" + bool1);
             bool1 = !PS入飞梭移动流程.Processing;
-            Debug.WriteLine("!PS入飞梭移动流程:" + bool1);
+            RunLog("!PS入飞梭移动流程:" + bool1);
             bool1 = !PS空盘上顶流程.Processing;
-            Debug.WriteLine("!PS空盘上顶流程:" + bool1);
+            RunLog("!PS空盘上顶流程:" + bool1);
             bool1 = !PS空盘下降流程.Processing;
-            Debug.WriteLine("!PS空盘下降流程:" + bool1);
+            RunLog("!PS空盘下降流程:" + bool1);
             bool1 = !PS待测盘上顶流程.Processing;
-            Debug.WriteLine("!PS待测盘上顶流程:" + bool1);
+            RunLog("!PS待测盘上顶流程:" + bool1);
             bool1 = !PS手动盘1上顶流程.Processing;
-            Debug.WriteLine("!PS手动盘1上顶流程:" + bool1);
+            RunLog("!PS手动盘1上顶流程:" + bool1);
             bool1 = !PS手动盘2上顶流程.Processing;
-            Debug.WriteLine("!PS手动盘2上顶流程:" + bool1);
+            RunLog("!PS手动盘2上顶流程:" + bool1);
             bool1 = !PS抓盘手臂取Empty空盘流程.Processing;
-            Debug.WriteLine("!PS抓盘手臂取Empty空盘流程:" + bool1);
+            RunLog("!PS抓盘手臂取Empty空盘流程:" + bool1);
             bool1 = !PS抓盘手臂取Load空盘流程.Processing;
-            Debug.WriteLine("!PS抓盘手臂取Load空盘流程:" + bool1);
+            RunLog("!PS抓盘手臂取Load空盘流程:" + bool1);
             bool1 = !PS抓盘手臂放空盘到Empty流程.Processing;
-            Debug.WriteLine("!PS抓盘手臂放空盘到Empty流程:" + bool1);
+            RunLog("!PS抓盘手臂放空盘到Empty流程:" + bool1);
             bool1 = !PS抓盘手臂放空盘到Auto1流程.Processing;
-            Debug.WriteLine("!PS抓盘手臂放空盘到Auto1流程:" + bool1);
+            RunLog("!PS抓盘手臂放空盘到Auto1流程:" + bool1);
             bool1 = !PS抓盘手臂放空盘到Auto2流程.Processing;
-            Debug.WriteLine("!PS抓盘手臂放空盘到Auto2流程:" + bool1);
+            RunLog("!PS抓盘手臂放空盘到Auto2流程:" + bool1);
             //飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
         }
 
@@ -1110,7 +1110,7 @@ namespace H5509_V2
                 string result = WaitAxisHome(axisHomes[i]);
                 if (result != "Success")
                 {
-                    Debug.WriteLine(result);
+                    RunLog(result);
                     bools[i] = false;
                 }
                 else bools[i] = true;
@@ -1207,11 +1207,11 @@ namespace H5509_V2
                         if (posvalue1 < pos2)
                         {
                             issecond = true;
-                            //Debug.WriteLine($"{axisRun.轴名称}修改前第一段目标速度:{axisRun.目标速度}");
+                            //RunLog($"{axisRun.轴名称}修改前第一段目标速度:{axisRun.目标速度}");
 
                             axisRun.目标速度 = axisRun.目标速度 * 第二段速度;
 
-                            //Debug.WriteLine($"{axisRun.轴名称}修改后第二段目标速度:{axisRun.目标速度}");
+                            //RunLog($"{axisRun.轴名称}修改后第二段目标速度:{axisRun.目标速度}");
 
                             // 设置AXIS轴的目标速度
                             error = GTN_SetVel(axisRun.核号, axisRun.轴号, axisRun.目标速度);
@@ -1250,7 +1250,7 @@ namespace H5509_V2
                     }
                     else if (posvalue > 300)
                     {
-                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
                     }
                 }
                 else
@@ -1261,7 +1261,7 @@ namespace H5509_V2
                     }
                     else if (posvalue > 150)
                     {
-                        Debug.WriteLine($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
                     }
                 }
             }
@@ -1322,12 +1322,12 @@ namespace H5509_V2
                                     {
                                         for (int se = 0; se < axisRuns.Count; se++)
                                         {
-                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
+                                            RunLog($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
 
                                             issecond[se] = true;
                                             axisRuns[se].目标速度 = axisRuns[se].目标速度 * 出入料Z第二段速度;
 
-                                            Debug.WriteLine($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
+                                            RunLog($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
 
                                             // 设置AXIS轴的目标速度
                                             short error = GTN_SetVel(axisRuns[se].核号, axisRuns[se].轴号, axisRuns[se].目标速度);
@@ -1345,12 +1345,12 @@ namespace H5509_V2
                                     }
                                     else
                                     {
-                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
+                                        RunLog($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
 
                                         issecond[i] = true;
                                         axisRuns[i].目标速度 = axisRuns[i].目标速度 * 第二段速度;
 
-                                        Debug.WriteLine($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
+                                        RunLog($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
 
                                         // 设置AXIS轴的目标速度
                                         short error = GTN_SetVel(axisRuns[i].核号, axisRuns[i].轴号, axisRuns[i].目标速度);
@@ -1403,7 +1403,7 @@ namespace H5509_V2
                         }
                         else if (posvalue > 300)
                         {
-                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{300}");
                         }
                     }
                     else
@@ -1414,7 +1414,7 @@ namespace H5509_V2
                         }
                         else if (posvalue > 150)
                         {
-                            Debug.WriteLine($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{150}");
+                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{150}");
                         }
                     }
                 }
@@ -1637,7 +1637,7 @@ namespace H5509_V2
                 };
 
                 result = motionEx.GetDi(ioNames, out string[] iovalues);
-                if (result != "Success") Debug.WriteLine("入料吸嘴_真空检测IO读取失败!" + result);
+                if (result != "Success") RunLog("入料吸嘴_真空检测IO读取失败!" + result);
 
                 uiCheckBox5.Checked = iovalues[0] == "1";
                 uiCheckBox8.Checked = iovalues[1] == "1";
@@ -1670,7 +1670,7 @@ namespace H5509_V2
 
             if (result != "Success")
             {
-                Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+                RunLog($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
                 MessageBox.Show("读取入料Z原点失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -1783,7 +1783,7 @@ namespace H5509_V2
                 else ioNames.Add("Y063_上料4_破真空");
             }
             string result = motionEx.SetDo(ioNames.ToArray(), znozzle.ToArray());
-            if (result != "Success") Debug.WriteLine("入料吸嘴_吸真空IO输出失败!" + result);
+            if (result != "Success") RunLog("入料吸嘴_吸真空IO输出失败!" + result);
             return result;
         }
 
@@ -1807,7 +1807,7 @@ namespace H5509_V2
                     };
 
                         result = motionEx.GetDi(ioNames, out string[] iovalues);
-                        if (result != "Success") Debug.WriteLine("入料吸嘴_真空检测IO读取失败!" + result);
+                        if (result != "Success") RunLog("入料吸嘴_真空检测IO读取失败!" + result);
 
                         uiCheckBox5.Checked = iovalues[0] == "1";
                         uiCheckBox8.Checked = iovalues[1] == "1";
@@ -1842,7 +1842,7 @@ namespace H5509_V2
 
             if (result != "Success")
             {
-                Debug.WriteLine($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
+                RunLog($"入料Z回原：{home[0]} {home[1]} {home[2]} {home[3]}");
                 MessageBox.Show("读取入料Z原点失败!\n详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -2030,7 +2030,7 @@ namespace H5509_V2
                 string result = motion.AxisStop(AxisInfoList[i].核号, AxisInfoList[i].轴号, 1);
                 if (result != "Success")
                 {
-                    Debug.WriteLine($"核号{AxisInfoList[i].核号},轴{AxisInfoList[i].轴号}停止失败!详细信息:" + result);
+                    RunLog($"核号{AxisInfoList[i].核号},轴{AxisInfoList[i].轴号}停止失败!详细信息:" + result);
                 }
             }
             MessageBox.Show("所有轴已紧急停止");
@@ -2150,13 +2150,13 @@ namespace H5509_V2
             string result = motionEx.SetDo(yIoName, true);
             if (result != "Success")
             {
-                Debug.WriteLine($"{yIoName}到位输出失败！" + result);
+                RunLog($"{yIoName}到位输出失败！" + result);
                 return result;
             }
 
             result = 读取气缸输入信号(xIoName, "1", out long ms);
-            if (result != "Success") Debug.WriteLine($"{yIoName}到位输出超时({ms}ms)");
-            else Debug.WriteLine($"{yIoName}到位输出成功({ms}ms)");
+            if (result != "Success") RunLog($"{yIoName}到位输出超时({ms}ms)");
+            else RunLog($"{yIoName}到位输出成功({ms}ms)");
             return result;
         }
 
@@ -2165,13 +2165,13 @@ namespace H5509_V2
             string result = motionEx.SetDo(yIoName, false);
             if (result != "Success")
             {
-                Debug.WriteLine($"{yIoName}原位输出失败！" + result);
+                RunLog($"{yIoName}原位输出失败！" + result);
                 return result;
             }
 
             result = 读取气缸输入信号(xIoName, "0", out long ms);
-            if (result != "Success") Debug.WriteLine($"{yIoName}原位输出超时({ms}ms)");
-            else Debug.WriteLine($"{yIoName}原位输出成功({ms}ms)");
+            if (result != "Success") RunLog($"{yIoName}原位输出超时({ms}ms)");
+            else RunLog($"{yIoName}原位输出成功({ms}ms)");
             return result;
         }
 
@@ -2180,13 +2180,13 @@ namespace H5509_V2
             string result = motionEx.SetDo(yIoName, false);
             if (result != "Success")
             {
-                Debug.WriteLine($"{yIoName}到位输出失败！" + result);
+                RunLog($"{yIoName}到位输出失败！" + result);
                 return result;
             }
 
             result = 读取气缸输入信号(xIoName, "0", out long ms);
-            if (result != "Success") Debug.WriteLine($"{yIoName}到位输出超时({ms}ms)");
-            else Debug.WriteLine($"{yIoName}到位输出成功({ms}ms)");
+            if (result != "Success") RunLog($"{yIoName}到位输出超时({ms}ms)");
+            else RunLog($"{yIoName}到位输出成功({ms}ms)");
             return result;
         }
 
@@ -2195,13 +2195,13 @@ namespace H5509_V2
             string result = motionEx.SetDo(yIoName, true);
             if (result != "Success")
             {
-                Debug.WriteLine($"{yIoName}原位输出失败！" + result);
+                RunLog($"{yIoName}原位输出失败！" + result);
                 return result;
             }
             result = 读取气缸输入信号(xIoName, "1", out long ms);
 
-            if (result == "Success") Debug.WriteLine($"{yIoName}原位输出超时({ms}ms)");
-            else Debug.WriteLine($"{yIoName}原位输出成功({ms}ms)");
+            if (result == "Success") RunLog($"{yIoName}原位输出超时({ms}ms)");
+            else RunLog($"{yIoName}原位输出成功({ms}ms)");
             return result;
         }
 
@@ -3283,10 +3283,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update InitPoint set value = '{newvalue}' where ptname = '{pointname}'");
                 if (line >= 1)
                 {
-                    Debug.WriteLine($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新成功");
                     return true;
                 }
-                else Debug.WriteLine($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
         }
@@ -3298,10 +3298,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
                 if (line >= 1)
                 {
-                    Debug.WriteLine($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功");
                     return true;
                 }
-                else Debug.WriteLine($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
         }
@@ -3679,7 +3679,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 15000);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
                     button71.Enabled = true;
@@ -3696,7 +3696,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 15000);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
                     button71.Enabled = true;
@@ -3714,7 +3714,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M22_入料手臂X轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -3760,7 +3760,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M16_入料手臂Y轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -3789,7 +3789,7 @@ namespace H5509_V2
                 string[] axis = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
                 string result = 多轴绝对运动(axis, pos, 1, inoldpos < mm ? 1 : 0, 出入料Z第二段距离);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
                 inoldpos = mm;
                 this.Invoke(new Action(() =>
                 {
@@ -3809,7 +3809,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M5_入料手臂P轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -3826,7 +3826,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M10_出料手臂P轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -3856,7 +3856,7 @@ namespace H5509_V2
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
 
                 string result = 多轴绝对运动(axis, pos, 1, outoldpos < mm ? 1 : 0, 出入料Z第二段距离);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
                 outoldpos = mm;
 
                 this.Invoke(new Action(() =>
@@ -3903,7 +3903,7 @@ namespace H5509_V2
                 string result = motion.AxisStop(AxisInfoList[i].核号, AxisInfoList[i].轴号, 1);
                 if (result != "Success")
                 {
-                    Debug.WriteLine($"核号{AxisInfoList[i].核号},轴{AxisInfoList[i].轴号}停止失败!详细信息:" + result);
+                    RunLog($"核号{AxisInfoList[i].核号},轴{AxisInfoList[i].轴号}停止失败!详细信息:" + result);
                 }
             }
             MessageBox.Show("所有轴已紧急停止");
@@ -3948,7 +3948,7 @@ namespace H5509_V2
                     Task.Run(() =>
                     {
                         result = 单轴绝对运动("M18_放Tary盘轴", mm);
-                        if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                        if (result != "Success") RunLog("移动失败!" + result);
                         this.Invoke(new Action(() =>
                         {
                             button76.Enabled = true;
@@ -4008,7 +4008,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M23_出料手臂X轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -4077,7 +4077,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M17_出料手臂Y轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -4147,7 +4147,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M21_测试手臂X轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -4175,7 +4175,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 string result = 单轴绝对运动("M19_测试手臂Z轴", mm);
-                if (result != "Success") Debug.WriteLine("移动失败!" + result);
+                if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
@@ -4447,7 +4447,7 @@ namespace H5509_V2
                             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set tray盘名称 = '{trayname}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
-                                Debug.WriteLine($"档案名称:[{name}]:Tray名称:{setupInfo.Tray盘信息.TrayName}->{trayname}:更新成功");
+                                RunLog($"档案名称:[{name}]:Tray名称:{setupInfo.Tray盘信息.TrayName}->{trayname}:更新成功");
                                 if (trayname != 设置信息.Tray盘信息.TrayName)
                                 {
                                     result = GetTrayInfo(trayname, out TrayInfo trayInfo);
@@ -4473,7 +4473,7 @@ namespace H5509_V2
                             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 加热盘名称 = '{heatname}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
-                                Debug.WriteLine($"档案名称:[{name}]:加热盘名称:{setupInfo.Heat盘信息.HeatName}->{heatname}:更新成功");
+                                RunLog($"档案名称:[{name}]:加热盘名称:{setupInfo.Heat盘信息.HeatName}->{heatname}:更新成功");
                                 if (heatname != 设置信息.Heat盘信息.HeatName)
                                 {
                                     result = GetHeatInfo(heatname, out HeatInfo heatInfo);
@@ -4497,7 +4497,7 @@ namespace H5509_V2
                             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 温度模式 = '{tempmode}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
-                                Debug.WriteLine($"档案名称:[{name}]:温度模式:{setupInfo.温度模式}->{tempmode}:更新成功");
+                                RunLog($"档案名称:[{name}]:温度模式:{setupInfo.温度模式}->{tempmode}:更新成功");
                                 if (tempmode != 设置信息.温度模式)
                                 {
                                     设置信息.温度模式 = tempmode;
@@ -4565,19 +4565,19 @@ namespace H5509_V2
                         }
                         else
                         {
-                            if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功");
-                            if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功");
-                            if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功");
-                            if (oldtester.Dut累计不良报警个数 != newtester.Dut累计不良报警个数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警个数]:{oldtester.Dut累计不良报警个数}->{newtester.Dut累计不良报警个数}:更新成功");
-                            if (oldtester.Dut累计不良报警使能 != newtester.Dut累计不良报警使能) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警使能]:{oldtester.Dut累计不良报警使能}->{newtester.Dut累计不良报警使能}:更新成功");
-                            if (oldtester.总良率报警百分比 != newtester.总良率报警百分比) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警百分比]:{oldtester.总良率报警百分比}->{newtester.总良率报警百分比}:更新成功");
-                            if (oldtester.总良率报警基数 != newtester.总良率报警基数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警基数]:{oldtester.总良率报警基数}->{newtester.总良率报警基数}:更新成功");
-                            if (oldtester.总良率报警间隔 != newtester.总良率报警间隔) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警间隔]:{oldtester.总良率报警间隔}->{newtester.总良率报警间隔}:更新成功");
-                            if (oldtester.总良率报警使能 != newtester.总良率报警使能) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警使能]:{oldtester.总良率报警使能}->{newtester.总良率报警使能}:更新成功");
-                            if (oldtester.socket使用次数 != newtester.socket使用次数) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[socket使用次数]:{oldtester.socket使用次数}->{newtester.socket使用次数}:更新成功");
-                            if (oldtester.测试超时时间 != newtester.测试超时时间) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功");
-                            if (oldtester.timeout超时时间 != newtester.timeout超时时间) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功");
-                            if (oldtester.超时发送timeout != newtester.超时发送timeout) Debug.WriteLine($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.超时发送timeout}->{newtester.超时发送timeout}:更新成功");
+                            if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功");
+                            if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功");
+                            if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功");
+                            if (oldtester.Dut累计不良报警个数 != newtester.Dut累计不良报警个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警个数]:{oldtester.Dut累计不良报警个数}->{newtester.Dut累计不良报警个数}:更新成功");
+                            if (oldtester.Dut累计不良报警使能 != newtester.Dut累计不良报警使能) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警使能]:{oldtester.Dut累计不良报警使能}->{newtester.Dut累计不良报警使能}:更新成功");
+                            if (oldtester.总良率报警百分比 != newtester.总良率报警百分比) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警百分比]:{oldtester.总良率报警百分比}->{newtester.总良率报警百分比}:更新成功");
+                            if (oldtester.总良率报警基数 != newtester.总良率报警基数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警基数]:{oldtester.总良率报警基数}->{newtester.总良率报警基数}:更新成功");
+                            if (oldtester.总良率报警间隔 != newtester.总良率报警间隔) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警间隔]:{oldtester.总良率报警间隔}->{newtester.总良率报警间隔}:更新成功");
+                            if (oldtester.总良率报警使能 != newtester.总良率报警使能) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警使能]:{oldtester.总良率报警使能}->{newtester.总良率报警使能}:更新成功");
+                            if (oldtester.socket使用次数 != newtester.socket使用次数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[socket使用次数]:{oldtester.socket使用次数}->{newtester.socket使用次数}:更新成功");
+                            if (oldtester.测试超时时间 != newtester.测试超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功");
+                            if (oldtester.timeout超时时间 != newtester.timeout超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功");
+                            if (oldtester.超时发送timeout != newtester.超时发送timeout) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.超时发送timeout}->{newtester.超时发送timeout}:更新成功");
                         }
 
                         if (value == 设置信息.测试机信息.测试机名称)
@@ -4594,7 +4594,7 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("保存测试机信息()异常!" + ex.Message);
+                    RunLog("保存测试机信息()异常!" + ex.Message);
                     return;
                 }
             }
@@ -4885,24 +4885,24 @@ namespace H5509_V2
                     }
                     else
                     {
-                        if (oldbinParam.auto1 != newbinParam.auto1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[auto1]:{oldbinParam.auto1}->{newbinParam.auto1}:更新成功");
-                        if (oldbinParam.auto2 != newbinParam.auto2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[auto2]:{oldbinParam.auto2}->{newbinParam.auto2}:更新成功");
-                        if (oldbinParam.fix1 != newbinParam.fix1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1]:{oldbinParam.fix1}->{newbinParam.fix1}:更新成功");
-                        if (oldbinParam.fix2 != newbinParam.fix2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2]:{oldbinParam.fix2}->{newbinParam.fix2}:更新成功");
-                        if (oldbinParam.fix3 != newbinParam.fix3) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3]:{oldbinParam.fix3}->{newbinParam.fix3}:更新成功");
-                        if (oldbinParam.fix1num != newbinParam.fix1num) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1num]:{oldbinParam.fix1num}->{newbinParam.fix1num}:更新成功");
-                        if (oldbinParam.fix2num != newbinParam.fix2num) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2num]:{oldbinParam.fix2num}->{newbinParam.fix2num}:更新成功");
-                        if (oldbinParam.fix3num != newbinParam.fix3num) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3num]:{oldbinParam.fix3num}->{newbinParam.fix3num}:更新成功");
-                        if (oldbinParam.color1 != newbinParam.color1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color1]:{oldbinParam.color1}->{newbinParam.color1}:更新成功");
-                        if (oldbinParam.color2 != newbinParam.color2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color2]:{oldbinParam.color2}->{newbinParam.color2}:更新成功");
-                        if (oldbinParam.color3 != newbinParam.color3) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color3]:{oldbinParam.color3}->{newbinParam.color3}:更新成功");
-                        if (oldbinParam.color4 != newbinParam.color4) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color4]:{oldbinParam.color4}->{newbinParam.color4}:更新成功");
-                        if (oldbinParam.color5 != newbinParam.color5) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[color5]:{oldbinParam.color5}->{newbinParam.color5}:更新成功");
-                        if (oldbinParam.name1 != newbinParam.name1) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name1]:{oldbinParam.name1}->{newbinParam.name1}:更新成功");
-                        if (oldbinParam.name2 != newbinParam.name2) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name2]:{oldbinParam.name2}->{newbinParam.name2}:更新成功");
-                        if (oldbinParam.name3 != newbinParam.name3) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name3]:{oldbinParam.name3}->{newbinParam.name3}:更新成功");
-                        if (oldbinParam.name4 != newbinParam.name4) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name4]:{oldbinParam.name4}->{newbinParam.name4}:更新成功");
-                        if (oldbinParam.name5 != newbinParam.name5) Debug.WriteLine($"档案名称:[{name}]:分BIN名称:[{value}]:[name5]:{oldbinParam.name5}->{newbinParam.name5}:更新成功");
+                        if (oldbinParam.auto1 != newbinParam.auto1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[auto1]:{oldbinParam.auto1}->{newbinParam.auto1}:更新成功");
+                        if (oldbinParam.auto2 != newbinParam.auto2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[auto2]:{oldbinParam.auto2}->{newbinParam.auto2}:更新成功");
+                        if (oldbinParam.fix1 != newbinParam.fix1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1]:{oldbinParam.fix1}->{newbinParam.fix1}:更新成功");
+                        if (oldbinParam.fix2 != newbinParam.fix2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2]:{oldbinParam.fix2}->{newbinParam.fix2}:更新成功");
+                        if (oldbinParam.fix3 != newbinParam.fix3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3]:{oldbinParam.fix3}->{newbinParam.fix3}:更新成功");
+                        if (oldbinParam.fix1num != newbinParam.fix1num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1num]:{oldbinParam.fix1num}->{newbinParam.fix1num}:更新成功");
+                        if (oldbinParam.fix2num != newbinParam.fix2num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2num]:{oldbinParam.fix2num}->{newbinParam.fix2num}:更新成功");
+                        if (oldbinParam.fix3num != newbinParam.fix3num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3num]:{oldbinParam.fix3num}->{newbinParam.fix3num}:更新成功");
+                        if (oldbinParam.color1 != newbinParam.color1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color1]:{oldbinParam.color1}->{newbinParam.color1}:更新成功");
+                        if (oldbinParam.color2 != newbinParam.color2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color2]:{oldbinParam.color2}->{newbinParam.color2}:更新成功");
+                        if (oldbinParam.color3 != newbinParam.color3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color3]:{oldbinParam.color3}->{newbinParam.color3}:更新成功");
+                        if (oldbinParam.color4 != newbinParam.color4) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color4]:{oldbinParam.color4}->{newbinParam.color4}:更新成功");
+                        if (oldbinParam.color5 != newbinParam.color5) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color5]:{oldbinParam.color5}->{newbinParam.color5}:更新成功");
+                        if (oldbinParam.name1 != newbinParam.name1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name1]:{oldbinParam.name1}->{newbinParam.name1}:更新成功");
+                        if (oldbinParam.name2 != newbinParam.name2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name2]:{oldbinParam.name2}->{newbinParam.name2}:更新成功");
+                        if (oldbinParam.name3 != newbinParam.name3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name3]:{oldbinParam.name3}->{newbinParam.name3}:更新成功");
+                        if (oldbinParam.name4 != newbinParam.name4) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name4]:{oldbinParam.name4}->{newbinParam.name4}:更新成功");
+                        if (oldbinParam.name5 != newbinParam.name5) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name5]:{oldbinParam.name5}->{newbinParam.name5}:更新成功");
                     }
 
                     if (value == 设置信息.分BIN信息.分BIN名称)
@@ -4920,7 +4920,7 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"保存档案名称:[{name}]异常！\n详细信息：" + ex.Message);
+                RunLog($"保存档案名称:[{name}]异常！\n详细信息：" + ex.Message);
                 return;
             }
 
@@ -6194,10 +6194,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update TrayInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
-                    Debug.WriteLine($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
                     return true;
                 }
-                else Debug.WriteLine($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
         }
@@ -6208,10 +6208,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
-                    Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
                     return true;
                 }
-                else Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
         }
@@ -6222,10 +6222,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
-                    Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
                     return true;
                 }
-                else Debug.WriteLine($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
         }
@@ -6237,53 +6237,123 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
                 if (line >= 1)
                 {
-                    Debug.WriteLine($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功");
                     return true;
                 }
-                else Debug.WriteLine($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
         }
 
         private void button227_Click(object sender, EventArgs e)
         {
-            飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
-            飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
-            if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true))
+            //飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { true, false, false, false } };
+            //if (入料手臂停止工作标记 && 结批标记)
             {
-                if (放料IC目标值[0].Contains(true))
-                {
-                    if (飞梭后入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true))
-                    {
-                        for (int i = 0; i < 放料IC目标值[0].Length; i++)
-                        {
-                            if (!放料IC目标值[0][i])
-                            {
-                                if (飞梭后入料IC[0][i] || 飞梭前入料IC[0][i])
+                bool[] open = new bool[]
                                 {
-                                    Debug.WriteLine($"梭车后入料：Dut{i + 1}中IC无法被取出");
-                                }
-                            }
+                                    飞梭后入料IC[0][0], 飞梭后入料IC[0][1], 飞梭后入料IC[0][2], 飞梭后入料IC[0][3],
+                                    飞梭后入料IC[1][0], 飞梭后入料IC[1][1], 飞梭后入料IC[1][2], 飞梭后入料IC[1][3]
+                                };
+
+                bool[] open2 = new bool[]
+                {
+                                    飞梭前入料IC[0][0], 飞梭前入料IC[0][1], 飞梭前入料IC[0][2], 飞梭前入料IC[0][3],
+                                    飞梭前入料IC[1][0], 飞梭前入料IC[1][1], 飞梭前入料IC[1][2], 飞梭前入料IC[1][3]
+                };
+
+                bool[] open3 = new bool[]
+                {
+                                    放料IC目标值[0][0], 放料IC目标值[0][1], 放料IC目标值[0][2], 放料IC目标值[0][3],
+                                    放料IC目标值[1][0], 放料IC目标值[1][1], 放料IC目标值[1][2], 放料IC目标值[1][3]
+                };
+
+                bool[] open6 = new bool[]
+                {
+                                    正在吸取后入料[0], 正在吸取后入料[1], 正在吸取后入料[2], 正在吸取后入料[3],
+                                    正在吸取后入料[4], 正在吸取后入料[5], 正在吸取后入料[6], 正在吸取后入料[7]
+                };
+
+                bool[] open7 = new bool[]
+                {
+                                    正在放置前入料[0][0], 正在放置前入料[0][1], 正在放置前入料[0][2], 正在放置前入料[0][3],
+                                    正在放置前入料[1][0], 正在放置前入料[1][1], 正在放置前入料[1][2], 正在放置前入料[1][3]
+                };
+
+                结批时判断是否关site(open, open2, open3, out bool[] open4, out bool[] open5);
+
+                if (open4.Contains(true))
+                {
+                    for (int i = 0; i < open3.Length; i++)
+                    {
+                        if (!open3[i] && open[i] && !open6[i])
+                        {
+                            open[i] = false;
                         }
                     }
                 }
-                if (放料IC目标值[1].Contains(true))
+
+                if (open5.Contains(true))
                 {
-                    if (飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[1].Contains(true))
+                    for (int i = 0; i < open3.Length; i++)
                     {
-                        for (int i = 0; i < 放料IC目标值[1].Length; i++)
+                        if (!open3[i] && open2[i] && !open7[i])
                         {
-                            if (!放料IC目标值[1][i])
-                            {
-                                if (飞梭后入料IC[1][i] || 飞梭前入料IC[1][i])
-                                {
-                                    Debug.WriteLine($"梭车后入料：Dut{i + 4 + 1}中IC无法被取出");
-                                }
-                            }
+                            open2[i] = false;
                         }
                     }
+                }
+
+                if (!open.Contains(true) && !open2.Contains(true))
+                {
+                    RunLog("aaa");
+                    //测试手臂入料停止工作标记 = true;
+                    //PS测试手臂取待测料流程.Processing = false;
+                    //PS测试手臂取待测料流程.StepID = 500;
+                    //break;
                 }
             }
+
+            //结批时判断是否关site(out bool[] open, out bool[] open2);
+
+            //飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true))
+            //{
+            //    if (放料IC目标值[0].Contains(true))
+            //    {
+            //        if (飞梭后入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true))
+            //        {
+            //            for (int i = 0; i < 放料IC目标值[0].Length; i++)
+            //            {
+            //                if (!放料IC目标值[0][i])
+            //                {
+            //                    if (飞梭后入料IC[0][i] || 飞梭前入料IC[0][i])
+            //                    {
+            //                        RunLog($"梭车后入料：Dut{i + 1}中IC无法被取出");
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //    if (放料IC目标值[1].Contains(true))
+            //    {
+            //        if (飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[1].Contains(true))
+            //        {
+            //            for (int i = 0; i < 放料IC目标值[1].Length; i++)
+            //            {
+            //                if (!放料IC目标值[1][i])
+            //                {
+            //                    if (飞梭后入料IC[1][i] || 飞梭前入料IC[1][i])
+            //                    {
+            //                        RunLog($"梭车后入料：Dut{i + 4 + 1}中IC无法被取出");
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
             //for (int i = 0; i < Auto2XPoint.Length; i++)
             //{
@@ -6298,7 +6368,7 @@ namespace H5509_V2
             //bool isIC1 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
             //if (!isIC1 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
             //{
-            //    Debug.WriteLine("食醋胡");
+            //    RunLog("食醋胡");
             //    //auto2isding = true;
             //    //抓盘手臂放空盘到Auto2标记 = 2;
             //}
@@ -6311,7 +6381,7 @@ namespace H5509_V2
             //    }
             //    else
             //    {
-            //        Debug.WriteLine("飞梭前后检测产品感应有IC放歪");
+            //        RunLog("飞梭前后检测产品感应有IC放歪");
             //        //ProgramPause = true;
             //        //IsPause = true;
             //    }
@@ -6379,7 +6449,7 @@ namespace H5509_V2
             {
                 strvaue += (value[i] / 10).ToString() + ",";
             }
-            Debug.WriteLine(strvaue);
+            RunLog(strvaue);
             uiTextBox4.Text = strvaue;
         }
 
@@ -6410,7 +6480,7 @@ namespace H5509_V2
             {
                 strvaue += (value[i] / 10).ToString() + ",";
             }
-            Debug.WriteLine(strvaue);
+            RunLog(strvaue);
             uiTextBox5.Text = strvaue;
         }
 
@@ -6427,7 +6497,7 @@ namespace H5509_V2
             {
                 strvaue += (value[i] / 10).ToString() + ",";
             }
-            Debug.WriteLine(strvaue);
+            RunLog(strvaue);
             uiTextBox6.Text = strvaue;
         }
 

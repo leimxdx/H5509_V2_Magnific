@@ -60,23 +60,24 @@ namespace H5509_V2
         private _offset offset;
         private _speed speed;
         private _IO io;
-        private _log log;
         private Handler handler;
         private MotionEx motionEx;
+
+        public Action 刷新开Site信息;
 
         public ForMain()
         {
             InitializeComponent();
 
-            log = new _log();
+            Log = new _log();
 
             string result = Init_APPmaster();
             if (result != "Success")
             {
-                log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
+                Log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
-
+            //RunLog("debug","run","读取数据库数据完成");
         }
 
         private void ForMain_Load(object sender, EventArgs e)
@@ -89,7 +90,6 @@ namespace H5509_V2
             io = new _IO();
             handler = new Handler();
             motionEx = MotionEx.GetInstance();
-
 
             setting.刷新分BIN信息 = main.刷新分BIN信息;
             setting.刷新温度信息 = main.刷新温度显示;
@@ -108,16 +108,6 @@ namespace H5509_V2
             {
                 TCPConnect = true;
                 main.刷新温度显示();
-                //result = dTMHelper.ReadSv(2, 0, out short[] value);
-                //if ((value[0] / 10) != 设定温度)
-                //{
-                //    result = dTMHelper.WriteSv(2, 0, 设定温度);
-                //    if (result != "Success")
-                //    {
-                //        MessageBox.Show($"温度设置为【{value}】℃失败!\n详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    }
-                //}
-                //else MessageBox.Show($"读取温控器温度失败!\n详细信息：" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             //防止控件过多产生闪烁现象
@@ -129,10 +119,6 @@ namespace H5509_V2
 
             handler.参数初始化();
 
-            //温控达温 = true;
-            //HeatDicPoint["0,0"] = true;
-            //HeatDicTimer["0,0"].Status = 1; //设置温控器0,0的状态为1
-
             result = motionEx.GSNInitCard();
             if (result != "Success")
             {
@@ -142,7 +128,7 @@ namespace H5509_V2
             result = Init_FrMain();
             if (result != "Success")
             {
-                log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
+                Log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
 
@@ -164,9 +150,6 @@ namespace H5509_V2
 
             main.canVisable(this);
 
-            //TimeSpan time = new TimeSpan(0,11,31);
-            //int x = (int)(449 / (time.TotalMinutes / 60));
-            //handler.DebugIO(out string[] iovalues);
         }
 
         /// <summary>
@@ -231,11 +214,12 @@ namespace H5509_V2
 
         private void button_log_Click(object sender, EventArgs e)
         {
-            changeMainPanel(log);
+            changeMainPanel(Log);
         }
 
-        private void 屏幕刷新()
+        private void 界面刷新()
         {
+            int testnum = 0;
             while (true)
             {
                 try
@@ -256,11 +240,194 @@ namespace H5509_V2
                         }
                     }));
 
+                    if (LogQueue.Count > 0)
+                    {
+                        if (LogQueue.TryDequeue(out LogManager logs))
+                        {
+                            Debug.WriteLine(logs.Msg);
+                            //Log.AddLog(logs.ExcelLevel, logs.ExcelLevel, logs.Msg);
+                            writeDataHelper.RunLog(logs.Msg, logs.TxtLogtype);
+                        }
+                    }
+
+                    if (IsPause) continue; //如果暂停则不刷新
+
+                    this.Invoke(new Action(() =>
+                    {
+                        if (Com.Iswaitout[testnum]) //如果接收超时
+                        {
+                            Com.Iswaitout[testnum] = false;
+                            RunLog($"Site{testnum + 1}:接收超时！触发停止");
+                            Listcode.Add($"8{testnum:D2}018");
+                            ProgramPause = true; //如果有接收超时则触发停止
+                            IsPause = true;
+
+                            //后续是否需要重新发送
+                        }
+
+
+                        //上传bin
+                        //计算每个dut的pass和fail数量
+                        //上传Num=Num+1
+                        //Socket使用时间
+                        //连续不良报警
+                        //自动关site
+                        //累计不良报警
+                        //总良率报警
+                        //Socket使用次数
+                        if (Com.Listtestsingal.Count != 0)
+                        {
+                            int sitenum = Com.Listtestsingal[0];
+                            RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
+                            Com.Listtestsingal.Remove(sitenum);
+
+                            bool[][] open = SiteTestIC[sitenum];
+
+                            Com.OutBin.TryDequeue(out string[] bins);
+
+                            //string bb = "@TEST_DONE " + sitenum.ToString("D2");
+                            //foreach (string s in bins)
+                            //{
+                            //    bb += " " + s;
+                            //}
+                            //string sql = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
+                            //$"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','{bb}')";
+                            //Task<int> task = SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+                            ////foreach (string b in bins)
+                            ////{
+                            ////    bin(b);
+                            ////}
+
+                            int doutnum = sitenum * 8;
+                            for (int m = 0; m < open.Length; m++)
+                            {
+                                for (int n = 0; n < open[m].Length; n++)
+                                {
+                                    string doutstr = $"{sitenum:D2}{m * 4 + n + 1}";
+                                    if (open[m][n])
+                                    {
+                                        if (Auto1.Contains(bins[m * 4 + n]))
+                                        {
+                                            Dout128PassNumber[doutnum + (m * 4 + n)]++;
+                                            doutContinueFail[sitenum][n + m * 4] = 0;
+                                        }
+                                        else
+                                        {
+                                            Dout128FailNumber[doutnum + (m * 4 + n)]++;
+                                            doutContinueFail[sitenum][n + m * 4]++;
+                                            单dut总不良计数[sitenum][n + m * 4]++;
+                                            单dut总不良累计计数[sitenum][n + m * 4]++;
+                                            总良率报警间隔计数++;
+                                        }
+                                        RunLog($"update SocketUse set Num=Num+1 from SocketUse where Id='{doutstr}'");
+                                    }
+
+                                    int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
+                                    int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
+                                    RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
+                                    RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
+                                }
+                            }
+
+                            bool isyieldex = false;
+                            bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
+                            bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
+                            int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+
+                            for (int m = 0; m < doutContinueFail.Count; m++) //连续不良率报警
+                            {
+                                for (int n = 0; n < doutContinueFail[m].Length; n++)
+                                {
+                                    if (doutContinueFail[m][n] >= doutfailnum)
+                                    {
+                                        string code = $"6{m + 1:D2}0{n + 1}14";
+                                        if (isalarm) //dout连续不良报警
+                                        {
+                                            isyieldex = true;
+                                            Listcode.Add(code);
+                                        }
+                                        if (isautoclose) //dout连续不良自动关闭该dout，
+                                        {
+                                            int dout = m * 8 + n + 1;
+                                            string labelname = $"lbl_dout{dout}";
+                                            设置信息.开site信息.SetSiteValue(sitenum, dout, "0");
+                                            string result = UpdateSiteStatus(设置信息.开site信息.Site名称, 6 + 1, 设置信息.开site信息.GetSiteValue(sitenum));
+                                            if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                                            result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                                            if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                                            设置信息.开site信息 = siteStatus;
+                                            main.刷新开Site状态();
+                                        }
+                                        string str = $"Site{m + 1}-Dut{n + 1}:连续不良数量:{doutContinueFail[m][n]}>={doutfailnum} code:{code}";
+                                        RunLog(str);
+                                        doutContinueFail[m][n] = 0; //如果已报警良率异常则清空重新计算
+                                    }
+                                }
+                            }
+
+                            if (设置信息.测试机信息.Dut累计不良报警使能)
+                            {
+                                for (int i = 0; i < 单dut总不良计数.Count; i++)
+                                {
+                                    for (int j = 0; j < 单dut总不良计数[i].Length; j++)
+                                    {
+                                        if (单dut总不良计数[i][j] >= 设置信息.测试机信息.Dut累计不良报警个数)
+                                        {
+                                            isyieldex = true;
+                                            string code = $"6{i + 1:D2}0{j + 1}16";
+                                            Listcode.Add(code);
+                                            string str = $"Site{i + 1}-Dut{i + 1}:累计不良数量:{单dut总不良计数[i][j]}>{设置信息.测试机信息.Dut累计不良报警个数} code:{code}";
+                                            RunLog(str);
+                                            单dut总不良计数[i][j] = 0;
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (设置信息.测试机信息.总良率报警使能 
+                                && 出料数 >= 设置信息.测试机信息.总良率报警基数
+                                && 总良率报警间隔计数 >= 设置信息.测试机信息.总良率报警间隔 
+                                && Auto1良率 <= 设置信息.测试机信息.总良率报警百分比)
+                            {
+                                isyieldex = true;
+                                string code = "1400320";
+                                Listcode.Add(code);
+                                string str = $"总良率：{Auto1良率}<{设置信息.测试机信息.总良率报警百分比.ToString("P1")}";
+                                RunLog(str);
+                                总良率报警间隔计数 = 0;
+                            }
+
+                            //try
+                            //{
+                            //    object su = await SqlServer.runSqlAsync(sqlServerConnectionString, "select count(*) from SocketUse where num>" + motionEx.testerIFParam.socket使用次数);
+                            //    if (int.Parse(su.ToString()) > socket使用次数超限数)
+                            //    {
+                            //        Listcode.Add("1400600");
+                            //        socket使用次数超限数 = int.Parse(su.ToString());
+                            //    }
+                            //}
+                            //catch (Exception ex) { writeDataHelper.RunLog("读取socket使用次数超限数异常：" + ex.Message); }
+
+                            if (isyieldex) //如果良率异常
+                            {
+                                ProgramPause = true; //如果有良率异常则触发停止
+                                IsPause = true;
+                            }
+                        }
+
+                    }));
+
+                    testnum++;
+                    if (testnum >= 16)
+                    {
+                        testnum = 0;
+                    }
+
                     Thread.Sleep(100);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("屏幕刷新异常!" + ex.Message);
+                    RunLog("屏幕刷新异常!" + ex.Message);
                     Thread.Sleep(100);
                 }
             }
@@ -319,9 +486,9 @@ namespace H5509_V2
                                 {
                                     温控达温 = true;
                                     达温时间 = DateTime.Now;
-                                    Debug.WriteLine("加热盘已达温");
-                                    Debug.WriteLine("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
-                                    Debug.WriteLine("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+                                    RunLog("加热盘已达温");
+                                    RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+                                    RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
                                 }
                             }
                             else
@@ -329,7 +496,7 @@ namespace H5509_V2
                                 //bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
                                 //if (tempopen.Contains(false)) //有false说明还有Site超出波动范围
                                 //{
-                                //    Debug.WriteLine("超波动温度");
+                                //    RunLog("超波动温度");
                                 //    ProgramPause = true;
                                 //    IsPause = true;
                                 //    for (int i = 0; i < 16; i++)
@@ -338,7 +505,7 @@ namespace H5509_V2
                                 //        {
                                 //            if (SiteTemp[i] > tempwavemax && SiteTemp[i] < tempwavemin)
                                 //            {
-                                //                Debug.WriteLine($"Site{i + 1}:【{SiteTemp[i]}】℃超波动温度");
+                                //                RunLog($"Site{i + 1}:【{SiteTemp[i]}】℃超波动温度");
                                 //            }
                                 //        }
                                 //    }
@@ -346,7 +513,7 @@ namespace H5509_V2
                                 //    {
                                 //        if (HeatTrayTemp > tempwavemax && HeatTrayTemp < tempwavemin)
                                 //        {
-                                //            Debug.WriteLine($"温控器:【{HeatTrayTemp}】℃超波动温度");
+                                //            RunLog($"温控器:【{HeatTrayTemp}】℃超波动温度");
                                 //        }
                                 //    }
                                 //}
@@ -358,7 +525,7 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("温度读取异常!" + ex.Message);
+                    RunLog("温度读取异常!" + ex.Message);
                     Thread.Sleep(100);
                 }
             }
@@ -376,7 +543,7 @@ namespace H5509_V2
                 });
                 Task.Run(() =>
                 {
-                    屏幕刷新();
+                    界面刷新();
                 });
                 Task.Run((() =>
                 {

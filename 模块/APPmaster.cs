@@ -18,6 +18,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Interop;
 using System.Xml.Linq;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Vml;
@@ -33,6 +34,8 @@ namespace H5509_V2
     {
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
 
+        public static string sqlServerConnectionString ="";
+
         public static string SQLServerConnString = "";
 
         public static bool InitedOK = false;
@@ -42,6 +45,12 @@ namespace H5509_V2
         public static string TCPIP;
 
         public static int TCPPort;
+
+        public static _log Log;
+
+        public static ConcurrentQueue<LogManager> LogQueue = new ConcurrentQueue<LogManager>(); //log队列
+
+        public static WriteData writeDataHelper = WriteData.GetWriteDataInstance();
 
         public static List<IOInfo> IOList;
 
@@ -306,6 +315,18 @@ namespace H5509_V2
 
         public static string othAll = "";
 
+        public static int[] Dout128PassNumber = new int[128];
+
+        public static int[] Dout128FailNumber = new int[128];
+
+        public static  List<int[]> doutContinueFail { get; set; } = new List<int[]>();
+       
+        public static  List<int[]> 单dut总不良计数 { get; set; } = new List<int[]>(); //单dut总不良计数（取消报警后清零）
+
+        public static  List<int[]> 单dut总不良累计计数 { get; set; } = new List<int[]>();//单dut总不良累计计数（取消报警后不清理）
+
+        public static  int 总良率报警间隔计数 { get; set; } = 0;
+
         public static bool 入料IC忽略;
 
         public static bool 入料IC吸不起结批;
@@ -383,6 +404,31 @@ namespace H5509_V2
 
         public static int Fix3数量 = 0;
 
+        public static double Auto1良率
+        {
+            get { return (double)Auto1数量 / 出料数 * 100; }
+        }
+
+        public static double Auto2良率
+        {
+            get { return (double)Auto2数量 / 出料数 * 100; }
+        }
+
+        public static double Fix1良率
+        {
+            get { return (double)Fix1数量 / 出料数 * 100; }
+        }
+
+        public static double Fix2良率
+        {
+            get { return (double)Fix2数量 / 出料数 * 100; }
+        }
+
+        public static double Fix3良率
+        {
+            get { return (double)Fix3数量 / 出料数 * 100; }
+        }
+
         public static double Tray_厚度
         {
             get { return 设置信息.Tray盘信息.Height; }
@@ -396,6 +442,11 @@ namespace H5509_V2
         public static OffsetPoint 点位微调
         {
             get { return 设置信息.OffsetPoint; }
+        }
+
+        public static SiteStatus 开Site信息
+        {
+            get { return 设置信息.开site信息; }
         }
 
         public static int Heat_X_Num
@@ -454,6 +505,8 @@ namespace H5509_V2
 
         public static int[] SiteTestState = new int[16];
 
+        public static string[] LotNo = new string[17];
+
         //public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
 
         public static List<bool[][]> SiteTestIC = new List<bool[][]>(); //保存Site放入的IC状态
@@ -463,6 +516,8 @@ namespace H5509_V2
         public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
 
         public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
+
+        //public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
 
         public static bool 空盘上顶到最大值 = false;
 
@@ -2919,10 +2974,26 @@ namespace H5509_V2
             {
                 if (siteopen[site])
                 {
-                    Debug.WriteLine($"开始前入料添加Site:{site + 1}");
+                    RunLog($"开始前入料添加Site:{site + 1}");
                     APPmaster.InSiteQueue.Enqueue(site);
                 }
             }
+        }
+
+        public static void RunLog(string info, short txtType = 1, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
+        {
+
+            LogManager log = new LogManager()
+            {
+                Msg = info,
+                TxtLogtype = txtType,
+                ExcelLevel = excelLevel,
+                ExcelType = excelType,
+            };
+            LogQueue.Enqueue(log);
+            //Debug.WriteLine(info);
+            ////Log.AddLog("debug", "run", info);
+            //writeDataHelper.RunLog(info, logtype);
         }
 
         public static void 整组开site()
@@ -2951,6 +3022,29 @@ namespace H5509_V2
             }
 
             return tempopen;
+        }
+
+        public static void 结批时判断是否关site(bool[] open, bool[] open2, bool[] open3, out bool[] isexception, out bool[] isexception2)
+        {
+            SiteStatus sitestatus = 设置信息.开site信息;
+
+            isexception = new bool[8];
+            isexception2 = new bool[8];
+
+            for (int dut = 0; dut < open.Length; dut++)
+            {
+                if (!open3[dut]) //if (sitestatus.GetSiteValue(site, dut) == "1")
+                {
+                    for (int site = 0; site < 16; site++)
+                    {
+                        if (open[dut]) isexception[dut] = true;
+
+                        if (open2[dut]) isexception2[dut] = true;
+
+                        if (isexception[dut] || isexception2[dut]) break;
+                    }
+                }
+            }
         }
 
         public static void 更新入料目标值()
@@ -2990,9 +3084,9 @@ namespace H5509_V2
                         if (!放料IC目标值[colum][dut] && 修改前入料目标值[colum][dut])
                         {
                             新关site更改[colum][dut] = true;
-                            //Debug.WriteLine($"放料目标值dut:{colum * 4 + dut + 1},{放料IC目标值[colum][dut]}->{save[colum][dut]}");
+                            //RunLog($"放料目标值dut:{colum * 4 + dut + 1},{放料IC目标值[colum][dut]}->{save[colum][dut]}");
                         }
-                        //else Debug.WriteLine($"放料目标值dut:{colum * 4 + dut + 1},{放料IC目标值[colum][dut]}->{save[colum][dut]}");
+                        //else RunLog($"放料目标值dut:{colum * 4 + dut + 1},{放料IC目标值[colum][dut]}->{save[colum][dut]}");
                     }
                 }
             }
@@ -3051,7 +3145,7 @@ namespace H5509_V2
                 if (lsopen[i + index])
                 {
                     LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] = false;
-                    Debug.WriteLine($"Loader site{index}:{xPoint},{yPoint + i * Interval}");
+                    RunLog($"Loader site{index}:{xPoint},{yPoint + i * Interval}");
 
                     //if (getiosts[i + index] == false) //如果等于False说明已经吸取到了IC
                     //{

@@ -114,7 +114,7 @@ namespace H5509_V2
                 str = " <= ";
             }
             string datestr = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}{str}";
-            Debug.WriteLine(datestr + message);
+            RunLog(datestr + message);
             //RefrshLog(datestr + message);
         }
 
@@ -139,7 +139,7 @@ namespace H5509_V2
                 RefreshInfoLog(outdata, true);
                 if (outdata.Length < 1) return;
 
-                Debug.WriteLine(outdata);
+                RunLog(outdata);
                 //writeDataHelper.RunLog(outdata, 2, true);
 
                 while (outdata.Length > 0)
@@ -172,14 +172,19 @@ namespace H5509_V2
                                 SiteTestState[site] = 3;
                                 OutSiteQueue.Enqueue(site);
                                 BinSaveQueue.Enqueue(bin);
-                                //writeDataHelper.RunLog($"获得Site:{site:D2},Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+
+                                //用来统计数据
+                                OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
+                                Listtestsingal.Add(site);
+
+                                RunLog($"接收Site:{site:D2},Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
                             }
                             //else writeDataHelper.RunLog($"site:{site:D2}未在测试!", 3);
                             outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                         }
                         catch (Exception ex)
                         {
-                            Debug.WriteLine("数据解析失败！详细信息：" + ex.Message);
+                            RunLog("数据解析失败！详细信息：" + ex.Message);
                             break;
                         }
                     }
@@ -272,6 +277,9 @@ namespace H5509_V2
             else Bin.Add(t, bin);
             OutSiteQueue.Enqueue(t);
             BinSaveQueue.Enqueue(bin);
+            //用来统计数据
+            OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
+            Listtestsingal.Add(t);
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
 
         }
@@ -309,6 +317,9 @@ namespace H5509_V2
             else Bin.Add(t, bin);
             OutSiteQueue.Enqueue(t);
             BinSaveQueue.Enqueue(bin);
+            //用来统计数据
+            OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
+            Listtestsingal.Add(t);
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
         }
     }

@@ -3937,6 +3937,7 @@
             this.Lbl_IClistenmode.Size = new System.Drawing.Size(180, 35);
             this.Lbl_IClistenmode.TabIndex = 94;
             this.Lbl_IClistenmode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.Lbl_IClistenmode.Click += new System.EventHandler(this.Lbl_IClistenmode_Click);
             // 
             // label132
             // 

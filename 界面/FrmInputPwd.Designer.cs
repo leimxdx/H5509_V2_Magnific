@@ -1,4 +1,4 @@
-﻿namespace H5509
+﻿namespace H5509_V2
 {
     partial class FrmInputPwd
     {

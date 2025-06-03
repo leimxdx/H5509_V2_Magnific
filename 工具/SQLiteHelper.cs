@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static GTN.mc;
-
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -39,7 +39,7 @@ namespace H5509_V2
             {
                 result = null;
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return e.Message;
             }
             connection.Close();
@@ -68,7 +68,7 @@ namespace H5509_V2
             catch (SqlException e)
             {
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return e.Message;
             }
         }
@@ -174,7 +174,7 @@ namespace H5509_V2
             catch (SqlException e)
             {
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return e.Message;
             }
             connection.Close();
@@ -203,7 +203,7 @@ namespace H5509_V2
             catch (SqlException e)
             {
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return e.Message;
             }
             connection.Close();
@@ -234,7 +234,7 @@ namespace H5509_V2
             catch (SqlException e)
             {
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return e.Message;
             }
             connection.Close();
@@ -262,7 +262,7 @@ namespace H5509_V2
             catch (SqlException e)
             {
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return -1;
             }
         }
@@ -291,7 +291,7 @@ namespace H5509_V2
             catch (SqlException e)
             {
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return -1;
             }
         }
@@ -310,7 +310,7 @@ namespace H5509_V2
             {
                 sqlLiteDataReader = null;
                 connection.Close();
-                Debug.WriteLine("命令：" + sql + "，错误信息：" + e.Message);
+                RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return e.Message;
             }
             //connection.Close();

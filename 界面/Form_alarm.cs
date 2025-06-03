@@ -6,7 +6,6 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using ClosedXML.Excel;
-using H5509;
 using H5509_V2;
 using static H5509_V2.APPmaster;
 
@@ -51,7 +50,7 @@ namespace H5509_alarm
             catch (Exception ex)
             {
                 string error = "打开文件失败：H5509_alarm.xlsx，详细信息：" + ex.Message;
-                Debug.WriteLine(error);
+                RunLog(error);
                 MessageBox.Show(error, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1, MessageBoxOptions.DefaultDesktopOnly);
             }
         }

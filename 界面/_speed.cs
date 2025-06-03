@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Sunny.UI;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -69,10 +70,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(APPmaster.SQLiteConnString, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
                 if (line >= 1)
                 {
-                    Debug.WriteLine($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功");
                     return true;
                 }
-                else Debug.WriteLine($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败");
             }
             return false;
         }

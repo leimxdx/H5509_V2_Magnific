@@ -1,0 +1,18 @@
+2025-06-03 17:36:32  =>  debug
+2025-06-03 19:05:21  =>  debug
+2025-06-03 19:05:46  =>  [error][2025-06-03 19:05:46]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-03 19:13:20  =>  debug
+2025-06-03 19:13:44  =>  GTN_Open(5,1):(-6)
+2025-06-03 19:13:44  =>  [error][2025-06-03 19:13:44]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-03 19:13:52  =>  屏幕刷新异常：在创建窗口句柄之前，不能在控件上调用 Invoke 或 BeginInvoke。
+2025-06-03 20:20:03  =>  GTN_Open(5,1):(-6)
+2025-06-03 20:20:03  =>  [error][2025-06-03 20:20:03]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58

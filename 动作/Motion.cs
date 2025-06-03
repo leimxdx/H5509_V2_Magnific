@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Sunny.UI.Win32;
 using static GTN.mc;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -53,50 +54,49 @@ namespace H5509_V2
             {
                 //打开运动控制器
                 short error = GTN_Open(5, 1);
-                //writeDataHelper.RunLog($"GTN_Open(5,1):({error})");
+                RunLog($"GTN_Open(5,1):({error})");
                 ErrorHandler("GT_Open", error);
 
                 //复位运动控制器(核1)
                 error = GTN_Reset(1);
-                //writeDataHelper.RunLog($"GTN_Reset(1):({error})");
+                RunLog($"GTN_Reset(1):({error})");
                 ErrorHandler("GT_Reset", error);
 
                 //复位运动控制器(核2)
                 error = GTN_Reset(2);
-                //writeDataHelper.RunLog($"GTN_Reset(1):({error})");
+                RunLog($"GTN_Reset(2):({error})");
                 ErrorHandler("GT_Reset", error);
 
                 // 注意：配置文件取消了各轴的报警和限位
                 // 配置运动控制器(核1)
                 error = GTN_LoadConfig(1, "gtn_core1.cfg");
-                //writeDataHelper.RunLog($"GTN_StartEcatComm(1):({error})");
+                RunLog($"GTN_LoadConfig(1):({error})");
                 ErrorHandler("GTN_LoadConfig(1, gtn_core1.cfg)", error);
 
                 // 配置运动控制器(核2)
                 error = GTN_LoadConfig(2, "gtn_core2.cfg");
-                //writeDataHelper.RunLog($"GTN_StartEcatComm(1):({error})");
+                RunLog($"GTN_LoadConfig(2):({error})");
                 ErrorHandler("GTN_LoadConfig(2, gtn_core2.cfg)", error);
 
                 //清除核1轴标志
                 error = GTN_ClrSts(1, 1, 12);
-                //writeDataHelper.RunLog($"GTN_ClrSts(1, 1, {advancedParam.AxisCount}):({error})");
+                RunLog($"GTN_ClrSts(1, 1, 12):({error})");
                 ErrorHandler("GTN_ClrSts", error);
 
                 //清除核2轴标志
                 error = GTN_ClrSts(2, 1, 12);
-                //writeDataHelper.RunLog($"GTN_ClrSts(1, 1, {advancedParam.AxisCount}):({error})");
+                RunLog($"GTN_ClrSts(2, 1, 12):({error})");
                 ErrorHandler("GTN_ClrSts", error);
 
                 error = GTN_ExtModuleInit(1);        //初始化gLink模块
-                //writeDataHelper.RunLog($"GT_GLinkInit(0):({error})");
+                RunLog($"GT_GLinkInit(1):({error})");
                 ErrorHandler("GT_GLinkInit", error);
 
                 if (error == 0)
                 {
                     error = GTN_GetExtModuleCount(1, 0, out short gLinkCout);
                     ErrorHandler("GTN_GetExtModuleCount", error);
-                    Console.WriteLine(gLinkCout + ("个IO模块初始化成功！"));
-                    //writeDataHelper.RunLog(slavenum + ("个IO模块初始化成功！"));
+					RunLog(gLinkCout + ("个IO模块初始化成功！"));
                 }
 
                 //for (int i = 0; i < 17; i++)
@@ -146,7 +146,7 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("[error][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]：" + "InitCard() " + ex.ToString());
+                RunLog("[error][" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + "]：" + "InitCard() " + ex.ToString());
                 return ex.Message;
             }
 

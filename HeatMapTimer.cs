@@ -52,7 +52,7 @@ namespace H5509_V2
                     {
                         Timer.Start();
                         StartHeatTime = DateTime.Now;
-                        Debug.WriteLine("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                        RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                     }
                     else
                     {
@@ -60,7 +60,7 @@ namespace H5509_V2
                         {
                             Timer.Start();
                             StartHeatTime = DateTime.Now;
-                            Debug.WriteLine("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                            RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                         }
                         else //如果未达温则等达温后再开始倒计时
                         {
@@ -84,7 +84,7 @@ namespace H5509_V2
                 WaitTimer.Stop();
                 Timer.Start();
                 StartHeatTime = DateTime.Now;
-                Debug.WriteLine("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             }
         }
     }
