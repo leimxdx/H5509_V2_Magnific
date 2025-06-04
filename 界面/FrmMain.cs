@@ -150,6 +150,17 @@ namespace H5509_V2
 
             main.canVisable(this);
 
+            //listcode.Add("1400441"); Dut全部被关闭，请长按结批按钮5S结批
+            //listcode.Add("1400020"); //系统错误--气压不足
+            //listcode.Add("4020001");"(按下开始)Auto1放置了Tray盘"
+            //listcode.Add("4021001");"(按下开始)Auto2放置了Tray盘"
+            //listcode.Add("4018008");"(按下开始)Empty的门没有关上"
+            //listcode.Add("4019008");"(按下开始)Loader的门没有关上"
+            //listcode.Add("4019008");"(按下开始)Loader的门没有关上"
+            //listcode.Add("4020008");"(按下开始)Auto1的门没有关上"
+            //listcode.Add("4021008");"(按下开始)Auto2的门没有关上"
+            //listcode.Add("4030009");"(按下开始)Fix1请放置空盘"
+            //listcode.Add("4031009");"(按下开始)Fix2请放置空盘"
         }
 
         /// <summary>
@@ -219,6 +230,7 @@ namespace H5509_V2
 
         private void 界面刷新()
         {
+            string result = "";
             int testnum = 0;
             while (true)
             {
@@ -251,6 +263,176 @@ namespace H5509_V2
                     }
 
                     if (IsPause) continue; //如果暂停则不刷新
+                    
+                    bool ispass = false;
+
+                    if (InNozzleIC)
+                    {
+                        result = handler.入料吸嘴_真空检测(out string[] iovalue);
+
+                        if (InNozzleICOpen[0])
+                        {
+                            if (iovalue[0] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3010001"); //入料手臂-吸--1号吸嘴丢失IC
+                                writeDataHelper.RunLog("入料手臂-吸--1号吸嘴丢失IC", 3);
+                            }
+                        }
+                        if (InNozzleICOpen[1])
+                        {
+                            if (iovalue[1] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3020001"); //入料手臂-吸--2号吸嘴丢失IC
+                                writeDataHelper.RunLog("入料手臂-吸--2号吸嘴丢失IC", 3);
+                            }
+                        }
+                        if (InNozzleICOpen[2])
+                        {
+                            if (iovalue[2] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3030001"); //入料手臂-吸--3号吸嘴丢失IC
+                                writeDataHelper.RunLog("入料手臂-吸--3号吸嘴丢失IC", 3);
+                            }
+                        }
+                        if (InNozzleICOpen[3])
+                        {
+                            if (iovalue[3] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3040001"); //入料手臂-吸--4号吸嘴丢失IC
+                                writeDataHelper.RunLog("入料手臂-吸--4号吸嘴丢失IC", 3);
+                            }
+                        }
+                    }
+
+                    if (OutNozzleIC)
+                    {
+                        result = handler.出料吸嘴_真空检测(out string[] iovalue);
+
+                        if (OutNozzleICOpen[0])
+                        {
+                            if (iovalue[0] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3050001"); //出料手臂-吸--1号吸嘴丢失IC
+                                writeDataHelper.RunLog("出料手臂-吸--1号吸嘴丢失IC", 3);
+                            }
+                        }
+                        if (OutNozzleICOpen[1])
+                        {
+                            if (iovalue[1] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3060001"); //出料手臂-吸--2号吸嘴丢失IC
+                                writeDataHelper.RunLog("出料手臂-吸--2号吸嘴丢失IC", 3);
+                            }
+                        }
+                        if (OutNozzleICOpen[2])
+                        {
+                            if (iovalue[2] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3070001"); //出料手臂-吸--3号吸嘴丢失IC
+                                writeDataHelper.RunLog("出料手臂-吸--3号吸嘴丢失IC", 3);
+                            }
+                        }
+                        if (OutNozzleICOpen[3])
+                        {
+                            if (iovalue[3] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3080001"); //出料手臂-吸--4号吸嘴丢失IC
+                                writeDataHelper.RunLog("出料手臂-吸--4号吸嘴丢失IC", 3);
+                            }
+                        }
+                    }
+
+                    if (TestNozzleIC)
+                    {
+                        result = handler.测试吸嘴_真空检测(out string[] iovalue);
+
+                        if (TestNozzleICOpen[0])
+                        {
+                            if (iovalue[0] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3099901"); //测试手臂-吸--1号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--1号吸嘴 丢失IC", 3);
+                            }
+                        }
+                        if (TestNozzleICOpen[1])
+                        {
+                            if (iovalue[1] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3109901"); //测试手臂-吸--2号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--2号吸嘴 丢失IC", 3);
+                            }
+                        }
+                        if (TestNozzleICOpen[2])
+                        {
+                            if (iovalue[2] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3119901"); //测试手臂-吸--3号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--3号吸嘴 丢失IC", 3);
+                            }
+                        }
+                        if (TestNozzleICOpen[3])
+                        {
+                            if (iovalue[3] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3129901"); //测试手臂-吸--4号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--4号吸嘴 丢失IC", 3);
+                            }
+                        }
+                        if (TestNozzleICOpen[4])
+                        {
+                            if (iovalue[4] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3139901"); //测试手臂-吸--5号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--5号吸嘴 丢失IC", 3);
+                            }
+                        }
+                        if (TestNozzleICOpen[5])
+                        {
+                            if (iovalue[5] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3149901"); //测试手臂-吸--6号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--6号吸嘴 丢失IC", 3);
+                            }
+                        }
+                        if (TestNozzleICOpen[6])
+                        {
+                            if (iovalue[6] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3159901"); //测试手臂-吸--7号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--7号吸嘴 丢失IC", 3);
+                            }
+                        }
+                        if (TestNozzleICOpen[7])
+                        {
+                            if (iovalue[7] == "0")
+                            {
+                                ispass = true;
+                                Listcode.Add("3169901"); //测试手臂-吸--8号吸嘴 丢失IC
+                                writeDataHelper.RunLog("测试手臂-吸--8号吸嘴 丢失IC", 3);
+                            }
+                        }
+                    }
+
+                    if (ispass)
+                    {
+                        ProgramPause = true;
+                        IsPause = true;
+                    }
 
                     this.Invoke(new Action(() =>
                     {
@@ -351,7 +533,7 @@ namespace H5509_V2
                                             int dout = m * 8 + n + 1;
                                             string labelname = $"lbl_dout{dout}";
                                             设置信息.开site信息.SetSiteValue(sitenum, dout, "0");
-                                            string result = UpdateSiteStatus(设置信息.开site信息.Site名称, 6 + 1, 设置信息.开site信息.GetSiteValue(sitenum));
+                                            result = UpdateSiteStatus(设置信息.开site信息.Site名称, 6 + 1, 设置信息.开site信息.GetSiteValue(sitenum));
                                             if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
                                             result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
                                             if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
@@ -384,9 +566,9 @@ namespace H5509_V2
                                 }
                             }
 
-                            if (设置信息.测试机信息.总良率报警使能 
+                            if (设置信息.测试机信息.总良率报警使能
                                 && 出料数 >= 设置信息.测试机信息.总良率报警基数
-                                && 总良率报警间隔计数 >= 设置信息.测试机信息.总良率报警间隔 
+                                && 总良率报警间隔计数 >= 设置信息.测试机信息.总良率报警间隔
                                 && Auto1良率 <= 设置信息.测试机信息.总良率报警百分比)
                             {
                                 isyieldex = true;

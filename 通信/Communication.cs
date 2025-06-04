@@ -298,14 +298,13 @@ namespace H5509_V2
                 }
             }
 
-            //if (motionEx.testerIFParam.超时发送timeout)
+            if (设置信息.测试机信息.超时发送timeout)
             {
                 timeOutTimer[t].Start();
                 //发送timeout
                 Send($"@TIMEOUT {t.ToString("D2")}+");
                 return;
             }
-
 
             SiteTestState[t] = 3;
             Iswaitout[t] = true;

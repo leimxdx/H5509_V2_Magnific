@@ -186,6 +186,11 @@ namespace H5509_V2
                     //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
 
                     //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
+                    if (textBoxmqty.Text.Trim().Length == 0)
+                    {
+                        MessageBox.Show("请输入批次数量!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                     string[] getstr = textBoxFlowcaedno.Text.Split(':');
                     LotNo = getstr;
                     if (getstr.Length == 17)
@@ -202,6 +207,7 @@ namespace H5509_V2
                         {
                             textBoxmqty.Text = getstr[8];
                         }
+                        else getstr[8] = textBoxmqty.Text; //如果是手动输入就不修改扫码出来的数量
                         textBoxcode.Text = getstr[9];
                         textBoxcodecrc.Text = getstr[10];
                         textBoxstation.Text = getstr[11];
@@ -844,6 +850,17 @@ namespace H5509_V2
                     {
                         RunLog($"新开Site{i}");
 
+                        if (!InSiteQueue.Contains(i) //如果不在入料队列中
+                            && !SiteTestState.Contains(1) //测试区有料
+                            && !SiteTestState.Contains(2) //测试区有料测试中
+                            && !SiteTestState.Contains(3) //测试区有料已测试
+                            && !SiteTestState.Contains(4) //测试区有料待取走
+                            && !正在吸取后入料.Contains(true)) //测试区有料待取走
+                        { 
+                            InSiteQueue.Enqueue(i);
+                            RunLog($"添加Site{i}");
+                        }
+
                     }
                     else if (修改前开Site更改[i] && !保存开Site更改[i])
                     {
@@ -1114,6 +1131,14 @@ namespace H5509_V2
                             label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
                             //if (升温时间.TotalHours >= 1) label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
                             //else label6.Text = "HeatingTime=" + 升温时间.ToString(@"mm\:ss");
+
+                            if (温控加热)
+                            { 
+                                if (label10.Text != "停止")
+                                {
+                                    label10.Text = "停止";
+                                }
+                            }
                         }
 
                         Txt_loadnum.Text = 载入数.ToString();
@@ -1363,9 +1388,54 @@ namespace H5509_V2
 
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
-            Com.OutBin.Enqueue(new string[] { "02", "02", "02", "02", "02", "02", "02", "02" });
-            Com.Listtestsingal.Add(1);
-            SiteTestIC[1] = new bool[2][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //int i = 1;
+            //if (!InSiteQueue.Contains(i) //如果不在入料队列中
+            //                && !SiteTestState.Contains(1) //测试区有料
+            //                && !SiteTestState.Contains(2) //测试区有料测试中
+            //                && !SiteTestState.Contains(3) //测试区有料已测试
+            //                && !SiteTestState.Contains(4) //测试区有料待取走
+            //                && !正在吸取后入料.Contains(true)) //测试区有料待取走
+            //{
+            //    InSiteQueue.Enqueue(i);
+            //}
+
+            //H5509正在归零 = true;
+            //if (!安全门禁用 && !IsPause && 设备状态 == 1 || H5509归零 || H5509正在归零)
+            //{
+            //    string result = handler.门禁感应(out string[] iovalue);
+            //    if (result == "Success")
+            //    {
+            //        if (iovalue.Contains("0"))
+            //        {
+            //            if (iovalue[0] == "0")
+            //            {
+            //                Listcode.Add("9000000");
+            //                RunLog("前门禁被打开");
+            //            }
+            //            else if (iovalue[1] == "0")
+            //            {
+            //                Listcode.Add("9000010");
+            //                RunLog("后门禁被打开");
+            //            }
+            //            else if (iovalue[2] == "0")
+            //            {
+            //                Listcode.Add("9000020");
+            //                RunLog("左门禁被打开");
+            //            }
+            //            else if (iovalue[3] == "0")
+            //            {
+            //                Listcode.Add("9000040");
+            //                RunLog("右门禁被打开");
+            //            }
+            //            ProgramPause = true;
+            //            IsPause = true;
+            //        }
+            //    }
+            //}
+
+            //Com.OutBin.Enqueue(new string[] { "02", "02", "02", "02", "02", "02", "02", "02" });
+            //Com.Listtestsingal.Add(1);
+            //SiteTestIC[1] = new bool[2][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
 
             //int site = 6;
             //int dut = 4;

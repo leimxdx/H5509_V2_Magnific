@@ -7,8 +7,10 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
@@ -934,6 +936,51 @@ namespace H5509_V2
             return result;
         }
 
+        public bool CheckAircyStatus()
+        {
+            bool iscanstart = true;
+
+            for (short site = 0; site < 16; site++)
+            {
+                //1:判断测试模组上升感应是否亮起
+                string result = 获取位移气缸原位感应(site, out string xIoName);
+                if (result == "Success")
+                {
+                    if (xIoName == "0")
+                    {
+                        iscanstart = false;
+                        Listcode.Add($"10{site + 14:D2}001");
+                        RunLog($"(按下开始)site{site + 1}升降气缸未在上方"); //, 3
+                    }
+                }
+                else
+                {
+                    iscanstart = false;
+                    Listcode.Add($"10{site + 14:D2}001");
+                    RunLog($"(按下开始)site{site + 1}升降气缸感应器读取失败!" + result); //, 3
+                }
+
+                //2:判断测试模组后位移气缸感应是否亮起
+                result = 获取下压气缸原位感应(site, out xIoName);
+                if (result == "Success")
+                {
+                    if (xIoName == "0")
+                    {
+                        iscanstart = false;
+                        Listcode.Add($"10{site + 30:D2}001");
+                        RunLog($"(按下开始)site{site + 1}前后气缸未在后方"); //, 3
+                    }
+                }
+                else
+                {
+                    iscanstart = false;
+                    Listcode.Add($"10{site + 30:D2}001");
+                    RunLog($"(按下开始)site{site + 1}前后气缸感应器读取失败!" + result); //, 3
+                }
+            }
+            return iscanstart;
+        }
+
         #endregion
 
         #region 入料吸嘴
@@ -1400,18 +1447,108 @@ namespace H5509_V2
         {
             List<string> ioNames = new List<string>();
 
-            ioNames.Add("X076_飞梭后检测产品感应1");
-            ioNames.Add("X077_飞梭后检测产品感应2");
-            ioNames.Add("X078_飞梭后检测产品感应3");
             ioNames.Add("X079_飞梭后检测产品感应4");
-            ioNames.Add("X080_飞梭前检测产品感应1");
-            ioNames.Add("X081_飞梭前检测产品感应2");
-            ioNames.Add("X082_飞梭前检测产品感应3");
+            ioNames.Add("X078_飞梭后检测产品感应3");
+            ioNames.Add("X077_飞梭后检测产品感应2");
+            ioNames.Add("X076_飞梭后检测产品感应1");
             ioNames.Add("X083_飞梭前检测产品感应4");
+            ioNames.Add("X082_飞梭前检测产品感应3");
+            ioNames.Add("X081_飞梭前检测产品感应2");
+            ioNames.Add("X080_飞梭前检测产品感应1");
 
             string result = motionEx.GetDi(ioNames.ToArray(), out iovalues);
             if (result != "Success") RunLog("飞梭前后_检测产品感应IO读取失败!" + result);
             return result;
+        }
+
+        public void 飞梭_前后放歪报警(string[] iovalues)
+        {
+            if (飞梭2位置 == 0)
+            {
+                if (iovalues[0] == "0")
+                {
+                    Listcode.Add("5470004"); //梭车2-后-左边1号位IC放歪
+                    Listcode.Add("5470005"); //梭车2-后-右边1号位IC放歪
+                }
+                if (iovalues[1] == "0")
+                {
+                    Listcode.Add("5470004"); //梭车2-后-左边2号位IC放歪
+                    Listcode.Add("5470005"); //梭车2-后-右边2号位IC放歪
+                }
+                if (iovalues[2] == "0")
+                {
+                    Listcode.Add("5470004"); //梭车2-后-左边3号位IC放歪
+                    Listcode.Add("5470005"); //梭车2-后-右边3号位IC放歪
+                }
+                if (iovalues[3] == "0")
+                {
+                    Listcode.Add("5470004"); //梭车2-后-左边4号位IC放歪
+                    Listcode.Add("5470005"); //梭车2-后-右边4号位IC放歪
+                }
+                if (iovalues[4] == "0")
+                {
+                    Listcode.Add("5430000"); //梭车1-前-左边1号位IC放歪
+                    Listcode.Add("5430001"); //梭车1-前-右边1号位IC放歪
+                }
+                if (iovalues[5] == "0")
+                {
+                    Listcode.Add("5440000"); //梭车1-前-左边2号位IC放歪
+                    Listcode.Add("5440001"); //梭车1-前-右边2号位IC放歪
+                }
+                if (iovalues[6] == "0")
+                {
+                    Listcode.Add("5450000"); //梭车1-前-左边3号位IC放歪
+                    Listcode.Add("5450001"); //梭车1-前-右边3号位IC放歪
+                }
+                if (iovalues[7] == "0")
+                {
+                    Listcode.Add("5460000"); //梭车1-前-左边4号位IC放歪
+                    Listcode.Add("5460001"); //梭车1-前-右边4号位IC放歪
+                }
+            }
+            else
+            {
+                if (iovalues[0] == "0")
+                {
+                    Listcode.Add("5470002"); //梭车1-后-左边1号位IC放歪
+                    Listcode.Add("5470003"); //梭车1-后-右边1号位IC放歪
+                }
+                if (iovalues[1] == "0")
+                {
+                    Listcode.Add("5480002"); //梭车1-后-左边2号位IC放歪
+                    Listcode.Add("5480003"); //梭车1-后-右边2号位IC放歪
+                }
+                if (iovalues[2] == "0")
+                {
+                    Listcode.Add("5490002"); //梭车1-后-左边3号位IC放歪
+                    Listcode.Add("5490003"); //梭车1-后-右边3号位IC放歪
+                }
+                if (iovalues[3] == "0")
+                {
+                    Listcode.Add("5500002"); //梭车1-后-左边4号位IC放歪
+                    Listcode.Add("5500003"); //梭车1-后-右边4号位IC放歪
+                }
+                if (iovalues[4] == "0")
+                {
+                    Listcode.Add("5430002"); //梭车2-前-左边1号位IC放歪
+                    Listcode.Add("5430003"); //梭车2-前-右边1号位IC放歪
+                }
+                if (iovalues[5] == "0")
+                {
+                    Listcode.Add("5440002"); //梭车2-前-左边2号位IC放歪
+                    Listcode.Add("5440003"); //梭车2-前-右边2号位IC放歪
+                }
+                if (iovalues[6] == "0")
+                {
+                    Listcode.Add("5450002"); //梭车2-前-左边3号位IC放歪
+                    Listcode.Add("5450003"); //梭车2-前-右边3号位IC放歪
+                }
+                if (iovalues[7] == "0")
+                {
+                    Listcode.Add("5460002"); //梭车2-前-左边4号位IC放歪
+                    Listcode.Add("5460003"); //梭车2-前-右边4号位IC放歪
+                }
+            }
         }
 
         #endregion
@@ -1468,6 +1605,24 @@ namespace H5509_V2
 
         #endregion
 
+        #region 门禁
+
+        public string 门禁感应(out string[] iovalues)
+        {
+            List<string> ioNames = new List<string>();
+
+            ioNames.Add("X012_前门禁");
+            ioNames.Add("X013_后门禁");
+            ioNames.Add("X014_左门禁");
+            ioNames.Add("X015_右门禁");
+
+            string result = motionEx.GetDi(ioNames.ToArray(), out iovalues);
+            if (result != "Success") RunLog("门禁感应IO读取失败!" + result);
+            return result;
+        }
+
+        #endregion
+
         #region 加热模块
 
         public string 加热盘加热开启()
@@ -1502,6 +1657,7 @@ namespace H5509_V2
             }
             return result;
         }
+
         public string 梭车加热关闭()
         {
             string result = motionEx.SetDo("Y151_梭车加热", false);
@@ -2178,6 +2334,8 @@ namespace H5509_V2
 
         public string Load向上移动(int type = 0)
         {
+            待测盘上顶到最大值 = false;
+
             string axisName = "M13_Loader顶盘轴";
 
             string result = motionEx.AxisJogMove(axisName, true);
@@ -2875,8 +3033,6 @@ namespace H5509_V2
         {
             bool iscanstart = true;
 
-            form_alarm.CancelAllAlarm();
-
             if (!H5509归零)
             {
                 iscanstart = false;
@@ -2884,14 +3040,41 @@ namespace H5509_V2
                 Listcode.Add("1400445");
             }
 
-            if (温度模式 == "高温")
+            if (IsDutAllCLose()) //当初次开始时检测有没有开dut
             {
-                if (!温控加热)
+                writeDataHelper.RunLog("Dut全部被关闭，请至少开1个Dut进行测试", 3);
+                iscanstart = false;
+                Listcode.Add("1400442");
+            }
+
+            if (!安全门禁用)
+            {
+                string result = 门禁感应(out string[] iovalue);
+                if (result == "Success")
                 {
-                    iscanstart = false;
-                    RunLog("未开启加热");
+                    if (iovalue[0] == "0")
+                    {
+                        iscanstart = false;
+                        Listcode.Add("(按下开始)9000000");
+                    }
+                    else if (iovalue[1] == "0")
+                    {
+                        iscanstart = false;
+                        Listcode.Add("(按下开始)9000010");
+                    }
+                    else if (iovalue[2] == "0")
+                    {
+                        iscanstart = false;
+                        Listcode.Add("(按下开始)9000020");
+                    }
+                    else if (iovalue[3] == "0")
+                    {
+                        iscanstart = false;
+                        Listcode.Add("(按下开始)9000040");
+                    }
                 }
             }
+
 
             if (Com.IsOpenCom == false)
             {
@@ -2908,8 +3091,37 @@ namespace H5509_V2
                     Listcode.Add("1400440");
                 }
             }
+
+            if (温度模式 == "高温" && iscanstart)
+            {
+                if (!温控加热)
+                {
+                    string result = 加热盘加热开启();
+                    string result2 = H5509归零 ? 梭车加热开启() : " 设备未归零";
+                    string result3 = Site加热开启();
+                    if (result == "Success" && result2 == "Success" && result3 == "Success")
+                    {
+                        //label10.Text = "停止";
+                        温控加热 = true;
+                        温控达温 = false;
+                    }
+                    else
+                    {
+                        if (result != "Success") RunLog("加热盘加热开启失败!" + result);
+                        if (result2 != "Success") RunLog("梭车加热开启失败!" + result2);
+                        if (result3 != "Success") RunLog("Site加热开启失败!" + result3);
+                        iscanstart = false;
+                    }
+                }
+            }
+
             return iscanstart;
         }
+
+        //private bool 每次开始检查()
+        //{
+
+        //}
 
         public void debug()
         {
@@ -2967,29 +3179,33 @@ namespace H5509_V2
         {
             string[] ioInfos =
             {
-                "X001_开始",
-                "X002_暂停",
-                "X003_安全钮",
-                "X004_重试",
-                "X005_忽略",
-                "X006_定点停止",
-                "X007_定点开始",
-                "X008_结批",
-                "X009_一个循环",
-                "X010_归零",
-                "X011_换盘",
-                "X012_前门禁",
-                "X013_后门禁",
-                "X014_左门禁",
-                "X015_右门禁",
-                "X018_空盘门感应",
-                "X024_Load门感应",
-                "X038_BIN平移按键",
-                "X036_AUTO1门感应",
-                "X042_AUTO2门感应",
-                "X046_FIX1盘感应",
-                "X047_FIX2盘感应",
-                "X045_FIX3盘对射",
+                "X001_开始", //0
+                "X002_暂停", //1
+                "X003_安全钮", //2
+                "X004_重试", //3
+                "X005_忽略", //4
+                "X006_定点停止", //5
+                "X007_定点开始", //6
+                "X008_结批", //7
+                "X009_一个循环", //8
+                "X010_归零", //9
+                "X011_换盘", //10
+                "X012_前门禁", //11
+                "X013_后门禁", //12
+                "X014_左门禁", //13
+                "X015_右门禁", //14
+                "X018_空盘门感应", //15
+                "X024_Load门感应", //16
+                "X038_BIN平移按键", //17
+                "X036_AUTO1门感应", //18
+                "X042_AUTO2门感应", //19
+                "X046_FIX1盘感应", //20
+                "X047_FIX2盘感应", //21
+                "X045_FIX3盘对射", //22
+                "X034_AUTO1前对射", //23
+                "X035_AUTO1后对射", //24
+                "X040_AUTO2前对射", //25
+                "X041_AUTO2后对射", //26
             };
 
             while (true)
@@ -3016,42 +3232,113 @@ namespace H5509_V2
                             ProgramBtnStart = false;
                             RunLog("按下开始(界面)");
                         }
-                        else
-                        {
-                            RunLog("按下开始");
-                        }
+                        else RunLog("按下开始");
 
                         bool isstart = true;
+
+                        form_alarm.CancelAllAlarm();
 
                         if (Load正在下降回零 || Empty正在下降回零)
                         {
                             isstart = false;
                             RunLog("Load或Empty正在下降回零，无法开始");
 
-                            if (Empty正在下降回零)
-                            {
-                                IsEmptyPause = false;
-                            }
-                            if (Load正在下降回零)
-                            {
-                                IsLoadPause = false;
-                            }
+                            if (Empty正在下降回零) IsEmptyPause = false;
+                            if (Load正在下降回零) IsLoadPause = false;
                         }
 
-                        if (isstart && 开始检查())
+                        if (isstart && 设备状态 == 0)
                         {
-                            if (设备状态 == 0)
+                            if (io[15] == "0")
+                            {
+                                isstart = false;
+                                RunLog("Empty门未关闭");
+                                Listcode.Add("4018008");
+                            }
+
+                            if (io[16] == "0")
+                            {
+                                isstart = false;
+                                RunLog("Load门未关闭");
+                                Listcode.Add("4019008");
+                            }
+
+                            if (io[18] == "0")
+                            {
+                                isstart = false;
+                                RunLog("Auto1门未关闭");
+                                Listcode.Add("4020008");
+                            }
+
+                            if (io[19] == "0")
+                            {
+                                isstart = false;
+                                RunLog("Auto2门未关闭");
+                                Listcode.Add("4021008");
+                            }
+
+                            if (io[20] == "0")
+                            {
+                                isstart = false;
+                                RunLog("Fix1请放置空盘");
+                                Listcode.Add("4030009");
+                            }
+
+                            if (io[21] == "0")
+                            {
+                                isstart = false;
+                                RunLog("Fix2请放置空盘");
+                                Listcode.Add("4031009");
+                            }
+
+                            if (io[22] == "1")
+                            {
+                                isstart = false;
+                                RunLog("Fix3请放置空盘");
+                                Listcode.Add("4032009");
+                            }
+
+                            if (io[23] == "1")
+                            {
+                                isstart = false;
+                                RunLog("AUTO1前对射感应到有Tray盘");
+                                Listcode.Add("4020001");
+                            }
+
+                            if (io[24] == "1")
+                            {
+                                isstart = false;
+                                RunLog("AUTO1后对射感应到有Tray盘");
+                                Listcode.Add("4020001");
+                            }
+
+                            if (io[25] == "1")
+                            {
+                                isstart = false;
+                                RunLog("AUTO2前对射感应到有Tray盘");
+                                Listcode.Add("4021001");
+                            }
+
+                            if (io[26] == "1")
+                            {
+                                isstart = false;
+                                RunLog("AUTO2后对射感应到有Tray盘");
+                                Listcode.Add("4021001");
+                            }
+
+                            isstart = CheckAircyStatus();
+
+                            if (isstart)
                             {
                                 StartRunIn(); //根据开Site情况添加入料队列
                                 ///更新入料目标值();
                                 开始时间 = DateTime.Now;
                                 //开始前的IO检查
                             }
-                            else
-                            {
-                                //每次开始前的IO检查
-                            }
+                        }
 
+                        if (isstart && 开始检查())
+                        {
                             if (Empty舱门上顶标记)
                             {
                                 if (!Empty舱门正在上顶)
@@ -3158,6 +3445,11 @@ namespace H5509_V2
                             motionEx.SetDo("Y008_结批灯", false);
                             motionEx.SetDo("Y014_绿灯", true);
                         }
+                        else
+                        {
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                     }
 
                     bool stop = io[1] == "1"; //"X002_暂停"
@@ -3184,6 +3476,8 @@ namespace H5509_V2
                         if (Load正在下降回零 || Load舱门上顶标记) APPmaster.IsLoadPause = true;
 
                         if (设备状态 == 1) 设备状态 = 2;
+
+                        if (设备状态 == 0) motionEx.Motion.AllAxisStop();
 
                         form_alarm.alarmLight(0, 1, 0, 0);
                         //motionEx.Motion.AllAxisStop();
@@ -3259,34 +3553,38 @@ namespace H5509_V2
                     bool stopbatch = io[7] == "1"; //X008_结批
                     if (CheckEdgeSingal(stopbatch, ref StopBatchRiseCache, true))
                     {
-                        if (!强制结批标记)
-                        {
-                            if (!结批触发定时器.Enabled)
-                            {
-                                结批触发定时器.Start();
-                                RunLog("结批按钮开始计时");
-                            }
-                        }
-                        if (!入料IC吸不起结批)
-                        {
-                            入料IC吸不起结批 = true;
-                            按下结批时间 = DateTime.Now;
-                        }
-                        if (!无待测盘结批)
-                        {
-                            无待测盘结批 = true;
-                            按下结批时间 = DateTime.Now;
-                        }
                         RunLog("按下结批");
-                        motionEx.SetDo("Y004_重试灯", false);
-                        motionEx.SetDo("Y005_忽略灯", false);
-                        motionEx.SetDo("Y008_结批灯", true);
-                        motionEx.SetDo("Y011_换盘灯", false);
+                        if (设备状态 != 0)
+                        {
+                            if (!强制结批标记)
+                            {
+                                if (!结批触发定时器.Enabled)
+                                {
+                                    结批触发定时器.Start();
+                                    RunLog("结批按钮开始计时");
+                                }
+                            }
+                            if (!入料IC吸不起结批)
+                            {
+                                入料IC吸不起结批 = true;
+                                按下结批时间 = DateTime.Now;
+                            }
+                            if (!无待测盘结批)
+                            {
+                                无待测盘结批 = true;
+                                按下结批时间 = DateTime.Now;
+                            }
+                            motionEx.SetDo("Y004_重试灯", false);
+                            motionEx.SetDo("Y005_忽略灯", false);
+                            motionEx.SetDo("Y008_结批灯", true);
+                            motionEx.SetDo("Y011_换盘灯", false);
+                        }
                         //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, true);
                         //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
                     }
+
                     if (CheckEdgeSingal(stopbatch, ref StopBatchFallCache, false))
                     {
                         结批触发定时器.Stop();
@@ -3303,41 +3601,75 @@ namespace H5509_V2
                     if (CheckEdgeSingal(home, ref HomeRiseCache, true))
                     {
                         RunLog("按下归零");
-                        if (!H5509正在归零 && 设备状态 == 0)
+                        bool ishome = true;
+                        if (!安全门禁用 && !H5509正在归零 && 设备状态 != 0)
                         {
-                            参数初始化();
-                            if (!Com.IsconnectTester)
+                            result = 门禁感应(out string[] iovalue);
+                            if (result == "Success")
                             {
-                                刷新批次信息();
+                                if (iovalue.Contains("0"))
+                                {
+                                    if (iovalue[0] == "0")
+                                    {
+                                        Listcode.Add("9000000");
+                                        RunLog("(按下归零)前门禁被打开");
+                                    }
+                                    else if (iovalue[1] == "0")
+                                    {
+                                        Listcode.Add("9000010");
+                                        RunLog("(按下归零)后门禁被打开");
+                                    }
+                                    else if (iovalue[2] == "0")
+                                    {
+                                        Listcode.Add("9000020");
+                                        RunLog("(按下归零)左门禁被打开");
+                                    }
+                                    else if (iovalue[3] == "0")
+                                    {
+                                        Listcode.Add("9000040");
+                                        RunLog("(按下归零)右门禁被打开");
+                                    }
+                                    ishome = false;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
-                            H5509正在归零 = true;
-                            H5509归零 = false;
-                            IsPause = false;
-                            结批完成 = false;
-                            motionEx.SetDo("Y001_开始灯", false);
-                            motionEx.SetDo("Y002_暂停灯", false);
-                            motionEx.SetDo("Y010_归零灯", true);
-                            if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
-                            Task.Run(() =>
+                            if (ishome)
                             {
-                                result = 整机回零流程();
-                                if (result == "Success")
+                                参数初始化();
+                                if (!Com.IsconnectTester)
                                 {
-                                    H5509归零 = true;
-                                    Listcode.Add("1400444");
-                                    RunLog("归零完成");
+                                    刷新批次信息();
                                 }
-                                else
-                                {
-                                    Listcode.Add("1400420");
-                                    RunLog("归零失败");
-                                }
-
-                                H5509正在归零 = false;
+                                H5509正在归零 = true;
+                                H5509归零 = false;
+                                IsPause = false;
+                                结批完成 = false;
                                 motionEx.SetDo("Y001_开始灯", false);
                                 motionEx.SetDo("Y002_暂停灯", false);
-                                motionEx.SetDo("Y010_归零灯", false);
-                            });
+                                motionEx.SetDo("Y010_归零灯", true);
+                                if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
+                                Task.Run(() =>
+                                {
+                                    result = 整机回零流程();
+                                    if (result == "Success")
+                                    {
+                                        H5509归零 = true;
+                                        Listcode.Add("1400444");
+                                        RunLog("归零完成");
+                                    }
+                                    else
+                                    {
+                                        Listcode.Add("1400420");
+                                        RunLog("归零失败");
+                                    }
+
+                                    H5509正在归零 = false;
+                                    motionEx.SetDo("Y001_开始灯", false);
+                                    motionEx.SetDo("Y002_暂停灯", false);
+                                    motionEx.SetDo("Y010_归零灯", false);
+                                });
+                            }
                         }
                     }
 
@@ -3351,37 +3683,43 @@ namespace H5509_V2
                     if (CheckEdgeSingal(x18, ref EmptyDoorRiseCache, true))
                     {
                         RunLog("Empty仓门已关闭");
-                        if (Empty正在下降回零 && Tray盘模式) IsEmptyPause = true;
+                        if (设备状态 != 0)
+                        {
+                            if (Empty正在下降回零 && Tray盘模式) IsEmptyPause = true;
+                        }
                     }
                     else if (CheckEdgeSingal(x18, ref EmptyDoorFallCache, false))
                     {
                         RunLog("Empty仓门被打开");
-                        if (Empty下降回零开关 && 设备状态 == 2)
+                        if (设备状态 != 0)
                         {
-                            if (!Empty正在下降回零)
+                            if (Empty下降回零开关 && 设备状态 == 2)
                             {
-                                Empty正在下降回零 = true;
-                                IsEmptyPause = false;
-                                Empty舱门开启标记 = 1;
-                                Empty下降回零标记 = 2;
-                                RunLog("Empty正在执行下降回零...");
-                                Task task = Task.Run(() =>
+                                if (!Empty正在下降回零)
                                 {
-                                    while (true)
+                                    Empty正在下降回零 = true;
+                                    IsEmptyPause = false;
+                                    Empty舱门开启标记 = 1;
+                                    Empty下降回零标记 = 2;
+                                    RunLog("Empty正在执行下降回零...");
+                                    Task task = Task.Run(() =>
                                     {
-                                        if (Empty下降回零标记 == 1)
+                                        while (true)
                                         {
-                                            Empty舱门上顶标记 = true;
-                                            Empty舱门开启标记 = 0;
-                                            break;
+                                            if (Empty下降回零标记 == 1)
+                                            {
+                                                Empty舱门上顶标记 = true;
+                                                Empty舱门开启标记 = 0;
+                                                break;
+                                            }
+                                            else Thread.Sleep(10);
                                         }
-                                        else Thread.Sleep(10);
-                                    }
-                                    Empty正在下降回零 = false;
-                                    RunLog("Empty下降回零完成");
-                                });
+                                        Empty正在下降回零 = false;
+                                        RunLog("Empty下降回零完成");
+                                    });
+                                }
+                                else IsEmptyPause = false;
                             }
-                            else IsEmptyPause = false;
                         }
                     }
 
@@ -3389,37 +3727,43 @@ namespace H5509_V2
                     if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
                     {
                         RunLog("Load仓门已关闭");
-                        if (Load正在下降回零 && Tray盘模式) IsLoadPause = true;
+                        if (设备状态 != 0)
+                        {
+                            if (Load正在下降回零 && Tray盘模式) IsLoadPause = true;
+                        }
                     }
                     else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
                     {
                         RunLog("Load仓门被打开");
-                        if (Load下降回零开关 && 设备状态 == 2)
+                        if (设备状态 != 0)
                         {
-                            if (!Load正在下降回零)
+                            if (Load下降回零开关 && 设备状态 == 2)
                             {
-                                Load正在下降回零 = true;
-                                IsLoadPause = false;
-                                Load舱门开启标记 = 1;
-                                Load下降回零标记 = 2;
-                                RunLog("Load正在执行下降回零...");
-                                Task task = Task.Run(() =>
+                                if (!Load正在下降回零)
                                 {
-                                    while (true)
+                                    Load正在下降回零 = true;
+                                    IsLoadPause = false;
+                                    Load舱门开启标记 = 1;
+                                    Load下降回零标记 = 2;
+                                    RunLog("Load正在执行下降回零...");
+                                    Task task = Task.Run(() =>
                                     {
-                                        if (Load下降回零标记 == 1)
+                                        while (true)
                                         {
-                                            Load舱门上顶标记 = true;
-                                            Load舱门开启标记 = 0;
-                                            break;
+                                            if (Load下降回零标记 == 1)
+                                            {
+                                                Load舱门上顶标记 = true;
+                                                Load舱门开启标记 = 0;
+                                                break;
+                                            }
+                                            else Thread.Sleep(10);
                                         }
-                                        else Thread.Sleep(10);
-                                    }
-                                    Load正在下降回零 = false;
-                                    RunLog("Load下降回零完成");
-                                });
+                                        Load正在下降回零 = false;
+                                        RunLog("Load下降回零完成");
+                                    });
+                                }
+                                else IsLoadPause = false;
                             }
-                            else IsLoadPause = false;
                         }
                     }
 
@@ -3466,18 +3810,26 @@ namespace H5509_V2
                         else RunLog("获取M11_Fix3放IC轴状态失败!" + result);
                     }
 
-                    bool x36 = io[18] == "1";  //X018_空盘门感应
+                    bool x36 = io[18] == "1";  //X036_Auto1门感应
                     if (CheckEdgeSingal(x36, ref Auto1DoorRiseCache, true))
                     {
                         RunLog("Auto1仓门已关闭");
+
+                        if (设备状态 != 0)
+                        {
+
+                        }
                     }
                     else if (CheckEdgeSingal(x36, ref Auto1DoorFallCache, false))
                     {
-                        Auto1料仓打开标记 = false;
                         RunLog("Auto1仓门被打开");
+                        if (设备状态 != 0)
+                        {
+                            Auto1料仓打开标记 = false;
+                        }
                     }
 
-                    bool x42 = io[19] == "1"; //X024_Load门感应
+                    bool x42 = io[19] == "1"; //X042_Auto2门感应
                     if (CheckEdgeSingal(x42, ref Auto2DoorRiseCache, true))
                     {
                         RunLog("Auto2仓门已关闭");
@@ -3525,6 +3877,39 @@ namespace H5509_V2
                     {
                         if (!Fix3Tray盘拿走标记) Fix3Tray盘拿走标记 = true;
                         RunLog("Fix3Tray盘被拿走");
+                    }
+
+                    if (!安全门禁用 && !IsPause && 设备状态 == 1 || H5509归零 || H5509正在归零)
+                    {
+                        result = 门禁感应(out string[] iovalue);
+                        if (result == "Success")
+                        {
+                            if (iovalue.Contains("0"))
+                            {
+                                if (iovalue[0] == "0")
+                                {
+                                    Listcode.Add("9000000");
+                                    RunLog("(运行中)前门禁被打开");
+                                }
+                                else if (iovalue[1] == "0")
+                                {
+                                    Listcode.Add("9000010");
+                                    RunLog("(运行中)后门禁被打开");
+                                }
+                                else if (iovalue[2] == "0")
+                                {
+                                    Listcode.Add("9000020");
+                                    RunLog("(运行中)左门禁被打开");
+                                }
+                                else if (iovalue[3] == "0")
+                                {
+                                    Listcode.Add("9000040");
+                                    RunLog("(运行中)右门禁被打开");
+                                }
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                        }
                     }
                 }
                 Thread.Sleep(5);
@@ -3716,10 +4101,12 @@ namespace H5509_V2
                                 if (value != "0")
                                 {
                                     RunLog($"Auto1前有盘感应到有Tray盘,value:" + value);
+                                    Listcode.Add("4020001");
                                 }
                                 if (value2 != "0")
                                 {
                                     RunLog($"Auto2前有盘感应到有Tray盘,value:" + value2);
+                                    Listcode.Add("4021001");
                                 }
                             }
                         }
@@ -3727,8 +4114,16 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto1_前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto2_前Tray存在感应失败！" + result2);
+                            if (result != "Success")
+                            {
+                                RunLog($"读取Auto1_前Tray存在感应失败！" + result);
+                                Listcode.Add("4020001");
+                            }
+                            if (result2 != "Success")
+                            {
+                                RunLog($"读取Auto2_前Tray存在感应失败！" + result2);
+                                Listcode.Add("4021001");
+                            }
                         }
                         break;
 
@@ -3960,6 +4355,14 @@ namespace H5509_V2
 
                         结批按钮闪烁的定时器.Stop();
                         motionEx.SetDo("Y008_结批灯", false);
+                        Listcode.Add("1400130");
+
+                        //Listcode.Add("1400100"); //一次循环完成
+
+                        if (载入数 != 出料数 || 载入数 != Convert.ToInt32(LotNo[8]))
+                        {
+                            Listcode.Add("1400443");
+                        }
 
                         RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结批流程完成");
                         PS结批流程.StepID = 500;
@@ -4526,7 +4929,8 @@ namespace H5509_V2
                                 {
                                     if (lsopen[i] && opens[i] == 0)
                                     {
-                                        RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->302{i + 1:D2}00,入料Z{i + 1}吸料失败");
+                                        Listcode.Add($"30{i + 1}0000");
+                                        RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->30{i + 1}0000,入料Z{i + 1}吸料失败");
                                     }
                                 }
 
@@ -4861,7 +5265,8 @@ namespace H5509_V2
                                 {
                                     if (lsopen[i] && opens[i] == 0)
                                     {
-                                        RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->302{i + 1:D2}00,入料Z{i + 1}吸料失败");
+                                        Listcode.Add($"30{i + 1}0000");
+                                        RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->30{i + 1}0000,入料Z{i + 1}吸料失败");
                                     }
                                 }
                                 入料IC吸不起结批 = false;
@@ -5449,7 +5854,8 @@ namespace H5509_V2
                                 {
                                     if (lsopen[i] && opens[i] == 1)
                                     {
-                                        RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->302{i + 1:D2}00,入料Z{i + 1}放料失败");
+                                        Listcode.Add($"30{i + 1}0002");
+                                        RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->30{i + 1}0002,入料Z{i + 1}放料失败");
                                     }
                                 }
                                 入料IC忽略 = false;
@@ -7385,23 +7791,50 @@ namespace H5509_V2
                         result = 飞梭_前后检测产品感应(out string[] iovalues);
                         if (result == "Success")
                         {
-                            //if (!iovalues.Contains("0"))
-                            //{
-                            PS入飞梭移动流程.StepID = 515;
-                            //}
-                            //else
-                            //{
-                            if (iovalues[0] == "0") RunLog("X076_飞梭后检测产品感应1 IC放歪");
-                            if (iovalues[1] == "0") RunLog("X077_飞梭后检测产品感应2 IC放歪");
-                            if (iovalues[2] == "0") RunLog("X078_飞梭后检测产品感应3 IC放歪");
-                            if (iovalues[3] == "0") RunLog("X079_飞梭后检测产品感应4 IC放歪");
-                            if (iovalues[4] == "0") RunLog("X080_飞梭前检测产品感应1 IC放歪");
-                            if (iovalues[5] == "0") RunLog("X081_飞梭前检测产品感应2 IC放歪");
-                            if (iovalues[6] == "0") RunLog("X082_飞梭前检测产品感应3 IC放歪");
-                            if (iovalues[7] == "0") RunLog("X083_飞梭前检测产品感应4 IC放歪");
-                            //ProgramPause = true;
-                            //IsPause = true;
-                            //}
+                            if (!iovalues.Contains("0"))
+                            {
+                                PS入飞梭移动流程.StepID = 515;
+                            }
+                            else
+                            {
+                                if (iovalues[0] == "0")
+                                {
+                                    RunLog("飞梭后检测产品感应4 IC放歪"); //X079_
+                                }
+                                if (iovalues[1] == "0")
+                                {
+                                    RunLog("飞梭后检测产品感应3 IC放歪"); //X078_
+                                }
+                                if (iovalues[2] == "0")
+                                {
+                                    RunLog("飞梭后检测产品感应2 IC放歪"); //X077_
+                                }
+                                if (iovalues[3] == "0")
+                                {
+                                    RunLog("飞梭后检测产品感应1 IC放歪"); //X076_
+                                }
+                                if (iovalues[4] == "0")
+                                {
+                                    RunLog("飞梭前检测产品感应4 IC放歪"); //X083_
+                                }
+                                if (iovalues[5] == "0")
+                                {
+                                    RunLog("飞梭前检测产品感应3 IC放歪"); //X082_
+                                }
+                                if (iovalues[6] == "0")
+                                {
+                                    RunLog("飞梭前检测产品感应2 IC放歪"); //X081_
+                                }
+                                if (iovalues[7] == "0")
+                                {
+                                    RunLog("飞梭前检测产品感应1 IC放歪"); //X080_
+                                }
+
+                                飞梭_前后放歪报警(iovalues);
+
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
                         }
                         break;
 
@@ -7681,7 +8114,7 @@ namespace H5509_V2
 
                                             //for (int i = 0; i < InSiteQueue.Count; i++)
                                             //{
-                                                
+
                                             //}
                                             //InSiteQueue.Contains(site);
                                         }
@@ -7730,6 +8163,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴_张卡气缸闭合失败!" + result);
+                            Listcode.Add($"1011001");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -7765,6 +8199,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴张开气缸到位输入读取失败!" + result);
+                            Listcode.Add($"1011001");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -7958,7 +8393,7 @@ namespace H5509_V2
                                     if (lsopen[i] && opens[i] == 0)
                                     {
                                         Listcode.Add($"3{i + 9:D2}9900");
-                                        RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->302{i + 1:D2}00,测试Z{i + 1}吸料失败");
+                                        RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->3{i + 9:D2}9900,测试Z{i + 1}吸料失败");
                                     }
                                 }
                                 测试IC忽略 = false;
@@ -8042,6 +8477,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴_张开失败!" + result);
+                            Listcode.Add($"1011000");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8081,6 +8517,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴张开气缸原位输入读取失败!" + result);
+                            Listcode.Add($"1011000");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8407,6 +8844,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴_张卡气缸张开失败!" + result);
+                            Listcode.Add($"1011001");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8446,6 +8884,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴_张开气缸到位信号读取失败!" + result);
+                            Listcode.Add($"1011001");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8728,6 +9167,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴_闭合失败!" + result);
+                            Listcode.Add($"1011000");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8764,6 +9204,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试吸嘴张开气缸到位输入读取失败!" + result);
+                            Listcode.Add($"1011000");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9007,6 +9448,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试区Site{site + 1}气缸前移失败!" + result);
+                            Listcode.Add($"8{site:D2}019");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9024,6 +9466,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试区Site{site + 1}气缸下压失败!" + result);
+                            Listcode.Add($"8{site:D2}019");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9136,6 +9579,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试区Site{site + 1}气缸抬升失败!" + result);
+                            Listcode.Add($"8{site:D2}019");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9154,6 +9598,7 @@ namespace H5509_V2
                         else
                         {
                             RunLog($"测试区Site{site + 1}气缸后移失败!" + result);
+                            Listcode.Add($"8{site:D2}019");
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9304,6 +9749,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog("空盘区没有空盘");
+                            Listcode.Add("4018004"); //添加报警弹窗
                             PS空盘上顶流程.StepID = 505;
                         }
                         else
@@ -9413,6 +9859,7 @@ namespace H5509_V2
                             {
                                 RunLog($"M12_Empty顶盘轴当前行程{prfpos}<{空盘满盘判断值}");
                                 RunLog("空盘区空盘放满");
+                                Listcode.Add("4018006");
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Empty料仓打开标记 = true;
@@ -9722,6 +10169,7 @@ namespace H5509_V2
                             无待测盘结批 = false;
                             APPmaster.ProgramPause = true;
                             IsPause = true;
+                            Listcode.Add("4019003"); //添加报警弹窗
                             RunLog("待测区没有盘");
                             PS待测盘上顶流程.StepID = 610;
                         }
@@ -10858,6 +11306,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray上下气缸未在原位");
+                                Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                             }
                         }
                         else
@@ -10865,6 +11314,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -10883,6 +11333,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray夹爪气缸未在原位");
+                                Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                             }
                         }
                         else
@@ -10890,6 +11341,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -10922,6 +11374,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸到位输出失败！" + result);
+                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -10938,6 +11391,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸到位输出失败！" + result);
+                            Listcode.Add("1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -10954,6 +11408,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输出失败！" + result);
+                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -10999,6 +11454,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输出失败！" + result);
+                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11170,6 +11626,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray上下气缸未在原位");
+                                Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                             }
                         }
                         else
@@ -11177,6 +11634,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -11195,6 +11653,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray夹爪气缸未在原位");
+                                Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                             }
                         }
                         else
@@ -11202,6 +11661,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11250,6 +11710,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸到位输出失败！" + result);
+                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11266,6 +11727,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸到位输出失败！" + result);
+                            Listcode.Add("1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11282,6 +11744,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输出失败！" + result);
+                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -11324,6 +11787,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输出失败！" + result);
+                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11526,6 +11990,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray上下气缸未在原位");
+                                Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                             }
                         }
                         else
@@ -11533,6 +11998,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -11551,6 +12017,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray夹爪气缸未夹紧");
+                                Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                             }
                         }
                         else
@@ -11558,6 +12025,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11602,6 +12070,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸到位输出失败！" + result);
+                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11618,6 +12087,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输出失败！" + result);
+                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11634,6 +12104,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输出失败！" + result);
+                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -11768,6 +12239,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray上下气缸未在原位");
+                                Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                             }
                         }
                         else
@@ -11775,6 +12247,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -11793,6 +12266,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray夹爪气缸未夹紧");
+                                Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                             }
                         }
                         else
@@ -11800,6 +12274,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11905,6 +12380,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸到位输出失败！" + result);
+                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11921,6 +12397,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输出失败！" + result);
+                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -11937,6 +12414,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输出失败！" + result);
+                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -12027,6 +12505,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"Auto1料仓满料！");
+                            Listcode.Add("4020001");//自动盘1区--盘放满(满料未拿走)
                             PS抓盘手臂放空盘到Auto1流程.StepID = 555;
                         }
                         else Thread.Sleep(10);
@@ -12044,6 +12523,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"Auto1料仓满料");
+                            Listcode.Add("4020001");//自动盘1区--盘放满(满料未拿走)
                         }
                         break;
 
@@ -12144,6 +12624,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸到位输出失败！" + result);
+                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -12160,6 +12641,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输出失败！" + result);
+                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -12176,6 +12658,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输出失败！" + result);
+                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -12326,6 +12809,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray上下气缸未在原位");
+                                Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                             }
                         }
                         else
@@ -12333,6 +12817,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -12351,6 +12836,7 @@ namespace H5509_V2
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"移Tray夹爪气缸未夹紧");
+                                Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                             }
                         }
                         else
@@ -12358,6 +12844,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输入读取失败！" + result);
+                            Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -12463,6 +12950,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸到位输出失败！" + result);
+                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -12479,6 +12967,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输出失败！" + result);
+                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -12495,6 +12984,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输出失败！" + result);
+                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 
@@ -12584,6 +13074,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"Auto2料仓满料！");
+                            Listcode.Add("4021001");//自动盘2区--盘放满(满料未拿走)
                             PS抓盘手臂放空盘到Auto2流程.StepID = 555;
                         }
                         else Thread.Sleep(10);
@@ -12601,6 +13092,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"Auto1料仓满料");
+                            Listcode.Add("4021001");//自动盘2区--盘放满(满料未拿走)
                         }
                         break;
 
@@ -12700,6 +13192,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸到位输出失败！" + result);
+                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -12716,6 +13209,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray夹爪气缸原位输出失败！" + result);
+                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
                         }
                         break;
 
@@ -12732,6 +13226,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             RunLog($"移Tray上下气缸原位输出失败！" + result);
+                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
                         }
                         break;
 

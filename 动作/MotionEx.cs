@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
+using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using DocumentFormat.OpenXml.Office2019.Excel.ThreadedComments;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -809,7 +810,7 @@ namespace H5509_V2
         /// </summary>
         /// <param name="ioName"></param>
         /// <returns></returns>
-        private string GetIOInfo(string ioName, out IOInfo ioInfo)
+        public string GetIOInfo(string ioName, out IOInfo ioInfo)
         {
             ioInfo = null;
             for (int i = 0; i < APPmaster.IOList.Count; i++)
@@ -850,6 +851,20 @@ namespace H5509_V2
             }
             if (ioInfos.Count == ioNames.Length) return "Success";
             else return "有IO编号不存在";
+        }
+
+        public string GetDi(string 模块类型, short 核号, short 索引, out string value)
+        {
+            value = "";
+            if (模块类型 == "gLink200")
+            {
+                return Motion.GLink_GetExtDi(核号, 索引, out value);
+            }
+            else if (模块类型 == "GNM601")
+            {
+                return Motion.GNM601_GetDi(核号, 索引, out value);
+            }
+            else return "未知IO模块";
         }
 
         /// <summary>
@@ -929,6 +944,20 @@ namespace H5509_V2
                 return "Success";
             }
             else return result;
+        }
+
+        public string GetDO(string 模块类型, short 核号, short 索引, out string value)
+        {
+            value = "";
+            if (模块类型 == "gLink200")
+            {
+                return Motion.GLink_GetExtDO(核号, 索引, out value);
+            }
+            else if (模块类型 == "GNM601")
+            {
+                return Motion.GNM601_GetDo(核号, 索引, out value);
+            }
+            else return "未知IO模块";
         }
 
         /// <summary>

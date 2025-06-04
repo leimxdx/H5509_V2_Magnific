@@ -527,7 +527,7 @@ namespace H5509_V2
 
         public static int 空盘下降最小值 = 10000;
 
-        public static int 空盘满盘判断值 = 367864;//12700
+        public static int 空盘满盘判断值 = 30000; //367864//12700
 
         public static bool 待测盘上顶到最大值 = false;
 
@@ -606,6 +606,18 @@ namespace H5509_V2
         public static short 飞梭后入料状态;
 
         public static short 飞梭后出料状态;
+
+        public static bool InNozzleIC = false;
+
+        public static bool[] InNozzleICOpen = new bool[4];
+
+        public static bool OutNozzleIC = false;
+
+        public static bool[] OutNozzleICOpen = new bool[4];
+
+        public static bool TestNozzleIC = false;
+
+        public static bool[] TestNozzleICOpen = new bool[8];
 
         public static bool[] 保存开Site更改;
 
@@ -2951,6 +2963,19 @@ namespace H5509_V2
                     {
                         return true;
                     }
+                }
+            }
+            return false;
+        }
+
+        public static bool IsDutAllCLose()
+        {
+            SiteStatus sitestatus = 设置信息.开site信息;
+            for (int i = 0; i < 16; i++)
+            {
+                if (sitestatus.GetSiteValue(i).Contains("1"))
+                {
+                    return true;
                 }
             }
             return false;
