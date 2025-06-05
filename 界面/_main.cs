@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.InkML;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
@@ -159,7 +161,6 @@ namespace H5509_V2
 
             放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; //防止报错
 
-
             刷新开Site状态();
 
             WindowsButtonBind(); //Open/Close按钮绑定
@@ -186,7 +187,7 @@ namespace H5509_V2
                     //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
 
                     //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
-                    if (textBoxmqty.Text.Trim().Length == 0)
+                    if (uiCheckBox1.Checked && textBoxmqty.Text.Trim().Length == 0)
                     {
                         MessageBox.Show("请输入批次数量!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -207,7 +208,11 @@ namespace H5509_V2
                         {
                             textBoxmqty.Text = getstr[8];
                         }
-                        else getstr[8] = textBoxmqty.Text; //如果是手动输入就不修改扫码出来的数量
+                        else
+                        {
+                            getstr[8] = textBoxmqty.Text; //如果是手动输入就不修改扫码出来的数量
+                            uiCheckBox1.Checked = false;
+                        }
                         textBoxcode.Text = getstr[9];
                         textBoxcodecrc.Text = getstr[10];
                         textBoxstation.Text = getstr[11];
@@ -1388,6 +1393,56 @@ namespace H5509_V2
 
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
+            //int sitenum = 1;
+            //int doutnum = sitenum * 8;
+            //bool[][] open = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //string[] bins = { "01", "01", "01", "01", "01", "01", "01", "01" };
+            //for (int m = 0; m < open.Length; m++)
+            //{
+            //    for (int n = 0; n < open[m].Length; n++)
+            //    {
+            //        string doutstr = $"{sitenum:D2}{m * 4 + n + 1}";
+            //        if (open[m][n])
+            //        {
+            //            if (Auto1.Contains(bins[m * 4 + n]))
+            //            {
+            //                Dout128PassNumber[doutnum + (m * 4 + n)]++;
+            //                doutContinueFail[sitenum][n + m * 4] = 0;
+            //            }
+            //            else
+            //            {
+            //                Dout128FailNumber[doutnum + (m * 4 + n)]++;
+            //                doutContinueFail[sitenum][n + m * 4]++;
+            //                单dut总不良计数[sitenum][n + m * 4]++;
+            //                单dut总不良累计计数[sitenum][n + m * 4]++;
+            //                总良率报警间隔计数++;
+            //            }
+
+            //            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SocketUse set Num=Num+1 where Id='{doutstr}'");
+            //            if (line <= 0) RunLog($"update SocketUse set Num=Num+1 where Id='{doutstr}',返回:{line}");
+            //        }
+
+            //        int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
+            //        int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
+            //        RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
+            //        RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
+            //    }
+            //}
+            //int[] opens = new int[4] { 0, 0, 0, 0 };
+            //int xPoint = 0;
+            //int yPoint = 6;
+
+            //HeatDicPoint["0,6"] = true;
+            //HeatDicPoint["0,7"] = true;
+            //HeatDicPoint["5,10"] = true;
+            //HeatDicPoint["5,11"] = true;
+            //HeatDicTimer["0,6"].Status = 2;
+            //HeatDicTimer["0,7"].Status = 2;
+            //HeatDicTimer["5,10"].Status = 2;
+            //HeatDicTimer["5,11"].Status = 2;
+
+            //APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 0, true, 2, out bool[] lsopen, out int index);
+
             //int i = 1;
             //if (!InSiteQueue.Contains(i) //如果不在入料队列中
             //                && !SiteTestState.Contains(1) //测试区有料

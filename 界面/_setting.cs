@@ -5,6 +5,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Reflection;
 using System.Resources;
@@ -18,6 +19,7 @@ using System.Xml.Linq;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Vml.Office;
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Sunny.UI;
 using static GTN.mc;
@@ -90,6 +92,12 @@ namespace H5509_V2
             GNM601Home = new Control[6] { label158, label162, label165, label174, label171, label168 };
             GNM601LimitN = new Control[6] { label159, label163, label166, label175, label172, label169 };
             GNM601LimitP = new Control[6] { label161, label164, label167, label176, label173, label170 };
+
+            uiComboBox11.DataSource = SerialPort.GetPortNames();
+            uiComboBox12.DataSource = new string[] { "9600", "19200", "38400", "57600", "115200" };
+            uiComboBox14.DataSource = new string[] { "None", "Odd", "Even" };
+            uiComboBox13.DataSource = new string[] { "7", "8" };
+            uiComboBox15.DataSource = new string[] { "1", "2" };
         }
 
         public string GetAxisStatus(short core, short axis, ref bool[] gNME601AxisStatus)
@@ -2713,6 +2721,12 @@ namespace H5509_V2
             numericUpDown_测试超时时间.Text = tester.测试超时时间.ToString();
             numericUpDown_timeout超时时间.Text = tester.timeout超时时间.ToString();
             checkBox_timeout.Checked = tester.超时发送timeout;
+
+            uiComboBox11.Text = tester.串口号;
+            uiComboBox12.Text = tester.波特率.ToString();
+            uiComboBox14.Text = tester.校验位.ToString();
+            uiComboBox13.Text = tester.数据位.ToString();
+            uiComboBox15.Text = tester.停止位.ToString();
         }
 
 
@@ -4557,14 +4571,21 @@ namespace H5509_V2
                         newtester.测试超时时间 = Convert.ToInt32(numericUpDown_测试超时时间.Text);
                         newtester.timeout超时时间 = Convert.ToInt32(numericUpDown_timeout超时时间.Text);
                         newtester.超时发送timeout = checkBox_timeout.Checked;
+                        newtester.串口号 = uiComboBox11.Text.Trim();
+                        newtester.波特率 = Convert.ToInt32(uiComboBox12.Text);
+                        newtester.校验位 = (Parity)Enum.Parse(typeof(Parity), uiComboBox14.Text, true);
+                        newtester.数据位 = Convert.ToInt32(uiComboBox13.Text);
+                        newtester.停止位 = (StopBits)Enum.Parse(typeof(StopBits), uiComboBox15.Text, true);
 
                         result = UpdateTesterIFParam(value, newtester);
                         if (result != "Success")
                         {
                             MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            刷新测试机(oldtester);
                         }
                         else
                         {
+                            bool comischange = false;
                             if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功");
                             if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功");
                             if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功");
@@ -4578,18 +4599,28 @@ namespace H5509_V2
                             if (oldtester.测试超时时间 != newtester.测试超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功");
                             if (oldtester.timeout超时时间 != newtester.timeout超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功");
                             if (oldtester.超时发送timeout != newtester.超时发送timeout) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.超时发送timeout}->{newtester.超时发送timeout}:更新成功");
-                        }
+                            if (oldtester.串口号 != newtester.串口号) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[串口号]:{oldtester.串口号}->{newtester.串口号}:更新成功"); }
+                            if (oldtester.波特率 != newtester.波特率) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[波特率]:{oldtester.波特率}->{newtester.波特率}:更新成功"); }
+                            if (oldtester.校验位 != newtester.校验位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.校验位}->{newtester.校验位}:更新成功"); }
+                            if (oldtester.数据位 != newtester.数据位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.数据位}->{newtester.数据位}:更新成功"); }
+                            if (oldtester.停止位 != newtester.停止位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.停止位}->{newtester.停止位}:更新成功"); }
 
-                        if (value == 设置信息.测试机信息.测试机名称)
-                        {
-                            result = GetTesterIFParam(value, out newtester);
-                            if (result == "Success")
+                            if (value == 设置信息.测试机信息.测试机名称)
                             {
-                                设置信息.测试机信息 = newtester;
-                            }
-                        }
+                                result = GetTesterIFParam(value, out newtester);
+                                if (result == "Success")
+                                {
+                                    设置信息.测试机信息 = newtester;
+                                }
 
-                        刷新测试机(newtester);
+                                if (comischange)
+                                {
+                                    Com.CloseCom();
+                                    Com.OpenCom();
+                                }
+                            }
+                            刷新测试机(newtester);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -6768,6 +6799,14 @@ namespace H5509_V2
         {
             double pos = Convert.ToDouble(numericUpDown157.Text);
             出料手臂变距轴移动初始点位(pos);
+        }
+
+        private void uiComboBox11_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                uiComboBox11.DataSource = SerialPort.GetPortNames();
+            }
         }
     }
 }

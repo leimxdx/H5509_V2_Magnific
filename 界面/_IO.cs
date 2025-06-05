@@ -12,6 +12,7 @@ using System.Reflection;
 using Sunny.UI.Win32;
 using System.Diagnostics;
 using static H5509_V2.APPmaster;
+using GTN;
 
 namespace H5509_V2
 {
@@ -31,6 +32,9 @@ namespace H5509_V2
 
         public string[] Glink200_核1_输入 = new string[200];
         public string[] Glink200_核1_输出 = new string[200];
+
+        List<UILight> ListUiLight = new List<UILight>();
+        List<UISwitch> ListUiSwitch = new List<UISwitch>();
 
         public _IO()
         {
@@ -115,6 +119,34 @@ namespace H5509_V2
 
                 uiTabControl2_SelectedIndexChanged(this.uiTabControl2.SelectedTab, null);
             }
+
+            TabPage[] tabpages = { tabPage7, tabPage8, tabPage9, tabPage16 };
+            for (int i = 0; i < tabpages.Length; i++)
+            {
+                foreach (var item in tabpages[i].Controls)
+                {
+                    if (item is UIGroupBox uigroupos)
+                    {
+                        foreach (var item1 in uigroupos.Controls)
+                        {
+                            if (item1 is UILight uilight)
+                            {
+                                if (uilight.TagString == null) continue;
+                                if (uilight.TagString.ToString().Length == 0) continue;
+                                ListUiLight.Add(uilight);
+                                
+                            }
+                            else if (item1 is UISwitch uiswitch)
+                            {
+                                if (uiswitch.TagString == null) continue;
+                                if (uiswitch.TagString.ToString().Length == 0) continue;
+                                uiswitch.Click += SetDoValue;
+                                ListUiSwitch.Add(uiswitch);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         private void IOUpdateTimer_Tick(object sender, EventArgs e)
@@ -129,14 +161,14 @@ namespace H5509_V2
                     UIFlowLayoutPanel uIFlow = uiTabControl2.SelectedTab.Controls["IOflp_" + currentIOPage.Substring(7)] as UIFlowLayoutPanel;
 
                     //GNME601 核1
-                    motionEx.GetDi("GNM601", 1, 0, out string value);
+                    motionEx.GetDi("GNM601", 1, 1, mc.MC_GPI, out string value);
                     char[] ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         GNME601_核1_输入[i] = ioval[i].ToString();
                     }
 
-                    motionEx.GetDi("GNM601", 1, 0, out value);
+                    motionEx.GetDO("GNM601", 1, 1, mc.MC_GPO, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
@@ -144,14 +176,14 @@ namespace H5509_V2
                     }
 
                     //GNME601 核2
-                    motionEx.GetDi("GNM601", 2, 0, out value);
+                    motionEx.GetDi("GNM601", 2, 1, mc.MC_GPI, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         GNME601_核2_输入[i] = ioval[i].ToString();
                     }
 
-                    motionEx.GetDi("GNM601", 2, 0, out value);
+                    motionEx.GetDO("GNM601", 2, 1, mc.MC_GPO, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
@@ -159,31 +191,31 @@ namespace H5509_V2
                     }
 
                     //gLink200 输入
-                    motionEx.GetDi("gLink200", 1, 0 * 32, out value);
+                    motionEx.GetDi("gLink200", 1, 0 * 32 + 1, mc.MC_GPI, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         Glink200_核1_输入[i + 0 * 32] = ioval[i].ToString();
                     }
-                    motionEx.GetDi("gLink200", 1, 1 * 32, out value);
+                    motionEx.GetDi("gLink200", 1, 1 * 32 + 1, mc.MC_GPI, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         Glink200_核1_输入[i + 1 * 32] = ioval[i].ToString();
                     }
-                    motionEx.GetDi("gLink200", 1, 2 * 32, out value);
+                    motionEx.GetDi("gLink200", 1, 2 * 32 + 1, mc.MC_GPI, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         Glink200_核1_输入[i + 2 * 32] = ioval[i].ToString();
                     }
-                    motionEx.GetDi("gLink200", 1, 3 * 32, out value);
+                    motionEx.GetDi("gLink200", 1, 3 * 32 + 1, mc.MC_GPI, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         Glink200_核1_输入[i + 3 * 32] = ioval[i].ToString();
                     }
-                    motionEx.GetDi("gLink200", 1, 4 * 32, out value);
+                    motionEx.GetDi("gLink200", 1, 4 * 32 + 1, mc.MC_GPI, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
@@ -191,25 +223,25 @@ namespace H5509_V2
                     }
 
                     //gLink200 输出
-                    motionEx.GetDO("gLink200", 1, 0 * 32, out value);
+                    motionEx.GetDO("gLink200", 1, 0 * 32 + 1, mc.MC_GPO, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         Glink200_核1_输出[i + 0 * 32] = ioval[i].ToString();
                     }
-                    motionEx.GetDO("gLink200", 1, 1 * 32, out value);
+                    motionEx.GetDO("gLink200", 1, 1 * 32 + 1, mc.MC_GPO, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         Glink200_核1_输出[i + 1 * 32] = ioval[i].ToString();
                     }
-                    motionEx.GetDO("gLink200", 1, 2 * 32, out value);
+                    motionEx.GetDO("gLink200", 1, 2 * 32 + 1, mc.MC_GPO, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
                         Glink200_核1_输出[i + 2 * 32] = ioval[i].ToString();
                     }
-                    motionEx.GetDO("gLink200", 1, 3 * 32, out value);
+                    motionEx.GetDO("gLink200", 1, 3 * 32 + 1, mc.MC_GPO, out value);
                     ioval = value.ToCharArray();
                     for (int i = 0; i < ioval.Length; i++)
                     {
@@ -218,65 +250,194 @@ namespace H5509_V2
                     string io = "";
                     string result = "";
 
-                    TabPage[] tabpages = { tabPage7 , tabPage8, tabPage9, tabPage16};
-                    for (int i = 0; i < tabpages.Length; i++)
+                    for (int i = 0; i < ListUiLight.Count; i++)
                     {
-                        foreach (var item in tabpages[i].Controls)
+                        UILight uilight = ListUiLight[i];
+
+                        result = motionEx.GetIOInfo(uilight.TagString, out IOInfo ioinfo);
+                        if (ioinfo.模块类型 == "GNM601")
                         {
-                            if (item is UIGroupBox uigroupos)
+                            if (ioinfo.IO编号.Contains("X"))
                             {
-                                foreach (var item1 in uigroupos.Controls)
+                                if (ioinfo.核号 == 1)
                                 {
-                                    if (item1 is UILight uilight)
+                                    if (GNME601_核1_输入[ioinfo.软件索引 - 1] == "0")
                                     {
-
-                                        if (uilight.TagString == null) continue;
-                                        if (uilight.TagString.ToString().Length == 0) continue;
-
-                                        io = uilight.TagString;
-                                        //if (io == "X051")
-                                        //{
-                                        //    Debug.WriteLine(0);
-                                        //}
-                                        result = motionEx.GetIOInfo(io, out IOInfo ioinfo);
-                                        if (ioinfo.模块类型 == "GNM601")
-                                        {
-                                            if (ioinfo.IO编号.Contains("X"))
-                                            {
-                                                if (ioinfo.核号 == 1)
-                                                {
-                                                    if (GNME601_核1_输入[ioinfo.软件索引] == "0")
-                                                    {
-                                                        uilight.State = UILightState.Off;
-                                                    }
-                                                    else uilight.State = UILightState.On;
-                                                }
-                                                else
-                                                {
-                                                    if (GNME601_核2_输入[ioinfo.软件索引] == "0")
-                                                    {
-                                                        uilight.State = UILightState.Off;
-                                                    }
-                                                    else uilight.State = UILightState.On;
-                                                }
-                                            }
-                                        }
-                                        else if (ioinfo.模块类型 == "gLink200")
-                                        {
-                                            if (ioinfo.IO编号.Contains("X"))
-                                            {
-                                                if (Glink200_核1_输入[ioinfo.软件索引] == "0")
-                                                {
-                                                    uilight.State = UILightState.Off;
-                                                }
-                                                else uilight.State = UILightState.On;
-                                            }
-                                        }
+                                        uilight.State = UILightState.On;
                                     }
+                                    else uilight.State = UILightState.Off;
+                                }
+                                else
+                                {
+                                    if (GNME601_核2_输入[ioinfo.软件索引 - 1] == "0")
+                                    {
+                                        uilight.State = UILightState.On;
+                                    }
+                                    else uilight.State = UILightState.Off;
                                 }
                             }
                         }
+                        else if (ioinfo.模块类型 == "gLink200")
+                        {
+                            if (ioinfo.IO编号.Contains("X"))
+                            {
+                                if (Glink200_核1_输入[ioinfo.软件索引 - 1] == "0")
+                                {
+                                    uilight.State = UILightState.Off;
+                                }
+                                else uilight.State = UILightState.On;
+                            }
+                        }
                     }
+
+                    for (int i = 0; i < ListUiSwitch.Count; i++)
+                    {
+                        UISwitch uiswitch = ListUiSwitch[i];
+
+                        result = motionEx.GetIOInfo(uiswitch.TagString, out IOInfo ioinfo);
+
+                        if (ioinfo.模块类型 == "GNM601")
+                        {
+
+                            if (ioinfo.IO编号.Contains("Y"))
+                            {
+                                if (ioinfo.核号 == 1)
+                                {
+                                    if (GNME601_核1_输出[ioinfo.软件索引 - 1] == "0")
+                                    {
+                                        uiswitch.Active = false;
+                                    }
+                                    else uiswitch.Active = true;
+                                }
+                                else
+                                {
+                                    if (GNME601_核2_输出[ioinfo.软件索引 - 1] == "0")
+                                    {
+                                        uiswitch.Active = false;
+                                    }
+                                    else uiswitch.Active = true;
+                                }
+                            }
+                        }
+                        else if (ioinfo.模块类型 == "gLink200")
+                        {
+                            if (ioinfo.IO编号.Contains("Y"))
+                            {
+                                if (Glink200_核1_输出[ioinfo.软件索引 - 1] == "0")
+                                {
+                                    uiswitch.Active = false;
+                                }
+                                else uiswitch.Active = true;
+                            }
+                        }
+                    }
+
+                    //TabPage[] tabpages = { tabPage7 , tabPage8, tabPage9, tabPage16};
+                    //for (int i = 0; i < tabpages.Length; i++)
+                    //{
+                    //    foreach (var item in tabpages[i].Controls)
+                    //    {
+                    //        if (item is UIGroupBox uigroupos)
+                    //        {
+                    //            foreach (var item1 in uigroupos.Controls)
+                    //            {
+                    //                if (item1 is UILight uilight)
+                    //                {
+                    //                    if (uilight.TagString == null) continue;
+                    //                    if (uilight.TagString.ToString().Length == 0) continue;
+
+                    //                    io = uilight.TagString;
+                    //                    //if (io == "X051")
+                    //                    //{
+                    //                    //    Debug.WriteLine(0);
+                    //                    //}
+                    //                    result = motionEx.GetIOInfo(io, out IOInfo ioinfo);
+                    //                    if (ioinfo.模块类型 == "GNM601")
+                    //                    {
+                    //                        if (ioinfo.IO编号.Contains("X"))
+                    //                        {
+                    //                            if (ioinfo.核号 == 1)
+                    //                            {
+                    //                                if (GNME601_核1_输入[ioinfo.软件索引 - 1] == "0")
+                    //                                {
+                    //                                    uilight.State = UILightState.On;
+                    //                                }
+                    //                                else uilight.State = UILightState.Off;
+                    //                            }
+                    //                            else
+                    //                            {
+                    //                                if (GNME601_核2_输入[ioinfo.软件索引 - 1] == "0")
+                    //                                {
+                    //                                    uilight.State = UILightState.On;
+                    //                                }
+                    //                                else uilight.State = UILightState.Off;
+                    //                            }
+                    //                        }
+                    //                    }
+                    //                    else if (ioinfo.模块类型 == "gLink200")
+                    //                    {
+                    //                        if (ioinfo.IO编号.Contains("X"))
+                    //                        {
+                    //                            if (Glink200_核1_输入[ioinfo.软件索引 - 1] == "0")
+                    //                            {
+                    //                                uilight.State = UILightState.Off;
+                    //                            }
+                    //                            else uilight.State = UILightState.On;
+                    //                        }
+                    //                    }
+                    //                }
+                    //                else if (item1 is UISwitch uiswitch)
+                    //                {
+                    //                    if (uiswitch.TagString == null) continue;
+                    //                    if (uiswitch.TagString.ToString().Length == 0) continue;
+
+                    //                    io = uiswitch.TagString;
+                    //                    if (io == "027")
+                    //                    {
+                    //                        Debug.WriteLine(io);
+                    //                    }
+                    //                    result = motionEx.GetIOInfo(io, out IOInfo ioinfo);
+
+                    //                    if (ioinfo.模块类型 == "GNM601")
+                    //                    {
+                                            
+                    //                        if (ioinfo.IO编号.Contains("Y"))
+                    //                        {
+                    //                            if (ioinfo.核号 == 1)
+                    //                            {
+                    //                                if (GNME601_核1_输出[ioinfo.软件索引 - 1] == "0")
+                    //                                {
+                    //                                    uiswitch.Active = false;
+                    //                                }
+                    //                                else uiswitch.Active = true;
+                    //                            }
+                    //                            else
+                    //                            {
+                    //                                if (GNME601_核2_输出[ioinfo.软件索引 - 1] == "0")
+                    //                                {
+                    //                                    uiswitch.Active = false;
+                    //                                }
+                    //                                else uiswitch.Active = true;
+                    //                            }
+                    //                        }
+                    //                    }
+                    //                    else if (ioinfo.模块类型 == "gLink200")
+                    //                    {
+                    //                        if (ioinfo.IO编号.Contains("Y"))
+                    //                        {
+                    //                            if (Glink200_核1_输出[ioinfo.软件索引 - 1] == "0")
+                    //                            {
+                    //                                uiswitch.Active = false;
+                    //                            }
+                    //                            else uiswitch.Active = true;
+                    //                        }
+                    //                    }
+
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
 
 
                     motionEx.GetDi(currentX.ToArray(), out string[] diX);
@@ -311,6 +472,7 @@ namespace H5509_V2
             {
             }
         }
+
         private void uiButton1_Click(object sender, EventArgs e)
         {
             UIMessageTip.Show(this, "TEST!TEST!TEST!", null, 1000, true, true);
@@ -338,7 +500,6 @@ namespace H5509_V2
                     }
                 }
             }
-
         }
 
         private void uiButton2_Click(object sender, EventArgs e)
@@ -381,6 +542,20 @@ namespace H5509_V2
                             }
                         }
                     }
+                }
+            }
+        }
+
+        private void SetDoValue(object sender, EventArgs e)
+        {
+            if (sender is UISwitch uISwitch)
+            {
+                if (uISwitch.TagString == null) return;
+                if (uISwitch.TagString.ToString().Length == 0) return;
+                string result = motionEx.SetDo(uISwitch.TagString, uISwitch.Active);
+                if (result != "Success")
+                {
+                    MessageBox.Show("输出失败!" + result);
                 }
             }
         }

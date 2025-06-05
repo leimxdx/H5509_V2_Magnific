@@ -23,5 +23,7 @@ namespace H5509_V2
         public string ExcelType { get; set; }
 
         public string ExcelLevel { get; set; }
+
+        public bool IsReceive { get; set; }
     }
 }

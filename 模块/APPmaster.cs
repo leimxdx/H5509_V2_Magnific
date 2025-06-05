@@ -9,6 +9,7 @@ using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 using System.Globalization;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -207,7 +208,7 @@ namespace H5509_V2
 
         public static int 跟随误差 = 250;
 
-        public static Communication Com = new Communication();
+        public static Communication Com;
 
         public static double TestShuttleLPos = 800;
 
@@ -1643,6 +1644,11 @@ namespace H5509_V2
                             测试超时时间 = Convert.ToInt32(dr["测试超时时间"].ToString()),
                             timeout超时时间 = Convert.ToInt32(dr["timeout超时时间"].ToString()),
                             超时发送timeout = Convert.ToBoolean(dr["超时发送timeout"].ToString()),
+                            串口号 = dr["串口号"].ToString(),
+                            波特率 = Convert.ToInt32(dr["波特率"].ToString()),
+                            校验位 = (Parity)Enum.Parse(typeof(Parity), dr["校验位"].ToString(), true),
+                            数据位 = Convert.ToInt32(dr["数据位"].ToString()),
+                            停止位 = (StopBits)Enum.Parse(typeof(StopBits), dr["停止位"].ToString(), true),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -1885,8 +1891,13 @@ namespace H5509_V2
                 $"socket使用次数 = '{tester.socket使用次数}'," +
                 $"测试超时时间 = '{tester.测试超时时间}'," +
                 $"timeout超时时间 = '{tester.timeout超时时间}'," +
-                $"超时发送timeout = '{tester.超时发送timeout}'" +
-                $"where 测试机名称 = '{name}'";
+                $"超时发送timeout = '{tester.超时发送timeout}'," +
+                $"串口号 = '{tester.串口号}'," +
+                $"波特率 = '{tester.波特率}'," +
+                $"校验位 = '{tester.校验位}'," +
+                $"数据位 = '{tester.数据位}'," +
+                $"停止位 = '{tester.停止位}'" +
+                $" where 测试机名称 = '{name}'";
 
             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
@@ -3005,7 +3016,7 @@ namespace H5509_V2
             }
         }
 
-        public static void RunLog(string info, short txtType = 1, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
+        public static void RunLog(string info, short txtType = 1, bool isReceive = false,  string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
         {
 
             LogManager log = new LogManager()
@@ -3014,6 +3025,7 @@ namespace H5509_V2
                 TxtLogtype = txtType,
                 ExcelLevel = excelLevel,
                 ExcelType = excelType,
+                IsReceive = isReceive,
             };
             LogQueue.Enqueue(log);
             //Debug.WriteLine(info);
@@ -3268,7 +3280,7 @@ namespace H5509_V2
             {
                 if (index + i == opens.Length) break;
                 if (yPoint + i * HeatInterval >= HeatYPoint.Length) break;
-                if (HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] == !ishave && HeatDicTimer[$"{xPoint},{yPoint + i * HeatInterval}"].Status == instatus) break;
+                if (HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] != ishave || HeatDicTimer[$"{xPoint},{yPoint + i * HeatInterval}"].Status != instatus) break;
                 if (opens[i + index] == status)
                 {
                     lsopen[i + index] = true;

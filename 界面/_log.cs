@@ -15,6 +15,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML.Excel;
 using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.Office2010.ExcelAc;
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
 using H5509_V2.界面;
 using Sunny.UI;
 using Sunny.UI.Win32;
@@ -33,6 +35,9 @@ namespace H5509_V2
         private 界面.UIProgressIndicatorEx progressIndicator; // 进度条实例
         private bool isProcessing = false;
         private static Dictionary<string, FileCounter> _fileCounters = new Dictionary<string, FileCounter>();
+
+        List<log> logNeed2Add = new List<log>(); // 用于存储需要添加的日志
+
 
         class FileCounter
         {
@@ -136,27 +141,51 @@ namespace H5509_V2
         /// <param name="info"></param>
         public void AddLog(string level, string logType, string info)
         {
-            string monthlyDir = Path.Combine(logsDirectory, DateTime.Now.ToString("yyyyMM"));
-            var currentFile = GetCurrentLogFile(monthlyDir);
 
-            var logs = new List<(string, string, string)>
+            logNeed2Add.Add(new log
             {
-                (level, logType, info)
-            };
+                Time = DateTime.Now,
+                LogLevel = level,
+                LogType = logType,
+                LogContent = info
+            });
 
-            WriteLogToExcel(currentFile, logs); // 单条也作为列表传入
-
-            if (dgv_data.InvokeRequired) RefreshLog(level, logType, info);
-            else RefreshLog(level, logType, info);
+            //if (logNeed2Add.Count >= 1000) // 超过1000条立即写入
+            //{
+            //    LogTimer_Tick(null, null); // 直接调用定时器事件处理方法
+            //}
 
         }
 
+        private void LogTimer_Tick(object sender, EventArgs e)
+        {
+            string monthlyDir = Path.Combine(logsDirectory, DateTime.Now.ToString("yyyyMM"));
+            var currentFile = GetCurrentLogFile(monthlyDir);
 
-        private void WriteLogToExcel(FileCounter fileCounter, List<(string level, string logType, string info)> logs)
+            int countTemp = logNeed2Add.Count;
+            List<log> logsTemp = logNeed2Add.GetRange(0, countTemp);
+
+            if (logsTemp.Count == 0) return; // 没有日志需要写入
+
+            WriteLogToExcel(currentFile, logsTemp);
+
+            logNeed2Add.RemoveRange(0, countTemp);// 清空已添加的日志
+        }
+
+        private void WriteLogToExcel(FileCounter fileCounter, List<log> logs)
         {
             try
             {
                 int remainingSpace = FileCounter.MaxRows - fileCounter.RowCount;
+
+                if (remainingSpace == 0)
+                {
+                    // 当前文件已满，创建新文件
+                    var newFile = GetCurrentLogFile(Path.GetDirectoryName(fileCounter.FilePath));
+                    WriteLogToExcel(newFile, logs);
+                    return;
+                }
+
                 int logsToWrite = Math.Min(logs.Count, remainingSpace);
 
                 if (logsToWrite > 0)
@@ -169,31 +198,25 @@ namespace H5509_V2
 
                         for (int i = 0; i < logsToWrite; i++)
                         {
-                            var (level, logType, info) = logs[i];
-                            worksheet.Cell(startRow + i, 1).Value = DateTime.Now;
-                            worksheet.Cell(startRow + i, 2).Value = level;
-                            worksheet.Cell(startRow + i, 3).Value = logType;
-                            worksheet.Cell(startRow + i, 4).Value = info;
+                            log temp = logs[i];
+                            worksheet.Cell(startRow + i, 1).Value = temp.Time;
+                            worksheet.Cell(startRow + i, 2).Value = temp.LogLevel;
+                            worksheet.Cell(startRow + i, 3).Value = temp.LogType;
+                            worksheet.Cell(startRow + i, 4).Value = temp.LogContent;
                         }
 
                         workbook.Save();
                         fileCounter.RowCount += logsToWrite;
                         //writeDataHelper.RunLog($"写入文件: {Path.GetFileName(fileCounter.FilePath)}，新增行数: {logsToWrite}，总行数: {fileCounter.RowCount}");
                     }
-
-                    // 处理剩余日志
-                    if (logs.Count > logsToWrite)
-                    {
-                        var remainingLogs = logs.Skip(logsToWrite).ToList();
-                        var newFile = GetCurrentLogFile(Path.GetDirectoryName(fileCounter.FilePath));
-                        WriteLogToExcel(newFile, remainingLogs);
-                    }
                 }
-                else
+
+                // 处理剩余日志（如果有的话）
+                if (logs.Count > logsToWrite)
                 {
-                    // 当前文件已满，创建新文件
+                    var remainingLogs = logs.Skip(logsToWrite).ToList();
                     var newFile = GetCurrentLogFile(Path.GetDirectoryName(fileCounter.FilePath));
-                    WriteLogToExcel(newFile, logs);
+                    WriteLogToExcel(newFile, remainingLogs);
                 }
             }
             catch (Exception ex)
@@ -399,11 +422,6 @@ namespace H5509_V2
             //RefreshDataGrid();
         }
 
-        private void startTime_ValueChanged(object sender, DateTime value)
-        {
-            //RefreshDataGrid();
-        }
-
         private void dgv_data_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             var grid = (DataGridView)sender;
@@ -465,15 +483,6 @@ namespace H5509_V2
         }
 
 
-        private void LogTimer_Tick(object sender, EventArgs e)
-        {
-
-        }
-
-        private void startTime_Leave(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnSelectKey_Click(object sender, EventArgs e)
         {
@@ -539,10 +548,18 @@ namespace H5509_V2
         }
         private FileCounter GetCurrentLogFile(string monthlyDir)
         {
+            //确保目录存在
+            if (!Directory.Exists(monthlyDir))
+            {
+                Directory.CreateDirectory(monthlyDir);
+            }
+
+
             // 1. 尝试查找已有文件
             var existingFiles = Directory.GetFiles(monthlyDir, "Log_*.xlsx")
                 .OrderByDescending(f => f)
                 .ToList();
+
 
             foreach (var file in existingFiles)
             {
@@ -618,6 +635,32 @@ namespace H5509_V2
                 return result;
 
             return File.GetCreationTime(filePath); // 回退使用文件创建时间
+        }
+
+        public void DelegteDisplayComInfo(string message)
+        {
+            try
+            {
+                if (richTextBox1.InvokeRequired)
+                {
+                    richTextBox1.Invoke(new Action(() =>
+                    {
+                        richTextBox1.AppendText(message + '\n');
+                        richTextBox1.Select(richTextBox1.TextLength, 0);
+                        richTextBox1.ScrollToCaret();
+                    }));
+                }
+                else
+                {
+                    richTextBox1.AppendText(message + '\n');
+                    richTextBox1.Select(richTextBox1.TextLength, 0);
+                    richTextBox1.ScrollToCaret();
+                }
+            }
+            catch (Exception ex)
+            {
+                RunLog($"日志显示异常: {ex.Message}");
+            }
         }
     }
 }

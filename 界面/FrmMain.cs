@@ -68,21 +68,22 @@ namespace H5509_V2
         public ForMain()
         {
             InitializeComponent();
-
+            
             Log = new _log();
 
             string result = Init_APPmaster();
             if (result != "Success")
             {
-                Log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
+                //Log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
-            //RunLog("debug","run","读取数据库数据完成");
+            //Log.AddLog("debug","run","读取数据库数据完成");
         }
 
         private void ForMain_Load(object sender, EventArgs e)
         {
             string result = "";
+            Com = new Communication();
             main = new _main();
             setting = new _setting();
             offset = new _offset();
@@ -96,6 +97,8 @@ namespace H5509_V2
             handler.刷新批次信息 = main.刷新批次信息;
             setting.handler = handler;
             main.handler = handler;
+
+            Com.RefrshLog = Log.DelegteDisplayComInfo;
 
             dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
 
@@ -151,16 +154,6 @@ namespace H5509_V2
             main.canVisable(this);
 
             //listcode.Add("1400441"); Dut全部被关闭，请长按结批按钮5S结批
-            //listcode.Add("1400020"); //系统错误--气压不足
-            //listcode.Add("4020001");"(按下开始)Auto1放置了Tray盘"
-            //listcode.Add("4021001");"(按下开始)Auto2放置了Tray盘"
-            //listcode.Add("4018008");"(按下开始)Empty的门没有关上"
-            //listcode.Add("4019008");"(按下开始)Loader的门没有关上"
-            //listcode.Add("4019008");"(按下开始)Loader的门没有关上"
-            //listcode.Add("4020008");"(按下开始)Auto1的门没有关上"
-            //listcode.Add("4021008");"(按下开始)Auto2的门没有关上"
-            //listcode.Add("4030009");"(按下开始)Fix1请放置空盘"
-            //listcode.Add("4031009");"(按下开始)Fix2请放置空盘"
         }
 
         /// <summary>
@@ -257,8 +250,8 @@ namespace H5509_V2
                         if (LogQueue.TryDequeue(out LogManager logs))
                         {
                             Debug.WriteLine(logs.Msg);
-                            //Log.AddLog(logs.ExcelLevel, logs.ExcelLevel, logs.Msg);
-                            writeDataHelper.RunLog(logs.Msg, logs.TxtLogtype);
+                            Log.AddLog(logs.ExcelLevel, logs.ExcelLevel, logs.Msg);
+                            writeDataHelper.RunLog(logs.Msg, logs.TxtLogtype, logs.IsReceive);
                         }
                     }
 
@@ -501,12 +494,14 @@ namespace H5509_V2
                                             单dut总不良累计计数[sitenum][n + m * 4]++;
                                             总良率报警间隔计数++;
                                         }
-                                        RunLog($"update SocketUse set Num=Num+1 from SocketUse where Id='{doutstr}'");
+
+                                        int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SocketUse set Num=Num+1 where Id='{doutstr}'");
+                                        if (line <= 0) RunLog($"update SocketUse set Num=Num+1 where Id='{doutstr}',返回:{line}");
                                     }
 
                                     int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
                                     int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
-                                    RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
+                                    //RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
                                     RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
                                 }
                             }

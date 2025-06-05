@@ -7,6 +7,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static H5509_V2.APPmaster;
@@ -34,6 +35,12 @@ namespace H5509_V2
         //public List<TestAriCylinder> listsitetest = new List<TestAriCylinder>();
         //创建GXN轴卡对象
         //private GxnMotionEx motionEx = GxnMotionEx.GetInstance();
+
+        public void CloseCom()
+        {
+            serialPort.Close();
+            Thread.Sleep(100);
+        }
 
         /// <summary>
         /// 打开串口
@@ -92,11 +99,12 @@ namespace H5509_V2
                 serialPort = new SerialPort();
                 serialPort.DataReceived += DataReceivedHandler;
             }
-            serialPort.PortName = "COM11";
-            serialPort.BaudRate = 9600; //波特率
-            serialPort.Parity = Parity.None;
-            serialPort.DataBits = 8;
-            serialPort.StopBits = StopBits.One;
+
+            serialPort.PortName = 设置信息.测试机信息.串口号;
+            serialPort.BaudRate = 设置信息.测试机信息.波特率;
+            serialPort.Parity = 设置信息.测试机信息.校验位;
+            serialPort.DataBits = 设置信息.测试机信息.数据位;
+            serialPort.StopBits = 设置信息.测试机信息.停止位;
 
             OpenCom();
         }
@@ -114,8 +122,7 @@ namespace H5509_V2
                 str = " <= ";
             }
             string datestr = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}{str}";
-            RunLog(datestr + message);
-            //RefrshLog(datestr + message);
+            RefrshLog(datestr + message);
         }
 
 
@@ -132,15 +139,12 @@ namespace H5509_V2
                     old = outdata;
                     return;
                 }
-                else
-                {
-                    old = "";
-                }
+                else old = "";
+
                 RefreshInfoLog(outdata, true);
                 if (outdata.Length < 1) return;
 
-                RunLog(outdata);
-                //writeDataHelper.RunLog(outdata, 2, true);
+                RunLog(outdata, 2, true);
 
                 while (outdata.Length > 0)
                 {
@@ -179,12 +183,12 @@ namespace H5509_V2
 
                                 RunLog($"接收Site:{site:D2},Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
                             }
-                            //else writeDataHelper.RunLog($"site:{site:D2}未在测试!", 3);
+                            else RunLog($"site:{site:D2}未在测试!", 2);
                             outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                         }
                         catch (Exception ex)
                         {
-                            RunLog("数据解析失败！详细信息：" + ex.Message);
+                            RunLog("数据解析失败！详细信息：" + ex.Message, 2);
                             break;
                         }
                     }
@@ -192,7 +196,7 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                //writeDataHelper.RunLog("接收串口数据解析失败！详细信息：" + ex.Message, 2);
+                RunLog("接收串口数据解析失败！详细信息：" + ex.Message, 2);
             }
         }
 
@@ -205,7 +209,7 @@ namespace H5509_V2
                 return;
             }
             serialPort.Write(str);
-            //writeDataHelper.RunLog(str, 2);
+            RunLog(str, 2);
             RefreshInfoLog(str, false);
         }
 
@@ -240,7 +244,7 @@ namespace H5509_V2
                     return "串口未打开";
                 }
                 serialPort.Write("@START_TEST " + str + "+");
-                //writeDataHelper.RunLog("@START_TEST " + str + "+", 2);
+                RunLog("@START_TEST " + str + "+", 2);
                 RefreshInfoLog("@START_TEST " + str + "+", false);
                 listtestdatetime[site] = DateTime.Now;
                 Listtimer[site].Start();

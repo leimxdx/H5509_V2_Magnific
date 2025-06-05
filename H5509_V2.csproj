@@ -320,9 +320,7 @@
     </EmbeddedResource>
     <None Include="gtn_core1.cfg" />
     <None Include="gtn_core2.cfg" />
-    <None Include="H5509_alarm.xlsx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="H5509_alarm.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -407,8 +405,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V2\bin\Debug \\desktop-4168527\GitHub\H5509_V2\bin\Debug</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

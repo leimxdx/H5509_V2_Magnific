@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,5 +36,15 @@ namespace H5509_V2
         public int timeout超时时间 { get; set; }
 
         public bool 超时发送timeout { get; set; }
+
+        public string 串口号 { get; set; }
+
+        public int 波特率 { get; set; }
+
+        public Parity 校验位 { get; set; }
+
+        public int 数据位 { get; set; }
+
+        public StopBits 停止位 { get; set; }
     }
 }

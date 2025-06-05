@@ -3033,6 +3033,24 @@ namespace H5509_V2
         {
             bool iscanstart = true;
 
+            string result = motionEx.GetDi("X020_进气压",out string value);
+            RunLog("X020_进气压:" + value);
+            //if (result == "Success")
+            //{
+            //    if (value == "0")
+            //    {
+            //        iscanstart = false;
+            //        Listcode.Add("1400020"); //系统错误--气压不足
+            //        RunLog("[Code]1400020,[Msg]气压不足");
+            //    }
+            //}
+            //else
+            //{
+            //    iscanstart = false;
+            //    Listcode.Add("1400020"); //系统错误--气压不足
+            //    RunLog("[Code]1400020,[Msg]气压读取失败!" + result);
+            //}
+
             if (!H5509归零)
             {
                 iscanstart = false;
@@ -3040,16 +3058,16 @@ namespace H5509_V2
                 Listcode.Add("1400445");
             }
 
-            if (IsDutAllCLose()) //当初次开始时检测有没有开dut
+            if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
             {
-                writeDataHelper.RunLog("Dut全部被关闭，请至少开1个Dut进行测试", 3);
+                writeDataHelper.RunLog("Dut全部被关闭，请至少开1个Dut进行测试");
                 iscanstart = false;
                 Listcode.Add("1400442");
             }
 
             if (!安全门禁用)
             {
-                string result = 门禁感应(out string[] iovalue);
+                result = 门禁感应(out string[] iovalue);
                 if (result == "Success")
                 {
                     if (iovalue[0] == "0")
@@ -3096,7 +3114,7 @@ namespace H5509_V2
             {
                 if (!温控加热)
                 {
-                    string result = 加热盘加热开启();
+                    result = 加热盘加热开启();
                     string result2 = H5509归零 ? 梭车加热开启() : " 设备未归零";
                     string result3 = Site加热开启();
                     if (result == "Success" && result2 == "Success" && result3 == "Success")
@@ -3206,6 +3224,7 @@ namespace H5509_V2
                 "X035_AUTO1后对射", //24
                 "X040_AUTO2前对射", //25
                 "X041_AUTO2后对射", //26
+                "X020_进气压",//27
             };
 
             while (true)
@@ -3298,28 +3317,28 @@ namespace H5509_V2
                                 Listcode.Add("4032009");
                             }
 
-                            if (io[23] == "1")
+                            if (io[23] == "0")
                             {
                                 isstart = false;
                                 RunLog("AUTO1前对射感应到有Tray盘");
                                 Listcode.Add("4020001");
                             }
 
-                            if (io[24] == "1")
+                            if (io[24] == "0")
                             {
                                 isstart = false;
                                 RunLog("AUTO1后对射感应到有Tray盘");
                                 Listcode.Add("4020001");
                             }
 
-                            if (io[25] == "1")
+                            if (io[25] == "0")
                             {
                                 isstart = false;
                                 RunLog("AUTO2前对射感应到有Tray盘");
                                 Listcode.Add("4021001");
                             }
 
-                            if (io[26] == "1")
+                            if (io[26] == "0")
                             {
                                 isstart = false;
                                 RunLog("AUTO2后对射感应到有Tray盘");
@@ -3602,36 +3621,39 @@ namespace H5509_V2
                     {
                         RunLog("按下归零");
                         bool ishome = true;
-                        if (!安全门禁用 && !H5509正在归零 && 设备状态 != 0)
+                        if (!H5509正在归零 && 设备状态 == 0)
                         {
-                            result = 门禁感应(out string[] iovalue);
-                            if (result == "Success")
+                            if (!安全门禁用)
                             {
-                                if (iovalue.Contains("0"))
+                                result = 门禁感应(out string[] iovalue);
+                                if (result == "Success")
                                 {
-                                    if (iovalue[0] == "0")
+                                    if (iovalue.Contains("0"))
                                     {
-                                        Listcode.Add("9000000");
-                                        RunLog("(按下归零)前门禁被打开");
+                                        if (iovalue[0] == "0")
+                                        {
+                                            Listcode.Add("9000000");
+                                            RunLog("(按下归零)前门禁被打开");
+                                        }
+                                        if (iovalue[1] == "0")
+                                        {
+                                            Listcode.Add("9000010");
+                                            RunLog("(按下归零)后门禁被打开");
+                                        }
+                                        if (iovalue[2] == "0")
+                                        {
+                                            Listcode.Add("9000020");
+                                            RunLog("(按下归零)左门禁被打开");
+                                        }
+                                        if (iovalue[3] == "0")
+                                        {
+                                            Listcode.Add("9000040");
+                                            RunLog("(按下归零)右门禁被打开");
+                                        }
+                                        ishome = false;
+                                        ProgramPause = true;
+                                        IsPause = true;
                                     }
-                                    else if (iovalue[1] == "0")
-                                    {
-                                        Listcode.Add("9000010");
-                                        RunLog("(按下归零)后门禁被打开");
-                                    }
-                                    else if (iovalue[2] == "0")
-                                    {
-                                        Listcode.Add("9000020");
-                                        RunLog("(按下归零)左门禁被打开");
-                                    }
-                                    else if (iovalue[3] == "0")
-                                    {
-                                        Listcode.Add("9000040");
-                                        RunLog("(按下归零)右门禁被打开");
-                                    }
-                                    ishome = false;
-                                    ProgramPause = true;
-                                    IsPause = true;
                                 }
                             }
                             if (ishome)
@@ -3879,29 +3901,28 @@ namespace H5509_V2
                         RunLog("Fix3Tray盘被拿走");
                     }
 
-                    if (!安全门禁用 && !IsPause && 设备状态 == 1 || H5509归零 || H5509正在归零)
+                    if (!IsPause && 设备状态 == 1 || H5509归零 || H5509正在归零)
                     {
-                        result = 门禁感应(out string[] iovalue);
-                        if (result == "Success")
+                        if (!安全门禁用)
                         {
-                            if (iovalue.Contains("0"))
+                            if (io[11] == "0" || io[12] == "0" || io[13] == "0" || io[14] == "0")
                             {
-                                if (iovalue[0] == "0")
+                                if (io[11] == "0")
                                 {
                                     Listcode.Add("9000000");
                                     RunLog("(运行中)前门禁被打开");
                                 }
-                                else if (iovalue[1] == "0")
+                                if (io[12] == "0")
                                 {
                                     Listcode.Add("9000010");
                                     RunLog("(运行中)后门禁被打开");
                                 }
-                                else if (iovalue[2] == "0")
+                                if (io[13] == "0")
                                 {
                                     Listcode.Add("9000020");
                                     RunLog("(运行中)左门禁被打开");
                                 }
-                                else if (iovalue[3] == "0")
+                                if (io[14] == "0")
                                 {
                                     Listcode.Add("9000040");
                                     RunLog("(运行中)右门禁被打开");
@@ -3910,9 +3931,19 @@ namespace H5509_V2
                                 IsPause = true;
                             }
                         }
+
+                        //if (!IsPause && 设备状态 == 1)
+                        //{
+                        //    if (io[27] == "0")
+                        //    {
+                        //        Listcode.Add("1400020"); //系统错误--气压不足
+                        //        ProgramPause = true;
+                        //        IsPause = true;
+                        //    }
+                        //}
                     }
+                    Thread.Sleep(5);
                 }
-                Thread.Sleep(5);
             }
         }
 
@@ -5601,8 +5632,8 @@ namespace H5509_V2
                     case 1015:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        if (飞梭移动状态 == 0) //梭车停止状态才能放
-                        {
+                        //if (飞梭移动状态 == 0) //梭车停止状态才能放
+                        //{
                             result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat放_Z + 点位微调.入料_Heat放_Z, true);
                             if (result == "Success")
                             {
@@ -5615,8 +5646,8 @@ namespace H5509_V2
                                 ProgramPause = true;
                                 IsPause = true;
                             }
-                        }
-                        else Thread.Sleep(10);
+                        //}
+                        //else Thread.Sleep(10);
                         break;
 
                     case 1020:

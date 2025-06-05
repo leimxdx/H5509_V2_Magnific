@@ -853,7 +853,7 @@ namespace H5509_V2
             else return "有IO编号不存在";
         }
 
-        public string GetDi(string 模块类型, short 核号, short 索引, out string value)
+        public string GetDi(string 模块类型, short 核号, short 索引, short 类型, out string value)
         {
             value = "";
             if (模块类型 == "gLink200")
@@ -862,7 +862,7 @@ namespace H5509_V2
             }
             else if (模块类型 == "GNM601")
             {
-                return Motion.GNM601_GetDi(核号, 索引, out value);
+                return Motion.GNM601_GetDi(核号, 类型, out value);
             }
             else return "未知IO模块";
         }
@@ -946,7 +946,7 @@ namespace H5509_V2
             else return result;
         }
 
-        public string GetDO(string 模块类型, short 核号, short 索引, out string value)
+        public string GetDO(string 模块类型, short 核号, short 索引, short 类型, out string value)
         {
             value = "";
             if (模块类型 == "gLink200")
@@ -955,7 +955,7 @@ namespace H5509_V2
             }
             else if (模块类型 == "GNM601")
             {
-                return Motion.GNM601_GetDo(核号, 索引, out value);
+                return Motion.GNM601_GetDo(核号, 类型, out value);
             }
             else return "未知IO模块";
         }

@@ -176,6 +176,7 @@
             this.label59 = new System.Windows.Forms.Label();
             this.label60 = new System.Windows.Forms.Label();
             this.uiGroupBox19 = new Sunny.UI.UIGroupBox();
+            this.uiSwitch100 = new Sunny.UI.UISwitch();
             this.uiSwitch34 = new Sunny.UI.UISwitch();
             this.uiSwitch35 = new Sunny.UI.UISwitch();
             this.uiLight46 = new Sunny.UI.UILight();
@@ -184,6 +185,7 @@
             this.label61 = new System.Windows.Forms.Label();
             this.label62 = new System.Windows.Forms.Label();
             this.uiGroupBox20 = new Sunny.UI.UIGroupBox();
+            this.uiSwitch99 = new Sunny.UI.UISwitch();
             this.uiSwitch36 = new Sunny.UI.UISwitch();
             this.uiSwitch37 = new Sunny.UI.UISwitch();
             this.uiLight50 = new Sunny.UI.UILight();
@@ -733,7 +735,9 @@
             // 
             // uiSwitch18
             // 
+            this.uiSwitch18.ActiveText = "关";
             this.uiSwitch18.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch18.InActiveText = "开";
             this.uiSwitch18.Location = new System.Drawing.Point(135, 167);
             this.uiSwitch18.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch18.Name = "uiSwitch18";
@@ -746,7 +750,9 @@
             // 
             // uiSwitch15
             // 
+            this.uiSwitch15.ActiveText = "关";
             this.uiSwitch15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch15.InActiveText = "开";
             this.uiSwitch15.Location = new System.Drawing.Point(135, 126);
             this.uiSwitch15.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch15.Name = "uiSwitch15";
@@ -768,7 +774,9 @@
             // 
             // uiSwitch16
             // 
+            this.uiSwitch16.ActiveText = "关";
             this.uiSwitch16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch16.InActiveText = "开";
             this.uiSwitch16.Location = new System.Drawing.Point(135, 85);
             this.uiSwitch16.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch16.Name = "uiSwitch16";
@@ -790,7 +798,9 @@
             // 
             // uiSwitch17
             // 
+            this.uiSwitch17.ActiveText = "关";
             this.uiSwitch17.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch17.InActiveText = "开";
             this.uiSwitch17.Location = new System.Drawing.Point(135, 44);
             this.uiSwitch17.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch17.Name = "uiSwitch17";
@@ -1082,7 +1092,9 @@
             // 
             // uiSwitch93
             // 
+            this.uiSwitch93.ActiveText = "关";
             this.uiSwitch93.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch93.InActiveText = "开";
             this.uiSwitch93.Location = new System.Drawing.Point(135, 166);
             this.uiSwitch93.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch93.Name = "uiSwitch93";
@@ -1104,7 +1116,9 @@
             // 
             // uiSwitch12
             // 
+            this.uiSwitch12.ActiveText = "关";
             this.uiSwitch12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch12.InActiveText = "开";
             this.uiSwitch12.Location = new System.Drawing.Point(135, 126);
             this.uiSwitch12.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch12.Name = "uiSwitch12";
@@ -1126,7 +1140,9 @@
             // 
             // uiSwitch13
             // 
+            this.uiSwitch13.ActiveText = "关";
             this.uiSwitch13.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch13.InActiveText = "开";
             this.uiSwitch13.Location = new System.Drawing.Point(135, 85);
             this.uiSwitch13.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch13.Name = "uiSwitch13";
@@ -1139,7 +1155,9 @@
             // 
             // uiSwitch14
             // 
+            this.uiSwitch14.ActiveText = "关";
             this.uiSwitch14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch14.InActiveText = "开";
             this.uiSwitch14.Location = new System.Drawing.Point(135, 44);
             this.uiSwitch14.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch14.Name = "uiSwitch14";
@@ -1216,7 +1234,9 @@
             // 
             // uiSwitch11
             // 
+            this.uiSwitch11.ActiveText = "关";
             this.uiSwitch11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch11.InActiveText = "开";
             this.uiSwitch11.Location = new System.Drawing.Point(182, 453);
             this.uiSwitch11.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch11.Name = "uiSwitch11";
@@ -1229,7 +1249,9 @@
             // 
             // uiSwitch9
             // 
+            this.uiSwitch9.ActiveText = "关";
             this.uiSwitch9.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch9.InActiveText = "开";
             this.uiSwitch9.Location = new System.Drawing.Point(182, 412);
             this.uiSwitch9.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch9.Name = "uiSwitch9";
@@ -1242,7 +1264,9 @@
             // 
             // uiSwitch10
             // 
+            this.uiSwitch10.ActiveText = "关";
             this.uiSwitch10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch10.InActiveText = "开";
             this.uiSwitch10.Location = new System.Drawing.Point(182, 371);
             this.uiSwitch10.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch10.Name = "uiSwitch10";
@@ -1255,7 +1279,9 @@
             // 
             // uiSwitch7
             // 
+            this.uiSwitch7.ActiveText = "关";
             this.uiSwitch7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch7.InActiveText = "开";
             this.uiSwitch7.Location = new System.Drawing.Point(182, 330);
             this.uiSwitch7.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch7.Name = "uiSwitch7";
@@ -1268,7 +1294,9 @@
             // 
             // uiSwitch8
             // 
+            this.uiSwitch8.ActiveText = "关";
             this.uiSwitch8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch8.InActiveText = "开";
             this.uiSwitch8.Location = new System.Drawing.Point(182, 289);
             this.uiSwitch8.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch8.Name = "uiSwitch8";
@@ -1281,7 +1309,9 @@
             // 
             // uiSwitch5
             // 
+            this.uiSwitch5.ActiveText = "关";
             this.uiSwitch5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch5.InActiveText = "开";
             this.uiSwitch5.Location = new System.Drawing.Point(182, 249);
             this.uiSwitch5.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch5.Name = "uiSwitch5";
@@ -1294,7 +1324,9 @@
             // 
             // uiSwitch6
             // 
+            this.uiSwitch6.ActiveText = "关";
             this.uiSwitch6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch6.InActiveText = "开";
             this.uiSwitch6.Location = new System.Drawing.Point(182, 208);
             this.uiSwitch6.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch6.Name = "uiSwitch6";
@@ -1307,7 +1339,9 @@
             // 
             // uiSwitch2
             // 
+            this.uiSwitch2.ActiveText = "关";
             this.uiSwitch2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch2.InActiveText = "开";
             this.uiSwitch2.Location = new System.Drawing.Point(182, 167);
             this.uiSwitch2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch2.Name = "uiSwitch2";
@@ -1320,7 +1354,9 @@
             // 
             // uiSwitch4
             // 
+            this.uiSwitch4.ActiveText = "关";
             this.uiSwitch4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch4.InActiveText = "开";
             this.uiSwitch4.Location = new System.Drawing.Point(182, 126);
             this.uiSwitch4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch4.Name = "uiSwitch4";
@@ -1333,7 +1369,9 @@
             // 
             // uiSwitch1
             // 
+            this.uiSwitch1.ActiveText = "关";
             this.uiSwitch1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch1.InActiveText = "开";
             this.uiSwitch1.Location = new System.Drawing.Point(182, 85);
             this.uiSwitch1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch1.Name = "uiSwitch1";
@@ -1346,7 +1384,9 @@
             // 
             // uiSwitch3
             // 
+            this.uiSwitch3.ActiveText = "关";
             this.uiSwitch3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch3.InActiveText = "开";
             this.uiSwitch3.Location = new System.Drawing.Point(182, 44);
             this.uiSwitch3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch3.Name = "uiSwitch3";
@@ -1651,7 +1691,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1889, 900);
+            this.tabPage8.Size = new System.Drawing.Size(200, 60);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "入料区";
             // 
@@ -1738,7 +1778,9 @@
             // 
             // uiSwitch31
             // 
+            this.uiSwitch31.ActiveText = "关";
             this.uiSwitch31.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch31.InActiveText = "开";
             this.uiSwitch31.Location = new System.Drawing.Point(154, 105);
             this.uiSwitch31.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch31.Name = "uiSwitch31";
@@ -1777,7 +1819,9 @@
             // 
             // uiSwitch30
             // 
+            this.uiSwitch30.ActiveText = "关";
             this.uiSwitch30.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch30.InActiveText = "开";
             this.uiSwitch30.Location = new System.Drawing.Point(155, 65);
             this.uiSwitch30.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch30.Name = "uiSwitch30";
@@ -1809,7 +1853,9 @@
             // 
             // uiSwitch25
             // 
+            this.uiSwitch25.ActiveText = "关";
             this.uiSwitch25.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch25.InActiveText = "开";
             this.uiSwitch25.Location = new System.Drawing.Point(155, 96);
             this.uiSwitch25.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch25.Name = "uiSwitch25";
@@ -2124,7 +2170,9 @@
             // 
             // uiSwitch24
             // 
+            this.uiSwitch24.ActiveText = "关";
             this.uiSwitch24.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch24.InActiveText = "开";
             this.uiSwitch24.Location = new System.Drawing.Point(155, 209);
             this.uiSwitch24.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch24.Name = "uiSwitch24";
@@ -2136,7 +2184,9 @@
             // 
             // uiSwitch19
             // 
+            this.uiSwitch19.ActiveText = "关";
             this.uiSwitch19.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch19.InActiveText = "开";
             this.uiSwitch19.Location = new System.Drawing.Point(155, 167);
             this.uiSwitch19.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch19.Name = "uiSwitch19";
@@ -2158,7 +2208,9 @@
             // 
             // uiSwitch20
             // 
+            this.uiSwitch20.ActiveText = "关";
             this.uiSwitch20.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch20.InActiveText = "开";
             this.uiSwitch20.Location = new System.Drawing.Point(155, 126);
             this.uiSwitch20.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch20.Name = "uiSwitch20";
@@ -2171,7 +2223,9 @@
             // 
             // uiSwitch21
             // 
+            this.uiSwitch21.ActiveText = "关";
             this.uiSwitch21.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch21.InActiveText = "开";
             this.uiSwitch21.Location = new System.Drawing.Point(155, 85);
             this.uiSwitch21.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch21.Name = "uiSwitch21";
@@ -2184,7 +2238,9 @@
             // 
             // uiSwitch22
             // 
+            this.uiSwitch22.ActiveText = "关";
             this.uiSwitch22.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch22.InActiveText = "开";
             this.uiSwitch22.Location = new System.Drawing.Point(155, 44);
             this.uiSwitch22.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch22.Name = "uiSwitch22";
@@ -2256,7 +2312,9 @@
             // 
             // uiSwitch23
             // 
+            this.uiSwitch23.ActiveText = "关";
             this.uiSwitch23.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch23.InActiveText = "开";
             this.uiSwitch23.Location = new System.Drawing.Point(155, 209);
             this.uiSwitch23.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch23.Name = "uiSwitch23";
@@ -2277,7 +2335,9 @@
             // 
             // uiSwitch26
             // 
+            this.uiSwitch26.ActiveText = "关";
             this.uiSwitch26.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch26.InActiveText = "开";
             this.uiSwitch26.Location = new System.Drawing.Point(155, 167);
             this.uiSwitch26.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch26.Name = "uiSwitch26";
@@ -2290,7 +2350,9 @@
             // 
             // uiSwitch27
             // 
+            this.uiSwitch27.ActiveText = "关";
             this.uiSwitch27.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch27.InActiveText = "开";
             this.uiSwitch27.Location = new System.Drawing.Point(155, 126);
             this.uiSwitch27.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch27.Name = "uiSwitch27";
@@ -2303,7 +2365,9 @@
             // 
             // uiSwitch28
             // 
+            this.uiSwitch28.ActiveText = "关";
             this.uiSwitch28.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch28.InActiveText = "开";
             this.uiSwitch28.Location = new System.Drawing.Point(155, 85);
             this.uiSwitch28.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch28.Name = "uiSwitch28";
@@ -2316,7 +2380,9 @@
             // 
             // uiSwitch29
             // 
+            this.uiSwitch29.ActiveText = "关";
             this.uiSwitch29.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch29.InActiveText = "开";
             this.uiSwitch29.Location = new System.Drawing.Point(155, 44);
             this.uiSwitch29.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch29.Name = "uiSwitch29";
@@ -2377,7 +2443,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1889, 900);
+            this.tabPage9.Size = new System.Drawing.Size(200, 60);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "出料区";
             // 
@@ -2412,13 +2478,15 @@
             this.uiLight47.Size = new System.Drawing.Size(35, 35);
             this.uiLight47.State = Sunny.UI.UILightState.Off;
             this.uiLight47.TabIndex = 133;
-            this.uiLight47.TagString = "X045";
+            this.uiLight47.TagString = "X038";
             this.uiLight47.Text = "uiLight47";
             this.uiLight47.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // uiSwitch98
             // 
+            this.uiSwitch98.ActiveText = "关";
             this.uiSwitch98.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch98.InActiveText = "开";
             this.uiSwitch98.Location = new System.Drawing.Point(85, 199);
             this.uiSwitch98.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch98.Name = "uiSwitch98";
@@ -2574,6 +2642,7 @@
             // 
             // uiGroupBox19
             // 
+            this.uiGroupBox19.Controls.Add(this.uiSwitch100);
             this.uiGroupBox19.Controls.Add(this.uiSwitch34);
             this.uiGroupBox19.Controls.Add(this.uiSwitch35);
             this.uiGroupBox19.Controls.Add(this.uiLight46);
@@ -2592,9 +2661,26 @@
             this.uiGroupBox19.Text = "Auto2";
             this.uiGroupBox19.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // uiSwitch100
+            // 
+            this.uiSwitch100.ActiveText = "关";
+            this.uiSwitch100.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch100.InActiveText = "开";
+            this.uiSwitch100.Location = new System.Drawing.Point(52, 196);
+            this.uiSwitch100.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch100.Name = "uiSwitch100";
+            this.uiSwitch100.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch100.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch100.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch100.TabIndex = 133;
+            this.uiSwitch100.TagString = "Y025";
+            this.uiSwitch100.Text = "uiSwitch100";
+            // 
             // uiSwitch34
             // 
+            this.uiSwitch34.ActiveText = "关";
             this.uiSwitch34.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch34.InActiveText = "开";
             this.uiSwitch34.Location = new System.Drawing.Point(155, 61);
             this.uiSwitch34.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch34.Name = "uiSwitch34";
@@ -2602,11 +2688,14 @@
             this.uiSwitch34.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch34.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch34.TabIndex = 131;
+            this.uiSwitch34.TagString = "Y032";
             this.uiSwitch34.Text = "uiSwitch34";
             // 
             // uiSwitch35
             // 
+            this.uiSwitch35.ActiveText = "关";
             this.uiSwitch35.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch35.InActiveText = "开";
             this.uiSwitch35.Location = new System.Drawing.Point(155, 96);
             this.uiSwitch35.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch35.Name = "uiSwitch35";
@@ -2614,6 +2703,7 @@
             this.uiSwitch35.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch35.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch35.TabIndex = 124;
+            this.uiSwitch35.TagString = "Y026";
             this.uiSwitch35.Text = "uiSwitch35";
             // 
             // uiLight46
@@ -2687,6 +2777,7 @@
             // 
             // uiGroupBox20
             // 
+            this.uiGroupBox20.Controls.Add(this.uiSwitch99);
             this.uiGroupBox20.Controls.Add(this.uiSwitch36);
             this.uiGroupBox20.Controls.Add(this.uiSwitch37);
             this.uiGroupBox20.Controls.Add(this.uiLight50);
@@ -2705,9 +2796,26 @@
             this.uiGroupBox20.Text = "Auto1";
             this.uiGroupBox20.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // uiSwitch99
+            // 
+            this.uiSwitch99.ActiveText = "关";
+            this.uiSwitch99.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch99.InActiveText = "开";
+            this.uiSwitch99.Location = new System.Drawing.Point(53, 196);
+            this.uiSwitch99.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch99.Name = "uiSwitch99";
+            this.uiSwitch99.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch99.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch99.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch99.TabIndex = 132;
+            this.uiSwitch99.TagString = "Y023";
+            this.uiSwitch99.Text = "uiSwitch99";
+            // 
             // uiSwitch36
             // 
+            this.uiSwitch36.ActiveText = "关";
             this.uiSwitch36.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch36.InActiveText = "开";
             this.uiSwitch36.Location = new System.Drawing.Point(155, 61);
             this.uiSwitch36.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch36.Name = "uiSwitch36";
@@ -2715,11 +2823,14 @@
             this.uiSwitch36.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch36.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch36.TabIndex = 131;
+            this.uiSwitch36.TagString = "Y027";
             this.uiSwitch36.Text = "uiSwitch36";
             // 
             // uiSwitch37
             // 
+            this.uiSwitch37.ActiveText = "关";
             this.uiSwitch37.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch37.InActiveText = "开";
             this.uiSwitch37.Location = new System.Drawing.Point(155, 96);
             this.uiSwitch37.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch37.Name = "uiSwitch37";
@@ -2727,6 +2838,7 @@
             this.uiSwitch37.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch37.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch37.TabIndex = 124;
+            this.uiSwitch37.TagString = "Y024";
             this.uiSwitch37.Text = "uiSwitch37";
             // 
             // uiLight50
@@ -2946,7 +3058,9 @@
             // 
             // uiSwitch39
             // 
+            this.uiSwitch39.ActiveText = "关";
             this.uiSwitch39.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch39.InActiveText = "开";
             this.uiSwitch39.Location = new System.Drawing.Point(155, 209);
             this.uiSwitch39.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch39.Name = "uiSwitch39";
@@ -2958,7 +3072,9 @@
             // 
             // uiSwitch40
             // 
+            this.uiSwitch40.ActiveText = "关";
             this.uiSwitch40.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch40.InActiveText = "开";
             this.uiSwitch40.Location = new System.Drawing.Point(155, 167);
             this.uiSwitch40.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch40.Name = "uiSwitch40";
@@ -2980,7 +3096,9 @@
             // 
             // uiSwitch41
             // 
+            this.uiSwitch41.ActiveText = "关";
             this.uiSwitch41.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch41.InActiveText = "开";
             this.uiSwitch41.Location = new System.Drawing.Point(155, 126);
             this.uiSwitch41.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch41.Name = "uiSwitch41";
@@ -2993,7 +3111,9 @@
             // 
             // uiSwitch42
             // 
+            this.uiSwitch42.ActiveText = "关";
             this.uiSwitch42.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch42.InActiveText = "开";
             this.uiSwitch42.Location = new System.Drawing.Point(155, 85);
             this.uiSwitch42.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch42.Name = "uiSwitch42";
@@ -3006,7 +3126,9 @@
             // 
             // uiSwitch43
             // 
+            this.uiSwitch43.ActiveText = "关";
             this.uiSwitch43.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch43.InActiveText = "开";
             this.uiSwitch43.Location = new System.Drawing.Point(155, 44);
             this.uiSwitch43.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch43.Name = "uiSwitch43";
@@ -3078,7 +3200,9 @@
             // 
             // uiSwitch44
             // 
+            this.uiSwitch44.ActiveText = "关";
             this.uiSwitch44.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch44.InActiveText = "开";
             this.uiSwitch44.Location = new System.Drawing.Point(155, 209);
             this.uiSwitch44.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch44.Name = "uiSwitch44";
@@ -3099,7 +3223,9 @@
             // 
             // uiSwitch45
             // 
+            this.uiSwitch45.ActiveText = "关";
             this.uiSwitch45.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch45.InActiveText = "开";
             this.uiSwitch45.Location = new System.Drawing.Point(155, 167);
             this.uiSwitch45.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch45.Name = "uiSwitch45";
@@ -3112,7 +3238,9 @@
             // 
             // uiSwitch46
             // 
+            this.uiSwitch46.ActiveText = "关";
             this.uiSwitch46.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch46.InActiveText = "开";
             this.uiSwitch46.Location = new System.Drawing.Point(155, 126);
             this.uiSwitch46.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch46.Name = "uiSwitch46";
@@ -3125,7 +3253,9 @@
             // 
             // uiSwitch47
             // 
+            this.uiSwitch47.ActiveText = "关";
             this.uiSwitch47.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch47.InActiveText = "开";
             this.uiSwitch47.Location = new System.Drawing.Point(155, 85);
             this.uiSwitch47.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch47.Name = "uiSwitch47";
@@ -3138,7 +3268,9 @@
             // 
             // uiSwitch48
             // 
+            this.uiSwitch48.ActiveText = "关";
             this.uiSwitch48.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch48.InActiveText = "开";
             this.uiSwitch48.Location = new System.Drawing.Point(155, 44);
             this.uiSwitch48.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch48.Name = "uiSwitch48";
@@ -3199,7 +3331,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(1889, 900);
+            this.tabPage16.Size = new System.Drawing.Size(200, 60);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "测试区";
             // 
@@ -3469,7 +3601,9 @@
             // 
             // uiSwitch94
             // 
+            this.uiSwitch94.ActiveText = "关";
             this.uiSwitch94.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch94.InActiveText = "开";
             this.uiSwitch94.Location = new System.Drawing.Point(386, 167);
             this.uiSwitch94.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch94.Name = "uiSwitch94";
@@ -3482,7 +3616,9 @@
             // 
             // uiSwitch95
             // 
+            this.uiSwitch95.ActiveText = "关";
             this.uiSwitch95.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch95.InActiveText = "开";
             this.uiSwitch95.Location = new System.Drawing.Point(386, 126);
             this.uiSwitch95.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch95.Name = "uiSwitch95";
@@ -3495,7 +3631,9 @@
             // 
             // uiSwitch96
             // 
+            this.uiSwitch96.ActiveText = "关";
             this.uiSwitch96.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch96.InActiveText = "开";
             this.uiSwitch96.Location = new System.Drawing.Point(386, 85);
             this.uiSwitch96.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch96.Name = "uiSwitch96";
@@ -3508,7 +3646,9 @@
             // 
             // uiSwitch97
             // 
+            this.uiSwitch97.ActiveText = "关";
             this.uiSwitch97.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch97.InActiveText = "开";
             this.uiSwitch97.Location = new System.Drawing.Point(386, 44);
             this.uiSwitch97.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch97.Name = "uiSwitch97";
@@ -3557,7 +3697,9 @@
             // 
             // uiSwitch78
             // 
+            this.uiSwitch78.ActiveText = "关";
             this.uiSwitch78.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch78.InActiveText = "开";
             this.uiSwitch78.Location = new System.Drawing.Point(155, 209);
             this.uiSwitch78.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch78.Name = "uiSwitch78";
@@ -3569,7 +3711,9 @@
             // 
             // uiSwitch80
             // 
+            this.uiSwitch80.ActiveText = "关";
             this.uiSwitch80.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch80.InActiveText = "开";
             this.uiSwitch80.Location = new System.Drawing.Point(155, 167);
             this.uiSwitch80.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch80.Name = "uiSwitch80";
@@ -3591,7 +3735,9 @@
             // 
             // uiSwitch81
             // 
+            this.uiSwitch81.ActiveText = "关";
             this.uiSwitch81.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch81.InActiveText = "开";
             this.uiSwitch81.Location = new System.Drawing.Point(155, 126);
             this.uiSwitch81.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch81.Name = "uiSwitch81";
@@ -3604,7 +3750,9 @@
             // 
             // uiSwitch82
             // 
+            this.uiSwitch82.ActiveText = "关";
             this.uiSwitch82.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch82.InActiveText = "开";
             this.uiSwitch82.Location = new System.Drawing.Point(155, 85);
             this.uiSwitch82.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch82.Name = "uiSwitch82";
@@ -3617,7 +3765,9 @@
             // 
             // uiSwitch83
             // 
+            this.uiSwitch83.ActiveText = "关";
             this.uiSwitch83.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch83.InActiveText = "开";
             this.uiSwitch83.Location = new System.Drawing.Point(155, 44);
             this.uiSwitch83.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch83.Name = "uiSwitch83";
@@ -3697,7 +3847,9 @@
             // 
             // uiSwitch89
             // 
+            this.uiSwitch89.ActiveText = "关";
             this.uiSwitch89.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch89.InActiveText = "开";
             this.uiSwitch89.Location = new System.Drawing.Point(376, 167);
             this.uiSwitch89.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch89.Name = "uiSwitch89";
@@ -3710,7 +3862,9 @@
             // 
             // uiSwitch90
             // 
+            this.uiSwitch90.ActiveText = "关";
             this.uiSwitch90.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch90.InActiveText = "开";
             this.uiSwitch90.Location = new System.Drawing.Point(376, 126);
             this.uiSwitch90.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch90.Name = "uiSwitch90";
@@ -3723,7 +3877,9 @@
             // 
             // uiSwitch91
             // 
+            this.uiSwitch91.ActiveText = "关";
             this.uiSwitch91.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch91.InActiveText = "开";
             this.uiSwitch91.Location = new System.Drawing.Point(376, 85);
             this.uiSwitch91.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch91.Name = "uiSwitch91";
@@ -3736,7 +3892,9 @@
             // 
             // uiSwitch92
             // 
+            this.uiSwitch92.ActiveText = "关";
             this.uiSwitch92.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch92.InActiveText = "开";
             this.uiSwitch92.Location = new System.Drawing.Point(376, 44);
             this.uiSwitch92.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch92.Name = "uiSwitch92";
@@ -3785,7 +3943,9 @@
             // 
             // uiSwitch84
             // 
+            this.uiSwitch84.ActiveText = "关";
             this.uiSwitch84.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch84.InActiveText = "开";
             this.uiSwitch84.Location = new System.Drawing.Point(155, 209);
             this.uiSwitch84.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch84.Name = "uiSwitch84";
@@ -3806,7 +3966,9 @@
             // 
             // uiSwitch85
             // 
+            this.uiSwitch85.ActiveText = "关";
             this.uiSwitch85.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch85.InActiveText = "开";
             this.uiSwitch85.Location = new System.Drawing.Point(155, 167);
             this.uiSwitch85.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch85.Name = "uiSwitch85";
@@ -3819,7 +3981,9 @@
             // 
             // uiSwitch86
             // 
+            this.uiSwitch86.ActiveText = "关";
             this.uiSwitch86.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch86.InActiveText = "开";
             this.uiSwitch86.Location = new System.Drawing.Point(155, 126);
             this.uiSwitch86.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch86.Name = "uiSwitch86";
@@ -3832,7 +3996,9 @@
             // 
             // uiSwitch87
             // 
+            this.uiSwitch87.ActiveText = "关";
             this.uiSwitch87.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch87.InActiveText = "开";
             this.uiSwitch87.Location = new System.Drawing.Point(155, 85);
             this.uiSwitch87.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch87.Name = "uiSwitch87";
@@ -3845,7 +4011,9 @@
             // 
             // uiSwitch88
             // 
+            this.uiSwitch88.ActiveText = "关";
             this.uiSwitch88.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch88.InActiveText = "开";
             this.uiSwitch88.Location = new System.Drawing.Point(155, 44);
             this.uiSwitch88.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch88.Name = "uiSwitch88";
@@ -3973,14 +4141,14 @@
             this.uiGroupBox22.Controls.Add(this.uiLight175);
             this.uiGroupBox22.Controls.Add(this.uiLight176);
             this.uiGroupBox22.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox22.Location = new System.Drawing.Point(1503, 298);
+            this.uiGroupBox22.Location = new System.Drawing.Point(1503, 18);
             this.uiGroupBox22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox22.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox22.Name = "uiGroupBox22";
             this.uiGroupBox22.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox22.Size = new System.Drawing.Size(183, 270);
             this.uiGroupBox22.TabIndex = 223;
-            this.uiGroupBox22.Text = "梭车前";
+            this.uiGroupBox22.Text = "梭车后";
             this.uiGroupBox22.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // uiLight173
@@ -4091,14 +4259,14 @@
             this.uiGroupBox15.Controls.Add(this.uiLight167);
             this.uiGroupBox15.Controls.Add(this.uiLight168);
             this.uiGroupBox15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox15.Location = new System.Drawing.Point(1503, 18);
+            this.uiGroupBox15.Location = new System.Drawing.Point(1503, 298);
             this.uiGroupBox15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox15.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox15.Name = "uiGroupBox15";
             this.uiGroupBox15.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
             this.uiGroupBox15.Size = new System.Drawing.Size(183, 270);
             this.uiGroupBox15.TabIndex = 222;
-            this.uiGroupBox15.Text = "梭车后";
+            this.uiGroupBox15.Text = "梭车前";
             this.uiGroupBox15.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // uiLight161
@@ -4850,6 +5018,7 @@
             this.uiSwitch62.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch62.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch62.TabIndex = 290;
+            this.uiSwitch62.TagString = "Y127";
             this.uiSwitch62.Text = "uiSwitch62";
             // 
             // uiSwitch63
@@ -4864,6 +5033,7 @@
             this.uiSwitch63.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch63.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch63.TabIndex = 289;
+            this.uiSwitch63.TagString = "Y125";
             this.uiSwitch63.Text = "uiSwitch63";
             // 
             // uiSwitch64
@@ -4878,6 +5048,7 @@
             this.uiSwitch64.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch64.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch64.TabIndex = 288;
+            this.uiSwitch64.TagString = "Y123";
             this.uiSwitch64.Text = "uiSwitch64";
             // 
             // uiSwitch65
@@ -4892,6 +5063,7 @@
             this.uiSwitch65.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch65.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch65.TabIndex = 287;
+            this.uiSwitch65.TagString = "Y121";
             this.uiSwitch65.Text = "uiSwitch65";
             // 
             // uiSwitch66
@@ -4906,6 +5078,7 @@
             this.uiSwitch66.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch66.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch66.TabIndex = 286;
+            this.uiSwitch66.TagString = "Y119";
             this.uiSwitch66.Text = "uiSwitch66";
             // 
             // uiSwitch67
@@ -4920,6 +5093,7 @@
             this.uiSwitch67.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch67.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch67.TabIndex = 285;
+            this.uiSwitch67.TagString = "Y117";
             this.uiSwitch67.Text = "uiSwitch67";
             // 
             // uiSwitch68
@@ -4934,6 +5108,7 @@
             this.uiSwitch68.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch68.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch68.TabIndex = 284;
+            this.uiSwitch68.TagString = "Y115";
             this.uiSwitch68.Text = "uiSwitch68";
             // 
             // uiSwitch69
@@ -4948,6 +5123,7 @@
             this.uiSwitch69.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch69.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch69.TabIndex = 283;
+            this.uiSwitch69.TagString = "Y113";
             this.uiSwitch69.Text = "uiSwitch69";
             // 
             // uiSwitch70
@@ -4962,6 +5138,7 @@
             this.uiSwitch70.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch70.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch70.TabIndex = 282;
+            this.uiSwitch70.TagString = "Y111";
             this.uiSwitch70.Text = "uiSwitch70";
             // 
             // uiSwitch71
@@ -4976,6 +5153,7 @@
             this.uiSwitch71.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch71.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch71.TabIndex = 281;
+            this.uiSwitch71.TagString = "Y109";
             this.uiSwitch71.Text = "uiSwitch71";
             // 
             // uiSwitch72
@@ -4990,6 +5168,7 @@
             this.uiSwitch72.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch72.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch72.TabIndex = 280;
+            this.uiSwitch72.TagString = "Y107";
             this.uiSwitch72.Text = "uiSwitch72";
             // 
             // uiSwitch73
@@ -5004,6 +5183,7 @@
             this.uiSwitch73.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch73.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch73.TabIndex = 279;
+            this.uiSwitch73.TagString = "Y105";
             this.uiSwitch73.Text = "uiSwitch73";
             // 
             // uiSwitch74
@@ -5018,6 +5198,7 @@
             this.uiSwitch74.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch74.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch74.TabIndex = 278;
+            this.uiSwitch74.TagString = "Y103";
             this.uiSwitch74.Text = "uiSwitch74";
             // 
             // uiSwitch75
@@ -5032,6 +5213,7 @@
             this.uiSwitch75.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch75.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch75.TabIndex = 277;
+            this.uiSwitch75.TagString = "Y101";
             this.uiSwitch75.Text = "uiSwitch75";
             // 
             // uiSwitch76
@@ -5046,6 +5228,7 @@
             this.uiSwitch76.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch76.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch76.TabIndex = 276;
+            this.uiSwitch76.TagString = "Y099";
             this.uiSwitch76.Text = "uiSwitch76";
             // 
             // uiSwitch77
@@ -5060,6 +5243,7 @@
             this.uiSwitch77.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch77.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch77.TabIndex = 275;
+            this.uiSwitch77.TagString = "Y097";
             this.uiSwitch77.Text = "uiSwitch77";
             // 
             // uiLight121
@@ -5570,6 +5754,7 @@
             this.uiSwitch58.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch58.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch58.TabIndex = 244;
+            this.uiSwitch58.TagString = "Y126";
             this.uiSwitch58.Text = "uiSwitch58";
             // 
             // uiLight98
@@ -5600,6 +5785,7 @@
             this.uiSwitch59.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch59.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch59.TabIndex = 243;
+            this.uiSwitch59.TagString = "Y124";
             this.uiSwitch59.Text = "uiSwitch59";
             // 
             // uiSwitch60
@@ -5614,6 +5800,7 @@
             this.uiSwitch60.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch60.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch60.TabIndex = 242;
+            this.uiSwitch60.TagString = "Y122";
             this.uiSwitch60.Text = "uiSwitch60";
             // 
             // uiSwitch61
@@ -5628,6 +5815,7 @@
             this.uiSwitch61.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch61.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch61.TabIndex = 241;
+            this.uiSwitch61.TagString = "Y120";
             this.uiSwitch61.Text = "uiSwitch61";
             // 
             // uiSwitch54
@@ -5642,6 +5830,7 @@
             this.uiSwitch54.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch54.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch54.TabIndex = 240;
+            this.uiSwitch54.TagString = "Y118";
             this.uiSwitch54.Text = "uiSwitch54";
             // 
             // uiSwitch55
@@ -5656,6 +5845,7 @@
             this.uiSwitch55.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch55.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch55.TabIndex = 239;
+            this.uiSwitch55.TagString = "Y116";
             this.uiSwitch55.Text = "uiSwitch55";
             // 
             // uiSwitch56
@@ -5670,6 +5860,7 @@
             this.uiSwitch56.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch56.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch56.TabIndex = 238;
+            this.uiSwitch56.TagString = "Y114";
             this.uiSwitch56.Text = "uiSwitch56";
             // 
             // uiSwitch57
@@ -5684,6 +5875,7 @@
             this.uiSwitch57.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch57.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch57.TabIndex = 237;
+            this.uiSwitch57.TagString = "Y112";
             this.uiSwitch57.Text = "uiSwitch57";
             // 
             // uiSwitch50
@@ -5698,6 +5890,7 @@
             this.uiSwitch50.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch50.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch50.TabIndex = 236;
+            this.uiSwitch50.TagString = "Y110";
             this.uiSwitch50.Text = "uiSwitch50";
             // 
             // uiSwitch51
@@ -5712,6 +5905,7 @@
             this.uiSwitch51.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch51.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch51.TabIndex = 235;
+            this.uiSwitch51.TagString = "Y108";
             this.uiSwitch51.Text = "uiSwitch51";
             // 
             // uiSwitch52
@@ -5726,6 +5920,7 @@
             this.uiSwitch52.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch52.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch52.TabIndex = 234;
+            this.uiSwitch52.TagString = "Y106";
             this.uiSwitch52.Text = "uiSwitch52";
             // 
             // uiSwitch53
@@ -5740,6 +5935,7 @@
             this.uiSwitch53.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch53.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch53.TabIndex = 233;
+            this.uiSwitch53.TagString = "Y104";
             this.uiSwitch53.Text = "uiSwitch53";
             // 
             // uiSwitch49
@@ -5754,6 +5950,7 @@
             this.uiSwitch49.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch49.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch49.TabIndex = 232;
+            this.uiSwitch49.TagString = "Y102";
             this.uiSwitch49.Text = "uiSwitch49";
             // 
             // uiSwitch38
@@ -5768,6 +5965,7 @@
             this.uiSwitch38.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch38.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch38.TabIndex = 231;
+            this.uiSwitch38.TagString = "Y100";
             this.uiSwitch38.Text = "uiSwitch38";
             // 
             // uiSwitch33
@@ -5782,6 +5980,7 @@
             this.uiSwitch33.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch33.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch33.TabIndex = 230;
+            this.uiSwitch33.TagString = "Y098";
             this.uiSwitch33.Text = "uiSwitch33";
             // 
             // uiSwitch32
@@ -5796,6 +5995,7 @@
             this.uiSwitch32.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch32.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch32.TabIndex = 229;
+            this.uiSwitch32.TagString = "Y096";
             this.uiSwitch32.Text = "uiSwitch32";
             // 
             // label106
@@ -8110,5 +8310,7 @@
         private Sunny.UI.UISwitch uiSwitch98;
         private Sunny.UI.UILight uiLight47;
         private Sunny.UI.UIButton uiButton2;
+        private Sunny.UI.UISwitch uiSwitch99;
+        private Sunny.UI.UISwitch uiSwitch100;
     }
 }
