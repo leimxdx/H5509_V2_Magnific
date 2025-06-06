@@ -12,12 +12,15 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Vml;
 using H5509_alarm;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
+using static H5509_V2.WriteData;
+using static H5509_V2.WriteData.LogType;
 
 namespace H5509_V2
 {
@@ -70,6 +73,8 @@ namespace H5509_V2
             InitializeComponent();
             
             Log = new _log();
+            显示操作log = Log.DelegteDisplayOperateLog;
+            显示报警log = Log.DelegteDisplayAlarmLog;
 
             string result = Init_APPmaster();
             if (result != "Success")
@@ -91,7 +96,6 @@ namespace H5509_V2
             io = new _IO();
             handler = new Handler();
             motionEx = MotionEx.GetInstance();
-
             setting.刷新分BIN信息 = main.刷新分BIN信息;
             setting.刷新温度信息 = main.刷新温度显示;
             handler.刷新批次信息 = main.刷新批次信息;
@@ -99,6 +103,7 @@ namespace H5509_V2
             main.handler = handler;
 
             Com.RefrshLog = Log.DelegteDisplayComInfo;
+
 
             dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
 
@@ -131,7 +136,7 @@ namespace H5509_V2
             result = Init_FrMain();
             if (result != "Success")
             {
-                Log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
+                RunLog("软件加载失败,请关闭软件重开!" + result);
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
 
@@ -219,6 +224,30 @@ namespace H5509_V2
         private void button_log_Click(object sender, EventArgs e)
         {
             changeMainPanel(Log);
+            Log.刷新日志界面();
+        }
+
+        public class 分Bin
+        {
+            public string bin;
+            public string pan;
+            public int num;
+
+            public 分Bin(string b, string p, int n)
+            {
+                bin = b;
+                pan = p;
+                num = n;
+            }
+        }
+
+
+        public void bin(string b)
+        {
+            for (int i = 0; i < 分bin.Count; i++)
+            {
+                if (分bin[i].bin == b) 分bin[i].num++;
+            }
         }
 
         private void 界面刷新()
@@ -250,8 +279,16 @@ namespace H5509_V2
                         if (LogQueue.TryDequeue(out LogManager logs))
                         {
                             Debug.WriteLine(logs.Msg);
-                            Log.AddLog(logs.ExcelLevel, logs.ExcelLevel, logs.Msg);
-                            writeDataHelper.RunLog(logs.Msg, logs.TxtLogtype, logs.IsReceive);
+                            Log.AddLog(logs.ExcelLevel, logs.ExcelLevel, logs.Msg, logs.Time);
+                            writeDataHelper.RunLog(logs.Msg, logs.Time, logs.TxtLogtype, logs.IsReceive);
+                            if (logs.TxtLogtype == LogType.OperateLog || logs.TxtLogtype == LogType.ParamLog)
+                            {
+                                显示操作log(logs.Msg, logs.Time);
+                            }
+                            else if (logs.TxtLogtype == LogType.AlarmLog)
+                            {
+                                显示报警log(logs.Msg, logs.Time);
+                            }
                         }
                     }
 
@@ -269,7 +306,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3010001"); //入料手臂-吸--1号吸嘴丢失IC
-                                writeDataHelper.RunLog("入料手臂-吸--1号吸嘴丢失IC", 3);
+                                RunLog("[Code]3010001,[Msg]入料手臂-吸--1号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (InNozzleICOpen[1])
@@ -278,7 +315,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3020001"); //入料手臂-吸--2号吸嘴丢失IC
-                                writeDataHelper.RunLog("入料手臂-吸--2号吸嘴丢失IC", 3);
+                                RunLog("[Code]3020001,[Msg]入料手臂-吸--2号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (InNozzleICOpen[2])
@@ -287,7 +324,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3030001"); //入料手臂-吸--3号吸嘴丢失IC
-                                writeDataHelper.RunLog("入料手臂-吸--3号吸嘴丢失IC", 3);
+                                RunLog("[Code]3030001,[Msg]入料手臂-吸--3号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (InNozzleICOpen[3])
@@ -296,7 +333,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3040001"); //入料手臂-吸--4号吸嘴丢失IC
-                                writeDataHelper.RunLog("入料手臂-吸--4号吸嘴丢失IC", 3);
+                                RunLog("[Code]3040001,[Msg]入料手臂-吸--4号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                     }
@@ -311,7 +348,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3050001"); //出料手臂-吸--1号吸嘴丢失IC
-                                writeDataHelper.RunLog("出料手臂-吸--1号吸嘴丢失IC", 3);
+                                RunLog("[Code]3050001,[Msg]出料手臂-吸--1号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (OutNozzleICOpen[1])
@@ -320,7 +357,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3060001"); //出料手臂-吸--2号吸嘴丢失IC
-                                writeDataHelper.RunLog("出料手臂-吸--2号吸嘴丢失IC", 3);
+                                RunLog("[Code]3060001,[Msg]出料手臂-吸--2号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (OutNozzleICOpen[2])
@@ -329,7 +366,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3070001"); //出料手臂-吸--3号吸嘴丢失IC
-                                writeDataHelper.RunLog("出料手臂-吸--3号吸嘴丢失IC", 3);
+                                RunLog("[Code]3070001,[Msg]出料手臂-吸--3号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (OutNozzleICOpen[3])
@@ -338,7 +375,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3080001"); //出料手臂-吸--4号吸嘴丢失IC
-                                writeDataHelper.RunLog("出料手臂-吸--4号吸嘴丢失IC", 3);
+                                RunLog("[Code]3080001,[Msg]出料手臂-吸--4号吸嘴丢失IC", LogType.AlarmLog);
                             }
                         }
                     }
@@ -353,7 +390,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3099901"); //测试手臂-吸--1号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--1号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3099901,[Msg]测试手臂-吸--1号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (TestNozzleICOpen[1])
@@ -362,7 +399,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3109901"); //测试手臂-吸--2号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--2号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3109901,[Msg]测试手臂-吸--2号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (TestNozzleICOpen[2])
@@ -371,7 +408,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3119901"); //测试手臂-吸--3号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--3号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3119901,[Msg]测试手臂-吸--3号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (TestNozzleICOpen[3])
@@ -380,7 +417,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3129901"); //测试手臂-吸--4号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--4号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3129901,[Msg]测试手臂-吸--4号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (TestNozzleICOpen[4])
@@ -389,7 +426,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3139901"); //测试手臂-吸--5号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--5号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3139901,[Msg]测试手臂-吸--5号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (TestNozzleICOpen[5])
@@ -398,7 +435,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3149901"); //测试手臂-吸--6号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--6号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3149901,[Msg]测试手臂-吸--6号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (TestNozzleICOpen[6])
@@ -407,7 +444,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3159901"); //测试手臂-吸--7号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--7号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3159901,[Msg]测试手臂-吸--7号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                         if (TestNozzleICOpen[7])
@@ -416,7 +453,7 @@ namespace H5509_V2
                             {
                                 ispass = true;
                                 Listcode.Add("3169901"); //测试手臂-吸--8号吸嘴 丢失IC
-                                writeDataHelper.RunLog("测试手臂-吸--8号吸嘴 丢失IC", 3);
+                                RunLog("[Code]3169901,[Msg]测试手臂-吸--8号吸嘴 丢失IC", LogType.AlarmLog);
                             }
                         }
                     }
@@ -432,8 +469,8 @@ namespace H5509_V2
                         if (Com.Iswaitout[testnum]) //如果接收超时
                         {
                             Com.Iswaitout[testnum] = false;
-                            RunLog($"Site{testnum + 1}:接收超时！触发停止");
                             Listcode.Add($"8{testnum:D2}018");
+                            RunLog($"[Code]8{testnum:D2}018,[Msg]Site{testnum + 1}:接收超时！触发停止", LogType.AlarmLog);
                             ProgramPause = true; //如果有接收超时则触发停止
                             IsPause = true;
 
@@ -468,10 +505,11 @@ namespace H5509_V2
                             //string sql = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
                             //$"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','{bb}')";
                             //Task<int> task = SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
-                            ////foreach (string b in bins)
-                            ////{
-                            ////    bin(b);
-                            ////}
+
+                            foreach (string b in bins)
+                            {
+                                bin(b);
+                            }
 
                             int doutnum = sitenum * 8;
                             for (int m = 0; m < open.Length; m++)
@@ -502,6 +540,9 @@ namespace H5509_V2
                                     int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
                                     int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
                                     //RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
+                                    string sql = $"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{Com.listtesttimespan[sitenum].Ticks} where id='{doutstr}'";
+                                    int line1 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+                                    if (line1 <= 0) RunLog(sql + $"返回:{line1}");
                                     RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
                                 }
                             }
@@ -535,8 +576,7 @@ namespace H5509_V2
                                             设置信息.开site信息 = siteStatus;
                                             main.刷新开Site状态();
                                         }
-                                        string str = $"Site{m + 1}-Dut{n + 1}:连续不良数量:{doutContinueFail[m][n]}>={doutfailnum} code:{code}";
-                                        RunLog(str);
+                                        RunLog($"[Code]{code},[Msg]Site{m + 1}-Dut{n + 1}:连续不良数量:{doutContinueFail[m][n]}>={doutfailnum}", LogType.AlarmLog);
                                         doutContinueFail[m][n] = 0; //如果已报警良率异常则清空重新计算
                                     }
                                 }
@@ -553,8 +593,7 @@ namespace H5509_V2
                                             isyieldex = true;
                                             string code = $"6{i + 1:D2}0{j + 1}16";
                                             Listcode.Add(code);
-                                            string str = $"Site{i + 1}-Dut{i + 1}:累计不良数量:{单dut总不良计数[i][j]}>{设置信息.测试机信息.Dut累计不良报警个数} code:{code}";
-                                            RunLog(str);
+                                            RunLog($"[Code]{code},[Msg]Site{i + 1}-Dut{i + 1}:累计不良数量:{单dut总不良计数[i][j]}>{设置信息.测试机信息.Dut累计不良报警个数}", LogType.AlarmLog);
                                             单dut总不良计数[i][j] = 0;
                                         }
                                     }
@@ -569,8 +608,7 @@ namespace H5509_V2
                                 isyieldex = true;
                                 string code = "1400320";
                                 Listcode.Add(code);
-                                string str = $"总良率：{Auto1良率}<{设置信息.测试机信息.总良率报警百分比.ToString("P1")}";
-                                RunLog(str);
+                                RunLog($"[Code]{code},[Msg]总良率：{Auto1良率}<{设置信息.测试机信息.总良率报警百分比.ToString("P1")}", LogType.AlarmLog);
                                 总良率报警间隔计数 = 0;
                             }
 

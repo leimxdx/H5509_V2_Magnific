@@ -4191,6 +4191,7 @@
             this.label_driverStatus.TabIndex = 1;
             this.label_driverStatus.Text = "HALT";
             this.label_driverStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label_driverStatus.TextChanged += new System.EventHandler(this.label_driverStatus_TextChanged);
             // 
             // pictureBox1
             // 

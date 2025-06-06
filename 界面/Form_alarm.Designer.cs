@@ -403,7 +403,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(32, 108);
             this.label9.TabIndex = 8;
-            this.label9.Text = "入\r\n料\r\n吸\r\n嘴";
+            this.label9.Text = "入,料,吸,嘴";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel_1
@@ -1728,7 +1728,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 108);
             this.label10.TabIndex = 8;
-            this.label10.Text = "测\r\n试\r\n吸\r\n嘴";
+            this.label10.Text = "测,试,吸,嘴";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TestArmSuck1
@@ -1824,7 +1824,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(32, 108);
             this.label11.TabIndex = 8;
-            this.label11.Text = "出\r\n料\r\n吸\r\n嘴";
+            this.label11.Text = "出,料,吸,嘴";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TranArmRSuck1
@@ -1890,7 +1890,7 @@
             this.Shuttle2.Name = "Shuttle2";
             this.Shuttle2.Size = new System.Drawing.Size(90, 100);
             this.Shuttle2.TabIndex = 50;
-            this.Shuttle2.Text = "梭 车\r\n（后）";
+            this.Shuttle2.Text = "梭 车,（后）";
             this.Shuttle2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Shuttle1
@@ -1904,7 +1904,7 @@
             this.Shuttle1.Name = "Shuttle1";
             this.Shuttle1.Size = new System.Drawing.Size(90, 100);
             this.Shuttle1.TabIndex = 51;
-            this.Shuttle1.Text = "梭 车\r\n（前）";
+            this.Shuttle1.Text = "梭 车,（前）";
             this.Shuttle1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CatchArm
@@ -1933,7 +1933,7 @@
             this.Hot.Name = "Hot";
             this.Hot.Size = new System.Drawing.Size(90, 130);
             this.Hot.TabIndex = 53;
-            this.Hot.Text = "加\r\n热\r\n盘";
+            this.Hot.Text = "加,热,盘";
             this.Hot.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Loader
@@ -1947,7 +1947,7 @@
             this.Loader.Name = "Loader";
             this.Loader.Size = new System.Drawing.Size(90, 130);
             this.Loader.TabIndex = 54;
-            this.Loader.Text = "待\r\n测\r\n盘";
+            this.Loader.Text = "待,测,盘";
             this.Loader.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Empty
@@ -1961,7 +1961,7 @@
             this.Empty.Name = "Empty";
             this.Empty.Size = new System.Drawing.Size(90, 130);
             this.Empty.TabIndex = 55;
-            this.Empty.Text = "空\r\n盘";
+            this.Empty.Text = "空,盘";
             this.Empty.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label179
@@ -2001,7 +2001,7 @@
             this.Auto1.Name = "Auto1";
             this.Auto1.Size = new System.Drawing.Size(90, 130);
             this.Auto1.TabIndex = 58;
-            this.Auto1.Text = "自\r\n动\r\n盘\r\n1";
+            this.Auto1.Text = "自,动,盘,1";
             this.Auto1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Auto2
@@ -2015,7 +2015,7 @@
             this.Auto2.Name = "Auto2";
             this.Auto2.Size = new System.Drawing.Size(90, 130);
             this.Auto2.TabIndex = 59;
-            this.Auto2.Text = "自\r\n动\r\n盘\r\n2";
+            this.Auto2.Text = "自,动,盘,2";
             this.Auto2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Fix1
@@ -2029,7 +2029,7 @@
             this.Fix1.Name = "Fix1";
             this.Fix1.Size = new System.Drawing.Size(90, 130);
             this.Fix1.TabIndex = 60;
-            this.Fix1.Text = "手\r\n动\r\n盘\r\n1";
+            this.Fix1.Text = "手,动,盘,1";
             this.Fix1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Fix2
@@ -2043,7 +2043,7 @@
             this.Fix2.Name = "Fix2";
             this.Fix2.Size = new System.Drawing.Size(90, 130);
             this.Fix2.TabIndex = 61;
-            this.Fix2.Text = "手\r\n动\r\n盘\r\n2";
+            this.Fix2.Text = "手,动,盘,2";
             this.Fix2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Fix3
@@ -2057,7 +2057,7 @@
             this.Fix3.Name = "Fix3";
             this.Fix3.Size = new System.Drawing.Size(90, 130);
             this.Fix3.TabIndex = 62;
-            this.Fix3.Text = "手\r\n动\r\n盘\r\n3";
+            this.Fix3.Text = "手,动,盘,3";
             this.Fix3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TranArmL

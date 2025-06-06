@@ -26,5 +26,7 @@ namespace H5509_V2
         public BinParam 分BIN信息 { get; set; } = new BinParam();
 
         public TesterIFParam 测试机信息 { get; set; } = new TesterIFParam();
+
+        public string 梭车名称 { get; set; }
     }
 }

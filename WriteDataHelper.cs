@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SiCommunication.Core;
+using static H5509_V2.WriteData;
 
 namespace H5509_V2
 {
@@ -21,6 +23,15 @@ namespace H5509_V2
 
         //定义一个锁
         private static readonly object objlock = new object();
+
+        public enum LogType
+        {
+            RunLog = 1,
+            ComLog = 2,
+            AlarmLog = 3,
+            OperateLog = 4,
+            ParamLog = 5
+        }
 
         //创建一个私有的构造方法
         private WriteData()
@@ -49,9 +60,9 @@ namespace H5509_V2
         /// <param name="log"></param>
         /// <param name="logtype">1: RunLog 2: ComLog 3: AlarmLog 4: KeyLog 5: OperateLog 6: ParamLog</param>
         /// <returns></returns>
-        public bool RunLog(string log, short logtype = 1, bool isReceive = false)
+        public bool RunLog(string log, DateTime datetime, LogType logtype = LogType.RunLog, bool isReceive = false)
         {
-            return WriteDataHelper.RunLog(log, logtype, isReceive);
+            return WriteDataHelper.RunLog(log, datetime, logtype, isReceive);
         }
     }
 
@@ -79,11 +90,11 @@ namespace H5509_V2
             ParamLogPath = $"{dataDirectory}\\{year}\\ParamLog";
         }
 
-        private string DatapPath(string fileName, short logtype = 1)
+        private string DatapPath(string fileName, LogType logtype)//, short logtype = 1
         {
             string path = "";
             string month = "\\" + DateTime.Now.Month.ToString("D2");
-            switch (logtype)
+            switch ((int)logtype)
             {
                 case 1: path = RunLogPath + month; break;
                 case 2: path = ComLogPath + month; break;
@@ -135,13 +146,12 @@ namespace H5509_V2
         /// <param name="log"></param>
         /// <param name="ID"></param>
         /// <returns></returns>
-        public bool RunLog(string log, short logtype = 1, bool isReceive = false)
+        public bool RunLog(string log, DateTime datetime, LogType logtype = LogType.RunLog, bool isReceive = false)
         {
             string str = " => ";
             if (isReceive) str = " <= ";
-            DateTime dataTime = DateTime.Now;
-            string writeTime = $"{dataTime:yyyy-MM-dd HH:mm:ss} {str} ";
-            string logPath = DatapPath(dataTime.ToString("yyyy-MM-dd") + ".log", logtype);
+            string writeTime = $"{datetime:yyyy-MM-dd HH:mm:ss} {str} ";
+            string logPath = DatapPath(datetime.ToString("yyyy-MM-dd") + ".log", logtype);
             if (WriteAppend(logPath, writeTime + log)) return true;
             else return false;
         }

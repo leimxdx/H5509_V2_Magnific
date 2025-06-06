@@ -7,13 +7,16 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.IO.Ports;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.Office2010.ExcelAc;
 using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
@@ -50,7 +53,7 @@ namespace H5509_V2
         {
             InitializeComponent();
             this.dgv_data.AutoGenerateColumns = false;
-            GlobalAddLog = AddLog;
+            //GlobalAddLog = AddLog;
             //CleanOldLogs();
             this.startTime.Value = DateTime.Now;
             this.endTime.Value = DateTime.Now;
@@ -71,6 +74,13 @@ namespace H5509_V2
             }
             startTime.Value = DateTime.Today;//0时
             endTime.Value = DateTime.Today.AddDays(1);
+
+            uiComboBox11.DataSource = SerialPort.GetPortNames();
+            uiComboBox12.DataSource = new string[] { "9600", "19200", "38400", "57600", "115200" };
+            uiComboBox14.DataSource = new string[] { "None", "Odd", "Even" };
+            uiComboBox13.DataSource = new string[] { "7", "8" };
+            uiComboBox15.DataSource = new string[] { "1", "2" };
+
         }
 
         private void _log_Load(object sender, EventArgs e)
@@ -87,28 +97,18 @@ namespace H5509_V2
             logsList = ReadExcel(Excelpath, this.startTime.Value, this.endTime.Value);
         }
 
+        public void 刷新日志界面()
+        {
+            uiComboBox11.Text = 设置信息.测试机信息.串口号;
+            uiComboBox12.Text = 设置信息.测试机信息.波特率.ToString();
+            uiComboBox14.Text = 设置信息.测试机信息.校验位.ToString();
+            uiComboBox13.Text = 设置信息.测试机信息.数据位.ToString();
+            uiComboBox15.Text = 设置信息.测试机信息.停止位.ToString();
+        }
+
         public TimeSpan Timestamp { get; set; }
         private List<log> logsList = new List<log>();
-
-        DateTime logTimes = DateTime.Now;
-
-        // 自动清理30天前的日志
-        private void CleanOldLogs()
-        {
-
-            foreach (var dir in Directory.GetDirectories(logsDirectory))
-            {
-                // 从文件夹名解析日期（格式：yyyyMMdd）
-                string dirName = Path.GetFileName(dir);
-                if (DateTime.TryParseExact(dirName, "yyyyMM", null, DateTimeStyles.None, out DateTime dirDate))
-                {
-                    if (dirDate < DateTime.Now.AddDays(-3))
-                    {
-                        Directory.Delete(dir, true); // 删除整个日期文件夹
-                    }
-                }
-            }
-        }
+        
 
         public void RefreshLog(string level, string logType, string info)
         {
@@ -129,7 +129,7 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                writeDataHelper.RunLog(ex.Message);
+                RunLog(ex.Message);
             }
         }
 
@@ -139,12 +139,12 @@ namespace H5509_V2
         /// <param name="level"> </param>
         /// <param name="logType"></param>
         /// <param name="info"></param>
-        public void AddLog(string level, string logType, string info)
+        public void AddLog(string level, string logType, string info, DateTime dateTime)
         {
 
             logNeed2Add.Add(new log
             {
-                Time = DateTime.Now,
+                Time = dateTime,
                 LogLevel = level,
                 LogType = logType,
                 LogContent = info
@@ -159,13 +159,13 @@ namespace H5509_V2
 
         private void LogTimer_Tick(object sender, EventArgs e)
         {
-            string monthlyDir = Path.Combine(logsDirectory, DateTime.Now.ToString("yyyyMM"));
+            if (logNeed2Add.Count == 0) return; // 没有日志需要写入
+
+            string monthlyDir = Path.Combine(logsDirectory, logNeed2Add[0].Time.ToString("yyyyMM"));
             var currentFile = GetCurrentLogFile(monthlyDir);
 
             int countTemp = logNeed2Add.Count;
             List<log> logsTemp = logNeed2Add.GetRange(0, countTemp);
-
-            if (logsTemp.Count == 0) return; // 没有日志需要写入
 
             WriteLogToExcel(currentFile, logsTemp);
 
@@ -221,34 +221,13 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                writeDataHelper.RunLog($"写入失败: {fileCounter.FilePath}\n{ex.Message}");
+                RunLog($"写入失败: {fileCounter.FilePath}\n{ex.Message}");
                 _fileCounters.Remove(fileCounter.FilePath);
                 var newFile = GetCurrentLogFile(Path.GetDirectoryName(fileCounter.FilePath));
                 WriteLogToExcel(newFile, logs);
             }
         }
 
-        private void InternalWrite(FileCounter fileCounter, List<(string level, string logType, string info)> logs)
-        {
-            using (var workbook = new XLWorkbook(fileCounter.FilePath))
-            {
-                var worksheet = workbook.Worksheet(1);
-                int startRow = worksheet.LastRowUsed()?.RowNumber() + 1 ?? 2;
-
-                for (int i = 0; i < logs.Count; i++)
-                {
-                    var (level, logType, info) = logs[i];
-                    worksheet.Cell(startRow + i, 1).Value = DateTime.Now;
-                    worksheet.Cell(startRow + i, 2).Value = level;
-                    worksheet.Cell(startRow + i, 3).Value = logType;
-                    worksheet.Cell(startRow + i, 4).Value = info;
-                }
-
-                workbook.Save();
-            }
-
-            fileCounter.RowCount += logs.Count;
-        }
         private void cbbLogLevel_SelectedIndexChanged(object sender, EventArgs e)
         {
             // 获取当前选中的日志等级
@@ -308,7 +287,7 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                writeDataHelper.RunLog($"读取{path}失败: {ex.Message}");
+                RunLog($"读取{path}失败: {ex.Message}");
             }
 
             return logs;
@@ -394,7 +373,7 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                writeDataHelper.RunLog($"查询失败: {ex.Message}");
+                RunLog($"查询失败: {ex.Message}");
                 UIMessageTip.ShowError(this, $"查询失败: {ex.Message}", 2000);
             }
             finally
@@ -444,11 +423,12 @@ namespace H5509_V2
         {
             var logFiles = new List<string>();
 
+            string[] directorys = Directory.GetDirectories(logsDirectory);
             // 遍历所有月份目录
-            foreach (var monthDir in Directory.GetDirectories(logsDirectory))
+            for (int i = 0; i < directorys.Length; i++)
             {
                 // 从目录名获取月份（格式：yyyyMM）
-                string dirName = Path.GetFileName(monthDir);
+                string dirName = Path.GetFileName(directorys[i]);
                 if (DateTime.TryParseExact(dirName, "yyyyMM", null, DateTimeStyles.None, out DateTime dirDate))
                 {
                     // 检查月份是否在查询时间范围内（优化：先粗略按月份筛选）
@@ -460,7 +440,7 @@ namespace H5509_V2
                         continue;
 
                     // 遍历该月所有日志文件
-                    foreach (var file in Directory.GetFiles(monthDir, "Log_*.xlsx"))
+                    foreach (var file in Directory.GetFiles(directorys[i], "Log_*.xlsx"))
                     {
                         // 从文件名解析时间（格式：Log_yyyyMMdd-HHmmss.xlsx）
                         string fileName = Path.GetFileNameWithoutExtension(file);
@@ -595,7 +575,7 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    writeDataHelper.RunLog($"加载已有文件失败: {file}\n{ex.Message}");
+                    RunLog($"加载已有文件失败: {file}\n{ex.Message}");
                 }
             }
 
@@ -621,7 +601,7 @@ namespace H5509_V2
             };
 
             _fileCounters.Add(newFilePath, newCounter);
-            writeDataHelper.RunLog($"创建新文件: {newFilePath}");
+            RunLog($"创建新文件: {newFilePath}");
 
             return newCounter;
         }
@@ -660,6 +640,238 @@ namespace H5509_V2
             catch (Exception ex)
             {
                 RunLog($"日志显示异常: {ex.Message}");
+            }
+        }
+
+        public void DelegteDisplayOperateLog(string message, DateTime datetime)
+        {
+            try
+            {
+                message = $"{datetime:yyyy-MM-dd HH:mm:ss.fff}=>{message}";
+                if (richTextBox2.InvokeRequired)
+                {
+                    richTextBox2.Invoke(new Action(() =>
+                    {
+                        richTextBox2.AppendText(message + '\n');
+                        richTextBox2.Select(richTextBox2.TextLength, 0);
+                        richTextBox2.ScrollToCaret();
+                    }));
+                }
+                else
+                {
+                    richTextBox2.AppendText(message + '\n');
+                    richTextBox2.Select(richTextBox2.TextLength, 0);
+                    richTextBox2.ScrollToCaret();
+                }
+            }
+            catch (Exception ex)
+            {
+                RunLog($"操作日志显示异常: {ex.Message}");
+            }
+        }
+        public void DelegteDisplayAlarmLog(string message, DateTime datetime)
+        {
+            try
+            {
+                message = $"{datetime:yyyy-MM-dd HH:mm:ss.fff}=>{message}";
+                if (richTextBox3.InvokeRequired)
+                {
+                    richTextBox3.Invoke(new Action(() =>
+                    {
+                        richTextBox3.AppendText(message + '\n');
+                        richTextBox3.Select(richTextBox3.TextLength, 0);
+                        richTextBox3.ScrollToCaret();
+                    }));
+                }
+                else
+                {
+                    richTextBox3.AppendText(message + '\n');
+                    richTextBox3.Select(richTextBox3.TextLength, 0);
+                    richTextBox3.ScrollToCaret();
+                }
+            }
+            catch (Exception ex)
+            {
+                RunLog($"报警日志显示异常: {ex.Message}");
+            }
+        }
+
+        private void uiComboBox11_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                uiComboBox11.DataSource = SerialPort.GetPortNames();
+                uiComboBox11.Text = 设置信息.测试机信息.串口号;
+            }
+        }
+
+        private void uiButton2_Click(object sender, EventArgs e)
+        {
+            if (设备状态 == 0) Com.CloseCom();
+            Com.OpenCom();
+            if (Com.IsOpenCom)
+            {
+                MessageBox.Show("连接成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void chk_senddoutadd()
+        {
+            this.chk_senddout1.CheckedChanged += new System.EventHandler(this.chk_senddout1_CheckedChanged);
+            this.chk_senddout2.CheckedChanged += new System.EventHandler(this.chk_senddout2_CheckedChanged);
+            this.chk_senddout3.CheckedChanged += new System.EventHandler(this.chk_senddout3_CheckedChanged);
+            this.chk_senddout4.CheckedChanged += new System.EventHandler(this.chk_senddout4_CheckedChanged);
+            this.chk_senddout5.CheckedChanged += new System.EventHandler(this.chk_senddout5_CheckedChanged);
+            this.chk_senddout6.CheckedChanged += new System.EventHandler(this.chk_senddout6_CheckedChanged);
+            this.chk_senddout7.CheckedChanged += new System.EventHandler(this.chk_senddout7_CheckedChanged);
+            this.chk_senddout8.CheckedChanged += new System.EventHandler(this.chk_senddout8_CheckedChanged);
+        }
+        private void chk_senddoutsub()
+        {
+            this.chk_senddout1.CheckedChanged -= new System.EventHandler(this.chk_senddout1_CheckedChanged);
+            this.chk_senddout2.CheckedChanged -= new System.EventHandler(this.chk_senddout2_CheckedChanged);
+            this.chk_senddout3.CheckedChanged -= new System.EventHandler(this.chk_senddout3_CheckedChanged);
+            this.chk_senddout4.CheckedChanged -= new System.EventHandler(this.chk_senddout4_CheckedChanged);
+            this.chk_senddout5.CheckedChanged -= new System.EventHandler(this.chk_senddout5_CheckedChanged);
+            this.chk_senddout6.CheckedChanged -= new System.EventHandler(this.chk_senddout6_CheckedChanged);
+            this.chk_senddout7.CheckedChanged -= new System.EventHandler(this.chk_senddout7_CheckedChanged);
+            this.chk_senddout8.CheckedChanged -= new System.EventHandler(this.chk_senddout8_CheckedChanged);
+        }
+
+        private List<bool[]> GetSiteStatus(out short site)
+        {
+            site = (short)(Convert.ToInt16(uiComboBox1.Text) - 1);
+            List<bool[]> isopen = new List<bool[]>()
+            {
+
+                new bool[] { chk_senddout1.Checked, chk_senddout2.Checked, chk_senddout3.Checked, chk_senddout4.Checked },
+                new bool[] { chk_senddout5.Checked, chk_senddout6.Checked, chk_senddout7.Checked, chk_senddout8.Checked }
+            };
+            return isopen;
+        }
+
+        /// <summary>
+        /// 获取发送测试信息
+        /// </summary>
+        /// <returns></returns>
+        private string GetSendisopen()
+        {
+            List<bool[]> isopen = GetSiteStatus(out short site);
+            string str = Com.getstartest(site, isopen);
+            return "@START_TEST " + str + "+";
+        }
+        private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void uiButton3_Click(object sender, EventArgs e)
+        {
+            chk_senddoutsub();
+            chk_senddout1.Checked = true;
+            chk_senddout2.Checked = true;
+            chk_senddout3.Checked = true;
+            chk_senddout4.Checked = true;
+            chk_senddout5.Checked = true;
+            chk_senddout6.Checked = true;
+            chk_senddout7.Checked = true;
+            chk_senddout8.Checked = true;
+            chk_senddoutadd();
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout1_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout2_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout3_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout4_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout5_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout6_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout7_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void chk_senddout8_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void uiButton4_Click(object sender, EventArgs e)
+        {
+            chk_senddoutsub();
+            chk_senddout1.Checked = false;
+            chk_senddout2.Checked = false;
+            chk_senddout3.Checked = false;
+            chk_senddout4.Checked = false;
+            chk_senddout5.Checked = false;
+            chk_senddout6.Checked = false;
+            chk_senddout7.Checked = false;
+            chk_senddout8.Checked = false;
+            chk_senddoutadd();
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void uiButton5_Click(object sender, EventArgs e)
+        {
+            List<bool[]> isopen = GetSiteStatus(out short testnum);
+            //if (SiteTestState[testnum] == 1)
+            //{
+            DialogResult dialog = MessageBox.Show("请确认是否发送测试信号?","提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                Com.Send(testnum, isopen);
+            }
+            //}
+            //else Com.Send(testnum, isopen);
+        }
+
+        private void uiButton6_Click(object sender, EventArgs e)
+        {
+            int site = (short)(Convert.ToInt16(uiComboBox1.Text) - 1);
+            if (SiteTestState[site] == 2)
+            {
+                Com.Listtimer[site].Stop();
+                //Com.Iswaitout[site] = true;
+                string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+                if (Com.Bin.ContainsKey(site))
+                {
+                    Com.Bin[site] = bin;
+                }
+                else Com.Bin.Add(site, bin);
+                OutSiteQueue.Enqueue(site);
+                BinSaveQueue.Enqueue(bin);
+                SiteTestState[site] = 3;
+                //用来统计数据
+                Com.OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
+                Com.Listtestsingal.Add(site);
+            }
+            else
+            {
+                MessageBox.Show($"Site:{site + 1}未在测试!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

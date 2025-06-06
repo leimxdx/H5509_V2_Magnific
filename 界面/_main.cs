@@ -11,6 +11,8 @@ using DocumentFormat.OpenXml.InkML;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
+using static H5509_V2.ForMain;
+using static H5509_V2.WriteData;
 using Color = System.Drawing.Color;
 using Control = System.Windows.Forms.Control;
 
@@ -40,10 +42,6 @@ namespace H5509_V2
         /// 绿灯是否闪烁
         /// </summary>
         private bool isGreenFlicker { get; set; } = true;
-
-        private int 开Site数量 = 0;
-
-        private int 关Site数量 = 0;
 
         private DateTime mousemovetime = DateTime.Now;
 
@@ -162,6 +160,8 @@ namespace H5509_V2
             放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; //防止报错
 
             刷新开Site状态();
+
+            StartSite数量 = 开Site数量;
 
             WindowsButtonBind(); //Open/Close按钮绑定
 
@@ -861,7 +861,7 @@ namespace H5509_V2
                             && !SiteTestState.Contains(3) //测试区有料已测试
                             && !SiteTestState.Contains(4) //测试区有料待取走
                             && !正在吸取后入料.Contains(true)) //测试区有料待取走
-                        { 
+                        {
                             InSiteQueue.Enqueue(i);
                             RunLog($"添加Site{i}");
                         }
@@ -905,13 +905,13 @@ namespace H5509_V2
                 case 1: textBox3.Text = Fix1_1; break;
                 case 2:
                     {
-                        textBox3.Text = "分区一：" + Fix1_1 + "\r\n分区二：" + Fix1_2;
+                        textBox3.Text = "分区一：" + Fix1_1 + ",分区二：" + Fix1_2;
                         Fix1 += "," + Fix1_2;
                     }
                     break;
                 case 3:
                     {
-                        textBox3.Text = "分区一：" + Fix1_1 + "\r\n分区二：" + Fix1_2 + "\r\n分区三：" + Fix1_3;
+                        textBox3.Text = "分区一：" + Fix1_1 + ",分区二：" + Fix1_2 + ",分区三：" + Fix1_3;
                         Fix1 += "," + Fix1_2 + "," + Fix1_3;
                     }
                     break;
@@ -921,13 +921,13 @@ namespace H5509_V2
                 case 1: textBox2.Text = Fix2_1; break;
                 case 2:
                     {
-                        textBox2.Text = "分区一：" + Fix2_1 + "\r\n分区二：" + Fix2_2;
+                        textBox2.Text = "分区一：" + Fix2_1 + ",分区二：" + Fix2_2;
                         Fix2 += "," + Fix2_2;
                     }
                     break;
                 case 3:
                     {
-                        textBox2.Text = "分区一：" + Fix2_1 + "\r\n分区二：" + Fix2_2 + "\r\n分区三：" + Fix2_3;
+                        textBox2.Text = "分区一：" + Fix2_1 + ",分区二：" + Fix2_2 + ",分区三：" + Fix2_3;
                         Fix2 += "," + Fix2_2 + "," + Fix2_3;
                     }
                     break;
@@ -937,69 +937,79 @@ namespace H5509_V2
                 case 1: textBox4.Text = Fix3_1; break;
                 case 2:
                     {
-                        textBox4.Text = "分区一：" + Fix3_1 + "\r\n分区二：" + Fix3_2;
+                        textBox4.Text = "分区一：" + Fix3_1 + ",分区二：" + Fix3_2;
                         Fix3 += "," + Fix3_2;
                     }
                     break;
                 case 3:
                     {
-                        textBox4.Text = "分区一：" + Fix3_1 + "\r\n分区二：" + Fix3_2 + "\r\n分区三：" + Fix3_3;
+                        textBox4.Text = "分区一：" + Fix3_1 + ",分区二：" + Fix3_2 + ",分区三：" + Fix3_3;
                         Fix3 += "," + Fix3_2 + "," + Fix3_3;
                     }
                     break;
             }
 
-            //分bin.Clear();
+            分bin.Clear();
 
-            //if (auto1.Length > 0)
-            //    foreach (string s in auto1.Split(','))
-            //    {
-            //        if (s == "") continue;
-            //        分bin.Add(new 分Bin(s, "auto1", 0));
-            //    }
-            //if (auto2.Length > 0)
-            //    foreach (string s in auto2.Split(','))
-            //    {
-            //        if (s == "") continue;
-            //        分bin.Add(new 分Bin(s, "auto2", 0));
-            //    }
-            //if (fix1.Length > 0)
-            //    foreach (string s in fix1.Split(','))
-            //    {
-            //        if (s == "") continue;
-            //        分bin.Add(new 分Bin(s, "fix1", 0));
-            //    }
-            //if (fix2.Length > 0)
-            //    foreach (string s in fix2.Split(','))
-            //    {
-            //        if (s == "") continue;
-            //        分bin.Add(new 分Bin(s, "fix2", 0));
-            //    }
-            //if (fix3.Length > 0)
-            //    foreach (string s in fix3.Split(','))
-            //    {
-            //        if (s == "") continue;
-            //        分bin.Add(new 分Bin(s, "fix3", 0));
-            //    }
-            //int[] 分bin_fix = { motionEx.binParam.fix1num, motionEx.binParam.fix2num, motionEx.binParam.fix3num };
-            //string[] 分bin_fix1 = { fix1_1, fix1_2, fix1_3 };
-            //string[] 分bin_fix2 = { fix2_1, fix2_2, fix2_3 };
-            //string[] 分bin_fix3 = { fix3_1, fix3_2, fix3_3 };
-            //string[][] 分bin_fix_ = { 分bin_fix1, 分bin_fix2, 分bin_fix3 };
+            if (Auto1.Length > 0)
+            {
+                foreach (string s in Auto1.Split(','))
+                {
+                    if (s == "") continue;
+                    分bin.Add(new 分Bin(s, "auto1", 0));
+                }
+            }
+            if (Auto2.Length > 0)
+            {
+                foreach (string s in Auto2.Split(','))
+                {
+                    if (s == "") continue;
+                    分bin.Add(new 分Bin(s, "auto2", 0));
+                }
+            }
+            if (Fix1.Length > 0)
+            {
+                foreach (string s in Fix1.Split(','))
+                {
+                    if (s == "") continue;
+                    分bin.Add(new 分Bin(s, "fix1", 0));
+                }
+            }
+            if (Fix2.Length > 0)
+            {
+                foreach (string s in Fix2.Split(','))
+                {
+                    if (s == "") continue;
+                    分bin.Add(new 分Bin(s, "fix2", 0));
+                }
+            }
+            if (Fix3.Length > 0)
+            {
+                foreach (string s in Fix3.Split(','))
+                {
+                    if (s == "") continue;
+                    分bin.Add(new 分Bin(s, "fix3", 0));
+                }
+            }
+            int[] 分bin_fix = { Fix1Num, Fix2Num, Fix3Num };
+            string[] 分bin_fix1 = { Fix1_1, Fix1_2, Fix1_3 };
+            string[] 分bin_fix2 = { Fix2_1, Fix2_2, Fix2_3 };
+            string[] 分bin_fix3 = { Fix3_1, Fix3_2, Fix3_3 };
+            string[][] 分bin_fix_ = { 分bin_fix1, 分bin_fix2, 分bin_fix3 };
 
-            //for (int j = 0; j < 3; j++)
-            //{
-            //    for (int i = 0; i < 分bin_fix[j]; i++)
-            //    {
-            //        if (分bin_fix_[j][i].Length > 0)
-            //        {
-            //            foreach (string s in 分bin_fix_[j][i].Split(','))
-            //            {
-            //                分bin.Add(new 分Bin(s, "fix" + (j + 1) + "_" + (i + 1), 0));
-            //            }
-            //        }
-            //    }
-            //}
+            for (int j = 0; j < 3; j++)
+            {
+                for (int i = 0; i < 分bin_fix[j]; i++)
+                {
+                    if (分bin_fix_[j][i].Length > 0)
+                    {
+                        foreach (string s in 分bin_fix_[j][i].Split(','))
+                        {
+                            分bin.Add(new 分Bin(s, "fix" + (j + 1) + "_" + (i + 1), 0));
+                        }
+                    }
+                }
+            }
 
 
             txt_auto1.BackColor = System.Drawing.Color.FromArgb(binParam.color1);
@@ -1138,7 +1148,7 @@ namespace H5509_V2
                             //else label6.Text = "HeatingTime=" + 升温时间.ToString(@"mm\:ss");
 
                             if (温控加热)
-                            { 
+                            {
                                 if (label10.Text != "停止")
                                 {
                                     label10.Text = "停止";
@@ -1393,6 +1403,77 @@ namespace H5509_V2
 
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
+            RunLog("调试操作log",LogType.OperateLog);
+            RunLog("调试报警log", LogType.AlarmLog);
+            //int passnum = 10;
+            //int failnum = 19;
+            ////RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
+            //string sql = $"update DutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{100} where Id='001'";
+            //int line1 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            //if (line1 <= 0) RunLog(sql + $"返回:{line1}");
+            //RunLog($"Site{0 + 1:D2}-{0 * 4 + 0 + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
+
+            //SaveBatchData();
+
+            //string auto1_num = "";
+            //string auto2_num = "";
+            //string fix1_num = "";
+            //string fix2_num = "";
+            //string fix3_num = "";
+
+            //foreach (分Bin 分 in 分bin)
+            //{
+            //    switch (分.pan)
+            //    {
+            //        case "auto1": auto1_num += 分.bin + ":" + 分.num + "，"; break;
+            //        case "auto2": auto2_num += 分.bin + ":" + 分.num + "，"; break;
+            //        case "fix1": fix1_num += 分.bin + ":" + 分.num + "，"; break;
+            //        case "fix2": fix2_num += 分.bin + ":" + 分.num + "，"; break;
+            //        case "fix3": fix3_num += 分.bin + ":" + 分.num + "，"; break;
+            //    }
+            //}
+
+            //auto1_num = auto1_num.TrimEnd('，');
+            //auto2_num = auto2_num.TrimEnd('，');
+            //fix1_num = fix1_num.TrimEnd('，');
+            //fix2_num = fix2_num.TrimEnd('，');
+            //fix3_num = fix3_num.TrimEnd('，');
+
+            //string sql = $"insert into FlowcaedNoInfo(开始时间,工单号,生产模式,产品类型,产品批号,用户名,总数量,良品数量,良率," +
+            //       $"投入数量,结束时间,工作时间,档案名称,UPH,Auto1名称,Auto2名称," +
+            //       $"Fix1名称,Fix2名称,Fix3名称,Auto1总数,Auto2总数,Fix1总数,Fix2总数,Fix3总数," +
+            //       $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
+            //       $"IC吸取模式,测试模式)" +
+            //        $"values('{DateTime.Now.ToString("F")}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
+            //       $"'{载入数}','{DateTime.Now.ToString()}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{Auto1}','{Auto2}'," +  //工作时间.Ticks
+            //       $"'{Fix1}','{Fix2}','{Fix3}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
+            //       $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{1}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{100}'," +
+            //       $"'正常','正常')";
+
+            //int line = SQLiteHelper.runSqlNonQuery(SQLiteBatchString, sql);
+
+            //if (line <= 0) Debug.WriteLine("sql保存失败！:" + sql);
+
+
+            // int uph = (int)(出料数 / (批次运行时间.TotalSeconds + 1) * 3600);
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->开始时间:{开始时间:yyyy-MM-dd HH:mm:ss.fff}");
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->按下结批时间:{按下结批时间:yyyy-MM-dd HH:mm:ss.fff}");
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结批时间:" + 结批时间.ToString(@"hh\:mm\:ss"));
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结束时间:{结束时间:yyyy-MM-dd HH:mm:ss.fff}");
+            //if (批次运行时间.TotalDays >= 1) RunLog($"PS结批流程.StepID={PS结批流程.StepID}->运行时间:" + 批次运行时间.ToString(@"dd\.hh\:mm\:ss"));
+            //else RunLog($"PS结批流程.StepID={PS结批流程.StepID}->运行时间:" + 批次运行时间.ToString(@"hh\:mm\:ss"));
+            //RunLog(($"PS结批流程.StepID={PS结批流程.StepID}->UPH:" + UPHNum.ToString()));
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->载入数:{载入数}");
+            //float total = 出料数;
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->总计:{total}");
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Auto1:{Auto1数量},良率:{Auto1良率:0.0}%");
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Auto2:{Auto2数量},良率:{Auto2良率: 0.0}%");
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Fix1:{Fix1数量},良率:{Fix1良率: 0.0}%");
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Fix2:{Fix2数量},良率:{Fix2良率: 0.0}%");
+            //RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Fix3:{Fix3数量},良率:{Fix3良率: 0.0}%");
+
+            //LogType logType = LogType.OperateLog;
+            //Debug.WriteLine((int)logType);
             //int sitenum = 1;
             //int doutnum = sitenum * 8;
             //bool[][] open = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
@@ -1503,6 +1584,11 @@ namespace H5509_V2
             //设置信息.开site信息 = siteStatus;
 
             //刷新开Site状态();
+        }
+
+        private void label_driverStatus_TextChanged(object sender, EventArgs e)
+        {
+            canVisable(this);
         }
     }
 }

@@ -70,10 +70,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(APPmaster.SQLiteConnString, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
                 if (line >= 1)
                 {
-                    RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }

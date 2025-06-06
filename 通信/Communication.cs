@@ -11,6 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static H5509_V2.APPmaster;
+using static H5509_V2.WriteData;
 namespace H5509_V2
 {
     public class Communication
@@ -144,7 +145,7 @@ namespace H5509_V2
                 RefreshInfoLog(outdata, true);
                 if (outdata.Length < 1) return;
 
-                RunLog(outdata, 2, true);
+                RunLog(outdata, WriteData.LogType.ComLog, true);
 
                 while (outdata.Length > 0)
                 {
@@ -162,7 +163,7 @@ namespace H5509_V2
                             string[] bin = outdata.Substring(14, 23).Split(' ');
                             int site = Convert.ToInt32(outdata.Substring(11, 2));
 
-                            if (SiteTestState[site] == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
+                            if (SiteTestState[site] == 2 && (Listtimer[site].Enabled || timeOutTimer[site].Enabled)) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                             {
                                 Listtimer[site].Stop();
                                 timeOutTimer[site].Stop();
@@ -173,9 +174,9 @@ namespace H5509_V2
                                 else Bin.Add(site, bin);
                                 listtesttimespan[site] = DateTime.Now - listtestdatetime[site];
                                 TestTime = DateTime.Now - listtestdatetime[site];
-                                SiteTestState[site] = 3;
                                 OutSiteQueue.Enqueue(site);
                                 BinSaveQueue.Enqueue(bin);
+                                SiteTestState[site] = 3;
 
                                 //用来统计数据
                                 OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
@@ -183,12 +184,15 @@ namespace H5509_V2
 
                                 RunLog($"接收Site:{site:D2},Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
                             }
-                            else RunLog($"site:{site:D2}未在测试!", 2);
+                            else RunLog($"site:{site:D2}未在测试!", WriteData.LogType.ComLog);
                             outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                         }
                         catch (Exception ex)
                         {
-                            RunLog("数据解析失败！详细信息：" + ex.Message, 2);
+                            Listcode.Add("1400150");
+                            RunLog($"[Code]1400150,[Msg]数据解析失败！详细信息：" + ex.Message, LogType.AlarmLog);
+                            ProgramPause = true;
+                            IsPause = true;
                             break;
                         }
                     }
@@ -196,7 +200,10 @@ namespace H5509_V2
             }
             catch (Exception ex)
             {
-                RunLog("接收串口数据解析失败！详细信息：" + ex.Message, 2);
+                Listcode.Add("1400150");
+                RunLog($"[Code]1400150,[Msg]接收串口数据解析失败！详细信息：" + ex.Message, LogType.AlarmLog);
+                ProgramPause = true;
+                IsPause = true;
             }
         }
 
@@ -209,7 +216,7 @@ namespace H5509_V2
                 return;
             }
             serialPort.Write(str);
-            RunLog(str, 2);
+            RunLog(str, WriteData.LogType.ComLog);
             RefreshInfoLog(str, false);
         }
 
@@ -244,7 +251,7 @@ namespace H5509_V2
                     return "串口未打开";
                 }
                 serialPort.Write("@START_TEST " + str + "+");
-                RunLog("@START_TEST " + str + "+", 2);
+                RunLog("@START_TEST " + str + "+", WriteData.LogType.ComLog);
                 RefreshInfoLog("@START_TEST " + str + "+", false);
                 listtestdatetime[site] = DateTime.Now;
                 Listtimer[site].Start();
@@ -271,7 +278,6 @@ namespace H5509_V2
                     break;
                 }
             }
-            SiteTestState[t] = 3;
             Iswaitout[t] = true;
             string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
             if (Bin.ContainsKey(t))
@@ -284,6 +290,7 @@ namespace H5509_V2
             //用来统计数据
             OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
             Listtestsingal.Add(t);
+            SiteTestState[t] = 3;
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
 
         }
@@ -310,7 +317,6 @@ namespace H5509_V2
                 return;
             }
 
-            SiteTestState[t] = 3;
             Iswaitout[t] = true;
             string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
             if (Bin.ContainsKey(t))
@@ -323,6 +329,7 @@ namespace H5509_V2
             //用来统计数据
             OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
             Listtestsingal.Add(t);
+            SiteTestState[t] = 3;
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
         }
     }

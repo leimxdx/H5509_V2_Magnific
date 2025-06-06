@@ -1,0 +1,124 @@
+2025-06-06 08:33:03  =>  GTN_Open(5,1):(-6)
+2025-06-06 08:33:03  =>  [error][2025-06-06 08:33:01]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 08:40:22  =>  GTN_Open(5,1):(-6)
+2025-06-06 08:40:22  =>  [error][2025-06-06 08:40:20]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 08:41:50  =>  GTN_Open(5,1):(-6)
+2025-06-06 08:41:50  =>  [error][2025-06-06 08:41:48]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 10:14:32  =>  GTN_Open(5,1):(-6)
+2025-06-06 10:14:33  =>  [error][2025-06-06 10:14:31]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 10:19:10  =>  GTN_Open(5,1):(-6)
+2025-06-06 10:19:10  =>  [error][2025-06-06 10:19:09]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 10:21:26  =>  GTN_Open(5,1):(-6)
+2025-06-06 10:21:26  =>  [error][2025-06-06 10:21:24]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 10:23:57  =>  GTN_Open(5,1):(-6)
+2025-06-06 10:23:57  =>  [error][2025-06-06 10:23:55]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 10:41:49  =>  GTN_Open(5,1):(-6)
+2025-06-06 10:41:50  =>  [error][2025-06-06 10:41:48]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 11:15:44  =>  GTN_Open(5,1):(-6)
+2025-06-06 11:15:44  =>  [error][2025-06-06 11:15:42]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 11:20:42  =>  GTN_Open(5,1):(-6)
+2025-06-06 11:20:43  =>  [error][2025-06-06 11:20:41]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 11:36:15  =>  GTN_Open(5,1):(-6)
+2025-06-06 11:36:15  =>  [error][2025-06-06 11:36:13]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 11:38:46  =>  PS结批流程.StepID=500->开始时间:2025-06-06 11:35:45.777
+2025-06-06 11:38:46  =>  PS结批流程.StepID=500->按下结批时间:2025-06-06 11:35:45.777
+2025-06-06 11:38:46  =>  PS结批流程.StepID=500->结批时间:00:00:00
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->结束时间:2025-06-06 11:35:45.777
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->运行时间:00:00:00
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->UPH:0
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->载入数:0
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->总计:0
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->Auto1:0,良率:NaN%
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->Auto2:0,良率:NaN%
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->Fix1:0,良率:NaN%
+2025-06-06 11:38:47  =>  PS结批流程.StepID=500->Fix2:0,良率:NaN%
+2025-06-06 11:38:48  =>  PS结批流程.StepID=500->Fix3:0,良率:NaN%
+2025-06-06 11:41:38  =>  GTN_Open(5,1):(-6)
+2025-06-06 11:41:38  =>  [error][2025-06-06 11:41:37]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 11:42:01  =>  PS结批流程.StepID=500->开始时间:2025-06-06 11:41:09.969
+2025-06-06 11:42:01  =>  PS结批流程.StepID=500->按下结批时间:2025-06-06 11:41:09.969
+2025-06-06 11:42:01  =>  PS结批流程.StepID=500->结批时间:00:00:00
+2025-06-06 11:42:01  =>  PS结批流程.StepID=500->结束时间:2025-06-06 11:41:09.969
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->运行时间:00:00:00
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->UPH:-2147483648
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->载入数:0
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->总计:15
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->Auto1:1,良率:6.7%
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->Auto2:2,良率: 13.3%
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->Fix1:3,良率: 20.0%
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->Fix2:4,良率: 26.7%
+2025-06-06 11:42:02  =>  PS结批流程.StepID=500->Fix3:5,良率: 33.3%
+2025-06-06 11:48:42  =>  GTN_Open(5,1):(-6)
+2025-06-06 11:48:42  =>  [error][2025-06-06 11:48:41]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 11:51:14  =>  PS结批流程.StepID=500->开始时间:2025-06-06 11:48:12.797
+2025-06-06 11:51:14  =>  PS结批流程.StepID=500->按下结批时间:2025-06-06 11:48:12.797
+2025-06-06 11:51:14  =>  PS结批流程.StepID=500->结批时间:00:00:00
+2025-06-06 11:51:14  =>  PS结批流程.StepID=500->结束时间:2025-06-06 11:48:12.797
+2025-06-06 11:51:14  =>  PS结批流程.StepID=500->运行时间:00:00:00
+2025-06-06 11:51:14  =>  PS结批流程.StepID=500->UPH:-2147483648
+2025-06-06 11:51:15  =>  PS结批流程.StepID=500->载入数:0
+2025-06-06 11:51:15  =>  PS结批流程.StepID=500->总计:15
+2025-06-06 11:51:15  =>  PS结批流程.StepID=500->Auto1:1,良率:6.7%
+2025-06-06 11:51:15  =>  PS结批流程.StepID=500->Auto2:2,良率: 13.3%
+2025-06-06 11:51:15  =>  PS结批流程.StepID=500->Fix1:3,良率: 20.0%
+2025-06-06 11:51:15  =>  PS结批流程.StepID=500->Fix2:4,良率: 26.7%
+2025-06-06 11:51:15  =>  PS结批流程.StepID=500->Fix3:5,良率: 33.3%
+2025-06-06 12:44:07  =>  GTN_Open(5,1):(-6)
+2025-06-06 12:44:07  =>  [error][2025-06-06 12:44:05]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 13:46:12  =>  GTN_Open(5,1):(-6)
+2025-06-06 13:46:12  =>  [error][2025-06-06 13:46:10]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 13:48:54  =>  GTN_Open(5,1):(-6)
+2025-06-06 13:48:55  =>  [error][2025-06-06 13:48:53]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-06 14:04:13  =>  GTN_Open(5,1):(-6)
+2025-06-06 14:04:14  =>  [error][2025-06-06 14:04:13]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58

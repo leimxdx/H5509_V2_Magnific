@@ -18,7 +18,9 @@ namespace H5509_V2
     {
         public string Msg { get; set; }
 
-        public short TxtLogtype { get; set; }
+        public DateTime Time { get; set; }
+
+        public WriteData.LogType TxtLogtype { get; set; }
 
         public string ExcelType { get; set; }
 

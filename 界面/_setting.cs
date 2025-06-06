@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -3165,10 +3166,10 @@ namespace H5509_V2
             }
         }
 
-        private void 刷新档案列表()
+        private string 刷新档案列表()
         {
-            string reuslt = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', 档案名称 from SetupInfo", out DataTable dt);
-            if (reuslt == "Success")
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', 档案名称 from SetupInfo", out DataTable dt);
+            if (result == "Success")
             {
                 uiDataGridView1.DataSource = dt;
                 uiDataGridView1.Columns[0].Width = 100;
@@ -3176,7 +3177,7 @@ namespace H5509_V2
 
                 uiDataGridView1.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
 
-                string result = SQLiteHelper.runSql(SQLiteConnString, "select value from config where name='当前档案'", out string value).ToString();
+                result = SQLiteHelper.runSql(SQLiteConnString, "select value from config where name='当前档案'", out string value).ToString();
 
                 if (result == "Success")
                 {
@@ -3190,7 +3191,15 @@ namespace H5509_V2
                     }
 
                     刷新档案信息(uiTabControl6.SelectedTab.Text);
+
+                    return "Success";
                 }
+                else return result;
+            }
+            else
+            {
+                RunLog($"刷新档案列表失败: {result}");
+                return result;
             }
         }
         private void 刷新Tray盘列表()
@@ -3297,10 +3306,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update InitPoint set value = '{newvalue}' where ptname = '{pointname}'");
                 if (line >= 1)
                 {
-                    RunLog($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }
@@ -3312,10 +3321,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
                 if (line >= 1)
                 {
-                    RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }
@@ -4461,7 +4470,7 @@ namespace H5509_V2
                             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set tray盘名称 = '{trayname}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
-                                RunLog($"档案名称:[{name}]:Tray名称:{setupInfo.Tray盘信息.TrayName}->{trayname}:更新成功");
+                                RunLog($"档案名称:[{name}]:Tray名称:{setupInfo.Tray盘信息.TrayName}->{trayname}:更新成功", WriteData.LogType.ParamLog);
                                 if (trayname != 设置信息.Tray盘信息.TrayName)
                                 {
                                     result = GetTrayInfo(trayname, out TrayInfo trayInfo);
@@ -4487,7 +4496,7 @@ namespace H5509_V2
                             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 加热盘名称 = '{heatname}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
-                                RunLog($"档案名称:[{name}]:加热盘名称:{setupInfo.Heat盘信息.HeatName}->{heatname}:更新成功");
+                                RunLog($"档案名称:[{name}]:加热盘名称:{setupInfo.Heat盘信息.HeatName}->{heatname}:更新成功", WriteData.LogType.ParamLog);
                                 if (heatname != 设置信息.Heat盘信息.HeatName)
                                 {
                                     result = GetHeatInfo(heatname, out HeatInfo heatInfo);
@@ -4511,7 +4520,7 @@ namespace H5509_V2
                             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 温度模式 = '{tempmode}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
-                                RunLog($"档案名称:[{name}]:温度模式:{setupInfo.温度模式}->{tempmode}:更新成功");
+                                RunLog($"档案名称:[{name}]:温度模式:{setupInfo.温度模式}->{tempmode}:更新成功", WriteData.LogType.ParamLog);
                                 if (tempmode != 设置信息.温度模式)
                                 {
                                     设置信息.温度模式 = tempmode;
@@ -4586,24 +4595,24 @@ namespace H5509_V2
                         else
                         {
                             bool comischange = false;
-                            if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功");
-                            if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功");
-                            if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功");
-                            if (oldtester.Dut累计不良报警个数 != newtester.Dut累计不良报警个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警个数]:{oldtester.Dut累计不良报警个数}->{newtester.Dut累计不良报警个数}:更新成功");
-                            if (oldtester.Dut累计不良报警使能 != newtester.Dut累计不良报警使能) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警使能]:{oldtester.Dut累计不良报警使能}->{newtester.Dut累计不良报警使能}:更新成功");
-                            if (oldtester.总良率报警百分比 != newtester.总良率报警百分比) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警百分比]:{oldtester.总良率报警百分比}->{newtester.总良率报警百分比}:更新成功");
-                            if (oldtester.总良率报警基数 != newtester.总良率报警基数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警基数]:{oldtester.总良率报警基数}->{newtester.总良率报警基数}:更新成功");
-                            if (oldtester.总良率报警间隔 != newtester.总良率报警间隔) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警间隔]:{oldtester.总良率报警间隔}->{newtester.总良率报警间隔}:更新成功");
-                            if (oldtester.总良率报警使能 != newtester.总良率报警使能) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警使能]:{oldtester.总良率报警使能}->{newtester.总良率报警使能}:更新成功");
-                            if (oldtester.socket使用次数 != newtester.socket使用次数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[socket使用次数]:{oldtester.socket使用次数}->{newtester.socket使用次数}:更新成功");
-                            if (oldtester.测试超时时间 != newtester.测试超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功");
-                            if (oldtester.timeout超时时间 != newtester.timeout超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功");
-                            if (oldtester.超时发送timeout != newtester.超时发送timeout) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.超时发送timeout}->{newtester.超时发送timeout}:更新成功");
-                            if (oldtester.串口号 != newtester.串口号) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[串口号]:{oldtester.串口号}->{newtester.串口号}:更新成功"); }
-                            if (oldtester.波特率 != newtester.波特率) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[波特率]:{oldtester.波特率}->{newtester.波特率}:更新成功"); }
-                            if (oldtester.校验位 != newtester.校验位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.校验位}->{newtester.校验位}:更新成功"); }
-                            if (oldtester.数据位 != newtester.数据位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.数据位}->{newtester.数据位}:更新成功"); }
-                            if (oldtester.停止位 != newtester.停止位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.停止位}->{newtester.停止位}:更新成功"); }
+                            if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.Dut累计不良报警个数 != newtester.Dut累计不良报警个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警个数]:{oldtester.Dut累计不良报警个数}->{newtester.Dut累计不良报警个数}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.Dut累计不良报警使能 != newtester.Dut累计不良报警使能) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警使能]:{oldtester.Dut累计不良报警使能}->{newtester.Dut累计不良报警使能}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.总良率报警百分比 != newtester.总良率报警百分比) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警百分比]:{oldtester.总良率报警百分比}->{newtester.总良率报警百分比}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.总良率报警基数 != newtester.总良率报警基数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警基数]:{oldtester.总良率报警基数}->{newtester.总良率报警基数}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.总良率报警间隔 != newtester.总良率报警间隔) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警间隔]:{oldtester.总良率报警间隔}->{newtester.总良率报警间隔}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.总良率报警使能 != newtester.总良率报警使能) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警使能]:{oldtester.总良率报警使能}->{newtester.总良率报警使能}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.socket使用次数 != newtester.socket使用次数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[socket使用次数]:{oldtester.socket使用次数}->{newtester.socket使用次数}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.测试超时时间 != newtester.测试超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.timeout超时时间 != newtester.timeout超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.超时发送timeout != newtester.超时发送timeout) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.超时发送timeout}->{newtester.超时发送timeout}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.串口号 != newtester.串口号) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[串口号]:{oldtester.串口号}->{newtester.串口号}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.波特率 != newtester.波特率) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[波特率]:{oldtester.波特率}->{newtester.波特率}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.校验位 != newtester.校验位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.校验位}->{newtester.校验位}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.数据位 != newtester.数据位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.数据位}->{newtester.数据位}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.停止位 != newtester.停止位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.停止位}->{newtester.停止位}:更新成功", WriteData.LogType.ParamLog); }
 
                             if (value == 设置信息.测试机信息.测试机名称)
                             {
@@ -4916,24 +4925,24 @@ namespace H5509_V2
                     }
                     else
                     {
-                        if (oldbinParam.auto1 != newbinParam.auto1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[auto1]:{oldbinParam.auto1}->{newbinParam.auto1}:更新成功");
-                        if (oldbinParam.auto2 != newbinParam.auto2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[auto2]:{oldbinParam.auto2}->{newbinParam.auto2}:更新成功");
-                        if (oldbinParam.fix1 != newbinParam.fix1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1]:{oldbinParam.fix1}->{newbinParam.fix1}:更新成功");
-                        if (oldbinParam.fix2 != newbinParam.fix2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2]:{oldbinParam.fix2}->{newbinParam.fix2}:更新成功");
-                        if (oldbinParam.fix3 != newbinParam.fix3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3]:{oldbinParam.fix3}->{newbinParam.fix3}:更新成功");
-                        if (oldbinParam.fix1num != newbinParam.fix1num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1num]:{oldbinParam.fix1num}->{newbinParam.fix1num}:更新成功");
-                        if (oldbinParam.fix2num != newbinParam.fix2num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2num]:{oldbinParam.fix2num}->{newbinParam.fix2num}:更新成功");
-                        if (oldbinParam.fix3num != newbinParam.fix3num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3num]:{oldbinParam.fix3num}->{newbinParam.fix3num}:更新成功");
-                        if (oldbinParam.color1 != newbinParam.color1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color1]:{oldbinParam.color1}->{newbinParam.color1}:更新成功");
-                        if (oldbinParam.color2 != newbinParam.color2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color2]:{oldbinParam.color2}->{newbinParam.color2}:更新成功");
-                        if (oldbinParam.color3 != newbinParam.color3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color3]:{oldbinParam.color3}->{newbinParam.color3}:更新成功");
-                        if (oldbinParam.color4 != newbinParam.color4) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color4]:{oldbinParam.color4}->{newbinParam.color4}:更新成功");
-                        if (oldbinParam.color5 != newbinParam.color5) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color5]:{oldbinParam.color5}->{newbinParam.color5}:更新成功");
-                        if (oldbinParam.name1 != newbinParam.name1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name1]:{oldbinParam.name1}->{newbinParam.name1}:更新成功");
-                        if (oldbinParam.name2 != newbinParam.name2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name2]:{oldbinParam.name2}->{newbinParam.name2}:更新成功");
-                        if (oldbinParam.name3 != newbinParam.name3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name3]:{oldbinParam.name3}->{newbinParam.name3}:更新成功");
-                        if (oldbinParam.name4 != newbinParam.name4) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name4]:{oldbinParam.name4}->{newbinParam.name4}:更新成功");
-                        if (oldbinParam.name5 != newbinParam.name5) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name5]:{oldbinParam.name5}->{newbinParam.name5}:更新成功");
+                        if (oldbinParam.auto1 != newbinParam.auto1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[auto1]:{oldbinParam.auto1}->{newbinParam.auto1}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.auto2 != newbinParam.auto2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[auto2]:{oldbinParam.auto2}->{newbinParam.auto2}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.fix1 != newbinParam.fix1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1]:{oldbinParam.fix1}->{newbinParam.fix1}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.fix2 != newbinParam.fix2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2]:{oldbinParam.fix2}->{newbinParam.fix2}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.fix3 != newbinParam.fix3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3]:{oldbinParam.fix3}->{newbinParam.fix3}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.fix1num != newbinParam.fix1num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix1num]:{oldbinParam.fix1num}->{newbinParam.fix1num}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.fix2num != newbinParam.fix2num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix2num]:{oldbinParam.fix2num}->{newbinParam.fix2num}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.fix3num != newbinParam.fix3num) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[fix3num]:{oldbinParam.fix3num}->{newbinParam.fix3num}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.color1 != newbinParam.color1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color1]:{oldbinParam.color1}->{newbinParam.color1}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.color2 != newbinParam.color2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color2]:{oldbinParam.color2}->{newbinParam.color2}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.color3 != newbinParam.color3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color3]:{oldbinParam.color3}->{newbinParam.color3}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.color4 != newbinParam.color4) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color4]:{oldbinParam.color4}->{newbinParam.color4}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.color5 != newbinParam.color5) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[color5]:{oldbinParam.color5}->{newbinParam.color5}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.name1 != newbinParam.name1) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name1]:{oldbinParam.name1}->{newbinParam.name1}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.name2 != newbinParam.name2) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name2]:{oldbinParam.name2}->{newbinParam.name2}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.name3 != newbinParam.name3) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name3]:{oldbinParam.name3}->{newbinParam.name3}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.name4 != newbinParam.name4) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name4]:{oldbinParam.name4}->{newbinParam.name4}:更新成功", WriteData.LogType.ParamLog);
+                        if (oldbinParam.name5 != newbinParam.name5) RunLog($"档案名称:[{name}]:分BIN名称:[{value}]:[name5]:{oldbinParam.name5}->{newbinParam.name5}:更新成功", WriteData.LogType.ParamLog);
                     }
 
                     if (value == 设置信息.分BIN信息.分BIN名称)
@@ -6225,10 +6234,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update TrayInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
-                    RunLog($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{name}]-tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }
@@ -6239,10 +6248,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
-                    RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }
@@ -6253,10 +6262,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
-                    RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{name}]-加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }
@@ -6268,10 +6277,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
                 if (line >= 1)
                 {
-                    RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }
@@ -6806,7 +6815,36 @@ namespace H5509_V2
             if (e.Button == MouseButtons.Left)
             {
                 uiComboBox11.DataSource = SerialPort.GetPortNames();
+                //uiComboBox11.Text = 设置信息.测试机信息.串口号;
             }
+        }
+
+        //复制档案
+        private void uiButton8_Click(object sender, EventArgs e)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+                string result = GetSetupInfo(name, out SetupInfo setupInfo);
+                if (result == "Success")
+                {
+                    string sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,分BIN名称,梭车名称,温度模式)" +
+                        $"values('{name}_副本','{setupInfo.Tray盘信息.TrayName}','{setupInfo.开site信息.Site名称}'," +
+                        $"'{setupInfo.Heat盘信息.HeatName}','{setupInfo.OffsetPoint.微调点位名称}','{setupInfo.测试机信息.测试机名称}'," +
+                        $"'{setupInfo.分BIN信息.分BIN名称}','{setupInfo.梭车名称}','{setupInfo.温度模式}')";
+                    int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+                    if (line >= 0)
+                    {
+                        result = 刷新档案列表();
+                        if (result == "Success") MessageBox.Show("复制档案成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        else MessageBox.Show("复制档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else MessageBox.Show("复制档案失败!返回行数:0", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else MessageBox.Show("复制档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else MessageBox.Show("请选择要复制档案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

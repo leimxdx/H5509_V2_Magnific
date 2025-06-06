@@ -246,10 +246,10 @@ namespace H5509_V2
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
                 if (line >= 1)
                 {
-                    RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功");
+                    RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
                     return true;
                 }
-                else RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败");
+                else RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }

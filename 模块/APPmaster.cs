@@ -25,9 +25,11 @@ using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Vml;
 using DocumentFormat.OpenXml.Wordprocessing;
 using H5509_alarm;
+using Sunny.UI;
 using Sunny.UI.Win32;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static GTN.mc;
+using static H5509_V2.ForMain;
 using Ttimer = System.Timers.Timer;
 namespace H5509_V2
 {
@@ -35,7 +37,9 @@ namespace H5509_V2
     {
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
 
-        public static string sqlServerConnectionString ="";
+        public static string SQLiteBatchString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\BatchData"};Polling=true;FailIfMissing=false";
+
+        public static string sqlServerConnectionString = "";
 
         public static string SQLServerConnString = "";
 
@@ -46,6 +50,14 @@ namespace H5509_V2
         public static string TCPIP;
 
         public static int TCPPort;
+
+        public static int 开Site数量 = 0;
+
+        public static int 关Site数量 = 0;
+
+        public static int StartSite数量 = 0;
+
+        public static List<分Bin> 分bin = new List<分Bin>();
 
         public static _log Log;
 
@@ -64,6 +76,10 @@ namespace H5509_V2
         public static InitPoint 初始点位 = new InitPoint();
 
         public static SetupInfo 设置信息 = new SetupInfo();
+
+        public static Action<string, DateTime> 显示操作log;
+
+        public static Action<string, DateTime> 显示报警log;
 
         public static Form_alarm form_alarm = new Form_alarm();
 
@@ -320,13 +336,13 @@ namespace H5509_V2
 
         public static int[] Dout128FailNumber = new int[128];
 
-        public static  List<int[]> doutContinueFail { get; set; } = new List<int[]>();
-       
-        public static  List<int[]> 单dut总不良计数 { get; set; } = new List<int[]>(); //单dut总不良计数（取消报警后清零）
+        public static List<int[]> doutContinueFail { get; set; } = new List<int[]>();
 
-        public static  List<int[]> 单dut总不良累计计数 { get; set; } = new List<int[]>();//单dut总不良累计计数（取消报警后不清理）
+        public static List<int[]> 单dut总不良计数 { get; set; } = new List<int[]>(); //单dut总不良计数（取消报警后清零）
 
-        public static  int 总良率报警间隔计数 { get; set; } = 0;
+        public static List<int[]> 单dut总不良累计计数 { get; set; } = new List<int[]>();//单dut总不良累计计数（取消报警后不清理）
+
+        public static int 总良率报警间隔计数 { get; set; } = 0;
 
         public static bool 入料IC忽略;
 
@@ -378,16 +394,28 @@ namespace H5509_V2
 
         public static DateTime 结束时间 = DateTime.Now;
 
-        public static double[] SiteTemp = new double[17];
+        public static TimeSpan 实时运行时间 { get { return DateTime.Now - 开始时间; } }
 
-        public static double HeatTrayTemp
+        public static TimeSpan 批次运行时间 { get { return 结束时间 - 开始时间; } }
+
+        public static int RealUPHNum { get { return (int)(出料数 / 实时运行时间.TotalSeconds * 3600); } }
+
+        public static int UPHNum
         {
-            get { return SiteTemp[16]; }
+            get
+            {
+                if (出料数 == 0) return 0;
+                else return (int)(出料数 / 批次运行时间.TotalSeconds * 3600);
+            }
         }
 
         public static TimeSpan 结批时间 { get { return 按下结批时间 - 结束时间; } }
 
         public static TimeSpan 升温时间 { get { return 达温时间 - 开始时间; } }
+
+        public static double[] SiteTemp = new double[17];
+
+        public static double HeatTrayTemp { get { return SiteTemp[16]; } }
 
         public static int UphNumber = 0;
 
@@ -407,27 +435,47 @@ namespace H5509_V2
 
         public static double Auto1良率
         {
-            get { return (double)Auto1数量 / 出料数 * 100; }
+            get
+            {
+                if (出料数 == 0) return 0;
+                else return (double)Auto1数量 / 出料数 * 100;
+            }
         }
 
         public static double Auto2良率
         {
-            get { return (double)Auto2数量 / 出料数 * 100; }
+            get
+            {
+                if (出料数 == 0) return 0;
+                else return (double)Auto2数量 / 出料数 * 100;
+            }
         }
 
         public static double Fix1良率
         {
-            get { return (double)Fix1数量 / 出料数 * 100; }
+            get
+            {
+                if (出料数 == 0) return 0;
+                else return (double)Fix1数量 / 出料数 * 100;
+            }
         }
 
         public static double Fix2良率
         {
-            get { return (double)Fix2数量 / 出料数 * 100; }
+            get
+            {
+                if (出料数 == 0) return 0;
+                else return (double)Fix2数量 / 出料数 * 100;
+            }
         }
 
         public static double Fix3良率
         {
-            get { return (double)Fix3数量 / 出料数 * 100; }
+            get
+            {
+                if (出料数 == 0) return 0;
+                else return (double)Fix3数量 / 出料数 * 100;
+            }
         }
 
         public static double Tray_厚度
@@ -1431,37 +1479,9 @@ namespace H5509_V2
             return SQLiteHelper.runSql(SQLiteConnString, $"select password from Jurisdiction where realName = '{name}'", out value);
         }
 
-        public static string GetSetupInfo(string name, out SetupInfo setupInfo)
+        public static string GetSetupInfo(string name, out SetupInfo setupInfo)//
         {
             setupInfo = new SetupInfo();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
-            if (result == "Success")
-            {
-                try
-                {
-                    if (dataTable.Rows.Count > 0)
-                    {
-                        DataRow dr = dataTable.Rows[0];
-
-                        setupInfo = new SetupInfo()
-                        {
-                            档案名称 = dr["档案名称"].ToString(),
-                            Tray盘信息 = new TrayInfo() { TrayName = dr["tray盘名称"].ToString() },
-                            Heat盘信息 = new HeatInfo() { HeatName = dr["加热盘名称"].ToString() },
-                        };
-                    }
-                    else result = $"无档案{name}信息";
-                }
-                catch (Exception ex)
-                {
-                    return "获取档案数据信息异常" + ex.Message;
-                }
-            }
-            return result;
-        }
-
-        public static string GetSetupInfo(string name)
-        {
             string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
@@ -1469,18 +1489,19 @@ namespace H5509_V2
                 {
                     DataRow reader = dataTable.Rows[0];
 
-                    设置信息.档案名称 = reader["档案名称"].ToString();
-                    设置信息.Tray盘信息.TrayName = reader["tray盘名称"].ToString();
-                    设置信息.Heat盘信息.HeatName = reader["加热盘名称"].ToString();
-                    设置信息.OffsetPoint.微调点位名称 = reader["偏移点位名称"].ToString();
-                    设置信息.开site信息.Site名称 = reader["site名称"].ToString();
-                    设置信息.分BIN信息.分BIN名称 = reader["分BIN名称"].ToString();
-                    设置信息.测试机信息.测试机名称 = reader["测试机名称"].ToString();
-                    设置信息.温度模式 = reader["温度模式"].ToString();
+                    setupInfo.档案名称 = reader["档案名称"].ToString();
+                    setupInfo.Tray盘信息.TrayName = reader["tray盘名称"].ToString();
+                    setupInfo.Heat盘信息.HeatName = reader["加热盘名称"].ToString();
+                    setupInfo.OffsetPoint.微调点位名称 = reader["偏移点位名称"].ToString();
+                    setupInfo.开site信息.Site名称 = reader["site名称"].ToString();
+                    setupInfo.分BIN信息.分BIN名称 = reader["分BIN名称"].ToString();
+                    setupInfo.测试机信息.测试机名称 = reader["测试机名称"].ToString();
+                    setupInfo.梭车名称 = reader["梭车名称"].ToString();
+                    setupInfo.温度模式 = reader["温度模式"].ToString();
                 }
-                else result = $"无档案{name}信息";
+                else return $"无档案{name}信息";
             }
-            return result;
+            return "Success";
         }
 
         public static string GetSetupInfoName(out DataTable dt)
@@ -1666,39 +1687,42 @@ namespace H5509_V2
         public static string GetSetupInfoData(string name)
         {
             ///设备档案
-            string result = GetSetupInfo(name);
+            string result = GetSetupInfo(name, out SetupInfo setupInfo);
             if (result == "Success")
             {
                 ///tray盘信息
-                result = GetTrayInfo(设置信息.Tray盘信息.TrayName, out TrayInfo trayInfo);
+                result = GetTrayInfo(setupInfo.Tray盘信息.TrayName, out TrayInfo trayInfo);
                 if (result != "Success") return result;
 
                 ///加热盘信息
-                result = GetHeatInfo(设置信息.Heat盘信息.HeatName, out HeatInfo heatInfo);
+                result = GetHeatInfo(setupInfo.Heat盘信息.HeatName, out HeatInfo heatInfo);
                 if (result != "Success") return result;
 
                 ///点位微调
-                result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offsetPoint);
+                result = GetOffsetPoint(setupInfo.OffsetPoint.微调点位名称, out OffsetPoint offsetPoint);
                 if (result != "Success") return result;
 
                 ///开Site信息
-                result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                result = GetSiteStatus(setupInfo.开site信息.Site名称, out SiteStatus siteStatus);
                 if (result != "Success") return result;
 
                 //分BIN参数
-                result = GetBINParam(设置信息.分BIN信息.分BIN名称, out BinParam binparam);
+                result = GetBINParam(setupInfo.分BIN信息.分BIN名称, out BinParam binparam);
                 if (result != "Success") return result;
 
                 //测试机参数
-                result = GetTesterIFParam(设置信息.测试机信息.测试机名称, out TesterIFParam tester);
+                result = GetTesterIFParam(setupInfo.测试机信息.测试机名称, out TesterIFParam tester);
                 if (result != "Success") return result;
 
+                设置信息.档案名称 = setupInfo.档案名称;
                 设置信息.Tray盘信息 = trayInfo;
                 设置信息.Heat盘信息 = heatInfo;
                 设置信息.OffsetPoint = offsetPoint;
                 设置信息.开site信息 = siteStatus;
                 设置信息.分BIN信息 = binparam;
                 设置信息.测试机信息 = tester;
+                设置信息.梭车名称 = setupInfo.梭车名称;
+                设置信息.温度模式 = setupInfo.温度模式;
             }
             return result;
         }
@@ -1903,6 +1927,62 @@ namespace H5509_V2
             if (line <= 0) return "保存失败";
 
             else return "Success";
+        }
+
+        public static void SaveBatchData()
+        {
+            string sql = "";
+            try
+            {
+                string auto1_num = "";
+                string auto2_num = "";
+                string fix1_num = "";
+                string fix2_num = "";
+                string fix3_num = "";
+
+                foreach (分Bin 分 in 分bin)
+                {
+                    switch (分.pan)
+                    {
+                        case "auto1": auto1_num += 分.bin + ":" + 分.num + "，"; break;
+                        case "auto2": auto2_num += 分.bin + ":" + 分.num + "，"; break;
+                        case "fix1": fix1_num += 分.bin + ":" + 分.num + "，"; break;
+                        case "fix2": fix2_num += 分.bin + ":" + 分.num + "，"; break;
+                        case "fix3": fix3_num += 分.bin + ":" + 分.num + "，"; break;
+                    }
+                }
+
+                auto1_num = auto1_num.TrimEnd('，');
+                auto2_num = auto2_num.TrimEnd('，');
+                fix1_num = fix1_num.TrimEnd('，');
+                fix2_num = fix2_num.TrimEnd('，');
+                fix3_num = fix3_num.TrimEnd('，');
+
+                //string[] axisname = { "M22_入料手臂X轴" , "M23_出料手臂X轴", "M21_测试手臂X轴" };
+                APPmaster.GetAxisRunInfo("M22_入料手臂X轴", out AxisRunInfo axisRun);
+                APPmaster.GetAxisRunInfo("M23_出料手臂X轴", out AxisRunInfo axisRun2);
+                APPmaster.GetAxisRunInfo("M21_测试手臂X轴", out AxisRunInfo axisRun3);
+                string 生产速度 = "入料手臂：" + axisRun.速度百分比 + "，测试手臂：" + axisRun2.速度百分比 + "，出料手臂：" + axisRun3.速度百分比;
+
+                sql = $"insert into FlowcaedNoInfo(开始时间,工单号,生产模式,产品类型,产品批号,用户名,总数量,良品数量,良率," +
+                       $"投入数量,结束时间,工作时间,档案名称,UPH,Auto1名称,Auto2名称," +
+                       $"Fix1名称,Fix2名称,Fix3名称,Auto1总数,Auto2总数,Fix1总数,Fix2总数,Fix3总数," +
+                       $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
+                       $"IC吸取模式,测试模式)" +
+                        $"values('{DateTime.Now.ToString("F")}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
+                       $"'{载入数}','{DateTime.Now.ToString()}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{Auto1}','{Auto2}'," +  //工作时间.Ticks
+                       $"'{Fix1}','{Fix2}','{Fix3}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
+                       $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{1}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
+                       $"'正常','正常')";
+
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteBatchString, sql);
+
+                if (line <= 0) Debug.WriteLine("sql保存失败！:" + sql);
+            }
+            catch (Exception ex)
+            {
+                RunLog($"执行SaveBatchData异常!sql:{sql}," + ex.Message);
+            }
         }
 
         /// <summary>
@@ -3016,12 +3096,12 @@ namespace H5509_V2
             }
         }
 
-        public static void RunLog(string info, short txtType = 1, bool isReceive = false,  string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
+        public static void RunLog(string info, WriteData.LogType txtType = WriteData.LogType.RunLog, bool isReceive = false, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
         {
-
             LogManager log = new LogManager()
             {
                 Msg = info,
+                Time = DateTime.Now,
                 TxtLogtype = txtType,
                 ExcelLevel = excelLevel,
                 ExcelType = excelType,
