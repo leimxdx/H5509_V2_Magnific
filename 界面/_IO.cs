@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Drawing;
 using System.Data;
+using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Sunny.UI;
-using System.Reflection;
-using Sunny.UI.Win32;
-using System.Diagnostics;
-using static H5509_V2.APPmaster;
 using GTN;
+using Sunny.UI;
+using Sunny.UI.Win32;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -23,6 +24,7 @@ namespace H5509_V2
         List<string> currentY;
         IOButton btn;
         MotionEx motionEx = MotionEx.GetInstance();
+        public Handler handler = new Handler();
 
         public string[] GNME601_核1_输入 = new string[32];
         public string[] GNME601_核2_输入 = new string[32];
@@ -134,7 +136,7 @@ namespace H5509_V2
                                 if (uilight.TagString == null) continue;
                                 if (uilight.TagString.ToString().Length == 0) continue;
                                 ListUiLight.Add(uilight);
-                                
+
                             }
                             else if (item1 is UISwitch uiswitch)
                             {
@@ -400,7 +402,7 @@ namespace H5509_V2
 
                     //                    if (ioinfo.模块类型 == "GNM601")
                     //                    {
-                                            
+
                     //                        if (ioinfo.IO编号.Contains("Y"))
                     //                        {
                     //                            if (ioinfo.核号 == 1)
@@ -558,6 +560,67 @@ namespace H5509_V2
                     MessageBox.Show("输出失败!" + result);
                 }
             }
+        }
+
+        private void uiSwitch84_ValueChanged(object sender, bool value)
+        {
+            bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
+            handler.测试吸嘴_吸放料(lsopen, false, false);
+            handler.测试吸嘴_吸放料(lsopen, true, value);
+            this.uiSwitch78.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch78_ValueChanged);
+            uiSwitch78.Active = false;
+            this.uiSwitch78.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch78_ValueChanged);
+        }
+
+        private void uiSwitch78_ValueChanged(object sender, bool value)
+        {
+            bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
+
+            handler.测试吸嘴_吸放料(lsopen, true, false);
+            handler.测试吸嘴_吸放料(lsopen, false, value);
+            this.uiSwitch84.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch84_ValueChanged);
+            uiSwitch84.Active = false;
+            this.uiSwitch84.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch84_ValueChanged);
+        }
+
+        private void uiSwitch23_ValueChanged(object sender, bool value)
+        {
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.入料吸嘴_吸放料(lsopen, false, false);
+            handler.入料吸嘴_吸放料(lsopen, true, value);
+            this.uiSwitch24.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch24_ValueChanged);
+            uiSwitch24.Active = false;
+            this.uiSwitch24.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch24_ValueChanged);
+        }
+
+        private void uiSwitch24_ValueChanged(object sender, bool value)
+        {
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.入料吸嘴_吸放料(lsopen, true, false);
+            handler.入料吸嘴_吸放料(lsopen, false, value);
+            this.uiSwitch23.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch23_ValueChanged);
+            uiSwitch23.Active = false;
+            this.uiSwitch23.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch23_ValueChanged);
+        }
+
+        private void uiSwitch44_ValueChanged(object sender, bool value)
+        {
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.出料吸嘴_吸放料(lsopen, false, false);
+            handler.出料吸嘴_吸放料(lsopen, true, value);
+            this.uiSwitch39.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch39_ValueChanged);
+            uiSwitch39.Active = false;
+            this.uiSwitch39.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch39_ValueChanged);
+        }
+
+        private void uiSwitch39_ValueChanged(object sender, bool value)
+        {
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.出料吸嘴_吸放料(lsopen, true, false);
+            handler.出料吸嘴_吸放料(lsopen, false, value);
+            this.uiSwitch44.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
+            uiSwitch44.Active = false;
+            this.uiSwitch44.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
         }
     }
 }

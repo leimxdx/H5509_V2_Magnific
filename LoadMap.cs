@@ -8,7 +8,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Drawing;
 using static H5509_V2.APPmaster;
+using Ttimer = System.Timers.Timer;
 namespace H5509_V2
 {
     public partial class LoadMap : Form
@@ -18,6 +20,7 @@ namespace H5509_V2
         public double[] LoadYPoint;
         public Dictionary<string, bool> LoadDicPoint = new Dictionary<string, bool>();
         public Dictionary<string, bool> LsLoadDicPoint = new Dictionary<string, bool>();
+        public Ttimer Timer { get; set; }
         public LoadMap()
         {
             InitializeComponent();
@@ -64,12 +67,36 @@ namespace H5509_V2
                 }
             }
         }
-        private void LoadMap_Load(object sender, EventArgs e)
+
+        private void TimerHeatTick(object sender, EventArgs e)
         {
-            TrayMapInit(); //临时TrayMap初始化
+            if (设备状态 == 1)
+            {
+                LsLoadDicPoint = null;
+                刷新数据();
+            }
+            else
+            {
+                if (LsLoadDicPoint == null)
+                {
+                    TrayMapInit();
+                }
+                try
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        button6.Enabled = true; //全选按钮不可用
+                        button2.Enabled = true; //全选按钮不可用
+                        button5.Enabled = true; //全选按钮不可用
+                        button4.Enabled = true; //全选按钮不可用
+                    }));
+                }
+                catch { }
+            }
+        }
 
-            dGV_init(dGV_LoadTrayMap, Tray_X_Num, Tray_Y_Num);
-
+        private void 刷新数据()
+        {
             for (int i = 0; i < LoadXPoint.Length; i++)
             {
                 for (int j = 0; j < LoadYPoint.Length; j++)
@@ -87,11 +114,50 @@ namespace H5509_V2
                     }
                 }
             }
+            try
+            {
+                this.Invoke(new Action(() =>
+                {
+                    if (设备状态 == 1)
+                    {
+                        button6.Enabled = false; //全选按钮不可用
+                        button2.Enabled = false; //全选按钮不可用
+                        button5.Enabled = false; //全选按钮不可用
+                        button4.Enabled = false; //全选按钮不可用
+                    }
+                    else
+                    {
+                        button6.Enabled = true; //全选按钮不可用
+                        button2.Enabled = true; //全选按钮不可用
+                        button5.Enabled = true; //全选按钮不可用
+                        button4.Enabled = true; //全选按钮不可用
+                    }
+                }));
+            }
+            catch { }
+        }
+
+        private void LoadMap_Load(object sender, EventArgs e)
+        {
+            TrayMapInit(); //临时TrayMap初始化
+
+            dGV_init(dGV_LoadTrayMap, Tray_X_Num, Tray_Y_Num);
+
+
+            刷新数据();
+
+            Timer = new Ttimer();
+            Timer.Interval = 200;
+            Timer.Elapsed += TimerHeatTick;
+            Timer.Start();
+
             dGV_LoadTrayMap.ClearSelection();
         }
 
         private void dGV_LoadTrayMap_CellMouseUp(object sender, DataGridViewCellMouseEventArgs e)
         {
+            if (设备状态 == 1 && LsLoadDicPoint == null) return;
+
             if (dGV_LoadTrayMap.SelectedCells.Count > 0)
             {
                 DataGridViewSelectedCellCollection selectcells = dGV_LoadTrayMap.SelectedCells;
@@ -100,6 +166,7 @@ namespace H5509_V2
                     int x = selectcells[i].RowIndex;
                     int y = selectcells[i].ColumnIndex;
                     //Console.WriteLine($"{x + 1},{y + 1}");
+
                     if (dGV_LoadTrayMap.Rows[x].Cells[y].Style.BackColor == Color.LimeGreen)
                     {
                         dGV_LoadTrayMap.Rows[x].Cells[y].Style.BackColor = Color.White;
@@ -119,6 +186,8 @@ namespace H5509_V2
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1 || LsLoadDicPoint == null) return;
+
             DialogResult result = MessageBox.Show("请确定是否保存?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
@@ -136,6 +205,8 @@ namespace H5509_V2
 
         private void button6_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
+
             for (int i = 0; i < LoadXPoint.Length; i++)
             {
                 for (int j = 0; j < LoadYPoint.Length; j++)
@@ -149,6 +220,8 @@ namespace H5509_V2
 
         private void button2_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
+
             for (int i = 0; i < LoadXPoint.Length; i++)
             {
                 for (int j = 0; j < LoadYPoint.Length; j++)
@@ -162,6 +235,8 @@ namespace H5509_V2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
+
             for (int i = 0; i < LoadXPoint.Length; i++)
             {
                 for (int j = 0; j < LoadYPoint.Length; j++)
@@ -184,6 +259,8 @@ namespace H5509_V2
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
+
             LsLoadDicPoint = new Dictionary<string, bool>();
             for (int i = 0; i < LoadXPoint.Length; i++)
             {
@@ -229,28 +306,46 @@ namespace H5509_V2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (CheckChange())
+            if (设备状态 == 1) DialogResult = DialogResult.Cancel;
+
+            if (LsLoadDicPoint != null && CheckChange())
             {
-                DialogResult dialog = MessageBox.Show("Map图有被修改,请确认是否退出!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) ;
+                DialogResult dialog = MessageBox.Show("Map图有被修改,请确认是否退出!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
                     DialogResult = DialogResult.Cancel;
                 }
+                else Timer.Stop();
             }
             else DialogResult = DialogResult.Cancel;
         }
 
         private void LoadMap_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CheckChange())
+            if (DialogResult != DialogResult.Cancel)
             {
-                DialogResult dialog = MessageBox.Show("Map图有被修改,请确认是否退出!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (dialog == DialogResult.Cancel)
+                if (设备状态 != 1 && LsLoadDicPoint != null && CheckChange())
                 {
-                    e.Cancel = true;
-                    DialogResult = DialogResult.Cancel;
+                    DialogResult dialog = MessageBox.Show("Map图有被修改,请确认是否退出!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.Cancel)
+                    {
+                        e.Cancel = true;
+                        DialogResult = DialogResult.Cancel;
+                    }
+                    else Timer.Stop();
                 }
             }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            设备状态 = 1;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            设备状态 = 0;
+
         }
     }
 }

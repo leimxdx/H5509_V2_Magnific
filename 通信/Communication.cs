@@ -65,6 +65,23 @@ namespace H5509_V2
             else IsOpenCom = false;
         }
 
+        public void 刷新测试超时时间()
+        {
+            double testTime = 设置信息.测试机信息.测试超时时间 * 1000; //将秒转换为毫秒
+            double testTime2 = 设置信息.测试机信息.timeout超时时间 * 1000; //将秒转换为毫秒
+            for (int i = 0; i < Listtimer.Count; i++)
+            {
+                if (Listtimer[i].Interval != testTime)
+                {
+                    Listtimer[i].Interval = testTime;
+                }
+                if (timeOutTimer[i].Interval != testTime2)
+                {
+                    timeOutTimer[i].Interval = testTime2;
+                }
+            }
+        }
+
         //ListSite.Add(i);
         //ListInput.Add(i);
         //ListOutput.Add(i);
@@ -75,25 +92,30 @@ namespace H5509_V2
             {
                 for (int i = 0; i < 16; i++)
                 {
-                    System.Timers.Timer timer = new System.Timers.Timer() { Interval = 600 * 1000 }; //默认测试超时时间修改为10分钟
+                    System.Timers.Timer timer = new System.Timers.Timer() { Interval = 设置信息.测试机信息.测试超时时间 * 1000 }; //默认测试超时时间修改为10分钟
                     Iswaitout[i] = false;
                     Listtimer.Add(timer);
                     listtestdatetime.Add(DateTime.Now);
                     listtesttimespan.Add(new TimeSpan(0));
                     timer.Elapsed += ReceiveTimer;
-                }
-            }
-            if (timeOutTimer.Count == 0)
-            {
-                for (int i = 0; i < 16; i++)
-                {
-                    System.Timers.Timer timer = new System.Timers.Timer() { Interval = 5 * 1000 }; //默认timeout超时时间修改为5秒
-                    timeOutTimer.Add(timer);
-                    timer.Elapsed += timeOut;
-                    timer.Stop();
+
+                    System.Timers.Timer timer2 = new System.Timers.Timer() { Interval = 设置信息.测试机信息.timeout超时时间 * 1000 }; //默认timeout超时时间修改为5秒
+                    timeOutTimer.Add(timer2);
+                    timer2.Elapsed += timeOut;
+                    timer2.Stop();
                 }
             }
 
+            //if (timeOutTimer.Count == 0)
+            //{
+            //    for (int i = 0; i < 16; i++)
+            //    {
+            //        System.Timers.Timer timer = new System.Timers.Timer() { Interval = 5 * 1000 }; //默认timeout超时时间修改为5秒
+            //        timeOutTimer.Add(timer);
+            //        timer.Elapsed += timeOut;
+            //        timer.Stop();
+            //    }
+            //}
 
             if (serialPort == null)
             {

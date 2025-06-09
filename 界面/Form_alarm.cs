@@ -2805,18 +2805,18 @@ namespace H5509_alarm
                         switch (alarmCode)
                         {
                             case "1400500": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("oth",oth).Replace("othAll",othAll); break;
-                            //case "1400600":
-                            //    {
-                            //        SqlServer.runSql(SQLServerConnString, "select id from SocketUse where num>" + motionEx.testerIFParam.socket使用次数,out List<object> res);
-                            //        string sid = "";
-                            //        for(int i=0;i<res.Count;i++)
-                            //        {
-                            //            sid += res[i].ToString()+",";
-                            //        }
-                            //        sid = sid.TrimEnd(',');
-                            //        row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("sid", sid);
-                            //    }
-                            //    break;
+                            case "1400600":
+                                {
+                                    SQLiteHelper.runSql(SQLiteRunningString, "select id from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out List<object> res);
+                                    string sid = "";
+                                    for (int i = 0; i < res.Count; i++)
+                                    {
+                                        sid += res[i].ToString() + ",";
+                                    }
+                                    sid = sid.TrimEnd(',');
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("sid", sid);
+                                }
+                                break;
 
                         }
                     }

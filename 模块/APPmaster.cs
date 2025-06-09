@@ -37,9 +37,7 @@ namespace H5509_V2
     {
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
 
-        public static string SQLiteBatchString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\BatchData"};Polling=true;FailIfMissing=false";
-
-        public static string sqlServerConnectionString = "";
+        public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false";
 
         public static string SQLServerConnString = "";
 
@@ -56,6 +54,10 @@ namespace H5509_V2
         public static int 关Site数量 = 0;
 
         public static int StartSite数量 = 0;
+
+        public static string trayTemp = "";
+
+        public static int Socket使用次数超限数 = 0;
 
         public static List<分Bin> 分bin = new List<分Bin>();
 
@@ -91,7 +93,15 @@ namespace H5509_V2
 
         public static string 当前权限;
 
-        public static int 权限时间 { get; set; } = 60;
+        public static int 权限时间
+        { 
+            get
+            {
+                if (操作权限 == "D") return 600;
+                else return 60;
+            }
+        }
+        
 
         public static string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
 
@@ -132,8 +142,6 @@ namespace H5509_V2
         public static bool 无测试机模式 = false;
 
         public static bool 安全门禁用 = false;
-
-        public static int 温控状态 = 0;
 
         public static bool 温控加热 = false;
 
@@ -336,11 +344,11 @@ namespace H5509_V2
 
         public static int[] Dout128FailNumber = new int[128];
 
-        public static List<int[]> doutContinueFail { get; set; } = new List<int[]>();
+        public static List<int[]> doutContinueFail;
 
-        public static List<int[]> 单dut总不良计数 { get; set; } = new List<int[]>(); //单dut总不良计数（取消报警后清零）
+        public static List<int[]> 单dut总不良计数; //单dut总不良计数（取消报警后清零）
 
-        public static List<int[]> 单dut总不良累计计数 { get; set; } = new List<int[]>();//单dut总不良累计计数（取消报警后不清理）
+        public static List<int[]> 单dut总不良累计计数;//单dut总不良累计计数（取消报警后不清理）
 
         public static int 总良率报警间隔计数 { get; set; } = 0;
 
@@ -576,7 +584,7 @@ namespace H5509_V2
 
         public static int 空盘下降最小值 = 10000;
 
-        public static int 空盘满盘判断值 = 30000; //367864//12700
+        public static int 空盘满盘判断值 = 370000; //30000//370000//367864//12700
 
         public static bool 待测盘上顶到最大值 = false;
 
@@ -584,19 +592,19 @@ namespace H5509_V2
 
         public static int 待测盘上顶最大值 = 434675;
 
-        public static int 待测盘下降最小值 = 10000;
+        public static int 待测盘下降最小值 = 15000;
 
         public static int Auto1上顶最大值 = 468000;
 
         public static int Auto1下降最小值 = 10000;
 
-        public static int Auto1满盘判断值 = 25000;
+        public static int Auto1满盘判断值 = 25000;//360000
 
         public static int Auto2上顶最大值 = 468000;
 
         public static int Auto2下降最小值 = 10000;
 
-        public static int Auto2满盘判断值 = 360000; //25000
+        public static int Auto2满盘判断值 = 25000;
 
         public static bool Auto1料仓满盘标记;
 
@@ -1463,6 +1471,7 @@ namespace H5509_V2
                         case "当前档案": 当前档案 = value; break;
                         case "TCPIP": TCPIP = value; break;
                         case "TCPPort": TCPPort = Convert.ToInt32(value); break;
+                        case "connectionString": SQLServerConnString = value; break;
                     }
                 }
             }
@@ -1962,20 +1971,20 @@ namespace H5509_V2
                 APPmaster.GetAxisRunInfo("M22_入料手臂X轴", out AxisRunInfo axisRun);
                 APPmaster.GetAxisRunInfo("M23_出料手臂X轴", out AxisRunInfo axisRun2);
                 APPmaster.GetAxisRunInfo("M21_测试手臂X轴", out AxisRunInfo axisRun3);
-                string 生产速度 = "入料手臂：" + axisRun.速度百分比 + "，测试手臂：" + axisRun2.速度百分比 + "，出料手臂：" + axisRun3.速度百分比;
+                string 生产速度 = "入料手臂：" + axisRun.速度百分比 + "，出料手臂：" + axisRun2.速度百分比 + "，测试手臂：" + axisRun3.速度百分比;
 
                 sql = $"insert into FlowcaedNoInfo(开始时间,工单号,生产模式,产品类型,产品批号,用户名,总数量,良品数量,良率," +
                        $"投入数量,结束时间,工作时间,档案名称,UPH,Auto1名称,Auto2名称," +
                        $"Fix1名称,Fix2名称,Fix3名称,Auto1总数,Auto2总数,Fix1总数,Fix2总数,Fix3总数," +
                        $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
                        $"IC吸取模式,测试模式)" +
-                        $"values('{DateTime.Now.ToString("F")}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
-                       $"'{载入数}','{DateTime.Now.ToString()}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{Auto1}','{Auto2}'," +  //工作时间.Ticks
+                        $"values('{开始时间.ToString("F")}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
+                       $"'{载入数}','{结束时间.ToString()}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{Auto1}','{Auto2}'," +  //工作时间.Ticks
                        $"'{Fix1}','{Fix2}','{Fix3}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
                        $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{1}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
                        $"'正常','正常')";
 
-                int line = SQLiteHelper.runSqlNonQuery(SQLiteBatchString, sql);
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
 
                 if (line <= 0) Debug.WriteLine("sql保存失败！:" + sql);
             }
@@ -2898,76 +2907,77 @@ namespace H5509_V2
 
         public static void Auto2TrayClear()
         {
-            //trayTemp = "";
+            trayTemp = "";
             for (int i = 0; i < Auto2XPoint.Length; i++)
             {
                 for (int j = 0; j < Auto2YPoint.Length; j++)
                 {
                     Auto2DicPoint[$"{i},{j}"] = false;
-                    //trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
+                    trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
                     Auto2DicBin[$"{i},{j}"] = "";
                 }
             }
-            //trayTemp = trayTemp.TrimEnd(',');
-            //if (trayTemp == "") return;
-            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}')";
-            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+            trayTemp = trayTemp.TrimEnd(',');
+            if (trayTemp == "") return;
+            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}')";
+            //RunLog("Auto2 Sql:" + sql);
+            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
         }
 
         public static void Fix1TrayClear()
         {
-            //trayTemp = "";
+            trayTemp = "";
             for (int i = 0; i < Fix1XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix1YPoint.Length; j++)
                 {
                     Fix1DicPoint[$"{i},{j}"] = false;
-                    //trayTemp += Fix1DicBin[$"{i},{j}"] + ",";
+                    trayTemp += Fix1DicBin[$"{i},{j}"] + ",";
                     Fix1DicBin[$"{i},{j}"] = "";
                 }
             }
-            //trayTemp = trayTemp.TrimEnd(',');
-            //if (trayTemp == "") return;
-            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}')";
-            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+            trayTemp = trayTemp.TrimEnd(',');
+            if (trayTemp == "") return;
+            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}')";
+            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
         }
 
         public static void Fix2TrayClear()
         {
-            //trayTemp = "";
+            trayTemp = "";
             for (int i = 0; i < Fix2XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix2YPoint.Length; j++)
                 {
                     Fix2DicPoint[$"{i},{j}"] = false;
-                    //trayTemp += Fix2DicBin[$"{i},{j}"] + ",";
+                    trayTemp += Fix2DicBin[$"{i},{j}"] + ",";
                     Fix2DicBin[$"{i},{j}"] = "";
                 }
             }
-            //trayTemp = trayTemp.TrimEnd(',');
-            //if (trayTemp == "") return;
-            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}')";
-            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+            trayTemp = trayTemp.TrimEnd(',');
+            if (trayTemp == "") return;
+            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}')";
+            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
         }
 
         public static void Fix3TrayClear()
         {
-            //trayTemp = "";
+            trayTemp = "";
             for (int i = 0; i < Fix3XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix3YPoint.Length; j++)
                 {
                     Fix3DicPoint[$"{i},{j}"] = false;
-                    //trayTemp += Fix3DicBin[$"{i},{j}"] + ",";
+                    trayTemp += Fix3DicBin[$"{i},{j}"] + ",";
                     Fix3DicBin[$"{i},{j}"] = "";
                 }
             }
-            //trayTemp = trayTemp.TrimEnd(',');
-            //if (trayTemp == "") return;
-            //string sql = $"insert into o_{textBoxFlowcaedno.Text + "_" + machinestarttime.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}')";
-            //SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
+            trayTemp = trayTemp.TrimEnd(',');
+            if (trayTemp == "") return;
+            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}')";
+            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
         }
 

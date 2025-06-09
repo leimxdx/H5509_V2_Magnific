@@ -250,12 +250,12 @@
             this.dut_081 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView_alarm = new System.Windows.Forms.DataGridView();
-            this.alarm_NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alarm_info = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.alarm_led = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.button_cencel = new System.Windows.Forms.Button();
             this.button_start = new System.Windows.Forms.Button();
             this.timer_light = new System.Windows.Forms.Timer(this.components);
+            this.alarm_NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alarm_info = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.alarm_led = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel_1.SuspendLayout();
             this.panel_S03.SuspendLayout();
             this.panel_S00.SuspendLayout();
@@ -403,7 +403,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(32, 108);
             this.label9.TabIndex = 8;
-            this.label9.Text = "入,料,吸,嘴";
+            this.label9.Text = "入\r\n料\r\n吸\r\n嘴";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel_1
@@ -1670,7 +1670,7 @@
             this.TestArmSuck5.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck5.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck5.Location = new System.Drawing.Point(57, 5);
+            this.TestArmSuck5.Location = new System.Drawing.Point(59, 5);
             this.TestArmSuck5.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck5.Name = "TestArmSuck5";
             this.TestArmSuck5.Size = new System.Drawing.Size(20, 20);
@@ -1683,7 +1683,7 @@
             this.TestArmSuck8.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck8.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck8.Location = new System.Drawing.Point(57, 95);
+            this.TestArmSuck8.Location = new System.Drawing.Point(59, 95);
             this.TestArmSuck8.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck8.Name = "TestArmSuck8";
             this.TestArmSuck8.Size = new System.Drawing.Size(20, 20);
@@ -1696,7 +1696,7 @@
             this.TestArmSuck6.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck6.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck6.Location = new System.Drawing.Point(57, 35);
+            this.TestArmSuck6.Location = new System.Drawing.Point(59, 35);
             this.TestArmSuck6.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck6.Name = "TestArmSuck6";
             this.TestArmSuck6.Size = new System.Drawing.Size(20, 20);
@@ -1709,7 +1709,7 @@
             this.TestArmSuck7.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck7.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck7.Location = new System.Drawing.Point(57, 65);
+            this.TestArmSuck7.Location = new System.Drawing.Point(59, 65);
             this.TestArmSuck7.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck7.Name = "TestArmSuck7";
             this.TestArmSuck7.Size = new System.Drawing.Size(20, 20);
@@ -1723,12 +1723,12 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label10.Location = new System.Drawing.Point(0, 5);
+            this.label10.Location = new System.Drawing.Point(2, 5);
             this.label10.Margin = new System.Windows.Forms.Padding(0, 5, 0, 5);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 108);
             this.label10.TabIndex = 8;
-            this.label10.Text = "测,试,吸,嘴";
+            this.label10.Text = "测\r\n试\r\n吸\r\n嘴";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TestArmSuck1
@@ -1736,7 +1736,7 @@
             this.TestArmSuck1.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck1.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck1.Location = new System.Drawing.Point(32, 5);
+            this.TestArmSuck1.Location = new System.Drawing.Point(34, 5);
             this.TestArmSuck1.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck1.Name = "TestArmSuck1";
             this.TestArmSuck1.Size = new System.Drawing.Size(20, 20);
@@ -1749,7 +1749,7 @@
             this.TestArmSuck4.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck4.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck4.Location = new System.Drawing.Point(32, 95);
+            this.TestArmSuck4.Location = new System.Drawing.Point(34, 95);
             this.TestArmSuck4.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck4.Name = "TestArmSuck4";
             this.TestArmSuck4.Size = new System.Drawing.Size(20, 20);
@@ -1762,7 +1762,7 @@
             this.TestArmSuck2.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck2.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck2.Location = new System.Drawing.Point(32, 35);
+            this.TestArmSuck2.Location = new System.Drawing.Point(34, 35);
             this.TestArmSuck2.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck2.Name = "TestArmSuck2";
             this.TestArmSuck2.Size = new System.Drawing.Size(20, 20);
@@ -1775,7 +1775,7 @@
             this.TestArmSuck3.BackColor = System.Drawing.Color.Transparent;
             this.TestArmSuck3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TestArmSuck3.Font = new System.Drawing.Font("微软雅黑", 11F);
-            this.TestArmSuck3.Location = new System.Drawing.Point(32, 65);
+            this.TestArmSuck3.Location = new System.Drawing.Point(34, 65);
             this.TestArmSuck3.Margin = new System.Windows.Forms.Padding(0, 5, 5, 5);
             this.TestArmSuck3.Name = "TestArmSuck3";
             this.TestArmSuck3.Size = new System.Drawing.Size(20, 20);
@@ -1824,7 +1824,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(32, 108);
             this.label11.TabIndex = 8;
-            this.label11.Text = "出,料,吸,嘴";
+            this.label11.Text = "出\r\n料\r\n吸\r\n嘴";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TranArmRSuck1
@@ -1890,7 +1890,7 @@
             this.Shuttle2.Name = "Shuttle2";
             this.Shuttle2.Size = new System.Drawing.Size(90, 100);
             this.Shuttle2.TabIndex = 50;
-            this.Shuttle2.Text = "梭 车,（后）";
+            this.Shuttle2.Text = "梭\r\n车\r\n（后）";
             this.Shuttle2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Shuttle1
@@ -1904,7 +1904,7 @@
             this.Shuttle1.Name = "Shuttle1";
             this.Shuttle1.Size = new System.Drawing.Size(90, 100);
             this.Shuttle1.TabIndex = 51;
-            this.Shuttle1.Text = "梭 车,（前）";
+            this.Shuttle1.Text = "梭\r\n车\r\n（前）";
             this.Shuttle1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CatchArm
@@ -3238,34 +3238,6 @@
             this.dataGridView_alarm.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView_alarm_RowsRemoved);
             this.dataGridView_alarm.DoubleClick += new System.EventHandler(this.dataGridView_alarm_DoubleClick);
             // 
-            // alarm_NO
-            // 
-            this.alarm_NO.HeaderText = "报警代码";
-            this.alarm_NO.Name = "alarm_NO";
-            this.alarm_NO.ReadOnly = true;
-            this.alarm_NO.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.alarm_NO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.alarm_NO.Width = 120;
-            // 
-            // alarm_info
-            // 
-            this.alarm_info.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.alarm_info.HeaderText = "报警信息";
-            this.alarm_info.Name = "alarm_info";
-            this.alarm_info.ReadOnly = true;
-            this.alarm_info.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.alarm_info.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // alarm_led
-            // 
-            this.alarm_led.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.alarm_led.HeaderText = "闪灯";
-            this.alarm_led.Name = "alarm_led";
-            this.alarm_led.ReadOnly = true;
-            this.alarm_led.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.alarm_led.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.alarm_led.Width = 58;
-            // 
             // button_cencel
             // 
             this.button_cencel.Location = new System.Drawing.Point(30, 98);
@@ -3293,6 +3265,34 @@
             this.timer_light.Enabled = true;
             this.timer_light.Interval = 500;
             this.timer_light.Tick += new System.EventHandler(this.timer_light_Tick);
+            // 
+            // alarm_NO
+            // 
+            this.alarm_NO.HeaderText = "报警代码";
+            this.alarm_NO.Name = "alarm_NO";
+            this.alarm_NO.ReadOnly = true;
+            this.alarm_NO.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.alarm_NO.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.alarm_NO.Width = 120;
+            // 
+            // alarm_info
+            // 
+            this.alarm_info.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.alarm_info.HeaderText = "报警信息";
+            this.alarm_info.Name = "alarm_info";
+            this.alarm_info.ReadOnly = true;
+            this.alarm_info.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.alarm_info.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // alarm_led
+            // 
+            this.alarm_led.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.alarm_led.HeaderText = "闪灯";
+            this.alarm_led.Name = "alarm_led";
+            this.alarm_led.ReadOnly = true;
+            this.alarm_led.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.alarm_led.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.alarm_led.Width = 58;
             // 
             // Form_alarm
             // 
@@ -3614,9 +3614,9 @@
         public System.Windows.Forms.DataGridViewTextBoxColumn alarmAll_NO;
         public System.Windows.Forms.DataGridViewTextBoxColumn alarmAll_info;
         public System.Windows.Forms.DataGridViewTextBoxColumn alarmAll_led;
-        public System.Windows.Forms.DataGridViewTextBoxColumn alarm_NO;
-        public System.Windows.Forms.DataGridViewTextBoxColumn alarm_info;
-        public System.Windows.Forms.DataGridViewTextBoxColumn alarm_led;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alarm_NO;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alarm_info;
+        private System.Windows.Forms.DataGridViewTextBoxColumn alarm_led;
     }
 }
 

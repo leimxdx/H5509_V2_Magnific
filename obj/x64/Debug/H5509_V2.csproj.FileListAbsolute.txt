@@ -113,3 +113,8 @@ D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewStetup.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.HeatMap.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.FrmInputPwd.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Auto1Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Auto2Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Fix1Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Fix2Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Fix3Map.resources

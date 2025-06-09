@@ -268,6 +268,8 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label152 = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.uiComboBox1 = new Sunny.UI.UIComboBox();
+            this.uiButton1 = new Sunny.UI.UIButton();
             this.uiDigitalLabel18 = new Sunny.UI.UIDigitalLabel();
             this.label10 = new System.Windows.Forms.Label();
             this.uiDigitalLabel17 = new Sunny.UI.UIDigitalLabel();
@@ -803,6 +805,7 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1284, 229);
             this.panel4.TabIndex = 167;
+            this.panel4.Tag = "@02@";
             // 
             // Btn_open16
             // 
@@ -3702,6 +3705,8 @@
             // 
             // uiPanel1
             // 
+            this.uiPanel1.Controls.Add(this.uiComboBox1);
+            this.uiPanel1.Controls.Add(this.uiButton1);
             this.uiPanel1.Controls.Add(this.uiDigitalLabel18);
             this.uiPanel1.Controls.Add(this.label10);
             this.uiPanel1.Controls.Add(this.uiDigitalLabel17);
@@ -3740,6 +3745,44 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiComboBox1
+            // 
+            this.uiComboBox1.DataSource = null;
+            this.uiComboBox1.FillColor = System.Drawing.Color.White;
+            this.uiComboBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiComboBox1.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
+            this.uiComboBox1.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2"});
+            this.uiComboBox1.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiComboBox1.Location = new System.Drawing.Point(1201, 423);
+            this.uiComboBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiComboBox1.MinimumSize = new System.Drawing.Size(63, 0);
+            this.uiComboBox1.Name = "uiComboBox1";
+            this.uiComboBox1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.uiComboBox1.Size = new System.Drawing.Size(104, 35);
+            this.uiComboBox1.SymbolSize = 24;
+            this.uiComboBox1.TabIndex = 180;
+            this.uiComboBox1.Text = "0";
+            this.uiComboBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiComboBox1.Visible = false;
+            this.uiComboBox1.Watermark = "";
+            // 
+            // uiButton1
+            // 
+            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton1.Location = new System.Drawing.Point(1094, 423);
+            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.Size = new System.Drawing.Size(100, 35);
+            this.uiButton1.TabIndex = 179;
+            this.uiButton1.Text = "状态";
+            this.uiButton1.TipsFont = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton1.Visible = false;
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
+            // 
             // uiDigitalLabel18
             // 
             this.uiDigitalLabel18.BackColor = System.Drawing.Color.White;
@@ -3769,6 +3812,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(87, 35);
             this.label10.TabIndex = 177;
+            this.label10.Tag = "";
             this.label10.Text = "关闭";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label10.Click += new System.EventHandler(this.label10_Click);
@@ -3816,7 +3860,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(191, 27);
             this.label8.TabIndex = 159;
-            this.label8.Text = "V.0.0.27 20250517";
+            this.label8.Text = "V.0.0.46 20250609";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9
@@ -3874,6 +3918,7 @@
             this.comboBox12.Name = "comboBox12";
             this.comboBox12.Size = new System.Drawing.Size(180, 35);
             this.comboBox12.TabIndex = 153;
+            this.comboBox12.Tag = "@02@#BCD#";
             // 
             // label147
             // 
@@ -4245,6 +4290,8 @@
             this.label139.Tag = "@02@";
             this.label139.Text = "载入数";
             this.label139.Click += new System.EventHandler(this.label139_Click);
+            this.label139.MouseEnter += new System.EventHandler(this.label139_MouseEnter);
+            this.label139.MouseLeave += new System.EventHandler(this.label139_MouseLeave);
             // 
             // Panel_right
             // 
@@ -4332,6 +4379,7 @@
             this.uiCheckBox1.Name = "uiCheckBox1";
             this.uiCheckBox1.Size = new System.Drawing.Size(77, 30);
             this.uiCheckBox1.TabIndex = 181;
+            this.uiCheckBox1.Tag = "@0@";
             this.uiCheckBox1.Text = "手动";
             this.uiCheckBox1.CheckedChanged += new System.EventHandler(this.uiCheckBox1_CheckedChanged);
             // 
@@ -4796,6 +4844,9 @@
             this.label1.Size = new System.Drawing.Size(52, 26);
             this.label1.TabIndex = 107;
             this.label1.Text = "Fix3";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            this.label1.MouseEnter += new System.EventHandler(this.label1_MouseEnter);
+            this.label1.MouseLeave += new System.EventHandler(this.label1_MouseLeave);
             // 
             // txt_total
             // 
@@ -4958,6 +5009,9 @@
             this.label142.Size = new System.Drawing.Size(52, 26);
             this.label142.TabIndex = 99;
             this.label142.Text = "Fix1";
+            this.label142.Click += new System.EventHandler(this.label142_Click);
+            this.label142.MouseEnter += new System.EventHandler(this.label142_MouseEnter);
+            this.label142.MouseLeave += new System.EventHandler(this.label142_MouseLeave);
             // 
             // label144
             // 
@@ -4970,6 +5024,9 @@
             this.label144.Size = new System.Drawing.Size(52, 26);
             this.label144.TabIndex = 101;
             this.label144.Text = "Fix2";
+            this.label144.Click += new System.EventHandler(this.label144_Click);
+            this.label144.MouseEnter += new System.EventHandler(this.label144_MouseEnter);
+            this.label144.MouseLeave += new System.EventHandler(this.label144_MouseLeave);
             // 
             // label141
             // 
@@ -4982,6 +5039,9 @@
             this.label141.Size = new System.Drawing.Size(70, 26);
             this.label141.TabIndex = 95;
             this.label141.Text = "Auto1";
+            this.label141.Click += new System.EventHandler(this.label141_Click);
+            this.label141.MouseEnter += new System.EventHandler(this.label141_MouseEnter);
+            this.label141.MouseLeave += new System.EventHandler(this.label141_MouseLeave);
             // 
             // label143
             // 
@@ -4994,6 +5054,9 @@
             this.label143.Size = new System.Drawing.Size(70, 26);
             this.label143.TabIndex = 97;
             this.label143.Text = "Auto2";
+            this.label143.Click += new System.EventHandler(this.label143_Click);
+            this.label143.MouseEnter += new System.EventHandler(this.label143_MouseEnter);
+            this.label143.MouseLeave += new System.EventHandler(this.label143_MouseLeave);
             // 
             // _main
             // 
@@ -5378,5 +5441,7 @@
         private Sunny.UI.UIButton Btn_close11;
         private System.Windows.Forms.Label label10;
         private Sunny.UI.UIDigitalLabel uiDigitalLabel18;
+        private Sunny.UI.UIButton uiButton1;
+        private Sunny.UI.UIComboBox uiComboBox1;
     }
 }

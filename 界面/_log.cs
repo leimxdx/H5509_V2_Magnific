@@ -108,7 +108,7 @@ namespace H5509_V2
 
         public TimeSpan Timestamp { get; set; }
         private List<log> logsList = new List<log>();
-        
+
 
         public void RefreshLog(string level, string logType, string info)
         {
@@ -421,45 +421,59 @@ namespace H5509_V2
         //获取日期范围内的日志文件
         private List<string> GetLogFilesInDateRange(DateTime startDate, DateTime endDate)
         {
+            var tempFiles = new List<string>();
             var logFiles = new List<string>();
 
             string[] directorys = Directory.GetDirectories(logsDirectory);
             // 遍历所有月份目录
             for (int i = 0; i < directorys.Length; i++)
             {
-                // 从目录名获取月份（格式：yyyyMM）
-                string dirName = Path.GetFileName(directorys[i]);
-                if (DateTime.TryParseExact(dirName, "yyyyMM", null, DateTimeStyles.None, out DateTime dirDate))
+                // 遍历该月所有日志文件
+                foreach (var file in Directory.GetFiles(directorys[i], "Log_*.xlsx"))
                 {
-                    // 检查月份是否在查询时间范围内（优化：先粗略按月份筛选）
-                    if (dirDate.Year < startDate.Year || dirDate.Year > endDate.Year)
-                        continue;
-                    if (dirDate.Year == startDate.Year && dirDate.Month < startDate.Month)
-                        continue;
-                    if (dirDate.Year == endDate.Year && dirDate.Month > endDate.Month)
-                        continue;
+                    // 从文件名解析时间（格式：Log_yyyyMMdd-HHmmss.xlsx）
+                    //string fileName = Path.GetFileNameWithoutExtension(file);
+                    //string timePart = fileName.Substring(4); // 去掉"Log_"
 
-                    // 遍历该月所有日志文件
-                    foreach (var file in Directory.GetFiles(directorys[i], "Log_*.xlsx"))
-                    {
-                        // 从文件名解析时间（格式：Log_yyyyMMdd-HHmmss.xlsx）
-                        string fileName = Path.GetFileNameWithoutExtension(file);
-                        string timePart = fileName.Substring(4); // 去掉"Log_"
+                    //if (DateTime.TryParseExact(timePart, "yyyyMMdd-HHmmss", null, DateTimeStyles.None, out DateTime fileTime))
+                    //{
+                    //    // 优化：如果文件创建时间完全不在查询范围内，则跳过（减少文件打开次数）
+                    //    if (fileTime.Date > endDate.Date || fileTime.Date < startDate.Date)
+                    //        continue;
+                    //}
 
-                        if (DateTime.TryParseExact(timePart, "yyyyMMdd-HHmmss", null, DateTimeStyles.None, out DateTime fileTime))
-                        {
-                            // 优化：如果文件创建时间完全不在查询范围内，则跳过（减少文件打开次数）
-                            if (fileTime.Date > endDate.Date || fileTime.Date < startDate.Date)
-                                continue;
-                        }
-
-                        // 如果文件名时间在范围内，或无法解析时间，则加入待检查列表
-                        logFiles.Add(file);
-                    }
+                    // 如果文件名时间在范围内，或无法解析时间，则加入待检查列表
+                    tempFiles.Add(file);
                 }
             }
 
-            return logFiles.OrderBy(f => f).ToList();
+            //文件名降序
+            tempFiles = tempFiles.OrderByDescending(f => f).ToList();
+
+
+            //筛选符合查询条件的文件名
+            //1、找到时间范围内的最后一个文件
+            //2、找的时间范围内的第一个文件的前一个文件
+            for(int i=0;i< tempFiles.Count;i++ )
+            {
+                // 从文件名解析时间（格式：Log_yyyyMMdd-HHmmss.xlsx）
+                string fileName = Path.GetFileNameWithoutExtension(tempFiles[i]);
+                string timePart = fileName.Substring(4); // 去掉"Log_"
+
+                if (DateTime.TryParseExact(timePart, "yyyyMMdd-HHmmss", null, DateTimeStyles.None, out DateTime fileTime))
+                {
+                    if (fileTime > endDate)
+                        continue;
+
+                    logFiles.Add(tempFiles[i]);
+
+                    if (fileTime < startDate)
+                        break;
+                }
+
+            }
+
+            return logFiles;
         }
 
 
@@ -840,7 +854,7 @@ namespace H5509_V2
             List<bool[]> isopen = GetSiteStatus(out short testnum);
             //if (SiteTestState[testnum] == 1)
             //{
-            DialogResult dialog = MessageBox.Show("请确认是否发送测试信号?","提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult dialog = MessageBox.Show("请确认是否发送测试信号?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dialog == DialogResult.OK)
             {
                 Com.Send(testnum, isopen);

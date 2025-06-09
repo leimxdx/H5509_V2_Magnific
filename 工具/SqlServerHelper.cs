@@ -238,6 +238,31 @@ namespace H5509_V2
             return "Success";
         }
 
+        public static int runSql(string connectionString, DataTable dataTable, string tableName)
+        {
+            SqlConnection connection = new SqlConnection(connectionString);
+            try
+            {
+                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(connectionString))
+                {
+                    bulkCopy.DestinationTableName = tableName;
+                    bulkCopy.BatchSize = 50000;  // 每批处理行数
+                    bulkCopy.ColumnMappings.Add("id", "id");
+                    bulkCopy.ColumnMappings.Add("pass", "pass");
+                    bulkCopy.ColumnMappings.Add("total", "total");
+                    bulkCopy.ColumnMappings.Add("usedTime", "usedTime");
+                    bulkCopy.WriteToServer(dataTable);  // dataTable 为 DataTable 对象
+                }
+                return 1; // 成功返回1
+            }
+            catch (Exception ex)
+            {
+                connection.Close();
+                RunLog(ex.Message);
+                return -2;
+            }
+        }
+
         /// <summary>
         /// 执行非查询sql，返回影响的行数
         /// </summary>
@@ -260,7 +285,7 @@ namespace H5509_V2
             {
                 connection.Close();
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
-                return -1;
+                return -2;
             }
         }
 

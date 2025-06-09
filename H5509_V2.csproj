@@ -153,8 +153,38 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auto1Map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auto1Map.Designer.cs">
+      <DependentUpon>Auto1Map.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Auto2Map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Auto2Map.Designer.cs">
+      <DependentUpon>Auto2Map.cs</DependentUpon>
+    </Compile>
     <Compile Include="BinParam.cs" />
     <Compile Include="DTMHelper.cs" />
+    <Compile Include="Fix1Map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fix1Map.Designer.cs">
+      <DependentUpon>Fix1Map.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fix2Map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fix2Map.Designer.cs">
+      <DependentUpon>Fix2Map.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Fix3Map.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fix3Map.Designer.cs">
+      <DependentUpon>Fix3Map.cs</DependentUpon>
+    </Compile>
     <Compile Include="FlowcaedNoInfo.cs" />
     <Compile Include="HeatInfo.cs" />
     <Compile Include="HeatMap.cs">
@@ -268,6 +298,21 @@
     <Compile Include="轴\AxisHomeInfo.cs" />
     <Compile Include="轴\AxisInfo.cs" />
     <Compile Include="轴\AxisRunInfo.cs" />
+    <EmbeddedResource Include="Auto1Map.resx">
+      <DependentUpon>Auto1Map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Auto2Map.resx">
+      <DependentUpon>Auto2Map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fix1Map.resx">
+      <DependentUpon>Fix1Map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fix2Map.resx">
+      <DependentUpon>Fix2Map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Fix3Map.resx">
+      <DependentUpon>Fix3Map.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="HeatMap.resx">
       <DependentUpon>HeatMap.cs</DependentUpon>
     </EmbeddedResource>

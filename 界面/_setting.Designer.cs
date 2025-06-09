@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle46 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle47 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle48 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle49 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle50 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle51 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle52 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle53 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle54 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle55 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle56 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle57 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle58 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle59 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle60 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.uiCheckBox206 = new Sunny.UI.UICheckBox();
@@ -2315,6 +2315,7 @@
             this.uiCheckBox206.Name = "uiCheckBox206";
             this.uiCheckBox206.Size = new System.Drawing.Size(175, 26);
             this.uiCheckBox206.TabIndex = 167;
+            this.uiCheckBox206.Tag = "@0@#BCD#";
             this.uiCheckBox206.Text = "无测试机模式(离线)";
             this.uiCheckBox206.Click += new System.EventHandler(this.uiCheckBox206_Click);
             // 
@@ -2331,6 +2332,7 @@
             this.uiCheckBox205.Name = "uiCheckBox205";
             this.uiCheckBox205.Size = new System.Drawing.Size(117, 26);
             this.uiCheckBox205.TabIndex = 166;
+            this.uiCheckBox205.Tag = "@02@#BCD#";
             this.uiCheckBox205.Text = "安全门禁用";
             this.uiCheckBox205.Click += new System.EventHandler(this.uiCheckBox205_Click);
             // 
@@ -2349,6 +2351,7 @@
             this.uiCheckBox204.Name = "uiCheckBox204";
             this.uiCheckBox204.Size = new System.Drawing.Size(117, 26);
             this.uiCheckBox204.TabIndex = 165;
+            this.uiCheckBox204.Tag = "@0@#BCD#";
             this.uiCheckBox204.Text = "Tray盘模式";
             this.uiCheckBox204.Click += new System.EventHandler(this.uiCheckBox204_Click);
             // 
@@ -2365,6 +2368,7 @@
             this.uiCheckBox203.Name = "uiCheckBox203";
             this.uiCheckBox203.Size = new System.Drawing.Size(101, 26);
             this.uiCheckBox203.TabIndex = 164;
+            this.uiCheckBox203.Tag = "@0@#BCD#";
             this.uiCheckBox203.Text = "空跑模式";
             this.uiCheckBox203.Click += new System.EventHandler(this.uiCheckBox203_Click);
             // 
@@ -2375,7 +2379,7 @@
             this.tabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(200, 60);
+            this.tabPage2.Size = new System.Drawing.Size(1893, 944);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "调试";
             // 
@@ -2397,7 +2401,7 @@
             this.uiTabControl3.Name = "uiTabControl3";
             this.uiTabControl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl3.SelectedIndex = 0;
-            this.uiTabControl3.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl3.Size = new System.Drawing.Size(1893, 944);
             this.uiTabControl3.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl3.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl3.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -2417,7 +2421,7 @@
             this.tabPage10.Controls.Add(this.groupBox4);
             this.tabPage10.Location = new System.Drawing.Point(0, 40);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(200, 20);
+            this.tabPage10.Size = new System.Drawing.Size(1893, 904);
             this.tabPage10.TabIndex = 0;
             this.tabPage10.Text = "基础调试";
             // 
@@ -2505,7 +2509,7 @@
             this.groupBox1.Size = new System.Drawing.Size(555, 750);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Tag = "@02@#BCD#";
+            this.groupBox1.Tag = "";
             this.groupBox1.Text = "点位运动";
             // 
             // txt_home_dingwei_vel
@@ -2556,6 +2560,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(110, 30);
             this.button4.TabIndex = 154;
+            this.button4.Tag = "@02@#BCD#";
             this.button4.Text = "绝对运动";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -2578,6 +2583,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(110, 30);
             this.button1.TabIndex = 126;
+            this.button1.Tag = "@02@#BCD#";
             this.button1.Text = "正向运动";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
@@ -2589,6 +2595,7 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(262, 30);
             this.button52.TabIndex = 144;
+            this.button52.Tag = "";
             this.button52.Text = "开启读取轴信息";
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.button52_Click);
@@ -2601,6 +2608,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(110, 30);
             this.button3.TabIndex = 153;
+            this.button3.Tag = "@02@#BCD#";
             this.button3.Text = "Jog-";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button3_MouseDown);
@@ -2614,6 +2622,7 @@
             this.button152.Name = "button152";
             this.button152.Size = new System.Drawing.Size(262, 30);
             this.button152.TabIndex = 140;
+            this.button152.Tag = "@02@#BCD#";
             this.button152.Text = "清除状态";
             this.button152.UseVisualStyleBackColor = true;
             this.button152.Click += new System.EventHandler(this.button152_Click);
@@ -2626,6 +2635,7 @@
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(110, 30);
             this.button39.TabIndex = 143;
+            this.button39.Tag = "@02@#BCD#";
             this.button39.Text = "反向运动";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
@@ -2649,6 +2659,7 @@
             this.button145.Name = "button145";
             this.button145.Size = new System.Drawing.Size(110, 30);
             this.button145.TabIndex = 138;
+            this.button145.Tag = "@02@#BCD#";
             this.button145.Text = "停止运动";
             this.button145.UseVisualStyleBackColor = false;
             this.button145.Click += new System.EventHandler(this.button145_Click);
@@ -2661,6 +2672,7 @@
             this.button146.Name = "button146";
             this.button146.Size = new System.Drawing.Size(262, 30);
             this.button146.TabIndex = 139;
+            this.button146.Tag = "@02@#BCD#";
             this.button146.Text = "使能开启";
             this.button146.UseVisualStyleBackColor = true;
             this.button146.Click += new System.EventHandler(this.button146_Click);
@@ -2673,6 +2685,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(110, 30);
             this.button15.TabIndex = 122;
+            this.button15.Tag = "@02@#BCD#";
             this.button15.Text = "Jog+";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button15_MouseDown);
@@ -2695,6 +2708,7 @@
             this.button156.Name = "button156";
             this.button156.Size = new System.Drawing.Size(110, 30);
             this.button156.TabIndex = 141;
+            this.button156.Tag = "@02@#BCD#";
             this.button156.Text = "回零";
             this.button156.UseVisualStyleBackColor = true;
             this.button156.Click += new System.EventHandler(this.button156_Click);
@@ -2707,6 +2721,7 @@
             this.button155.Name = "button155";
             this.button155.Size = new System.Drawing.Size(110, 30);
             this.button155.TabIndex = 142;
+            this.button155.Tag = "@02@#BCD#";
             this.button155.Text = "停止回零";
             this.button155.UseVisualStyleBackColor = true;
             this.button155.Click += new System.EventHandler(this.button155_Click);
@@ -2719,6 +2734,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(262, 30);
             this.button2.TabIndex = 127;
+            this.button2.Tag = "@02@#BCD#";
             this.button2.Text = "位置清零";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -3458,7 +3474,7 @@
             this.groupBox2.Size = new System.Drawing.Size(664, 807);
             this.groupBox2.TabIndex = 174;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Tag = "@02@#BCD#";
+            this.groupBox2.Tag = "@02@#D#";
             this.groupBox2.Text = "IO调试";
             // 
             // button235
@@ -5007,6 +5023,7 @@
             this.groupBox4.Size = new System.Drawing.Size(457, 750);
             this.groupBox4.TabIndex = 155;
             this.groupBox4.TabStop = false;
+            this.groupBox4.Tag = "@02@#D#";
             this.groupBox4.Text = "单轴回零";
             // 
             // button227
@@ -5412,6 +5429,7 @@
             this.button221.Name = "button221";
             this.button221.Size = new System.Drawing.Size(153, 30);
             this.button221.TabIndex = 402;
+            this.button221.Tag = "@02@#D#";
             this.button221.Text = "调试取盘";
             this.button221.UseVisualStyleBackColor = true;
             this.button221.Click += new System.EventHandler(this.button221_Click);
@@ -5423,6 +5441,7 @@
             this.button219.Name = "button219";
             this.button219.Size = new System.Drawing.Size(153, 30);
             this.button219.TabIndex = 401;
+            this.button219.Tag = "@02@#D#";
             this.button219.Text = "Auto1换空盘";
             this.button219.UseVisualStyleBackColor = true;
             this.button219.Click += new System.EventHandler(this.button219_Click);
@@ -5434,6 +5453,7 @@
             this.button220.Name = "button220";
             this.button220.Size = new System.Drawing.Size(153, 30);
             this.button220.TabIndex = 400;
+            this.button220.Tag = "@02@#D#";
             this.button220.Text = "Auto2换空盘";
             this.button220.UseVisualStyleBackColor = true;
             this.button220.Click += new System.EventHandler(this.button220_Click);
@@ -5445,6 +5465,7 @@
             this.button218.Name = "button218";
             this.button218.Size = new System.Drawing.Size(153, 30);
             this.button218.TabIndex = 399;
+            this.button218.Tag = "@02@#D#";
             this.button218.Text = "Auto2放空盘";
             this.button218.UseVisualStyleBackColor = true;
             this.button218.Click += new System.EventHandler(this.button218_Click);
@@ -5456,6 +5477,7 @@
             this.button217.Name = "button217";
             this.button217.Size = new System.Drawing.Size(153, 30);
             this.button217.TabIndex = 398;
+            this.button217.Tag = "@02@#D#";
             this.button217.Text = "Auto1放空盘";
             this.button217.UseVisualStyleBackColor = true;
             this.button217.Click += new System.EventHandler(this.button217_Click);
@@ -5467,6 +5489,7 @@
             this.button216.Name = "button216";
             this.button216.Size = new System.Drawing.Size(153, 30);
             this.button216.TabIndex = 397;
+            this.button216.Tag = "@02@#D#";
             this.button216.Text = "Load去空盘";
             this.button216.UseVisualStyleBackColor = true;
             this.button216.Click += new System.EventHandler(this.button216_Click);
@@ -5478,6 +5501,7 @@
             this.button214.Name = "button214";
             this.button214.Size = new System.Drawing.Size(153, 30);
             this.button214.TabIndex = 396;
+            this.button214.Tag = "@02@#D#";
             this.button214.Text = "Auto2顶盘";
             this.button214.UseVisualStyleBackColor = true;
             this.button214.Click += new System.EventHandler(this.button214_Click);
@@ -5489,6 +5513,7 @@
             this.button215.Name = "button215";
             this.button215.Size = new System.Drawing.Size(153, 30);
             this.button215.TabIndex = 395;
+            this.button215.Tag = "@02@#D#";
             this.button215.Text = "Auto1顶盘";
             this.button215.UseVisualStyleBackColor = true;
             this.button215.Click += new System.EventHandler(this.button215_Click);
@@ -5500,6 +5525,7 @@
             this.button213.Name = "button213";
             this.button213.Size = new System.Drawing.Size(153, 30);
             this.button213.TabIndex = 394;
+            this.button213.Tag = "@02@#D#";
             this.button213.Text = "Load顶盘";
             this.button213.UseVisualStyleBackColor = true;
             this.button213.Click += new System.EventHandler(this.button213_Click);
@@ -5511,6 +5537,7 @@
             this.button212.Name = "button212";
             this.button212.Size = new System.Drawing.Size(153, 30);
             this.button212.TabIndex = 393;
+            this.button212.Tag = "@02@#D#";
             this.button212.Text = "Empty顶盘";
             this.button212.UseVisualStyleBackColor = true;
             this.button212.Click += new System.EventHandler(this.button212_Click);
@@ -5540,6 +5567,7 @@
             this.comboBox7.Name = "comboBox7";
             this.comboBox7.Size = new System.Drawing.Size(74, 29);
             this.comboBox7.TabIndex = 392;
+            this.comboBox7.Tag = "@02@#D#";
             this.comboBox7.Text = "0";
             // 
             // comboBox6
@@ -5567,6 +5595,7 @@
             this.comboBox6.Name = "comboBox6";
             this.comboBox6.Size = new System.Drawing.Size(74, 29);
             this.comboBox6.TabIndex = 363;
+            this.comboBox6.Tag = "@02@#D#";
             this.comboBox6.Text = "0";
             // 
             // button210
@@ -5576,6 +5605,7 @@
             this.button210.Name = "button210";
             this.button210.Size = new System.Drawing.Size(119, 30);
             this.button210.TabIndex = 391;
+            this.button210.Tag = "@02@#D#";
             this.button210.Text = "到位";
             this.button210.UseVisualStyleBackColor = true;
             this.button210.Click += new System.EventHandler(this.button210_Click);
@@ -5587,6 +5617,7 @@
             this.button211.Name = "button211";
             this.button211.Size = new System.Drawing.Size(119, 30);
             this.button211.TabIndex = 390;
+            this.button211.Tag = "@02@#D#";
             this.button211.Text = "原位";
             this.button211.UseVisualStyleBackColor = true;
             this.button211.Click += new System.EventHandler(this.button211_Click);
@@ -5598,6 +5629,7 @@
             this.button209.Name = "button209";
             this.button209.Size = new System.Drawing.Size(119, 30);
             this.button209.TabIndex = 389;
+            this.button209.Tag = "@02@#D#";
             this.button209.Text = "到位";
             this.button209.UseVisualStyleBackColor = true;
             this.button209.Click += new System.EventHandler(this.button209_Click);
@@ -5631,6 +5663,7 @@
             this.button208.Name = "button208";
             this.button208.Size = new System.Drawing.Size(119, 30);
             this.button208.TabIndex = 363;
+            this.button208.Tag = "@02@#D#";
             this.button208.Text = "原位";
             this.button208.UseVisualStyleBackColor = true;
             this.button208.Click += new System.EventHandler(this.button208_Click);
@@ -5693,7 +5726,7 @@
             this.groupBox3.Size = new System.Drawing.Size(715, 769);
             this.groupBox3.TabIndex = 175;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Tag = "@02@#BCD#";
+            this.groupBox3.Tag = "@02@#D#";
             this.groupBox3.Text = "入料";
             // 
             // groupBox6
@@ -6989,7 +7022,7 @@
             this.groupBox8.Size = new System.Drawing.Size(715, 836);
             this.groupBox8.TabIndex = 344;
             this.groupBox8.TabStop = false;
-            this.groupBox8.Tag = "@02@#BCD#";
+            this.groupBox8.Tag = "@02@#D#";
             this.groupBox8.Text = "出料";
             // 
             // groupBox9
@@ -8577,7 +8610,7 @@
             this.groupBox16.Size = new System.Drawing.Size(715, 836);
             this.groupBox16.TabIndex = 345;
             this.groupBox16.TabStop = false;
-            this.groupBox16.Tag = "@02@#BCD#";
+            this.groupBox16.Tag = "@02@#D#";
             this.groupBox16.Text = "测试入料";
             // 
             // groupBox17
@@ -10113,7 +10146,7 @@
             this.groupBox19.Size = new System.Drawing.Size(715, 836);
             this.groupBox19.TabIndex = 346;
             this.groupBox19.TabStop = false;
-            this.groupBox19.Tag = "@02@#BCD#";
+            this.groupBox19.Tag = "@02@#D#";
             this.groupBox19.Text = "测试出料";
             // 
             // groupBox20
@@ -11668,7 +11701,7 @@
             this.groupBox7.Size = new System.Drawing.Size(451, 307);
             this.groupBox7.TabIndex = 345;
             this.groupBox7.TabStop = false;
-            this.groupBox7.Tag = "@02@#BCD#";
+            this.groupBox7.Tag = "@02@#D#";
             this.groupBox7.Text = "飞梭";
             // 
             // comboBox5
@@ -11984,6 +12017,7 @@
             this.button123.Name = "button123";
             this.button123.Size = new System.Drawing.Size(153, 80);
             this.button123.TabIndex = 345;
+            this.button123.Tag = "@0@#BCD#";
             this.button123.Text = "紧急停止";
             this.button123.UseVisualStyleBackColor = false;
             this.button123.Click += new System.EventHandler(this.button123_Click);
@@ -12078,6 +12112,7 @@
             this.tabPage7.Name = "tabPage7";
             this.tabPage7.Size = new System.Drawing.Size(200, 20);
             this.tabPage7.TabIndex = 0;
+            this.tabPage7.Tag = "";
             this.tabPage7.Text = "入料手臂";
             // 
             // button25
@@ -12088,6 +12123,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(153, 80);
             this.button25.TabIndex = 346;
+            this.button25.Tag = "@02@#D#";
             this.button25.Text = "紧急停止";
             this.button25.UseVisualStyleBackColor = false;
             this.button25.Click += new System.EventHandler(this.button25_Click);
@@ -12102,6 +12138,7 @@
             this.uiButton9.RectColor = System.Drawing.Color.White;
             this.uiButton9.Size = new System.Drawing.Size(98, 34);
             this.uiButton9.TabIndex = 315;
+            this.uiButton9.Tag = "@02@#D#";
             this.uiButton9.Text = "恢复默认";
             this.uiButton9.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton9.Click += new System.EventHandler(this.uiButton9_Click);
@@ -12116,6 +12153,7 @@
             this.uiButton10.RectColor = System.Drawing.Color.White;
             this.uiButton10.Size = new System.Drawing.Size(98, 34);
             this.uiButton10.TabIndex = 314;
+            this.uiButton10.Tag = "@02@#D#";
             this.uiButton10.Text = "保存";
             this.uiButton10.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton10.Click += new System.EventHandler(this.uiButton10_Click);
@@ -12876,6 +12914,7 @@
             this.button242.Name = "button242";
             this.button242.Size = new System.Drawing.Size(108, 34);
             this.button242.TabIndex = 548;
+            this.button242.Tag = "@02@#D#";
             this.button242.Text = "移动";
             this.button242.UseVisualStyleBackColor = true;
             this.button242.Click += new System.EventHandler(this.button242_Click);
@@ -12916,6 +12955,7 @@
             this.button241.Name = "button241";
             this.button241.Size = new System.Drawing.Size(108, 34);
             this.button241.TabIndex = 545;
+            this.button241.Tag = "@02@#D#";
             this.button241.Text = "移动";
             this.button241.UseVisualStyleBackColor = true;
             this.button241.Click += new System.EventHandler(this.button241_Click);
@@ -12956,6 +12996,7 @@
             this.button240.Name = "button240";
             this.button240.Size = new System.Drawing.Size(108, 34);
             this.button240.TabIndex = 542;
+            this.button240.Tag = "@02@#D#";
             this.button240.Text = "移动";
             this.button240.UseVisualStyleBackColor = true;
             this.button240.Click += new System.EventHandler(this.button240_Click);
@@ -12996,6 +13037,7 @@
             this.button226.Name = "button226";
             this.button226.Size = new System.Drawing.Size(108, 34);
             this.button226.TabIndex = 539;
+            this.button226.Tag = "@02@#D#";
             this.button226.Text = "移动";
             this.button226.UseVisualStyleBackColor = true;
             this.button226.Click += new System.EventHandler(this.button226_Click);
@@ -13352,6 +13394,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(108, 34);
             this.button32.TabIndex = 101;
+            this.button32.Tag = "@02@#D#";
             this.button32.Text = "移动";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
@@ -13392,6 +13435,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(108, 34);
             this.button20.TabIndex = 277;
+            this.button20.Tag = "@02@#D#";
             this.button20.Text = "移动";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
@@ -13442,6 +13486,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(108, 34);
             this.button31.TabIndex = 119;
+            this.button31.Tag = "@02@#D#";
             this.button31.Text = "移动";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
@@ -13482,6 +13527,7 @@
             this.button222.Name = "button222";
             this.button222.Size = new System.Drawing.Size(108, 34);
             this.button222.TabIndex = 300;
+            this.button222.Tag = "@02@#D#";
             this.button222.Text = "移动";
             this.button222.UseVisualStyleBackColor = true;
             this.button222.Click += new System.EventHandler(this.button222_Click);
@@ -13532,6 +13578,7 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(108, 34);
             this.button30.TabIndex = 120;
+            this.button30.Tag = "@02@#D#";
             this.button30.Text = "移动";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
@@ -13553,6 +13600,7 @@
             this.button223.Name = "button223";
             this.button223.Size = new System.Drawing.Size(108, 34);
             this.button223.TabIndex = 299;
+            this.button223.Tag = "@02@#D#";
             this.button223.Text = "移动";
             this.button223.UseVisualStyleBackColor = true;
             this.button223.Click += new System.EventHandler(this.button223_Click);
@@ -13564,6 +13612,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(108, 34);
             this.button29.TabIndex = 121;
+            this.button29.Tag = "@02@#D#";
             this.button29.Text = "移动";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
@@ -13575,6 +13624,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(108, 34);
             this.button19.TabIndex = 282;
+            this.button19.Tag = "@02@#D#";
             this.button19.Text = "移动";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
@@ -13596,6 +13646,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(108, 34);
             this.button18.TabIndex = 283;
+            this.button18.Tag = "@02@#D#";
             this.button18.Text = "移动";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
@@ -13617,6 +13668,7 @@
             this.button224.Name = "button224";
             this.button224.Size = new System.Drawing.Size(108, 34);
             this.button224.TabIndex = 298;
+            this.button224.Tag = "@02@#D#";
             this.button224.Text = "移动";
             this.button224.UseVisualStyleBackColor = true;
             this.button224.Click += new System.EventHandler(this.button224_Click);
@@ -13628,6 +13680,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(108, 34);
             this.button28.TabIndex = 122;
+            this.button28.Tag = "@02@#D#";
             this.button28.Text = "移动";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
@@ -13649,6 +13702,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(108, 34);
             this.button27.TabIndex = 123;
+            this.button27.Tag = "@02@#D#";
             this.button27.Text = "移动";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
@@ -13696,6 +13750,7 @@
             this.tabPage8.Name = "tabPage8";
             this.tabPage8.Size = new System.Drawing.Size(200, 60);
             this.tabPage8.TabIndex = 1;
+            this.tabPage8.Tag = "";
             this.tabPage8.Text = "出料手臂";
             // 
             // button23
@@ -13706,6 +13761,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(153, 80);
             this.button23.TabIndex = 346;
+            this.button23.Tag = "@02@#D#";
             this.button23.Text = "紧急停止";
             this.button23.UseVisualStyleBackColor = false;
             this.button23.Click += new System.EventHandler(this.button23_Click);
@@ -13720,6 +13776,7 @@
             this.uiButton5.RectColor = System.Drawing.Color.White;
             this.uiButton5.Size = new System.Drawing.Size(98, 34);
             this.uiButton5.TabIndex = 332;
+            this.uiButton5.Tag = "@02@#D#";
             this.uiButton5.Text = "恢复默认";
             this.uiButton5.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton5.Click += new System.EventHandler(this.uiButton5_Click);
@@ -13734,6 +13791,7 @@
             this.uiButton6.RectColor = System.Drawing.Color.White;
             this.uiButton6.Size = new System.Drawing.Size(98, 34);
             this.uiButton6.TabIndex = 331;
+            this.uiButton6.Tag = "@02@#D#";
             this.uiButton6.Text = "保存";
             this.uiButton6.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton6.Click += new System.EventHandler(this.uiButton6_Click);
@@ -13756,6 +13814,7 @@
             this.uiTitlePanel7.ShowText = false;
             this.uiTitlePanel7.Size = new System.Drawing.Size(1408, 410);
             this.uiTitlePanel7.TabIndex = 328;
+            this.uiTitlePanel7.Tag = "";
             this.uiTitlePanel7.Text = "最大速度（单位：pulse/ms），加减速度（单位：pulse/ms²）";
             this.uiTitlePanel7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -14479,6 +14538,7 @@
             this.uiTitlePanel14.ShowText = false;
             this.uiTitlePanel14.Size = new System.Drawing.Size(1408, 450);
             this.uiTitlePanel14.TabIndex = 327;
+            this.uiTitlePanel14.Tag = "";
             this.uiTitlePanel14.Text = "点位（单位：mm）";
             this.uiTitlePanel14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -14518,6 +14578,7 @@
             this.button244.Name = "button244";
             this.button244.Size = new System.Drawing.Size(108, 34);
             this.button244.TabIndex = 568;
+            this.button244.Tag = "@02@#D#";
             this.button244.Text = "移动";
             this.button244.UseVisualStyleBackColor = true;
             this.button244.Click += new System.EventHandler(this.button244_Click);
@@ -14558,6 +14619,7 @@
             this.button245.Name = "button245";
             this.button245.Size = new System.Drawing.Size(108, 34);
             this.button245.TabIndex = 565;
+            this.button245.Tag = "@02@#D#";
             this.button245.Text = "移动";
             this.button245.UseVisualStyleBackColor = true;
             this.button245.Click += new System.EventHandler(this.button245_Click);
@@ -14646,6 +14708,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(108, 34);
             this.button22.TabIndex = 293;
+            this.button22.Tag = "@02@#D#";
             this.button22.Text = "移动";
             this.button22.UseVisualStyleBackColor = true;
             // 
@@ -14675,6 +14738,7 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(108, 34);
             this.button57.TabIndex = 232;
+            this.button57.Tag = "@02@#D#";
             this.button57.Text = "移动";
             this.button57.UseVisualStyleBackColor = true;
             this.button57.Click += new System.EventHandler(this.button57_Click);
@@ -14811,6 +14875,7 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(108, 34);
             this.button58.TabIndex = 231;
+            this.button58.Tag = "@02@#D#";
             this.button58.Text = "移动";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
@@ -14996,6 +15061,7 @@
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(108, 34);
             this.button55.TabIndex = 233;
+            this.button55.Tag = "@02@#D#";
             this.button55.Text = "移动";
             this.button55.UseVisualStyleBackColor = true;
             this.button55.Click += new System.EventHandler(this.button55_Click);
@@ -15142,6 +15208,7 @@
             this.button54.Name = "button54";
             this.button54.Size = new System.Drawing.Size(108, 34);
             this.button54.TabIndex = 234;
+            this.button54.Tag = "@02@#D#";
             this.button54.Text = "移动";
             this.button54.UseVisualStyleBackColor = true;
             this.button54.Click += new System.EventHandler(this.button54_Click);
@@ -15201,6 +15268,7 @@
             this.button43.Name = "button43";
             this.button43.Size = new System.Drawing.Size(108, 34);
             this.button43.TabIndex = 240;
+            this.button43.Tag = "@02@#D#";
             this.button43.Text = "移动";
             this.button43.UseVisualStyleBackColor = true;
             this.button43.Click += new System.EventHandler(this.button43_Click);
@@ -15279,6 +15347,7 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(108, 34);
             this.button44.TabIndex = 239;
+            this.button44.Tag = "@02@#D#";
             this.button44.Text = "移动";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
@@ -15309,6 +15378,7 @@
             this.button53.Name = "button53";
             this.button53.Size = new System.Drawing.Size(108, 34);
             this.button53.TabIndex = 235;
+            this.button53.Tag = "@02@#D#";
             this.button53.Text = "移动";
             this.button53.UseVisualStyleBackColor = true;
             this.button53.Click += new System.EventHandler(this.button53_Click);
@@ -15397,6 +15467,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(108, 34);
             this.button21.TabIndex = 303;
+            this.button21.Tag = "@02@#D#";
             this.button21.Text = "移动";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
@@ -15408,6 +15479,7 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(108, 34);
             this.button45.TabIndex = 238;
+            this.button45.Tag = "@02@#D#";
             this.button45.Text = "移动";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
@@ -15429,6 +15501,7 @@
             this.button51.Name = "button51";
             this.button51.Size = new System.Drawing.Size(108, 34);
             this.button51.TabIndex = 236;
+            this.button51.Tag = "@02@#D#";
             this.button51.Text = "移动";
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
@@ -15460,6 +15533,7 @@
             this.button49.Name = "button49";
             this.button49.Size = new System.Drawing.Size(108, 34);
             this.button49.TabIndex = 237;
+            this.button49.Tag = "@02@#D#";
             this.button49.Text = "移动";
             this.button49.UseVisualStyleBackColor = true;
             this.button49.Click += new System.EventHandler(this.button49_Click);
@@ -15491,6 +15565,7 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(108, 34);
             this.button56.TabIndex = 241;
+            this.button56.Tag = "@02@#D#";
             this.button56.Text = "移动";
             this.button56.UseVisualStyleBackColor = true;
             this.button56.Click += new System.EventHandler(this.button56_Click);
@@ -15542,6 +15617,7 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(108, 34);
             this.button46.TabIndex = 267;
+            this.button46.Tag = "@02@#D#";
             this.button46.Text = "移动";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
@@ -15563,6 +15639,7 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(108, 34);
             this.button48.TabIndex = 242;
+            this.button48.Tag = "@02@#D#";
             this.button48.Text = "移动";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
@@ -15574,6 +15651,7 @@
             this.button42.Name = "button42";
             this.button42.Size = new System.Drawing.Size(108, 34);
             this.button42.TabIndex = 271;
+            this.button42.Tag = "@02@#D#";
             this.button42.Text = "移动";
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
@@ -15585,6 +15663,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(108, 34);
             this.button40.TabIndex = 243;
+            this.button40.Tag = "@02@#D#";
             this.button40.Text = "移动";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
@@ -15596,6 +15675,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(108, 34);
             this.button34.TabIndex = 280;
+            this.button34.Tag = "@02@#D#";
             this.button34.Text = "移动";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
@@ -15607,6 +15687,7 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(108, 34);
             this.button38.TabIndex = 246;
+            this.button38.Tag = "@02@#D#";
             this.button38.Text = "移动";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
@@ -15618,6 +15699,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(108, 34);
             this.button37.TabIndex = 245;
+            this.button37.Tag = "@02@#D#";
             this.button37.Text = "移动";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
@@ -15629,6 +15711,7 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(108, 34);
             this.button36.TabIndex = 244;
+            this.button36.Tag = "@02@#D#";
             this.button36.Text = "移动";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
@@ -15640,6 +15723,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(108, 34);
             this.button33.TabIndex = 281;
+            this.button33.Tag = "@02@#D#";
             this.button33.Text = "移动";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
@@ -15658,6 +15742,7 @@
             this.tabPage9.Name = "tabPage9";
             this.tabPage9.Size = new System.Drawing.Size(200, 60);
             this.tabPage9.TabIndex = 2;
+            this.tabPage9.Tag = "";
             this.tabPage9.Text = "测试手臂";
             // 
             // uiTitlePanel2
@@ -15680,6 +15765,7 @@
             this.uiTitlePanel2.ShowText = false;
             this.uiTitlePanel2.Size = new System.Drawing.Size(706, 528);
             this.uiTitlePanel2.TabIndex = 312;
+            this.uiTitlePanel2.Tag = "";
             this.uiTitlePanel2.Text = "I/O";
             this.uiTitlePanel2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -15690,6 +15776,7 @@
             this.button238.Name = "button238";
             this.button238.Size = new System.Drawing.Size(108, 34);
             this.button238.TabIndex = 577;
+            this.button238.Tag = "@02@#D#";
             this.button238.Text = "后移";
             this.button238.UseVisualStyleBackColor = true;
             this.button238.Click += new System.EventHandler(this.button238_Click);
@@ -15701,6 +15788,7 @@
             this.button239.Name = "button239";
             this.button239.Size = new System.Drawing.Size(108, 34);
             this.button239.TabIndex = 576;
+            this.button239.Tag = "@02@#D#";
             this.button239.Text = "前移";
             this.button239.UseVisualStyleBackColor = true;
             this.button239.Click += new System.EventHandler(this.button239_Click);
@@ -15738,6 +15826,7 @@
             this.uiComboBox10.Size = new System.Drawing.Size(220, 29);
             this.uiComboBox10.SymbolSize = 24;
             this.uiComboBox10.TabIndex = 575;
+            this.uiComboBox10.Tag = "@02@#D#";
             this.uiComboBox10.Text = "Site_1";
             this.uiComboBox10.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.uiComboBox10.Watermark = "";
@@ -15759,6 +15848,7 @@
             this.button236.Name = "button236";
             this.button236.Size = new System.Drawing.Size(108, 34);
             this.button236.TabIndex = 573;
+            this.button236.Tag = "@02@#D#";
             this.button236.Text = "上升";
             this.button236.UseVisualStyleBackColor = true;
             this.button236.Click += new System.EventHandler(this.button236_Click);
@@ -15770,6 +15860,7 @@
             this.button237.Name = "button237";
             this.button237.Size = new System.Drawing.Size(108, 34);
             this.button237.TabIndex = 572;
+            this.button237.Tag = "@02@#D#";
             this.button237.Text = "下压";
             this.button237.UseVisualStyleBackColor = true;
             this.button237.Click += new System.EventHandler(this.button237_Click);
@@ -15781,6 +15872,7 @@
             this.button225.Name = "button225";
             this.button225.Size = new System.Drawing.Size(108, 34);
             this.button225.TabIndex = 571;
+            this.button225.Tag = "@02@#D#";
             this.button225.Text = "闭合";
             this.button225.UseVisualStyleBackColor = true;
             this.button225.Click += new System.EventHandler(this.button225_Click);
@@ -15792,6 +15884,7 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(108, 34);
             this.button50.TabIndex = 570;
+            this.button50.Tag = "@02@#D#";
             this.button50.Text = "张开";
             this.button50.UseVisualStyleBackColor = true;
             this.button50.Click += new System.EventHandler(this.button50_Click);
@@ -15814,6 +15907,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(153, 80);
             this.button24.TabIndex = 346;
+            this.button24.Tag = "@02@#D#";
             this.button24.Text = "紧急停止";
             this.button24.UseVisualStyleBackColor = false;
             this.button24.Click += new System.EventHandler(this.button24_Click);
@@ -15828,6 +15922,7 @@
             this.uiButton13.RectColor = System.Drawing.Color.White;
             this.uiButton13.Size = new System.Drawing.Size(98, 34);
             this.uiButton13.TabIndex = 315;
+            this.uiButton13.Tag = "@02@#D#";
             this.uiButton13.Text = "恢复默认";
             this.uiButton13.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton13.Click += new System.EventHandler(this.uiButton13_Click);
@@ -15842,6 +15937,7 @@
             this.uiButton14.RectColor = System.Drawing.Color.White;
             this.uiButton14.Size = new System.Drawing.Size(98, 34);
             this.uiButton14.TabIndex = 314;
+            this.uiButton14.Tag = "@02@#D#";
             this.uiButton14.Text = "保存";
             this.uiButton14.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton14.Click += new System.EventHandler(this.uiButton14_Click);
@@ -15859,6 +15955,7 @@
             this.uiTitlePanel9.ShowText = false;
             this.uiTitlePanel9.Size = new System.Drawing.Size(944, 242);
             this.uiTitlePanel9.TabIndex = 311;
+            this.uiTitlePanel9.Tag = "";
             this.uiTitlePanel9.Text = "最大速度（单位：pulse/ms），加减速度（单位：pulse/ms²）";
             this.uiTitlePanel9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -16125,6 +16222,7 @@
             this.uiTitlePanel8.ShowText = false;
             this.uiTitlePanel8.Size = new System.Drawing.Size(944, 382);
             this.uiTitlePanel8.TabIndex = 310;
+            this.uiTitlePanel8.Tag = "";
             this.uiTitlePanel8.Text = "点位（单位：mm）";
             this.uiTitlePanel8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -16135,6 +16233,7 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(108, 34);
             this.button41.TabIndex = 569;
+            this.button41.Tag = "@02@#D#";
             this.button41.Text = "移动";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
@@ -16146,6 +16245,7 @@
             this.button47.Name = "button47";
             this.button47.Size = new System.Drawing.Size(108, 34);
             this.button47.TabIndex = 568;
+            this.button47.Tag = "@02@#D#";
             this.button47.Text = "移动";
             this.button47.UseVisualStyleBackColor = true;
             this.button47.Click += new System.EventHandler(this.button47_Click);
@@ -16472,6 +16572,7 @@
             this.button63.Name = "button63";
             this.button63.Size = new System.Drawing.Size(108, 34);
             this.button63.TabIndex = 206;
+            this.button63.Tag = "@02@#D#";
             this.button63.Text = "移动";
             this.button63.UseVisualStyleBackColor = true;
             this.button63.Click += new System.EventHandler(this.button63_Click);
@@ -16493,6 +16594,7 @@
             this.button64.Name = "button64";
             this.button64.Size = new System.Drawing.Size(108, 34);
             this.button64.TabIndex = 198;
+            this.button64.Tag = "@02@#D#";
             this.button64.Text = "移动";
             this.button64.UseVisualStyleBackColor = true;
             this.button64.Click += new System.EventHandler(this.button64_Click);
@@ -16504,6 +16606,7 @@
             this.button62.Name = "button62";
             this.button62.Size = new System.Drawing.Size(108, 34);
             this.button62.TabIndex = 128;
+            this.button62.Tag = "@02@#D#";
             this.button62.Text = "移动";
             this.button62.UseVisualStyleBackColor = true;
             this.button62.Click += new System.EventHandler(this.button62_Click);
@@ -16535,6 +16638,7 @@
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(108, 34);
             this.button61.TabIndex = 190;
+            this.button61.Tag = "@02@#D#";
             this.button61.Text = "移动";
             this.button61.UseVisualStyleBackColor = true;
             this.button61.Click += new System.EventHandler(this.button61_Click);
@@ -16576,6 +16680,7 @@
             this.button60.Name = "button60";
             this.button60.Size = new System.Drawing.Size(108, 34);
             this.button60.TabIndex = 186;
+            this.button60.Tag = "@02@#D#";
             this.button60.Text = "移动";
             this.button60.UseVisualStyleBackColor = true;
             this.button60.Click += new System.EventHandler(this.button60_Click);
@@ -16597,6 +16702,7 @@
             this.button65.Name = "button65";
             this.button65.Size = new System.Drawing.Size(108, 34);
             this.button65.TabIndex = 196;
+            this.button65.Tag = "@02@#D#";
             this.button65.Text = "移动";
             this.button65.UseVisualStyleBackColor = true;
             this.button65.Click += new System.EventHandler(this.button65_Click);
@@ -16618,6 +16724,7 @@
             this.button66.Name = "button66";
             this.button66.Size = new System.Drawing.Size(108, 34);
             this.button66.TabIndex = 204;
+            this.button66.Tag = "@02@#D#";
             this.button66.Text = "移动";
             this.button66.UseVisualStyleBackColor = true;
             this.button66.Click += new System.EventHandler(this.button66_Click);
@@ -16629,6 +16736,7 @@
             this.button67.Name = "button67";
             this.button67.Size = new System.Drawing.Size(108, 34);
             this.button67.TabIndex = 192;
+            this.button67.Tag = "@02@#D#";
             this.button67.Text = "移动";
             this.button67.UseVisualStyleBackColor = true;
             this.button67.Click += new System.EventHandler(this.button67_Click);
@@ -16640,6 +16748,7 @@
             this.button59.Name = "button59";
             this.button59.Size = new System.Drawing.Size(108, 34);
             this.button59.TabIndex = 188;
+            this.button59.Tag = "@02@#D#";
             this.button59.Text = "移动";
             this.button59.UseVisualStyleBackColor = true;
             this.button59.Click += new System.EventHandler(this.button59_Click);
@@ -16651,6 +16760,7 @@
             this.button68.Name = "button68";
             this.button68.Size = new System.Drawing.Size(108, 34);
             this.button68.TabIndex = 194;
+            this.button68.Tag = "@02@#D#";
             this.button68.Text = "移动";
             this.button68.UseVisualStyleBackColor = true;
             this.button68.Click += new System.EventHandler(this.button68_Click);
@@ -16662,6 +16772,7 @@
             this.button69.Name = "button69";
             this.button69.Size = new System.Drawing.Size(108, 34);
             this.button69.TabIndex = 202;
+            this.button69.Tag = "@02@#D#";
             this.button69.Text = "移动";
             this.button69.UseVisualStyleBackColor = true;
             this.button69.Click += new System.EventHandler(this.button69_Click);
@@ -16703,6 +16814,7 @@
             this.button70.Name = "button70";
             this.button70.Size = new System.Drawing.Size(108, 34);
             this.button70.TabIndex = 200;
+            this.button70.Tag = "@02@#D#";
             this.button70.Text = "移动";
             this.button70.UseVisualStyleBackColor = true;
             this.button70.Click += new System.EventHandler(this.button70_Click);
@@ -16730,6 +16842,7 @@
             this.tabPage16.Name = "tabPage16";
             this.tabPage16.Size = new System.Drawing.Size(200, 60);
             this.tabPage16.TabIndex = 3;
+            this.tabPage16.Tag = "";
             this.tabPage16.Text = "梭车";
             // 
             // button26
@@ -16740,6 +16853,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(153, 80);
             this.button26.TabIndex = 346;
+            this.button26.Tag = "@02@#D#";
             this.button26.Text = "紧急停止";
             this.button26.UseVisualStyleBackColor = false;
             this.button26.Click += new System.EventHandler(this.button26_Click);
@@ -16756,6 +16870,7 @@
             this.uiTitlePanel10.ShowText = false;
             this.uiTitlePanel10.Size = new System.Drawing.Size(486, 230);
             this.uiTitlePanel10.TabIndex = 312;
+            this.uiTitlePanel10.Tag = "";
             this.uiTitlePanel10.Text = "最大速度（单位：pulse/ms），加减速度（单位：pulse/ms²）";
             this.uiTitlePanel10.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -16873,6 +16988,7 @@
             this.uiButton17.RectColor = System.Drawing.Color.White;
             this.uiButton17.Size = new System.Drawing.Size(98, 34);
             this.uiButton17.TabIndex = 316;
+            this.uiButton17.Tag = "@02@#D#";
             this.uiButton17.Text = "恢复默认";
             this.uiButton17.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton17.Click += new System.EventHandler(this.uiButton17_Click);
@@ -16887,6 +17003,7 @@
             this.uiButton18.RectColor = System.Drawing.Color.White;
             this.uiButton18.Size = new System.Drawing.Size(98, 34);
             this.uiButton18.TabIndex = 315;
+            this.uiButton18.Tag = "@02@#D#";
             this.uiButton18.Text = "保存";
             this.uiButton18.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton18.Click += new System.EventHandler(this.uiButton18_Click);
@@ -16908,6 +17025,7 @@
             this.uiTitlePanel11.ShowText = false;
             this.uiTitlePanel11.Size = new System.Drawing.Size(486, 130);
             this.uiTitlePanel11.TabIndex = 311;
+            this.uiTitlePanel11.Tag = "";
             this.uiTitlePanel11.Text = "点位（单位：mm）";
             this.uiTitlePanel11.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -16976,6 +17094,7 @@
             this.button71.Name = "button71";
             this.button71.Size = new System.Drawing.Size(108, 34);
             this.button71.TabIndex = 188;
+            this.button71.Tag = "@02@#D#";
             this.button71.Text = "移动";
             this.button71.UseVisualStyleBackColor = true;
             this.button71.Click += new System.EventHandler(this.button71_Click);
@@ -16987,6 +17106,7 @@
             this.button72.Name = "button72";
             this.button72.Size = new System.Drawing.Size(108, 34);
             this.button72.TabIndex = 187;
+            this.button72.Tag = "@02@#D#";
             this.button72.Text = "移动";
             this.button72.UseVisualStyleBackColor = true;
             this.button72.Click += new System.EventHandler(this.button72_Click);
@@ -17014,6 +17134,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(153, 80);
             this.button35.TabIndex = 346;
+            this.button35.Tag = "@0@#D#";
             this.button35.Text = "紧急停止";
             this.button35.UseVisualStyleBackColor = false;
             this.button35.Click += new System.EventHandler(this.button35_Click);
@@ -17028,6 +17149,7 @@
             this.uiButton21.RectColor = System.Drawing.Color.White;
             this.uiButton21.Size = new System.Drawing.Size(98, 34);
             this.uiButton21.TabIndex = 317;
+            this.uiButton21.Tag = "@02@#D#";
             this.uiButton21.Text = "恢复默认";
             this.uiButton21.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton21.Click += new System.EventHandler(this.uiButton21_Click);
@@ -17042,6 +17164,7 @@
             this.uiButton22.RectColor = System.Drawing.Color.White;
             this.uiButton22.Size = new System.Drawing.Size(98, 34);
             this.uiButton22.TabIndex = 316;
+            this.uiButton22.Tag = "@02@#D#";
             this.uiButton22.Text = "保存";
             this.uiButton22.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton22.Click += new System.EventHandler(this.uiButton22_Click);
@@ -17058,6 +17181,7 @@
             this.uiTitlePanel12.ShowText = false;
             this.uiTitlePanel12.Size = new System.Drawing.Size(493, 230);
             this.uiTitlePanel12.TabIndex = 313;
+            this.uiTitlePanel12.Tag = "";
             this.uiTitlePanel12.Text = "运行速度（单位：pulse/ms），加速度（单位：pulse/ms²）";
             this.uiTitlePanel12.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -17188,6 +17312,7 @@
             this.uiTitlePanel1.ShowText = false;
             this.uiTitlePanel1.Size = new System.Drawing.Size(493, 207);
             this.uiTitlePanel1.TabIndex = 303;
+            this.uiTitlePanel1.Tag = "";
             this.uiTitlePanel1.Text = "点位（单位：mm）";
             this.uiTitlePanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -17284,6 +17409,7 @@
             this.button74.Name = "button74";
             this.button74.Size = new System.Drawing.Size(108, 34);
             this.button74.TabIndex = 120;
+            this.button74.Tag = "@02@#D#";
             this.button74.Text = "移动";
             this.button74.UseVisualStyleBackColor = true;
             this.button74.Click += new System.EventHandler(this.button74_Click);
@@ -17295,6 +17421,7 @@
             this.button75.Name = "button75";
             this.button75.Size = new System.Drawing.Size(108, 34);
             this.button75.TabIndex = 119;
+            this.button75.Tag = "@02@#D#";
             this.button75.Text = "移动";
             this.button75.UseVisualStyleBackColor = true;
             this.button75.Click += new System.EventHandler(this.button75_Click);
@@ -17316,6 +17443,7 @@
             this.button76.Name = "button76";
             this.button76.Size = new System.Drawing.Size(108, 34);
             this.button76.TabIndex = 101;
+            this.button76.Tag = "@02@#D#";
             this.button76.Text = "移动";
             this.button76.UseVisualStyleBackColor = true;
             this.button76.Click += new System.EventHandler(this.button76_Click);
@@ -17327,6 +17455,7 @@
             this.button73.Name = "button73";
             this.button73.Size = new System.Drawing.Size(108, 34);
             this.button73.TabIndex = 121;
+            this.button73.Tag = "@02@#D#";
             this.button73.Text = "移动";
             this.button73.UseVisualStyleBackColor = true;
             this.button73.Click += new System.EventHandler(this.button73_Click);
@@ -18351,7 +18480,7 @@
             this.tabPage6.Controls.Add(this.uiTabControl5);
             this.tabPage6.Location = new System.Drawing.Point(0, 40);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage6.Size = new System.Drawing.Size(200, 60);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "产品";
             // 
@@ -18371,7 +18500,7 @@
             this.uiTabControl5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl5.SelectedIndex = 0;
             this.uiTabControl5.ShowTabDivider = false;
-            this.uiTabControl5.Size = new System.Drawing.Size(1893, 944);
+            this.uiTabControl5.Size = new System.Drawing.Size(200, 60);
             this.uiTabControl5.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl5.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl5.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -18391,7 +18520,7 @@
             this.tabPage23.Controls.Add(this.panel1);
             this.tabPage23.Location = new System.Drawing.Point(0, 40);
             this.tabPage23.Name = "tabPage23";
-            this.tabPage23.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage23.Size = new System.Drawing.Size(200, 20);
             this.tabPage23.TabIndex = 0;
             this.tabPage23.Text = "档案列表";
             // 
@@ -18403,7 +18532,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(464, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1429, 904);
+            this.panel2.Size = new System.Drawing.Size(0, 20);
             this.panel2.TabIndex = 313;
             // 
             // uiTabControl6
@@ -18422,7 +18551,7 @@
             this.uiTabControl6.Name = "uiTabControl6";
             this.uiTabControl6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl6.SelectedIndex = 0;
-            this.uiTabControl6.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl6.Size = new System.Drawing.Size(0, 0);
             this.uiTabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl6.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -18431,6 +18560,7 @@
             this.uiTabControl6.TabSelectedForeColor = System.Drawing.Color.Black;
             this.uiTabControl6.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
             this.uiTabControl6.TabUnSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl6.Tag = "";
             this.uiTabControl6.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
             this.uiTabControl6.TipsForeColor = System.Drawing.Color.Black;
             this.uiTabControl6.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl6_Selecting);
@@ -18449,7 +18579,7 @@
             this.tabPage25.Controls.Add(this.label49);
             this.tabPage25.Location = new System.Drawing.Point(0, 40);
             this.tabPage25.Name = "tabPage25";
-            this.tabPage25.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage25.Size = new System.Drawing.Size(0, 0);
             this.tabPage25.TabIndex = 2;
             this.tabPage25.Text = "设定";
             // 
@@ -18611,7 +18741,7 @@
             this.tabPage27.Controls.Add(this.label443);
             this.tabPage27.Location = new System.Drawing.Point(0, 40);
             this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage27.Size = new System.Drawing.Size(200, 60);
             this.tabPage27.TabIndex = 4;
             this.tabPage27.Text = "测试机";
             // 
@@ -19383,7 +19513,7 @@
             this.tabPage_bin.Controls.Add(this.listBox1);
             this.tabPage_bin.Location = new System.Drawing.Point(0, 40);
             this.tabPage_bin.Name = "tabPage_bin";
-            this.tabPage_bin.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage_bin.Size = new System.Drawing.Size(200, 60);
             this.tabPage_bin.TabIndex = 5;
             this.tabPage_bin.Text = "分BIN";
             // 
@@ -19832,7 +19962,7 @@
             this.button_del2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_del2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_del2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_del2.Location = new System.Drawing.Point(307, 572);
+            this.button_del2.Location = new System.Drawing.Point(-918, -170);
             this.button_del2.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_del2.Name = "button_del2";
             this.button_del2.RectColor = System.Drawing.Color.White;
@@ -19847,7 +19977,7 @@
             this.button_add2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_add2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_add2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_add2.Location = new System.Drawing.Point(219, 572);
+            this.button_add2.Location = new System.Drawing.Point(-1006, -170);
             this.button_add2.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_add2.Name = "button_add2";
             this.button_add2.RectColor = System.Drawing.Color.White;
@@ -19862,7 +19992,7 @@
             this.button_del1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_del1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_del1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_del1.Location = new System.Drawing.Point(130, 572);
+            this.button_del1.Location = new System.Drawing.Point(-1095, -170);
             this.button_del1.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_del1.Name = "button_del1";
             this.button_del1.RectColor = System.Drawing.Color.White;
@@ -19877,7 +20007,7 @@
             this.button_add1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button_add1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_add1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_add1.Location = new System.Drawing.Point(42, 572);
+            this.button_add1.Location = new System.Drawing.Point(-1183, -170);
             this.button_add1.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_add1.Name = "button_add1";
             this.button_add1.RectColor = System.Drawing.Color.White;
@@ -20154,7 +20284,7 @@
             this.tabPage29.Controls.Add(this.uiTabControl8);
             this.tabPage29.Location = new System.Drawing.Point(0, 40);
             this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage29.Size = new System.Drawing.Size(200, 60);
             this.tabPage29.TabIndex = 6;
             this.tabPage29.Text = "点位偏移";
             // 
@@ -20175,7 +20305,7 @@
             this.uiTabControl8.Name = "uiTabControl8";
             this.uiTabControl8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl8.SelectedIndex = 0;
-            this.uiTabControl8.Size = new System.Drawing.Size(1425, 802);
+            this.uiTabControl8.Size = new System.Drawing.Size(200, 60);
             this.uiTabControl8.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl8.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl8.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -20194,7 +20324,7 @@
             this.tabPage28.Controls.Add(this.uiTitlePanel17);
             this.tabPage28.Location = new System.Drawing.Point(0, 40);
             this.tabPage28.Name = "tabPage28";
-            this.tabPage28.Size = new System.Drawing.Size(1425, 762);
+            this.tabPage28.Size = new System.Drawing.Size(200, 20);
             this.tabPage28.TabIndex = 2;
             this.tabPage28.Text = "入料手臂";
             // 
@@ -23068,9 +23198,9 @@
             this.panel4.Controls.Add(this.uiButton4);
             this.panel4.Controls.Add(this.uiButton3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 842);
+            this.panel4.Location = new System.Drawing.Point(0, -38);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1425, 58);
+            this.panel4.Size = new System.Drawing.Size(0, 58);
             this.panel4.TabIndex = 179;
             // 
             // uiCheckBox196
@@ -23130,12 +23260,13 @@
             this.uiButton4.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.uiButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton4.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton4.Location = new System.Drawing.Point(1194, 10);
+            this.uiButton4.Location = new System.Drawing.Point(-223, 14);
             this.uiButton4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton4.Name = "uiButton4";
             this.uiButton4.RectColor = System.Drawing.Color.White;
             this.uiButton4.Size = new System.Drawing.Size(98, 34);
             this.uiButton4.TabIndex = 312;
+            this.uiButton4.Tag = "@02@#BCD#";
             this.uiButton4.Text = "恢复默认";
             this.uiButton4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton4.Click += new System.EventHandler(this.uiButton4_Click);
@@ -23145,12 +23276,13 @@
             this.uiButton3.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton3.Location = new System.Drawing.Point(1310, 10);
+            this.uiButton3.Location = new System.Drawing.Point(-107, 14);
             this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton3.Name = "uiButton3";
             this.uiButton3.RectColor = System.Drawing.Color.White;
             this.uiButton3.Size = new System.Drawing.Size(98, 34);
             this.uiButton3.TabIndex = 311;
+            this.uiButton3.Tag = "@02@#BCD#";
             this.uiButton3.Text = "保存";
             this.uiButton3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click_1);
@@ -23163,35 +23295,35 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(464, 904);
+            this.panel1.Size = new System.Drawing.Size(464, 20);
             this.panel1.TabIndex = 316;
             // 
             // uiDataGridView1
             // 
             this.uiDataGridView1.AllowUserToAddRows = false;
             this.uiDataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle46.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle46;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.uiDataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.uiDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle47.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle47.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle47.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle47.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle47.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle47.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle47.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle47;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.uiDataGridView1.ColumnHeadersHeight = 32;
             this.uiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle48.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle48.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle48.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle48.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle48.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle48.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle48.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle48;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.uiDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridView1.EnableHeadersVisualStyles = false;
             this.uiDataGridView1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -23199,20 +23331,20 @@
             this.uiDataGridView1.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridView1.Name = "uiDataGridView1";
             this.uiDataGridView1.ReadOnly = true;
-            dataGridViewCellStyle49.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            dataGridViewCellStyle49.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle49.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle49.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle49.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle49.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle49;
-            dataGridViewCellStyle50.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle50.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle50;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.uiDataGridView1.RowTemplate.Height = 28;
             this.uiDataGridView1.SelectedIndex = -1;
-            this.uiDataGridView1.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView1.Size = new System.Drawing.Size(460, 0);
             this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView1.TabIndex = 0;
             this.uiDataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView1_CellMouseClick);
@@ -23223,7 +23355,7 @@
             this.panel5.Controls.Add(this.uiButton8);
             this.panel5.Controls.Add(this.uiButton11);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 842);
+            this.panel5.Location = new System.Drawing.Point(0, -42);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(460, 58);
             this.panel5.TabIndex = 180;
@@ -23238,6 +23370,7 @@
             this.uiButton8.RectColor = System.Drawing.Color.White;
             this.uiButton8.Size = new System.Drawing.Size(98, 34);
             this.uiButton8.TabIndex = 315;
+            this.uiButton8.Tag = "@02@#BCD#";
             this.uiButton8.Text = "复制";
             this.uiButton8.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton8.Click += new System.EventHandler(this.uiButton8_Click);
@@ -23252,6 +23385,7 @@
             this.uiButton11.RectColor = System.Drawing.Color.White;
             this.uiButton11.Size = new System.Drawing.Size(98, 34);
             this.uiButton11.TabIndex = 314;
+            this.uiButton11.Tag = "@02@#BCD#";
             this.uiButton11.Text = "删除";
             this.uiButton11.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
@@ -23262,7 +23396,7 @@
             this.tabPage32.Controls.Add(this.panel8);
             this.tabPage32.Location = new System.Drawing.Point(0, 40);
             this.tabPage32.Name = "tabPage32";
-            this.tabPage32.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage32.Size = new System.Drawing.Size(200, 60);
             this.tabPage32.TabIndex = 1;
             this.tabPage32.Text = "Tray盘列表";
             // 
@@ -23274,7 +23408,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(464, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1429, 904);
+            this.panel9.Size = new System.Drawing.Size(0, 60);
             this.panel9.TabIndex = 183;
             // 
             // uiTabControl7
@@ -23291,7 +23425,7 @@
             this.uiTabControl7.Name = "uiTabControl7";
             this.uiTabControl7.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl7.SelectedIndex = 0;
-            this.uiTabControl7.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl7.Size = new System.Drawing.Size(0, 2);
             this.uiTabControl7.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl7.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl7.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -23300,6 +23434,7 @@
             this.uiTabControl7.TabSelectedForeColor = System.Drawing.Color.Black;
             this.uiTabControl7.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
             this.uiTabControl7.TabUnSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl7.Tag = "";
             this.uiTabControl7.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
             this.uiTabControl7.TipsForeColor = System.Drawing.Color.Black;
             this.uiTabControl7.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl7_Selecting);
@@ -23330,7 +23465,7 @@
             this.tabPage24.Controls.Add(this.label347);
             this.tabPage24.Location = new System.Drawing.Point(0, 40);
             this.tabPage24.Name = "tabPage24";
-            this.tabPage24.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage24.Size = new System.Drawing.Size(0, 0);
             this.tabPage24.TabIndex = 2;
             this.tabPage24.Text = "Tray盘";
             // 
@@ -23575,9 +23710,9 @@
             this.panel6.Controls.Add(this.uiButton15);
             this.panel6.Controls.Add(this.uiButton16);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 842);
+            this.panel6.Location = new System.Drawing.Point(0, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1425, 58);
+            this.panel6.Size = new System.Drawing.Size(0, 58);
             this.panel6.TabIndex = 180;
             // 
             // uiCheckBox197
@@ -23637,12 +23772,13 @@
             this.uiButton15.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.uiButton15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton15.Location = new System.Drawing.Point(1194, 10);
+            this.uiButton15.Location = new System.Drawing.Point(-223, 14);
             this.uiButton15.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton15.Name = "uiButton15";
             this.uiButton15.RectColor = System.Drawing.Color.White;
             this.uiButton15.Size = new System.Drawing.Size(98, 34);
             this.uiButton15.TabIndex = 312;
+            this.uiButton15.Tag = "@02@#BCD#";
             this.uiButton15.Text = "恢复默认";
             this.uiButton15.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
@@ -23651,12 +23787,13 @@
             this.uiButton16.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.uiButton16.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton16.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton16.Location = new System.Drawing.Point(1310, 10);
+            this.uiButton16.Location = new System.Drawing.Point(-107, 14);
             this.uiButton16.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton16.Name = "uiButton16";
             this.uiButton16.RectColor = System.Drawing.Color.White;
             this.uiButton16.Size = new System.Drawing.Size(98, 34);
             this.uiButton16.TabIndex = 311;
+            this.uiButton16.Tag = "@02@#BCD#";
             this.uiButton16.Text = "保存";
             this.uiButton16.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton16.Click += new System.EventHandler(this.uiButton16_保存Tray盘信息Click);
@@ -23669,35 +23806,35 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(464, 904);
+            this.panel8.Size = new System.Drawing.Size(464, 60);
             this.panel8.TabIndex = 182;
             // 
             // uiDataGridView2
             // 
             this.uiDataGridView2.AllowUserToAddRows = false;
             this.uiDataGridView2.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle51.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle51;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.uiDataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.uiDataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle52.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle52.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle52.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle52.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle52.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle52.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle52.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle52;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.uiDataGridView2.ColumnHeadersHeight = 32;
             this.uiDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle53.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle53.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle53.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle53.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle53.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle53.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle53.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView2.DefaultCellStyle = dataGridViewCellStyle53;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
             this.uiDataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridView2.EnableHeadersVisualStyles = false;
             this.uiDataGridView2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -23705,20 +23842,20 @@
             this.uiDataGridView2.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridView2.Name = "uiDataGridView2";
             this.uiDataGridView2.ReadOnly = true;
-            dataGridViewCellStyle54.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle54.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle54.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle54.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle54.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle54.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle54.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle54;
-            dataGridViewCellStyle55.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle55.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle55;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.uiDataGridView2.RowTemplate.Height = 28;
             this.uiDataGridView2.SelectedIndex = -1;
-            this.uiDataGridView2.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView2.Size = new System.Drawing.Size(460, 0);
             this.uiDataGridView2.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView2.TabIndex = 1;
             this.uiDataGridView2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView2_CellMouseClick);
@@ -23729,7 +23866,7 @@
             this.panel7.Controls.Add(this.uiButton7);
             this.panel7.Controls.Add(this.uiButton19);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 842);
+            this.panel7.Location = new System.Drawing.Point(0, -2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(460, 58);
             this.panel7.TabIndex = 181;
@@ -23744,6 +23881,7 @@
             this.uiButton7.RectColor = System.Drawing.Color.White;
             this.uiButton7.Size = new System.Drawing.Size(98, 34);
             this.uiButton7.TabIndex = 319;
+            this.uiButton7.Tag = "@02@#BCD#";
             this.uiButton7.Text = "复制";
             this.uiButton7.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
@@ -23757,6 +23895,7 @@
             this.uiButton19.RectColor = System.Drawing.Color.White;
             this.uiButton19.Size = new System.Drawing.Size(98, 34);
             this.uiButton19.TabIndex = 318;
+            this.uiButton19.Tag = "@02@#BCD#";
             this.uiButton19.Text = "删除";
             this.uiButton19.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
@@ -23766,7 +23905,7 @@
             this.tabPage38.Controls.Add(this.panel12);
             this.tabPage38.Location = new System.Drawing.Point(0, 40);
             this.tabPage38.Name = "tabPage38";
-            this.tabPage38.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage38.Size = new System.Drawing.Size(200, 60);
             this.tabPage38.TabIndex = 0;
             this.tabPage38.Text = "加热盘列表";
             // 
@@ -23778,7 +23917,7 @@
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(464, 0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1429, 904);
+            this.panel14.Size = new System.Drawing.Size(0, 60);
             this.panel14.TabIndex = 184;
             // 
             // uiTabControl9
@@ -23795,7 +23934,7 @@
             this.uiTabControl9.Name = "uiTabControl9";
             this.uiTabControl9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl9.SelectedIndex = 0;
-            this.uiTabControl9.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl9.Size = new System.Drawing.Size(0, 2);
             this.uiTabControl9.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl9.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl9.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -23804,6 +23943,7 @@
             this.uiTabControl9.TabSelectedForeColor = System.Drawing.Color.Black;
             this.uiTabControl9.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
             this.uiTabControl9.TabUnSelectedForeColor = System.Drawing.Color.Black;
+            this.uiTabControl9.Tag = "";
             this.uiTabControl9.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
             this.uiTabControl9.TipsForeColor = System.Drawing.Color.Black;
             this.uiTabControl9.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl9_Selecting);
@@ -23834,7 +23974,7 @@
             this.tabPage39.Controls.Add(this.label595);
             this.tabPage39.Location = new System.Drawing.Point(0, 40);
             this.tabPage39.Name = "tabPage39";
-            this.tabPage39.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage39.Size = new System.Drawing.Size(0, 0);
             this.tabPage39.TabIndex = 2;
             this.tabPage39.Text = "加热盘";
             // 
@@ -25100,9 +25240,9 @@
             this.panel15.Controls.Add(this.uiButton27);
             this.panel15.Controls.Add(this.uiButton28);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel15.Location = new System.Drawing.Point(0, 842);
+            this.panel15.Location = new System.Drawing.Point(0, 2);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(1425, 58);
+            this.panel15.Size = new System.Drawing.Size(0, 58);
             this.panel15.TabIndex = 180;
             // 
             // uiCheckBox200
@@ -25162,12 +25302,13 @@
             this.uiButton27.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.uiButton27.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton27.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton27.Location = new System.Drawing.Point(1194, 10);
+            this.uiButton27.Location = new System.Drawing.Point(-223, 14);
             this.uiButton27.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton27.Name = "uiButton27";
             this.uiButton27.RectColor = System.Drawing.Color.White;
             this.uiButton27.Size = new System.Drawing.Size(98, 34);
             this.uiButton27.TabIndex = 312;
+            this.uiButton27.Tag = "@02@#BCD#";
             this.uiButton27.Text = "恢复默认";
             this.uiButton27.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
@@ -25176,12 +25317,13 @@
             this.uiButton28.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.uiButton28.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton28.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton28.Location = new System.Drawing.Point(1310, 10);
+            this.uiButton28.Location = new System.Drawing.Point(-107, 14);
             this.uiButton28.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton28.Name = "uiButton28";
             this.uiButton28.RectColor = System.Drawing.Color.White;
             this.uiButton28.Size = new System.Drawing.Size(98, 34);
             this.uiButton28.TabIndex = 311;
+            this.uiButton28.Tag = "@02@#BCD#";
             this.uiButton28.Text = "保存";
             this.uiButton28.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton28.Click += new System.EventHandler(this.uiButton28_保存加热盘信息Click);
@@ -25194,35 +25336,35 @@
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(0, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(464, 904);
+            this.panel12.Size = new System.Drawing.Size(464, 60);
             this.panel12.TabIndex = 183;
             // 
             // uiDataGridView3
             // 
             this.uiDataGridView3.AllowUserToAddRows = false;
             this.uiDataGridView3.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle56;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.uiDataGridView3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.uiDataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle57.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle57.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle57.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle57.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle57.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle57.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle57;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.uiDataGridView3.ColumnHeadersHeight = 32;
             this.uiDataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle58.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle58.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle58.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle58.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle58.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle58.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle58.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView3.DefaultCellStyle = dataGridViewCellStyle58;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView3.DefaultCellStyle = dataGridViewCellStyle13;
             this.uiDataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridView3.EnableHeadersVisualStyles = false;
             this.uiDataGridView3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -25230,20 +25372,20 @@
             this.uiDataGridView3.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridView3.Name = "uiDataGridView3";
             this.uiDataGridView3.ReadOnly = true;
-            dataGridViewCellStyle59.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle59.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle59.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle59.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle59.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle59.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle59.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle59;
-            dataGridViewCellStyle60.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle60.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle60;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.uiDataGridView3.RowTemplate.Height = 28;
             this.uiDataGridView3.SelectedIndex = -1;
-            this.uiDataGridView3.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView3.Size = new System.Drawing.Size(460, 0);
             this.uiDataGridView3.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView3.TabIndex = 1;
             this.uiDataGridView3.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView3_CellMouseClick);
@@ -25255,7 +25397,7 @@
             this.panel13.Controls.Add(this.uiButton24);
             this.panel13.Controls.Add(this.uiButton25);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel13.Location = new System.Drawing.Point(0, 842);
+            this.panel13.Location = new System.Drawing.Point(0, -2);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(460, 58);
             this.panel13.TabIndex = 181;
@@ -25270,6 +25412,7 @@
             this.uiButton24.RectColor = System.Drawing.Color.White;
             this.uiButton24.Size = new System.Drawing.Size(98, 34);
             this.uiButton24.TabIndex = 319;
+            this.uiButton24.Tag = "@02@#BCD#";
             this.uiButton24.Text = "复制";
             this.uiButton24.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
@@ -25283,6 +25426,7 @@
             this.uiButton25.RectColor = System.Drawing.Color.White;
             this.uiButton25.Size = new System.Drawing.Size(98, 34);
             this.uiButton25.TabIndex = 318;
+            this.uiButton25.Tag = "@02@#BCD#";
             this.uiButton25.Text = "删除";
             this.uiButton25.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 

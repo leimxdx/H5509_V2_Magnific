@@ -92,11 +92,13 @@ namespace H5509_V2
                 RunLog($"GT_GLinkInit(1):({error})");
                 ErrorHandler("GT_GLinkInit", error);
 
+                short glinkCout = 0;
+
                 if (error == 0)
                 {
-                    error = GTN_GetExtModuleCount(1, 0, out short gLinkCout);
+                    error = GTN_GetExtModuleCount(1, 0, out glinkCout);
                     ErrorHandler("GTN_GetExtModuleCount", error);
-					RunLog(gLinkCout + ("个IO模块初始化成功！"));
+                    RunLog(glinkCout + ("个IO模块初始化成功！"));
                 }
 
                 //for (int i = 0; i < 17; i++)
@@ -142,7 +144,8 @@ namespace H5509_V2
                 //    listbool.Add(bools);
                 //}
 
-                APPmaster.InitedOK = true;
+                APPmaster.InitedOK = glinkCout > 0;
+
             }
             catch (Exception ex)
             {

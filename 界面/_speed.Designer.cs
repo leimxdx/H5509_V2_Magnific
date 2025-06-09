@@ -78,6 +78,7 @@
             this.uiButton4.RectColor = System.Drawing.Color.White;
             this.uiButton4.Size = new System.Drawing.Size(98, 34);
             this.uiButton4.TabIndex = 313;
+            this.uiButton4.Tag = "@02@#BCD#";
             this.uiButton4.Text = "恢复默认";
             this.uiButton4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton4.Click += new System.EventHandler(this.uiButton4_Click);
@@ -92,6 +93,7 @@
             this.uiButton3.RectColor = System.Drawing.Color.White;
             this.uiButton3.Size = new System.Drawing.Size(98, 34);
             this.uiButton3.TabIndex = 312;
+            this.uiButton3.Tag = "@02@#BCD#";
             this.uiButton3.Text = "保存";
             this.uiButton3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton3.Click += new System.EventHandler(this.uiButton3_Click);

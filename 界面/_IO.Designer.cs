@@ -35,7 +35,6 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.uiTabControl3 = new Sunny.UI.UITabControl();
             this.tabPage7 = new System.Windows.Forms.TabPage();
-            this.uiButton2 = new Sunny.UI.UIButton();
             this.uiGroupBox5 = new Sunny.UI.UIGroupBox();
             this.uiSwitch18 = new Sunny.UI.UISwitch();
             this.uiSwitch15 = new Sunny.UI.UISwitch();
@@ -284,7 +283,6 @@
             this.uiLight164 = new Sunny.UI.UILight();
             this.uiLight163 = new Sunny.UI.UILight();
             this.uiSwitch79 = new Sunny.UI.UISwitch();
-            this.label103 = new System.Windows.Forms.Label();
             this.uiGroupBox22 = new Sunny.UI.UIGroupBox();
             this.uiLight173 = new Sunny.UI.UILight();
             this.uiLight174 = new Sunny.UI.UILight();
@@ -686,7 +684,6 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.tabPage7.Controls.Add(this.uiButton2);
             this.tabPage7.Controls.Add(this.uiGroupBox5);
             this.tabPage7.Controls.Add(this.uiGroupBox4);
             this.tabPage7.Controls.Add(this.uiGroupBox3);
@@ -698,19 +695,6 @@
             this.tabPage7.Size = new System.Drawing.Size(1889, 900);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Text = "系统";
-            // 
-            // uiButton2
-            // 
-            this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton2.Location = new System.Drawing.Point(468, 527);
-            this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton2.Name = "uiButton2";
-            this.uiButton2.Size = new System.Drawing.Size(100, 35);
-            this.uiButton2.TabIndex = 39;
-            this.uiButton2.Text = "uiButton2";
-            this.uiButton2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton2.Click += new System.EventHandler(this.uiButton2_Click);
             // 
             // uiGroupBox5
             // 
@@ -745,6 +729,7 @@
             this.uiSwitch18.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch18.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch18.TabIndex = 133;
+            this.uiSwitch18.Tag = "@02@#BCD#";
             this.uiSwitch18.TagString = "Y039";
             this.uiSwitch18.Text = "uiSwitch18";
             // 
@@ -760,6 +745,7 @@
             this.uiSwitch15.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch15.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch15.TabIndex = 132;
+            this.uiSwitch15.Tag = "@02@#BCD#";
             this.uiSwitch15.TagString = "Y038";
             this.uiSwitch15.Text = "uiSwitch15";
             // 
@@ -784,6 +770,7 @@
             this.uiSwitch16.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch16.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch16.TabIndex = 131;
+            this.uiSwitch16.Tag = "@02@#BCD#";
             this.uiSwitch16.TagString = "Y037";
             this.uiSwitch16.Text = "uiSwitch16";
             // 
@@ -808,6 +795,7 @@
             this.uiSwitch17.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch17.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch17.TabIndex = 130;
+            this.uiSwitch17.Tag = "@02@#BCD#";
             this.uiSwitch17.TagString = "Y036";
             this.uiSwitch17.Text = "uiSwitch17";
             // 
@@ -1102,6 +1090,7 @@
             this.uiSwitch93.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch93.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch93.TabIndex = 131;
+            this.uiSwitch93.Tag = "@02@#BCD#";
             this.uiSwitch93.TagString = "Y015";
             this.uiSwitch93.Text = "uiSwitch93";
             // 
@@ -1126,6 +1115,7 @@
             this.uiSwitch12.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch12.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch12.TabIndex = 129;
+            this.uiSwitch12.Tag = "@02@#BCD#";
             this.uiSwitch12.TagString = "Y014";
             this.uiSwitch12.Text = "uiSwitch12";
             // 
@@ -1150,6 +1140,7 @@
             this.uiSwitch13.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch13.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch13.TabIndex = 128;
+            this.uiSwitch13.Tag = "@02@#BCD#";
             this.uiSwitch13.TagString = "Y013";
             this.uiSwitch13.Text = "uiSwitch13";
             // 
@@ -1165,6 +1156,7 @@
             this.uiSwitch14.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch14.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch14.TabIndex = 127;
+            this.uiSwitch14.Tag = "@02@#BCD#";
             this.uiSwitch14.TagString = "Y012";
             this.uiSwitch14.Text = "uiSwitch14";
             // 
@@ -1244,6 +1236,7 @@
             this.uiSwitch11.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch11.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch11.TabIndex = 126;
+            this.uiSwitch11.Tag = "@02@#BCD#";
             this.uiSwitch11.TagString = "Y011";
             this.uiSwitch11.Text = "uiSwitch11";
             // 
@@ -1259,6 +1252,7 @@
             this.uiSwitch9.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch9.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch9.TabIndex = 125;
+            this.uiSwitch9.Tag = "@02@#BCD#";
             this.uiSwitch9.TagString = "Y009";
             this.uiSwitch9.Text = "uiSwitch9";
             // 
@@ -1274,6 +1268,7 @@
             this.uiSwitch10.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch10.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch10.TabIndex = 124;
+            this.uiSwitch10.Tag = "@02@#BCD#";
             this.uiSwitch10.TagString = "Y007";
             this.uiSwitch10.Text = "uiSwitch10";
             // 
@@ -1289,6 +1284,7 @@
             this.uiSwitch7.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch7.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch7.TabIndex = 123;
+            this.uiSwitch7.Tag = "@02@#BCD#";
             this.uiSwitch7.TagString = "Y006";
             this.uiSwitch7.Text = "uiSwitch7";
             // 
@@ -1304,6 +1300,7 @@
             this.uiSwitch8.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch8.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch8.TabIndex = 122;
+            this.uiSwitch8.Tag = "@02@#BCD#";
             this.uiSwitch8.TagString = "Y003";
             this.uiSwitch8.Text = "uiSwitch8";
             // 
@@ -1319,6 +1316,7 @@
             this.uiSwitch5.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch5.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch5.TabIndex = 121;
+            this.uiSwitch5.Tag = "@02@#BCD#";
             this.uiSwitch5.TagString = "Y010";
             this.uiSwitch5.Text = "uiSwitch5";
             // 
@@ -1334,6 +1332,7 @@
             this.uiSwitch6.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch6.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch6.TabIndex = 120;
+            this.uiSwitch6.Tag = "@02@#BCD#";
             this.uiSwitch6.TagString = "Y008";
             this.uiSwitch6.Text = "uiSwitch6";
             // 
@@ -1349,6 +1348,7 @@
             this.uiSwitch2.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch2.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch2.TabIndex = 119;
+            this.uiSwitch2.Tag = "@02@#BCD#";
             this.uiSwitch2.TagString = "Y005";
             this.uiSwitch2.Text = "uiSwitch2";
             // 
@@ -1364,6 +1364,7 @@
             this.uiSwitch4.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch4.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch4.TabIndex = 118;
+            this.uiSwitch4.Tag = "@02@#BCD#";
             this.uiSwitch4.TagString = "Y004";
             this.uiSwitch4.Text = "uiSwitch4";
             // 
@@ -1379,6 +1380,7 @@
             this.uiSwitch1.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch1.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch1.TabIndex = 117;
+            this.uiSwitch1.Tag = "@02@#BCD#";
             this.uiSwitch1.TagString = "Y002";
             this.uiSwitch1.Text = "uiSwitch1";
             // 
@@ -1394,6 +1396,7 @@
             this.uiSwitch3.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch3.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch3.TabIndex = 116;
+            this.uiSwitch3.Tag = "@02@#BCD#";
             this.uiSwitch3.TagString = "Y001";
             this.uiSwitch3.Text = "uiSwitch3";
             // 
@@ -1691,7 +1694,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 60);
+            this.tabPage8.Size = new System.Drawing.Size(1889, 900);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "入料区";
             // 
@@ -1788,6 +1791,7 @@
             this.uiSwitch31.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch31.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch31.TabIndex = 127;
+            this.uiSwitch31.Tag = "@02@#BCD#";
             this.uiSwitch31.TagString = "Y051";
             this.uiSwitch31.Text = "uiSwitch31";
             // 
@@ -1829,6 +1833,7 @@
             this.uiSwitch30.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch30.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch30.TabIndex = 124;
+            this.uiSwitch30.Tag = "@02@#BCD#";
             this.uiSwitch30.TagString = "Y050";
             this.uiSwitch30.Text = "uiSwitch30";
             // 
@@ -1863,6 +1868,7 @@
             this.uiSwitch25.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch25.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch25.TabIndex = 124;
+            this.uiSwitch25.Tag = "@02@#BCD#";
             this.uiSwitch25.TagString = "Y018";
             this.uiSwitch25.Text = "uiSwitch25";
             // 
@@ -2180,7 +2186,9 @@
             this.uiSwitch24.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch24.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch24.TabIndex = 123;
+            this.uiSwitch24.Tag = "@02@#BCD#";
             this.uiSwitch24.Text = "uiSwitch24";
+            this.uiSwitch24.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch24_ValueChanged);
             // 
             // uiSwitch19
             // 
@@ -2194,6 +2202,7 @@
             this.uiSwitch19.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch19.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch19.TabIndex = 119;
+            this.uiSwitch19.Tag = "@02@#BCD#";
             this.uiSwitch19.TagString = "Y063";
             this.uiSwitch19.Text = "uiSwitch19";
             // 
@@ -2218,6 +2227,7 @@
             this.uiSwitch20.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch20.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch20.TabIndex = 118;
+            this.uiSwitch20.Tag = "@02@#BCD#";
             this.uiSwitch20.TagString = "Y062";
             this.uiSwitch20.Text = "uiSwitch20";
             // 
@@ -2233,6 +2243,7 @@
             this.uiSwitch21.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch21.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch21.TabIndex = 117;
+            this.uiSwitch21.Tag = "@02@#BCD#";
             this.uiSwitch21.TagString = "Y061";
             this.uiSwitch21.Text = "uiSwitch21";
             // 
@@ -2248,6 +2259,7 @@
             this.uiSwitch22.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch22.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch22.TabIndex = 116;
+            this.uiSwitch22.Tag = "@02@#BCD#";
             this.uiSwitch22.TagString = "Y060";
             this.uiSwitch22.Text = "uiSwitch22";
             // 
@@ -2322,7 +2334,9 @@
             this.uiSwitch23.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch23.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch23.TabIndex = 121;
+            this.uiSwitch23.Tag = "@02@#BCD#";
             this.uiSwitch23.Text = "uiSwitch23";
+            this.uiSwitch23.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch23_ValueChanged);
             // 
             // label39
             // 
@@ -2345,6 +2359,7 @@
             this.uiSwitch26.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch26.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch26.TabIndex = 119;
+            this.uiSwitch26.Tag = "@02@#BCD#";
             this.uiSwitch26.TagString = "Y059";
             this.uiSwitch26.Text = "uiSwitch26";
             // 
@@ -2360,6 +2375,7 @@
             this.uiSwitch27.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch27.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch27.TabIndex = 118;
+            this.uiSwitch27.Tag = "@02@#BCD#";
             this.uiSwitch27.TagString = "Y058";
             this.uiSwitch27.Text = "uiSwitch27";
             // 
@@ -2375,6 +2391,7 @@
             this.uiSwitch28.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch28.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch28.TabIndex = 117;
+            this.uiSwitch28.Tag = "@02@#BCD#";
             this.uiSwitch28.TagString = "Y057";
             this.uiSwitch28.Text = "uiSwitch28";
             // 
@@ -2390,6 +2407,7 @@
             this.uiSwitch29.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch29.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch29.TabIndex = 116;
+            this.uiSwitch29.Tag = "@02@#BCD#";
             this.uiSwitch29.TagString = "Y056";
             this.uiSwitch29.Text = "uiSwitch29";
             // 
@@ -2443,7 +2461,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(200, 60);
+            this.tabPage9.Size = new System.Drawing.Size(1889, 900);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "出料区";
             // 
@@ -2494,6 +2512,7 @@
             this.uiSwitch98.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch98.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch98.TabIndex = 132;
+            this.uiSwitch98.Tag = "@02@#BCD#";
             this.uiSwitch98.TagString = "Y040";
             this.uiSwitch98.Text = "uiSwitch98";
             // 
@@ -2673,6 +2692,7 @@
             this.uiSwitch100.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch100.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch100.TabIndex = 133;
+            this.uiSwitch100.Tag = "@02@#BCD#";
             this.uiSwitch100.TagString = "Y025";
             this.uiSwitch100.Text = "uiSwitch100";
             // 
@@ -2688,6 +2708,7 @@
             this.uiSwitch34.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch34.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch34.TabIndex = 131;
+            this.uiSwitch34.Tag = "@02@#BCD#";
             this.uiSwitch34.TagString = "Y032";
             this.uiSwitch34.Text = "uiSwitch34";
             // 
@@ -2703,6 +2724,7 @@
             this.uiSwitch35.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch35.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch35.TabIndex = 124;
+            this.uiSwitch35.Tag = "@02@#BCD#";
             this.uiSwitch35.TagString = "Y026";
             this.uiSwitch35.Text = "uiSwitch35";
             // 
@@ -2808,6 +2830,7 @@
             this.uiSwitch99.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch99.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch99.TabIndex = 132;
+            this.uiSwitch99.Tag = "@02@#BCD#";
             this.uiSwitch99.TagString = "Y023";
             this.uiSwitch99.Text = "uiSwitch99";
             // 
@@ -2823,6 +2846,7 @@
             this.uiSwitch36.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch36.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch36.TabIndex = 131;
+            this.uiSwitch36.Tag = "@02@#BCD#";
             this.uiSwitch36.TagString = "Y027";
             this.uiSwitch36.Text = "uiSwitch36";
             // 
@@ -2838,6 +2862,7 @@
             this.uiSwitch37.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch37.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch37.TabIndex = 124;
+            this.uiSwitch37.Tag = "@02@#BCD#";
             this.uiSwitch37.TagString = "Y024";
             this.uiSwitch37.Text = "uiSwitch37";
             // 
@@ -3068,7 +3093,9 @@
             this.uiSwitch39.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch39.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch39.TabIndex = 123;
+            this.uiSwitch39.Tag = "@02@#BCD#";
             this.uiSwitch39.Text = "uiSwitch39";
+            this.uiSwitch39.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch39_ValueChanged);
             // 
             // uiSwitch40
             // 
@@ -3082,6 +3109,7 @@
             this.uiSwitch40.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch40.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch40.TabIndex = 119;
+            this.uiSwitch40.Tag = "@02@#BCD#";
             this.uiSwitch40.TagString = "Y075";
             this.uiSwitch40.Text = "uiSwitch40";
             // 
@@ -3106,6 +3134,7 @@
             this.uiSwitch41.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch41.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch41.TabIndex = 118;
+            this.uiSwitch41.Tag = "@02@#BCD#";
             this.uiSwitch41.TagString = "Y074";
             this.uiSwitch41.Text = "uiSwitch41";
             // 
@@ -3121,6 +3150,7 @@
             this.uiSwitch42.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch42.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch42.TabIndex = 117;
+            this.uiSwitch42.Tag = "@02@#BCD#";
             this.uiSwitch42.TagString = "Y073";
             this.uiSwitch42.Text = "uiSwitch42";
             // 
@@ -3136,6 +3166,7 @@
             this.uiSwitch43.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch43.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch43.TabIndex = 116;
+            this.uiSwitch43.Tag = "@02@#BCD#";
             this.uiSwitch43.TagString = "Y072";
             this.uiSwitch43.Text = "uiSwitch43";
             // 
@@ -3210,7 +3241,9 @@
             this.uiSwitch44.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch44.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch44.TabIndex = 121;
+            this.uiSwitch44.Tag = "@02@#BCD#";
             this.uiSwitch44.Text = "uiSwitch44";
+            this.uiSwitch44.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
             // 
             // label78
             // 
@@ -3233,6 +3266,7 @@
             this.uiSwitch45.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch45.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch45.TabIndex = 119;
+            this.uiSwitch45.Tag = "@02@#BCD#";
             this.uiSwitch45.TagString = "Y071";
             this.uiSwitch45.Text = "uiSwitch45";
             // 
@@ -3248,6 +3282,7 @@
             this.uiSwitch46.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch46.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch46.TabIndex = 118;
+            this.uiSwitch46.Tag = "@02@#BCD#";
             this.uiSwitch46.TagString = "Y070";
             this.uiSwitch46.Text = "uiSwitch46";
             // 
@@ -3263,6 +3298,7 @@
             this.uiSwitch47.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch47.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch47.TabIndex = 117;
+            this.uiSwitch47.Tag = "@02@#BCD#";
             this.uiSwitch47.TagString = "Y069";
             this.uiSwitch47.Text = "uiSwitch47";
             // 
@@ -3278,6 +3314,7 @@
             this.uiSwitch48.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch48.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch48.TabIndex = 116;
+            this.uiSwitch48.Tag = "@02@#BCD#";
             this.uiSwitch48.TagString = "Y068";
             this.uiSwitch48.Text = "uiSwitch48";
             // 
@@ -3321,17 +3358,17 @@
             // 
             this.tabPage16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage16.Controls.Add(this.uiGroupBox21);
-            this.tabPage16.Controls.Add(this.uiGroupBox26);
-            this.tabPage16.Controls.Add(this.uiGroupBox27);
             this.tabPage16.Controls.Add(this.uiGroupBox14);
             this.tabPage16.Controls.Add(this.uiGroupBox22);
+            this.tabPage16.Controls.Add(this.uiGroupBox26);
             this.tabPage16.Controls.Add(this.uiGroupBox15);
             this.tabPage16.Controls.Add(this.uiGroupBox13);
+            this.tabPage16.Controls.Add(this.uiGroupBox27);
             this.tabPage16.Controls.Add(this.uiGroupBox12);
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 60);
+            this.tabPage16.Size = new System.Drawing.Size(1889, 900);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "测试区";
             // 
@@ -3354,7 +3391,7 @@
             this.uiGroupBox21.Controls.Add(this.label123);
             this.uiGroupBox21.Controls.Add(this.label124);
             this.uiGroupBox21.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox21.Location = new System.Drawing.Point(1015, 578);
+            this.uiGroupBox21.Location = new System.Drawing.Point(1018, 19);
             this.uiGroupBox21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox21.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox21.Name = "uiGroupBox21";
@@ -3589,7 +3626,7 @@
             this.uiGroupBox26.Controls.Add(this.label128);
             this.uiGroupBox26.Controls.Add(this.label129);
             this.uiGroupBox26.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox26.Location = new System.Drawing.Point(519, 578);
+            this.uiGroupBox26.Location = new System.Drawing.Point(522, 19);
             this.uiGroupBox26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox26.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox26.Name = "uiGroupBox26";
@@ -3611,6 +3648,7 @@
             this.uiSwitch94.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch94.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch94.TabIndex = 131;
+            this.uiSwitch94.Tag = "@02@#BCD#";
             this.uiSwitch94.TagString = "Y093";
             this.uiSwitch94.Text = "uiSwitch94";
             // 
@@ -3626,6 +3664,7 @@
             this.uiSwitch95.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch95.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch95.TabIndex = 130;
+            this.uiSwitch95.Tag = "@02@#BCD#";
             this.uiSwitch95.TagString = "Y092";
             this.uiSwitch95.Text = "uiSwitch95";
             // 
@@ -3641,6 +3680,7 @@
             this.uiSwitch96.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch96.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch96.TabIndex = 129;
+            this.uiSwitch96.Tag = "@02@#BCD#";
             this.uiSwitch96.TagString = "Y091";
             this.uiSwitch96.Text = "uiSwitch96";
             // 
@@ -3656,6 +3696,7 @@
             this.uiSwitch97.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch97.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch97.TabIndex = 128;
+            this.uiSwitch97.Tag = "@02@#BCD#";
             this.uiSwitch97.TagString = "Y090";
             this.uiSwitch97.Text = "uiSwitch97";
             // 
@@ -3707,7 +3748,9 @@
             this.uiSwitch78.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch78.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch78.TabIndex = 123;
+            this.uiSwitch78.Tag = "@02@#BCD#";
             this.uiSwitch78.Text = "uiSwitch78";
+            this.uiSwitch78.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch78_ValueChanged);
             // 
             // uiSwitch80
             // 
@@ -3721,6 +3764,7 @@
             this.uiSwitch80.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch80.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch80.TabIndex = 119;
+            this.uiSwitch80.Tag = "@02@#BCD#";
             this.uiSwitch80.TagString = "Y089";
             this.uiSwitch80.Text = "uiSwitch80";
             // 
@@ -3745,6 +3789,7 @@
             this.uiSwitch81.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch81.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch81.TabIndex = 118;
+            this.uiSwitch81.Tag = "@02@#BCD#";
             this.uiSwitch81.TagString = "Y088";
             this.uiSwitch81.Text = "uiSwitch81";
             // 
@@ -3760,6 +3805,7 @@
             this.uiSwitch82.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch82.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch82.TabIndex = 117;
+            this.uiSwitch82.Tag = "@02@#BCD#";
             this.uiSwitch82.TagString = "Y087";
             this.uiSwitch82.Text = "uiSwitch82";
             // 
@@ -3775,6 +3821,7 @@
             this.uiSwitch83.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch83.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch83.TabIndex = 116;
+            this.uiSwitch83.Tag = "@02@#BCD#";
             this.uiSwitch83.TagString = "Y086";
             this.uiSwitch83.Text = "uiSwitch83";
             // 
@@ -3835,7 +3882,7 @@
             this.uiGroupBox27.Controls.Add(this.label133);
             this.uiGroupBox27.Controls.Add(this.label134);
             this.uiGroupBox27.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox27.Location = new System.Drawing.Point(19, 578);
+            this.uiGroupBox27.Location = new System.Drawing.Point(22, 19);
             this.uiGroupBox27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox27.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox27.Name = "uiGroupBox27";
@@ -3857,6 +3904,7 @@
             this.uiSwitch89.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch89.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch89.TabIndex = 129;
+            this.uiSwitch89.Tag = "@02@#BCD#";
             this.uiSwitch89.TagString = "Y085";
             this.uiSwitch89.Text = "uiSwitch89";
             // 
@@ -3872,6 +3920,7 @@
             this.uiSwitch90.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch90.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch90.TabIndex = 128;
+            this.uiSwitch90.Tag = "@02@#BCD#";
             this.uiSwitch90.TagString = "Y084";
             this.uiSwitch90.Text = "uiSwitch90";
             // 
@@ -3887,6 +3936,7 @@
             this.uiSwitch91.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch91.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch91.TabIndex = 127;
+            this.uiSwitch91.Tag = "@02@#BCD#";
             this.uiSwitch91.TagString = "Y083";
             this.uiSwitch91.Text = "uiSwitch91";
             // 
@@ -3902,6 +3952,7 @@
             this.uiSwitch92.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch92.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch92.TabIndex = 126;
+            this.uiSwitch92.Tag = "@02@#BCD#";
             this.uiSwitch92.TagString = "Y082";
             this.uiSwitch92.Text = "uiSwitch92";
             // 
@@ -3953,7 +4004,9 @@
             this.uiSwitch84.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch84.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch84.TabIndex = 121;
+            this.uiSwitch84.Tag = "@02@#BCD#";
             this.uiSwitch84.Text = "uiSwitch84";
+            this.uiSwitch84.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch84_ValueChanged);
             // 
             // label130
             // 
@@ -3976,6 +4029,7 @@
             this.uiSwitch85.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch85.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch85.TabIndex = 119;
+            this.uiSwitch85.Tag = "@02@#BCD#";
             this.uiSwitch85.TagString = "Y081";
             this.uiSwitch85.Text = "uiSwitch85";
             // 
@@ -3991,6 +4045,7 @@
             this.uiSwitch86.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch86.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch86.TabIndex = 118;
+            this.uiSwitch86.Tag = "@02@#BCD#";
             this.uiSwitch86.TagString = "Y080";
             this.uiSwitch86.Text = "uiSwitch86";
             // 
@@ -4006,6 +4061,7 @@
             this.uiSwitch87.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch87.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch87.TabIndex = 117;
+            this.uiSwitch87.Tag = "@02@#BCD#";
             this.uiSwitch87.TagString = "Y079";
             this.uiSwitch87.Text = "uiSwitch87";
             // 
@@ -4021,6 +4077,7 @@
             this.uiSwitch88.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch88.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch88.TabIndex = 116;
+            this.uiSwitch88.Tag = "@02@#BCD#";
             this.uiSwitch88.TagString = "Y078";
             this.uiSwitch88.Text = "uiSwitch88";
             // 
@@ -4065,14 +4122,13 @@
             this.uiGroupBox14.Controls.Add(this.uiLight164);
             this.uiGroupBox14.Controls.Add(this.uiLight163);
             this.uiGroupBox14.Controls.Add(this.uiSwitch79);
-            this.uiGroupBox14.Controls.Add(this.label103);
             this.uiGroupBox14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox14.Location = new System.Drawing.Point(1503, 578);
+            this.uiGroupBox14.Location = new System.Drawing.Point(1506, 19);
             this.uiGroupBox14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox14.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox14.Name = "uiGroupBox14";
             this.uiGroupBox14.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox14.Size = new System.Drawing.Size(365, 105);
+            this.uiGroupBox14.Size = new System.Drawing.Size(202, 95);
             this.uiGroupBox14.TabIndex = 224;
             this.uiGroupBox14.Text = "测试区气缸(张开/闭合)";
             this.uiGroupBox14.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -4081,7 +4137,7 @@
             // 
             this.uiLight164.CenterColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.uiLight164.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiLight164.Location = new System.Drawing.Point(184, 43);
+            this.uiLight164.Location = new System.Drawing.Point(24, 41);
             this.uiLight164.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLight164.Name = "uiLight164";
             this.uiLight164.OnCenterColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -4097,7 +4153,7 @@
             // 
             this.uiLight163.CenterColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.uiLight163.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiLight163.Location = new System.Drawing.Point(225, 43);
+            this.uiLight163.Location = new System.Drawing.Point(65, 41);
             this.uiLight163.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiLight163.Name = "uiLight163";
             this.uiLight163.OnCenterColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -4114,24 +4170,16 @@
             this.uiSwitch79.ActiveText = "张开";
             this.uiSwitch79.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiSwitch79.InActiveText = "闭合";
-            this.uiSwitch79.Location = new System.Drawing.Point(272, 46);
+            this.uiSwitch79.Location = new System.Drawing.Point(112, 44);
             this.uiSwitch79.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiSwitch79.Name = "uiSwitch79";
             this.uiSwitch79.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
             this.uiSwitch79.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch79.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch79.TabIndex = 125;
+            this.uiSwitch79.Tag = "@02@#BCD#";
             this.uiSwitch79.TagString = "Y094";
             this.uiSwitch79.Text = "uiSwitch79";
-            // 
-            // label103
-            // 
-            this.label103.AutoSize = true;
-            this.label103.Location = new System.Drawing.Point(19, 50);
-            this.label103.Name = "label103";
-            this.label103.Size = new System.Drawing.Size(145, 21);
-            this.label103.TabIndex = 124;
-            this.label103.Text = "测试张开/闭合气缸";
             // 
             // uiGroupBox22
             // 
@@ -4141,7 +4189,7 @@
             this.uiGroupBox22.Controls.Add(this.uiLight175);
             this.uiGroupBox22.Controls.Add(this.uiLight176);
             this.uiGroupBox22.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox22.Location = new System.Drawing.Point(1503, 18);
+            this.uiGroupBox22.Location = new System.Drawing.Point(1506, 290);
             this.uiGroupBox22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox22.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox22.Name = "uiGroupBox22";
@@ -4259,7 +4307,7 @@
             this.uiGroupBox15.Controls.Add(this.uiLight167);
             this.uiGroupBox15.Controls.Add(this.uiLight168);
             this.uiGroupBox15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox15.Location = new System.Drawing.Point(1503, 298);
+            this.uiGroupBox15.Location = new System.Drawing.Point(1506, 570);
             this.uiGroupBox15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox15.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox15.Name = "uiGroupBox15";
@@ -4484,7 +4532,7 @@
             this.uiGroupBox13.Controls.Add(this.label117);
             this.uiGroupBox13.Controls.Add(this.label118);
             this.uiGroupBox13.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox13.Location = new System.Drawing.Point(19, 298);
+            this.uiGroupBox13.Location = new System.Drawing.Point(22, 571);
             this.uiGroupBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox13.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox13.Name = "uiGroupBox13";
@@ -5018,6 +5066,7 @@
             this.uiSwitch62.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch62.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch62.TabIndex = 290;
+            this.uiSwitch62.Tag = "@02@#BCD#";
             this.uiSwitch62.TagString = "Y127";
             this.uiSwitch62.Text = "uiSwitch62";
             // 
@@ -5033,6 +5082,7 @@
             this.uiSwitch63.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch63.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch63.TabIndex = 289;
+            this.uiSwitch63.Tag = "@02@#BCD#";
             this.uiSwitch63.TagString = "Y125";
             this.uiSwitch63.Text = "uiSwitch63";
             // 
@@ -5048,6 +5098,7 @@
             this.uiSwitch64.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch64.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch64.TabIndex = 288;
+            this.uiSwitch64.Tag = "@02@#BCD#";
             this.uiSwitch64.TagString = "Y123";
             this.uiSwitch64.Text = "uiSwitch64";
             // 
@@ -5063,6 +5114,7 @@
             this.uiSwitch65.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch65.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch65.TabIndex = 287;
+            this.uiSwitch65.Tag = "@02@#BCD#";
             this.uiSwitch65.TagString = "Y121";
             this.uiSwitch65.Text = "uiSwitch65";
             // 
@@ -5078,6 +5130,7 @@
             this.uiSwitch66.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch66.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch66.TabIndex = 286;
+            this.uiSwitch66.Tag = "@02@#BCD#";
             this.uiSwitch66.TagString = "Y119";
             this.uiSwitch66.Text = "uiSwitch66";
             // 
@@ -5093,6 +5146,7 @@
             this.uiSwitch67.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch67.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch67.TabIndex = 285;
+            this.uiSwitch67.Tag = "@02@#BCD#";
             this.uiSwitch67.TagString = "Y117";
             this.uiSwitch67.Text = "uiSwitch67";
             // 
@@ -5108,6 +5162,7 @@
             this.uiSwitch68.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch68.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch68.TabIndex = 284;
+            this.uiSwitch68.Tag = "@02@#BCD#";
             this.uiSwitch68.TagString = "Y115";
             this.uiSwitch68.Text = "uiSwitch68";
             // 
@@ -5123,6 +5178,7 @@
             this.uiSwitch69.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch69.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch69.TabIndex = 283;
+            this.uiSwitch69.Tag = "@02@#BCD#";
             this.uiSwitch69.TagString = "Y113";
             this.uiSwitch69.Text = "uiSwitch69";
             // 
@@ -5138,6 +5194,7 @@
             this.uiSwitch70.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch70.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch70.TabIndex = 282;
+            this.uiSwitch70.Tag = "@02@#BCD#";
             this.uiSwitch70.TagString = "Y111";
             this.uiSwitch70.Text = "uiSwitch70";
             // 
@@ -5153,6 +5210,7 @@
             this.uiSwitch71.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch71.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch71.TabIndex = 281;
+            this.uiSwitch71.Tag = "@02@#BCD#";
             this.uiSwitch71.TagString = "Y109";
             this.uiSwitch71.Text = "uiSwitch71";
             // 
@@ -5168,6 +5226,7 @@
             this.uiSwitch72.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch72.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch72.TabIndex = 280;
+            this.uiSwitch72.Tag = "@02@#BCD#";
             this.uiSwitch72.TagString = "Y107";
             this.uiSwitch72.Text = "uiSwitch72";
             // 
@@ -5183,6 +5242,7 @@
             this.uiSwitch73.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch73.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch73.TabIndex = 279;
+            this.uiSwitch73.Tag = "@02@#BCD#";
             this.uiSwitch73.TagString = "Y105";
             this.uiSwitch73.Text = "uiSwitch73";
             // 
@@ -5198,6 +5258,7 @@
             this.uiSwitch74.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch74.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch74.TabIndex = 278;
+            this.uiSwitch74.Tag = "@02@#BCD#";
             this.uiSwitch74.TagString = "Y103";
             this.uiSwitch74.Text = "uiSwitch74";
             // 
@@ -5213,6 +5274,7 @@
             this.uiSwitch75.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch75.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch75.TabIndex = 277;
+            this.uiSwitch75.Tag = "@02@#BCD#";
             this.uiSwitch75.TagString = "Y101";
             this.uiSwitch75.Text = "uiSwitch75";
             // 
@@ -5228,6 +5290,7 @@
             this.uiSwitch76.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch76.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch76.TabIndex = 276;
+            this.uiSwitch76.Tag = "@02@#BCD#";
             this.uiSwitch76.TagString = "Y099";
             this.uiSwitch76.Text = "uiSwitch76";
             // 
@@ -5243,6 +5306,7 @@
             this.uiSwitch77.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch77.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch77.TabIndex = 275;
+            this.uiSwitch77.Tag = "@02@#BCD#";
             this.uiSwitch77.TagString = "Y097";
             this.uiSwitch77.Text = "uiSwitch77";
             // 
@@ -5754,6 +5818,7 @@
             this.uiSwitch58.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch58.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch58.TabIndex = 244;
+            this.uiSwitch58.Tag = "@02@#BCD#";
             this.uiSwitch58.TagString = "Y126";
             this.uiSwitch58.Text = "uiSwitch58";
             // 
@@ -5785,6 +5850,7 @@
             this.uiSwitch59.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch59.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch59.TabIndex = 243;
+            this.uiSwitch59.Tag = "@02@#BCD#";
             this.uiSwitch59.TagString = "Y124";
             this.uiSwitch59.Text = "uiSwitch59";
             // 
@@ -5800,6 +5866,7 @@
             this.uiSwitch60.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch60.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch60.TabIndex = 242;
+            this.uiSwitch60.Tag = "@02@#BCD#";
             this.uiSwitch60.TagString = "Y122";
             this.uiSwitch60.Text = "uiSwitch60";
             // 
@@ -5815,6 +5882,7 @@
             this.uiSwitch61.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch61.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch61.TabIndex = 241;
+            this.uiSwitch61.Tag = "@02@#BCD#";
             this.uiSwitch61.TagString = "Y120";
             this.uiSwitch61.Text = "uiSwitch61";
             // 
@@ -5830,6 +5898,7 @@
             this.uiSwitch54.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch54.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch54.TabIndex = 240;
+            this.uiSwitch54.Tag = "@02@#BCD#";
             this.uiSwitch54.TagString = "Y118";
             this.uiSwitch54.Text = "uiSwitch54";
             // 
@@ -5845,6 +5914,7 @@
             this.uiSwitch55.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch55.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch55.TabIndex = 239;
+            this.uiSwitch55.Tag = "@02@#BCD#";
             this.uiSwitch55.TagString = "Y116";
             this.uiSwitch55.Text = "uiSwitch55";
             // 
@@ -5860,6 +5930,7 @@
             this.uiSwitch56.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch56.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch56.TabIndex = 238;
+            this.uiSwitch56.Tag = "@02@#BCD#";
             this.uiSwitch56.TagString = "Y114";
             this.uiSwitch56.Text = "uiSwitch56";
             // 
@@ -5875,6 +5946,7 @@
             this.uiSwitch57.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch57.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch57.TabIndex = 237;
+            this.uiSwitch57.Tag = "@02@#BCD#";
             this.uiSwitch57.TagString = "Y112";
             this.uiSwitch57.Text = "uiSwitch57";
             // 
@@ -5890,6 +5962,7 @@
             this.uiSwitch50.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch50.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch50.TabIndex = 236;
+            this.uiSwitch50.Tag = "@02@#BCD#";
             this.uiSwitch50.TagString = "Y110";
             this.uiSwitch50.Text = "uiSwitch50";
             // 
@@ -5905,6 +5978,7 @@
             this.uiSwitch51.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch51.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch51.TabIndex = 235;
+            this.uiSwitch51.Tag = "@02@#BCD#";
             this.uiSwitch51.TagString = "Y108";
             this.uiSwitch51.Text = "uiSwitch51";
             // 
@@ -5920,6 +5994,7 @@
             this.uiSwitch52.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch52.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch52.TabIndex = 234;
+            this.uiSwitch52.Tag = "@02@#BCD#";
             this.uiSwitch52.TagString = "Y106";
             this.uiSwitch52.Text = "uiSwitch52";
             // 
@@ -5935,6 +6010,7 @@
             this.uiSwitch53.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch53.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch53.TabIndex = 233;
+            this.uiSwitch53.Tag = "@02@#BCD#";
             this.uiSwitch53.TagString = "Y104";
             this.uiSwitch53.Text = "uiSwitch53";
             // 
@@ -5950,6 +6026,7 @@
             this.uiSwitch49.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch49.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch49.TabIndex = 232;
+            this.uiSwitch49.Tag = "@02@#BCD#";
             this.uiSwitch49.TagString = "Y102";
             this.uiSwitch49.Text = "uiSwitch49";
             // 
@@ -5965,6 +6042,7 @@
             this.uiSwitch38.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch38.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch38.TabIndex = 231;
+            this.uiSwitch38.Tag = "@02@#BCD#";
             this.uiSwitch38.TagString = "Y100";
             this.uiSwitch38.Text = "uiSwitch38";
             // 
@@ -5980,6 +6058,7 @@
             this.uiSwitch33.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch33.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch33.TabIndex = 230;
+            this.uiSwitch33.Tag = "@02@#BCD#";
             this.uiSwitch33.TagString = "Y098";
             this.uiSwitch33.Text = "uiSwitch33";
             // 
@@ -5995,6 +6074,7 @@
             this.uiSwitch32.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch32.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch32.TabIndex = 229;
+            this.uiSwitch32.Tag = "@02@#BCD#";
             this.uiSwitch32.TagString = "Y096";
             this.uiSwitch32.Text = "uiSwitch32";
             // 
@@ -6225,7 +6305,7 @@
             this.uiGroupBox12.Controls.Add(this.uiLight34);
             this.uiGroupBox12.Controls.Add(this.uiLight35);
             this.uiGroupBox12.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox12.Location = new System.Drawing.Point(19, 18);
+            this.uiGroupBox12.Location = new System.Drawing.Point(22, 291);
             this.uiGroupBox12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox12.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox12.Name = "uiGroupBox12";
@@ -7780,7 +7860,6 @@
             this.uiGroupBox27.ResumeLayout(false);
             this.uiGroupBox27.PerformLayout();
             this.uiGroupBox14.ResumeLayout(false);
-            this.uiGroupBox14.PerformLayout();
             this.uiGroupBox22.ResumeLayout(false);
             this.panel38.ResumeLayout(false);
             this.uiGroupBox15.ResumeLayout(false);
@@ -8245,7 +8324,6 @@
         private Sunny.UI.UILight uiLight160;
         private Sunny.UI.UIGroupBox uiGroupBox14;
         private Sunny.UI.UISwitch uiSwitch79;
-        private System.Windows.Forms.Label label103;
         private Sunny.UI.UILight uiLight163;
         private Sunny.UI.UILight uiLight165;
         private Sunny.UI.UILight uiLight166;
@@ -8309,7 +8387,6 @@
         private System.Windows.Forms.Label label147;
         private Sunny.UI.UISwitch uiSwitch98;
         private Sunny.UI.UILight uiLight47;
-        private Sunny.UI.UIButton uiButton2;
         private Sunny.UI.UISwitch uiSwitch99;
         private Sunny.UI.UISwitch uiSwitch100;
     }

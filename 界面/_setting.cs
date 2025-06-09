@@ -394,15 +394,19 @@ namespace H5509_V2
             {
                 RefreshTimer.Start();
                 button52.Text = "取消读取轴信息";
-                button146.Enabled = true;
-                button152.Enabled = true;
-                button2.Enabled = true;
-                button90.Enabled = true; //GlinkIO按钮
-                button91.Enabled = true; //GlinkIO按钮
-                button92.Enabled = true; //GNM601IO按钮
-                button93.Enabled = true; //GNM601IO按钮
-                button156.Enabled = true;//回零按钮
-                button155.Enabled = true;//停止回零按钮
+
+                if (设备状态 != 1 && 当前权限 != "Operator")
+                {
+                    button146.Enabled = true;
+                    button152.Enabled = true;
+                    button2.Enabled = true;
+                    button90.Enabled = true; //GlinkIO按钮
+                    button91.Enabled = true; //GlinkIO按钮
+                    button92.Enabled = true; //GNM601IO按钮
+                    button93.Enabled = true; //GNM601IO按钮
+                    button156.Enabled = true;//回零按钮
+                    button155.Enabled = true;//停止回零按钮
+                }
             }
             else
             {
@@ -4621,6 +4625,8 @@ namespace H5509_V2
                                 {
                                     设置信息.测试机信息 = newtester;
                                 }
+
+                                Com.刷新测试超时时间();
 
                                 if (comischange)
                                 {

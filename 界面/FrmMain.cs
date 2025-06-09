@@ -96,14 +96,20 @@ namespace H5509_V2
             io = new _IO();
             handler = new Handler();
             motionEx = MotionEx.GetInstance();
+
             setting.刷新分BIN信息 = main.刷新分BIN信息;
             setting.刷新温度信息 = main.刷新温度显示;
+
             handler.刷新批次信息 = main.刷新批次信息;
-            setting.handler = handler;
+            handler.刷新分BIN信息 = main.刷新分BIN信息;
+            handler.刷新权限 = main.切换为操作员权限;
+
+            main.刷新界面权限 = 刷新界面权限;
             main.handler = handler;
 
+            setting.handler = handler;
+            io.handler = handler;
             Com.RefrshLog = Log.DelegteDisplayComInfo;
-
 
             dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
 
@@ -157,9 +163,84 @@ namespace H5509_V2
             #endregion
 
             main.canVisable(this);
+            刷新界面权限();
 
             //listcode.Add("1400441"); Dut全部被关闭，请长按结批按钮5S结批
         }
+
+        public void 刷新界面权限()
+        {
+            CanVisable(this);
+            CanVisable(setting);
+            CanVisable(offset);
+            CanVisable(speed);
+            CanVisable(io);
+        }
+        
+
+        public void CanVisable(Control cons)
+        {
+            foreach (Control con in cons.Controls)
+            {
+                if (con.Tag != null)
+                {
+                    //根据操作权限控制visable与enable
+                    if (con.Tag.ToString().Contains("#"))
+                    {
+                        string t = con.Tag.ToString();
+                        t = t.Substring(t.IndexOf("#") + 1);
+                        t = t.Substring(0, t.IndexOf("#"));
+
+                        if (t.Contains("0"))
+                        {
+                            if (t.Contains(操作权限))
+                            {
+                                con.Visible = true;
+                            }
+                            else
+                            {
+                                con.Visible = false;
+                                continue;
+                            }
+                        }
+                        else //if (t.Contains("1"))没有设置默认都是1
+                        {
+                            if (t.Contains(操作权限))
+                            {
+                                con.Enabled = true;
+                            }
+                            else
+                            {
+                                con.Enabled = false;
+                                continue;
+                            }
+                        }
+                    }
+
+                    //根据运行状态控制enable
+                    if (con.Tag.ToString().Contains("@"))
+                    {
+                        string t = con.Tag.ToString();
+                        t = t.Substring(t.IndexOf("@") + 1);
+                        t = t.Substring(0, t.IndexOf("@"));
+                        if (t.Contains(设备状态.ToString()))
+                        {
+                            con.Enabled = true;
+                        }
+                        else
+                        {
+                            con.Enabled = false;
+                        }
+                    }
+
+                }
+                if (con.Controls.Count > 0)
+                {
+                    CanVisable(con);
+                }
+            }
+        }
+
 
         /// <summary>
         /// MainPanel界面切换
@@ -296,164 +377,59 @@ namespace H5509_V2
                     
                     bool ispass = false;
 
-                    if (InNozzleIC)
+                    if (!空跑模式)
                     {
-                        result = handler.入料吸嘴_真空检测(out string[] iovalue);
+                        if (InNozzleIC)
+                        {
+                            result = handler.入料吸嘴_真空检测(out string[] iovalue);
 
-                        if (InNozzleICOpen[0])
-                        {
-                            if (iovalue[0] == "0")
+                            for (int i = 0; i < iovalue.Length; i++)
                             {
-                                ispass = true;
-                                Listcode.Add("3010001"); //入料手臂-吸--1号吸嘴丢失IC
-                                RunLog("[Code]3010001,[Msg]入料手臂-吸--1号吸嘴丢失IC", LogType.AlarmLog);
+                                if (InNozzleICOpen[i] && InNozzleIC)
+                                {
+                                    if (iovalue[i] == "0")
+                                    {
+                                        ispass = true;
+                                        Listcode.Add($"30{i + 1}0001"); //出料手臂-吸--1号吸嘴丢失IC
+                                        RunLog($"[Code]30{i + 1}0001,[Msg]入料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                                    }
+                                }
                             }
                         }
-                        if (InNozzleICOpen[1])
-                        {
-                            if (iovalue[1] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3020001"); //入料手臂-吸--2号吸嘴丢失IC
-                                RunLog("[Code]3020001,[Msg]入料手臂-吸--2号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (InNozzleICOpen[2])
-                        {
-                            if (iovalue[2] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3030001"); //入料手臂-吸--3号吸嘴丢失IC
-                                RunLog("[Code]3030001,[Msg]入料手臂-吸--3号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (InNozzleICOpen[3])
-                        {
-                            if (iovalue[3] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3040001"); //入料手臂-吸--4号吸嘴丢失IC
-                                RunLog("[Code]3040001,[Msg]入料手臂-吸--4号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                    }
 
-                    if (OutNozzleIC)
-                    {
-                        result = handler.出料吸嘴_真空检测(out string[] iovalue);
+                        if (OutNozzleIC)
+                        {
+                            result = handler.出料吸嘴_真空检测(out string[] iovalue);
 
-                        if (OutNozzleICOpen[0])
-                        {
-                            if (iovalue[0] == "0")
+                            for (int i = 0; i < iovalue.Length; i++)
                             {
-                                ispass = true;
-                                Listcode.Add("3050001"); //出料手臂-吸--1号吸嘴丢失IC
-                                RunLog("[Code]3050001,[Msg]出料手臂-吸--1号吸嘴丢失IC", LogType.AlarmLog);
+                                if (OutNozzleICOpen[i] && OutNozzleIC)
+                                {
+                                    if (iovalue[i] == "0")
+                                    {
+                                        ispass = true;
+                                        Listcode.Add($"30{i + 5}0001"); //出料手臂-吸--1号吸嘴丢失IC
+                                        RunLog($"[Code]30{i + 5}0001,[Msg]出料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                                    }
+                                }
                             }
                         }
-                        if (OutNozzleICOpen[1])
-                        {
-                            if (iovalue[1] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3060001"); //出料手臂-吸--2号吸嘴丢失IC
-                                RunLog("[Code]3060001,[Msg]出料手臂-吸--2号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (OutNozzleICOpen[2])
-                        {
-                            if (iovalue[2] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3070001"); //出料手臂-吸--3号吸嘴丢失IC
-                                RunLog("[Code]3070001,[Msg]出料手臂-吸--3号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (OutNozzleICOpen[3])
-                        {
-                            if (iovalue[3] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3080001"); //出料手臂-吸--4号吸嘴丢失IC
-                                RunLog("[Code]3080001,[Msg]出料手臂-吸--4号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                    }
 
-                    if (TestNozzleIC)
-                    {
-                        result = handler.测试吸嘴_真空检测(out string[] iovalue);
+                        if (TestNozzleIC)
+                        {
+                            result = handler.测试吸嘴_真空检测(out string[] iovalue);
 
-                        if (TestNozzleICOpen[0])
-                        {
-                            if (iovalue[0] == "0")
+                            for (int i = 0; i < iovalue.Length; i++)
                             {
-                                ispass = true;
-                                Listcode.Add("3099901"); //测试手臂-吸--1号吸嘴 丢失IC
-                                RunLog("[Code]3099901,[Msg]测试手臂-吸--1号吸嘴 丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (TestNozzleICOpen[1])
-                        {
-                            if (iovalue[1] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3109901"); //测试手臂-吸--2号吸嘴 丢失IC
-                                RunLog("[Code]3109901,[Msg]测试手臂-吸--2号吸嘴 丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (TestNozzleICOpen[2])
-                        {
-                            if (iovalue[2] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3119901"); //测试手臂-吸--3号吸嘴 丢失IC
-                                RunLog("[Code]3119901,[Msg]测试手臂-吸--3号吸嘴 丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (TestNozzleICOpen[3])
-                        {
-                            if (iovalue[3] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3129901"); //测试手臂-吸--4号吸嘴 丢失IC
-                                RunLog("[Code]3129901,[Msg]测试手臂-吸--4号吸嘴 丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (TestNozzleICOpen[4])
-                        {
-                            if (iovalue[4] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3139901"); //测试手臂-吸--5号吸嘴 丢失IC
-                                RunLog("[Code]3139901,[Msg]测试手臂-吸--5号吸嘴 丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (TestNozzleICOpen[5])
-                        {
-                            if (iovalue[5] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3149901"); //测试手臂-吸--6号吸嘴 丢失IC
-                                RunLog("[Code]3149901,[Msg]测试手臂-吸--6号吸嘴 丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (TestNozzleICOpen[6])
-                        {
-                            if (iovalue[6] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3159901"); //测试手臂-吸--7号吸嘴 丢失IC
-                                RunLog("[Code]3159901,[Msg]测试手臂-吸--7号吸嘴 丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                        if (TestNozzleICOpen[7])
-                        {
-                            if (iovalue[7] == "0")
-                            {
-                                ispass = true;
-                                Listcode.Add("3169901"); //测试手臂-吸--8号吸嘴 丢失IC
-                                RunLog("[Code]3169901,[Msg]测试手臂-吸--8号吸嘴 丢失IC", LogType.AlarmLog);
+                                if (TestNozzleICOpen[i] && TestNozzleIC)
+                                {
+                                    if (iovalue[i] == "0")
+                                    {
+                                        ispass = true;
+                                        Listcode.Add($"3{i + 9:D2}9901"); //出料手臂-吸--1号吸嘴丢失IC
+                                        RunLog($"[Code]3{i + 9:D2}9901,[Msg]测试手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                                    }
+                                }
                             }
                         }
                     }
@@ -464,173 +440,186 @@ namespace H5509_V2
                         IsPause = true;
                     }
 
-                    this.Invoke(new Action(() =>
+                    if (!空跑模式 && 设备状态 != 0)
                     {
-                        if (Com.Iswaitout[testnum]) //如果接收超时
+                        this.Invoke(new Action(() =>
                         {
-                            Com.Iswaitout[testnum] = false;
-                            Listcode.Add($"8{testnum:D2}018");
-                            RunLog($"[Code]8{testnum:D2}018,[Msg]Site{testnum + 1}:接收超时！触发停止", LogType.AlarmLog);
-                            ProgramPause = true; //如果有接收超时则触发停止
-                            IsPause = true;
-
-                            //后续是否需要重新发送
-                        }
-
-
-                        //上传bin
-                        //计算每个dut的pass和fail数量
-                        //上传Num=Num+1
-                        //Socket使用时间
-                        //连续不良报警
-                        //自动关site
-                        //累计不良报警
-                        //总良率报警
-                        //Socket使用次数
-                        if (Com.Listtestsingal.Count != 0)
-                        {
-                            int sitenum = Com.Listtestsingal[0];
-                            RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
-                            Com.Listtestsingal.Remove(sitenum);
-
-                            bool[][] open = SiteTestIC[sitenum];
-
-                            Com.OutBin.TryDequeue(out string[] bins);
-
-                            //string bb = "@TEST_DONE " + sitenum.ToString("D2");
-                            //foreach (string s in bins)
-                            //{
-                            //    bb += " " + s;
-                            //}
-                            //string sql = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
-                            //$"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','{bb}')";
-                            //Task<int> task = SqlServer.runSqlNonQueryAsync(sqlServerConnectionString, sql);
-
-                            foreach (string b in bins)
+                            if (Com.Iswaitout[testnum]) //如果接收超时
                             {
-                                bin(b);
+                                Com.Iswaitout[testnum] = false;
+                                Listcode.Add($"8{testnum:D2}018");
+                                RunLog($"[Code]8{testnum:D2}018,[Msg]Site{testnum + 1}:接收超时！触发停止", LogType.AlarmLog);
+                                ProgramPause = true; //如果有接收超时则触发停止
+                                IsPause = true;
+
+                                //后续是否需要重新发送
                             }
 
-                            int doutnum = sitenum * 8;
-                            for (int m = 0; m < open.Length; m++)
+                            //上传bin
+                            //计算每个dut的pass和fail数量
+                            //上传Num=Num+1
+                            //Socket使用时间
+                            //连续不良报警
+                            //自动关site
+                            //累计不良报警
+                            //总良率报警
+                            //Socket使用次数
+                            if (Com.Listtestsingal.Count != 0)
                             {
-                                for (int n = 0; n < open[m].Length; n++)
+                                int sitenum = Com.Listtestsingal[0];
+                                RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
+                                Com.Listtestsingal.Remove(sitenum);
+
+                                bool[][] open = SiteTestIC[sitenum];
+
+                                Com.OutBin.TryDequeue(out string[] bins);
+
+                                string bb = "@TEST_DONE " + sitenum.ToString("D2");
+                                foreach (string s in bins)
                                 {
-                                    string doutstr = $"{sitenum:D2}{m * 4 + n + 1}";
-                                    if (open[m][n])
+                                    bb += " " + s;
+                                }
+                                string sql = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
+                                $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','{bb}')";
+                                SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+
+                                foreach (string b in bins)
+                                {
+                                    bin(b);
+                                }
+
+                                int doutnum = sitenum * 8;
+                                for (int m = 0; m < open.Length; m++)
+                                {
+                                    for (int n = 0; n < open[m].Length; n++)
                                     {
-                                        if (Auto1.Contains(bins[m * 4 + n]))
+                                        string doutstr = $"{sitenum:D2}{m * 4 + n + 1}";
+                                        if (open[m][n])
                                         {
-                                            Dout128PassNumber[doutnum + (m * 4 + n)]++;
-                                            doutContinueFail[sitenum][n + m * 4] = 0;
+                                            if (Auto1.Contains(bins[m * 4 + n]))
+                                            {
+                                                Dout128PassNumber[doutnum + (m * 4 + n)]++;
+                                                doutContinueFail[sitenum][n + m * 4] = 0;
+                                            }
+                                            else
+                                            {
+                                                Dout128FailNumber[doutnum + (m * 4 + n)]++;
+                                                doutContinueFail[sitenum][n + m * 4]++;
+                                                单dut总不良计数[sitenum][n + m * 4]++;
+                                                单dut总不良累计计数[sitenum][n + m * 4]++;
+                                                总良率报警间隔计数++;
+                                            }
+
+                                            int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, $"update SocketUse set Num=Num+1 where Id='{doutstr}'");
+                                            if (line <= 0) RunLog($"update SocketUse set Num=Num+1 where Id='{doutstr}',返回:{line}");
+                                        }
+
+                                        int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
+                                        int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
+                                        //RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
+                                        sql = $"update DutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{Com.listtesttimespan[sitenum].Ticks} where id='{doutstr}'";
+                                        int line1 = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
+                                        if (line1 <= 0) RunLog(sql + $"返回:{line1}");
+                                        RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
+                                    }
+                                }
+
+                                bool isyieldex = false;
+                                bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
+                                bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
+                                int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+
+                                for (int m = 0; m < doutContinueFail.Count; m++) //连续不良率报警
+                                {
+                                    for (int n = 0; n < doutContinueFail[m].Length; n++)
+                                    {
+                                        if (doutContinueFail[m][n] >= doutfailnum)
+                                        {
+                                            string code = $"6{m + 1:D2}0{n + 1}14";
+                                            if (isalarm) //dout连续不良报警
+                                            {
+                                                isyieldex = true;
+                                                Listcode.Add(code);
+                                            }
+                                            if (isautoclose) //dout连续不良自动关闭该dout，
+                                            {
+                                                int dout = m * 8 + n + 1;
+                                                string labelname = $"lbl_dout{dout}";
+                                                设置信息.开site信息.SetSiteValue(sitenum, dout, "0");
+                                                result = UpdateSiteStatus(设置信息.开site信息.Site名称, 6 + 1, 设置信息.开site信息.GetSiteValue(sitenum));
+                                                if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                                                result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                                                if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                                                设置信息.开site信息 = siteStatus;
+                                                main.刷新开Site状态();
+                                            }
+                                            RunLog($"[Code]{code},[Msg]Site{m + 1}-Dut{n + 1}:连续不良数量:{doutContinueFail[m][n]}>={doutfailnum}", LogType.AlarmLog);
+                                            doutContinueFail[m][n] = 0; //如果已报警良率异常则清空重新计算
+                                        }
+                                    }
+                                }
+
+                                if (设置信息.测试机信息.Dut累计不良报警使能)
+                                {
+                                    for (int i = 0; i < 单dut总不良计数.Count; i++)
+                                    {
+                                        for (int j = 0; j < 单dut总不良计数[i].Length; j++)
+                                        {
+                                            if (单dut总不良计数[i][j] >= 设置信息.测试机信息.Dut累计不良报警个数)
+                                            {
+                                                isyieldex = true;
+                                                string code = $"6{i + 1:D2}0{j + 1}16";
+                                                Listcode.Add(code);
+                                                RunLog($"[Code]{code},[Msg]Site{i + 1}-Dut{i + 1}:累计不良数量:{单dut总不良计数[i][j]}>{设置信息.测试机信息.Dut累计不良报警个数}", LogType.AlarmLog);
+                                                单dut总不良计数[i][j] = 0;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (设置信息.测试机信息.总良率报警使能
+                                    && 出料数 >= 设置信息.测试机信息.总良率报警基数
+                                    && 总良率报警间隔计数 >= 设置信息.测试机信息.总良率报警间隔
+                                    && Auto1良率 <= 设置信息.测试机信息.总良率报警百分比)
+                                {
+                                    isyieldex = true;
+                                    string code = "1400320";
+                                    Listcode.Add(code);
+                                    RunLog($"[Code]{code},[Msg]总良率：{Auto1良率}<{设置信息.测试机信息.总良率报警百分比.ToString("P1")}", LogType.AlarmLog);
+                                    总良率报警间隔计数 = 0;
+                                }
+                                try
+                                {
+                                    result = SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out string value);
+                                    //object su = await SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + motionEx.testerIFParam.socket使用次数);
+                                    bool isint = int.TryParse(value.ToString(), out int socketnum);
+                                    if (isint)
+                                    {
+                                        if (socketnum > Socket使用次数超限数)
+                                        {
+                                            Listcode.Add("1400600");
+                                            Socket使用次数超限数 = socketnum;
                                         }
                                         else
                                         {
-                                            Dout128FailNumber[doutnum + (m * 4 + n)]++;
-                                            doutContinueFail[sitenum][n + m * 4]++;
-                                            单dut总不良计数[sitenum][n + m * 4]++;
-                                            单dut总不良累计计数[sitenum][n + m * 4]++;
-                                            总良率报警间隔计数++;
+                                            if (socketnum == 0)
+                                            {
+                                                Socket使用次数超限数 = 0;
+                                            }
                                         }
-
-                                        int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update SocketUse set Num=Num+1 where Id='{doutstr}'");
-                                        if (line <= 0) RunLog($"update SocketUse set Num=Num+1 where Id='{doutstr}',返回:{line}");
                                     }
-
-                                    int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
-                                    int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
-                                    //RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
-                                    string sql = $"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{Com.listtesttimespan[sitenum].Ticks} where id='{doutstr}'";
-                                    int line1 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
-                                    if (line1 <= 0) RunLog(sql + $"返回:{line1}");
-                                    RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
                                 }
-                            }
+                                catch (Exception ex) { RunLog("读取socket使用次数超限数异常：" + ex.Message); }
 
-                            bool isyieldex = false;
-                            bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
-                            bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
-                            int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
-
-                            for (int m = 0; m < doutContinueFail.Count; m++) //连续不良率报警
-                            {
-                                for (int n = 0; n < doutContinueFail[m].Length; n++)
+                                if (isyieldex) //如果良率异常
                                 {
-                                    if (doutContinueFail[m][n] >= doutfailnum)
-                                    {
-                                        string code = $"6{m + 1:D2}0{n + 1}14";
-                                        if (isalarm) //dout连续不良报警
-                                        {
-                                            isyieldex = true;
-                                            Listcode.Add(code);
-                                        }
-                                        if (isautoclose) //dout连续不良自动关闭该dout，
-                                        {
-                                            int dout = m * 8 + n + 1;
-                                            string labelname = $"lbl_dout{dout}";
-                                            设置信息.开site信息.SetSiteValue(sitenum, dout, "0");
-                                            result = UpdateSiteStatus(设置信息.开site信息.Site名称, 6 + 1, 设置信息.开site信息.GetSiteValue(sitenum));
-                                            if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                                            result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
-                                            if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                                            设置信息.开site信息 = siteStatus;
-                                            main.刷新开Site状态();
-                                        }
-                                        RunLog($"[Code]{code},[Msg]Site{m + 1}-Dut{n + 1}:连续不良数量:{doutContinueFail[m][n]}>={doutfailnum}", LogType.AlarmLog);
-                                        doutContinueFail[m][n] = 0; //如果已报警良率异常则清空重新计算
-                                    }
+                                    ProgramPause = true; //如果有良率异常则触发停止
+                                    IsPause = true;
                                 }
                             }
 
-                            if (设置信息.测试机信息.Dut累计不良报警使能)
-                            {
-                                for (int i = 0; i < 单dut总不良计数.Count; i++)
-                                {
-                                    for (int j = 0; j < 单dut总不良计数[i].Length; j++)
-                                    {
-                                        if (单dut总不良计数[i][j] >= 设置信息.测试机信息.Dut累计不良报警个数)
-                                        {
-                                            isyieldex = true;
-                                            string code = $"6{i + 1:D2}0{j + 1}16";
-                                            Listcode.Add(code);
-                                            RunLog($"[Code]{code},[Msg]Site{i + 1}-Dut{i + 1}:累计不良数量:{单dut总不良计数[i][j]}>{设置信息.测试机信息.Dut累计不良报警个数}", LogType.AlarmLog);
-                                            单dut总不良计数[i][j] = 0;
-                                        }
-                                    }
-                                }
-                            }
-
-                            if (设置信息.测试机信息.总良率报警使能
-                                && 出料数 >= 设置信息.测试机信息.总良率报警基数
-                                && 总良率报警间隔计数 >= 设置信息.测试机信息.总良率报警间隔
-                                && Auto1良率 <= 设置信息.测试机信息.总良率报警百分比)
-                            {
-                                isyieldex = true;
-                                string code = "1400320";
-                                Listcode.Add(code);
-                                RunLog($"[Code]{code},[Msg]总良率：{Auto1良率}<{设置信息.测试机信息.总良率报警百分比.ToString("P1")}", LogType.AlarmLog);
-                                总良率报警间隔计数 = 0;
-                            }
-
-                            //try
-                            //{
-                            //    object su = await SqlServer.runSqlAsync(sqlServerConnectionString, "select count(*) from SocketUse where num>" + motionEx.testerIFParam.socket使用次数);
-                            //    if (int.Parse(su.ToString()) > socket使用次数超限数)
-                            //    {
-                            //        Listcode.Add("1400600");
-                            //        socket使用次数超限数 = int.Parse(su.ToString());
-                            //    }
-                            //}
-                            //catch (Exception ex) { writeDataHelper.RunLog("读取socket使用次数超限数异常：" + ex.Message); }
-
-                            if (isyieldex) //如果良率异常
-                            {
-                                ProgramPause = true; //如果有良率异常则触发停止
-                                IsPause = true;
-                            }
-                        }
-
-                    }));
+                        }));
+                    }
 
                     testnum++;
                     if (testnum >= 16)

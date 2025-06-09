@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dGV_LoadTrayMap = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +44,8 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_LoadTrayMap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,8 +71,8 @@
             this.dGV_LoadTrayMap.Name = "dGV_LoadTrayMap";
             this.dGV_LoadTrayMap.ReadOnly = true;
             this.dGV_LoadTrayMap.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.dGV_LoadTrayMap.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.dGV_LoadTrayMap.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dGV_LoadTrayMap.RowTemplate.Height = 23;
             this.dGV_LoadTrayMap.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dGV_LoadTrayMap.Size = new System.Drawing.Size(399, 583);
@@ -207,11 +209,37 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button7.Location = new System.Drawing.Point(441, 256);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(110, 42);
+            this.button7.TabIndex = 52;
+            this.button7.Text = "状态=1";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Visible = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.button8.Location = new System.Drawing.Point(441, 304);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(110, 42);
+            this.button8.TabIndex = 53;
+            this.button8.Text = "状态=0";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Visible = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // LoadMap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(567, 610);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button6);
@@ -247,5 +275,7 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }

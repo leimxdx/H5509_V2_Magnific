@@ -35,7 +35,7 @@ namespace H5509_V2
                 reader.Read();
                 result = reader[0];
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 result = null;
                 connection.Close();
@@ -65,7 +65,7 @@ namespace H5509_V2
                 connection.Close();
                 return res;
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 connection.Close();
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
@@ -171,7 +171,7 @@ namespace H5509_V2
                 connection.Open();
                 adapter.Fill(result);
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 connection.Close();
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
@@ -200,7 +200,7 @@ namespace H5509_V2
                 connection.Open();
                 adapter.Fill(result, name);
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 connection.Close();
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
@@ -231,7 +231,7 @@ namespace H5509_V2
                     result.Add(reader[0]);
                 }
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 connection.Close();
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
@@ -259,7 +259,7 @@ namespace H5509_V2
                 return res;
 
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 connection.Close();
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
@@ -288,7 +288,7 @@ namespace H5509_V2
                 return res;
 
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 connection.Close();
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
@@ -306,7 +306,7 @@ namespace H5509_V2
                 connection.Open();
                 sqlLiteDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
             }
-            catch (SqlException e)
+            catch (Exception e)
             {
                 sqlLiteDataReader = null;
                 connection.Close();

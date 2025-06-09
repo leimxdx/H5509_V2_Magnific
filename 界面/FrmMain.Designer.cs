@@ -43,6 +43,7 @@
             // 
             // button_main
             // 
+            this.button_main.BackColor = System.Drawing.Color.White;
             this.button_main.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button_main.Image = global::H5509_V2.Properties.Resources.主界面;
             this.button_main.Location = new System.Drawing.Point(12, 12);
@@ -57,6 +58,7 @@
             // 
             // button_setting
             // 
+            this.button_setting.BackColor = System.Drawing.Color.White;
             this.button_setting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button_setting.Image = global::H5509_V2.Properties.Resources.设置与维护图标;
             this.button_setting.Location = new System.Drawing.Point(168, 12);
@@ -71,6 +73,7 @@
             // 
             // button_offset
             // 
+            this.button_offset.BackColor = System.Drawing.Color.White;
             this.button_offset.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button_offset.Image = global::H5509_V2.Properties.Resources.Offset图标;
             this.button_offset.Location = new System.Drawing.Point(324, 12);
@@ -85,6 +88,7 @@
             // 
             // button_speed
             // 
+            this.button_speed.BackColor = System.Drawing.Color.White;
             this.button_speed.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button_speed.Image = global::H5509_V2.Properties.Resources.速度图标;
             this.button_speed.Location = new System.Drawing.Point(480, 12);
@@ -99,6 +103,7 @@
             // 
             // button_io
             // 
+            this.button_io.BackColor = System.Drawing.Color.White;
             this.button_io.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button_io.Image = global::H5509_V2.Properties.Resources.IO图标;
             this.button_io.Location = new System.Drawing.Point(636, 12);
@@ -113,6 +118,7 @@
             // 
             // button_log
             // 
+            this.button_log.BackColor = System.Drawing.Color.White;
             this.button_log.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button_log.Image = global::H5509_V2.Properties.Resources.日志图标;
             this.button_log.Location = new System.Drawing.Point(792, 12);
@@ -127,12 +133,14 @@
             // 
             // button_exit
             // 
+            this.button_exit.BackColor = System.Drawing.Color.White;
             this.button_exit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button_exit.Image = global::H5509_V2.Properties.Resources.退出图标;
             this.button_exit.Location = new System.Drawing.Point(948, 12);
             this.button_exit.Name = "button_exit";
             this.button_exit.Size = new System.Drawing.Size(150, 60);
             this.button_exit.TabIndex = 14;
+            this.button_exit.Tag = "@02@";
             this.button_exit.Text = "退出";
             this.button_exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -173,6 +181,7 @@
             this.Controls.Add(this.button_setting);
             this.Controls.Add(this.button_main);
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.MaximumSize = new System.Drawing.Size(2560, 1440);
             this.Name = "ForMain";
             this.Padding = new System.Windows.Forms.Padding(0);
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));

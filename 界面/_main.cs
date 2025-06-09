@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
@@ -64,6 +65,8 @@ namespace H5509_V2
         private UIButton[] Btn_Close;
 
         private UIDigitalLabel[] Lbl_Temp;
+
+        public Action 刷新界面权限;
 
         public _main()
         {
@@ -197,6 +200,7 @@ namespace H5509_V2
                     if (getstr.Length == 17)
                     {
                         textBoxFlowcaedno.Text = getstr[0].Replace("-", "_"); //ZRS240929001A:
+                        getstr[1] = textBoxmachine.Text;
                         //textBoxmachine.Text = getstr[1]; //BS-TEST:
                         textBoxcustom.Text = getstr[2]; //HM:
                         textBoxproduct.Text = getstr[3];
@@ -486,6 +490,12 @@ namespace H5509_V2
             }
         }
 
+        public void 刷新界面按钮权限()
+        {
+            canVisable(this);
+            刷新界面权限();
+        }
+
         public void canVisable(Control cons)
         {
             foreach (Control con in cons.Controls)
@@ -549,7 +559,7 @@ namespace H5509_V2
             }
         }
 
-        private void Changeoperator()
+        public void 切换为操作员权限()
         {
             windowstimer.Stop();
             当前权限 = "Operator";
@@ -560,7 +570,7 @@ namespace H5509_V2
                 this.combox_juris.SelectedIndexChanged -= new System.EventHandler(this.combox_juris_SelectedIndexChanged);
                 combox_juris.Text = 当前权限;
                 this.combox_juris.SelectedIndexChanged += new System.EventHandler(this.combox_juris_SelectedIndexChanged);
-                canVisable(this);
+                刷新界面按钮权限();
             }));
         }
 
@@ -577,7 +587,7 @@ namespace H5509_V2
                 TimeSpan remainingTime = TimeSpan.FromMilliseconds(权限时间 * 1000) - (DateTime.Now - mousemovetime);
                 if (remainingTime.Seconds < 0)
                 {
-                    Changeoperator();
+                    切换为操作员权限();
                 }
             }
             //this.Invoke(new Action(() =>
@@ -672,7 +682,6 @@ namespace H5509_V2
                     {
                         当前权限 = combox_juris.Text;
                         操作权限 = "A";
-
                         windowstimer.Stop();
                         //checkBox_doorbear.Checked = true;
                     }
@@ -693,7 +702,7 @@ namespace H5509_V2
                                     {
                                         //case "operator": operation = "A"; break;
                                         case "Engineer":
-                                            操作权限 = "B";
+                                            操作权限 = "B"; 
                                             windowstimer.Start();
                                             mousemovetime = DateTime.Now;
                                             break;
@@ -733,7 +742,7 @@ namespace H5509_V2
                 this.combox_juris.SelectedIndexChanged += new System.EventHandler(this.combox_juris_SelectedIndexChanged);
             }
 
-            canVisable(this);
+            刷新界面按钮权限();
         }
 
         public void 刷新档案选项()
@@ -1174,7 +1183,7 @@ namespace H5509_V2
                         {
                             label153.Visible = true;
                             TimeSpan remainingTime = TimeSpan.FromMilliseconds(权限时间 * 1000) - (DateTime.Now - mousemovetime);
-                            label153.Text = $"权限剩余时间: {remainingTime.Seconds} 秒";
+                            label153.Text = $"权限剩余时间: {(int)remainingTime.TotalSeconds} 秒";
                         }
                         else label153.Visible = false;
 
@@ -1401,10 +1410,114 @@ namespace H5509_V2
             heatMap.ShowDialog();
         }
 
+        //public void bin(string b)
+        //{
+        //    for (int i = 0; i < 分bin.Count; i++)
+        //    {
+        //        if (分bin[i].bin == b) 分bin[i].num++;
+        //    }
+        //}
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
-            RunLog("调试操作log",LogType.OperateLog);
-            RunLog("调试报警log", LogType.AlarmLog);
+
+            ////保存工单dut信息
+            //string result = SQLiteHelper.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
+            //if (result == "Success")
+            //{
+            //    string tableName = $"dut_{LotNo[0]}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
+            //    int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table {tableName}(id nchar(10) not NULL,pass int not NULL,total int not NULL,usedTime varchar(50) not NULL)");
+            //    if (line >= -1)
+            //    {
+            //        SqlServer.runSql(SQLServerConnString, dataTable, tableName);
+            //    }
+            //}
+
+            //for (int i = 0; i < Auto2XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Auto2YPoint.Length; j++)
+            //    {
+            //        Auto2DicPoint[$"{i},{j}"] = true;
+            //        Auto2DicBin[$"{i},{j}"] = $"{i}{j}";
+            //    }
+            //}
+            ////int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, $"UPDATE DutAll SET pass = pass + (SELECT dc.pass FROM DutCurrent dc WHERE dc.id = DutAll.id), total = total + (SELECT dc.total FROM DutCurrent dc WHERE dc.id = DutAll.id), usedTime = CAST(usedTime AS INTEGER) + (SELECT dc.usedTime FROM DutCurrent dc WHERE dc.id = DutAll.id) WHERE EXISTS ( SELECT 1 FROM DutCurrent dc WHERE dc.id = DutAll.id)");
+            ////Debug.WriteLine(line);
+            //int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
+            //int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
+
+            ////SQLiteHelper.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
+            ////int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_ZRS240929001A_20250609_10_26_46(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
+            ////int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_ZRS240929001A_20250609_10_26_46(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
+
+            //if (line <= -2)
+            //{
+            //    //isstart = false;
+            //    Listcode.Add("1400330");
+            //    RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
+            //}
+
+            //if (line1 <= -2)
+            //{
+            //    //isstart = false;
+            //    Listcode.Add("1400330");
+            //    RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
+            //}
+
+            //Auto1TrayClear();
+            //Auto2TrayClear();
+            //Fix1TrayClear();
+            //Fix2TrayClear();
+            //Fix3TrayClear();
+
+            // string[] bins = new string[] { "01", "01", "01", "01", "01", "01", "01", "01" };
+
+            //string bb = "@TEST_DONE " + 0.ToString("D2");
+            //foreach (string s in bins)
+            //{
+            //    bb += " " + s;
+            //}
+            //string sql = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
+            //$"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','{bb}')";
+            //Task<int> task = SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+
+            //foreach (string b in bins)
+            //{
+            //    bin(b);
+            //}
+
+            //string result = SQLiteHelper.runSql(SQLiteRunningString, "select id from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out List<object> res);
+
+            //try
+            //{
+            //   result = SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out string value);
+            //    //object su = await SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + motionEx.testerIFParam.socket使用次数);
+            //    bool isint = int.TryParse(value.ToString(), out int socketnum);
+            //    if (isint)
+            //    {
+            //        if (socketnum > Socket使用次数超限数)
+            //        {
+            //            Listcode.Add("1400600");
+            //            Socket使用次数超限数 = socketnum;
+            //        }
+            //        else
+            //        {
+            //            if (socketnum == 0)
+            //            {
+            //                Socket使用次数超限数 = 0;
+            //            }
+            //        }
+            //    }
+            //}
+            //catch (Exception ex) { RunLog("读取socket使用次数超限数异常：" + ex.Message); }
+
+            //            刷新分BIN信息();
+
+            //SQLiteHelper.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
+            //SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
+            //SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
+
+            //RunLog("调试操作log",LogType.OperateLog);
+            //RunLog("调试报警log", LogType.AlarmLog);
             //int passnum = 10;
             //int failnum = 19;
             ////RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
@@ -1588,7 +1701,126 @@ namespace H5509_V2
 
         private void label_driverStatus_TextChanged(object sender, EventArgs e)
         {
-            canVisable(this);
+            刷新界面权限();
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            设备状态 = Convert.ToInt32(uiComboBox1.Text.ToString());
+        }
+
+        private void label139_MouseEnter(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline)));
+            float emsize = label139.Font.Size;
+            this.label139.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label139_MouseLeave(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = System.Drawing.FontStyle.Bold;
+            float emsize = label139.Font.Size;
+            this.label139.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label141_MouseEnter(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline)));
+            float emsize = label141.Font.Size;
+            this.label141.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label141_MouseLeave(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = System.Drawing.FontStyle.Bold;
+            float emsize = label141.Font.Size;
+            this.label141.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label143_MouseEnter(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline)));
+            float emsize = label143.Font.Size;
+            this.label143.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label143_MouseLeave(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = System.Drawing.FontStyle.Bold;
+            float emsize = label143.Font.Size;
+            this.label143.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label142_MouseEnter(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline)));
+            float emsize = label142.Font.Size;
+            this.label142.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label142_MouseLeave(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = System.Drawing.FontStyle.Bold;
+            float emsize = label142.Font.Size;
+            this.label142.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label144_MouseEnter(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline)));
+            float emsize = label144.Font.Size;
+            this.label144.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label144_MouseLeave(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = System.Drawing.FontStyle.Bold;
+            float emsize = label144.Font.Size;
+            this.label144.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label1_MouseEnter(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline)));
+            float emsize = label1.Font.Size;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label1_MouseLeave(object sender, EventArgs e)
+        {
+            System.Drawing.FontStyle fontsty = System.Drawing.FontStyle.Bold;
+            float emsize = label1.Font.Size;
+            this.label1.Font = new System.Drawing.Font("微软雅黑", emsize, fontsty, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+        }
+
+        private void label141_Click(object sender, EventArgs e)
+        {
+            Auto1Map auto1Map = new Auto1Map();
+            auto1Map.ShowDialog();
+        }
+
+        private void label143_Click(object sender, EventArgs e)
+        {
+            Auto2Map auto2Map = new Auto2Map();
+            auto2Map.ShowDialog();
+        }
+
+        private void label142_Click(object sender, EventArgs e)
+        {
+            Fix1Map fix1Map = new Fix1Map();
+            fix1Map.ShowDialog();
+        }
+
+        private void label144_Click(object sender, EventArgs e)
+        {
+            Fix2Map fix2Map = new Fix2Map();
+            fix2Map.ShowDialog();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+            Fix3Map fix3Map = new Fix3Map();
+            fix3Map.ShowDialog();
         }
     }
 }
