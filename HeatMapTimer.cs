@@ -18,7 +18,7 @@ namespace H5509_V2
         public HeatMapTimer()
         {
             Timer = new Ttimer();
-            Timer.Interval = 120 * 1000; //2分钟
+            Timer.Interval = 达温后延时时间 * 1000; //2分钟
             Timer.Elapsed += TimerHeatTick;
 
             WaitTimer = new Ttimer();
@@ -52,7 +52,7 @@ namespace H5509_V2
                     {
                         Timer.Start();
                         StartHeatTime = DateTime.Now;
-                        RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                        //RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                     }
                     else
                     {
@@ -60,7 +60,7 @@ namespace H5509_V2
                         {
                             Timer.Start();
                             StartHeatTime = DateTime.Now;
-                            RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                            //RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                         }
                         else //如果未达温则等达温后再开始倒计时
                         {

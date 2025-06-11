@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbbLogLevel = new Sunny.UI.UIComboBox();
@@ -152,6 +152,7 @@
             this.uiButton17 = new Sunny.UI.UIButton();
             this.dataGridView_f = new System.Windows.Forms.DataGridView();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.uiButton18 = new Sunny.UI.UIButton();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
@@ -349,24 +350,24 @@
             this.dgv_data.AllowUserToDeleteRows = false;
             this.dgv_data.AllowUserToResizeColumns = false;
             this.dgv_data.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgv_data.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.Color.White;
+            this.dgv_data.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgv_data.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_data.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_data.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_data.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_data.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dgv_data.ColumnHeadersHeight = 40;
             this.dgv_data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_data.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -374,14 +375,14 @@
             this.LogLevel,
             this.LogType,
             this.LogContent});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_data.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle16.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle16.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_data.DefaultCellStyle = dataGridViewCellStyle16;
             this.dgv_data.EnableHeadersVisualStyles = false;
             this.dgv_data.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
             this.dgv_data.Location = new System.Drawing.Point(20, 178);
@@ -389,22 +390,22 @@
             this.dgv_data.Name = "dgv_data";
             this.dgv_data.ReadOnly = true;
             this.dgv_data.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_data.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle17.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle17.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_data.RowHeadersDefaultCellStyle = dataGridViewCellStyle17;
             this.dgv_data.RowHeadersWidth = 99;
             this.dgv_data.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            this.dgv_data.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle18.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            dataGridViewCellStyle18.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.Color.White;
+            this.dgv_data.RowsDefaultCellStyle = dataGridViewCellStyle18;
             this.dgv_data.RowTemplate.Height = 35;
             this.dgv_data.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_data.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -415,9 +416,9 @@
             // LogTime
             // 
             this.LogTime.DataPropertyName = "Time";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "yyyy-MM-dd HH:mm:ss";
-            this.LogTime.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle12.Format = "yyyy-MM-dd HH:mm:ss";
+            this.LogTime.DefaultCellStyle = dataGridViewCellStyle12;
             this.LogTime.HeaderText = "日志时间";
             this.LogTime.Name = "LogTime";
             this.LogTime.ReadOnly = true;
@@ -427,8 +428,8 @@
             // LogLevel
             // 
             this.LogLevel.DataPropertyName = "LogLevel";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.LogLevel.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.LogLevel.DefaultCellStyle = dataGridViewCellStyle13;
             this.LogLevel.HeaderText = "日志等级";
             this.LogLevel.Name = "LogLevel";
             this.LogLevel.ReadOnly = true;
@@ -438,8 +439,8 @@
             // LogType
             // 
             this.LogType.DataPropertyName = "LogType";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.LogType.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.LogType.DefaultCellStyle = dataGridViewCellStyle14;
             this.LogType.HeaderText = "日志类型";
             this.LogType.Name = "LogType";
             this.LogType.ReadOnly = true;
@@ -449,8 +450,8 @@
             // LogContent
             // 
             this.LogContent.DataPropertyName = "LogContent";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.LogContent.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.LogContent.DefaultCellStyle = dataGridViewCellStyle15;
             this.LogContent.HeaderText = "日志内容";
             this.LogContent.Name = "LogContent";
             this.LogContent.ReadOnly = true;
@@ -517,6 +518,7 @@
             this.uiTabControl6.TabUnSelectedForeColor = System.Drawing.Color.Black;
             this.uiTabControl6.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
             this.uiTabControl6.TipsForeColor = System.Drawing.Color.Black;
+            this.uiTabControl6.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl6_Selecting);
             // 
             // tabPage25
             // 
@@ -677,7 +679,7 @@
             this.tabPage27.Controls.Add(this.panel1);
             this.tabPage27.Location = new System.Drawing.Point(0, 40);
             this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Size = new System.Drawing.Size(200, 60);
+            this.tabPage27.Size = new System.Drawing.Size(1468, 950);
             this.tabPage27.TabIndex = 4;
             this.tabPage27.Text = "通讯log";
             // 
@@ -688,7 +690,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(263, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(0, 60);
+            this.panel2.Size = new System.Drawing.Size(1205, 950);
             this.panel2.TabIndex = 41;
             // 
             // uiGroupBox1
@@ -701,7 +703,7 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(10, 32, 10, 10);
-            this.uiGroupBox1.Size = new System.Drawing.Size(1, 1);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1205, 743);
             this.uiGroupBox1.TabIndex = 38;
             this.uiGroupBox1.Text = "通讯数据";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -711,7 +713,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(10, 32);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(0, 0);
+            this.richTextBox1.Size = new System.Drawing.Size(1185, 701);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -735,12 +737,12 @@
             this.uiGroupBox2.Controls.Add(this.label5);
             this.uiGroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox2.Location = new System.Drawing.Point(0, -147);
+            this.uiGroupBox2.Location = new System.Drawing.Point(0, 743);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(1, 207);
+            this.uiGroupBox2.Size = new System.Drawing.Size(1205, 207);
             this.uiGroupBox2.TabIndex = 39;
             this.uiGroupBox2.Text = "通讯指令";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1001,7 +1003,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(263, 60);
+            this.panel1.Size = new System.Drawing.Size(263, 950);
             this.panel1.TabIndex = 40;
             // 
             // uiGroupBox3
@@ -1025,7 +1027,7 @@
             this.uiGroupBox3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox3.Name = "uiGroupBox3";
             this.uiGroupBox3.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox3.Size = new System.Drawing.Size(263, 60);
+            this.uiGroupBox3.Size = new System.Drawing.Size(263, 950);
             this.uiGroupBox3.TabIndex = 37;
             this.uiGroupBox3.Text = "串口信息";
             this.uiGroupBox3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1203,9 +1205,9 @@
             this.tabPage29.Controls.Add(this.groupBox4);
             this.tabPage29.Location = new System.Drawing.Point(0, 40);
             this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Size = new System.Drawing.Size(200, 60);
+            this.tabPage29.Size = new System.Drawing.Size(1468, 950);
             this.tabPage29.TabIndex = 6;
-            this.tabPage29.Text = "温控器log";
+            this.tabPage29.Text = "数据查询";
             // 
             // tabControl6
             // 
@@ -1216,12 +1218,12 @@
             this.tabControl6.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.tabControl6.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.tabControl6.ItemSize = new System.Drawing.Size(150, 40);
-            this.tabControl6.Location = new System.Drawing.Point(309, 14);
+            this.tabControl6.Location = new System.Drawing.Point(407, 14);
             this.tabControl6.MainPage = "";
             this.tabControl6.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
             this.tabControl6.Name = "tabControl6";
             this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(1156, 933);
+            this.tabControl6.Size = new System.Drawing.Size(1056, 924);
             this.tabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl6.Style = Sunny.UI.UIStyle.Custom;
             this.tabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -1232,13 +1234,14 @@
             this.tabControl6.TabUnSelectedForeColor = System.Drawing.Color.Black;
             this.tabControl6.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
             this.tabControl6.TipsForeColor = System.Drawing.Color.Black;
+            this.tabControl6.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl6_Selecting);
             // 
             // tabPage14
             // 
             this.tabPage14.Controls.Add(this.tabControl7);
             this.tabPage14.Location = new System.Drawing.Point(0, 40);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(1156, 893);
+            this.tabPage14.Size = new System.Drawing.Size(1056, 884);
             this.tabPage14.TabIndex = 0;
             this.tabPage14.Text = "端口信息";
             this.tabPage14.UseVisualStyleBackColor = true;
@@ -1257,7 +1260,7 @@
             this.tabControl7.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
             this.tabControl7.Name = "tabControl7";
             this.tabControl7.SelectedIndex = 0;
-            this.tabControl7.Size = new System.Drawing.Size(1136, 878);
+            this.tabControl7.Size = new System.Drawing.Size(1036, 872);
             this.tabControl7.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl7.Style = Sunny.UI.UIStyle.Custom;
             this.tabControl7.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -1268,6 +1271,7 @@
             this.tabControl7.TabUnSelectedForeColor = System.Drawing.Color.Black;
             this.tabControl7.TipsFont = new System.Drawing.Font("微软雅黑", 11.25F);
             this.tabControl7.TipsForeColor = System.Drawing.Color.Black;
+            this.tabControl7.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl7_Selecting);
             // 
             // tabPage18
             // 
@@ -1277,7 +1281,7 @@
             this.tabPage18.Controls.Add(this.dataGridView_dutAll);
             this.tabPage18.Location = new System.Drawing.Point(0, 40);
             this.tabPage18.Name = "tabPage18";
-            this.tabPage18.Size = new System.Drawing.Size(1136, 838);
+            this.tabPage18.Size = new System.Drawing.Size(1036, 832);
             this.tabPage18.TabIndex = 0;
             this.tabPage18.Text = "dut总良率";
             // 
@@ -1285,13 +1289,14 @@
             // 
             this.uiButton7.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton7.Location = new System.Drawing.Point(1047, 6);
+            this.uiButton7.Location = new System.Drawing.Point(947, 6);
             this.uiButton7.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton7.Name = "uiButton7";
             this.uiButton7.Size = new System.Drawing.Size(75, 29);
             this.uiButton7.TabIndex = 6;
             this.uiButton7.Text = "刷新";
             this.uiButton7.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton7.Click += new System.EventHandler(this.uiButton7_Click);
             // 
             // uiButton8
             // 
@@ -1304,6 +1309,7 @@
             this.uiButton8.TabIndex = 5;
             this.uiButton8.Text = "清空选定dut记录";
             this.uiButton8.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton8.Click += new System.EventHandler(this.uiButton8_Click);
             // 
             // dataGridView_dutAll
             // 
@@ -1318,7 +1324,7 @@
             this.dataGridView_dutAll.RowHeadersVisible = false;
             this.dataGridView_dutAll.RowTemplate.Height = 23;
             this.dataGridView_dutAll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView_dutAll.Size = new System.Drawing.Size(1116, 784);
+            this.dataGridView_dutAll.Size = new System.Drawing.Size(1016, 784);
             this.dataGridView_dutAll.TabIndex = 0;
             // 
             // tabPage19
@@ -1336,13 +1342,14 @@
             // 
             this.uiButton9.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton9.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton9.Location = new System.Drawing.Point(1047, 6);
+            this.uiButton9.Location = new System.Drawing.Point(947, 6);
             this.uiButton9.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton9.Name = "uiButton9";
             this.uiButton9.Size = new System.Drawing.Size(75, 29);
             this.uiButton9.TabIndex = 7;
             this.uiButton9.Text = "刷新";
             this.uiButton9.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton9.Click += new System.EventHandler(this.uiButton9_Click);
             // 
             // dataGridView_dutCurrent
             // 
@@ -1357,7 +1364,7 @@
             this.dataGridView_dutCurrent.RowHeadersVisible = false;
             this.dataGridView_dutCurrent.RowTemplate.Height = 23;
             this.dataGridView_dutCurrent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView_dutCurrent.Size = new System.Drawing.Size(1116, 784);
+            this.dataGridView_dutCurrent.Size = new System.Drawing.Size(1016, 784);
             this.dataGridView_dutCurrent.TabIndex = 1;
             // 
             // tabPage20
@@ -1375,13 +1382,14 @@
             // 
             this.uiButton10.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton10.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton10.Location = new System.Drawing.Point(1047, 6);
+            this.uiButton10.Location = new System.Drawing.Point(947, 6);
             this.uiButton10.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton10.Name = "uiButton10";
             this.uiButton10.Size = new System.Drawing.Size(75, 29);
             this.uiButton10.TabIndex = 7;
             this.uiButton10.Text = "刷新";
             this.uiButton10.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton10.Click += new System.EventHandler(this.uiButton10_Click);
             // 
             // dataGridView_dutFlowcaedNo
             // 
@@ -1396,7 +1404,7 @@
             this.dataGridView_dutFlowcaedNo.RowHeadersVisible = false;
             this.dataGridView_dutFlowcaedNo.RowTemplate.Height = 23;
             this.dataGridView_dutFlowcaedNo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView_dutFlowcaedNo.Size = new System.Drawing.Size(1116, 784);
+            this.dataGridView_dutFlowcaedNo.Size = new System.Drawing.Size(1016, 784);
             this.dataGridView_dutFlowcaedNo.TabIndex = 2;
             // 
             // tabPage21
@@ -1427,6 +1435,7 @@
             this.uiButton11.TabIndex = 19;
             this.uiButton11.Text = "修改";
             this.uiButton11.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton11.Click += new System.EventHandler(this.uiButton11_Click);
             // 
             // uiButton12
             // 
@@ -1439,18 +1448,20 @@
             this.uiButton12.TabIndex = 18;
             this.uiButton12.Text = "清空选定dut记录";
             this.uiButton12.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton12.Click += new System.EventHandler(this.uiButton12_Click);
             // 
             // uiButton13
             // 
             this.uiButton13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton13.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton13.Location = new System.Drawing.Point(1047, 6);
+            this.uiButton13.Location = new System.Drawing.Point(947, 6);
             this.uiButton13.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton13.Name = "uiButton13";
             this.uiButton13.Size = new System.Drawing.Size(75, 29);
             this.uiButton13.TabIndex = 17;
             this.uiButton13.Text = "刷新";
             this.uiButton13.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton13.Click += new System.EventHandler(this.uiButton13_Click);
             // 
             // numericUpDown1
             // 
@@ -1504,8 +1515,9 @@
             this.dataGridView_socketUsed.RowHeadersVisible = false;
             this.dataGridView_socketUsed.RowTemplate.Height = 23;
             this.dataGridView_socketUsed.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView_socketUsed.Size = new System.Drawing.Size(1116, 784);
+            this.dataGridView_socketUsed.Size = new System.Drawing.Size(1016, 784);
             this.dataGridView_socketUsed.TabIndex = 3;
+            this.dataGridView_socketUsed.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_socketUsed_CellClick);
             // 
             // tabPage15
             // 
@@ -1522,13 +1534,14 @@
             // 
             this.uiButton14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton14.Location = new System.Drawing.Point(1067, 6);
+            this.uiButton14.Location = new System.Drawing.Point(967, 6);
             this.uiButton14.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton14.Name = "uiButton14";
             this.uiButton14.Size = new System.Drawing.Size(75, 29);
             this.uiButton14.TabIndex = 8;
             this.uiButton14.Text = "刷新";
             this.uiButton14.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton14.Click += new System.EventHandler(this.uiButton14_Click);
             // 
             // dataGridView_flowcaedNoInfo
             // 
@@ -1542,8 +1555,9 @@
             this.dataGridView_flowcaedNoInfo.ReadOnly = true;
             this.dataGridView_flowcaedNoInfo.RowHeadersVisible = false;
             this.dataGridView_flowcaedNoInfo.RowTemplate.Height = 23;
+            this.dataGridView_flowcaedNoInfo.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridView_flowcaedNoInfo.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView_flowcaedNoInfo.Size = new System.Drawing.Size(1136, 836);
+            this.dataGridView_flowcaedNoInfo.Size = new System.Drawing.Size(1036, 836);
             this.dataGridView_flowcaedNoInfo.TabIndex = 7;
             // 
             // tabPage16
@@ -1573,49 +1587,54 @@
             // 
             this.uiButton15.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton15.Location = new System.Drawing.Point(1067, 6);
+            this.uiButton15.Location = new System.Drawing.Point(967, 6);
             this.uiButton15.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton15.Name = "uiButton15";
             this.uiButton15.Size = new System.Drawing.Size(75, 29);
             this.uiButton15.TabIndex = 14;
             this.uiButton15.Text = "刷新";
             this.uiButton15.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton15.Click += new System.EventHandler(this.uiButton15_Click);
             // 
             // comboBox_out4
             // 
             this.comboBox_out4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_out4.FormattingEnabled = true;
-            this.comboBox_out4.Location = new System.Drawing.Point(1074, 46);
+            this.comboBox_out4.Location = new System.Drawing.Point(978, 66);
             this.comboBox_out4.Name = "comboBox_out4";
             this.comboBox_out4.Size = new System.Drawing.Size(70, 29);
             this.comboBox_out4.TabIndex = 13;
+            this.comboBox_out4.SelectedIndexChanged += new System.EventHandler(this.comboBox_out4_SelectedIndexChanged);
             // 
             // comboBox_out3
             // 
             this.comboBox_out3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_out3.FormattingEnabled = true;
-            this.comboBox_out3.Location = new System.Drawing.Point(788, 46);
+            this.comboBox_out3.Location = new System.Drawing.Point(716, 66);
             this.comboBox_out3.Name = "comboBox_out3";
             this.comboBox_out3.Size = new System.Drawing.Size(70, 29);
             this.comboBox_out3.TabIndex = 12;
+            this.comboBox_out3.SelectedIndexChanged += new System.EventHandler(this.comboBox_out3_SelectedIndexChanged);
             // 
             // comboBox_out2
             // 
             this.comboBox_out2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_out2.FormattingEnabled = true;
-            this.comboBox_out2.Location = new System.Drawing.Point(502, 46);
+            this.comboBox_out2.Location = new System.Drawing.Point(454, 66);
             this.comboBox_out2.Name = "comboBox_out2";
             this.comboBox_out2.Size = new System.Drawing.Size(70, 29);
             this.comboBox_out2.TabIndex = 11;
+            this.comboBox_out2.SelectedIndexChanged += new System.EventHandler(this.comboBox_out2_SelectedIndexChanged);
             // 
             // comboBox_out1
             // 
             this.comboBox_out1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox_out1.FormattingEnabled = true;
-            this.comboBox_out1.Location = new System.Drawing.Point(216, 46);
+            this.comboBox_out1.Location = new System.Drawing.Point(192, 66);
             this.comboBox_out1.Name = "comboBox_out1";
             this.comboBox_out1.Size = new System.Drawing.Size(70, 29);
             this.comboBox_out1.TabIndex = 10;
+            this.comboBox_out1.SelectedIndexChanged += new System.EventHandler(this.comboBox_out1_SelectedIndexChanged);
             // 
             // groupBox8
             // 
@@ -1623,9 +1642,9 @@
             this.groupBox8.Controls.Add(this.button_out3);
             this.groupBox8.Controls.Add(this.button_out2);
             this.groupBox8.Controls.Add(this.button_out1);
-            this.groupBox8.Location = new System.Drawing.Point(6, 772);
+            this.groupBox8.Location = new System.Drawing.Point(6, 715);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(1136, 105);
+            this.groupBox8.Size = new System.Drawing.Size(1042, 105);
             this.groupBox8.TabIndex = 8;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "数据导出";
@@ -1634,54 +1653,58 @@
             // 
             this.button_out4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_out4.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out4.Location = new System.Drawing.Point(954, 37);
+            this.button_out4.Location = new System.Drawing.Point(870, 37);
             this.button_out4.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_out4.Name = "button_out4";
             this.button_out4.Size = new System.Drawing.Size(100, 29);
             this.button_out4.TabIndex = 15;
             this.button_out4.Text = "导出Excel";
             this.button_out4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_out4.Click += new System.EventHandler(this.button_out4_Click);
             // 
             // button_out3
             // 
             this.button_out3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_out3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out3.Location = new System.Drawing.Point(668, 37);
+            this.button_out3.Location = new System.Drawing.Point(608, 37);
             this.button_out3.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_out3.Name = "button_out3";
             this.button_out3.Size = new System.Drawing.Size(100, 29);
             this.button_out3.TabIndex = 14;
             this.button_out3.Text = "导出Excel";
             this.button_out3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_out3.Click += new System.EventHandler(this.button_out3_Click);
             // 
             // button_out2
             // 
             this.button_out2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_out2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out2.Location = new System.Drawing.Point(382, 37);
+            this.button_out2.Location = new System.Drawing.Point(346, 37);
             this.button_out2.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_out2.Name = "button_out2";
             this.button_out2.Size = new System.Drawing.Size(100, 29);
             this.button_out2.TabIndex = 13;
             this.button_out2.Text = "导出Excel";
             this.button_out2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_out2.Click += new System.EventHandler(this.button_out2_Click);
             // 
             // button_out1
             // 
             this.button_out1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.button_out1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out1.Location = new System.Drawing.Point(96, 37);
+            this.button_out1.Location = new System.Drawing.Point(84, 37);
             this.button_out1.MinimumSize = new System.Drawing.Size(1, 1);
             this.button_out1.Name = "button_out1";
             this.button_out1.Size = new System.Drawing.Size(100, 29);
             this.button_out1.TabIndex = 12;
             this.button_out1.Text = "导出Excel";
             this.button_out1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.button_out1.Click += new System.EventHandler(this.button_out1_Click);
             // 
             // label1605
             // 
             this.label1605.AutoSize = true;
-            this.label1605.Location = new System.Drawing.Point(984, 49);
+            this.label1605.Location = new System.Drawing.Point(900, 69);
             this.label1605.Name = "label1605";
             this.label1605.Size = new System.Drawing.Size(40, 21);
             this.label1605.TabIndex = 7;
@@ -1690,7 +1713,7 @@
             // label1604
             // 
             this.label1604.AutoSize = true;
-            this.label1604.Location = new System.Drawing.Point(698, 46);
+            this.label1604.Location = new System.Drawing.Point(638, 66);
             this.label1604.Name = "label1604";
             this.label1604.Size = new System.Drawing.Size(40, 21);
             this.label1604.TabIndex = 6;
@@ -1699,7 +1722,7 @@
             // label1602
             // 
             this.label1602.AutoSize = true;
-            this.label1602.Location = new System.Drawing.Point(412, 46);
+            this.label1602.Location = new System.Drawing.Point(376, 66);
             this.label1602.Name = "label1602";
             this.label1602.Size = new System.Drawing.Size(40, 21);
             this.label1602.TabIndex = 5;
@@ -1708,7 +1731,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(114, 49);
+            this.label6.Location = new System.Drawing.Point(102, 69);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(64, 21);
             this.label6.TabIndex = 4;
@@ -1722,13 +1745,13 @@
             this.dataGridView_out4.AllowUserToResizeRows = false;
             this.dataGridView_out4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_out4.ColumnHeadersVisible = false;
-            this.dataGridView_out4.Location = new System.Drawing.Point(864, 81);
+            this.dataGridView_out4.Location = new System.Drawing.Point(792, 101);
             this.dataGridView_out4.Name = "dataGridView_out4";
             this.dataGridView_out4.ReadOnly = true;
             this.dataGridView_out4.RowHeadersVisible = false;
             this.dataGridView_out4.RowTemplate.Height = 23;
             this.dataGridView_out4.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out4.Size = new System.Drawing.Size(280, 685);
+            this.dataGridView_out4.Size = new System.Drawing.Size(256, 608);
             this.dataGridView_out4.TabIndex = 3;
             // 
             // dataGridView_out3
@@ -1739,13 +1762,13 @@
             this.dataGridView_out3.AllowUserToResizeRows = false;
             this.dataGridView_out3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_out3.ColumnHeadersVisible = false;
-            this.dataGridView_out3.Location = new System.Drawing.Point(578, 81);
+            this.dataGridView_out3.Location = new System.Drawing.Point(530, 101);
             this.dataGridView_out3.Name = "dataGridView_out3";
             this.dataGridView_out3.ReadOnly = true;
             this.dataGridView_out3.RowHeadersVisible = false;
             this.dataGridView_out3.RowTemplate.Height = 23;
             this.dataGridView_out3.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out3.Size = new System.Drawing.Size(280, 685);
+            this.dataGridView_out3.Size = new System.Drawing.Size(256, 608);
             this.dataGridView_out3.TabIndex = 2;
             // 
             // dataGridView_out2
@@ -1756,13 +1779,13 @@
             this.dataGridView_out2.AllowUserToResizeRows = false;
             this.dataGridView_out2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_out2.ColumnHeadersVisible = false;
-            this.dataGridView_out2.Location = new System.Drawing.Point(292, 81);
+            this.dataGridView_out2.Location = new System.Drawing.Point(268, 101);
             this.dataGridView_out2.Name = "dataGridView_out2";
             this.dataGridView_out2.ReadOnly = true;
             this.dataGridView_out2.RowHeadersVisible = false;
             this.dataGridView_out2.RowTemplate.Height = 23;
             this.dataGridView_out2.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out2.Size = new System.Drawing.Size(280, 685);
+            this.dataGridView_out2.Size = new System.Drawing.Size(256, 608);
             this.dataGridView_out2.TabIndex = 1;
             // 
             // dataGridView_out1
@@ -1773,13 +1796,13 @@
             this.dataGridView_out1.AllowUserToResizeRows = false;
             this.dataGridView_out1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView_out1.ColumnHeadersVisible = false;
-            this.dataGridView_out1.Location = new System.Drawing.Point(6, 81);
+            this.dataGridView_out1.Location = new System.Drawing.Point(6, 101);
             this.dataGridView_out1.Name = "dataGridView_out1";
             this.dataGridView_out1.ReadOnly = true;
             this.dataGridView_out1.RowHeadersVisible = false;
             this.dataGridView_out1.RowTemplate.Height = 23;
             this.dataGridView_out1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out1.Size = new System.Drawing.Size(280, 685);
+            this.dataGridView_out1.Size = new System.Drawing.Size(256, 608);
             this.dataGridView_out1.TabIndex = 0;
             // 
             // tabPage17
@@ -1805,18 +1828,20 @@
             this.uiButton16.TabIndex = 11;
             this.uiButton16.Text = "导出Excel";
             this.uiButton16.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton16.Click += new System.EventHandler(this.uiButton16_Click);
             // 
             // uiButton17
             // 
             this.uiButton17.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton17.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton17.Location = new System.Drawing.Point(1067, 6);
+            this.uiButton17.Location = new System.Drawing.Point(967, 6);
             this.uiButton17.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton17.Name = "uiButton17";
             this.uiButton17.Size = new System.Drawing.Size(75, 29);
             this.uiButton17.TabIndex = 10;
             this.uiButton17.Text = "刷新";
             this.uiButton17.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton17.Click += new System.EventHandler(this.uiButton17_Click);
             // 
             // dataGridView_f
             // 
@@ -1830,51 +1855,64 @@
             this.dataGridView_f.ReadOnly = true;
             this.dataGridView_f.RowHeadersVisible = false;
             this.dataGridView_f.RowTemplate.Height = 23;
+            this.dataGridView_f.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridView_f.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridView_f.Size = new System.Drawing.Size(1136, 836);
+            this.dataGridView_f.Size = new System.Drawing.Size(1036, 836);
             this.dataGridView_f.TabIndex = 8;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.label7);
             this.groupBox4.Controls.Add(this.uiButton18);
             this.groupBox4.Controls.Add(this.listBox1);
             this.groupBox4.Controls.Add(this.textBox5);
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(300, 944);
+            this.groupBox4.Size = new System.Drawing.Size(398, 935);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "批次搜索";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 21);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "工单号：";
             // 
             // uiButton18
             // 
             this.uiButton18.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton18.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton18.Location = new System.Drawing.Point(219, 28);
+            this.uiButton18.Location = new System.Drawing.Point(317, 28);
             this.uiButton18.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton18.Name = "uiButton18";
             this.uiButton18.Size = new System.Drawing.Size(75, 29);
             this.uiButton18.TabIndex = 4;
             this.uiButton18.Text = "搜索";
             this.uiButton18.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton18.Click += new System.EventHandler(this.uiButton18_Click);
             // 
             // listBox1
             // 
-            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.Font = new System.Drawing.Font("微软雅黑", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 21;
+            this.listBox1.ItemHeight = 20;
             this.listBox1.Location = new System.Drawing.Point(6, 63);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(287, 865);
+            this.listBox1.Size = new System.Drawing.Size(386, 864);
             this.listBox1.TabIndex = 2;
+            this.listBox1.Click += new System.EventHandler(this.listBox1_Click);
             // 
             // textBox5
             // 
-            this.textBox5.Location = new System.Drawing.Point(7, 28);
+            this.textBox5.Location = new System.Drawing.Point(86, 28);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(206, 29);
+            this.textBox5.Size = new System.Drawing.Size(225, 29);
             this.textBox5.TabIndex = 0;
             // 
             // _log
@@ -2050,5 +2088,6 @@
         private Sunny.UI.UIButton uiButton18;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label7;
     }
 }

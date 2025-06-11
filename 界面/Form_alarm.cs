@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows.Forms;
 using ClosedXML.Excel;
 using H5509_V2;
+using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
 
 namespace H5509_alarm
@@ -651,6 +652,21 @@ namespace H5509_alarm
                     case "5460001":
                     case "5460002":
                     case "5460003":
+                    case "5430101":
+                    case "5430102":
+                    case "5430103":
+                    case "5440100":
+                    case "5440101":
+                    case "5440102":
+                    case "5440103":
+                    case "5450100":
+                    case "5450101":
+                    case "5450102":
+                    case "5450103":
+                    case "5460100":
+                    case "5460101":
+                    case "5460102":
+                    case "5460103":
                         if (alarm)
                         {
                             S_Shuttle1 += alarmCode + ",";
@@ -687,6 +703,22 @@ namespace H5509_alarm
                     case "5500003":
                     case "5500004":
                     case "5500005":
+                    case "5470100":
+                    case "5470101":
+                    case "5470102":
+                    case "5470103":
+                    case "5480100":
+                    case "5480101":
+                    case "5480102":
+                    case "5480103":
+                    case "5490100":
+                    case "5490101":
+                    case "5490102":
+                    case "5490103":
+                    case "5500100":
+                    case "5500101":
+                    case "5500102":
+                    case "5500103":
                         if (alarm)
                         {
                             S_Shuttle2 += alarmCode + ",";
@@ -2614,6 +2646,61 @@ namespace H5509_alarm
                         }
                         break;
 
+                    //温度异常
+                    case "801219":
+                    case "802219":
+                    case "803219":
+                    case "804219":
+                    case "805219":
+                    case "806219":
+                    case "807219":
+                    case "808219":
+                    case "809219":
+                    case "810219":
+                    case "811219":
+                    case "812219":
+                    case "813219":
+                    case "814219":
+                    case "815219":
+                    case "816219":
+                    case "800319":
+                    case "801319":
+                    case "802319":
+                    case "803319":
+                    case "804319":
+                    case "805319":
+                    case "806319":
+                    case "807319":
+                    case "808319":
+                    case "809319":
+                    case "810319":
+                    case "811319":
+                    case "812319":
+                    case "813319":
+                    case "814319":
+                    case "815319":
+                    case "816319":
+                    case "5430100":
+
+                        if (alarm)
+                        {
+                            S_Temp += alarmCode + ",";
+                        }
+                        else
+                        {
+                            S_Temp = S_Temp.Replace(alarmCode + ",", "");
+                        }
+                        if (S_Temp.Length > 0)
+                        {
+                            Temp.Enabled = false;
+                        }
+                        else
+                        {
+                            Temp.Enabled = true;
+                            Temp.BackColor = Color.Cyan;
+                        }
+                        break;
+
                     //安全门
                     case "9000000":
                     case "9000010":
@@ -2804,7 +2891,7 @@ namespace H5509_alarm
                         //添加动态报警信息
                         switch (alarmCode)
                         {
-                            case "1400500": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("oth",oth).Replace("othAll",othAll); break;
+                            case "1400500": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("oth", oth).Replace("othAll", othAll); break;
                             case "1400600":
                                 {
                                     SQLiteHelper.runSql(SQLiteRunningString, "select id from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out List<object> res);
@@ -2818,12 +2905,119 @@ namespace H5509_alarm
                                 }
                                 break;
 
+                            case "2008007":  //MXX_MoveFail M1_入料手臂Z1轴
+                                { row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M01_入料手臂Z1轴").Replace("Msg", M1_入料手臂Z1轴ErrorMsg); }
+                                break;
+                            case "2009007":  //MXX_MoveFail M2_入料手臂Z2轴
+                                { row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M02_入料手臂Z2轴").Replace("Msg", M2_入料手臂Z2轴ErrorMsg); }
+                                break;
+                            case "2010007": //MXX_MoveFail M3_入料手臂Z3轴
+                                { row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M03_入料手臂Z3轴").Replace("Msg", M3_入料手臂Z3轴ErrorMsg); }
+                                break;
+                            case "2011007":  //MXX_MoveFail M4_入料手臂Z4轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M04_入料手臂Z4轴").Replace("Msg", M4_入料手臂Z4轴ErrorMsg);
+                                }
+                                break;
+                            case "2012007":  //MXX_MoveFail M5_入料手臂P轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M05_入料手臂P轴").Replace("Msg", M5_入料手臂P轴ErrorMsg);
+                                }
+                                break;
+                            case "2013007":  //MXX_MoveFail M6_出料手臂Z1轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M06_出料手臂Z1轴").Replace("Msg", M6_出料手臂Z1轴ErrorMsg);
+                                }
+                                break;
+                            case "2014007":  //MXX_MoveFail M7_出料手臂Z2轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M07_出料手臂Z2轴").Replace("Msg", M7_出料手臂Z2轴ErrorMsg);
+                                }
+                                break;
+                            case "2015007":  //MXX_MoveFail M8_出料手臂Z3轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M08_出料手臂Z3轴").Replace("Msg", M8_出料手臂Z3轴ErrorMsg);
+                                }
+                                break;
+                            case "2016007":  //MXX_MoveFail M9_出料手臂Z4轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M09_出料手臂Z4轴").Replace("Msg", M9_出料手臂Z4轴ErrorMsg);
+                                }
+                                break;
+                            case "2017007":  //MXX_MoveFail M10_出料手臂P轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M10_出料手臂P轴").Replace("Msg", M10_出料手臂P轴ErrorMsg);
+                                }
+                                break;
+                            case "2018007":  //MXX_MoveFail M11_Fix3放IC轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M11_Fix3放IC轴").Replace("Msg", M11_Fix3放IC轴ErrorMsg);
+                                }
+                                break;
+                            case "2019007":  //MXX_MoveFail M12_Empty顶盘轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M12_Empty顶盘轴").Replace("Msg", M12_Empty顶盘轴ErrorMsg);
+                                }
+                                break;
+                            case "2020007":  //MXX_MoveFail M13_Loader顶盘轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M13_Loader顶盘轴").Replace("Msg", M13_Loader顶盘轴ErrorMsg);
+                                }
+                                break;
+                            case "2021007":  //MXX_MoveFail M14_Auto1顶盘轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M14_Auto1顶盘轴").Replace("Msg", M14_Auto1顶盘轴ErrorMsg);
+                                }
+                                break;
+                            case "2022007":  //MXX_MoveFail M15_Auto2顶盘轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M15_Auto2顶盘轴").Replace("Msg", M15_Auto2顶盘轴ErrorMsg);
+                                }
+                                break;
+                            case "2023007":  //MXX_MoveFail M16_入料手臂Y轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M16_入料手臂Y轴").Replace("Msg", M16_入料手臂Y轴ErrorMsg);
+                                }
+                                break;
+                            case "2024007":  //MXX_MoveFail M17_出料手臂Y轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M17_出料手臂Y轴").Replace("Msg", M17_出料手臂Y轴ErrorMsg);
+                                }
+                                break;
+                            case "2025007":  //MXX_MoveFail M18_放Tary盘轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M18_放Tary盘轴").Replace("Msg", M18_放Tary盘轴ErrorMsg);
+                                }
+                                break;
+                            case "2026007":  //MXX_MoveFail M19_测试手臂Z轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M19_测试手臂Z轴").Replace("Msg", M19_测试手臂Z轴ErrorMsg);
+                                }
+                                break;
+                            case "2027007":  //MXX_MoveFail M20_飞梭轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M20_飞梭轴").Replace("Msg", M20_飞梭轴ErrorMsg);
+                                }
+                                break;
+                            case "2028007":  //MXX_MoveFail M21_测试手臂X轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M21_测试手臂X轴").Replace("Msg", M21_测试手臂X轴ErrorMsg);
+                                }
+                                break;
+                            case "2029007":  //MXX_MoveFail M22_入料手臂X轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M22_入料手臂X轴").Replace("Msg", M22_入料手臂X轴ErrorMsg);
+                                }
+                                break;
+                            case "2030007":  //MXX_MoveFail M23_出料手臂X轴
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M23_出料手臂X轴").Replace("Msg", M23_出料手臂X轴ErrorMsg);
+                                }
+                                break;
                         }
                     }
 
                 }
-
-
                 dataGridView_alarm.Rows.Add(row);
             }));
         }

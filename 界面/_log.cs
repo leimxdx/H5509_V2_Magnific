@@ -269,7 +269,7 @@ namespace H5509_V2
                     var worksheet = workbook.Worksheet(1) ?? workbook.Worksheets.First();
                     foreach (var row in worksheet.RowsUsed().Skip(1))
                     {
-                        DateTime logTime = row.Cell(1).GetDateTime();
+                        DateTime logTime = row.Cell(1).GetDateTime().ToString().ToDateTime();
 
                         // 检查时间范围
                         if (startTime.HasValue && logTime < startTime.Value) continue;
@@ -454,7 +454,7 @@ namespace H5509_V2
             //筛选符合查询条件的文件名
             //1、找到时间范围内的最后一个文件
             //2、找的时间范围内的第一个文件的前一个文件
-            for(int i=0;i< tempFiles.Count;i++ )
+            for (int i = 0; i < tempFiles.Count; i++)
             {
                 // 从文件名解析时间（格式：Log_yyyyMMdd-HHmmss.xlsx）
                 string fileName = Path.GetFileNameWithoutExtension(tempFiles[i]);
@@ -888,5 +888,975 @@ namespace H5509_V2
                 MessageBox.Show($"Site:{site + 1}未在测试!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void uiButton18_Click(object sender, EventArgs e)
+        {
+            update_listBox1();
+        }
+
+        public void update_listBox1()
+        {
+            listBox1.Items.Clear();
+            string sql = $"select 开始时间,工单号,生产模式 from FlowcaedNoInfo where 工单号 like '%{textBox5.Text}%' order by 开始时间 desc";
+
+            string res = SQLiteHelper.runSql(SQLiteRunningString, sql, out DataTable dt);
+            if (res != "Success" || dt.Rows.Count < 1) return;
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                listBox1.Items.Add(dt.Rows[i].ItemArray[0] + "-" + dt.Rows[i].ItemArray[1] + "-" + dt.Rows[i].ItemArray[2]);
+            }
+        }
+
+        private void uiTabControl6_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            //点击数据查询时更新数据
+            if (e.TabPage.Text == "数据查询")
+            {
+                //button23.PerformClick();
+                uiButton18_Click(uiButton18, EventArgs.Empty);
+                if (listBox1.Items.Count > 0) listBox1.SelectedIndex = 0;
+
+                switch (tabControl6.SelectedTab.Text)
+                {
+                    case "端口信息":
+                        {
+                            switch (tabControl7.SelectedTab.Text)
+                            {
+                                //dut总良率
+                                case "dut总良率": uiButton7_Click(uiButton7, EventArgs.Empty); break;
+                                //当前工单dut实时良率
+                                case "当前工单dut实时良率": uiButton9_Click(uiButton9, EventArgs.Empty); break;
+                                //工单dut良率查询
+                                case "工单dut良率查询": uiButton10_Click(uiButton10, EventArgs.Empty); break;
+                                //socket使用次数
+                                case "socket使用次数": uiButton13_Click(uiButton13, EventArgs.Empty); break;
+                            }
+                        }
+                        break;
+                    //工单详情
+                    case "工单详情": uiButton14_Click(uiButton14, EventArgs.Empty); break;
+                    //Bin项信息
+                    case "Bin项信息": uiButton15_Click(uiButton15, EventArgs.Empty); break;
+                    //料表信息
+                    case "料表信息": uiButton17_Click(uiButton17, EventArgs.Empty); break;
+                }
+            }
+        }
+
+        //dut总良率刷新
+        private void uiButton7_Click(object sender, EventArgs e)
+        {
+            dataGridView_dutAll.Columns.Clear();
+            //初始化dataGridView_dutAll
+            dataGridView_dutAll.EnableHeadersVisualStyles = false;
+            dataGridView_dutAll.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView_dutAll.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView_dutAll.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridView_dutAll.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView_dutAll.DefaultCellStyle.Font = new Font("微软雅黑", 9);
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == 0)
+                {
+                    dataGridView_dutAll.Columns.Add(0.ToString(), "Site号");
+                    dataGridView_dutAll.Columns[i].Width = 60;
+                }
+                else
+                {
+                    dataGridView_dutAll.Columns.Add(i.ToString(), i.ToString());
+                    dataGridView_dutAll.Columns[i].Width = 119;
+                }
+                dataGridView_dutAll.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView_dutAll.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                //dataGridView_dutAll.Columns[i].HeaderCell.Style.BackColor = Color.LightGray;
+
+            }
+            dataGridView_dutAll.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView_dutAll.ColumnHeadersHeight = 30;
+            for (int i = 0; i < 16; i++)
+            {
+                dataGridView_dutAll.Rows.Add();
+                dataGridView_dutAll.Rows[i].Cells[0].Value = i.ToString("D2");
+                dataGridView_dutAll.Rows[i].Cells[0].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView_dutAll.Rows[i].Cells[0].ReadOnly = false;
+                dataGridView_dutAll.Rows[i].Cells[0].Style.BackColor = Color.LightGray;
+                dataGridView_dutAll.Rows[i].Cells[0].Style.SelectionBackColor = Color.LightGray;
+                dataGridView_dutAll.Rows[i].Cells[0].Style.SelectionForeColor = Color.Black;
+                dataGridView_dutAll.Rows[i].Height = 47;
+            }
+            try
+            {
+                update_dataGridView_dutAll();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+        public void update_dataGridView_dutAll()
+        {
+            string sql = "SELECT * FROM dutAll";
+            SQLiteHelper.runSql(SQLiteRunningString, sql, out DataTable dataTable);
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                if (dr.ItemArray[3].ToString().Trim(' ') == "0")
+                {
+                    continue;
+                }
+                TimeSpan ts;
+                if (dr.ItemArray[3].ToString().Trim(' ').Length < 7)
+                {
+                    ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString()));
+                }
+                else
+                {
+                    ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
+                }
+                string value = ts.ToString().Replace(".", "天") + "\r\n";
+                value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
+                double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
+
+                if (d.ToString("P1") == "100.0%")
+                {
+                    d = ((int)(d * 1000)) * 1.0 / 1000;
+                }
+                value += d.ToString("P1");
+
+                dataGridView_dutAll.Rows[int.Parse(dr.ItemArray[0].ToString().Substring(0, 2))].Cells[int.Parse(dr.ItemArray[0].ToString().Substring(2, 1))].Value = value;
+            }
+        }
+
+
+        //当前工单dut实时良率刷新
+        private void uiButton9_Click(object sender, EventArgs e)
+        {
+            dataGridView_dutCurrent.Columns.Clear();
+            //初始化dataGridView_dutCurrent
+            dataGridView_dutCurrent.EnableHeadersVisualStyles = false;
+            dataGridView_dutCurrent.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView_dutCurrent.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView_dutCurrent.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridView_dutCurrent.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView_dutCurrent.DefaultCellStyle.Font = new Font("微软雅黑", 9);
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == 0)
+                {
+                    dataGridView_dutCurrent.Columns.Add(0.ToString(), "Site号");
+                    dataGridView_dutCurrent.Columns[i].Width = 60;
+                }
+                else
+                {
+                    dataGridView_dutCurrent.Columns.Add(i.ToString(), i.ToString());
+                    dataGridView_dutCurrent.Columns[i].Width = 119;
+                }
+                dataGridView_dutCurrent.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView_dutCurrent.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                //dataGridView_dutCurrent.Columns[i].HeaderCell.Style.BackColor = Color.LightGray;
+
+            }
+            dataGridView_dutCurrent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView_dutCurrent.ColumnHeadersHeight = 30;
+            for (int i = 0; i < 16; i++)
+            {
+                dataGridView_dutCurrent.Rows.Add();
+                dataGridView_dutCurrent.Rows[i].Cells[0].Value = i.ToString("D2");
+                dataGridView_dutCurrent.Rows[i].Cells[0].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView_dutCurrent.Rows[i].Cells[0].ReadOnly = false;
+                dataGridView_dutCurrent.Rows[i].Cells[0].Style.BackColor = Color.LightGray;
+                dataGridView_dutCurrent.Rows[i].Cells[0].Style.SelectionBackColor = Color.LightGray;
+                dataGridView_dutCurrent.Rows[i].Cells[0].Style.SelectionForeColor = Color.Black;
+                dataGridView_dutCurrent.Rows[i].Height = 47;
+            }
+            try
+            {
+                update_dataGridView_dutCurrent();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+
+        public void update_dataGridView_dutCurrent()
+        {
+            string sql = "SELECT * FROM dutCurrent";
+            SQLiteHelper.runSql(SQLiteRunningString, sql, out DataTable dataTable);
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                if (dr.ItemArray[3].ToString().Trim(' ') == "0")
+                {
+                    continue;
+                }
+                TimeSpan ts;
+                if (dr.ItemArray[3].ToString().Trim(' ').Length < 7)
+                {
+                    ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString()));
+                }
+                else
+                {
+                    ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
+                }
+                string value = ts.ToString().Replace(".", "天") + "\r\n";
+                value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
+                double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
+
+                if (d.ToString("P1") == "100.0%")
+                {
+                    d = ((int)(d * 1000)) * 1.0 / 1000;
+                }
+                value += d.ToString("P1");
+
+                dataGridView_dutCurrent.Rows[int.Parse(dr.ItemArray[0].ToString().Substring(0, 2))].Cells[int.Parse(dr.ItemArray[0].ToString().Substring(2, 1))].Value = value;
+            }
+        }
+
+
+
+        //工单dut良率查询刷新
+        private void uiButton10_Click(object sender, EventArgs e)
+        {
+            dataGridView_dutFlowcaedNo.Columns.Clear();
+            //初始化dataGridView_dutFlowcaedNo
+            dataGridView_dutFlowcaedNo.EnableHeadersVisualStyles = false;
+            dataGridView_dutFlowcaedNo.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView_dutFlowcaedNo.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView_dutFlowcaedNo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridView_dutFlowcaedNo.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView_dutFlowcaedNo.DefaultCellStyle.Font = new Font("微软雅黑", 9);
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == 0)
+                {
+                    dataGridView_dutFlowcaedNo.Columns.Add(0.ToString(), "Site号");
+                    dataGridView_dutFlowcaedNo.Columns[i].Width = 60;
+                }
+                else
+                {
+                    dataGridView_dutFlowcaedNo.Columns.Add(i.ToString(), i.ToString());
+                    dataGridView_dutFlowcaedNo.Columns[i].Width = 119;
+                }
+                dataGridView_dutFlowcaedNo.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView_dutFlowcaedNo.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                //dataGridView_dutFlowcaedNo.Columns[i].HeaderCell.Style.BackColor = Color.LightGray;
+
+            }
+            dataGridView_dutFlowcaedNo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView_dutFlowcaedNo.ColumnHeadersHeight = 30;
+            for (int i = 0; i < 16; i++)
+            {
+                dataGridView_dutFlowcaedNo.Rows.Add();
+                dataGridView_dutFlowcaedNo.Rows[i].Cells[0].Value = i.ToString("D2");
+                dataGridView_dutFlowcaedNo.Rows[i].Cells[0].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView_dutFlowcaedNo.Rows[i].Cells[0].ReadOnly = false;
+                dataGridView_dutFlowcaedNo.Rows[i].Cells[0].Style.BackColor = Color.LightGray;
+                dataGridView_dutFlowcaedNo.Rows[i].Cells[0].Style.SelectionBackColor = Color.LightGray;
+                dataGridView_dutFlowcaedNo.Rows[i].Cells[0].Style.SelectionForeColor = Color.Black;
+                dataGridView_dutFlowcaedNo.Rows[i].Height = 47;
+            }
+            try
+            {
+                update_dataGridView_dutFlowcaedNo();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        public void update_dataGridView_dutFlowcaedNo()
+        {
+            string[] s;
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+            }
+
+            string sql = "SELECT * FROM dut_" + s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss");
+
+            SqlServer.runSql(SQLServerConnString, sql, out DataTable dataTable);
+
+            foreach (DataRow dr in dataTable.Rows)
+            {
+                if (dr.ItemArray[3].ToString().Trim(' ') == "0")
+                {
+                    continue;
+                }
+                TimeSpan ts;
+                if (dr.ItemArray[3].ToString().Trim(' ').Length < 7)
+                {
+                    ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString()));
+                }
+                else
+                {
+                    ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
+                }
+                string value = ts.ToString().Replace(".", "天") + "\r\n";
+                value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
+                double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
+
+                if (d.ToString("P1") == "100.0%")
+                {
+                    d = ((int)(d * 1000)) * 1.0 / 1000;
+                }
+                value += d.ToString("P1");
+
+                dataGridView_dutFlowcaedNo.Rows[int.Parse(dr.ItemArray[0].ToString().Substring(0, 2))].Cells[int.Parse(dr.ItemArray[0].ToString().Substring(2, 1))].Value = value;
+            }
+        }
+
+        //socket使用次数刷新
+        private void uiButton13_Click(object sender, EventArgs e)
+        {
+            dataGridView_socketUsed.Columns.Clear();
+            //初始化dataGridView_socketUsed
+            dataGridView_socketUsed.EnableHeadersVisualStyles = false;
+            dataGridView_socketUsed.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView_socketUsed.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView_socketUsed.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridView_socketUsed.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView_socketUsed.DefaultCellStyle.Font = new Font("微软雅黑", 9);
+            for (int i = 0; i < 9; i++)
+            {
+                if (i == 0)
+                {
+                    dataGridView_socketUsed.Columns.Add(0.ToString(), "Site号");
+                    dataGridView_socketUsed.Columns[i].Width = 60;
+                }
+                else
+                {
+                    dataGridView_socketUsed.Columns.Add(i.ToString(), i.ToString());
+                    dataGridView_socketUsed.Columns[i].Width = 119;
+                }
+                dataGridView_socketUsed.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView_socketUsed.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                //dataGridView_socketUsed.Columns[i].HeaderCell.Style.BackColor = Color.LightGray;
+
+            }
+            dataGridView_socketUsed.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView_socketUsed.ColumnHeadersHeight = 30;
+            for (int i = 0; i < 16; i++)
+            {
+                dataGridView_socketUsed.Rows.Add();
+                dataGridView_socketUsed.Rows[i].Cells[0].Value = i.ToString("D2");
+                dataGridView_socketUsed.Rows[i].Cells[0].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView_socketUsed.Rows[i].Cells[0].ReadOnly = false;
+                dataGridView_socketUsed.Rows[i].Cells[0].Style.BackColor = Color.LightGray;
+                dataGridView_socketUsed.Rows[i].Cells[0].Style.SelectionBackColor = Color.LightGray;
+                dataGridView_socketUsed.Rows[i].Cells[0].Style.SelectionForeColor = Color.Black;
+                dataGridView_socketUsed.Rows[i].Height = 47;
+            }
+            try
+            {
+                update_dataGridView_socketUsed();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+        }
+        public void update_dataGridView_socketUsed()
+        {
+            string res = SQLiteHelper.runSql(SQLiteRunningString, "select Id, Num from SocketUse", out DataTable dt);
+            if (res != "Success") return;
+            foreach (DataRow dr in dt.Rows)
+            {
+                //Debug.WriteLine(dr.ItemArray[0].ToString());
+                dataGridView_socketUsed.Rows[int.Parse(dr.ItemArray[0].ToString().Substring(0, 2))].Cells[int.Parse(dr.ItemArray[0].ToString().Substring(2, 1))].Value = dr.ItemArray[1].ToString();
+
+            }
+        }
+
+        //工单详情刷新
+        private void uiButton14_Click(object sender, EventArgs e)
+        {
+            dataGridView_flowcaedNoInfo.Columns.Clear();
+            //初始化dataGridView_flowcaedNoInfo
+            dataGridView_flowcaedNoInfo.EnableHeadersVisualStyles = false;
+            dataGridView_flowcaedNoInfo.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView_flowcaedNoInfo.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView_flowcaedNoInfo.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridView_flowcaedNoInfo.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView_flowcaedNoInfo.DefaultCellStyle.Font = new Font("Microsoft YaHei UI", 10);
+
+            dataGridView_flowcaedNoInfo.Columns.Add(0.ToString(), "序号");
+            dataGridView_flowcaedNoInfo.Columns[0].Width = 75;
+            dataGridView_flowcaedNoInfo.Columns.Add(1.ToString(), "生产信息");
+            dataGridView_flowcaedNoInfo.Columns[1].Width = 200;
+            dataGridView_flowcaedNoInfo.Columns.Add(2.ToString(), "内容");
+            dataGridView_flowcaedNoInfo.Columns[2].Width = 758;
+            for (int i = 0; i < dataGridView_flowcaedNoInfo.Columns.Count; i++)
+            {
+                dataGridView_flowcaedNoInfo.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView_flowcaedNoInfo.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+            dataGridView_flowcaedNoInfo.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            dataGridView_flowcaedNoInfo.ColumnHeadersHeight = 34;
+            for (int i = 0; i < 40; i++)
+            {
+                dataGridView_flowcaedNoInfo.Rows.Add();
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[0].Value = (i + 1).ToString("D2");
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[0].Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[0].ReadOnly = false;
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[0].Style.BackColor = Color.LightGray;
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[0].Style.SelectionBackColor = Color.LightGray;
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[0].Style.SelectionForeColor = Color.Black;
+                dataGridView_flowcaedNoInfo.Rows[i].Height = 20;
+            }
+            string sql = "select * from flowcaedNoInfo where 产品类型=''";
+            string res = SQLiteHelper.runSql(SQLiteRunningString, sql, out DataTable dt);
+
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[1].Value = dt.Columns[i].ColumnName;
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[2].Value = "";
+            }
+
+            update_dataGridView_flowcaedNoInfo();
+
+        }
+
+        public void update_dataGridView_flowcaedNoInfo()
+        {
+            string[] s;
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+            }
+            string sql = $"select * from flowcaedNoInfo where 开始时间='{s[0]}' and 工单号='{s[1]}'";
+            string res = SQLiteHelper.runSql(SQLiteRunningString, sql, out DataTable dt);
+            if (res != "Success" || dt.Rows.Count < 1) return;
+            for (int i = 0; i < dt.Columns.Count; i++)
+            {
+                dataGridView_flowcaedNoInfo.Rows[i].Cells[2].Value = dt.Rows[0].ItemArray[i].ToString();
+            }
+
+        }
+
+        //Bin项信息刷新
+        private void uiButton15_Click(object sender, EventArgs e)
+        {
+            string[] s;
+            //清空dataGridView_out 1~4
+            for (int i = 1; i <= 4; i++)
+            {
+                (tabPage16.Controls["comboBox_out" + i] as ComboBox).Items.Clear();
+                (tabPage16.Controls["dataGridView_out" + i] as DataGridView).Columns.Clear();
+            }
+
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+            }
+
+            string res = SqlServer.runSql(SQLServerConnString, $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='auto2'", out int num1);
+            if (res == "Success" && num1 > 0)
+            {
+                for (int i = 1; i <= num1; i++)
+                {
+                    comboBox_out1.Items.Add(i.ToString());
+                }
+                comboBox_out1.SelectedIndex = 0;
+            }
+            res = SqlServer.runSql(SQLServerConnString, $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix1'", out int num2);
+            if (res == "Success" && num2 > 0)
+            {
+                for (int i = 1; i <= num2; i++)
+                {
+                    comboBox_out2.Items.Add(i.ToString());
+                }
+                comboBox_out2.SelectedIndex = 0;
+            }
+            res = SqlServer.runSql(SQLServerConnString, $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix2'", out int num3);
+            if (res == "Success" && num3 > 0)
+            {
+                for (int i = 1; i <= num3; i++)
+                {
+                    comboBox_out3.Items.Add(i.ToString());
+                }
+                comboBox_out3.SelectedIndex = 0;
+            }
+            res = SqlServer.runSql(SQLServerConnString, $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix3'", out int num4);
+            if (res == "Success" && num4 > 0)
+            {
+                for (int i = 1; i <= num4; i++)
+                {
+                    comboBox_out4.Items.Add(i.ToString());
+                }
+                comboBox_out4.SelectedIndex = 0;
+            }
+        }
+
+        //料表信息刷新
+        private void uiButton17_Click(object sender, EventArgs e)
+        {
+            dataGridView_f.Columns.Clear();
+            //初始化dataGridView_f
+            dataGridView_f.EnableHeadersVisualStyles = false;
+            dataGridView_f.ColumnHeadersDefaultCellStyle.BackColor = Color.LightGray;
+            dataGridView_f.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            //dataGridView_f.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dataGridView_f.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridView_f.DefaultCellStyle.Font = new Font("微软雅黑", 10);
+
+            dataGridView_f.Columns.Add(0.ToString(), "批次开始日期");
+            dataGridView_f.Columns[0].Width = 120;
+            dataGridView_f.Columns.Add(1.ToString(), "获取MAP时间");
+            dataGridView_f.Columns[1].Width = 170;
+            dataGridView_f.Columns.Add(2.ToString(), "料号");
+            dataGridView_f.Columns[2].Width = 170;
+            dataGridView_f.Columns.Add(3.ToString(), "批号");
+            dataGridView_f.Columns[3].Width = 90;
+            dataGridView_f.Columns.Add(4.ToString(), "MAP信息");
+            dataGridView_f.Columns[4].Width = 483;
+            for (int i = 0; i < dataGridView_f.Columns.Count; i++)
+            {
+                dataGridView_f.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridView_f.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+            update_dataGridView_f();
+        }
+        public void update_dataGridView_f()
+        {
+            string[] s;
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+
+            }
+            string sql = $"select * from f_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")}  order by 获取MAP时间";
+            string res = SqlServer.runSql(SQLServerConnString, sql, out DataTable dt);
+            if (res != "Success" || dt.Rows.Count < 1) return;
+            foreach (DataRow dr in dt.Rows)
+            {
+                dataGridView_f.Rows.Add(dr.ItemArray);
+            }
+        }
+
+        //清除全部选定socket使用次数记录
+        private void uiButton12_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_socketUsed.SelectedCells.Count < 1)
+            {
+                return;
+            }
+            for (int i = 0; i < dataGridView_socketUsed.SelectedCells.Count; i++)
+            {
+                if (dataGridView_socketUsed.SelectedCells[i].ColumnIndex == 0)
+                {
+                    dataGridView_socketUsed.SelectedCells[i].Selected = false;
+                    i--;
+                }
+            }
+            if (dataGridView_socketUsed.SelectedCells.Count < 1)
+            {
+                return;
+            }
+            DialogResult result = MessageBox.Show("共选择 " + dataGridView_socketUsed.SelectedCells.Count + " 个dut，请确认是否清零！", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                int c = 0;
+                for (int i = 0; i < dataGridView_socketUsed.SelectedCells.Count; i++)
+                {
+                    string sql = $"update SocketUse set Num = {0} where Id = '{dataGridView_socketUsed.SelectedCells[i].RowIndex.ToString("D2") + dataGridView_socketUsed.SelectedCells[i].ColumnIndex.ToString()}'";
+                    try
+                    {
+                        int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
+                        if (line > 0)
+                        {
+                            c++;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"清零失败！共计选择 {dataGridView_socketUsed.SelectedCells.Count} 个，成功 {c} 个，失败 {dataGridView_socketUsed.SelectedCells.Count - c} 个，详细信息：" + ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                }
+
+                if (c == dataGridView_socketUsed.SelectedCells.Count)
+                {
+                    MessageBox.Show("清零成功！共清零 " + c + " 个dut！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"清零失败！共计选择 {dataGridView_socketUsed.SelectedCells.Count} 个，成功 {c} 个，失败 {dataGridView_socketUsed.SelectedCells.Count - c} 个。", "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                update_dataGridView_socketUsed();
+
+            }
+        }
+
+        //清除选定dut总良率记录
+        private void uiButton8_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("共选择 " + dataGridView_dutAll.SelectedCells.Count + " 个dut，请确认是否清零！", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                int c = 0;
+                for (int i = 0; i < dataGridView_dutAll.SelectedCells.Count; i++)
+                {
+                    if (dataGridView_dutAll.SelectedCells[i].ColumnIndex == 0) continue;
+
+                    string sql = $"update dutAll set pass=0,total=0,usedTime='{new TimeSpan().Ticks}' where Id = '{dataGridView_dutAll.SelectedCells[i].RowIndex.ToString("D2") + dataGridView_dutAll.SelectedCells[i].ColumnIndex.ToString()}'";
+                    try
+                    {
+                        int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
+                        if (line > 0)
+                        {
+                            c++;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"清零失败！共计选择 {dataGridView_dutAll.SelectedCells.Count} 个，成功 {c} 个，失败 {dataGridView_dutAll.SelectedCells.Count - c} 个，详细信息：" + ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+
+                if (c == dataGridView_dutAll.SelectedCells.Count)
+                {
+                    MessageBox.Show("清零成功！共清零 " + c + " 个dut！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show($"清零失败！共计选择 {dataGridView_dutAll.SelectedCells.Count} 个，成功 {c} 个，失败 {dataGridView_dutAll.SelectedCells.Count - c} 个。", "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                update_dataGridView_dutAll();
+
+            }
+        }
+
+        private void tabControl7_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            switch (e.TabPage.Text)
+            {
+                //总良率: uiButton7
+                case "dut总良率": uiButton7_Click(uiButton7, EventArgs.Empty); break;
+                //当前工单dut实时良率: uiButton9
+                case "当前工单dut实时良率": uiButton9_Click(uiButton9, EventArgs.Empty); break;
+                //工单dut良率查询: uiButton10
+                case "工单dut良率查询": uiButton10_Click(uiButton10, EventArgs.Empty); break;
+                //socket使用次数: uiButton13
+                case "socket使用次数": uiButton13_Click(uiButton13, EventArgs.Empty); break;
+            }
+        }
+
+        private void listBox1_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItems == null) return;
+
+            switch (tabControl6.SelectedTab.Text)
+            {
+                case "端口信息":
+                    {
+                        switch (tabControl7.SelectedTab.Text)
+                        {
+                            //dut总良率
+                            case "dut总良率": uiButton7_Click(uiButton7, EventArgs.Empty); break;
+                            //当前工单dut实时良率
+                            case "当前工单dut实时良率": uiButton9_Click(uiButton9, EventArgs.Empty); break;
+                            //工单dut良率查询
+                            case "工单dut良率查询": uiButton10_Click(uiButton10, EventArgs.Empty); break;
+                            //socket使用次数
+                            case "socket使用次数": uiButton13_Click(uiButton13, EventArgs.Empty); break;
+                        }
+                    }
+                    break;
+                //工单详情
+                case "工单详情": uiButton14_Click(uiButton14, EventArgs.Empty); break;
+                //Bin项信息
+                case "Bin项信息": uiButton15_Click(uiButton15, EventArgs.Empty); break;
+                //料表信息
+                case "料表信息": uiButton17_Click(uiButton17, EventArgs.Empty); break;
+            }
+        }
+
+        private void dataGridView_socketUsed_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex > 0 && e.RowIndex >= 0)
+            {
+                textBox7.Text = e.RowIndex.ToString("D2") + e.ColumnIndex.ToString();
+                if (decimal.TryParse(dataGridView_socketUsed.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString(), out decimal res))
+                {
+                    numericUpDown1.Value = res;
+                }
+                else
+                {
+                    numericUpDown1.Value = 0;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 修改socket使用次数
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uiButton11_Click(object sender, EventArgs e)
+        {
+            if (dataGridView_socketUsed.SelectedCells.Count != 1)
+            {
+                MessageBox.Show("修改时请勿选择多个单元格！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (textBox7.Text.Length < 1)
+            {
+                return;
+            }
+
+            DialogResult result = MessageBox.Show($"请确认是否将dut{textBox7.Text}的使用次数从 {dataGridView_socketUsed.SelectedCells[0].Value} 修改为 {numericUpDown1.Value} .", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                string sql = $"update SocketUse set Num = {numericUpDown1.Value} where Id = '{textBox7.Text}'";
+                try
+                {
+                    int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
+                    if (line > 0)
+                    {
+                        MessageBox.Show("修改成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        update_dataGridView_socketUsed();
+                    }
+                    else MessageBox.Show("修改失败！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex) { MessageBox.Show("修改失败！详细信息：" + ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            }
+        }
+
+
+        /// <summary>
+        /// 将DataGridView导出到excel
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <param name="filePath">路径与文件名</param>
+        /// <param name="header">是否输出表头，默认false</param>
+        public void ExportDataGridViewToExcel(DataGridView dataGridView, string filePath, bool header = false)
+        {
+            // 创建一个XLWorkbook对象
+            using (var workbook = new XLWorkbook())
+            {
+                // 添加一个工作表
+                var worksheet = workbook.Worksheets.Add("Sheet1");
+
+                int h = 1;
+                if (header)
+                {
+                    for (int i = 0; i < dataGridView.Columns.Count; i++)
+                    {
+                        // 导出列头
+                        worksheet.Cell(1, i + 1).Value = dataGridView.Columns[i].HeaderText;
+                    }
+                    h = 2;
+                }
+
+                // 导出数据
+                for (int i = 0; i < dataGridView.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataGridView.Columns.Count; j++)
+                    {
+                        worksheet.Cell(i + h, j + 1).Value = dataGridView.Rows[i].Cells[j].Value?.ToString();
+                    }
+                }
+
+                for (int i = 0; i < dataGridView.Columns.Count; i++)
+                {
+                    // 设置列宽以适应内容（可选）
+                    worksheet.Column(i + 1).AdjustToContents();
+                }
+
+                // 保存工作簿到文件
+                workbook.SaveAs(filePath);
+
+            }
+        }
+        private void button_out1_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                ExportDataGridViewToExcel(dataGridView_out1, folderBrowserDialog.SelectedPath + "\\Bin项信息-Auto2第" + comboBox_out1.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
+            }
+        }
+
+        private void button_out2_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                ExportDataGridViewToExcel(dataGridView_out2, folderBrowserDialog.SelectedPath + "\\Bin项信息-Fix1第" + comboBox_out2.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
+            }
+        }
+
+        private void button_out3_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                ExportDataGridViewToExcel(dataGridView_out3, folderBrowserDialog.SelectedPath + "\\Bin项信息-Fix2第" + comboBox_out3.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
+            }
+        }
+
+        private void button_out4_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                ExportDataGridViewToExcel(dataGridView_out4, folderBrowserDialog.SelectedPath + "\\Bin项信息-Fix3第" + comboBox_out4.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
+            }
+        }
+
+        private void uiButton16_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                ExportDataGridViewToExcel(dataGridView_f, folderBrowserDialog.SelectedPath + "\\料表信息-" + listBox1.Text.Replace(":", ".") + ".xlsx", true);
+            }
+        }
+
+
+
+        /// <summary>
+        /// 初始化DataGridView
+        /// </summary>
+        /// <param name="dGV">DataGridView</param>
+        /// <param name="x">列</param>
+        /// <param name="y">行</param>
+        void dGV_init(DataGridView dGV, int x, int y)
+        {
+            dGV.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False; // 禁止换行
+            dGV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None; // 关闭自动调整行高
+            dGV.DefaultCellStyle.Font = new Font("Microsoft YaHei UI", 10);
+
+            dGV.RowTemplate.Height = dGV.Size.Height / y; // 设置所有新行的默认高度
+
+            dGV.Columns.Clear();
+
+            for (int i = 0; i < x; i++)
+            {
+                dGV.Columns.Add("Column" + i.ToString(), "Column" + i.ToString());
+                dGV.Columns[i].Width = dGV.Width / x; // 设置所有列的宽度
+            }
+
+            dGV.Rows.Add(y);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="dgv">DataGridView</param>
+        /// <param name="name">auto2,fix1,fix2,fix3</param>
+        /// <param name="s">表名</param>
+        /// <param name="num">第N盘</param>
+        public void update_dataGridView_out(DataGridView dgv, string name, string s, int num)
+        {
+            string res = SqlServer.runSql(SQLServerConnString, $"select * from o_{s} where 名称='{name}' order by 时间 offset {num - 1} rows fetch next 1 rows only", out DataTable dt);
+            if (res != "Success") return;
+
+            int x = int.Parse(dt.Rows[0].ItemArray[2].ToString().Split('x')[0]);
+            int y = int.Parse(dt.Rows[0].ItemArray[2].ToString().Split('x')[1]);
+
+            dGV_init(dgv, x, y);
+
+            string[] value = dt.Rows[0].ItemArray[3].ToString().Split(',');
+            int z = 0;
+            for (int i = 0; i < x; i++)
+            {
+                for (int j = 0; j < y; j++)
+                {
+                    dgv.Rows[j].Cells[i].Value = value[z];
+                    if (++z == value.Length) return;
+                }
+            }
+
+        }
+
+        private void comboBox_out1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] s;
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+            }
+            update_dataGridView_out(dataGridView_out1, "auto2", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out1.Text));
+        }
+        private void comboBox_out2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] s;
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+            }
+            update_dataGridView_out(dataGridView_out2, "fix1", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out2.Text));
+
+        }
+        private void comboBox_out3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] s;
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+            }
+            update_dataGridView_out(dataGridView_out3, "fix2", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out3.Text));
+
+        }
+        private void comboBox_out4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] s;
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('-');
+            }
+            update_dataGridView_out(dataGridView_out4, "fix3", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out4.Text));
+
+        }
+
+        private void tabControl6_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            switch (e.TabPage.Text)
+            {
+                case "端口信息":
+                    {
+                        switch (tabControl7.SelectedTab.Text)
+                        {
+                            //dut总良率
+                            case "dut总良率": uiButton7_Click(uiButton7, EventArgs.Empty); break;
+                            //当前工单dut实时良率
+                            case "当前工单dut实时良率": uiButton9_Click(uiButton9, EventArgs.Empty); break;
+                            //工单dut良率查询
+                            case "工单dut良率查询": uiButton10_Click(uiButton10, EventArgs.Empty); break;
+                            //socket使用次数
+                            case "socket使用次数": uiButton13_Click(uiButton13, EventArgs.Empty); break;
+                        }
+                    }
+                    break;
+                //工单详情
+                case "工单详情": uiButton14_Click(uiButton14, EventArgs.Empty); break;
+                //Bin项信息
+                case "Bin项信息": uiButton15_Click(uiButton15, EventArgs.Empty); break;
+                //料表信息
+                case "料表信息": uiButton17_Click(uiButton17, EventArgs.Empty); break;
+            }
+        }
+
     }
 }

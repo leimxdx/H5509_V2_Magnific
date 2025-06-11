@@ -71,7 +71,7 @@ namespace H5509_V2
         public ForMain()
         {
             InitializeComponent();
-            
+
             Log = new _log();
             显示操作log = Log.DelegteDisplayOperateLog;
             显示报警log = Log.DelegteDisplayAlarmLog;
@@ -111,6 +111,9 @@ namespace H5509_V2
             io.handler = handler;
             Com.RefrshLog = Log.DelegteDisplayComInfo;
 
+            达温延时 = new System.Timers.Timer() { Interval = 达温后延时时间 * 1000 }; //2分钟
+            达温延时.Elapsed += main.TempFirst;
+
             dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
 
             if (!dTMHelper.Connect())
@@ -123,6 +126,7 @@ namespace H5509_V2
                 TCPConnect = true;
                 main.刷新温度显示();
             }
+
 
             //防止控件过多产生闪烁现象
             SetControlStyle();
@@ -176,7 +180,7 @@ namespace H5509_V2
             CanVisable(speed);
             CanVisable(io);
         }
-        
+
 
         public void CanVisable(Control cons)
         {
@@ -374,7 +378,7 @@ namespace H5509_V2
                     }
 
                     if (IsPause) continue; //如果暂停则不刷新
-                    
+
                     bool ispass = false;
 
                     if (!空跑模式)
@@ -679,48 +683,82 @@ namespace H5509_V2
                             else SiteTemp[16] = value3[0];
                         }
 
-                        if (设备状态 == 1 && 温度模式 == "高温" && !IsPause)
+                        bool[] tempopen = 检测温度探头状态();
+                        if (tempopen.Contains(true))
                         {
-                            double tempwavemax = 加热盘.波动温度上限;
-                            double tempwavemin = 加热盘.波动温度下限;
-                            if (!温控达温)
+                            for (int i = 0; i < tempopen.Length; i++)
                             {
-                                bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
-                                if (!tempopen.Contains(false)) //有false说明还有Site没有达温
+                                if (tempopen[i])
                                 {
-                                    温控达温 = true;
-                                    达温时间 = DateTime.Now;
-                                    RunLog("加热盘已达温");
-                                    RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
-                                    RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+                                    Listcode.Add($"8{i:D2}219");
+                                    if (i == 15) RunLog($"[Code]8{i:D2}219,[Msg]加热盘探头异常!" + result, LogType.AlarmLog);
+                                    else RunLog($"[Code]8{i:D2}219,[Msg]Site{i}探头异常!" + result, LogType.AlarmLog);
                                 }
                             }
-                            else
+                            ProgramPause = true; //如果有温度异常则触发停止
+                            IsPause = true;
+                        }
+                        else
+                        {
+                            if (设备状态 == 1 && 温度模式 == "高温" && !IsPause)
                             {
-                                //bool[] tempopen = 检测温度(tempwavemax, tempwavemin);
-                                //if (tempopen.Contains(false)) //有false说明还有Site超出波动范围
-                                //{
-                                //    RunLog("超波动温度");
-                                //    ProgramPause = true;
-                                //    IsPause = true;
-                                //    for (int i = 0; i < 16; i++)
-                                //    {
-                                //        if (SiteTemp[i] != 32770)
-                                //        {
-                                //            if (SiteTemp[i] > tempwavemax && SiteTemp[i] < tempwavemin)
-                                //            {
-                                //                RunLog($"Site{i + 1}:【{SiteTemp[i]}】℃超波动温度");
-                                //            }
-                                //        }
-                                //    }
-                                //    if (HeatTrayTemp != 32770)
-                                //    {
-                                //        if (HeatTrayTemp > tempwavemax && HeatTrayTemp < tempwavemin)
-                                //        {
-                                //            RunLog($"温控器:【{HeatTrayTemp}】℃超波动温度");
-                                //        }
-                                //    }
-                                //}
+                                double tempwavemax = 加热盘.波动温度上限;
+                                double tempwavemin = 加热盘.波动温度下限;
+                                if (!温控达温)
+                                {
+                                    tempopen = 检测温度是否达温(tempwavemax, tempwavemin);
+                                    if (tempopen[16]) //如果加热盘已经达温则开始延时
+                                    {
+                                        if (!初次达温) //初次达温开启延时定时器
+                                        {
+                                            if (!达温延时.Enabled)
+                                            {
+                                                RunLog("初次达温延时开始");
+                                                达温延时.Start();
+                                            }
+                                        }
+                                    }
+                                    if (!tempopen.Contains(false)) //有false(没有达温:False,达温/探头异常：true)说明还有Site没有达温
+                                    {
+                                        if (初次达温)
+                                        {
+                                            温控达温 = true;
+                                            达温时间 = DateTime.Now;
+                                            RunLog("加热盘已达温");
+                                            RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+                                            RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    tempopen = 检测温度是否异常(tempwavemax, tempwavemin);
+                                    if (tempopen.Contains(true)) //有true说明有Site超出波动范围
+                                    {
+                                        for (int site = 0; site < SiteTemp.Length; site++)
+                                        {
+                                            if (tempopen[site] && SiteTemp[site] != 32770)
+                                            {
+                                                double temp = SiteTemp[site];
+                                                if (temp > 加热盘.波动温度上限)
+                                                {
+                                                    Listcode.Add($"8{site:D2}319");
+                                                    if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+                                                    else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+                                                }
+                                                else if (temp <= 加热盘.波动温度下限)
+                                                {
+                                                    Listcode.Add($"8{site:D2}319");
+                                                    if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+                                                    else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+                                                }
+                                            }
+                                        }
+                                        //RunLog("这里触发暂停");
+                                        ProgramPause = true;
+                                        IsPause = true;
+                                    }
+                                }
                             }
                         }
                     }

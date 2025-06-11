@@ -94,14 +94,59 @@ namespace H5509_V2
         public static string 当前权限;
 
         public static int 权限时间
-        { 
+        {
             get
             {
                 if (操作权限 == "D") return 600;
                 else return 60;
             }
         }
-        
+
+        public static string M1_入料手臂Z1轴ErrorMsg = "";
+
+        public static string M2_入料手臂Z2轴ErrorMsg = "";
+
+        public static string M3_入料手臂Z3轴ErrorMsg = "";
+
+        public static string M4_入料手臂Z4轴ErrorMsg = "";
+
+        public static string M5_入料手臂P轴ErrorMsg = "";
+
+        public static string M6_出料手臂Z1轴ErrorMsg = "";
+
+        public static string M7_出料手臂Z2轴ErrorMsg = "";
+
+        public static string M8_出料手臂Z3轴ErrorMsg = "";
+
+        public static string M9_出料手臂Z4轴ErrorMsg = "";
+
+        public static string M10_出料手臂P轴ErrorMsg = "";
+
+        public static string M11_Fix3放IC轴ErrorMsg = "";
+
+        public static string M12_Empty顶盘轴ErrorMsg = "";
+
+        public static string M13_Loader顶盘轴ErrorMsg = "";
+
+        public static string M14_Auto1顶盘轴ErrorMsg = "";
+
+        public static string M15_Auto2顶盘轴ErrorMsg = "";
+
+        public static string M16_入料手臂Y轴ErrorMsg = "";
+
+        public static string M17_出料手臂Y轴ErrorMsg = "";
+
+        public static string M18_放Tary盘轴ErrorMsg = "";
+
+        public static string M19_测试手臂Z轴ErrorMsg = "";
+
+        public static string M20_飞梭轴ErrorMsg = "";
+
+        public static string M21_测试手臂X轴ErrorMsg = "";
+
+        public static string M22_入料手臂X轴ErrorMsg = "";
+
+        public static string M23_出料手臂X轴ErrorMsg = "";
 
         public static string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
 
@@ -145,7 +190,11 @@ namespace H5509_V2
 
         public static bool 温控加热 = false;
 
+        public static System.Timers.Timer 达温延时;
+
         public static bool 温控达温 = false;
+
+        public static bool 初次达温 = false; //初次达温标记
 
         public static double 设定温度
         {
@@ -156,6 +205,15 @@ namespace H5509_V2
         public static string 温度模式
         {
             get { return 设置信息.温度模式; }
+        }
+
+        public static int IC加热时间
+        {
+            get { return 设置信息.Heat盘信息.IC加热时间; }
+        }
+        public static int 达温后延时时间
+        {
+            get { return 设置信息.Heat盘信息.达温后延时; }
         }
 
         public static bool H5509归零 = false;
@@ -1184,8 +1242,8 @@ namespace H5509_V2
                             Height = Convert.ToDouble(dr["height"].ToString()),
                             设定温度 = Convert.ToDouble(dr["设定温度"].ToString()),
                             波动温度 = Convert.ToDouble(dr["波动温度"].ToString()),
-                            波动延时报警 = Convert.ToInt32(dr["波动延时报警"].ToString()),
-                            达温波动报警 = Convert.ToInt32(dr["达温波动报警"].ToString()),
+                            IC加热时间 = Convert.ToInt32(dr["IC加热时间"].ToString()),
+                            达温后延时 = Convert.ToInt32(dr["达温后延时"].ToString()),
                             报警温度 = Convert.ToDouble(dr["报警温度"].ToString()),
                             超温温度 = Convert.ToDouble(dr["超温温度"].ToString()),
                             升温超时报警 = Convert.ToInt32(dr["升温超时报警"].ToString()),
@@ -2889,6 +2947,7 @@ namespace H5509_V2
                 for (int j = 0; j < HeatYPoint.Length; j++)
                 {
                     HeatDicPoint[$"{i},{j}"] = false;
+                    HeatDicTimer[$"{i},{j}"] = new HeatMapTimer();
                 }
             }
         }
@@ -3128,7 +3187,7 @@ namespace H5509_V2
 
         }
 
-        public static bool[] 检测温度(double tempmax, double tempmin)
+        public static bool[] 检测温度是否达温(double tempmax, double tempmin)
         {
             bool[] tempopen = new bool[17];
 
@@ -3145,7 +3204,49 @@ namespace H5509_V2
                         else tempopen[i] = false;
                     }
                 }
-                else tempopen[i] = true; //没有开Site默认达温
+                else tempopen[i] = true; //没有开Site True:默认达温, False默认无异常
+            }
+
+            return tempopen;
+        }
+        public static bool[] 检测温度是否异常(double tempmax, double tempmin)
+        {
+            bool[] tempopen = new bool[17];
+
+            for (int i = 0; i < SiteTemp.Length; i++)
+            {
+                if (GetSiteOpen(i).Contains(true))
+                {
+                    if (SiteTemp[i] != 32770)
+                    {
+                        if (SiteTemp[i] > tempmax || SiteTemp[i] <= tempmin)
+                        {
+                            tempopen[i] = true;
+                        }
+                        else tempopen[i] = false;
+                    }
+                }
+                else tempopen[i] = false; //没有开Site True:默认达温, False默认无异常
+            }
+
+            return tempopen;
+        }
+
+        public static bool[] 检测温度探头状态()
+        {
+            bool[] tempopen = new bool[17];
+
+            for (int i = 0; i < SiteTemp.Length; i++)
+            {
+                if (GetSiteOpen(i).Contains(true))
+                {
+                    if (SiteTemp[i] == 32770)
+                    {
+                        tempopen[i] = true; //温度探头异常
+                    }
+                    else tempopen[i] = false; //温度探头正常
+                }
+                else tempopen[i] = false; //没有开Site不检测探头
             }
 
             return tempopen;

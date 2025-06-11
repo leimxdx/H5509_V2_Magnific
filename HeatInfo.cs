@@ -48,8 +48,8 @@ namespace H5509_V2
 
         public double 设定温度 { get; set; }
         public double 波动温度 { get; set; }
-        public int 波动延时报警 { get; set; }
-        public int 达温波动报警 { get; set; }
+        public int IC加热时间 { get; set; }
+        public int 达温后延时 { get; set; }
 
         public double 波动温度上限
         {

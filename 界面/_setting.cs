@@ -1257,13 +1257,13 @@ namespace H5509_V2
 
                 if (axisRun.轴名称 == "M19_测试手臂Z轴")
                 {
-                    if (posvalue > errorvalue * 2)
+                    if (posvalue > 800)
                     {
-                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{800}";
                     }
-                    else if (posvalue > 300)
+                    else if (posvalue > 450)
                     {
-                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{450}");
                     }
                 }
                 else
@@ -1410,13 +1410,13 @@ namespace H5509_V2
 
                     if (axisRuns[i].轴名称 == "M19_测试手臂Z轴")
                     {
-                        if (posvalue > errorvalue * 2)
+                        if (posvalue > 800)
                         {
-                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{800}";
                         }
-                        else if (posvalue > 300)
+                        else if (posvalue > 450)
                         {
-                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{450}");
                         }
                     }
                     else
@@ -3019,8 +3019,8 @@ namespace H5509_V2
             textBox24.Text = heatInfo.HeatName;
             numericUpDown129.Text = heatInfo.设定温度.ToString();
             numericUpDown130.Text = heatInfo.波动温度.ToString();
-            numericUpDown134.Text = heatInfo.波动延时报警.ToString();
-            numericUpDown154.Text = heatInfo.达温波动报警.ToString();
+            numericUpDown134.Text = heatInfo.IC加热时间.ToString();
+            numericUpDown154.Text = heatInfo.达温后延时.ToString();
             numericUpDown131.Text = heatInfo.报警温度.ToString();
             numericUpDown132.Text = heatInfo.超温温度.ToString();
             numericUpDown133.Text = heatInfo.升温超时报警.ToString();
@@ -6105,8 +6105,8 @@ namespace H5509_V2
                     Height = Convert.ToDouble(textBox51.Text),
                     设定温度 = Convert.ToDouble(numericUpDown129.Text),
                     波动温度 = Convert.ToDouble(numericUpDown130.Text),
-                    波动延时报警 = Convert.ToInt32(numericUpDown134.Text),
-                    达温波动报警 = Convert.ToInt32(numericUpDown154.Text),
+                    IC加热时间 = Convert.ToInt32(numericUpDown134.Text),
+                    达温后延时 = Convert.ToInt32(numericUpDown154.Text),
                     报警温度 = Convert.ToDouble(numericUpDown131.Text),
                     超温温度 = Convert.ToDouble(numericUpDown132.Text),
                     升温超时报警 = Convert.ToInt32(numericUpDown133.Text),
@@ -6151,8 +6151,8 @@ namespace H5509_V2
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "height", newheatInfo.Height, oldheatInfo.Height);
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "设定温度", newheatInfo.设定温度, oldheatInfo.设定温度);
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "波动温度", newheatInfo.波动温度, oldheatInfo.波动温度);
-                        UpdateHeatInfo(name, oldheatInfo.HeatName, "波动延时报警", newheatInfo.波动延时报警, oldheatInfo.波动延时报警);
-                        UpdateHeatInfo(name, oldheatInfo.HeatName, "达温波动报警", newheatInfo.达温波动报警, oldheatInfo.达温波动报警);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "IC加热时间", newheatInfo.IC加热时间, oldheatInfo.IC加热时间);
+                        UpdateHeatInfo(name, oldheatInfo.HeatName, "达温后延时", newheatInfo.达温后延时, oldheatInfo.达温后延时);
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "报警温度", newheatInfo.报警温度, oldheatInfo.报警温度);
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "超温温度", newheatInfo.超温温度, oldheatInfo.超温温度);
                         UpdateHeatInfo(name, oldheatInfo.HeatName, "升温超时报警", newheatInfo.升温超时报警, oldheatInfo.升温超时报警);
@@ -6825,8 +6825,7 @@ namespace H5509_V2
             }
         }
 
-        //复制档案
-        private void uiButton8_Click(object sender, EventArgs e)
+        private void 复制档案代码()
         {
             int rows = uiDataGridView1.SelectedIndex;
             if (rows >= 0)
@@ -6840,6 +6839,7 @@ namespace H5509_V2
                         $"'{setupInfo.Heat盘信息.HeatName}','{setupInfo.OffsetPoint.微调点位名称}','{setupInfo.测试机信息.测试机名称}'," +
                         $"'{setupInfo.分BIN信息.分BIN名称}','{setupInfo.梭车名称}','{setupInfo.温度模式}')";
                     int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+
                     if (line >= 0)
                     {
                         result = 刷新档案列表();
@@ -6851,6 +6851,82 @@ namespace H5509_V2
                 else MessageBox.Show("复制档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             else MessageBox.Show("请选择要复制档案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        //新增档案
+        private void uiButton8_Click(object sender, EventArgs e)
+        {
+            NewSetupName newSetupName = new NewSetupName();
+            DialogResult dialog = newSetupName.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                string sql = $"select count(*) from SetupInfo where 档案名称 = '{newSetupName.Name}'";
+                string result = SQLiteHelper.runSql(SQLiteConnString, sql, out string value);
+                if (result == "Success")
+                {
+                    if (Convert.ToInt32(value) >= 1) MessageBox.Show("档案已存在!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                    {
+                        dialog = MessageBox.Show($"请确认是否新增档案:{newSetupName.Name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                        if (dialog == DialogResult.OK)
+                        {
+                            sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,分BIN名称,梭车名称,温度模式)" +
+                            $"values('{newSetupName.Name}', '默认','{newSetupName.Name}', '默认','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}', '常温')";
+                            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+
+                            if (line >= 1)
+                            {
+                                int line1 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"insert into SiteStatus(Site名称)values({newSetupName.Name})");
+                                int line2 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"insert into OffsetPoint(微调点位名称)values({newSetupName.Name})");
+                                int line3 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称)values('{newSetupName.Name}')");
+                                int line4 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3)values('{newSetupName.Name}','01','02,20A,OTH','03;;','04;;','05;;')");
+                                if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line4 >= 1)
+                                {
+                                    刷新档案列表();
+                                    MessageBox.Show("新建成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("新建失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void uiButton11_Click(object sender, EventArgs e)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+                DialogResult dialog = MessageBox.Show($"请确认是否删除档案:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialog == DialogResult.OK)
+                {
+                    int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"delete From SetupInfo Where 档案名称 = '{name}'");
+                    if (line >= 1)
+                    {
+                        int line1 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"delete From SiteStatus Where Site名称 = '{name}'");
+                        int line2 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"delete From OffsetPoint Where 微调点位名称 = '{name}'");
+                        int line3 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"delete From TesterIFParam Where 测试机名称 = '{name}'");
+                        int line4 = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"delete From BinParam Where 分BIN名称 = '{name}'");
+
+                        if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line4 >= 1)
+                        {
+                            刷新档案列表();
+                            MessageBox.Show("删除成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("删除档案失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else MessageBox.Show("删除档案失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else MessageBox.Show("请选择要删除的档案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

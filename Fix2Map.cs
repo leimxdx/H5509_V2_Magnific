@@ -51,7 +51,7 @@ namespace H5509_V2
         private void 刷新数据()
         {
             double[] trayXPoint = Fix2XPoint;
-            double[] trayYPoint = Fix2XPoint;
+            double[] trayYPoint = Fix2YPoint;
             Dictionary<string, bool> tryDicPoint = Fix2DicPoint;
             Dictionary<string, string> tryDicBin = Fix2DicBin;
 

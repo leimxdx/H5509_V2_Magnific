@@ -50,7 +50,7 @@ namespace H5509_V2
         private void 刷新数据()
         {
             double[] trayXPoint = Auto2XPoint;
-            double[] trayYPoint = Auto2XPoint;
+            double[] trayYPoint = Auto2YPoint;
             Dictionary<string, bool> tryDicPoint = Auto2DicPoint;
             Dictionary<string, string> tryDicBin = Auto2DicBin;
 

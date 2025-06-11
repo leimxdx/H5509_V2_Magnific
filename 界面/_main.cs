@@ -158,6 +158,7 @@ namespace H5509_V2
                 Chk_timer[i] = timer;
             }
 
+
             textBoxmachine.Text = Environment.MachineName;
 
             放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; //防止报错
@@ -574,6 +575,13 @@ namespace H5509_V2
             }));
         }
 
+        public void TempFirst(object sender, EventArgs e)
+        {
+            初次达温 = true;
+            达温延时.Stop(); //初次达温延时
+            RunLog("初次达温延时到");
+        }
+
         private void WindowstimerTick(object sender, EventArgs eventArgs)
         {
             System.Drawing.Point mousePosition = Control.MousePosition;
@@ -702,7 +710,7 @@ namespace H5509_V2
                                     {
                                         //case "operator": operation = "A"; break;
                                         case "Engineer":
-                                            操作权限 = "B"; 
+                                            操作权限 = "B";
                                             windowstimer.Start();
                                             mousemovetime = DateTime.Now;
                                             break;
@@ -1253,6 +1261,20 @@ namespace H5509_V2
                 label116.BackColor = Color.Red;
             }
 
+            if (达温延时.Interval != 达温后延时时间 * 1000)
+            {
+                达温延时.Interval = 达温后延时时间 * 1000;
+            }
+
+            foreach (var item in HeatDicTimer)
+            {
+                if (item.Value.Timer.Interval != IC加热时间 * 1000)
+                {
+                    item.Value.Timer.Interval = IC加热时间 * 1000;
+                }
+            }
+
+
             string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
             if (result4 == "Success")
             {
@@ -1318,7 +1340,7 @@ namespace H5509_V2
 
         private void label10_Click(object sender, EventArgs e)
         {
-            if (设备状态 == 0)
+            if (设备状态 != 1)
             {
                 if (label10.Text == "停止")
                 {
@@ -1417,8 +1439,303 @@ namespace H5509_V2
         //        if (分bin[i].bin == b) 分bin[i].num++;
         //    }
         //}
+
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
+            bool[] tempopen; //bool[] 用于存储每个Site的温度是否达温或异常
+            double tempwavemax = 加热盘.波动温度上限;
+            double tempwavemin = 加热盘.波动温度下限;
+            if (!温控达温)
+            {
+                tempopen = 检测温度是否达温(tempwavemax, tempwavemin);
+                if (!tempopen.Contains(false)) //有false(没有达温:False,达温/探头异常：true)说明还有Site没有达温
+                {
+                    if (!初次达温) //达温后开启延时定时器
+                    {
+                        if (!达温延时.Enabled)
+                        {
+                            RunLog("初次达温延时开始");
+                            达温延时.Start();
+                        }
+                    }
+                    else
+                    {
+                        温控达温 = true;
+                        达温时间 = DateTime.Now;
+                        RunLog("加热盘已达温");
+                        RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+                        RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+                    }
+                }
+            }
+            else
+            {
+                tempopen = 检测温度是否异常(tempwavemax, tempwavemin);
+                if (tempopen.Contains(true)) //有true说明有Site超出波动范围
+                {
+                    for (int site = 0; site < SiteTemp.Length; site++)
+                    {
+                        if (tempopen[site] && SiteTemp[site] != 32770)
+                        {
+                            double temp = SiteTemp[site];
+                            if (temp > 加热盘.波动温度上限)
+                            {
+                                Listcode.Add($"8{site:D2}319");
+                                if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+                                else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+                            }
+                            else if (temp <= 加热盘.波动温度下限)
+                            {
+                                Listcode.Add($"8{site:D2}319");
+                                if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+                                else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                    ProgramPause = true;
+                    IsPause = true;
+                }
+            }
+            //bool[] tempopen;
+            //double tempwavemax = 加热盘.波动温度上限;
+            //double tempwavemin = 加热盘.波动温度下限;
+
+            //if (!温控达温)
+            //{
+            //    tempopen = 检测温度是否达温(tempwavemax, tempwavemin);
+            //    if (!tempopen.Contains(false)) //有false(没有达温:False,达温/探头异常：true)说明还有Site没有达温
+            //    {
+            //        if (!初次达温) //达温后开启延时定时器
+            //        {
+            //            if (!达温延时.Enabled)
+            //            {
+            //                RunLog("初次达温延时开始");
+            //                达温延时.Start();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            温控达温 = true;
+            //            达温时间 = DateTime.Now;
+            //            RunLog("加热盘已达温");
+            //            RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+            //            RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    tempopen = 检测温度是否异常(tempwavemax, tempwavemin);
+            //    if (tempopen.Contains(true)) //有true说明有Site超出波动范围
+            //    {
+            //        for (int site = 0; site < SiteTemp.Length; site++)
+            //        {
+            //            if (tempopen[site] && SiteTemp[site] != 32770)
+            //            {
+            //                double temp = SiteTemp[site];
+            //                if (temp > 加热盘.波动温度上限)
+            //                {
+            //                    //Listcode.Add($"8{site:D2}319");
+            //                    if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+            //                    else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+            //                }
+            //                else if (temp <= 加热盘.波动温度下限)
+            //                {
+            //                    //Listcode.Add($"8{site:D2}319");
+            //                    if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+            //                    else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+
+            //                }
+            //            }
+            //        }
+            //        //ProgramPause = true;
+            //        //IsPause = true;
+            //    }
+            //}
+            //飞梭后入料IC = new bool[][] { new bool[] { true, false, false, false }, new bool[] { false, true, false, false } };
+            //飞梭前入料IC = new bool[][] { new bool[] { false, false, true, false }, new bool[] { false, false, false, true } };
+            ////检测梭车是否有IC遗留
+            //if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //飞梭后入料IC第1/2列无料
+            //{
+            //    for (int i = 0; i < 飞梭后入料IC[0].Length; i++)
+            //    {
+            //        if (飞梭后入料IC[0][i] || 飞梭后入料IC[1][i])
+            //        {
+            //            if (飞梭2位置 == 0)
+            //            {
+            //                if (飞梭后入料IC[0][i])
+            //                {
+            //                    Listcode.Add($"5{i + 47}0102");
+            //                    RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //                if (飞梭后入料IC[1][i])
+            //                {
+            //                    Listcode.Add($"5{i + 47}0103");
+            //                    RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //            }
+            //            else
+            //            {
+            //                if (飞梭后入料IC[0][i])
+            //                {
+            //                    Listcode.Add($"5{i + 47}0100");
+            //                    RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //                if (飞梭后入料IC[1][i])
+            //                {
+            //                    Listcode.Add($"5{i + 47}0101");
+            //                    RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            //if (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true)) //飞梭前入料IC第1/2列无料
+            //{
+            //    for (int i = 0; i < 飞梭前入料IC[0].Length; i++)
+            //    {
+            //        if (飞梭前入料IC[0][i] || 飞梭前入料IC[1][i])
+            //        {
+            //            if (飞梭2位置 == 0)
+            //            {
+            //                if (飞梭前入料IC[0][i])
+            //                {
+            //                    Listcode.Add($"5{i + 43}0100");
+            //                    RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //                if (飞梭前入料IC[1][i])
+            //                {
+            //                    Listcode.Add($"5{i + 43}0101");
+            //                    RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //            }
+            //            else
+            //            {
+            //                if (飞梭前入料IC[0][i])
+            //                {
+            //                    Listcode.Add($"5{i + 43}0102");
+            //                    RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //                if (飞梭前入料IC[1][i])
+            //                {
+            //                    Listcode.Add($"5{i + 43}0103");
+            //                    RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+            //飞梭后入料IC = new bool[][] { new bool[] { true, false, false, false }, new bool[] { false, true, false, false } };
+            //飞梭前入料IC = new bool[][] { new bool[] { false, false, true, false }, new bool[] { false, false, false, true } };
+            ////检测梭车是否有IC遗留
+            //if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //飞梭后入料IC第1/2列无料
+            //{
+            //    for (int i = 0; i < 飞梭后入料IC[0].Length; i++)
+            //    {
+            //        if (飞梭后入料IC[0][i] || 飞梭后入料IC[1][i])
+            //        {
+            //            if (飞梭2位置 == 0)
+            //            {
+            //                Listcode.Add($"5{i + 47}0102");
+            //                Listcode.Add($"5{i + 47}0103");
+            //            }
+            //            else
+            //            {
+            //                Listcode.Add($"5{i + 47}0100");
+            //                Listcode.Add($"5{i + 47}0101");
+            //            }
+            //        }
+            //    }
+            //}
+
+            //if (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true)) //飞梭前入料IC第1/2列无料
+            //{
+            //    for (int i = 0; i < 飞梭前入料IC[0].Length; i++)
+            //    {
+            //        if (飞梭前入料IC[0][i] || 飞梭前入料IC[1][i])
+            //        {
+            //            if (飞梭2位置 == 0)
+            //            {
+            //                Listcode.Add($"5{i + 43}0100");
+            //                Listcode.Add($"5{i + 43}0101");
+            //            }
+            //            else
+            //            {
+            //                Listcode.Add($"5{i + 43}0102");
+            //                Listcode.Add($"5{i + 43}0103");
+            //            }
+            //        }
+            //    }
+            //}
+            //    double
+            //    if (!温控达温)
+            //    {
+            //        if (!tempopen.Contains(false)) //有false(没有达温:False,达温/探头异常：true)说明还有Site没有达温
+            //        {
+            //            if (!初次达温) //达温后开启延时定时器
+            //            {
+            //                if (!达温延时.Enabled)
+            //                {
+            //                    达温延时.Start();
+            //                }
+            //            }
+            //            else
+            //            {
+            //                温控达温 = true;
+            //                达温时间 = DateTime.Now;
+            //                RunLog("加热盘已达温");
+            //                RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+            //                RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+            //            }
+            //        }
+            //    }
+            //    else
+            //    {
+            //        if (tempopen.Contains(false)) //有false说明有Site超出波动范围
+            //        {
+            //            for (int site = 0; site < SiteTemp.Length; site++)
+            //            {
+            //                if (SiteTemp[site] != 32770)
+            //                {
+            //                    double temp = SiteTemp[site];
+            //                    if (temp > 加热盘.波动温度上限)
+            //                    {
+            //                        Listcode.Add($"8{site:D2}319");
+            //                        if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+            //                        else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+            //                    }
+            //                    else if (temp <= 加热盘.波动温度下限)
+            //                    {
+            //                        Listcode.Add($"8{site:D2}319");
+            //                        if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+            //                        else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+
+            //                    }
+            //                }
+            //            }
+            //            ProgramPause = true;
+            //            IsPause = true;
+            //        }
+            //    }
+            //}
+
+            //bool[] tempopen = 检测温度探头状态();
+            //bool[] tempopen = new bool[] { true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true };
+            //if (tempopen.Contains(true))
+            //{
+            //    for (int i = 0; i < tempopen.Length; i++)
+            //    {
+            //        if (tempopen[i])
+            //        {
+            //            Listcode.Add($"8{i:D2}219");
+            //            if (i == 15) RunLog($"[Code]8{i:D2}219,[Msg]加热盘温度异常!" , LogType.AlarmLog);
+            //            else RunLog($"[Code]8{i:D2}219,[Msg]Site{i}温度异常!" , LogType.AlarmLog);
+            //        }
+            //    }
+            //    //ProgramPause = true; //如果有温度异常则触发停止
+            //    //IsPause = true;
+            //}
 
             ////保存工单dut信息
             //string result = SQLiteHelper.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);

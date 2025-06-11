@@ -450,13 +450,13 @@ namespace H5509_V2
 
                 if (axisRun.轴名称 == "M19_测试手臂Z轴")
                 {
-                    if (posvalue > errorvalue * 2)
+                    if (posvalue > 800)
                     {
-                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{800}";
                     }
-                    else if (posvalue > 300)
+                    else if (posvalue > 450)//300
                     {
-                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{450}");
                     }
                 }
                 else
@@ -475,7 +475,6 @@ namespace H5509_V2
             {
                 return ex.Message;
             }
-
 
             return "Success";
         }
@@ -620,13 +619,13 @@ namespace H5509_V2
 
                     if (axisRuns[i].轴名称 == "M19_测试手臂Z轴")
                     {
-                        if (posvalue > errorvalue * 2)
+                        if (posvalue > 800)
                         {
-                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue * 2}";
+                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{800}";
                         }
-                        else if (posvalue > 300)
+                        else if (posvalue > 450)
                         {
-                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{300}");
+                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{450}");
                         }
                     }
                     else

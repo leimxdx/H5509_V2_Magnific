@@ -66,7 +66,26 @@ namespace H5509_V2
                     {
                         if (!温控达温)
                         {
-                            aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(升温)";
+                            if (达温延时.Enabled)
+                            {
+                                aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(延时)";
+                            }
+                            else
+                            {
+                                if (初次达温)
+                                {
+                                    aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(回温)";
+                                }
+                                else aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(升温)";
+                            }
+                            //if (!初次达温)
+                            //{
+                            //    if(达温延时.Enabled) aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(延时)";
+                            //    else aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(回温)";
+                            //}
+                            //else aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(升温)";
+
+                            //aa.Value = HeatDicTimer[$"{i},{j}"].Status.ToString() + "(升温)";
                             aa.Style.BackColor = Color.White;
                         }
                         else

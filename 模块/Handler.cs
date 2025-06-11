@@ -57,23 +57,43 @@ namespace H5509_V2
 
         private void ForcedBatchTick(object sender, EventArgs eventArgs)
         {
-            强制结批标记 = true;
-            结批标记 = true;
-            按下结批时间 = DateTime.Now;
             结批触发定时器.Stop();
-            结批按钮闪烁的定时器.Start();
             RunLog("结批按钮已按下5s");
-
-            if (温度模式 == "高温")
+            if (!结批标记)
             {
-                ProgramPause = true;
-                IsPause = true;
-                DialogResult dialog = MessageBox.Show("请确认是否清空加热盘!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-                if (dialog == DialogResult.OK)
+                if (温度模式 == "高温")
                 {
-                    加热盘停止入料标记 = true;
+                    ProgramPause = true;
+                    IsPause = true;
+                    DialogResult dialog = MessageBox.Show("请确认是否清空加热盘?\n是:将加热盘剩余IC取完\n否:直接结批\n取消:不做任何操作", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    if (dialog == DialogResult.Yes)
+                    {
+                        强制结批标记 = true;
+                        结批标记 = true;
+                        按下结批时间 = DateTime.Now;
+                        结批按钮闪烁的定时器.Start();
+                    }
+                    else if (dialog == DialogResult.No)
+                    {
+                        强制结批标记 = true;
+                        结批标记 = true;
+                        按下结批时间 = DateTime.Now;
+                        加热盘停止入料标记 = true;
+                        结批按钮闪烁的定时器.Start();
+                    }
+                    ProgramStart = true;
                 }
-                ProgramStart = true;
+                else
+                {
+                    强制结批标记 = true;
+                    结批标记 = true;
+                    按下结批时间 = DateTime.Now;
+                    结批按钮闪烁的定时器.Start();
+                }
+            }
+            else
+            {
+                RunLog("无法触发结批,正在结批中...");
             }
         }
 
@@ -2790,6 +2810,7 @@ namespace H5509_V2
             //温度模式 = 0;
             设备状态 = 0;
             温控达温 = false;
+            初次达温 = false;
             H5509归零 = false;
             H5509正在归零 = false;
             H5509初始化 = false;
@@ -2864,7 +2885,8 @@ namespace H5509_V2
             Auto2数量 = 0;
             Fix1数量 = 0;
             Fix2数量 = 0;
-            Fix3数量 = 0;
+            Fix3数量 = 0; 
+            HeatTrayClear();
             Auto1TrayClear();
             Auto2TrayClear();
             Fix1TrayClear();
@@ -3198,7 +3220,7 @@ namespace H5509_V2
             bool iscanstart = true;
 
             string result = motionEx.GetDi("X020_进气压", out string value);
-            RunLog("X020_进气压:" + value);
+            //RunLog("X020_进气压:" + value);
             //if (result == "Success")
             //{
             //    if (value == "0")
@@ -3640,14 +3662,14 @@ namespace H5509_V2
                                 if (!Load换盘标记 && Load上顶标记 == 1 && Load下降回零标记 == 1)
                                 {
                                     Load下降回零开关 = true;
-                                    RunLog("Load下降开关打开");
+                                    //RunLog("Load下降开关打开");
                                 }
                                 if (!Auto1换盘标记 && !Auto2换盘标记 && Empty上顶标记 == 1 && Empty下降标记 == 1)
                                 {
                                     Empty下降回零开关 = true;
                                     Auto1下降回零开关 = true;
                                     Auto2下降回零开关 = true;
-                                    RunLog("Empty/Auto下降开关打开");
+                                    //RunLog("Empty/Auto下降开关打开");
                                 }
                             }
                         }
@@ -4245,16 +4267,26 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
                             if (auto1.Result != "Success") RunLog("Auto1顶盘轴移动失败!" + auto1.Result);
                             if (auto2.Result != "Success") RunLog("Auto2顶盘轴移动失败!" + auto2.Result);
                             if (testp.Result != "Success") RunLog("测试吸嘴_张开气缸闭合失败!" + testp.Result);
-                            if (testx.Result != "Success") RunLog("测试手臂X移动失败!" + testx.Result);
+                            if (testx.Result != "Success")
+                            {
+                                Listcode.Add("2028007");
+                                RunLog($"[Code]2028007,[Msg]测试手臂X移动到等待位失败!" + testx.Result, LogType.AlarmLog);
+                                M21_测试手臂X轴ErrorMsg = testx.Result;
+                            }
                             if (shuttle.Result != "Success") RunLog("入料手臂P移动失败!" + shuttle.Result);
                             if (inputp.Result != "Success") RunLog("入料手臂P移动失败!" + inputp.Result);
-                            if (outputxyp.Result != "Success") RunLog("出料手臂移动失败!" + outputxyp.Result);
+                            if (outputxyp.Result != "Success")
+                            {
+                                Listcode.Add("2030007");
+                                RunLog($"[Code]2030007,[Msg]出料手臂走到等待位失败!" + outputxyp.Result, LogType.AlarmLog);
+                                M23_出料手臂X轴ErrorMsg = outputxyp.Result;
+                            }
                             if (fix3.Result != "Success") RunLog("Fix3放IC盘轴移动失败!" + fix3.Result);
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
                         }
                         break;
 
@@ -4444,9 +4476,20 @@ namespace H5509_V2
                         }
                         else
                         {
+                            if (input.Result != "Success")
+                            {
+                                Listcode.Add("2029007");
+                                RunLog($"[Code]2029007,[Msg]入料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                                M22_入料手臂X轴ErrorMsg = result;
+                            }
+                            if (output.Result != "Success")
+                            {
+                                Listcode.Add("2030007");
+                                RunLog($"[Code]2030007,[Msg]出料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                                M23_出料手臂X轴ErrorMsg = result;
+                            }
                             ProgramPause = true;
                             IsPause = true;
-                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->出入料手臂走到避让位置失败!" + result);
                         }
                         break;
 
@@ -4513,6 +4556,7 @@ namespace H5509_V2
                         结束时间 = DateTime.Now;
 
                         LoaderTrayClear();
+                        HeatTrayClear();
                         Auto1TrayClear();
                         Auto2TrayClear();
                         Fix1TrayClear();
@@ -4547,6 +4591,79 @@ namespace H5509_V2
                         {
                             Listcode.Add("1400443");
                             RunLog($"[Code]1400443,[Msg]载入数、总数和批次数量不一致", LogType.AlarmLog);
+                        }
+
+                        //检测梭车是否有IC遗留
+                        if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //飞梭后入料IC第1/2列无料
+                        {
+                            for (int i = 0; i < 飞梭后入料IC[0].Length; i++)
+                            {
+                                if (飞梭后入料IC[0][i] || 飞梭后入料IC[1][i])
+                                {
+                                    if (飞梭2位置 == 0)
+                                    {
+                                        if (飞梭后入料IC[0][i])
+                                        {
+                                            Listcode.Add($"5{i + 47}0102");
+                                            RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                        if (飞梭后入料IC[1][i])
+                                        {
+                                            Listcode.Add($"5{i + 47}0103");
+                                            RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (飞梭后入料IC[0][i])
+                                        {
+                                            Listcode.Add($"5{i + 47}0100");
+                                            RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                        if (飞梭后入料IC[1][i])
+                                        {
+                                            Listcode.Add($"5{i + 47}0101");
+                                            RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        if (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true)) //飞梭前入料IC第1/2列无料
+                        {
+                            for (int i = 0; i < 飞梭前入料IC[0].Length; i++)
+                            {
+                                if (飞梭前入料IC[0][i] || 飞梭前入料IC[1][i])
+                                {
+                                    if (飞梭2位置 == 0)
+                                    {
+                                        if (飞梭前入料IC[0][i])
+                                        {
+                                            Listcode.Add($"5{i + 43}0100");
+                                            RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                        if (飞梭前入料IC[1][i])
+                                        {
+                                            Listcode.Add($"5{i + 43}0101");
+                                            RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (飞梭前入料IC[0][i])
+                                        {
+                                            Listcode.Add($"5{i + 43}0102");
+                                            RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                        if (飞梭前入料IC[1][i])
+                                        {
+                                            Listcode.Add($"5{i + 43}0103");
+                                            RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                                        }
+                                    }
+                                }
+                            }
                         }
 
                         //保存工单dut信息
@@ -4916,7 +5033,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"XYP轴移动到Load吸料位置等待失败!" + result);
+                            Listcode.Add("2029007");
+                            RunLog($"[Code]2029007,[Msg]XYP轴移动到Load吸料位置等待失败!" + result, LogType.AlarmLog);
+                            M22_入料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -4951,7 +5070,7 @@ namespace H5509_V2
                         break;
 
                     case 625:
-                        PS入料手臂吸放料流程.StepName = "XYP轴移动到Heat吸料位置";
+                        PS入料手臂吸放料流程.StepName = "XYP轴移动到Heat盘吸料位置";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         result = 入料手臂移动(xPos, yPos, 入料吸放料Heat间距 + 点位微调.入料_Heat_变距); //50, 300, 10 写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
@@ -4959,6 +5078,14 @@ namespace H5509_V2
                             firstdraw = true;
                             ismovewait = false;
                             PS入料手臂吸放料流程.StepID = 630;
+                        }
+                        else
+                        {
+                            Listcode.Add("2029007");
+                            RunLog($"[Code]2029007,[Msg]XYP轴移动到Heat盘吸料位置失败!" + result, LogType.AlarmLog);
+                            M22_入料手臂X轴ErrorMsg = result;
+                            ProgramPause = true;
+                            IsPause = true;
                         }
                         break;
 
@@ -5284,7 +5411,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"XYP轴移动到Load吸料位置失败!" + result);
+                            Listcode.Add("2029007");
+                            RunLog($"[Code]2029007,[Msg]XYP轴移动到Load吸料位置失败!" + result, LogType.AlarmLog);
+                            M22_入料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -5600,7 +5729,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"XYP轴移动到飞梭放料位置失败!" + result);
+                            Listcode.Add("2029007");
+                            RunLog($"[Code]2029007,[Msg]XYP轴移动到飞梭放料位置失败!" + result, LogType.AlarmLog);
+                            M22_入料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -5805,7 +5936,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"XYP轴移动到加热盘放料位置失败!" + result);
+                            Listcode.Add("2029007");
+                            RunLog($"[Code]2029007,[Msg]XYP轴移动到加热盘放料位置失败!" + result, LogType.AlarmLog);
+                            M22_入料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -6140,7 +6273,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"入料手臂移到避让位失败!" + result);
+                            Listcode.Add("2029007");
+                            RunLog($"[Code]2029007,[Msg]入料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                            M22_入料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -6210,7 +6345,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"入料手臂移到避让位失败!" + result);
+                            Listcode.Add("2029007");
+                            RunLog($"[Code]2029007,[Msg]入料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                            M22_入料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -6705,7 +6842,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"出料手臂移动到梭车第1列失败!" + result);
+                            Listcode.Add("2030007");
+                            RunLog($"[Code]2030007,[Msg]出料手臂移动到梭车第1列失败!" + result, LogType.AlarmLog);
+                            M23_出料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -6724,7 +6863,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"出料手臂移动到梭车第2列失败!" + result);
+                            Listcode.Add("2030007");
+                            RunLog($"[Code]2030007,[Msg]出料手臂移动到梭车第2列失败!" + result, LogType.AlarmLog);
+                            M23_出料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -7400,6 +7541,7 @@ namespace H5509_V2
                         Task<string> outputx = Task.Run(() => { return 出料手臂移动(xPos, yPos, 出料放料间距 + 点位微调.出料_AF_变距); });
                         if (outputx.Result == "Success" && fix3move.Result == "Success")
                         {
+                            firstdzhome = true;
                             Tray平移运动标记 = false;
                             for (int i = 0; i < lsopen.Length; i++)
                             {
@@ -7411,7 +7553,9 @@ namespace H5509_V2
                         {
                             if (outputx.Result != "Success")
                             {
-                                RunLog("出料手臂移动失败!" + outputx.Result);
+                                Listcode.Add("2030007");
+                                RunLog($"[Code]2030007,[Msg]出料手臂走到放料位失败!" + outputx.Result, LogType.AlarmLog);
+                                M23_出料手臂X轴ErrorMsg = result;
                             }
                             if (fix3move.Result != "Success")
                             {
@@ -7526,13 +7670,40 @@ namespace H5509_V2
                             }
                             else
                             {
-                                for (int i = 0; i < home.Length; i++)
+                                if (home.Contains("1"))
                                 {
-                                    if (home[i] == "1") { RunLog($"出料吸嘴{i + 1}没有挡住原点"); }
+                                    for (int i = 0; i < home.Length; i++)
+                                    {
+                                        if (home[i] == "1") { RunLog($"出料吸嘴{i + 1}没有挡住原点"); }
+                                    }
+                                    if (firstdzhome)
+                                    {
+                                        firstdzhome = false;
+                                    }
+                                    else
+                                    {
+                                        ProgramPause = true;
+                                        APPmaster.IsPause = true;
+                                    }
                                 }
-                                ProgramPause = true;
-                                APPmaster.IsPause = true;
+                                PS出料手臂吸放料流程.StepID = 735;
                             }
+                        }
+                        break;
+
+                    case 735:
+                        PS出料手臂吸放料流程.StepName = "出料手臂Z回原";
+                        homeopen = new bool[] { home[0] == "1", home[1] == "1", home[2] == "1", home[3] == "1" };
+                        result = 出料手臂Z回零(homeopen);
+                        if (result == "Success")
+                        {
+                            PS出料手臂吸放料流程.StepID = 730;
+                        }
+                        else
+                        {
+                            RunLog($"出料手臂Z回零失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
                         }
                         break;
 
@@ -7547,7 +7718,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"出料手臂移动到梭车第1列失败!" + result);
+                            Listcode.Add("2030007");
+                            RunLog($"[Code]2030007,[Msg]出料手臂移动到梭车第1列失败!" + result, LogType.AlarmLog);
+                            M23_出料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -7574,7 +7747,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"出料手臂移到避让位失败!" + result);
+                            Listcode.Add("2030007");
+                            RunLog($"[Code]2030007,[Msg]出料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                            M23_出料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -7615,7 +7790,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"出料手臂移到避让位失败!" + result);
+                            Listcode.Add("2030007");
+                            RunLog($"[Code]2030007,[Msg]出料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                            M23_出料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -7675,7 +7852,9 @@ namespace H5509_V2
                             {
                                 if (fix1xypmove.Result != "Success")
                                 {
-                                    RunLog("出料手臂移动失败!" + fix1xypmove.Result);
+                                    Listcode.Add("2030007");
+                                    RunLog($"[Code]2030007,[Msg]出料手臂移到避让位(Fix1放满)失败!" + fix1xypmove.Result, LogType.AlarmLog);
+                                    M23_出料手臂X轴ErrorMsg = result;
                                 }
                                 if (fix1traymove.Result != "Success")
                                 {
@@ -7770,7 +7949,9 @@ namespace H5509_V2
                             {
                                 if (fix2xypmove.Result != "Success")
                                 {
-                                    RunLog("出料手臂移动失败!" + fix2xypmove.Result);
+                                    Listcode.Add("2030007");
+                                    RunLog($"[Code]2030007,[Msg]出料手臂移到避让位(Fix2放满)失败!" + fix2xypmove.Result, LogType.AlarmLog);
+                                    M23_出料手臂X轴ErrorMsg = result;
                                 }
                                 if (fix2traymove.Result != "Success")
                                 {
@@ -7864,7 +8045,9 @@ namespace H5509_V2
                             {
                                 if (fix3xypmove.Result != "Success")
                                 {
-                                    RunLog("出料手臂移动失败!" + fix3xypmove.Result);
+                                    Listcode.Add("2030007");
+                                    RunLog($"[Code]2030007,[Msg]出料手臂移到避让位(Fix3放满)失败!" + fix3xypmove.Result, LogType.AlarmLog);
+                                    M23_出料手臂X轴ErrorMsg = result;
                                 }
                                 if (fix3traymove.Result != "Success")
                                 {
@@ -8022,38 +8205,38 @@ namespace H5509_V2
                             }
                             else
                             {
-                                if (iovalues[0] == "0")
-                                {
-                                    RunLog("飞梭后检测产品感应4 IC放歪"); //X079_
-                                }
-                                if (iovalues[1] == "0")
-                                {
-                                    RunLog("飞梭后检测产品感应3 IC放歪"); //X078_
-                                }
-                                if (iovalues[2] == "0")
-                                {
-                                    RunLog("飞梭后检测产品感应2 IC放歪"); //X077_
-                                }
-                                if (iovalues[3] == "0")
-                                {
-                                    RunLog("飞梭后检测产品感应1 IC放歪"); //X076_
-                                }
-                                if (iovalues[4] == "0")
-                                {
-                                    RunLog("飞梭前检测产品感应4 IC放歪"); //X083_
-                                }
-                                if (iovalues[5] == "0")
-                                {
-                                    RunLog("飞梭前检测产品感应3 IC放歪"); //X082_
-                                }
-                                if (iovalues[6] == "0")
-                                {
-                                    RunLog("飞梭前检测产品感应2 IC放歪"); //X081_
-                                }
-                                if (iovalues[7] == "0")
-                                {
-                                    RunLog("飞梭前检测产品感应1 IC放歪"); //X080_
-                                }
+                                //if (iovalues[0] == "0")
+                                //{
+                                //    RunLog("飞梭后检测产品感应4 IC放歪"); //X079_
+                                //}
+                                //if (iovalues[1] == "0")
+                                //{
+                                //    RunLog("飞梭后检测产品感应3 IC放歪"); //X078_
+                                //}
+                                //if (iovalues[2] == "0")
+                                //{
+                                //    RunLog("飞梭后检测产品感应2 IC放歪"); //X077_
+                                //}
+                                //if (iovalues[3] == "0")
+                                //{
+                                //    RunLog("飞梭后检测产品感应1 IC放歪"); //X076_
+                                //}
+                                //if (iovalues[4] == "0")
+                                //{
+                                //    RunLog("飞梭前检测产品感应4 IC放歪"); //X083_
+                                //}
+                                //if (iovalues[5] == "0")
+                                //{
+                                //    RunLog("飞梭前检测产品感应3 IC放歪"); //X082_
+                                //}
+                                //if (iovalues[6] == "0")
+                                //{
+                                //    RunLog("飞梭前检测产品感应2 IC放歪"); //X081_
+                                //}
+                                //if (iovalues[7] == "0")
+                                //{
+                                //    RunLog("飞梭前检测产品感应1 IC放歪"); //X080_
+                                //}
 
                                 飞梭_前后放歪报警(iovalues);
 
@@ -8299,64 +8482,91 @@ namespace H5509_V2
                             bool[] open = GetSiteOpen(site);
                             if (open.Contains(true)) //如果有开Site
                             {
-                                if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //如果梭车上有料
+                                bool temppass = true;
+                                double temp = SiteTemp[site];
+                                if (温度模式 == "高温")
                                 {
-                                    opens = new int[8]
+                                    if (temp > 加热盘.波动温度上限 || temp <= 加热盘.波动温度下限)
                                     {
-                                        open[0] && 飞梭后入料IC[0][0] ? 0 : 2, open[1] && 飞梭后入料IC[0][1] ? 0 : 2, open[2] && 飞梭后入料IC[0][2] ? 0 : 2, open[3] && 飞梭后入料IC[0][3] ? 0 : 2,
-                                        open[4] && 飞梭后入料IC[1][0] ? 0 : 2, open[5] && 飞梭后入料IC[1][1] ? 0 : 2, open[6] && 飞梭后入料IC[1][2] ? 0 : 2, open[7] && 飞梭后入料IC[1][3] ? 0 : 2
-                                    };
-
-                                    lsopen = new bool[8]
-                                    {
-                                        opens[0] == 0, opens[1] == 0, opens[2] == 0, opens[3] == 0,
-                                        opens[4] == 0, opens[5] == 0, opens[6] == 0, opens[7] == 0,
-                                    };
-
-                                    正在吸取后入料 = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7], };
-
-                                    if (lsopen.Contains(true)) //梭车上只要有一颗就拿走
-                                    {
-                                        InSiteQueue.TryDequeue(out movesite);
-                                        RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->拿到取Site{site + 1}的IC信息:{opens[0]},{opens[1]},{opens[2]},{opens[3]},{opens[4]},{opens[5]},{opens[6]},{opens[7]}");
-                                        PS测试手臂取待测料流程.StepID = 505;
-                                    }
-                                    else //没有要拿的料就给下一个,并将site移除并添加到末尾
-                                    {
-                                        RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}：在梭车上没有要取的IC");
-
-                                        if (飞梭后出料状态 == 1)// || (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true))
-                                        {
-                                            飞梭后入料状态 = 0;
-                                            PS测试手臂取待测料流程.Processing = false;
-                                            PS测试手臂取待测料流程.StepID = 500;
-                                        }
-                                        else //没有出料则循环判断每个site
-                                        {
-                                            InSiteQueue.TryDequeue(out movesite);
-                                            InSiteQueue.Enqueue(site);
-                                            Thread.Sleep(10);
-
-                                            //for (int i = 0; i < InSiteQueue.Count; i++)
-                                            //{
-
-                                            //}
-                                            //InSiteQueue.Contains(site);
-                                        }
+                                        temppass = false;
                                     }
                                 }
-                                else //如果梭车没有料,则等梭车交换后到有料
+                                if (temppass)
                                 {
-                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}取料：梭车上没有IC");
-                                    if ((飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭后出料状态 == 1) && 入料手臂停止工作标记)
+                                    if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //如果梭车上有料
                                     {
-                                        飞梭后入料状态 = 0;
+                                        opens = new int[8]
+                                        {
+                                            open[0] && 飞梭后入料IC[0][0] ? 0 : 2, open[1] && 飞梭后入料IC[0][1] ? 0 : 2, open[2] && 飞梭后入料IC[0][2] ? 0 : 2, open[3] && 飞梭后入料IC[0][3] ? 0 : 2,
+                                            open[4] && 飞梭后入料IC[1][0] ? 0 : 2, open[5] && 飞梭后入料IC[1][1] ? 0 : 2, open[6] && 飞梭后入料IC[1][2] ? 0 : 2, open[7] && 飞梭后入料IC[1][3] ? 0 : 2
+                                        };
+
+                                        lsopen = new bool[8]
+                                        {
+                                            opens[0] == 0, opens[1] == 0, opens[2] == 0, opens[3] == 0,
+                                            opens[4] == 0, opens[5] == 0, opens[6] == 0, opens[7] == 0,
+                                        };
+
+                                        正在吸取后入料 = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7], };
+
+                                        if (lsopen.Contains(true)) //梭车上只要有一颗就拿走
+                                        {
+                                            InSiteQueue.TryDequeue(out movesite);
+                                            RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->拿到取Site{site + 1}的IC信息:{opens[0]},{opens[1]},{opens[2]},{opens[3]},{opens[4]},{opens[5]},{opens[6]},{opens[7]}");
+                                            PS测试手臂取待测料流程.StepID = 505;
+                                        }
+                                        else //没有要拿的料就给下一个,并将site移除并添加到末尾
+                                        {
+                                            RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}：在梭车上没有要取的IC");
+
+                                            if (飞梭后出料状态 == 1)// || (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true))
+                                            {
+                                                飞梭后入料状态 = 0;
+                                                PS测试手臂取待测料流程.Processing = false;
+                                                PS测试手臂取待测料流程.StepID = 500;
+                                            }
+                                            else //没有出料则循环判断每个site
+                                            {
+                                                InSiteQueue.TryDequeue(out movesite);
+                                                InSiteQueue.Enqueue(site);
+                                                Thread.Sleep(10);
+
+                                                //for (int i = 0; i < InSiteQueue.Count; i++)
+                                                //{
+
+                                                //}
+                                                //InSiteQueue.Contains(site);
+                                            }
+                                        }
                                     }
-                                    SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-                                    SiteTestState[site] = 0; //无料
-                                    PS测试手臂取待测料流程.Processing = false;
-                                    PS测试手臂取待测料流程.StepID = 500;
-                                    Thread.Sleep(10);
+                                    else //如果梭车没有料,则等梭车交换后到有料
+                                    {
+                                        RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}取料：梭车上没有IC");
+                                        if ((飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭后出料状态 == 1) && 入料手臂停止工作标记)
+                                        {
+                                            飞梭后入料状态 = 0;
+                                        }
+                                        SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+                                        SiteTestState[site] = 0; //无料
+                                        PS测试手臂取待测料流程.Processing = false;
+                                        PS测试手臂取待测料流程.StepID = 500;
+                                        Thread.Sleep(10);
+                                    }
+                                }
+                                else
+                                {
+                                    if (temp > 加热盘.波动温度上限)
+                                    {
+                                        Listcode.Add($"8{site:D2}319");
+                                        RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+                                    }
+                                    else if (temp <= 加热盘.波动温度下限)
+                                    {
+                                        Listcode.Add($"8{site:D2}319");
+                                        RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+                                    }
+                                    ProgramPause = true;
+                                    IsPause = true;
                                 }
                             }
                             else //如果Site全部被关闭则拿下一个Site的料
@@ -8407,7 +8617,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试手臂X移动到梭车失败!" + result);
+                            Listcode.Add("2028008");
+                            RunLog($"[Code]2028008,[Msg]测试手臂X移动到梭车失败!" + result);
+                            M21_测试手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8441,7 +8653,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试Z向下移动失败!" + result);
+                            Listcode.Add("2026007");
+                            RunLog($"[Code]2026007,[Msg]测试Z向下移动失败!" + result, LogType.AlarmLog);
+                            M19_测试手臂Z轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8542,7 +8756,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试Z向上移动失败!" + result);
+                            Listcode.Add("2026007");
+                            RunLog($"[Code]2026007,[Msg]测试Z向上移动失败!" + result, LogType.AlarmLog);
+                            M19_测试手臂Z轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8726,7 +8942,9 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"测试手臂X轴移动到Site{site + 1}上方失败!" + result);
+                                Listcode.Add("2028007");
+                                RunLog($"[Code]2028007,[Msg]测试手臂X轴移动到Site{site + 1}上方失败!" + result, LogType.AlarmLog);
+                                M21_测试手臂X轴ErrorMsg = result;
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -8766,7 +8984,9 @@ namespace H5509_V2
                                 }
                                 else
                                 {
-                                    RunLog($"测试Z向下移动失败!" + result);
+                                    Listcode.Add("2026007");
+                                    RunLog($"[Code]2026007,[Msg]测试Z向下移动失败!" + result, LogType.AlarmLog);
+                                    M19_测试手臂Z轴ErrorMsg = result;
                                     ProgramPause = true;
                                     IsPause = true;
                                 }
@@ -8822,7 +9042,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试Z向上移动失败!" + result);
+                            Listcode.Add("2026007");
+                            RunLog($"[Code]2026007,[Msg]测试Z向上移动失败!" + result, LogType.AlarmLog);
+                            M19_测试手臂Z轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -8966,7 +9188,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试手臂X走到梭车避让位失败!" + result);
+                            Listcode.Add("2028007");
+                            RunLog($"[Code]2028007,[Msg]测试手臂X走到梭车避让位失败!" + result, LogType.AlarmLog);
+                            M21_测试手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9093,7 +9317,9 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"测试手臂X轴移动到Site{site + 1}上方失败!" + result);
+                                Listcode.Add("2028007");
+                                RunLog($"[Code]2028007,[Msg]测试手臂X轴移动到Site{site + 1}上方失败!" + result, LogType.AlarmLog);
+                                M21_测试手臂X轴ErrorMsg = result;
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -9133,7 +9359,9 @@ namespace H5509_V2
                                 }
                                 else
                                 {
-                                    RunLog($"测试Z向下移动失败!" + result);
+                                    Listcode.Add("2026007");
+                                    RunLog($"[Code]2026007,[Msg]测试Z向下移动失败!" + result, LogType.AlarmLog);
+                                    M19_测试手臂Z轴ErrorMsg = result;
                                     ProgramPause = true;
                                     IsPause = true;
                                 }
@@ -9237,7 +9465,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试Z向上移动失败!" + result);
+                            Listcode.Add("2026007");
+                            RunLog($"[Code]2026007,[Msg]测试Z向上移动失败!" + result, LogType.AlarmLog);
+                            M19_测试手臂Z轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9371,7 +9601,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试Z吸料不起移到梭车上避让失败!" + result);
+                            Listcode.Add("2028007");
+                            RunLog($"[Code]2028007,[Msg]测试Z吸料不起移到梭车上避让失败!" + result, LogType.AlarmLog);
+                            M21_测试手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9417,7 +9649,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试手臂X移动到梭车失败!" + result);
+                            Listcode.Add("2028007");
+                            RunLog($"[Code]2028007,[Msg]测试手臂X移动到梭车失败!" + result, LogType.AlarmLog);
+                            M21_测试手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9454,7 +9688,9 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"测试Z向下移动失败!" + result);
+                                Listcode.Add("2026007");
+                                RunLog($"[Code]2026007,[Msg]测试Z向下移动失败!" + result, LogType.AlarmLog);
+                                M19_测试手臂Z轴ErrorMsg = result;
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -9509,7 +9745,9 @@ namespace H5509_V2
                         }
                         else
                         {
-                            RunLog($"测试Z向上移动失败!" + result);
+                            Listcode.Add("2026007");
+                            RunLog($"[Code]2026007,[Msg]测试Z向上移动失败!" + result, LogType.AlarmLog);
+                            M19_测试手臂Z轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
                         }
