@@ -103,6 +103,7 @@ namespace H5509_V2
             handler.刷新批次信息 = main.刷新批次信息;
             handler.刷新分BIN信息 = main.刷新分BIN信息;
             handler.刷新权限 = main.切换为操作员权限;
+            handler.显示Dout颜色 = main.显示Dout颜色;
 
             main.刷新界面权限 = 刷新界面权限;
             main.handler = handler;
@@ -335,6 +336,60 @@ namespace H5509_V2
             }
         }
 
+        private void 数据上传()
+        {
+            while (true)
+            {
+                try
+                {
+                    Log.LogTimer_Tick(null, null);
+                    if (LogQueue.Count > 0)
+                    {
+                        //Debug.WriteLine("获取日志数量:" + LogQueue.Count);
+
+                        int countTemp = LogQueue.Count;
+                        List<LogManager> logsTemp = new List<LogManager>();
+                        for (int i = 0; i < countTemp; i++)
+                        {
+                            LogQueue.TryDequeue(out LogManager log);
+                            logsTemp.Add(log);
+                        }
+
+                        string[] logs = new string[logsTemp.Count];
+                        DateTime[] logtime = new DateTime[logsTemp.Count];
+
+                        for (int i = 0; i < logsTemp.Count; i++)
+                        {
+                            logs[i] = logsTemp[i].Msg;
+                            logtime[i] = logsTemp[i].Time;
+                        }
+
+                        writeDataHelper.RunLog(logs, logtime);
+
+                        for (int i = 0; i < logsTemp.Count; i++)
+                        {
+                            if (logsTemp[i].TxtLogtype == LogType.OperateLog || logsTemp[i].TxtLogtype == LogType.ParamLog)
+                            {
+                                显示操作log(logsTemp[i].Msg, logsTemp[i].Time);
+                            }
+                            else if (logsTemp[i].TxtLogtype == LogType.AlarmLog)
+                            {
+                                显示报警log(logsTemp[i].Msg, logsTemp[i].Time);
+                            }
+                        }
+
+                        //LogQueue.RemoveRange(0, countTemp);// 清空已添加的日志
+                    }
+
+                    Thread.Sleep(500);
+                }
+                catch (Exception ex)
+                {
+                    RunLog("数据上传异常!" + ex.Message);
+                    Thread.Sleep(1000);
+                }
+            }
+        }
         private void 界面刷新()
         {
             string result = "";
@@ -359,23 +414,6 @@ namespace H5509_V2
                         }
                     }));
 
-                    if (LogQueue.Count > 0)
-                    {
-                        if (LogQueue.TryDequeue(out LogManager logs))
-                        {
-                            Debug.WriteLine(logs.Msg);
-                            Log.AddLog(logs.ExcelLevel, logs.ExcelLevel, logs.Msg, logs.Time);
-                            writeDataHelper.RunLog(logs.Msg, logs.Time, logs.TxtLogtype, logs.IsReceive);
-                            if (logs.TxtLogtype == LogType.OperateLog || logs.TxtLogtype == LogType.ParamLog)
-                            {
-                                显示操作log(logs.Msg, logs.Time);
-                            }
-                            else if (logs.TxtLogtype == LogType.AlarmLog)
-                            {
-                                显示报警log(logs.Msg, logs.Time);
-                            }
-                        }
-                    }
 
                     if (IsPause) continue; //如果暂停则不刷新
 
@@ -472,11 +510,13 @@ namespace H5509_V2
                             {
                                 int sitenum = Com.Listtestsingal[0];
                                 RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
-                                Com.Listtestsingal.Remove(sitenum);
-
+                                //Com.Listtestsingal.Remove(sitenum);
+                                Com.Listtestsingal.RemoveAt(0);
                                 bool[][] open = SiteTestIC[sitenum];
 
                                 Com.OutBin.TryDequeue(out string[] bins);
+
+                                //main.显示Dout颜色(sitenum, open, bins);
 
                                 string bb = "@TEST_DONE " + sitenum.ToString("D2");
                                 foreach (string s in bins)
@@ -631,13 +671,14 @@ namespace H5509_V2
                         testnum = 0;
                     }
 
-                    Thread.Sleep(100);
                 }
                 catch (Exception ex)
                 {
                     RunLog("屏幕刷新异常!" + ex.Message);
                     Thread.Sleep(100);
                 }
+
+                Thread.Sleep(50);
             }
         }
 
@@ -684,15 +725,15 @@ namespace H5509_V2
                         }
 
                         bool[] tempopen = 检测温度探头状态();
-                        if (tempopen.Contains(true))
+                        if (!IsPause && tempopen.Contains(true))
                         {
                             for (int i = 0; i < tempopen.Length; i++)
                             {
                                 if (tempopen[i])
                                 {
                                     Listcode.Add($"8{i:D2}219");
-                                    if (i == 15) RunLog($"[Code]8{i:D2}219,[Msg]加热盘探头异常!" + result, LogType.AlarmLog);
-                                    else RunLog($"[Code]8{i:D2}219,[Msg]Site{i}探头异常!" + result, LogType.AlarmLog);
+                                    if (i == 15) RunLog($"[Code]8{i:D2}219,[Msg]加热盘探头异常!", LogType.AlarmLog);
+                                    else RunLog($"[Code]8{i:D2}219,[Msg]Site{i}探头异常!", LogType.AlarmLog);
                                 }
                             }
                             ProgramPause = true; //如果有温度异常则触发停止
@@ -787,6 +828,10 @@ namespace H5509_V2
                 {
                     界面刷新();
                 });
+                Task.Run((() =>
+                {
+                    数据上传();
+                }));
                 Task.Run((() =>
                 {
                     温度读取();

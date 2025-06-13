@@ -148,6 +148,8 @@ namespace H5509_V2
 
         public static string M23_出料手臂X轴ErrorMsg = "";
 
+        public static int 正在入料的Site;
+
         public static string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
 
         public static bool IsStart = false; //开始
@@ -464,7 +466,16 @@ namespace H5509_V2
 
         public static TimeSpan 批次运行时间 { get { return 结束时间 - 开始时间; } }
 
-        public static int RealUPHNum { get { return (int)(出料数 / 实时运行时间.TotalSeconds * 3600); } }
+        public static int RealUPHNum 
+        { 
+            get 
+            {
+                if(出料数 == 0) return 0;
+                else return (int)(出料数 / 实时运行时间.TotalSeconds * 3600); 
+            }
+        }
+
+        public static int UPHType = 0;
 
         public static int UPHNum
         {
@@ -625,6 +636,8 @@ namespace H5509_V2
         //public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
 
         public static List<bool[][]> SiteTestIC = new List<bool[][]>(); //保存Site放入的IC状态
+
+        public static List<string[]> SiteTestBin = new List<string[]>();
 
         public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>(); //用来保存接收的Bin数据的队列
 
@@ -1862,11 +1875,13 @@ namespace H5509_V2
 
             for (int i = 0; i < 16; i++)
             {
-                APPmaster.SiteTestIC.Add(new bool[2][]
+                SiteTestIC.Add(new bool[2][]
                 {
                     new bool[] { false, false, false, false },
                     new bool[] { false, false, false, false },
                 });
+
+                SiteTestBin.Add(new string[] { "", "", "", "", "", "", "", "" });
             }
             return "Success";
         }
@@ -2037,8 +2052,8 @@ namespace H5509_V2
                        $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
                        $"IC吸取模式,测试模式)" +
                         $"values('{开始时间.ToString("F")}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
-                       $"'{载入数}','{结束时间.ToString()}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{Auto1}','{Auto2}'," +  //工作时间.Ticks
-                       $"'{Fix1}','{Fix2}','{Fix3}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
+                       $"'{载入数}','{结束时间.ToString()}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{设置信息.分BIN信息.name1}','{设置信息.分BIN信息.name2}'," +  //工作时间.Ticks
+                       $"'{设置信息.分BIN信息.name3}','{设置信息.分BIN信息.name4}','{设置信息.分BIN信息.name5}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
                        $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{1}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
                        $"'正常','正常')";
 
@@ -2544,7 +2559,7 @@ namespace H5509_V2
         {
             for (int i = 0; i < 实际值.Length; i++)
             {
-                if (目标值[i] == false) break; //如果不需要放
+                if (目标值[i] == false) continue; //如果不需要放
                 if (实际值[i] != 目标值[i]) return true;
             }
             return false;
@@ -3167,16 +3182,22 @@ namespace H5509_V2
 
         public static void RunLog(string info, WriteData.LogType txtType = WriteData.LogType.RunLog, bool isReceive = false, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
         {
+            Log.AddLog(excelLevel, excelType, info);
+
             LogManager log = new LogManager()
             {
                 Msg = info,
                 Time = DateTime.Now,
                 TxtLogtype = txtType,
-                ExcelLevel = excelLevel,
-                ExcelType = excelType,
+                //ExcelLevel = excelLevel,
+                //ExcelType = excelType,
                 IsReceive = isReceive,
             };
             LogQueue.Enqueue(log);
+
+            //Debug.WriteLine("输出日志数量：" + LogQueue.Count);
+            Debug.WriteLine(info);
+
             //Debug.WriteLine(info);
             ////Log.AddLog("debug", "run", info);
             //writeDataHelper.RunLog(info, logtype);
@@ -3800,6 +3821,42 @@ namespace H5509_V2
                     pos[0] = 初始点位.入料_梭车2_X + 梭车列间距 + 点位微调.入料_梭车2第2列放_X;
                     pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第2列放_Y;
                     pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
+                }
+            }
+            return pos;
+        }
+
+        public static double[] 获取梭车xyp吸料点位2(int colum) //因两个梭车点位不同，因此出料手臂等待的时候是获取将要过来的梭车的点位
+        {
+            double[] pos = new double[3];
+            if (飞梭2位置 == 0) //梭车2在后，梭车1在前
+            {
+                if (colum == 0) //梭车2第1列
+                {
+                    pos[0] = 初始点位.出料_梭车2_X + 点位微调.出料_梭车2第1列吸_X;
+                    pos[1] = 初始点位.出料_梭车2_Y + 点位微调.出料_梭车2第1列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
+                }
+                else  //梭车2第2列
+                {
+                    pos[0] = 初始点位.出料_梭车2_X - 梭车列间距 + 点位微调.出料_梭车2第2列吸_X;
+                    pos[1] = 初始点位.出料_梭车2_Y + 点位微调.出料_梭车2第2列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
+                }
+            }
+            else //梭车2在前，梭车1后
+            {
+                if (colum == 0) //梭车1第1列
+                {
+                    pos[0] = 初始点位.出料_梭车1_X + 点位微调.出料_梭车1第1列吸_X;
+                    pos[1] = 初始点位.出料_梭车1_Y + 点位微调.出料_梭车1第1列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
+                }
+                else  //梭车1第2列
+                {
+                    pos[0] = 初始点位.出料_梭车1_X - 梭车列间距 + 点位微调.出料_梭车1第2列吸_X;
+                    pos[1] = 初始点位.出料_梭车1_Y + 点位微调.出料_梭车1第2列吸_Y;
+                    pos[2] = 出料吸料间距 + 点位微调.出料_梭车_变距;
                 }
             }
             return pos;

@@ -198,6 +198,7 @@ namespace H5509_V2
                                 TestTime = DateTime.Now - listtestdatetime[site];
                                 OutSiteQueue.Enqueue(site);
                                 BinSaveQueue.Enqueue(bin);
+                                SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
                                 SiteTestState[site] = 3;
 
                                 //用来统计数据
@@ -312,6 +313,7 @@ namespace H5509_V2
             //用来统计数据
             OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
             Listtestsingal.Add(t);
+            SiteTestBin[t] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
             SiteTestState[t] = 3;
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
 
@@ -351,6 +353,7 @@ namespace H5509_V2
             //用来统计数据
             OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
             Listtestsingal.Add(t);
+            SiteTestBin[t] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
             SiteTestState[t] = 3;
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
         }

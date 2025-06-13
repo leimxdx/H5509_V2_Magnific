@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -29,8 +30,9 @@ namespace H5509_V2
             RunLog = 1,
             ComLog = 2,
             AlarmLog = 3,
-            OperateLog = 4,
-            ParamLog = 5
+            KeyLogPath = 4,
+            OperateLog = 5,
+            ParamLog = 6
         }
 
         //创建一个私有的构造方法
@@ -61,6 +63,17 @@ namespace H5509_V2
         /// <param name="logtype">1: RunLog 2: ComLog 3: AlarmLog 4: KeyLog 5: OperateLog 6: ParamLog</param>
         /// <returns></returns>
         public bool RunLog(string log, DateTime datetime, LogType logtype = LogType.RunLog, bool isReceive = false)
+        {
+            return WriteDataHelper.RunLog(log, datetime, logtype, isReceive);
+        }
+
+        /// <summary>
+        /// 输出log(1: RunLog 2: ComLog 3: AlarmLog 4: KeyLog 5: OperateLog 6: ParamLog)
+        /// </summary>
+        /// <param name="log"></param>
+        /// <param name="logtype">1: RunLog 2: ComLog 3: AlarmLog 4: KeyLog 5: OperateLog 6: ParamLog</param>
+        /// <returns></returns>
+        public bool RunLog(string[] log, DateTime[] datetime, LogType logtype = LogType.RunLog, bool isReceive = false)
         {
             return WriteDataHelper.RunLog(log, datetime, logtype, isReceive);
         }
@@ -112,6 +125,8 @@ namespace H5509_V2
         }
         private bool WriteAppend(string filePath, string[] contents)
         {
+            //Stopwatch stop = new Stopwatch();
+            //stop.Start();
             writeDataLock.Enter();
             try
             {
@@ -131,6 +146,8 @@ namespace H5509_V2
             }
             finally
             {
+                //stop.Stop();
+                //Debug.WriteLine(stop.ElapsedMilliseconds);
                 writeDataLock.Leave();
             }
         }
@@ -140,6 +157,7 @@ namespace H5509_V2
             if (WriteAppend(filePath, new string[] { content })) return true;
             else return false;
         }
+
         /// <summary>
         /// 写运行日志
         /// </summary>
@@ -153,6 +171,27 @@ namespace H5509_V2
             string writeTime = $"{datetime:yyyy-MM-dd HH:mm:ss} {str} ";
             string logPath = DatapPath(datetime.ToString("yyyy-MM-dd") + ".log", logtype);
             if (WriteAppend(logPath, writeTime + log)) return true;
+            else return false;
+        }
+
+        /// <summary>
+        /// 写运行日志
+        /// </summary>
+        /// <param name="log"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public bool RunLog(string[] log, DateTime[] datetime, LogType logtype = LogType.RunLog, bool isReceive = false)
+        {
+            string str = " => ";
+            if (isReceive) str = " <= ";
+            string[] content = new string[log.Length];
+            string logPath = DatapPath(datetime[0].ToString("yyyy-MM-dd") + ".log", logtype);
+            for (int i = 0; i < content.Length; i++)
+            {
+                string writeTime = $"{datetime[i]:yyyy-MM-dd HH:mm:ss} {str} ";
+                content[i] = writeTime + log[i];
+            }
+            if (WriteAppend(logPath, content)) return true;
             else return false;
         }
     }

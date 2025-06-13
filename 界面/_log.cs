@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,7 +40,7 @@ namespace H5509_V2
         private bool isProcessing = false;
         private static Dictionary<string, FileCounter> _fileCounters = new Dictionary<string, FileCounter>();
 
-        List<log> logNeed2Add = new List<log>(); // 用于存储需要添加的日志
+        ConcurrentQueue<log> logNeed2Add = new ConcurrentQueue<log>(); // 用于存储需要添加的日志
 
 
         class FileCounter
@@ -139,17 +140,16 @@ namespace H5509_V2
         /// <param name="level"> </param>
         /// <param name="logType"></param>
         /// <param name="info"></param>
-        public void AddLog(string level, string logType, string info, DateTime dateTime)
+        public void AddLog(string level, string logType, string info)
         {
-
-            logNeed2Add.Add(new log
+            logNeed2Add.Enqueue(new log
             {
-                Time = dateTime,
+                Time = DateTime.Now,
                 LogLevel = level,
                 LogType = logType,
                 LogContent = info
             });
-
+            //Debug.WriteLine("输出表格数量："+logNeed2Add.Count);
             //if (logNeed2Add.Count >= 1000) // 超过1000条立即写入
             //{
             //    LogTimer_Tick(null, null); // 直接调用定时器事件处理方法
@@ -157,19 +157,26 @@ namespace H5509_V2
 
         }
 
-        private void LogTimer_Tick(object sender, EventArgs e)
+        public void LogTimer_Tick(object sender, EventArgs e)
         {
             if (logNeed2Add.Count == 0) return; // 没有日志需要写入
 
-            string monthlyDir = Path.Combine(logsDirectory, logNeed2Add[0].Time.ToString("yyyyMM"));
-            var currentFile = GetCurrentLogFile(monthlyDir);
-
             int countTemp = logNeed2Add.Count;
-            List<log> logsTemp = logNeed2Add.GetRange(0, countTemp);
+            List<log> logsTemp = new List<log>();
+            for (int i = 0; i < countTemp; i++)
+            {
+                logNeed2Add.TryDequeue(out log log);
+                logsTemp.Add(log);
+            }
+
+            //Debug.WriteLine("获取表格数量:"+ logNeed2Add.Count);
+
+            string monthlyDir = Path.Combine(logsDirectory, logsTemp[0].Time.ToString("yyyyMM"));
+            var currentFile = GetCurrentLogFile(monthlyDir);
 
             WriteLogToExcel(currentFile, logsTemp);
 
-            logNeed2Add.RemoveRange(0, countTemp);// 清空已添加的日志
+            //logNeed2Add.RemoveRange(0, countTemp);// 清空已添加的日志
         }
 
         private void WriteLogToExcel(FileCounter fileCounter, List<log> logs)
@@ -878,6 +885,7 @@ namespace H5509_V2
                 else Com.Bin.Add(site, bin);
                 OutSiteQueue.Enqueue(site);
                 BinSaveQueue.Enqueue(bin);
+                SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
                 SiteTestState[site] = 3;
                 //用来统计数据
                 Com.OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });

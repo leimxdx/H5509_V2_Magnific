@@ -16,15 +16,10 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Vml.Office;
-using DocumentFormat.OpenXml.Vml.Spreadsheet;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Sunny.UI;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
+using static H5509_V2.WriteData;
 using Color = System.Drawing.Color;
 using Control = System.Windows.Forms.Control;
 
@@ -4475,16 +4470,19 @@ namespace H5509_V2
                             if (line >= 1)
                             {
                                 RunLog($"档案名称:[{name}]:Tray名称:{setupInfo.Tray盘信息.TrayName}->{trayname}:更新成功", WriteData.LogType.ParamLog);
-                                if (trayname != 设置信息.Tray盘信息.TrayName)
+                                if (name == 设置信息.档案名称)
                                 {
-                                    result = GetTrayInfo(trayname, out TrayInfo trayInfo);
-                                    if (result == "Success")
+                                    if (trayname == 设置信息.Tray盘信息.TrayName)
                                     {
-                                        设置信息.Tray盘信息 = trayInfo;
-                                        result = Init_TrayPoint();
-                                        if (result != "Success")
+                                        result = GetTrayInfo(trayname, out TrayInfo trayInfo);
+                                        if (result == "Success")
                                         {
-                                            MessageBox.Show("获取tray盘信息保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            设置信息.Tray盘信息 = trayInfo;
+                                            result = Init_TrayPoint();
+                                            if (result != "Success")
+                                            {
+                                                MessageBox.Show("获取tray盘信息保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
                                         }
                                     }
                                 }
@@ -4501,15 +4499,18 @@ namespace H5509_V2
                             if (line >= 1)
                             {
                                 RunLog($"档案名称:[{name}]:加热盘名称:{setupInfo.Heat盘信息.HeatName}->{heatname}:更新成功", WriteData.LogType.ParamLog);
-                                if (heatname != 设置信息.Heat盘信息.HeatName)
+                                if (name == 设置信息.档案名称)
                                 {
-                                    result = GetHeatInfo(heatname, out HeatInfo heatInfo);
-                                    if (result == "Success")
+                                    if (heatname != 设置信息.Heat盘信息.HeatName)
                                     {
-                                        设置信息.温度模式 = tempmode;
-                                        设置信息.Heat盘信息 = heatInfo;
-                                        HeatTrayICPointInit();
-                                        刷新温度信息();
+                                        result = GetHeatInfo(heatname, out HeatInfo heatInfo);
+                                        if (result == "Success")
+                                        {
+                                            设置信息.温度模式 = tempmode;
+                                            设置信息.Heat盘信息 = heatInfo;
+                                            HeatTrayICPointInit();
+                                            刷新温度信息();
+                                        }
                                     }
                                 }
                             }
@@ -4525,10 +4526,13 @@ namespace H5509_V2
                             if (line >= 1)
                             {
                                 RunLog($"档案名称:[{name}]:温度模式:{setupInfo.温度模式}->{tempmode}:更新成功", WriteData.LogType.ParamLog);
-                                if (tempmode != 设置信息.温度模式)
+                                if (name == 设置信息.档案名称)
                                 {
-                                    设置信息.温度模式 = tempmode;
-                                    刷新温度信息();
+                                    if (tempmode != 设置信息.温度模式)
+                                    {
+                                        设置信息.温度模式 = tempmode;
+                                        刷新温度信息();
+                                    }
                                 }
                             }
                             else
@@ -6293,73 +6297,79 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
-            //飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
-            飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { true, false, false, false } };
-            //if (入料手臂停止工作标记 && 结批标记)
-            {
-                bool[] open = new bool[]
-                                {
-                                    飞梭后入料IC[0][0], 飞梭后入料IC[0][1], 飞梭后入料IC[0][2], 飞梭后入料IC[0][3],
-                                    飞梭后入料IC[1][0], 飞梭后入料IC[1][1], 飞梭后入料IC[1][2], 飞梭后入料IC[1][3]
-                                };
+            //string[] logs = new string[1000];
+            //for (int i = 0; i < logs.Length; i++)
+            //{
+            //    Log.AddLog("debug", "run","调试log:" + i);
+            //}
+            //Log.LogTimer_Tick(null,null);
+            ////飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { true, false, false, false } };
+            ////if (入料手臂停止工作标记 && 结批标记)
+            //{
+            //    bool[] open = new bool[]
+            //                    {
+            //                        飞梭后入料IC[0][0], 飞梭后入料IC[0][1], 飞梭后入料IC[0][2], 飞梭后入料IC[0][3],
+            //                        飞梭后入料IC[1][0], 飞梭后入料IC[1][1], 飞梭后入料IC[1][2], 飞梭后入料IC[1][3]
+            //                    };
 
-                bool[] open2 = new bool[]
-                {
-                                    飞梭前入料IC[0][0], 飞梭前入料IC[0][1], 飞梭前入料IC[0][2], 飞梭前入料IC[0][3],
-                                    飞梭前入料IC[1][0], 飞梭前入料IC[1][1], 飞梭前入料IC[1][2], 飞梭前入料IC[1][3]
-                };
+            //    bool[] open2 = new bool[]
+            //    {
+            //                        飞梭前入料IC[0][0], 飞梭前入料IC[0][1], 飞梭前入料IC[0][2], 飞梭前入料IC[0][3],
+            //                        飞梭前入料IC[1][0], 飞梭前入料IC[1][1], 飞梭前入料IC[1][2], 飞梭前入料IC[1][3]
+            //    };
 
-                bool[] open3 = new bool[]
-                {
-                                    放料IC目标值[0][0], 放料IC目标值[0][1], 放料IC目标值[0][2], 放料IC目标值[0][3],
-                                    放料IC目标值[1][0], 放料IC目标值[1][1], 放料IC目标值[1][2], 放料IC目标值[1][3]
-                };
+            //    bool[] open3 = new bool[]
+            //    {
+            //                        放料IC目标值[0][0], 放料IC目标值[0][1], 放料IC目标值[0][2], 放料IC目标值[0][3],
+            //                        放料IC目标值[1][0], 放料IC目标值[1][1], 放料IC目标值[1][2], 放料IC目标值[1][3]
+            //    };
 
-                bool[] open6 = new bool[]
-                {
-                                    正在吸取后入料[0], 正在吸取后入料[1], 正在吸取后入料[2], 正在吸取后入料[3],
-                                    正在吸取后入料[4], 正在吸取后入料[5], 正在吸取后入料[6], 正在吸取后入料[7]
-                };
+            //    bool[] open6 = new bool[]
+            //    {
+            //                        正在吸取后入料[0], 正在吸取后入料[1], 正在吸取后入料[2], 正在吸取后入料[3],
+            //                        正在吸取后入料[4], 正在吸取后入料[5], 正在吸取后入料[6], 正在吸取后入料[7]
+            //    };
 
-                bool[] open7 = new bool[]
-                {
-                                    正在放置前入料[0][0], 正在放置前入料[0][1], 正在放置前入料[0][2], 正在放置前入料[0][3],
-                                    正在放置前入料[1][0], 正在放置前入料[1][1], 正在放置前入料[1][2], 正在放置前入料[1][3]
-                };
+            //    bool[] open7 = new bool[]
+            //    {
+            //                        正在放置前入料[0][0], 正在放置前入料[0][1], 正在放置前入料[0][2], 正在放置前入料[0][3],
+            //                        正在放置前入料[1][0], 正在放置前入料[1][1], 正在放置前入料[1][2], 正在放置前入料[1][3]
+            //    };
 
-                结批时判断是否关site(open, open2, open3, out bool[] open4, out bool[] open5);
+            //    结批时判断是否关site(open, open2, open3, out bool[] open4, out bool[] open5);
 
-                if (open4.Contains(true))
-                {
-                    for (int i = 0; i < open3.Length; i++)
-                    {
-                        if (!open3[i] && open[i] && !open6[i])
-                        {
-                            open[i] = false;
-                        }
-                    }
-                }
+            //    if (open4.Contains(true))
+            //    {
+            //        for (int i = 0; i < open3.Length; i++)
+            //        {
+            //            if (!open3[i] && open[i] && !open6[i])
+            //            {
+            //                open[i] = false;
+            //            }
+            //        }
+            //    }
 
-                if (open5.Contains(true))
-                {
-                    for (int i = 0; i < open3.Length; i++)
-                    {
-                        if (!open3[i] && open2[i] && !open7[i])
-                        {
-                            open2[i] = false;
-                        }
-                    }
-                }
+            //    if (open5.Contains(true))
+            //    {
+            //        for (int i = 0; i < open3.Length; i++)
+            //        {
+            //            if (!open3[i] && open2[i] && !open7[i])
+            //            {
+            //                open2[i] = false;
+            //            }
+            //        }
+            //    }
 
-                if (!open.Contains(true) && !open2.Contains(true))
-                {
-                    RunLog("aaa");
-                    //测试手臂入料停止工作标记 = true;
-                    //PS测试手臂取待测料流程.Processing = false;
-                    //PS测试手臂取待测料流程.StepID = 500;
-                    //break;
-                }
-            }
+            //    if (!open.Contains(true) && !open2.Contains(true))
+            //    {
+            //        RunLog("aaa");
+            //        //测试手臂入料停止工作标记 = true;
+            //        //PS测试手臂取待测料流程.Processing = false;
+            //        //PS测试手臂取待测料流程.StepID = 500;
+            //        //break;
+            //    }
+            //}
 
             //结批时判断是否关site(out bool[] open, out bool[] open2);
 

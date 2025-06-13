@@ -241,6 +241,37 @@
             this.label122 = new System.Windows.Forms.Label();
             this.label123 = new System.Windows.Forms.Label();
             this.label124 = new System.Windows.Forms.Label();
+            this.uiGroupBox14 = new Sunny.UI.UIGroupBox();
+            this.uiLight164 = new Sunny.UI.UILight();
+            this.uiLight163 = new Sunny.UI.UILight();
+            this.uiSwitch79 = new Sunny.UI.UISwitch();
+            this.uiGroupBox22 = new Sunny.UI.UIGroupBox();
+            this.panel32 = new System.Windows.Forms.Panel();
+            this.panel33 = new System.Windows.Forms.Panel();
+            this.lbl_梭车后出1 = new System.Windows.Forms.Label();
+            this.lbl_梭车后出2 = new System.Windows.Forms.Label();
+            this.lbl_梭车后出8 = new System.Windows.Forms.Label();
+            this.lbl_梭车后出3 = new System.Windows.Forms.Label();
+            this.lbl_梭车后出7 = new System.Windows.Forms.Label();
+            this.lbl_梭车后出4 = new System.Windows.Forms.Label();
+            this.lbl_梭车后出6 = new System.Windows.Forms.Label();
+            this.lbl_梭车后出5 = new System.Windows.Forms.Label();
+            this.label155 = new System.Windows.Forms.Label();
+            this.uiLight173 = new Sunny.UI.UILight();
+            this.uiLight174 = new Sunny.UI.UILight();
+            this.panel38 = new System.Windows.Forms.Panel();
+            this.panel39 = new System.Windows.Forms.Panel();
+            this.lbl_梭车后入1 = new System.Windows.Forms.Label();
+            this.lbl_梭车后入2 = new System.Windows.Forms.Label();
+            this.lbl_梭车后入8 = new System.Windows.Forms.Label();
+            this.lbl_梭车后入3 = new System.Windows.Forms.Label();
+            this.lbl_梭车后入7 = new System.Windows.Forms.Label();
+            this.lbl_梭车后入4 = new System.Windows.Forms.Label();
+            this.lbl_梭车后入6 = new System.Windows.Forms.Label();
+            this.lbl_梭车后入5 = new System.Windows.Forms.Label();
+            this.label105 = new System.Windows.Forms.Label();
+            this.uiLight175 = new Sunny.UI.UILight();
+            this.uiLight176 = new Sunny.UI.UILight();
             this.uiGroupBox26 = new Sunny.UI.UIGroupBox();
             this.uiSwitch94 = new Sunny.UI.UISwitch();
             this.uiSwitch95 = new Sunny.UI.UISwitch();
@@ -260,43 +291,31 @@
             this.label127 = new System.Windows.Forms.Label();
             this.label128 = new System.Windows.Forms.Label();
             this.label129 = new System.Windows.Forms.Label();
-            this.uiGroupBox27 = new Sunny.UI.UIGroupBox();
-            this.uiSwitch89 = new Sunny.UI.UISwitch();
-            this.uiSwitch90 = new Sunny.UI.UISwitch();
-            this.uiSwitch91 = new Sunny.UI.UISwitch();
-            this.uiSwitch92 = new Sunny.UI.UISwitch();
-            this.label135 = new System.Windows.Forms.Label();
-            this.label136 = new System.Windows.Forms.Label();
-            this.label137 = new System.Windows.Forms.Label();
-            this.label138 = new System.Windows.Forms.Label();
-            this.uiSwitch84 = new Sunny.UI.UISwitch();
-            this.label130 = new System.Windows.Forms.Label();
-            this.uiSwitch85 = new Sunny.UI.UISwitch();
-            this.uiSwitch86 = new Sunny.UI.UISwitch();
-            this.uiSwitch87 = new Sunny.UI.UISwitch();
-            this.uiSwitch88 = new Sunny.UI.UISwitch();
-            this.label131 = new System.Windows.Forms.Label();
-            this.label132 = new System.Windows.Forms.Label();
-            this.label133 = new System.Windows.Forms.Label();
-            this.label134 = new System.Windows.Forms.Label();
-            this.uiGroupBox14 = new Sunny.UI.UIGroupBox();
-            this.uiLight164 = new Sunny.UI.UILight();
-            this.uiLight163 = new Sunny.UI.UILight();
-            this.uiSwitch79 = new Sunny.UI.UISwitch();
-            this.uiGroupBox22 = new Sunny.UI.UIGroupBox();
-            this.uiLight173 = new Sunny.UI.UILight();
-            this.uiLight174 = new Sunny.UI.UILight();
-            this.panel38 = new System.Windows.Forms.Panel();
-            this.panel39 = new System.Windows.Forms.Panel();
-            this.label105 = new System.Windows.Forms.Label();
-            this.uiLight175 = new Sunny.UI.UILight();
-            this.uiLight176 = new Sunny.UI.UILight();
             this.uiGroupBox15 = new Sunny.UI.UIGroupBox();
-            this.uiLight161 = new Sunny.UI.UILight();
-            this.uiLight162 = new Sunny.UI.UILight();
             this.panel34 = new System.Windows.Forms.Panel();
             this.panel35 = new System.Windows.Forms.Panel();
-            this.label104 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入1 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入2 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入8 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入3 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入7 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入4 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入6 = new System.Windows.Forms.Label();
+            this.lbl_梭车前入5 = new System.Windows.Forms.Label();
+            this.label173 = new System.Windows.Forms.Label();
+            this.panel36 = new System.Windows.Forms.Panel();
+            this.panel37 = new System.Windows.Forms.Panel();
+            this.lbl_梭车前出1 = new System.Windows.Forms.Label();
+            this.lbl_梭车前出2 = new System.Windows.Forms.Label();
+            this.lbl_梭车前出8 = new System.Windows.Forms.Label();
+            this.lbl_梭车前出3 = new System.Windows.Forms.Label();
+            this.lbl_梭车前出7 = new System.Windows.Forms.Label();
+            this.lbl_梭车前出4 = new System.Windows.Forms.Label();
+            this.lbl_梭车前出6 = new System.Windows.Forms.Label();
+            this.lbl_梭车前出5 = new System.Windows.Forms.Label();
+            this.label165 = new System.Windows.Forms.Label();
+            this.uiLight161 = new Sunny.UI.UILight();
+            this.uiLight162 = new Sunny.UI.UILight();
             this.uiLight167 = new Sunny.UI.UILight();
             this.uiLight168 = new Sunny.UI.UILight();
             this.uiGroupBox13 = new Sunny.UI.UIGroupBox();
@@ -412,6 +431,25 @@
             this.label120 = new System.Windows.Forms.Label();
             this.label117 = new System.Windows.Forms.Label();
             this.label118 = new System.Windows.Forms.Label();
+            this.uiGroupBox27 = new Sunny.UI.UIGroupBox();
+            this.uiSwitch89 = new Sunny.UI.UISwitch();
+            this.uiSwitch90 = new Sunny.UI.UISwitch();
+            this.uiSwitch91 = new Sunny.UI.UISwitch();
+            this.uiSwitch92 = new Sunny.UI.UISwitch();
+            this.label135 = new System.Windows.Forms.Label();
+            this.label136 = new System.Windows.Forms.Label();
+            this.label137 = new System.Windows.Forms.Label();
+            this.label138 = new System.Windows.Forms.Label();
+            this.uiSwitch84 = new Sunny.UI.UISwitch();
+            this.label130 = new System.Windows.Forms.Label();
+            this.uiSwitch85 = new Sunny.UI.UISwitch();
+            this.uiSwitch86 = new Sunny.UI.UISwitch();
+            this.uiSwitch87 = new Sunny.UI.UISwitch();
+            this.uiSwitch88 = new Sunny.UI.UISwitch();
+            this.label131 = new System.Windows.Forms.Label();
+            this.label132 = new System.Windows.Forms.Label();
+            this.label133 = new System.Windows.Forms.Label();
+            this.label134 = new System.Windows.Forms.Label();
             this.uiGroupBox12 = new Sunny.UI.UIGroupBox();
             this.label86 = new System.Windows.Forms.Label();
             this.panel16 = new System.Windows.Forms.Panel();
@@ -556,14 +594,20 @@
             this.uiGroupBox25.SuspendLayout();
             this.tabPage16.SuspendLayout();
             this.uiGroupBox21.SuspendLayout();
-            this.uiGroupBox26.SuspendLayout();
-            this.uiGroupBox27.SuspendLayout();
             this.uiGroupBox14.SuspendLayout();
             this.uiGroupBox22.SuspendLayout();
+            this.panel32.SuspendLayout();
+            this.panel33.SuspendLayout();
             this.panel38.SuspendLayout();
+            this.panel39.SuspendLayout();
+            this.uiGroupBox26.SuspendLayout();
             this.uiGroupBox15.SuspendLayout();
             this.panel34.SuspendLayout();
+            this.panel35.SuspendLayout();
+            this.panel36.SuspendLayout();
+            this.panel37.SuspendLayout();
             this.uiGroupBox13.SuspendLayout();
+            this.uiGroupBox27.SuspendLayout();
             this.uiGroupBox12.SuspendLayout();
             this.panel16.SuspendLayout();
             this.panel18.SuspendLayout();
@@ -619,8 +663,8 @@
             // 
             // uiTabControl1
             // 
-            this.uiTabControl1.Controls.Add(this.tabPage1);
             this.uiTabControl1.Controls.Add(this.tabPage2);
+            this.uiTabControl1.Controls.Add(this.tabPage1);
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
@@ -729,7 +773,7 @@
             this.uiSwitch18.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch18.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch18.TabIndex = 133;
-            this.uiSwitch18.Tag = "@02@#BCD#";
+            this.uiSwitch18.Tag = "";
             this.uiSwitch18.TagString = "Y039";
             this.uiSwitch18.Text = "uiSwitch18";
             // 
@@ -745,7 +789,7 @@
             this.uiSwitch15.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch15.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch15.TabIndex = 132;
-            this.uiSwitch15.Tag = "@02@#BCD#";
+            this.uiSwitch15.Tag = "";
             this.uiSwitch15.TagString = "Y038";
             this.uiSwitch15.Text = "uiSwitch15";
             // 
@@ -770,7 +814,7 @@
             this.uiSwitch16.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch16.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch16.TabIndex = 131;
-            this.uiSwitch16.Tag = "@02@#BCD#";
+            this.uiSwitch16.Tag = "";
             this.uiSwitch16.TagString = "Y037";
             this.uiSwitch16.Text = "uiSwitch16";
             // 
@@ -795,7 +839,7 @@
             this.uiSwitch17.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch17.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch17.TabIndex = 130;
-            this.uiSwitch17.Tag = "@02@#BCD#";
+            this.uiSwitch17.Tag = "";
             this.uiSwitch17.TagString = "Y036";
             this.uiSwitch17.Text = "uiSwitch17";
             // 
@@ -1090,7 +1134,7 @@
             this.uiSwitch93.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch93.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch93.TabIndex = 131;
-            this.uiSwitch93.Tag = "@02@#BCD#";
+            this.uiSwitch93.Tag = "";
             this.uiSwitch93.TagString = "Y015";
             this.uiSwitch93.Text = "uiSwitch93";
             // 
@@ -1115,7 +1159,7 @@
             this.uiSwitch12.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch12.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch12.TabIndex = 129;
-            this.uiSwitch12.Tag = "@02@#BCD#";
+            this.uiSwitch12.Tag = "";
             this.uiSwitch12.TagString = "Y014";
             this.uiSwitch12.Text = "uiSwitch12";
             // 
@@ -1140,7 +1184,7 @@
             this.uiSwitch13.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch13.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch13.TabIndex = 128;
-            this.uiSwitch13.Tag = "@02@#BCD#";
+            this.uiSwitch13.Tag = "";
             this.uiSwitch13.TagString = "Y013";
             this.uiSwitch13.Text = "uiSwitch13";
             // 
@@ -1156,7 +1200,7 @@
             this.uiSwitch14.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch14.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch14.TabIndex = 127;
-            this.uiSwitch14.Tag = "@02@#BCD#";
+            this.uiSwitch14.Tag = "";
             this.uiSwitch14.TagString = "Y012";
             this.uiSwitch14.Text = "uiSwitch14";
             // 
@@ -1236,7 +1280,7 @@
             this.uiSwitch11.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch11.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch11.TabIndex = 126;
-            this.uiSwitch11.Tag = "@02@#BCD#";
+            this.uiSwitch11.Tag = "";
             this.uiSwitch11.TagString = "Y011";
             this.uiSwitch11.Text = "uiSwitch11";
             // 
@@ -1252,7 +1296,7 @@
             this.uiSwitch9.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch9.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch9.TabIndex = 125;
-            this.uiSwitch9.Tag = "@02@#BCD#";
+            this.uiSwitch9.Tag = "";
             this.uiSwitch9.TagString = "Y009";
             this.uiSwitch9.Text = "uiSwitch9";
             // 
@@ -1268,7 +1312,7 @@
             this.uiSwitch10.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch10.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch10.TabIndex = 124;
-            this.uiSwitch10.Tag = "@02@#BCD#";
+            this.uiSwitch10.Tag = "";
             this.uiSwitch10.TagString = "Y007";
             this.uiSwitch10.Text = "uiSwitch10";
             // 
@@ -1284,7 +1328,7 @@
             this.uiSwitch7.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch7.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch7.TabIndex = 123;
-            this.uiSwitch7.Tag = "@02@#BCD#";
+            this.uiSwitch7.Tag = "";
             this.uiSwitch7.TagString = "Y006";
             this.uiSwitch7.Text = "uiSwitch7";
             // 
@@ -1300,7 +1344,7 @@
             this.uiSwitch8.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch8.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch8.TabIndex = 122;
-            this.uiSwitch8.Tag = "@02@#BCD#";
+            this.uiSwitch8.Tag = "";
             this.uiSwitch8.TagString = "Y003";
             this.uiSwitch8.Text = "uiSwitch8";
             // 
@@ -1316,7 +1360,7 @@
             this.uiSwitch5.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch5.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch5.TabIndex = 121;
-            this.uiSwitch5.Tag = "@02@#BCD#";
+            this.uiSwitch5.Tag = "";
             this.uiSwitch5.TagString = "Y010";
             this.uiSwitch5.Text = "uiSwitch5";
             // 
@@ -1332,7 +1376,7 @@
             this.uiSwitch6.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch6.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch6.TabIndex = 120;
-            this.uiSwitch6.Tag = "@02@#BCD#";
+            this.uiSwitch6.Tag = "";
             this.uiSwitch6.TagString = "Y008";
             this.uiSwitch6.Text = "uiSwitch6";
             // 
@@ -1348,7 +1392,7 @@
             this.uiSwitch2.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch2.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch2.TabIndex = 119;
-            this.uiSwitch2.Tag = "@02@#BCD#";
+            this.uiSwitch2.Tag = "";
             this.uiSwitch2.TagString = "Y005";
             this.uiSwitch2.Text = "uiSwitch2";
             // 
@@ -1364,7 +1408,7 @@
             this.uiSwitch4.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch4.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch4.TabIndex = 118;
-            this.uiSwitch4.Tag = "@02@#BCD#";
+            this.uiSwitch4.Tag = "";
             this.uiSwitch4.TagString = "Y004";
             this.uiSwitch4.Text = "uiSwitch4";
             // 
@@ -1380,7 +1424,7 @@
             this.uiSwitch1.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch1.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch1.TabIndex = 117;
-            this.uiSwitch1.Tag = "@02@#BCD#";
+            this.uiSwitch1.Tag = "";
             this.uiSwitch1.TagString = "Y002";
             this.uiSwitch1.Text = "uiSwitch1";
             // 
@@ -1396,7 +1440,7 @@
             this.uiSwitch3.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch3.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch3.TabIndex = 116;
-            this.uiSwitch3.Tag = "@02@#BCD#";
+            this.uiSwitch3.Tag = "";
             this.uiSwitch3.TagString = "Y001";
             this.uiSwitch3.Text = "uiSwitch3";
             // 
@@ -1791,7 +1835,7 @@
             this.uiSwitch31.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch31.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch31.TabIndex = 127;
-            this.uiSwitch31.Tag = "@02@#BCD#";
+            this.uiSwitch31.Tag = "";
             this.uiSwitch31.TagString = "Y051";
             this.uiSwitch31.Text = "uiSwitch31";
             // 
@@ -1833,7 +1877,7 @@
             this.uiSwitch30.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch30.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch30.TabIndex = 124;
-            this.uiSwitch30.Tag = "@02@#BCD#";
+            this.uiSwitch30.Tag = "";
             this.uiSwitch30.TagString = "Y050";
             this.uiSwitch30.Text = "uiSwitch30";
             // 
@@ -1868,7 +1912,7 @@
             this.uiSwitch25.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch25.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch25.TabIndex = 124;
-            this.uiSwitch25.Tag = "@02@#BCD#";
+            this.uiSwitch25.Tag = "";
             this.uiSwitch25.TagString = "Y018";
             this.uiSwitch25.Text = "uiSwitch25";
             // 
@@ -2186,7 +2230,7 @@
             this.uiSwitch24.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch24.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch24.TabIndex = 123;
-            this.uiSwitch24.Tag = "@02@#BCD#";
+            this.uiSwitch24.Tag = "";
             this.uiSwitch24.Text = "uiSwitch24";
             this.uiSwitch24.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch24_ValueChanged);
             // 
@@ -2202,7 +2246,7 @@
             this.uiSwitch19.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch19.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch19.TabIndex = 119;
-            this.uiSwitch19.Tag = "@02@#BCD#";
+            this.uiSwitch19.Tag = "";
             this.uiSwitch19.TagString = "Y063";
             this.uiSwitch19.Text = "uiSwitch19";
             // 
@@ -2227,7 +2271,7 @@
             this.uiSwitch20.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch20.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch20.TabIndex = 118;
-            this.uiSwitch20.Tag = "@02@#BCD#";
+            this.uiSwitch20.Tag = "";
             this.uiSwitch20.TagString = "Y062";
             this.uiSwitch20.Text = "uiSwitch20";
             // 
@@ -2243,7 +2287,7 @@
             this.uiSwitch21.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch21.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch21.TabIndex = 117;
-            this.uiSwitch21.Tag = "@02@#BCD#";
+            this.uiSwitch21.Tag = "";
             this.uiSwitch21.TagString = "Y061";
             this.uiSwitch21.Text = "uiSwitch21";
             // 
@@ -2259,7 +2303,7 @@
             this.uiSwitch22.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch22.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch22.TabIndex = 116;
-            this.uiSwitch22.Tag = "@02@#BCD#";
+            this.uiSwitch22.Tag = "";
             this.uiSwitch22.TagString = "Y060";
             this.uiSwitch22.Text = "uiSwitch22";
             // 
@@ -2334,7 +2378,7 @@
             this.uiSwitch23.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch23.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch23.TabIndex = 121;
-            this.uiSwitch23.Tag = "@02@#BCD#";
+            this.uiSwitch23.Tag = "";
             this.uiSwitch23.Text = "uiSwitch23";
             this.uiSwitch23.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch23_ValueChanged);
             // 
@@ -2359,7 +2403,7 @@
             this.uiSwitch26.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch26.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch26.TabIndex = 119;
-            this.uiSwitch26.Tag = "@02@#BCD#";
+            this.uiSwitch26.Tag = "";
             this.uiSwitch26.TagString = "Y059";
             this.uiSwitch26.Text = "uiSwitch26";
             // 
@@ -2375,7 +2419,7 @@
             this.uiSwitch27.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch27.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch27.TabIndex = 118;
-            this.uiSwitch27.Tag = "@02@#BCD#";
+            this.uiSwitch27.Tag = "";
             this.uiSwitch27.TagString = "Y058";
             this.uiSwitch27.Text = "uiSwitch27";
             // 
@@ -2391,7 +2435,7 @@
             this.uiSwitch28.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch28.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch28.TabIndex = 117;
-            this.uiSwitch28.Tag = "@02@#BCD#";
+            this.uiSwitch28.Tag = "";
             this.uiSwitch28.TagString = "Y057";
             this.uiSwitch28.Text = "uiSwitch28";
             // 
@@ -2407,7 +2451,7 @@
             this.uiSwitch29.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch29.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch29.TabIndex = 116;
-            this.uiSwitch29.Tag = "@02@#BCD#";
+            this.uiSwitch29.Tag = "";
             this.uiSwitch29.TagString = "Y056";
             this.uiSwitch29.Text = "uiSwitch29";
             // 
@@ -2512,7 +2556,7 @@
             this.uiSwitch98.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch98.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch98.TabIndex = 132;
-            this.uiSwitch98.Tag = "@02@#BCD#";
+            this.uiSwitch98.Tag = "";
             this.uiSwitch98.TagString = "Y040";
             this.uiSwitch98.Text = "uiSwitch98";
             // 
@@ -2692,7 +2736,7 @@
             this.uiSwitch100.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch100.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch100.TabIndex = 133;
-            this.uiSwitch100.Tag = "@02@#BCD#";
+            this.uiSwitch100.Tag = "";
             this.uiSwitch100.TagString = "Y025";
             this.uiSwitch100.Text = "uiSwitch100";
             // 
@@ -2708,7 +2752,7 @@
             this.uiSwitch34.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch34.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch34.TabIndex = 131;
-            this.uiSwitch34.Tag = "@02@#BCD#";
+            this.uiSwitch34.Tag = "";
             this.uiSwitch34.TagString = "Y032";
             this.uiSwitch34.Text = "uiSwitch34";
             // 
@@ -2724,7 +2768,7 @@
             this.uiSwitch35.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch35.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch35.TabIndex = 124;
-            this.uiSwitch35.Tag = "@02@#BCD#";
+            this.uiSwitch35.Tag = "";
             this.uiSwitch35.TagString = "Y026";
             this.uiSwitch35.Text = "uiSwitch35";
             // 
@@ -2830,7 +2874,7 @@
             this.uiSwitch99.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch99.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch99.TabIndex = 132;
-            this.uiSwitch99.Tag = "@02@#BCD#";
+            this.uiSwitch99.Tag = "";
             this.uiSwitch99.TagString = "Y023";
             this.uiSwitch99.Text = "uiSwitch99";
             // 
@@ -2846,7 +2890,7 @@
             this.uiSwitch36.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch36.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch36.TabIndex = 131;
-            this.uiSwitch36.Tag = "@02@#BCD#";
+            this.uiSwitch36.Tag = "";
             this.uiSwitch36.TagString = "Y027";
             this.uiSwitch36.Text = "uiSwitch36";
             // 
@@ -2862,7 +2906,7 @@
             this.uiSwitch37.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch37.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch37.TabIndex = 124;
-            this.uiSwitch37.Tag = "@02@#BCD#";
+            this.uiSwitch37.Tag = "";
             this.uiSwitch37.TagString = "Y024";
             this.uiSwitch37.Text = "uiSwitch37";
             // 
@@ -3093,7 +3137,7 @@
             this.uiSwitch39.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch39.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch39.TabIndex = 123;
-            this.uiSwitch39.Tag = "@02@#BCD#";
+            this.uiSwitch39.Tag = "";
             this.uiSwitch39.Text = "uiSwitch39";
             this.uiSwitch39.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch39_ValueChanged);
             // 
@@ -3109,7 +3153,7 @@
             this.uiSwitch40.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch40.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch40.TabIndex = 119;
-            this.uiSwitch40.Tag = "@02@#BCD#";
+            this.uiSwitch40.Tag = "";
             this.uiSwitch40.TagString = "Y075";
             this.uiSwitch40.Text = "uiSwitch40";
             // 
@@ -3134,7 +3178,7 @@
             this.uiSwitch41.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch41.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch41.TabIndex = 118;
-            this.uiSwitch41.Tag = "@02@#BCD#";
+            this.uiSwitch41.Tag = "";
             this.uiSwitch41.TagString = "Y074";
             this.uiSwitch41.Text = "uiSwitch41";
             // 
@@ -3150,7 +3194,7 @@
             this.uiSwitch42.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch42.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch42.TabIndex = 117;
-            this.uiSwitch42.Tag = "@02@#BCD#";
+            this.uiSwitch42.Tag = "";
             this.uiSwitch42.TagString = "Y073";
             this.uiSwitch42.Text = "uiSwitch42";
             // 
@@ -3166,7 +3210,7 @@
             this.uiSwitch43.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch43.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch43.TabIndex = 116;
-            this.uiSwitch43.Tag = "@02@#BCD#";
+            this.uiSwitch43.Tag = "";
             this.uiSwitch43.TagString = "Y072";
             this.uiSwitch43.Text = "uiSwitch43";
             // 
@@ -3241,7 +3285,7 @@
             this.uiSwitch44.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch44.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch44.TabIndex = 121;
-            this.uiSwitch44.Tag = "@02@#BCD#";
+            this.uiSwitch44.Tag = "";
             this.uiSwitch44.Text = "uiSwitch44";
             this.uiSwitch44.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
             // 
@@ -3266,7 +3310,7 @@
             this.uiSwitch45.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch45.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch45.TabIndex = 119;
-            this.uiSwitch45.Tag = "@02@#BCD#";
+            this.uiSwitch45.Tag = "";
             this.uiSwitch45.TagString = "Y071";
             this.uiSwitch45.Text = "uiSwitch45";
             // 
@@ -3282,7 +3326,7 @@
             this.uiSwitch46.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch46.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch46.TabIndex = 118;
-            this.uiSwitch46.Tag = "@02@#BCD#";
+            this.uiSwitch46.Tag = "";
             this.uiSwitch46.TagString = "Y070";
             this.uiSwitch46.Text = "uiSwitch46";
             // 
@@ -3298,7 +3342,7 @@
             this.uiSwitch47.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch47.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch47.TabIndex = 117;
-            this.uiSwitch47.Tag = "@02@#BCD#";
+            this.uiSwitch47.Tag = "";
             this.uiSwitch47.TagString = "Y069";
             this.uiSwitch47.Text = "uiSwitch47";
             // 
@@ -3314,7 +3358,7 @@
             this.uiSwitch48.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch48.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch48.TabIndex = 116;
-            this.uiSwitch48.Tag = "@02@#BCD#";
+            this.uiSwitch48.Tag = "";
             this.uiSwitch48.TagString = "Y068";
             this.uiSwitch48.Text = "uiSwitch48";
             // 
@@ -3605,518 +3649,6 @@
             this.label124.TabIndex = 12;
             this.label124.Text = "吸嘴4真空侦测";
             // 
-            // uiGroupBox26
-            // 
-            this.uiGroupBox26.Controls.Add(this.uiSwitch94);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch95);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch96);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch97);
-            this.uiGroupBox26.Controls.Add(this.label140);
-            this.uiGroupBox26.Controls.Add(this.label141);
-            this.uiGroupBox26.Controls.Add(this.label142);
-            this.uiGroupBox26.Controls.Add(this.label143);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch78);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch80);
-            this.uiGroupBox26.Controls.Add(this.label125);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch81);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch82);
-            this.uiGroupBox26.Controls.Add(this.uiSwitch83);
-            this.uiGroupBox26.Controls.Add(this.label126);
-            this.uiGroupBox26.Controls.Add(this.label127);
-            this.uiGroupBox26.Controls.Add(this.label128);
-            this.uiGroupBox26.Controls.Add(this.label129);
-            this.uiGroupBox26.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox26.Location = new System.Drawing.Point(522, 19);
-            this.uiGroupBox26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox26.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox26.Name = "uiGroupBox26";
-            this.uiGroupBox26.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox26.Size = new System.Drawing.Size(488, 262);
-            this.uiGroupBox26.TabIndex = 226;
-            this.uiGroupBox26.Text = "破真空";
-            this.uiGroupBox26.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // uiSwitch94
-            // 
-            this.uiSwitch94.ActiveText = "关";
-            this.uiSwitch94.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch94.InActiveText = "开";
-            this.uiSwitch94.Location = new System.Drawing.Point(386, 167);
-            this.uiSwitch94.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch94.Name = "uiSwitch94";
-            this.uiSwitch94.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch94.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch94.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch94.TabIndex = 131;
-            this.uiSwitch94.Tag = "@02@#BCD#";
-            this.uiSwitch94.TagString = "Y093";
-            this.uiSwitch94.Text = "uiSwitch94";
-            // 
-            // uiSwitch95
-            // 
-            this.uiSwitch95.ActiveText = "关";
-            this.uiSwitch95.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch95.InActiveText = "开";
-            this.uiSwitch95.Location = new System.Drawing.Point(386, 126);
-            this.uiSwitch95.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch95.Name = "uiSwitch95";
-            this.uiSwitch95.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch95.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch95.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch95.TabIndex = 130;
-            this.uiSwitch95.Tag = "@02@#BCD#";
-            this.uiSwitch95.TagString = "Y092";
-            this.uiSwitch95.Text = "uiSwitch95";
-            // 
-            // uiSwitch96
-            // 
-            this.uiSwitch96.ActiveText = "关";
-            this.uiSwitch96.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch96.InActiveText = "开";
-            this.uiSwitch96.Location = new System.Drawing.Point(386, 85);
-            this.uiSwitch96.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch96.Name = "uiSwitch96";
-            this.uiSwitch96.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch96.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch96.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch96.TabIndex = 129;
-            this.uiSwitch96.Tag = "@02@#BCD#";
-            this.uiSwitch96.TagString = "Y091";
-            this.uiSwitch96.Text = "uiSwitch96";
-            // 
-            // uiSwitch97
-            // 
-            this.uiSwitch97.ActiveText = "关";
-            this.uiSwitch97.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch97.InActiveText = "开";
-            this.uiSwitch97.Location = new System.Drawing.Point(386, 44);
-            this.uiSwitch97.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch97.Name = "uiSwitch97";
-            this.uiSwitch97.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch97.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch97.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch97.TabIndex = 128;
-            this.uiSwitch97.Tag = "@02@#BCD#";
-            this.uiSwitch97.TagString = "Y090";
-            this.uiSwitch97.Text = "uiSwitch97";
-            // 
-            // label140
-            // 
-            this.label140.AutoSize = true;
-            this.label140.Location = new System.Drawing.Point(260, 48);
-            this.label140.Name = "label140";
-            this.label140.Size = new System.Drawing.Size(99, 21);
-            this.label140.TabIndex = 124;
-            this.label140.Text = "吸嘴破真空5";
-            // 
-            // label141
-            // 
-            this.label141.AutoSize = true;
-            this.label141.Location = new System.Drawing.Point(260, 89);
-            this.label141.Name = "label141";
-            this.label141.Size = new System.Drawing.Size(99, 21);
-            this.label141.TabIndex = 125;
-            this.label141.Text = "吸嘴破真空6";
-            // 
-            // label142
-            // 
-            this.label142.AutoSize = true;
-            this.label142.Location = new System.Drawing.Point(260, 130);
-            this.label142.Name = "label142";
-            this.label142.Size = new System.Drawing.Size(99, 21);
-            this.label142.TabIndex = 126;
-            this.label142.Text = "吸嘴破真空7";
-            // 
-            // label143
-            // 
-            this.label143.AutoSize = true;
-            this.label143.Location = new System.Drawing.Point(260, 171);
-            this.label143.Name = "label143";
-            this.label143.Size = new System.Drawing.Size(99, 21);
-            this.label143.TabIndex = 127;
-            this.label143.Text = "吸嘴破真空8";
-            // 
-            // uiSwitch78
-            // 
-            this.uiSwitch78.ActiveText = "关";
-            this.uiSwitch78.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch78.InActiveText = "开";
-            this.uiSwitch78.Location = new System.Drawing.Point(155, 209);
-            this.uiSwitch78.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch78.Name = "uiSwitch78";
-            this.uiSwitch78.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch78.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch78.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch78.TabIndex = 123;
-            this.uiSwitch78.Tag = "@02@#BCD#";
-            this.uiSwitch78.Text = "uiSwitch78";
-            this.uiSwitch78.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch78_ValueChanged);
-            // 
-            // uiSwitch80
-            // 
-            this.uiSwitch80.ActiveText = "关";
-            this.uiSwitch80.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch80.InActiveText = "开";
-            this.uiSwitch80.Location = new System.Drawing.Point(155, 167);
-            this.uiSwitch80.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch80.Name = "uiSwitch80";
-            this.uiSwitch80.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch80.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch80.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch80.TabIndex = 119;
-            this.uiSwitch80.Tag = "@02@#BCD#";
-            this.uiSwitch80.TagString = "Y089";
-            this.uiSwitch80.Text = "uiSwitch80";
-            // 
-            // label125
-            // 
-            this.label125.AutoSize = true;
-            this.label125.Location = new System.Drawing.Point(29, 213);
-            this.label125.Name = "label125";
-            this.label125.Size = new System.Drawing.Size(90, 21);
-            this.label125.TabIndex = 122;
-            this.label125.Text = "破真空全开";
-            // 
-            // uiSwitch81
-            // 
-            this.uiSwitch81.ActiveText = "关";
-            this.uiSwitch81.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch81.InActiveText = "开";
-            this.uiSwitch81.Location = new System.Drawing.Point(155, 126);
-            this.uiSwitch81.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch81.Name = "uiSwitch81";
-            this.uiSwitch81.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch81.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch81.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch81.TabIndex = 118;
-            this.uiSwitch81.Tag = "@02@#BCD#";
-            this.uiSwitch81.TagString = "Y088";
-            this.uiSwitch81.Text = "uiSwitch81";
-            // 
-            // uiSwitch82
-            // 
-            this.uiSwitch82.ActiveText = "关";
-            this.uiSwitch82.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch82.InActiveText = "开";
-            this.uiSwitch82.Location = new System.Drawing.Point(155, 85);
-            this.uiSwitch82.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch82.Name = "uiSwitch82";
-            this.uiSwitch82.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch82.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch82.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch82.TabIndex = 117;
-            this.uiSwitch82.Tag = "@02@#BCD#";
-            this.uiSwitch82.TagString = "Y087";
-            this.uiSwitch82.Text = "uiSwitch82";
-            // 
-            // uiSwitch83
-            // 
-            this.uiSwitch83.ActiveText = "关";
-            this.uiSwitch83.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch83.InActiveText = "开";
-            this.uiSwitch83.Location = new System.Drawing.Point(155, 44);
-            this.uiSwitch83.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch83.Name = "uiSwitch83";
-            this.uiSwitch83.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch83.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch83.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch83.TabIndex = 116;
-            this.uiSwitch83.Tag = "@02@#BCD#";
-            this.uiSwitch83.TagString = "Y086";
-            this.uiSwitch83.Text = "uiSwitch83";
-            // 
-            // label126
-            // 
-            this.label126.AutoSize = true;
-            this.label126.Location = new System.Drawing.Point(29, 48);
-            this.label126.Name = "label126";
-            this.label126.Size = new System.Drawing.Size(99, 21);
-            this.label126.TabIndex = 6;
-            this.label126.Text = "吸嘴破真空1";
-            // 
-            // label127
-            // 
-            this.label127.AutoSize = true;
-            this.label127.Location = new System.Drawing.Point(29, 89);
-            this.label127.Name = "label127";
-            this.label127.Size = new System.Drawing.Size(99, 21);
-            this.label127.TabIndex = 7;
-            this.label127.Text = "吸嘴破真空2";
-            // 
-            // label128
-            // 
-            this.label128.AutoSize = true;
-            this.label128.Location = new System.Drawing.Point(29, 130);
-            this.label128.Name = "label128";
-            this.label128.Size = new System.Drawing.Size(99, 21);
-            this.label128.TabIndex = 8;
-            this.label128.Text = "吸嘴破真空3";
-            // 
-            // label129
-            // 
-            this.label129.AutoSize = true;
-            this.label129.Location = new System.Drawing.Point(29, 171);
-            this.label129.Name = "label129";
-            this.label129.Size = new System.Drawing.Size(99, 21);
-            this.label129.TabIndex = 12;
-            this.label129.Text = "吸嘴破真空4";
-            // 
-            // uiGroupBox27
-            // 
-            this.uiGroupBox27.Controls.Add(this.uiSwitch89);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch90);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch91);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch92);
-            this.uiGroupBox27.Controls.Add(this.label135);
-            this.uiGroupBox27.Controls.Add(this.label136);
-            this.uiGroupBox27.Controls.Add(this.label137);
-            this.uiGroupBox27.Controls.Add(this.label138);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch84);
-            this.uiGroupBox27.Controls.Add(this.label130);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch85);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch86);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch87);
-            this.uiGroupBox27.Controls.Add(this.uiSwitch88);
-            this.uiGroupBox27.Controls.Add(this.label131);
-            this.uiGroupBox27.Controls.Add(this.label132);
-            this.uiGroupBox27.Controls.Add(this.label133);
-            this.uiGroupBox27.Controls.Add(this.label134);
-            this.uiGroupBox27.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox27.Location = new System.Drawing.Point(22, 19);
-            this.uiGroupBox27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiGroupBox27.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiGroupBox27.Name = "uiGroupBox27";
-            this.uiGroupBox27.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox27.Size = new System.Drawing.Size(495, 262);
-            this.uiGroupBox27.TabIndex = 225;
-            this.uiGroupBox27.Text = "吸真空";
-            this.uiGroupBox27.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // uiSwitch89
-            // 
-            this.uiSwitch89.ActiveText = "关";
-            this.uiSwitch89.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch89.InActiveText = "开";
-            this.uiSwitch89.Location = new System.Drawing.Point(376, 167);
-            this.uiSwitch89.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch89.Name = "uiSwitch89";
-            this.uiSwitch89.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch89.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch89.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch89.TabIndex = 129;
-            this.uiSwitch89.Tag = "@02@#BCD#";
-            this.uiSwitch89.TagString = "Y085";
-            this.uiSwitch89.Text = "uiSwitch89";
-            // 
-            // uiSwitch90
-            // 
-            this.uiSwitch90.ActiveText = "关";
-            this.uiSwitch90.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch90.InActiveText = "开";
-            this.uiSwitch90.Location = new System.Drawing.Point(376, 126);
-            this.uiSwitch90.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch90.Name = "uiSwitch90";
-            this.uiSwitch90.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch90.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch90.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch90.TabIndex = 128;
-            this.uiSwitch90.Tag = "@02@#BCD#";
-            this.uiSwitch90.TagString = "Y084";
-            this.uiSwitch90.Text = "uiSwitch90";
-            // 
-            // uiSwitch91
-            // 
-            this.uiSwitch91.ActiveText = "关";
-            this.uiSwitch91.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch91.InActiveText = "开";
-            this.uiSwitch91.Location = new System.Drawing.Point(376, 85);
-            this.uiSwitch91.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch91.Name = "uiSwitch91";
-            this.uiSwitch91.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch91.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch91.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch91.TabIndex = 127;
-            this.uiSwitch91.Tag = "@02@#BCD#";
-            this.uiSwitch91.TagString = "Y083";
-            this.uiSwitch91.Text = "uiSwitch91";
-            // 
-            // uiSwitch92
-            // 
-            this.uiSwitch92.ActiveText = "关";
-            this.uiSwitch92.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch92.InActiveText = "开";
-            this.uiSwitch92.Location = new System.Drawing.Point(376, 44);
-            this.uiSwitch92.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch92.Name = "uiSwitch92";
-            this.uiSwitch92.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch92.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch92.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch92.TabIndex = 126;
-            this.uiSwitch92.Tag = "@02@#BCD#";
-            this.uiSwitch92.TagString = "Y082";
-            this.uiSwitch92.Text = "uiSwitch92";
-            // 
-            // label135
-            // 
-            this.label135.AutoSize = true;
-            this.label135.Location = new System.Drawing.Point(250, 48);
-            this.label135.Name = "label135";
-            this.label135.Size = new System.Drawing.Size(99, 21);
-            this.label135.TabIndex = 122;
-            this.label135.Text = "吸嘴吸真空5";
-            // 
-            // label136
-            // 
-            this.label136.AutoSize = true;
-            this.label136.Location = new System.Drawing.Point(250, 89);
-            this.label136.Name = "label136";
-            this.label136.Size = new System.Drawing.Size(99, 21);
-            this.label136.TabIndex = 123;
-            this.label136.Text = "吸嘴吸真空6";
-            // 
-            // label137
-            // 
-            this.label137.AutoSize = true;
-            this.label137.Location = new System.Drawing.Point(250, 130);
-            this.label137.Name = "label137";
-            this.label137.Size = new System.Drawing.Size(99, 21);
-            this.label137.TabIndex = 124;
-            this.label137.Text = "吸嘴吸真空7";
-            // 
-            // label138
-            // 
-            this.label138.AutoSize = true;
-            this.label138.Location = new System.Drawing.Point(250, 171);
-            this.label138.Name = "label138";
-            this.label138.Size = new System.Drawing.Size(99, 21);
-            this.label138.TabIndex = 125;
-            this.label138.Text = "吸嘴吸真空8";
-            // 
-            // uiSwitch84
-            // 
-            this.uiSwitch84.ActiveText = "关";
-            this.uiSwitch84.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch84.InActiveText = "开";
-            this.uiSwitch84.Location = new System.Drawing.Point(155, 209);
-            this.uiSwitch84.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch84.Name = "uiSwitch84";
-            this.uiSwitch84.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch84.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch84.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch84.TabIndex = 121;
-            this.uiSwitch84.Tag = "@02@#BCD#";
-            this.uiSwitch84.Text = "uiSwitch84";
-            this.uiSwitch84.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch84_ValueChanged);
-            // 
-            // label130
-            // 
-            this.label130.AutoSize = true;
-            this.label130.Location = new System.Drawing.Point(29, 213);
-            this.label130.Name = "label130";
-            this.label130.Size = new System.Drawing.Size(90, 21);
-            this.label130.TabIndex = 120;
-            this.label130.Text = "吸真空全开";
-            // 
-            // uiSwitch85
-            // 
-            this.uiSwitch85.ActiveText = "关";
-            this.uiSwitch85.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch85.InActiveText = "开";
-            this.uiSwitch85.Location = new System.Drawing.Point(155, 167);
-            this.uiSwitch85.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch85.Name = "uiSwitch85";
-            this.uiSwitch85.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch85.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch85.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch85.TabIndex = 119;
-            this.uiSwitch85.Tag = "@02@#BCD#";
-            this.uiSwitch85.TagString = "Y081";
-            this.uiSwitch85.Text = "uiSwitch85";
-            // 
-            // uiSwitch86
-            // 
-            this.uiSwitch86.ActiveText = "关";
-            this.uiSwitch86.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch86.InActiveText = "开";
-            this.uiSwitch86.Location = new System.Drawing.Point(155, 126);
-            this.uiSwitch86.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch86.Name = "uiSwitch86";
-            this.uiSwitch86.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch86.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch86.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch86.TabIndex = 118;
-            this.uiSwitch86.Tag = "@02@#BCD#";
-            this.uiSwitch86.TagString = "Y080";
-            this.uiSwitch86.Text = "uiSwitch86";
-            // 
-            // uiSwitch87
-            // 
-            this.uiSwitch87.ActiveText = "关";
-            this.uiSwitch87.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch87.InActiveText = "开";
-            this.uiSwitch87.Location = new System.Drawing.Point(155, 85);
-            this.uiSwitch87.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch87.Name = "uiSwitch87";
-            this.uiSwitch87.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch87.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch87.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch87.TabIndex = 117;
-            this.uiSwitch87.Tag = "@02@#BCD#";
-            this.uiSwitch87.TagString = "Y079";
-            this.uiSwitch87.Text = "uiSwitch87";
-            // 
-            // uiSwitch88
-            // 
-            this.uiSwitch88.ActiveText = "关";
-            this.uiSwitch88.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiSwitch88.InActiveText = "开";
-            this.uiSwitch88.Location = new System.Drawing.Point(155, 44);
-            this.uiSwitch88.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiSwitch88.Name = "uiSwitch88";
-            this.uiSwitch88.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
-            this.uiSwitch88.Size = new System.Drawing.Size(75, 29);
-            this.uiSwitch88.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
-            this.uiSwitch88.TabIndex = 116;
-            this.uiSwitch88.Tag = "@02@#BCD#";
-            this.uiSwitch88.TagString = "Y078";
-            this.uiSwitch88.Text = "uiSwitch88";
-            // 
-            // label131
-            // 
-            this.label131.AutoSize = true;
-            this.label131.Location = new System.Drawing.Point(29, 48);
-            this.label131.Name = "label131";
-            this.label131.Size = new System.Drawing.Size(99, 21);
-            this.label131.TabIndex = 6;
-            this.label131.Text = "吸嘴吸真空1";
-            // 
-            // label132
-            // 
-            this.label132.AutoSize = true;
-            this.label132.Location = new System.Drawing.Point(29, 89);
-            this.label132.Name = "label132";
-            this.label132.Size = new System.Drawing.Size(99, 21);
-            this.label132.TabIndex = 7;
-            this.label132.Text = "吸嘴吸真空2";
-            // 
-            // label133
-            // 
-            this.label133.AutoSize = true;
-            this.label133.Location = new System.Drawing.Point(29, 130);
-            this.label133.Name = "label133";
-            this.label133.Size = new System.Drawing.Size(99, 21);
-            this.label133.TabIndex = 8;
-            this.label133.Text = "吸嘴吸真空3";
-            // 
-            // label134
-            // 
-            this.label134.AutoSize = true;
-            this.label134.Location = new System.Drawing.Point(29, 171);
-            this.label134.Name = "label134";
-            this.label134.Size = new System.Drawing.Size(99, 21);
-            this.label134.TabIndex = 12;
-            this.label134.Text = "吸嘴吸真空4";
-            // 
             // uiGroupBox14
             // 
             this.uiGroupBox14.Controls.Add(this.uiLight164);
@@ -4177,12 +3709,13 @@
             this.uiSwitch79.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch79.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch79.TabIndex = 125;
-            this.uiSwitch79.Tag = "@02@#BCD#";
+            this.uiSwitch79.Tag = "";
             this.uiSwitch79.TagString = "Y094";
             this.uiSwitch79.Text = "uiSwitch79";
             // 
             // uiGroupBox22
             // 
+            this.uiGroupBox22.Controls.Add(this.panel32);
             this.uiGroupBox22.Controls.Add(this.uiLight173);
             this.uiGroupBox22.Controls.Add(this.uiLight174);
             this.uiGroupBox22.Controls.Add(this.panel38);
@@ -4194,10 +3727,156 @@
             this.uiGroupBox22.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox22.Name = "uiGroupBox22";
             this.uiGroupBox22.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox22.Size = new System.Drawing.Size(183, 270);
+            this.uiGroupBox22.Size = new System.Drawing.Size(265, 270);
             this.uiGroupBox22.TabIndex = 223;
             this.uiGroupBox22.Text = "梭车后";
             this.uiGroupBox22.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel32
+            // 
+            this.panel32.BackColor = System.Drawing.Color.LightGray;
+            this.panel32.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel32.Controls.Add(this.panel33);
+            this.panel32.Controls.Add(this.label155);
+            this.panel32.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel32.Location = new System.Drawing.Point(162, 66);
+            this.panel32.Margin = new System.Windows.Forms.Padding(10);
+            this.panel32.Name = "panel32";
+            this.panel32.Size = new System.Drawing.Size(69, 153);
+            this.panel32.TabIndex = 220;
+            // 
+            // panel33
+            // 
+            this.panel33.BackColor = System.Drawing.Color.LightGray;
+            this.panel33.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel33.Controls.Add(this.lbl_梭车后出1);
+            this.panel33.Controls.Add(this.lbl_梭车后出2);
+            this.panel33.Controls.Add(this.lbl_梭车后出8);
+            this.panel33.Controls.Add(this.lbl_梭车后出3);
+            this.panel33.Controls.Add(this.lbl_梭车后出7);
+            this.panel33.Controls.Add(this.lbl_梭车后出4);
+            this.panel33.Controls.Add(this.lbl_梭车后出6);
+            this.panel33.Controls.Add(this.lbl_梭车后出5);
+            this.panel33.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel33.Location = new System.Drawing.Point(4, 3);
+            this.panel33.Margin = new System.Windows.Forms.Padding(10);
+            this.panel33.Name = "panel33";
+            this.panel33.Size = new System.Drawing.Size(60, 145);
+            this.panel33.TabIndex = 144;
+            // 
+            // lbl_梭车后出1
+            // 
+            this.lbl_梭车后出1.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出1.Location = new System.Drawing.Point(4, 13);
+            this.lbl_梭车后出1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出1.Name = "lbl_梭车后出1";
+            this.lbl_梭车后出1.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出1.TabIndex = 0;
+            this.lbl_梭车后出1.Text = "1";
+            this.lbl_梭车后出1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后出2
+            // 
+            this.lbl_梭车后出2.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出2.Location = new System.Drawing.Point(4, 43);
+            this.lbl_梭车后出2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出2.Name = "lbl_梭车后出2";
+            this.lbl_梭车后出2.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出2.TabIndex = 1;
+            this.lbl_梭车后出2.Text = "2";
+            this.lbl_梭车后出2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后出8
+            // 
+            this.lbl_梭车后出8.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出8.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出8.Location = new System.Drawing.Point(31, 103);
+            this.lbl_梭车后出8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出8.Name = "lbl_梭车后出8";
+            this.lbl_梭车后出8.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出8.TabIndex = 7;
+            this.lbl_梭车后出8.Text = "8";
+            this.lbl_梭车后出8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后出3
+            // 
+            this.lbl_梭车后出3.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出3.Location = new System.Drawing.Point(4, 73);
+            this.lbl_梭车后出3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出3.Name = "lbl_梭车后出3";
+            this.lbl_梭车后出3.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出3.TabIndex = 2;
+            this.lbl_梭车后出3.Text = "3";
+            this.lbl_梭车后出3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后出7
+            // 
+            this.lbl_梭车后出7.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出7.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出7.Location = new System.Drawing.Point(31, 73);
+            this.lbl_梭车后出7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出7.Name = "lbl_梭车后出7";
+            this.lbl_梭车后出7.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出7.TabIndex = 6;
+            this.lbl_梭车后出7.Text = "7";
+            this.lbl_梭车后出7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后出4
+            // 
+            this.lbl_梭车后出4.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出4.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出4.Location = new System.Drawing.Point(4, 103);
+            this.lbl_梭车后出4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出4.Name = "lbl_梭车后出4";
+            this.lbl_梭车后出4.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出4.TabIndex = 3;
+            this.lbl_梭车后出4.Text = "4";
+            this.lbl_梭车后出4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后出6
+            // 
+            this.lbl_梭车后出6.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出6.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出6.Location = new System.Drawing.Point(31, 43);
+            this.lbl_梭车后出6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出6.Name = "lbl_梭车后出6";
+            this.lbl_梭车后出6.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出6.TabIndex = 5;
+            this.lbl_梭车后出6.Text = "6";
+            this.lbl_梭车后出6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后出5
+            // 
+            this.lbl_梭车后出5.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后出5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后出5.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后出5.Location = new System.Drawing.Point(31, 13);
+            this.lbl_梭车后出5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后出5.Name = "lbl_梭车后出5";
+            this.lbl_梭车后出5.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后出5.TabIndex = 4;
+            this.lbl_梭车后出5.Text = "5";
+            this.lbl_梭车后出5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label155
+            // 
+            this.label155.BackColor = System.Drawing.Color.Black;
+            this.label155.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label155.Location = new System.Drawing.Point(0, 0);
+            this.label155.Margin = new System.Windows.Forms.Padding(2);
+            this.label155.Name = "label155";
+            this.label155.Size = new System.Drawing.Size(11, 12);
+            this.label155.TabIndex = 143;
             // 
             // uiLight173
             // 
@@ -4249,12 +3928,124 @@
             // 
             this.panel39.BackColor = System.Drawing.Color.LightGray;
             this.panel39.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel39.Controls.Add(this.lbl_梭车后入1);
+            this.panel39.Controls.Add(this.lbl_梭车后入2);
+            this.panel39.Controls.Add(this.lbl_梭车后入8);
+            this.panel39.Controls.Add(this.lbl_梭车后入3);
+            this.panel39.Controls.Add(this.lbl_梭车后入7);
+            this.panel39.Controls.Add(this.lbl_梭车后入4);
+            this.panel39.Controls.Add(this.lbl_梭车后入6);
+            this.panel39.Controls.Add(this.lbl_梭车后入5);
             this.panel39.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.panel39.Location = new System.Drawing.Point(4, 3);
             this.panel39.Margin = new System.Windows.Forms.Padding(10);
             this.panel39.Name = "panel39";
             this.panel39.Size = new System.Drawing.Size(60, 145);
             this.panel39.TabIndex = 144;
+            // 
+            // lbl_梭车后入1
+            // 
+            this.lbl_梭车后入1.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入1.Location = new System.Drawing.Point(4, 13);
+            this.lbl_梭车后入1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入1.Name = "lbl_梭车后入1";
+            this.lbl_梭车后入1.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入1.TabIndex = 0;
+            this.lbl_梭车后入1.Text = "1";
+            this.lbl_梭车后入1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后入2
+            // 
+            this.lbl_梭车后入2.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入2.Location = new System.Drawing.Point(4, 43);
+            this.lbl_梭车后入2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入2.Name = "lbl_梭车后入2";
+            this.lbl_梭车后入2.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入2.TabIndex = 1;
+            this.lbl_梭车后入2.Text = "2";
+            this.lbl_梭车后入2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后入8
+            // 
+            this.lbl_梭车后入8.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入8.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入8.Location = new System.Drawing.Point(31, 103);
+            this.lbl_梭车后入8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入8.Name = "lbl_梭车后入8";
+            this.lbl_梭车后入8.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入8.TabIndex = 7;
+            this.lbl_梭车后入8.Text = "8";
+            this.lbl_梭车后入8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后入3
+            // 
+            this.lbl_梭车后入3.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入3.Location = new System.Drawing.Point(4, 73);
+            this.lbl_梭车后入3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入3.Name = "lbl_梭车后入3";
+            this.lbl_梭车后入3.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入3.TabIndex = 2;
+            this.lbl_梭车后入3.Text = "3";
+            this.lbl_梭车后入3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后入7
+            // 
+            this.lbl_梭车后入7.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入7.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入7.Location = new System.Drawing.Point(31, 73);
+            this.lbl_梭车后入7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入7.Name = "lbl_梭车后入7";
+            this.lbl_梭车后入7.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入7.TabIndex = 6;
+            this.lbl_梭车后入7.Text = "7";
+            this.lbl_梭车后入7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后入4
+            // 
+            this.lbl_梭车后入4.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入4.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入4.Location = new System.Drawing.Point(4, 103);
+            this.lbl_梭车后入4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入4.Name = "lbl_梭车后入4";
+            this.lbl_梭车后入4.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入4.TabIndex = 3;
+            this.lbl_梭车后入4.Text = "4";
+            this.lbl_梭车后入4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后入6
+            // 
+            this.lbl_梭车后入6.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入6.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入6.Location = new System.Drawing.Point(31, 43);
+            this.lbl_梭车后入6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入6.Name = "lbl_梭车后入6";
+            this.lbl_梭车后入6.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入6.TabIndex = 5;
+            this.lbl_梭车后入6.Text = "6";
+            this.lbl_梭车后入6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车后入5
+            // 
+            this.lbl_梭车后入5.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车后入5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车后入5.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车后入5.Location = new System.Drawing.Point(31, 13);
+            this.lbl_梭车后入5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车后入5.Name = "lbl_梭车后入5";
+            this.lbl_梭车后入5.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车后入5.TabIndex = 4;
+            this.lbl_梭车后入5.Text = "5";
+            this.lbl_梭车后入5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label105
             // 
@@ -4299,11 +4090,268 @@
             this.uiLight176.TagString = "X078";
             this.uiLight176.Text = "uiLight176";
             // 
+            // uiGroupBox26
+            // 
+            this.uiGroupBox26.Controls.Add(this.uiSwitch94);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch95);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch96);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch97);
+            this.uiGroupBox26.Controls.Add(this.label140);
+            this.uiGroupBox26.Controls.Add(this.label141);
+            this.uiGroupBox26.Controls.Add(this.label142);
+            this.uiGroupBox26.Controls.Add(this.label143);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch78);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch80);
+            this.uiGroupBox26.Controls.Add(this.label125);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch81);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch82);
+            this.uiGroupBox26.Controls.Add(this.uiSwitch83);
+            this.uiGroupBox26.Controls.Add(this.label126);
+            this.uiGroupBox26.Controls.Add(this.label127);
+            this.uiGroupBox26.Controls.Add(this.label128);
+            this.uiGroupBox26.Controls.Add(this.label129);
+            this.uiGroupBox26.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiGroupBox26.Location = new System.Drawing.Point(522, 19);
+            this.uiGroupBox26.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox26.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox26.Name = "uiGroupBox26";
+            this.uiGroupBox26.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox26.Size = new System.Drawing.Size(488, 262);
+            this.uiGroupBox26.TabIndex = 226;
+            this.uiGroupBox26.Text = "破真空";
+            this.uiGroupBox26.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiSwitch94
+            // 
+            this.uiSwitch94.ActiveText = "关";
+            this.uiSwitch94.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch94.InActiveText = "开";
+            this.uiSwitch94.Location = new System.Drawing.Point(386, 167);
+            this.uiSwitch94.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch94.Name = "uiSwitch94";
+            this.uiSwitch94.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch94.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch94.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch94.TabIndex = 131;
+            this.uiSwitch94.Tag = "";
+            this.uiSwitch94.TagString = "Y093";
+            this.uiSwitch94.Text = "uiSwitch94";
+            // 
+            // uiSwitch95
+            // 
+            this.uiSwitch95.ActiveText = "关";
+            this.uiSwitch95.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch95.InActiveText = "开";
+            this.uiSwitch95.Location = new System.Drawing.Point(386, 126);
+            this.uiSwitch95.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch95.Name = "uiSwitch95";
+            this.uiSwitch95.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch95.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch95.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch95.TabIndex = 130;
+            this.uiSwitch95.Tag = "";
+            this.uiSwitch95.TagString = "Y092";
+            this.uiSwitch95.Text = "uiSwitch95";
+            // 
+            // uiSwitch96
+            // 
+            this.uiSwitch96.ActiveText = "关";
+            this.uiSwitch96.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch96.InActiveText = "开";
+            this.uiSwitch96.Location = new System.Drawing.Point(386, 85);
+            this.uiSwitch96.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch96.Name = "uiSwitch96";
+            this.uiSwitch96.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch96.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch96.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch96.TabIndex = 129;
+            this.uiSwitch96.Tag = "";
+            this.uiSwitch96.TagString = "Y091";
+            this.uiSwitch96.Text = "uiSwitch96";
+            // 
+            // uiSwitch97
+            // 
+            this.uiSwitch97.ActiveText = "关";
+            this.uiSwitch97.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch97.InActiveText = "开";
+            this.uiSwitch97.Location = new System.Drawing.Point(386, 44);
+            this.uiSwitch97.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch97.Name = "uiSwitch97";
+            this.uiSwitch97.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch97.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch97.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch97.TabIndex = 128;
+            this.uiSwitch97.Tag = "";
+            this.uiSwitch97.TagString = "Y090";
+            this.uiSwitch97.Text = "uiSwitch97";
+            // 
+            // label140
+            // 
+            this.label140.AutoSize = true;
+            this.label140.Location = new System.Drawing.Point(260, 48);
+            this.label140.Name = "label140";
+            this.label140.Size = new System.Drawing.Size(99, 21);
+            this.label140.TabIndex = 124;
+            this.label140.Text = "吸嘴破真空5";
+            // 
+            // label141
+            // 
+            this.label141.AutoSize = true;
+            this.label141.Location = new System.Drawing.Point(260, 89);
+            this.label141.Name = "label141";
+            this.label141.Size = new System.Drawing.Size(99, 21);
+            this.label141.TabIndex = 125;
+            this.label141.Text = "吸嘴破真空6";
+            // 
+            // label142
+            // 
+            this.label142.AutoSize = true;
+            this.label142.Location = new System.Drawing.Point(260, 130);
+            this.label142.Name = "label142";
+            this.label142.Size = new System.Drawing.Size(99, 21);
+            this.label142.TabIndex = 126;
+            this.label142.Text = "吸嘴破真空7";
+            // 
+            // label143
+            // 
+            this.label143.AutoSize = true;
+            this.label143.Location = new System.Drawing.Point(260, 171);
+            this.label143.Name = "label143";
+            this.label143.Size = new System.Drawing.Size(99, 21);
+            this.label143.TabIndex = 127;
+            this.label143.Text = "吸嘴破真空8";
+            // 
+            // uiSwitch78
+            // 
+            this.uiSwitch78.ActiveText = "关";
+            this.uiSwitch78.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch78.InActiveText = "开";
+            this.uiSwitch78.Location = new System.Drawing.Point(155, 209);
+            this.uiSwitch78.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch78.Name = "uiSwitch78";
+            this.uiSwitch78.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch78.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch78.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch78.TabIndex = 123;
+            this.uiSwitch78.Tag = "";
+            this.uiSwitch78.Text = "uiSwitch78";
+            this.uiSwitch78.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch78_ValueChanged);
+            // 
+            // uiSwitch80
+            // 
+            this.uiSwitch80.ActiveText = "关";
+            this.uiSwitch80.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch80.InActiveText = "开";
+            this.uiSwitch80.Location = new System.Drawing.Point(155, 167);
+            this.uiSwitch80.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch80.Name = "uiSwitch80";
+            this.uiSwitch80.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch80.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch80.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch80.TabIndex = 119;
+            this.uiSwitch80.Tag = "";
+            this.uiSwitch80.TagString = "Y089";
+            this.uiSwitch80.Text = "uiSwitch80";
+            // 
+            // label125
+            // 
+            this.label125.AutoSize = true;
+            this.label125.Location = new System.Drawing.Point(29, 213);
+            this.label125.Name = "label125";
+            this.label125.Size = new System.Drawing.Size(90, 21);
+            this.label125.TabIndex = 122;
+            this.label125.Text = "破真空全开";
+            // 
+            // uiSwitch81
+            // 
+            this.uiSwitch81.ActiveText = "关";
+            this.uiSwitch81.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch81.InActiveText = "开";
+            this.uiSwitch81.Location = new System.Drawing.Point(155, 126);
+            this.uiSwitch81.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch81.Name = "uiSwitch81";
+            this.uiSwitch81.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch81.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch81.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch81.TabIndex = 118;
+            this.uiSwitch81.Tag = "";
+            this.uiSwitch81.TagString = "Y088";
+            this.uiSwitch81.Text = "uiSwitch81";
+            // 
+            // uiSwitch82
+            // 
+            this.uiSwitch82.ActiveText = "关";
+            this.uiSwitch82.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch82.InActiveText = "开";
+            this.uiSwitch82.Location = new System.Drawing.Point(155, 85);
+            this.uiSwitch82.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch82.Name = "uiSwitch82";
+            this.uiSwitch82.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch82.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch82.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch82.TabIndex = 117;
+            this.uiSwitch82.Tag = "";
+            this.uiSwitch82.TagString = "Y087";
+            this.uiSwitch82.Text = "uiSwitch82";
+            // 
+            // uiSwitch83
+            // 
+            this.uiSwitch83.ActiveText = "关";
+            this.uiSwitch83.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch83.InActiveText = "开";
+            this.uiSwitch83.Location = new System.Drawing.Point(155, 44);
+            this.uiSwitch83.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch83.Name = "uiSwitch83";
+            this.uiSwitch83.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch83.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch83.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch83.TabIndex = 116;
+            this.uiSwitch83.Tag = "";
+            this.uiSwitch83.TagString = "Y086";
+            this.uiSwitch83.Text = "uiSwitch83";
+            // 
+            // label126
+            // 
+            this.label126.AutoSize = true;
+            this.label126.Location = new System.Drawing.Point(29, 48);
+            this.label126.Name = "label126";
+            this.label126.Size = new System.Drawing.Size(99, 21);
+            this.label126.TabIndex = 6;
+            this.label126.Text = "吸嘴破真空1";
+            // 
+            // label127
+            // 
+            this.label127.AutoSize = true;
+            this.label127.Location = new System.Drawing.Point(29, 89);
+            this.label127.Name = "label127";
+            this.label127.Size = new System.Drawing.Size(99, 21);
+            this.label127.TabIndex = 7;
+            this.label127.Text = "吸嘴破真空2";
+            // 
+            // label128
+            // 
+            this.label128.AutoSize = true;
+            this.label128.Location = new System.Drawing.Point(29, 130);
+            this.label128.Name = "label128";
+            this.label128.Size = new System.Drawing.Size(99, 21);
+            this.label128.TabIndex = 8;
+            this.label128.Text = "吸嘴破真空3";
+            // 
+            // label129
+            // 
+            this.label129.AutoSize = true;
+            this.label129.Location = new System.Drawing.Point(29, 171);
+            this.label129.Name = "label129";
+            this.label129.Size = new System.Drawing.Size(99, 21);
+            this.label129.TabIndex = 12;
+            this.label129.Text = "吸嘴破真空4";
+            // 
             // uiGroupBox15
             // 
+            this.uiGroupBox15.Controls.Add(this.panel34);
+            this.uiGroupBox15.Controls.Add(this.panel36);
             this.uiGroupBox15.Controls.Add(this.uiLight161);
             this.uiGroupBox15.Controls.Add(this.uiLight162);
-            this.uiGroupBox15.Controls.Add(this.panel34);
             this.uiGroupBox15.Controls.Add(this.uiLight167);
             this.uiGroupBox15.Controls.Add(this.uiLight168);
             this.uiGroupBox15.Font = new System.Drawing.Font("微软雅黑", 12F);
@@ -4312,10 +4360,302 @@
             this.uiGroupBox15.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox15.Name = "uiGroupBox15";
             this.uiGroupBox15.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox15.Size = new System.Drawing.Size(183, 270);
+            this.uiGroupBox15.Size = new System.Drawing.Size(265, 270);
             this.uiGroupBox15.TabIndex = 222;
             this.uiGroupBox15.Text = "梭车前";
             this.uiGroupBox15.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // panel34
+            // 
+            this.panel34.BackColor = System.Drawing.Color.LightGray;
+            this.panel34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel34.Controls.Add(this.panel35);
+            this.panel34.Controls.Add(this.label173);
+            this.panel34.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel34.Location = new System.Drawing.Point(84, 66);
+            this.panel34.Margin = new System.Windows.Forms.Padding(10);
+            this.panel34.Name = "panel34";
+            this.panel34.Size = new System.Drawing.Size(69, 153);
+            this.panel34.TabIndex = 222;
+            // 
+            // panel35
+            // 
+            this.panel35.BackColor = System.Drawing.Color.LightGray;
+            this.panel35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel35.Controls.Add(this.lbl_梭车前入1);
+            this.panel35.Controls.Add(this.lbl_梭车前入2);
+            this.panel35.Controls.Add(this.lbl_梭车前入8);
+            this.panel35.Controls.Add(this.lbl_梭车前入3);
+            this.panel35.Controls.Add(this.lbl_梭车前入7);
+            this.panel35.Controls.Add(this.lbl_梭车前入4);
+            this.panel35.Controls.Add(this.lbl_梭车前入6);
+            this.panel35.Controls.Add(this.lbl_梭车前入5);
+            this.panel35.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel35.Location = new System.Drawing.Point(4, 3);
+            this.panel35.Margin = new System.Windows.Forms.Padding(10);
+            this.panel35.Name = "panel35";
+            this.panel35.Size = new System.Drawing.Size(60, 145);
+            this.panel35.TabIndex = 144;
+            // 
+            // lbl_梭车前入1
+            // 
+            this.lbl_梭车前入1.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入1.Location = new System.Drawing.Point(4, 13);
+            this.lbl_梭车前入1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入1.Name = "lbl_梭车前入1";
+            this.lbl_梭车前入1.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入1.TabIndex = 0;
+            this.lbl_梭车前入1.Text = "1";
+            this.lbl_梭车前入1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前入2
+            // 
+            this.lbl_梭车前入2.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入2.Location = new System.Drawing.Point(4, 43);
+            this.lbl_梭车前入2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入2.Name = "lbl_梭车前入2";
+            this.lbl_梭车前入2.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入2.TabIndex = 1;
+            this.lbl_梭车前入2.Text = "2";
+            this.lbl_梭车前入2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前入8
+            // 
+            this.lbl_梭车前入8.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入8.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入8.Location = new System.Drawing.Point(31, 103);
+            this.lbl_梭车前入8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入8.Name = "lbl_梭车前入8";
+            this.lbl_梭车前入8.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入8.TabIndex = 7;
+            this.lbl_梭车前入8.Text = "8";
+            this.lbl_梭车前入8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前入3
+            // 
+            this.lbl_梭车前入3.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入3.Location = new System.Drawing.Point(4, 73);
+            this.lbl_梭车前入3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入3.Name = "lbl_梭车前入3";
+            this.lbl_梭车前入3.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入3.TabIndex = 2;
+            this.lbl_梭车前入3.Text = "3";
+            this.lbl_梭车前入3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前入7
+            // 
+            this.lbl_梭车前入7.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入7.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入7.Location = new System.Drawing.Point(31, 73);
+            this.lbl_梭车前入7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入7.Name = "lbl_梭车前入7";
+            this.lbl_梭车前入7.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入7.TabIndex = 6;
+            this.lbl_梭车前入7.Text = "7";
+            this.lbl_梭车前入7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前入4
+            // 
+            this.lbl_梭车前入4.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入4.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入4.Location = new System.Drawing.Point(4, 103);
+            this.lbl_梭车前入4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入4.Name = "lbl_梭车前入4";
+            this.lbl_梭车前入4.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入4.TabIndex = 3;
+            this.lbl_梭车前入4.Text = "4";
+            this.lbl_梭车前入4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前入6
+            // 
+            this.lbl_梭车前入6.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入6.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入6.Location = new System.Drawing.Point(31, 43);
+            this.lbl_梭车前入6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入6.Name = "lbl_梭车前入6";
+            this.lbl_梭车前入6.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入6.TabIndex = 5;
+            this.lbl_梭车前入6.Text = "6";
+            this.lbl_梭车前入6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前入5
+            // 
+            this.lbl_梭车前入5.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前入5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前入5.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前入5.Location = new System.Drawing.Point(31, 13);
+            this.lbl_梭车前入5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前入5.Name = "lbl_梭车前入5";
+            this.lbl_梭车前入5.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前入5.TabIndex = 4;
+            this.lbl_梭车前入5.Text = "5";
+            this.lbl_梭车前入5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label173
+            // 
+            this.label173.BackColor = System.Drawing.Color.Black;
+            this.label173.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label173.Location = new System.Drawing.Point(0, 0);
+            this.label173.Margin = new System.Windows.Forms.Padding(2);
+            this.label173.Name = "label173";
+            this.label173.Size = new System.Drawing.Size(11, 12);
+            this.label173.TabIndex = 143;
+            // 
+            // panel36
+            // 
+            this.panel36.BackColor = System.Drawing.Color.LightGray;
+            this.panel36.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel36.Controls.Add(this.panel37);
+            this.panel36.Controls.Add(this.label165);
+            this.panel36.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel36.Location = new System.Drawing.Point(162, 66);
+            this.panel36.Margin = new System.Windows.Forms.Padding(10);
+            this.panel36.Name = "panel36";
+            this.panel36.Size = new System.Drawing.Size(69, 153);
+            this.panel36.TabIndex = 221;
+            // 
+            // panel37
+            // 
+            this.panel37.BackColor = System.Drawing.Color.LightGray;
+            this.panel37.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel37.Controls.Add(this.lbl_梭车前出1);
+            this.panel37.Controls.Add(this.lbl_梭车前出2);
+            this.panel37.Controls.Add(this.lbl_梭车前出8);
+            this.panel37.Controls.Add(this.lbl_梭车前出3);
+            this.panel37.Controls.Add(this.lbl_梭车前出7);
+            this.panel37.Controls.Add(this.lbl_梭车前出4);
+            this.panel37.Controls.Add(this.lbl_梭车前出6);
+            this.panel37.Controls.Add(this.lbl_梭车前出5);
+            this.panel37.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.panel37.Location = new System.Drawing.Point(4, 3);
+            this.panel37.Margin = new System.Windows.Forms.Padding(10);
+            this.panel37.Name = "panel37";
+            this.panel37.Size = new System.Drawing.Size(60, 145);
+            this.panel37.TabIndex = 144;
+            // 
+            // lbl_梭车前出1
+            // 
+            this.lbl_梭车前出1.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出1.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出1.Location = new System.Drawing.Point(4, 13);
+            this.lbl_梭车前出1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出1.Name = "lbl_梭车前出1";
+            this.lbl_梭车前出1.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出1.TabIndex = 0;
+            this.lbl_梭车前出1.Text = "1";
+            this.lbl_梭车前出1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前出2
+            // 
+            this.lbl_梭车前出2.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出2.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出2.Location = new System.Drawing.Point(4, 43);
+            this.lbl_梭车前出2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出2.Name = "lbl_梭车前出2";
+            this.lbl_梭车前出2.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出2.TabIndex = 1;
+            this.lbl_梭车前出2.Text = "2";
+            this.lbl_梭车前出2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前出8
+            // 
+            this.lbl_梭车前出8.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出8.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出8.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出8.Location = new System.Drawing.Point(31, 103);
+            this.lbl_梭车前出8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出8.Name = "lbl_梭车前出8";
+            this.lbl_梭车前出8.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出8.TabIndex = 7;
+            this.lbl_梭车前出8.Text = "8";
+            this.lbl_梭车前出8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前出3
+            // 
+            this.lbl_梭车前出3.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出3.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出3.Location = new System.Drawing.Point(4, 73);
+            this.lbl_梭车前出3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出3.Name = "lbl_梭车前出3";
+            this.lbl_梭车前出3.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出3.TabIndex = 2;
+            this.lbl_梭车前出3.Text = "3";
+            this.lbl_梭车前出3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前出7
+            // 
+            this.lbl_梭车前出7.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出7.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出7.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出7.Location = new System.Drawing.Point(31, 73);
+            this.lbl_梭车前出7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出7.Name = "lbl_梭车前出7";
+            this.lbl_梭车前出7.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出7.TabIndex = 6;
+            this.lbl_梭车前出7.Text = "7";
+            this.lbl_梭车前出7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前出4
+            // 
+            this.lbl_梭车前出4.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出4.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出4.Location = new System.Drawing.Point(4, 103);
+            this.lbl_梭车前出4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出4.Name = "lbl_梭车前出4";
+            this.lbl_梭车前出4.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出4.TabIndex = 3;
+            this.lbl_梭车前出4.Text = "4";
+            this.lbl_梭车前出4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前出6
+            // 
+            this.lbl_梭车前出6.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出6.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出6.Location = new System.Drawing.Point(31, 43);
+            this.lbl_梭车前出6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出6.Name = "lbl_梭车前出6";
+            this.lbl_梭车前出6.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出6.TabIndex = 5;
+            this.lbl_梭车前出6.Text = "6";
+            this.lbl_梭车前出6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_梭车前出5
+            // 
+            this.lbl_梭车前出5.BackColor = System.Drawing.Color.Cyan;
+            this.lbl_梭车前出5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lbl_梭车前出5.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.lbl_梭车前出5.Location = new System.Drawing.Point(31, 13);
+            this.lbl_梭车前出5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_梭车前出5.Name = "lbl_梭车前出5";
+            this.lbl_梭车前出5.Size = new System.Drawing.Size(23, 26);
+            this.lbl_梭车前出5.TabIndex = 4;
+            this.lbl_梭车前出5.Text = "5";
+            this.lbl_梭车前出5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label165
+            // 
+            this.label165.BackColor = System.Drawing.Color.Black;
+            this.label165.Font = new System.Drawing.Font("微软雅黑", 13F);
+            this.label165.Location = new System.Drawing.Point(0, 0);
+            this.label165.Margin = new System.Windows.Forms.Padding(2);
+            this.label165.Name = "label165";
+            this.label165.Size = new System.Drawing.Size(11, 12);
+            this.label165.TabIndex = 143;
             // 
             // uiLight161
             // 
@@ -4349,40 +4689,6 @@
             this.uiLight162.TabIndex = 216;
             this.uiLight162.TagString = "X080";
             this.uiLight162.Text = "uiLight162";
-            // 
-            // panel34
-            // 
-            this.panel34.BackColor = System.Drawing.Color.LightGray;
-            this.panel34.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel34.Controls.Add(this.panel35);
-            this.panel34.Controls.Add(this.label104);
-            this.panel34.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel34.Location = new System.Drawing.Point(84, 66);
-            this.panel34.Margin = new System.Windows.Forms.Padding(10);
-            this.panel34.Name = "panel34";
-            this.panel34.Size = new System.Drawing.Size(69, 153);
-            this.panel34.TabIndex = 219;
-            // 
-            // panel35
-            // 
-            this.panel35.BackColor = System.Drawing.Color.LightGray;
-            this.panel35.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel35.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.panel35.Location = new System.Drawing.Point(4, 3);
-            this.panel35.Margin = new System.Windows.Forms.Padding(10);
-            this.panel35.Name = "panel35";
-            this.panel35.Size = new System.Drawing.Size(60, 145);
-            this.panel35.TabIndex = 144;
-            // 
-            // label104
-            // 
-            this.label104.BackColor = System.Drawing.Color.Black;
-            this.label104.Font = new System.Drawing.Font("微软雅黑", 13F);
-            this.label104.Location = new System.Drawing.Point(0, 0);
-            this.label104.Margin = new System.Windows.Forms.Padding(2);
-            this.label104.Name = "label104";
-            this.label104.Size = new System.Drawing.Size(11, 12);
-            this.label104.TabIndex = 143;
             // 
             // uiLight167
             // 
@@ -5066,7 +5372,7 @@
             this.uiSwitch62.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch62.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch62.TabIndex = 290;
-            this.uiSwitch62.Tag = "@02@#BCD#";
+            this.uiSwitch62.Tag = "";
             this.uiSwitch62.TagString = "Y127";
             this.uiSwitch62.Text = "uiSwitch62";
             // 
@@ -5082,7 +5388,7 @@
             this.uiSwitch63.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch63.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch63.TabIndex = 289;
-            this.uiSwitch63.Tag = "@02@#BCD#";
+            this.uiSwitch63.Tag = "";
             this.uiSwitch63.TagString = "Y125";
             this.uiSwitch63.Text = "uiSwitch63";
             // 
@@ -5098,7 +5404,7 @@
             this.uiSwitch64.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch64.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch64.TabIndex = 288;
-            this.uiSwitch64.Tag = "@02@#BCD#";
+            this.uiSwitch64.Tag = "";
             this.uiSwitch64.TagString = "Y123";
             this.uiSwitch64.Text = "uiSwitch64";
             // 
@@ -5114,7 +5420,7 @@
             this.uiSwitch65.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch65.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch65.TabIndex = 287;
-            this.uiSwitch65.Tag = "@02@#BCD#";
+            this.uiSwitch65.Tag = "";
             this.uiSwitch65.TagString = "Y121";
             this.uiSwitch65.Text = "uiSwitch65";
             // 
@@ -5130,7 +5436,7 @@
             this.uiSwitch66.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch66.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch66.TabIndex = 286;
-            this.uiSwitch66.Tag = "@02@#BCD#";
+            this.uiSwitch66.Tag = "";
             this.uiSwitch66.TagString = "Y119";
             this.uiSwitch66.Text = "uiSwitch66";
             // 
@@ -5146,7 +5452,7 @@
             this.uiSwitch67.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch67.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch67.TabIndex = 285;
-            this.uiSwitch67.Tag = "@02@#BCD#";
+            this.uiSwitch67.Tag = "";
             this.uiSwitch67.TagString = "Y117";
             this.uiSwitch67.Text = "uiSwitch67";
             // 
@@ -5162,7 +5468,7 @@
             this.uiSwitch68.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch68.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch68.TabIndex = 284;
-            this.uiSwitch68.Tag = "@02@#BCD#";
+            this.uiSwitch68.Tag = "";
             this.uiSwitch68.TagString = "Y115";
             this.uiSwitch68.Text = "uiSwitch68";
             // 
@@ -5178,7 +5484,7 @@
             this.uiSwitch69.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch69.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch69.TabIndex = 283;
-            this.uiSwitch69.Tag = "@02@#BCD#";
+            this.uiSwitch69.Tag = "";
             this.uiSwitch69.TagString = "Y113";
             this.uiSwitch69.Text = "uiSwitch69";
             // 
@@ -5194,7 +5500,7 @@
             this.uiSwitch70.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch70.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch70.TabIndex = 282;
-            this.uiSwitch70.Tag = "@02@#BCD#";
+            this.uiSwitch70.Tag = "";
             this.uiSwitch70.TagString = "Y111";
             this.uiSwitch70.Text = "uiSwitch70";
             // 
@@ -5210,7 +5516,7 @@
             this.uiSwitch71.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch71.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch71.TabIndex = 281;
-            this.uiSwitch71.Tag = "@02@#BCD#";
+            this.uiSwitch71.Tag = "";
             this.uiSwitch71.TagString = "Y109";
             this.uiSwitch71.Text = "uiSwitch71";
             // 
@@ -5226,7 +5532,7 @@
             this.uiSwitch72.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch72.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch72.TabIndex = 280;
-            this.uiSwitch72.Tag = "@02@#BCD#";
+            this.uiSwitch72.Tag = "";
             this.uiSwitch72.TagString = "Y107";
             this.uiSwitch72.Text = "uiSwitch72";
             // 
@@ -5242,7 +5548,7 @@
             this.uiSwitch73.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch73.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch73.TabIndex = 279;
-            this.uiSwitch73.Tag = "@02@#BCD#";
+            this.uiSwitch73.Tag = "";
             this.uiSwitch73.TagString = "Y105";
             this.uiSwitch73.Text = "uiSwitch73";
             // 
@@ -5258,7 +5564,7 @@
             this.uiSwitch74.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch74.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch74.TabIndex = 278;
-            this.uiSwitch74.Tag = "@02@#BCD#";
+            this.uiSwitch74.Tag = "";
             this.uiSwitch74.TagString = "Y103";
             this.uiSwitch74.Text = "uiSwitch74";
             // 
@@ -5274,7 +5580,7 @@
             this.uiSwitch75.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch75.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch75.TabIndex = 277;
-            this.uiSwitch75.Tag = "@02@#BCD#";
+            this.uiSwitch75.Tag = "";
             this.uiSwitch75.TagString = "Y101";
             this.uiSwitch75.Text = "uiSwitch75";
             // 
@@ -5290,7 +5596,7 @@
             this.uiSwitch76.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch76.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch76.TabIndex = 276;
-            this.uiSwitch76.Tag = "@02@#BCD#";
+            this.uiSwitch76.Tag = "";
             this.uiSwitch76.TagString = "Y099";
             this.uiSwitch76.Text = "uiSwitch76";
             // 
@@ -5306,7 +5612,7 @@
             this.uiSwitch77.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch77.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch77.TabIndex = 275;
-            this.uiSwitch77.Tag = "@02@#BCD#";
+            this.uiSwitch77.Tag = "";
             this.uiSwitch77.TagString = "Y097";
             this.uiSwitch77.Text = "uiSwitch77";
             // 
@@ -5818,7 +6124,7 @@
             this.uiSwitch58.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch58.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch58.TabIndex = 244;
-            this.uiSwitch58.Tag = "@02@#BCD#";
+            this.uiSwitch58.Tag = "";
             this.uiSwitch58.TagString = "Y126";
             this.uiSwitch58.Text = "uiSwitch58";
             // 
@@ -5850,7 +6156,7 @@
             this.uiSwitch59.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch59.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch59.TabIndex = 243;
-            this.uiSwitch59.Tag = "@02@#BCD#";
+            this.uiSwitch59.Tag = "";
             this.uiSwitch59.TagString = "Y124";
             this.uiSwitch59.Text = "uiSwitch59";
             // 
@@ -5866,7 +6172,7 @@
             this.uiSwitch60.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch60.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch60.TabIndex = 242;
-            this.uiSwitch60.Tag = "@02@#BCD#";
+            this.uiSwitch60.Tag = "";
             this.uiSwitch60.TagString = "Y122";
             this.uiSwitch60.Text = "uiSwitch60";
             // 
@@ -5882,7 +6188,7 @@
             this.uiSwitch61.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch61.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch61.TabIndex = 241;
-            this.uiSwitch61.Tag = "@02@#BCD#";
+            this.uiSwitch61.Tag = "";
             this.uiSwitch61.TagString = "Y120";
             this.uiSwitch61.Text = "uiSwitch61";
             // 
@@ -5898,7 +6204,7 @@
             this.uiSwitch54.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch54.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch54.TabIndex = 240;
-            this.uiSwitch54.Tag = "@02@#BCD#";
+            this.uiSwitch54.Tag = "";
             this.uiSwitch54.TagString = "Y118";
             this.uiSwitch54.Text = "uiSwitch54";
             // 
@@ -5914,7 +6220,7 @@
             this.uiSwitch55.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch55.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch55.TabIndex = 239;
-            this.uiSwitch55.Tag = "@02@#BCD#";
+            this.uiSwitch55.Tag = "";
             this.uiSwitch55.TagString = "Y116";
             this.uiSwitch55.Text = "uiSwitch55";
             // 
@@ -5930,7 +6236,7 @@
             this.uiSwitch56.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch56.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch56.TabIndex = 238;
-            this.uiSwitch56.Tag = "@02@#BCD#";
+            this.uiSwitch56.Tag = "";
             this.uiSwitch56.TagString = "Y114";
             this.uiSwitch56.Text = "uiSwitch56";
             // 
@@ -5946,7 +6252,7 @@
             this.uiSwitch57.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch57.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch57.TabIndex = 237;
-            this.uiSwitch57.Tag = "@02@#BCD#";
+            this.uiSwitch57.Tag = "";
             this.uiSwitch57.TagString = "Y112";
             this.uiSwitch57.Text = "uiSwitch57";
             // 
@@ -5962,7 +6268,7 @@
             this.uiSwitch50.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch50.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch50.TabIndex = 236;
-            this.uiSwitch50.Tag = "@02@#BCD#";
+            this.uiSwitch50.Tag = "";
             this.uiSwitch50.TagString = "Y110";
             this.uiSwitch50.Text = "uiSwitch50";
             // 
@@ -5978,7 +6284,7 @@
             this.uiSwitch51.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch51.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch51.TabIndex = 235;
-            this.uiSwitch51.Tag = "@02@#BCD#";
+            this.uiSwitch51.Tag = "";
             this.uiSwitch51.TagString = "Y108";
             this.uiSwitch51.Text = "uiSwitch51";
             // 
@@ -5994,7 +6300,7 @@
             this.uiSwitch52.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch52.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch52.TabIndex = 234;
-            this.uiSwitch52.Tag = "@02@#BCD#";
+            this.uiSwitch52.Tag = "";
             this.uiSwitch52.TagString = "Y106";
             this.uiSwitch52.Text = "uiSwitch52";
             // 
@@ -6010,7 +6316,7 @@
             this.uiSwitch53.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch53.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch53.TabIndex = 233;
-            this.uiSwitch53.Tag = "@02@#BCD#";
+            this.uiSwitch53.Tag = "";
             this.uiSwitch53.TagString = "Y104";
             this.uiSwitch53.Text = "uiSwitch53";
             // 
@@ -6026,7 +6332,7 @@
             this.uiSwitch49.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch49.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch49.TabIndex = 232;
-            this.uiSwitch49.Tag = "@02@#BCD#";
+            this.uiSwitch49.Tag = "";
             this.uiSwitch49.TagString = "Y102";
             this.uiSwitch49.Text = "uiSwitch49";
             // 
@@ -6042,7 +6348,7 @@
             this.uiSwitch38.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch38.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch38.TabIndex = 231;
-            this.uiSwitch38.Tag = "@02@#BCD#";
+            this.uiSwitch38.Tag = "";
             this.uiSwitch38.TagString = "Y100";
             this.uiSwitch38.Text = "uiSwitch38";
             // 
@@ -6058,7 +6364,7 @@
             this.uiSwitch33.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch33.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch33.TabIndex = 230;
-            this.uiSwitch33.Tag = "@02@#BCD#";
+            this.uiSwitch33.Tag = "";
             this.uiSwitch33.TagString = "Y098";
             this.uiSwitch33.Text = "uiSwitch33";
             // 
@@ -6074,7 +6380,7 @@
             this.uiSwitch32.Size = new System.Drawing.Size(75, 29);
             this.uiSwitch32.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
             this.uiSwitch32.TabIndex = 229;
-            this.uiSwitch32.Tag = "@02@#BCD#";
+            this.uiSwitch32.Tag = "";
             this.uiSwitch32.TagString = "Y096";
             this.uiSwitch32.Text = "uiSwitch32";
             // 
@@ -6221,6 +6527,262 @@
             this.label118.Size = new System.Drawing.Size(47, 21);
             this.label118.TabIndex = 216;
             this.label118.Text = "Site4";
+            // 
+            // uiGroupBox27
+            // 
+            this.uiGroupBox27.Controls.Add(this.uiSwitch89);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch90);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch91);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch92);
+            this.uiGroupBox27.Controls.Add(this.label135);
+            this.uiGroupBox27.Controls.Add(this.label136);
+            this.uiGroupBox27.Controls.Add(this.label137);
+            this.uiGroupBox27.Controls.Add(this.label138);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch84);
+            this.uiGroupBox27.Controls.Add(this.label130);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch85);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch86);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch87);
+            this.uiGroupBox27.Controls.Add(this.uiSwitch88);
+            this.uiGroupBox27.Controls.Add(this.label131);
+            this.uiGroupBox27.Controls.Add(this.label132);
+            this.uiGroupBox27.Controls.Add(this.label133);
+            this.uiGroupBox27.Controls.Add(this.label134);
+            this.uiGroupBox27.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiGroupBox27.Location = new System.Drawing.Point(22, 19);
+            this.uiGroupBox27.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox27.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox27.Name = "uiGroupBox27";
+            this.uiGroupBox27.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox27.Size = new System.Drawing.Size(495, 262);
+            this.uiGroupBox27.TabIndex = 225;
+            this.uiGroupBox27.Text = "吸真空";
+            this.uiGroupBox27.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // uiSwitch89
+            // 
+            this.uiSwitch89.ActiveText = "关";
+            this.uiSwitch89.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch89.InActiveText = "开";
+            this.uiSwitch89.Location = new System.Drawing.Point(376, 167);
+            this.uiSwitch89.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch89.Name = "uiSwitch89";
+            this.uiSwitch89.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch89.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch89.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch89.TabIndex = 129;
+            this.uiSwitch89.Tag = "";
+            this.uiSwitch89.TagString = "Y085";
+            this.uiSwitch89.Text = "uiSwitch89";
+            // 
+            // uiSwitch90
+            // 
+            this.uiSwitch90.ActiveText = "关";
+            this.uiSwitch90.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch90.InActiveText = "开";
+            this.uiSwitch90.Location = new System.Drawing.Point(376, 126);
+            this.uiSwitch90.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch90.Name = "uiSwitch90";
+            this.uiSwitch90.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch90.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch90.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch90.TabIndex = 128;
+            this.uiSwitch90.Tag = "";
+            this.uiSwitch90.TagString = "Y084";
+            this.uiSwitch90.Text = "uiSwitch90";
+            // 
+            // uiSwitch91
+            // 
+            this.uiSwitch91.ActiveText = "关";
+            this.uiSwitch91.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch91.InActiveText = "开";
+            this.uiSwitch91.Location = new System.Drawing.Point(376, 85);
+            this.uiSwitch91.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch91.Name = "uiSwitch91";
+            this.uiSwitch91.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch91.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch91.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch91.TabIndex = 127;
+            this.uiSwitch91.Tag = "";
+            this.uiSwitch91.TagString = "Y083";
+            this.uiSwitch91.Text = "uiSwitch91";
+            // 
+            // uiSwitch92
+            // 
+            this.uiSwitch92.ActiveText = "关";
+            this.uiSwitch92.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch92.InActiveText = "开";
+            this.uiSwitch92.Location = new System.Drawing.Point(376, 44);
+            this.uiSwitch92.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch92.Name = "uiSwitch92";
+            this.uiSwitch92.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch92.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch92.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch92.TabIndex = 126;
+            this.uiSwitch92.Tag = "";
+            this.uiSwitch92.TagString = "Y082";
+            this.uiSwitch92.Text = "uiSwitch92";
+            // 
+            // label135
+            // 
+            this.label135.AutoSize = true;
+            this.label135.Location = new System.Drawing.Point(250, 48);
+            this.label135.Name = "label135";
+            this.label135.Size = new System.Drawing.Size(99, 21);
+            this.label135.TabIndex = 122;
+            this.label135.Text = "吸嘴吸真空5";
+            // 
+            // label136
+            // 
+            this.label136.AutoSize = true;
+            this.label136.Location = new System.Drawing.Point(250, 89);
+            this.label136.Name = "label136";
+            this.label136.Size = new System.Drawing.Size(99, 21);
+            this.label136.TabIndex = 123;
+            this.label136.Text = "吸嘴吸真空6";
+            // 
+            // label137
+            // 
+            this.label137.AutoSize = true;
+            this.label137.Location = new System.Drawing.Point(250, 130);
+            this.label137.Name = "label137";
+            this.label137.Size = new System.Drawing.Size(99, 21);
+            this.label137.TabIndex = 124;
+            this.label137.Text = "吸嘴吸真空7";
+            // 
+            // label138
+            // 
+            this.label138.AutoSize = true;
+            this.label138.Location = new System.Drawing.Point(250, 171);
+            this.label138.Name = "label138";
+            this.label138.Size = new System.Drawing.Size(99, 21);
+            this.label138.TabIndex = 125;
+            this.label138.Text = "吸嘴吸真空8";
+            // 
+            // uiSwitch84
+            // 
+            this.uiSwitch84.ActiveText = "关";
+            this.uiSwitch84.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch84.InActiveText = "开";
+            this.uiSwitch84.Location = new System.Drawing.Point(155, 209);
+            this.uiSwitch84.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch84.Name = "uiSwitch84";
+            this.uiSwitch84.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch84.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch84.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch84.TabIndex = 121;
+            this.uiSwitch84.Tag = "";
+            this.uiSwitch84.Text = "uiSwitch84";
+            this.uiSwitch84.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch84_ValueChanged);
+            // 
+            // label130
+            // 
+            this.label130.AutoSize = true;
+            this.label130.Location = new System.Drawing.Point(29, 213);
+            this.label130.Name = "label130";
+            this.label130.Size = new System.Drawing.Size(90, 21);
+            this.label130.TabIndex = 120;
+            this.label130.Text = "吸真空全开";
+            // 
+            // uiSwitch85
+            // 
+            this.uiSwitch85.ActiveText = "关";
+            this.uiSwitch85.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch85.InActiveText = "开";
+            this.uiSwitch85.Location = new System.Drawing.Point(155, 167);
+            this.uiSwitch85.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch85.Name = "uiSwitch85";
+            this.uiSwitch85.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch85.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch85.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch85.TabIndex = 119;
+            this.uiSwitch85.Tag = "";
+            this.uiSwitch85.TagString = "Y081";
+            this.uiSwitch85.Text = "uiSwitch85";
+            // 
+            // uiSwitch86
+            // 
+            this.uiSwitch86.ActiveText = "关";
+            this.uiSwitch86.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch86.InActiveText = "开";
+            this.uiSwitch86.Location = new System.Drawing.Point(155, 126);
+            this.uiSwitch86.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch86.Name = "uiSwitch86";
+            this.uiSwitch86.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch86.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch86.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch86.TabIndex = 118;
+            this.uiSwitch86.Tag = "";
+            this.uiSwitch86.TagString = "Y080";
+            this.uiSwitch86.Text = "uiSwitch86";
+            // 
+            // uiSwitch87
+            // 
+            this.uiSwitch87.ActiveText = "关";
+            this.uiSwitch87.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch87.InActiveText = "开";
+            this.uiSwitch87.Location = new System.Drawing.Point(155, 85);
+            this.uiSwitch87.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch87.Name = "uiSwitch87";
+            this.uiSwitch87.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch87.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch87.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch87.TabIndex = 117;
+            this.uiSwitch87.Tag = "";
+            this.uiSwitch87.TagString = "Y079";
+            this.uiSwitch87.Text = "uiSwitch87";
+            // 
+            // uiSwitch88
+            // 
+            this.uiSwitch88.ActiveText = "关";
+            this.uiSwitch88.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiSwitch88.InActiveText = "开";
+            this.uiSwitch88.Location = new System.Drawing.Point(155, 44);
+            this.uiSwitch88.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiSwitch88.Name = "uiSwitch88";
+            this.uiSwitch88.RectSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.None;
+            this.uiSwitch88.Size = new System.Drawing.Size(75, 29);
+            this.uiSwitch88.SwitchShape = Sunny.UI.UISwitch.UISwitchShape.Square;
+            this.uiSwitch88.TabIndex = 116;
+            this.uiSwitch88.Tag = "";
+            this.uiSwitch88.TagString = "Y078";
+            this.uiSwitch88.Text = "uiSwitch88";
+            // 
+            // label131
+            // 
+            this.label131.AutoSize = true;
+            this.label131.Location = new System.Drawing.Point(29, 48);
+            this.label131.Name = "label131";
+            this.label131.Size = new System.Drawing.Size(99, 21);
+            this.label131.TabIndex = 6;
+            this.label131.Text = "吸嘴吸真空1";
+            // 
+            // label132
+            // 
+            this.label132.AutoSize = true;
+            this.label132.Location = new System.Drawing.Point(29, 89);
+            this.label132.Name = "label132";
+            this.label132.Size = new System.Drawing.Size(99, 21);
+            this.label132.TabIndex = 7;
+            this.label132.Text = "吸嘴吸真空2";
+            // 
+            // label133
+            // 
+            this.label133.AutoSize = true;
+            this.label133.Location = new System.Drawing.Point(29, 130);
+            this.label133.Name = "label133";
+            this.label133.Size = new System.Drawing.Size(99, 21);
+            this.label133.TabIndex = 8;
+            this.label133.Text = "吸嘴吸真空3";
+            // 
+            // label134
+            // 
+            this.label134.AutoSize = true;
+            this.label134.Location = new System.Drawing.Point(29, 171);
+            this.label134.Name = "label134";
+            this.label134.Size = new System.Drawing.Size(99, 21);
+            this.label134.TabIndex = 12;
+            this.label134.Text = "吸嘴吸真空4";
             // 
             // uiGroupBox12
             // 
@@ -7790,7 +8352,6 @@
             // 
             // IOUpdateTimer
             // 
-            this.IOUpdateTimer.Interval = 500;
             this.IOUpdateTimer.Tick += new System.EventHandler(this.IOUpdateTimer_Tick);
             // 
             // uiButton1
@@ -7804,6 +8365,7 @@
             this.uiButton1.TabIndex = 4;
             this.uiButton1.Text = "uiButton1";
             this.uiButton1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton1.Visible = false;
             this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
             // 
             // _IO
@@ -7855,17 +8417,23 @@
             this.tabPage16.ResumeLayout(false);
             this.uiGroupBox21.ResumeLayout(false);
             this.uiGroupBox21.PerformLayout();
-            this.uiGroupBox26.ResumeLayout(false);
-            this.uiGroupBox26.PerformLayout();
-            this.uiGroupBox27.ResumeLayout(false);
-            this.uiGroupBox27.PerformLayout();
             this.uiGroupBox14.ResumeLayout(false);
             this.uiGroupBox22.ResumeLayout(false);
+            this.panel32.ResumeLayout(false);
+            this.panel33.ResumeLayout(false);
             this.panel38.ResumeLayout(false);
+            this.panel39.ResumeLayout(false);
+            this.uiGroupBox26.ResumeLayout(false);
+            this.uiGroupBox26.PerformLayout();
             this.uiGroupBox15.ResumeLayout(false);
             this.panel34.ResumeLayout(false);
+            this.panel35.ResumeLayout(false);
+            this.panel36.ResumeLayout(false);
+            this.panel37.ResumeLayout(false);
             this.uiGroupBox13.ResumeLayout(false);
             this.uiGroupBox13.PerformLayout();
+            this.uiGroupBox27.ResumeLayout(false);
+            this.uiGroupBox27.PerformLayout();
             this.uiGroupBox12.ResumeLayout(false);
             this.uiGroupBox12.PerformLayout();
             this.panel16.ResumeLayout(false);
@@ -8277,17 +8845,11 @@
         private Sunny.UI.UIGroupBox uiGroupBox22;
         private Sunny.UI.UILight uiLight173;
         private Sunny.UI.UILight uiLight174;
-        private System.Windows.Forms.Panel panel38;
-        private System.Windows.Forms.Panel panel39;
-        private System.Windows.Forms.Label label105;
         private Sunny.UI.UILight uiLight175;
         private Sunny.UI.UILight uiLight176;
         private Sunny.UI.UIGroupBox uiGroupBox15;
         private Sunny.UI.UILight uiLight161;
         private Sunny.UI.UILight uiLight162;
-        private System.Windows.Forms.Panel panel34;
-        private System.Windows.Forms.Panel panel35;
-        private System.Windows.Forms.Label label104;
         private Sunny.UI.UILight uiLight167;
         private Sunny.UI.UILight uiLight168;
         private Sunny.UI.UILight uiLight129;
@@ -8389,5 +8951,49 @@
         private Sunny.UI.UILight uiLight47;
         private Sunny.UI.UISwitch uiSwitch99;
         private Sunny.UI.UISwitch uiSwitch100;
+        private System.Windows.Forms.Panel panel32;
+        private System.Windows.Forms.Panel panel33;
+        private System.Windows.Forms.Label lbl_梭车后出1;
+        private System.Windows.Forms.Label lbl_梭车后出2;
+        private System.Windows.Forms.Label lbl_梭车后出8;
+        private System.Windows.Forms.Label lbl_梭车后出3;
+        private System.Windows.Forms.Label lbl_梭车后出7;
+        private System.Windows.Forms.Label lbl_梭车后出4;
+        private System.Windows.Forms.Label lbl_梭车后出6;
+        private System.Windows.Forms.Label lbl_梭车后出5;
+        private System.Windows.Forms.Label label155;
+        private System.Windows.Forms.Panel panel38;
+        private System.Windows.Forms.Panel panel39;
+        private System.Windows.Forms.Label lbl_梭车后入1;
+        private System.Windows.Forms.Label lbl_梭车后入2;
+        private System.Windows.Forms.Label lbl_梭车后入8;
+        private System.Windows.Forms.Label lbl_梭车后入3;
+        private System.Windows.Forms.Label lbl_梭车后入7;
+        private System.Windows.Forms.Label lbl_梭车后入4;
+        private System.Windows.Forms.Label lbl_梭车后入6;
+        private System.Windows.Forms.Label lbl_梭车后入5;
+        private System.Windows.Forms.Label label105;
+        private System.Windows.Forms.Panel panel34;
+        private System.Windows.Forms.Panel panel35;
+        private System.Windows.Forms.Label lbl_梭车前入1;
+        private System.Windows.Forms.Label lbl_梭车前入2;
+        private System.Windows.Forms.Label lbl_梭车前入8;
+        private System.Windows.Forms.Label lbl_梭车前入3;
+        private System.Windows.Forms.Label lbl_梭车前入7;
+        private System.Windows.Forms.Label lbl_梭车前入4;
+        private System.Windows.Forms.Label lbl_梭车前入6;
+        private System.Windows.Forms.Label lbl_梭车前入5;
+        private System.Windows.Forms.Label label173;
+        private System.Windows.Forms.Panel panel36;
+        private System.Windows.Forms.Panel panel37;
+        private System.Windows.Forms.Label lbl_梭车前出1;
+        private System.Windows.Forms.Label lbl_梭车前出2;
+        private System.Windows.Forms.Label lbl_梭车前出8;
+        private System.Windows.Forms.Label lbl_梭车前出3;
+        private System.Windows.Forms.Label lbl_梭车前出7;
+        private System.Windows.Forms.Label lbl_梭车前出4;
+        private System.Windows.Forms.Label lbl_梭车前出6;
+        private System.Windows.Forms.Label lbl_梭车前出5;
+        private System.Windows.Forms.Label label165;
     }
 }

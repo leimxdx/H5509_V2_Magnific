@@ -11,6 +11,7 @@ using Sunny.UI;
 using System.Diagnostics.Contracts;
 using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
@@ -63,6 +64,18 @@ namespace H5509_V2
 
         private void IOButton_Click(object sender, EventArgs e)
         {
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return;
+            }
+
             if (uiLabel1.Text[0] == 'X')
             {
                 return;

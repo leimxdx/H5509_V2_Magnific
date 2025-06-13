@@ -173,3 +173,12 @@ table TesterIFParam has no column named auto1
 打开控制器失败(-6)
    在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
    在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-10 22:30:46  =>  GTN_Open(5,1):(0)
+2025-06-10 22:30:47  =>  GTN_Reset(1):(0)
+2025-06-10 22:30:47  =>  GTN_Reset(2):(0)
+2025-06-10 22:30:47  =>  GTN_LoadConfig(1):(0)
+2025-06-10 22:30:48  =>  GTN_LoadConfig(2):(0)
+2025-06-10 22:30:48  =>  GTN_ClrSts(1, 1, 12):(0)
+2025-06-10 22:30:48  =>  GTN_ClrSts(2, 1, 12):(0)
+2025-06-10 22:30:48  =>  GT_GLinkInit(1):(0)
+2025-06-10 22:30:48  =>  8个IO模块初始化成功！

@@ -4100,6 +4100,7 @@
             this.lab_uph.TabIndex = 2;
             this.lab_uph.Text = "UPH=10000";
             this.lab_uph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lab_uph.Click += new System.EventHandler(this.lab_uph_Click);
             // 
             // lbl_closenum
             // 

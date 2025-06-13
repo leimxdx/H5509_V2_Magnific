@@ -8,7 +8,10 @@ using System.Security.Policy;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.Packaging;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
@@ -292,24 +295,26 @@ namespace H5509_V2
 
         private void uphtimeTick(object sender, EventArgs eventArgs)
         {
-            if (设备状态 == 0) return;
-
             int uph = 0;
 
-            if (出料数 != UphNumber)
+            if (设备状态 != 0 && UPHType == 0)
             {
-                uph = 3600 / 10 * (出料数 - UphNumber);
-
-                UphNumber = 出料数;
-            }
-
-            if (uph >= 0)
-            {
-                lab_uph.Invoke(new Action(() =>
+                if (出料数 != UphNumber)
                 {
-                    lab_uph.Text = $"UPH={uph}";
-                }));
+                    uph = 3600 / 10 * (出料数 - UphNumber);
+
+                    UphNumber = 出料数;
+                }
+
+                if (uph >= 0)
+                {
+                    lab_uph.Invoke(new Action(() =>
+                    {
+                        lab_uph.Text = $"UPH={uph}";
+                    }));
+                }
             }
+
             //RunLog($"UPH={uph}");
         }
 
@@ -345,6 +350,14 @@ namespace H5509_V2
             RefreshCurrentTime();
             RefreshLightState(flicker);
             flicker = !flicker;
+            if (设备状态 != 0 && UPHType == 1)
+            {
+                lab_uph.Invoke(new Action(() =>
+                {
+                    lab_uph.Text = $"UPH={RealUPHNum}";
+                })); 
+                UphNumber = 出料数;
+            }
         }
 
         private void TimerCloseSelcet(object sender, EventArgs e)
@@ -853,13 +866,22 @@ namespace H5509_V2
                             {
                                 if (飞梭后入料IC[cloum][dut] && !正在吸取后入料[cloum * 4 + dut])
                                 {
-                                    RunLog($"后梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出");
-                                    MessageBox.Show($"后梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    if (设备状态 == 1)
+                                    {
+                                        Listcode.Add($"5{cloum * 4 + dut + 43}500");
+                                    }
+                                    else MessageBox.Show($"后梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    RunLog($"后梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出");
                                 }
                                 if (飞梭前入料IC[cloum][dut] || 正在放置前入料[cloum][dut]) //入料4个吸嘴
                                 {
-                                    RunLog($"前梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
-                                    MessageBox.Show($"前梭车入料:所有site的dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    if (设备状态 == 1)
+                                    {
+                                        Listcode.Add($"5{cloum * 4 + dut + 51}500");
+                                    }
+                                    else MessageBox.Show($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    RunLog($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
+
                                 }
                             }
                         }
@@ -873,21 +895,26 @@ namespace H5509_V2
                         RunLog($"新开Site{i}");
 
                         if (!InSiteQueue.Contains(i) //如果不在入料队列中
-                            && !SiteTestState.Contains(1) //测试区有料
-                            && !SiteTestState.Contains(2) //测试区有料测试中
-                            && !SiteTestState.Contains(3) //测试区有料已测试
-                            && !SiteTestState.Contains(4) //测试区有料待取走
-                            && !正在吸取后入料.Contains(true)) //测试区有料待取走
+                            && !OutSiteQueue.Contains(i) //不在出料队列中
+                            && (SiteTestState[i] == 0)
+                            && (正在入料的Site != i))
+                            //&& !正在吸取后入料.Contains(true)) //测试区有料待取走
                         {
                             InSiteQueue.Enqueue(i);
                             RunLog($"添加Site{i}");
+                        }
+                        else
+                        {
+                            RunLog("!InSiteQueue:"+ !InSiteQueue.Contains(i));
+                            RunLog("!OutSiteQueue:" + !OutSiteQueue.Contains(i));
+                            RunLog($"SiteTestState[{i}]:" + SiteTestState[i]);
+                            RunLog("site:" + 正在入料的Site);
                         }
 
                     }
                     else if (修改前开Site更改[i] && !保存开Site更改[i])
                     {
-                        RunLog($"新关Site{i}");
-
+                        RunLog($"新全关Site{i}");
                     }
                 }
             }
@@ -1222,8 +1249,17 @@ namespace H5509_V2
                             Lbl_Temp[i].BackColor = color;
                         }
 
+                        if (设备状态 != 0)
+                        {
+                            for (int site = 0; site < SiteTestIC.Count; site++)
+                            {
+                                bool[][] open = SiteTestIC[site];
+                                显示Dout颜色(site, open, SiteTestBin[site]);
+                            }
+                        }
                     }));
-                    Thread.Sleep(100);
+
+                    Thread.Sleep(50);
                 }
                 catch (Exception ex)
                 {
@@ -1232,6 +1268,49 @@ namespace H5509_V2
                 }
             }
         }
+
+        public void 显示Dout颜色()
+        {
+            for (int site = 0; site < SiteTestIC.Count; site++)
+            {
+                bool[][] open = SiteTestIC[site];
+                显示Dout颜色(site, open, SiteTestBin[site]);
+            }
+        }
+
+        public void 显示Dout颜色(int site, bool[][] open, string[] bins)
+        {
+            for (int j = 0; j < open.Length; j++)
+            {
+                for (int k = 0; k < open[j].Length; k++)
+                {
+                    if (open[j][k])
+                    {
+                        int sitestate = SiteTestState[site];
+                        if (sitestate == 1)
+                        {
+                            Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Green;
+                        }
+                        else if (sitestate == 2)
+                        {
+                            Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Yellow;
+                        }
+                        else if (sitestate == 3 || sitestate == 4)
+                        {
+                            string bin = bins[j * 4 + k];
+                            if (Auto1.Contains(bin)) Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Lime;
+                            else Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Red;
+                        }
+                        else
+                        {
+                            //Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Cyan;
+                        }
+                    }
+                    else Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Cyan;
+                }
+            }
+        }
+
 
         public void 刷新温度显示()
         {
@@ -2138,6 +2217,22 @@ namespace H5509_V2
         {
             Fix3Map fix3Map = new Fix3Map();
             fix3Map.ShowDialog();
+        }
+
+        private void lab_uph_Click(object sender, EventArgs e)
+        {
+            if (当前权限 != "Operator")
+            {
+                if (UPHType == 0)
+                {
+                    UPHType = 1;
+                }
+                else
+                {
+                    UPHType = 0;
+                }
+            }
+            else UPHType = 0;
         }
     }
 }

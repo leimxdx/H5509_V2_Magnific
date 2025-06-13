@@ -46,6 +46,8 @@ namespace H5509_V2
 
         public Action 刷新权限;
 
+        public Action 显示Dout颜色;
+
         public Handler()
         {
             结批触发定时器.Interval = 2 * 1000; //2秒钟
@@ -2854,6 +2856,7 @@ namespace H5509_V2
             Fix3Tray盘拿走标记 = false;
             总良率报警间隔计数 = 0;
             Socket使用次数超限数 = 0;
+            正在入料的Site = 99;
             trayTemp = "";
             Dout128PassNumber = new int[128];
             Dout128FailNumber = new int[128];
@@ -2869,6 +2872,8 @@ namespace H5509_V2
                 doutContinueFail.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
                 单dut总不良计数.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
                 单dut总不良累计计数.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
+                SiteTestBin[i] = new string[] { "", "", "", "", "", "", "", "" };
+                //显示Dout颜色(i, SiteTestIC[i], SiteTestBin[i]);
             }
             入料IC忽略 = false;
             入料IC吸不起结批 = false;
@@ -3813,6 +3818,7 @@ namespace H5509_V2
                             if (ishome)
                             {
                                 参数初始化();
+                                显示Dout颜色();
                                 if (!Com.IsconnectTester)
                                 {
                                     刷新批次信息();
@@ -3824,6 +3830,7 @@ namespace H5509_V2
                                 motionEx.SetDo("Y001_开始灯", false);
                                 motionEx.SetDo("Y002_暂停灯", false);
                                 motionEx.SetDo("Y010_归零灯", true);
+                                form_alarm.CancelAllAlarm();
                                 if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
                                 Task.Run(() =>
                                 {
@@ -4110,7 +4117,7 @@ namespace H5509_V2
                         //    }
                         //}
                     }
-                    Thread.Sleep(5);
+                    Thread.Sleep(6);
                 }
             }
         }
@@ -4215,7 +4222,8 @@ namespace H5509_V2
             PS初始化流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
+                if (H5509归零) Thread.Sleep(10);
+                else Thread.Sleep(100);
 
                 if (APPmaster.IsForecePause)
                 {
@@ -4404,7 +4412,8 @@ namespace H5509_V2
             PS结批流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
+                if(结批标记) Thread.Sleep(10);
+                else Thread.Sleep(100);
 
                 if (APPmaster.IsForecePause)
                 {
@@ -7710,7 +7719,7 @@ namespace H5509_V2
                     case 798:
                         PS出料手臂吸放料流程.StepName = "出料手臂移到梭车第1列上等待";
                         RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
-                        xpos = 获取梭车xyp吸料点位(0);
+                        xpos = 获取梭车xyp吸料点位2(0);
                         result = 出料手臂移动(xpos[0], xpos[1], xpos[2]);
                         if (result == "Success")
                         {
@@ -8512,6 +8521,8 @@ namespace H5509_V2
                                         if (lsopen.Contains(true)) //梭车上只要有一颗就拿走
                                         {
                                             InSiteQueue.TryDequeue(out movesite);
+                                            正在入料的Site = movesite;
+                                            RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->移除Site{movesite + 1}");
                                             RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->拿到取Site{site + 1}的IC信息:{opens[0]},{opens[1]},{opens[2]},{opens[3]},{opens[4]},{opens[5]},{opens[6]},{opens[7]}");
                                             PS测试手臂取待测料流程.StepID = 505;
                                         }
@@ -8531,11 +8542,23 @@ namespace H5509_V2
                                                 InSiteQueue.Enqueue(site);
                                                 Thread.Sleep(10);
 
+                                                if (InSiteQueue.Count == 1) //如果只有一个Site在等,则返回出去等下一个
+                                                {
+                                                    if (!SiteTestState.Contains(2)) //如何没有Site正在测试，则交叉
+                                                    {
+                                                        if (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true) && 入料手臂停止工作标记) //如果前梭车入料区有料才交叉
+                                                        {
+                                                            飞梭后入料状态 = 0;
+                                                        }
+                                                    }
+                                                    PS测试手臂取待测料流程.Processing = false;
+                                                    PS测试手臂取待测料流程.StepID = 500;
+                                                }
                                                 //for (int i = 0; i < InSiteQueue.Count; i++)
                                                 //{
 
-                                                //}
-                                                //InSiteQueue.Contains(site);
+                                                    //}
+                                                    //InSiteQueue.Contains(site);
                                             }
                                         }
                                     }
@@ -9823,6 +9846,7 @@ namespace H5509_V2
                             飞梭后出料BIN项 = new string[][] { new string[] { bin[0], bin[1], bin[2], bin[3] }, new string[] { bin[4], bin[5], bin[6], bin[7] } };
                             InSiteQueue.Enqueue(site);
 
+                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->添加Site:{site + 1}");
                             PS测试手臂取已测料流程.StepID = 799;
                         }
                         else
