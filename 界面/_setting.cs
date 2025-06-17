@@ -3050,16 +3050,16 @@ namespace H5509_V2
             int rows = uiDataGridView1.SelectedIndex;
             if (rows >= 0)
             {
-                uiCheckBox194.Visible = false;
-                uiCheckBox195.Visible = false;
-                uiCheckBox196.Visible = false;
+                //uiCheckBox194.Visible = false;
+                //uiCheckBox195.Visible = false;
+                //uiCheckBox196.Visible = false;
                 string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
                 if (tabpagetext == "设定")
                 {
                     刷新设定(name);
-                    uiCheckBox194.Visible = true;
-                    uiCheckBox195.Visible = true;
-                    uiCheckBox196.Visible = true;
+                    //uiCheckBox194.Visible = true;
+                    //uiCheckBox195.Visible = true;
+                    //uiCheckBox196.Visible = true;
                 }
                 else if (tabpagetext == "测试机")
                 {
@@ -3117,15 +3117,15 @@ namespace H5509_V2
             int rows = uiDataGridView2.SelectedIndex;
             if (rows >= 0)
             {
-                uiCheckBox197.Visible = false;
-                uiCheckBox198.Visible = false;
-                uiCheckBox199.Visible = false;
+                //uiCheckBox197.Visible = false;
+                //uiCheckBox198.Visible = false;
+                //uiCheckBox199.Visible = false;
                 string name = uiDataGridView2.Rows[rows].Cells[1].Value.ToString();
                 if (tabpagetext == "Tray盘")
                 {
-                    uiCheckBox197.Visible = true;
-                    uiCheckBox198.Visible = true;
-                    uiCheckBox199.Visible = true;
+                    //uiCheckBox197.Visible = true;
+                    //uiCheckBox198.Visible = true;
+                    //uiCheckBox199.Visible = true;
                     刷新Tray盘(name);
                 }
                 else if (tabpagetext == "取放设定")
@@ -3144,17 +3144,17 @@ namespace H5509_V2
 
                 string result = GetHeatInfo(name, out HeatInfo heatInfo);
 
-                uiCheckBox200.Visible = false;
-                uiCheckBox201.Visible = false;
-                uiCheckBox202.Visible = false;
+                //uiCheckBox200.Visible = false;
+                //uiCheckBox201.Visible = false;
+                //uiCheckBox202.Visible = false;
 
                 if (result == "Success")
                 {
                     if (tabpagetext == "加热盘")
                     {
-                        uiCheckBox200.Visible = true;
-                        uiCheckBox201.Visible = true;
-                        uiCheckBox202.Visible = true;
+                        //uiCheckBox200.Visible = true;
+                        //uiCheckBox201.Visible = true;
+                        //uiCheckBox202.Visible = true;
                         刷新加热盘(heatInfo);
                     }
                     else if (tabpagetext == "温度设定")
@@ -6937,6 +6937,40 @@ namespace H5509_V2
                 }
             }
             else MessageBox.Show("请选择要删除的档案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        /// <summary>
+        /// 新增Tray盘信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uiButton7_Click_1(object sender, EventArgs e)
+        {
+            NewTrayInfo newTrayInfo = new NewTrayInfo();
+            DialogResult dialog = newTrayInfo.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                TrayInfo trayInfo = newTrayInfo.trayInfo;
+                string sql = $"insert into TrayInfo(name,xnum,ynum,xstart,ystart,xpitch,ypitch,width,length,height)" +
+                    $"values('{trayInfo.TrayName}', {trayInfo.X_Num}, {trayInfo.Y_Num}, {trayInfo.X_Start}, {trayInfo.Y_Start}, {trayInfo.X_Pitch}, {trayInfo.Y_Pitch}, {trayInfo.Width}, {trayInfo.Length}, {trayInfo.Height})";
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+                if (line <= 0)
+                {
+                    RunLog("执行Sql失败:" + sql);
+                    MessageBox.Show("新增失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else 刷新Tray盘列表();
+            }
+        }
+
+        /// <summary>
+        /// 新增加热盘信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uiButton24_Click(object sender, EventArgs e)
+        {
+            //HeatInfo heatInfo = new HeatInfo();
         }
     }
 }

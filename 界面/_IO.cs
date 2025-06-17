@@ -591,6 +591,18 @@ namespace H5509_V2
 
         private void uiSwitch84_ValueChanged(object sender, bool value)
         {
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return;
+            }
+
             bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
             handler.测试吸嘴_吸放料(lsopen, false, false);
             handler.测试吸嘴_吸放料(lsopen, true, value);
@@ -601,8 +613,19 @@ namespace H5509_V2
 
         private void uiSwitch78_ValueChanged(object sender, bool value)
         {
-            bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return;
+            }
 
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return;
+            }
+
+            bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
             handler.测试吸嘴_吸放料(lsopen, true, false);
             handler.测试吸嘴_吸放料(lsopen, false, value);
             this.uiSwitch84.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch84_ValueChanged);
@@ -612,6 +635,18 @@ namespace H5509_V2
 
         private void uiSwitch23_ValueChanged(object sender, bool value)
         {
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return;
+            }
+
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.入料吸嘴_吸放料(lsopen, false, false);
             handler.入料吸嘴_吸放料(lsopen, true, value);
@@ -622,6 +657,18 @@ namespace H5509_V2
 
         private void uiSwitch24_ValueChanged(object sender, bool value)
         {
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return;
+            }
+
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.入料吸嘴_吸放料(lsopen, true, false);
             handler.入料吸嘴_吸放料(lsopen, false, value);
@@ -632,6 +679,18 @@ namespace H5509_V2
 
         private void uiSwitch44_ValueChanged(object sender, bool value)
         {
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return;
+            }
+
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.出料吸嘴_吸放料(lsopen, false, false);
             handler.出料吸嘴_吸放料(lsopen, true, value);
@@ -642,6 +701,18 @@ namespace H5509_V2
 
         private void uiSwitch39_ValueChanged(object sender, bool value)
         {
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return;
+            }
+
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.出料吸嘴_吸放料(lsopen, true, false);
             handler.出料吸嘴_吸放料(lsopen, false, value);

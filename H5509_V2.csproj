@@ -214,6 +214,12 @@
     <Compile Include="NewStetup.Designer.cs">
       <DependentUpon>NewStetup.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewTrayInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewTrayInfo.Designer.cs">
+      <DependentUpon>NewTrayInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="TesterIFParam.cs" />
     <Compile Include="WriteDataHelper.cs" />
     <Compile Include="模块\log.cs" />
@@ -330,6 +336,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NewStetup.resx">
       <DependentUpon>NewStetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewTrayInfo.resx">
+      <DependentUpon>NewTrayInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
