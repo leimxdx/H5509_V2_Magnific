@@ -59,7 +59,7 @@
     <LangVersion>7.3</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
-    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
     <OutputPath>bin\x64\Release\</OutputPath>
@@ -202,17 +202,17 @@
     <Compile Include="LoadMap.Designer.cs">
       <DependentUpon>LoadMap.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewHeatTrayInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewHeatTrayInfo.Designer.cs">
+      <DependentUpon>NewHeatTrayInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="NewSetupName.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="NewSetupName.Designer.cs">
       <DependentUpon>NewSetupName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="NewStetup.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="NewStetup.Designer.cs">
-      <DependentUpon>NewStetup.cs</DependentUpon>
     </Compile>
     <Compile Include="NewTrayInfo.cs">
       <SubType>Form</SubType>
@@ -331,11 +331,11 @@
     <EmbeddedResource Include="LoadMap.resx">
       <DependentUpon>LoadMap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NewHeatTrayInfo.resx">
+      <DependentUpon>NewHeatTrayInfo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="NewSetupName.resx">
       <DependentUpon>NewSetupName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="NewStetup.resx">
-      <DependentUpon>NewStetup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewTrayInfo.resx">
       <DependentUpon>NewTrayInfo.cs</DependentUpon>
@@ -470,7 +470,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe \\desktop-4168527\GitHub\H5509_V2\bin\Debug</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

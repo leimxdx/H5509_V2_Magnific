@@ -524,6 +524,11 @@
             // 
             this.uiDoubleUpDown59.DecimalPlaces = 3;
             this.uiDoubleUpDown59.Location = new System.Drawing.Point(210, 162);
+            this.uiDoubleUpDown59.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown59.Name = "uiDoubleUpDown59";
             this.uiDoubleUpDown59.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown59.TabIndex = 494;
@@ -543,6 +548,11 @@
             // 
             this.uiDoubleUpDown60.DecimalPlaces = 3;
             this.uiDoubleUpDown60.Location = new System.Drawing.Point(210, 125);
+            this.uiDoubleUpDown60.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown60.Name = "uiDoubleUpDown60";
             this.uiDoubleUpDown60.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown60.TabIndex = 493;
@@ -552,6 +562,11 @@
             // 
             this.uiDoubleUpDown58.DecimalPlaces = 3;
             this.uiDoubleUpDown58.Location = new System.Drawing.Point(210, 88);
+            this.uiDoubleUpDown58.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown58.Name = "uiDoubleUpDown58";
             this.uiDoubleUpDown58.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown58.TabIndex = 492;
@@ -561,6 +576,11 @@
             // 
             this.uiDoubleUpDown55.DecimalPlaces = 3;
             this.uiDoubleUpDown55.Location = new System.Drawing.Point(210, 51);
+            this.uiDoubleUpDown55.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown55.Name = "uiDoubleUpDown55";
             this.uiDoubleUpDown55.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown55.TabIndex = 491;
@@ -660,6 +680,11 @@
             // 
             this.uiDoubleUpDown56.DecimalPlaces = 2;
             this.uiDoubleUpDown56.Location = new System.Drawing.Point(135, 86);
+            this.uiDoubleUpDown56.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown56.Name = "uiDoubleUpDown56";
             this.uiDoubleUpDown56.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown56.TabIndex = 490;
@@ -669,6 +694,11 @@
             // 
             this.uiDoubleUpDown57.DecimalPlaces = 2;
             this.uiDoubleUpDown57.Location = new System.Drawing.Point(135, 49);
+            this.uiDoubleUpDown57.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown57.Name = "uiDoubleUpDown57";
             this.uiDoubleUpDown57.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown57.TabIndex = 489;
@@ -899,6 +929,11 @@
             // 
             this.uiDoubleUpDown71.DecimalPlaces = 3;
             this.uiDoubleUpDown71.Location = new System.Drawing.Point(1251, 88);
+            this.uiDoubleUpDown71.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown71.Name = "uiDoubleUpDown71";
             this.uiDoubleUpDown71.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown71.TabIndex = 495;
@@ -908,6 +943,11 @@
             // 
             this.uiDoubleUpDown103.DecimalPlaces = 3;
             this.uiDoubleUpDown103.Location = new System.Drawing.Point(1251, 680);
+            this.uiDoubleUpDown103.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown103.Name = "uiDoubleUpDown103";
             this.uiDoubleUpDown103.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown103.TabIndex = 487;
@@ -917,6 +957,11 @@
             // 
             this.uiDoubleUpDown72.DecimalPlaces = 2;
             this.uiDoubleUpDown72.Location = new System.Drawing.Point(1251, 53);
+            this.uiDoubleUpDown72.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown72.Name = "uiDoubleUpDown72";
             this.uiDoubleUpDown72.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown72.TabIndex = 494;
@@ -926,6 +971,11 @@
             // 
             this.uiDoubleUpDown45.DecimalPlaces = 2;
             this.uiDoubleUpDown45.Location = new System.Drawing.Point(1251, 645);
+            this.uiDoubleUpDown45.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown45.Name = "uiDoubleUpDown45";
             this.uiDoubleUpDown45.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown45.TabIndex = 486;
@@ -935,6 +985,11 @@
             // 
             this.uiDoubleUpDown63.DecimalPlaces = 3;
             this.uiDoubleUpDown63.Location = new System.Drawing.Point(904, 88);
+            this.uiDoubleUpDown63.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown63.Name = "uiDoubleUpDown63";
             this.uiDoubleUpDown63.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown63.TabIndex = 493;
@@ -944,6 +999,11 @@
             // 
             this.uiDoubleUpDown105.DecimalPlaces = 3;
             this.uiDoubleUpDown105.Location = new System.Drawing.Point(1251, 384);
+            this.uiDoubleUpDown105.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown105.Name = "uiDoubleUpDown105";
             this.uiDoubleUpDown105.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown105.TabIndex = 485;
@@ -953,6 +1013,11 @@
             // 
             this.uiDoubleUpDown64.DecimalPlaces = 2;
             this.uiDoubleUpDown64.Location = new System.Drawing.Point(904, 53);
+            this.uiDoubleUpDown64.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown64.Name = "uiDoubleUpDown64";
             this.uiDoubleUpDown64.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown64.TabIndex = 492;
@@ -962,6 +1027,11 @@
             // 
             this.uiDoubleUpDown47.DecimalPlaces = 2;
             this.uiDoubleUpDown47.Location = new System.Drawing.Point(1251, 349);
+            this.uiDoubleUpDown47.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown47.Name = "uiDoubleUpDown47";
             this.uiDoubleUpDown47.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown47.TabIndex = 484;
@@ -971,6 +1041,11 @@
             // 
             this.uiDoubleUpDown69.DecimalPlaces = 3;
             this.uiDoubleUpDown69.Location = new System.Drawing.Point(561, 88);
+            this.uiDoubleUpDown69.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown69.Name = "uiDoubleUpDown69";
             this.uiDoubleUpDown69.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown69.TabIndex = 491;
@@ -980,6 +1055,11 @@
             // 
             this.uiDoubleUpDown109.DecimalPlaces = 3;
             this.uiDoubleUpDown109.Location = new System.Drawing.Point(1251, 236);
+            this.uiDoubleUpDown109.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown109.Name = "uiDoubleUpDown109";
             this.uiDoubleUpDown109.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown109.TabIndex = 483;
@@ -989,6 +1069,11 @@
             // 
             this.uiDoubleUpDown70.DecimalPlaces = 2;
             this.uiDoubleUpDown70.Location = new System.Drawing.Point(561, 53);
+            this.uiDoubleUpDown70.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown70.Name = "uiDoubleUpDown70";
             this.uiDoubleUpDown70.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown70.TabIndex = 490;
@@ -998,6 +1083,11 @@
             // 
             this.uiDoubleUpDown104.DecimalPlaces = 3;
             this.uiDoubleUpDown104.Location = new System.Drawing.Point(1251, 532);
+            this.uiDoubleUpDown104.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown104.Name = "uiDoubleUpDown104";
             this.uiDoubleUpDown104.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown104.TabIndex = 483;
@@ -1007,6 +1097,11 @@
             // 
             this.uiDoubleUpDown61.DecimalPlaces = 3;
             this.uiDoubleUpDown61.Location = new System.Drawing.Point(214, 88);
+            this.uiDoubleUpDown61.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown61.Name = "uiDoubleUpDown61";
             this.uiDoubleUpDown61.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown61.TabIndex = 489;
@@ -1016,6 +1111,11 @@
             // 
             this.uiDoubleUpDown48.DecimalPlaces = 2;
             this.uiDoubleUpDown48.Location = new System.Drawing.Point(1251, 201);
+            this.uiDoubleUpDown48.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown48.Name = "uiDoubleUpDown48";
             this.uiDoubleUpDown48.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown48.TabIndex = 482;
@@ -1025,6 +1125,11 @@
             // 
             this.uiDoubleUpDown46.DecimalPlaces = 2;
             this.uiDoubleUpDown46.Location = new System.Drawing.Point(1251, 497);
+            this.uiDoubleUpDown46.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown46.Name = "uiDoubleUpDown46";
             this.uiDoubleUpDown46.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown46.TabIndex = 482;
@@ -1034,6 +1139,11 @@
             // 
             this.uiDoubleUpDown62.DecimalPlaces = 2;
             this.uiDoubleUpDown62.Location = new System.Drawing.Point(214, 53);
+            this.uiDoubleUpDown62.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown62.Name = "uiDoubleUpDown62";
             this.uiDoubleUpDown62.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown62.TabIndex = 488;
@@ -1043,6 +1153,11 @@
             // 
             this.uiDoubleUpDown110.DecimalPlaces = 3;
             this.uiDoubleUpDown110.Location = new System.Drawing.Point(904, 680);
+            this.uiDoubleUpDown110.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown110.Name = "uiDoubleUpDown110";
             this.uiDoubleUpDown110.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown110.TabIndex = 481;
@@ -1052,6 +1167,11 @@
             // 
             this.uiDoubleUpDown52.DecimalPlaces = 2;
             this.uiDoubleUpDown52.Location = new System.Drawing.Point(904, 645);
+            this.uiDoubleUpDown52.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown52.Name = "uiDoubleUpDown52";
             this.uiDoubleUpDown52.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown52.TabIndex = 480;
@@ -1061,6 +1181,11 @@
             // 
             this.uiDoubleUpDown112.DecimalPlaces = 3;
             this.uiDoubleUpDown112.Location = new System.Drawing.Point(904, 384);
+            this.uiDoubleUpDown112.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown112.Name = "uiDoubleUpDown112";
             this.uiDoubleUpDown112.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown112.TabIndex = 479;
@@ -1070,6 +1195,11 @@
             // 
             this.uiDoubleUpDown54.DecimalPlaces = 2;
             this.uiDoubleUpDown54.Location = new System.Drawing.Point(904, 349);
+            this.uiDoubleUpDown54.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown54.Name = "uiDoubleUpDown54";
             this.uiDoubleUpDown54.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown54.TabIndex = 478;
@@ -1079,6 +1209,11 @@
             // 
             this.uiDoubleUpDown114.DecimalPlaces = 3;
             this.uiDoubleUpDown114.Location = new System.Drawing.Point(561, 680);
+            this.uiDoubleUpDown114.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown114.Name = "uiDoubleUpDown114";
             this.uiDoubleUpDown114.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown114.TabIndex = 477;
@@ -1088,6 +1223,11 @@
             // 
             this.uiDoubleUpDown67.DecimalPlaces = 2;
             this.uiDoubleUpDown67.Location = new System.Drawing.Point(561, 645);
+            this.uiDoubleUpDown67.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown67.Name = "uiDoubleUpDown67";
             this.uiDoubleUpDown67.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown67.TabIndex = 476;
@@ -1097,6 +1237,11 @@
             // 
             this.uiDoubleUpDown115.DecimalPlaces = 3;
             this.uiDoubleUpDown115.Location = new System.Drawing.Point(561, 532);
+            this.uiDoubleUpDown115.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown115.Name = "uiDoubleUpDown115";
             this.uiDoubleUpDown115.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown115.TabIndex = 475;
@@ -1106,6 +1251,11 @@
             // 
             this.uiDoubleUpDown113.DecimalPlaces = 3;
             this.uiDoubleUpDown113.Location = new System.Drawing.Point(904, 236);
+            this.uiDoubleUpDown113.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown113.Name = "uiDoubleUpDown113";
             this.uiDoubleUpDown113.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown113.TabIndex = 475;
@@ -1115,6 +1265,11 @@
             // 
             this.uiDoubleUpDown111.DecimalPlaces = 3;
             this.uiDoubleUpDown111.Location = new System.Drawing.Point(904, 532);
+            this.uiDoubleUpDown111.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown111.Name = "uiDoubleUpDown111";
             this.uiDoubleUpDown111.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown111.TabIndex = 475;
@@ -1124,6 +1279,11 @@
             // 
             this.uiDoubleUpDown68.DecimalPlaces = 2;
             this.uiDoubleUpDown68.Location = new System.Drawing.Point(561, 497);
+            this.uiDoubleUpDown68.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown68.Name = "uiDoubleUpDown68";
             this.uiDoubleUpDown68.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown68.TabIndex = 474;
@@ -1133,6 +1293,11 @@
             // 
             this.uiDoubleUpDown65.DecimalPlaces = 2;
             this.uiDoubleUpDown65.Location = new System.Drawing.Point(904, 201);
+            this.uiDoubleUpDown65.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown65.Name = "uiDoubleUpDown65";
             this.uiDoubleUpDown65.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown65.TabIndex = 474;
@@ -1142,6 +1307,11 @@
             // 
             this.uiDoubleUpDown53.DecimalPlaces = 2;
             this.uiDoubleUpDown53.Location = new System.Drawing.Point(904, 497);
+            this.uiDoubleUpDown53.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown53.Name = "uiDoubleUpDown53";
             this.uiDoubleUpDown53.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown53.TabIndex = 474;
@@ -1151,6 +1321,11 @@
             // 
             this.uiDoubleUpDown116.DecimalPlaces = 3;
             this.uiDoubleUpDown116.Location = new System.Drawing.Point(561, 384);
+            this.uiDoubleUpDown116.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown116.Name = "uiDoubleUpDown116";
             this.uiDoubleUpDown116.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown116.TabIndex = 473;
@@ -1160,6 +1335,11 @@
             // 
             this.uiDoubleUpDown76.DecimalPlaces = 2;
             this.uiDoubleUpDown76.Location = new System.Drawing.Point(561, 349);
+            this.uiDoubleUpDown76.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown76.Name = "uiDoubleUpDown76";
             this.uiDoubleUpDown76.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown76.TabIndex = 472;
@@ -1169,6 +1349,11 @@
             // 
             this.uiDoubleUpDown117.DecimalPlaces = 3;
             this.uiDoubleUpDown117.Location = new System.Drawing.Point(561, 236);
+            this.uiDoubleUpDown117.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown117.Name = "uiDoubleUpDown117";
             this.uiDoubleUpDown117.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown117.TabIndex = 471;
@@ -1178,6 +1363,11 @@
             // 
             this.uiDoubleUpDown77.DecimalPlaces = 2;
             this.uiDoubleUpDown77.Location = new System.Drawing.Point(561, 201);
+            this.uiDoubleUpDown77.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown77.Name = "uiDoubleUpDown77";
             this.uiDoubleUpDown77.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown77.TabIndex = 470;
@@ -1187,6 +1377,11 @@
             // 
             this.uiDoubleUpDown118.DecimalPlaces = 3;
             this.uiDoubleUpDown118.Location = new System.Drawing.Point(214, 680);
+            this.uiDoubleUpDown118.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown118.Name = "uiDoubleUpDown118";
             this.uiDoubleUpDown118.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown118.TabIndex = 469;
@@ -1196,6 +1391,11 @@
             // 
             this.uiDoubleUpDown78.DecimalPlaces = 2;
             this.uiDoubleUpDown78.Location = new System.Drawing.Point(214, 645);
+            this.uiDoubleUpDown78.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown78.Name = "uiDoubleUpDown78";
             this.uiDoubleUpDown78.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown78.TabIndex = 468;
@@ -1205,6 +1405,11 @@
             // 
             this.uiDoubleUpDown119.DecimalPlaces = 3;
             this.uiDoubleUpDown119.Location = new System.Drawing.Point(214, 532);
+            this.uiDoubleUpDown119.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown119.Name = "uiDoubleUpDown119";
             this.uiDoubleUpDown119.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown119.TabIndex = 467;
@@ -1214,6 +1419,11 @@
             // 
             this.uiDoubleUpDown79.DecimalPlaces = 2;
             this.uiDoubleUpDown79.Location = new System.Drawing.Point(214, 497);
+            this.uiDoubleUpDown79.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown79.Name = "uiDoubleUpDown79";
             this.uiDoubleUpDown79.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown79.TabIndex = 466;
@@ -1223,6 +1433,11 @@
             // 
             this.uiDoubleUpDown120.DecimalPlaces = 3;
             this.uiDoubleUpDown120.Location = new System.Drawing.Point(214, 384);
+            this.uiDoubleUpDown120.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown120.Name = "uiDoubleUpDown120";
             this.uiDoubleUpDown120.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown120.TabIndex = 465;
@@ -1250,6 +1465,11 @@
             // 
             this.uiDoubleUpDown81.DecimalPlaces = 2;
             this.uiDoubleUpDown81.Location = new System.Drawing.Point(214, 201);
+            this.uiDoubleUpDown81.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown81.Name = "uiDoubleUpDown81";
             this.uiDoubleUpDown81.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown81.TabIndex = 462;
@@ -1259,6 +1479,11 @@
             // 
             this.uiDoubleUpDown122.DecimalPlaces = 3;
             this.uiDoubleUpDown122.Location = new System.Drawing.Point(1251, 610);
+            this.uiDoubleUpDown122.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown122.Name = "uiDoubleUpDown122";
             this.uiDoubleUpDown122.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown122.TabIndex = 461;
@@ -1268,6 +1493,11 @@
             // 
             this.uiDoubleUpDown126.DecimalPlaces = 3;
             this.uiDoubleUpDown126.Location = new System.Drawing.Point(904, 610);
+            this.uiDoubleUpDown126.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown126.Name = "uiDoubleUpDown126";
             this.uiDoubleUpDown126.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown126.TabIndex = 460;
@@ -1277,6 +1507,11 @@
             // 
             this.uiDoubleUpDown130.DecimalPlaces = 3;
             this.uiDoubleUpDown130.Location = new System.Drawing.Point(561, 610);
+            this.uiDoubleUpDown130.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown130.Name = "uiDoubleUpDown130";
             this.uiDoubleUpDown130.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown130.TabIndex = 459;
@@ -1286,6 +1521,11 @@
             // 
             this.uiDoubleUpDown123.DecimalPlaces = 3;
             this.uiDoubleUpDown123.Location = new System.Drawing.Point(1251, 462);
+            this.uiDoubleUpDown123.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown123.Name = "uiDoubleUpDown123";
             this.uiDoubleUpDown123.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown123.TabIndex = 458;
@@ -1295,6 +1535,11 @@
             // 
             this.uiDoubleUpDown127.DecimalPlaces = 3;
             this.uiDoubleUpDown127.Location = new System.Drawing.Point(904, 462);
+            this.uiDoubleUpDown127.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown127.Name = "uiDoubleUpDown127";
             this.uiDoubleUpDown127.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown127.TabIndex = 457;
@@ -1304,6 +1549,11 @@
             // 
             this.uiDoubleUpDown131.DecimalPlaces = 3;
             this.uiDoubleUpDown131.Location = new System.Drawing.Point(561, 462);
+            this.uiDoubleUpDown131.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown131.Name = "uiDoubleUpDown131";
             this.uiDoubleUpDown131.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown131.TabIndex = 456;
@@ -1313,6 +1563,11 @@
             // 
             this.uiDoubleUpDown135.DecimalPlaces = 3;
             this.uiDoubleUpDown135.Location = new System.Drawing.Point(214, 462);
+            this.uiDoubleUpDown135.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown135.Name = "uiDoubleUpDown135";
             this.uiDoubleUpDown135.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown135.TabIndex = 455;
@@ -1322,6 +1577,11 @@
             // 
             this.uiDoubleUpDown134.DecimalPlaces = 3;
             this.uiDoubleUpDown134.Location = new System.Drawing.Point(214, 610);
+            this.uiDoubleUpDown134.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown134.Name = "uiDoubleUpDown134";
             this.uiDoubleUpDown134.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown134.TabIndex = 455;
@@ -1331,6 +1591,11 @@
             // 
             this.uiDoubleUpDown124.DecimalPlaces = 3;
             this.uiDoubleUpDown124.Location = new System.Drawing.Point(1251, 314);
+            this.uiDoubleUpDown124.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown124.Name = "uiDoubleUpDown124";
             this.uiDoubleUpDown124.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown124.TabIndex = 454;
@@ -1340,6 +1605,11 @@
             // 
             this.uiDoubleUpDown128.DecimalPlaces = 3;
             this.uiDoubleUpDown128.Location = new System.Drawing.Point(904, 314);
+            this.uiDoubleUpDown128.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown128.Name = "uiDoubleUpDown128";
             this.uiDoubleUpDown128.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown128.TabIndex = 453;
@@ -1349,6 +1619,11 @@
             // 
             this.uiDoubleUpDown132.DecimalPlaces = 3;
             this.uiDoubleUpDown132.Location = new System.Drawing.Point(561, 314);
+            this.uiDoubleUpDown132.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown132.Name = "uiDoubleUpDown132";
             this.uiDoubleUpDown132.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown132.TabIndex = 452;
@@ -1367,6 +1642,11 @@
             // 
             this.uiDoubleUpDown125.DecimalPlaces = 3;
             this.uiDoubleUpDown125.Location = new System.Drawing.Point(1251, 166);
+            this.uiDoubleUpDown125.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown125.Name = "uiDoubleUpDown125";
             this.uiDoubleUpDown125.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown125.TabIndex = 450;
@@ -1376,6 +1656,11 @@
             // 
             this.uiDoubleUpDown129.DecimalPlaces = 3;
             this.uiDoubleUpDown129.Location = new System.Drawing.Point(904, 166);
+            this.uiDoubleUpDown129.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown129.Name = "uiDoubleUpDown129";
             this.uiDoubleUpDown129.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown129.TabIndex = 449;
@@ -1385,6 +1670,11 @@
             // 
             this.uiDoubleUpDown133.DecimalPlaces = 3;
             this.uiDoubleUpDown133.Location = new System.Drawing.Point(561, 166);
+            this.uiDoubleUpDown133.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown133.Name = "uiDoubleUpDown133";
             this.uiDoubleUpDown133.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown133.TabIndex = 448;
@@ -1394,6 +1684,11 @@
             // 
             this.uiDoubleUpDown137.DecimalPlaces = 3;
             this.uiDoubleUpDown137.Location = new System.Drawing.Point(214, 166);
+            this.uiDoubleUpDown137.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown137.Name = "uiDoubleUpDown137";
             this.uiDoubleUpDown137.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown137.TabIndex = 447;
@@ -1403,6 +1698,11 @@
             // 
             this.uiDoubleUpDown37.DecimalPlaces = 2;
             this.uiDoubleUpDown37.Location = new System.Drawing.Point(1251, 575);
+            this.uiDoubleUpDown37.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown37.Name = "uiDoubleUpDown37";
             this.uiDoubleUpDown37.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown37.TabIndex = 446;
@@ -1421,6 +1721,11 @@
             // 
             this.uiDoubleUpDown39.DecimalPlaces = 2;
             this.uiDoubleUpDown39.Location = new System.Drawing.Point(1251, 279);
+            this.uiDoubleUpDown39.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown39.Name = "uiDoubleUpDown39";
             this.uiDoubleUpDown39.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown39.TabIndex = 444;
@@ -1430,6 +1735,11 @@
             // 
             this.uiDoubleUpDown40.DecimalPlaces = 2;
             this.uiDoubleUpDown40.Location = new System.Drawing.Point(1251, 131);
+            this.uiDoubleUpDown40.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown40.Name = "uiDoubleUpDown40";
             this.uiDoubleUpDown40.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown40.TabIndex = 438;
@@ -1439,6 +1749,11 @@
             // 
             this.uiDoubleUpDown41.DecimalPlaces = 2;
             this.uiDoubleUpDown41.Location = new System.Drawing.Point(904, 575);
+            this.uiDoubleUpDown41.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown41.Name = "uiDoubleUpDown41";
             this.uiDoubleUpDown41.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown41.TabIndex = 443;
@@ -1457,6 +1772,11 @@
             // 
             this.uiDoubleUpDown43.DecimalPlaces = 2;
             this.uiDoubleUpDown43.Location = new System.Drawing.Point(904, 279);
+            this.uiDoubleUpDown43.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown43.Name = "uiDoubleUpDown43";
             this.uiDoubleUpDown43.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown43.TabIndex = 441;
@@ -1466,6 +1786,11 @@
             // 
             this.uiDoubleUpDown44.DecimalPlaces = 2;
             this.uiDoubleUpDown44.Location = new System.Drawing.Point(904, 131);
+            this.uiDoubleUpDown44.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown44.Name = "uiDoubleUpDown44";
             this.uiDoubleUpDown44.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown44.TabIndex = 440;
@@ -1475,6 +1800,11 @@
             // 
             this.uiDoubleUpDown27.DecimalPlaces = 2;
             this.uiDoubleUpDown27.Location = new System.Drawing.Point(561, 575);
+            this.uiDoubleUpDown27.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown27.Name = "uiDoubleUpDown27";
             this.uiDoubleUpDown27.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown27.TabIndex = 439;
@@ -1484,6 +1814,11 @@
             // 
             this.uiDoubleUpDown28.DecimalPlaces = 2;
             this.uiDoubleUpDown28.Location = new System.Drawing.Point(561, 427);
+            this.uiDoubleUpDown28.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown28.Name = "uiDoubleUpDown28";
             this.uiDoubleUpDown28.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown28.TabIndex = 437;
@@ -1493,6 +1828,11 @@
             // 
             this.uiDoubleUpDown35.DecimalPlaces = 2;
             this.uiDoubleUpDown35.Location = new System.Drawing.Point(561, 279);
+            this.uiDoubleUpDown35.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown35.Name = "uiDoubleUpDown35";
             this.uiDoubleUpDown35.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown35.TabIndex = 436;
@@ -1502,6 +1842,11 @@
             // 
             this.uiDoubleUpDown36.DecimalPlaces = 2;
             this.uiDoubleUpDown36.Location = new System.Drawing.Point(561, 131);
+            this.uiDoubleUpDown36.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown36.Name = "uiDoubleUpDown36";
             this.uiDoubleUpDown36.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown36.TabIndex = 435;
@@ -1511,6 +1856,11 @@
             // 
             this.uiDoubleUpDown25.DecimalPlaces = 2;
             this.uiDoubleUpDown25.Location = new System.Drawing.Point(214, 575);
+            this.uiDoubleUpDown25.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown25.Name = "uiDoubleUpDown25";
             this.uiDoubleUpDown25.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown25.TabIndex = 434;
@@ -1520,6 +1870,11 @@
             // 
             this.uiDoubleUpDown26.DecimalPlaces = 2;
             this.uiDoubleUpDown26.Location = new System.Drawing.Point(214, 427);
+            this.uiDoubleUpDown26.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown26.Name = "uiDoubleUpDown26";
             this.uiDoubleUpDown26.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown26.TabIndex = 433;
@@ -1538,6 +1893,11 @@
             // 
             this.uiDoubleUpDown66.DecimalPlaces = 2;
             this.uiDoubleUpDown66.Location = new System.Drawing.Point(214, 131);
+            this.uiDoubleUpDown66.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown66.Name = "uiDoubleUpDown66";
             this.uiDoubleUpDown66.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown66.TabIndex = 333;
@@ -2382,6 +2742,11 @@
             // 
             this.uiDoubleUpDown82.DecimalPlaces = 2;
             this.uiDoubleUpDown82.Location = new System.Drawing.Point(969, 353);
+            this.uiDoubleUpDown82.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown82.Name = "uiDoubleUpDown82";
             this.uiDoubleUpDown82.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown82.TabIndex = 357;
@@ -2391,6 +2756,11 @@
             // 
             this.uiDoubleUpDown34.DecimalPlaces = 2;
             this.uiDoubleUpDown34.Location = new System.Drawing.Point(249, 437);
+            this.uiDoubleUpDown34.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown34.Name = "uiDoubleUpDown34";
             this.uiDoubleUpDown34.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown34.TabIndex = 359;
@@ -2400,6 +2770,11 @@
             // 
             this.uiDoubleUpDown83.DecimalPlaces = 2;
             this.uiDoubleUpDown83.Location = new System.Drawing.Point(969, 317);
+            this.uiDoubleUpDown83.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown83.Name = "uiDoubleUpDown83";
             this.uiDoubleUpDown83.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown83.TabIndex = 356;
@@ -2419,6 +2794,11 @@
             // 
             this.uiDoubleUpDown84.DecimalPlaces = 2;
             this.uiDoubleUpDown84.Location = new System.Drawing.Point(969, 281);
+            this.uiDoubleUpDown84.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown84.Name = "uiDoubleUpDown84";
             this.uiDoubleUpDown84.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown84.TabIndex = 355;
@@ -2428,6 +2808,11 @@
             // 
             this.uiDoubleUpDown33.DecimalPlaces = 2;
             this.uiDoubleUpDown33.Location = new System.Drawing.Point(249, 401);
+            this.uiDoubleUpDown33.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown33.Name = "uiDoubleUpDown33";
             this.uiDoubleUpDown33.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown33.TabIndex = 358;
@@ -2437,6 +2822,11 @@
             // 
             this.uiDoubleUpDown91.DecimalPlaces = 2;
             this.uiDoubleUpDown91.Location = new System.Drawing.Point(969, 237);
+            this.uiDoubleUpDown91.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown91.Name = "uiDoubleUpDown91";
             this.uiDoubleUpDown91.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown91.TabIndex = 354;
@@ -2456,6 +2846,11 @@
             // 
             this.uiDoubleUpDown92.DecimalPlaces = 2;
             this.uiDoubleUpDown92.Location = new System.Drawing.Point(969, 201);
+            this.uiDoubleUpDown92.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown92.Name = "uiDoubleUpDown92";
             this.uiDoubleUpDown92.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown92.TabIndex = 353;
@@ -2475,6 +2870,11 @@
             // 
             this.uiDoubleUpDown93.DecimalPlaces = 2;
             this.uiDoubleUpDown93.Location = new System.Drawing.Point(969, 165);
+            this.uiDoubleUpDown93.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown93.Name = "uiDoubleUpDown93";
             this.uiDoubleUpDown93.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown93.TabIndex = 352;
@@ -2494,6 +2894,11 @@
             // 
             this.uiDoubleUpDown88.DecimalPlaces = 2;
             this.uiDoubleUpDown88.Location = new System.Drawing.Point(969, 118);
+            this.uiDoubleUpDown88.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown88.Name = "uiDoubleUpDown88";
             this.uiDoubleUpDown88.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown88.TabIndex = 351;
@@ -2513,6 +2918,11 @@
             // 
             this.uiDoubleUpDown89.DecimalPlaces = 2;
             this.uiDoubleUpDown89.Location = new System.Drawing.Point(969, 82);
+            this.uiDoubleUpDown89.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown89.Name = "uiDoubleUpDown89";
             this.uiDoubleUpDown89.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown89.TabIndex = 350;
@@ -2532,6 +2942,11 @@
             // 
             this.uiDoubleUpDown90.DecimalPlaces = 2;
             this.uiDoubleUpDown90.Location = new System.Drawing.Point(969, 46);
+            this.uiDoubleUpDown90.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown90.Name = "uiDoubleUpDown90";
             this.uiDoubleUpDown90.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown90.TabIndex = 349;
@@ -2551,6 +2966,11 @@
             // 
             this.uiDoubleUpDown94.DecimalPlaces = 2;
             this.uiDoubleUpDown94.Location = new System.Drawing.Point(632, 353);
+            this.uiDoubleUpDown94.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown94.Name = "uiDoubleUpDown94";
             this.uiDoubleUpDown94.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown94.TabIndex = 348;
@@ -2570,6 +2990,11 @@
             // 
             this.uiDoubleUpDown95.DecimalPlaces = 2;
             this.uiDoubleUpDown95.Location = new System.Drawing.Point(632, 317);
+            this.uiDoubleUpDown95.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown95.Name = "uiDoubleUpDown95";
             this.uiDoubleUpDown95.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown95.TabIndex = 347;
@@ -2589,6 +3014,11 @@
             // 
             this.uiDoubleUpDown96.DecimalPlaces = 2;
             this.uiDoubleUpDown96.Location = new System.Drawing.Point(632, 281);
+            this.uiDoubleUpDown96.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown96.Name = "uiDoubleUpDown96";
             this.uiDoubleUpDown96.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown96.TabIndex = 346;
@@ -2608,6 +3038,11 @@
             // 
             this.uiDoubleUpDown19.DecimalPlaces = 2;
             this.uiDoubleUpDown19.Location = new System.Drawing.Point(632, 237);
+            this.uiDoubleUpDown19.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown19.Name = "uiDoubleUpDown19";
             this.uiDoubleUpDown19.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown19.TabIndex = 345;
@@ -2627,6 +3062,11 @@
             // 
             this.uiDoubleUpDown21.DecimalPlaces = 2;
             this.uiDoubleUpDown21.Location = new System.Drawing.Point(632, 201);
+            this.uiDoubleUpDown21.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown21.Name = "uiDoubleUpDown21";
             this.uiDoubleUpDown21.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown21.TabIndex = 344;
@@ -2646,6 +3086,11 @@
             // 
             this.uiDoubleUpDown20.DecimalPlaces = 2;
             this.uiDoubleUpDown20.Location = new System.Drawing.Point(632, 165);
+            this.uiDoubleUpDown20.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown20.Name = "uiDoubleUpDown20";
             this.uiDoubleUpDown20.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown20.TabIndex = 343;
@@ -2665,6 +3110,11 @@
             // 
             this.uiDoubleUpDown30.DecimalPlaces = 2;
             this.uiDoubleUpDown30.Location = new System.Drawing.Point(632, 118);
+            this.uiDoubleUpDown30.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown30.Name = "uiDoubleUpDown30";
             this.uiDoubleUpDown30.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown30.TabIndex = 342;
@@ -2684,6 +3134,11 @@
             // 
             this.uiDoubleUpDown32.DecimalPlaces = 2;
             this.uiDoubleUpDown32.Location = new System.Drawing.Point(632, 82);
+            this.uiDoubleUpDown32.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown32.Name = "uiDoubleUpDown32";
             this.uiDoubleUpDown32.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown32.TabIndex = 341;
@@ -2703,6 +3158,11 @@
             // 
             this.uiDoubleUpDown31.DecimalPlaces = 2;
             this.uiDoubleUpDown31.Location = new System.Drawing.Point(632, 46);
+            this.uiDoubleUpDown31.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown31.Name = "uiDoubleUpDown31";
             this.uiDoubleUpDown31.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown31.TabIndex = 340;
@@ -2762,6 +3222,11 @@
             // 
             this.uiDoubleUpDown85.DecimalPlaces = 2;
             this.uiDoubleUpDown85.Location = new System.Drawing.Point(249, 353);
+            this.uiDoubleUpDown85.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown85.Name = "uiDoubleUpDown85";
             this.uiDoubleUpDown85.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown85.TabIndex = 339;
@@ -2781,6 +3246,11 @@
             // 
             this.uiDoubleUpDown86.DecimalPlaces = 2;
             this.uiDoubleUpDown86.Location = new System.Drawing.Point(249, 317);
+            this.uiDoubleUpDown86.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown86.Name = "uiDoubleUpDown86";
             this.uiDoubleUpDown86.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown86.TabIndex = 338;
@@ -2800,6 +3270,11 @@
             // 
             this.uiDoubleUpDown87.DecimalPlaces = 2;
             this.uiDoubleUpDown87.Location = new System.Drawing.Point(249, 281);
+            this.uiDoubleUpDown87.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown87.Name = "uiDoubleUpDown87";
             this.uiDoubleUpDown87.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown87.TabIndex = 337;
@@ -2819,6 +3294,11 @@
             // 
             this.uiDoubleUpDown16.DecimalPlaces = 2;
             this.uiDoubleUpDown16.Location = new System.Drawing.Point(249, 237);
+            this.uiDoubleUpDown16.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown16.Name = "uiDoubleUpDown16";
             this.uiDoubleUpDown16.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown16.TabIndex = 336;
@@ -2838,6 +3318,11 @@
             // 
             this.uiDoubleUpDown18.DecimalPlaces = 2;
             this.uiDoubleUpDown18.Location = new System.Drawing.Point(249, 201);
+            this.uiDoubleUpDown18.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown18.Name = "uiDoubleUpDown18";
             this.uiDoubleUpDown18.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown18.TabIndex = 335;
@@ -2857,6 +3342,11 @@
             // 
             this.uiDoubleUpDown17.DecimalPlaces = 2;
             this.uiDoubleUpDown17.Location = new System.Drawing.Point(249, 165);
+            this.uiDoubleUpDown17.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown17.Name = "uiDoubleUpDown17";
             this.uiDoubleUpDown17.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown17.TabIndex = 334;
@@ -2876,6 +3366,11 @@
             // 
             this.uiDoubleUpDown73.DecimalPlaces = 2;
             this.uiDoubleUpDown73.Location = new System.Drawing.Point(249, 118);
+            this.uiDoubleUpDown73.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown73.Name = "uiDoubleUpDown73";
             this.uiDoubleUpDown73.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown73.TabIndex = 333;
@@ -2895,6 +3390,11 @@
             // 
             this.uiDoubleUpDown74.DecimalPlaces = 2;
             this.uiDoubleUpDown74.Location = new System.Drawing.Point(249, 82);
+            this.uiDoubleUpDown74.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown74.Name = "uiDoubleUpDown74";
             this.uiDoubleUpDown74.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown74.TabIndex = 332;
@@ -2914,6 +3414,11 @@
             // 
             this.uiDoubleUpDown75.DecimalPlaces = 2;
             this.uiDoubleUpDown75.Location = new System.Drawing.Point(249, 46);
+            this.uiDoubleUpDown75.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown75.Name = "uiDoubleUpDown75";
             this.uiDoubleUpDown75.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown75.TabIndex = 331;
@@ -3038,6 +3543,11 @@
             // 
             this.uiDoubleUpDown9.DecimalPlaces = 2;
             this.uiDoubleUpDown9.Location = new System.Drawing.Point(985, 235);
+            this.uiDoubleUpDown9.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown9.Name = "uiDoubleUpDown9";
             this.uiDoubleUpDown9.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown9.TabIndex = 369;
@@ -3057,6 +3567,11 @@
             // 
             this.uiDoubleUpDown10.DecimalPlaces = 2;
             this.uiDoubleUpDown10.Location = new System.Drawing.Point(985, 199);
+            this.uiDoubleUpDown10.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown10.Name = "uiDoubleUpDown10";
             this.uiDoubleUpDown10.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown10.TabIndex = 368;
@@ -3076,6 +3591,11 @@
             // 
             this.uiDoubleUpDown11.DecimalPlaces = 2;
             this.uiDoubleUpDown11.Location = new System.Drawing.Point(985, 163);
+            this.uiDoubleUpDown11.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown11.Name = "uiDoubleUpDown11";
             this.uiDoubleUpDown11.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown11.TabIndex = 367;
@@ -3095,6 +3615,11 @@
             // 
             this.uiDoubleUpDown6.DecimalPlaces = 2;
             this.uiDoubleUpDown6.Location = new System.Drawing.Point(985, 118);
+            this.uiDoubleUpDown6.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown6.Name = "uiDoubleUpDown6";
             this.uiDoubleUpDown6.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown6.TabIndex = 366;
@@ -3114,6 +3639,11 @@
             // 
             this.uiDoubleUpDown7.DecimalPlaces = 2;
             this.uiDoubleUpDown7.Location = new System.Drawing.Point(985, 82);
+            this.uiDoubleUpDown7.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown7.Name = "uiDoubleUpDown7";
             this.uiDoubleUpDown7.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown7.TabIndex = 365;
@@ -3133,6 +3663,11 @@
             // 
             this.uiDoubleUpDown8.DecimalPlaces = 2;
             this.uiDoubleUpDown8.Location = new System.Drawing.Point(985, 46);
+            this.uiDoubleUpDown8.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown8.Name = "uiDoubleUpDown8";
             this.uiDoubleUpDown8.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown8.TabIndex = 364;
@@ -3152,6 +3687,11 @@
             // 
             this.uiDoubleUpDown15.DecimalPlaces = 2;
             this.uiDoubleUpDown15.Location = new System.Drawing.Point(604, 355);
+            this.uiDoubleUpDown15.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown15.Name = "uiDoubleUpDown15";
             this.uiDoubleUpDown15.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown15.TabIndex = 363;
@@ -3171,6 +3711,11 @@
             // 
             this.uiDoubleUpDown5.DecimalPlaces = 2;
             this.uiDoubleUpDown5.Location = new System.Drawing.Point(604, 319);
+            this.uiDoubleUpDown5.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown5.Name = "uiDoubleUpDown5";
             this.uiDoubleUpDown5.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown5.TabIndex = 362;
@@ -3190,6 +3735,11 @@
             // 
             this.uiDoubleUpDown1.DecimalPlaces = 2;
             this.uiDoubleUpDown1.Location = new System.Drawing.Point(604, 283);
+            this.uiDoubleUpDown1.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown1.Name = "uiDoubleUpDown1";
             this.uiDoubleUpDown1.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown1.TabIndex = 361;
@@ -3209,6 +3759,11 @@
             // 
             this.uiDoubleUpDown12.DecimalPlaces = 2;
             this.uiDoubleUpDown12.Location = new System.Drawing.Point(604, 235);
+            this.uiDoubleUpDown12.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown12.Name = "uiDoubleUpDown12";
             this.uiDoubleUpDown12.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown12.TabIndex = 360;
@@ -3228,6 +3783,11 @@
             // 
             this.uiDoubleUpDown13.DecimalPlaces = 2;
             this.uiDoubleUpDown13.Location = new System.Drawing.Point(604, 199);
+            this.uiDoubleUpDown13.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown13.Name = "uiDoubleUpDown13";
             this.uiDoubleUpDown13.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown13.TabIndex = 359;
@@ -3247,6 +3807,11 @@
             // 
             this.uiDoubleUpDown14.DecimalPlaces = 2;
             this.uiDoubleUpDown14.Location = new System.Drawing.Point(604, 163);
+            this.uiDoubleUpDown14.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown14.Name = "uiDoubleUpDown14";
             this.uiDoubleUpDown14.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown14.TabIndex = 358;
@@ -3256,6 +3821,11 @@
             // 
             this.uiDoubleUpDown98.DecimalPlaces = 2;
             this.uiDoubleUpDown98.Location = new System.Drawing.Point(211, 118);
+            this.uiDoubleUpDown98.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown98.Name = "uiDoubleUpDown98";
             this.uiDoubleUpDown98.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown98.TabIndex = 313;
@@ -3265,6 +3835,11 @@
             // 
             this.uiDoubleUpDown100.DecimalPlaces = 2;
             this.uiDoubleUpDown100.Location = new System.Drawing.Point(604, 118);
+            this.uiDoubleUpDown100.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown100.Name = "uiDoubleUpDown100";
             this.uiDoubleUpDown100.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown100.TabIndex = 357;
@@ -3274,6 +3849,11 @@
             // 
             this.uiDoubleUpDown97.DecimalPlaces = 2;
             this.uiDoubleUpDown97.Location = new System.Drawing.Point(211, 82);
+            this.uiDoubleUpDown97.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown97.Name = "uiDoubleUpDown97";
             this.uiDoubleUpDown97.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown97.TabIndex = 312;
@@ -3283,6 +3863,11 @@
             // 
             this.uiDoubleUpDown101.DecimalPlaces = 2;
             this.uiDoubleUpDown101.Location = new System.Drawing.Point(604, 82);
+            this.uiDoubleUpDown101.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown101.Name = "uiDoubleUpDown101";
             this.uiDoubleUpDown101.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown101.TabIndex = 356;
@@ -3302,6 +3887,11 @@
             // 
             this.uiDoubleUpDown102.DecimalPlaces = 2;
             this.uiDoubleUpDown102.Location = new System.Drawing.Point(604, 46);
+            this.uiDoubleUpDown102.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown102.Name = "uiDoubleUpDown102";
             this.uiDoubleUpDown102.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown102.TabIndex = 355;
@@ -3311,6 +3901,11 @@
             // 
             this.uiDoubleUpDown99.DecimalPlaces = 2;
             this.uiDoubleUpDown99.Location = new System.Drawing.Point(211, 46);
+            this.uiDoubleUpDown99.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown99.Name = "uiDoubleUpDown99";
             this.uiDoubleUpDown99.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown99.TabIndex = 311;
@@ -3320,6 +3915,11 @@
             // 
             this.uiDoubleUpDown2.DecimalPlaces = 2;
             this.uiDoubleUpDown2.Location = new System.Drawing.Point(211, 355);
+            this.uiDoubleUpDown2.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown2.Name = "uiDoubleUpDown2";
             this.uiDoubleUpDown2.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown2.TabIndex = 354;
@@ -3339,6 +3939,11 @@
             // 
             this.uiDoubleUpDown3.DecimalPlaces = 2;
             this.uiDoubleUpDown3.Location = new System.Drawing.Point(211, 319);
+            this.uiDoubleUpDown3.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown3.Name = "uiDoubleUpDown3";
             this.uiDoubleUpDown3.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown3.TabIndex = 353;
@@ -3358,6 +3963,11 @@
             // 
             this.uiDoubleUpDown4.DecimalPlaces = 2;
             this.uiDoubleUpDown4.Location = new System.Drawing.Point(211, 283);
+            this.uiDoubleUpDown4.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown4.Name = "uiDoubleUpDown4";
             this.uiDoubleUpDown4.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown4.TabIndex = 352;
@@ -3377,6 +3987,11 @@
             // 
             this.uiDoubleUpDown106.DecimalPlaces = 2;
             this.uiDoubleUpDown106.Location = new System.Drawing.Point(211, 235);
+            this.uiDoubleUpDown106.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown106.Name = "uiDoubleUpDown106";
             this.uiDoubleUpDown106.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown106.TabIndex = 351;
@@ -3396,6 +4011,11 @@
             // 
             this.uiDoubleUpDown107.DecimalPlaces = 2;
             this.uiDoubleUpDown107.Location = new System.Drawing.Point(211, 199);
+            this.uiDoubleUpDown107.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown107.Name = "uiDoubleUpDown107";
             this.uiDoubleUpDown107.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown107.TabIndex = 350;
@@ -3415,6 +4035,11 @@
             // 
             this.uiDoubleUpDown108.DecimalPlaces = 2;
             this.uiDoubleUpDown108.Location = new System.Drawing.Point(211, 163);
+            this.uiDoubleUpDown108.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown108.Name = "uiDoubleUpDown108";
             this.uiDoubleUpDown108.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown108.TabIndex = 349;

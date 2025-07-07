@@ -561,6 +561,12 @@ namespace H5509_V2
 
             if (result != "Success") return result;
 
+            result = IsEnable(axisRun.核号, axisRun.轴号, out bool isEnable);
+
+            if (result != "Success") return result;
+
+            if (!isEnable) return axisRun.轴名称 + "未使能";
+
             try
             {
                 //清除标志
@@ -623,6 +629,12 @@ namespace H5509_V2
 
             if (result != "Success") return result;
 
+            result = IsEnable(axisRun.核号, axisRun.轴号, out bool isEnable);
+
+            if (result != "Success") return result;
+
+            if (!isEnable) return axisRun.轴名称 + "未使能";
+
             try
             {
                 //清除标志
@@ -682,6 +694,12 @@ namespace H5509_V2
                 result = CommonMotionValidate(listAxisRun[i].核号, listAxisRun[i].轴号);
 
                 if (result != "Success") return result;
+
+                result = IsEnable(listAxisRun[i].核号, listAxisRun[i].轴号, out bool isEnable);
+
+                if (result != "Success") return result;
+
+                if (!isEnable) return listAxisRun[i].轴名称 + "未使能";
             }
 
             //定义一个命令返回值
@@ -761,6 +779,12 @@ namespace H5509_V2
             string result = CommonMotionValidate(axisRun.核号, axisRun.轴号);
 
             if (result != "Success") return result;
+
+            result = IsEnable(axisRun.核号, axisRun.轴号, out bool isEnable);
+
+            if (result != "Success") return result;
+
+            if (!isEnable) return axisRun.轴名称 + "未使能";
 
             try
             {

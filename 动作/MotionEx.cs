@@ -19,34 +19,72 @@ using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
-    public class MotionEx
+    public class MotionEx //单例模式实现类
     {
-        //创建一个Motion对象
+        //创建一个Motion对象(后续需改为private,不能被外部访问)
         public Motion Motion = new Motion();
 
-        //创建一个静态对象保存当前的实例
-        private static volatile MotionEx instance;
+        //(1)//懒汉式单例
 
-        //定义一个锁
-        private static readonly object objlock = new object();
+        ////创建一个静态对象保存当前的实例
+        //private static volatile MotionEx instance;
 
-        //创建一个私有的构造方法
-        private MotionEx() { }
+        ////定义一个锁
+        //private static readonly object objlock = new object(); //为了避免多个线程同时调用GetLoadBalancer方法，在C#中，我们可以使用关键字lock/Moniter.Enter+Exit等来实现
+
+        ////创建一个私有的构造方法
+        //private MotionEx() { } //为了防止在外部对单例类实例化，它的构造函数被设为private；
+
+        //public static MotionEx GetInstance() //在单例类的内部实现只生成一个实例，同时它提供一个静态的GetInstance()方法，让客户可以访问它的唯一实例；
+        //{
+        //    if (instance == null) 
+        //    {
+        //        lock (objlock) //线程A先进入lock代码块内，执行实例化代码。此时线程B排队吃瓜等待，必须等待线程A执行完毕后才能进入lock代码块
+        //        {
+        //            if (instance == null) //当A执行完毕时，线程B并不知道实例已经被创建，将继续创建新的实例，从而导致多个单例对象。因此，开发人员需要进一步改进，于是就有了双重检查锁定（Double-Check Locking）
+        //            {
+        //                instance = new MotionEx();
+        //            }
+        //        }
+        //    }
+        //    return instance;
+        //}
+
+        //(2)一种更好的单例实现
+
+        /*
+            该实现方法在内部定义了一个私有类型Nested。当第一次用到这个嵌套类型的时候，会调用静态构造函数创建LoadBalancer的实例instance。如果我们不调用属性MotionEx.GetMotionExInstance()，
+          那么就不会触发.NET运行时（CLR）调用Nested，也就不会创建实例，因此也就保证了按需创建实例（或延迟初始化）。
+        可见，此方法既可以实现延迟加载，又可以保证线程安全，不影响系统性能。但其缺点是与具体编程语言本身的特性相关，有一些面向对象的编程语言并不支持此种方式。
+        */
+
+        // 公共静态成员方法，返回唯一实例
 
         public static MotionEx GetInstance()
         {
-            if (instance == null)
-            {
-                lock (objlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new MotionEx();
-                    }
-                }
-            }
-            return instance;
+            return Nested.instance;
         }
+
+        // 使用内部类+静态构造函数实现延迟初始化(只有在 GetMotionExInstance() 被调用时才会被加载，从而触发实例化)
+
+        class Nested //静态内部类Nested只有在被引用的时候才会被加载，而GetMotionExInstance方法第一次被调用时才会访问Nested.instance，这时候才会触发Nested类的加载和初始化
+        {
+            static Nested() { }
+            internal static readonly MotionEx instance = new MotionEx();
+        }
+
+        //单例模式的主要缺点
+        /*
+          （1）单例模式中没有抽象层，因此单例类的扩展有很大的困难。
+　　      （2）单例类的职责过重，在一定程度上违背了单一职责的原则。因为单例类既提供了业务方法，又提供了创建对象的方法（工厂方法），将对象的创建和对象本身的功能耦合在一起。不够，很多时候我们都需要取得平衡。
+　　      （3）很多高级面向对象编程语言如C#和Java等都提供了垃圾回收机制，如果实例化的共享对象长时间不被利用，系统则会认为它是垃圾，于是会自动销毁并回收资源，下次利用时又得重新实例化，这将导致共享的单例对象状态的丢失。
+        */
+
+        //单例模式的适用场景
+        /*
+          （1）系统只需要一个实例对象。例如：系统要求提供一个唯一的序列号生成器或者资源管理器，又或者需要考虑资源消耗太大而只允许创建一个对象。
+　　      （2）客户调用类的单个实例只允许使用一个公共访问点，除了该公共访问点，不能通过其他途径访问该实例
+        */
 
         #region 轴卡初始化
 
@@ -442,33 +480,46 @@ namespace H5509_V2
 
                 if (isException) return errortxt;
 
-                Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号, out double encPos);
-                //Motion.GetCmdPrfPos(axisRun.核号, axisRun.轴号, out int prfPos);
+                #region 等待位置
 
-                double posvalue = Math.Abs(prfPos - encPos);
-                int errorvalue = 跟随误差;
+                if (ServoAxis.Contains(axisRun.轴名称)) //只有伺服轴才需要确认编码器位置和规划位置，步进电机没有编码器
+                {
+                    Stopwatch stopwatch = new Stopwatch();
+                    bool isvalue = true;
 
-                if (axisRun.轴名称 == "M19_测试手臂Z轴")
-                {
-                    if (posvalue > 800)
+                    int errorvalue = 跟随误差;
+                    if (axisRun.轴名称 == "M19_测试手臂Z轴")
                     {
-                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{800}";
+                        errorvalue = 测试Z跟随误差;
                     }
-                    else if (posvalue > 450)//300
+
+                    double encPos = 0;
+                    stopwatch.Start();
+                    while (isvalue)
                     {
-                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{450}");
+                        Motion.GetCmdEncPos(axisRun.核号, axisRun.轴号, out encPos);
+                        double posvalue = Math.Abs(prfPos - encPos);
+
+                        if (stopwatch.ElapsedMilliseconds > 5000)
+                        {
+                            RunLog($"{axisRun.轴名称}移动超时5s");
+                            return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
+                        }
+                        else
+                        {
+                            if (posvalue < errorvalue)
+                            {
+                                isvalue = false;
+                            }
+                        }
+                        Thread.Sleep(10);
                     }
-                }
-                else
-                {
-                    if (posvalue > errorvalue)
-                    {
-                        return $"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
-                    }
-                    else if (posvalue > 150)
-                    {
-                        RunLog($"{axisRun.轴名称}规划位置({prfPos})和实际位置({encPos})的跟随误差={posvalue}>{150}");
-                    }
+
+                    stopwatch.Stop();
+                    RunLog($"{axisRun.轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前实际位置{encPos}");
+                    stopwatch.Reset();
+
+                    #endregion
                 }
             }
             catch (Exception ex)
@@ -611,34 +662,46 @@ namespace H5509_V2
 
                 for (int i = 0; i < axisRuns.Count; i++)
                 {
-                    Motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号, out double encPos);
-                    //Motion.GetCmdPrfPos(axisRuns[i].核号, axisRuns[i].轴号, out int prfPos);
+                    #region 等待位置
 
-                    double posvalue = Math.Abs(prfPos[i] - encPos);
-                    int errorvalue = 跟随误差;
+                    if (ServoAxis.Contains(axisRuns[i].轴名称)) //只有伺服轴才需要确认编码器位置和规划位置，步进电机没有编码器
+                    {
+                        Stopwatch stopwatch = new Stopwatch();
+                        bool isvalue = true;
 
-                    if (axisRuns[i].轴名称 == "M19_测试手臂Z轴")
-                    {
-                        if (posvalue > 800)
+                        int errorvalue = 跟随误差;
+                        if (axisRuns[i].轴名称 == "M19_测试手臂Z轴")
                         {
-                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{800}";
+                            errorvalue = 测试Z跟随误差;
                         }
-                        else if (posvalue > 450)
+                        double encPos = 0;
+                        stopwatch.Start();
+                        while (isvalue)
                         {
-                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{450}");
+                            Motion.GetCmdEncPos(axisRuns[i].核号, axisRuns[i].轴号, out encPos);
+                            double posvalue = Math.Abs(prfPos[i] - encPos);
+
+                            if (stopwatch.ElapsedMilliseconds > 5000)
+                            {
+                                RunLog($"{axisRuns[i].轴名称}移动超时5s");
+                                return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
+                            }
+                            else
+                            {
+                                if (posvalue < errorvalue)
+                                {
+                                    isvalue = false;
+                                }
+                            }
+                            Thread.Sleep(10);
                         }
+
+                        stopwatch.Stop();
+                        RunLog($"{axisRuns[i].轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前实际位置{encPos}");
+                        stopwatch.Reset();
                     }
-                    else
-                    {
-                        if (posvalue > errorvalue)
-                        {
-                            return $"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{errorvalue}";
-                        }
-                        else if (posvalue > 150)
-                        {
-                            RunLog($"{axisRuns[i].轴名称}规划位置({prfPos[i]})和实际位置({encPos})的跟随误差={posvalue}>{150}");
-                        }
-                    }
+
+                    #endregion
                 }
             }
             catch (Exception ex)

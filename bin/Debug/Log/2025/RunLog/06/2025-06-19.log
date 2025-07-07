@@ -1,0 +1,76 @@
+2025-06-19 09:19:45  =>  GTN_Open(5,1):(-6)
+2025-06-19 09:19:45  =>  [error][2025-06-19 09:19:45]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 09:34:19  =>  GTN_Open(5,1):(-6)
+2025-06-19 09:34:19  =>  [error][2025-06-19 09:34:19]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 09:34:55  =>  密码错误！
+2025-06-19 09:37:28  =>  GTN_Open(5,1):(-6)
+2025-06-19 09:37:28  =>  [error][2025-06-19 09:37:28]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 09:39:14  =>  GTN_Open(5,1):(-6)
+2025-06-19 09:39:14  =>  [error][2025-06-19 09:39:14]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 09:56:43  =>  GTN_Open(5,1):(-6)
+2025-06-19 09:56:43  =>  [error][2025-06-19 09:56:43]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:00:20  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:00:20  =>  [error][2025-06-19 10:00:20]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:03:11  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:03:11  =>  [error][2025-06-19 10:03:11]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:11:46  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:11:46  =>  [error][2025-06-19 10:11:46]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:13:09  =>  档案名称:[8X19_UFS_OnLine]:Tray名称:8x19_UFS->8x19_eMMC:更新成功
+2025-06-19 10:13:30  =>  档案名称:[8X19_UFS_OnLine]:Tray名称:8x19_eMMC->8x19_UFS:更新成功
+2025-06-19 10:18:52  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:18:52  =>  [error][2025-06-19 10:18:52]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:19:43  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:19:43  =>  [error][2025-06-19 10:19:43]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:20:24  =>  档案名称:[8X19_UFS_OnLine]:Tray名称:8x19_UFS->8x19_eMMC:更新成功
+2025-06-19 10:20:57  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:20:57  =>  [error][2025-06-19 10:20:57]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:21:32  =>  档案名称:[8X19_UFS_OnLine]:Tray名称:8x19_eMMC->8x19_UFS:更新成功
+2025-06-19 10:27:19  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:27:19  =>  [error][2025-06-19 10:27:19]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:28:20  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:28:20  =>  [error][2025-06-19 10:28:20]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-06-19 10:29:34  =>  命令：select * from f_ZRS240929001A_20250606_22_18_02  order by 获取MAP时间，错误信息：对象名 'f_ZRS240929001A_20250606_22_18_02' 无效。
+2025-06-19 10:31:14  =>  GTN_Open(5,1):(-6)
+2025-06-19 10:31:14  =>  [error][2025-06-19 10:31:14]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58

@@ -4284,7 +4284,7 @@ namespace H5509_V2
                                 RunLog($"[Code]2028007,[Msg]测试手臂X移动到等待位失败!" + testx.Result, LogType.AlarmLog);
                                 M21_测试手臂X轴ErrorMsg = testx.Result;
                             }
-                            if (shuttle.Result != "Success") RunLog("入料手臂P移动失败!" + shuttle.Result);
+                            if (shuttle.Result != "Success") RunLog("梭车移动失败!" + shuttle.Result);
                             if (inputp.Result != "Success") RunLog("入料手臂P移动失败!" + inputp.Result);
                             if (outputxyp.Result != "Success")
                             {
@@ -4293,6 +4293,7 @@ namespace H5509_V2
                                 M23_出料手臂X轴ErrorMsg = outputxyp.Result;
                             }
                             if (fix3.Result != "Success") RunLog("Fix3放IC盘轴移动失败!" + fix3.Result);
+
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                         }
@@ -5151,6 +5152,9 @@ namespace H5509_V2
 
                             stopwatch.Stop();
                             stopwatch.Reset();
+
+                            bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0};
+                            入料吸嘴_吸放料(bools, true, false);
                         }
                         else
                         {
@@ -5494,6 +5498,9 @@ namespace H5509_V2
 
                             stopwatch.Stop();
                             stopwatch.Reset();
+
+                            bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
+                            入料吸嘴_吸放料(bools, true, false);
                         }
                         else
                         {
@@ -6946,6 +6953,9 @@ namespace H5509_V2
 
                             stopwatch.Stop();
                             stopwatch.Reset();
+
+                            bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 }; 
+                            出料吸嘴_吸放料(bools, true, false);
                         }
                         else
                         {
@@ -8734,6 +8744,8 @@ namespace H5509_V2
                             stopwatch.Stop();
                             stopwatch.Reset();
 
+                            bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
+                            测试吸嘴_吸放料(bools, true, false);
                         }
                         else
                         {
@@ -9444,6 +9456,9 @@ namespace H5509_V2
 
                             stopwatch.Stop();
                             stopwatch.Reset();
+
+                            bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
+                            测试吸嘴_吸放料(bools, true, false);
                         }
                         else
                         {

@@ -169,7 +169,7 @@
             // 
             this.AllowShowTitle = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1920, 1032);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.pictureBox1);

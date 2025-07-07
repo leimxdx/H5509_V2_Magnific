@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Sunny.UI;
 using static GTN.mc;
 using static H5509_V2.APPmaster;
@@ -396,11 +397,39 @@ namespace H5509_V2
                     button152.Enabled = true;
                     button2.Enabled = true;
                     button90.Enabled = true; //GlinkIO按钮
-                    button91.Enabled = true; //GlinkIO按钮
+                    button91.Enabled = true; //GlinkIO按钮 
                     button92.Enabled = true; //GNM601IO按钮
                     button93.Enabled = true; //GNM601IO按钮
                     button156.Enabled = true;//回零按钮
                     button155.Enabled = true;//停止回零按钮
+
+                    //2025-06-20 17:17
+                    //button1.Enabled = true;//正向运动按钮
+                    //button39.Enabled = true;//反向运动按钮
+                    //button4.Enabled = true; //绝对运动按钮
+                    //button145.Enabled = true;//停止运动按钮
+                    //button15.Enabled = true; //Jog+
+                    //button3.Enabled = true; //Jog-
+                }
+                else
+                {
+                    //2025-06-20 17:17
+                    button146.Enabled = false;
+                    button152.Enabled = false;
+                    button2.Enabled = false;
+                    button90.Enabled = false; //GlinkIO按钮
+                    button91.Enabled = false; //GlinkIO按钮
+                    button92.Enabled = false; //GNM601IO按钮
+                    button93.Enabled = false; //GNM601IO按钮
+                    button156.Enabled = false;//回零按钮
+                    button155.Enabled = false;//停止回零按钮
+
+                    button1.Enabled = false;//正向运动按钮
+                    button39.Enabled = false;//反向运动按钮
+                    button4.Enabled = false; //绝对运动按钮
+                    button145.Enabled = false;//停止运动按钮
+                    button15.Enabled = false; //Jog+
+                    button3.Enabled = false; //Jog-
                 }
             }
             else
@@ -2994,55 +3023,68 @@ namespace H5509_V2
             刷新手臂点位(value, uiTabControl8.SelectedTab.Text);
         }
 
-        private void 刷新加热盘(HeatInfo heatInfo)
+        private void 刷新加热盘(string name)
         {
-            uiComboBox8.Items.Clear();
-            uiComboBox8.Items.AddRange(new string[] { "平均数", "中位数", "最小值", "最大值", "去极值平均" });
-            uiComboBox9.Items.Clear();
-            uiComboBox9.Items.AddRange(new string[] { "PT100", "K" });
+            string result = GetHeatInfo(name, out HeatInfo heatInfo);
+            if (result == "Success")
+            {
+                uiComboBox8.Items.Clear();
+                uiComboBox8.Items.AddRange(new string[] { "平均数", "中位数", "最小值", "最大值", "去极值平均" });
+                uiComboBox9.Items.Clear();
+                uiComboBox9.Items.AddRange(new string[] { "PT100", "K" });
 
-            textBox57.Text = heatInfo.HeatName;
-            textBox60.Text = heatInfo.X_Num.ToString();
-            textBox59.Text = heatInfo.Y_Num.ToString();
-            textBox58.Text = heatInfo.X_Start.ToString();
-            textBox56.Text = heatInfo.Y_Start.ToString();
-            textBox55.Text = heatInfo.X_Pitch.ToString();
-            textBox54.Text = heatInfo.Y_Pitch.ToString();
-            textBox53.Text = heatInfo.Width.ToString();
-            textBox52.Text = heatInfo.Length.ToString();
-            textBox51.Text = heatInfo.Height.ToString();
-            textBox24.Text = heatInfo.HeatName;
-            numericUpDown129.Text = heatInfo.设定温度.ToString();
-            numericUpDown130.Text = heatInfo.波动温度.ToString();
-            numericUpDown134.Text = heatInfo.IC加热时间.ToString();
-            numericUpDown154.Text = heatInfo.达温后延时.ToString();
-            numericUpDown131.Text = heatInfo.报警温度.ToString();
-            numericUpDown132.Text = heatInfo.超温温度.ToString();
-            numericUpDown133.Text = heatInfo.升温超时报警.ToString();
-            uiComboBox8.Text = heatInfo.达温标准.ToString();
-            uiComboBox9.Text = heatInfo.探头类型.ToString();
-            numericUpDown135.Text = heatInfo.温控器温度补偿.ToString();
-            numericUpDown136.Text = heatInfo.Site1温度补偿.ToString();
-            numericUpDown137.Text = heatInfo.Site2温度补偿.ToString();
-            numericUpDown139.Text = heatInfo.Site3温度补偿.ToString();
-            numericUpDown138.Text = heatInfo.Site4温度补偿.ToString();
-            numericUpDown143.Text = heatInfo.Site5温度补偿.ToString();
-            numericUpDown142.Text = heatInfo.Site6温度补偿.ToString();
-            numericUpDown141.Text = heatInfo.Site7温度补偿.ToString();
-            numericUpDown140.Text = heatInfo.Site8温度补偿.ToString();
-            numericUpDown147.Text = heatInfo.Site9温度补偿.ToString();
-            numericUpDown146.Text = heatInfo.Site10温度补偿.ToString();
-            numericUpDown145.Text = heatInfo.Site11温度补偿.ToString();
-            numericUpDown144.Text = heatInfo.Site12温度补偿.ToString();
-            numericUpDown151.Text = heatInfo.Site13温度补偿.ToString();
-            numericUpDown150.Text = heatInfo.Site14温度补偿.ToString();
-            numericUpDown149.Text = heatInfo.Site15温度补偿.ToString();
-            numericUpDown148.Text = heatInfo.Site16温度补偿.ToString();
+                textBox57.Text = heatInfo.HeatName;
+                textBox60.Text = heatInfo.X_Num.ToString();
+                textBox59.Text = heatInfo.Y_Num.ToString();
+                textBox58.Text = heatInfo.X_Start.ToString();
+                textBox56.Text = heatInfo.Y_Start.ToString();
+                textBox55.Text = heatInfo.X_Pitch.ToString();
+                textBox54.Text = heatInfo.Y_Pitch.ToString();
+                textBox53.Text = heatInfo.Width.ToString();
+                textBox52.Text = heatInfo.Length.ToString();
+                textBox51.Text = heatInfo.Height.ToString();
+                textBox24.Text = heatInfo.HeatName;
+                numericUpDown129.Text = heatInfo.设定温度.ToString();
+                numericUpDown130.Text = heatInfo.波动温度.ToString();
+                numericUpDown134.Text = heatInfo.IC加热时间.ToString();
+                numericUpDown154.Text = heatInfo.达温后延时.ToString();
+                numericUpDown131.Text = heatInfo.报警温度.ToString();
+                numericUpDown132.Text = heatInfo.超温温度.ToString();
+                numericUpDown133.Text = heatInfo.升温超时报警.ToString();
+                uiComboBox8.Text = heatInfo.达温标准.ToString();
+                uiComboBox9.Text = heatInfo.探头类型.ToString();
+                numericUpDown135.Text = heatInfo.温控器温度补偿.ToString();
+                numericUpDown136.Text = heatInfo.Site1温度补偿.ToString();
+                numericUpDown137.Text = heatInfo.Site2温度补偿.ToString();
+                numericUpDown139.Text = heatInfo.Site3温度补偿.ToString();
+                numericUpDown138.Text = heatInfo.Site4温度补偿.ToString();
+                numericUpDown143.Text = heatInfo.Site5温度补偿.ToString();
+                numericUpDown142.Text = heatInfo.Site6温度补偿.ToString();
+                numericUpDown141.Text = heatInfo.Site7温度补偿.ToString();
+                numericUpDown140.Text = heatInfo.Site8温度补偿.ToString();
+                numericUpDown147.Text = heatInfo.Site9温度补偿.ToString();
+                numericUpDown146.Text = heatInfo.Site10温度补偿.ToString();
+                numericUpDown145.Text = heatInfo.Site11温度补偿.ToString();
+                numericUpDown144.Text = heatInfo.Site12温度补偿.ToString();
+                numericUpDown151.Text = heatInfo.Site13温度补偿.ToString();
+                numericUpDown150.Text = heatInfo.Site14温度补偿.ToString();
+                numericUpDown149.Text = heatInfo.Site15温度补偿.ToString();
+                numericUpDown148.Text = heatInfo.Site16温度补偿.ToString();
+            }
         }
 
         private void 刷新梭车(string name)
         {
 
+        }
+
+        private void 刷新设定信息(string name)
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                刷新设定(name);
+            }
         }
 
         private void 刷新档案信息(string tabpagetext)
@@ -3112,6 +3154,14 @@ namespace H5509_V2
             }
         }
 
+        private void 刷新Tray盘信息(string tabpagetext, string name)
+        {
+            if (tabpagetext == "Tray盘")
+            {
+                刷新Tray盘(name);
+            }
+        }
+
         private void 刷新Tray盘信息(string tabpagetext)
         {
             int rows = uiDataGridView2.SelectedIndex;
@@ -3135,6 +3185,14 @@ namespace H5509_V2
             }
         }
 
+        private void 刷新加热盘信息(string tabpagetext, string name)
+        {
+            //if (tabpagetext == "加热盘")
+            //{
+            刷新加热盘(name);
+            //}
+        }
+
         private void 刷新加热盘信息(string tabpagetext)
         {
             int rows = uiDataGridView3.SelectedIndex;
@@ -3142,26 +3200,22 @@ namespace H5509_V2
             {
                 string name = uiDataGridView3.Rows[rows].Cells[1].Value.ToString();
 
-                string result = GetHeatInfo(name, out HeatInfo heatInfo);
-
                 //uiCheckBox200.Visible = false;
                 //uiCheckBox201.Visible = false;
                 //uiCheckBox202.Visible = false;
 
-                if (result == "Success")
-                {
-                    if (tabpagetext == "加热盘")
-                    {
-                        //uiCheckBox200.Visible = true;
-                        //uiCheckBox201.Visible = true;
-                        //uiCheckBox202.Visible = true;
-                        刷新加热盘(heatInfo);
-                    }
-                    else if (tabpagetext == "温度设定")
-                    {
-                        刷新加热盘(heatInfo);
-                    }
-                }
+                //if (tabpagetext == "加热盘")
+                //{
+                //    //uiCheckBox200.Visible = true;
+                //    //uiCheckBox201.Visible = true;
+                //    //uiCheckBox202.Visible = true;
+                //    刷新加热盘(name);
+                //}
+                //else if (tabpagetext == "温度设定")
+                //{
+                刷新加热盘(name);
+                //}
+
             }
         }
 
@@ -3175,9 +3229,11 @@ namespace H5509_V2
                 uiDataGridView1.Columns[1].Width = 250;
 
                 uiDataGridView1.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
+                uiDataGridView1.ClearSelection();
 
                 result = SQLiteHelper.runSql(SQLiteConnString, "select value from config where name='当前档案'", out string value).ToString();
 
+                bool isCurrentTray = false;
                 if (result == "Success")
                 {
                     foreach (DataGridViewRow dr in uiDataGridView1.Rows)
@@ -3186,11 +3242,17 @@ namespace H5509_V2
                         {
                             dr.Cells[0].Value = "当前档案";
                             dr.Cells[0].Selected = true;
+                            isCurrentTray = true;
+                            break;
                         }
                     }
 
-                    刷新档案信息(uiTabControl6.SelectedTab.Text);
-
+                    if (uiDataGridView1.Rows.Count > 0)
+                    {
+                        if (isCurrentTray) 刷新设定信息(value);
+                        else 刷新档案信息(uiTabControl6.SelectedTab.Text);
+                    }
+                    
                     return "Success";
                 }
                 else return result;
@@ -3211,9 +3273,10 @@ namespace H5509_V2
                 uiDataGridView2.Columns[1].Width = 250;
 
                 uiDataGridView2.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
-
+                uiDataGridView2.ClearSelection();
                 string result = SQLiteHelper.runSql(SQLiteConnString, $"select tray盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
+                bool isCurrentTray = false;
                 if (result == "Success")
                 {
                     foreach (DataGridViewRow dr in uiDataGridView2.Rows)
@@ -3222,10 +3285,16 @@ namespace H5509_V2
                         {
                             dr.Cells[0].Value = "当前Tray盘";
                             dr.Cells[0].Selected = true;
+                            isCurrentTray = true;
+                            break;
                         }
                     }
                 }
-                刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+                if (uiDataGridView2.Rows.Count > 0)
+                {
+                    if (isCurrentTray) 刷新Tray盘信息(uiTabControl7.SelectedTab.Text, value);
+                    else 刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+                }
             }
         }
         private void 刷新加热盘列表()
@@ -3239,8 +3308,10 @@ namespace H5509_V2
 
                 uiDataGridView3.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
 
+                uiDataGridView3.ClearSelection();
                 string result = SQLiteHelper.runSql(SQLiteConnString, $"select 加热盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
+                bool isCurrentTray = false;
                 if (result == "Success")
                 {
                     foreach (DataGridViewRow dr in uiDataGridView3.Rows)
@@ -3249,10 +3320,16 @@ namespace H5509_V2
                         {
                             dr.Cells[0].Value = "当前加热盘";
                             dr.Cells[0].Selected = true;
+                            isCurrentTray = true;
+                            break;
                         }
                     }
                 }
-                刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+                if (uiDataGridView3.Rows.Count > 0)
+                {
+                    if (isCurrentTray) 刷新加热盘信息(uiTabControl9.SelectedTab.Text, value);
+                    else 刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+                }
             }
         }
         private void 刷新产品(string tabpagetext)
@@ -6970,7 +7047,82 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void uiButton24_Click(object sender, EventArgs e)
         {
-            //HeatInfo heatInfo = new HeatInfo();
+            NewHeatTrayInfo newHeatTrayInfo = new NewHeatTrayInfo();
+            DialogResult dialog = newHeatTrayInfo.ShowDialog();
+            if (dialog == DialogResult.OK)
+            {
+                HeatInfo heatInfo = newHeatTrayInfo.heatInfo;
+                string sql = $"insert into HeatInfo(name,xnum,ynum,xstart,ystart,xpitch,ypitch,width,length,height)" +
+                    $"values('{heatInfo.HeatName}', {heatInfo.X_Num}, {heatInfo.Y_Num}, {heatInfo.X_Start}, {heatInfo.Y_Start}, {heatInfo.X_Pitch}, {heatInfo.Y_Pitch}, {heatInfo.Width}, {heatInfo.Length}, {heatInfo.Height})";
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+                if (line <= 0)
+                {
+                    RunLog("执行Sql失败:" + sql);
+                    MessageBox.Show("新增失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else 刷新加热盘列表();
+            }
+        }
+
+        /// <summary>
+        /// 删除Tray盘信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uiButton19_Click(object sender, EventArgs e)
+        {
+            int rows = uiDataGridView2.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView2.Rows[rows].Cells[1].Value.ToString();
+                if (name == "默认")
+                {
+                    MessageBox.Show("默认Tray盘不能删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                DialogResult dialog = MessageBox.Show($"请确认是否删除Tray盘:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialog == DialogResult.OK)
+                {
+                    int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"delete From TrayInfo Where name = '{name}'");
+                    if (line >= 1)
+                    {
+                        刷新Tray盘列表();
+                    }
+                    else MessageBox.Show("删除Tray盘失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else MessageBox.Show("请选择要删除的Tray盘!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+
+        /// <summary>
+        /// 删除Heat盘信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void uiButton25_Click(object sender, EventArgs e)
+        {
+            int rows = uiDataGridView3.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView3.Rows[rows].Cells[1].Value.ToString();
+                if (name == "默认")
+                {
+                    MessageBox.Show("默认加热盘不能删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                DialogResult dialog = MessageBox.Show($"请确认是否删除加热盘:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialog == DialogResult.OK)
+                {
+                    int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"delete From HeatInfo Where name = '{name}'");
+                    if (line >= 1)
+                    {
+                        刷新加热盘列表();
+                    }
+                    else MessageBox.Show("删除加热盘失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else MessageBox.Show("请选择要删除的加热盘!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

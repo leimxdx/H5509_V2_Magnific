@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle61 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle62 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle63 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle64 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle65 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle66 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle67 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle68 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle69 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle70 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle71 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle72 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.uiTabControl1 = new Sunny.UI.UITabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.uiCheckBox206 = new Sunny.UI.UICheckBox();
@@ -1852,6 +1852,7 @@
             this.uiButton24 = new Sunny.UI.UIButton();
             this.uiButton25 = new Sunny.UI.UIButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.uiCheckBox207 = new Sunny.UI.UICheckBox();
             this.uiTabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -2329,6 +2330,7 @@
             // tabPage1
             // 
             this.tabPage1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage1.Controls.Add(this.uiCheckBox207);
             this.tabPage1.Controls.Add(this.uiCheckBox206);
             this.tabPage1.Controls.Add(this.uiCheckBox205);
             this.tabPage1.Controls.Add(this.uiCheckBox204);
@@ -2366,7 +2368,7 @@
             this.uiCheckBox205.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiCheckBox205.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiCheckBox205.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox205.Location = new System.Drawing.Point(26, 131);
+            this.uiCheckBox205.Location = new System.Drawing.Point(26, 180);
             this.uiCheckBox205.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiCheckBox205.Name = "uiCheckBox205";
             this.uiCheckBox205.Size = new System.Drawing.Size(117, 26);
@@ -2418,7 +2420,7 @@
             this.tabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(200, 60);
+            this.tabPage2.Size = new System.Drawing.Size(1893, 944);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "调试";
             // 
@@ -2436,7 +2438,7 @@
             this.uiTabControl3.Name = "uiTabControl3";
             this.uiTabControl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl3.SelectedIndex = 0;
-            this.uiTabControl3.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl3.Size = new System.Drawing.Size(1893, 944);
             this.uiTabControl3.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl3.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl3.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -2456,7 +2458,7 @@
             this.tabPage10.Controls.Add(this.groupBox4);
             this.tabPage10.Location = new System.Drawing.Point(0, 40);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(200, 20);
+            this.tabPage10.Size = new System.Drawing.Size(1893, 904);
             this.tabPage10.TabIndex = 0;
             this.tabPage10.Text = "基础调试";
             // 
@@ -19006,7 +19008,7 @@
             this.tabPage6.Controls.Add(this.uiTabControl5);
             this.tabPage6.Location = new System.Drawing.Point(0, 40);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage6.Size = new System.Drawing.Size(200, 60);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "产品";
             // 
@@ -19026,7 +19028,7 @@
             this.uiTabControl5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl5.SelectedIndex = 0;
             this.uiTabControl5.ShowTabDivider = false;
-            this.uiTabControl5.Size = new System.Drawing.Size(1893, 944);
+            this.uiTabControl5.Size = new System.Drawing.Size(200, 60);
             this.uiTabControl5.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl5.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl5.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -19046,7 +19048,7 @@
             this.tabPage23.Controls.Add(this.panel1);
             this.tabPage23.Location = new System.Drawing.Point(0, 40);
             this.tabPage23.Name = "tabPage23";
-            this.tabPage23.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage23.Size = new System.Drawing.Size(200, 20);
             this.tabPage23.TabIndex = 0;
             this.tabPage23.Text = "档案列表";
             // 
@@ -19058,7 +19060,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(464, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1429, 904);
+            this.panel2.Size = new System.Drawing.Size(0, 20);
             this.panel2.TabIndex = 313;
             // 
             // uiTabControl6
@@ -19077,7 +19079,7 @@
             this.uiTabControl6.Name = "uiTabControl6";
             this.uiTabControl6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl6.SelectedIndex = 0;
-            this.uiTabControl6.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl6.Size = new System.Drawing.Size(0, 0);
             this.uiTabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl6.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -19105,7 +19107,7 @@
             this.tabPage25.Controls.Add(this.label49);
             this.tabPage25.Location = new System.Drawing.Point(0, 40);
             this.tabPage25.Name = "tabPage25";
-            this.tabPage25.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage25.Size = new System.Drawing.Size(0, 0);
             this.tabPage25.TabIndex = 2;
             this.tabPage25.Text = "设定";
             // 
@@ -20922,6 +20924,11 @@
             // 
             this.numericUpDown1.DecimalPlaces = 2;
             this.numericUpDown1.Location = new System.Drawing.Point(985, 235);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown1.TabIndex = 369;
@@ -20941,6 +20948,11 @@
             // 
             this.numericUpDown17.DecimalPlaces = 2;
             this.numericUpDown17.Location = new System.Drawing.Point(985, 199);
+            this.numericUpDown17.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown17.Name = "numericUpDown17";
             this.numericUpDown17.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown17.TabIndex = 368;
@@ -20960,6 +20972,11 @@
             // 
             this.numericUpDown18.DecimalPlaces = 2;
             this.numericUpDown18.Location = new System.Drawing.Point(985, 163);
+            this.numericUpDown18.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown18.Name = "numericUpDown18";
             this.numericUpDown18.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown18.TabIndex = 367;
@@ -20979,6 +20996,11 @@
             // 
             this.numericUpDown19.DecimalPlaces = 2;
             this.numericUpDown19.Location = new System.Drawing.Point(985, 118);
+            this.numericUpDown19.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown19.Name = "numericUpDown19";
             this.numericUpDown19.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown19.TabIndex = 366;
@@ -20998,6 +21020,11 @@
             // 
             this.numericUpDown20.DecimalPlaces = 2;
             this.numericUpDown20.Location = new System.Drawing.Point(985, 82);
+            this.numericUpDown20.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown20.Name = "numericUpDown20";
             this.numericUpDown20.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown20.TabIndex = 365;
@@ -21017,6 +21044,11 @@
             // 
             this.numericUpDown21.DecimalPlaces = 2;
             this.numericUpDown21.Location = new System.Drawing.Point(985, 46);
+            this.numericUpDown21.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown21.Name = "numericUpDown21";
             this.numericUpDown21.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown21.TabIndex = 364;
@@ -21036,6 +21068,11 @@
             // 
             this.numericUpDown22.DecimalPlaces = 2;
             this.numericUpDown22.Location = new System.Drawing.Point(604, 355);
+            this.numericUpDown22.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown22.Name = "numericUpDown22";
             this.numericUpDown22.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown22.TabIndex = 363;
@@ -21055,6 +21092,11 @@
             // 
             this.numericUpDown23.DecimalPlaces = 2;
             this.numericUpDown23.Location = new System.Drawing.Point(604, 319);
+            this.numericUpDown23.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown23.Name = "numericUpDown23";
             this.numericUpDown23.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown23.TabIndex = 362;
@@ -21074,6 +21116,11 @@
             // 
             this.numericUpDown24.DecimalPlaces = 2;
             this.numericUpDown24.Location = new System.Drawing.Point(604, 283);
+            this.numericUpDown24.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown24.Name = "numericUpDown24";
             this.numericUpDown24.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown24.TabIndex = 361;
@@ -21093,6 +21140,11 @@
             // 
             this.numericUpDown25.DecimalPlaces = 2;
             this.numericUpDown25.Location = new System.Drawing.Point(604, 235);
+            this.numericUpDown25.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown25.Name = "numericUpDown25";
             this.numericUpDown25.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown25.TabIndex = 360;
@@ -21112,6 +21164,11 @@
             // 
             this.numericUpDown26.DecimalPlaces = 2;
             this.numericUpDown26.Location = new System.Drawing.Point(604, 199);
+            this.numericUpDown26.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown26.Name = "numericUpDown26";
             this.numericUpDown26.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown26.TabIndex = 359;
@@ -21131,6 +21188,11 @@
             // 
             this.numericUpDown27.DecimalPlaces = 2;
             this.numericUpDown27.Location = new System.Drawing.Point(604, 163);
+            this.numericUpDown27.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown27.Name = "numericUpDown27";
             this.numericUpDown27.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown27.TabIndex = 358;
@@ -21140,6 +21202,11 @@
             // 
             this.numericUpDown28.DecimalPlaces = 2;
             this.numericUpDown28.Location = new System.Drawing.Point(211, 118);
+            this.numericUpDown28.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown28.Name = "numericUpDown28";
             this.numericUpDown28.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown28.TabIndex = 313;
@@ -21149,6 +21216,11 @@
             // 
             this.numericUpDown29.DecimalPlaces = 2;
             this.numericUpDown29.Location = new System.Drawing.Point(604, 118);
+            this.numericUpDown29.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown29.Name = "numericUpDown29";
             this.numericUpDown29.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown29.TabIndex = 357;
@@ -21158,6 +21230,11 @@
             // 
             this.numericUpDown30.DecimalPlaces = 2;
             this.numericUpDown30.Location = new System.Drawing.Point(211, 82);
+            this.numericUpDown30.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown30.Name = "numericUpDown30";
             this.numericUpDown30.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown30.TabIndex = 312;
@@ -21167,6 +21244,11 @@
             // 
             this.numericUpDown31.DecimalPlaces = 2;
             this.numericUpDown31.Location = new System.Drawing.Point(604, 82);
+            this.numericUpDown31.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown31.Name = "numericUpDown31";
             this.numericUpDown31.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown31.TabIndex = 356;
@@ -21186,6 +21268,11 @@
             // 
             this.numericUpDown32.DecimalPlaces = 2;
             this.numericUpDown32.Location = new System.Drawing.Point(604, 46);
+            this.numericUpDown32.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown32.Name = "numericUpDown32";
             this.numericUpDown32.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown32.TabIndex = 355;
@@ -21195,6 +21282,11 @@
             // 
             this.numericUpDown33.DecimalPlaces = 2;
             this.numericUpDown33.Location = new System.Drawing.Point(211, 46);
+            this.numericUpDown33.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown33.Name = "numericUpDown33";
             this.numericUpDown33.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown33.TabIndex = 311;
@@ -21204,6 +21296,11 @@
             // 
             this.numericUpDown34.DecimalPlaces = 2;
             this.numericUpDown34.Location = new System.Drawing.Point(211, 355);
+            this.numericUpDown34.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown34.Name = "numericUpDown34";
             this.numericUpDown34.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown34.TabIndex = 354;
@@ -21223,6 +21320,11 @@
             // 
             this.numericUpDown35.DecimalPlaces = 2;
             this.numericUpDown35.Location = new System.Drawing.Point(211, 319);
+            this.numericUpDown35.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown35.Name = "numericUpDown35";
             this.numericUpDown35.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown35.TabIndex = 353;
@@ -21242,6 +21344,11 @@
             // 
             this.numericUpDown36.DecimalPlaces = 2;
             this.numericUpDown36.Location = new System.Drawing.Point(211, 283);
+            this.numericUpDown36.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown36.Name = "numericUpDown36";
             this.numericUpDown36.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown36.TabIndex = 352;
@@ -21261,6 +21368,11 @@
             // 
             this.numericUpDown37.DecimalPlaces = 2;
             this.numericUpDown37.Location = new System.Drawing.Point(211, 235);
+            this.numericUpDown37.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown37.Name = "numericUpDown37";
             this.numericUpDown37.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown37.TabIndex = 351;
@@ -21280,6 +21392,11 @@
             // 
             this.numericUpDown38.DecimalPlaces = 2;
             this.numericUpDown38.Location = new System.Drawing.Point(211, 199);
+            this.numericUpDown38.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown38.Name = "numericUpDown38";
             this.numericUpDown38.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown38.TabIndex = 350;
@@ -21299,6 +21416,11 @@
             // 
             this.numericUpDown39.DecimalPlaces = 2;
             this.numericUpDown39.Location = new System.Drawing.Point(211, 163);
+            this.numericUpDown39.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown39.Name = "numericUpDown39";
             this.numericUpDown39.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown39.TabIndex = 349;
@@ -21460,6 +21582,11 @@
             // 
             this.numericUpDown40.DecimalPlaces = 2;
             this.numericUpDown40.Location = new System.Drawing.Point(969, 353);
+            this.numericUpDown40.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown40.Name = "numericUpDown40";
             this.numericUpDown40.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown40.TabIndex = 357;
@@ -21469,6 +21596,11 @@
             // 
             this.uiDoubleUpDown34.DecimalPlaces = 2;
             this.uiDoubleUpDown34.Location = new System.Drawing.Point(249, 437);
+            this.uiDoubleUpDown34.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown34.Name = "uiDoubleUpDown34";
             this.uiDoubleUpDown34.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown34.TabIndex = 359;
@@ -21478,6 +21610,11 @@
             // 
             this.numericUpDown41.DecimalPlaces = 2;
             this.numericUpDown41.Location = new System.Drawing.Point(969, 317);
+            this.numericUpDown41.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown41.Name = "numericUpDown41";
             this.numericUpDown41.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown41.TabIndex = 356;
@@ -21497,6 +21634,11 @@
             // 
             this.numericUpDown42.DecimalPlaces = 2;
             this.numericUpDown42.Location = new System.Drawing.Point(969, 281);
+            this.numericUpDown42.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown42.Name = "numericUpDown42";
             this.numericUpDown42.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown42.TabIndex = 355;
@@ -21506,6 +21648,11 @@
             // 
             this.uiDoubleUpDown33.DecimalPlaces = 2;
             this.uiDoubleUpDown33.Location = new System.Drawing.Point(249, 401);
+            this.uiDoubleUpDown33.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown33.Name = "uiDoubleUpDown33";
             this.uiDoubleUpDown33.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown33.TabIndex = 358;
@@ -21515,6 +21662,11 @@
             // 
             this.numericUpDown43.DecimalPlaces = 2;
             this.numericUpDown43.Location = new System.Drawing.Point(969, 237);
+            this.numericUpDown43.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown43.Name = "numericUpDown43";
             this.numericUpDown43.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown43.TabIndex = 354;
@@ -21534,6 +21686,11 @@
             // 
             this.numericUpDown44.DecimalPlaces = 2;
             this.numericUpDown44.Location = new System.Drawing.Point(969, 201);
+            this.numericUpDown44.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown44.Name = "numericUpDown44";
             this.numericUpDown44.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown44.TabIndex = 353;
@@ -21553,6 +21710,11 @@
             // 
             this.numericUpDown45.DecimalPlaces = 2;
             this.numericUpDown45.Location = new System.Drawing.Point(969, 165);
+            this.numericUpDown45.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown45.Name = "numericUpDown45";
             this.numericUpDown45.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown45.TabIndex = 352;
@@ -21572,6 +21734,11 @@
             // 
             this.numericUpDown46.DecimalPlaces = 2;
             this.numericUpDown46.Location = new System.Drawing.Point(969, 118);
+            this.numericUpDown46.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown46.Name = "numericUpDown46";
             this.numericUpDown46.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown46.TabIndex = 351;
@@ -21591,6 +21758,11 @@
             // 
             this.numericUpDown47.DecimalPlaces = 2;
             this.numericUpDown47.Location = new System.Drawing.Point(969, 82);
+            this.numericUpDown47.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown47.Name = "numericUpDown47";
             this.numericUpDown47.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown47.TabIndex = 350;
@@ -21610,6 +21782,11 @@
             // 
             this.numericUpDown48.DecimalPlaces = 2;
             this.numericUpDown48.Location = new System.Drawing.Point(969, 46);
+            this.numericUpDown48.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown48.Name = "numericUpDown48";
             this.numericUpDown48.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown48.TabIndex = 349;
@@ -21629,6 +21806,11 @@
             // 
             this.numericUpDown49.DecimalPlaces = 2;
             this.numericUpDown49.Location = new System.Drawing.Point(632, 353);
+            this.numericUpDown49.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown49.Name = "numericUpDown49";
             this.numericUpDown49.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown49.TabIndex = 348;
@@ -21648,6 +21830,11 @@
             // 
             this.numericUpDown50.DecimalPlaces = 2;
             this.numericUpDown50.Location = new System.Drawing.Point(632, 317);
+            this.numericUpDown50.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown50.Name = "numericUpDown50";
             this.numericUpDown50.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown50.TabIndex = 347;
@@ -21667,6 +21854,11 @@
             // 
             this.numericUpDown51.DecimalPlaces = 2;
             this.numericUpDown51.Location = new System.Drawing.Point(632, 281);
+            this.numericUpDown51.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown51.Name = "numericUpDown51";
             this.numericUpDown51.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown51.TabIndex = 346;
@@ -21686,6 +21878,11 @@
             // 
             this.numericUpDown52.DecimalPlaces = 2;
             this.numericUpDown52.Location = new System.Drawing.Point(632, 237);
+            this.numericUpDown52.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown52.Name = "numericUpDown52";
             this.numericUpDown52.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown52.TabIndex = 345;
@@ -21705,6 +21902,11 @@
             // 
             this.numericUpDown53.DecimalPlaces = 2;
             this.numericUpDown53.Location = new System.Drawing.Point(632, 201);
+            this.numericUpDown53.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown53.Name = "numericUpDown53";
             this.numericUpDown53.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown53.TabIndex = 344;
@@ -21724,6 +21926,11 @@
             // 
             this.numericUpDown54.DecimalPlaces = 2;
             this.numericUpDown54.Location = new System.Drawing.Point(632, 165);
+            this.numericUpDown54.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown54.Name = "numericUpDown54";
             this.numericUpDown54.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown54.TabIndex = 343;
@@ -21762,6 +21969,11 @@
             // 
             this.uiDoubleUpDown32.DecimalPlaces = 2;
             this.uiDoubleUpDown32.Location = new System.Drawing.Point(632, 82);
+            this.uiDoubleUpDown32.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown32.Name = "uiDoubleUpDown32";
             this.uiDoubleUpDown32.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown32.TabIndex = 341;
@@ -21781,6 +21993,11 @@
             // 
             this.uiDoubleUpDown31.DecimalPlaces = 2;
             this.uiDoubleUpDown31.Location = new System.Drawing.Point(632, 46);
+            this.uiDoubleUpDown31.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown31.Name = "uiDoubleUpDown31";
             this.uiDoubleUpDown31.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown31.TabIndex = 340;
@@ -21840,6 +22057,11 @@
             // 
             this.numericUpDown55.DecimalPlaces = 2;
             this.numericUpDown55.Location = new System.Drawing.Point(249, 353);
+            this.numericUpDown55.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown55.Name = "numericUpDown55";
             this.numericUpDown55.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown55.TabIndex = 339;
@@ -21859,6 +22081,11 @@
             // 
             this.numericUpDown56.DecimalPlaces = 2;
             this.numericUpDown56.Location = new System.Drawing.Point(249, 317);
+            this.numericUpDown56.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown56.Name = "numericUpDown56";
             this.numericUpDown56.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown56.TabIndex = 338;
@@ -21878,6 +22105,11 @@
             // 
             this.numericUpDown57.DecimalPlaces = 2;
             this.numericUpDown57.Location = new System.Drawing.Point(249, 281);
+            this.numericUpDown57.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown57.Name = "numericUpDown57";
             this.numericUpDown57.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown57.TabIndex = 337;
@@ -21897,6 +22129,11 @@
             // 
             this.numericUpDown58.DecimalPlaces = 2;
             this.numericUpDown58.Location = new System.Drawing.Point(249, 237);
+            this.numericUpDown58.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown58.Name = "numericUpDown58";
             this.numericUpDown58.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown58.TabIndex = 336;
@@ -21916,6 +22153,11 @@
             // 
             this.numericUpDown59.DecimalPlaces = 2;
             this.numericUpDown59.Location = new System.Drawing.Point(249, 201);
+            this.numericUpDown59.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown59.Name = "numericUpDown59";
             this.numericUpDown59.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown59.TabIndex = 335;
@@ -21935,6 +22177,11 @@
             // 
             this.numericUpDown60.DecimalPlaces = 2;
             this.numericUpDown60.Location = new System.Drawing.Point(249, 165);
+            this.numericUpDown60.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown60.Name = "numericUpDown60";
             this.numericUpDown60.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown60.TabIndex = 334;
@@ -21954,6 +22201,11 @@
             // 
             this.numericUpDown61.DecimalPlaces = 2;
             this.numericUpDown61.Location = new System.Drawing.Point(249, 118);
+            this.numericUpDown61.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown61.Name = "numericUpDown61";
             this.numericUpDown61.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown61.TabIndex = 333;
@@ -21973,6 +22225,11 @@
             // 
             this.numericUpDown62.DecimalPlaces = 2;
             this.numericUpDown62.Location = new System.Drawing.Point(249, 82);
+            this.numericUpDown62.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown62.Name = "numericUpDown62";
             this.numericUpDown62.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown62.TabIndex = 332;
@@ -21992,6 +22249,11 @@
             // 
             this.numericUpDown63.DecimalPlaces = 2;
             this.numericUpDown63.Location = new System.Drawing.Point(249, 46);
+            this.numericUpDown63.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown63.Name = "numericUpDown63";
             this.numericUpDown63.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown63.TabIndex = 331;
@@ -22179,6 +22441,11 @@
             // 
             this.numericUpDown64.DecimalPlaces = 3;
             this.numericUpDown64.Location = new System.Drawing.Point(1251, 88);
+            this.numericUpDown64.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown64.Name = "numericUpDown64";
             this.numericUpDown64.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown64.TabIndex = 495;
@@ -22188,6 +22455,11 @@
             // 
             this.numericUpDown65.DecimalPlaces = 3;
             this.numericUpDown65.Location = new System.Drawing.Point(1251, 680);
+            this.numericUpDown65.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown65.Name = "numericUpDown65";
             this.numericUpDown65.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown65.TabIndex = 487;
@@ -22197,6 +22469,11 @@
             // 
             this.numericUpDown66.DecimalPlaces = 2;
             this.numericUpDown66.Location = new System.Drawing.Point(1251, 53);
+            this.numericUpDown66.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown66.Name = "numericUpDown66";
             this.numericUpDown66.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown66.TabIndex = 494;
@@ -22206,6 +22483,11 @@
             // 
             this.numericUpDown67.DecimalPlaces = 2;
             this.numericUpDown67.Location = new System.Drawing.Point(1251, 645);
+            this.numericUpDown67.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown67.Name = "numericUpDown67";
             this.numericUpDown67.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown67.TabIndex = 486;
@@ -22215,6 +22497,11 @@
             // 
             this.numericUpDown68.DecimalPlaces = 3;
             this.numericUpDown68.Location = new System.Drawing.Point(904, 88);
+            this.numericUpDown68.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown68.Name = "numericUpDown68";
             this.numericUpDown68.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown68.TabIndex = 493;
@@ -22224,6 +22511,11 @@
             // 
             this.numericUpDown69.DecimalPlaces = 3;
             this.numericUpDown69.Location = new System.Drawing.Point(1251, 384);
+            this.numericUpDown69.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown69.Name = "numericUpDown69";
             this.numericUpDown69.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown69.TabIndex = 485;
@@ -22233,6 +22525,11 @@
             // 
             this.numericUpDown70.DecimalPlaces = 2;
             this.numericUpDown70.Location = new System.Drawing.Point(904, 53);
+            this.numericUpDown70.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown70.Name = "numericUpDown70";
             this.numericUpDown70.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown70.TabIndex = 492;
@@ -22242,6 +22539,11 @@
             // 
             this.numericUpDown71.DecimalPlaces = 2;
             this.numericUpDown71.Location = new System.Drawing.Point(1251, 349);
+            this.numericUpDown71.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown71.Name = "numericUpDown71";
             this.numericUpDown71.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown71.TabIndex = 484;
@@ -22251,6 +22553,11 @@
             // 
             this.numericUpDown72.DecimalPlaces = 3;
             this.numericUpDown72.Location = new System.Drawing.Point(561, 88);
+            this.numericUpDown72.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown72.Name = "numericUpDown72";
             this.numericUpDown72.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown72.TabIndex = 491;
@@ -22260,6 +22567,11 @@
             // 
             this.uiDoubleUpDown109.DecimalPlaces = 3;
             this.uiDoubleUpDown109.Location = new System.Drawing.Point(1251, 236);
+            this.uiDoubleUpDown109.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown109.Name = "uiDoubleUpDown109";
             this.uiDoubleUpDown109.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown109.TabIndex = 483;
@@ -22269,6 +22581,11 @@
             // 
             this.numericUpDown73.DecimalPlaces = 2;
             this.numericUpDown73.Location = new System.Drawing.Point(561, 53);
+            this.numericUpDown73.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown73.Name = "numericUpDown73";
             this.numericUpDown73.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown73.TabIndex = 490;
@@ -22278,6 +22595,11 @@
             // 
             this.numericUpDown74.DecimalPlaces = 3;
             this.numericUpDown74.Location = new System.Drawing.Point(1251, 532);
+            this.numericUpDown74.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown74.Name = "numericUpDown74";
             this.numericUpDown74.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown74.TabIndex = 483;
@@ -22287,6 +22609,11 @@
             // 
             this.numericUpDown75.DecimalPlaces = 3;
             this.numericUpDown75.Location = new System.Drawing.Point(214, 88);
+            this.numericUpDown75.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown75.Name = "numericUpDown75";
             this.numericUpDown75.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown75.TabIndex = 489;
@@ -22296,6 +22623,11 @@
             // 
             this.numericUpDown76.DecimalPlaces = 2;
             this.numericUpDown76.Location = new System.Drawing.Point(1251, 201);
+            this.numericUpDown76.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown76.Name = "numericUpDown76";
             this.numericUpDown76.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown76.TabIndex = 482;
@@ -22305,6 +22637,11 @@
             // 
             this.numericUpDown77.DecimalPlaces = 2;
             this.numericUpDown77.Location = new System.Drawing.Point(1251, 497);
+            this.numericUpDown77.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown77.Name = "numericUpDown77";
             this.numericUpDown77.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown77.TabIndex = 482;
@@ -22314,6 +22651,11 @@
             // 
             this.numericUpDown78.DecimalPlaces = 2;
             this.numericUpDown78.Location = new System.Drawing.Point(214, 53);
+            this.numericUpDown78.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown78.Name = "numericUpDown78";
             this.numericUpDown78.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown78.TabIndex = 488;
@@ -22323,6 +22665,11 @@
             // 
             this.uiDoubleUpDown110.DecimalPlaces = 3;
             this.uiDoubleUpDown110.Location = new System.Drawing.Point(904, 680);
+            this.uiDoubleUpDown110.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown110.Name = "uiDoubleUpDown110";
             this.uiDoubleUpDown110.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown110.TabIndex = 481;
@@ -22332,6 +22679,11 @@
             // 
             this.uiDoubleUpDown52.DecimalPlaces = 2;
             this.uiDoubleUpDown52.Location = new System.Drawing.Point(904, 645);
+            this.uiDoubleUpDown52.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown52.Name = "uiDoubleUpDown52";
             this.uiDoubleUpDown52.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown52.TabIndex = 480;
@@ -22341,6 +22693,11 @@
             // 
             this.numericUpDown79.DecimalPlaces = 3;
             this.numericUpDown79.Location = new System.Drawing.Point(904, 384);
+            this.numericUpDown79.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown79.Name = "numericUpDown79";
             this.numericUpDown79.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown79.TabIndex = 479;
@@ -22350,6 +22707,11 @@
             // 
             this.uiDoubleUpDown54.DecimalPlaces = 2;
             this.uiDoubleUpDown54.Location = new System.Drawing.Point(904, 349);
+            this.uiDoubleUpDown54.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown54.Name = "uiDoubleUpDown54";
             this.uiDoubleUpDown54.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown54.TabIndex = 478;
@@ -22359,6 +22721,11 @@
             // 
             this.numericUpDown80.DecimalPlaces = 3;
             this.numericUpDown80.Location = new System.Drawing.Point(561, 680);
+            this.numericUpDown80.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown80.Name = "numericUpDown80";
             this.numericUpDown80.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown80.TabIndex = 477;
@@ -22368,6 +22735,11 @@
             // 
             this.numericUpDown81.DecimalPlaces = 2;
             this.numericUpDown81.Location = new System.Drawing.Point(561, 645);
+            this.numericUpDown81.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown81.Name = "numericUpDown81";
             this.numericUpDown81.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown81.TabIndex = 476;
@@ -22377,6 +22749,11 @@
             // 
             this.numericUpDown82.DecimalPlaces = 3;
             this.numericUpDown82.Location = new System.Drawing.Point(561, 532);
+            this.numericUpDown82.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown82.Name = "numericUpDown82";
             this.numericUpDown82.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown82.TabIndex = 475;
@@ -22386,6 +22763,11 @@
             // 
             this.numericUpDown83.DecimalPlaces = 3;
             this.numericUpDown83.Location = new System.Drawing.Point(904, 236);
+            this.numericUpDown83.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown83.Name = "numericUpDown83";
             this.numericUpDown83.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown83.TabIndex = 475;
@@ -22395,6 +22777,11 @@
             // 
             this.uiDoubleUpDown111.DecimalPlaces = 3;
             this.uiDoubleUpDown111.Location = new System.Drawing.Point(904, 532);
+            this.uiDoubleUpDown111.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown111.Name = "uiDoubleUpDown111";
             this.uiDoubleUpDown111.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown111.TabIndex = 475;
@@ -22404,6 +22791,11 @@
             // 
             this.numericUpDown84.DecimalPlaces = 2;
             this.numericUpDown84.Location = new System.Drawing.Point(561, 497);
+            this.numericUpDown84.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown84.Name = "numericUpDown84";
             this.numericUpDown84.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown84.TabIndex = 474;
@@ -22413,6 +22805,11 @@
             // 
             this.numericUpDown85.DecimalPlaces = 2;
             this.numericUpDown85.Location = new System.Drawing.Point(904, 201);
+            this.numericUpDown85.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown85.Name = "numericUpDown85";
             this.numericUpDown85.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown85.TabIndex = 474;
@@ -22422,6 +22819,11 @@
             // 
             this.uiDoubleUpDown53.DecimalPlaces = 2;
             this.uiDoubleUpDown53.Location = new System.Drawing.Point(904, 497);
+            this.uiDoubleUpDown53.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown53.Name = "uiDoubleUpDown53";
             this.uiDoubleUpDown53.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown53.TabIndex = 474;
@@ -22431,6 +22833,11 @@
             // 
             this.numericUpDown86.DecimalPlaces = 3;
             this.numericUpDown86.Location = new System.Drawing.Point(561, 384);
+            this.numericUpDown86.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown86.Name = "numericUpDown86";
             this.numericUpDown86.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown86.TabIndex = 473;
@@ -22440,6 +22847,11 @@
             // 
             this.numericUpDown87.DecimalPlaces = 2;
             this.numericUpDown87.Location = new System.Drawing.Point(561, 349);
+            this.numericUpDown87.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown87.Name = "numericUpDown87";
             this.numericUpDown87.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown87.TabIndex = 472;
@@ -22449,6 +22861,11 @@
             // 
             this.numericUpDown88.DecimalPlaces = 3;
             this.numericUpDown88.Location = new System.Drawing.Point(561, 236);
+            this.numericUpDown88.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown88.Name = "numericUpDown88";
             this.numericUpDown88.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown88.TabIndex = 471;
@@ -22458,6 +22875,11 @@
             // 
             this.numericUpDown89.DecimalPlaces = 2;
             this.numericUpDown89.Location = new System.Drawing.Point(561, 201);
+            this.numericUpDown89.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown89.Name = "numericUpDown89";
             this.numericUpDown89.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown89.TabIndex = 470;
@@ -22467,6 +22889,11 @@
             // 
             this.numericUpDown90.DecimalPlaces = 3;
             this.numericUpDown90.Location = new System.Drawing.Point(214, 680);
+            this.numericUpDown90.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown90.Name = "numericUpDown90";
             this.numericUpDown90.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown90.TabIndex = 469;
@@ -22476,6 +22903,11 @@
             // 
             this.numericUpDown91.DecimalPlaces = 2;
             this.numericUpDown91.Location = new System.Drawing.Point(214, 645);
+            this.numericUpDown91.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown91.Name = "numericUpDown91";
             this.numericUpDown91.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown91.TabIndex = 468;
@@ -22485,6 +22917,11 @@
             // 
             this.numericUpDown92.DecimalPlaces = 3;
             this.numericUpDown92.Location = new System.Drawing.Point(214, 532);
+            this.numericUpDown92.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown92.Name = "numericUpDown92";
             this.numericUpDown92.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown92.TabIndex = 467;
@@ -22494,6 +22931,11 @@
             // 
             this.numericUpDown93.DecimalPlaces = 2;
             this.numericUpDown93.Location = new System.Drawing.Point(214, 497);
+            this.numericUpDown93.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown93.Name = "numericUpDown93";
             this.numericUpDown93.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown93.TabIndex = 466;
@@ -22503,6 +22945,11 @@
             // 
             this.numericUpDown94.DecimalPlaces = 3;
             this.numericUpDown94.Location = new System.Drawing.Point(214, 384);
+            this.numericUpDown94.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown94.Name = "numericUpDown94";
             this.numericUpDown94.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown94.TabIndex = 465;
@@ -22512,6 +22959,11 @@
             // 
             this.numericUpDown95.DecimalPlaces = 2;
             this.numericUpDown95.Location = new System.Drawing.Point(214, 349);
+            this.numericUpDown95.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown95.Name = "numericUpDown95";
             this.numericUpDown95.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown95.TabIndex = 464;
@@ -22521,6 +22973,11 @@
             // 
             this.numericUpDown96.DecimalPlaces = 3;
             this.numericUpDown96.Location = new System.Drawing.Point(214, 236);
+            this.numericUpDown96.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown96.Name = "numericUpDown96";
             this.numericUpDown96.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown96.TabIndex = 463;
@@ -22530,6 +22987,11 @@
             // 
             this.numericUpDown97.DecimalPlaces = 2;
             this.numericUpDown97.Location = new System.Drawing.Point(214, 201);
+            this.numericUpDown97.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown97.Name = "numericUpDown97";
             this.numericUpDown97.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown97.TabIndex = 462;
@@ -22539,6 +23001,11 @@
             // 
             this.numericUpDown98.DecimalPlaces = 3;
             this.numericUpDown98.Location = new System.Drawing.Point(1251, 610);
+            this.numericUpDown98.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown98.Name = "numericUpDown98";
             this.numericUpDown98.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown98.TabIndex = 461;
@@ -22548,6 +23015,11 @@
             // 
             this.numericUpDown99.DecimalPlaces = 3;
             this.numericUpDown99.Location = new System.Drawing.Point(904, 610);
+            this.numericUpDown99.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown99.Name = "numericUpDown99";
             this.numericUpDown99.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown99.TabIndex = 460;
@@ -22557,6 +23029,11 @@
             // 
             this.numericUpDown100.DecimalPlaces = 3;
             this.numericUpDown100.Location = new System.Drawing.Point(561, 610);
+            this.numericUpDown100.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown100.Name = "numericUpDown100";
             this.numericUpDown100.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown100.TabIndex = 459;
@@ -22566,6 +23043,11 @@
             // 
             this.numericUpDown101.DecimalPlaces = 3;
             this.numericUpDown101.Location = new System.Drawing.Point(1251, 462);
+            this.numericUpDown101.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown101.Name = "numericUpDown101";
             this.numericUpDown101.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown101.TabIndex = 458;
@@ -22575,6 +23057,11 @@
             // 
             this.numericUpDown102.DecimalPlaces = 3;
             this.numericUpDown102.Location = new System.Drawing.Point(904, 462);
+            this.numericUpDown102.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown102.Name = "numericUpDown102";
             this.numericUpDown102.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown102.TabIndex = 457;
@@ -22584,6 +23071,11 @@
             // 
             this.numericUpDown103.DecimalPlaces = 3;
             this.numericUpDown103.Location = new System.Drawing.Point(561, 462);
+            this.numericUpDown103.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown103.Name = "numericUpDown103";
             this.numericUpDown103.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown103.TabIndex = 456;
@@ -22593,6 +23085,11 @@
             // 
             this.numericUpDown104.DecimalPlaces = 3;
             this.numericUpDown104.Location = new System.Drawing.Point(214, 462);
+            this.numericUpDown104.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown104.Name = "numericUpDown104";
             this.numericUpDown104.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown104.TabIndex = 455;
@@ -22602,6 +23099,11 @@
             // 
             this.numericUpDown105.DecimalPlaces = 3;
             this.numericUpDown105.Location = new System.Drawing.Point(214, 610);
+            this.numericUpDown105.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown105.Name = "numericUpDown105";
             this.numericUpDown105.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown105.TabIndex = 455;
@@ -22611,6 +23113,11 @@
             // 
             this.numericUpDown106.DecimalPlaces = 3;
             this.numericUpDown106.Location = new System.Drawing.Point(1251, 314);
+            this.numericUpDown106.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown106.Name = "numericUpDown106";
             this.numericUpDown106.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown106.TabIndex = 454;
@@ -22620,6 +23127,11 @@
             // 
             this.numericUpDown107.DecimalPlaces = 3;
             this.numericUpDown107.Location = new System.Drawing.Point(904, 314);
+            this.numericUpDown107.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown107.Name = "numericUpDown107";
             this.numericUpDown107.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown107.TabIndex = 453;
@@ -22629,6 +23141,11 @@
             // 
             this.numericUpDown108.DecimalPlaces = 3;
             this.numericUpDown108.Location = new System.Drawing.Point(561, 314);
+            this.numericUpDown108.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown108.Name = "numericUpDown108";
             this.numericUpDown108.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown108.TabIndex = 452;
@@ -22638,6 +23155,11 @@
             // 
             this.numericUpDown109.DecimalPlaces = 3;
             this.numericUpDown109.Location = new System.Drawing.Point(214, 314);
+            this.numericUpDown109.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown109.Name = "numericUpDown109";
             this.numericUpDown109.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown109.TabIndex = 451;
@@ -22647,6 +23169,11 @@
             // 
             this.numericUpDown110.DecimalPlaces = 3;
             this.numericUpDown110.Location = new System.Drawing.Point(1251, 166);
+            this.numericUpDown110.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown110.Name = "numericUpDown110";
             this.numericUpDown110.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown110.TabIndex = 450;
@@ -22656,6 +23183,11 @@
             // 
             this.numericUpDown111.DecimalPlaces = 3;
             this.numericUpDown111.Location = new System.Drawing.Point(904, 166);
+            this.numericUpDown111.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown111.Name = "numericUpDown111";
             this.numericUpDown111.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown111.TabIndex = 449;
@@ -22665,6 +23197,11 @@
             // 
             this.numericUpDown112.DecimalPlaces = 3;
             this.numericUpDown112.Location = new System.Drawing.Point(561, 166);
+            this.numericUpDown112.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown112.Name = "numericUpDown112";
             this.numericUpDown112.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown112.TabIndex = 448;
@@ -22674,6 +23211,11 @@
             // 
             this.numericUpDown113.DecimalPlaces = 3;
             this.numericUpDown113.Location = new System.Drawing.Point(214, 166);
+            this.numericUpDown113.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown113.Name = "numericUpDown113";
             this.numericUpDown113.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown113.TabIndex = 447;
@@ -22683,6 +23225,11 @@
             // 
             this.uiDoubleUpDown37.DecimalPlaces = 2;
             this.uiDoubleUpDown37.Location = new System.Drawing.Point(1251, 575);
+            this.uiDoubleUpDown37.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown37.Name = "uiDoubleUpDown37";
             this.uiDoubleUpDown37.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown37.TabIndex = 446;
@@ -22692,6 +23239,11 @@
             // 
             this.uiDoubleUpDown38.DecimalPlaces = 2;
             this.uiDoubleUpDown38.Location = new System.Drawing.Point(1251, 427);
+            this.uiDoubleUpDown38.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown38.Name = "uiDoubleUpDown38";
             this.uiDoubleUpDown38.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown38.TabIndex = 445;
@@ -22701,6 +23253,11 @@
             // 
             this.uiDoubleUpDown39.DecimalPlaces = 2;
             this.uiDoubleUpDown39.Location = new System.Drawing.Point(1251, 279);
+            this.uiDoubleUpDown39.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown39.Name = "uiDoubleUpDown39";
             this.uiDoubleUpDown39.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown39.TabIndex = 444;
@@ -22710,6 +23267,11 @@
             // 
             this.uiDoubleUpDown40.DecimalPlaces = 2;
             this.uiDoubleUpDown40.Location = new System.Drawing.Point(1251, 131);
+            this.uiDoubleUpDown40.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown40.Name = "uiDoubleUpDown40";
             this.uiDoubleUpDown40.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown40.TabIndex = 438;
@@ -22719,6 +23281,11 @@
             // 
             this.uiDoubleUpDown41.DecimalPlaces = 2;
             this.uiDoubleUpDown41.Location = new System.Drawing.Point(904, 575);
+            this.uiDoubleUpDown41.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown41.Name = "uiDoubleUpDown41";
             this.uiDoubleUpDown41.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown41.TabIndex = 443;
@@ -22728,6 +23295,11 @@
             // 
             this.uiDoubleUpDown42.DecimalPlaces = 2;
             this.uiDoubleUpDown42.Location = new System.Drawing.Point(904, 427);
+            this.uiDoubleUpDown42.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown42.Name = "uiDoubleUpDown42";
             this.uiDoubleUpDown42.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown42.TabIndex = 442;
@@ -22737,6 +23309,11 @@
             // 
             this.numericUpDown114.DecimalPlaces = 2;
             this.numericUpDown114.Location = new System.Drawing.Point(904, 279);
+            this.numericUpDown114.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown114.Name = "numericUpDown114";
             this.numericUpDown114.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown114.TabIndex = 441;
@@ -22746,6 +23323,11 @@
             // 
             this.numericUpDown115.DecimalPlaces = 2;
             this.numericUpDown115.Location = new System.Drawing.Point(904, 131);
+            this.numericUpDown115.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown115.Name = "numericUpDown115";
             this.numericUpDown115.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown115.TabIndex = 440;
@@ -22755,6 +23337,11 @@
             // 
             this.numericUpDown116.DecimalPlaces = 2;
             this.numericUpDown116.Location = new System.Drawing.Point(561, 575);
+            this.numericUpDown116.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown116.Name = "numericUpDown116";
             this.numericUpDown116.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown116.TabIndex = 439;
@@ -22764,6 +23351,11 @@
             // 
             this.uiDoubleUpDown28.DecimalPlaces = 2;
             this.uiDoubleUpDown28.Location = new System.Drawing.Point(561, 427);
+            this.uiDoubleUpDown28.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown28.Name = "uiDoubleUpDown28";
             this.uiDoubleUpDown28.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown28.TabIndex = 437;
@@ -22773,6 +23365,11 @@
             // 
             this.uiDoubleUpDown35.DecimalPlaces = 2;
             this.uiDoubleUpDown35.Location = new System.Drawing.Point(561, 279);
+            this.uiDoubleUpDown35.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown35.Name = "uiDoubleUpDown35";
             this.uiDoubleUpDown35.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown35.TabIndex = 436;
@@ -22782,6 +23379,11 @@
             // 
             this.uiDoubleUpDown36.DecimalPlaces = 2;
             this.uiDoubleUpDown36.Location = new System.Drawing.Point(561, 131);
+            this.uiDoubleUpDown36.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown36.Name = "uiDoubleUpDown36";
             this.uiDoubleUpDown36.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown36.TabIndex = 435;
@@ -22791,6 +23393,11 @@
             // 
             this.numericUpDown117.DecimalPlaces = 2;
             this.numericUpDown117.Location = new System.Drawing.Point(214, 575);
+            this.numericUpDown117.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown117.Name = "numericUpDown117";
             this.numericUpDown117.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown117.TabIndex = 434;
@@ -22800,6 +23407,11 @@
             // 
             this.uiDoubleUpDown26.DecimalPlaces = 2;
             this.uiDoubleUpDown26.Location = new System.Drawing.Point(214, 427);
+            this.uiDoubleUpDown26.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.uiDoubleUpDown26.Name = "uiDoubleUpDown26";
             this.uiDoubleUpDown26.Size = new System.Drawing.Size(130, 29);
             this.uiDoubleUpDown26.TabIndex = 433;
@@ -22809,6 +23421,11 @@
             // 
             this.numericUpDown118.DecimalPlaces = 2;
             this.numericUpDown118.Location = new System.Drawing.Point(214, 279);
+            this.numericUpDown118.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown118.Name = "numericUpDown118";
             this.numericUpDown118.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown118.TabIndex = 432;
@@ -22818,6 +23435,11 @@
             // 
             this.numericUpDown119.DecimalPlaces = 2;
             this.numericUpDown119.Location = new System.Drawing.Point(214, 131);
+            this.numericUpDown119.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown119.Name = "numericUpDown119";
             this.numericUpDown119.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown119.TabIndex = 333;
@@ -23575,6 +24197,11 @@
             // 
             this.numericUpDown120.DecimalPlaces = 2;
             this.numericUpDown120.Location = new System.Drawing.Point(135, 86);
+            this.numericUpDown120.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown120.Name = "numericUpDown120";
             this.numericUpDown120.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown120.TabIndex = 490;
@@ -23584,6 +24211,11 @@
             // 
             this.numericUpDown121.DecimalPlaces = 2;
             this.numericUpDown121.Location = new System.Drawing.Point(135, 49);
+            this.numericUpDown121.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown121.Name = "numericUpDown121";
             this.numericUpDown121.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown121.TabIndex = 489;
@@ -23645,6 +24277,11 @@
             // 
             this.numericUpDown122.DecimalPlaces = 3;
             this.numericUpDown122.Location = new System.Drawing.Point(210, 162);
+            this.numericUpDown122.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown122.Name = "numericUpDown122";
             this.numericUpDown122.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown122.TabIndex = 494;
@@ -23664,6 +24301,11 @@
             // 
             this.numericUpDown123.DecimalPlaces = 3;
             this.numericUpDown123.Location = new System.Drawing.Point(210, 125);
+            this.numericUpDown123.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown123.Name = "numericUpDown123";
             this.numericUpDown123.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown123.TabIndex = 493;
@@ -23673,6 +24315,11 @@
             // 
             this.numericUpDown124.DecimalPlaces = 3;
             this.numericUpDown124.Location = new System.Drawing.Point(210, 88);
+            this.numericUpDown124.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown124.Name = "numericUpDown124";
             this.numericUpDown124.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown124.TabIndex = 492;
@@ -23682,6 +24329,11 @@
             // 
             this.numericUpDown125.DecimalPlaces = 3;
             this.numericUpDown125.Location = new System.Drawing.Point(210, 51);
+            this.numericUpDown125.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
             this.numericUpDown125.Name = "numericUpDown125";
             this.numericUpDown125.Size = new System.Drawing.Size(130, 29);
             this.numericUpDown125.TabIndex = 491;
@@ -23726,9 +24378,9 @@
             this.panel4.Controls.Add(this.uiButton4);
             this.panel4.Controls.Add(this.uiButton3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, 842);
+            this.panel4.Location = new System.Drawing.Point(0, -38);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(1425, 58);
+            this.panel4.Size = new System.Drawing.Size(0, 58);
             this.panel4.TabIndex = 179;
             // 
             // uiCheckBox196
@@ -23821,35 +24473,35 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(464, 904);
+            this.panel1.Size = new System.Drawing.Size(464, 20);
             this.panel1.TabIndex = 316;
             // 
             // uiDataGridView1
             // 
             this.uiDataGridView1.AllowUserToAddRows = false;
             this.uiDataGridView1.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle61.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle61;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.uiDataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.uiDataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle62.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle62.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle62.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle62.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle62.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle62.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle62.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle62;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.uiDataGridView1.ColumnHeadersHeight = 32;
             this.uiDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle63.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle63.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle63.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle63.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle63.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle63.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle63.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle63;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.uiDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridView1.EnableHeadersVisualStyles = false;
             this.uiDataGridView1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -23857,20 +24509,20 @@
             this.uiDataGridView1.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridView1.Name = "uiDataGridView1";
             this.uiDataGridView1.ReadOnly = true;
-            dataGridViewCellStyle64.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
-            dataGridViewCellStyle64.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle64.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle64.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle64.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle64.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle64.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle64;
-            dataGridViewCellStyle65.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle65.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle65;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.BottomCenter;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.uiDataGridView1.RowTemplate.Height = 28;
             this.uiDataGridView1.SelectedIndex = -1;
-            this.uiDataGridView1.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView1.Size = new System.Drawing.Size(460, 0);
             this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView1.TabIndex = 0;
             this.uiDataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView1_CellMouseClick);
@@ -23881,7 +24533,7 @@
             this.panel5.Controls.Add(this.uiButton8);
             this.panel5.Controls.Add(this.uiButton11);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, 842);
+            this.panel5.Location = new System.Drawing.Point(0, -42);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(460, 58);
             this.panel5.TabIndex = 180;
@@ -23923,7 +24575,7 @@
             this.tabPage32.Controls.Add(this.panel8);
             this.tabPage32.Location = new System.Drawing.Point(0, 40);
             this.tabPage32.Name = "tabPage32";
-            this.tabPage32.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage32.Size = new System.Drawing.Size(200, 60);
             this.tabPage32.TabIndex = 1;
             this.tabPage32.Text = "Tray盘列表";
             // 
@@ -23935,7 +24587,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(464, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(1429, 904);
+            this.panel9.Size = new System.Drawing.Size(0, 60);
             this.panel9.TabIndex = 183;
             // 
             // uiTabControl7
@@ -23952,7 +24604,7 @@
             this.uiTabControl7.Name = "uiTabControl7";
             this.uiTabControl7.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl7.SelectedIndex = 0;
-            this.uiTabControl7.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl7.Size = new System.Drawing.Size(0, 2);
             this.uiTabControl7.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl7.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl7.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -23992,7 +24644,7 @@
             this.tabPage24.Controls.Add(this.label347);
             this.tabPage24.Location = new System.Drawing.Point(0, 40);
             this.tabPage24.Name = "tabPage24";
-            this.tabPage24.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage24.Size = new System.Drawing.Size(0, 0);
             this.tabPage24.TabIndex = 2;
             this.tabPage24.Text = "Tray盘";
             // 
@@ -24237,9 +24889,9 @@
             this.panel6.Controls.Add(this.uiButton15);
             this.panel6.Controls.Add(this.uiButton16);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 842);
+            this.panel6.Location = new System.Drawing.Point(0, 2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1425, 58);
+            this.panel6.Size = new System.Drawing.Size(0, 58);
             this.panel6.TabIndex = 180;
             // 
             // uiCheckBox197
@@ -24331,35 +24983,35 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(464, 904);
+            this.panel8.Size = new System.Drawing.Size(464, 60);
             this.panel8.TabIndex = 182;
             // 
             // uiDataGridView2
             // 
             this.uiDataGridView2.AllowUserToAddRows = false;
             this.uiDataGridView2.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle66.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle66;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView2.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
             this.uiDataGridView2.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.uiDataGridView2.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle67.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle67.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle67.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle67.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle67.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle67.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle67.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle67;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.uiDataGridView2.ColumnHeadersHeight = 32;
             this.uiDataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle68.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle68.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle68.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle68.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle68.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle68.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle68.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView2.DefaultCellStyle = dataGridViewCellStyle68;
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
             this.uiDataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridView2.EnableHeadersVisualStyles = false;
             this.uiDataGridView2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -24367,20 +25019,20 @@
             this.uiDataGridView2.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridView2.Name = "uiDataGridView2";
             this.uiDataGridView2.ReadOnly = true;
-            dataGridViewCellStyle69.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle69.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle69.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle69.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle69.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle69.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle69.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle69;
-            dataGridViewCellStyle70.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle70.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle70;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView2.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.uiDataGridView2.RowTemplate.Height = 28;
             this.uiDataGridView2.SelectedIndex = -1;
-            this.uiDataGridView2.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView2.Size = new System.Drawing.Size(460, 0);
             this.uiDataGridView2.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView2.TabIndex = 1;
             this.uiDataGridView2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView2_CellMouseClick);
@@ -24391,7 +25043,7 @@
             this.panel7.Controls.Add(this.uiButton7);
             this.panel7.Controls.Add(this.uiButton19);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, 842);
+            this.panel7.Location = new System.Drawing.Point(0, -2);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(460, 58);
             this.panel7.TabIndex = 181;
@@ -24424,6 +25076,7 @@
             this.uiButton19.Tag = "@02@#BCD#";
             this.uiButton19.Text = "删除";
             this.uiButton19.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton19.Click += new System.EventHandler(this.uiButton19_Click);
             // 
             // tabPage38
             // 
@@ -24431,7 +25084,7 @@
             this.tabPage38.Controls.Add(this.panel12);
             this.tabPage38.Location = new System.Drawing.Point(0, 40);
             this.tabPage38.Name = "tabPage38";
-            this.tabPage38.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage38.Size = new System.Drawing.Size(200, 60);
             this.tabPage38.TabIndex = 0;
             this.tabPage38.Text = "加热盘列表";
             // 
@@ -24443,7 +25096,7 @@
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(464, 0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(1429, 904);
+            this.panel14.Size = new System.Drawing.Size(0, 60);
             this.panel14.TabIndex = 184;
             // 
             // uiTabControl9
@@ -24460,7 +25113,7 @@
             this.uiTabControl9.Name = "uiTabControl9";
             this.uiTabControl9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl9.SelectedIndex = 0;
-            this.uiTabControl9.Size = new System.Drawing.Size(1425, 842);
+            this.uiTabControl9.Size = new System.Drawing.Size(0, 2);
             this.uiTabControl9.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl9.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl9.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -24500,7 +25153,7 @@
             this.tabPage39.Controls.Add(this.label595);
             this.tabPage39.Location = new System.Drawing.Point(0, 40);
             this.tabPage39.Name = "tabPage39";
-            this.tabPage39.Size = new System.Drawing.Size(1425, 802);
+            this.tabPage39.Size = new System.Drawing.Size(0, 0);
             this.tabPage39.TabIndex = 2;
             this.tabPage39.Text = "加热盘";
             // 
@@ -25766,9 +26419,9 @@
             this.panel15.Controls.Add(this.uiButton27);
             this.panel15.Controls.Add(this.uiButton28);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel15.Location = new System.Drawing.Point(0, 842);
+            this.panel15.Location = new System.Drawing.Point(0, 2);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(1425, 58);
+            this.panel15.Size = new System.Drawing.Size(0, 58);
             this.panel15.TabIndex = 180;
             // 
             // uiCheckBox200
@@ -25860,35 +26513,35 @@
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(0, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(464, 904);
+            this.panel12.Size = new System.Drawing.Size(464, 60);
             this.panel12.TabIndex = 183;
             // 
             // uiDataGridView3
             // 
             this.uiDataGridView3.AllowUserToAddRows = false;
             this.uiDataGridView3.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle71.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiDataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle71;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            this.uiDataGridView3.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.uiDataGridView3.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.uiDataGridView3.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle72.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle72.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle72.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle72.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle72.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle72.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle72.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle72;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView3.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.uiDataGridView3.ColumnHeadersHeight = 32;
             this.uiDataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewCellStyle73.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle73.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle73.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle73.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle73.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle73.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle73.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.uiDataGridView3.DefaultCellStyle = dataGridViewCellStyle73;
+            dataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle13.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.uiDataGridView3.DefaultCellStyle = dataGridViewCellStyle13;
             this.uiDataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiDataGridView3.EnableHeadersVisualStyles = false;
             this.uiDataGridView3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -25896,20 +26549,20 @@
             this.uiDataGridView3.Location = new System.Drawing.Point(0, 0);
             this.uiDataGridView3.Name = "uiDataGridView3";
             this.uiDataGridView3.ReadOnly = true;
-            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle74.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle74.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle74.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            dataGridViewCellStyle74.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.uiDataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle74;
-            dataGridViewCellStyle75.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle75.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiDataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle75;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.uiDataGridView3.RowHeadersDefaultCellStyle = dataGridViewCellStyle14;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.uiDataGridView3.RowTemplate.Height = 28;
             this.uiDataGridView3.SelectedIndex = -1;
-            this.uiDataGridView3.Size = new System.Drawing.Size(460, 842);
+            this.uiDataGridView3.Size = new System.Drawing.Size(460, 0);
             this.uiDataGridView3.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView3.TabIndex = 1;
             this.uiDataGridView3.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView3_CellMouseClick);
@@ -25921,7 +26574,7 @@
             this.panel13.Controls.Add(this.uiButton24);
             this.panel13.Controls.Add(this.uiButton25);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel13.Location = new System.Drawing.Point(0, 842);
+            this.panel13.Location = new System.Drawing.Point(0, -2);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(460, 58);
             this.panel13.TabIndex = 181;
@@ -25954,6 +26607,23 @@
             this.uiButton25.Tag = "@02@#BCD#";
             this.uiButton25.Text = "删除";
             this.uiButton25.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton25.Click += new System.EventHandler(this.uiButton25_Click);
+            // 
+            // uiCheckBox207
+            // 
+            this.uiCheckBox207.AutoSize = true;
+            this.uiCheckBox207.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox207.CheckBoxSize = 20;
+            this.uiCheckBox207.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox207.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiCheckBox207.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox207.Location = new System.Drawing.Point(26, 138);
+            this.uiCheckBox207.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox207.Name = "uiCheckBox207";
+            this.uiCheckBox207.Size = new System.Drawing.Size(117, 26);
+            this.uiCheckBox207.TabIndex = 168;
+            this.uiCheckBox207.Tag = "@02@#0D#";
+            this.uiCheckBox207.Text = "安全门禁用";
             // 
             // _setting
             // 
@@ -28278,5 +28948,6 @@
         private System.Windows.Forms.Label lbl_dout20;
         private System.Windows.Forms.Label lbl_dout19;
         private System.Windows.Forms.Label lbl_dout18;
+        private Sunny.UI.UICheckBox uiCheckBox207;
     }
 }

@@ -290,7 +290,9 @@ namespace H5509_V2
 
         public static int 气缸动作超时时间 = 3000; //ms
 
-        public static int 跟随误差 = 250;
+        public static int 跟随误差 = 150;
+
+        public static int 测试Z跟随误差 = 450;
 
         public static Communication Com;
 
@@ -399,6 +401,8 @@ namespace H5509_V2
         public static string oth = "";
 
         public static string othAll = "";
+
+        public static string[] ServoAxis = {"M16_入料手臂Y轴",  "M17_出料手臂Y轴", "M18_放Tary盘轴", "M19_测试手臂Z轴", "M20_飞梭轴", "M21_测试手臂X轴", "M22_入料手臂X轴", "M23_出料手臂X轴" };
 
         public static int[] Dout128PassNumber = new int[128];
 
@@ -655,7 +659,7 @@ namespace H5509_V2
 
         public static int 空盘下降最小值 = 10000;
 
-        public static int 空盘满盘判断值 = 370000; //30000//370000//367864//12700
+        public static int 空盘满盘判断值 = 30000; //30000//370000//367864//12700
 
         public static bool 待测盘上顶到最大值 = false;
 
@@ -2051,15 +2055,15 @@ namespace H5509_V2
                        $"Fix1名称,Fix2名称,Fix3名称,Auto1总数,Auto2总数,Fix1总数,Fix2总数,Fix3总数," +
                        $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
                        $"IC吸取模式,测试模式)" +
-                        $"values('{开始时间.ToString("F")}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
-                       $"'{载入数}','{结束时间.ToString()}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{设置信息.分BIN信息.name1}','{设置信息.分BIN信息.name2}'," +  //工作时间.Ticks
+                        $"values('{开始时间:yyyy年MM月dd日 HH:mm:ss}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
+                       $"'{载入数}','{结束时间}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{设置信息.分BIN信息.name1}','{设置信息.分BIN信息.name2}'," +  //工作时间.Ticks
                        $"'{设置信息.分BIN信息.name3}','{设置信息.分BIN信息.name4}','{设置信息.分BIN信息.name5}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
                        $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{1}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
                        $"'正常','正常')";
 
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
 
-                if (line <= 0) Debug.WriteLine("sql保存失败！:" + sql);
+                if (line <= 0) RunLog("sql保存失败！:" + sql);
             }
             catch (Exception ex)
             {
