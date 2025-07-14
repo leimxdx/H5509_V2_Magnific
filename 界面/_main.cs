@@ -1521,6 +1521,7 @@ namespace H5509_V2
         
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
+            //int iscan = HeatInterval;
             //if (!handler.CheckAircyStatus())
             //{
             //    Debug.WriteLine("气缸异常");

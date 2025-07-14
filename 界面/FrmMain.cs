@@ -189,21 +189,14 @@ namespace H5509_V2
         {
             foreach (Control con in cons.Controls)
             {
-                //if (con is UITabControl uItabl)
-                //{
-                //    Debug.WriteLine("dd");
-                //}
-                //if (con.Name == "uiTabControl3")
-                //{
-                //    Debug.WriteLine("dd");
-                //}
-                //if (con is UITabControl uItabl)
-                //{
-                //    for (int i = 0; i < length; i++)
-                //    {
-
-                //    }
-                //}
+                if (con is UITabControl uItabl)
+                {
+                    for (int i = 0; i < uItabl.TabPages.Count; i++)
+                    {
+                        CanVisable(uItabl.TabPages[i]);
+                    }
+                    continue;
+                }
 
                 if (con.Tag != null)
                 {
@@ -255,8 +248,8 @@ namespace H5509_V2
                             con.Enabled = false;
                         }
                     }
-
                 }
+
                 if (con.Controls.Count > 0)
                 {
                     CanVisable(con);

@@ -5417,7 +5417,7 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             xPos = LoaderXPoint[xPoint] + 点位微调.入料_Load吸_X;
-                            yPos = (LoaderYPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.入料_Load吸_Y;
+                            yPos = (LoaderYPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.入料_Load吸_Y;
                             PS入料手臂吸放料流程.StepID = 525;
                         }
                         else
@@ -5555,7 +5555,7 @@ namespace H5509_V2
                                     if (opens[i + index] == 1)
                                     {
                                         lsopen[i + index] = false;
-                                        LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] = false;
+                                        LoaderDicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = false;
                                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料成功");
                                     }
                                     else RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料失败");
@@ -5657,7 +5657,7 @@ namespace H5509_V2
                                 if (lsopen[i + index])
                                 {
                                     lsopen[i + index] = false;
-                                    LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] = false;
+                                    LoaderDicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = false;
                                 }
                             }
                             PS入料手臂吸放料流程.StepID = 555;
@@ -7159,7 +7159,7 @@ namespace H5509_V2
                                 RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->获取Auto1坐标位置");
                                 APPmaster.获取Auto1盘Open(opens, xPoint, yPoint, out lsopen, index, bin);
                                 xPos = Auto1XPoint[xPoint] + 点位微调.出料_Auto1放_X;
-                                yPos = (Auto1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Auto1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                yPos = (Auto1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Auto1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                 PS出料手臂吸放料流程.StepID = 710;
                                 break;
 
@@ -7185,7 +7185,7 @@ namespace H5509_V2
                                 RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->获取Auto2坐标位置");
                                 APPmaster.获取Auto2盘Open(opens, xPoint, yPoint, out lsopen, index, bin);
                                 xPos = Auto2XPoint[xPoint] + 点位微调.出料_Auto2放_X;
-                                yPos = (Auto2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Auto2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                yPos = (Auto2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Auto2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                 PS出料手臂吸放料流程.StepID = 710;
                                 break;
 
@@ -7215,7 +7215,7 @@ namespace H5509_V2
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1, bin, max, out lsopen, index);
                                         xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
-                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7235,7 +7235,7 @@ namespace H5509_V2
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_1, bin, max, out lsopen, index);
                                         xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
-                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7252,7 +7252,7 @@ namespace H5509_V2
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_2, bin, max, out lsopen, index);
                                         xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
-                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7272,7 +7272,7 @@ namespace H5509_V2
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_1, bin, max, out lsopen, index);
                                         xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
-                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7289,7 +7289,7 @@ namespace H5509_V2
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_2, bin, max, out lsopen, index);
                                         xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
-                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7306,7 +7306,7 @@ namespace H5509_V2
                                     {
                                         获取Fix1盘Open(opens, xPoint, yPoint, Fix1_3, bin, max, out lsopen, index);
                                         xPos = Fix1XPoint[xPoint] + 点位微调.出料_Fix1放_X;
-                                        yPos = (Fix1YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7330,7 +7330,7 @@ namespace H5509_V2
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2, bin, max, out lsopen, index);
                                         xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
-                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7350,7 +7350,7 @@ namespace H5509_V2
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_1, bin, max, out lsopen, index);
                                         xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
-                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7367,7 +7367,7 @@ namespace H5509_V2
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_2, bin, max, out lsopen, index);
                                         xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
-                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7387,7 +7387,7 @@ namespace H5509_V2
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_1, bin, max, out lsopen, index);
                                         xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
-                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7404,7 +7404,7 @@ namespace H5509_V2
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_2, bin, max, out lsopen, index);
                                         xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
-                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7421,7 +7421,7 @@ namespace H5509_V2
                                     {
                                         获取Fix2盘Open(opens, xPoint, yPoint, Fix2_3, bin, max, out lsopen, index);
                                         xPos = Fix2XPoint[xPoint] + 点位微调.出料_Fix2放_X;
-                                        yPos = (Fix2YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7445,7 +7445,7 @@ namespace H5509_V2
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3, bin, max, out lsopen, index);
                                         xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
-                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix3YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7465,7 +7465,7 @@ namespace H5509_V2
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_1, bin, max, out lsopen, index);
                                         xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
-                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix3YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7482,7 +7482,7 @@ namespace H5509_V2
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_2, bin, max, out lsopen, index);
                                         xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
-                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix3YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7502,7 +7502,7 @@ namespace H5509_V2
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_1, bin, max, out lsopen, index);
                                         xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
-                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix3YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7519,7 +7519,7 @@ namespace H5509_V2
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_2, bin, max, out lsopen, index);
                                         xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
-                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix3YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7536,7 +7536,7 @@ namespace H5509_V2
                                     {
                                         获取Fix3盘Open(opens, xPoint, yPoint, Fix3_3, bin, max, out lsopen, index);
                                         xPos = Fix3XPoint[xPoint] + 点位微调.出料_Fix3放_X;
-                                        yPos = (Fix3YPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                        yPos = (Fix3YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Fix3放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                                         PS出料手臂吸放料流程.StepID = 710;
                                     }
                                     else
@@ -7671,32 +7671,32 @@ namespace H5509_V2
                                         if (trayid == 0)
                                         {
                                             Auto1数量++;
-                                            Auto1DicPoint[$"{xPoint},{yPoint + i * Interval}"] = true;
-                                            Auto1DicBin[$"{xPoint},{yPoint + i * Interval}"] = bin[i + index];
+                                            Auto1DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
+                                            Auto1DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
                                         }
                                         else if (trayid == 1)
                                         {
                                             Auto2数量++;
-                                            Auto2DicPoint[$"{xPoint},{yPoint + i * Interval}"] = true;
-                                            Auto2DicBin[$"{xPoint},{yPoint + i * Interval}"] = bin[i + index];
+                                            Auto2DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
+                                            Auto2DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
                                         }
                                         else if (trayid == 2)
                                         {
                                             Fix1数量++;
-                                            Fix1DicPoint[$"{xPoint},{yPoint + i * Interval}"] = true;
-                                            Fix1DicBin[$"{xPoint},{yPoint + i * Interval}"] = bin[i + index];
+                                            Fix1DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
+                                            Fix1DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
                                         }
                                         else if (trayid == 3)
                                         {
                                             Fix2数量++;
-                                            Fix2DicPoint[$"{xPoint},{yPoint + i * Interval}"] = true;
-                                            Fix2DicBin[$"{xPoint},{yPoint + i * Interval}"] = bin[i + index];
+                                            Fix2DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
+                                            Fix2DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
                                         }
                                         else
                                         {
                                             Fix3数量++;
-                                            Fix3DicPoint[$"{xPoint},{yPoint + i * Interval}"] = true;
-                                            Fix3DicBin[$"{xPoint},{yPoint + i * Interval}"] = bin[i + index];
+                                            Fix3DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
+                                            Fix3DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
                                         }
                                     }
                                 }

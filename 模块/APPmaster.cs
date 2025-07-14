@@ -434,9 +434,87 @@ namespace H5509_V2
 
         public static bool Tray平移运动标记; //是否正在平移
 
-        public static short Interval = 2; //吸料间隔
+        public static double TrayMax
+        {
+            get { return 初始点位.入料_变距最大值; }
+        }
 
-        public static short HeatInterval = 1; //Heat吸放料间隔
+        public static double TrayMin
+        {
+            get { return 初始点位.入料_变距最小值; }
+        }
+
+        public static short TrayInterval //吸料间隔
+        {
+            get
+            {
+                double min = TrayMin;
+                double max = TrayMax;
+                double tray_y_pitch = Tray_Y_Pitch;
+                if (tray_y_pitch >= min) //如果YPitch大于或等于最小变距，则不用间隔吸
+                {
+                    if (tray_y_pitch > max) //如果YPitch大于最大变距，则无法吸取
+                    {
+                        return 0; //异常
+                    }
+                    else return 1;
+                }
+                else //如果YPitch小于最小变距，则需要间隔吸
+                {
+                    if (tray_y_pitch * 2 < max && tray_y_pitch * 2 > min) //如果YPitch 
+                    {
+                        return 2; //间隔1个吸
+                    }
+                    else if (tray_y_pitch * 3 < max && tray_y_pitch * 3 > min)
+                    {
+                        return 3; //间隔2个吸
+                    }
+                    else if (tray_y_pitch * 4 < max && tray_y_pitch * 4 > min)
+                    {
+                        return 4; //间隔3个吸
+                    }
+                    else return 0; //异常
+                }
+            }
+        }
+
+        //public static short Interval = 2; //吸料间隔
+
+        public static int HeatInterval //吸料间隔
+        {
+            get
+            {
+                double min = TrayMin;
+                double max = TrayMax;
+                double heat_y_pitch = Heat_Y_Pitch;
+                if (heat_y_pitch >= min) //如果YPitch大于或等于最小变距，则不用间隔吸
+                {
+                    if (heat_y_pitch > max) //如果YPitch大于最大变距，则无法吸取
+                    {
+                        return 0; //异常
+                    }
+                    else return 1;
+                }
+                else //如果YPitch小于最小变距，则需要间隔吸
+                {
+                    if (heat_y_pitch * 2 < max && heat_y_pitch * 2 > min) //如果YPitch 
+                    {
+                        return 2; //间隔1个吸
+                    }
+                    else if (heat_y_pitch * 3 < max && heat_y_pitch * 3 > min)
+                    {
+                        return 3; //间隔2个吸
+                    }
+                    else if (heat_y_pitch * 4 < max && heat_y_pitch * 4 > min)
+                    {
+                        return 4; //间隔3个吸
+                    }
+                    else return 0; //异常
+                }
+            }
+        }
+
+        //public static short HeatInterval = 1; //Heat吸放料间隔
 
         public static double 梭车列间距 = 40; //mm
 
@@ -588,6 +666,7 @@ namespace H5509_V2
         {
             get { return 设置信息.Heat盘信息.Y_Num; }
         }
+
         public static int Tray_X_Num
         {
             get { return 设置信息.Tray盘信息.X_Num; }
@@ -610,7 +689,7 @@ namespace H5509_V2
 
         public static double 入料吸料间距 //tray吸
         {
-            get { return 初始点位.入料_变距最大值 - Tray_Y_Pitch * Interval; }
+            get { return 初始点位.入料_变距最大值 - Tray_Y_Pitch * TrayInterval; }
         }
 
         public static double 入料放料间距 //梭车放
@@ -625,7 +704,7 @@ namespace H5509_V2
 
         public static double 出料放料间距 //tray放
         {
-            get { return 初始点位.出料_变距最大值 - Tray_Y_Pitch * Interval; }
+            get { return 初始点位.出料_变距最大值 - Tray_Y_Pitch * TrayInterval; }
         }
 
         public static double 入料吸放料Heat间距 //Heat吸放
@@ -2086,7 +2165,7 @@ namespace H5509_V2
             int yNum = trayInfo.Y_Num;
             double loaderx = 初始点位.入料_Load_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
             double loadery = 初始点位.入料_Load_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 初始点位.入料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
+            double total = 初始点位.入料_变距最大值 - yPitch * TrayInterval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             double[] loaderXPoint = new double[xNum];
             double[] loaderYPoint = new double[yNum];
@@ -2158,7 +2237,7 @@ namespace H5509_V2
             int yNum = trayInfo.Y_Num;
             double loaderx = 初始点位.出料_Auto1_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
             double loadery = 初始点位.出料_Auto1_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
+            double total = 初始点位.出料_变距最大值 - yPitch * TrayInterval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
@@ -2194,7 +2273,7 @@ namespace H5509_V2
             int yNum = trayInfo.Y_Num;
             double loaderx = 初始点位.出料_Auto2_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
             double loadery = 初始点位.出料_Auto2_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
+            double total = 初始点位.出料_变距最大值 - yPitch * TrayInterval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
@@ -2230,7 +2309,7 @@ namespace H5509_V2
             int yNum = trayInfo.Y_Num;
             double loaderx = 初始点位.出料_Fix1_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
             double loadery = 初始点位.出料_Fix1_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
+            double total = 初始点位.出料_变距最大值 - yPitch * TrayInterval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
@@ -2266,7 +2345,7 @@ namespace H5509_V2
             int yNum = trayInfo.Y_Num;
             double loaderx = 初始点位.出料_Fix2_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
             double loadery = 初始点位.出料_Fix2_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
+            double total = 初始点位.出料_变距最大值 - yPitch * TrayInterval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
@@ -2302,7 +2381,7 @@ namespace H5509_V2
             int yNum = trayInfo.Y_Num;
             double loaderx = 初始点位.出料_Fix3_X; //motionEx.InitPointParam.InputArm_Loader_X + motionEx.OffsetParam.InputArm.InputArm_Loader_X;
             double loadery = 初始点位.出料_Fix3_Y; //motionEx.InitPointParam.InputArm_Loader_Y + motionEx.OffsetParam.InputArm.InputArm_Loader_Y;
-            double total = 初始点位.出料_变距最大值 - yPitch * Interval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
+            double total = 初始点位.出料_变距最大值 - yPitch * TrayInterval; //要缩小的距离 最大变距值 - IC间隔 * 间隔吸的个数，
 
             double[] xPoint = new double[xNum];
             double[] yPoint = new double[yNum];
@@ -3371,7 +3450,7 @@ namespace H5509_V2
             if (获取Load盘坐标(true, out short xPoint, out short yPoint))
             {
                 xPos = LoaderXPoint[xPoint] + 点位微调.入料_Load吸_X;
-                yPos = (LoaderYPoint[yPoint] + index * Interval * Tray_Y_Pitch) + 点位微调.入料_Load吸_Y;
+                yPos = (LoaderYPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.入料_Load吸_Y;
                 return true;
             }
             else return false;
@@ -3397,8 +3476,8 @@ namespace H5509_V2
                 if (index + i == lsopen.Length) break;
                 if (lsopen[i + index])
                 {
-                    LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] = false;
-                    RunLog($"Loader site{index}:{xPoint},{yPoint + i * Interval}");
+                    LoaderDicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = false;
+                    RunLog($"Loader site{index}:{xPoint},{yPoint + i * TrayInterval}");
 
                     //if (getiosts[i + index] == false) //如果等于False说明已经吸取到了IC
                     //{
@@ -3443,7 +3522,7 @@ namespace H5509_V2
             if (获取Auto1盘坐标(false, out int xPoint, out int yPoint))
             {
                 xPos = Auto1XPoint[xPoint];
-                yPos = Auto1YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                yPos = Auto1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
@@ -3455,7 +3534,7 @@ namespace H5509_V2
             if (获取Auto2盘坐标(false, out int xPoint, out int yPoint))
             {
                 xPos = Auto2XPoint[xPoint];
-                yPos = Auto2YPoint[yPoint] + index * Interval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                yPos = Auto2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
                 return true;
             }
             else return false;
@@ -3471,8 +3550,8 @@ namespace H5509_V2
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= LoaderYPoint.Length) break;
-                if (LoaderDicPoint[$"{xPoint},{yPoint + i * Interval}"] == false) break;
+                if (yPoint + i * TrayInterval >= LoaderYPoint.Length) break;
+                if (LoaderDicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] == false) break;
                 if (opens[i + index] == 0)
                 {
                     lsopen[i + index] = true;
@@ -3517,8 +3596,8 @@ namespace H5509_V2
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= Auto1YPoint.Length) break;
-                if (Auto1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (yPoint + i * TrayInterval >= Auto1YPoint.Length) break;
+                if (Auto1DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] == true) break;
                 if (opens[i + index] == 1 && Auto1.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
@@ -3538,8 +3617,8 @@ namespace H5509_V2
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= Auto2YPoint.Length) break;
-                if (Auto2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (yPoint + i * TrayInterval >= Auto2YPoint.Length) break;
+                if (Auto2DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] == true) break;
                 if (opens[i + index] == 1 && Auto2.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
@@ -3559,8 +3638,8 @@ namespace H5509_V2
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= max) break;
-                if (Fix1DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (yPoint + i * TrayInterval >= max) break;
+                if (Fix1DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] == true) break;
                 if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
@@ -3580,8 +3659,8 @@ namespace H5509_V2
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= max) break;
-                if (Fix2DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (yPoint + i * TrayInterval >= max) break;
+                if (Fix2DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] == true) break;
                 if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;
@@ -3601,8 +3680,8 @@ namespace H5509_V2
             for (int i = 0; i < opens.Length; i++)
             {
                 if (index + i == opens.Length) break;
-                if (yPoint + i * Interval >= max) break;
-                if (Fix3DicPoint[$"{xPoint},{yPoint + i * Interval}"] == true) break;
+                if (yPoint + i * TrayInterval >= max) break;
+                if (Fix3DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] == true) break;
                 if (opens[i + index] == 1 && tray.Split(',').Contains(bin[i + index]))
                 {
                     lsopen[i + index] = true;

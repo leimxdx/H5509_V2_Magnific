@@ -3241,7 +3241,8 @@ namespace H5509_V2
 
                 result = SQLiteHelper.runSql(SQLiteConnString, "select value from config where name='当前档案'", out string value).ToString();
 
-                bool isCurrentTray = false;
+                //int index = 0;
+                //bool isCurrentTray = false;
                 if (result == "Success")
                 {
                     foreach (DataGridViewRow dr in uiDataGridView1.Rows)
@@ -3249,18 +3250,33 @@ namespace H5509_V2
                         if (dr.Cells[1].Value.Equals(value))
                         {
                             dr.Cells[0].Value = "当前档案";
-                            dr.Cells[0].Selected = true;
-                            isCurrentTray = true;
+                            //dr.Cells[0].Selected = true;
+                            //index = dr.Cells[0].RowIndex;
+                            //isCurrentTray = true;
                             break;
                         }
                     }
-
                     if (uiDataGridView1.Rows.Count > 0)
                     {
-                        if (isCurrentTray) 刷新设定信息(value);
-                        else 刷新档案信息(uiTabControl6.SelectedTab.Text);
+                        uiDataGridView1.CurrentCell = uiDataGridView1.Rows[0].Cells[1];
                     }
-                    
+                    刷新档案信息(uiTabControl6.SelectedTab.Text);
+
+                    //if (uiDataGridView1.Rows.Count > 0)
+                    //{
+                    //    string name = uiDataGridView1.Rows[index].Cells[1].Value.ToString();
+                    //    if (isCurrentTray) 刷新设定信息(name); //value uiDataGridView1.Rows[0].Cells[]
+                    //    if (uiTabControl6.SelectedTab.Text != "设定")
+                    //    {
+                    //        刷新档案信息(uiTabControl6.SelectedTab.Text);
+                    //    }
+                    //    //uiDataGridView1.SelectedIndex = index;
+                    //}
+
+                    //uiDataGridView1.CurrentCell = uiDataGridView1.Rows[index].Cells[1];
+                    //uiDataGridView1.SelectedIndex = index;
+                    //uiDataGridView1.ClearSelection();
+
                     return "Success";
                 }
                 else return result;
@@ -3284,7 +3300,8 @@ namespace H5509_V2
                 uiDataGridView2.ClearSelection();
                 string result = SQLiteHelper.runSql(SQLiteConnString, $"select tray盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
-                bool isCurrentTray = false;
+                //int index = 0;
+                //bool isCurrentTray = false;
                 if (result == "Success")
                 {
                     foreach (DataGridViewRow dr in uiDataGridView2.Rows)
@@ -3292,17 +3309,27 @@ namespace H5509_V2
                         if (dr.Cells[1].Value.Equals(value))
                         {
                             dr.Cells[0].Value = "当前Tray盘";
-                            dr.Cells[0].Selected = true;
-                            isCurrentTray = true;
+                            //dr.Cells[0].Selected = true;
+                            //index = dr.Cells[0].RowIndex;
+                            //isCurrentTray = true;
                             break;
                         }
                     }
                 }
                 if (uiDataGridView2.Rows.Count > 0)
                 {
-                    if (isCurrentTray) 刷新Tray盘信息(uiTabControl7.SelectedTab.Text, value);
-                    else 刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+                    uiDataGridView2.CurrentCell = uiDataGridView2.Rows[0].Cells[1];
                 }
+                刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+
+                //if (uiDataGridView2.Rows.Count > 0)
+                //{
+                //    if (isCurrentTray) 刷新Tray盘信息(uiTabControl7.SelectedTab.Text, value);
+                //    else 刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
+                //}
+
+                //uiDataGridView2.SelectedIndex = index;
+                //uiDataGridView2.ClearSelection();
             }
         }
         private void 刷新加热盘列表()
@@ -3319,7 +3346,8 @@ namespace H5509_V2
                 uiDataGridView3.ClearSelection();
                 string result = SQLiteHelper.runSql(SQLiteConnString, $"select 加热盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
-                bool isCurrentTray = false;
+                //int index = 0;
+                //bool isCurrentTray = false;
                 if (result == "Success")
                 {
                     foreach (DataGridViewRow dr in uiDataGridView3.Rows)
@@ -3327,20 +3355,30 @@ namespace H5509_V2
                         if (dr.Cells[1].Value.Equals(value))
                         {
                             dr.Cells[0].Value = "当前加热盘";
-                            dr.Cells[0].Selected = true;
-                            isCurrentTray = true;
+                            //dr.Cells[0].Selected = true;
+                            //index = dr.Cells[0].RowIndex;
+                            //isCurrentTray = true;
                             break;
                         }
                     }
                 }
                 if (uiDataGridView3.Rows.Count > 0)
                 {
-                    if (isCurrentTray) 刷新加热盘信息(uiTabControl9.SelectedTab.Text, value);
-                    else 刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+                    uiDataGridView3.CurrentCell = uiDataGridView3.Rows[0].Cells[1];
                 }
+                刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+
+                //if (uiDataGridView3.Rows.Count > 0)
+                //{
+                //    if (isCurrentTray) 刷新加热盘信息(uiTabControl9.SelectedTab.Text, value);
+                //    else 刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+                //}
+                //uiDataGridView3.SelectedIndex = index;
+                //uiDataGridView3.ClearSelection();
+                //uiDataGridView3.ClearSelection();
             }
         }
-        private void 刷新产品(string tabpagetext)
+        public void 刷新产品(string tabpagetext)
         {
             if (tabpagetext == "档案列表")
             {
@@ -6395,6 +6433,7 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            //int interval = TrayInterval;
             //string[] logs = new string[1000];
             //for (int i = 0; i < logs.Length; i++)
             //{
