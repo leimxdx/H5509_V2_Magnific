@@ -476,6 +476,25 @@ namespace H5509_V2
                     lbl_梭车后出7.BackColor = 飞梭后出料IC[1][2] ? Color.Lime : Color.Cyan;
                     lbl_梭车后出8.BackColor = 飞梭后出料IC[1][3] ? Color.Lime : Color.Cyan;
 
+                    bool[] iscan = { uiSwitch19.Active, uiSwitch20.Active, uiSwitch21.Active, uiSwitch22.Active };
+                    uiSwitch24.Active = iscan.Contains(true);
+
+                    iscan = new bool[] { uiSwitch26.Active, uiSwitch27.Active, uiSwitch28.Active, uiSwitch29.Active };
+                    uiSwitch23.Active = iscan.Contains(true);
+
+                    iscan = new bool[] { uiSwitch45.Active, uiSwitch46.Active, uiSwitch47.Active, uiSwitch48.Active };
+                    uiSwitch44.Active = iscan.Contains(true);
+
+                    iscan = new bool[] { uiSwitch40.Active, uiSwitch41.Active, uiSwitch42.Active, uiSwitch43.Active };
+                    uiSwitch39.Active = iscan.Contains(true);
+
+                    iscan = new bool[] { uiSwitch88.Active, uiSwitch87.Active, uiSwitch86.Active, uiSwitch85.Active, uiSwitch92.Active, uiSwitch91.Active, uiSwitch90.Active, uiSwitch89.Active };
+                    uiSwitch84.Active = iscan.Contains(true);
+
+                    iscan = new bool[] { uiSwitch83.Active, uiSwitch82.Active, uiSwitch81.Active, uiSwitch80.Active, uiSwitch97.Active, uiSwitch96.Active, uiSwitch95.Active, uiSwitch94.Active };
+                    uiSwitch78.Active = iscan.Contains(true);
+
+
                     //stopwatch.Stop();
                     //UIMessageTip.Show(this, stopwatch.ElapsedMilliseconds.ToString(), null, 1000, true, true);
                 }
@@ -719,6 +738,77 @@ namespace H5509_V2
             this.uiSwitch44.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
             uiSwitch44.Active = false;
             this.uiSwitch44.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
+        }
+
+        private bool StateCheck()
+        {
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return false;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void uiSwitch23_Click(object sender, EventArgs e)
+        {
+            if (!StateCheck()) return;
+
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.入料吸嘴_吸放料(lsopen, false, false);
+            handler.入料吸嘴_吸放料(lsopen, true, uiSwitch23.Active);
+        }
+
+        private void uiSwitch24_Click(object sender, EventArgs e)
+        {
+            if (!StateCheck()) return;
+
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.入料吸嘴_吸放料(lsopen, true, false);
+            handler.入料吸嘴_吸放料(lsopen, false, uiSwitch24.Active);
+        }
+
+        private void uiSwitch44_Click(object sender, EventArgs e)
+        {
+            if (!StateCheck()) return;
+
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.出料吸嘴_吸放料(lsopen, false, false);
+            handler.出料吸嘴_吸放料(lsopen, true, uiSwitch44.Active);
+        }
+
+        private void uiSwitch39_Click(object sender, EventArgs e)
+        {
+            if (!StateCheck()) return;
+
+            bool[] lsopen = new bool[] { true, true, true, true };
+            handler.出料吸嘴_吸放料(lsopen, true, false);
+            handler.出料吸嘴_吸放料(lsopen, false, uiSwitch39.Active);
+        }
+
+        private void uiSwitch84_Click(object sender, EventArgs e)
+        {
+            if (!StateCheck()) return;
+
+            bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
+            handler.测试吸嘴_吸放料(lsopen, false, false);
+            handler.测试吸嘴_吸放料(lsopen, true, uiSwitch84.Active);
+        }
+
+        private void uiSwitch78_Click(object sender, EventArgs e)
+        {
+            if (!StateCheck()) return;
+
+            bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
+            handler.测试吸嘴_吸放料(lsopen, true, false);
+            handler.测试吸嘴_吸放料(lsopen, false, uiSwitch78.Active);
         }
     }
 }

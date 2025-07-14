@@ -115,18 +115,18 @@ namespace H5509_V2
             达温延时 = new System.Timers.Timer() { Interval = 达温后延时时间 * 1000 }; //2分钟
             达温延时.Elapsed += main.TempFirst;
 
-            //dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
+            dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
 
-            //if (!dTMHelper.Connect())
-            //{
-            //    TCPConnect = false;
-            //    MessageBox.Show("温控器连接失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
-            //else
-            //{
-            //    TCPConnect = true;
-            //    main.刷新温度显示();
-            //}
+            if (!dTMHelper.Connect())
+            {
+                TCPConnect = false;
+                MessageBox.Show("温控器连接失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                TCPConnect = true;
+                main.刷新温度显示();
+            }
 
             //MotionEx motionex = MotionEx.GetInstance();
             //MotionEx motionex2 = MotionEx.GetInstance();
@@ -140,11 +140,11 @@ namespace H5509_V2
 
             handler.参数初始化();
 
-            //result = motionEx.GSNInitCard();
-            //if (result != "Success")
-            //{
-            //    MessageBox.Show("系统加载失败！详细信息：\n" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+            result = motionEx.GSNInitCard();
+            if (result != "Success")
+            {
+                MessageBox.Show("系统加载失败！详细信息：\n" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
             result = Init_FrMain();
             if (result != "Success")
@@ -189,6 +189,22 @@ namespace H5509_V2
         {
             foreach (Control con in cons.Controls)
             {
+                //if (con is UITabControl uItabl)
+                //{
+                //    Debug.WriteLine("dd");
+                //}
+                //if (con.Name == "uiTabControl3")
+                //{
+                //    Debug.WriteLine("dd");
+                //}
+                //if (con is UITabControl uItabl)
+                //{
+                //    for (int i = 0; i < length; i++)
+                //    {
+
+                //    }
+                //}
+
                 if (con.Tag != null)
                 {
                     //根据操作权限控制visable与enable
@@ -392,6 +408,7 @@ namespace H5509_V2
                 }
             }
         }
+
         private void 界面刷新()
         {
             string result = "";
@@ -517,7 +534,7 @@ namespace H5509_V2
                                 bool[][] open = SiteTestIC[sitenum];
 
                                 Com.OutBin.TryDequeue(out string[] bins);
- 
+
                                 //main.显示Dout颜色(sitenum, open, bins);
 
                                 string bb = "@TEST_DONE " + sitenum.ToString("D2");

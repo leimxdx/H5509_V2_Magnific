@@ -170,7 +170,7 @@ namespace H5509_V2
 
         public static bool IsForecePause = false; //强制停止
 
-        public static int 第二段距离 = 8000;
+        public static int 梭车第二段距离 = 10000;
 
         public static double 第二段速度 = 0.3;
 

@@ -308,7 +308,7 @@ namespace H5509_V2
 
         public string 飞梭轴移动(double pos)
         {
-            return motionEx.AxisAbsoluteMove("M20_飞梭轴", pos, 0, 1, 5000);
+            return motionEx.AxisAbsoluteMove("M20_飞梭轴", pos, 0, 1, 梭车第二段距离);
         }
 
         public string Fix3放IC盘轴移动(double pos, int type = 0)
@@ -716,6 +716,39 @@ namespace H5509_V2
 
         #region 测试区位移和上下位移气缸
 
+        public string 测试区_位移气缸原位信号读取(int site)
+        {
+            string result = 获取位移气缸(site, out string yIoName);
+            string result2 = 获取位移气缸原位感应(site, out string xIoName);
+            if (result != "Success") return result;
+            if (result2 != "Success") return result2;
+
+            result = motionEx.GetDi(xIoName, out string value);
+
+            //result = 读取气缸输入信号(xIoName, "1", out long ms);
+            if (result != "Success") return $"{yIoName}位移气缸原位信号读取失败!" + result;
+
+            if (value == "1") return "Success";
+            else return "Fail";
+
+        }
+
+        public string 测试区_升降气缸原位信号读取(int site)
+        {
+            string result = 获取下压气缸(site, out string yIoName);
+            string result2 = 获取下压气缸原位感应(site, out string xIoName);
+            if (result != "Success") return result;
+            if (result2 != "Success") return result2;
+
+            result = motionEx.GetDi(xIoName, out string value);
+
+            //result = 读取气缸输入信号(xIoName, "1", out long ms);
+            if (result != "Success") return $"{yIoName}升降气缸原位信号读取失败!" + result; 
+
+            if (value == "1") return "Success";
+            else return "Fail";
+        }
+
         public string 测试区_位移气缸到位输出(string yIoName, string xIoName)
         {
             string result = motionEx.SetDo(yIoName, true);
@@ -971,39 +1004,22 @@ namespace H5509_V2
             for (short site = 0; site < 16; site++)
             {
                 //1:判断测试模组上升感应是否亮起
-                string result = 获取位移气缸原位感应(site, out string xIoName);
-                if (result == "Success")
-                {
-                    if (xIoName == "0")
-                    {
-                        iscanstart = false;
-                        Listcode.Add($"10{site + 14:D2}001");
-                        RunLog($"[Code]10{site + 14:D2}001,[Msg](按下开始)site{site + 1}升降气缸未在上方", LogType.AlarmLog);
-                    }
-                }
-                else
+                string result = 测试区_位移气缸原位信号读取(site);
+                if (result != "Success")
                 {
                     iscanstart = false;
                     Listcode.Add($"10{site + 14:D2}001");
-                    RunLog($"[Code]10{site + 14:D2}001,[Msg](按下开始)site{site + 1}升降气缸感应器读取失败!");
+                    RunLog($"[Code]10{site + 14:D2}001,[Msg](按下开始)site{site + 1}升降气缸未在上方", LogType.AlarmLog);
+
                 }
 
                 //2:判断测试模组后位移气缸感应是否亮起
-                result = 获取下压气缸原位感应(site, out xIoName);
-                if (result == "Success")
-                {
-                    if (xIoName == "0")
-                    {
-                        iscanstart = false;
-                        Listcode.Add($"10{site + 30:D2}001");
-                        RunLog($"[Code]10{site + 30:D2}001,[Msg](按下开始)site{site + 1}前后气缸未在后方", LogType.AlarmLog);
-                    }
-                }
-                else
+                result = 测试区_升降气缸原位信号读取(site);
+                if (result != "Success")
                 {
                     iscanstart = false;
                     Listcode.Add($"10{site + 30:D2}001");
-                    RunLog($"[Code]10{site + 30:D2}001,[Msg](按下开始)site{site + 1}前后气缸感应器读取失败!", LogType.AlarmLog);
+                    RunLog($"[Code]10{site + 30:D2}001,[Msg](按下开始)site{site + 1}前后气缸未在后方", LogType.AlarmLog);
                 }
             }
             return iscanstart;
@@ -2890,7 +2906,7 @@ namespace H5509_V2
             Auto2数量 = 0;
             Fix1数量 = 0;
             Fix2数量 = 0;
-            Fix3数量 = 0; 
+            Fix3数量 = 0;
             HeatTrayClear();
             Auto1TrayClear();
             Auto2TrayClear();
@@ -3655,7 +3671,7 @@ namespace H5509_V2
 
                         if (设备状态 == 1) 设备状态 = 2;
 
-                        if (设备状态 == 0) motionEx.Motion.AllAxisStop();
+                        if (设备状态 == 0 || 设备状态 == 2) motionEx.Motion.AllAxisStop();
 
                         form_alarm.alarmLight(0, 1, 0, 0);
                         //motionEx.Motion.AllAxisStop();
@@ -4413,7 +4429,7 @@ namespace H5509_V2
             PS结批流程.StepID = 500;
             while (true)
             {
-                if(结批标记) Thread.Sleep(10);
+                if (结批标记) Thread.Sleep(10);
                 else Thread.Sleep(100);
 
                 if (APPmaster.IsForecePause)
@@ -5153,7 +5169,7 @@ namespace H5509_V2
                             stopwatch.Stop();
                             stopwatch.Reset();
 
-                            bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0};
+                            bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
                             入料吸嘴_吸放料(bools, true, false);
                         }
                         else
@@ -6954,7 +6970,7 @@ namespace H5509_V2
                             stopwatch.Stop();
                             stopwatch.Reset();
 
-                            bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 }; 
+                            bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
                             出料吸嘴_吸放料(bools, true, false);
                         }
                         else
@@ -8567,8 +8583,8 @@ namespace H5509_V2
                                                 //for (int i = 0; i < InSiteQueue.Count; i++)
                                                 //{
 
-                                                    //}
-                                                    //InSiteQueue.Contains(site);
+                                                //}
+                                                //InSiteQueue.Contains(site);
                                             }
                                         }
                                     }
@@ -8990,15 +9006,30 @@ namespace H5509_V2
                         PS测试手臂取待测料流程.StepName = "测试吸嘴张开气缸到位输入读取";
                         RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                         result = 测试吸嘴张开气缸原位输入读取();
-                        if (result == "Success")
+                        string result3 = 测试区_位移气缸原位信号读取(site);
+                        string result4 = 测试区_升降气缸原位信号读取(site);
+                        if (result == "Success" && result3 == "Success" && result4 == "Success")
                         {
                             PS测试手臂取待测料流程.StepID = 720;
                             RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试Z等待气缸动作完成");
                         }
                         else
                         {
-                            Listcode.Add($"1011000");
-                            RunLog($"[Code]1011000,[Msg]测试吸嘴张开气缸原位输入读取失败!" + result, LogType.AlarmLog);
+                            if (result != "Success")
+                            {
+                                Listcode.Add($"1011000");
+                                RunLog($"[Code]1011000,[Msg]测试吸嘴张开气缸原位输入读取失败!" + result, LogType.AlarmLog);
+                            }
+                            if (result3 != "Success")
+                            {
+                                Listcode.Add($"10{site + 30:D2}001");
+                                RunLog($"[Code]10{site + 30:D2}001,[Msg]测试区Site{site + 1}位移气缸未在原位!" + result, LogType.AlarmLog);
+                            }
+                            if (result4 != "Success")
+                            {
+                                Listcode.Add($"10{site + 14:D2}001");
+                                RunLog($"[Code]10{site + 14:D2}001,[Msg]测试区Site{site + 1}升降气缸未在原位!" + result, LogType.AlarmLog);
+                            }
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9330,8 +9361,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            Listcode.Add($"1011001");
-                            RunLog($"[Code]1011001,[Msg]测试吸嘴_张卡气缸张开失败!" + result, LogType.AlarmLog);
+                            if (result != "Success")
+                            {
+                                Listcode.Add($"1011001");
+                                RunLog($"[Code]1011001,[Msg]测试吸嘴_张卡气缸张开失败!" + result, LogType.AlarmLog);
+                            }
                             ProgramPause = true;
                             IsPause = true;
                         }
@@ -9383,23 +9417,43 @@ namespace H5509_V2
                         PS测试手臂取已测料流程.StepName = "测试Z向下移动";
                         if (SiteTestState[site] == 4) //待取出
                         {
-                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                            result = 获取测试Z吸料补偿(site, out double sitez);
-                            if (result == "Success")
+                            string result3 = 测试区_位移气缸原位信号读取(site);
+                            string result4 = 测试区_升降气缸原位信号读取(site);
+                            if (result3 == "Success" && result4 == "Success")
                             {
-                                result = 测试手臂Z移动(初始点位.测试_Test区吸_Z + sitez, true);
+                                RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
+                                result = 获取测试Z吸料补偿(site, out double sitez);
                                 if (result == "Success")
                                 {
-                                    PS测试手臂取已测料流程.StepID = 525;
+                                    result = 测试手臂Z移动(初始点位.测试_Test区吸_Z + sitez, true);
+                                    if (result == "Success")
+                                    {
+                                        PS测试手臂取已测料流程.StepID = 525;
+                                    }
+                                    else
+                                    {
+                                        Listcode.Add("2026007");
+                                        RunLog($"[Code]2026007,[Msg]测试Z向下移动失败!" + result, LogType.AlarmLog);
+                                        M19_测试手臂Z轴ErrorMsg = result;
+                                        ProgramPause = true;
+                                        IsPause = true;
+                                    }
                                 }
-                                else
+                            }
+                            else
+                            {
+                                if (result3 != "Success")
                                 {
-                                    Listcode.Add("2026007");
-                                    RunLog($"[Code]2026007,[Msg]测试Z向下移动失败!" + result, LogType.AlarmLog);
-                                    M19_测试手臂Z轴ErrorMsg = result;
-                                    ProgramPause = true;
-                                    IsPause = true;
+                                    Listcode.Add($"10{site + 30:D2}001");
+                                    RunLog($"[Code]10{site + 30:D2}001,[Msg]测试区Site{site + 1}位移气缸未在原位!" + result, LogType.AlarmLog);
                                 }
+                                if (result4 != "Success")
+                                {
+                                    Listcode.Add($"10{site + 14:D2}001");
+                                    RunLog($"[Code]10{site + 14:D2}001,[Msg]测试区Site{site + 1}升降气缸未在原位!" + result, LogType.AlarmLog);
+                                }
+                                ProgramPause = true;
+                                IsPause = true;
                             }
                         }
                         else Thread.Sleep(10);

@@ -459,7 +459,7 @@ namespace H5509_V2
 
         private void button146_Click(object sender, EventArgs e)
         {
-
+            if (设备状态 == 1) return;
             APPmaster.GetAxisCore(cobox_axisname.Text, out short core, out short axis);
 
             if (button146.Text == "使能开启")
@@ -495,7 +495,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button152_Click(object sender, EventArgs e)
         {
-
+            if (设备状态 == 1) return;
             APPmaster.GetAxisCore(cobox_axisname.Text, out short core, out short axis);
 
             string result = motion.AxisClrSts(core, axis);
@@ -513,7 +513,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-
+            if (设备状态 == 1) return;
             APPmaster.GetAxisCore(cobox_axisname.Text, out short core, out short axis);
 
             string result = motion.AxisZeroPos(core, axis);
@@ -807,6 +807,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
@@ -828,6 +829,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button39_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
@@ -851,6 +853,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
@@ -872,6 +875,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button145_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisStop();
         }
 
@@ -882,6 +886,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button156_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisHomeInfo axisHome = GetHomeValue();
             if (axisHome != null)
             {
@@ -903,6 +908,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button155_Click(object sender, EventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisStop();
         }
 
@@ -958,6 +964,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button15_MouseDown(object sender, MouseEventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
@@ -986,6 +993,7 @@ namespace H5509_V2
         /// <param name="e"></param>
         private void button3_MouseDown(object sender, MouseEventArgs e)
         {
+            if (设备状态 == 1) return;
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
@@ -3363,6 +3371,10 @@ namespace H5509_V2
             {
                 刷新产品(uiTabControl5.SelectedTab.Text);
             }
+            //else if (tabpagetext == "产品")
+            //{
+            //    刷新产品(uiTabControl5.SelectedTab.Text);
+            //}
         }
 
         private void uiTabControl1_Selecting(object sender, TabControlCancelEventArgs e)
@@ -3777,7 +3789,7 @@ namespace H5509_V2
             button72.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 15000);
+                string result = motionEx.AxisAbsoluteMove("M20_飞梭轴", pos, 1, 1, 梭车第二段距离);
                 if (result != "Success") RunLog("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
@@ -3794,7 +3806,7 @@ namespace H5509_V2
             button72.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M20_飞梭轴", pos, 0, 1, 15000);
+                string result = motionEx.AxisAbsoluteMove("M20_飞梭轴", pos, 1, 1, 梭车第二段距离);
                 if (result != "Success") RunLog("移动失败!" + result);
                 this.Invoke(new Action(() =>
                 {
@@ -3804,26 +3816,6 @@ namespace H5509_V2
             });
         }
 
-        private void 入料手臂X移动初始点位(double mm)
-        {
-            button29.Enabled = false;
-            button224.Enabled = false;
-            button32.Enabled = false;
-            button20.Enabled = false;
-            Task.Run(() =>
-            {
-                string result = 单轴绝对运动("M22_入料手臂X轴", mm);
-                if (result != "Success") RunLog("移动失败!" + result);
-
-                this.Invoke(new Action(() =>
-                {
-                    button29.Enabled = true;
-                    button224.Enabled = true;
-                    button32.Enabled = true;
-                    button20.Enabled = true;
-                }));
-            });
-        }
 
         private void button29_Click(object sender, EventArgs e)
         {
@@ -3850,6 +3842,28 @@ namespace H5509_V2
         }
 
 
+        private void 入料手臂X移动初始点位(double mm)
+        {
+            button29.Enabled = false;
+            button224.Enabled = false;
+            button32.Enabled = false;
+            button20.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M22_入料手臂X轴", mm, 1);
+                //string result = 单轴绝对运动("M22_入料手臂X轴", mm);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button29.Enabled = true;
+                    button224.Enabled = true;
+                    button32.Enabled = true;
+                    button20.Enabled = true;
+                }));
+            });
+        }
+
         private void 入料手臂Y移动初始点位(double mm)
         {
             button28.Enabled = false;
@@ -3858,7 +3872,7 @@ namespace H5509_V2
             button19.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M16_入料手臂Y轴", mm);
+                string result = motionEx.AxisAbsoluteMove("M16_入料手臂Y轴", mm, 1);
                 if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
@@ -3887,7 +3901,8 @@ namespace H5509_V2
                 double z4 = Convert.ToDouble(uiDoubleUpDown19.Text);
                 string[] axis = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
-                string result = 多轴绝对运动(axis, pos, 1, inoldpos < mm ? 1 : 0, 出入料Z第二段距离);
+                string result = motionEx.AxisMove(axis, pos, 1, inoldpos < mm ? 1 : 0, 出入料Z第二段距离);
+                //string result = 多轴绝对运动(axis, pos, 1, inoldpos < mm ? 1 : 0, 出入料Z第二段距离);
                 if (result != "Success") RunLog("移动失败!" + result);
                 inoldpos = mm;
                 this.Invoke(new Action(() =>
@@ -3900,6 +3915,7 @@ namespace H5509_V2
                 }));
             });
         }
+
         private void 入料手臂变距轴移动初始点位(double mm)
         {
             button240.Enabled = false;
@@ -3907,7 +3923,7 @@ namespace H5509_V2
             button242.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M5_入料手臂P轴", mm);
+                string result = motionEx.AxisAbsoluteMove("M5_入料手臂P轴", mm, 1);
                 if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
@@ -3918,19 +3934,57 @@ namespace H5509_V2
                 }));
             });
         }
-        private void 出料手臂变距轴移动初始点位(double mm)
+
+        private void 出料手臂X移动初始点位(double mm)
         {
-            button245.Enabled = false;
-            button244.Enabled = false;
+            button56.Enabled = false;
+            button58.Enabled = false;
+            button55.Enabled = false;
+            button36.Enabled = false;
+            button51.Enabled = false;
+            button21.Enabled = false;
+            button45.Enabled = false;
             Task.Run(() =>
             {
-                string result = 单轴绝对运动("M10_出料手臂P轴", mm);
+                string result = motionEx.AxisAbsoluteMove("M23_出料手臂X轴", mm, 1);
                 if (result != "Success") RunLog("移动失败!" + result);
 
                 this.Invoke(new Action(() =>
                 {
-                    button245.Enabled = true;
-                    button244.Enabled = true;
+                    button56.Enabled = true;
+                    button58.Enabled = true;
+                    button55.Enabled = true;
+                    button36.Enabled = true;
+                    button51.Enabled = true;
+                    button21.Enabled = true;
+                    button45.Enabled = true;
+                }));
+            });
+        }
+
+        private void 出料手臂Y移动初始点位(double mm)
+        {
+            button48.Enabled = false;
+            button57.Enabled = false;
+            button54.Enabled = false;
+            button37.Enabled = false;
+            button49.Enabled = false;
+            button34.Enabled = false;
+            button44.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M17_出料手臂Y轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button48.Enabled = true;
+                    button57.Enabled = true;
+                    button54.Enabled = true;
+                    button37.Enabled = true;
+                    button49.Enabled = true;
+                    button34.Enabled = true;
+                    button44.Enabled = true;
                 }));
             });
         }
@@ -3954,7 +4008,8 @@ namespace H5509_V2
                 string[] axis = { "M6_出料手臂Z1轴", "M7_出料手臂Z2轴", "M8_出料手臂Z3轴", "M9_出料手臂Z4轴" };
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
 
-                string result = 多轴绝对运动(axis, pos, 1, outoldpos < mm ? 1 : 0, 出入料Z第二段距离);
+                string result = motionEx.AxisMove(axis, pos, 1, outoldpos < mm ? 1 : 0, 出入料Z第二段距离);
+                //string result = 多轴绝对运动(axis, pos, 1, outoldpos < mm ? 1 : 0, 出入料Z第二段距离);
                 if (result != "Success") RunLog("移动失败!" + result);
                 outoldpos = mm;
 
@@ -3967,6 +4022,114 @@ namespace H5509_V2
                     button42.Enabled = true;
                     button33.Enabled = true;
                     button43.Enabled = true;
+                }));
+            });
+        }
+
+        private void 出料手臂变距轴移动初始点位(double mm)
+        {
+            button245.Enabled = false;
+            button244.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M10_出料手臂P轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button245.Enabled = true;
+                    button244.Enabled = true;
+                }));
+            });
+        }
+
+        private void 抓盘手臂X移动初始点位(double mm)
+        {
+            string result = handler.移Tray上下气缸原位输入读取(out string value);
+            if (result == "Success")
+            {
+                if (value == "1")
+                {
+                    button76.Enabled = false;
+                    button75.Enabled = false;
+                    button74.Enabled = false;
+                    button73.Enabled = false;
+                    Task.Run(() =>
+                    {
+                        result = motionEx.AxisAbsoluteMove("M18_放Tary盘轴", mm, 1);
+                        if (result != "Success") RunLog("移动失败!" + result);
+                        this.Invoke(new Action(() =>
+                        {
+                            button76.Enabled = true;
+                            button75.Enabled = true;
+                            button74.Enabled = true;
+                            button73.Enabled = true;
+                        }));
+                    });
+                }
+                else
+                {
+                    MessageBox.Show($"抓盘手臂上下气缸未在原位");
+                }
+            }
+            else
+            {
+                APPmaster.ProgramPause = true;
+                IsPause = true;
+                MessageBox.Show($"移Tray上下气缸原位输入读取失败！" + result);
+            }
+        }
+
+        private void 测试手臂X移动初始点位(double mm)
+        {
+            button62.Enabled = false;
+            button67.Enabled = false;
+            button70.Enabled = false;
+            button69.Enabled = false;
+            button66.Enabled = false;
+            button63.Enabled = false;
+            button59.Enabled = false;
+            button65.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M21_测试手臂X轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button62.Enabled = true;
+                    button67.Enabled = true;
+                    button70.Enabled = true;
+                    button69.Enabled = true;
+                    button66.Enabled = true;
+                    button63.Enabled = true;
+                    button59.Enabled = true;
+                    button65.Enabled = true;
+                }));
+            });
+        }
+
+        private void 测试手臂Z移动初始点位(double mm)
+        {
+            button60.Enabled = false;
+            button68.Enabled = false;
+            button61.Enabled = false;
+            button64.Enabled = false;
+            button47.Enabled = false;
+            button41.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M19_测试手臂Z轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button60.Enabled = true;
+                    button68.Enabled = true;
+                    button61.Enabled = true;
+                    button64.Enabled = true;
+                    button47.Enabled = true;
+                    button41.Enabled = true;
                 }));
             });
         }
@@ -4033,42 +4196,6 @@ namespace H5509_V2
             所有轴紧急停止();
         }
 
-        private void 抓盘手臂X移动初始点位(double mm)
-        {
-            string result = handler.移Tray上下气缸原位输入读取(out string value);
-            if (result == "Success")
-            {
-                if (value == "1")
-                {
-                    button76.Enabled = false;
-                    button75.Enabled = false;
-                    button74.Enabled = false;
-                    button73.Enabled = false;
-                    Task.Run(() =>
-                    {
-                        result = 单轴绝对运动("M18_放Tary盘轴", mm);
-                        if (result != "Success") RunLog("移动失败!" + result);
-                        this.Invoke(new Action(() =>
-                        {
-                            button76.Enabled = true;
-                            button75.Enabled = true;
-                            button74.Enabled = true;
-                            button73.Enabled = true;
-                        }));
-                    });
-                }
-                else
-                {
-                    MessageBox.Show($"抓盘手臂上下气缸未在原位");
-                }
-            }
-            else
-            {
-                APPmaster.ProgramPause = true;
-                IsPause = true;
-                MessageBox.Show($"移Tray上下气缸原位输入读取失败！" + result);
-            }
-        }
 
         private void button76_Click(object sender, EventArgs e)
         {
@@ -4095,32 +4222,6 @@ namespace H5509_V2
         }
 
 
-        private void 出料手臂X移动初始点位(double mm)
-        {
-            button56.Enabled = false;
-            button58.Enabled = false;
-            button55.Enabled = false;
-            button36.Enabled = false;
-            button51.Enabled = false;
-            button21.Enabled = false;
-            button45.Enabled = false;
-            Task.Run(() =>
-            {
-                string result = 单轴绝对运动("M23_出料手臂X轴", mm);
-                if (result != "Success") RunLog("移动失败!" + result);
-
-                this.Invoke(new Action(() =>
-                {
-                    button56.Enabled = true;
-                    button58.Enabled = true;
-                    button55.Enabled = true;
-                    button36.Enabled = true;
-                    button51.Enabled = true;
-                    button21.Enabled = true;
-                    button45.Enabled = true;
-                }));
-            });
-        }
 
         private void button56_Click(object sender, EventArgs e)
         {
@@ -4164,32 +4265,6 @@ namespace H5509_V2
             出料手臂X移动初始点位(pos);
         }
 
-        private void 出料手臂Y移动初始点位(double mm)
-        {
-            button48.Enabled = false;
-            button57.Enabled = false;
-            button54.Enabled = false;
-            button37.Enabled = false;
-            button49.Enabled = false;
-            button34.Enabled = false;
-            button44.Enabled = false;
-            Task.Run(() =>
-            {
-                string result = 单轴绝对运动("M17_出料手臂Y轴", mm);
-                if (result != "Success") RunLog("移动失败!" + result);
-
-                this.Invoke(new Action(() =>
-                {
-                    button48.Enabled = true;
-                    button57.Enabled = true;
-                    button54.Enabled = true;
-                    button37.Enabled = true;
-                    button49.Enabled = true;
-                    button34.Enabled = true;
-                    button44.Enabled = true;
-                }));
-            });
-        }
 
         private void button48_Click(object sender, EventArgs e)
         {
@@ -4233,60 +4308,6 @@ namespace H5509_V2
             出料手臂Y移动初始点位(pos);
         }
 
-        private void 测试手臂X移动初始点位(double mm)
-        {
-            button62.Enabled = false;
-            button67.Enabled = false;
-            button70.Enabled = false;
-            button69.Enabled = false;
-            button66.Enabled = false;
-            button63.Enabled = false;
-            button59.Enabled = false;
-            button65.Enabled = false;
-            Task.Run(() =>
-            {
-                string result = 单轴绝对运动("M21_测试手臂X轴", mm);
-                if (result != "Success") RunLog("移动失败!" + result);
-
-                this.Invoke(new Action(() =>
-                {
-                    button62.Enabled = true;
-                    button67.Enabled = true;
-                    button70.Enabled = true;
-                    button69.Enabled = true;
-                    button66.Enabled = true;
-                    button63.Enabled = true;
-                    button59.Enabled = true;
-                    button65.Enabled = true;
-                }));
-            });
-        }
-
-
-        private void 测试手臂Z移动初始点位(double mm)
-        {
-            button60.Enabled = false;
-            button68.Enabled = false;
-            button61.Enabled = false;
-            button64.Enabled = false;
-            button47.Enabled = false;
-            button41.Enabled = false;
-            Task.Run(() =>
-            {
-                string result = 单轴绝对运动("M19_测试手臂Z轴", mm);
-                if (result != "Success") RunLog("移动失败!" + result);
-
-                this.Invoke(new Action(() =>
-                {
-                    button60.Enabled = true;
-                    button68.Enabled = true;
-                    button61.Enabled = true;
-                    button64.Enabled = true;
-                    button47.Enabled = true;
-                    button41.Enabled = true;
-                }));
-            });
-        }
 
         private void button62_Click(object sender, EventArgs e)
         {

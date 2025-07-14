@@ -13,7 +13,7 @@ using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
-    public partial class _speed: UIUserControl
+    public partial class _speed : UIUserControl
     {
         public _speed()
         {
@@ -60,6 +60,30 @@ namespace H5509_V2
             uiDoubleUpDown5.Value = axisRun.速度百分比;
             APPmaster.GetAxisRunInfo("M11_Fix3放IC轴", out axisRun);
             uiDoubleUpDown2.Value = axisRun.速度百分比;
+
+            uiDoubleUpDown6.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown6_ValueChanged);
+            if ((uiDoubleUpDown99.Value + uiDoubleUpDown97.Value + uiDoubleUpDown98.Value + uiDoubleUpDown108.Value) / 4 == uiDoubleUpDown99.Value)
+            {
+                uiDoubleUpDown6.Value = uiDoubleUpDown99.Value;
+            }
+            else uiDoubleUpDown6.Value = 100;
+            uiDoubleUpDown6.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown6_ValueChanged);
+
+            this.uiDoubleUpDown7.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown7_ValueChanged);
+            if ((uiDoubleUpDown16.Value + uiDoubleUpDown17.Value + uiDoubleUpDown18.Value + uiDoubleUpDown14.Value) / 4 == uiDoubleUpDown16.Value)
+            {
+                uiDoubleUpDown7.Value = uiDoubleUpDown16.Value;
+            }
+            else uiDoubleUpDown7.Value = 100;
+            this.uiDoubleUpDown7.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown7_ValueChanged);
+
+            this.uiDoubleUpDown8.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown8_ValueChanged);
+            if ((uiDoubleUpDown106.Value + uiDoubleUpDown107.Value) / 2 == uiDoubleUpDown106.Value)
+            {
+                uiDoubleUpDown8.Value = uiDoubleUpDown106.Value;
+            }
+            else uiDoubleUpDown8.Value = 100;
+            this.uiDoubleUpDown8.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown8_ValueChanged);
 
         }
 
@@ -151,6 +175,30 @@ namespace H5509_V2
         private void uiButton4_Click(object sender, EventArgs e)
         {
             刷新速度值();
+        }
+
+
+
+        private void uiDoubleUpDown6_ValueChanged(object sender, double value)
+        {
+            uiDoubleUpDown99.Value = uiDoubleUpDown6.Value;
+            uiDoubleUpDown97.Value = uiDoubleUpDown6.Value;
+            uiDoubleUpDown98.Value = uiDoubleUpDown6.Value;
+            uiDoubleUpDown108.Value = uiDoubleUpDown6.Value;
+        }
+
+        private void uiDoubleUpDown7_ValueChanged(object sender, double value)
+        {
+            uiDoubleUpDown16.Value = uiDoubleUpDown7.Value;
+            uiDoubleUpDown17.Value = uiDoubleUpDown7.Value;
+            uiDoubleUpDown18.Value = uiDoubleUpDown7.Value;
+            uiDoubleUpDown14.Value = uiDoubleUpDown7.Value;
+        }
+
+        private void uiDoubleUpDown8_ValueChanged(object sender, double value)
+        {
+            uiDoubleUpDown106.Value = uiDoubleUpDown8.Value;
+            uiDoubleUpDown107.Value = uiDoubleUpDown8.Value;
         }
     }
 }

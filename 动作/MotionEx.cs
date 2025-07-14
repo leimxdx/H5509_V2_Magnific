@@ -426,7 +426,7 @@ namespace H5509_V2
                             }
                         }
                     }
-                    else if (APPmaster.IsEmptyPause && axisRun.轴名称 == "M12_Empty顶盘轴")
+                    else if (APPmaster.IsEmptyPause && axisRun.轴名称 == "M12_Empty顶盘轴" && type == 0)
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
                         while (true)
@@ -440,7 +440,7 @@ namespace H5509_V2
                             }
                         }
                     }
-                    else if (APPmaster.IsLoadPause && axisRun.轴名称 == "M13_Loader顶盘轴")
+                    else if (APPmaster.IsLoadPause && axisRun.轴名称 == "M13_Loader顶盘轴" && type == 0)
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
                         while (true)
@@ -516,7 +516,7 @@ namespace H5509_V2
                     }
 
                     stopwatch.Stop();
-                    RunLog($"{axisRun.轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前实际位置{encPos}");
+                    RunLog($"{axisRun.轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前目标位置{prfPos},实际位置{encPos}");
                     stopwatch.Reset();
 
                     #endregion
@@ -697,7 +697,7 @@ namespace H5509_V2
                         }
 
                         stopwatch.Stop();
-                        RunLog($"{axisRuns[i].轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前实际位置{encPos}");
+                        RunLog($"{axisRuns[i].轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前目标位置{prfPos[i]},实际位置{encPos}");
                         stopwatch.Reset();
                     }
 

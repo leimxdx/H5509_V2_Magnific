@@ -1157,7 +1157,7 @@ namespace H5509_V2
                             //    label_driverStatus.ForeColor = Color.LimeGreen;
                             //}
                             //else 
-                            if (正在结批)
+                            if (结批标记) //正在结批
                             {
                                 label_driverStatus.Text = "结批中";
                                 label_driverStatus.ForeColor = Color.LimeGreen;
@@ -1518,63 +1518,69 @@ namespace H5509_V2
         //        if (分bin[i].bin == b) 分bin[i].num++;
         //    }
         //}
-
+        
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
-            bool[] tempopen; //bool[] 用于存储每个Site的温度是否达温或异常
-            double tempwavemax = 加热盘.波动温度上限;
-            double tempwavemin = 加热盘.波动温度下限;
-            if (!温控达温)
-            {
-                tempopen = 检测温度是否达温(tempwavemax, tempwavemin);
-                if (!tempopen.Contains(false)) //有false(没有达温:False,达温/探头异常：true)说明还有Site没有达温
-                {
-                    if (!初次达温) //达温后开启延时定时器
-                    {
-                        if (!达温延时.Enabled)
-                        {
-                            RunLog("初次达温延时开始");
-                            达温延时.Start();
-                        }
-                    }
-                    else
-                    {
-                        温控达温 = true;
-                        达温时间 = DateTime.Now;
-                        RunLog("加热盘已达温");
-                        RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
-                        RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
-                    }
-                }
-            }
-            else
-            {
-                tempopen = 检测温度是否异常(tempwavemax, tempwavemin);
-                if (tempopen.Contains(true)) //有true说明有Site超出波动范围
-                {
-                    for (int site = 0; site < SiteTemp.Length; site++)
-                    {
-                        if (tempopen[site] && SiteTemp[site] != 32770)
-                        {
-                            double temp = SiteTemp[site];
-                            if (temp > 加热盘.波动温度上限)
-                            {
-                                Listcode.Add($"8{site:D2}319");
-                                if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
-                                else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
-                            }
-                            else if (temp <= 加热盘.波动温度下限)
-                            {
-                                Listcode.Add($"8{site:D2}319");
-                                if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
-                                else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
-                            }
-                        }
-                    }
-                    ProgramPause = true;
-                    IsPause = true;
-                }
-            }
+            //if (!handler.CheckAircyStatus())
+            //{
+            //    Debug.WriteLine("气缸异常");
+            //}
+            //bool[] tempopen; //bool[] 用于存储每个Site的温度是否达温或异常
+            //double tempwavemax = 加热盘.波动温度上限;
+            //double tempwavemin = 加热盘.波动温度下限;
+            //if (!温控达温)
+            //{
+            //    tempopen = 检测温度是否达温(tempwavemax, tempwavemin);
+            //    if (!tempopen.Contains(false)) //有false(没有达温:False,达温/探头异常：true)说明还有Site没有达温
+            //    {
+            //        if (!初次达温) //达温后开启延时定时器
+            //        {
+            //            if (!达温延时.Enabled)
+            //            {
+            //                RunLog("初次达温延时开始");
+            //                达温延时.Start();
+            //            }
+            //        }
+            //        else
+            //        {
+            //            温控达温 = true;
+            //            达温时间 = DateTime.Now;
+            //            RunLog("加热盘已达温");
+            //            RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+            //            RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    tempopen = 检测温度是否异常(tempwavemax, tempwavemin);
+            //    if (tempopen.Contains(true)) //有true说明有Site超出波动范围
+            //    {
+            //        for (int site = 0; site < SiteTemp.Length; site++)
+            //        {
+            //            if (tempopen[site] && SiteTemp[site] != 32770)
+            //            {
+            //                double temp = SiteTemp[site];
+            //                if (temp > 加热盘.波动温度上限)
+            //                {
+            //                    Listcode.Add($"8{site:D2}319");
+            //                    if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+            //                    else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃高于上限[{加热盘.波动温度上限}]℃", LogType.AlarmLog);
+            //                }
+            //                else if (temp <= 加热盘.波动温度下限)
+            //                {
+            //                    Listcode.Add($"8{site:D2}319");
+            //                    if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+            //                    else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{temp}]℃低于下限[{加热盘.波动温度下限}]℃", LogType.AlarmLog);
+            //                }
+            //            }
+            //        }
+            //        ProgramPause = true;
+            //        IsPause = true;
+            //    }
+            //}
+
+            #region 温度调试代码 保存下
             //bool[] tempopen;
             //double tempwavemax = 加热盘.波动温度上限;
             //double tempwavemin = 加热盘.波动温度下限;
@@ -2093,6 +2099,7 @@ namespace H5509_V2
             //设置信息.开site信息 = siteStatus;
 
             //刷新开Site状态();
+            #endregion
         }
 
         private void label_driverStatus_TextChanged(object sender, EventArgs e)

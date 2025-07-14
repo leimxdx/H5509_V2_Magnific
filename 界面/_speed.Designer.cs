@@ -31,6 +31,14 @@
             this.uiButton4 = new Sunny.UI.UIButton();
             this.uiButton3 = new Sunny.UI.UIButton();
             this.uiTitlePanel4 = new Sunny.UI.UITitlePanel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown9 = new Sunny.UI.UIDoubleUpDown();
+            this.label8 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown8 = new Sunny.UI.UIDoubleUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown7 = new Sunny.UI.UIDoubleUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.uiDoubleUpDown6 = new Sunny.UI.UIDoubleUpDown();
             this.label13 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -72,7 +80,7 @@
             // 
             this.uiButton4.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton4.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton4.Location = new System.Drawing.Point(360, 442);
+            this.uiButton4.Location = new System.Drawing.Point(664, 434);
             this.uiButton4.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton4.Name = "uiButton4";
             this.uiButton4.RectColor = System.Drawing.Color.White;
@@ -87,7 +95,7 @@
             // 
             this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton3.Location = new System.Drawing.Point(485, 442);
+            this.uiButton3.Location = new System.Drawing.Point(789, 434);
             this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton3.Name = "uiButton3";
             this.uiButton3.RectColor = System.Drawing.Color.White;
@@ -100,6 +108,14 @@
             // 
             // uiTitlePanel4
             // 
+            this.uiTitlePanel4.Controls.Add(this.label9);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown9);
+            this.uiTitlePanel4.Controls.Add(this.label8);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown8);
+            this.uiTitlePanel4.Controls.Add(this.label7);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown7);
+            this.uiTitlePanel4.Controls.Add(this.label6);
+            this.uiTitlePanel4.Controls.Add(this.uiDoubleUpDown6);
             this.uiTitlePanel4.Controls.Add(this.label13);
             this.uiTitlePanel4.Controls.Add(this.label16);
             this.uiTitlePanel4.Controls.Add(this.label17);
@@ -141,16 +157,131 @@
             this.uiTitlePanel4.Name = "uiTitlePanel4";
             this.uiTitlePanel4.Padding = new System.Windows.Forms.Padding(1, 35, 1, 1);
             this.uiTitlePanel4.ShowText = false;
-            this.uiTitlePanel4.Size = new System.Drawing.Size(585, 408);
+            this.uiTitlePanel4.Size = new System.Drawing.Size(886, 408);
             this.uiTitlePanel4.TabIndex = 311;
             this.uiTitlePanel4.Text = "速度（单位：%）";
             this.uiTitlePanel4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label9.Location = new System.Drawing.Point(590, 162);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(138, 21);
+            this.label9.TabIndex = 363;
+            this.label9.Text = "其他手臂整体速度";
+            // 
+            // uiDoubleUpDown9
+            // 
+            this.uiDoubleUpDown9.DecimalPlaces = 0;
+            this.uiDoubleUpDown9.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown9.Location = new System.Drawing.Point(734, 158);
+            this.uiDoubleUpDown9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown9.Maximum = 100D;
+            this.uiDoubleUpDown9.Minimum = 10D;
+            this.uiDoubleUpDown9.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown9.Name = "uiDoubleUpDown9";
+            this.uiDoubleUpDown9.ShowText = false;
+            this.uiDoubleUpDown9.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown9.Step = 5D;
+            this.uiDoubleUpDown9.TabIndex = 364;
+            this.uiDoubleUpDown9.Text = "uiDoubleUpDown9";
+            this.uiDoubleUpDown9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label8.Location = new System.Drawing.Point(590, 126);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(138, 21);
+            this.label8.TabIndex = 361;
+            this.label8.Text = "测试手臂整体速度";
+            // 
+            // uiDoubleUpDown8
+            // 
+            this.uiDoubleUpDown8.DecimalPlaces = 0;
+            this.uiDoubleUpDown8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown8.Location = new System.Drawing.Point(734, 122);
+            this.uiDoubleUpDown8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown8.Maximum = 100D;
+            this.uiDoubleUpDown8.Minimum = 10D;
+            this.uiDoubleUpDown8.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown8.Name = "uiDoubleUpDown8";
+            this.uiDoubleUpDown8.ShowText = false;
+            this.uiDoubleUpDown8.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown8.Step = 5D;
+            this.uiDoubleUpDown8.TabIndex = 362;
+            this.uiDoubleUpDown8.Text = "uiDoubleUpDown8";
+            this.uiDoubleUpDown8.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown8.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown8_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label7.Location = new System.Drawing.Point(590, 90);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(138, 21);
+            this.label7.TabIndex = 359;
+            this.label7.Text = "出料手臂整体速度";
+            // 
+            // uiDoubleUpDown7
+            // 
+            this.uiDoubleUpDown7.DecimalPlaces = 0;
+            this.uiDoubleUpDown7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown7.Location = new System.Drawing.Point(734, 86);
+            this.uiDoubleUpDown7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown7.Maximum = 100D;
+            this.uiDoubleUpDown7.Minimum = 10D;
+            this.uiDoubleUpDown7.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown7.Name = "uiDoubleUpDown7";
+            this.uiDoubleUpDown7.ShowText = false;
+            this.uiDoubleUpDown7.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown7.Step = 5D;
+            this.uiDoubleUpDown7.TabIndex = 360;
+            this.uiDoubleUpDown7.Text = "uiDoubleUpDown7";
+            this.uiDoubleUpDown7.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown7.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown7_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
+            this.label6.Location = new System.Drawing.Point(590, 54);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(138, 21);
+            this.label6.TabIndex = 357;
+            this.label6.Text = "入料手臂整体速度";
+            // 
+            // uiDoubleUpDown6
+            // 
+            this.uiDoubleUpDown6.DecimalPlaces = 0;
+            this.uiDoubleUpDown6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown6.Location = new System.Drawing.Point(734, 50);
+            this.uiDoubleUpDown6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown6.Maximum = 100D;
+            this.uiDoubleUpDown6.Minimum = 10D;
+            this.uiDoubleUpDown6.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown6.Name = "uiDoubleUpDown6";
+            this.uiDoubleUpDown6.ShowText = false;
+            this.uiDoubleUpDown6.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown6.Step = 5D;
+            this.uiDoubleUpDown6.TabIndex = 358;
+            this.uiDoubleUpDown6.Text = "uiDoubleUpDown6";
+            this.uiDoubleUpDown6.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown6.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown6_ValueChanged);
             // 
             // label13
             // 
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label13.Location = new System.Drawing.Point(300, 50);
+            this.label13.Location = new System.Drawing.Point(300, 51);
             this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(89, 21);
@@ -161,7 +292,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label16.Location = new System.Drawing.Point(300, 122);
+            this.label16.Location = new System.Drawing.Point(300, 123);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(89, 21);
@@ -172,7 +303,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label17.Location = new System.Drawing.Point(300, 86);
+            this.label17.Location = new System.Drawing.Point(300, 87);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(89, 21);
@@ -183,7 +314,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label18.Location = new System.Drawing.Point(300, 158);
+            this.label18.Location = new System.Drawing.Point(300, 159);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(111, 21);
@@ -262,7 +393,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label12.Location = new System.Drawing.Point(300, 203);
+            this.label12.Location = new System.Drawing.Point(300, 204);
             this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(89, 21);
@@ -290,7 +421,7 @@
             // 
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label14.Location = new System.Drawing.Point(300, 239);
+            this.label14.Location = new System.Drawing.Point(300, 240);
             this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(89, 21);
@@ -318,7 +449,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(300, 323);
+            this.label5.Location = new System.Drawing.Point(300, 324);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 21);
@@ -346,7 +477,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label2.Location = new System.Drawing.Point(17, 323);
+            this.label2.Location = new System.Drawing.Point(17, 324);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 21);
@@ -357,7 +488,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label3.Location = new System.Drawing.Point(17, 359);
+            this.label3.Location = new System.Drawing.Point(17, 360);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 21);
@@ -368,7 +499,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label4.Location = new System.Drawing.Point(17, 287);
+            this.label4.Location = new System.Drawing.Point(17, 288);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 21);
@@ -430,7 +561,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label1.Location = new System.Drawing.Point(300, 287);
+            this.label1.Location = new System.Drawing.Point(300, 288);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(88, 21);
@@ -458,7 +589,7 @@
             // 
             this.label57.AutoSize = true;
             this.label57.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label57.Location = new System.Drawing.Point(16, 50);
+            this.label57.Location = new System.Drawing.Point(16, 51);
             this.label57.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(89, 21);
@@ -469,7 +600,7 @@
             // 
             this.label43.AutoSize = true;
             this.label43.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label43.Location = new System.Drawing.Point(16, 203);
+            this.label43.Location = new System.Drawing.Point(16, 204);
             this.label43.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label43.Name = "label43";
             this.label43.Size = new System.Drawing.Size(89, 21);
@@ -480,7 +611,7 @@
             // 
             this.label56.AutoSize = true;
             this.label56.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label56.Location = new System.Drawing.Point(16, 122);
+            this.label56.Location = new System.Drawing.Point(16, 123);
             this.label56.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(89, 21);
@@ -491,7 +622,7 @@
             // 
             this.label44.AutoSize = true;
             this.label44.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label44.Location = new System.Drawing.Point(16, 239);
+            this.label44.Location = new System.Drawing.Point(16, 240);
             this.label44.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label44.Name = "label44";
             this.label44.Size = new System.Drawing.Size(89, 21);
@@ -502,7 +633,7 @@
             // 
             this.label55.AutoSize = true;
             this.label55.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label55.Location = new System.Drawing.Point(16, 86);
+            this.label55.Location = new System.Drawing.Point(16, 87);
             this.label55.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(89, 21);
@@ -513,7 +644,7 @@
             // 
             this.label45.AutoSize = true;
             this.label45.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(245)))), ((int)(((byte)(255)))));
-            this.label45.Location = new System.Drawing.Point(16, 158);
+            this.label45.Location = new System.Drawing.Point(16, 159);
             this.label45.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label45.Name = "label45";
             this.label45.Size = new System.Drawing.Size(111, 21);
@@ -675,5 +806,13 @@
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown16;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown17;
         private Sunny.UI.UIDoubleUpDown uiDoubleUpDown18;
+        private System.Windows.Forms.Label label9;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown9;
+        private System.Windows.Forms.Label label8;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown8;
+        private System.Windows.Forms.Label label7;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown7;
+        private System.Windows.Forms.Label label6;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown6;
     }
 }

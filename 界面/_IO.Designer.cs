@@ -634,7 +634,7 @@
             this.tabPage1.Controls.Add(this.uiTabControl2);
             this.tabPage1.Location = new System.Drawing.Point(0, 40);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage1.Size = new System.Drawing.Size(200, 60);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "IO调试";
             // 
@@ -1738,7 +1738,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1889, 900);
+            this.tabPage8.Size = new System.Drawing.Size(200, 60);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "入料区";
             // 
@@ -2232,7 +2232,7 @@
             this.uiSwitch24.TabIndex = 123;
             this.uiSwitch24.Tag = "";
             this.uiSwitch24.Text = "uiSwitch24";
-            this.uiSwitch24.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch24_ValueChanged);
+            this.uiSwitch24.Click += new System.EventHandler(this.uiSwitch24_Click);
             // 
             // uiSwitch19
             // 
@@ -2380,7 +2380,7 @@
             this.uiSwitch23.TabIndex = 121;
             this.uiSwitch23.Tag = "";
             this.uiSwitch23.Text = "uiSwitch23";
-            this.uiSwitch23.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch23_ValueChanged);
+            this.uiSwitch23.Click += new System.EventHandler(this.uiSwitch23_Click);
             // 
             // label39
             // 
@@ -3139,7 +3139,7 @@
             this.uiSwitch39.TabIndex = 123;
             this.uiSwitch39.Tag = "";
             this.uiSwitch39.Text = "uiSwitch39";
-            this.uiSwitch39.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch39_ValueChanged);
+            this.uiSwitch39.Click += new System.EventHandler(this.uiSwitch39_Click);
             // 
             // uiSwitch40
             // 
@@ -3287,7 +3287,7 @@
             this.uiSwitch44.TabIndex = 121;
             this.uiSwitch44.Tag = "";
             this.uiSwitch44.Text = "uiSwitch44";
-            this.uiSwitch44.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
+            this.uiSwitch44.Click += new System.EventHandler(this.uiSwitch44_Click);
             // 
             // label78
             // 
@@ -4235,7 +4235,7 @@
             this.uiSwitch78.TabIndex = 123;
             this.uiSwitch78.Tag = "";
             this.uiSwitch78.Text = "uiSwitch78";
-            this.uiSwitch78.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch78_ValueChanged);
+            this.uiSwitch78.Click += new System.EventHandler(this.uiSwitch78_Click);
             // 
             // uiSwitch80
             // 
@@ -6673,7 +6673,7 @@
             this.uiSwitch84.TabIndex = 121;
             this.uiSwitch84.Tag = "";
             this.uiSwitch84.Text = "uiSwitch84";
-            this.uiSwitch84.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch84_ValueChanged);
+            this.uiSwitch84.Click += new System.EventHandler(this.uiSwitch84_Click);
             // 
             // label130
             // 
