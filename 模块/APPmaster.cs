@@ -198,6 +198,10 @@ namespace H5509_V2
 
         public static bool 初次达温 = false; //初次达温标记
 
+        public static double 常温上限 = 35;
+
+        public static bool 温控器异常 = false;
+
         public static double 设定温度
         {
             get { return 设置信息.Heat盘信息.设定温度; }

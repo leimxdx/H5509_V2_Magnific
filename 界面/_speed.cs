@@ -200,5 +200,6 @@ namespace H5509_V2
             uiDoubleUpDown106.Value = uiDoubleUpDown8.Value;
             uiDoubleUpDown107.Value = uiDoubleUpDown8.Value;
         }
+
     }
 }

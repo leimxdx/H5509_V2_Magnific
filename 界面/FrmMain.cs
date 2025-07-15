@@ -700,44 +700,57 @@ namespace H5509_V2
             {
                 try
                 {
+                    //if (IsPause)
+                    //{
+                    //    Thread.Sleep(100);
+                    //    continue;
+                    //}
+
                     if (TCPConnect)
                     {
                         string result = dTMHelper.ReadPv(0, out ushort[] value);
-                        if (result == "Success")
+                        string result2 = dTMHelper.ReadPv(1, out ushort[] value2);
+                        string result3 = dTMHelper.ReadPv(2, 0, out ushort[] value3);
+
+                        if (result != "Success" || result2 != "Success" || result3 != "Success")
                         {
-                            for (int i = 0; i < value.Length; i++)
-                            {
-                                if (value[i] != 32770)
-                                {
-                                    SiteTemp[i] = (double)value[i] / 10 + 加热盘.Site温度补偿(i);
-                                }
-                                else SiteTemp[i] = value[i];
-                            }
-                        }
-                        result = dTMHelper.ReadPv(1, out ushort[] value2);
-                        if (result == "Success")
-                        {
-                            for (int i = 0; i < value2.Length; i++)
-                            {
-                                if (value2[i] != 32770)
-                                {
-                                    SiteTemp[i + 8] = (double)value2[i] / 10 + 加热盘.Site温度补偿(i + 8);
-                                }
-                                else SiteTemp[i + 8] = value2[i];
-                            }
-                        }
-                        result = dTMHelper.ReadPv(2, 0, out ushort[] value3);
-                        if (result == "Success")
-                        {
-                            if (value3[0] != 32770)
-                            {
-                                SiteTemp[16] = (double)value3[0] / 10 + 加热盘.温控器温度补偿;
-                            }
-                            else SiteTemp[16] = value3[0];
+                            TCPConnect = false;
+                            ProgramPause = true;
+                            IsPause = true;
+                            Listcode.Add("1400448");
+                            RunLog($"[Code]1400448,[Msg]温控器连接失败!", LogType.AlarmLog);
+                            continue;
                         }
 
+                        for (int i = 0; i < value.Length; i++)
+                        {
+                            if (value[i] != 32770)
+                            {
+                                SiteTemp[i] = (double)value[i] / 10 + 加热盘.Site温度补偿(i);
+                            }
+                            else SiteTemp[i] = value[i];
+                        }
+
+                        for (int i = 0; i < value2.Length; i++)
+                        {
+                            if (value2[i] != 32770)
+                            {
+                                SiteTemp[i + 8] = (double)value2[i] / 10 + 加热盘.Site温度补偿(i + 8);
+                            }
+                            else SiteTemp[i + 8] = value2[i];
+                        }
+
+                        if (value3[0] != 32770)
+                        {
+                            SiteTemp[16] = (double)value3[0] / 10 + 加热盘.温控器温度补偿;
+                        }
+                        else SiteTemp[16] = value3[0];
+
+                        if (IsPause) continue;
+
                         bool[] tempopen = 检测温度探头状态();
-                        if (!IsPause && tempopen.Contains(true))
+
+                        if (tempopen.Contains(true))
                         {
                             for (int i = 0; i < tempopen.Length; i++)
                             {
@@ -753,7 +766,7 @@ namespace H5509_V2
                         }
                         else
                         {
-                            if (设备状态 == 1 && 温度模式 == "高温" && !IsPause)
+                            if (设备状态 == 1 && 温度模式 == "高温") //&& !IsPause
                             {
                                 double tempwavemax = 加热盘.波动温度上限;
                                 double tempwavemin = 加热盘.波动温度下限;
@@ -780,6 +793,17 @@ namespace H5509_V2
                                             RunLog("加热盘已达温");
                                             RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
                                             RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+                                        }
+                                    }
+                                    else
+                                    {
+                                        TimeSpan timeSpan = DateTime.Now - 开始时间;
+                                        if (timeSpan.TotalSeconds > 加热盘.升温超时报警)
+                                        {
+                                            Listcode.Add($"1400446");
+                                            RunLog($"[Code]1400446,[Msg]升温超时!", LogType.AlarmLog);
+                                            ProgramPause = true; //如果升温超时则触发停止
+                                            IsPause = true;
                                         }
                                     }
                                 }
@@ -812,6 +836,25 @@ namespace H5509_V2
                                         IsPause = true;
                                     }
                                 }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (dTMHelper.Connect())
+                        {
+                            TCPConnect = true;
+                            温控器异常 = false;
+                        }
+                        else
+                        {
+                            ProgramPause = true;
+                            IsPause = true;
+                            Listcode.Add("1400448");
+                            if (!温控器异常) //防止log输出多次
+                            {
+                                温控器异常 = true;
+                                RunLog($"[Code]1400448,[Msg]温控器连接失败!", LogType.AlarmLog);
                             }
                         }
                     }

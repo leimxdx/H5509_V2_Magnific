@@ -578,6 +578,7 @@ namespace H5509_V2
             windowstimer.Stop();
             当前权限 = "Operator";
             操作权限 = "A";
+            安全门禁用 = false;
             this.Invoke(new Action(() =>
             {
                 //checkBox_doorbear.Checked = true;
@@ -704,7 +705,7 @@ namespace H5509_V2
                         当前权限 = combox_juris.Text;
                         操作权限 = "A";
                         windowstimer.Stop();
-                        //checkBox_doorbear.Checked = true;
+                        安全门禁用 = false; //checkBox_doorbear.Checked = true;
                     }
                     else
                     {
@@ -741,8 +742,8 @@ namespace H5509_V2
                                 }
                                 else
                                 {
-                                    RunLog($"密码{frmInputPwd.Password}错误！");
-                                    MessageBox.Show($"密码{frmInputPwd.Password}错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    RunLog($"密码错误！");//{frmInputPwd.Password}
+                                    MessageBox.Show($"密码错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);//{frmInputPwd.Password}
                                 }
                             }
                             else
@@ -1521,6 +1522,40 @@ namespace H5509_V2
         
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
+            //bool[] tempopen = new bool[17];
+            //if (tempopen[16]) //如果加热盘已经达温则开始延时
+            //{
+            //    if (!初次达温) //初次达温开启延时定时器
+            //    {
+            //        if (!达温延时.Enabled)
+            //        {
+            //            RunLog("初次达温延时开始");
+            //            达温延时.Start();
+            //        }
+            //    }
+            //}
+            //if (!tempopen.Contains(false)) //有false(没有达温:False,达温/探头异常：true)说明还有Site没有达温
+            //{
+            //    if (初次达温)
+            //    {
+            //        温控达温 = true;
+            //        达温时间 = DateTime.Now;
+            //        RunLog("加热盘已达温");
+            //        RunLog("达温时间：" + 达温时间.ToString("yyyy-MM-dd HH:mm:ss"));
+            //        RunLog("升温时间：" + 升温时间.ToString(@"hh\:mm\:ss"));
+            //    }
+            //}
+            //else
+            //{
+            //    TimeSpan timeSpan = DateTime.Now - 开始时间;
+            //    if (timeSpan.TotalSeconds + 1800 > 加热盘.升温超时报警)
+            //    {
+            //        Listcode.Add($"1400446");
+            //        RunLog($"[Code]1400446,[Msg]升温超时!", LogType.AlarmLog);
+            //        ProgramPause = true; //如果升温超时则触发停止
+            //        IsPause = true;
+            //    }
+            //}
             //int iscan = HeatInterval;
             //if (!handler.CheckAircyStatus())
             //{

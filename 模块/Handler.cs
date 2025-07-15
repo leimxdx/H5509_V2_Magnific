@@ -743,7 +743,7 @@ namespace H5509_V2
             result = motionEx.GetDi(xIoName, out string value);
 
             //result = 读取气缸输入信号(xIoName, "1", out long ms);
-            if (result != "Success") return $"{yIoName}升降气缸原位信号读取失败!" + result; 
+            if (result != "Success") return $"{yIoName}升降气缸原位信号读取失败!" + result;
 
             if (value == "1") return "Success";
             else return "Fail";
@@ -3236,40 +3236,90 @@ namespace H5509_V2
             return isstart;
         }
 
-        private bool 开始检查()
+        private bool 开始检查(string[] io)
         {
-            bool iscanstart = true;
+            bool isstart = true;
 
             string result = motionEx.GetDi("X020_进气压", out string value);
             //RunLog("X020_进气压:" + value);
-            //if (result == "Success")
-            //{
-            //    if (value == "0")
-            //    {
-            //        iscanstart = false;
-            //        Listcode.Add("1400020"); //系统错误--气压不足
-            //        RunLog("[Code]1400020,[Msg]气压不足", LogType.AlarmLog);
-            //    }
-            //}
-            //else
-            //{
-            //    iscanstart = false;
-            //    Listcode.Add("1400020"); //系统错误--气压不足
-            //    RunLog("[Code]1400020,[Msg]气压读取失败!" + result, LogType.AlarmLog);
-            //}
+
+            if (result == "Success")
+            {
+                if (value == "0")
+                {
+                    isstart = false;
+                    Listcode.Add("1400020"); //系统错误--气压不足
+                    RunLog("[Code]1400020,[Msg]气压不足", LogType.AlarmLog);
+                }
+            }
+            else
+            {
+                isstart = false;
+                Listcode.Add("1400020"); //系统错误--气压不足
+                RunLog("[Code]1400020,[Msg]气压读取失败!" + result, LogType.AlarmLog);
+            }
 
             if (!H5509归零)
             {
-                iscanstart = false;
+                isstart = false;
                 Listcode.Add("1400445");
                 RunLog("[Code]1400445,[Msg]设备未归零", LogType.AlarmLog);
             }
 
             if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
             {
-                iscanstart = false;
+                isstart = false;
                 Listcode.Add("1400442");
                 RunLog("[Code]1400442,[Msg]Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+            }
+
+            if (io[0] == "0") //15
+            {
+                isstart = false;
+                Listcode.Add("4018008");
+                RunLog("[Code]4018008,[Msg](按下开始)Empty门未关闭", LogType.AlarmLog);
+            }
+
+            if (io[1] == "0")//16
+            {
+                isstart = false;
+                Listcode.Add("4019008");
+                RunLog("[Code]4019008,[Msg](按下开始)Load门未关闭", LogType.AlarmLog);
+            }
+
+            if (io[2] == "0")//18
+            {
+                isstart = false;
+                Listcode.Add("4020008");
+                RunLog("[Code]4020008,[Msg](按下开始)Auto1门未关闭", LogType.AlarmLog);
+            }
+
+            if (io[3] == "0")//19
+            {
+                isstart = false;
+                Listcode.Add("4021008");
+                RunLog("[Code]4021008,[Msg](按下开始)Auto2门未关闭", LogType.AlarmLog);
+            }
+
+            if (io[4] == "0")//20
+            {
+                isstart = false;
+                Listcode.Add("4030009");
+                RunLog("[Code]4030009,[Msg](按下开始)Fix1请放置空盘", LogType.AlarmLog);
+            }
+
+            if (io[5] == "0")//21
+            {
+                isstart = false;
+                Listcode.Add("4031009");
+                RunLog("[Code]4031009,[Msg](按下开始)Fix2请放置空盘", LogType.AlarmLog);
+            }
+
+            if (io[6] == "1")//22
+            {
+                isstart = false;
+                Listcode.Add("4032009");
+                RunLog("[Code]4032009,[Msg](按下开始)Fix3请放置空盘", LogType.AlarmLog);
             }
 
             if (!安全门禁用)
@@ -3279,35 +3329,34 @@ namespace H5509_V2
                 {
                     if (iovalue[0] == "0")
                     {
-                        iscanstart = false;
+                        isstart = false;
                         Listcode.Add("9000000");
                         RunLog("[Code]9000000,[Msg](按下开始)系统错误--前安全门打开", LogType.AlarmLog);
                     }
                     else if (iovalue[1] == "0")
                     {
-                        iscanstart = false;
+                        isstart = false;
                         Listcode.Add("9000010");
                         RunLog("[Code]9000010,[Msg](按下开始)系统错误--后安全门打开", LogType.AlarmLog);
                     }
                     else if (iovalue[2] == "0")
                     {
-                        iscanstart = false;
+                        isstart = false;
                         Listcode.Add("9000020");
                         RunLog("[Code]9000020,[Msg](按下开始)系统错误--左安全门打开", LogType.AlarmLog);
                     }
                     else if (iovalue[3] == "0")
                     {
-                        iscanstart = false;
+                        isstart = false;
                         Listcode.Add("9000040");
                         RunLog("[Code]9000040,[Msg](按下开始)系统错误--右安全门打开", LogType.AlarmLog);
                     }
                 }
             }
 
-
             if (Com.IsOpenCom == false)
             {
-                iscanstart = false;
+                isstart = false;
                 Listcode.Add("1400430");
                 RunLog("[Code]1400430,[Msg]串口未连接");
             }
@@ -3315,36 +3364,85 @@ namespace H5509_V2
             {
                 if (Com.IsconnectTester == false)
                 {
-                    iscanstart = false;
+                    isstart = false;
                     Listcode.Add("1400440");
                     RunLog("[Code]1400430,[Msg]未发送生产信息给测试机"); //listcode.Add("1400440");
                 }
             }
 
-            if (温度模式 == "高温" && iscanstart)
+            if (isstart)
             {
-                if (!温控加热)
+                if (TCPConnect)
                 {
-                    result = 加热盘加热开启();
-                    string result2 = H5509归零 ? 梭车加热开启() : " 设备未归零";
-                    string result3 = Site加热开启();
-                    if (result == "Success" && result2 == "Success" && result3 == "Success")
+                    if (温度模式 == "高温")
                     {
-                        //label10.Text = "停止";
-                        温控加热 = true;
-                        温控达温 = false;
+                        string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
+                        if (result4 == "Success")
+                        {
+                            string result5 = dTMHelper.WriteSv(1, 设定温度);
+                            string result6 = dTMHelper.WriteSv(0, 设定温度);
+                            if (result5 != "Success" || result6 != "Success")
+                            {
+                                isstart = false;
+                                Listcode.Add("1400447");
+                                RunLog("[Code]1400447,[Msg]设定温度失败");
+                            }
+                        }
+                        else
+                        {
+                            isstart = false;
+                            Listcode.Add("1400447");
+                            RunLog("[Code]1400447,[Msg]设定温度失败");
+                        }
+
+                        if (isstart && !温控加热)
+                        {
+                            result = 加热盘加热开启();
+                            string result2 = H5509归零 ? 梭车加热开启() : " 设备未归零";
+                            string result3 = Site加热开启();
+                            if (result == "Success" && result2 == "Success" && result3 == "Success")
+                            {
+                                //label10.Text = "停止";
+                                温控加热 = true;
+                                温控达温 = false;
+                            }
+                            else
+                            {
+                                if (result != "Success") RunLog("加热盘加热开启失败!" + result);
+                                if (result2 != "Success") RunLog("梭车加热开启失败!" + result2);
+                                if (result3 != "Success") RunLog("Site加热开启失败!" + result3);
+                                isstart = false;
+                            }
+                        }
                     }
                     else
                     {
-                        if (result != "Success") RunLog("加热盘加热开启失败!" + result);
-                        if (result2 != "Success") RunLog("梭车加热开启失败!" + result2);
-                        if (result3 != "Success") RunLog("Site加热开启失败!" + result3);
-                        iscanstart = false;
+                        for (int site = 0; site < SiteTemp.Length; site++)
+                        {
+                            if (SiteTemp[site] == 32770) continue;
+
+                            if (GetSiteOpen(site).Contains(true))
+                            {
+                                if (SiteTemp[site] > 常温上限)
+                                {
+                                    isstart = false;
+                                    Listcode.Add($"8{site:D2}319");
+                                    if (site == 16) RunLog($"[Code]8{site:D2}319,[Msg]温控器:温度[{SiteTemp[site]}]℃高于常温上限[{常温上限}]℃", LogType.AlarmLog);
+                                    else RunLog($"[Code]8{site:D2}319,[Msg]Site{site + 1}:温度[{SiteTemp[site]}]℃高于常温上限[{常温上限}]℃", LogType.AlarmLog);
+                                }
+                            }
+                        }
                     }
+                }
+                else
+                {
+                    isstart = false;
+                    Listcode.Add("1400448");
+                    RunLog($"[Code]1400448,[Msg]温控器连接失败!", LogType.AlarmLog);
                 }
             }
 
-            return iscanstart;
+            return isstart;
         }
 
         //private bool 每次开始检查()
@@ -3477,34 +3575,20 @@ namespace H5509_V2
                             if (Load正在下降回零) IsLoadPause = false;
                         }
 
+                        string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
+
                         if (isstart && 设备状态 == 0)
                         {
-                            string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
-
                             if (!初次开始检查(iov))
                             {
                                 isstart = false;
                             }
                         }
 
-                        if (isstart && 开始检查())
+                        if (isstart && 开始检查(iov))
                         {
-
                             if (设备状态 == 0)
                             {
-                                StartRunIn(); //根据开Site情况添加入料队列
-                                ///更新入料目标值();
-                                开始时间 = DateTime.Now;
-                                //开始前的IO检查
-                                StartSite数量 = 开Site数量;
-
-                                if (当前权限 != "Operator")//&& CuPersonnel != "supplier")
-                                {
-                                    刷新权限();
-                                }
-
-                                刷新分BIN信息();
-
                                 SQLiteHelper.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
                                 int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
                                 int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
@@ -3521,6 +3605,22 @@ namespace H5509_V2
                                     isstart = false;
                                     Listcode.Add("1400330");
                                     RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
+                                }
+
+                                if (isstart)
+                                {
+                                    StartRunIn(); //根据开Site情况添加入料队列
+                                    ///更新入料目标值();
+                                    开始时间 = DateTime.Now;
+                                    //开始前的IO检查
+                                    StartSite数量 = 开Site数量;
+
+                                    if (当前权限 != "Operator")//&& CuPersonnel != "supplier")
+                                    {
+                                        刷新权限();
+                                    }
+
+                                    刷新分BIN信息();
                                 }
                             }
 

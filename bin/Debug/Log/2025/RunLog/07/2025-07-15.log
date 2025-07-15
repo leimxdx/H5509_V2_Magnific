@@ -1,0 +1,72 @@
+2025-07-15 09:06:27  =>  GTN_Open(5,1):(-6)
+2025-07-15 09:06:27  =>  [error][2025-07-15 09:06:27]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-15 09:06:38  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:06:48  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:07:12  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:07:22  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:07:33  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:07:43  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:07:54  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:08:54  =>  GTN_Open(5,1):(-6)
+2025-07-15 09:08:54  =>  [error][2025-07-15 09:08:54]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-15 09:09:05  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:09:16  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:09:26  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:09:37  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:09:47  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:09:58  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:13:16  =>  GTN_Open(5,1):(-6)
+2025-07-15 09:13:16  =>  [error][2025-07-15 09:13:16]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-15 09:13:27  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:13:36  =>  密码8520错误！
+2025-07-15 09:13:38  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:13:48  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:13:52  =>  密码8520错误！
+2025-07-15 09:13:59  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:14:09  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:14:20  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:14:30  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:14:41  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:14:52  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:15:02  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:15:05  =>  档案切换[8X19_UFS_OnLine]->[默认]
+2025-07-15 09:15:13  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:15:23  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:15:28  =>  档案切换[默认]->[8X19_UFS_OnLine]
+2025-07-15 09:15:34  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:15:44  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:15:55  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:35:24  =>  GTN_Open(5,1):(-6)
+2025-07-15 09:35:24  =>  [error][2025-07-15 09:35:24]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-15 09:35:35  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:40:24  =>  GTN_Open(5,1):(-6)
+2025-07-15 09:40:24  =>  [error][2025-07-15 09:40:24]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-15 09:40:38  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:43:16  =>  GTN_Open(5,1):(-6)
+2025-07-15 09:43:16  =>  [error][2025-07-15 09:43:16]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-15 09:43:26  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-15 09:45:50  =>  @START_TEST 00 00000000+
+2025-07-15 09:48:18  =>  GTN_Open(5,1):(-6)
+2025-07-15 09:48:18  =>  [error][2025-07-15 09:48:18]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-15 09:48:30  =>  [Code]1400448,[Msg]温控器连接失败!

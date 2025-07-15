@@ -172,6 +172,7 @@
             this.label9.Size = new System.Drawing.Size(138, 21);
             this.label9.TabIndex = 363;
             this.label9.Text = "其他手臂整体速度";
+            this.label9.Visible = false;
             // 
             // uiDoubleUpDown9
             // 
@@ -189,6 +190,7 @@
             this.uiDoubleUpDown9.TabIndex = 364;
             this.uiDoubleUpDown9.Text = "uiDoubleUpDown9";
             this.uiDoubleUpDown9.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown9.Visible = false;
             // 
             // label8
             // 

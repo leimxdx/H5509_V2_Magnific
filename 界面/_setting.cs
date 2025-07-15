@@ -3103,6 +3103,7 @@ namespace H5509_V2
                 //uiCheckBox194.Visible = false;
                 //uiCheckBox195.Visible = false;
                 //uiCheckBox196.Visible = false;
+
                 string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
                 if (tabpagetext == "设定")
                 {
@@ -3408,6 +3409,10 @@ namespace H5509_V2
             else if (tabpagetext == "产品")
             {
                 刷新产品(uiTabControl5.SelectedTab.Text);
+            }
+            else if (tabpagetext == "系统设置")
+            {
+                uiCheckBox205.Checked = 安全门禁用;
             }
             //else if (tabpagetext == "产品")
             //{
@@ -6122,6 +6127,10 @@ namespace H5509_V2
                 else if (tabtext == "点位偏移")
                 {
                     刷新点位偏移(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
+                }
+                else if (tabtext == "设定")
+                {
+                    刷新设定(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
                 }
             }
         }
