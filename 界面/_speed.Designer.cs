@@ -335,7 +335,7 @@
             this.uiDoubleUpDown14.Name = "uiDoubleUpDown14";
             this.uiDoubleUpDown14.ShowText = false;
             this.uiDoubleUpDown14.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown14.Step = 1D;
+            this.uiDoubleUpDown14.Step = 5D;
             this.uiDoubleUpDown14.TabIndex = 353;
             this.uiDoubleUpDown14.Text = "uiDoubleUpDown14";
             this.uiDoubleUpDown14.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -352,7 +352,7 @@
             this.uiDoubleUpDown16.Name = "uiDoubleUpDown16";
             this.uiDoubleUpDown16.ShowText = false;
             this.uiDoubleUpDown16.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown16.Step = 1D;
+            this.uiDoubleUpDown16.Step = 5D;
             this.uiDoubleUpDown16.TabIndex = 356;
             this.uiDoubleUpDown16.Text = "uiDoubleUpDown16";
             this.uiDoubleUpDown16.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -369,7 +369,7 @@
             this.uiDoubleUpDown17.Name = "uiDoubleUpDown17";
             this.uiDoubleUpDown17.ShowText = false;
             this.uiDoubleUpDown17.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown17.Step = 1D;
+            this.uiDoubleUpDown17.Step = 5D;
             this.uiDoubleUpDown17.TabIndex = 354;
             this.uiDoubleUpDown17.Text = "uiDoubleUpDown17";
             this.uiDoubleUpDown17.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -386,7 +386,7 @@
             this.uiDoubleUpDown18.Name = "uiDoubleUpDown18";
             this.uiDoubleUpDown18.ShowText = false;
             this.uiDoubleUpDown18.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown18.Step = 1D;
+            this.uiDoubleUpDown18.Step = 5D;
             this.uiDoubleUpDown18.TabIndex = 355;
             this.uiDoubleUpDown18.Text = "uiDoubleUpDown18";
             this.uiDoubleUpDown18.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -414,7 +414,7 @@
             this.uiDoubleUpDown12.Name = "uiDoubleUpDown12";
             this.uiDoubleUpDown12.ShowText = false;
             this.uiDoubleUpDown12.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown12.Step = 1D;
+            this.uiDoubleUpDown12.Step = 5D;
             this.uiDoubleUpDown12.TabIndex = 336;
             this.uiDoubleUpDown12.Text = "uiDoubleUpDown12";
             this.uiDoubleUpDown12.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -442,7 +442,7 @@
             this.uiDoubleUpDown13.Name = "uiDoubleUpDown13";
             this.uiDoubleUpDown13.ShowText = false;
             this.uiDoubleUpDown13.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown13.Step = 1D;
+            this.uiDoubleUpDown13.Step = 5D;
             this.uiDoubleUpDown13.TabIndex = 335;
             this.uiDoubleUpDown13.Text = "uiDoubleUpDown13";
             this.uiDoubleUpDown13.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -470,7 +470,7 @@
             this.uiDoubleUpDown5.Name = "uiDoubleUpDown5";
             this.uiDoubleUpDown5.ShowText = false;
             this.uiDoubleUpDown5.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown5.Step = 1D;
+            this.uiDoubleUpDown5.Step = 5D;
             this.uiDoubleUpDown5.TabIndex = 318;
             this.uiDoubleUpDown5.Text = "uiDoubleUpDown5";
             this.uiDoubleUpDown5.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -520,7 +520,7 @@
             this.uiDoubleUpDown2.Name = "uiDoubleUpDown2";
             this.uiDoubleUpDown2.ShowText = false;
             this.uiDoubleUpDown2.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown2.Step = 1D;
+            this.uiDoubleUpDown2.Step = 5D;
             this.uiDoubleUpDown2.TabIndex = 315;
             this.uiDoubleUpDown2.Text = "uiDoubleUpDown2";
             this.uiDoubleUpDown2.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -537,7 +537,7 @@
             this.uiDoubleUpDown3.Name = "uiDoubleUpDown3";
             this.uiDoubleUpDown3.ShowText = false;
             this.uiDoubleUpDown3.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown3.Step = 1D;
+            this.uiDoubleUpDown3.Step = 5D;
             this.uiDoubleUpDown3.TabIndex = 314;
             this.uiDoubleUpDown3.Text = "uiDoubleUpDown3";
             this.uiDoubleUpDown3.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -554,7 +554,7 @@
             this.uiDoubleUpDown4.Name = "uiDoubleUpDown4";
             this.uiDoubleUpDown4.ShowText = false;
             this.uiDoubleUpDown4.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown4.Step = 1D;
+            this.uiDoubleUpDown4.Step = 5D;
             this.uiDoubleUpDown4.TabIndex = 313;
             this.uiDoubleUpDown4.Text = "uiDoubleUpDown4";
             this.uiDoubleUpDown4.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -582,7 +582,7 @@
             this.uiDoubleUpDown1.Name = "uiDoubleUpDown1";
             this.uiDoubleUpDown1.ShowText = false;
             this.uiDoubleUpDown1.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown1.Step = 1D;
+            this.uiDoubleUpDown1.Step = 5D;
             this.uiDoubleUpDown1.TabIndex = 306;
             this.uiDoubleUpDown1.Text = "uiDoubleUpDown1";
             this.uiDoubleUpDown1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -665,7 +665,7 @@
             this.uiDoubleUpDown99.Name = "uiDoubleUpDown99";
             this.uiDoubleUpDown99.ShowText = false;
             this.uiDoubleUpDown99.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown99.Step = 1D;
+            this.uiDoubleUpDown99.Step = 5D;
             this.uiDoubleUpDown99.TabIndex = 290;
             this.uiDoubleUpDown99.Text = "uiDoubleUpDown99";
             this.uiDoubleUpDown99.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -682,7 +682,7 @@
             this.uiDoubleUpDown106.Name = "uiDoubleUpDown106";
             this.uiDoubleUpDown106.ShowText = false;
             this.uiDoubleUpDown106.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown106.Step = 1D;
+            this.uiDoubleUpDown106.Step = 5D;
             this.uiDoubleUpDown106.TabIndex = 297;
             this.uiDoubleUpDown106.Text = "uiDoubleUpDown106";
             this.uiDoubleUpDown106.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -699,7 +699,7 @@
             this.uiDoubleUpDown107.Name = "uiDoubleUpDown107";
             this.uiDoubleUpDown107.ShowText = false;
             this.uiDoubleUpDown107.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown107.Step = 1D;
+            this.uiDoubleUpDown107.Step = 5D;
             this.uiDoubleUpDown107.TabIndex = 296;
             this.uiDoubleUpDown107.Text = "uiDoubleUpDown107";
             this.uiDoubleUpDown107.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -716,7 +716,7 @@
             this.uiDoubleUpDown108.Name = "uiDoubleUpDown108";
             this.uiDoubleUpDown108.ShowText = false;
             this.uiDoubleUpDown108.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown108.Step = 1D;
+            this.uiDoubleUpDown108.Step = 5D;
             this.uiDoubleUpDown108.TabIndex = 295;
             this.uiDoubleUpDown108.Text = "uiDoubleUpDown108";
             this.uiDoubleUpDown108.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -733,7 +733,7 @@
             this.uiDoubleUpDown98.Name = "uiDoubleUpDown98";
             this.uiDoubleUpDown98.ShowText = false;
             this.uiDoubleUpDown98.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown98.Step = 1D;
+            this.uiDoubleUpDown98.Step = 5D;
             this.uiDoubleUpDown98.TabIndex = 291;
             this.uiDoubleUpDown98.Text = "uiDoubleUpDown98";
             this.uiDoubleUpDown98.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
@@ -750,7 +750,7 @@
             this.uiDoubleUpDown97.Name = "uiDoubleUpDown97";
             this.uiDoubleUpDown97.ShowText = false;
             this.uiDoubleUpDown97.Size = new System.Drawing.Size(130, 29);
-            this.uiDoubleUpDown97.Step = 1D;
+            this.uiDoubleUpDown97.Step = 5D;
             this.uiDoubleUpDown97.TabIndex = 291;
             this.uiDoubleUpDown97.Text = "uiDoubleUpDown97";
             this.uiDoubleUpDown97.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;

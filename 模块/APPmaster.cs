@@ -311,18 +311,6 @@ namespace H5509_V2
 
         public static Communication Com;
 
-        public static double TestShuttleLPos = 800;
-
-        public static double TestShuttleRPos = 900.6;
-
-        public static double Testx1pos = 12;
-
-        public static double Testx2pos = 401.4;
-
-        public static double Testx3pos = 1089.5;
-
-        public static double Testx4pos = 1478.8;
-
         public static double[] TestXPoint; //Site点位坐标
 
         public static double[] LoaderXPoint; //Loader待测盘
@@ -417,7 +405,7 @@ namespace H5509_V2
 
         public static string othAll = "";
 
-        public static string[] ServoAxis = {"M16_入料手臂Y轴",  "M17_出料手臂Y轴", "M18_放Tary盘轴", "M19_测试手臂Z轴", "M20_飞梭轴", "M21_测试手臂X轴", "M22_入料手臂X轴", "M23_出料手臂X轴" };
+        public static string[] ServoAxis = { "M16_入料手臂Y轴", "M17_出料手臂Y轴", "M18_放Tary盘轴", "M19_测试手臂Z轴", "M20_飞梭轴", "M21_测试手臂X轴", "M22_入料手臂X轴", "M23_出料手臂X轴" };
 
         public static int[] Dout128PassNumber = new int[128];
 
@@ -539,9 +527,17 @@ namespace H5509_V2
 
         public static double Auto2初始点 = 193;
 
-        public static double Auto1上移固定距离 = 29.5;
+        public static double Empty原点偏移 = 2.5; //不是原点偏移, 是找到有盘感应器向上移动的距离
 
-        public static double Auto2上移固定距离 = 29.5;
+        public static double Load原点偏移 = 0.5; //不是原点偏移, 是找到有盘感应器向上移动的距离
+
+        //public static double Auto1上移固定距离 = 29.5; 
+
+        //public static double Auto2上移固定距离 = 29.5;
+
+        public static double Auto1上移固定距离 { get { return 初始点位.Auto1_分盘位 - 初始点位.Auto1_初始位; } }
+
+        public static double Auto2上移固定距离 { get { return 初始点位.Auto2_分盘位 - 初始点位.Auto2_初始位; } }
 
         public static DateTime IndexTime = DateTime.Now;
 
@@ -563,12 +559,12 @@ namespace H5509_V2
 
         public static TimeSpan 批次运行时间 { get { return 结束时间 - 开始时间; } }
 
-        public static int RealUPHNum 
-        { 
-            get 
+        public static int RealUPHNum
+        {
+            get
             {
-                if(出料数 == 0) return 0;
-                else return (int)(出料数 / 实时运行时间.TotalSeconds * 3600); 
+                if (出料数 == 0) return 0;
+                else return (int)(出料数 / 实时运行时间.TotalSeconds * 3600);
             }
         }
 
@@ -749,7 +745,7 @@ namespace H5509_V2
 
         public static bool 空盘下降到最小值 = false;
 
-        public static int 空盘上顶最大值 = 429895;
+        //public static int 空盘上顶最大值 = 429895;
 
         public static int 空盘下降最小值 = 10000;
 
@@ -1320,6 +1316,17 @@ namespace H5509_V2
                         case "抓盘_Load_X": initPoint.抓盘_Load_X = value; break;
                         case "抓盘_Auto1_X": initPoint.抓盘_Auto1_X = value; break;
                         case "抓盘_Auto2_X": initPoint.抓盘_Auto2_X = value; break;
+                        case "Empty_最高上顶": initPoint.Empty_最高上顶 = value; break;
+                        case "Empty_满盘位": initPoint.Empty_满盘位 = value; break;
+                        case "Load_最高上顶": initPoint.Load_最高上顶 = value; break;
+                        case "Auto1_最高上顶": initPoint.Auto1_最高上顶 = value; break;
+                        case "Auto1_分盘位": initPoint.Auto1_分盘位 = value; break;
+                        case "Auto1_初始位": initPoint.Auto1_初始位 = value; break;
+                        case "Auto1_满盘位": initPoint.Auto1_满盘位 = value; break;
+                        case "Auto2_最高上顶": initPoint.Auto2_最高上顶 = value; break;
+                        case "Auto2_分盘位": initPoint.Auto2_分盘位 = value; break;
+                        case "Auto2_初始位": initPoint.Auto2_初始位 = value; break;
+                        case "Auto2_满盘位": initPoint.Auto2_满盘位 = value; break;
                     }
                 }
                 初始点位 = initPoint;
@@ -1667,7 +1674,7 @@ namespace H5509_V2
                         报警音乐 = dr["报警音乐"].ToString(),
                     };
                     if (lightset.状态 == "报警中") 报警状态灯设置 = lightset;
-                    else if(lightset.状态 == "待料中") 待料状态灯设置 = lightset;
+                    else if (lightset.状态 == "待料中") 待料状态灯设置 = lightset;
                     else if (lightset.状态 == "归零中") 归零状态灯设置 = lightset;
                     else if (lightset.状态 == "暂停中") 暂停状态灯设置 = lightset;
                     else if (lightset.状态 == "结批中") 结批状态灯设置 = lightset;

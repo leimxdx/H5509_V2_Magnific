@@ -2669,6 +2669,46 @@ namespace H5509_V2
             uiDoubleUpDown22.Text = axisRun.减速度.ToString(); ;
         }
 
+        private void 刷新顶盘手臂初始点位()
+        {
+            numericUpDown163.Text = 初始点位.Empty_最高上顶.ToString();
+            numericUpDown162.Text = 初始点位.Empty_满盘位.ToString();
+            numericUpDown161.Text = 初始点位.Load_最高上顶.ToString();
+
+            numericUpDown174.Text = 初始点位.Auto1_最高上顶.ToString();
+            numericUpDown179.Text = 初始点位.Auto1_分盘位.ToString();
+            numericUpDown159.Text = 初始点位.Auto1_初始位.ToString();
+            numericUpDown173.Text = 初始点位.Auto1_满盘位.ToString();
+
+            numericUpDown175.Text = 初始点位.Auto2_最高上顶.ToString();
+            numericUpDown178.Text = 初始点位.Auto2_分盘位.ToString();
+            numericUpDown177.Text = 初始点位.Auto2_初始位.ToString();
+            numericUpDown176.Text = 初始点位.Auto2_满盘位.ToString();
+        }
+
+        private void 刷新顶盘手臂速度参数()
+        {
+            GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRun);
+            numericUpDown3.Text = axisRun.最大速度.ToString();
+            numericUpDown4.Text = axisRun.加速度.ToString();
+            numericUpDown2.Text = axisRun.减速度.ToString();
+
+            GetAxisRunInfo("M13_Loader顶盘轴", out axisRun);
+            numericUpDown165.Text = axisRun.最大速度.ToString();
+            numericUpDown166.Text = axisRun.加速度.ToString();
+            numericUpDown164.Text = axisRun.减速度.ToString();
+
+            GetAxisRunInfo("M14_Auto1顶盘轴", out axisRun);
+            numericUpDown171.Text = axisRun.最大速度.ToString();
+            numericUpDown172.Text = axisRun.加速度.ToString();
+            numericUpDown170.Text = axisRun.减速度.ToString();
+
+            GetAxisRunInfo("M15_Auto2顶盘轴", out axisRun);
+            numericUpDown168.Text = axisRun.最大速度.ToString();
+            numericUpDown169.Text = axisRun.加速度.ToString();
+            numericUpDown167.Text = axisRun.减速度.ToString();
+        }
+
         private void 刷新初始点位(string tabpagetext)
         {
             if (tabpagetext == "入料手臂")
@@ -2695,6 +2735,11 @@ namespace H5509_V2
             {
                 刷新抓盘手臂初始点位();
                 刷新抓盘手臂速度参数();
+            }
+            else if (tabpagetext == "顶盘手臂")
+            {
+                刷新顶盘手臂初始点位();
+                刷新顶盘手臂速度参数();
             }
         }
 
@@ -3451,21 +3496,18 @@ namespace H5509_V2
 
         private void 刷新设置与维护界面(string tabpagetext)
         {
-            if (tabpagetext == "初始点位")
-            {
-                刷新初始点位(uiTabControl2.SelectedTab.Text);
-            }
-            else if (tabpagetext == "产品")
+            if (tabpagetext == "产品")
             {
                 刷新产品(uiTabControl5.SelectedTab.Text);
             }
             else if (tabpagetext == "系统设置")
             {
                 uiCheckBox205.Checked = 安全门禁用;
-            }
-            else if (tabpagetext == "状态灯")
-            {
                 刷新灯光状态();
+            }
+            else if (tabpagetext == "调试")
+            {
+                刷新调试(uiTabControl3.SelectedTab.Text);
             }
             //else if (tabpagetext == "产品")
             //{
@@ -3481,6 +3523,18 @@ namespace H5509_V2
         public void 刷新设置与维护界面()
         {
             刷新设置与维护界面(uiTabControl1.SelectedTab.Text);
+        }
+
+        private void 刷新调试(string tabpagetext)
+        {
+            if (tabpagetext == "初始点位")
+            {
+                刷新初始点位(uiTabControl2.SelectedTab.Text);
+            }
+            else if (tabpagetext == "基础调试")
+            {
+                cobox_axisname_SelectedIndexChanged(null, null);
+            }
         }
 
         public bool UpdateInitPointData(string pointname, double newvalue, double oldvalue)
@@ -3599,21 +3653,21 @@ namespace H5509_V2
 
 
                 GetAxisRunInfo("M2_入料手臂Z2轴", out axisRun);
-                if (UpdateRunInfoData("M2_入料手臂Z2轴", "最大速度", Convert.ToDouble(uiDoubleUpDown81.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown81.Value);
-                if (UpdateRunInfoData("M2_入料手臂Z2轴", "加速度", Convert.ToDouble(uiDoubleUpDown80.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown80.Value);
-                if (UpdateRunInfoData("M2_入料手臂Z2轴", "减速度", Convert.ToDouble(uiDoubleUpDown79.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown79.Value);
+                if (UpdateRunInfoData("M2_入料手臂Z2轴", "最大速度", Convert.ToDouble(uiDoubleUpDown15.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown15.Value); //uiDoubleUpDown81.Value
+                if (UpdateRunInfoData("M2_入料手臂Z2轴", "加速度", Convert.ToDouble(uiDoubleUpDown14.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown14.Value);//uiDoubleUpDown80.Value
+                if (UpdateRunInfoData("M2_入料手臂Z2轴", "减速度", Convert.ToDouble(uiDoubleUpDown13.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown13.Value);//uiDoubleUpDown79.Value
 
 
                 GetAxisRunInfo("M3_入料手臂Z3轴", out axisRun);
-                if (UpdateRunInfoData("M3_入料手臂Z3轴", "最大速度", Convert.ToDouble(uiDoubleUpDown6.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown6.Value);
-                if (UpdateRunInfoData("M3_入料手臂Z3轴", "加速度", Convert.ToDouble(uiDoubleUpDown5.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown5.Value);
-                if (UpdateRunInfoData("M3_入料手臂Z3轴", "减速度", Convert.ToDouble(uiDoubleUpDown4.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown4.Value);
+                if (UpdateRunInfoData("M3_入料手臂Z3轴", "最大速度", Convert.ToDouble(uiDoubleUpDown15.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown15.Value); //uiDoubleUpDown6.Value
+                if (UpdateRunInfoData("M3_入料手臂Z3轴", "加速度", Convert.ToDouble(uiDoubleUpDown14.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown14.Value);//uiDoubleUpDown5.Value
+                if (UpdateRunInfoData("M3_入料手臂Z3轴", "减速度", Convert.ToDouble(uiDoubleUpDown13.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown13.Value);//uiDoubleUpDown4.Value
 
 
                 GetAxisRunInfo("M4_入料手臂Z4轴", out axisRun);
-                if (UpdateRunInfoData("M4_入料手臂Z4轴", "最大速度", Convert.ToDouble(uiDoubleUpDown3.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown3.Value);
-                if (UpdateRunInfoData("M4_入料手臂Z4轴", "加速度", Convert.ToDouble(uiDoubleUpDown2.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown2.Value);
-                if (UpdateRunInfoData("M4_入料手臂Z4轴", "减速度", Convert.ToDouble(uiDoubleUpDown1.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown1.Value);
+                if (UpdateRunInfoData("M4_入料手臂Z4轴", "最大速度", Convert.ToDouble(uiDoubleUpDown15.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown15.Value); //uiDoubleUpDown3.Value
+                if (UpdateRunInfoData("M4_入料手臂Z4轴", "加速度", Convert.ToDouble(uiDoubleUpDown14.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown14.Value);//uiDoubleUpDown2.Value
+                if (UpdateRunInfoData("M4_入料手臂Z4轴", "减速度", Convert.ToDouble(uiDoubleUpDown13.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown13.Value);//uiDoubleUpDown1.Value
             }
         }
 
@@ -3762,21 +3816,21 @@ namespace H5509_V2
 
 
                 GetAxisRunInfo("M7_出料手臂Z2轴", out axisRun);
-                if (UpdateRunInfoData("M7_出料手臂Z2轴", "最大速度", Convert.ToDouble(uiDoubleUpDown141.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown141.Text);
-                if (UpdateRunInfoData("M7_出料手臂Z2轴", "加速度", Convert.ToDouble(uiDoubleUpDown140.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown140.Text);
-                if (UpdateRunInfoData("M7_出料手臂Z2轴", "减速度", Convert.ToDouble(uiDoubleUpDown139.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown139.Text);
+                if (UpdateRunInfoData("M7_出料手臂Z2轴", "最大速度", Convert.ToDouble(uiDoubleUpDown138.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown138.Text);//uiDoubleUpDown141.Text
+                if (UpdateRunInfoData("M7_出料手臂Z2轴", "加速度", Convert.ToDouble(uiDoubleUpDown137.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown137.Text);//uiDoubleUpDown140.Text
+                if (UpdateRunInfoData("M7_出料手臂Z2轴", "减速度", Convert.ToDouble(uiDoubleUpDown136.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown136.Text);//uiDoubleUpDown139.Text
 
 
                 GetAxisRunInfo("M8_出料手臂Z3轴", out axisRun);
-                if (UpdateRunInfoData("M8_出料手臂Z3轴", "最大速度", Convert.ToDouble(uiDoubleUpDown129.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown129.Text);
-                if (UpdateRunInfoData("M8_出料手臂Z3轴", "加速度", Convert.ToDouble(uiDoubleUpDown128.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown128.Text);
-                if (UpdateRunInfoData("M8_出料手臂Z3轴", "减速度", Convert.ToDouble(uiDoubleUpDown127.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown127.Text);
+                if (UpdateRunInfoData("M8_出料手臂Z3轴", "最大速度", Convert.ToDouble(uiDoubleUpDown138.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown138.Text);//uiDoubleUpDown129.Text
+                if (UpdateRunInfoData("M8_出料手臂Z3轴", "加速度", Convert.ToDouble(uiDoubleUpDown137.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown137.Text);//uiDoubleUpDown128.Text
+                if (UpdateRunInfoData("M8_出料手臂Z3轴", "减速度", Convert.ToDouble(uiDoubleUpDown136.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown136.Text);//uiDoubleUpDown127.Text
 
 
                 GetAxisRunInfo("M9_出料手臂Z4轴", out axisRun);
-                if (UpdateRunInfoData("M9_出料手臂Z4轴", "最大速度", Convert.ToDouble(uiDoubleUpDown120.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown120.Text);
-                if (UpdateRunInfoData("M9_出料手臂Z4轴", "加速度", Convert.ToDouble(uiDoubleUpDown119.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown119.Text);
-                if (UpdateRunInfoData("M9_出料手臂Z4轴", "减速度", Convert.ToDouble(uiDoubleUpDown118.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown118.Text);
+                if (UpdateRunInfoData("M9_出料手臂Z4轴", "最大速度", Convert.ToDouble(uiDoubleUpDown138.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(uiDoubleUpDown138.Text);//uiDoubleUpDown120.Text
+                if (UpdateRunInfoData("M9_出料手臂Z4轴", "加速度", Convert.ToDouble(uiDoubleUpDown137.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(uiDoubleUpDown137.Text);//uiDoubleUpDown119.Text
+                if (UpdateRunInfoData("M9_出料手臂Z4轴", "减速度", Convert.ToDouble(uiDoubleUpDown136.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown136.Text);//uiDoubleUpDown118.Text
             }
         }
 
@@ -3870,11 +3924,57 @@ namespace H5509_V2
                 if (UpdateRunInfoData("M18_放Tary盘轴", "减速度", Convert.ToDouble(uiDoubleUpDown22.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(uiDoubleUpDown22.Text);
             }
         }
+        private void uiButton23_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (result == DialogResult.OK)
+            {
+                if (UpdateInitPointData("Empty_最高上顶", Convert.ToDouble(numericUpDown163.Text), 初始点位.Empty_最高上顶)) 初始点位.Empty_最高上顶 = Convert.ToDouble(numericUpDown163.Text);
+                if (UpdateInitPointData("Empty_满盘位", Convert.ToDouble(numericUpDown162.Text), 初始点位.Empty_满盘位)) 初始点位.Empty_满盘位 = Convert.ToDouble(numericUpDown162.Text);
+                if (UpdateInitPointData("Load_最高上顶", Convert.ToDouble(numericUpDown161.Text), 初始点位.Load_最高上顶)) 初始点位.Load_最高上顶 = Convert.ToDouble(numericUpDown161.Text);
+
+                if (UpdateInitPointData("Auto1_最高上顶", Convert.ToDouble(numericUpDown174.Text), 初始点位.Auto1_最高上顶)) 初始点位.Auto1_最高上顶 = Convert.ToDouble(numericUpDown174.Text);
+                if (UpdateInitPointData("Auto1_分盘位", Convert.ToDouble(numericUpDown179.Text), 初始点位.Auto1_分盘位)) 初始点位.Auto1_分盘位 = Convert.ToDouble(numericUpDown179.Text);
+                if (UpdateInitPointData("Auto1_初始位", Convert.ToDouble(numericUpDown159.Text), 初始点位.Auto1_初始位)) 初始点位.Auto1_初始位 = Convert.ToDouble(numericUpDown159.Text);
+                if (UpdateInitPointData("Auto1_满盘位", Convert.ToDouble(numericUpDown173.Text), 初始点位.Auto1_满盘位)) 初始点位.Auto1_满盘位 = Convert.ToDouble(numericUpDown173.Text);
+
+                if (UpdateInitPointData("Auto2_最高上顶", Convert.ToDouble(numericUpDown175.Text), 初始点位.Auto2_最高上顶)) 初始点位.Auto2_最高上顶 = Convert.ToDouble(numericUpDown175.Text);
+                if (UpdateInitPointData("Auto2_分盘位", Convert.ToDouble(numericUpDown178.Text), 初始点位.Auto2_分盘位)) 初始点位.Auto2_分盘位 = Convert.ToDouble(numericUpDown178.Text);
+                if (UpdateInitPointData("Auto2_初始位", Convert.ToDouble(numericUpDown177.Text), 初始点位.Auto2_初始位)) 初始点位.Auto2_初始位 = Convert.ToDouble(numericUpDown177.Text);
+                if (UpdateInitPointData("Auto2_满盘位", Convert.ToDouble(numericUpDown176.Text), 初始点位.Auto2_满盘位)) 初始点位.Auto2_满盘位 = Convert.ToDouble(numericUpDown176.Text);
+
+                GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRun);
+                if (UpdateRunInfoData("M12_Empty顶盘轴", "最大速度", Convert.ToDouble(numericUpDown3.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(numericUpDown3.Text);
+                if (UpdateRunInfoData("M12_Empty顶盘轴", "加速度", Convert.ToDouble(numericUpDown4.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(numericUpDown4.Text);
+                if (UpdateRunInfoData("M12_Empty顶盘轴", "减速度", Convert.ToDouble(numericUpDown2.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(numericUpDown2.Text);
+
+                GetAxisRunInfo("M13_Loader顶盘轴", out axisRun);
+                if (UpdateRunInfoData("M13_Loader顶盘轴", "最大速度", Convert.ToDouble(numericUpDown165.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(numericUpDown165.Text);
+                if (UpdateRunInfoData("M13_Loader顶盘轴", "加速度", Convert.ToDouble(numericUpDown166.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(numericUpDown166.Text);
+                if (UpdateRunInfoData("M13_Loader顶盘轴", "减速度", Convert.ToDouble(numericUpDown164.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(numericUpDown164.Text);
+
+                GetAxisRunInfo("M14_Auto1顶盘轴", out axisRun);
+                if (UpdateRunInfoData("M14_Auto1顶盘轴", "最大速度", Convert.ToDouble(numericUpDown171.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(numericUpDown171.Text);
+                if (UpdateRunInfoData("M14_Auto1顶盘轴", "加速度", Convert.ToDouble(numericUpDown172.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(numericUpDown172.Text);
+                if (UpdateRunInfoData("M14_Auto1顶盘轴", "减速度", Convert.ToDouble(numericUpDown170.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(numericUpDown170.Text);
+
+                GetAxisRunInfo("M15_Auto2顶盘轴", out axisRun);
+                if (UpdateRunInfoData("M15_Auto2顶盘轴", "最大速度", Convert.ToDouble(numericUpDown168.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(numericUpDown168.Text);
+                if (UpdateRunInfoData("M15_Auto2顶盘轴", "加速度", Convert.ToDouble(numericUpDown169.Text), axisRun.加速度)) axisRun.加速度 = Convert.ToDouble(numericUpDown169.Text);
+                if (UpdateRunInfoData("M15_Auto2顶盘轴", "减速度", Convert.ToDouble(numericUpDown167.Text), axisRun.减速度)) axisRun.减速度 = Convert.ToDouble(numericUpDown167.Text);
+            }
+        }
 
         private void uiButton21_Click(object sender, EventArgs e)
         {
             刷新抓盘手臂初始点位();
             刷新抓盘手臂速度参数();
+        }
+
+        private void uiButton20_Click(object sender, EventArgs e)
+        {
+            刷新顶盘手臂初始点位();
+            刷新顶盘手臂速度参数();
         }
 
         private void button72_Click(object sender, EventArgs e)
@@ -6859,16 +6959,6 @@ namespace H5509_V2
             uiComboBox2.Visible = uiCheckBox193.Checked;
         }
 
-        /// <summary>
-        /// 新增档案
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void uiButton12_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void uiTabControl9_Selecting(object sender, TabControlCancelEventArgs e)
         {
             刷新加热盘信息(uiTabControl9.SelectedTab.Text);
@@ -7466,7 +7556,7 @@ namespace H5509_V2
             }
         }
 
-        private void uiCheckBox207_CheckedChanged(object sender, EventArgs e)
+        private void uiCheckBox207_Click(object sender, EventArgs e)
         {
             if (uiCheckBox207.Checked)
             {
@@ -7506,6 +7596,26 @@ namespace H5509_V2
                 uiCheckBox215.Checked = false;
                 uiCheckBox214.Checked = false;
             }
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(uiDoubleUpDown126.Text);
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M11_Fix3放IC轴", pos, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+            });
+        }
+
+        private void button243_Click(object sender, EventArgs e)
+        {
+            所有轴紧急停止();
+        }
+
+        private void uiTabControl3_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新调试(e.TabPage.Text);
         }
     }
 }

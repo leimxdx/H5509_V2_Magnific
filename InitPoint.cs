@@ -79,5 +79,16 @@ namespace H5509_V2
         public double 抓盘_Load_X { get; set; }
         public double 抓盘_Auto1_X { get; set; }
         public double 抓盘_Auto2_X { get; set; }
+        public double Empty_最高上顶 { get; set; }
+        public double Empty_满盘位 { get; set; }
+        public double Load_最高上顶 { get; set; }
+        public double Auto1_最高上顶 { get; set; }
+        public double Auto1_分盘位 { get; set; }
+        public double Auto1_初始位 { get; set; }
+        public double Auto1_满盘位 { get; set; }
+        public double Auto2_最高上顶 { get; set; }
+        public double Auto2_分盘位 { get; set; }
+        public double Auto2_初始位 { get; set; }
+        public double Auto2_满盘位 { get; set; }
     }
 }

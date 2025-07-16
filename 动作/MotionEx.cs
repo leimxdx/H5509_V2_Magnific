@@ -412,7 +412,7 @@ namespace H5509_V2
                         }
                     }
 
-                    if (APPmaster.IsPause && type == 0)
+                    if (APPmaster.IsPause && type == 0) //type == 0 : 暂停有效  == 1 暂停无效
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
                         while (true)
@@ -426,7 +426,7 @@ namespace H5509_V2
                             }
                         }
                     }
-                    else if (APPmaster.IsEmptyPause && axisRun.轴名称 == "M12_Empty顶盘轴" && type == 0)
+                    else if (APPmaster.IsEmptyPause && axisRun.轴名称 == "M12_Empty顶盘轴")
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
                         while (true)
@@ -440,7 +440,7 @@ namespace H5509_V2
                             }
                         }
                     }
-                    else if (APPmaster.IsLoadPause && axisRun.轴名称 == "M13_Loader顶盘轴" && type == 0)
+                    else if (APPmaster.IsLoadPause && axisRun.轴名称 == "M13_Loader顶盘轴")
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), 1);
                         while (true)

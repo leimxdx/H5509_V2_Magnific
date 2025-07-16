@@ -634,14 +634,14 @@
             this.tabPage1.Controls.Add(this.uiTabControl2);
             this.tabPage1.Location = new System.Drawing.Point(0, 40);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(200, 60);
+            this.tabPage1.Size = new System.Drawing.Size(1893, 944);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "IO调试";
             // 
             // uiTabControl2
             // 
             this.uiTabControl2.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.uiTabControl2.Font = new System.Drawing.Font("微软雅黑", 15F);
+            this.uiTabControl2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiTabControl2.ItemSize = new System.Drawing.Size(150, 40);
             this.uiTabControl2.Location = new System.Drawing.Point(3, 3);
             this.uiTabControl2.MainPage = "";
@@ -657,7 +657,7 @@
             this.uiTabControl2.TabSelectedForeColor = System.Drawing.Color.Black;
             this.uiTabControl2.TabUnSelectedColor = System.Drawing.SystemColors.Menu;
             this.uiTabControl2.TabUnSelectedForeColor = System.Drawing.Color.Black;
-            this.uiTabControl2.TipsFont = new System.Drawing.Font("微软雅黑", 15F);
+            this.uiTabControl2.TipsFont = new System.Drawing.Font("微软雅黑", 12F);
             this.uiTabControl2.TipsForeColor = System.Drawing.Color.Black;
             this.uiTabControl2.SelectedIndexChanged += new System.EventHandler(this.uiTabControl2_SelectedIndexChanged);
             // 
@@ -666,7 +666,7 @@
             this.uiTabControl1.Controls.Add(this.tabPage2);
             this.uiTabControl1.Controls.Add(this.tabPage1);
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
-            this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
             this.uiTabControl1.Location = new System.Drawing.Point(2, 3);
             this.uiTabControl1.MainPage = "";
@@ -1738,7 +1738,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 60);
+            this.tabPage8.Size = new System.Drawing.Size(1889, 900);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "入料区";
             // 

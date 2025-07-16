@@ -2265,7 +2265,10 @@ namespace H5509_V2
         {
             string axisName = "M12_Empty顶盘轴";
 
-            string result = motionEx.AxisJogMove(axisName, true);
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
+            if (result != "Success") return result;
+
+            result = motionEx.AxisJogMove(axisName, true);
             if (result != "Success") return result;
 
             while (true)
@@ -2327,12 +2330,13 @@ namespace H5509_V2
                         return result;
                     }
 
-                    if (prfpos > 空盘上顶最大值 || value2 == "0")
+                    double maxpoint = 初始点位.Empty_最高上顶 / axisRunInfo.步长mm;
+                    if (prfpos > maxpoint || value2 == "0")
                     {
                         空盘上顶到最大值 = true;
                         motionEx.AxisStopMove(axisName, 1);
                         //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
-                        return $"{axisName}当前上升行程{prfpos}>{空盘上顶最大值} || {value2}";
+                        return $"{axisName}当前上升行程{prfpos}>{maxpoint} || {value2}";
                     }
 
                     Thread.Sleep(1); //减少轴卡和CPU压力
@@ -2416,7 +2420,10 @@ namespace H5509_V2
 
             string axisName = "M13_Loader顶盘轴";
 
-            string result = motionEx.AxisJogMove(axisName, true);
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRunInfo);
+            if (result != "Success") return result;
+
+            result = motionEx.AxisJogMove(axisName, true);
             if (result != "Success") return result;
 
             while (true)
@@ -2478,12 +2485,13 @@ namespace H5509_V2
                         return result;
                     }
 
-                    if (prfpos > 待测盘上顶最大值 || value2 == "0")
+                    double maxpoint = 初始点位.Load_最高上顶 / axisRunInfo.步长mm;
+                    if (prfpos > maxpoint || value2 == "0") //待测盘上顶最大值
                     {
                         motionEx.AxisStopMove(axisName, 1);
                         待测盘上顶到最大值 = true;
                         //Thread.Sleep(300);//解决轴:Empty第1次回零失败，详细信息：正在运动
-                        return $"{axisName}当前上升行程{prfpos}>{待测盘上顶最大值} || {value2}";
+                        return $"{axisName}当前上升行程{prfpos}>{maxpoint} || {value2}";
                     }
                     Thread.Sleep(1); //减少轴卡和CPU压力
                 }
@@ -2600,6 +2608,7 @@ namespace H5509_V2
                         motionEx.AxisStopMove(axisName, 1);
                         return result;
                     }
+
                     if (prfpos > Auto1上顶最大值)
                     {
                         motionEx.AxisStopMove(axisName, 1);
@@ -4374,8 +4383,8 @@ namespace H5509_V2
                     case 505:
                         PS初始化流程.StepName = "各轴移动到初始点";
                         RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
-                        Task<string> auto1 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto1顶盘轴移动(Auto1初始点) : "Success"; });
-                        Task<string> auto2 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto2顶盘轴移动(Auto2初始点) : "Success"; });//182.715
+                        Task<string> auto1 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto1顶盘轴移动(初始点位.Auto1_初始位) : "Success"; });
+                        Task<string> auto2 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto2顶盘轴移动(初始点位.Auto2_初始位) : "Success"; });//182.715
                         Task<string> testp = Task.Run(() => { return 测试吸嘴_张开气缸输出(true); });
                         Task<string> testx = Task.Run(() => { return 测试手臂X移动(初始点位.测试_梭车1吸_X); });
                         Task<string> shuttle = Task.Run(() => { return 飞梭轴移动(初始点位.梭车2_后_Y); });
@@ -10365,7 +10374,7 @@ namespace H5509_V2
                     case 515:
                         PS空盘上顶流程.StepName = "Empty向上移动固定距离";
                         RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty顶盘轴移动2(2.5, Empty舱门开启标记);//3175 1.5875
+                        result = Empty顶盘轴移动2(Empty原点偏移, Empty舱门开启标记);//3175 1.5875
                         if (result == "Success")
                         {
                             Empty上顶标记 = 1;
@@ -10474,10 +10483,10 @@ namespace H5509_V2
                         result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos1);
                         if (result == "Success")
                         {
-                            result = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo);
+                            result = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo2);
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) - Tray_厚度; //6.35
+                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo2.步长mm) - Tray_厚度; //6.35
                                 PS空盘下降流程.StepID = 505;
                             }
                             else
@@ -10515,11 +10524,13 @@ namespace H5509_V2
                         PS空盘下降流程.StepName = "判断Empty顶盘轴是否走到最小值";
                         RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
                         result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos);
-                        if (result == "Success")
+                        string result3 = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo);
+                        if (result == "Success" && result3 == "Success")
                         {
-                            if (prfpos < 空盘满盘判断值)
+                            double minpoint = 初始点位.Empty_满盘位 / axisRunInfo.步长mm;
+                            if (prfpos < minpoint) //空盘满盘判断值
                             {
-                                RunLog($"M12_Empty顶盘轴当前行程{prfpos}<{空盘满盘判断值}");
+                                RunLog($"M12_Empty顶盘轴当前行程{prfpos}<{minpoint}");
                                 Listcode.Add("4018006");
                                 RunLog($"[Code]4018006,[Msg]空盘区空盘放满", LogType.AlarmLog);
                                 APPmaster.ProgramPause = true;
@@ -10533,7 +10544,8 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            RunLog($"判断Empty顶盘轴是否走到最大值失败！" + result);
+                            if (result != "Success") RunLog($"读取Empty顶盘轴编码位置失败！" + result);
+                            if (result3 != "Success") RunLog($"读取Empty顶盘轴运行信息失败！" + result3);
                         }
                         break;
 
@@ -10779,7 +10791,7 @@ namespace H5509_V2
                     case 520:
                         PS待测盘上顶流程.StepName = "Load向上移动固定距离";
                         RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load顶盘轴移动2(0.5, Load舱门开启标记); //3175 1.5875
+                        result = Load顶盘轴移动2(Load原点偏移, Load舱门开启标记); //3175 1.5875
                         if (result == "Success")
                         {
                             PS待测盘上顶流程.StepID = 525;
@@ -11333,12 +11345,14 @@ namespace H5509_V2
                         PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
                         RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
                         result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
-                        if (result == "Success")
+                        string result3 = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo2);
+                        if (result == "Success" && result3 == "Success")
                         {
-                            if (prfpos < Auto1满盘判断值)
+                            double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
+                            if (prfpos < minpoint) //Auto1满盘判断值
                             {
                                 Auto1料仓满盘标记 = true;
-                                RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{Auto1满盘判断值}");
+                                RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}");
                             }
                             else Auto1料仓满盘标记 = false;
 
@@ -11349,7 +11363,8 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            RunLog($"判断Auto1料仓是否满盘失败！" + result);
+                            if (result != "Success") RunLog($"读取Auto1顶盘轴编码位置失败！" + result);
+                            if (result3 != "Success") RunLog($"读取Auto1顶盘轴运行信息失败！" + result3);
                         }
                         break;
 
@@ -11811,9 +11826,11 @@ namespace H5509_V2
                         PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
                         RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
                         result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
-                        if (result == "Success")
+                        string result3 = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo2);
+                        if (result == "Success" && result3 == "Success")
                         {
-                            if (prfpos < Auto2满盘判断值)
+                            double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
+                            if (prfpos < minpoint) //Auto2满盘判断值
                             {
                                 Auto2料仓满盘标记 = true;
                                 RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
@@ -11827,7 +11844,8 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            RunLog($"判断Auto2料仓是否满盘失败！" + result);
+                            if (result != "Success") RunLog($"读取Auto2顶盘轴编码位置失败！" + result);
+                            if (result3 != "Success") RunLog($"读取Auto2顶盘轴运行信息失败！" + result3);
                         }
                         break;
 
@@ -13212,7 +13230,7 @@ namespace H5509_V2
                     case 565:
                         PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴和Auto1顶盘轴移动到等待位";
                         Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto1_X - 200); });
-                        Task<string> auto1u = Task.Run(() => { return Auto1顶盘轴移动(Auto1初始点); });
+                        Task<string> auto1u = Task.Run(() => { return Auto1顶盘轴移动(初始点位.Auto1_初始位); });
                         if (trayx.Result == "Success" && auto1u.Result == "Success")
                         {
                             PS抓盘手臂放空盘到Auto1流程.StepID = 570;
@@ -13781,7 +13799,7 @@ namespace H5509_V2
                     case 565:
                         PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴和Auto2顶盘轴移动到等待位";
                         Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto2_X - 200); });
-                        Task<string> auto2u = Task.Run(() => { return Auto2顶盘轴移动(Auto2初始点); });
+                        Task<string> auto2u = Task.Run(() => { return Auto2顶盘轴移动(初始点位.Auto2_初始位); });
                         if (trayx.Result == "Success" && auto2u.Result == "Success")
                         {
                             PS抓盘手臂放空盘到Auto2流程.StepID = 570;
