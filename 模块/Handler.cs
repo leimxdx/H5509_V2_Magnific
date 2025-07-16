@@ -3773,7 +3773,7 @@ namespace H5509_V2
 
                         if (设备状态 == 0 || 设备状态 == 2) motionEx.Motion.AllAxisStop();
 
-                        form_alarm.alarmLight(0, 1, 0, 0);
+                        form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
                         //motionEx.Motion.AllAxisStop();
 
                         if (设备状态 != 0 && H5509归零 && H5509初始化 && Tray盘模式 && !正在结批)
@@ -5244,7 +5244,7 @@ namespace H5509_V2
                             stopwatch.Start();
                             while (JudgeNozzleSts(lsopen, opens, 0))
                             {
-                                if (stopwatch.ElapsedMilliseconds > 2000)
+                                if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.入料手臂吸料超时时间)
                                 {
                                     RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料吸料超时");
                                     break;
@@ -5280,9 +5280,8 @@ namespace H5509_V2
                             {
                                 if (lsopen[i]) opens[i] = 1;
                             }
-                            Thread.Sleep(200);
+                            Thread.Sleep(设置信息.测试机信息.入料手臂吹料时间);
                         }
-
 
                         if (result == "Success")
                         {
@@ -5590,7 +5589,7 @@ namespace H5509_V2
                             stopwatch.Start();
                             while (JudgeNozzleSts(lsopen, opens, 0))
                             {
-                                if (stopwatch.ElapsedMilliseconds > 2000)
+                                if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.入料手臂吸料超时时间)
                                 {
                                     RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料吸料超时");
                                     break;
@@ -5626,7 +5625,7 @@ namespace H5509_V2
                             {
                                 if (lsopen[i]) opens[i] = 1;
                             }
-                            Thread.Sleep(200);
+                            Thread.Sleep(设置信息.测试机信息.入料手臂吹料时间);
                         }
 
                         if (result == "Success")
@@ -5901,7 +5900,7 @@ namespace H5509_V2
                             result = 空跑模式 ? "Success" : 入料吸嘴_吸放料(lsopen, false, true); //开破真空
                             if (result == "Success")
                             {
-                                Thread.Sleep(200);
+                                Thread.Sleep(设置信息.测试机信息.入料手臂吹料时间);
                                 result = 空跑模式 ? "Success" : 入料吸嘴_吸放料(lsopen, false, false); //关破真空
                                 if (result == "Success")
                                 {
@@ -6106,7 +6105,7 @@ namespace H5509_V2
                             result = 空跑模式 ? "Success" : 入料吸嘴_吸放料(lsopen, false, true); //开破真空
                             if (result == "Success")
                             {
-                                Thread.Sleep(200);
+                                Thread.Sleep(设置信息.测试机信息.入料手臂吹料时间);
                                 result = 空跑模式 ? "Success" : 入料吸嘴_吸放料(lsopen, false, false); //关破真空
                                 if (result == "Success")
                                 {
@@ -6142,7 +6141,7 @@ namespace H5509_V2
                             stopwatch.Start();
                             while (JudgeNozzleSts(lsopen, opens, 1))
                             {
-                                if (stopwatch.ElapsedMilliseconds > 2000)
+                                if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.入料手臂吸料超时时间)
                                 {
                                     RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料放料超时");
                                     break;
@@ -6174,7 +6173,7 @@ namespace H5509_V2
                             {
                                 if (lsopen[i]) opens[i] = 0;
                             }
-                            Thread.Sleep(100);
+                            Thread.Sleep(设置信息.测试机信息.入料手臂吹料时间);
                         }
 
                         if (result == "Success")
@@ -7045,7 +7044,7 @@ namespace H5509_V2
                             stopwatch.Start();
                             while (JudgeNozzleSts(lsopen, opens, 0))
                             {
-                                if (stopwatch.ElapsedMilliseconds > 2000)
+                                if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.出料手臂吸料超时时间)
                                 {
                                     RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料吸料超时");
                                     break;
@@ -7080,7 +7079,7 @@ namespace H5509_V2
                             {
                                 if (lsopen[i]) opens[i] = 1;
                             }
-                            Thread.Sleep(100);
+                            Thread.Sleep(设置信息.测试机信息.出料手臂吹料时间);
                         }
 
                         if (result == "Success")
@@ -7727,7 +7726,7 @@ namespace H5509_V2
                             result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, false, true);
                             if (result == "Success")
                             {
-                                Thread.Sleep(200);
+                                Thread.Sleep(设置信息.测试机信息.出料手臂吹料时间);
                                 result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, false, false);
                                 if (result == "Success")
                                 {
@@ -8835,7 +8834,7 @@ namespace H5509_V2
                             stopwatch.Start();
                             while (JudgeNozzleSts(lsopen, opens, 0))
                             {
-                                if (stopwatch.ElapsedMilliseconds > 2000)
+                                if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.测试手臂吸料超时时间)
                                 {
                                     RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试吸料超时");
                                     break;
@@ -8870,7 +8869,7 @@ namespace H5509_V2
                             {
                                 if (lsopen[i]) opens[i] = 1;
                             }
-                            Thread.Sleep(100);
+                            Thread.Sleep(设置信息.测试机信息.测试手臂吹料时间);
                         }
 
                         if (result == "Success")
@@ -9170,7 +9169,7 @@ namespace H5509_V2
                             result = 空跑模式 ? "Success" : 测试吸嘴_放料(lsopen, true);
                             if (result == "Success")
                             {
-                                Thread.Sleep(200);
+                                Thread.Sleep(设置信息.测试机信息.测试手臂吹料时间);
                                 result = 空跑模式 ? "Success" : 测试吸嘴_放料(lsopen, false);
                                 if (result == "Success")
                                 {
@@ -9586,7 +9585,7 @@ namespace H5509_V2
 
                             while (JudgeNozzleSts(lsopen, opens, 0))
                             {
-                                if (stopwatch.ElapsedMilliseconds > 2000)
+                                if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.测试手臂吸料超时时间)
                                 {
                                     RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试吸料超时");
                                     break;
@@ -9621,7 +9620,7 @@ namespace H5509_V2
                             {
                                 if (lsopen[i]) opens[i] = 1;
                             }
-                            Thread.Sleep(200);
+                            Thread.Sleep(设置信息.测试机信息.测试手臂吹料时间);
                         }
                         if (result == "Success")
                         {
@@ -9899,7 +9898,7 @@ namespace H5509_V2
                             result = 空跑模式 ? "Success" : 测试吸嘴_吸放料(lsopen, false, true);
                             if (result == "Success")
                             {
-                                Thread.Sleep(200);
+                                Thread.Sleep(设置信息.测试机信息.测试手臂吹料时间);
                                 result = 空跑模式 ? "Success" : 测试吸嘴_吸放料(lsopen, false, false);
                                 if (result == "Success")
                                 {
@@ -10122,7 +10121,7 @@ namespace H5509_V2
                         result = 测试区_下压气缸到位输出(site);
                         if (result == "Success")
                         {
-                            Thread.Sleep(100);
+                            Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
                             PS测试区气缸下压动作流程.StepID = 520;
                         }
                         else

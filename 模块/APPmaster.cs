@@ -19,6 +19,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Xml.Linq;
 using DocumentFormat.OpenXml.Bibliography;
@@ -39,7 +40,7 @@ namespace H5509_V2
 
         public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false";
 
-        public static string SQLServerConnString = "";
+        public static string SQLServerConnString = ""; //在SqlServer数据库获取
 
         public static bool InitedOK = false;
 
@@ -78,6 +79,16 @@ namespace H5509_V2
         public static InitPoint 初始点位 = new InitPoint();
 
         public static SetupInfo 设置信息 = new SetupInfo();
+
+        public static LightSet 报警状态灯设置 = new LightSet(); //灯光设置
+
+        public static LightSet 待料状态灯设置 = new LightSet(); //灯光设置
+
+        public static LightSet 归零状态灯设置 = new LightSet(); //灯光设置
+
+        public static LightSet 暂停状态灯设置 = new LightSet(); //灯光设置
+
+        public static LightSet 结批状态灯设置 = new LightSet(); //灯光设置
 
         public static Action<string, DateTime> 显示操作log;
 
@@ -1636,6 +1647,62 @@ namespace H5509_V2
             return result;
         }
 
+        public static string GetLightSet()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from LightSet", out DataTable dataTable);
+            if (result == "Success")
+            {
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    LightSet lightset = new LightSet()
+                    {
+                        状态 = dr["设备状态"].ToString(),
+                        绿灯颜色显示 = Convert.ToBoolean(dr["绿灯颜色显示"].ToString()),
+                        绿灯显示方式 = Convert.ToInt32(dr["绿灯显示方式"].ToString()),
+                        黄灯颜色显示 = Convert.ToBoolean(dr["黄灯颜色显示"].ToString()),
+                        黄灯显示方式 = Convert.ToInt32(dr["黄灯显示方式"].ToString()),
+                        红灯颜色显示 = Convert.ToBoolean(dr["红灯颜色显示"].ToString()),
+                        红灯显示方式 = Convert.ToInt32(dr["红灯显示方式"].ToString()),
+                        音乐提示 = Convert.ToBoolean(dr["音乐提示"].ToString()),
+                        报警音乐 = dr["报警音乐"].ToString(),
+                    };
+                    if (lightset.状态 == "报警中") 报警状态灯设置 = lightset;
+                    else if(lightset.状态 == "待料中") 待料状态灯设置 = lightset;
+                    else if (lightset.状态 == "归零中") 归零状态灯设置 = lightset;
+                    else if (lightset.状态 == "暂停中") 暂停状态灯设置 = lightset;
+                    else if (lightset.状态 == "结批中") 结批状态灯设置 = lightset;
+                }
+            }
+            return result;
+        }
+
+        public static string GetLightSet(string state, out LightSet lightset)
+        {
+            lightset = new LightSet();
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from LightSet where 设备状态 = '{state}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    lightset = new LightSet()
+                    {
+                        状态 = dr["设备状态"].ToString(),
+                        绿灯颜色显示 = Convert.ToBoolean(dr["绿灯颜色显示"].ToString()),
+                        绿灯显示方式 = Convert.ToInt32(dr["绿灯显示方式"].ToString()),
+                        黄灯颜色显示 = Convert.ToBoolean(dr["黄灯颜色显示"].ToString()),
+                        黄灯显示方式 = Convert.ToInt32(dr["黄灯显示方式"].ToString()),
+                        红灯颜色显示 = Convert.ToBoolean(dr["红灯颜色显示"].ToString()),
+                        红灯显示方式 = Convert.ToInt32(dr["红灯显示方式"].ToString()),
+                        音乐提示 = Convert.ToBoolean(dr["音乐提示"].ToString()),
+                        报警音乐 = dr["报警音乐"].ToString(),
+                    };
+                    if (lightset.状态 == state) break;
+                }
+            }
+            return result;
+        }
+
+
         public static string GetSetupValue(string name, string field, out string value)
         {
             return SQLiteHelper.runSql(SQLiteConnString, $"select {field} from SetupInfo where 档案名称 = '{name}'", out value);
@@ -1837,6 +1904,14 @@ namespace H5509_V2
                             校验位 = (Parity)Enum.Parse(typeof(Parity), dr["校验位"].ToString(), true),
                             数据位 = Convert.ToInt32(dr["数据位"].ToString()),
                             停止位 = (StopBits)Enum.Parse(typeof(StopBits), dr["停止位"].ToString(), true),
+                            入料手臂吸料超时时间 = Convert.ToInt32(dr["入料手臂吸料超时时间"].ToString()),
+                            出料手臂吸料超时时间 = Convert.ToInt32(dr["出料手臂吸料超时时间"].ToString()),
+                            测试手臂吸料超时时间 = Convert.ToInt32(dr["测试手臂吸料超时时间"].ToString()),
+                            入料手臂吹料时间 = Convert.ToInt32(dr["入料手臂吹料时间"].ToString()),
+                            出料手臂吹料时间 = Convert.ToInt32(dr["出料手臂吹料时间"].ToString()),
+                            测试手臂吹料时间 = Convert.ToInt32(dr["测试手臂吹料时间"].ToString()),
+                            发送开始信号延时 = Convert.ToInt32(dr["发送开始信号延时"].ToString()),
+                            离线模式测试等待时间 = Convert.ToInt32(dr["离线模式测试等待时间"].ToString()),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -1942,6 +2017,10 @@ namespace H5509_V2
 
             ///设备config
             result = GetconfigData();
+            if (result != "Success") return result;
+
+            ///状态灯设置
+            result = GetLightSet();
             if (result != "Success") return result;
 
             ///档案信息
@@ -2089,7 +2168,15 @@ namespace H5509_V2
                 $"波特率 = '{tester.波特率}'," +
                 $"校验位 = '{tester.校验位}'," +
                 $"数据位 = '{tester.数据位}'," +
-                $"停止位 = '{tester.停止位}'" +
+                $"停止位 = '{tester.停止位}'," +
+                $"入料手臂吸料超时时间 = '{tester.入料手臂吸料超时时间}'," +
+                $"出料手臂吸料超时时间 = '{tester.出料手臂吸料超时时间}'," +
+                $"测试手臂吸料超时时间 = '{tester.测试手臂吸料超时时间}'," +
+                $"入料手臂吹料时间 = '{tester.入料手臂吹料时间}'," +
+                $"出料手臂吹料时间 = '{tester.出料手臂吹料时间}'," +
+                $"测试手臂吹料时间 = '{tester.测试手臂吹料时间}'," +
+                $"发送开始信号延时 = '{tester.发送开始信号延时}'," +
+                $"离线模式测试等待时间 = '{tester.离线模式测试等待时间}'" +
                 $" where 测试机名称 = '{name}'";
 
             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);

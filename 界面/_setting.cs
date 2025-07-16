@@ -2764,8 +2764,16 @@ namespace H5509_V2
             uiComboBox14.Text = tester.校验位.ToString();
             uiComboBox13.Text = tester.数据位.ToString();
             uiComboBox15.Text = tester.停止位.ToString();
-        }
 
+            numericUpDown6.Text = tester.入料手臂吸料超时时间.ToString();
+            numericUpDown9.Text = tester.出料手臂吸料超时时间.ToString();
+            numericUpDown11.Text = tester.测试手臂吸料超时时间.ToString();
+            numericUpDown7.Text = tester.入料手臂吹料时间.ToString();
+            numericUpDown8.Text = tester.出料手臂吹料时间.ToString();
+            numericUpDown10.Text = tester.测试手臂吹料时间.ToString();
+            numericUpDown156.Text = tester.发送开始信号延时.ToString();
+            numericUpDown160.Text = tester.离线模式测试等待时间.ToString();
+        }
 
         private void 刷新分BIN(BinParam binParam)
         {
@@ -3153,6 +3161,44 @@ namespace H5509_V2
             }
         }
 
+        private void 刷新灯光状态()
+        {
+            LightSet lightSet = new LightSet();
+
+            if (uiComboBox16.Text == "报警中") lightSet = 报警状态灯设置;
+            else if (uiComboBox16.Text == "待料中") lightSet = 待料状态灯设置;
+            else if (uiComboBox16.Text == "归零中") lightSet = 归零状态灯设置;
+            else if (uiComboBox16.Text == "暂停中") lightSet = 暂停状态灯设置;
+            else if (uiComboBox16.Text == "结批中") lightSet = 结批状态灯设置;
+
+            uiCheckBox207.Checked = lightSet.绿灯颜色显示;
+            uiCheckBox208.Checked = lightSet.黄灯颜色显示;
+            uiCheckBox209.Checked = lightSet.红灯颜色显示;
+
+            uiCheckBox210.Checked = false;
+            uiCheckBox211.Checked = false;
+            uiCheckBox210.Checked = lightSet.绿灯显示方式 == 1;
+            uiCheckBox211.Checked = lightSet.绿灯显示方式 == 2;
+
+            uiCheckBox213.Checked = false;
+            uiCheckBox212.Checked = false;
+            uiCheckBox213.Checked = lightSet.黄灯显示方式 == 1;
+            uiCheckBox212.Checked = lightSet.黄灯显示方式 == 2;
+
+            uiCheckBox215.Checked = false;
+            uiCheckBox214.Checked = false;
+            uiCheckBox215.Checked = lightSet.红灯显示方式 == 1;
+            uiCheckBox214.Checked = lightSet.红灯显示方式 == 2;
+
+            uiComboBox17.Text = lightSet.报警音乐;
+
+            //bool isdis = uiComboBox16.Text == "报警中";
+
+            //label662.Visible = isdis;
+            //uiComboBox17.Visible = isdis;
+            //uiButton1.Visible = isdis;
+        }
+
         private void 刷新取放设定(string name)
         {
             string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dt);
@@ -3288,6 +3334,7 @@ namespace H5509_V2
                 return result;
             }
         }
+
         private void 刷新Tray盘列表()
         {
             string reuslt = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', name as Tray盘名称 from TrayInfo", out DataTable dt);
@@ -3333,6 +3380,7 @@ namespace H5509_V2
                 //uiDataGridView2.ClearSelection();
             }
         }
+
         private void 刷新加热盘列表()
         {
             string reuslt = SQLiteHelper.runSql(SQLiteConnString, "select '' as ' ', name as 加热盘名称 from HeatInfo", out DataTable dt);
@@ -3379,6 +3427,7 @@ namespace H5509_V2
                 //uiDataGridView3.ClearSelection();
             }
         }
+
         public void 刷新产品(string tabpagetext)
         {
             if (tabpagetext == "档案列表")
@@ -3413,6 +3462,10 @@ namespace H5509_V2
             else if (tabpagetext == "系统设置")
             {
                 uiCheckBox205.Checked = 安全门禁用;
+            }
+            else if (tabpagetext == "状态灯")
+            {
+                刷新灯光状态();
             }
             //else if (tabpagetext == "产品")
             //{
@@ -3459,7 +3512,6 @@ namespace H5509_V2
             }
             return false;
         }
-
 
         #region 初始点位
 
@@ -3859,7 +3911,6 @@ namespace H5509_V2
             });
         }
 
-
         private void button29_Click(object sender, EventArgs e)
         {
             double pos = Convert.ToDouble(uiDoubleUpDown102.Text);
@@ -4239,7 +4290,6 @@ namespace H5509_V2
             所有轴紧急停止();
         }
 
-
         private void button76_Click(object sender, EventArgs e)
         {
             double pos = Convert.ToDouble(uiDoubleUpDown55.Text);
@@ -4263,8 +4313,6 @@ namespace H5509_V2
             double pos = Convert.ToDouble(uiDoubleUpDown59.Text);
             抓盘手臂X移动初始点位(pos);
         }
-
-
 
         private void button56_Click(object sender, EventArgs e)
         {
@@ -4308,7 +4356,6 @@ namespace H5509_V2
             出料手臂X移动初始点位(pos);
         }
 
-
         private void button48_Click(object sender, EventArgs e)
         {
             double pos = Convert.ToDouble(uiDoubleUpDown74.Text);
@@ -4350,7 +4397,6 @@ namespace H5509_V2
             double pos = Convert.ToDouble(uiDoubleUpDown95.Text);
             出料手臂Y移动初始点位(pos);
         }
-
 
         private void button62_Click(object sender, EventArgs e)
         {
@@ -4734,6 +4780,14 @@ namespace H5509_V2
                         newtester.校验位 = (Parity)Enum.Parse(typeof(Parity), uiComboBox14.Text, true);
                         newtester.数据位 = Convert.ToInt32(uiComboBox13.Text);
                         newtester.停止位 = (StopBits)Enum.Parse(typeof(StopBits), uiComboBox15.Text, true);
+                        newtester.入料手臂吸料超时时间 = Convert.ToInt32(numericUpDown6.Text);
+                        newtester.出料手臂吸料超时时间 = Convert.ToInt32(numericUpDown9.Text);
+                        newtester.测试手臂吸料超时时间 = Convert.ToInt32(numericUpDown11.Text);
+                        newtester.入料手臂吹料时间 = Convert.ToInt32(numericUpDown7.Text);
+                        newtester.出料手臂吹料时间 = Convert.ToInt32(numericUpDown8.Text);
+                        newtester.测试手臂吹料时间 = Convert.ToInt32(numericUpDown10.Text);
+                        newtester.发送开始信号延时 = Convert.ToInt32(numericUpDown156.Text);
+                        newtester.离线模式测试等待时间 = Convert.ToInt32(numericUpDown160.Text);
 
                         result = UpdateTesterIFParam(value, newtester);
                         if (result != "Success")
@@ -4762,6 +4816,15 @@ namespace H5509_V2
                             if (oldtester.校验位 != newtester.校验位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.校验位}->{newtester.校验位}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.数据位 != newtester.数据位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.数据位}->{newtester.数据位}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.停止位 != newtester.停止位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.停止位}->{newtester.停止位}:更新成功", WriteData.LogType.ParamLog); }
+
+                            if (oldtester.入料手臂吸料超时时间 != newtester.入料手臂吸料超时时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料手臂吸料超时时间]:{oldtester.入料手臂吸料超时时间}->{newtester.入料手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.出料手臂吸料超时时间 != newtester.出料手臂吸料超时时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料手臂吸料超时时间]:{oldtester.出料手臂吸料超时时间}->{newtester.出料手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.测试手臂吸料超时时间 != newtester.测试手臂吸料超时时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吸料超时时间]:{oldtester.测试手臂吸料超时时间}->{newtester.测试手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.入料手臂吹料时间 != newtester.入料手臂吹料时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料手臂吹料时间]:{oldtester.入料手臂吹料时间}->{newtester.入料手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.出料手臂吹料时间 != newtester.出料手臂吹料时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料手臂吹料时间]:{oldtester.出料手臂吹料时间}->{newtester.出料手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.测试手臂吹料时间 != newtester.测试手臂吹料时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吹料时间]:{oldtester.测试手臂吹料时间}->{newtester.测试手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.发送开始信号延时 != newtester.发送开始信号延时) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[发送开始信号延时]:{oldtester.发送开始信号延时}->{newtester.发送开始信号延时}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.离线模式测试等待时间 != newtester.离线模式测试等待时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[离线模式测试等待时间]:{oldtester.离线模式测试等待时间}->{newtester.离线模式测试等待时间}:更新成功", WriteData.LogType.ParamLog); }
 
                             if (value == 设置信息.测试机信息.测试机名称)
                             {
@@ -5167,6 +5230,7 @@ namespace H5509_V2
                 }
             }
         }
+
         private void 保存出料手臂Offset(string name, string page, OffsetPoint offset)
         {
             DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -5223,6 +5287,7 @@ namespace H5509_V2
                 }
             }
         }
+
         private void 保存测试手臂Offset(string name, string page, OffsetPoint offset)
         {
 
@@ -5316,6 +5381,7 @@ namespace H5509_V2
                 }
             }
         }
+
         private void 保存梭车Offset(string name, string page, OffsetPoint offset)
         {
 
@@ -5338,6 +5404,7 @@ namespace H5509_V2
                 }
             }
         }
+
         private void 保存抓料手臂Offset(string name, string page, OffsetPoint offset)
         {
 
@@ -6396,6 +6463,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public bool UpdateHeatInfo(string name, string trayname, string fiedname, double newvalue, double oldvalue)
         {
             if (newvalue != oldvalue)
@@ -6410,6 +6478,7 @@ namespace H5509_V2
             }
             return false;
         }
+
         public bool UpdateHeatInfo(string name, string trayname, string fiedname, string newvalue, string oldvalue)
         {
             if (newvalue != oldvalue)
@@ -6436,6 +6505,51 @@ namespace H5509_V2
                     return true;
                 }
                 else RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
+            }
+            return false;
+        }
+
+        public bool UpdateLight(string lightstate, string fiedname, bool newvalue, bool oldvalue)
+        {
+            if (newvalue != oldvalue)
+            {
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update LightSet set {fiedname} = '{newvalue}' where 设备状态 = '{lightstate}'");
+                if (line >= 1)
+                {
+                    RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
+                    return true;
+                }
+                else RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
+            }
+            return false;
+        }
+
+        public bool UpdateLight(string lightstate, string fiedname, int newvalue, int oldvalue)
+        {
+            if (newvalue != oldvalue)
+            {
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update LightSet set {fiedname} = {newvalue} where 设备状态 = '{lightstate}'");
+                if (line >= 1)
+                {
+                    RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
+                    return true;
+                }
+                else RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
+            }
+            return false;
+        }
+
+        public bool UpdateLight(string lightstate, string fiedname, string newvalue, string oldvalue)
+        {
+            if (newvalue != oldvalue)
+            {
+                int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, $"update LightSet set {fiedname} = '{newvalue}' where 设备状态 = '{lightstate}'");
+                if (line >= 1)
+                {
+                    RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", WriteData.LogType.ParamLog);
+                    return true;
+                }
+                else RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新失败", WriteData.LogType.ParamLog);
             }
             return false;
         }
@@ -7163,7 +7277,6 @@ namespace H5509_V2
             else MessageBox.Show("请选择要删除的Tray盘!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-
         /// <summary>
         /// 删除Heat盘信息
         /// </summary>
@@ -7192,6 +7305,207 @@ namespace H5509_V2
                 }
             }
             else MessageBox.Show("请选择要删除的加热盘!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+
+        private void uiCheckBox210_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox210.Checked)
+            {
+                uiCheckBox211.Checked = false;
+                uiCheckBox207.Checked = true;
+            }
+            else
+            {
+                if (!uiCheckBox211.Checked && !uiCheckBox210.Checked)
+                {
+                    uiCheckBox207.Checked = false;
+                }
+            }
+            //uiCheckBox211.Checked = !uiCheckBox210.Checked;
+        }
+
+        private void uiCheckBox211_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox211.Checked)
+            {
+                uiCheckBox210.Checked = false;
+                uiCheckBox207.Checked = true;
+            }
+            else
+            {
+                if (!uiCheckBox211.Checked && !uiCheckBox210.Checked)
+                {
+                    uiCheckBox207.Checked = false;
+                }
+            }
+            //uiCheckBox210.Checked = !uiCheckBox211.Checked;
+        }
+
+        private void uiCheckBox213_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox213.Checked)
+            {
+                uiCheckBox212.Checked = false;
+                uiCheckBox208.Checked = true;
+            }
+            else
+            {
+                if (!uiCheckBox212.Checked && !uiCheckBox213.Checked)
+                {
+                    uiCheckBox208.Checked = false;
+                }
+            }
+            //uiCheckBox212.Checked = !uiCheckBox213.Checked;
+        }
+
+        private void uiCheckBox212_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox212.Checked)
+            {
+                uiCheckBox213.Checked = false;
+                uiCheckBox208.Checked = true;
+            }
+            else
+            {
+                if (!uiCheckBox212.Checked && !uiCheckBox213.Checked)
+                {
+                    uiCheckBox208.Checked = false;
+                }
+            }
+            //uiCheckBox213.Checked = !uiCheckBox212.Checked;
+        }
+
+        private void uiCheckBox215_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox215.Checked)
+            {
+                uiCheckBox214.Checked = false;
+                uiCheckBox209.Checked = true;
+            }
+            else
+            {
+                if (!uiCheckBox214.Checked && !uiCheckBox215.Checked)
+                {
+                    uiCheckBox209.Checked = false;
+                }
+            }
+            //uiCheckBox214.Checked = !uiCheckBox215.Checked;
+        }
+
+        private void uiCheckBox214_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox214.Checked)
+            {
+                uiCheckBox215.Checked = false;
+                uiCheckBox209.Checked = true;
+            }
+            else
+            {
+                if (!uiCheckBox214.Checked && !uiCheckBox215.Checked)
+                {
+                    uiCheckBox209.Checked = false;
+                }
+            }
+            //uiCheckBox215.Checked = !uiCheckBox214.Checked;
+        }
+
+        private void uiComboBox16_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            刷新灯光状态();
+        }
+
+        private void uiButton29_Click(object sender, EventArgs e)
+        {
+            刷新灯光状态();
+        }
+
+        private void uiButton30_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.OK)
+            {
+                int green = 0;
+                if (uiCheckBox210.Checked) green = 1;
+                else if (uiCheckBox211.Checked) green = 2;
+
+                int yellow = 0;
+                if (uiCheckBox213.Checked) yellow = 1;
+                else if (uiCheckBox212.Checked) yellow = 2;
+
+                int red = 0;
+                if (uiCheckBox215.Checked) red = 1;
+                else if (uiCheckBox214.Checked) red = 2;
+
+                LightSet newlightset = new LightSet()
+                {
+                    状态 = uiComboBox16.Text,
+                    绿灯颜色显示 = uiCheckBox207.Checked,
+                    绿灯显示方式 = green,
+                    黄灯颜色显示 = uiCheckBox208.Checked,
+                    黄灯显示方式 = yellow,
+                    红灯颜色显示 = uiCheckBox209.Checked,
+                    红灯显示方式 = red,
+                    音乐提示 = uiComboBox17.Text != "无音乐",
+                    报警音乐 = uiComboBox17.Text,
+                };
+
+                string result = GetLightSet(newlightset.状态, out LightSet oldLightSet);
+                if (result == "Success")
+                {
+                    UpdateLight(newlightset.状态, "绿灯颜色显示", newlightset.绿灯颜色显示, oldLightSet.绿灯颜色显示);
+                    UpdateLight(newlightset.状态, "绿灯显示方式", newlightset.绿灯显示方式, oldLightSet.绿灯显示方式);
+                    UpdateLight(newlightset.状态, "黄灯颜色显示", newlightset.黄灯颜色显示, oldLightSet.黄灯颜色显示);
+                    UpdateLight(newlightset.状态, "黄灯显示方式", newlightset.黄灯显示方式, oldLightSet.黄灯显示方式);
+                    UpdateLight(newlightset.状态, "红灯颜色显示", newlightset.红灯颜色显示, oldLightSet.红灯颜色显示);
+                    UpdateLight(newlightset.状态, "红灯显示方式", newlightset.红灯显示方式, oldLightSet.红灯显示方式);
+                    UpdateLight(newlightset.状态, "音乐提示", newlightset.音乐提示, oldLightSet.音乐提示);
+                    UpdateLight(newlightset.状态, "报警音乐", newlightset.报警音乐, oldLightSet.报警音乐);
+
+                    GetLightSet();
+                }
+            }
+        }
+
+        private void uiCheckBox207_CheckedChanged(object sender, EventArgs e)
+        {
+            if (uiCheckBox207.Checked)
+            {
+                uiCheckBox210.Checked = true;
+                uiCheckBox211.Checked = false;
+            }
+            else
+            {
+                uiCheckBox210.Checked = false;
+                uiCheckBox211.Checked = false;
+            }
+        }
+
+        private void uiCheckBox208_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox208.Checked)
+            {
+                uiCheckBox213.Checked = true;
+                uiCheckBox212.Checked = false;
+            }
+            else
+            {
+                uiCheckBox213.Checked = false;
+                uiCheckBox212.Checked = false;
+            }
+        }
+
+        private void uiCheckBox209_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox209.Checked)
+            {
+                uiCheckBox215.Checked = true;
+                uiCheckBox214.Checked = false;
+            }
+            else
+            {
+                uiCheckBox215.Checked = false;
+                uiCheckBox214.Checked = false;
+            }
         }
     }
 }

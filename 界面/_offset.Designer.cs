@@ -311,6 +311,7 @@
             this.label53 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.uiTabControl2 = new Sunny.UI.UITabControl();
+            this.uiDoubleUpDown22 = new Sunny.UI.UIDoubleUpDown();
             this.tabPage17.SuspendLayout();
             this.uiTitlePanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.uiDoubleUpDown59)).BeginInit();
@@ -464,7 +465,7 @@
             this.tabPage17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(1896, 950);
+            this.tabPage17.Size = new System.Drawing.Size(200, 60);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
             // 
@@ -523,6 +524,11 @@
             // uiDoubleUpDown59
             // 
             this.uiDoubleUpDown59.DecimalPlaces = 3;
+            this.uiDoubleUpDown59.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown59.Location = new System.Drawing.Point(210, 162);
             this.uiDoubleUpDown59.Minimum = new decimal(new int[] {
             100,
@@ -547,6 +553,11 @@
             // uiDoubleUpDown60
             // 
             this.uiDoubleUpDown60.DecimalPlaces = 3;
+            this.uiDoubleUpDown60.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown60.Location = new System.Drawing.Point(210, 125);
             this.uiDoubleUpDown60.Minimum = new decimal(new int[] {
             100,
@@ -561,6 +572,11 @@
             // uiDoubleUpDown58
             // 
             this.uiDoubleUpDown58.DecimalPlaces = 3;
+            this.uiDoubleUpDown58.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown58.Location = new System.Drawing.Point(210, 88);
             this.uiDoubleUpDown58.Minimum = new decimal(new int[] {
             100,
@@ -575,6 +591,11 @@
             // uiDoubleUpDown55
             // 
             this.uiDoubleUpDown55.DecimalPlaces = 3;
+            this.uiDoubleUpDown55.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown55.Location = new System.Drawing.Point(210, 51);
             this.uiDoubleUpDown55.Minimum = new decimal(new int[] {
             100,
@@ -625,7 +646,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(1896, 950);
+            this.tabPage16.Size = new System.Drawing.Size(200, 60);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "梭车";
             // 
@@ -679,6 +700,11 @@
             // uiDoubleUpDown56
             // 
             this.uiDoubleUpDown56.DecimalPlaces = 2;
+            this.uiDoubleUpDown56.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown56.Location = new System.Drawing.Point(135, 86);
             this.uiDoubleUpDown56.Minimum = new decimal(new int[] {
             100,
@@ -693,6 +719,11 @@
             // uiDoubleUpDown57
             // 
             this.uiDoubleUpDown57.DecimalPlaces = 2;
+            this.uiDoubleUpDown57.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown57.Location = new System.Drawing.Point(135, 49);
             this.uiDoubleUpDown57.Minimum = new decimal(new int[] {
             100,
@@ -733,7 +764,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1896, 950);
+            this.tabPage9.Size = new System.Drawing.Size(200, 60);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "测试手臂";
             // 
@@ -928,6 +959,11 @@
             // uiDoubleUpDown71
             // 
             this.uiDoubleUpDown71.DecimalPlaces = 3;
+            this.uiDoubleUpDown71.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown71.Location = new System.Drawing.Point(1251, 88);
             this.uiDoubleUpDown71.Minimum = new decimal(new int[] {
             100,
@@ -942,6 +978,11 @@
             // uiDoubleUpDown103
             // 
             this.uiDoubleUpDown103.DecimalPlaces = 3;
+            this.uiDoubleUpDown103.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown103.Location = new System.Drawing.Point(1251, 680);
             this.uiDoubleUpDown103.Minimum = new decimal(new int[] {
             100,
@@ -956,6 +997,11 @@
             // uiDoubleUpDown72
             // 
             this.uiDoubleUpDown72.DecimalPlaces = 2;
+            this.uiDoubleUpDown72.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown72.Location = new System.Drawing.Point(1251, 53);
             this.uiDoubleUpDown72.Minimum = new decimal(new int[] {
             100,
@@ -970,6 +1016,11 @@
             // uiDoubleUpDown45
             // 
             this.uiDoubleUpDown45.DecimalPlaces = 2;
+            this.uiDoubleUpDown45.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown45.Location = new System.Drawing.Point(1251, 645);
             this.uiDoubleUpDown45.Minimum = new decimal(new int[] {
             100,
@@ -984,6 +1035,11 @@
             // uiDoubleUpDown63
             // 
             this.uiDoubleUpDown63.DecimalPlaces = 3;
+            this.uiDoubleUpDown63.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown63.Location = new System.Drawing.Point(904, 88);
             this.uiDoubleUpDown63.Minimum = new decimal(new int[] {
             100,
@@ -998,6 +1054,11 @@
             // uiDoubleUpDown105
             // 
             this.uiDoubleUpDown105.DecimalPlaces = 3;
+            this.uiDoubleUpDown105.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown105.Location = new System.Drawing.Point(1251, 384);
             this.uiDoubleUpDown105.Minimum = new decimal(new int[] {
             100,
@@ -1012,6 +1073,11 @@
             // uiDoubleUpDown64
             // 
             this.uiDoubleUpDown64.DecimalPlaces = 2;
+            this.uiDoubleUpDown64.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown64.Location = new System.Drawing.Point(904, 53);
             this.uiDoubleUpDown64.Minimum = new decimal(new int[] {
             100,
@@ -1026,6 +1092,11 @@
             // uiDoubleUpDown47
             // 
             this.uiDoubleUpDown47.DecimalPlaces = 2;
+            this.uiDoubleUpDown47.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown47.Location = new System.Drawing.Point(1251, 349);
             this.uiDoubleUpDown47.Minimum = new decimal(new int[] {
             100,
@@ -1040,6 +1111,11 @@
             // uiDoubleUpDown69
             // 
             this.uiDoubleUpDown69.DecimalPlaces = 3;
+            this.uiDoubleUpDown69.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown69.Location = new System.Drawing.Point(561, 88);
             this.uiDoubleUpDown69.Minimum = new decimal(new int[] {
             100,
@@ -1054,6 +1130,11 @@
             // uiDoubleUpDown109
             // 
             this.uiDoubleUpDown109.DecimalPlaces = 3;
+            this.uiDoubleUpDown109.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown109.Location = new System.Drawing.Point(1251, 236);
             this.uiDoubleUpDown109.Minimum = new decimal(new int[] {
             100,
@@ -1068,6 +1149,11 @@
             // uiDoubleUpDown70
             // 
             this.uiDoubleUpDown70.DecimalPlaces = 2;
+            this.uiDoubleUpDown70.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown70.Location = new System.Drawing.Point(561, 53);
             this.uiDoubleUpDown70.Minimum = new decimal(new int[] {
             100,
@@ -1082,6 +1168,11 @@
             // uiDoubleUpDown104
             // 
             this.uiDoubleUpDown104.DecimalPlaces = 3;
+            this.uiDoubleUpDown104.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown104.Location = new System.Drawing.Point(1251, 532);
             this.uiDoubleUpDown104.Minimum = new decimal(new int[] {
             100,
@@ -1096,6 +1187,11 @@
             // uiDoubleUpDown61
             // 
             this.uiDoubleUpDown61.DecimalPlaces = 3;
+            this.uiDoubleUpDown61.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown61.Location = new System.Drawing.Point(214, 88);
             this.uiDoubleUpDown61.Minimum = new decimal(new int[] {
             100,
@@ -1110,6 +1206,11 @@
             // uiDoubleUpDown48
             // 
             this.uiDoubleUpDown48.DecimalPlaces = 2;
+            this.uiDoubleUpDown48.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown48.Location = new System.Drawing.Point(1251, 201);
             this.uiDoubleUpDown48.Minimum = new decimal(new int[] {
             100,
@@ -1124,6 +1225,11 @@
             // uiDoubleUpDown46
             // 
             this.uiDoubleUpDown46.DecimalPlaces = 2;
+            this.uiDoubleUpDown46.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown46.Location = new System.Drawing.Point(1251, 497);
             this.uiDoubleUpDown46.Minimum = new decimal(new int[] {
             100,
@@ -1138,6 +1244,11 @@
             // uiDoubleUpDown62
             // 
             this.uiDoubleUpDown62.DecimalPlaces = 2;
+            this.uiDoubleUpDown62.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown62.Location = new System.Drawing.Point(214, 53);
             this.uiDoubleUpDown62.Minimum = new decimal(new int[] {
             100,
@@ -1152,6 +1263,11 @@
             // uiDoubleUpDown110
             // 
             this.uiDoubleUpDown110.DecimalPlaces = 3;
+            this.uiDoubleUpDown110.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown110.Location = new System.Drawing.Point(904, 680);
             this.uiDoubleUpDown110.Minimum = new decimal(new int[] {
             100,
@@ -1166,6 +1282,11 @@
             // uiDoubleUpDown52
             // 
             this.uiDoubleUpDown52.DecimalPlaces = 2;
+            this.uiDoubleUpDown52.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown52.Location = new System.Drawing.Point(904, 645);
             this.uiDoubleUpDown52.Minimum = new decimal(new int[] {
             100,
@@ -1180,6 +1301,11 @@
             // uiDoubleUpDown112
             // 
             this.uiDoubleUpDown112.DecimalPlaces = 3;
+            this.uiDoubleUpDown112.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown112.Location = new System.Drawing.Point(904, 384);
             this.uiDoubleUpDown112.Minimum = new decimal(new int[] {
             100,
@@ -1194,6 +1320,11 @@
             // uiDoubleUpDown54
             // 
             this.uiDoubleUpDown54.DecimalPlaces = 2;
+            this.uiDoubleUpDown54.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown54.Location = new System.Drawing.Point(904, 349);
             this.uiDoubleUpDown54.Minimum = new decimal(new int[] {
             100,
@@ -1208,6 +1339,11 @@
             // uiDoubleUpDown114
             // 
             this.uiDoubleUpDown114.DecimalPlaces = 3;
+            this.uiDoubleUpDown114.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown114.Location = new System.Drawing.Point(561, 680);
             this.uiDoubleUpDown114.Minimum = new decimal(new int[] {
             100,
@@ -1222,6 +1358,11 @@
             // uiDoubleUpDown67
             // 
             this.uiDoubleUpDown67.DecimalPlaces = 2;
+            this.uiDoubleUpDown67.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown67.Location = new System.Drawing.Point(561, 645);
             this.uiDoubleUpDown67.Minimum = new decimal(new int[] {
             100,
@@ -1236,6 +1377,11 @@
             // uiDoubleUpDown115
             // 
             this.uiDoubleUpDown115.DecimalPlaces = 3;
+            this.uiDoubleUpDown115.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown115.Location = new System.Drawing.Point(561, 532);
             this.uiDoubleUpDown115.Minimum = new decimal(new int[] {
             100,
@@ -1250,6 +1396,11 @@
             // uiDoubleUpDown113
             // 
             this.uiDoubleUpDown113.DecimalPlaces = 3;
+            this.uiDoubleUpDown113.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown113.Location = new System.Drawing.Point(904, 236);
             this.uiDoubleUpDown113.Minimum = new decimal(new int[] {
             100,
@@ -1264,6 +1415,11 @@
             // uiDoubleUpDown111
             // 
             this.uiDoubleUpDown111.DecimalPlaces = 3;
+            this.uiDoubleUpDown111.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown111.Location = new System.Drawing.Point(904, 532);
             this.uiDoubleUpDown111.Minimum = new decimal(new int[] {
             100,
@@ -1278,6 +1434,11 @@
             // uiDoubleUpDown68
             // 
             this.uiDoubleUpDown68.DecimalPlaces = 2;
+            this.uiDoubleUpDown68.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown68.Location = new System.Drawing.Point(561, 497);
             this.uiDoubleUpDown68.Minimum = new decimal(new int[] {
             100,
@@ -1292,6 +1453,11 @@
             // uiDoubleUpDown65
             // 
             this.uiDoubleUpDown65.DecimalPlaces = 2;
+            this.uiDoubleUpDown65.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown65.Location = new System.Drawing.Point(904, 201);
             this.uiDoubleUpDown65.Minimum = new decimal(new int[] {
             100,
@@ -1306,6 +1472,11 @@
             // uiDoubleUpDown53
             // 
             this.uiDoubleUpDown53.DecimalPlaces = 2;
+            this.uiDoubleUpDown53.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown53.Location = new System.Drawing.Point(904, 497);
             this.uiDoubleUpDown53.Minimum = new decimal(new int[] {
             100,
@@ -1320,6 +1491,11 @@
             // uiDoubleUpDown116
             // 
             this.uiDoubleUpDown116.DecimalPlaces = 3;
+            this.uiDoubleUpDown116.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown116.Location = new System.Drawing.Point(561, 384);
             this.uiDoubleUpDown116.Minimum = new decimal(new int[] {
             100,
@@ -1334,6 +1510,11 @@
             // uiDoubleUpDown76
             // 
             this.uiDoubleUpDown76.DecimalPlaces = 2;
+            this.uiDoubleUpDown76.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown76.Location = new System.Drawing.Point(561, 349);
             this.uiDoubleUpDown76.Minimum = new decimal(new int[] {
             100,
@@ -1348,6 +1529,11 @@
             // uiDoubleUpDown117
             // 
             this.uiDoubleUpDown117.DecimalPlaces = 3;
+            this.uiDoubleUpDown117.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown117.Location = new System.Drawing.Point(561, 236);
             this.uiDoubleUpDown117.Minimum = new decimal(new int[] {
             100,
@@ -1362,6 +1548,11 @@
             // uiDoubleUpDown77
             // 
             this.uiDoubleUpDown77.DecimalPlaces = 2;
+            this.uiDoubleUpDown77.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown77.Location = new System.Drawing.Point(561, 201);
             this.uiDoubleUpDown77.Minimum = new decimal(new int[] {
             100,
@@ -1376,6 +1567,11 @@
             // uiDoubleUpDown118
             // 
             this.uiDoubleUpDown118.DecimalPlaces = 3;
+            this.uiDoubleUpDown118.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown118.Location = new System.Drawing.Point(214, 680);
             this.uiDoubleUpDown118.Minimum = new decimal(new int[] {
             100,
@@ -1390,6 +1586,11 @@
             // uiDoubleUpDown78
             // 
             this.uiDoubleUpDown78.DecimalPlaces = 2;
+            this.uiDoubleUpDown78.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown78.Location = new System.Drawing.Point(214, 645);
             this.uiDoubleUpDown78.Minimum = new decimal(new int[] {
             100,
@@ -1404,6 +1605,11 @@
             // uiDoubleUpDown119
             // 
             this.uiDoubleUpDown119.DecimalPlaces = 3;
+            this.uiDoubleUpDown119.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown119.Location = new System.Drawing.Point(214, 532);
             this.uiDoubleUpDown119.Minimum = new decimal(new int[] {
             100,
@@ -1418,6 +1624,11 @@
             // uiDoubleUpDown79
             // 
             this.uiDoubleUpDown79.DecimalPlaces = 2;
+            this.uiDoubleUpDown79.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown79.Location = new System.Drawing.Point(214, 497);
             this.uiDoubleUpDown79.Minimum = new decimal(new int[] {
             100,
@@ -1432,6 +1643,11 @@
             // uiDoubleUpDown120
             // 
             this.uiDoubleUpDown120.DecimalPlaces = 3;
+            this.uiDoubleUpDown120.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown120.Location = new System.Drawing.Point(214, 384);
             this.uiDoubleUpDown120.Minimum = new decimal(new int[] {
             100,
@@ -1446,6 +1662,11 @@
             // uiDoubleUpDown80
             // 
             this.uiDoubleUpDown80.DecimalPlaces = 2;
+            this.uiDoubleUpDown80.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown80.Location = new System.Drawing.Point(214, 349);
             this.uiDoubleUpDown80.Name = "uiDoubleUpDown80";
             this.uiDoubleUpDown80.Size = new System.Drawing.Size(130, 29);
@@ -1455,6 +1676,11 @@
             // uiDoubleUpDown121
             // 
             this.uiDoubleUpDown121.DecimalPlaces = 3;
+            this.uiDoubleUpDown121.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown121.Location = new System.Drawing.Point(214, 236);
             this.uiDoubleUpDown121.Name = "uiDoubleUpDown121";
             this.uiDoubleUpDown121.Size = new System.Drawing.Size(130, 29);
@@ -1464,6 +1690,11 @@
             // uiDoubleUpDown81
             // 
             this.uiDoubleUpDown81.DecimalPlaces = 2;
+            this.uiDoubleUpDown81.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown81.Location = new System.Drawing.Point(214, 201);
             this.uiDoubleUpDown81.Minimum = new decimal(new int[] {
             100,
@@ -1478,6 +1709,11 @@
             // uiDoubleUpDown122
             // 
             this.uiDoubleUpDown122.DecimalPlaces = 3;
+            this.uiDoubleUpDown122.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown122.Location = new System.Drawing.Point(1251, 610);
             this.uiDoubleUpDown122.Minimum = new decimal(new int[] {
             100,
@@ -1492,6 +1728,11 @@
             // uiDoubleUpDown126
             // 
             this.uiDoubleUpDown126.DecimalPlaces = 3;
+            this.uiDoubleUpDown126.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown126.Location = new System.Drawing.Point(904, 610);
             this.uiDoubleUpDown126.Minimum = new decimal(new int[] {
             100,
@@ -1506,6 +1747,11 @@
             // uiDoubleUpDown130
             // 
             this.uiDoubleUpDown130.DecimalPlaces = 3;
+            this.uiDoubleUpDown130.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown130.Location = new System.Drawing.Point(561, 610);
             this.uiDoubleUpDown130.Minimum = new decimal(new int[] {
             100,
@@ -1520,6 +1766,11 @@
             // uiDoubleUpDown123
             // 
             this.uiDoubleUpDown123.DecimalPlaces = 3;
+            this.uiDoubleUpDown123.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown123.Location = new System.Drawing.Point(1251, 462);
             this.uiDoubleUpDown123.Minimum = new decimal(new int[] {
             100,
@@ -1534,6 +1785,11 @@
             // uiDoubleUpDown127
             // 
             this.uiDoubleUpDown127.DecimalPlaces = 3;
+            this.uiDoubleUpDown127.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown127.Location = new System.Drawing.Point(904, 462);
             this.uiDoubleUpDown127.Minimum = new decimal(new int[] {
             100,
@@ -1548,6 +1804,11 @@
             // uiDoubleUpDown131
             // 
             this.uiDoubleUpDown131.DecimalPlaces = 3;
+            this.uiDoubleUpDown131.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown131.Location = new System.Drawing.Point(561, 462);
             this.uiDoubleUpDown131.Minimum = new decimal(new int[] {
             100,
@@ -1562,6 +1823,11 @@
             // uiDoubleUpDown135
             // 
             this.uiDoubleUpDown135.DecimalPlaces = 3;
+            this.uiDoubleUpDown135.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown135.Location = new System.Drawing.Point(214, 462);
             this.uiDoubleUpDown135.Minimum = new decimal(new int[] {
             100,
@@ -1576,6 +1842,11 @@
             // uiDoubleUpDown134
             // 
             this.uiDoubleUpDown134.DecimalPlaces = 3;
+            this.uiDoubleUpDown134.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown134.Location = new System.Drawing.Point(214, 610);
             this.uiDoubleUpDown134.Minimum = new decimal(new int[] {
             100,
@@ -1590,6 +1861,11 @@
             // uiDoubleUpDown124
             // 
             this.uiDoubleUpDown124.DecimalPlaces = 3;
+            this.uiDoubleUpDown124.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown124.Location = new System.Drawing.Point(1251, 314);
             this.uiDoubleUpDown124.Minimum = new decimal(new int[] {
             100,
@@ -1604,6 +1880,11 @@
             // uiDoubleUpDown128
             // 
             this.uiDoubleUpDown128.DecimalPlaces = 3;
+            this.uiDoubleUpDown128.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown128.Location = new System.Drawing.Point(904, 314);
             this.uiDoubleUpDown128.Minimum = new decimal(new int[] {
             100,
@@ -1618,6 +1899,11 @@
             // uiDoubleUpDown132
             // 
             this.uiDoubleUpDown132.DecimalPlaces = 3;
+            this.uiDoubleUpDown132.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown132.Location = new System.Drawing.Point(561, 314);
             this.uiDoubleUpDown132.Minimum = new decimal(new int[] {
             100,
@@ -1632,6 +1918,11 @@
             // uiDoubleUpDown136
             // 
             this.uiDoubleUpDown136.DecimalPlaces = 3;
+            this.uiDoubleUpDown136.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown136.Location = new System.Drawing.Point(214, 314);
             this.uiDoubleUpDown136.Name = "uiDoubleUpDown136";
             this.uiDoubleUpDown136.Size = new System.Drawing.Size(130, 29);
@@ -1641,6 +1932,11 @@
             // uiDoubleUpDown125
             // 
             this.uiDoubleUpDown125.DecimalPlaces = 3;
+            this.uiDoubleUpDown125.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown125.Location = new System.Drawing.Point(1251, 166);
             this.uiDoubleUpDown125.Minimum = new decimal(new int[] {
             100,
@@ -1655,6 +1951,11 @@
             // uiDoubleUpDown129
             // 
             this.uiDoubleUpDown129.DecimalPlaces = 3;
+            this.uiDoubleUpDown129.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown129.Location = new System.Drawing.Point(904, 166);
             this.uiDoubleUpDown129.Minimum = new decimal(new int[] {
             100,
@@ -1669,6 +1970,11 @@
             // uiDoubleUpDown133
             // 
             this.uiDoubleUpDown133.DecimalPlaces = 3;
+            this.uiDoubleUpDown133.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown133.Location = new System.Drawing.Point(561, 166);
             this.uiDoubleUpDown133.Minimum = new decimal(new int[] {
             100,
@@ -1683,6 +1989,11 @@
             // uiDoubleUpDown137
             // 
             this.uiDoubleUpDown137.DecimalPlaces = 3;
+            this.uiDoubleUpDown137.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown137.Location = new System.Drawing.Point(214, 166);
             this.uiDoubleUpDown137.Minimum = new decimal(new int[] {
             100,
@@ -1697,6 +2008,11 @@
             // uiDoubleUpDown37
             // 
             this.uiDoubleUpDown37.DecimalPlaces = 2;
+            this.uiDoubleUpDown37.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown37.Location = new System.Drawing.Point(1251, 575);
             this.uiDoubleUpDown37.Minimum = new decimal(new int[] {
             100,
@@ -1711,6 +2027,11 @@
             // uiDoubleUpDown38
             // 
             this.uiDoubleUpDown38.DecimalPlaces = 2;
+            this.uiDoubleUpDown38.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown38.Location = new System.Drawing.Point(1251, 427);
             this.uiDoubleUpDown38.Name = "uiDoubleUpDown38";
             this.uiDoubleUpDown38.Size = new System.Drawing.Size(130, 29);
@@ -1720,6 +2041,11 @@
             // uiDoubleUpDown39
             // 
             this.uiDoubleUpDown39.DecimalPlaces = 2;
+            this.uiDoubleUpDown39.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown39.Location = new System.Drawing.Point(1251, 279);
             this.uiDoubleUpDown39.Minimum = new decimal(new int[] {
             100,
@@ -1734,6 +2060,11 @@
             // uiDoubleUpDown40
             // 
             this.uiDoubleUpDown40.DecimalPlaces = 2;
+            this.uiDoubleUpDown40.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown40.Location = new System.Drawing.Point(1251, 131);
             this.uiDoubleUpDown40.Minimum = new decimal(new int[] {
             100,
@@ -1748,6 +2079,11 @@
             // uiDoubleUpDown41
             // 
             this.uiDoubleUpDown41.DecimalPlaces = 2;
+            this.uiDoubleUpDown41.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown41.Location = new System.Drawing.Point(904, 575);
             this.uiDoubleUpDown41.Minimum = new decimal(new int[] {
             100,
@@ -1762,6 +2098,11 @@
             // uiDoubleUpDown42
             // 
             this.uiDoubleUpDown42.DecimalPlaces = 2;
+            this.uiDoubleUpDown42.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown42.Location = new System.Drawing.Point(904, 427);
             this.uiDoubleUpDown42.Name = "uiDoubleUpDown42";
             this.uiDoubleUpDown42.Size = new System.Drawing.Size(130, 29);
@@ -1771,6 +2112,11 @@
             // uiDoubleUpDown43
             // 
             this.uiDoubleUpDown43.DecimalPlaces = 2;
+            this.uiDoubleUpDown43.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown43.Location = new System.Drawing.Point(904, 279);
             this.uiDoubleUpDown43.Minimum = new decimal(new int[] {
             100,
@@ -1785,6 +2131,11 @@
             // uiDoubleUpDown44
             // 
             this.uiDoubleUpDown44.DecimalPlaces = 2;
+            this.uiDoubleUpDown44.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown44.Location = new System.Drawing.Point(904, 131);
             this.uiDoubleUpDown44.Minimum = new decimal(new int[] {
             100,
@@ -1799,6 +2150,11 @@
             // uiDoubleUpDown27
             // 
             this.uiDoubleUpDown27.DecimalPlaces = 2;
+            this.uiDoubleUpDown27.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown27.Location = new System.Drawing.Point(561, 575);
             this.uiDoubleUpDown27.Minimum = new decimal(new int[] {
             100,
@@ -1813,6 +2169,11 @@
             // uiDoubleUpDown28
             // 
             this.uiDoubleUpDown28.DecimalPlaces = 2;
+            this.uiDoubleUpDown28.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown28.Location = new System.Drawing.Point(561, 427);
             this.uiDoubleUpDown28.Minimum = new decimal(new int[] {
             100,
@@ -1827,6 +2188,11 @@
             // uiDoubleUpDown35
             // 
             this.uiDoubleUpDown35.DecimalPlaces = 2;
+            this.uiDoubleUpDown35.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown35.Location = new System.Drawing.Point(561, 279);
             this.uiDoubleUpDown35.Minimum = new decimal(new int[] {
             100,
@@ -1841,6 +2207,11 @@
             // uiDoubleUpDown36
             // 
             this.uiDoubleUpDown36.DecimalPlaces = 2;
+            this.uiDoubleUpDown36.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown36.Location = new System.Drawing.Point(561, 131);
             this.uiDoubleUpDown36.Minimum = new decimal(new int[] {
             100,
@@ -1855,6 +2226,11 @@
             // uiDoubleUpDown25
             // 
             this.uiDoubleUpDown25.DecimalPlaces = 2;
+            this.uiDoubleUpDown25.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown25.Location = new System.Drawing.Point(214, 575);
             this.uiDoubleUpDown25.Minimum = new decimal(new int[] {
             100,
@@ -1869,6 +2245,11 @@
             // uiDoubleUpDown26
             // 
             this.uiDoubleUpDown26.DecimalPlaces = 2;
+            this.uiDoubleUpDown26.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown26.Location = new System.Drawing.Point(214, 427);
             this.uiDoubleUpDown26.Minimum = new decimal(new int[] {
             100,
@@ -1883,6 +2264,11 @@
             // uiDoubleUpDown23
             // 
             this.uiDoubleUpDown23.DecimalPlaces = 2;
+            this.uiDoubleUpDown23.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown23.Location = new System.Drawing.Point(214, 279);
             this.uiDoubleUpDown23.Name = "uiDoubleUpDown23";
             this.uiDoubleUpDown23.Size = new System.Drawing.Size(130, 29);
@@ -1892,6 +2278,11 @@
             // uiDoubleUpDown66
             // 
             this.uiDoubleUpDown66.DecimalPlaces = 2;
+            this.uiDoubleUpDown66.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown66.Location = new System.Drawing.Point(214, 131);
             this.uiDoubleUpDown66.Minimum = new decimal(new int[] {
             100,
@@ -2668,6 +3059,7 @@
             // 
             // uiTitlePanel14
             // 
+            this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown22);
             this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown82);
             this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown34);
             this.uiTitlePanel14.Controls.Add(this.uiDoubleUpDown83);
@@ -2741,6 +3133,11 @@
             // uiDoubleUpDown82
             // 
             this.uiDoubleUpDown82.DecimalPlaces = 2;
+            this.uiDoubleUpDown82.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown82.Location = new System.Drawing.Point(969, 353);
             this.uiDoubleUpDown82.Minimum = new decimal(new int[] {
             100,
@@ -2755,6 +3152,11 @@
             // uiDoubleUpDown34
             // 
             this.uiDoubleUpDown34.DecimalPlaces = 2;
+            this.uiDoubleUpDown34.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown34.Location = new System.Drawing.Point(249, 437);
             this.uiDoubleUpDown34.Minimum = new decimal(new int[] {
             100,
@@ -2769,6 +3171,11 @@
             // uiDoubleUpDown83
             // 
             this.uiDoubleUpDown83.DecimalPlaces = 2;
+            this.uiDoubleUpDown83.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown83.Location = new System.Drawing.Point(969, 317);
             this.uiDoubleUpDown83.Minimum = new decimal(new int[] {
             100,
@@ -2793,6 +3200,11 @@
             // uiDoubleUpDown84
             // 
             this.uiDoubleUpDown84.DecimalPlaces = 2;
+            this.uiDoubleUpDown84.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown84.Location = new System.Drawing.Point(969, 281);
             this.uiDoubleUpDown84.Minimum = new decimal(new int[] {
             100,
@@ -2807,6 +3219,11 @@
             // uiDoubleUpDown33
             // 
             this.uiDoubleUpDown33.DecimalPlaces = 2;
+            this.uiDoubleUpDown33.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown33.Location = new System.Drawing.Point(249, 401);
             this.uiDoubleUpDown33.Minimum = new decimal(new int[] {
             100,
@@ -2821,6 +3238,11 @@
             // uiDoubleUpDown91
             // 
             this.uiDoubleUpDown91.DecimalPlaces = 2;
+            this.uiDoubleUpDown91.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown91.Location = new System.Drawing.Point(969, 237);
             this.uiDoubleUpDown91.Minimum = new decimal(new int[] {
             100,
@@ -2845,6 +3267,11 @@
             // uiDoubleUpDown92
             // 
             this.uiDoubleUpDown92.DecimalPlaces = 2;
+            this.uiDoubleUpDown92.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown92.Location = new System.Drawing.Point(969, 201);
             this.uiDoubleUpDown92.Minimum = new decimal(new int[] {
             100,
@@ -2869,6 +3296,11 @@
             // uiDoubleUpDown93
             // 
             this.uiDoubleUpDown93.DecimalPlaces = 2;
+            this.uiDoubleUpDown93.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown93.Location = new System.Drawing.Point(969, 165);
             this.uiDoubleUpDown93.Minimum = new decimal(new int[] {
             100,
@@ -2893,6 +3325,11 @@
             // uiDoubleUpDown88
             // 
             this.uiDoubleUpDown88.DecimalPlaces = 2;
+            this.uiDoubleUpDown88.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown88.Location = new System.Drawing.Point(969, 118);
             this.uiDoubleUpDown88.Minimum = new decimal(new int[] {
             100,
@@ -2917,6 +3354,11 @@
             // uiDoubleUpDown89
             // 
             this.uiDoubleUpDown89.DecimalPlaces = 2;
+            this.uiDoubleUpDown89.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown89.Location = new System.Drawing.Point(969, 82);
             this.uiDoubleUpDown89.Minimum = new decimal(new int[] {
             100,
@@ -2941,6 +3383,11 @@
             // uiDoubleUpDown90
             // 
             this.uiDoubleUpDown90.DecimalPlaces = 2;
+            this.uiDoubleUpDown90.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown90.Location = new System.Drawing.Point(969, 46);
             this.uiDoubleUpDown90.Minimum = new decimal(new int[] {
             100,
@@ -2965,6 +3412,11 @@
             // uiDoubleUpDown94
             // 
             this.uiDoubleUpDown94.DecimalPlaces = 2;
+            this.uiDoubleUpDown94.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown94.Location = new System.Drawing.Point(632, 353);
             this.uiDoubleUpDown94.Minimum = new decimal(new int[] {
             100,
@@ -2989,6 +3441,11 @@
             // uiDoubleUpDown95
             // 
             this.uiDoubleUpDown95.DecimalPlaces = 2;
+            this.uiDoubleUpDown95.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown95.Location = new System.Drawing.Point(632, 317);
             this.uiDoubleUpDown95.Minimum = new decimal(new int[] {
             100,
@@ -3013,6 +3470,11 @@
             // uiDoubleUpDown96
             // 
             this.uiDoubleUpDown96.DecimalPlaces = 2;
+            this.uiDoubleUpDown96.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown96.Location = new System.Drawing.Point(632, 281);
             this.uiDoubleUpDown96.Minimum = new decimal(new int[] {
             100,
@@ -3037,6 +3499,11 @@
             // uiDoubleUpDown19
             // 
             this.uiDoubleUpDown19.DecimalPlaces = 2;
+            this.uiDoubleUpDown19.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown19.Location = new System.Drawing.Point(632, 237);
             this.uiDoubleUpDown19.Minimum = new decimal(new int[] {
             100,
@@ -3061,6 +3528,11 @@
             // uiDoubleUpDown21
             // 
             this.uiDoubleUpDown21.DecimalPlaces = 2;
+            this.uiDoubleUpDown21.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown21.Location = new System.Drawing.Point(632, 201);
             this.uiDoubleUpDown21.Minimum = new decimal(new int[] {
             100,
@@ -3085,6 +3557,11 @@
             // uiDoubleUpDown20
             // 
             this.uiDoubleUpDown20.DecimalPlaces = 2;
+            this.uiDoubleUpDown20.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown20.Location = new System.Drawing.Point(632, 165);
             this.uiDoubleUpDown20.Minimum = new decimal(new int[] {
             100,
@@ -3109,6 +3586,11 @@
             // uiDoubleUpDown30
             // 
             this.uiDoubleUpDown30.DecimalPlaces = 2;
+            this.uiDoubleUpDown30.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown30.Location = new System.Drawing.Point(632, 118);
             this.uiDoubleUpDown30.Minimum = new decimal(new int[] {
             100,
@@ -3133,6 +3615,11 @@
             // uiDoubleUpDown32
             // 
             this.uiDoubleUpDown32.DecimalPlaces = 2;
+            this.uiDoubleUpDown32.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown32.Location = new System.Drawing.Point(632, 82);
             this.uiDoubleUpDown32.Minimum = new decimal(new int[] {
             100,
@@ -3157,6 +3644,11 @@
             // uiDoubleUpDown31
             // 
             this.uiDoubleUpDown31.DecimalPlaces = 2;
+            this.uiDoubleUpDown31.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown31.Location = new System.Drawing.Point(632, 46);
             this.uiDoubleUpDown31.Minimum = new decimal(new int[] {
             100,
@@ -3221,6 +3713,11 @@
             // uiDoubleUpDown85
             // 
             this.uiDoubleUpDown85.DecimalPlaces = 2;
+            this.uiDoubleUpDown85.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown85.Location = new System.Drawing.Point(249, 353);
             this.uiDoubleUpDown85.Minimum = new decimal(new int[] {
             100,
@@ -3245,6 +3742,11 @@
             // uiDoubleUpDown86
             // 
             this.uiDoubleUpDown86.DecimalPlaces = 2;
+            this.uiDoubleUpDown86.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown86.Location = new System.Drawing.Point(249, 317);
             this.uiDoubleUpDown86.Minimum = new decimal(new int[] {
             100,
@@ -3269,6 +3771,11 @@
             // uiDoubleUpDown87
             // 
             this.uiDoubleUpDown87.DecimalPlaces = 2;
+            this.uiDoubleUpDown87.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown87.Location = new System.Drawing.Point(249, 281);
             this.uiDoubleUpDown87.Minimum = new decimal(new int[] {
             100,
@@ -3293,6 +3800,11 @@
             // uiDoubleUpDown16
             // 
             this.uiDoubleUpDown16.DecimalPlaces = 2;
+            this.uiDoubleUpDown16.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown16.Location = new System.Drawing.Point(249, 237);
             this.uiDoubleUpDown16.Minimum = new decimal(new int[] {
             100,
@@ -3317,6 +3829,11 @@
             // uiDoubleUpDown18
             // 
             this.uiDoubleUpDown18.DecimalPlaces = 2;
+            this.uiDoubleUpDown18.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown18.Location = new System.Drawing.Point(249, 201);
             this.uiDoubleUpDown18.Minimum = new decimal(new int[] {
             100,
@@ -3341,6 +3858,11 @@
             // uiDoubleUpDown17
             // 
             this.uiDoubleUpDown17.DecimalPlaces = 2;
+            this.uiDoubleUpDown17.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown17.Location = new System.Drawing.Point(249, 165);
             this.uiDoubleUpDown17.Minimum = new decimal(new int[] {
             100,
@@ -3365,6 +3887,11 @@
             // uiDoubleUpDown73
             // 
             this.uiDoubleUpDown73.DecimalPlaces = 2;
+            this.uiDoubleUpDown73.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown73.Location = new System.Drawing.Point(249, 118);
             this.uiDoubleUpDown73.Minimum = new decimal(new int[] {
             100,
@@ -3389,6 +3916,11 @@
             // uiDoubleUpDown74
             // 
             this.uiDoubleUpDown74.DecimalPlaces = 2;
+            this.uiDoubleUpDown74.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown74.Location = new System.Drawing.Point(249, 82);
             this.uiDoubleUpDown74.Minimum = new decimal(new int[] {
             100,
@@ -3413,6 +3945,11 @@
             // uiDoubleUpDown75
             // 
             this.uiDoubleUpDown75.DecimalPlaces = 2;
+            this.uiDoubleUpDown75.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown75.Location = new System.Drawing.Point(249, 46);
             this.uiDoubleUpDown75.Minimum = new decimal(new int[] {
             100,
@@ -3542,6 +4079,11 @@
             // uiDoubleUpDown9
             // 
             this.uiDoubleUpDown9.DecimalPlaces = 2;
+            this.uiDoubleUpDown9.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown9.Location = new System.Drawing.Point(985, 235);
             this.uiDoubleUpDown9.Minimum = new decimal(new int[] {
             100,
@@ -3566,6 +4108,11 @@
             // uiDoubleUpDown10
             // 
             this.uiDoubleUpDown10.DecimalPlaces = 2;
+            this.uiDoubleUpDown10.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown10.Location = new System.Drawing.Point(985, 199);
             this.uiDoubleUpDown10.Minimum = new decimal(new int[] {
             100,
@@ -3590,6 +4137,11 @@
             // uiDoubleUpDown11
             // 
             this.uiDoubleUpDown11.DecimalPlaces = 2;
+            this.uiDoubleUpDown11.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown11.Location = new System.Drawing.Point(985, 163);
             this.uiDoubleUpDown11.Minimum = new decimal(new int[] {
             100,
@@ -3614,6 +4166,11 @@
             // uiDoubleUpDown6
             // 
             this.uiDoubleUpDown6.DecimalPlaces = 2;
+            this.uiDoubleUpDown6.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown6.Location = new System.Drawing.Point(985, 118);
             this.uiDoubleUpDown6.Minimum = new decimal(new int[] {
             100,
@@ -3638,6 +4195,11 @@
             // uiDoubleUpDown7
             // 
             this.uiDoubleUpDown7.DecimalPlaces = 2;
+            this.uiDoubleUpDown7.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown7.Location = new System.Drawing.Point(985, 82);
             this.uiDoubleUpDown7.Minimum = new decimal(new int[] {
             100,
@@ -3662,6 +4224,11 @@
             // uiDoubleUpDown8
             // 
             this.uiDoubleUpDown8.DecimalPlaces = 2;
+            this.uiDoubleUpDown8.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown8.Location = new System.Drawing.Point(985, 46);
             this.uiDoubleUpDown8.Minimum = new decimal(new int[] {
             100,
@@ -3686,6 +4253,11 @@
             // uiDoubleUpDown15
             // 
             this.uiDoubleUpDown15.DecimalPlaces = 2;
+            this.uiDoubleUpDown15.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown15.Location = new System.Drawing.Point(604, 355);
             this.uiDoubleUpDown15.Minimum = new decimal(new int[] {
             100,
@@ -3710,6 +4282,11 @@
             // uiDoubleUpDown5
             // 
             this.uiDoubleUpDown5.DecimalPlaces = 2;
+            this.uiDoubleUpDown5.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown5.Location = new System.Drawing.Point(604, 319);
             this.uiDoubleUpDown5.Minimum = new decimal(new int[] {
             100,
@@ -3734,6 +4311,11 @@
             // uiDoubleUpDown1
             // 
             this.uiDoubleUpDown1.DecimalPlaces = 2;
+            this.uiDoubleUpDown1.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown1.Location = new System.Drawing.Point(604, 283);
             this.uiDoubleUpDown1.Minimum = new decimal(new int[] {
             100,
@@ -3758,6 +4340,11 @@
             // uiDoubleUpDown12
             // 
             this.uiDoubleUpDown12.DecimalPlaces = 2;
+            this.uiDoubleUpDown12.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown12.Location = new System.Drawing.Point(604, 235);
             this.uiDoubleUpDown12.Minimum = new decimal(new int[] {
             100,
@@ -3782,6 +4369,11 @@
             // uiDoubleUpDown13
             // 
             this.uiDoubleUpDown13.DecimalPlaces = 2;
+            this.uiDoubleUpDown13.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown13.Location = new System.Drawing.Point(604, 199);
             this.uiDoubleUpDown13.Minimum = new decimal(new int[] {
             100,
@@ -3806,6 +4398,11 @@
             // uiDoubleUpDown14
             // 
             this.uiDoubleUpDown14.DecimalPlaces = 2;
+            this.uiDoubleUpDown14.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown14.Location = new System.Drawing.Point(604, 163);
             this.uiDoubleUpDown14.Minimum = new decimal(new int[] {
             100,
@@ -3820,6 +4417,11 @@
             // uiDoubleUpDown98
             // 
             this.uiDoubleUpDown98.DecimalPlaces = 2;
+            this.uiDoubleUpDown98.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown98.Location = new System.Drawing.Point(211, 118);
             this.uiDoubleUpDown98.Minimum = new decimal(new int[] {
             100,
@@ -3834,6 +4436,11 @@
             // uiDoubleUpDown100
             // 
             this.uiDoubleUpDown100.DecimalPlaces = 2;
+            this.uiDoubleUpDown100.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown100.Location = new System.Drawing.Point(604, 118);
             this.uiDoubleUpDown100.Minimum = new decimal(new int[] {
             100,
@@ -3848,6 +4455,11 @@
             // uiDoubleUpDown97
             // 
             this.uiDoubleUpDown97.DecimalPlaces = 2;
+            this.uiDoubleUpDown97.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown97.Location = new System.Drawing.Point(211, 82);
             this.uiDoubleUpDown97.Minimum = new decimal(new int[] {
             100,
@@ -3862,6 +4474,11 @@
             // uiDoubleUpDown101
             // 
             this.uiDoubleUpDown101.DecimalPlaces = 2;
+            this.uiDoubleUpDown101.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown101.Location = new System.Drawing.Point(604, 82);
             this.uiDoubleUpDown101.Minimum = new decimal(new int[] {
             100,
@@ -3886,6 +4503,11 @@
             // uiDoubleUpDown102
             // 
             this.uiDoubleUpDown102.DecimalPlaces = 2;
+            this.uiDoubleUpDown102.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown102.Location = new System.Drawing.Point(604, 46);
             this.uiDoubleUpDown102.Minimum = new decimal(new int[] {
             100,
@@ -3900,6 +4522,11 @@
             // uiDoubleUpDown99
             // 
             this.uiDoubleUpDown99.DecimalPlaces = 2;
+            this.uiDoubleUpDown99.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown99.Location = new System.Drawing.Point(211, 46);
             this.uiDoubleUpDown99.Minimum = new decimal(new int[] {
             100,
@@ -3914,6 +4541,11 @@
             // uiDoubleUpDown2
             // 
             this.uiDoubleUpDown2.DecimalPlaces = 2;
+            this.uiDoubleUpDown2.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown2.Location = new System.Drawing.Point(211, 355);
             this.uiDoubleUpDown2.Minimum = new decimal(new int[] {
             100,
@@ -3938,6 +4570,11 @@
             // uiDoubleUpDown3
             // 
             this.uiDoubleUpDown3.DecimalPlaces = 2;
+            this.uiDoubleUpDown3.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown3.Location = new System.Drawing.Point(211, 319);
             this.uiDoubleUpDown3.Minimum = new decimal(new int[] {
             100,
@@ -3962,6 +4599,11 @@
             // uiDoubleUpDown4
             // 
             this.uiDoubleUpDown4.DecimalPlaces = 2;
+            this.uiDoubleUpDown4.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown4.Location = new System.Drawing.Point(211, 283);
             this.uiDoubleUpDown4.Minimum = new decimal(new int[] {
             100,
@@ -3986,6 +4628,11 @@
             // uiDoubleUpDown106
             // 
             this.uiDoubleUpDown106.DecimalPlaces = 2;
+            this.uiDoubleUpDown106.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown106.Location = new System.Drawing.Point(211, 235);
             this.uiDoubleUpDown106.Minimum = new decimal(new int[] {
             100,
@@ -4010,6 +4657,11 @@
             // uiDoubleUpDown107
             // 
             this.uiDoubleUpDown107.DecimalPlaces = 2;
+            this.uiDoubleUpDown107.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown107.Location = new System.Drawing.Point(211, 199);
             this.uiDoubleUpDown107.Minimum = new decimal(new int[] {
             100,
@@ -4034,6 +4686,11 @@
             // uiDoubleUpDown108
             // 
             this.uiDoubleUpDown108.DecimalPlaces = 2;
+            this.uiDoubleUpDown108.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.uiDoubleUpDown108.Location = new System.Drawing.Point(211, 163);
             this.uiDoubleUpDown108.Minimum = new decimal(new int[] {
             100,
@@ -4144,6 +4801,24 @@
             this.uiTabControl2.TipsFont = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl2.TipsForeColor = System.Drawing.Color.Black;
             this.uiTabControl2.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.uiTabControl2_Selecting);
+            // 
+            // uiDoubleUpDown22
+            // 
+            this.uiDoubleUpDown22.DecimalPlaces = 0;
+            this.uiDoubleUpDown22.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiDoubleUpDown22.Location = new System.Drawing.Point(468, 422);
+            this.uiDoubleUpDown22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiDoubleUpDown22.Maximum = 100D;
+            this.uiDoubleUpDown22.Minimum = 10D;
+            this.uiDoubleUpDown22.MinimumSize = new System.Drawing.Size(100, 0);
+            this.uiDoubleUpDown22.Name = "uiDoubleUpDown22";
+            this.uiDoubleUpDown22.ShowText = false;
+            this.uiDoubleUpDown22.Size = new System.Drawing.Size(130, 29);
+            this.uiDoubleUpDown22.Step = 1D;
+            this.uiDoubleUpDown22.TabIndex = 331;
+            this.uiDoubleUpDown22.Text = "uiDoubleUpDown22";
+            this.uiDoubleUpDown22.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.uiDoubleUpDown22.Visible = false;
             // 
             // _offset
             // 
@@ -4587,5 +5262,6 @@
         private System.Windows.Forms.NumericUpDown uiDoubleUpDown60;
         private System.Windows.Forms.NumericUpDown uiDoubleUpDown58;
         private System.Windows.Forms.NumericUpDown uiDoubleUpDown55;
+        private Sunny.UI.UIDoubleUpDown uiDoubleUpDown22;
     }
 }

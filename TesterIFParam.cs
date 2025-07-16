@@ -46,5 +46,21 @@ namespace H5509_V2
         public int 数据位 { get; set; }
 
         public StopBits 停止位 { get; set; }
+
+        public int 入料手臂吸料超时时间 { get; set; }
+
+        public int 出料手臂吸料超时时间 { get; set; }
+
+        public int 测试手臂吸料超时时间 { get; set; }
+
+        public int 入料手臂吹料时间 { get; set; }
+
+        public int 出料手臂吹料时间 { get; set; }
+
+        public int 测试手臂吹料时间 { get; set; }
+
+        public int 发送开始信号延时 { get; set; }
+
+        public int 离线模式测试等待时间 { get; set; }
     }
 }

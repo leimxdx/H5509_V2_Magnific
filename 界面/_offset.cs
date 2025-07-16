@@ -18,6 +18,7 @@ namespace H5509_V2
         public _offset()
         {
             InitializeComponent();
+
         }
 
         public void 刷新Offset()

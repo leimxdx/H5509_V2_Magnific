@@ -61,7 +61,7 @@ namespace H5509_alarm
         bool g = false;
         bool v = false;
         //0灭，1亮，2闪 
-        public void alarmLight(int red, int yellow, int green, int voice)
+        public void AlarmLight(int red, int yellow, int green, string voice)
         {
             r = false;
             switch (red)
@@ -88,11 +88,10 @@ namespace H5509_alarm
             v = true;
             switch (voice)
             {
-
-                case 1: motionEx.SetDo("Y036_报警音乐1", true); break;
-                case 2: motionEx.SetDo("Y037_报警音乐2", true); break;
-                case 3: motionEx.SetDo("Y038_报警音乐3", true); break;
-                case 4: motionEx.SetDo("Y039_报警音乐4", true); break;
+                case "音乐1": motionEx.SetDo("Y036_报警音乐1", true); break;
+                case "音乐2": motionEx.SetDo("Y037_报警音乐2", true); break;
+                case "音乐3": motionEx.SetDo("Y038_报警音乐3", true); break;
+                case "音乐4": motionEx.SetDo("Y039_报警音乐4", true); break;
                 default:
                     {
                         v = false;
@@ -108,13 +107,13 @@ namespace H5509_alarm
 
         private void dataGridView_alarm_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            alarmLight(2, 0, 0, 4);
+            AlarmLight(2, 0, 0, 报警状态灯设置.报警音乐); //添加报警
         }
         private void dataGridView_alarm_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             if (dataGridView_alarm.Rows.Count == 0)
             {
-                alarmLight(0, 0, 1, 0);
+                AlarmLight(0, 0, 1, "无音乐"); //取消报警
                 this.Hide();
             }
         }
@@ -3121,7 +3120,7 @@ namespace H5509_alarm
                 e.Cancel = true;
                 this.Hide();
                 Thread.Sleep(1);
-                alarmLight(0, 1, 0, 0);
+                AlarmLight(0, 1, 0, "无音乐"); //关闭报警界面
             }
         }
 
