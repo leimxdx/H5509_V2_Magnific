@@ -3860,7 +3860,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(191, 27);
             this.label8.TabIndex = 159;
-            this.label8.Text = "V.0.0.55 20250715";
+            this.label8.Text = "V.1.0.01 20250719";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9
@@ -3962,27 +3962,28 @@
             // Lbl_connectstate
             // 
             this.Lbl_connectstate.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Lbl_connectstate.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.Lbl_connectstate.ForeColor = System.Drawing.Color.Black;
+            this.Lbl_connectstate.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Lbl_connectstate.ForeColor = System.Drawing.Color.LimeGreen;
             this.Lbl_connectstate.Location = new System.Drawing.Point(645, 65);
             this.Lbl_connectstate.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.Lbl_connectstate.Name = "Lbl_connectstate";
             this.Lbl_connectstate.Size = new System.Drawing.Size(180, 35);
             this.Lbl_connectstate.TabIndex = 95;
+            this.Lbl_connectstate.Text = "在线模式";
             this.Lbl_connectstate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Lbl_IClistenmode
             // 
             this.Lbl_IClistenmode.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Lbl_IClistenmode.Font = new System.Drawing.Font("微软雅黑", 15F);
-            this.Lbl_IClistenmode.ForeColor = System.Drawing.Color.Black;
+            this.Lbl_IClistenmode.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Lbl_IClistenmode.ForeColor = System.Drawing.Color.LimeGreen;
             this.Lbl_IClistenmode.Location = new System.Drawing.Point(645, 16);
             this.Lbl_IClistenmode.Margin = new System.Windows.Forms.Padding(2, 5, 2, 5);
             this.Lbl_IClistenmode.Name = "Lbl_IClistenmode";
             this.Lbl_IClistenmode.Size = new System.Drawing.Size(180, 35);
             this.Lbl_IClistenmode.TabIndex = 94;
+            this.Lbl_IClistenmode.Text = "正常模式";
             this.Lbl_IClistenmode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.Lbl_IClistenmode.Click += new System.EventHandler(this.Lbl_IClistenmode_Click);
             // 
             // label132
             // 

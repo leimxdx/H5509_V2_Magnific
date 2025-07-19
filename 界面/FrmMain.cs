@@ -72,6 +72,8 @@ namespace H5509_V2
         {
             InitializeComponent();
 
+            ControlName = new Control[] {button_setting, button_offset, button_speed, button_io, button_log, button_exit };
+
             Log = new _log();
             显示操作log = Log.DelegteDisplayOperateLog;
             显示报警log = Log.DelegteDisplayAlarmLog;
@@ -140,6 +142,8 @@ namespace H5509_V2
 
             handler.参数初始化();
 
+            刷新按钮权限();
+
             result = motionEx.GSNInitCard();
             if (result != "Success")
             {
@@ -184,7 +188,6 @@ namespace H5509_V2
             CanVisable(io);
         }
 
-
         public void CanVisable(Control cons)
         {
             foreach (Control con in cons.Controls)
@@ -224,10 +227,18 @@ namespace H5509_V2
                             if (t.Contains(操作权限))
                             {
                                 con.Enabled = true;
+                                if (ButtonName.Contains(con.Name))
+                                {
+                                    con.BackColor = Color.White;
+                                }
                             }
                             else
                             {
                                 con.Enabled = false;
+                                if (ButtonName.Contains(con.Name))
+                                {
+                                    con.BackColor = Color.FromArgb(226, 226, 226);
+                                }
                                 continue;
                             }
                         }
@@ -241,11 +252,19 @@ namespace H5509_V2
                         t = t.Substring(0, t.IndexOf("@"));
                         if (t.Contains(设备状态.ToString()))
                         {
+                            if (ButtonName.Contains(con.Name))
+                            {
+                                con.BackColor = Color.White;
+                            }
                             con.Enabled = true;
                         }
                         else
                         {
                             con.Enabled = false;
+                            if (ButtonName.Contains(con.Name))
+                            {
+                                con.BackColor = Color.FromArgb(226, 226, 226);
+                            }
                         }
                     }
                 }
@@ -338,7 +357,6 @@ namespace H5509_V2
             }
         }
 
-
         public void bin(string b)
         {
             for (int i = 0; i < 分bin.Count; i++)
@@ -398,6 +416,21 @@ namespace H5509_V2
                 {
                     RunLog("数据上传异常!" + ex.Message);
                     Thread.Sleep(1000);
+                }
+            }
+        }
+
+        private void 刷新按钮权限()
+        {
+            for (int i = 0; i < ListConPerm.Count; i++)
+            {
+                for (int j = 0; j < ControlName.Length; j++)
+                {
+                    if (ListConPerm[i].控件名 == ControlName[i].Name)
+                    {
+                        ControlName[i].Tag = ListConPerm[i].显示 + ListConPerm[i].权限描述;
+                        break;
+                    }
                 }
             }
         }

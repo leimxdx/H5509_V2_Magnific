@@ -65,6 +65,7 @@
             this.button_setting.Name = "button_setting";
             this.button_setting.Size = new System.Drawing.Size(150, 60);
             this.button_setting.TabIndex = 9;
+            this.button_setting.Tag = "@02@#BCD#";
             this.button_setting.Text = "设置与维护";
             this.button_setting.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_setting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -80,6 +81,7 @@
             this.button_offset.Name = "button_offset";
             this.button_offset.Size = new System.Drawing.Size(150, 60);
             this.button_offset.TabIndex = 10;
+            this.button_offset.Tag = "@02@#BCD#";
             this.button_offset.Text = "Offset";
             this.button_offset.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_offset.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -95,6 +97,7 @@
             this.button_speed.Name = "button_speed";
             this.button_speed.Size = new System.Drawing.Size(150, 60);
             this.button_speed.TabIndex = 11;
+            this.button_speed.Tag = "@02@#BCD#";
             this.button_speed.Text = "速度";
             this.button_speed.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_speed.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -110,6 +113,7 @@
             this.button_io.Name = "button_io";
             this.button_io.Size = new System.Drawing.Size(150, 60);
             this.button_io.TabIndex = 12;
+            this.button_io.Tag = "@012@#ABCD#";
             this.button_io.Text = "IO";
             this.button_io.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_io.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -125,6 +129,7 @@
             this.button_log.Name = "button_log";
             this.button_log.Size = new System.Drawing.Size(150, 60);
             this.button_log.TabIndex = 13;
+            this.button_log.Tag = "@012@#ABCD#";
             this.button_log.Text = "日志";
             this.button_log.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_log.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -140,7 +145,7 @@
             this.button_exit.Name = "button_exit";
             this.button_exit.Size = new System.Drawing.Size(150, 60);
             this.button_exit.TabIndex = 14;
-            this.button_exit.Tag = "@02@";
+            this.button_exit.Tag = "@02@#BCD#";
             this.button_exit.Text = "退出";
             this.button_exit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_exit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -181,6 +186,7 @@
             this.Controls.Add(this.button_setting);
             this.Controls.Add(this.button_main);
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(2560, 1440);
             this.Name = "ForMain";
             this.Padding = new System.Windows.Forms.Padding(0);

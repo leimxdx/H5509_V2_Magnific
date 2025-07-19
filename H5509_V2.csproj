@@ -72,6 +72,9 @@
     <ErrorReport>prompt</ErrorReport>
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>H5509big.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="ClosedXML, Version=0.104.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\ClosedXML.0.104.2\lib\netstandard2.0\ClosedXML.dll</HintPath>
@@ -167,6 +170,7 @@
       <DependentUpon>Auto2Map.cs</DependentUpon>
     </Compile>
     <Compile Include="BinParam.cs" />
+    <Compile Include="ControlPerm.cs" />
     <Compile Include="DTMHelper.cs" />
     <Compile Include="Fix1Map.cs">
       <SubType>Form</SubType>
@@ -454,6 +458,7 @@
     <Content Include="gt_rn.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="H5509big.ico" />
     <Content Include="LAFunc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

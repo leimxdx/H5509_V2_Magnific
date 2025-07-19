@@ -19,19 +19,17 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Xml.Linq;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Vml;
-using DocumentFormat.OpenXml.Wordprocessing;
 using H5509_alarm;
 using Sunny.UI;
 using Sunny.UI.Win32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static GTN.mc;
 using static H5509_V2.ForMain;
 using Ttimer = System.Timers.Timer;
+
 namespace H5509_V2
 {
     public class APPmaster
@@ -98,11 +96,19 @@ namespace H5509_V2
 
         public static List<string> Listcode = new List<string>(); //保存报警代码
 
+        public static string 气压报警 = "1";
+
         public static DTMHelper dTMHelper; //温控器
 
         public static string 当前档案;
 
         public static string 当前权限;
+
+        public static string[] ButtonName = { "button_setting", "button_offset", "button_speed", "button_exit", "button_io", "button_log" };
+
+        public static Control[] ControlName = new Control[6];  //{"button_setting", "button_offset", "button_speed", "button_io", "button_log", "button_exit" };
+
+        public static List<ControlPerm> ListConPerm = new List<ControlPerm>();
 
         public static int 权限时间
         {
@@ -224,10 +230,17 @@ namespace H5509_V2
             get { return 设置信息.温度模式; }
         }
 
+        public static bool 入料吸提前开真空 = true;
+
+        public static bool 出料吸提前开真空 = true;
+
+        public static bool 测试吸提前开真空 = true;
+
         public static int IC加热时间
         {
             get { return 设置信息.Heat盘信息.IC加热时间; }
         }
+
         public static int 达温后延时时间
         {
             get { return 设置信息.Heat盘信息.达温后延时; }
@@ -251,7 +264,9 @@ namespace H5509_V2
 
         public static bool 定点停止标记 = false;
 
-        public static bool 定点停止允许 = false;
+        public static bool 后方定点停止允许 = false;
+
+        public static bool 前方定点停止允许 = false;
 
         public static bool 开舱门上顶标记 = false;
 
@@ -961,6 +976,10 @@ namespace H5509_V2
 
         public static ST_ProcessManage PS整机回零流程;
 
+        public static int PS入料手臂吸放料流程StepID = 505;
+
+        public static bool PS入料手臂吸放料流程Processing = false;
+
         /// <summary>
         /// 程序是否触发开始
         /// </summary>
@@ -1648,6 +1667,7 @@ namespace H5509_V2
                         case "TCPIP": TCPIP = value; break;
                         case "TCPPort": TCPPort = Convert.ToInt32(value); break;
                         case "connectionString": SQLServerConnString = value; break;
+                        case "气压报警": 气压报警 = value; break;
                     }
                 }
             }
@@ -1709,6 +1729,27 @@ namespace H5509_V2
             return result;
         }
 
+        public static string GetContorlPerm()
+        {
+            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from ControlPerm", out DataTable dataTable);
+            if (result == "Success")
+            {
+                List<ControlPerm> listConPerm = new List<ControlPerm>();
+                foreach (DataRow dr in dataTable.Rows)
+                {
+                    listConPerm.Add(new ControlPerm()
+                    {
+                        控件名 = dr["控件名"].ToString(),
+                        中文名 = dr["中文名"].ToString(),
+                        权限 = dr["权限"].ToString(),
+                        状态 = dr["状态"].ToString(),
+                        显示 = dr["显示"].ToString(),
+                    });
+                }
+                ListConPerm = listConPerm;
+            }
+            return result;
+        }
 
         public static string GetSetupValue(string name, string field, out string value)
         {
@@ -1911,6 +1952,7 @@ namespace H5509_V2
                             校验位 = (Parity)Enum.Parse(typeof(Parity), dr["校验位"].ToString(), true),
                             数据位 = Convert.ToInt32(dr["数据位"].ToString()),
                             停止位 = (StopBits)Enum.Parse(typeof(StopBits), dr["停止位"].ToString(), true),
+
                             入料手臂吸料超时时间 = Convert.ToInt32(dr["入料手臂吸料超时时间"].ToString()),
                             出料手臂吸料超时时间 = Convert.ToInt32(dr["出料手臂吸料超时时间"].ToString()),
                             测试手臂吸料超时时间 = Convert.ToInt32(dr["测试手臂吸料超时时间"].ToString()),
@@ -1919,6 +1961,10 @@ namespace H5509_V2
                             测试手臂吹料时间 = Convert.ToInt32(dr["测试手臂吹料时间"].ToString()),
                             发送开始信号延时 = Convert.ToInt32(dr["发送开始信号延时"].ToString()),
                             离线模式测试等待时间 = Convert.ToInt32(dr["离线模式测试等待时间"].ToString()),
+
+                            入料吸提前开真空 = Convert.ToBoolean(dr["入料吸提前开真空"].ToString()),
+                            出料吸提前开真空 = Convert.ToBoolean(dr["出料吸提前开真空"].ToString()),
+                            测试吸提前开真空 = Convert.ToBoolean(dr["测试吸提前开真空"].ToString()),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -2024,6 +2070,10 @@ namespace H5509_V2
 
             ///设备config
             result = GetconfigData();
+            if (result != "Success") return result;
+
+            ///按钮权限
+            result = GetContorlPerm();
             if (result != "Success") return result;
 
             ///状态灯设置
@@ -2183,7 +2233,10 @@ namespace H5509_V2
                 $"出料手臂吹料时间 = '{tester.出料手臂吹料时间}'," +
                 $"测试手臂吹料时间 = '{tester.测试手臂吹料时间}'," +
                 $"发送开始信号延时 = '{tester.发送开始信号延时}'," +
-                $"离线模式测试等待时间 = '{tester.离线模式测试等待时间}'" +
+                $"离线模式测试等待时间 = '{tester.离线模式测试等待时间}'," +
+                $"入料吸提前开真空 = '{tester.入料吸提前开真空}'," +
+                $"出料吸提前开真空 = '{tester.出料吸提前开真空}'," +
+                $"测试吸提前开真空 = '{tester.测试吸提前开真空}'" +
                 $" where 测试机名称 = '{name}'";
 
             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);

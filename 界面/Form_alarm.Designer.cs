@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_alarm));
             this.Comm = new System.Windows.Forms.Label();
             this.Sys = new System.Windows.Forms.Label();
             this.Temp = new System.Windows.Forms.Label();
@@ -250,12 +251,12 @@
             this.dut_081 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView_alarm = new System.Windows.Forms.DataGridView();
-            this.button_cencel = new System.Windows.Forms.Button();
-            this.button_start = new System.Windows.Forms.Button();
-            this.timer_light = new System.Windows.Forms.Timer(this.components);
             this.alarm_NO = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alarm_info = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.alarm_led = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.button_cencel = new System.Windows.Forms.Button();
+            this.button_start = new System.Windows.Forms.Button();
+            this.timer_light = new System.Windows.Forms.Timer(this.components);
             this.panel_1.SuspendLayout();
             this.panel_S03.SuspendLayout();
             this.panel_S00.SuspendLayout();
@@ -3238,34 +3239,6 @@
             this.dataGridView_alarm.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.dataGridView_alarm_RowsRemoved);
             this.dataGridView_alarm.DoubleClick += new System.EventHandler(this.dataGridView_alarm_DoubleClick);
             // 
-            // button_cencel
-            // 
-            this.button_cencel.Location = new System.Drawing.Point(30, 98);
-            this.button_cencel.Name = "button_cencel";
-            this.button_cencel.Size = new System.Drawing.Size(100, 23);
-            this.button_cencel.TabIndex = 71;
-            this.button_cencel.Text = "取消报警该代码";
-            this.button_cencel.UseVisualStyleBackColor = true;
-            this.button_cencel.Visible = false;
-            this.button_cencel.Click += new System.EventHandler(this.button_cencel_Click);
-            // 
-            // button_start
-            // 
-            this.button_start.Location = new System.Drawing.Point(30, 53);
-            this.button_start.Name = "button_start";
-            this.button_start.Size = new System.Drawing.Size(100, 23);
-            this.button_start.TabIndex = 70;
-            this.button_start.Text = "报警该代码";
-            this.button_start.UseVisualStyleBackColor = true;
-            this.button_start.Visible = false;
-            this.button_start.Click += new System.EventHandler(this.button_start_Click);
-            // 
-            // timer_light
-            // 
-            this.timer_light.Enabled = true;
-            this.timer_light.Interval = 500;
-            this.timer_light.Tick += new System.EventHandler(this.timer_light_Tick);
-            // 
             // alarm_NO
             // 
             this.alarm_NO.HeaderText = "报警代码";
@@ -3293,6 +3266,34 @@
             this.alarm_led.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.alarm_led.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.alarm_led.Width = 58;
+            // 
+            // button_cencel
+            // 
+            this.button_cencel.Location = new System.Drawing.Point(30, 98);
+            this.button_cencel.Name = "button_cencel";
+            this.button_cencel.Size = new System.Drawing.Size(100, 23);
+            this.button_cencel.TabIndex = 71;
+            this.button_cencel.Text = "取消报警该代码";
+            this.button_cencel.UseVisualStyleBackColor = true;
+            this.button_cencel.Visible = false;
+            this.button_cencel.Click += new System.EventHandler(this.button_cencel_Click);
+            // 
+            // button_start
+            // 
+            this.button_start.Location = new System.Drawing.Point(30, 53);
+            this.button_start.Name = "button_start";
+            this.button_start.Size = new System.Drawing.Size(100, 23);
+            this.button_start.TabIndex = 70;
+            this.button_start.Text = "报警该代码";
+            this.button_start.UseVisualStyleBackColor = true;
+            this.button_start.Visible = false;
+            this.button_start.Click += new System.EventHandler(this.button_start_Click);
+            // 
+            // timer_light
+            // 
+            this.timer_light.Enabled = true;
+            this.timer_light.Interval = 500;
+            this.timer_light.Tick += new System.EventHandler(this.timer_light_Tick);
             // 
             // Form_alarm
             // 
@@ -3350,6 +3351,7 @@
             this.Controls.Add(this.Temp);
             this.Controls.Add(this.Sys);
             this.Controls.Add(this.Comm);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(1260, 910);
             this.MinimumSize = new System.Drawing.Size(1260, 910);
             this.Name = "Form_alarm";

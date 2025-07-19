@@ -62,5 +62,11 @@ namespace H5509_V2
         public int 发送开始信号延时 { get; set; }
 
         public int 离线模式测试等待时间 { get; set; }
+
+        public bool 入料吸提前开真空 { get; set; }
+
+        public bool 出料吸提前开真空 { get; set; }
+
+        public bool 测试吸提前开真空 { get; set; }
     }
 }

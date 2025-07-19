@@ -16,6 +16,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Sunny.UI;
 using static GTN.mc;
@@ -2818,6 +2819,10 @@ namespace H5509_V2
             numericUpDown10.Text = tester.测试手臂吹料时间.ToString();
             numericUpDown156.Text = tester.发送开始信号延时.ToString();
             numericUpDown160.Text = tester.离线模式测试等待时间.ToString();
+
+            checkBox5.Checked = tester.入料吸提前开真空;
+            checkBox6.Checked = tester.出料吸提前开真空;
+            checkBox7.Checked = tester.测试吸提前开真空;
         }
 
         private void 刷新分BIN(BinParam binParam)
@@ -4880,6 +4885,7 @@ namespace H5509_V2
                         newtester.校验位 = (Parity)Enum.Parse(typeof(Parity), uiComboBox14.Text, true);
                         newtester.数据位 = Convert.ToInt32(uiComboBox13.Text);
                         newtester.停止位 = (StopBits)Enum.Parse(typeof(StopBits), uiComboBox15.Text, true);
+
                         newtester.入料手臂吸料超时时间 = Convert.ToInt32(numericUpDown6.Text);
                         newtester.出料手臂吸料超时时间 = Convert.ToInt32(numericUpDown9.Text);
                         newtester.测试手臂吸料超时时间 = Convert.ToInt32(numericUpDown11.Text);
@@ -4888,6 +4894,10 @@ namespace H5509_V2
                         newtester.测试手臂吹料时间 = Convert.ToInt32(numericUpDown10.Text);
                         newtester.发送开始信号延时 = Convert.ToInt32(numericUpDown156.Text);
                         newtester.离线模式测试等待时间 = Convert.ToInt32(numericUpDown160.Text);
+
+                        newtester.入料吸提前开真空 = Convert.ToBoolean(checkBox5.Checked);
+                        newtester.出料吸提前开真空 = Convert.ToBoolean(checkBox6.Checked);
+                        newtester.测试吸提前开真空 = Convert.ToBoolean(checkBox7.Checked);
 
                         result = UpdateTesterIFParam(value, newtester);
                         if (result != "Success")
@@ -4925,6 +4935,10 @@ namespace H5509_V2
                             if (oldtester.测试手臂吹料时间 != newtester.测试手臂吹料时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吹料时间]:{oldtester.测试手臂吹料时间}->{newtester.测试手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.发送开始信号延时 != newtester.发送开始信号延时) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[发送开始信号延时]:{oldtester.发送开始信号延时}->{newtester.发送开始信号延时}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.离线模式测试等待时间 != newtester.离线模式测试等待时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[离线模式测试等待时间]:{oldtester.离线模式测试等待时间}->{newtester.离线模式测试等待时间}:更新成功", WriteData.LogType.ParamLog); }
+
+                            if (oldtester.入料吸提前开真空 != newtester.入料吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料吸提前开真空]:{oldtester.入料吸提前开真空}->{newtester.入料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.出料吸提前开真空 != newtester.出料吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料吸提前开真空]:{oldtester.出料吸提前开真空}->{newtester.出料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.测试吸提前开真空 != newtester.测试吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试吸提前开真空]:{oldtester.测试吸提前开真空}->{newtester.测试吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
 
                             if (value == 设置信息.测试机信息.测试机名称)
                             {
@@ -6656,6 +6670,51 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            //H5509归零 = true;
+            //设备状态 = 1;
+            //if (!IsPause && (设备状态 == 1 || H5509正在归零))
+            //{
+            //    if (!安全门禁用)
+            //    {
+            //        string[] io = new string[4] { "0", "1", "1", "1" };
+
+            //        if (io[0] == "0" || io[1] == "0" || io[2] == "0" || io[3] == "0")
+            //        {
+            //            if (io[11] == "0")
+            //            {
+            //                Listcode.Add("9000000");
+            //                RunLog("[Code]9000000,[Msg](运行中)前门禁被打开", LogType.AlarmLog);
+            //            }
+            //            if (io[12] == "0")
+            //            {
+            //                Listcode.Add("9000010");
+            //                RunLog("[Code]9000010,[Msg](运行中)后门禁被打开", LogType.AlarmLog);
+            //            }
+            //            if (io[13] == "0")
+            //            {
+            //                Listcode.Add("9000020");
+            //                RunLog("[Code]9000020,[Msg](运行中)左门禁被打开", LogType.AlarmLog);
+            //            }
+            //            if (io[14] == "0")
+            //            {
+            //                Listcode.Add("9000040");
+            //                RunLog("[Code]9000040,[Msg](运行中)右门禁被打开", LogType.AlarmLog);
+            //            }
+            //            ProgramPause = true;
+            //            IsPause = true;
+            //        }
+            //    }
+
+            //if (!IsPause && 设备状态 == 1)
+            //{
+            //    if (io[27] == "0")
+            //    {
+            //        Listcode.Add("1400020"); //系统错误--气压不足
+            //        ProgramPause = true;
+            //        IsPause = true;
+            //    }
+            //}
+        //}
             //int interval = TrayInterval;
             //string[] logs = new string[1000];
             //for (int i = 0; i < logs.Length; i++)
@@ -7262,6 +7321,13 @@ namespace H5509_V2
             if (rows >= 0)
             {
                 string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+
+                if (name == "默认")
+                {
+                    MessageBox.Show("默认档案不能删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 DialogResult dialog = MessageBox.Show($"请确认是否删除档案:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
@@ -7353,6 +7419,7 @@ namespace H5509_V2
                     MessageBox.Show("默认Tray盘不能删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
                 DialogResult dialog = MessageBox.Show($"请确认是否删除Tray盘:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
@@ -7616,6 +7683,149 @@ namespace H5509_V2
         private void uiTabControl3_Selecting(object sender, TabControlCancelEventArgs e)
         {
             刷新调试(e.TabPage.Text);
+        }
+
+
+        private void uiButton29_Click_1(object sender, EventArgs e)
+        {
+
+        }
+        private void Empty顶盘手臂移动初始点位(double mm)
+        {
+            button248.Enabled = false;
+            button247.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M12_Empty顶盘轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button248.Enabled = true;
+                    button247.Enabled = true;
+                }));
+            });
+        }
+
+        private void Load顶盘手臂移动初始点位(double mm)
+        {
+            button246.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M13_Loader顶盘轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button246.Enabled = true;
+                }));
+            });
+        }
+        private void Auto1顶盘手臂移动初始点位(double mm)
+        {
+            button251.Enabled = false;
+            button256.Enabled = false;
+            button249.Enabled = false;
+            button250.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M14_Auto1顶盘轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button251.Enabled = true;
+                    button256.Enabled = true;
+                    button249.Enabled = true;
+                    button250.Enabled = true;
+                }));
+            });
+        }
+        private void Auto2顶盘手臂移动初始点位(double mm)
+        {
+            button252.Enabled = false;
+            button255.Enabled = false;
+            button254.Enabled = false;
+            button253.Enabled = false;
+            Task.Run(() =>
+            {
+                string result = motionEx.AxisAbsoluteMove("M15_Auto2顶盘轴", mm, 1);
+                if (result != "Success") RunLog("移动失败!" + result);
+
+                this.Invoke(new Action(() =>
+                {
+                    button252.Enabled = true;
+                    button255.Enabled = true;
+                    button254.Enabled = true;
+                    button253.Enabled = true;
+                }));
+            });
+        }
+
+        private void button248_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown163.Text);
+            Empty顶盘手臂移动初始点位(pos);
+        }
+
+        private void button247_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown162.Text);
+            Empty顶盘手臂移动初始点位(pos);
+        }
+
+        private void button246_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown161.Text);
+            Load顶盘手臂移动初始点位(pos);
+        }
+
+        private void button251_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown174.Text);
+            Auto1顶盘手臂移动初始点位(pos);
+        }
+
+        private void button256_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown179.Text);
+            Auto1顶盘手臂移动初始点位(pos);
+        }
+
+        private void button249_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown159.Text);
+            Auto1顶盘手臂移动初始点位(pos);
+        }
+
+        private void button250_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown173.Text);
+            Auto1顶盘手臂移动初始点位(pos);
+        }
+
+        private void button252_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown175.Text);
+            Auto2顶盘手臂移动初始点位(pos);
+        }
+
+        private void button255_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown178.Text);
+            Auto2顶盘手臂移动初始点位(pos);
+        }
+
+        private void button254_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown177.Text);
+            Auto2顶盘手臂移动初始点位(pos);
+        }
+
+        private void button253_Click(object sender, EventArgs e)
+        {
+            double pos = Convert.ToDouble(numericUpDown176.Text);
+            Auto2顶盘手臂移动初始点位(pos);
         }
     }
 }

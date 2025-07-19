@@ -19,6 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.InkML;
 using Microsoft.SqlServer.Server;
 using Sunny.UI;
@@ -2847,7 +2848,8 @@ namespace H5509_V2
             结批完成 = false;
             强制结批标记 = false;
             定点停止标记 = false;
-            定点停止允许 = false;
+            后方定点停止允许 = false;
+            前方定点停止允许 = false;
             开舱门上顶标记 = false;
             Load舱门上顶标记 = false;
             Empty舱门上顶标记 = false;
@@ -3250,15 +3252,13 @@ namespace H5509_V2
             bool isstart = true;
 
             string result = motionEx.GetDi("X020_进气压", out string value);
-            //RunLog("X020_进气压:" + value);
-
             if (result == "Success")
             {
-                if (value == "0")
+                if (value == 气压报警)
                 {
                     isstart = false;
                     Listcode.Add("1400020"); //系统错误--气压不足
-                    RunLog("[Code]1400020,[Msg]气压不足", LogType.AlarmLog);
+                    RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
                 }
             }
             else
@@ -3843,14 +3843,14 @@ namespace H5509_V2
                     if (CheckEdgeSingal(fixedstop, ref FixedStopRiseCache, true))
                     {
                         RunLog("按下定点停止", LogType.OperateLog);
-                        定点停止允许 = false;
+                        前方定点停止允许 = true;
                     }
 
                     bool fixedstart = io[6] == "1"; //X007_定点开始
                     if (CheckEdgeSingal(fixedstart, ref FixedStartRiseCache, true))
                     {
                         RunLog("按下定点开始", LogType.OperateLog);
-                        定点停止允许 = true;
+                        后方定点停止允许 = true;
                     }
 
                     bool stopbatch = io[7] == "1"; //X008_结批
@@ -3935,11 +3935,17 @@ namespace H5509_V2
                                             RunLog("[Code]9000040,[Msg](按下归零)右门禁被打开", LogType.AlarmLog);
                                         }
                                         ishome = false;
-                                        ProgramPause = true;
-                                        IsPause = true;
                                     }
                                 }
                             }
+
+                            if (io[27] == 气压报警)
+                            {
+                                ishome = false;
+                                Listcode.Add("1400020"); //系统错误--气压不足
+                                RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
+                            }
+
                             if (ishome)
                             {
                                 参数初始化();
@@ -3979,6 +3985,11 @@ namespace H5509_V2
                                     motionEx.SetDo("Y002_暂停灯", false);
                                     motionEx.SetDo("Y010_归零灯", false);
                                 });
+                            }
+                            else
+                            {
+                                ProgramPause = true;
+                                IsPause = true;
                             }
                         }
                     }
@@ -4126,11 +4137,6 @@ namespace H5509_V2
                     if (CheckEdgeSingal(x36, ref Auto1DoorRiseCache, true))
                     {
                         RunLog("Auto1仓门已关闭", LogType.OperateLog);
-
-                        if (设备状态 != 0)
-                        {
-
-                        }
                     }
                     else if (CheckEdgeSingal(x36, ref Auto1DoorFallCache, false))
                     {
@@ -4201,7 +4207,7 @@ namespace H5509_V2
                         RunLog("Fix3Tray盘被拿走", LogType.OperateLog);
                     }
 
-                    if (!IsPause && 设备状态 == 1 || H5509归零 || H5509正在归零)
+                    if (!IsPause && (设备状态 == 1 || H5509正在归零))
                     {
                         if (!安全门禁用)
                         {
@@ -4232,15 +4238,13 @@ namespace H5509_V2
                             }
                         }
 
-                        //if (!IsPause && 设备状态 == 1)
-                        //{
-                        //    if (io[27] == "0")
-                        //    {
-                        //        Listcode.Add("1400020"); //系统错误--气压不足
-                        //        ProgramPause = true;
-                        //        IsPause = true;
-                        //    }
-                        //}
+                        if (io[27] == 气压报警)
+                        {
+                            Listcode.Add("1400020"); //系统错误--气压不足
+                            RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
                     }
                     Thread.Sleep(6);
                 }
@@ -4931,6 +4935,8 @@ namespace H5509_V2
                             if (Auto1换盘标记 || Auto2换盘标记)
                             {
                                 PS入料手臂吸放料流程.StepID = 905;
+                                PS入料手臂吸放料流程StepID = 500;
+                                PS入料手臂吸放料流程Processing = false;
                             }
                             Thread.Sleep(10);
                         }
@@ -4938,6 +4944,18 @@ namespace H5509_V2
 
                     case 505:
                         PS入料手臂吸放料流程.StepName = "计算放料IC颗数";
+
+                        if (入料手臂抓料等待标记)
+                        {
+                            if (Auto1换盘标记 || Auto2换盘标记) //2025-07-19 10:39 新bug
+                            {
+                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->避让Auto1换盘({Auto1换盘标记})或Auto2换盘({Auto2换盘标记})");
+                                PS入料手臂吸放料流程.StepID = 905;
+                                PS入料手臂吸放料流程StepID = 505;
+                                PS入料手臂吸放料流程Processing = true;
+                                break;
+                            }
+                        }
 
                         if (飞梭前入料放料参数(out colums, out open))
                         {
@@ -5003,7 +5021,8 @@ namespace H5509_V2
                             }
                             else
                             {
-                                PS入料手臂吸放料流程.StepID = 710;
+                                入料手臂抓料等待标记 = false; //验证结果
+                                PS入料手臂吸放料流程.StepID = 705;
                             }
                         }
                         else
@@ -5227,6 +5246,12 @@ namespace H5509_V2
                     case 630:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
+
+                        if (入料吸提前开真空 && !空跑模式)
+                        {
+                            入料吸嘴_吸放料(lsopen, true, true);
+                        }
+
                         result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat吸_Z + 点位微调.入料_Heat吸_Z, true);
                         if (result == "Success")
                         {
@@ -5403,6 +5428,7 @@ namespace H5509_V2
                                 入料IC忽略 = false;
                                 ProgramPause = true;
                                 IsPause = true;
+                                motionEx.SetDo("Y004_重试灯", true);
                                 PS入料手臂吸放料流程.StepID = 653;
                             }
                         }
@@ -5559,6 +5585,12 @@ namespace H5509_V2
                     case 530:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
+
+                        if (入料吸提前开真空 && !空跑模式)
+                        {
+                            入料吸嘴_吸放料(lsopen, true, true);
+                        }
+
                         result = 入料手臂Z移动(lsopen, 初始点位.入料_Load_Z + 点位微调.入料_Load吸_Z, true);
                         if (result == "Success")
                         {
@@ -5747,6 +5779,9 @@ namespace H5509_V2
                                 入料IC忽略 = false;
                                 ProgramPause = true;
                                 IsPause = true;
+                                motionEx.SetDo("Y004_重试灯", true);
+                                motionEx.SetDo("Y005_忽略灯", true);
+                                motionEx.SetDo("Y008_结批灯", true);
                                 PS入料手臂吸放料流程.StepID = 553;
                             }
                         }
@@ -5857,6 +5892,16 @@ namespace H5509_V2
                     case 705: ////放料流程////
                         PS入料手臂吸放料流程.StepName = "XYP轴移动到飞梭放料位置";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
+
+                        if (Auto1换盘标记 || Auto2换盘标记) //2025-07-19 10:39 新bug
+                        {
+                            RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->避让Auto1换盘({Auto1换盘标记})或Auto2换盘({Auto2换盘标记})");
+                            PS入料手臂吸放料流程.StepID = 905;
+                            PS入料手臂吸放料流程StepID = 705;
+                            PS入料手臂吸放料流程Processing = true;
+                            break;
+                        }
+
                         double[] xypPos = 获取梭车xyp放料点位(colums);
                         result = 入料手臂移动(xypPos[0], xypPos[1], xypPos[2]); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
@@ -5889,6 +5934,13 @@ namespace H5509_V2
                             {
                                 firstdraw = true;
                                 PS入料手臂吸放料流程.StepID = 715;
+                                if (前方定点停止允许)
+                                {
+                                    前方定点停止允许 = false;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料手臂已定点停止完成");
+                                }
                             }
                             else
                             {
@@ -6087,13 +6139,19 @@ namespace H5509_V2
                     case 1015:
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        //if (飞梭移动状态 == 0) //梭车停止状态才能放
-                        //{
                         result = 入料手臂Z移动(lsopen, 初始点位.入料_Heat放_Z + 点位微调.入料_Heat放_Z, true);
                         if (result == "Success")
                         {
                             firstdraw = true;
                             PS入料手臂吸放料流程.StepID = 1020;
+
+                            if (前方定点停止允许)
+                            {
+                                前方定点停止允许 = false;
+                                ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料手臂已定点停止完成");
+                            }
                         }
                         else
                         {
@@ -6101,8 +6159,6 @@ namespace H5509_V2
                             ProgramPause = true;
                             IsPause = true;
                         }
-                        //}
-                        //else Thread.Sleep(10);
                         break;
 
                     case 1020:
@@ -6500,12 +6556,13 @@ namespace H5509_V2
                             Auto等待换盘标记 = false;
                             if (!Auto1换盘标记) RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Auto1换盘完成");
                             if (!Auto2换盘标记) RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->Auto2换盘完成");
-                            PS入料手臂吸放料流程.StepID = 500;
-                            PS入料手臂吸放料流程.Processing = false;
+                            PS入料手臂吸放料流程.StepID = PS入料手臂吸放料流程StepID;
+                            PS入料手臂吸放料流程.Processing = PS入料手臂吸放料流程Processing;
                         }
                         break;
 
                     #endregion
+
 
                     default:
                         RunLog(("PS入料手臂吸放料流程.StepID =" + PS入料手臂吸放料流程.StepID.ToString() + "对应流程不存在"));
@@ -7014,6 +7071,12 @@ namespace H5509_V2
                     case 520:
                         PS出料手臂吸放料流程.StepName = "出料手臂Z向下移动";
                         RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
+
+                        if (出料吸提前开真空 && !空跑模式)
+                        {
+                            出料吸嘴_吸放料(lsopen, true, true);
+                        }
+
                         double zpos = 获取梭车Z吸料点位(colums);
                         result = 出料手臂Z移动(lsopen, zpos, true);
                         if (result == "Success")
@@ -7209,6 +7272,8 @@ namespace H5509_V2
                                 出料IC忽略 = false;
                                 ProgramPause = true;
                                 IsPause = true;
+                                motionEx.SetDo("Y004_重试灯", true);
+                                motionEx.SetDo("Y005_忽略灯", true);
                                 PS出料手臂吸放料流程.StepID = 546;
                             }
                         }
@@ -7717,6 +7782,14 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             PS出料手臂吸放料流程.StepID = 720;
+
+                            if (前方定点停止允许)
+                            {
+                                前方定点停止允许 = false;
+                                ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料手臂已定点停止完成");
+                            }
                         }
                         else
                         {
@@ -8764,7 +8837,7 @@ namespace H5509_V2
                     case 510:
                         PS测试手臂取待测料流程.StepName = "测试手臂X轴到飞梭后入料吸料";
                         RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
-                        double xpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2吸_X + 点位微调.测试_梭车2左吸_X : 初始点位.测试_梭车1吸_X + 点位微调.测试_梭车1左吸_X;
+                        double xpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2吸_X + 点位微调.测试_梭车2左吸_X) : (初始点位.测试_梭车1吸_X + 点位微调.测试_梭车1左吸_X);
                         result = 测试手臂X移动(xpos);
                         if (result == "Success")
                         {
@@ -8802,7 +8875,13 @@ namespace H5509_V2
                     case 520:
                         PS测试手臂取待测料流程.StepName = "测试Z向下移动"; //飞梭吸
                         RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
-                        double zpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2吸_Z + 点位微调.测试_梭车2左吸_Z : 初始点位.测试_梭车1吸_Z + 点位微调.测试_梭车1左吸_Z;
+
+                        if (测试吸提前开真空 && !空跑模式)
+                        {
+                            测试吸嘴_吸放料(lsopen, true, true);
+                        }
+
+                        double zpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2吸_Z + 点位微调.测试_梭车2左吸_Z) : (初始点位.测试_梭车1吸_Z + 点位微调.测试_梭车1左吸_Z);
                         result = 测试手臂Z移动(zpos, true);
                         if (result == "Success")
                         {
@@ -8999,6 +9078,8 @@ namespace H5509_V2
                                 测试IC忽略 = false;
                                 ProgramPause = true;
                                 IsPause = true;
+                                motionEx.SetDo("Y004_重试灯", true);
+                                motionEx.SetDo("Y005_忽略灯", true);
                                 PS测试手臂取待测料流程.StepID = 543;
                             }
                         }
@@ -9155,6 +9236,14 @@ namespace H5509_V2
                                 if (result == "Success")
                                 {
                                     PS测试手臂取待测料流程.StepID = 725;
+
+                                    if (后方定点停止允许)
+                                    {
+                                        后方定点停止允许 = false;
+                                        ProgramPause = true;
+                                        IsPause = true;
+                                        RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试手臂已定点停止完成");
+                                    }
                                 }
                                 else
                                 {
@@ -9288,6 +9377,7 @@ namespace H5509_V2
 
                     case 740:
                         PS测试手臂取待测料流程.StepName = $"检测是否IC放歪";
+                        RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                         result = 测试区_左右对射感应(site, out iovalues);
                         result2 = 测试区_上下对射感应(site, out iovalues2);
                         if (result == "Success" && result2 == "Success")
@@ -9533,6 +9623,11 @@ namespace H5509_V2
                                 result = 获取测试Z吸料补偿(site, out double sitez);
                                 if (result == "Success")
                                 {
+                                    if (测试吸提前开真空 && !空跑模式)
+                                    {
+                                        测试吸嘴_吸放料(lsopen, true, true);
+                                    }
+
                                     result = 测试手臂Z移动(初始点位.测试_Test区吸_Z + sitez, true);
                                     if (result == "Success")
                                     {
@@ -9838,7 +9933,7 @@ namespace H5509_V2
                     case 710:
                         PS测试手臂取已测料流程.StepName = "测试手臂X移动到梭车";
                         RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                        double xpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X : 初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X;
+                        double xpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
                         result = 测试手臂X移动(xpos);
                         if (result == "Success")
                         {
@@ -9880,11 +9975,19 @@ namespace H5509_V2
                         if (飞梭后出料状态 == 0) //等梭车过来再放
                         {
                             RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                            double zpos = 飞梭2位置 == 0 ? 初始点位.测试_梭车2放_Z + 点位微调.测试_梭车2右放_Z : 初始点位.测试_梭车1放_Z + 点位微调.测试_梭车1右放_Z;
+                            double zpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_Z + 点位微调.测试_梭车2右放_Z) : (初始点位.测试_梭车1放_Z + 点位微调.测试_梭车1右放_Z);
                             result = 测试手臂Z移动(zpos, true);
                             if (result == "Success")
                             {
                                 PS测试手臂取已测料流程.StepID = 725;
+
+                                if (后方定点停止允许)
+                                {
+                                    后方定点停止允许 = false;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试手臂已定点停止完成");
+                                }
                             }
                             else
                             {

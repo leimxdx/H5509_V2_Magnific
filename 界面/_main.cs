@@ -355,7 +355,7 @@ namespace H5509_V2
                 lab_uph.Invoke(new Action(() =>
                 {
                     lab_uph.Text = $"UPH={RealUPHNum}";
-                })); 
+                }));
                 UphNumber = 出料数;
             }
         }
@@ -537,13 +537,30 @@ namespace H5509_V2
                         }
                         else //if (t.Contains("1"))没有设置默认都是1
                         {
+                            //if (t.Contains(操作权限))
+                            //{
+                            //    con.Enabled = true;
+                            //}
+                            //else
+                            //{
+                            //    con.Enabled = false;
+                            //    continue;
+                            //}
                             if (t.Contains(操作权限))
                             {
                                 con.Enabled = true;
+                                if (ButtonName.Contains(con.Name))
+                                {
+                                    con.BackColor = Color.White;
+                                }
                             }
                             else
                             {
                                 con.Enabled = false;
+                                if (ButtonName.Contains(con.Name))
+                                {
+                                    con.BackColor = Color.FromArgb(226, 226, 226);
+                                }
                                 continue;
                             }
                         }
@@ -557,10 +574,18 @@ namespace H5509_V2
                         t = t.Substring(0, t.IndexOf("@"));
                         if (t.Contains(设备状态.ToString()))
                         {
+                            if (ButtonName.Contains(con.Name))
+                            {
+                                con.BackColor = Color.White;
+                            }
                             con.Enabled = true;
                         }
                         else
                         {
+                            if (ButtonName.Contains(con.Name))
+                            {
+                                con.BackColor = Color.FromArgb(226, 226, 226);
+                            }
                             con.Enabled = false;
                         }
                     }
@@ -899,14 +924,14 @@ namespace H5509_V2
                             && !OutSiteQueue.Contains(i) //不在出料队列中
                             && (SiteTestState[i] == 0)
                             && (正在入料的Site != i))
-                            //&& !正在吸取后入料.Contains(true)) //测试区有料待取走
+                        //&& !正在吸取后入料.Contains(true)) //测试区有料待取走
                         {
                             InSiteQueue.Enqueue(i);
                             RunLog($"添加Site{i}");
                         }
                         else
                         {
-                            RunLog("!InSiteQueue:"+ !InSiteQueue.Contains(i));
+                            RunLog("!InSiteQueue:" + !InSiteQueue.Contains(i));
                             RunLog("!OutSiteQueue:" + !OutSiteQueue.Contains(i));
                             RunLog($"SiteTestState[{i}]:" + SiteTestState[i]);
                             RunLog("site:" + 正在入料的Site);
@@ -1186,6 +1211,28 @@ namespace H5509_V2
                         label653.Text = $"IndexTime={DIndexTime.TotalSeconds:0.0}s";
                         label652.Text = $"TestTime={TestTime.TotalSeconds:0.0}s";
 
+                        if (空跑模式)
+                        {
+                            Lbl_IClistenmode.Text = "空跑模式";
+                            Lbl_IClistenmode.ForeColor = Color.Red;
+                        }
+                        else 
+                        {
+                            Lbl_IClistenmode.Text = "正常模式";
+                            Lbl_IClistenmode.ForeColor = Color.LimeGreen;
+                        }
+
+                        if (无测试机模式)
+                        {
+                            Lbl_connectstate.Text = "离线模式";
+                            Lbl_connectstate.ForeColor = Color.Red;
+                        }
+                        else
+                        {
+                            Lbl_connectstate.Text = "在线模式";
+                            Lbl_connectstate.ForeColor = Color.LimeGreen;
+                        }
+
                         if (温度模式 == "高温")
                         {
                             label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
@@ -1311,7 +1358,6 @@ namespace H5509_V2
                 }
             }
         }
-
 
         public void 刷新温度显示()
         {
@@ -1519,7 +1565,7 @@ namespace H5509_V2
         //        if (分bin[i].bin == b) 分bin[i].num++;
         //    }
         //}
-        
+
         private void Lbl_IClistenmode_Click(object sender, EventArgs e)
         {
             //bool[] tempopen = new bool[17];

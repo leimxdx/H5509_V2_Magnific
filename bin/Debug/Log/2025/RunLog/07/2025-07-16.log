@@ -257,3 +257,31 @@
 打开控制器失败(-6)
    在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
    在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-16 21:25:09  =>  GTN_Open(5,1):(-6)
+2025-07-16 21:25:09  =>  [error][2025-07-16 21:25:09]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-16 21:26:05  =>  GTN_Open(5,1):(-6)
+2025-07-16 21:26:05  =>  [error][2025-07-16 21:26:05]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-16 21:26:16  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-16 21:30:45  =>  GTN_Open(5,1):(-6)
+2025-07-16 21:30:45  =>  [error][2025-07-16 21:30:45]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-16 21:30:55  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-16 21:35:23  =>  GTN_Open(5,1):(-6)
+2025-07-16 21:35:23  =>  [error][2025-07-16 21:35:23]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-16 21:35:33  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-16 22:11:59  =>  GTN_Open(5,1):(-6)
+2025-07-16 22:11:59  =>  [error][2025-07-16 22:11:59]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
