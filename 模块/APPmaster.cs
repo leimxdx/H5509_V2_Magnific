@@ -230,12 +230,6 @@ namespace H5509_V2
             get { return 设置信息.温度模式; }
         }
 
-        public static bool 入料吸提前开真空 = true;
-
-        public static bool 出料吸提前开真空 = true;
-
-        public static bool 测试吸提前开真空 = true;
-
         public static int IC加热时间
         {
             get { return 设置信息.Heat盘信息.IC加热时间; }

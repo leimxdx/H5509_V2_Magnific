@@ -3860,7 +3860,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(191, 27);
             this.label8.TabIndex = 159;
-            this.label8.Text = "V.1.0.01 20250719";
+            this.label8.Text = "V.1.0.02 20250721";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9
@@ -4039,7 +4039,7 @@
             this.lbl_runtime.Name = "lbl_runtime";
             this.lbl_runtime.Size = new System.Drawing.Size(241, 45);
             this.lbl_runtime.TabIndex = 7;
-            this.lbl_runtime.Text = "RunTime=dd.HH:mm:ss";
+            this.lbl_runtime.Text = "RunTime";
             this.lbl_runtime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lbl_currenttime
@@ -4051,7 +4051,6 @@
             this.lbl_currenttime.Name = "lbl_currenttime";
             this.lbl_currenttime.Size = new System.Drawing.Size(110, 45);
             this.lbl_currenttime.TabIndex = 6;
-            this.lbl_currenttime.Text = "HH:mm:ss";
             this.lbl_currenttime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label6
@@ -4063,7 +4062,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(246, 45);
             this.label6.TabIndex = 8;
-            this.label6.Text = "HeatingTime=HH:mm:ss";
+            this.label6.Text = "HeatingTime";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label653
@@ -4075,7 +4074,7 @@
             this.label653.Name = "label653";
             this.label653.Size = new System.Drawing.Size(171, 45);
             this.label653.TabIndex = 4;
-            this.label653.Text = "IndexTime=99.9s";
+            this.label653.Text = "IndexTime";
             this.label653.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label652
@@ -4087,7 +4086,7 @@
             this.label652.Name = "label652";
             this.label652.Size = new System.Drawing.Size(178, 45);
             this.label652.TabIndex = 3;
-            this.label652.Text = "TestTime=MM:ss";
+            this.label652.Text = "TestTime";
             this.label652.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lab_uph
@@ -4099,7 +4098,7 @@
             this.lab_uph.Name = "lab_uph";
             this.lab_uph.Size = new System.Drawing.Size(127, 45);
             this.lab_uph.TabIndex = 2;
-            this.lab_uph.Text = "UPH=10000";
+            this.lab_uph.Text = "UPH";
             this.lab_uph.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lab_uph.Click += new System.EventHandler(this.lab_uph_Click);
             // 

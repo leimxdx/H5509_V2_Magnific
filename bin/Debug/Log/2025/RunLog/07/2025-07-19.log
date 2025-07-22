@@ -72,3 +72,42 @@
 打开控制器失败(-6)
    在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
    在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-19 16:09:42  =>  GTN_Open(5,1):(-6)
+2025-07-19 16:09:42  =>  [error][2025-07-19 16:09:42]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-19 16:09:54  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-19 16:10:52  =>  档案名称-[8X19_UFS_OnLine]-偏移点位名称-[8X19_UFS_OnLine]-点位-[测试_梭车1右放_X]0->-0.3:更新成功
+2025-07-19 16:10:52  =>  档案名称-[8X19_UFS_OnLine]-偏移点位名称-[8X19_UFS_OnLine]-点位-[测试_梭车2右放_X]0->-0.5:更新成功
+2025-07-19 16:11:22  =>  初始点位:[测试_梭车2放_X]917.66->918.76:更新成功
+2025-07-19 16:16:36  =>  GTN_Open(5,1):(-6)
+2025-07-19 16:16:36  =>  [error][2025-07-19 16:16:36]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-19 16:16:47  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-19 16:49:51  =>  GTN_Open(5,1):(-6)
+2025-07-19 16:49:51  =>  [error][2025-07-19 16:49:51]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-19 16:50:02  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-19 16:51:31  =>  @START_INFO ZRS240929001A:DESKTOP-M5HPH95:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+
+2025-07-19 16:51:56  =>  @START_INFO ZRS240929001A:DESKTOP-M5HPH95:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+
+2025-07-19 16:52:06  =>  @START_INFO ZRS240929001A:DESKTOP-M5HPH95:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+
+2025-07-19 16:52:06  =>  @INFO_OK+
+2025-07-19 16:53:29  =>  GTN_Open(5,1):(-6)
+2025-07-19 16:53:29  =>  [error][2025-07-19 16:53:29]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-19 16:53:40  =>  [Code]1400448,[Msg]温控器连接失败!
+2025-07-19 16:53:44  =>  @START_INFO ZRS240929001A:DESKTOP-M5HPH95:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::620:::FT::R80544:FT3:FT:25+
+2025-07-19 16:53:44  =>  @INFO_OK+
+2025-07-19 20:35:32  =>  GTN_Open(5,1):(-6)
+2025-07-19 20:35:32  =>  [error][2025-07-19 20:35:32]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 45
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 58
+2025-07-19 20:35:43  =>  [Code]1400448,[Msg]温控器连接失败!

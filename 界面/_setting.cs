@@ -3338,7 +3338,7 @@ namespace H5509_V2
 
                 result = SQLiteHelper.runSql(SQLiteConnString, "select value from config where name='当前档案'", out string value).ToString();
 
-                //int index = 0;
+                int index = 0;
                 //bool isCurrentTray = false;
                 if (result == "Success")
                 {
@@ -3348,14 +3348,21 @@ namespace H5509_V2
                         {
                             dr.Cells[0].Value = "当前档案";
                             //dr.Cells[0].Selected = true;
-                            //index = dr.Cells[0].RowIndex;
+                            index = dr.Cells[0].RowIndex;
                             //isCurrentTray = true;
                             break;
                         }
                     }
+
+                    //if (uiDataGridView1.Rows.Count > 0)
+                    //{
+                    //    uiDataGridView1.CurrentCell = uiDataGridView1.Rows[0].Cells[1];
+                    //}
+                    //刷新档案信息(uiTabControl6.SelectedTab.Text);
+
                     if (uiDataGridView1.Rows.Count > 0)
                     {
-                        uiDataGridView1.CurrentCell = uiDataGridView1.Rows[0].Cells[1];
+                        uiDataGridView1.CurrentCell = uiDataGridView1.Rows[index].Cells[1];
                     }
                     刷新档案信息(uiTabControl6.SelectedTab.Text);
 
@@ -3398,7 +3405,7 @@ namespace H5509_V2
                 uiDataGridView2.ClearSelection();
                 string result = SQLiteHelper.runSql(SQLiteConnString, $"select tray盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
-                //int index = 0;
+                int index = 0;
                 //bool isCurrentTray = false;
                 if (result == "Success")
                 {
@@ -3408,7 +3415,7 @@ namespace H5509_V2
                         {
                             dr.Cells[0].Value = "当前Tray盘";
                             //dr.Cells[0].Selected = true;
-                            //index = dr.Cells[0].RowIndex;
+                            index = dr.Cells[0].RowIndex;
                             //isCurrentTray = true;
                             break;
                         }
@@ -3416,7 +3423,7 @@ namespace H5509_V2
                 }
                 if (uiDataGridView2.Rows.Count > 0)
                 {
-                    uiDataGridView2.CurrentCell = uiDataGridView2.Rows[0].Cells[1];
+                    uiDataGridView2.CurrentCell = uiDataGridView2.Rows[index].Cells[1];
                 }
                 刷新Tray盘信息(uiTabControl7.SelectedTab.Text);
 
@@ -3445,7 +3452,7 @@ namespace H5509_V2
                 uiDataGridView3.ClearSelection();
                 string result = SQLiteHelper.runSql(SQLiteConnString, $"select 加热盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
-                //int index = 0;
+                int index = 0;
                 //bool isCurrentTray = false;
                 if (result == "Success")
                 {
@@ -3455,7 +3462,7 @@ namespace H5509_V2
                         {
                             dr.Cells[0].Value = "当前加热盘";
                             //dr.Cells[0].Selected = true;
-                            //index = dr.Cells[0].RowIndex;
+                            index = dr.Cells[0].RowIndex;
                             //isCurrentTray = true;
                             break;
                         }
@@ -3463,7 +3470,7 @@ namespace H5509_V2
                 }
                 if (uiDataGridView3.Rows.Count > 0)
                 {
-                    uiDataGridView3.CurrentCell = uiDataGridView3.Rows[0].Cells[1];
+                    uiDataGridView3.CurrentCell = uiDataGridView3.Rows[index].Cells[1];
                 }
                 刷新加热盘信息(uiTabControl9.SelectedTab.Text);
 
@@ -6670,6 +6677,12 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            //double 测试_梭车2放_X = 初始点位.测试_梭车2放_X;
+            //double 测试_梭车2右放_X = 点位微调.测试_梭车2右放_X;
+            //double 测试_梭车1放_X = 初始点位.测试_梭车1放_X;
+            //double 测试_梭车1右放_X = 点位微调.测试_梭车1右放_X;
+            //double xpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
+            //double xpos2 = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
             //H5509归零 = true;
             //设备状态 = 1;
             //if (!IsPause && (设备状态 == 1 || H5509正在归零))
@@ -6714,7 +6727,7 @@ namespace H5509_V2
             //        IsPause = true;
             //    }
             //}
-        //}
+            //}
             //int interval = TrayInterval;
             //string[] logs = new string[1000];
             //for (int i = 0; i < logs.Length; i++)

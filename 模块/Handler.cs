@@ -4413,7 +4413,12 @@ namespace H5509_V2
                                 RunLog($"[Code]2028007,[Msg]测试手臂X移动到等待位失败!" + testx.Result, LogType.AlarmLog);
                                 M21_测试手臂X轴ErrorMsg = testx.Result;
                             }
-                            if (shuttle.Result != "Success") RunLog("梭车移动失败!" + shuttle.Result);
+                            if (shuttle.Result != "Success")
+                            {
+                                Listcode.Add("2027007");
+                                RunLog($"[Code]2027007,[Msg]梭车2移动到后方失败!" + testx.Result, LogType.AlarmLog);
+                                M20_飞梭轴ErrorMsg = testx.Result;
+                            }
                             if (inputp.Result != "Success") RunLog("入料手臂P移动失败!" + inputp.Result);
                             if (outputxyp.Result != "Success")
                             {
@@ -5247,7 +5252,7 @@ namespace H5509_V2
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
 
-                        if (入料吸提前开真空 && !空跑模式)
+                        if (设置信息.测试机信息.入料吸提前开真空 && !空跑模式)
                         {
                             入料吸嘴_吸放料(lsopen, true, true);
                         }
@@ -5586,7 +5591,7 @@ namespace H5509_V2
                         PS入料手臂吸放料流程.StepName = "入料手臂Z向下移动";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
 
-                        if (入料吸提前开真空 && !空跑模式)
+                        if (设置信息.测试机信息.入料吸提前开真空 && !空跑模式)
                         {
                             入料吸嘴_吸放料(lsopen, true, true);
                         }
@@ -7072,7 +7077,7 @@ namespace H5509_V2
                         PS出料手臂吸放料流程.StepName = "出料手臂Z向下移动";
                         RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
 
-                        if (出料吸提前开真空 && !空跑模式)
+                        if (设置信息.测试机信息.出料吸提前开真空 && !空跑模式)
                         {
                             出料吸嘴_吸放料(lsopen, true, true);
                         }
@@ -8475,9 +8480,11 @@ namespace H5509_V2
                             }
                             else
                             {
+                                Listcode.Add("2027007");
+                                RunLog($"[Code]2027007,[Msg]梭车2移动到前方失败!" + result, LogType.AlarmLog);
+                                M20_飞梭轴ErrorMsg = result;
                                 ProgramPause = true;
                                 IsPause = true;
-                                RunLog("飞梭2前移失败");
                             }
                         }
                         else
@@ -8490,9 +8497,11 @@ namespace H5509_V2
                             }
                             else
                             {
+                                Listcode.Add("2027007");
+                                RunLog($"[Code]2027007,[Msg]梭车2移动到后方失败!" + result, LogType.AlarmLog);
+                                M20_飞梭轴ErrorMsg = result;
                                 ProgramPause = true;
                                 IsPause = true;
-                                RunLog("飞梭2后移失败");
                             }
                         }
                         break;
@@ -8876,7 +8885,7 @@ namespace H5509_V2
                         PS测试手臂取待测料流程.StepName = "测试Z向下移动"; //飞梭吸
                         RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
 
-                        if (测试吸提前开真空 && !空跑模式)
+                        if (设置信息.测试机信息.测试吸提前开真空 && !空跑模式)
                         {
                             测试吸嘴_吸放料(lsopen, true, true);
                         }
@@ -9623,7 +9632,7 @@ namespace H5509_V2
                                 result = 获取测试Z吸料补偿(site, out double sitez);
                                 if (result == "Success")
                                 {
-                                    if (测试吸提前开真空 && !空跑模式)
+                                    if (设置信息.测试机信息.测试吸提前开真空 && !空跑模式)
                                     {
                                         测试吸嘴_吸放料(lsopen, true, true);
                                     }
@@ -9933,7 +9942,8 @@ namespace H5509_V2
                     case 710:
                         PS测试手臂取已测料流程.StepName = "测试手臂X移动到梭车";
                         RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                        double xpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
+                        int state = 飞梭后出料状态 == 0 ? 0 : 1;
+                        double xpos = 飞梭2位置 == state ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
                         result = 测试手臂X移动(xpos);
                         if (result == "Success")
                         {
@@ -12149,9 +12159,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Empty失败！" + result);
                         }
                         break;
 
@@ -12469,9 +12481,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Load失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Load失败！" + result);
                         }
                         break;
 
@@ -12597,9 +12611,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Empty失败！" + result);
                         }
                         break;
 
@@ -12833,9 +12849,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Empty失败！" + result);
                         }
                         break;
 
@@ -12947,9 +12965,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴回到原点失败！" + result);
                         }
                         break;
 
@@ -13093,9 +13113,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1等待位失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到等待位失败！" + result);
                         }
                         break;
 
@@ -13128,11 +13150,13 @@ namespace H5509_V2
 
                                 if (value != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1前感应到有Tray盘,value:" + value);
+                                    Listcode.Add("4020001");
+                                    RunLog("[Code]4020001,[Msg]Auto1前对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                                 if (value3 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1后感应到有Tray盘,value2:" + value3);
+                                    Listcode.Add("4020001");
+                                    RunLog("[Code]4020001,[Msg]Auto1后对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -13140,8 +13164,17 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto1前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto1后Tray放歪感应失败！" + result2);
+
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4020001");
+                                RunLog("[Code]4020001,[Msg]读取Auto1前Tray存在感应失败！" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4020001");
+                                RunLog("[Code]4020001,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -13155,9 +13188,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Auto1失败！" + result);
                         }
                         break;
 
@@ -13230,11 +13265,13 @@ namespace H5509_V2
 
                                 if (value != "0")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1没有感应到Tray盘,value:" + value);
+                                    Listcode.Add("4020009");
+                                    RunLog("[Code]4020009,[Msg]Auto1前对射感应到无Tray盘", LogType.AlarmLog);
                                 }
                                 if (value2 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1感应到Tray盘放歪,value:" + value2);
+                                    Listcode.Add("4020017");
+                                    RunLog("[Code]4020017,[Msg]Auto1后对射感应到Tray盘放歪", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -13242,8 +13279,17 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto1前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto1后Tray放歪感应失败！" + result2);
+
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4020009");
+                                RunLog("[Code]4020009,[Msg]读取Auto1前Tray存在感应失败!" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4020017");
+                                RunLog("[Code]4020017,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -13273,9 +13319,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴回到原点失败！" + result);
                         }
                         break;
 
@@ -13342,7 +13390,9 @@ namespace H5509_V2
                         {
                             if (trayx.Result != "Success")
                             {
-                                RunLog($"放Tary盘轴移动到等待位失败！" + trayx.Result);
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1等待位失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
                             }
                             if (auto1u.Result != "Success")
                             {
@@ -13371,11 +13421,13 @@ namespace H5509_V2
 
                                 if (value != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1有盘感应到Tray盘,value:" + value);
+                                    Listcode.Add("4020001");
+                                    RunLog("[Code]4020001,[Msg]Auto1前对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                                 if (value2 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1放歪感应到Tray盘,value:" + value2);
+                                    Listcode.Add("4020001");
+                                    RunLog("[Code]4020001,[Msg]Auto1后对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -13383,8 +13435,17 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto1前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto1后Tray放歪感应失败！" + result2);
+
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4020001");
+                                RunLog("[Code]4020001,[Msg]读取Auto1前Tray有盘感应失败！" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4020001");
+                                RunLog("[Code]4020001,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -13399,9 +13460,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Auto1失败！" + result);
                         }
                         break;
 
@@ -13474,11 +13537,13 @@ namespace H5509_V2
 
                                 if (value != "0")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1没有感应到Tray盘,value:" + value);
+                                    Listcode.Add("4020009");
+                                    RunLog("[Code]4020009,[Msg]Auto1前对射感应到无Tray盘", LogType.AlarmLog);
                                 }
                                 if (value2 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto1感应到Tray盘放歪,value:" + value2);
+                                    Listcode.Add("4020017");
+                                    RunLog("[Code]4020017,[Msg]Auto1后对射感应到Tray盘放歪", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -13486,8 +13551,16 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto1前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto1后Tray放歪感应失败！" + result2);
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4020009");
+                                RunLog("[Code]4020009,[Msg]读取Auto1前Tray存在感应失败!" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4020017");
+                                RunLog("[Code]4020017,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -13517,9 +13590,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴回到原点失败！" + result);
                         }
                         break;
 
@@ -13663,9 +13738,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2等待位失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到等待位失败！" + result);
                         }
                         break;
 
@@ -13698,11 +13775,13 @@ namespace H5509_V2
 
                                 if (value != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2前感应到有Tray盘,value:" + value);
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]Auto2前对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                                 if (value3 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2后感应到有Tray盘,value2:" + value3);
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]Auto2后对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -13710,8 +13789,16 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto2前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto2后Tray放歪感应失败！" + result2);
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4021001");
+                                RunLog("[Code]4021001,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4021001");
+                                RunLog("[Code]4021001,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -13725,9 +13812,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Auto2失败！" + result);
                         }
                         break;
 
@@ -13800,11 +13889,13 @@ namespace H5509_V2
 
                                 if (value != "0")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2没有感应到Tray盘,value:" + value);
+                                    Listcode.Add("4021009");
+                                    RunLog("[Code]4021009,[Msg]Auto2前对射感应到无Tray盘", LogType.AlarmLog);
                                 }
                                 if (value2 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2感应到Tray盘放歪,value:" + value2);
+                                    Listcode.Add("4021017");
+                                    RunLog("[Code]4021017,[Msg]Auto2后感应到Tray盘放歪", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -13812,8 +13903,17 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto2前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto2后Tray放歪感应失败！" + result2);
+
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4021009");
+                                RunLog("[Code]4021009,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4021017");
+                                RunLog("[Code]4021017,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -13843,9 +13943,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴回到原点失败！" + result);
                         }
                         break;
 
@@ -13911,7 +14013,11 @@ namespace H5509_V2
                         {
                             if (trayx.Result != "Success")
                             {
-                                RunLog($"放Tary盘轴移动到等待位失败！" + trayx.Result);
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2等待位失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
                             }
                             if (auto2u.Result != "Success")
                             {
@@ -13940,11 +14046,13 @@ namespace H5509_V2
 
                                 if (value != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2有盘感应到Tray盘,value:" + value);
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]Auto2前对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                                 if (value2 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2放歪感应到Tray盘,value:" + value2);
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]Auto2后对射感应到有Tray盘", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -13952,8 +14060,17 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto2前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto2后Tray放歪感应失败！" + result2);
+
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4021001");
+                                RunLog("[Code]4021001,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4021001");
+                                RunLog("[Code]4021001,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -13967,9 +14084,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴移动到Auto2失败！" + result);
                         }
                         break;
 
@@ -14042,11 +14161,13 @@ namespace H5509_V2
 
                                 if (value != "0")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2没有感应到Tray盘,value:" + value);
+                                    Listcode.Add("4021009");
+                                    RunLog("[Code]4021009,[Msg]Auto2前对射感应到无Tray盘", LogType.AlarmLog);
                                 }
                                 if (value2 != "1")
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Auto2感应到Tray盘放歪,value:" + value2);
+                                    Listcode.Add("4021017");
+                                    RunLog("[Code]4021017,[Msg]Auto2后感应到Tray盘放歪", LogType.AlarmLog);
                                 }
                             }
                         }
@@ -14054,8 +14175,17 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto2前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Auto2后Tray放歪感应失败！" + result2);
+
+                            if (result != "Success")
+                            {
+                                Listcode.Add("4021009");
+                                RunLog("[Code]4021009,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                            }
+                            if (result2 != "Success")
+                            {
+                                Listcode.Add("4021017");
+                                RunLog("[Code]4021017,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                            }
                         }
                         break;
 
@@ -14085,9 +14215,11 @@ namespace H5509_V2
                         }
                         else
                         {
-                            APPmaster.ProgramPause = true;
+                            Listcode.Add("2025007");
+                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                            M18_放Tary盘轴ErrorMsg = result;
+                            ProgramPause = true;
                             IsPause = true;
-                            RunLog($"放Tary盘轴回到原点失败！" + result);
                         }
                         break;
 
