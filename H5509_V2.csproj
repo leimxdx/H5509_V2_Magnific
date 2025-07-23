@@ -170,6 +170,12 @@
       <DependentUpon>Auto2Map.cs</DependentUpon>
     </Compile>
     <Compile Include="BinParam.cs" />
+    <Compile Include="ChangePwd.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChangePwd.Designer.cs">
+      <DependentUpon>ChangePwd.cs</DependentUpon>
+    </Compile>
     <Compile Include="ControlPerm.cs" />
     <Compile Include="DTMHelper.cs" />
     <Compile Include="Fix1Map.cs">
@@ -320,6 +326,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Auto2Map.resx">
       <DependentUpon>Auto2Map.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChangePwd.resx">
+      <DependentUpon>ChangePwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Fix1Map.resx">
       <DependentUpon>Fix1Map.cs</DependentUpon>

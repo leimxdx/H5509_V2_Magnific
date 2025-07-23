@@ -101,6 +101,7 @@ namespace H5509_V2
 
             setting.刷新分BIN信息 = main.刷新分BIN信息;
             setting.刷新温度信息 = main.刷新温度显示;
+            setting.刷新按钮状态 = 刷新按钮权限;
 
             handler.刷新批次信息 = main.刷新批次信息;
             handler.刷新分BIN信息 = main.刷新分BIN信息;

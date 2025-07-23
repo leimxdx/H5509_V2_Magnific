@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Resources;
 using System.Security.Cryptography;
 using System.Security.Policy;
+using System.Security.RightsManagement;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,6 +50,7 @@ namespace H5509_V2
 
         public Action 刷新分BIN信息;
         public Action 刷新温度信息;
+        public Action 刷新按钮状态;
 
         public _setting()
         {
@@ -3521,6 +3523,10 @@ namespace H5509_V2
             {
                 刷新调试(uiTabControl3.SelectedTab.Text);
             }
+            else if (tabpagetext == "权限")
+            {
+                刷新按钮权限();
+            }
             //else if (tabpagetext == "产品")
             //{
             //    刷新产品(uiTabControl5.SelectedTab.Text);
@@ -3546,6 +3552,37 @@ namespace H5509_V2
             else if (tabpagetext == "基础调试")
             {
                 cobox_axisname_SelectedIndexChanged(null, null);
+            }
+        }
+
+        private void 刷新按钮权限()
+        {
+            for (int i = 0; i < ListConPerm.Count; i++)
+            {
+                if (ListConPerm[i].控件名 == "button_setting") 
+                {
+                    uiComboBox3.Text = ListConPerm[i].权限;
+                }
+                else if (ListConPerm[i].控件名 == "button_offset")
+                {
+                    uiComboBox4.Text = ListConPerm[i].权限;
+                }
+                else if (ListConPerm[i].控件名 == "button_speed")
+                {
+                    uiComboBox5.Text = ListConPerm[i].权限;
+                }
+                else if (ListConPerm[i].控件名 == "button_io")
+                {
+                    uiComboBox6.Text = ListConPerm[i].权限;
+                }
+                else if (ListConPerm[i].控件名 == "button_log")
+                {
+                    uiComboBox18.Text = ListConPerm[i].权限;
+                }
+                else if (ListConPerm[i].控件名 == "button_exit")
+                {
+                    uiComboBox7.Text = ListConPerm[i].权限;
+                }
             }
         }
 
@@ -7701,8 +7738,105 @@ namespace H5509_V2
 
         private void uiButton29_Click_1(object sender, EventArgs e)
         {
+            string 设置与维护 = uiComboBox3.Text; //设置与维护
+            string offset = uiComboBox4.Text; //offset
+            string 速度 = uiComboBox5.Text; //速度
+            string IO = uiComboBox6.Text; //IO
+            string 日志 = uiComboBox18.Text; //日志
+            string 退出 = button_exit.Text; //退出
 
+            string[] controls = new string[] { 设置与维护, offset, 速度, IO, 日志, 退出 };
+
+            //ButtonName = { "button_setting", "button_offset", "button_speed", "button_exit", "button_io", "button_log" };
+            try
+            {
+                DialogResult dialog = MessageBox.Show("请确认是否保存?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialog == DialogResult.OK)
+                {
+                    for (int i = 0; i < ListConPerm.Count; i++)
+                    {
+                        if (ListConPerm[i].控件名 == "button_setting")
+                        {
+                            if (ListConPerm[i].权限 != uiComboBox3.Text)
+                            {
+                                string result = UpateControlPerm("button_setting", uiComboBox3.Text);
+                                if (result != "Success")
+                                {
+                                    MessageBox.Show("修改权限失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                        else if (ListConPerm[i].控件名 == "button_offset")
+                        {
+                            if (ListConPerm[i].权限 != uiComboBox4.Text)
+                            {
+                                string result = UpateControlPerm("button_offset", uiComboBox4.Text);
+                                if (result != "Success")
+                                {
+                                    MessageBox.Show("修改权限失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                        else if (ListConPerm[i].控件名 == "button_speed")
+                        {
+                            if (ListConPerm[i].权限 != uiComboBox5.Text)
+                            {
+                                string result = UpateControlPerm("button_speed", uiComboBox5.Text);
+                                if (result != "Success")
+                                {
+                                    MessageBox.Show("修改权限失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                        else if (ListConPerm[i].控件名 == "button_io")
+                        {
+                            if (ListConPerm[i].权限 != uiComboBox6.Text)
+                            {
+                                string result = UpateControlPerm("button_io", uiComboBox6.Text);
+                                if (result != "Success")
+                                {
+                                    MessageBox.Show("修改权限失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                        else if (ListConPerm[i].控件名 == "button_log")
+                        {
+                            if (ListConPerm[i].权限 != uiComboBox18.Text)
+                            {
+                                string result = UpateControlPerm("button_log", uiComboBox18.Text);
+                                if (result != "Success")
+                                {
+                                    MessageBox.Show("修改权限失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                        else if (ListConPerm[i].控件名 == "button_exit")
+                        {
+                            if (ListConPerm[i].权限 != uiComboBox7.Text)
+                            {
+                                string result = UpateControlPerm("button_exit", uiComboBox7.Text);
+                                if (result != "Success")
+                                {
+                                    MessageBox.Show("修改权限失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                        }
+                    }
+                    GetContorlPerm();
+                    刷新按钮状态();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("修改权限异常!" + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        private void uiButton26_Click(object sender, EventArgs e)
+        {
+            刷新按钮权限();
+        }
+
         private void Empty顶盘手臂移动初始点位(double mm)
         {
             button248.Enabled = false;
@@ -7839,6 +7973,57 @@ namespace H5509_V2
         {
             double pos = Convert.ToDouble(numericUpDown176.Text);
             Auto2顶盘手臂移动初始点位(pos);
+        }
+
+        private void ChangePwd(string realName)
+        {
+            //string realName = "Engineer";
+            string result = GetPassWord(realName, out string password);
+            string result2 = GetPermTime(realName, out string permtime);
+            if (result == "Success" && result2 == "Success")
+            {
+                ChangePwd changePwd = new ChangePwd();
+                changePwd.RealName = realName;
+                changePwd.OldPassword = password;
+                changePwd.PermissoionTime = permtime;
+                DialogResult dialog = changePwd.ShowDialog();
+                if (dialog == DialogResult.OK)
+                {
+                    result = UpateJurisdiction(realName, changePwd.NewPassword, changePwd.PermissoionTime);
+                    if (result != "Success")
+                    {
+                        MessageBox.Show($"修改{realName}密码失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        RunLog($"修改{realName}密码失败!" + result);
+                    }
+                    else
+                    {
+                        if (当前权限 == realName)
+                        {
+                            权限时间 = Convert.ToInt32(changePwd.PermissoionTime);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (result != "Success") RunLog($"修改{realName}密码异常!" + result);
+                if (result != "Success") RunLog($"修改{realName}权限时间异常!" + result);
+            }
+        }
+
+        private void button257_Click(object sender, EventArgs e)
+        {
+            ChangePwd("Engineer");
+        }
+
+        private void button258_Click(object sender, EventArgs e)
+        {
+            ChangePwd("Administrator");
+        }
+
+        private void button259_Click(object sender, EventArgs e)
+        {
+            ChangePwd("Supplier");
         }
     }
 }

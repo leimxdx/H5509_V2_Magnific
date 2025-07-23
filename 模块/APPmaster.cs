@@ -110,14 +110,14 @@ namespace H5509_V2
 
         public static List<ControlPerm> ListConPerm = new List<ControlPerm>();
 
-        public static int 权限时间
-        {
-            get
-            {
-                if (操作权限 == "D") return 600;
-                else return 60;
-            }
-        }
+        public static int 权限时间 = 60;
+        //{
+        //    get
+        //    {
+        //        if (操作权限 == "D") return 600;
+        //        else return 60;
+        //    }
+        //}
 
         public static string M1_入料手臂Z1轴ErrorMsg = "";
 
@@ -1755,6 +1755,11 @@ namespace H5509_V2
             return SQLiteHelper.runSql(SQLiteConnString, $"select password from Jurisdiction where realName = '{name}'", out value);
         }
 
+        public static string GetPermTime(string name, out string value)
+        {
+            return SQLiteHelper.runSql(SQLiteConnString, $"select permtime from Jurisdiction where realName = '{name}'", out value);
+        }
+
         public static string GetSetupInfo(string name, out SetupInfo setupInfo)//
         {
             setupInfo = new SetupInfo();
@@ -2236,6 +2241,22 @@ namespace H5509_V2
             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
 
+            else return "Success";
+        }
+
+        public static string UpateJurisdiction(string name, string password, string permTime)
+        {
+            string sql = $"update Jurisdiction set password = '{password}', permtime = '{permTime}' where realName = '{name}'";
+            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            if (line <= 0) return "保存失败";
+            else return "Success";
+        }
+
+        public static string UpateControlPerm(string name, string perm)
+        {
+            string sql = $"update ControlPerm set 权限 = '{perm}' where 控件名 = '{name}'";
+            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            if (line <= 0) return "保存失败";
             else return "Success";
         }
 

@@ -537,15 +537,6 @@ namespace H5509_V2
                         }
                         else //if (t.Contains("1"))没有设置默认都是1
                         {
-                            //if (t.Contains(操作权限))
-                            //{
-                            //    con.Enabled = true;
-                            //}
-                            //else
-                            //{
-                            //    con.Enabled = false;
-                            //    continue;
-                            //}
                             if (t.Contains(操作权限))
                             {
                                 con.Enabled = true;
@@ -737,12 +728,14 @@ namespace H5509_V2
                         FrmInputPwd frmInputPwd = new FrmInputPwd();
                         if (frmInputPwd.ShowDialog() == DialogResult.OK)
                         {
-                            string get = GetPassWord(combox_juris.Text, out string value);
-                            if (get == "Success")
+                            string getpwd = GetPassWord(combox_juris.Text, out string 密码);
+                            string gettime = GetPermTime(combox_juris.Text, out string 时间);
+                            if (getpwd == "Success")
                             {
-                                if (frmInputPwd.Password == value)
+                                if (frmInputPwd.Password == 密码)
                                 {
                                     当前权限 = combox_juris.Text;
+                                    权限时间 = Convert.ToInt32(时间);
                                     ischange = true;
 
                                     switch (当前权限)
@@ -773,8 +766,8 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"获取{combox_juris.Text}密码失败！" + get);
-                                MessageBox.Show($"获取{combox_juris.Text}密码失败！" + get, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                RunLog($"获取{combox_juris.Text}密码失败！" + getpwd);
+                                MessageBox.Show($"获取{combox_juris.Text}密码失败！" + getpwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                     }
