@@ -516,7 +516,7 @@ namespace H5509_V2
                     }
 
                     stopwatch.Stop();
-                    RunLog($"{axisRun.轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前目标位置{prfPos},实际位置{encPos}");
+                    //RunLog($"{axisRun.轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前目标位置{prfPos},实际位置{encPos}");
                     stopwatch.Reset();
 
                     #endregion
@@ -697,7 +697,7 @@ namespace H5509_V2
                         }
 
                         stopwatch.Stop();
-                        RunLog($"{axisRuns[i].轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前目标位置{prfPos[i]},实际位置{encPos}");
+                        //RunLog($"{axisRuns[i].轴名称}移动完成,等待时间{stopwatch.ElapsedMilliseconds}ms,当前目标位置{prfPos[i]},实际位置{encPos}");
                         stopwatch.Reset();
                     }
 

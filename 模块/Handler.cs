@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.SqlServer.Server;
 using Sunny.UI;
 using Sunny.UI.Win32;
@@ -953,7 +954,7 @@ namespace H5509_V2
                 case 5: xIoName = "X119_6_测试模组上升感应"; break;
                 case 6: xIoName = "X124_7_测试模组上升感应"; break;
                 case 7: xIoName = "X129_8_测试模组上升感应"; break;
-                case 8: xIoName = "X139_10_测试模组上升感应"; break;
+                case 8: xIoName = "X134_10_测试模组上升感应"; break;
                 case 9: xIoName = "X139_10_测试模组上升感应"; break;
                 case 10: xIoName = "X144_11_测试模组上升感应"; break;
                 case 11: xIoName = "X149_12_测试模组上升感应"; break;
@@ -2597,7 +2598,7 @@ namespace H5509_V2
                         return result;
                     }
 
-                    if (value == "0")
+                    if (value == "0") //返回0是挡到感应器,1是没有挡到感应器
                     {
                         motionEx.AxisStopMove(axisName, 1);
                         return "Success";
@@ -2883,6 +2884,7 @@ namespace H5509_V2
             Fix3Tray盘拿走标记 = false;
             总良率报警间隔计数 = 0;
             Socket使用次数超限数 = 0;
+            报警次数 = 0;
             正在入料的Site = 99;
             trayTemp = "";
             Dout128PassNumber = new int[128];
@@ -3385,24 +3387,36 @@ namespace H5509_V2
                 {
                     if (温度模式 == "高温")
                     {
-                        string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
-                        if (result4 == "Success")
+                        for (int i = 0; i < SiteSvTemp.Length; i++)
                         {
-                            string result5 = dTMHelper.WriteSv(1, 设定温度);
-                            string result6 = dTMHelper.WriteSv(0, 设定温度);
-                            if (result5 != "Success" || result6 != "Success")
+                            if (SiteSvTemp[i] != 设定温度)
                             {
+                                //if (设定温控器温度() != "Success")
                                 isstart = false;
                                 Listcode.Add("1400447");
-                                RunLog("[Code]1400447,[Msg]设定温度失败");
+                                RunLog("[Code]1400447,[Msg]设定温度失败", LogType.AlarmLog);
+                                break;
                             }
                         }
-                        else
-                        {
-                            isstart = false;
-                            Listcode.Add("1400447");
-                            RunLog("[Code]1400447,[Msg]设定温度失败");
-                        }
+
+                        //string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
+                        //if (result4 == "Success")
+                        //{
+                        //    string result5 = dTMHelper.WriteSv(1, 设定温度);
+                        //    string result6 = dTMHelper.WriteSv(0, 设定温度);
+                        //    if (result5 != "Success" || result6 != "Success")
+                        //    {
+                        //        isstart = false;
+                        //        Listcode.Add("1400447");
+                        //        RunLog("[Code]1400447,[Msg]设定温度失败");
+                        //    }
+                        //}
+                        //else
+                        //{
+                        //    isstart = false;
+                        //    Listcode.Add("1400447");
+                        //    RunLog("[Code]1400447,[Msg]设定温度失败");
+                        //}
 
                         if (isstart && !温控加热)
                         {
@@ -3598,6 +3612,8 @@ namespace H5509_V2
                         {
                             if (设备状态 == 0)
                             {
+                                开始时间 = DateTime.Now;
+
                                 SQLiteHelper.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
                                 int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
                                 int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
@@ -3619,8 +3635,7 @@ namespace H5509_V2
                                 if (isstart)
                                 {
                                     StartRunIn(); //根据开Site情况添加入料队列
-                                    ///更新入料目标值();
-                                    开始时间 = DateTime.Now;
+
                                     //开始前的IO检查
                                     StartSite数量 = 开Site数量;
 
@@ -3630,6 +3645,8 @@ namespace H5509_V2
                                     }
 
                                     刷新分BIN信息();
+
+                                    报警次数 = 0;
                                 }
                             }
 
@@ -7768,7 +7785,7 @@ namespace H5509_V2
                             {
                                 Listcode.Add("2030007");
                                 RunLog($"[Code]2030007,[Msg]出料手臂走到放料位失败!" + outputx.Result, LogType.AlarmLog);
-                                M23_出料手臂X轴ErrorMsg = result;
+                                M23_出料手臂X轴ErrorMsg = outputx.Result;
                             }
                             if (fix3move.Result != "Success")
                             {
@@ -8075,7 +8092,7 @@ namespace H5509_V2
                                 {
                                     Listcode.Add("2030007");
                                     RunLog($"[Code]2030007,[Msg]出料手臂移到避让位(Fix1放满)失败!" + fix1xypmove.Result, LogType.AlarmLog);
-                                    M23_出料手臂X轴ErrorMsg = result;
+                                    M23_出料手臂X轴ErrorMsg = fix1xypmove.Result;
                                 }
                                 if (fix1traymove.Result != "Success")
                                 {
@@ -8161,7 +8178,7 @@ namespace H5509_V2
                                 }
                             }
                             Task<string> fix2xypmove = Task.Run(() => { return 出料手臂移动(0.5, 初始点位.出料_Fix2_Y, 出料放料间距); });
-                            if (result == "Success")
+                            if (fix2traymove.Result == "Success" && fix2xypmove.Result == "Success")
                             {
                                 Tray平移运动标记 = false;
                                 PS出料手臂吸放料流程.StepID = 1110;
@@ -8172,7 +8189,7 @@ namespace H5509_V2
                                 {
                                     Listcode.Add("2030007");
                                     RunLog($"[Code]2030007,[Msg]出料手臂移到避让位(Fix2放满)失败!" + fix2xypmove.Result, LogType.AlarmLog);
-                                    M23_出料手臂X轴ErrorMsg = result;
+                                    M23_出料手臂X轴ErrorMsg = fix2xypmove.Result;
                                 }
                                 if (fix2traymove.Result != "Success")
                                 {
@@ -8258,7 +8275,7 @@ namespace H5509_V2
                                 }
                             }
                             Task<string> fix3xypmove = Task.Run(() => { return 出料手臂移动(0.5, 初始点位.出料_Fix3_Y, 出料放料间距); });
-                            if (result == "Success")
+                            if (fix3traymove.Result == "Success" && fix3xypmove.Result == "Success")
                             {
                                 PS出料手臂吸放料流程.StepID = 1210;
                             }
@@ -8268,7 +8285,7 @@ namespace H5509_V2
                                 {
                                     Listcode.Add("2030007");
                                     RunLog($"[Code]2030007,[Msg]出料手臂移到避让位(Fix3放满)失败!" + fix3xypmove.Result, LogType.AlarmLog);
-                                    M23_出料手臂X轴ErrorMsg = result;
+                                    M23_出料手臂X轴ErrorMsg = fix3xypmove.Result;
                                 }
                                 if (fix3traymove.Result != "Success")
                                 {
@@ -11098,14 +11115,17 @@ namespace H5509_V2
         public void Auto1顶盘流程()
         {
             string result = "";
+            double movepos = 0;
             PS手动盘1上顶流程.StepID = 500;
             while (true)
             {
                 Thread.Sleep(10);
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
+
+                if (H5509初始化 == false)
+                {
+                    Thread.Sleep(100);
+                    continue;
+                }
 
                 if (APPmaster.IsForecePause)
                 {
@@ -11154,7 +11174,7 @@ namespace H5509_V2
                         result = Auto1向上移动(Auto1舱门开启标记);
                         if (result == "Success")
                         {
-                            PS手动盘1上顶流程.StepID = 515;
+                            PS手动盘1上顶流程.StepID = 514;
                         }
                         else
                         {
@@ -11164,10 +11184,36 @@ namespace H5509_V2
                         }
                         break;
 
+                    case 514:
+                        PS手动盘1上顶流程.StepName = "获取Auto1上移绝对位置";
+                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos1);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + 初始点位.Auto1上顶固定高度; //6.35  Auto1上移固定距离
+                                PS手动盘1上顶流程.StepID = 515;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
                     case 515:
-                        PS手动盘1上顶流程.StepName = "Auto1向上移动固定距离";
+                        PS手动盘1上顶流程.StepName = $"Auto1向上移动绝对位置{movepos}mm";
                         RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", 21);//3175 1.5875
+                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);  //result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", 21);//3175 1.5875
                         if (result == "Success")
                         {
                             PS手动盘1上顶流程.StepID = 520;
@@ -11202,7 +11248,7 @@ namespace H5509_V2
                         result = Auto1向下移动(Auto1舱门开启标记);
                         if (result == "Success")
                         {
-                            PS手动盘1上顶流程.StepID = 530;
+                            PS手动盘1上顶流程.StepID = 526;
                         }
                         else
                         {
@@ -11212,10 +11258,37 @@ namespace H5509_V2
                         }
                         break;
 
-                    case 530:
-                        PS手动盘1上顶流程.StepName = "Auto1向下移动固定距离";
+                    case 526:
+                        PS手动盘1上顶流程.StepName = "获取Auto1下移绝对位置";
                         RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", -15);//3175 1.5875
+                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos2);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - 初始点位.Auto1下降固定高度; //6.35  Auto1上移固定距离 - Tray_厚度
+                                PS手动盘1上顶流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
+                    case 530:
+                        PS手动盘1上顶流程.StepName = $"Auto1向下移动绝对位置{movepos}mm";
+                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记); //result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", -15);//3175 1.5875
                         if (result == "Success")
                         {
                             PS手动盘1上顶流程.StepID = 535;
@@ -11248,12 +11321,14 @@ namespace H5509_V2
                         PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
                         RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
                         result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
-                        if (result == "Success")
+                        string result3 = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo2);
+                        if (result == "Success" && result3 == "Success")
                         {
-                            if (prfpos < Auto1满盘判断值 && !正在结批)
+                            double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
+                            if (prfpos < minpoint) //Auto1满盘判断值  && !正在结批
                             {
                                 Auto1料仓满盘标记 = true;
-                                RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{Auto1满盘判断值}");
+                                RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}"); //Auto1满盘判断值
                             }
                             else Auto1料仓满盘标记 = false;
 
@@ -11264,7 +11339,8 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            RunLog($"判断Auto1料仓是否满盘失败！" + result);
+                            if (result != "Success") RunLog($"读取Auto1顶盘轴编码位置失败！" + result);
+                            if (result3 != "Success") RunLog($"读取Auto1顶盘轴运行信息失败！" + result3);
                         }
                         break;
 
@@ -11281,6 +11357,7 @@ namespace H5509_V2
                 }
             }
         }
+
 
         public void Auto1顶盘流程2()
         {
@@ -11577,14 +11654,17 @@ namespace H5509_V2
         public void Auto2顶盘流程()
         {
             string result = "";
+            double movepos = 0;
             PS手动盘2上顶流程.StepID = 500;
             while (true)
             {
                 Thread.Sleep(10);
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
+
+                if (H5509初始化 == false)
+                {
+                    Thread.Sleep(100);
+                    continue;
+                }
 
                 if (APPmaster.IsForecePause)
                 {
@@ -11633,7 +11713,7 @@ namespace H5509_V2
                         result = Auto2向上移动(Auto2舱门开启标记);
                         if (result == "Success")
                         {
-                            PS手动盘2上顶流程.StepID = 515;
+                            PS手动盘2上顶流程.StepID = 511;
                         }
                         else
                         {
@@ -11643,10 +11723,36 @@ namespace H5509_V2
                         }
                         break;
 
+                    case 511:
+                        PS手动盘2上顶流程.StepName = "获取Auto2上移绝对位置";
+                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos1);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + 初始点位.Auto2上顶固定高度; //6.35 Auto2上移固定距离
+                                PS手动盘2上顶流程.StepID = 515;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
                     case 515:
-                        PS手动盘2上顶流程.StepName = "Auto2向上移动固定距离";
+                        PS手动盘2上顶流程.StepName = $"Auto2向上移动绝对位置{movepos}mm";
                         RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", 21);//3175 1.5875
+                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记); //result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", 21);//3175 1.5875
                         if (result == "Success")
                         {
                             PS手动盘2上顶流程.StepID = 520;
@@ -11681,7 +11787,7 @@ namespace H5509_V2
                         result = Auto2向下移动(Auto2舱门开启标记);
                         if (result == "Success")
                         {
-                            PS手动盘2上顶流程.StepID = 530;
+                            PS手动盘2上顶流程.StepID = 526;
                         }
                         else
                         {
@@ -11691,10 +11797,37 @@ namespace H5509_V2
                         }
                         break;
 
-                    case 530:
-                        PS手动盘2上顶流程.StepName = "Auto2向下移动固定距离";
+                    case 526:
+                        PS手动盘2上顶流程.StepName = "获取Auto2下移绝对位置";
                         RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", -15);//3175 1.5875
+                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos2);
+                        if (result == "Success")
+                        {
+                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success")
+                            {
+                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - 初始点位.Auto2下降固定高度; //15 6.35 Auto2上移固定距离 - Tray_厚度
+                                PS手动盘2上顶流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                            }
+                        }
+                        else
+                        {
+                            APPmaster.ProgramPause = true;
+                            IsPause = true;
+                            RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
+                        }
+                        break;
+
+                    case 530:
+                        PS手动盘2上顶流程.StepName = $"Auto2向下移动绝对位置{movepos}mm";
+                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);  //result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", -15);//3175 1.5875
                         if (result == "Success")
                         {
                             PS手动盘2上顶流程.StepID = 535;
@@ -11728,12 +11861,14 @@ namespace H5509_V2
                         PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
                         RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
                         result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
-                        if (result == "Success")
+                        string result3 = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo2);
+                        if (result == "Success" && result3 == "Success")
                         {
-                            if (prfpos < Auto2满盘判断值 && !正在结批)
+                            double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
+                            if (prfpos < minpoint)// && !正在结批 Auto2满盘判断值
                             {
                                 Auto2料仓满盘标记 = true;
-                                RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
+                                RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{minpoint}"); //Auto2满盘判断值
                             }
                             else Auto2料仓满盘标记 = false;
 
@@ -11744,7 +11879,8 @@ namespace H5509_V2
                         {
                             APPmaster.ProgramPause = true;
                             IsPause = true;
-                            RunLog($"判断Auto2料仓是否满盘失败！" + result);
+                            if (result != "Success") RunLog($"读取Auto2顶盘轴编码位置失败！" + result);
+                            if (result3 != "Success") RunLog($"读取Auto2顶盘轴运行信息失败！" + result3);
                         }
                         break;
 

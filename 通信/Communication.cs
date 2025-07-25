@@ -39,8 +39,22 @@ namespace H5509_V2
 
         public void CloseCom()
         {
+            IsOpenCom = false;
             serialPort.Close();
-            Thread.Sleep(100);
+            Thread.Sleep(50);
+        }
+
+        public void 刷新串口信息()
+        {
+            CloseCom();
+
+            serialPort.PortName = 设置信息.测试机信息.串口号;
+            serialPort.BaudRate = 设置信息.测试机信息.波特率;
+            serialPort.Parity = 设置信息.测试机信息.校验位;
+            serialPort.DataBits = 设置信息.测试机信息.数据位;
+            serialPort.StopBits = 设置信息.测试机信息.停止位;
+
+            OpenCom();
         }
 
         /// <summary>
@@ -123,13 +137,7 @@ namespace H5509_V2
                 serialPort.DataReceived += DataReceivedHandler;
             }
 
-            serialPort.PortName = 设置信息.测试机信息.串口号;
-            serialPort.BaudRate = 设置信息.测试机信息.波特率;
-            serialPort.Parity = 设置信息.测试机信息.校验位;
-            serialPort.DataBits = 设置信息.测试机信息.数据位;
-            serialPort.StopBits = 设置信息.测试机信息.停止位;
-
-            OpenCom();
+            刷新串口信息();
         }
 
 

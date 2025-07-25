@@ -58,6 +58,10 @@ namespace H5509_V2
 
         public static int Socket使用次数超限数 = 0;
 
+        public static int 报警次数 = 0;
+
+        public static string[] 报警忽略次数 = { "4018004", "4018006", "4019003", "4020009", "4020001", "4021009", "4021001", "4030009", "4030013", "4031009", "4031013", "4032009", "4032013", "1400440", "1400444", "1400445", "1400448" };
+
         public static List<分Bin> 分bin = new List<分Bin>();
 
         public static _log Log;
@@ -592,6 +596,8 @@ namespace H5509_V2
 
         public static TimeSpan 升温时间 { get { return 达温时间 - 开始时间; } }
 
+        public static double[] SiteSvTemp = new double[17];
+
         public static double[] SiteTemp = new double[17];
 
         public static double HeatTrayTemp { get { return SiteTemp[16]; } }
@@ -770,13 +776,13 @@ namespace H5509_V2
 
         public static int Auto1上顶最大值 = 468000;
 
-        public static int Auto1下降最小值 = 10000;
+        public static int Auto1下降最小值 = 5000;
 
         public static int Auto1满盘判断值 = 25000;//360000
 
         public static int Auto2上顶最大值 = 468000;
 
-        public static int Auto2下降最小值 = 10000;
+        public static int Auto2下降最小值 = 5000;
 
         public static int Auto2满盘判断值 = 25000;
 
@@ -1340,6 +1346,11 @@ namespace H5509_V2
                         case "Auto2_分盘位": initPoint.Auto2_分盘位 = value; break;
                         case "Auto2_初始位": initPoint.Auto2_初始位 = value; break;
                         case "Auto2_满盘位": initPoint.Auto2_满盘位 = value; break;
+                        case "Auto1上顶固定高度": initPoint.Auto1上顶固定高度 = value; break;
+                        case "Auto1下降固定高度": initPoint.Auto1下降固定高度 = value; break;
+                        case "Auto2上顶固定高度": initPoint.Auto2上顶固定高度 = value; break;
+                        case "Auto2下降固定高度": initPoint.Auto2下降固定高度 = value; break;
+                            
                     }
                 }
                 初始点位 = initPoint;
@@ -2260,6 +2271,24 @@ namespace H5509_V2
             else return "Success";
         }
 
+        public static string 设定温控器温度()
+        {
+            //RunLog($"开始设定温度({设定温度}):" + DateTime.Now.ToString());
+            string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
+            if (result4 == "Success")
+            {
+                string result5 = dTMHelper.WriteSv(1, 设定温度);
+                string result6 = dTMHelper.WriteSv(0, 设定温度);
+                if (result5 != "Success" || result6 != "Success")
+                {
+                    if (result5 != "Success") return $"模块2设定温度失败!" + result5;
+                    if (result6 != "Success") return $"模块1设定温度失败!" + result6;
+                }
+                return "Success";
+            }
+            else return $"模块3设定温度失败!" + result4;
+        }
+
         public static void SaveBatchData()
         {
             string sql = "";
@@ -2300,11 +2329,11 @@ namespace H5509_V2
                        $"Fix1名称,Fix2名称,Fix3名称,Auto1总数,Auto2总数,Fix1总数,Fix2总数,Fix3总数," +
                        $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
                        $"IC吸取模式,测试模式)" +
-                        $"values('{开始时间:yyyy年MM月dd日 HH:mm:ss}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率}%'," +
+                        $"values('{开始时间:yyyy年MM月dd日 HH:mm:ss}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率:0.00}%'," +
                        $"'{载入数}','{结束时间}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{设置信息.分BIN信息.name1}','{设置信息.分BIN信息.name2}'," +  //工作时间.Ticks
                        $"'{设置信息.分BIN信息.name3}','{设置信息.分BIN信息.name4}','{设置信息.分BIN信息.name5}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
-                       $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{1}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
-                       $"'正常','正常')";
+                       $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{报警次数}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
+                       $"'{(空跑模式 ? "空跑模式" : "正常模式")}','在线')";
 
                 int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
 

@@ -90,5 +90,10 @@ namespace H5509_V2
         public double Auto2_分盘位 { get; set; }
         public double Auto2_初始位 { get; set; }
         public double Auto2_满盘位 { get; set; }
+
+        public double Auto1上顶固定高度 { get; set; }
+        public double Auto1下降固定高度 { get; set; }
+        public double Auto2上顶固定高度 { get; set; }
+        public double Auto2下降固定高度 { get; set; }
     }
 }

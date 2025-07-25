@@ -636,6 +636,7 @@ namespace H5509_V2
 
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
+            //H5509归零 = false;
             bool canchange = true;
             bool ischange = false;
             if (设备状态 != 0)
@@ -668,8 +669,10 @@ namespace H5509_V2
                                 if (result == "Success") //(5)更新tray点位
                                 {
                                     刷新分BIN信息();
+
                                     刷新开Site状态();
                                     刷新温度显示();
+                                    Com.刷新串口信息();
                                     ischange = true;
                                     RunLog($"档案切换[{当前档案}]->[{comboBox1.Text.Trim()}]");
                                     当前档案 = value;
@@ -735,7 +738,7 @@ namespace H5509_V2
                                 if (frmInputPwd.Password == 密码)
                                 {
                                     当前权限 = combox_juris.Text;
-                                    权限时间 = Convert.ToInt32(时间);
+                                    权限时间 = Convert.ToInt32(时间) * 60;
                                     ischange = true;
 
                                     switch (当前权限)
@@ -900,7 +903,6 @@ namespace H5509_V2
                                     }
                                     else MessageBox.Show($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     RunLog($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
-
                                 }
                             }
                         }
@@ -1365,6 +1367,9 @@ namespace H5509_V2
                     string result3 = handler.Site加热关闭();
                     if (result != "Success" || result2 != "Success" || result3 != "Success")
                     {
+                        if (result != "Success") RunLog($"加热盘加热关闭失败!" + result);
+                        if (result2 != "Success") RunLog($"梭车加热关闭失败!" + result2);
+                        if (result3 != "Success") RunLog($"Site加热关闭失败!" + result3);
                         MessageBox.Show("停止加热失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
@@ -1392,30 +1397,40 @@ namespace H5509_V2
                     item.Value.Timer.Interval = IC加热时间 * 1000;
                 }
             }
+            //设定温控器温度();
+            //string result4 = 设定温控器温度();
+            //if (result4 != "Success")
+            //{
+            //    Listcode.Add("1400447");
+            //    RunLog("[Code]1400447,[Msg]设定温度失败");
+            //}
 
-
-            string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
-            if (result4 == "Success")
-            {
-                string result5 = dTMHelper.WriteSv(1, 设定温度);
-                string result6 = dTMHelper.WriteSv(0, 设定温度);
-                if (result5 != "Success" || result6 != "Success")
-                {
-                    MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
+            //RunLog($"开始设定温度({设定温度}):" + DateTime.Now.ToString());
+            //string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
+            //if (result4 == "Success")
+            //{
+            //    string result5 = dTMHelper.WriteSv(1, 设定温度);
+            //    string result6 = dTMHelper.WriteSv(0, 设定温度);
+            //    if (result5 != "Success" || result6 != "Success")
+            //    {
+            //        if (result5 != "Success") RunLog($"模块2设定温度失败!" + result5);
+            //        if (result6 != "Success") RunLog($"模块1设定温度失败!" + result6);
+            //        MessageBox.Show("设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        return;
+            //    }
+            //}
+            //else
+            //{
+            //    RunLog($"设定温度失败!" + result4);
+            //    MessageBox.Show("模块3设定温度失败", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return;
+            //}
 
             //this.uiDoubleUpDown14.ValueChanged -= new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
             //uiDoubleUpDown14.Value = 设定温度;
             //this.uiDoubleUpDown14.ValueChanged += new Sunny.UI.UIDoubleUpDown.OnValueChanged(this.uiDoubleUpDown14_ValueChanged);
         }
+
 
         //private void label116_Click(object sender, EventArgs e)
         //{
@@ -1456,6 +1471,7 @@ namespace H5509_V2
         //        }
         //    }
         //}
+
 
         private void label10_Click(object sender, EventArgs e)
         {

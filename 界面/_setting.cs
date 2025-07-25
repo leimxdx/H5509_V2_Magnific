@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DocumentFormat.OpenXml.Spreadsheet;
 using DocumentFormat.OpenXml.Vml.Spreadsheet;
 using DocumentFormat.OpenXml.Wordprocessing;
 using Sunny.UI;
@@ -51,6 +52,7 @@ namespace H5509_V2
         public Action 刷新分BIN信息;
         public Action 刷新温度信息;
         public Action 刷新按钮状态;
+        public Action 刷新开Site状态;
 
         public _setting()
         {
@@ -1370,12 +1372,12 @@ namespace H5509_V2
                                     {
                                         for (int se = 0; se < axisRuns.Count; se++)
                                         {
-                                            RunLog($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
+                                            //RunLog($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
 
                                             issecond[se] = true;
                                             axisRuns[se].目标速度 = axisRuns[se].目标速度 * 出入料Z第二段速度;
 
-                                            RunLog($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
+                                            //RunLog($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
 
                                             // 设置AXIS轴的目标速度
                                             short error = GTN_SetVel(axisRuns[se].核号, axisRuns[se].轴号, axisRuns[se].目标速度);
@@ -1393,12 +1395,12 @@ namespace H5509_V2
                                     }
                                     else
                                     {
-                                        RunLog($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
+                                        //RunLog($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
 
                                         issecond[i] = true;
                                         axisRuns[i].目标速度 = axisRuns[i].目标速度 * 第二段速度;
 
-                                        RunLog($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
+                                        //RunLog($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
 
                                         // 设置AXIS轴的目标速度
                                         short error = GTN_SetVel(axisRuns[i].核号, axisRuns[i].轴号, axisRuns[i].目标速度);
@@ -2687,6 +2689,11 @@ namespace H5509_V2
             numericUpDown178.Text = 初始点位.Auto2_分盘位.ToString();
             numericUpDown177.Text = 初始点位.Auto2_初始位.ToString();
             numericUpDown176.Text = 初始点位.Auto2_满盘位.ToString();
+
+            numericUpDown181.Text = 初始点位.Auto1上顶固定高度.ToString();
+            numericUpDown182.Text = 初始点位.Auto1下降固定高度.ToString();
+            numericUpDown180.Text = 初始点位.Auto2上顶固定高度.ToString();
+            numericUpDown183.Text = 初始点位.Auto2下降固定高度.ToString();
         }
 
         private void 刷新顶盘手臂速度参数()
@@ -3991,6 +3998,12 @@ namespace H5509_V2
                 if (UpdateInitPointData("Auto2_分盘位", Convert.ToDouble(numericUpDown178.Text), 初始点位.Auto2_分盘位)) 初始点位.Auto2_分盘位 = Convert.ToDouble(numericUpDown178.Text);
                 if (UpdateInitPointData("Auto2_初始位", Convert.ToDouble(numericUpDown177.Text), 初始点位.Auto2_初始位)) 初始点位.Auto2_初始位 = Convert.ToDouble(numericUpDown177.Text);
                 if (UpdateInitPointData("Auto2_满盘位", Convert.ToDouble(numericUpDown176.Text), 初始点位.Auto2_满盘位)) 初始点位.Auto2_满盘位 = Convert.ToDouble(numericUpDown176.Text);
+
+                if (UpdateInitPointData("Auto1上顶固定高度", Convert.ToDouble(numericUpDown181.Text), 初始点位.Auto1上顶固定高度)) 初始点位.Auto1上顶固定高度 = Convert.ToDouble(numericUpDown181.Text);
+                if (UpdateInitPointData("Auto1下降固定高度", Convert.ToDouble(numericUpDown182.Text), 初始点位.Auto1下降固定高度)) 初始点位.Auto1下降固定高度 = Convert.ToDouble(numericUpDown182.Text);
+                if (UpdateInitPointData("Auto2上顶固定高度", Convert.ToDouble(numericUpDown180.Text), 初始点位.Auto2上顶固定高度)) 初始点位.Auto2上顶固定高度 = Convert.ToDouble(numericUpDown180.Text);
+                if (UpdateInitPointData("Auto2下降固定高度", Convert.ToDouble(numericUpDown183.Text), 初始点位.Auto2下降固定高度)) 初始点位.Auto2下降固定高度 = Convert.ToDouble(numericUpDown183.Text);
+
 
                 GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRun);
                 if (UpdateRunInfoData("M12_Empty顶盘轴", "最大速度", Convert.ToDouble(numericUpDown3.Text), axisRun.最大速度)) axisRun.最大速度 = Convert.ToDouble(numericUpDown3.Text);
@@ -6362,41 +6375,50 @@ namespace H5509_V2
 
         private void label_color1_Click(object sender, EventArgs e)
         {
-            colorDialog1.ShowDialog();
-
-            (sender as Label).BackColor = colorDialog1.Color;
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                (sender as Label).BackColor = colorDialog1.Color;
+            }
         }
 
         private void label_color2_Click(object sender, EventArgs e)
         {
 
-            colorDialog1.ShowDialog();
-
-            (sender as Label).BackColor = colorDialog1.Color;
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                (sender as Label).BackColor = colorDialog1.Color;
+            }
         }
 
         private void label_color3_Click(object sender, EventArgs e)
         {
-
-            colorDialog1.ShowDialog();
-
-            (sender as Label).BackColor = colorDialog1.Color;
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                (sender as Label).BackColor = colorDialog1.Color;
+            }
         }
 
         private void label_color4_Click(object sender, EventArgs e)
         {
 
-            colorDialog1.ShowDialog();
-
-            (sender as Label).BackColor = colorDialog1.Color;
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                (sender as Label).BackColor = colorDialog1.Color;
+            }
         }
 
         private void label_color5_Click(object sender, EventArgs e)
         {
 
-            colorDialog1.ShowDialog();
-
-            (sender as Label).BackColor = colorDialog1.Color;
+            DialogResult result = colorDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                (sender as Label).BackColor = colorDialog1.Color;
+            }
         }
 
         private void uiDataGridView3_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -6714,6 +6736,71 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            //string sql = $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+            //string sql2 = $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+            //int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
+            //int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
+
+            //if (line != -1)
+            //{
+            //    //isstart = false;
+            //    Listcode.Add("1400330");
+            //    RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
+            //}
+
+            //if (line1 != -1)
+            //{
+            //    //isstart = false;
+            //    Listcode.Add("1400330");
+            //    RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
+            //}
+
+            //string sql3 = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
+            //                    $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','123456')";
+            //SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql3);
+            //doutContinueFail[7][5] = 10;
+            //bool isyieldex = false;
+            //bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
+            //bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
+            //int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+
+            //for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
+            //{
+            //    for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
+            //    {
+            //        if (doutContinueFail[site][dut] >= doutfailnum)
+            //        {
+            //            string code = $"6{site + 1:D2}0{dut + 1}14";
+            //            if (isalarm) //dout连续不良报警
+            //            {
+            //                RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
+            //                doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
+            //                isyieldex = true;
+            //                Listcode.Add(code);
+            //            }
+            //            if (isautoclose) //dout连续不良自动关闭该dout，
+            //            {
+            //                int dout = site * 8 + dut + 1;
+            //                string labelname = $"lbl_dout{dout}";
+            //                设置信息.开site信息.SetSiteValue(site, dut, "0");
+            //                string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+            //                if (result != "Success")
+            //                {
+            //                    RunLog("Site保存失败!" + result);
+            //                }
+            //                //result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+            //                //if (result != "Success")
+            //                //{
+            //                //    RunLog("Site读取失败!" + result);
+            //                //}
+            //                //设置信息.开site信息 = siteStatus;
+            //                刷新开Site状态();
+            //            }
+            //        }
+            //    }
+            //}
+
+
             //double 测试_梭车2放_X = 初始点位.测试_梭车2放_X;
             //double 测试_梭车2右放_X = 点位微调.测试_梭车2右放_X;
             //double 测试_梭车1放_X = 初始点位.测试_梭车1放_X;
@@ -6935,6 +7022,10 @@ namespace H5509_V2
             //    }
             //}
             //handler.debug();
+            //for (int i = 0; i < 1000; i++)
+            //{
+            //    Listcode.Add(i.ToString());
+            //}
         }
 
         private void button228_Click(object sender, EventArgs e)
@@ -7999,7 +8090,7 @@ namespace H5509_V2
                     {
                         if (当前权限 == realName)
                         {
-                            权限时间 = Convert.ToInt32(changePwd.PermissoionTime);
+                            权限时间 = Convert.ToInt32(changePwd.PermissoionTime) * 60;
                         }
                     }
                 }

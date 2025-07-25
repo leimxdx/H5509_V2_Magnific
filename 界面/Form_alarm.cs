@@ -1,14 +1,18 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML.Excel;
 using H5509_V2;
 using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
+using static H5509_V2.WriteData;
 
 namespace H5509_alarm
 {
@@ -18,6 +22,10 @@ namespace H5509_alarm
         private MotionEx motionEx = MotionEx.GetInstance();
 
         //private WriteData writeDataHelper = WriteData.GetWriteDataInstance();
+
+        public ConcurrentQueue<string> QueueCode = new ConcurrentQueue<string>();
+
+        public Task RefreshTask;
 
         public Form_alarm()
         {
@@ -196,11 +204,11 @@ namespace H5509_alarm
         }
 
 
-        public void code(string[] alarmCode, bool alarm)
+        public void ShowCode(string[] alarmCode, bool alarm)
         {
             foreach (string c in alarmCode)
             {
-                code(c, alarm);
+                ShowCode(c, alarm);
             }
         }
 
@@ -254,7 +262,7 @@ namespace H5509_alarm
         string[,] S_dut = new string[16, 8];
 
 
-        public void code(string alarmCode, bool alarm)
+        public void ShowCode(string alarmCode, bool alarm)
         {
             //if (alarm) this.Show();
             Control.ControlCollection[] dut = { panel_1.Controls, panel_2.Controls, panel_3.Controls, panel_4.Controls };
@@ -3044,14 +3052,14 @@ namespace H5509_alarm
             }
 
             dataGridView_alarm.Rows.Add(row);
-            code(dataGridView_all.CurrentRow.Cells[0].Value.ToString(), true);
+            ShowCode(dataGridView_all.CurrentRow.Cells[0].Value.ToString(), true);
         }
 
         private void button_cencel_Click(object sender, EventArgs e)
         {
 
             if (dataGridView_alarm.Rows.Count < 1) return;
-            code(dataGridView_alarm.CurrentRow.Cells[0].Value.ToString(), false);
+            ShowCode(dataGridView_alarm.CurrentRow.Cells[0].Value.ToString(), false);
 
             dataGridView_alarm.Rows.RemoveAt(dataGridView_alarm.CurrentRow.Index);
         }
@@ -3071,7 +3079,7 @@ namespace H5509_alarm
         {
             foreach (DataGridViewRow r in dataGridView_alarm.Rows)
             {
-                code(r.Cells[0].Value.ToString(), false);
+                ShowCode(r.Cells[0].Value.ToString(), false);
             }
             dataGridView_alarm.Rows.Clear();
         }
@@ -3124,6 +3132,32 @@ namespace H5509_alarm
             }
         }
 
-
+        private void Form_alarm_Load(object sender, EventArgs e)
+        {
+            RefreshTask = Task.Run(() => 
+            {
+                while (true)
+                {
+                    try
+                    {
+                        if (QueueCode.Count != 0)
+                        {
+                            //this.Activate();
+                            if (QueueCode.TryDequeue(out string code))
+                            {
+                                ShowCode(code, true);
+                            }
+                            Thread.Sleep(1);
+                        }
+                        else Thread.Sleep(500);
+                    }
+                    catch (Exception ex)
+                    {
+                        RunLog("刷新Code异常!" + ex.Message);
+                        Thread.Sleep(1000);
+                    }
+                }
+            });
+        }
     }
 }

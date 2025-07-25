@@ -12,7 +12,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DocumentFormat.OpenXml.Vml;
 using H5509_alarm;
 using Sunny.UI;
 using Sunny.UI.Win32;
@@ -72,7 +71,7 @@ namespace H5509_V2
         {
             InitializeComponent();
 
-            ControlName = new Control[] {button_setting, button_offset, button_speed, button_io, button_log, button_exit };
+            ControlName = new Control[] { button_setting, button_offset, button_speed, button_io, button_log, button_exit };
 
             Log = new _log();
             显示操作log = Log.DelegteDisplayOperateLog;
@@ -102,6 +101,7 @@ namespace H5509_V2
             setting.刷新分BIN信息 = main.刷新分BIN信息;
             setting.刷新温度信息 = main.刷新温度显示;
             setting.刷新按钮状态 = 刷新按钮权限;
+            setting.刷新开Site状态 = main.刷新开Site状态;
 
             handler.刷新批次信息 = main.刷新批次信息;
             handler.刷新分BIN信息 = main.刷新分BIN信息;
@@ -450,12 +450,14 @@ namespace H5509_V2
                     {
                         if (Listcode.Count != 0)
                         {
+                            form_alarm.Activate();
                             form_alarm.Show();
                             for (int i = 0; i < Listcode.Count; i++)
                             {
-                                form_alarm.code(Listcode[i], true);
+                                form_alarm.QueueCode.Enqueue(Listcode[i]); //将报警代码放入队列
+                                //form_alarm.ShowCode(Listcode[i], true);
+                                if (!报警忽略次数.Contains(Listcode[i])) 报警次数++;
                                 Listcode.Remove(Listcode[i]);
-                                //alarm_count++;
                             }
                         }
                     }));
@@ -610,7 +612,10 @@ namespace H5509_V2
                                         sql = $"update DutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{Com.listtesttimespan[sitenum].Ticks} where id='{doutstr}'";
                                         int line1 = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
                                         if (line1 <= 0) RunLog(sql + $"返回:{line1}");
-                                        RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
+                                        //int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
+                                        //int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
+                                        //命令：insert into f_ZRS202507192157_20250724_17_19_57(批次开始日期, 获取MAP时间, 料号, 批号, MAP信息)values('2025年7月24日', '2025/7/24 17:31:12', 'RS70B08G3S03F', 'E9002B', '@TEST_DONE 08 06 06 44 06 05 05 06 05')，错误信息：对象名 'f_ZRS202507192157_20250724_17_19_57' 无效。
+                                        //RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
                                     }
                                 }
 
@@ -619,32 +624,38 @@ namespace H5509_V2
                                 bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
                                 int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
 
-                                for (int m = 0; m < doutContinueFail.Count; m++) //连续不良率报警
+                                for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
                                 {
-                                    for (int n = 0; n < doutContinueFail[m].Length; n++)
+                                    for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
                                     {
-                                        if (doutContinueFail[m][n] >= doutfailnum)
+                                        if (doutContinueFail[site][dut] >= doutfailnum)
                                         {
-                                            string code = $"6{m + 1:D2}0{n + 1}14";
+                                            string code = $"6{site + 1:D2}0{dut + 1}14";
                                             if (isalarm) //dout连续不良报警
                                             {
+                                                RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
+                                                doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
                                                 isyieldex = true;
                                                 Listcode.Add(code);
                                             }
                                             if (isautoclose) //dout连续不良自动关闭该dout，
                                             {
-                                                int dout = m * 8 + n + 1;
+                                                int dout = site * 8 + dut + 1;
                                                 string labelname = $"lbl_dout{dout}";
-                                                设置信息.开site信息.SetSiteValue(sitenum, dout, "0");
-                                                result = UpdateSiteStatus(设置信息.开site信息.Site名称, 6 + 1, 设置信息.开site信息.GetSiteValue(sitenum));
-                                                if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                                                result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
-                                                if (result != "Success") { MessageBox.Show("读取失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-                                                设置信息.开site信息 = siteStatus;
+                                                设置信息.开site信息.SetSiteValue(site, dut, "0");
+                                                result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+                                                if (result != "Success") 
+                                                {
+                                                    RunLog("Site保存失败!" + result);
+                                                }
+                                                //result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                                                //if (result != "Success") 
+                                                //{
+                                                //    RunLog("Site读取失败!" + result); 
+                                                //}
+                                                //设置信息.开site信息 = siteStatus;
                                                 main.刷新开Site状态();
                                             }
-                                            RunLog($"[Code]{code},[Msg]Site{m + 1}-Dut{n + 1}:连续不良数量:{doutContinueFail[m][n]}>={doutfailnum}", LogType.AlarmLog);
-                                            doutContinueFail[m][n] = 0; //如果已报警良率异常则清空重新计算
                                         }
                                     }
                                 }
@@ -728,6 +739,7 @@ namespace H5509_V2
             }
         }
 
+
         private void 温度读取()
         {
             while (true)
@@ -742,11 +754,24 @@ namespace H5509_V2
 
                     if (TCPConnect)
                     {
+
+                        #region 读取设定温度
+
+                        string result4 = dTMHelper.ReadSv(0, out short[] svvalue);
+                        string result5 = dTMHelper.ReadSv(1, out short[] svvalue2);
+                        string result6 = dTMHelper.ReadSv(2, 0, out short[] svvalue3);
+
+                        #endregion
+
+                        #region 读取探测温度
+
                         string result = dTMHelper.ReadPv(0, out ushort[] value);
                         string result2 = dTMHelper.ReadPv(1, out ushort[] value2);
                         string result3 = dTMHelper.ReadPv(2, 0, out ushort[] value3);
 
-                        if (result != "Success" || result2 != "Success" || result3 != "Success")
+                        #endregion
+
+                        if (result != "Success" || result2 != "Success" || result3 != "Success" || result4 != "Success" || result5 != "Success" || result6 != "Success")
                         {
                             TCPConnect = false;
                             ProgramPause = true;
@@ -754,6 +779,29 @@ namespace H5509_V2
                             Listcode.Add("1400448");
                             RunLog($"[Code]1400448,[Msg]温控器连接失败!", LogType.AlarmLog);
                             continue;
+                        }
+
+                        for (int i = 0; i < svvalue.Length; i++)
+                        {
+                            SiteSvTemp[i] = (double)svvalue[i] / 10;
+                        }
+
+                        for (int i = 0; i < svvalue2.Length; i++)
+                        {
+                            SiteSvTemp[i + 8] = (double)svvalue2[i] / 10;
+                        }
+
+                        SiteSvTemp[16] = (double)svvalue3[0] / 10;
+
+                        for (int i = 0; i < SiteSvTemp.Length; i++)
+                        {
+                            if (SiteSvTemp[i] != 设定温度)
+                            {
+                                if (设定温控器温度() != "Success")
+                                {
+                                    break;
+                                }
+                            }
                         }
 
                         for (int i = 0; i < value.Length; i++)
@@ -779,6 +827,7 @@ namespace H5509_V2
                             SiteTemp[16] = (double)value3[0] / 10 + 加热盘.温控器温度补偿;
                         }
                         else SiteTemp[16] = value3[0];
+
 
                         if (IsPause) continue;
 
@@ -882,12 +931,12 @@ namespace H5509_V2
                         }
                         else
                         {
-                            ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1400448");
                             if (!温控器异常) //防止log输出多次
                             {
                                 温控器异常 = true;
+                                ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1400448");
                                 RunLog($"[Code]1400448,[Msg]温控器连接失败!", LogType.AlarmLog);
                             }
                         }
@@ -897,6 +946,8 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
+                    ProgramPause = true;
+                    IsPause = true;
                     RunLog("温度读取异常!" + ex.Message);
                     Thread.Sleep(100);
                 }

@@ -3357,6 +3357,7 @@
             this.Name = "Form_alarm";
             this.Text = "Form1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_alarm_FormClosing);
+            this.Load += new System.EventHandler(this.Form_alarm_Load);
             this.panel_1.ResumeLayout(false);
             this.panel_S03.ResumeLayout(false);
             this.panel_S00.ResumeLayout(false);
