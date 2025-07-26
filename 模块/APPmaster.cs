@@ -195,7 +195,9 @@ namespace H5509_V2
 
         public static double 第二段速度 = 0.3;
 
-        public static int 出入料Z第二段距离 = 300;
+        public static int 入料Z第二段距离 = 600;
+
+        public static int 出料Z第二段距离 = 600;
 
         public static double 出入料Z第二段速度 = 0.5;
 

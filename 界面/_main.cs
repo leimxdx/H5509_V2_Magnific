@@ -204,6 +204,7 @@ namespace H5509_V2
                     if (getstr.Length == 17)
                     {
                         textBoxFlowcaedno.Text = getstr[0].Replace("-", "_"); //ZRS240929001A:
+                        getstr[0] = textBoxFlowcaedno.Text;
                         getstr[1] = textBoxmachine.Text;
                         //textBoxmachine.Text = getstr[1]; //BS-TEST:
                         textBoxcustom.Text = getstr[2]; //HM:

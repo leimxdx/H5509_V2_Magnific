@@ -183,81 +183,7 @@ namespace H5509_V2
                 axisNames.Add("M4_入料手臂Z4轴");
             }
 
-            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray(), 0, isdown ? 1 : 0, 600);
-        }
-
-        public string 入料手臂Z移动(bool[] isopen, bool isdown)
-        {
-            List<string> axisNames = new List<string>();
-            List<double> pPoss = new List<double>();
-
-            double pos;
-            if (isdown) pos = 10;
-            else pos = -0.3;
-
-            if (isopen[0])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M1_入料手臂Z1轴");
-            }
-            if (isopen[1])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M2_入料手臂Z2轴");
-            }
-            if (isopen[2])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M3_入料手臂Z3轴");
-            }
-            if (isopen[3])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M4_入料手臂Z4轴");
-            }
-
-            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray());
-        }
-
-        public string 出料手臂Z移动(bool[] isopen, bool isdown)
-        {
-            List<string> axisNames = new List<string>();
-            List<double> pPoss = new List<double>();
-
-            double pos;
-            if (isdown) pos = 10;
-            else pos = -0.3;
-
-            if (isopen[0])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M6_出料手臂Z1轴");
-            }
-            if (isopen[1])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M7_出料手臂Z2轴");
-            }
-            if (isopen[2])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M8_出料手臂Z3轴");
-            }
-            if (isopen[3])
-            {
-                double zpos = isdown ? pos + 0 : pos; //加上硬件补偿
-                pPoss.Add(zpos);
-                axisNames.Add("M9_出料手臂Z4轴");
-            }
-
-            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray());
+            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray(), 0, isdown ? 1 : 0, 入料Z第二段距离);
         }
 
         public string 出料手臂Z移动(bool[] isopen, double pos, bool isdown)
@@ -290,7 +216,7 @@ namespace H5509_V2
                 axisNames.Add("M9_出料手臂Z4轴");
             }
 
-            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray(), 0, isdown ? 1 : 0, 600);
+            return motionEx.AxisMove(axisNames.ToArray(), pPoss.ToArray(), 0, isdown ? 1 : 0, 出料Z第二段距离);
         }
 
         public string 测试手臂X移动(double pos)
@@ -3615,13 +3541,16 @@ namespace H5509_V2
                                 开始时间 = DateTime.Now;
 
                                 SQLiteHelper.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
-                                int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
-                                int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
+                                string sql = $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+                                string sql2 = $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+                                int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
+                                int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
 
                                 if (line <= -2)
                                 {
                                     isstart = false;
                                     Listcode.Add("1400330");
+                                    RunLog("执行SQl异常："+ sql);
                                     RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
                                 }
 
@@ -3629,6 +3558,7 @@ namespace H5509_V2
                                 {
                                     isstart = false;
                                     Listcode.Add("1400330");
+                                    RunLog("执行SQl异常：" + sql2);
                                     RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
                                 }
 
@@ -7843,7 +7773,7 @@ namespace H5509_V2
                     case 725:
                         PS出料手臂吸放料流程.StepName = "出料手臂Z向上";
                         RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
-                        result = 出料手臂Z移动(lsopen, false);
+                        result = 出料手臂Z移动(lsopen, -0.3, false); //result = 出料手臂Z移动(lsopen, false);
                         if (result == "Success")
                         {
                             PS出料手臂吸放料流程.StepID = 730;
@@ -9457,7 +9387,7 @@ namespace H5509_V2
                                     if (iovalues[i] == "0")
                                     {
                                         Listcode.Add($"7005{i + 1}{site:D2}");
-                                        RunLog($"[Code]7005{i + 1}{site:D2},[Msg]Site{site + 1} Test X Sensor {i + 1} IC放歪" + result, LogType.AlarmLog);
+                                        RunLog($"[Code]7005{i + 1}{site:D2},[Msg]Site{site + 1} Test X Sensor {i + 1} IC放歪", LogType.AlarmLog);
                                     }
                                 }
                             }
@@ -9468,7 +9398,7 @@ namespace H5509_V2
                                     if (iovalues2[i] == "0")
                                     {
                                         Listcode.Add($"7007{i + 8}{site:D2}");
-                                        RunLog($"[Code]7007{i + 8}{site:D2},[Msg]Site{site + 1} Test Site Y{i + 1} Sensor IC放歪" + result, LogType.AlarmLog);
+                                        RunLog($"[Code]7007{i + 8}{site:D2},[Msg]Site{site + 1} Test Site Y{i + 1} Sensor IC放歪", LogType.AlarmLog);
                                     }
                                 }
                             }

@@ -1050,7 +1050,7 @@ namespace H5509_V2
                 });
                 Task.Run(() =>
                 {
-                    handler.Auto1顶盘流程2();
+                    handler.Auto1顶盘流程();
                 });
                 Task.Run(() =>
                 {
@@ -1058,7 +1058,7 @@ namespace H5509_V2
                 });
                 Task.Run(() =>
                 {
-                    handler.Auto2顶盘流程2();
+                    handler.Auto2顶盘流程();
                 });
                 Task.Run(() =>
                 {

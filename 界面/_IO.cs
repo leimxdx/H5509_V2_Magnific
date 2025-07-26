@@ -584,17 +584,7 @@ namespace H5509_V2
 
         private void SetDoValue(object sender, EventArgs e)
         {
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return;
-            }
+            if (!StateCheck()) return;
 
             if (sender is UISwitch uISwitch)
             {
@@ -610,17 +600,7 @@ namespace H5509_V2
 
         private void uiSwitch84_ValueChanged(object sender, bool value)
         {
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return;
-            }
+            if (!StateCheck()) return;
 
             bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
             handler.测试吸嘴_吸放料(lsopen, false, false);
@@ -654,17 +634,7 @@ namespace H5509_V2
 
         private void uiSwitch23_ValueChanged(object sender, bool value)
         {
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return;
-            }
+            if (!StateCheck()) return;
 
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.入料吸嘴_吸放料(lsopen, false, false);
@@ -676,17 +646,7 @@ namespace H5509_V2
 
         private void uiSwitch24_ValueChanged(object sender, bool value)
         {
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return;
-            }
+            if (!StateCheck()) return;
 
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.入料吸嘴_吸放料(lsopen, true, false);
@@ -698,17 +658,7 @@ namespace H5509_V2
 
         private void uiSwitch44_ValueChanged(object sender, bool value)
         {
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return;
-            }
+            if (!StateCheck()) return;
 
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.出料吸嘴_吸放料(lsopen, false, false);
@@ -720,17 +670,7 @@ namespace H5509_V2
 
         private void uiSwitch39_ValueChanged(object sender, bool value)
         {
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return;
-            }
+            if (!StateCheck()) return;
 
             bool[] lsopen = new bool[] { true, true, true, true };
             handler.出料吸嘴_吸放料(lsopen, true, false);
@@ -742,6 +682,12 @@ namespace H5509_V2
 
         private bool StateCheck()
         {
+            if (当前权限 == "Operator")
+            {
+                UIMessageTip.ShowError(this.Parent, "权限不足", 1000, true, true);
+                return false;
+            }
+
             if (!APPmaster.InitedOK)
             {
                 UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);

@@ -4157,7 +4157,7 @@ namespace H5509_V2
                 double z4 = Convert.ToDouble(uiDoubleUpDown19.Text);
                 string[] axis = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
-                string result = motionEx.AxisMove(axis, pos, 1, inoldpos < mm ? 1 : 0, 出入料Z第二段距离);
+                string result = motionEx.AxisMove(axis, pos, 1, inoldpos < mm ? 1 : 0, 入料Z第二段距离);
                 //string result = 多轴绝对运动(axis, pos, 1, inoldpos < mm ? 1 : 0, 出入料Z第二段距离);
                 if (result != "Success") RunLog("移动失败!" + result);
                 inoldpos = mm;
@@ -4264,7 +4264,7 @@ namespace H5509_V2
                 string[] axis = { "M6_出料手臂Z1轴", "M7_出料手臂Z2轴", "M8_出料手臂Z3轴", "M9_出料手臂Z4轴" };
                 double[] pos = { mm + z1, mm + z2, mm + z3, mm + z4 };
 
-                string result = motionEx.AxisMove(axis, pos, 1, outoldpos < mm ? 1 : 0, 出入料Z第二段距离);
+                string result = motionEx.AxisMove(axis, pos, 1, outoldpos < mm ? 1 : 0, 出料Z第二段距离);
                 //string result = 多轴绝对运动(axis, pos, 1, outoldpos < mm ? 1 : 0, 出入料Z第二段距离);
                 if (result != "Success") RunLog("移动失败!" + result);
                 outoldpos = mm;
@@ -6736,6 +6736,10 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            string sql = $"create table f_{"ZRS202506200955_TE_LIN" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+            string sql2 = $"create table o_{"ZRS202506200955_TE_LIN" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
+            int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
             //string sql = $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
             //string sql2 = $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
             //int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
@@ -8115,6 +8119,27 @@ namespace H5509_V2
         private void button259_Click(object sender, EventArgs e)
         {
             ChangePwd("Supplier");
+        }
+
+        private void button260_Click(object sender, EventArgs e)
+        {
+            string sql = $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+            string sql2 = $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
+            int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
+
+            if (line <= -2)
+            {
+                RunLog("执行SQl异常：" + sql);
+                RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
+            }
+
+            if (line1 <= -2)
+            {
+                Listcode.Add("1400330");
+                RunLog("执行SQl异常：" + sql2);
+                RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
+            }
         }
     }
 }

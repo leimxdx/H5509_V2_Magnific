@@ -3860,7 +3860,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(191, 27);
             this.label8.TabIndex = 159;
-            this.label8.Text = "V.1.0.02 20250721";
+            this.label8.Text = "V.1.0.04 20250726";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label9

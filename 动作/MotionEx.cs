@@ -577,12 +577,12 @@ namespace H5509_V2
                                     {
                                         for (int se = 0; se < axisRuns.Count; se++)
                                         {
-                                            RunLog($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
+                                            //RunLog($"{axisRuns[se].轴名称}修改前目标速度:" + axisRuns[se].目标速度);
 
                                             issecond[se] = true;
                                             axisRuns[se].目标速度 = axisRuns[se].目标速度 * 出入料Z第二段速度;
 
-                                            RunLog($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
+                                            //RunLog($"{axisRuns[se].轴名称}修改后目标速度:" + axisRuns[se].目标速度);
 
                                             // 设置AXIS轴的目标速度
                                             short error = GTN_SetVel(axisRuns[se].核号, axisRuns[se].轴号, axisRuns[se].目标速度);
@@ -600,12 +600,12 @@ namespace H5509_V2
                                     }
                                     else
                                     {
-                                        RunLog($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
+                                        //RunLog($"{axisRuns[i].轴名称}修改前目标速度:" + axisRuns[i].目标速度);
 
                                         issecond[i] = true;
                                         axisRuns[i].目标速度 = axisRuns[i].目标速度 * 第二段速度;
 
-                                        RunLog($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
+                                        //RunLog($"{axisRuns[i].轴名称}修改后目标速度:" + axisRuns[i].目标速度);
 
                                         // 设置AXIS轴的目标速度
                                         short error = GTN_SetVel(axisRuns[i].核号, axisRuns[i].轴号, axisRuns[i].目标速度);
