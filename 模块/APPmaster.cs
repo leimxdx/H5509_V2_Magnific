@@ -324,6 +324,18 @@ namespace H5509_V2
 
         public static int 测试Z跟随误差 = 450;
 
+        public static int 保存Auto1放料个数 = 0;
+
+        public static int 保存Auto2放料个数 = 0;
+
+        public static bool 出料正在Auto1放料 = false;
+
+        public static bool 出料正在Auto2放料 = false;
+
+        public static bool Auto1正在侧敲 = false;
+
+        public static bool Auto2正在侧敲 = false;
+
         public static Communication Com;
 
         public static double[] TestXPoint; //Site点位坐标
@@ -1977,6 +1989,14 @@ namespace H5509_V2
                             入料吸提前开真空 = Convert.ToBoolean(dr["入料吸提前开真空"].ToString()),
                             出料吸提前开真空 = Convert.ToBoolean(dr["出料吸提前开真空"].ToString()),
                             测试吸提前开真空 = Convert.ToBoolean(dr["测试吸提前开真空"].ToString()),
+
+                            Auto侧敲使能 = Convert.ToBoolean(dr["Auto侧敲使能"].ToString()),
+                            前侧同时敲击 = Convert.ToBoolean(dr["前侧同时敲击"].ToString()),
+                            放置多少颗敲击 = Convert.ToInt32(dr["放置多少颗敲击"].ToString()),
+                            Auto侧敲次数 = Convert.ToInt32(dr["Auto侧敲次数"].ToString()),
+                            侧敲间隔 = Convert.ToInt32(dr["侧敲间隔"].ToString()),
+                            放料时允许侧敲 = Convert.ToBoolean(dr["放料时允许侧敲"].ToString()),
+                            侧敲时允许放料 = Convert.ToBoolean(dr["侧敲时允许放料"].ToString()),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -2248,7 +2268,14 @@ namespace H5509_V2
                 $"离线模式测试等待时间 = '{tester.离线模式测试等待时间}'," +
                 $"入料吸提前开真空 = '{tester.入料吸提前开真空}'," +
                 $"出料吸提前开真空 = '{tester.出料吸提前开真空}'," +
-                $"测试吸提前开真空 = '{tester.测试吸提前开真空}'" +
+                $"测试吸提前开真空 = '{tester.测试吸提前开真空}'," +
+                $"Auto侧敲使能 = '{tester.Auto侧敲使能}'," +
+                $"前侧同时敲击 = '{tester.前侧同时敲击}'," +
+                $"放置多少颗敲击 = '{tester.放置多少颗敲击}'," +
+                $"Auto侧敲次数 = '{tester.Auto侧敲次数}'," +
+                $"侧敲间隔 = '{tester.侧敲间隔}'," +
+                $"放料时允许侧敲 = '{tester.放料时允许侧敲}'," +
+                $"侧敲时允许放料 = '{tester.侧敲时允许放料}'" +
                 $" where 测试机名称 = '{name}'";
 
             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);

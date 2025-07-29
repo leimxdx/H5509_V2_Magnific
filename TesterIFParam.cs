@@ -68,5 +68,19 @@ namespace H5509_V2
         public bool 出料吸提前开真空 { get; set; }
 
         public bool 测试吸提前开真空 { get; set; }
+
+        public bool Auto侧敲使能 { get; set; }
+
+        public bool 前侧同时敲击 { get; set; }
+
+        public int 放置多少颗敲击 { get; set; }
+
+        public int Auto侧敲次数 { get; set; }
+
+        public int 侧敲间隔 { get; set; }
+
+        public bool 放料时允许侧敲 { get; set; }
+
+        public bool 侧敲时允许放料 { get; set; }
     }
 }

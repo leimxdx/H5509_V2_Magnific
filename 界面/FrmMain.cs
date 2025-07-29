@@ -67,6 +67,34 @@ namespace H5509_V2
 
         public Action 刷新开Site信息;
 
+        private Task Task系统按钮检测流程;
+        private Task Task界面刷新;
+        private Task Task数据上传;
+        private Task Task温度读取;
+        private Task Task初始化流程;
+        private Task Task结批流程;
+        private Task Task入料手臂吸放料流程;
+        private Task Task出料手臂吸放料流程;
+        private Task Task飞梭移动流程;
+        private Task Task测试手臂取待测料流程;
+        private Task Task测试手臂取已测料流程;
+        private Task Task测试区气缸下压动作流程;
+        private Task Task测试区气缸上抬动作流程;
+        private Task Task抓盘手臂取Empty盘;
+        private Task Task抓盘手臂放空盘到Empty;
+        private Task Task抓盘手臂取Load空盘;
+        private Task TaskEmpty顶盘流程;
+        private Task TaskEmpty下降流程;
+        private Task TaskEmpty下降回零流程;
+        private Task TaskLoad顶盘流程;
+        private Task TaskLoad下降回零流程;
+        private Task TaskAuto1顶盘流程;
+        private Task TaskAuto1下降回零流程;
+        private Task TaskAuto2顶盘流程;
+        private Task TaskAuto2下降回零流程;
+        private Task Task抓盘手臂放空盘到Auto1;
+        private Task Task抓盘手臂放空盘到Auto2;
+
         public ForMain()
         {
             InitializeComponent();
@@ -81,7 +109,8 @@ namespace H5509_V2
             if (result != "Success")
             {
                 //Log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
-                MessageBox.Show("软件加载失败,请关闭软件重开!", result);
+                MessageBox.Show($"软件加载失败,请关闭软件重开!\n{result}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Application.Exit();
             }
             //Log.AddLog("debug","run","读取数据库数据完成");
         }
@@ -463,7 +492,11 @@ namespace H5509_V2
                     }));
 
 
-                    if (IsPause) continue; //如果暂停则不刷新
+                    if (IsPause)
+                    {
+                        Thread.Sleep(50);
+                        continue; //如果暂停则不刷新
+                    }
 
                     bool ispass = false;
 
@@ -739,7 +772,6 @@ namespace H5509_V2
             }
         }
 
-
         private void 温度读取()
         {
             while (true)
@@ -751,6 +783,7 @@ namespace H5509_V2
                     //    Thread.Sleep(100);
                     //    continue;
                     //}
+
 
                     if (TCPConnect)
                     {
@@ -829,7 +862,11 @@ namespace H5509_V2
                         else SiteTemp[16] = value3[0];
 
 
-                        if (IsPause) continue;
+                        if (IsPause)
+                        {
+                            Thread.Sleep(50);
+                            continue;
+                        }
 
                         bool[] tempopen = 检测温度探头状态();
 
@@ -956,125 +993,122 @@ namespace H5509_V2
 
         private string Init_FrMain()
         {
+            cts = new CancellationTokenSource();
+
+            Task系统按钮检测流程 = new Task(handler.系统按钮检测流程, cts.Token); //1
+
+            Task界面刷新 = new Task(界面刷新, cts.Token); //2
+
+            Task数据上传 = new Task(数据上传, cts.Token); //3
+
+            Task温度读取 = new Task(温度读取, cts.Token); //4
+
+            Task初始化流程 = new Task(handler.初始化流程, cts.Token); //5
+
+            Task结批流程 = new Task(handler.结批流程, cts.Token); //6
+
+            Task入料手臂吸放料流程 = new Task(handler.入料手臂吸放料流程, cts.Token); //7
+
+            Task出料手臂吸放料流程 = new Task(handler.出料手臂吸放料流程, cts.Token); //8
+
+            Task飞梭移动流程 = new Task(handler.飞梭移动流程, cts.Token); //9
+
+            Task测试手臂取待测料流程 = new Task(handler.测试手臂取待测料流程, cts.Token); //10
+
+            Task测试手臂取已测料流程 = new Task(handler.测试手臂取已测料流程, cts.Token); //11
+
+            Task测试区气缸下压动作流程 = new Task(handler.测试区气缸下压动作流程, cts.Token); //12
+
+            Task测试区气缸上抬动作流程 = new Task(handler.测试区气缸上抬动作流程, cts.Token); //13
+
+            Task抓盘手臂取Empty盘 = new Task(handler.抓盘手臂取Empty盘, cts.Token); //14
+
+            Task抓盘手臂放空盘到Empty = new Task(handler.抓盘手臂放空盘到Empty, cts.Token); //15
+
+            Task抓盘手臂取Load空盘 = new Task(handler.抓盘手臂取Load空盘, cts.Token); //16
+
+            TaskEmpty顶盘流程 = new Task(handler.Empty顶盘流程, cts.Token); //17
+
+            TaskEmpty下降流程 = new Task(handler.Empty下降流程, cts.Token); //18
+
+            TaskEmpty下降回零流程 = new Task(handler.Empty下降回零流程, cts.Token); //19
+
+            TaskLoad顶盘流程 = new Task(handler.Load顶盘流程, cts.Token); //20
+
+            TaskLoad下降回零流程 = new Task(handler.Load下降回零流程, cts.Token); //21
+
+            TaskAuto1顶盘流程 = new Task(handler.Auto1顶盘流程, cts.Token); //22
+
+            TaskAuto1下降回零流程 = new Task(handler.Auto1下降回零流程, cts.Token); //23
+
+            TaskAuto2顶盘流程 = new Task(handler.Auto2顶盘流程, cts.Token); //24
+
+            TaskAuto2下降回零流程 = new Task(handler.Auto2下降回零流程, cts.Token); //25
+
+            Task抓盘手臂放空盘到Auto1 = new Task(handler.抓盘手臂放空盘到Auto1, cts.Token); //26
+
+            Task抓盘手臂放空盘到Auto2 = new Task(handler.抓盘手臂放空盘到Auto2, cts.Token); //27
+
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
             {
-                cts = new CancellationTokenSource();
+                Task系统按钮检测流程.Start(); //1
 
-                Task.Run(() =>
-                {
-                    handler.系统按钮检测流程();
-                });
-                Task.Run(() =>
-                {
-                    界面刷新();
-                });
-                Task.Run((() =>
-                {
-                    数据上传();
-                }));
-                Task.Run((() =>
-                {
-                    温度读取();
-                }));
-                Task.Run(() =>
-                {
-                    handler.初始化流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.结批流程();
-                });
-                //Task.Run(() =>
-                //{
-                //    handler.入料手臂吸放料流程();
-                //});
-                Task.Run(() =>
-                {
-                    handler.入料手臂吸放料流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.出料手臂吸放料流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.飞梭移动流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.测试手臂取待测料流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.测试手臂取已测料流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.测试区气缸下压动作流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.测试区气缸上抬动作流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.抓盘手臂取Empty盘();
-                });
-                Task.Run(() =>
-                {
-                    handler.抓盘手臂放空盘到Empty();
-                });
-                Task.Run(() =>
-                {
-                    handler.抓盘手臂取Load空盘();
-                });
-                Task.Run(() =>
-                {
-                    handler.Empty顶盘流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Empty下降流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Empty下降回零流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Load顶盘流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Load下降回零流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Auto1顶盘流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Auto1下降回零流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Auto2顶盘流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.Auto2下降回零流程();
-                });
-                Task.Run(() =>
-                {
-                    handler.抓盘手臂放空盘到Auto1();
-                });
-                Task.Run(() =>
-                {
-                    handler.抓盘手臂放空盘到Auto2();
-                });
+                Task界面刷新.Start(); //2
+
+                Task数据上传.Start(); //3
+
+                Task温度读取.Start(); //4
+
+                Task初始化流程.Start(); //5
+
+                Task结批流程.Start(); //6
+
+                Task入料手臂吸放料流程.Start(); //7
+
+                Task出料手臂吸放料流程.Start(); //8
+
+                Task飞梭移动流程.Start(); //9
+
+                Task测试手臂取待测料流程.Start(); //10
+
+                Task测试手臂取已测料流程.Start(); //11
+
+                Task测试区气缸下压动作流程.Start(); //12
+
+                Task测试区气缸上抬动作流程.Start(); //13
+
+                Task抓盘手臂取Empty盘.Start(); //14
+
+                Task抓盘手臂放空盘到Empty.Start(); //15
+
+                Task抓盘手臂取Load空盘.Start(); //16
+
+                TaskEmpty顶盘流程.Start(); //17
+
+                TaskEmpty下降流程.Start(); //18
+
+                TaskEmpty下降回零流程.Start(); //19
+
+                TaskLoad顶盘流程.Start(); //20
+
+                TaskLoad下降回零流程.Start(); //21
+
+                TaskAuto1顶盘流程.Start(); //22
+
+                TaskAuto1下降回零流程.Start(); //23
+
+                TaskAuto2顶盘流程.Start(); //24
+
+                TaskAuto2下降回零流程.Start(); //25
+
+                Task抓盘手臂放空盘到Auto1.Start(); //26
+
+                Task抓盘手臂放空盘到Auto2.Start(); //27
             });
 
             return "Success";
         }
+
     }
+
 }

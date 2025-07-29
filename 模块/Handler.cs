@@ -1806,7 +1806,7 @@ namespace H5509_V2
                 RunLog("Load区Tray前侧定位气缸原位输出失败！" + result);
                 return result;
             }
-            Thread.Sleep(500); //没有感应器，固定延时处理
+            Thread.Sleep(400); //没有感应器，固定延时处理
             return result;
         }
 
@@ -1835,7 +1835,7 @@ namespace H5509_V2
 
         #region Auto1区
 
-        public string Auto1_Tray前侧定位气缸到位输出()
+        public string Auto1_Tray前侧定位气缸到位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y023_AUTO1_Tray前定位", true);
             if (result != "Success")
@@ -1851,11 +1851,11 @@ namespace H5509_V2
                 return result2;
             }
 
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
-        public string Auto1_Tray前侧定位气缸原位输出()
+        public string Auto1_Tray前侧定位气缸原位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y023_AUTO1_Tray前定位", false);
             if (result != "Success")
@@ -1871,7 +1871,7 @@ namespace H5509_V2
                 return result2;
             }
 
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
@@ -1899,7 +1899,7 @@ namespace H5509_V2
             return result;
         }
 
-        public string Auto1_Tray侧定位气缸到位输出()
+        public string Auto1_Tray侧定位气缸到位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y024_BIN_A区Tray侧定位", true);
             if (result != "Success")
@@ -1907,11 +1907,11 @@ namespace H5509_V2
                 RunLog("BIN_A区Tray侧定位气缸到位输出失败！" + result);
                 return result;
             }
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
-        public string Auto1_Tray侧定位气缸原位输出()
+        public string Auto1_Tray侧定位气缸原位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y024_BIN_A区Tray侧定位", false);
             if (result != "Success")
@@ -1919,7 +1919,7 @@ namespace H5509_V2
                 RunLog("BIN_A区Tray侧定位气缸原位输出失败！" + result);
                 return result;
             }
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
@@ -1972,7 +1972,7 @@ namespace H5509_V2
 
         #region Auto2
 
-        public string Auto2_Tray前侧定位气缸到位输出()
+        public string Auto2_Tray前侧定位气缸到位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y025_AUTO2_Tray前定位", true);
             if (result != "Success")
@@ -1988,11 +1988,11 @@ namespace H5509_V2
                 return result2;
             }
 
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
-        public string Auto2_Tray前侧定位气缸原位输出()
+        public string Auto2_Tray前侧定位气缸原位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y025_AUTO2_Tray前定位", false);
             if (result != "Success")
@@ -2008,7 +2008,7 @@ namespace H5509_V2
                 return result2;
             }
 
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
@@ -2036,7 +2036,7 @@ namespace H5509_V2
             return result;
         }
 
-        public string Auto2_Tray侧定位气缸到位输出()
+        public string Auto2_Tray侧定位气缸到位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y026_BIN_B区Tray侧定位", true);
             if (result != "Success")
@@ -2044,11 +2044,11 @@ namespace H5509_V2
                 RunLog("BIN_B区Tray侧定位气缸到位输出失败！" + result);
                 return result;
             }
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
-        public string Auto2_Tray侧定位气缸原位输出()
+        public string Auto2_Tray侧定位气缸原位输出(int sleep = 300)
         {
             string result = motionEx.SetDo("Y026_BIN_B区Tray侧定位", false);
             if (result != "Success")
@@ -2056,7 +2056,7 @@ namespace H5509_V2
                 RunLog("BIN_B区Tray侧定位气缸原位输出失败！" + result);
                 return result;
             }
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(sleep); //没有感应器，固定延时处理
             return result;
         }
 
@@ -2802,6 +2802,14 @@ namespace H5509_V2
             Auto1换盘标记 = false;
             Auto2换盘标记 = false;
             Auto等待换盘标记 = false;
+
+            保存Auto1放料个数 = 0;
+            保存Auto2放料个数 = 0;
+            出料正在Auto1放料 = false;
+            出料正在Auto2放料 = false;
+            Auto1正在侧敲 = false;
+            Auto2正在侧敲 = false;
+
             Fix1Tray盘放置标记 = false;
             Fix1Tray盘拿走标记 = false;
             Fix2Tray盘放置标记 = false;
@@ -3524,6 +3532,12 @@ namespace H5509_V2
                             if (Load正在下降回零) IsLoadPause = false;
                         }
 
+                        if (H5509正在归零)
+                        {
+                            isstart = false;
+                            RunLog("设备正在回零...，无法开始", LogType.OperateLog);
+                        }
+
                         string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
 
                         if (isstart && 设备状态 == 0)
@@ -3550,7 +3564,7 @@ namespace H5509_V2
                                 {
                                     isstart = false;
                                     Listcode.Add("1400330");
-                                    RunLog("执行SQl异常："+ sql);
+                                    RunLog("执行SQl异常：" + sql);
                                     RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
                                 }
 
@@ -3753,6 +3767,8 @@ namespace H5509_V2
 
                         motionEx.SetDo("Y001_开始灯", false);
                         motionEx.SetDo("Y002_暂停灯", true);
+                        motionEx.SetDo("Y006_定点停止灯", false);
+                        motionEx.SetDo("Y007_定点开始灯", false);
                     }
 
                     bool safesw = io[2] == "1"; //"X003_安全钮"
@@ -3764,9 +3780,15 @@ namespace H5509_V2
                     bool again = io[3] == "1"; //X004_重试
                     if (CheckEdgeSingal(again, ref AgainRiseCache, true))
                     {
-                        入料IC忽略 = false;
+                        入料IC忽略 = false; 
+                        出料IC忽略 = false; 
+                        测试IC忽略 = false;
                         入料IC吸不起结批 = false;
                         RunLog("按下重试", LogType.OperateLog);
+                        motionEx.SetDo("Y004_重试灯", true);
+                        motionEx.SetDo("Y005_忽略灯", false);
+                        motionEx.SetDo("Y008_结批灯", false);
+                        motionEx.SetDo("Y011_换盘灯", false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, true);
                         //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
@@ -3779,7 +3801,12 @@ namespace H5509_V2
                         RunLog("按下跳过", LogType.OperateLog);
                         if (入料IC忽略 == false) 入料IC忽略 = true;
                         if (出料IC忽略 == false) 出料IC忽略 = true;
-                        if (测试IC忽略 == false) 测试IC忽略 = true;
+                        if (测试IC忽略 == false) 测试IC忽略 = true; 
+                        
+                        motionEx.SetDo("Y004_重试灯", false);
+                        motionEx.SetDo("Y005_忽略灯", true);
+                        motionEx.SetDo("Y008_结批灯", false);
+                        motionEx.SetDo("Y011_换盘灯", false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
                         //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
                         //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
@@ -3790,6 +3817,7 @@ namespace H5509_V2
                     if (CheckEdgeSingal(fixedstop, ref FixedStopRiseCache, true))
                     {
                         RunLog("按下定点停止", LogType.OperateLog);
+                        motionEx.SetDo("Y006_定点停止灯", true);
                         前方定点停止允许 = true;
                     }
 
@@ -3797,6 +3825,7 @@ namespace H5509_V2
                     if (CheckEdgeSingal(fixedstart, ref FixedStartRiseCache, true))
                     {
                         RunLog("按下定点开始", LogType.OperateLog);
+                        motionEx.SetDo("Y007_定点开始灯", true);
                         后方定点停止允许 = true;
                     }
 
@@ -3945,6 +3974,10 @@ namespace H5509_V2
                     if (CheckEdgeSingal(exchangetray, ref ExchangetrayRiseCache, true))
                     {
                         RunLog("按下换Tray", LogType.OperateLog);
+                        motionEx.SetDo("Y004_重试灯", false);
+                        motionEx.SetDo("Y005_忽略灯", false);
+                        motionEx.SetDo("Y008_结批灯", false);
+                        motionEx.SetDo("Y011_换盘灯", true);
                     }
 
                     bool x18 = io[15] == "1";  //X018_空盘门感应
@@ -7285,6 +7318,7 @@ namespace H5509_V2
                                 APPmaster.获取Auto1盘Open(opens, xPoint, yPoint, out lsopen, index, bin);
                                 xPos = Auto1XPoint[xPoint] + 点位微调.出料_Auto1放_X;
                                 yPos = (Auto1YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Auto1放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                出料正在Auto1放料 = true;
                                 PS出料手臂吸放料流程.StepID = 710;
                                 break;
 
@@ -7311,6 +7345,7 @@ namespace H5509_V2
                                 APPmaster.获取Auto2盘Open(opens, xPoint, yPoint, out lsopen, index, bin);
                                 xPos = Auto2XPoint[xPoint] + 点位微调.出料_Auto2放_X;
                                 yPos = (Auto2YPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.出料_Auto2放_Y; //坐标位置 + 哪个吸嘴 * 吸料间隔 * yPitch;
+                                出料正在Auto2放料 = true;
                                 PS出料手臂吸放料流程.StepID = 710;
                                 break;
 
@@ -7749,22 +7784,30 @@ namespace H5509_V2
                             ProgramPause = true;
                             IsPause = true;
                         }
+
                         break;
 
                     case 720:
                         PS出料手臂吸放料流程.StepName = "出料吸嘴放料";
                         RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
-                        result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, true, false);
-                        if (result == "Success")
+                        bool outzenable1 = 设置信息.测试机信息.侧敲时允许放料 || !Auto1正在侧敲;
+                        bool outzenable2 = 设置信息.测试机信息.侧敲时允许放料 || !Auto2正在侧敲;
+                        if (trayid > 1 || ((trayid == 0 && outzenable1) || (trayid == 1 && outzenable2)))
                         {
-                            result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, false, true);
+                            result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, true, false);
                             if (result == "Success")
                             {
-                                Thread.Sleep(设置信息.测试机信息.出料手臂吹料时间);
-                                result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, false, false);
+                                result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, false, true);
                                 if (result == "Success")
                                 {
-                                    PS出料手臂吸放料流程.StepID = 725;
+                                    Thread.Sleep(设置信息.测试机信息.出料手臂吹料时间);
+                                    result = 空跑模式 ? "Success" : 出料吸嘴_吸放料(lsopen, false, false);
+                                    if (result == "Success")
+                                    {
+                                        出料正在Auto1放料 = false;
+                                        出料正在Auto2放料 = false;
+                                        PS出料手臂吸放料流程.StepID = 725;
+                                    }
                                 }
                             }
                         }
@@ -10915,7 +10958,9 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             Listcode.Add("4019003"); //添加报警弹窗
-                            RunLog($"[Code]4019003,[Msg]待测区没有盘", LogType.AlarmLog);
+                            RunLog($"[Code]4019003,[Msg]待测区没有盘", LogType.AlarmLog); 
+                            motionEx.SetDo("Y004_重试灯", true);
+                            motionEx.SetDo("Y008_结批灯", true);
                             PS待测盘上顶流程.StepID = 610;
                         }
                         else
@@ -11079,7 +11124,24 @@ namespace H5509_V2
                             PS手动盘1上顶流程.Processing = true;
                             PS手动盘1上顶流程.StepID = 505;
                         }
-                        else Thread.Sleep(10);
+                        else
+                        {
+                            bool isenable = 设置信息.测试机信息.放料时允许侧敲 || !出料正在Auto1放料;
+                            if (Tray盘模式 && !Auto1换盘标记 && Auto1上顶标记 == 1 && 设置信息.测试机信息.Auto侧敲使能 && isenable)
+                            {
+                                if (Auto1数量 - 保存Auto1放料个数 >= 设置信息.测试机信息.放置多少颗敲击)
+                                {
+                                    bool isIC1 = 获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
+                                    if (!isIC1 || auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要侧敲，加!isIC1是因为满盘时返回False,auto1xy返回是0，所以满盘的时候也要侧敲，和满盘会放空盘一样，如果不加则不会放空盘自然也不会触发侧敲
+                                    {
+                                        Auto1正在侧敲 = true;
+                                        保存Auto1放料个数 = Auto1数量;
+                                        PS手动盘1上顶流程.StepID = 605;
+                                    }
+                                }
+                            }
+                            Thread.Sleep(10);
+                        }
                         break;
 
                     case 505:
@@ -11278,6 +11340,33 @@ namespace H5509_V2
                         PS手动盘1上顶流程.StepName = $"手动盘1上顶流程完成";
                         RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
                         PS手动盘1上顶流程.Processing = false;
+                        PS手动盘1上顶流程.StepID = 500;
+                        break;
+
+                    case 605:
+                        PS手动盘1上顶流程.StepName = $"手动盘1执行侧敲";
+                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                        bool qenable = 设置信息.测试机信息.前侧同时敲击;
+                        int count = 设置信息.测试机信息.Auto侧敲次数;
+                        int delay = 设置信息.测试机信息.侧敲间隔;
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (qenable) //前侧同时敲击
+                            {
+                                if (i > 0) Thread.Sleep(delay);
+                                Auto1_Tray前侧定位气缸原位输出(10);
+                                Thread.Sleep(delay);
+                                Auto1_Tray前侧定位气缸到位输出(10);
+                            }
+                            else
+                            {
+                                if (i > 0) Thread.Sleep(delay);
+                                Auto1_Tray侧定位气缸原位输出(10);
+                                Thread.Sleep(delay);
+                                Auto1_Tray侧定位气缸到位输出(10);
+                            }
+                        }
+                        Auto1正在侧敲 = false;
                         PS手动盘1上顶流程.StepID = 500;
                         break;
 
@@ -11618,7 +11707,24 @@ namespace H5509_V2
                             PS手动盘2上顶流程.Processing = true;
                             PS手动盘2上顶流程.StepID = 505;
                         }
-                        else Thread.Sleep(10);
+                        else
+                        {
+                            bool isenable = 设置信息.测试机信息.放料时允许侧敲 || !出料正在Auto2放料;
+                            if (Tray盘模式 && !Auto2换盘标记 && Auto2上顶标记 == 1 && 设置信息.测试机信息.Auto侧敲使能 && isenable)
+                            {
+                                if (Auto2数量 - 保存Auto2放料个数 >= 设置信息.测试机信息.放置多少颗敲击)
+                                {
+                                    bool isIC1 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
+                                    if (!isIC1 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要侧敲，加!isIC1是因为满盘时返回False,auto2xy返回是0
+                                    {
+                                        Auto2正在侧敲 = true;
+                                        保存Auto2放料个数 = Auto2数量;
+                                        PS手动盘2上顶流程.StepID = 605;
+                                    }
+                                }
+                            }
+                            Thread.Sleep(10);
+                        }
                         break;
 
                     case 505:
@@ -11822,6 +11928,32 @@ namespace H5509_V2
                         PS手动盘2上顶流程.StepID = 500;
                         break;
 
+                    case 605:
+                        PS手动盘2上顶流程.StepName = $"手动盘2执行侧敲";
+                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                        bool qenable = 设置信息.测试机信息.前侧同时敲击;
+                        int count = 设置信息.测试机信息.Auto侧敲次数;
+                        int delay = 设置信息.测试机信息.侧敲间隔;
+                        for (int i = 0; i < count; i++)
+                        {
+                            if (qenable) //前侧同时敲击
+                            {
+                                if (i > 0) Thread.Sleep(delay);
+                                Auto2_Tray前侧定位气缸原位输出(10);
+                                Thread.Sleep(delay);
+                                Auto2_Tray前侧定位气缸到位输出(10);
+                            }
+                            else
+                            {
+                                if (i > 0) Thread.Sleep(delay);
+                                Auto2_Tray侧定位气缸原位输出(10);
+                                Thread.Sleep(delay);
+                                Auto2_Tray侧定位气缸到位输出(10);
+                            }
+                        }
+                        Auto2正在侧敲 = false;
+                        PS手动盘2上顶流程.StepID = 500;
+                        break;
 
                     default:
                         RunLog(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));

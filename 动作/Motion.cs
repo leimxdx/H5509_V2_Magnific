@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using Sunny.UI.Win32;
 using static GTN.mc;
+using static GTN.mc_ringnet;
 using static H5509_V2.APPmaster;
 
 namespace H5509_V2
@@ -336,6 +337,26 @@ namespace H5509_V2
                 return ex.Message;
             }
 
+        }
+
+
+        /// <summary>
+        /// 获取轴模块通讯状态
+        /// </summary>
+        /// <returns></returns>
+        public string GetAxisTerminalStatus(short core, short index, out TTerminalStatus terminalStatus)
+        {
+            terminalStatus = new TTerminalStatus();
+            try
+            {
+                short error = GTN_GetTerminalStatus(core, index, out terminalStatus);
+                ErrorHandler("GTN_GetTerminalStatus", error);
+                return "Success";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         /// <summary>

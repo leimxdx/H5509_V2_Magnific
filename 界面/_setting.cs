@@ -2832,6 +2832,14 @@ namespace H5509_V2
             checkBox5.Checked = tester.入料吸提前开真空;
             checkBox6.Checked = tester.出料吸提前开真空;
             checkBox7.Checked = tester.测试吸提前开真空;
+
+            checkBox8.Checked = tester.Auto侧敲使能;
+            checkBox9.Checked = tester.前侧同时敲击;
+            numericUpDown185.Text = tester.放置多少颗敲击.ToString();
+            numericUpDown184.Text = tester.Auto侧敲次数.ToString();
+            numericUpDown186.Text = tester.侧敲间隔.ToString();
+            checkBox10.Checked = tester.放料时允许侧敲;
+            checkBox11.Checked = tester.侧敲时允许放料;
         }
 
         private void 刷新分BIN(BinParam binParam)
@@ -3566,7 +3574,7 @@ namespace H5509_V2
         {
             for (int i = 0; i < ListConPerm.Count; i++)
             {
-                if (ListConPerm[i].控件名 == "button_setting") 
+                if (ListConPerm[i].控件名 == "button_setting")
                 {
                     uiComboBox3.Text = ListConPerm[i].权限;
                 }
@@ -4956,6 +4964,14 @@ namespace H5509_V2
                         newtester.出料吸提前开真空 = Convert.ToBoolean(checkBox6.Checked);
                         newtester.测试吸提前开真空 = Convert.ToBoolean(checkBox7.Checked);
 
+                        newtester.Auto侧敲使能 = Convert.ToBoolean(checkBox8.Checked);
+                        newtester.前侧同时敲击 = Convert.ToBoolean(checkBox9.Checked);
+                        newtester.放置多少颗敲击 = Convert.ToInt32(numericUpDown185.Value);
+                        newtester.Auto侧敲次数 = Convert.ToInt32(numericUpDown184.Value);
+                        newtester.侧敲间隔 = Convert.ToInt32(numericUpDown186.Value);
+                        newtester.放料时允许侧敲 = Convert.ToBoolean(checkBox10.Checked);
+                        newtester.侧敲时允许放料 = Convert.ToBoolean(checkBox11.Checked);
+
                         result = UpdateTesterIFParam(value, newtester);
                         if (result != "Success")
                         {
@@ -4996,6 +5012,14 @@ namespace H5509_V2
                             if (oldtester.入料吸提前开真空 != newtester.入料吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料吸提前开真空]:{oldtester.入料吸提前开真空}->{newtester.入料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.出料吸提前开真空 != newtester.出料吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料吸提前开真空]:{oldtester.出料吸提前开真空}->{newtester.出料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.测试吸提前开真空 != newtester.测试吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试吸提前开真空]:{oldtester.测试吸提前开真空}->{newtester.测试吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
+                            
+                            if (oldtester.Auto侧敲使能 != newtester.Auto侧敲使能) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto侧敲使能]:{oldtester.Auto侧敲使能}->{newtester.Auto侧敲使能}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.前侧同时敲击 != newtester.前侧同时敲击) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[前侧同时敲击]:{oldtester.前侧同时敲击}->{newtester.前侧同时敲击}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.放置多少颗敲击 != newtester.放置多少颗敲击) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[放置多少颗敲击]:{oldtester.放置多少颗敲击}->{newtester.放置多少颗敲击}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.Auto侧敲次数 != newtester.Auto侧敲次数) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto侧敲次数]:{oldtester.Auto侧敲次数}->{newtester.Auto侧敲次数}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.侧敲间隔 != newtester.侧敲间隔) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲间隔]:{oldtester.侧敲间隔}->{newtester.侧敲间隔}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.放料时允许侧敲 != newtester.放料时允许侧敲) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[放料时允许侧敲]:{oldtester.放料时允许侧敲}->{newtester.放料时允许侧敲}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.侧敲时允许放料 != newtester.侧敲时允许放料) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲时允许放料]:{oldtester.侧敲时允许放料}->{newtester.侧敲时允许放料}:更新成功", WriteData.LogType.ParamLog); }
 
                             if (value == 设置信息.测试机信息.测试机名称)
                             {
@@ -6736,300 +6760,309 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
-            string sql = $"create table f_{"ZRS202506200955_TE_LIN" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
-            string sql2 = $"create table o_{"ZRS202506200955_TE_LIN" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
-            int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
-            int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
+            //int trayid = 1;
+            //Auto1正在侧敲 = false;
+            //Auto2正在侧敲 = true;
+            //bool outzenable1 = false || !Auto1正在侧敲;
+            //bool outzenable2 = false || !Auto2正在侧敲;
+            //if (trayid > 1 || ((trayid == 0 && outzenable1) || (trayid == 1 && outzenable2)))
+            //{
+            //    Debug.WriteLine("执行");
+            //}
+            //string sql = $"create table f_{"ZRS202506200955_TE_LIN" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+            //string sql2 = $"create table o_{"ZRS202506200955_TE_LIN" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+            //int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
+            //int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
             //string sql = $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
             //string sql2 = $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
             //int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
             //int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
 
-            //if (line != -1)
-            //{
-            //    //isstart = false;
-            //    Listcode.Add("1400330");
-            //    RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
-            //}
+                //if (line != -1)
+                //{
+                //    //isstart = false;
+                //    Listcode.Add("1400330");
+                //    RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
+                //}
 
-            //if (line1 != -1)
-            //{
-            //    //isstart = false;
-            //    Listcode.Add("1400330");
-            //    RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
-            //}
+                //if (line1 != -1)
+                //{
+                //    //isstart = false;
+                //    Listcode.Add("1400330");
+                //    RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
+                //}
 
-            //string sql3 = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
-            //                    $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','123456')";
-            //SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql3);
-            //doutContinueFail[7][5] = 10;
-            //bool isyieldex = false;
-            //bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
-            //bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
-            //int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+                //string sql3 = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
+                //                    $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','123456')";
+                //SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql3);
+                //doutContinueFail[7][5] = 10;
+                //bool isyieldex = false;
+                //bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
+                //bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
+                //int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
 
-            //for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
-            //{
-            //    for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
-            //    {
-            //        if (doutContinueFail[site][dut] >= doutfailnum)
-            //        {
-            //            string code = $"6{site + 1:D2}0{dut + 1}14";
-            //            if (isalarm) //dout连续不良报警
-            //            {
-            //                RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
-            //                doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
-            //                isyieldex = true;
-            //                Listcode.Add(code);
-            //            }
-            //            if (isautoclose) //dout连续不良自动关闭该dout，
-            //            {
-            //                int dout = site * 8 + dut + 1;
-            //                string labelname = $"lbl_dout{dout}";
-            //                设置信息.开site信息.SetSiteValue(site, dut, "0");
-            //                string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
-            //                if (result != "Success")
-            //                {
-            //                    RunLog("Site保存失败!" + result);
-            //                }
-            //                //result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
-            //                //if (result != "Success")
-            //                //{
-            //                //    RunLog("Site读取失败!" + result);
-            //                //}
-            //                //设置信息.开site信息 = siteStatus;
-            //                刷新开Site状态();
-            //            }
-            //        }
-            //    }
-            //}
+                //for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
+                //{
+                //    for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
+                //    {
+                //        if (doutContinueFail[site][dut] >= doutfailnum)
+                //        {
+                //            string code = $"6{site + 1:D2}0{dut + 1}14";
+                //            if (isalarm) //dout连续不良报警
+                //            {
+                //                RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
+                //                doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
+                //                isyieldex = true;
+                //                Listcode.Add(code);
+                //            }
+                //            if (isautoclose) //dout连续不良自动关闭该dout，
+                //            {
+                //                int dout = site * 8 + dut + 1;
+                //                string labelname = $"lbl_dout{dout}";
+                //                设置信息.开site信息.SetSiteValue(site, dut, "0");
+                //                string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+                //                if (result != "Success")
+                //                {
+                //                    RunLog("Site保存失败!" + result);
+                //                }
+                //                //result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
+                //                //if (result != "Success")
+                //                //{
+                //                //    RunLog("Site读取失败!" + result);
+                //                //}
+                //                //设置信息.开site信息 = siteStatus;
+                //                刷新开Site状态();
+                //            }
+                //        }
+                //    }
+                //}
 
 
-            //double 测试_梭车2放_X = 初始点位.测试_梭车2放_X;
-            //double 测试_梭车2右放_X = 点位微调.测试_梭车2右放_X;
-            //double 测试_梭车1放_X = 初始点位.测试_梭车1放_X;
-            //double 测试_梭车1右放_X = 点位微调.测试_梭车1右放_X;
-            //double xpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
-            //double xpos2 = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
-            //H5509归零 = true;
-            //设备状态 = 1;
-            //if (!IsPause && (设备状态 == 1 || H5509正在归零))
-            //{
-            //    if (!安全门禁用)
-            //    {
-            //        string[] io = new string[4] { "0", "1", "1", "1" };
+                //double 测试_梭车2放_X = 初始点位.测试_梭车2放_X;
+                //double 测试_梭车2右放_X = 点位微调.测试_梭车2右放_X;
+                //double 测试_梭车1放_X = 初始点位.测试_梭车1放_X;
+                //double 测试_梭车1右放_X = 点位微调.测试_梭车1右放_X;
+                //double xpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
+                //double xpos2 = 飞梭2位置 == 0 ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
+                //H5509归零 = true;
+                //设备状态 = 1;
+                //if (!IsPause && (设备状态 == 1 || H5509正在归零))
+                //{
+                //    if (!安全门禁用)
+                //    {
+                //        string[] io = new string[4] { "0", "1", "1", "1" };
 
-            //        if (io[0] == "0" || io[1] == "0" || io[2] == "0" || io[3] == "0")
-            //        {
-            //            if (io[11] == "0")
-            //            {
-            //                Listcode.Add("9000000");
-            //                RunLog("[Code]9000000,[Msg](运行中)前门禁被打开", LogType.AlarmLog);
-            //            }
-            //            if (io[12] == "0")
-            //            {
-            //                Listcode.Add("9000010");
-            //                RunLog("[Code]9000010,[Msg](运行中)后门禁被打开", LogType.AlarmLog);
-            //            }
-            //            if (io[13] == "0")
-            //            {
-            //                Listcode.Add("9000020");
-            //                RunLog("[Code]9000020,[Msg](运行中)左门禁被打开", LogType.AlarmLog);
-            //            }
-            //            if (io[14] == "0")
-            //            {
-            //                Listcode.Add("9000040");
-            //                RunLog("[Code]9000040,[Msg](运行中)右门禁被打开", LogType.AlarmLog);
-            //            }
-            //            ProgramPause = true;
-            //            IsPause = true;
-            //        }
-            //    }
+                //        if (io[0] == "0" || io[1] == "0" || io[2] == "0" || io[3] == "0")
+                //        {
+                //            if (io[11] == "0")
+                //            {
+                //                Listcode.Add("9000000");
+                //                RunLog("[Code]9000000,[Msg](运行中)前门禁被打开", LogType.AlarmLog);
+                //            }
+                //            if (io[12] == "0")
+                //            {
+                //                Listcode.Add("9000010");
+                //                RunLog("[Code]9000010,[Msg](运行中)后门禁被打开", LogType.AlarmLog);
+                //            }
+                //            if (io[13] == "0")
+                //            {
+                //                Listcode.Add("9000020");
+                //                RunLog("[Code]9000020,[Msg](运行中)左门禁被打开", LogType.AlarmLog);
+                //            }
+                //            if (io[14] == "0")
+                //            {
+                //                Listcode.Add("9000040");
+                //                RunLog("[Code]9000040,[Msg](运行中)右门禁被打开", LogType.AlarmLog);
+                //            }
+                //            ProgramPause = true;
+                //            IsPause = true;
+                //        }
+                //    }
 
-            //if (!IsPause && 设备状态 == 1)
-            //{
-            //    if (io[27] == "0")
-            //    {
-            //        Listcode.Add("1400020"); //系统错误--气压不足
-            //        ProgramPause = true;
-            //        IsPause = true;
-            //    }
-            //}
-            //}
-            //int interval = TrayInterval;
-            //string[] logs = new string[1000];
-            //for (int i = 0; i < logs.Length; i++)
-            //{
-            //    Log.AddLog("debug", "run","调试log:" + i);
-            //}
-            //Log.LogTimer_Tick(null,null);
-            ////飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
-            //飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { true, false, false, false } };
-            ////if (入料手臂停止工作标记 && 结批标记)
-            //{
-            //    bool[] open = new bool[]
-            //                    {
-            //                        飞梭后入料IC[0][0], 飞梭后入料IC[0][1], 飞梭后入料IC[0][2], 飞梭后入料IC[0][3],
-            //                        飞梭后入料IC[1][0], 飞梭后入料IC[1][1], 飞梭后入料IC[1][2], 飞梭后入料IC[1][3]
-            //                    };
+                //if (!IsPause && 设备状态 == 1)
+                //{
+                //    if (io[27] == "0")
+                //    {
+                //        Listcode.Add("1400020"); //系统错误--气压不足
+                //        ProgramPause = true;
+                //        IsPause = true;
+                //    }
+                //}
+                //}
+                //int interval = TrayInterval;
+                //string[] logs = new string[1000];
+                //for (int i = 0; i < logs.Length; i++)
+                //{
+                //    Log.AddLog("debug", "run","调试log:" + i);
+                //}
+                //Log.LogTimer_Tick(null,null);
+                ////飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+                //飞梭后入料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { true, false, false, false } };
+                ////if (入料手臂停止工作标记 && 结批标记)
+                //{
+                //    bool[] open = new bool[]
+                //                    {
+                //                        飞梭后入料IC[0][0], 飞梭后入料IC[0][1], 飞梭后入料IC[0][2], 飞梭后入料IC[0][3],
+                //                        飞梭后入料IC[1][0], 飞梭后入料IC[1][1], 飞梭后入料IC[1][2], 飞梭后入料IC[1][3]
+                //                    };
 
-            //    bool[] open2 = new bool[]
-            //    {
-            //                        飞梭前入料IC[0][0], 飞梭前入料IC[0][1], 飞梭前入料IC[0][2], 飞梭前入料IC[0][3],
-            //                        飞梭前入料IC[1][0], 飞梭前入料IC[1][1], 飞梭前入料IC[1][2], 飞梭前入料IC[1][3]
-            //    };
+                //    bool[] open2 = new bool[]
+                //    {
+                //                        飞梭前入料IC[0][0], 飞梭前入料IC[0][1], 飞梭前入料IC[0][2], 飞梭前入料IC[0][3],
+                //                        飞梭前入料IC[1][0], 飞梭前入料IC[1][1], 飞梭前入料IC[1][2], 飞梭前入料IC[1][3]
+                //    };
 
-            //    bool[] open3 = new bool[]
-            //    {
-            //                        放料IC目标值[0][0], 放料IC目标值[0][1], 放料IC目标值[0][2], 放料IC目标值[0][3],
-            //                        放料IC目标值[1][0], 放料IC目标值[1][1], 放料IC目标值[1][2], 放料IC目标值[1][3]
-            //    };
+                //    bool[] open3 = new bool[]
+                //    {
+                //                        放料IC目标值[0][0], 放料IC目标值[0][1], 放料IC目标值[0][2], 放料IC目标值[0][3],
+                //                        放料IC目标值[1][0], 放料IC目标值[1][1], 放料IC目标值[1][2], 放料IC目标值[1][3]
+                //    };
 
-            //    bool[] open6 = new bool[]
-            //    {
-            //                        正在吸取后入料[0], 正在吸取后入料[1], 正在吸取后入料[2], 正在吸取后入料[3],
-            //                        正在吸取后入料[4], 正在吸取后入料[5], 正在吸取后入料[6], 正在吸取后入料[7]
-            //    };
+                //    bool[] open6 = new bool[]
+                //    {
+                //                        正在吸取后入料[0], 正在吸取后入料[1], 正在吸取后入料[2], 正在吸取后入料[3],
+                //                        正在吸取后入料[4], 正在吸取后入料[5], 正在吸取后入料[6], 正在吸取后入料[7]
+                //    };
 
-            //    bool[] open7 = new bool[]
-            //    {
-            //                        正在放置前入料[0][0], 正在放置前入料[0][1], 正在放置前入料[0][2], 正在放置前入料[0][3],
-            //                        正在放置前入料[1][0], 正在放置前入料[1][1], 正在放置前入料[1][2], 正在放置前入料[1][3]
-            //    };
+                //    bool[] open7 = new bool[]
+                //    {
+                //                        正在放置前入料[0][0], 正在放置前入料[0][1], 正在放置前入料[0][2], 正在放置前入料[0][3],
+                //                        正在放置前入料[1][0], 正在放置前入料[1][1], 正在放置前入料[1][2], 正在放置前入料[1][3]
+                //    };
 
-            //    结批时判断是否关site(open, open2, open3, out bool[] open4, out bool[] open5);
+                //    结批时判断是否关site(open, open2, open3, out bool[] open4, out bool[] open5);
 
-            //    if (open4.Contains(true))
-            //    {
-            //        for (int i = 0; i < open3.Length; i++)
-            //        {
-            //            if (!open3[i] && open[i] && !open6[i])
-            //            {
-            //                open[i] = false;
-            //            }
-            //        }
-            //    }
+                //    if (open4.Contains(true))
+                //    {
+                //        for (int i = 0; i < open3.Length; i++)
+                //        {
+                //            if (!open3[i] && open[i] && !open6[i])
+                //            {
+                //                open[i] = false;
+                //            }
+                //        }
+                //    }
 
-            //    if (open5.Contains(true))
-            //    {
-            //        for (int i = 0; i < open3.Length; i++)
-            //        {
-            //            if (!open3[i] && open2[i] && !open7[i])
-            //            {
-            //                open2[i] = false;
-            //            }
-            //        }
-            //    }
+                //    if (open5.Contains(true))
+                //    {
+                //        for (int i = 0; i < open3.Length; i++)
+                //        {
+                //            if (!open3[i] && open2[i] && !open7[i])
+                //            {
+                //                open2[i] = false;
+                //            }
+                //        }
+                //    }
 
-            //    if (!open.Contains(true) && !open2.Contains(true))
-            //    {
-            //        RunLog("aaa");
-            //        //测试手臂入料停止工作标记 = true;
-            //        //PS测试手臂取待测料流程.Processing = false;
-            //        //PS测试手臂取待测料流程.StepID = 500;
-            //        //break;
-            //    }
-            //}
+                //    if (!open.Contains(true) && !open2.Contains(true))
+                //    {
+                //        RunLog("aaa");
+                //        //测试手臂入料停止工作标记 = true;
+                //        //PS测试手臂取待测料流程.Processing = false;
+                //        //PS测试手臂取待测料流程.StepID = 500;
+                //        //break;
+                //    }
+                //}
 
-            //结批时判断是否关site(out bool[] open, out bool[] open2);
+                //结批时判断是否关site(out bool[] open, out bool[] open2);
 
-            //飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
-            //飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
-            //if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true))
-            //{
-            //    if (放料IC目标值[0].Contains(true))
-            //    {
-            //        if (飞梭后入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true))
-            //        {
-            //            for (int i = 0; i < 放料IC目标值[0].Length; i++)
-            //            {
-            //                if (!放料IC目标值[0][i])
-            //                {
-            //                    if (飞梭后入料IC[0][i] || 飞梭前入料IC[0][i])
-            //                    {
-            //                        RunLog($"梭车后入料：Dut{i + 1}中IC无法被取出");
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //    if (放料IC目标值[1].Contains(true))
-            //    {
-            //        if (飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[1].Contains(true))
-            //        {
-            //            for (int i = 0; i < 放料IC目标值[1].Length; i++)
-            //            {
-            //                if (!放料IC目标值[1][i])
-            //                {
-            //                    if (飞梭后入料IC[1][i] || 飞梭前入料IC[1][i])
-            //                    {
-            //                        RunLog($"梭车后入料：Dut{i + 4 + 1}中IC无法被取出");
-            //                    }
-            //                }
-            //            }
-            //        }
-            //    }
-            //}
+                //飞梭前入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+                //飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+                //if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true))
+                //{
+                //    if (放料IC目标值[0].Contains(true))
+                //    {
+                //        if (飞梭后入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true))
+                //        {
+                //            for (int i = 0; i < 放料IC目标值[0].Length; i++)
+                //            {
+                //                if (!放料IC目标值[0][i])
+                //                {
+                //                    if (飞梭后入料IC[0][i] || 飞梭前入料IC[0][i])
+                //                    {
+                //                        RunLog($"梭车后入料：Dut{i + 1}中IC无法被取出");
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+                //    if (放料IC目标值[1].Contains(true))
+                //    {
+                //        if (飞梭后入料IC[1].Contains(true) || 飞梭前入料IC[1].Contains(true))
+                //        {
+                //            for (int i = 0; i < 放料IC目标值[1].Length; i++)
+                //            {
+                //                if (!放料IC目标值[1][i])
+                //                {
+                //                    if (飞梭后入料IC[1][i] || 飞梭前入料IC[1][i])
+                //                    {
+                //                        RunLog($"梭车后入料：Dut{i + 4 + 1}中IC无法被取出");
+                //                    }
+                //                }
+                //            }
+                //        }
+                //    }
+                //}
 
-            //for (int i = 0; i < Auto2XPoint.Length; i++)
-            //{
-            //    for (int j = 0; j < Auto2YPoint.Length; j++)
-            //    {
-            //        Auto2DicPoint[$"{i},{j}"] = false;
-            //        //trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
-            //        //Auto2DicBin[$"{i},{j}"] = "";
-            //    }
-            //}
-            //Auto2DicPoint[$"0,0"] = true;
-            //bool isIC1 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
-            //if (!isIC1 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
-            //{
-            //    RunLog("食醋胡");
-            //    //auto2isding = true;
-            //    //抓盘手臂放空盘到Auto2标记 = 2;
-            //}
-            //string result = handler.飞梭_前后检测产品感应(out string[] iovalues);
-            //if (result == "Success")
-            //{
-            //    if (!iovalues.Contains("0"))
-            //    {
-            //       //PS入飞梭移动流程.StepID = 515;
-            //    }
-            //    else
-            //    {
-            //        RunLog("飞梭前后检测产品感应有IC放歪");
-            //        //ProgramPause = true;
-            //        //IsPause = true;
-            //    }
-            //}
-            //飞梭前出料BIN项 = new string[][] { new string[] { "01", "02", "03", "04" }, new string[] { "05", "06", "07", "08" } };
+                //for (int i = 0; i < Auto2XPoint.Length; i++)
+                //{
+                //    for (int j = 0; j < Auto2YPoint.Length; j++)
+                //    {
+                //        Auto2DicPoint[$"{i},{j}"] = false;
+                //        //trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
+                //        //Auto2DicBin[$"{i},{j}"] = "";
+                //    }
+                //}
+                //Auto2DicPoint[$"0,0"] = true;
+                //bool isIC1 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
+                //if (!isIC1 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
+                //{
+                //    RunLog("食醋胡");
+                //    //auto2isding = true;
+                //    //抓盘手臂放空盘到Auto2标记 = 2;
+                //}
+                //string result = handler.飞梭_前后检测产品感应(out string[] iovalues);
+                //if (result == "Success")
+                //{
+                //    if (!iovalues.Contains("0"))
+                //    {
+                //       //PS入飞梭移动流程.StepID = 515;
+                //    }
+                //    else
+                //    {
+                //        RunLog("飞梭前后检测产品感应有IC放歪");
+                //        //ProgramPause = true;
+                //        //IsPause = true;
+                //    }
+                //}
+                //飞梭前出料BIN项 = new string[][] { new string[] { "01", "02", "03", "04" }, new string[] { "05", "06", "07", "08" } };
 
-            //string[][] bins = new string[2][]
-            // {
-            //    new string[]{ 飞梭前出料BIN项[0][0], 飞梭前出料BIN项[0][1], 飞梭前出料BIN项[0][2], 飞梭前出料BIN项[0][3]},
-            //    new string[]{ 飞梭前出料BIN项[1][0], 飞梭前出料BIN项[1][1], 飞梭前出料BIN项[1][2], 飞梭前出料BIN项[1][3]},
-            // };
+                //string[][] bins = new string[2][]
+                // {
+                //    new string[]{ 飞梭前出料BIN项[0][0], 飞梭前出料BIN项[0][1], 飞梭前出料BIN项[0][2], 飞梭前出料BIN项[0][3]},
+                //    new string[]{ 飞梭前出料BIN项[1][0], 飞梭前出料BIN项[1][1], 飞梭前出料BIN项[1][2], 飞梭前出料BIN项[1][3]},
+                // };
 
-            //for (int i = 0; i < bins.Length; i++)
-            //{
-            //    for (int j = 0; j < bins[i].Length; j++)
-            //    {
-            //        oth = bins[i][j];
-            //        if (!Auto1.Split(",").Contains(oth) && !Auto2.Split(",").Contains(oth) && !Fix1.Split(",").Contains(oth) && !Fix2.Split(",").Contains(oth) && !Fix3.Split(",").Contains(oth))
-            //        {
-            //            if (!othAll.Contains(oth))
-            //            {
-            //                othAll += oth + ",";
-            //            }
-            //            bins[i][j] = "OTH";
-            //        }
-            //    }
-            //}
-            //handler.debug();
-            //for (int i = 0; i < 1000; i++)
-            //{
-            //    Listcode.Add(i.ToString());
-            //}
+                //for (int i = 0; i < bins.Length; i++)
+                //{
+                //    for (int j = 0; j < bins[i].Length; j++)
+                //    {
+                //        oth = bins[i][j];
+                //        if (!Auto1.Split(",").Contains(oth) && !Auto2.Split(",").Contains(oth) && !Fix1.Split(",").Contains(oth) && !Fix2.Split(",").Contains(oth) && !Fix3.Split(",").Contains(oth))
+                //        {
+                //            if (!othAll.Contains(oth))
+                //            {
+                //                othAll += oth + ",";
+                //            }
+                //            bins[i][j] = "OTH";
+                //        }
+                //    }
+                //}
+                //handler.debug();
+                //for (int i = 0; i < 1000; i++)
+                //{
+                //    Listcode.Add(i.ToString());
+                //}
         }
 
         private void button228_Click(object sender, EventArgs e)
@@ -7504,7 +7537,7 @@ namespace H5509_V2
         /// 新增Tray盘信息
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="e"></param> 
         private void uiButton7_Click_1(object sender, EventArgs e)
         {
             NewTrayInfo newTrayInfo = new NewTrayInfo();
@@ -7830,7 +7863,6 @@ namespace H5509_V2
             刷新调试(e.TabPage.Text);
         }
 
-
         private void uiButton29_Click_1(object sender, EventArgs e)
         {
             string 设置与维护 = uiComboBox3.Text; //设置与维护
@@ -7963,6 +7995,7 @@ namespace H5509_V2
                 }));
             });
         }
+
         private void Auto1顶盘手臂移动初始点位(double mm)
         {
             button251.Enabled = false;
@@ -7983,6 +8016,7 @@ namespace H5509_V2
                 }));
             });
         }
+
         private void Auto2顶盘手臂移动初始点位(double mm)
         {
             button252.Enabled = false;
@@ -8140,6 +8174,63 @@ namespace H5509_V2
                 RunLog("执行SQl异常：" + sql2);
                 RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
             }
+        }
+
+        private void uiButton30_Click_1(object sender, EventArgs e)
+        {
+            uiButton30.Enabled = false;
+            Task.Run(() =>
+            {
+                int count = Convert.ToInt32(numericUpDown184.Value); //敲击次数
+                int delay = Convert.ToInt32(numericUpDown186.Value); //敲击间隔
+                for (int i = 0; i < count; i++)
+                {
+                    if (checkBox9.Checked) //前侧同时敲击
+                    {
+                        handler.Auto1_Tray前侧定位气缸原位输出(10);
+                        Thread.Sleep(delay);
+                        handler.Auto1_Tray前侧定位气缸到位输出(10);
+                        Thread.Sleep(delay);
+                    }
+                    else
+                    {
+                        handler.Auto1_Tray侧定位气缸原位输出(10);
+                        Thread.Sleep(delay);
+                        handler.Auto1_Tray侧定位气缸到位输出(10);
+                        Thread.Sleep(delay);
+                    }
+                }
+                this.Invoke(new Action(() => { uiButton30.Enabled = true; }));
+                
+            });
+        }
+
+        private void uiButton31_Click(object sender, EventArgs e)
+        {
+            uiButton31.Enabled = false;
+            Task.Run(() =>
+            {
+                int count = Convert.ToInt32(numericUpDown184.Value); //敲击次数
+                int delay = Convert.ToInt32(numericUpDown186.Value); //敲击间隔
+                for (int i = 0; i < count; i++)
+                {
+                    if (checkBox9.Checked) //前侧同时敲击
+                    {
+                        handler.Auto2_Tray前侧定位气缸原位输出(10);
+                        Thread.Sleep(delay);
+                        handler.Auto2_Tray前侧定位气缸到位输出(10);
+                        Thread.Sleep(delay);
+                    }
+                    else
+                    {
+                        handler.Auto2_Tray侧定位气缸原位输出(10);
+                        Thread.Sleep(delay);
+                        handler.Auto2_Tray侧定位气缸到位输出(10);
+                        Thread.Sleep(delay);
+                    }
+                }
+                this.Invoke(new Action(() => { uiButton31.Enabled = true; }));
+            });
         }
     }
 }

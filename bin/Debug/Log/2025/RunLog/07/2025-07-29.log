@@ -1,0 +1,6 @@
+2025-07-29 09:38:21  =>  GTN_Open(5,1):(-6)
+2025-07-29 09:38:21  =>  [error][2025-07-29 09:38:21]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 46
+   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V2\动作\Motion.cs:行号 59
+2025-07-29 09:38:32  =>  [Code]1400448,[Msg]温控器连接失败!
