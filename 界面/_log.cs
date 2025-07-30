@@ -82,6 +82,10 @@ namespace H5509_V2
             uiComboBox13.DataSource = new string[] { "7", "8" };
             uiComboBox15.DataSource = new string[] { "1", "2" };
 
+            dateTimePicker1.Value = DateTime.Now; //开始时间的结束时间
+            dateTimePicker2.Value = DateTime.Now.AddDays(-1); //开始时间的开始时间
+
+            textBox2.Text = Directory.GetCurrentDirectory() + "\\Log";
         }
 
         private void _log_Load(object sender, EventArgs e)
@@ -905,7 +909,9 @@ namespace H5509_V2
         public void update_listBox1()
         {
             listBox1.Items.Clear();
-            string sql = $"select 开始时间,工单号,生产模式 from FlowcaedNoInfo where 工单号 like '%{textBox5.Text}%' order by 开始时间 desc";
+            string startime = uiCheckBox210.Checked ? $"and 开始时间 <= '{dateTimePicker1.Value:yyyy年MM月dd日 HH:mm:ss}'" : ""; 
+            string endtime = uiCheckBox1.Checked ? $"and 开始时间 >= '{dateTimePicker2.Value:yyyy年MM月dd日 HH:mm:ss}'" : ""; //结束时间
+            string sql = $"select 开始时间,工单号,生产模式 from FlowcaedNoInfo where 工单号 like '%{textBox5.Text}%' {startime} {endtime} order by 开始时间 desc";
 
             string res = SQLiteHelper.runSql(SQLiteRunningString, sql, out DataTable dt);
             if (res != "Success" || dt.Rows.Count < 1) return;
@@ -1688,6 +1694,62 @@ namespace H5509_V2
 
             }
         }
+
+        public void ExportDataGridViewToExcel(DataTable dataTable, string filePath, bool header = true)
+        {
+            // 创建一个XLWorkbook对象
+            using (var workbook = new XLWorkbook())
+            {
+                // 添加一个工作表
+                var worksheet = workbook.Worksheets.Add("Sheet1");
+
+                int h = 1;
+                if (header)
+                {
+                    for (int i = 0; i < dataTable.Columns.Count; i++)
+                    {
+                        // 导出列头
+                        worksheet.Cell(1, i + 1).Value = dataTable.Columns[i].ColumnName;
+                    }
+                    h = 2;
+                }
+
+                // 导出数据
+                for (int i = 0; i < dataTable.Rows.Count; i++)
+                {
+                    for (int j = 0; j < dataTable.Columns.Count; j++)
+                    {
+                        if (j == 0 || j == 1)
+                        {
+                            if (DateTime.TryParse(dataTable.Rows[i][j].ToString(), out DateTime wtime))
+                            {
+                                worksheet.Cell(i + h, j + 1).Value = wtime;
+                            }
+                            else worksheet.Cell(i + h, j + 1).Value = dataTable.Rows[i][j].ToString();
+                        }
+                        else
+                        {
+                            if (long.TryParse(dataTable.Rows[i][j].ToString(), out long result))
+                            {
+                                worksheet.Cell(i + h, j + 1).Value = result;
+                            }
+                            else worksheet.Cell(i + h, j + 1).Value = dataTable.Rows[i][j].ToString();
+                        }
+
+                    }
+                }
+
+                for (int i = 0; i < dataTable.Columns.Count; i++)
+                {
+                    // 设置列宽以适应内容（可选）
+                    worksheet.Column(i + 1).AdjustToContents();
+                }
+
+                // 保存工作簿到文件
+                workbook.SaveAs(filePath);
+
+            }
+        }
         private void button_out1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
@@ -1866,5 +1928,146 @@ namespace H5509_V2
             }
         }
 
+        private void uiButton19_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                // 配置对话框属性（可选）
+                folderDialog.Description = "请选择一个文件夹"; // 对话框标题
+                folderDialog.ShowNewFolderButton = true; // 显示“新建文件夹”按钮
+                folderDialog.SelectedPath = Directory.GetCurrentDirectory() + "\\Log";
+
+                // 显示对话框并获取结果
+                if (folderDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string folderPath = folderDialog.SelectedPath; // 选中的文件夹完整路径
+                    textBox2.Text = folderPath;
+                }
+            }
+        }
+
+        private void uiButton20_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (textBox2.Text.Length == 0)
+                {
+                    MessageBox.Show("请选择保存路径!");
+                    return;
+                }
+
+                if (!new DirectoryInfo(textBox2.Text).Exists)
+                {
+                    MessageBox.Show("路径不存在!", "提示");
+                    return;
+                }
+
+                System.Diagnostics.Process.Start("explorer.exe", textBox2.Text);
+            }
+            catch (Exception ex)
+            {
+                string errortext = "打开文件夹失败!详细信息:" + ex.Message;
+                MessageBox.Show(errortext, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                RunLog(errortext);
+            }
+        }
+
+        private void uiButton21_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text.Length == 0)
+            {
+                MessageBox.Show("请选择保存路径!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!new DirectoryInfo(textBox2.Text).Exists)
+            {
+                MessageBox.Show("路径不存在!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DateTime end = dateTimePicker1.Value;
+            DateTime start = dateTimePicker2.Value;
+
+            int startYear = start.Year;
+            int startMonth = start.Month;
+            int startDay = start.Day;
+
+            int endYear = end.Year;
+            int endMonth = end.Month;
+            int endDay = end.Day;
+            int endh = end.Hour;
+
+            try
+            {
+                string startime = uiCheckBox210.Checked ? $"and 开始时间 <= '{dateTimePicker1.Value:yyyy年MM月dd日 HH:mm:ss}'" : "";
+                string endtime = uiCheckBox1.Checked ? $"and 开始时间 >= '{dateTimePicker2.Value:yyyy年MM月dd日 HH:mm:ss}'" : ""; //结束时间
+                string sql = $"select * from FlowcaedNoInfo where 工单号 like '%{textBox5.Text}%' {startime} {endtime} order by 开始时间 desc";
+
+                string res = SQLiteHelper.runSql(SQLiteRunningString, sql, out DataTable dt);
+                if (res != "Success" || dt.Rows.Count < 1)
+                {
+                    MessageBox.Show("无数据信息!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                //string sql = $"select * from BatchInfo where 结束时间 > '{start.ToString("yyyy-MM-dd HH:mm:ss")}' and 结束时间 < '{end.ToString("yyyy-MM-dd HH:mm:ss")}'";
+                //string result = SQLiteHelper.runSql(SQLiteConnString, sql, out DataTable datatable);
+
+                //if (datatable.Rows.Count == 0)
+                //{
+                //    MessageBox.Show("无数据信息!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                ///}
+
+                DateTime time = DateTime.Now;
+                string fileName = "";
+                string lotno = textBox5.Text.Trim().Length > 0 ? $"(工单号_{textBox5.Text.Trim()})" : "";
+                if (uiCheckBox1.Checked && uiCheckBox210.Checked)
+                {
+                    fileName = textBox2.Text + "\\" + $"生产信息{startYear}.{startMonth:00}.{startDay:00}至{endYear}.{endMonth:00}.{endDay:00}{lotno}-{time.Hour:00}{time.Minute:00}{time.Second:00}" + ".xlsx";
+                }
+                else if (!uiCheckBox1.Checked && uiCheckBox210.Checked)
+                {
+                    fileName = textBox2.Text + "\\" + $"生产信息{endYear}.{endMonth:00}.{endDay:00}以前{lotno}-{time.Hour:00}{time.Minute:00}{time.Second:00}" + ".xlsx";
+                }
+                else if (uiCheckBox1.Checked && !uiCheckBox210.Checked)
+                {
+                    fileName = textBox2.Text + "\\" + $"生产信息{startYear}.{startMonth:00}.{startDay:00}至今{lotno}-{time.Hour:00}{time.Minute:00}{time.Second:00}" + ".xlsx";
+                }
+                else
+                {
+                    fileName = textBox2.Text + "\\" + $"所有生产信息{lotno}-{time.Hour:00}{time.Minute:00}{time.Second:00}" + ".xlsx";
+                }
+
+                uiButton21.Enabled = false;
+                uiButton21.Text = "正在导出...";
+                Task.Run(() =>
+                {
+                    ExportDataGridViewToExcel(dt, fileName, true);
+                    this.Invoke(new Action(() =>
+                    {
+                        uiButton21.Enabled = true;
+                        uiButton21.Text = "导出Excel";
+                    }));
+                });
+
+                //FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                //if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+                //{
+                //    DateTime time = DateTime.Now;
+                //    string fileName = $"生产信息{time.Year}.{time.Month:00}.{time.Day:00}_{time.Hour:00}h{time.Minute:00}m{time.Second:00}s";
+                //    string selectedFolderPath = folderBrowserDialog.SelectedPath;
+                //    ExportDataGridViewToExcel(dataTable, folderBrowserDialog.SelectedPath + "\\" + $"{fileName}.xlsx");
+                //}
+            }
+            catch (Exception ex)
+            {
+                uiButton21.Enabled = true;
+                uiButton21.Text = "导出Excel";
+                MessageBox.Show("导出异常!详细信息:" + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
+    
 }

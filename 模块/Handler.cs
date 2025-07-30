@@ -4569,6 +4569,7 @@ namespace H5509_V2
                         {
                             正在结批 = true;
                             RunLog("正在结批", LogType.OperateLog);
+                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->正在结批...");
                             PS结批流程.Processing = true;
                             PS结批流程.StepID = 505;
                         }
@@ -4669,6 +4670,7 @@ namespace H5509_V2
 
                     case 599:
                         PS结批流程.StepName = $"数据处理";
+                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->数据处理");
                         设备状态 = 0;
                         正在结批 = false;
                         结批标记 = false;
@@ -4687,20 +4689,22 @@ namespace H5509_V2
                         Fix2TrayClear();
                         Fix3TrayClear();
 
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->开始时间:{开始时间:yyyy-MM-dd HH:mm:ss.fff}");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->按下结批时间:{按下结批时间:yyyy-MM-dd HH:mm:ss.fff}");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结批时间:" + 结批时间.ToString(@"hh\:mm\:ss"));
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结束时间:{结束时间:yyyy-MM-dd HH:mm:ss.fff}");
-                        if (批次运行时间.TotalDays >= 1) RunLog($"PS结批流程.StepID={PS结批流程.StepID}->运行时间:" + 批次运行时间.ToString(@"dd\.hh\:mm\:ss"));
-                        else RunLog($"PS结批流程.StepID={PS结批流程.StepID}->运行时间:" + 批次运行时间.ToString(@"hh\:mm\:ss"));
-                        RunLog(($"PS结批流程.StepID={PS结批流程.StepID}->UPH:" + UPHNum.ToString()));
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->载入数:{载入数}");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->总计:{出料数}");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Auto1:{Auto1数量},良率:{Auto1良率:0.0}%");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Auto2:{Auto2数量},良率:{Auto2良率: 0.0}%");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Fix1:{Fix1数量},良率:{Fix1良率: 0.0}%");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Fix2:{Fix2数量},良率:{Fix2良率: 0.0}%");
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->Fix3:{Fix3数量},良率:{Fix3良率: 0.0}%");
+                        RunLog($"吸取模式:{(空跑模式 ? "空跑模式" : "正常模式")}", LogType.OperateLog);
+                        RunLog($"测试模式:{(无测试机模式 ? "离线" : "在线")}", LogType.OperateLog);
+                        RunLog($"开始时间:{开始时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
+                        RunLog($"按下结批时间:{按下结批时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
+                        RunLog($"结批时间:" + 结批时间.ToString(@"hh\:mm\:ss"), LogType.OperateLog);
+                        RunLog($"结束时间:{结束时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
+                        if (批次运行时间.TotalDays >= 1) RunLog($"运行时间:" + 批次运行时间.ToString(@"dd\.hh\:mm\:ss"), LogType.OperateLog);
+                        else RunLog($"运行时间:" + 批次运行时间.ToString(@"hh\:mm\:ss"), LogType.OperateLog);
+                        RunLog(($"UPH:" + UPHNum.ToString()), LogType.OperateLog);
+                        RunLog($"载入数:{载入数}", LogType.OperateLog);
+                        RunLog($"总计:{出料数}", LogType.OperateLog);
+                        RunLog($"Auto1:{Auto1数量},良率:{Auto1良率:0.0}%", LogType.OperateLog);
+                        RunLog($"Auto2:{Auto2数量},良率:{Auto2良率: 0.0}%", LogType.OperateLog);
+                        RunLog($"Fix1:{Fix1数量},良率:{Fix1良率: 0.0}%", LogType.OperateLog);
+                        RunLog($"Fix2:{Fix2数量},良率:{Fix2良率: 0.0}%", LogType.OperateLog);
+                        RunLog($"Fix3:{Fix3数量},良率:{Fix3良率: 0.0}%", LogType.OperateLog);
 
                         SaveBatchData();
 
@@ -4806,8 +4810,9 @@ namespace H5509_V2
                         //合并dut信息
                         SQLiteHelper.runSqlNonQuery(SQLiteRunningString, $"UPDATE DutAll SET pass = pass + (SELECT dc.pass FROM DutCurrent dc WHERE dc.id = DutAll.id), total = total + (SELECT dc.total FROM DutCurrent dc WHERE dc.id = DutAll.id), usedTime = CAST(usedTime AS INTEGER) + (SELECT dc.usedTime FROM DutCurrent dc WHERE dc.id = DutAll.id) WHERE EXISTS ( SELECT 1 FROM DutCurrent dc WHERE dc.id = DutAll.id)");
 
+                        RunLog($"结批完成", LogType.OperateLog);
                         RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结批流程完成");
-                        RunLog("结批完成", LogType.OperateLog);
+
                         PS结批流程.StepID = 500;
                         PS结批流程.Processing = false;
                         ProgramPause = true;
@@ -6464,7 +6469,7 @@ namespace H5509_V2
 
                     case 810:
                         PS入料手臂吸放料流程.StepName = "判断抓盘手臂放空盘到Empty标记";
-                        if (抓盘手臂放空盘到Empty标记 == 1)
+                        if (抓盘手臂取Load空盘标记 == 1 && 抓盘手臂放空盘到Empty标记 == 1)
                         {
                             抓盘手臂取Load空盘标记 = 2;
                             PS入料手臂吸放料流程.StepID = 815;
@@ -10434,7 +10439,7 @@ namespace H5509_V2
                     case 500:
                         PS空盘上顶流程.StepName = "路径规划";
                         PS空盘上顶流程.Condition = Empty上顶标记 == 2;// && Empty下降标记 == 1(下降时，会要上顶流程)
-                        PS空盘上顶流程.Permit = !PS空盘上顶流程.Processing;
+                        PS空盘上顶流程.Permit = !PS空盘上顶流程.Processing; //&& !PS空盘下降流程.Processing && !PS空盘下降回零流程.Processing;
                         if (PS空盘上顶流程.Condition && PS空盘上顶流程.Permit)
                         {
                             PS空盘上顶流程.Processing = true;
@@ -10571,8 +10576,8 @@ namespace H5509_V2
                 {
                     case 500:
                         PS空盘下降流程.StepName = "路径规划";
-                        PS空盘下降流程.Condition = Empty下降标记 == 2;
-                        PS空盘下降流程.Permit = !PS空盘下降流程.Processing;
+                        PS空盘下降流程.Condition = Empty下降标记 == 2 && Empty上顶标记 == 1;
+                        PS空盘下降流程.Permit = !PS空盘下降流程.Processing && !PS空盘上顶流程.Processing && !PS空盘下降回零流程.Processing;
                         if (PS空盘下降流程.Condition && PS空盘下降流程.Permit)
                         {
                             PS空盘下降流程.Processing = true;
@@ -12283,8 +12288,18 @@ namespace H5509_V2
                 {
                     case 500:
                         PS抓盘手臂取Empty空盘流程.StepName = "路径规划";
-                        PS抓盘手臂取Empty空盘流程.Condition = 抓盘手臂取Empty空盘标记 == 2 && Empty下降标记 == 1 && Empty上顶标记 == 1;
-                        PS抓盘手臂取Empty空盘流程.Permit = !PS抓盘手臂取Empty空盘流程.Processing;
+                        PS抓盘手臂取Empty空盘流程.Condition = 抓盘手臂取Empty空盘标记 == 2 
+                                                && Empty下降标记 == 1 
+                                                && Empty上顶标记 == 1 
+                                                && 抓盘手臂放空盘到Empty标记 == 1 
+                                                && 抓盘手臂取Load空盘标记 == 1;
+
+                        PS抓盘手臂取Empty空盘流程.Permit = !PS抓盘手臂取Empty空盘流程.Processing 
+                                                && !PS空盘下降流程.Processing
+                                                && !PS空盘上顶流程.Processing 
+                                                && !PS抓盘手臂放空盘到Empty流程.Processing 
+                                                && !PS抓盘手臂取Load空盘流程.Processing;
+
                         if (PS抓盘手臂取Empty空盘流程.Condition && PS抓盘手臂取Empty空盘流程.Permit)
                         {
                             PS抓盘手臂取Empty空盘流程.Processing = true;
@@ -12604,8 +12619,23 @@ namespace H5509_V2
                 {
                     case 500:
                         PS抓盘手臂取Load空盘流程.StepName = "路径规划";
-                        PS抓盘手臂取Load空盘流程.Condition = 抓盘手臂取Load空盘标记 == 2 && Load上顶标记 == 1;
-                        PS抓盘手臂取Load空盘流程.Permit = !PS抓盘手臂取Load空盘流程.Processing;
+                        PS抓盘手臂取Load空盘流程.Condition = 抓盘手臂取Load空盘标记 == 2 
+                                                    && 抓盘手臂放空盘到Empty标记 == 1 
+                                                    && Load上顶标记 == 1
+                                                    && Empty下降标记 == 1
+                                                    && Empty上顶标记 == 1
+                                                    && !Auto1换盘标记
+                                                    && !Auto2换盘标记;
+
+                        PS抓盘手臂取Load空盘流程.Permit = !PS抓盘手臂取Load空盘流程.Processing
+                                                    && !PS待测盘上顶流程.Processing
+                                                    && !PS待测盘下降流程.Processing
+                                                    && !PS待测盘下降回零流程.Processing
+                                                    && !PS空盘下降流程.Processing
+                                                    && !PS空盘上顶流程.Processing
+                                                    && !PS空盘下降回零流程.Processing
+                                                    && !PS抓盘手臂放空盘到Empty流程.Processing;
+
                         if (PS抓盘手臂取Load空盘流程.Condition && PS抓盘手臂取Load空盘流程.Permit)
                         {
                             Empty下降标记 = 2;
@@ -12975,7 +13005,7 @@ namespace H5509_V2
                     case 500:
                         PS抓盘手臂放空盘到Empty流程.StepName = "路径规划";
                         PS抓盘手臂放空盘到Empty流程.Condition = 抓盘手臂放空盘到Empty标记 == 2 && Empty上顶标记 == 1 && Empty下降标记 == 1;
-                        PS抓盘手臂放空盘到Empty流程.Permit = true;
+                        PS抓盘手臂放空盘到Empty流程.Permit = !PS抓盘手臂放空盘到Empty流程.Processing && !PS空盘上顶流程.Processing && !PS空盘下降流程.Processing;
                         if (PS抓盘手臂放空盘到Empty流程.Condition && PS抓盘手臂放空盘到Empty流程.Permit)
                         {
                             PS抓盘手臂放空盘到Empty流程.Processing = true;
@@ -13214,8 +13244,12 @@ namespace H5509_V2
                 {
                     case 500:
                         PS抓盘手臂放空盘到Auto1流程.StepName = "路径规划";
-                        PS抓盘手臂放空盘到Auto1流程.Condition = 抓盘手臂放空盘到Auto1标记 == 2;
-                        PS抓盘手臂放空盘到Auto1流程.Permit = true;
+                        PS抓盘手臂放空盘到Auto1流程.Condition = 抓盘手臂放空盘到Auto1标记 == 2 
+                                                    && 抓盘手臂取Empty空盘标记 == 1;
+
+                        PS抓盘手臂放空盘到Auto1流程.Permit = !PS抓盘手臂放空盘到Auto1流程.Processing 
+                                                    && !PS抓盘手臂取Empty空盘流程.Processing;
+
                         if (PS抓盘手臂放空盘到Auto1流程.Condition && PS抓盘手臂放空盘到Auto1流程.Permit)
                         {
                             抓盘手臂取Empty空盘标记 = 2;
@@ -13839,8 +13873,12 @@ namespace H5509_V2
                 {
                     case 500:
                         PS抓盘手臂放空盘到Auto2流程.StepName = "路径规划";
-                        PS抓盘手臂放空盘到Auto2流程.Condition = 抓盘手臂放空盘到Auto2标记 == 2;
-                        PS抓盘手臂放空盘到Auto2流程.Permit = true;
+                        PS抓盘手臂放空盘到Auto2流程.Condition = 抓盘手臂放空盘到Auto2标记 == 2
+                                                    && 抓盘手臂取Empty空盘标记 == 1;
+
+                        PS抓盘手臂放空盘到Auto2流程.Permit = !PS抓盘手臂放空盘到Auto2流程.Processing
+                                                    && !PS抓盘手臂取Empty空盘流程.Processing;
+
                         if (PS抓盘手臂放空盘到Auto2流程.Condition && PS抓盘手臂放空盘到Auto2流程.Permit)
                         {
                             抓盘手臂取Empty空盘标记 = 2;

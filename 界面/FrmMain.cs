@@ -407,37 +407,73 @@ namespace H5509_V2
                         //Debug.WriteLine("获取日志数量:" + LogQueue.Count);
 
                         int countTemp = LogQueue.Count;
+
+                        List<string> runlog = new List<string>();
+                        List<DateTime> runlogtime = new List<DateTime>();
+
+                        List<string> operatelog = new List<string>();
+                        List<DateTime> operatelogtime = new List<DateTime>();
+
+                        List<string> alarmlog = new List<string>();
+                        List<DateTime> alarmlogtime = new List<DateTime>();
+
+                        List<string> comlog = new List<string>();
+                        List<DateTime> comlogtime = new List<DateTime>();
+
                         List<LogManager> logsTemp = new List<LogManager>();
                         for (int i = 0; i < countTemp; i++)
                         {
-                            LogQueue.TryDequeue(out LogManager log);
-                            logsTemp.Add(log);
-                        }
-
-                        string[] logs = new string[logsTemp.Count];
-                        DateTime[] logtime = new DateTime[logsTemp.Count];
-
-                        for (int i = 0; i < logsTemp.Count; i++)
-                        {
-                            logs[i] = logsTemp[i].Msg;
-                            logtime[i] = logsTemp[i].Time;
-                        }
-
-                        writeDataHelper.RunLog(logs, logtime);
-
-                        for (int i = 0; i < logsTemp.Count; i++)
-                        {
-                            if (logsTemp[i].TxtLogtype == LogType.OperateLog || logsTemp[i].TxtLogtype == LogType.ParamLog)
+                            if (LogQueue.TryDequeue(out LogManager logs))
                             {
-                                显示操作log(logsTemp[i].Msg, logsTemp[i].Time);
-                            }
-                            else if (logsTemp[i].TxtLogtype == LogType.AlarmLog)
-                            {
-                                显示报警log(logsTemp[i].Msg, logsTemp[i].Time);
+                                if (logs.TxtLogtype == LogType.RunLog)
+                                {
+                                    runlog.Add(logs.Msg);
+                                    runlogtime.Add(logs.Time);
+                                }
+                                else if(logs.TxtLogtype == LogType.OperateLog || logs.TxtLogtype == LogType.ParamLog)
+                                {
+                                    operatelog.Add(logs.Msg);
+                                    operatelogtime.Add(logs.Time);
+                                }
+                                else if (logs.TxtLogtype == LogType.AlarmLog)
+                                {
+                                    alarmlog.Add(logs.Msg);
+                                    alarmlogtime.Add(logs.Time);
+                                }
+                                else if (logs.TxtLogtype == LogType.ComLog)
+                                {
+                                    comlog.Add(logs.Msg);
+                                    comlogtime.Add(logs.Time);
+                                }
                             }
                         }
+                        if (runlog.Count > 0)
+                        {
+                            writeDataHelper.RunLog(runlog.ToArray(), runlogtime.ToArray());
+                        }
 
-                        //LogQueue.RemoveRange(0, countTemp);// 清空已添加的日志
+                        if (comlog.Count > 0)
+                        {
+                            writeDataHelper.RunLog(comlog.ToArray(), comlogtime.ToArray(), LogType.ComLog);
+                        }
+
+                        if (alarmlog.Count > 0)
+                        {
+                            writeDataHelper.RunLog(alarmlog.ToArray(), alarmlogtime.ToArray(), LogType.AlarmLog);
+                            for (int i = 0; i < alarmlog.Count; i++)
+                            {
+                                显示报警log(alarmlog[i], alarmlogtime[i]);
+                            }
+                        }
+
+                        if (operatelog.Count > 0)
+                        {
+                            writeDataHelper.RunLog(operatelog.ToArray(), operatelogtime.ToArray(), LogType.OperateLog);
+                            for (int i = 0; i < operatelog.Count; i++)
+                            {
+                                显示操作log(operatelog[i], operatelogtime[i]);
+                            }
+                        }
                     }
 
                     Thread.Sleep(500);

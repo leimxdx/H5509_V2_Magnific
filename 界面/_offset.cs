@@ -19,6 +19,32 @@ namespace H5509_V2
         {
             InitializeComponent();
 
+            TabPage[] initPointtabPages = { tabPage7, tabPage8, tabPage9, tabPage16, tabPage17 };
+            foreach (TabPage tabPage in initPointtabPages)
+            {
+                foreach (Control control in tabPage.Controls)
+                {
+                    if (control is UITitlePanel uITitle)
+                    {
+                        foreach (Control control2 in uITitle.Controls)
+                        {
+                            if (control2 is NumericUpDown numericUpDown)
+                            {
+                                numericUpDown.MouseWheel += Ctl_MouseWheel;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Ctl_MouseWheel(object sender, MouseEventArgs e)
+        {
+            // 将滚轮事件标记为已处理，阻止默认行为
+            if (e is HandledMouseEventArgs handledArgs)
+            {
+                handledArgs.Handled = true;
+            }
         }
 
         public void 刷新Offset()

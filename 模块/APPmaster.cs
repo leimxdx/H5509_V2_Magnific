@@ -3489,7 +3489,7 @@ namespace H5509_V2
 
         public static void RunLog(string info, WriteData.LogType txtType = WriteData.LogType.RunLog, bool isReceive = false, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
         {
-            Log.AddLog(excelLevel, excelType, info);
+            Log.AddLog(excelLevel, excelType, info); //写入Excel
 
             LogManager log = new LogManager()
             {
