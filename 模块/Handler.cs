@@ -3780,8 +3780,8 @@ namespace H5509_V2
                     bool again = io[3] == "1"; //X004_重试
                     if (CheckEdgeSingal(again, ref AgainRiseCache, true))
                     {
-                        入料IC忽略 = false; 
-                        出料IC忽略 = false; 
+                        入料IC忽略 = false;
+                        出料IC忽略 = false;
                         测试IC忽略 = false;
                         入料IC吸不起结批 = false;
                         RunLog("按下重试", LogType.OperateLog);
@@ -3801,8 +3801,7 @@ namespace H5509_V2
                         RunLog("按下跳过", LogType.OperateLog);
                         if (入料IC忽略 == false) 入料IC忽略 = true;
                         if (出料IC忽略 == false) 出料IC忽略 = true;
-                        if (测试IC忽略 == false) 测试IC忽略 = true; 
-                        
+                        if (测试IC忽略 == false) 测试IC忽略 = true;
                         motionEx.SetDo("Y004_重试灯", false);
                         motionEx.SetDo("Y005_忽略灯", true);
                         motionEx.SetDo("Y008_结批灯", false);
@@ -7949,8 +7948,6 @@ namespace H5509_V2
                         PS出料手臂吸放料流程.StepID = 500;
                         break;
 
-
-
                     case 805:
                         PS出料手臂吸放料流程.StepName = "出料手臂移到避让位";
                         RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
@@ -7958,8 +7955,16 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             Auto1上顶标记 = 2;
-                            PS出料手臂吸放料流程.StepID = 810;
-                            RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->判断Load未在换盘");
+                            if (设置信息.测试机信息.Auto换盘时出料Z回零)
+                            {
+                                PS出料手臂吸放料流程.StepID = 806;
+                                PS出料手臂放盘回零流程StepID = 810;
+                            }
+                            else
+                            {
+                                PS出料手臂吸放料流程.StepID = 810;
+                                RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->判断Load未在换盘");
+                            }
                         }
                         else
                         {
@@ -7968,6 +7973,71 @@ namespace H5509_V2
                             M23_出料手臂X轴ErrorMsg = result;
                             ProgramPause = true;
                             IsPause = true;
+                        }
+                        break;
+
+                    case 806:
+                        PS出料手臂吸放料流程.StepName = "出料手臂Z执行换盘回零前下降2mm";
+                        RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
+                        result = 出料手臂Z移动(new bool[] { true, true, true, true }, 2, true);
+                        if (result == "Success")
+                        {
+                            firstdzhome = true;
+                            PS出料手臂吸放料流程.StepID = 807;
+                        }
+                        else
+                        {
+                            RunLog($"出料手臂Z移动失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 807:
+                        PS出料手臂吸放料流程.StepName = "出料手臂Z执行换盘回零";
+                        RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
+                        result = 出料手臂Z回零(new bool[] { true, true, true, true });
+                        if (result == "Success")
+                        {
+                            PS出料手臂吸放料流程.StepID = 808;
+                        }
+                        else
+                        {
+                            RunLog($"出料手臂Z回零失败!" + result);
+                            ProgramPause = true;
+                            IsPause = true;
+                        }
+                        break;
+
+                    case 808:
+                        PS出料手臂吸放料流程.StepName = "出料Z是否在原点";
+                        RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{PS出料手臂吸放料流程.StepName}");
+                        result = 出料吸嘴_回原检测(out home);
+                        if (result == "Success")
+                        {
+                            if (!home.Contains("1")) //如果有1说明有吸嘴没有挡住原点
+                            {
+                                PS出料手臂吸放料流程.StepID = PS出料手臂放盘回零流程StepID;
+                            }
+                            else
+                            {
+                                for (int i = 0; i < home.Length; i++)
+                                {
+                                    if (home[i] == "1") { RunLog($"出料吸嘴Z{i + 1}没有挡住原点"); }
+                                }
+
+                                if (firstdzhome)
+                                {
+                                    firstdzhome = false;
+                                    PS出料手臂吸放料流程.StepID = 807;
+                                }
+                                else
+                                {
+                                    ProgramPause = true;
+                                    APPmaster.IsPause = true;
+                                    PS出料手臂吸放料流程.StepID = 806;
+                                }
+                            }
                         }
                         break;
 
@@ -8001,8 +8071,18 @@ namespace H5509_V2
                         if (result == "Success")
                         {
                             Auto2上顶标记 = 2;
-                            PS出料手臂吸放料流程.StepID = 910;
-                            RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->判断Load是否未在换盘");
+
+                            if (设置信息.测试机信息.Auto换盘时出料Z回零)
+                            {
+                                PS出料手臂吸放料流程.StepID = 806;
+                                PS出料手臂放盘回零流程StepID = 910;
+                            }
+                            else
+                            {
+                                PS出料手臂吸放料流程.StepID = 910;
+                                RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->判断Load是否未在换盘");
+                            }
+
                         }
                         else
                         {
@@ -8179,7 +8259,6 @@ namespace H5509_V2
                         }
                         else PS出料手臂吸放料流程.StepID = 1120;
                         break;
-
 
                     case 1110:
                         PS出料手臂吸放料流程.StepName = "Fix2满盘报警";
@@ -10963,7 +11042,7 @@ namespace H5509_V2
                             APPmaster.ProgramPause = true;
                             IsPause = true;
                             Listcode.Add("4019003"); //添加报警弹窗
-                            RunLog($"[Code]4019003,[Msg]待测区没有盘", LogType.AlarmLog); 
+                            RunLog($"[Code]4019003,[Msg]待测区没有盘", LogType.AlarmLog);
                             motionEx.SetDo("Y004_重试灯", true);
                             motionEx.SetDo("Y008_结批灯", true);
                             PS待测盘上顶流程.StepID = 610;
@@ -12288,16 +12367,16 @@ namespace H5509_V2
                 {
                     case 500:
                         PS抓盘手臂取Empty空盘流程.StepName = "路径规划";
-                        PS抓盘手臂取Empty空盘流程.Condition = 抓盘手臂取Empty空盘标记 == 2 
-                                                && Empty下降标记 == 1 
-                                                && Empty上顶标记 == 1 
-                                                && 抓盘手臂放空盘到Empty标记 == 1 
+                        PS抓盘手臂取Empty空盘流程.Condition = 抓盘手臂取Empty空盘标记 == 2
+                                                && Empty下降标记 == 1
+                                                && Empty上顶标记 == 1
+                                                && 抓盘手臂放空盘到Empty标记 == 1
                                                 && 抓盘手臂取Load空盘标记 == 1;
 
-                        PS抓盘手臂取Empty空盘流程.Permit = !PS抓盘手臂取Empty空盘流程.Processing 
+                        PS抓盘手臂取Empty空盘流程.Permit = !PS抓盘手臂取Empty空盘流程.Processing
                                                 && !PS空盘下降流程.Processing
-                                                && !PS空盘上顶流程.Processing 
-                                                && !PS抓盘手臂放空盘到Empty流程.Processing 
+                                                && !PS空盘上顶流程.Processing
+                                                && !PS抓盘手臂放空盘到Empty流程.Processing
                                                 && !PS抓盘手臂取Load空盘流程.Processing;
 
                         if (PS抓盘手臂取Empty空盘流程.Condition && PS抓盘手臂取Empty空盘流程.Permit)
@@ -12619,13 +12698,13 @@ namespace H5509_V2
                 {
                     case 500:
                         PS抓盘手臂取Load空盘流程.StepName = "路径规划";
-                        PS抓盘手臂取Load空盘流程.Condition = 抓盘手臂取Load空盘标记 == 2 
-                                                    && 抓盘手臂放空盘到Empty标记 == 1 
+                        PS抓盘手臂取Load空盘流程.Condition = 抓盘手臂取Load空盘标记 == 2
+                                                    && 抓盘手臂放空盘到Empty标记 == 1
                                                     && Load上顶标记 == 1
                                                     && Empty下降标记 == 1
-                                                    && Empty上顶标记 == 1
-                                                    && !Auto1换盘标记
-                                                    && !Auto2换盘标记;
+                                                    && Empty上顶标记 == 1;
+                                                    //&& !Auto1换盘标记
+                                                    //&& !Auto2换盘标记;
 
                         PS抓盘手臂取Load空盘流程.Permit = !PS抓盘手臂取Load空盘流程.Processing
                                                     && !PS待测盘上顶流程.Processing
@@ -13244,10 +13323,10 @@ namespace H5509_V2
                 {
                     case 500:
                         PS抓盘手臂放空盘到Auto1流程.StepName = "路径规划";
-                        PS抓盘手臂放空盘到Auto1流程.Condition = 抓盘手臂放空盘到Auto1标记 == 2 
+                        PS抓盘手臂放空盘到Auto1流程.Condition = 抓盘手臂放空盘到Auto1标记 == 2
                                                     && 抓盘手臂取Empty空盘标记 == 1;
 
-                        PS抓盘手臂放空盘到Auto1流程.Permit = !PS抓盘手臂放空盘到Auto1流程.Processing 
+                        PS抓盘手臂放空盘到Auto1流程.Permit = !PS抓盘手臂放空盘到Auto1流程.Processing
                                                     && !PS抓盘手臂取Empty空盘流程.Processing;
 
                         if (PS抓盘手臂放空盘到Auto1流程.Condition && PS抓盘手臂放空盘到Auto1流程.Permit)

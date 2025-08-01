@@ -2873,6 +2873,8 @@ namespace H5509_V2
             numericUpDown186.Text = tester.侧敲间隔.ToString();
             checkBox10.Checked = tester.放料时允许侧敲;
             checkBox11.Checked = tester.侧敲时允许放料;
+
+            checkBox12.Checked = tester.Auto换盘时出料Z回零;
         }
 
         private void 刷新分BIN(BinParam binParam)
@@ -3565,6 +3567,12 @@ namespace H5509_V2
             else if (tabpagetext == "系统设置")
             {
                 uiCheckBox205.Checked = 安全门禁用;
+                uiCheckBox203.Checked = 空跑模式;
+                if (!空跑模式)
+                {
+                    uiCheckBox204.Enabled = false;
+                }
+                uiCheckBox206.Checked = 无测试机模式;
                 刷新灯光状态();
             }
             else if (tabpagetext == "调试")
@@ -4993,17 +5001,19 @@ namespace H5509_V2
                         newtester.发送开始信号延时 = Convert.ToInt32(numericUpDown156.Text);
                         newtester.离线模式测试等待时间 = Convert.ToInt32(numericUpDown160.Text);
 
-                        newtester.入料吸提前开真空 = Convert.ToBoolean(checkBox5.Checked);
-                        newtester.出料吸提前开真空 = Convert.ToBoolean(checkBox6.Checked);
-                        newtester.测试吸提前开真空 = Convert.ToBoolean(checkBox7.Checked);
+                        newtester.入料吸提前开真空 = checkBox5.Checked;
+                        newtester.出料吸提前开真空 = checkBox6.Checked;
+                        newtester.测试吸提前开真空 = checkBox7.Checked;
 
-                        newtester.Auto侧敲使能 = Convert.ToBoolean(checkBox8.Checked);
-                        newtester.前侧同时敲击 = Convert.ToBoolean(checkBox9.Checked);
+                        newtester.Auto侧敲使能 = checkBox8.Checked;
+                        newtester.前侧同时敲击 = checkBox9.Checked;
                         newtester.放置多少颗敲击 = Convert.ToInt32(numericUpDown185.Value);
                         newtester.Auto侧敲次数 = Convert.ToInt32(numericUpDown184.Value);
                         newtester.侧敲间隔 = Convert.ToInt32(numericUpDown186.Value);
-                        newtester.放料时允许侧敲 = Convert.ToBoolean(checkBox10.Checked);
-                        newtester.侧敲时允许放料 = Convert.ToBoolean(checkBox11.Checked);
+                        newtester.放料时允许侧敲 = checkBox10.Checked;
+                        newtester.侧敲时允许放料 = checkBox11.Checked;
+
+                        newtester.Auto换盘时出料Z回零 = checkBox12.Checked;
 
                         result = UpdateTesterIFParam(value, newtester);
                         if (result != "Success")
@@ -5053,6 +5063,8 @@ namespace H5509_V2
                             if (oldtester.侧敲间隔 != newtester.侧敲间隔) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲间隔]:{oldtester.侧敲间隔}->{newtester.侧敲间隔}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.放料时允许侧敲 != newtester.放料时允许侧敲) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[放料时允许侧敲]:{oldtester.放料时允许侧敲}->{newtester.放料时允许侧敲}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.侧敲时允许放料 != newtester.侧敲时允许放料) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲时允许放料]:{oldtester.侧敲时允许放料}->{newtester.侧敲时允许放料}:更新成功", WriteData.LogType.ParamLog); }
+
+                            if (oldtester.Auto换盘时出料Z回零 != newtester.Auto换盘时出料Z回零) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto换盘时出料Z回零]:{oldtester.Auto换盘时出料Z回零}->{newtester.Auto换盘时出料Z回零}:更新成功", WriteData.LogType.ParamLog); }
 
                             if (value == 设置信息.测试机信息.测试机名称)
                             {

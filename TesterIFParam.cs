@@ -82,5 +82,7 @@ namespace H5509_V2
         public bool 放料时允许侧敲 { get; set; }
 
         public bool 侧敲时允许放料 { get; set; }
+
+        public bool Auto换盘时出料Z回零 { get; set; }
     }
 }

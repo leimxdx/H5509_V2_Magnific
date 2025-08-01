@@ -994,6 +994,12 @@ namespace H5509_V2
 
         public static bool PS入料手臂吸放料流程Processing = false;
 
+        public static bool PS出料手臂换盘功能 = false;
+
+        public static int PS出料手臂放盘回零流程StepID = 505;
+
+        public static bool PS出料手臂放盘回零流程Processing = false;
+
         /// <summary>
         /// 程序是否触发开始
         /// </summary>
@@ -1997,6 +2003,8 @@ namespace H5509_V2
                             侧敲间隔 = Convert.ToInt32(dr["侧敲间隔"].ToString()),
                             放料时允许侧敲 = Convert.ToBoolean(dr["放料时允许侧敲"].ToString()),
                             侧敲时允许放料 = Convert.ToBoolean(dr["侧敲时允许放料"].ToString()),
+
+                            Auto换盘时出料Z回零 = Convert.ToBoolean(dr["Auto换盘时出料Z回零"].ToString()),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -2275,7 +2283,8 @@ namespace H5509_V2
                 $"Auto侧敲次数 = '{tester.Auto侧敲次数}'," +
                 $"侧敲间隔 = '{tester.侧敲间隔}'," +
                 $"放料时允许侧敲 = '{tester.放料时允许侧敲}'," +
-                $"侧敲时允许放料 = '{tester.侧敲时允许放料}'" +
+                $"侧敲时允许放料 = '{tester.侧敲时允许放料}'," +
+                $"Auto换盘时出料Z回零 = '{tester.Auto换盘时出料Z回零}'" +
                 $" where 测试机名称 = '{name}'";
 
             int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
