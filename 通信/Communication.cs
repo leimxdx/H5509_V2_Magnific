@@ -20,6 +20,7 @@ namespace H5509_V2
         public bool IsconnectTester { get; set; } = false;
         public List<System.Timers.Timer> Listtimer = new List<System.Timers.Timer>();
         public List<System.Timers.Timer> timeOutTimer = new List<System.Timers.Timer>();
+        public List<System.Timers.Timer> ListNoTestTimer = new List<System.Timers.Timer>();
 
         public List<TimeSpan> listindextimespan = new List<TimeSpan>();
         public List<TimeSpan> listtesttimespan = new List<TimeSpan>();
@@ -83,6 +84,7 @@ namespace H5509_V2
         {
             double testTime = 设置信息.测试机信息.测试超时时间 * 1000; //将秒转换为毫秒
             double testTime2 = 设置信息.测试机信息.timeout超时时间 * 1000; //将秒转换为毫秒
+            double testTime3 = 设置信息.测试机信息.离线模式测试等待时间 * 1000; //将秒转换为毫秒
             for (int i = 0; i < Listtimer.Count; i++)
             {
                 if (Listtimer[i].Interval != testTime)
@@ -92,6 +94,10 @@ namespace H5509_V2
                 if (timeOutTimer[i].Interval != testTime2)
                 {
                     timeOutTimer[i].Interval = testTime2;
+                }
+                if (ListNoTestTimer[i].Interval != testTime3)
+                {
+                    ListNoTestTimer[i].Interval = testTime3;
                 }
             }
         }
@@ -117,19 +123,12 @@ namespace H5509_V2
                     timeOutTimer.Add(timer2);
                     timer2.Elapsed += timeOut;
                     timer2.Stop();
+
+                    System.Timers.Timer timer3 = new System.Timers.Timer() { Interval = 设置信息.测试机信息.离线模式测试等待时间 * 1000 };
+                    ListNoTestTimer.Add(timer3);
+                    timer3.Elapsed += ReceiveNoTestTimer;
                 }
             }
-
-            //if (timeOutTimer.Count == 0)
-            //{
-            //    for (int i = 0; i < 16; i++)
-            //    {
-            //        System.Timers.Timer timer = new System.Timers.Timer() { Interval = 5 * 1000 }; //默认timeout超时时间修改为5秒
-            //        timeOutTimer.Add(timer);
-            //        timer.Elapsed += timeOut;
-            //        timer.Stop();
-            //    }
-            //}
 
             if (serialPort == null)
             {
@@ -271,23 +270,33 @@ namespace H5509_V2
         /// </summary>
         /// <param name="site"></param>
         /// <param name="isopen"></param>
-        public string Send(short site, List<bool[]> isopen)
+        public string Send(short site, List<bool[]> isopen, bool isOFFLine = false)
         {
             try
             {
                 string str = getstartest(site, isopen);
 
-                if (serialPort == null || !serialPort.IsOpen)
+                if (isOFFLine) //离线模式，无测试机
                 {
-                    return "串口未打开";
+                    RunLog("@START_TEST " + str + "+", WriteData.LogType.ComLog);
+                    RefreshInfoLog("@START_TEST " + str + "+", false);
+                    ListNoTestTimer[site].Start();
+                    listtestdatetime[site] = DateTime.Now;
                 }
-                serialPort.Write("@START_TEST " + str + "+");
-                RunLog("@START_TEST " + str + "+", WriteData.LogType.ComLog);
-                RefreshInfoLog("@START_TEST " + str + "+", false);
-                listtestdatetime[site] = DateTime.Now;
-                Listtimer[site].Start();
-                Iswaitout[site] = false;
-                //启动定时器
+                else //在线模式
+                {
+                    if (serialPort == null || !serialPort.IsOpen)
+                    {
+                        return "串口未打开";
+                    }
+                    serialPort.Write("@START_TEST " + str + "+");
+                    RunLog("@START_TEST " + str + "+", WriteData.LogType.ComLog);
+                    RefreshInfoLog("@START_TEST " + str + "+", false);
+                    listtestdatetime[site] = DateTime.Now;
+                    Listtimer[site].Start();
+                    Iswaitout[site] = false;
+                    //启动定时器
+                }
             }
             catch (Exception ex)
             {
@@ -364,6 +373,85 @@ namespace H5509_V2
             SiteTestBin[t] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
             SiteTestState[t] = 3;
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
+        }
+
+        private void ReceiveNoTestTimer(object sender, EventArgs e)
+        {
+            (sender as System.Timers.Timer).Stop();
+            int site = 0;
+            System.Timers.Timer timer = sender as System.Timers.Timer;
+            for (int i = 0; i < 16; i++)
+            {
+                if (timer.Equals(ListNoTestTimer[i]))
+                {
+                    site = i;
+                    break;
+                }
+            }
+
+            string bins = string.Join(",", Auto1);
+            bins += "," + string.Join(",", Auto2);
+            if (Fix1.Length != 0)
+                bins += "," + string.Join(",", Fix1);
+            if (Fix2.Length != 0)
+                bins += "," + string.Join(",", Fix2);
+            if (Fix3.Length != 0)
+                bins += "," + string.Join(",", Fix3);
+
+            string[] bins2 = bins.Split(',');
+
+            string[] bin = GetRandomBin(0, bins2.Length, bins2);
+            //string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+
+            RefreshInfoLog($"@TEST_DONE {site:D2} {bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}+", true);
+            RunLog($"@TEST_DONE {site:D2} {bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}+", WriteData.LogType.ComLog, true);
+
+            if (Bin.ContainsKey(site))
+            {
+                Bin[site] = bin;
+            }
+            else Bin.Add(site, bin);
+            listtesttimespan[site] = DateTime.Now - listtestdatetime[site];
+            TestTime = DateTime.Now - listtestdatetime[site];
+
+            OutSiteQueue.Enqueue(site);
+            BinSaveQueue.Enqueue(bin);
+
+            //用来统计数据
+            OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
+            Listtestsingal.Add(site);
+            SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
+            SiteTestState[site] = 3;
+
+            RunLog($"接收Site:{site:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+        }
+
+        private string[] GetRandomBin(int x, int y, string[] bins)
+        {
+            Random random = new Random();
+            Thread.Sleep(15);
+            int dout1 = random.Next(x, y); //模拟Auto1/Auto2/Fix1/Fix2的BIN信号
+            Thread.Sleep(15);
+            int dout2 = random.Next(x, y);
+            Thread.Sleep(15);
+            int dout3 = random.Next(x, y);
+            Thread.Sleep(15);
+            int dout4 = random.Next(x, y);
+            Thread.Sleep(15);
+            int dout5 = random.Next(x, y);
+            Thread.Sleep(15);
+            int dout6 = random.Next(x, y);
+            Thread.Sleep(15);
+            int dout7 = random.Next(x, y);
+            Thread.Sleep(15);
+            int dout8 = random.Next(x, y);
+            Thread.Sleep(15);
+
+            return new string[]
+            {
+                bins[dout1], bins[dout2], bins[dout3], bins[dout4],
+                bins[dout5], bins[dout6], bins[dout7], bins[dout8]
+            };
         }
     }
 }

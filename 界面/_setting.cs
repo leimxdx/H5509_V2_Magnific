@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -564,64 +565,68 @@ namespace H5509_V2
 
         private void button89_Click(object sender, EventArgs e)
         {
-            bool bool1 = !飞梭后入料IC[0].Contains(true); //飞梭后入料IC第1列无料
-            RunLog("!飞梭后入料IC[0]:" + bool1);
-            bool1 = !飞梭后入料IC[1].Contains(true);//飞梭后入料IC第2列无料
-            RunLog("!飞梭后入料IC[1]:" + bool1);
-            bool1 = !飞梭前入料IC[0].Contains(true); //飞梭前入料IC第1列无料
-            RunLog("!飞梭前入料IC[0]:" + bool1);
-            bool1 = !飞梭前入料IC[1].Contains(true); //飞梭前入料IC第2列无料
-            RunLog("!飞梭前入料IC[1]:" + bool1);
-            bool1 = !飞梭后出料IC[0].Contains(true);//飞梭后出料IC第1列无料
-            RunLog("!飞梭后出料IC[0]:" + bool1);
-            bool1 = !飞梭后出料IC[1].Contains(true); //飞梭后出料IC第2列无料
-            RunLog("!飞梭后出料IC[1]:" + bool1);
-            bool1 = !飞梭前出料IC[0].Contains(true); //飞梭前出料IC第1列无料
-            RunLog("!飞梭前出料IC[0]:" + bool1);
-            bool1 = !飞梭前出料IC[1].Contains(true); //飞梭前出料IC第2列无料
-            RunLog("!飞梭前出料IC[1]:" + bool1);
-            bool1 = SiteTestState.Contains(0); //测试区无料
-            RunLog("SiteTestState.Contains(0):" + bool1);
-            bool1 = !SiteTestState.Contains(1); //测试区有料
-            RunLog("!SiteTestState.Contains(1):" + bool1);
-            bool1 = !SiteTestState.Contains(2); //测试区有料测试中
-            RunLog("!SiteTestState.Contains(2):" + bool1);
-            bool1 = !SiteTestState.Contains(3); //测试区有料已测试
-            RunLog("!SiteTestState.Contains(3):" + bool1);
-            bool1 = !SiteTestState.Contains(4); //测试区有料待取走
-            RunLog("!SiteTestState.Contains(4):" + bool1);
-            bool1 = !PS结批流程.Processing;
-            RunLog("!PS结批流程:" + bool1);
-            bool1 = !PS出料手臂吸放料流程.Processing;
-            RunLog("!PS出料手臂吸放料流程:" + bool1);
-            bool1 = !PS入料手臂吸放料流程.Processing;
-            RunLog("!PS入料手臂吸放料流程:" + bool1);
-            bool1 = !PS测试手臂取待测料流程.Processing;
-            RunLog("!PS测试手臂取待测料流程:" + bool1);
-            bool1 = !PS测试手臂取已测料流程.Processing;
-            RunLog("!PS测试手臂取已测料流程:" + bool1);
-            bool1 = !PS入飞梭移动流程.Processing;
-            RunLog("!PS入飞梭移动流程:" + bool1);
-            bool1 = !PS空盘上顶流程.Processing;
-            RunLog("!PS空盘上顶流程:" + bool1);
-            bool1 = !PS空盘下降流程.Processing;
-            RunLog("!PS空盘下降流程:" + bool1);
-            bool1 = !PS待测盘上顶流程.Processing;
-            RunLog("!PS待测盘上顶流程:" + bool1);
-            bool1 = !PS手动盘1上顶流程.Processing;
-            RunLog("!PS手动盘1上顶流程:" + bool1);
-            bool1 = !PS手动盘2上顶流程.Processing;
-            RunLog("!PS手动盘2上顶流程:" + bool1);
-            bool1 = !PS抓盘手臂取Empty空盘流程.Processing;
-            RunLog("!PS抓盘手臂取Empty空盘流程:" + bool1);
-            bool1 = !PS抓盘手臂取Load空盘流程.Processing;
-            RunLog("!PS抓盘手臂取Load空盘流程:" + bool1);
-            bool1 = !PS抓盘手臂放空盘到Empty流程.Processing;
-            RunLog("!PS抓盘手臂放空盘到Empty流程:" + bool1);
-            bool1 = !PS抓盘手臂放空盘到Auto1流程.Processing;
-            RunLog("!PS抓盘手臂放空盘到Auto1流程:" + bool1);
-            bool1 = !PS抓盘手臂放空盘到Auto2流程.Processing;
-            RunLog("!PS抓盘手臂放空盘到Auto2流程:" + bool1);
+            温控达温 = true;
+            string point = textBox26.Text;
+            HeatDicPoint[point] = true;
+            HeatDicTimer[point].Status = 1;
+            //bool bool1 = !飞梭后入料IC[0].Contains(true); //飞梭后入料IC第1列无料
+            //RunLog("!飞梭后入料IC[0]:" + bool1);
+            //bool1 = !飞梭后入料IC[1].Contains(true);//飞梭后入料IC第2列无料
+            //RunLog("!飞梭后入料IC[1]:" + bool1);
+            //bool1 = !飞梭前入料IC[0].Contains(true); //飞梭前入料IC第1列无料
+            //RunLog("!飞梭前入料IC[0]:" + bool1);
+            //bool1 = !飞梭前入料IC[1].Contains(true); //飞梭前入料IC第2列无料
+            //RunLog("!飞梭前入料IC[1]:" + bool1);
+            //bool1 = !飞梭后出料IC[0].Contains(true);//飞梭后出料IC第1列无料
+            //RunLog("!飞梭后出料IC[0]:" + bool1);
+            //bool1 = !飞梭后出料IC[1].Contains(true); //飞梭后出料IC第2列无料
+            //RunLog("!飞梭后出料IC[1]:" + bool1);
+            //bool1 = !飞梭前出料IC[0].Contains(true); //飞梭前出料IC第1列无料
+            //RunLog("!飞梭前出料IC[0]:" + bool1);
+            //bool1 = !飞梭前出料IC[1].Contains(true); //飞梭前出料IC第2列无料
+            //RunLog("!飞梭前出料IC[1]:" + bool1);
+            //bool1 = SiteTestState.Contains(0); //测试区无料
+            //RunLog("SiteTestState.Contains(0):" + bool1);
+            //bool1 = !SiteTestState.Contains(1); //测试区有料
+            //RunLog("!SiteTestState.Contains(1):" + bool1);
+            //bool1 = !SiteTestState.Contains(2); //测试区有料测试中
+            //RunLog("!SiteTestState.Contains(2):" + bool1);
+            //bool1 = !SiteTestState.Contains(3); //测试区有料已测试
+            //RunLog("!SiteTestState.Contains(3):" + bool1);
+            //bool1 = !SiteTestState.Contains(4); //测试区有料待取走
+            //RunLog("!SiteTestState.Contains(4):" + bool1);
+            //bool1 = !PS结批流程.Processing;
+            //RunLog("!PS结批流程:" + bool1);
+            //bool1 = !PS出料手臂吸放料流程.Processing;
+            //RunLog("!PS出料手臂吸放料流程:" + bool1);
+            //bool1 = !PS入料手臂吸放料流程.Processing;
+            //RunLog("!PS入料手臂吸放料流程:" + bool1);
+            //bool1 = !PS测试手臂取待测料流程.Processing;
+            //RunLog("!PS测试手臂取待测料流程:" + bool1);
+            //bool1 = !PS测试手臂取已测料流程.Processing;
+            //RunLog("!PS测试手臂取已测料流程:" + bool1);
+            //bool1 = !PS入飞梭移动流程.Processing;
+            //RunLog("!PS入飞梭移动流程:" + bool1);
+            //bool1 = !PS空盘上顶流程.Processing;
+            //RunLog("!PS空盘上顶流程:" + bool1);
+            //bool1 = !PS空盘下降流程.Processing;
+            //RunLog("!PS空盘下降流程:" + bool1);
+            //bool1 = !PS待测盘上顶流程.Processing;
+            //RunLog("!PS待测盘上顶流程:" + bool1);
+            //bool1 = !PS手动盘1上顶流程.Processing;
+            //RunLog("!PS手动盘1上顶流程:" + bool1);
+            //bool1 = !PS手动盘2上顶流程.Processing;
+            //RunLog("!PS手动盘2上顶流程:" + bool1);
+            //bool1 = !PS抓盘手臂取Empty空盘流程.Processing;
+            //RunLog("!PS抓盘手臂取Empty空盘流程:" + bool1);
+            //bool1 = !PS抓盘手臂取Load空盘流程.Processing;
+            //RunLog("!PS抓盘手臂取Load空盘流程:" + bool1);
+            //bool1 = !PS抓盘手臂放空盘到Empty流程.Processing;
+            //RunLog("!PS抓盘手臂放空盘到Empty流程:" + bool1);
+            //bool1 = !PS抓盘手臂放空盘到Auto1流程.Processing;
+            //RunLog("!PS抓盘手臂放空盘到Auto1流程:" + bool1);
+            //bool1 = !PS抓盘手臂放空盘到Auto2流程.Processing;
+            //RunLog("!PS抓盘手臂放空盘到Auto2流程:" + bool1);
             //飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
         }
 
@@ -6826,6 +6831,13 @@ namespace H5509_V2
 
         private void button227_Click(object sender, EventArgs e)
         {
+            string point = textBox25.Text;
+            HeatDicPoint[point] = false;
+            HeatDicTimer[point].Status = 0;
+
+            //List<bool[]> isopen = new List<bool[]>() { new bool[] { true, true, true, true } , new bool[] { true, true, true, true } };
+            //string result = APPmaster.Com.Send(0, isopen, 无测试机模式);
+            //Com.ReceiveNoTestTimer(null, null);
             //for (int i = 0; i < 10000; i++)
             //{
             //    RunLog($"吸取模式:{(空跑模式 ? "空跑模式" : "正常模式")}", LogType.RunLog);
@@ -7152,6 +7164,9 @@ namespace H5509_V2
 
         private void button228_Click(object sender, EventArgs e)
         {
+            DialogResult dialog = MessageBox.Show("请确认是否写入?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog != DialogResult.OK) return;
+
             int chl = Convert.ToInt32(numericUpDown128.Value);
             int staID = Convert.ToInt32(numericUpDown127.Value);
             double vaule = Convert.ToDouble(numericUpDown126.Value);
@@ -7193,6 +7208,9 @@ namespace H5509_V2
 
         private void button231_Click(object sender, EventArgs e)
         {
+            DialogResult dialog = MessageBox.Show("请确认是否写入?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog != DialogResult.OK) return;
+
             int staID = Convert.ToInt32(numericUpDown127.Value);
             double vaule = Convert.ToDouble(numericUpDown126.Value);
             for (int i = 0; i < 8; i++)
@@ -7241,6 +7259,9 @@ namespace H5509_V2
 
         private void button234_Click(object sender, EventArgs e)
         {
+            DialogResult dialog = MessageBox.Show("请确认是否写入?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog != DialogResult.OK) return;
+
             int staID = Convert.ToInt32(numericUpDown127.Value);
             double vaule = Convert.ToDouble(numericUpDown126.Value);
             for (int i = 0; i < 8; i++)
@@ -8316,6 +8337,300 @@ namespace H5509_V2
                 }
                 this.Invoke(new Action(() => { uiButton31.Enabled = true; }));
             });
+        }
+
+        private void button262_Click(object sender, EventArgs e)
+        {
+            TimeSpan timeSpan = 获取加热倒数时间();
+            Debug.WriteLine(timeSpan.ToString());
+            uiTextBox8.Text = timeSpan.ToString();
+        }
+
+        private void button263_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                RunLog($"设备状态 = {设备状态}");
+                RunLog($"温控达温 = {温控达温}");
+                RunLog($"初次达温 = {初次达温}");
+                RunLog($"H5509归零 = {H5509归零}");
+                RunLog($"H5509正在归零 = {H5509正在归零}");
+                RunLog($"H5509初始化 = {H5509初始化}");
+                RunLog($"H5509正在初始化 = {H5509正在初始化}");
+                RunLog($"结批标记 = {结批标记}");
+                RunLog($"正在结批 = {正在结批}");
+                RunLog($"结批完成 = {结批完成}");
+                RunLog($"强制结批标记 = {强制结批标记}");
+                RunLog($"定点停止标记 = {定点停止标记}");
+                RunLog($"后方定点停止允许 = {后方定点停止允许}");
+                RunLog($"前方定点停止允许 = {前方定点停止允许}");
+                RunLog($"开舱门上顶标记 = {开舱门上顶标记}");
+                RunLog($"Load舱门上顶标记 = {Load舱门上顶标记}");
+                RunLog($"Empty舱门上顶标记 = {Empty舱门上顶标记}");
+                RunLog($"Auto1舱门上顶标记 = {Auto1舱门上顶标记}");
+                RunLog($"Auto2舱门上顶标记 = {Auto2舱门上顶标记}");
+                RunLog($"Load舱门开启标记 = {Load舱门开启标记}");
+                RunLog($"Empty舱门开启标记 = {Empty舱门开启标记}");
+                RunLog($"Auto1舱门开启标记 = {Auto1舱门开启标记}");
+                RunLog($"Auto2舱门开启标记 = {Auto2舱门开启标记}");
+                RunLog($"Empty下降回零开关 = {Empty下降回零开关}");
+                RunLog($"Load下降回零开关 = {Load下降回零开关}");
+                RunLog($"Auto1下降回零开关 = {Auto1下降回零开关}");
+                RunLog($"Auto2下降回零开关 = {Auto2下降回零开关}");
+                RunLog($"Empty正在下降回零 = {Empty正在下降回零}");
+                RunLog($"Load正在下降回零 = {Load正在下降回零}");
+                RunLog($"Auto1正在下降回零 = {Auto1正在下降回零}");
+                RunLog($"Auto2正在下降回零 = {Auto2正在下降回零}");
+                RunLog($"Empty舱门正在上顶 = {Empty舱门正在上顶}");
+                RunLog($"Load舱门正在上顶 = {Load舱门正在上顶}");
+                RunLog($"Auto1舱门正在上顶 = {Auto1舱门正在上顶}");
+                RunLog($"Auto2舱门正在上顶 = {Auto2舱门正在上顶}");
+                RunLog($"Load换盘标记 = {Load换盘标记}");
+                RunLog($"Auto1换盘标记 = {Auto1换盘标记}");
+                RunLog($"Auto2换盘标记 = {Auto2换盘标记}");
+                RunLog($"Auto等待换盘标记 = {Auto等待换盘标记}");
+
+                RunLog($"保存Auto1放料个数 = {保存Auto1放料个数}");
+                RunLog($"保存Auto2放料个数 = {保存Auto2放料个数}");
+                RunLog($"出料正在Auto1放料 = {出料正在Auto1放料}");
+                RunLog($"出料正在Auto2放料 = {出料正在Auto2放料}");
+                RunLog($"Auto1正在侧敲 = {Auto1正在侧敲}");
+                RunLog($"Auto2正在侧敲 = {Auto2正在侧敲}");
+
+                RunLog($"Fix1Tray盘放置标记 = {Fix1Tray盘放置标记}");
+                RunLog($"Fix1Tray盘拿走标记 = {Fix1Tray盘拿走标记}");
+                RunLog($"Fix2Tray盘放置标记 = {Fix2Tray盘放置标记}");
+                RunLog($"Fix2Tray盘拿走标记 = {Fix2Tray盘拿走标记}");
+                RunLog($"Fix3Tray盘放置标记 = {Fix3Tray盘放置标记}");
+                RunLog($"Fix3Tray盘拿走标记 = {Fix3Tray盘拿走标记}");
+                RunLog($"总良率报警间隔计数 = {总良率报警间隔计数}");
+                RunLog($"Socket使用次数超限数 = {Socket使用次数超限数}");
+                RunLog($"报警次数 = {报警次数}");
+                RunLog($"正在入料的Site = {正在入料的Site}");
+                RunLog($"trayTemp = {trayTemp}");
+
+                string dout128pass = $"{Dout128PassNumber[0]}";
+                for (int i = 1; i < Dout128PassNumber.Length; i++)
+                {
+                    dout128pass += $",{Dout128PassNumber[i]}";
+                }
+                RunLog($"Dout128PassNumber={dout128pass}");
+
+                string dout128fail = $"{Dout128FailNumber[0]}";
+                for (int i = 1; i < Dout128FailNumber.Length; i++)
+                {
+                    dout128fail += $",{Dout128FailNumber[i]}";
+                }
+                RunLog($"Dout128FailNumber={dout128fail}");
+
+                RunLog($"SiteTestState = {SiteTestState[0]},{SiteTestState[1]},{SiteTestState[2]},{SiteTestState[3]},{SiteTestState[4]},{SiteTestState[5]},{SiteTestState[6]},{SiteTestState[7]},{SiteTestState[8]},{SiteTestState[9]},{SiteTestState[10]},{SiteTestState[11]},{SiteTestState[12]},{SiteTestState[13]},{SiteTestState[14]},{SiteTestState[15]}");
+                for (int i = 0; i < SiteTestIC.Count; i++)
+                {
+                    RunLog($"Com.Iswaitout[{i}] = {Com.Iswaitout[i]}");
+                    RunLog($"SiteTestIC[{i}] = {SiteTestIC[i][0][0]},{SiteTestIC[i][0][1]},{SiteTestIC[i][0][2]},{SiteTestIC[i][0][3]},{SiteTestIC[i][1][0]},{SiteTestIC[i][1][1]},{SiteTestIC[i][1][2]},{SiteTestIC[i][1][3]}");
+                    RunLog($"doutContinueFail[{i}] = {doutContinueFail[i][0]},{doutContinueFail[i][1]},{doutContinueFail[i][2]},{doutContinueFail[i][3]},{doutContinueFail[i][4]},{doutContinueFail[i][5]},{doutContinueFail[i][6]},{doutContinueFail[i][7]}");
+                    RunLog($"单dut总不良计数[{i}] = {单dut总不良计数[i][0]},{单dut总不良计数[i][1]},{单dut总不良计数[i][2]},{单dut总不良计数[i][3]},{单dut总不良计数[i][4]},{单dut总不良计数[i][5]},{单dut总不良计数[i][6]},{单dut总不良计数[i][7]}");
+                    RunLog($"单dut总不良累计计数[{i}] = {单dut总不良累计计数[i][0]},{单dut总不良累计计数[i][1]},{单dut总不良累计计数[i][2]},{单dut总不良累计计数[i][3]},{单dut总不良累计计数[i][4]},{单dut总不良累计计数[i][5]},{单dut总不良累计计数[i][6]},{单dut总不良累计计数[i][7]}");
+                    RunLog($"SiteTestBin[{i}] = {SiteTestBin[i][0]},{SiteTestBin[i][1]},{SiteTestBin[i][2]},{SiteTestBin[i][3]},{SiteTestBin[i][4]},{SiteTestBin[i][5]},{SiteTestBin[i][6]},{SiteTestBin[i][7]}");
+                }
+                RunLog($"入料IC忽略 = {入料IC忽略}");
+                RunLog($"入料IC吸不起结批 = {入料IC吸不起结批}");
+                RunLog($"无待测盘结批 = {无待测盘结批}");
+                RunLog($"出料IC忽略 = {出料IC忽略}");
+                RunLog($"测试IC忽略 = {测试IC忽略}");
+
+                string binsaves = "";
+                if (BinSaveQueue.Count > 0)
+                {
+                    if (BinSaveQueue.TryDequeue(out string[] binSave))
+                    {
+                        binsaves += $"{binSave[0]},{binSave[1]},{binSave[2]},{binSave[3]},{binSave[4]},{binSave[5]},{binSave[6]},{binSave[7]}";
+                    }
+                }
+
+                for (int i = 0; i < BinSaveQueue.Count; i++)
+                {
+                    if (BinSaveQueue.TryDequeue(out string[] binSave))
+                    {
+                        binsaves += $"--{binSave[0]},{binSave[1]},{binSave[2]},{binSave[3]},{binSave[4]},{binSave[5]},{binSave[6]},{binSave[7]}";
+                    }
+                }
+                RunLog("BinSaveQueue=" + binsaves);
+
+                binsaves = "";
+                if (InSiteQueue.Count > 0)
+                {
+                    if (InSiteQueue.TryDequeue(out int insite))
+                    {
+                        binsaves += $"{insite}";
+                    }
+                }
+
+                for (int i = 0; i < InSiteQueue.Count; i++)
+                {
+                    if (InSiteQueue.TryDequeue(out int insite))
+                    {
+                        binsaves += $",{insite}";
+                    }
+                }
+                RunLog("InSiteQueue=" + binsaves);
+
+                binsaves = "";
+                if (OutSiteQueue.Count > 0)
+                {
+                    if (OutSiteQueue.TryDequeue(out int outsite))
+                    {
+                        binsaves += $"{outsite}";
+                    }
+                }
+
+                for (int i = 0; i < OutSiteQueue.Count; i++)
+                {
+                    if (OutSiteQueue.TryDequeue(out int outsite))
+                    {
+                        binsaves += $",{outsite}";
+                    }
+                }
+                RunLog("OutSiteQueue=" + binsaves);
+
+                RunLog($"载入数 = {载入数}");
+                RunLog($"UphNumber = {UphNumber}");
+                RunLog($"Auto1数量 = {Auto1数量}");
+                RunLog($"Auto2数量 = {Auto2数量}");
+                RunLog($"Fix1数量 = {Fix1数量}");
+                RunLog($"Fix2数量 = {Fix2数量}");
+                RunLog($"Fix3数量 = {Fix3数量}");
+                RunLog($"空盘上顶到最大值 = {空盘上顶到最大值}");
+                RunLog($"空盘下降到最小值 = {空盘下降到最小值}");
+                RunLog($"Auto1料仓满盘标记 = {Auto1料仓满盘标记}");
+                RunLog($"Auto2料仓满盘标记 = {Auto2料仓满盘标记}");
+                RunLog($"Auto1放盘等待标记 = {Auto1放盘等待标记}");
+                RunLog($"Auto2放盘等待标记 = {Auto2放盘等待标记}");
+                RunLog($"Empty料仓打开标记 = {Empty料仓打开标记}");
+                RunLog($"Load料仓打开标记 = {Load料仓打开标记}");
+                RunLog($"Auto1料仓打开标记 = {Auto1料仓打开标记}");
+                RunLog($"Auto2料仓打开标记 = {Auto2料仓打开标记}");
+                RunLog($"入料手臂工作完成标记 = {入料手臂工作完成标记}");
+                RunLog($"加热盘停止入料标记 = {加热盘停止入料标记}");
+                RunLog($"入料手臂停止工作标记 = {入料手臂停止工作标记}");
+                RunLog($"测试手臂入料停止工作标记 = {测试手臂入料停止工作标记}");
+                RunLog($"测试手臂出料停止工作标记 = {测试手臂出料停止工作标记}");
+                RunLog($"出料手臂出料停止工作标记 = {出料手臂出料停止工作标记}");
+                RunLog($"飞梭停止工作 = {飞梭停止工作}");
+                RunLog($"出料手臂工作完成标记 = {出料手臂工作完成标记}");
+                RunLog($"测试手臂工作完成标记 = {测试手臂工作完成标记}");
+                RunLog($"入料手臂抓料等待标记 = {入料手臂抓料等待标记}");
+                RunLog($"飞梭移动状态 = {飞梭移动状态}");
+                RunLog($"飞梭前入料状态 = {飞梭前入料状态}");
+                RunLog($"飞梭前出料状态 = {飞梭前出料状态}");
+                RunLog($"飞梭后入料状态 = {飞梭后入料状态}");
+                RunLog($"飞梭后出料状态 = {飞梭后出料状态}");
+                RunLog($"Empty上顶标记 = {Empty上顶标记}");
+                RunLog($"Load上顶标记 = {Load上顶标记}");
+                RunLog($"Auto1上顶标记 = {Auto1上顶标记}");
+                RunLog($"Auto2上顶标记 = {Auto2上顶标记}");
+                RunLog($"Empty下降标记 = {Empty下降标记}");
+                RunLog($"Load下降标记 = {Load下降标记}");
+                RunLog($"Empty下降回零标记 = {Empty下降回零标记}");
+                RunLog($"Load下降回零标记 = {Load下降回零标记}");
+                RunLog($"Auto1下降回零标记 = {Auto1下降回零标记}");
+                RunLog($"Auto2下降回零标记 = {Auto2下降回零标记}");
+                RunLog($"抓盘手臂取Empty空盘标记 = {抓盘手臂取Empty空盘标记}");
+                RunLog($"抓盘手臂取Load空盘标记 = {抓盘手臂取Load空盘标记}");
+                RunLog($"抓盘手臂给Auto1空盘标记 = {抓盘手臂给Auto1空盘标记}");
+                RunLog($"抓盘手臂给Auto2空盘标记 = {抓盘手臂给Auto2空盘标记}");
+                RunLog($"抓盘手臂放空盘到Empty标记 = {抓盘手臂放空盘到Empty标记}");
+                RunLog($"抓盘手臂放空盘到Auto1标记 = {抓盘手臂放空盘到Auto1标记}");
+                RunLog($"抓盘手臂放空盘到Auto2标记 = {抓盘手臂放空盘到Auto2标记}");
+
+                if (飞梭前出料BIN项 != null)
+                {
+                    if (飞梭前出料BIN项[0] != null)
+                    {
+                        RunLog($"飞梭前出料BIN项 = {飞梭前出料BIN项[0][0]},{飞梭前出料BIN项[0][1]},{飞梭前出料BIN项[0][2]},{飞梭前出料BIN项[0][3]}");
+                    }
+                    if (飞梭前出料BIN项[1] != null)
+                    {
+                        RunLog($"飞梭前出料BIN项 = {飞梭前出料BIN项[1][0]},{飞梭前出料BIN项[1][1]},{飞梭前出料BIN项[1][2]},{飞梭前出料BIN项[1][3]}");
+                    }
+                }
+                if (飞梭后出料BIN项 != null)
+                {
+                    if (飞梭后出料BIN项[0] != null)
+                    {
+                        RunLog($"飞梭后出料BIN项 = {飞梭后出料BIN项[0][0]},{飞梭后出料BIN项[0][1]},{飞梭后出料BIN项[0][2]},{飞梭后出料BIN项[0][3]}");
+                    }
+                    if (飞梭后出料BIN项[1] != null)
+                    {
+                        RunLog($"飞梭后出料BIN项 = {飞梭后出料BIN项[1][0]},{飞梭后出料BIN项[1][1]},{飞梭后出料BIN项[1][2]},{飞梭后出料BIN项[1][3]}");
+                    }
+                }
+
+                RunLog($"InNozzleIC = {InNozzleIC}");
+                RunLog($"InNozzleICOpen = {InNozzleICOpen[0]},{InNozzleICOpen[1]},{InNozzleICOpen[2]},{InNozzleICOpen[3]}");
+                RunLog($"OutNozzleIC = {OutNozzleIC}");
+                RunLog($"OutNozzleICOpen = {OutNozzleICOpen[0]},{OutNozzleICOpen[1]},{OutNozzleICOpen[2]},{OutNozzleICOpen[3]}");
+                RunLog($"TestNozzleIC = {TestNozzleIC}");
+                RunLog($"TestNozzleICOpen = {TestNozzleICOpen[0]},{TestNozzleICOpen[1]},{TestNozzleICOpen[2]},{TestNozzleICOpen[3]},{TestNozzleICOpen[4]},{TestNozzleICOpen[5]},{TestNozzleICOpen[6]},{TestNozzleICOpen[7]}");
+
+                RunLog($"正在吸取后入料 = {正在吸取后入料[0]},{正在吸取后入料[1]},{正在吸取后入料[2]},{正在吸取后入料[3]},{正在吸取后入料[4]},{正在吸取后入料[5]},{正在吸取后入料[6]},{正在吸取后入料[7]}");
+                RunLog($"正在放置前入料 = {正在放置前入料[0][0]},{正在放置前入料[0][1]},{正在放置前入料[0][2]},{正在放置前入料[0][3]},{正在放置前入料[1][0]},{正在放置前入料[1][1]},{正在放置前入料[1][2]},{正在放置前入料[1][3]}");
+                RunLog($"飞梭前入料IC = {飞梭前入料IC[0][0]},{飞梭前入料IC[0][1]},{飞梭前入料IC[0][2]},{飞梭前入料IC[0][3]},{飞梭前入料IC[1][0]},{飞梭前入料IC[1][1]},{飞梭前入料IC[1][2]},{飞梭前入料IC[1][3]}");
+                RunLog($"飞梭前出料IC = {飞梭前出料IC[0][0]},{飞梭前出料IC[0][1]},{飞梭前出料IC[0][2]},{飞梭前出料IC[0][3]},{飞梭前出料IC[1][0]},{飞梭前出料IC[1][1]},{飞梭前出料IC[1][2]},{飞梭前出料IC[1][3]}");
+                RunLog($"飞梭后入料IC = {飞梭后入料IC[0][0]},{飞梭后入料IC[0][1]},{飞梭后入料IC[0][2]},{飞梭后入料IC[0][3]},{飞梭后入料IC[1][0]},{飞梭后入料IC[1][1]},{飞梭后入料IC[1][2]},{飞梭后入料IC[1][3]}");
+                RunLog($"飞梭后出料IC = {飞梭后出料IC[0][0]},{飞梭后出料IC[0][1]},{飞梭后出料IC[0][2]},{飞梭后出料IC[0][3]},{飞梭后出料IC[1][0]},{飞梭后出料IC[1][1]},{飞梭后出料IC[1][2]},{飞梭后出料IC[1][3]}");
+
+                RunLog($"PS初始化流程.StepID = {PS初始化流程.StepID}");
+                RunLog($"PS初始化流程.Processing = {PS初始化流程.Processing}");
+                RunLog($"PS结批流程.StepID = {PS结批流程.StepID}");
+                RunLog($"PS结批流程.Processing = {PS结批流程.Processing}");
+                RunLog($"PS入料手臂吸放料流程.StepID = {PS入料手臂吸放料流程.StepID}");
+                RunLog($"PS入料手臂吸放料流程.Processing = {PS入料手臂吸放料流程.Processing}");
+                RunLog($"PS出料手臂吸放料流程.StepID = {PS出料手臂吸放料流程.StepID}");
+                RunLog($"PS出料手臂吸放料流程.Processing = {PS出料手臂吸放料流程.Processing}");
+                RunLog($"PS入飞梭移动流程.StepID = {PS入飞梭移动流程.StepID}");
+                RunLog($"PS入飞梭移动流程.Processing = {PS入飞梭移动流程.Processing}");
+                RunLog($"PS测试手臂取待测料流程.StepID = {PS测试手臂取待测料流程.StepID}");
+                RunLog($"PS测试手臂取待测料流程.Processing = {PS测试手臂取待测料流程.Processing}");
+                RunLog($"PS测试手臂取已测料流程.StepID = {PS测试手臂取已测料流程.StepID}");
+                RunLog($"PS测试手臂取已测料流程.Processing = {PS测试手臂取已测料流程.Processing}");
+                RunLog($"PS测试区气缸下压动作流程.StepID = {PS测试区气缸下压动作流程.StepID}");
+                RunLog($"PS测试区气缸下压动作流程.Processing = {PS测试区气缸下压动作流程.Processing}");
+                RunLog($"PS测试区气缸上抬动作流程.StepID = {PS测试区气缸上抬动作流程.StepID}");
+                RunLog($"PS测试区气缸上抬动作流程.Processing = {PS测试区气缸上抬动作流程.Processing}");
+                RunLog($"PS空盘上顶流程.StepID = {PS空盘上顶流程.StepID}");
+                RunLog($"PS空盘上顶流程.Processing = {PS空盘上顶流程.Processing}");
+                RunLog($"PS空盘下降流程.StepID = {PS空盘下降流程.StepID}");
+                RunLog($"PS空盘下降流程.Processing = {PS空盘下降流程.Processing}");
+                RunLog($"PS空盘下降回零流程.StepID = {PS空盘下降回零流程.StepID}");
+                RunLog($"PS空盘下降回零流程.Processing = {PS空盘下降回零流程.Processing}");
+                RunLog($"PS待测盘上顶流程.StepID = {PS待测盘上顶流程.StepID}");
+                RunLog($"PS待测盘上顶流程.Processing = {PS待测盘上顶流程.Processing}");
+                RunLog($"PS待测盘下降回零流程.StepID = {PS待测盘下降回零流程.StepID}");
+                RunLog($"PS待测盘下降回零流程.Processing = {PS待测盘下降回零流程.Processing}");
+                RunLog($"PS手动盘1上顶流程.StepID = {PS手动盘1上顶流程.StepID}");
+                RunLog($"PS手动盘1上顶流程.Processing = {PS手动盘1上顶流程.Processing}");
+                RunLog($"PS手动盘1下降回零流程.StepID = {PS手动盘1下降回零流程.StepID}");
+                RunLog($"PS手动盘1下降回零流程.Processing = {PS手动盘1下降回零流程.Processing}");
+                RunLog($"PS手动盘2上顶流程.StepID = {PS手动盘2上顶流程.StepID}");
+                RunLog($"PS手动盘2上顶流程.Processing = {PS手动盘2上顶流程.Processing}");
+                RunLog($"PS手动盘2下降回零流程.StepID = {PS手动盘2下降回零流程.StepID}");
+                RunLog($"PS手动盘2下降回零流程.Processing = {PS手动盘2下降回零流程.Processing}");
+                RunLog($"PS抓盘手臂取Empty空盘流程.StepID = {PS抓盘手臂取Empty空盘流程.StepID}");
+                RunLog($"PS抓盘手臂取Empty空盘流程.Processing = {PS抓盘手臂取Empty空盘流程.Processing}");
+                RunLog($"PS抓盘手臂取Load空盘流程.StepID = {PS抓盘手臂取Load空盘流程.StepID}");
+                RunLog($"PS抓盘手臂取Load空盘流程.Processing = {PS抓盘手臂取Load空盘流程.Processing}");
+                RunLog($"PS抓盘手臂放空盘到Empty流程.StepID = {PS抓盘手臂放空盘到Empty流程.StepID}");
+                RunLog($"PS抓盘手臂放空盘到Empty流程.Processing = {PS抓盘手臂放空盘到Empty流程.Processing}");
+                RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID = {PS抓盘手臂放空盘到Auto1流程.StepID}");
+                RunLog($"PS抓盘手臂放空盘到Auto1流程.Processing ={PS抓盘手臂放空盘到Auto1流程.Processing}");
+                RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID = {PS抓盘手臂放空盘到Auto2流程.StepID}");
+                RunLog($"PS抓盘手臂放空盘到Auto2流程.Processing={PS抓盘手臂放空盘到Auto2流程.Processing}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("打印失败!" + ex.Message);
+            }
         }
     }
 }

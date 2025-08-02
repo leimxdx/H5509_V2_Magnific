@@ -9,9 +9,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Packaging;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
@@ -1231,7 +1228,10 @@ namespace H5509_V2
 
                         if (温度模式 == "高温")
                         {
-                            label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
+                            label6.Text = "SokingTime=" + 获取加热倒数时间().TotalSeconds.ToString("0.0") + "s" ;
+
+                            //label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
+
                             //if (升温时间.TotalHours >= 1) label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
                             //else label6.Text = "HeatingTime=" + 升温时间.ToString(@"mm\:ss");
 

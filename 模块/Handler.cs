@@ -8687,6 +8687,7 @@ namespace H5509_V2
                                     飞梭后入料状态 = 0;
                                 }
                             }
+                            //OneCycle
                             Thread.Sleep(10);
                         }
                         break;
@@ -8787,7 +8788,7 @@ namespace H5509_V2
                                 {
                                     if (temp > 加热盘.波动温度上限 || temp <= 加热盘.波动温度下限)
                                     {
-                                        temppass = false;
+                                        temppass = false; 
                                     }
                                 }
                                 if (temppass)
@@ -10332,7 +10333,7 @@ namespace H5509_V2
                     case 520:
                         PS测试区气缸下压动作流程.StepName = $"发送测试信号";
                         RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-                        result = APPmaster.Com.Send(site, open);
+                        result = APPmaster.Com.Send(site, open, 无测试机模式);
                         if (result == "Success")
                         {
                             SiteTestState[site] = 2;

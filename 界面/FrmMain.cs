@@ -527,7 +527,6 @@ namespace H5509_V2
                         }
                     }));
 
-
                     if (IsPause)
                     {
                         Thread.Sleep(50);
@@ -819,7 +818,6 @@ namespace H5509_V2
                     //    Thread.Sleep(100);
                     //    continue;
                     //}
-
 
                     if (TCPConnect)
                     {

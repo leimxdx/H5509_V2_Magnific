@@ -572,6 +572,8 @@ namespace H5509_V2
 
         public static TimeSpan TestTime = new TimeSpan(0);
 
+        public static TimeSpan HeatTime = new TimeSpan(0);
+
         public static DateTime 软件开启时间 = DateTime.Now;
 
         public static DateTime 开始时间 = DateTime.Now;
@@ -1370,7 +1372,7 @@ namespace H5509_V2
                         case "Auto1下降固定高度": initPoint.Auto1下降固定高度 = value; break;
                         case "Auto2上顶固定高度": initPoint.Auto2上顶固定高度 = value; break;
                         case "Auto2下降固定高度": initPoint.Auto2下降固定高度 = value; break;
-                            
+
                     }
                 }
                 初始点位 = initPoint;
@@ -4381,6 +4383,46 @@ namespace H5509_V2
                 default: return "Fail";
             }
             return "Success";
+        }
+
+        public static TimeSpan 获取加热倒数时间()
+        {
+            if(温度模式 != "高温" || !温控达温) return new TimeSpan(0);
+
+            TimeSpan timeSpan = new TimeSpan(23, 59, 59); //IC加热时间不会大于这个吧
+
+            for (int i = 0; i < HeatXPoint.Length; i++)
+            {
+                for (int j = 0; j < HeatYPoint.Length; j++)
+                {
+                    if (HeatDicPoint[$"{i},{j}"])
+                    {
+                        if (HeatDicTimer[$"{i},{j}"].Status == 2)
+                        {
+                            return new TimeSpan(0);
+                        }
+                        else
+                        {
+                            if (HeatDicTimer[$"{i},{j}"].Status == 1)
+                            {
+                                if (timeSpan > HeatDicTimer[$"{i},{j}"].CountDownTime)
+                                {
+                                    timeSpan = HeatDicTimer[$"{i},{j}"].CountDownTime;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (timeSpan == new TimeSpan(23, 59, 59))
+            {
+                return new TimeSpan(0);
+            }
+            else
+            {
+                return timeSpan;
+            }
         }
     }
 }

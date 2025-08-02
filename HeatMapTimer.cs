@@ -18,12 +18,12 @@ namespace H5509_V2
         public HeatMapTimer()
         {
             Timer = new Ttimer();
-            Timer.Interval = 达温后延时时间 * 1000; //2分钟
+            Timer.Interval = IC加热时间 * 1000; //2分钟 达温后延时时间  IC加热时间
             Timer.Elapsed += TimerHeatTick;
 
             WaitTimer = new Ttimer();
             WaitTimer.Interval = 500;
-            WaitTimer.Elapsed += WaitTimerHeatTick;
+            WaitTimer.Elapsed += WaitTimerHeatTick; //每500ms检测一次是否达温
         }
 
         public DateTime StartHeatTime = DateTime.Now;
@@ -32,7 +32,12 @@ namespace H5509_V2
 
         public TimeSpan CountDownTime
         {
-            get { return StartHeatTime.AddSeconds(Timer.Interval / 1000) - DateTime.Now; }
+            get 
+            { 
+                TimeSpan time = StartHeatTime.AddSeconds(Timer.Interval / 1000) - DateTime.Now;
+                if (time.TotalSeconds < 0) return new TimeSpan(0);
+                else return time;
+            }
         }
 
         private int status;
@@ -84,7 +89,7 @@ namespace H5509_V2
                 WaitTimer.Stop();
                 Timer.Start();
                 StartHeatTime = DateTime.Now;
-                RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                //RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             }
         }
     }

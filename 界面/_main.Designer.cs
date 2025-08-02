@@ -4034,10 +4034,10 @@
             // 
             this.lbl_runtime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_runtime.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lbl_runtime.Location = new System.Drawing.Point(1072, 0);
+            this.lbl_runtime.Location = new System.Drawing.Point(1071, 0);
             this.lbl_runtime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_runtime.Name = "lbl_runtime";
-            this.lbl_runtime.Size = new System.Drawing.Size(241, 45);
+            this.lbl_runtime.Size = new System.Drawing.Size(242, 45);
             this.lbl_runtime.TabIndex = 7;
             this.lbl_runtime.Text = "RunTime";
             this.lbl_runtime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4046,7 +4046,7 @@
             // 
             this.lbl_currenttime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.lbl_currenttime.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lbl_currenttime.Location = new System.Drawing.Point(962, 0);
+            this.lbl_currenttime.Location = new System.Drawing.Point(961, 0);
             this.lbl_currenttime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_currenttime.Name = "lbl_currenttime";
             this.lbl_currenttime.Size = new System.Drawing.Size(110, 45);
@@ -4057,10 +4057,10 @@
             // 
             this.label6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.label6.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label6.Location = new System.Drawing.Point(716, 0);
+            this.label6.Location = new System.Drawing.Point(729, 0);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(246, 45);
+            this.label6.Size = new System.Drawing.Size(232, 45);
             this.label6.TabIndex = 8;
             this.label6.Text = "HeatingTime";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -4072,7 +4072,7 @@
             this.label653.Location = new System.Drawing.Point(545, 0);
             this.label653.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label653.Name = "label653";
-            this.label653.Size = new System.Drawing.Size(171, 45);
+            this.label653.Size = new System.Drawing.Size(184, 45);
             this.label653.TabIndex = 4;
             this.label653.Text = "IndexTime";
             this.label653.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
