@@ -223,10 +223,11 @@ namespace H5509_V2
                         textBoxcodecrc.Text = getstr[10];
                         textBoxstation.Text = getstr[11];
                         textBoxmark.Text = getstr[12];
-                        if (textBoxuser.Text == "")
+                        if (textBoxuser.Text.Trim().Length == 0)
                         {
-                            textBoxuser.Text = getstr[13];
+                            textBoxuser.Text = getstr[13]; //如果用户没有输入就不修改扫码出来的用户 
                         }
+                        else getstr[13] = textBoxuser.Text.Trim(); 
                         textBoxtestflow.Text = getstr[14];
                         textBoxstate.Text = getstr[15];
                         textBoxtemprature.Text = getstr[16];
@@ -1252,11 +1253,11 @@ namespace H5509_V2
                         txt_fix1.Text = Fix1数量.ToString();
                         txt_fix2.Text = Fix2数量.ToString();
                         txt_fix3.Text = Fix3数量.ToString();
-                        txt_auto1yield.Text = (Auto1数量 / total * 100).ToString("0.0") + '%';
-                        txt_auto2yield.Text = (Auto2数量 / total * 100).ToString("0.0") + '%';
-                        txt_fix1yield.Text = (Fix1数量 / total * 100).ToString("0.0") + '%';
-                        txt_fix2yield.Text = (Fix2数量 / total * 100).ToString("0.0") + '%';
-                        txt_fix3yield.Text = (Fix3数量 / total * 100).ToString("0.0") + '%';
+                        txt_auto1yield.Text = (Auto1数量 / total * 100).ToString("0.00") + '%';
+                        txt_auto2yield.Text = (Auto2数量 / total * 100).ToString("0.00") + '%';
+                        txt_fix1yield.Text = (Fix1数量 / total * 100).ToString("0.00") + '%';
+                        txt_fix2yield.Text = (Fix2数量 / total * 100).ToString("0.00") + '%';
+                        txt_fix3yield.Text = (Fix3数量 / total * 100).ToString("0.00") + '%';
 
                         if (windowstimer.Enabled)
                         {

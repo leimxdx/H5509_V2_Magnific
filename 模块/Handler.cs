@@ -4699,11 +4699,11 @@ namespace H5509_V2
                         RunLog(($"UPH:" + UPHNum.ToString()), LogType.OperateLog);
                         RunLog($"载入数:{载入数}", LogType.OperateLog);
                         RunLog($"总计:{出料数}", LogType.OperateLog);
-                        RunLog($"Auto1:{Auto1数量},良率:{Auto1良率:0.0}%", LogType.OperateLog);
-                        RunLog($"Auto2:{Auto2数量},良率:{Auto2良率: 0.0}%", LogType.OperateLog);
-                        RunLog($"Fix1:{Fix1数量},良率:{Fix1良率: 0.0}%", LogType.OperateLog);
-                        RunLog($"Fix2:{Fix2数量},良率:{Fix2良率: 0.0}%", LogType.OperateLog);
-                        RunLog($"Fix3:{Fix3数量},良率:{Fix3良率: 0.0}%", LogType.OperateLog);
+                        RunLog($"Auto1:{Auto1数量},良率:{Auto1良率:0.00}%", LogType.OperateLog);
+                        RunLog($"Auto2:{Auto2数量},良率:{Auto2良率: 0.00}%", LogType.OperateLog);
+                        RunLog($"Fix1:{Fix1数量},良率:{Fix1良率: 0.00}%", LogType.OperateLog);
+                        RunLog($"Fix2:{Fix2数量},良率:{Fix2良率: 0.00}%", LogType.OperateLog);
+                        RunLog($"Fix3:{Fix3数量},良率:{Fix3良率: 0.00}%", LogType.OperateLog);
 
                         SaveBatchData();
 

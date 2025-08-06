@@ -8632,5 +8632,11 @@ namespace H5509_V2
                 MessageBox.Show("打印失败!" + ex.Message);
             }
         }
+
+        private void button264_Click(object sender, EventArgs e)
+        {
+            //Auto1数量 = 8162;
+            //Fix2数量 = 4;
+        }
     }
 }
