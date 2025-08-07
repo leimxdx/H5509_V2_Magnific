@@ -227,7 +227,7 @@ namespace H5509_V2
                         {
                             textBoxuser.Text = getstr[13]; //如果用户没有输入就不修改扫码出来的用户 
                         }
-                        else getstr[13] = textBoxuser.Text.Trim(); 
+                        else getstr[13] = textBoxuser.Text.Trim();
                         textBoxtestflow.Text = getstr[14];
                         textBoxstate.Text = getstr[15];
                         textBoxtemprature.Text = getstr[16];
@@ -1182,6 +1182,11 @@ namespace H5509_V2
                                 label_driverStatus.Text = "结批中";
                                 label_driverStatus.ForeColor = Color.LimeGreen;
                             }
+                            else if (一个循环标记)
+                            {
+                                label_driverStatus.Text = "一个循环中";
+                                label_driverStatus.ForeColor = Color.LimeGreen;
+                            }
                             else
                             {
                                 label_driverStatus.Text = "Running";
@@ -1193,8 +1198,16 @@ namespace H5509_V2
                         }
                         else if (设备状态 == 2)
                         {
-                            label_driverStatus.Text = "STOP";
-                            label_driverStatus.ForeColor = Color.Red;
+                            if (一个循环完成)
+                            {
+                                label_driverStatus.Text = "一个循环完成";
+                                label_driverStatus.ForeColor = Color.Black;
+                            }
+                            else
+                            {
+                                label_driverStatus.Text = "STOP";
+                                label_driverStatus.ForeColor = Color.Red;
+                            }
                             isRedFlicker = true;
                             isYellowFlicker = false;
                             isGreenFlicker = false;
@@ -1210,7 +1223,7 @@ namespace H5509_V2
                             Lbl_IClistenmode.Text = "空跑模式";
                             Lbl_IClistenmode.ForeColor = Color.Red;
                         }
-                        else 
+                        else
                         {
                             Lbl_IClistenmode.Text = "正常模式";
                             Lbl_IClistenmode.ForeColor = Color.LimeGreen;
@@ -1229,7 +1242,7 @@ namespace H5509_V2
 
                         if (温度模式 == "高温")
                         {
-                            label6.Text = "SokingTime=" + 获取加热倒数时间().TotalSeconds.ToString("0.0") + "s" ;
+                            label6.Text = "SokingTime=" + 获取加热倒数时间().TotalSeconds.ToString("0.0") + "s";
 
                             //label6.Text = "HeatingTime=" + 升温时间.ToString(@"hh\:mm\:ss");
 
@@ -1253,11 +1266,13 @@ namespace H5509_V2
                         txt_fix1.Text = Fix1数量.ToString();
                         txt_fix2.Text = Fix2数量.ToString();
                         txt_fix3.Text = Fix3数量.ToString();
-                        txt_auto1yield.Text = (Auto1数量 / total * 100).ToString("0.00") + '%';
-                        txt_auto2yield.Text = (Auto2数量 / total * 100).ToString("0.00") + '%';
-                        txt_fix1yield.Text = (Fix1数量 / total * 100).ToString("0.00") + '%';
-                        txt_fix2yield.Text = (Fix2数量 / total * 100).ToString("0.00") + '%';
-                        txt_fix3yield.Text = (Fix3数量 / total * 100).ToString("0.00") + '%';
+
+                        //double auto1 = total != 0 ? Math.Truncate((Auto1数量 / total * 10000)) / 100 : 0;
+                        txt_auto1yield.Text = Auto1良率.ToString("0.00") + '%';
+                        txt_auto2yield.Text = total != 0 ? (Auto2数量 / total * 100).ToString("0.00") + '%': "0.00%";
+                        txt_fix1yield.Text = total != 0 ? (Fix1数量 / total * 100).ToString("0.00") + '%': "0.00%";
+                        txt_fix2yield.Text = total != 0 ? (Fix2数量 / total * 100).ToString("0.00") + '%': "0.00%";
+                        txt_fix3yield.Text = total != 0 ? (Fix3数量 / total * 100).ToString("0.00") + '%': "0.00%";
 
                         if (windowstimer.Enabled)
                         {
@@ -2333,6 +2348,10 @@ namespace H5509_V2
                 }
             }
             else UPHType = 0;
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
         }
     }
 }

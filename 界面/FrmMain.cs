@@ -813,15 +813,8 @@ namespace H5509_V2
             {
                 try
                 {
-                    //if (IsPause)
-                    //{
-                    //    Thread.Sleep(100);
-                    //    continue;
-                    //}
-
                     if (TCPConnect)
                     {
-
                         #region 读取设定温度
 
                         string result4 = dTMHelper.ReadSv(0, out short[] svvalue);

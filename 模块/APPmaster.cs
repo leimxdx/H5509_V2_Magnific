@@ -23,6 +23,7 @@ using System.Web;
 using System.Windows.Forms;
 using System.Windows.Interop;
 using System.Xml.Linq;
+using DocumentFormat.OpenXml.Vml;
 using H5509_alarm;
 using Sunny.UI;
 using Sunny.UI.Win32;
@@ -258,11 +259,15 @@ namespace H5509_V2
 
         public static bool 正在结批 = false;
 
+        public static bool 一个循环标记 = false;
+
+        public static bool 一个循环中 = false;
+
+        public static bool 一个循环完成 = false;
+
         public static bool 结批完成 = false;
 
         public static bool 强制结批标记 = false;
-
-        public static bool 定点停止标记 = false;
 
         public static bool 后方定点停止允许 = false;
 
@@ -464,6 +469,10 @@ namespace H5509_V2
 
         public static bool Tray平移运动标记; //是否正在平移
 
+        public static bool 结批选项选择中 = false;
+
+        public static bool 一个循环选项选择中 = false;
+
         public static double TrayMax
         {
             get { return 初始点位.入料_变距最大值; }
@@ -582,6 +591,8 @@ namespace H5509_V2
 
         public static DateTime 按下结批时间 = DateTime.Now;
 
+        public static DateTime 按下一个循环时间 = DateTime.Now;
+
         public static DateTime 结束时间 = DateTime.Now;
 
         public static TimeSpan 实时运行时间 { get { return DateTime.Now - 开始时间; } }
@@ -639,7 +650,7 @@ namespace H5509_V2
             get
             {
                 if (出料数 == 0) return 0;
-                else return (double)Auto1数量 / 出料数 * 100;
+                else return Math.Truncate(((double)Auto1数量 / 出料数 * 10000)) / 100;
             }
         }
 

@@ -37,10 +37,13 @@ namespace H5509_V2
         public MotionEx motionEx = MotionEx.GetInstance();
 
         public bool Approvallamp { get; set; } = false;
+        public bool Onecyclelamp { get; set; } = false;
 
         public System.Timers.Timer 结批触发定时器 = new System.Timers.Timer();
 
         public System.Timers.Timer 结批按钮闪烁的定时器 = new System.Timers.Timer(); //结批按钮灯闪烁定时器
+
+        public System.Timers.Timer OneCycle按钮闪烁的定时器 = new System.Timers.Timer(); //OneCycle按钮闪烁的定时器
 
         public Action 刷新批次信息;
 
@@ -57,16 +60,20 @@ namespace H5509_V2
 
             结批按钮闪烁的定时器.Interval = 400;
             结批按钮闪烁的定时器.Elapsed += finalLampFlickertimerTick;
+
+            OneCycle按钮闪烁的定时器.Interval = 400;
+            OneCycle按钮闪烁的定时器.Elapsed += onecycletimerTick;
         }
 
         private void ForcedBatchTick(object sender, EventArgs eventArgs)
         {
             结批触发定时器.Stop();
             RunLog("结批按钮已按下5s");
-            if (!结批标记)
+            if (!结批标记 && !一个循环标记)
             {
                 if (温度模式 == "高温")
                 {
+                    结批选项选择中 = true;
                     ProgramPause = true;
                     IsPause = true;
                     DialogResult dialog = MessageBox.Show("请确认是否清空加热盘?\n是:将加热盘剩余IC取完\n否:直接结批\n取消:不做任何操作", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
@@ -85,6 +92,7 @@ namespace H5509_V2
                         加热盘停止入料标记 = true;
                         结批按钮闪烁的定时器.Start();
                     }
+                    结批选项选择中 = false;
                     ProgramStart = true;
                 }
                 else
@@ -97,7 +105,8 @@ namespace H5509_V2
             }
             else
             {
-                RunLog("无法触发结批,正在结批中...");
+                if (结批标记) RunLog("无法触发结批,正在结批中...");
+                if (一个循环标记) RunLog("无法触发结批,正在一个循环中...");
             }
         }
 
@@ -105,6 +114,13 @@ namespace H5509_V2
         {
             Approvallamp = !Approvallamp;
             motionEx.SetDo("Y008_结批灯", Approvallamp);
+        }
+
+
+        private void onecycletimerTick(object sender, EventArgs eventArgs)
+        {
+            Onecyclelamp = !Onecyclelamp;
+            motionEx.SetDo("Y009_一个循环灯", Onecyclelamp);
         }
 
         #region 轴移动
@@ -2774,7 +2790,11 @@ namespace H5509_V2
             正在结批 = false;
             结批完成 = false;
             强制结批标记 = false;
-            定点停止标记 = false;
+            一个循环标记 = false;
+            一个循环中 = false;
+            一个循环完成 = false;
+            结批选项选择中 = false;
+            一个循环选项选择中 = false;
             后方定点停止允许 = false;
             前方定点停止允许 = false;
             开舱门上顶标记 = false;
@@ -3267,6 +3287,21 @@ namespace H5509_V2
                 RunLog("[Code]4032009,[Msg](按下开始)Fix3请放置空盘", LogType.AlarmLog);
             }
 
+            if (io[7] != "0")//23
+            {
+                isstart = false;
+                Listcode.Add("4020009");
+                RunLog("[Code]4020009,[Msg](按下开始)AUTO1前对射感应到无Tray盘", LogType.AlarmLog);
+            }
+
+            if (io[9] != "0")//25
+            {
+                isstart = false;
+                Listcode.Add("4021009");
+                RunLog("[Code]4021009,[Msg](按下开始)AUTO2前对射感应到无Tray盘", LogType.AlarmLog);
+            }
+
+
             if (!安全门禁用)
             {
                 result = 门禁感应(out string[] iovalue);
@@ -3333,25 +3368,6 @@ namespace H5509_V2
                             }
                         }
 
-                        //string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
-                        //if (result4 == "Success")
-                        //{
-                        //    string result5 = dTMHelper.WriteSv(1, 设定温度);
-                        //    string result6 = dTMHelper.WriteSv(0, 设定温度);
-                        //    if (result5 != "Success" || result6 != "Success")
-                        //    {
-                        //        isstart = false;
-                        //        Listcode.Add("1400447");
-                        //        RunLog("[Code]1400447,[Msg]设定温度失败");
-                        //    }
-                        //}
-                        //else
-                        //{
-                        //    isstart = false;
-                        //    Listcode.Add("1400447");
-                        //    RunLog("[Code]1400447,[Msg]设定温度失败");
-                        //}
-
                         if (isstart && !温控加热)
                         {
                             result = 加热盘加热开启();
@@ -3400,6 +3416,82 @@ namespace H5509_V2
             }
 
             return isstart;
+        }
+
+        private void 检测梭车是否有IC遗留()
+        {
+            //检测梭车是否有IC遗留
+            if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //飞梭后入料IC第1/2列无料
+            {
+                for (int i = 0; i < 飞梭后入料IC[0].Length; i++)
+                {
+                    if (飞梭后入料IC[0][i] || 飞梭后入料IC[1][i])
+                    {
+                        if (飞梭2位置 == 0)
+                        {
+                            if (飞梭后入料IC[0][i])
+                            {
+                                Listcode.Add($"5{i + 47}0102");
+                                RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                            if (飞梭后入料IC[1][i])
+                            {
+                                Listcode.Add($"5{i + 47}0103");
+                                RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                        }
+                        else
+                        {
+                            if (飞梭后入料IC[0][i])
+                            {
+                                Listcode.Add($"5{i + 47}0100");
+                                RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                            if (飞梭后入料IC[1][i])
+                            {
+                                Listcode.Add($"5{i + 47}0101");
+                                RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true)) //飞梭前入料IC第1/2列无料
+            {
+                for (int i = 0; i < 飞梭前入料IC[0].Length; i++)
+                {
+                    if (飞梭前入料IC[0][i] || 飞梭前入料IC[1][i])
+                    {
+                        if (飞梭2位置 == 0)
+                        {
+                            if (飞梭前入料IC[0][i])
+                            {
+                                Listcode.Add($"5{i + 43}0100");
+                                RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                            if (飞梭前入料IC[1][i])
+                            {
+                                Listcode.Add($"5{i + 43}0101");
+                                RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                        }
+                        else
+                        {
+                            if (飞梭前入料IC[0][i])
+                            {
+                                Listcode.Add($"5{i + 43}0102");
+                                RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                            if (飞梭前入料IC[1][i])
+                            {
+                                Listcode.Add($"5{i + 43}0103");
+                                RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         //private bool 每次开始检查()
@@ -3535,7 +3627,19 @@ namespace H5509_V2
                         if (H5509正在归零)
                         {
                             isstart = false;
-                            RunLog("设备正在回零...，无法开始", LogType.OperateLog);
+                            RunLog("设备正在回零...,无法开始", LogType.OperateLog);
+                        }
+
+                        if (结批选项选择中)
+                        {
+                            isstart = false;
+                            RunLog("结批选项选择中...,无法开始", LogType.OperateLog);
+                        }
+
+                        if (一个循环选项选择中)
+                        {
+                            isstart = false;
+                            RunLog("一个循环选项选择中...,无法开始", LogType.OperateLog);
                         }
 
                         string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
@@ -3596,6 +3700,11 @@ namespace H5509_V2
 
                             if (isstart)
                             {
+                                if (一个循环完成)
+                                {
+                                    一个循环完成 = false;
+                                    StartRunIn(); //根据开Site情况添加入料队列
+                                }
 
                                 if (Empty舱门上顶标记)
                                 {
@@ -3698,6 +3807,7 @@ namespace H5509_V2
                                 motionEx.SetDo("Y004_重试灯", false);
                                 motionEx.SetDo("Y005_忽略灯", false);
                                 motionEx.SetDo("Y008_结批灯", false);
+                                motionEx.SetDo("Y009_一个循环灯", false);
                                 motionEx.SetDo("Y011_换盘灯", false);
                                 motionEx.SetDo("Y013_黄灯", false);
                                 motionEx.SetDo("Y008_结批灯", false);
@@ -3722,12 +3832,12 @@ namespace H5509_V2
                         if (ProgramPause)
                         {
                             ProgramPause = false;
-                            RunLog("按下暂停(程序)", LogType.OperateLog);
+                            RunLog("按下暂停(程序)");//, LogType.OperateLog
                         }
                         else if (ProgramBtnPause)
                         {
                             ProgramBtnPause = false;
-                            RunLog("按下暂停(界面)", LogType.OperateLog);
+                            RunLog("按下暂停(界面)");//, LogType.OperateLog
                         }
                         else
                         {
@@ -3769,6 +3879,7 @@ namespace H5509_V2
                         motionEx.SetDo("Y002_暂停灯", true);
                         motionEx.SetDo("Y006_定点停止灯", false);
                         motionEx.SetDo("Y007_定点开始灯", false);
+                        motionEx.SetDo("Y009_一个循环灯", false);
                     }
 
                     bool safesw = io[2] == "1"; //"X003_安全钮"
@@ -3872,7 +3983,46 @@ namespace H5509_V2
                     bool onecycle = io[8] == "1"; //X009_一个循环
                     if (CheckEdgeSingal(onecycle, ref OnecycleRiseCache, true))
                     {
-                        RunLog("按下一次循环", LogType.OperateLog);
+                        RunLog("按下一个循环", LogType.OperateLog);
+                        if (!结批标记)
+                        {
+                            if (!一个循环标记)
+                            {
+                                if (温度模式 == "高温")
+                                {
+                                    一个循环选项选择中 = true;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                    DialogResult dialog = MessageBox.Show("请确认是否清空加热盘?\n是:将加热盘剩余IC取完\n否:直接结批\n取消:不做任何操作", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                    if (dialog == DialogResult.Yes)
+                                    {
+                                        一个循环标记 = true;
+                                        一个循环完成 = false;
+                                        按下一个循环时间 = DateTime.Now;
+                                        OneCycle按钮闪烁的定时器.Start();
+                                    }
+                                    else if (dialog == DialogResult.No)
+                                    {
+                                        一个循环标记 = true;
+                                        一个循环完成 = false;
+                                        按下一个循环时间 = DateTime.Now;
+                                        加热盘停止入料标记 = true;
+                                        OneCycle按钮闪烁的定时器.Start();
+                                    }
+                                    一个循环选项选择中 = false;
+                                    ProgramStart = true;
+                                }
+                                else
+                                {
+                                    一个循环标记 = true;
+                                    一个循环完成 = false;
+                                    按下一个循环时间 = DateTime.Now;
+                                    OneCycle按钮闪烁的定时器.Start();
+                                }
+                            }
+                            else RunLog("无法触发一个循环,正在一个循环中...");
+                        }
+                        else RunLog("无法触发结批,正在结批中...");
                     }
 
                     bool home = io[9] == "1"; //X010_归零
@@ -4526,7 +4676,7 @@ namespace H5509_V2
             PS结批流程.StepID = 500;
             while (true)
             {
-                if (结批标记) Thread.Sleep(10);
+                if (结批标记 || 一个循环标记) Thread.Sleep(10);
                 else Thread.Sleep(100);
 
                 if (APPmaster.IsForecePause)
@@ -4571,6 +4721,34 @@ namespace H5509_V2
                             RunLog($"PS结批流程.StepID={PS结批流程.StepID}->正在结批...");
                             PS结批流程.Processing = true;
                             PS结批流程.StepID = 505;
+                        }
+                        else
+                        {
+                            bool condition = 一个循环标记 && H5509归零 && H5509初始化 && !一个循环完成 && 设备状态 == 1 && 飞梭停止工作;
+                            if (process && condition)
+                            {
+                                ProgramPause = true;
+                                IsPause = true;
+                                Thread.Sleep(50); //等待程序停止
+
+                                一个循环标记 = false;
+                                一个循环完成 = true;
+
+                                飞梭停止工作 = false;
+                                入料手臂停止工作标记 = false;
+                                测试手臂入料停止工作标记 = false;
+                                测试手臂出料停止工作标记 = false;
+                                出料手臂出料停止工作标记 = false;
+
+                                检测梭车是否有IC遗留();
+                                OneCycle按钮闪烁的定时器.Stop();
+                                Thread.Sleep(10); //等待输出完成
+                                motionEx.SetDo("Y009_一个循环灯", false);
+
+                                Listcode.Add("1400100");
+                                RunLog($"[Code]1400100,[Msg]一次循环完成", LogType.AlarmLog);
+                            }
+                            Thread.Sleep(10);
                         }
                         break;
 
@@ -4720,78 +4898,7 @@ namespace H5509_V2
                             RunLog($"[Code]1400443,[Msg]载入数、总数和批次数量不一致", LogType.AlarmLog);
                         }
 
-                        //检测梭车是否有IC遗留
-                        if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //飞梭后入料IC第1/2列无料
-                        {
-                            for (int i = 0; i < 飞梭后入料IC[0].Length; i++)
-                            {
-                                if (飞梭后入料IC[0][i] || 飞梭后入料IC[1][i])
-                                {
-                                    if (飞梭2位置 == 0)
-                                    {
-                                        if (飞梭后入料IC[0][i])
-                                        {
-                                            Listcode.Add($"5{i + 47}0102");
-                                            RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                        if (飞梭后入料IC[1][i])
-                                        {
-                                            Listcode.Add($"5{i + 47}0103");
-                                            RunLog($"[Code][Msg]后梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (飞梭后入料IC[0][i])
-                                        {
-                                            Listcode.Add($"5{i + 47}0100");
-                                            RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                        if (飞梭后入料IC[1][i])
-                                        {
-                                            Listcode.Add($"5{i + 47}0101");
-                                            RunLog($"[Code][Msg]后梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        if (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true)) //飞梭前入料IC第1/2列无料
-                        {
-                            for (int i = 0; i < 飞梭前入料IC[0].Length; i++)
-                            {
-                                if (飞梭前入料IC[0][i] || 飞梭前入料IC[1][i])
-                                {
-                                    if (飞梭2位置 == 0)
-                                    {
-                                        if (飞梭前入料IC[0][i])
-                                        {
-                                            Listcode.Add($"5{i + 43}0100");
-                                            RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                        if (飞梭前入料IC[1][i])
-                                        {
-                                            Listcode.Add($"5{i + 43}0101");
-                                            RunLog($"[Code][Msg]前梭车(梭车1)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (飞梭前入料IC[0][i])
-                                        {
-                                            Listcode.Add($"5{i + 43}0102");
-                                            RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 1:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                        if (飞梭前入料IC[1][i])
-                                        {
-                                            Listcode.Add($"5{i + 43}0103");
-                                            RunLog($"[Code][Msg]前梭车(梭车2)Dut{i + 5:D2}有IC遗留", LogType.AlarmLog);
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        检测梭车是否有IC遗留();
 
                         //保存工单dut信息
                         result = SQLiteHelper.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
@@ -4873,14 +4980,14 @@ namespace H5509_V2
 
                         if (温度模式 == "常温") //常温
                         {
-                            if (结批标记)
+                            if (结批标记 || 一个循环标记)
                             {
                                 ispass = false;
                             }
                         }
                         else
                         {
-                            if (结批标记)
+                            if (结批标记 || 一个循环标记)
                             {
                                 if (加热盘停止入料标记)
                                 {
@@ -4901,7 +5008,7 @@ namespace H5509_V2
                         }
                         else
                         {
-                            if (结批标记)
+                            if (结批标记 || 一个循环标记)
                             {
                                 if (温度模式 == "常温")
                                 {
@@ -4962,7 +5069,7 @@ namespace H5509_V2
                                     }
                                     else //如果没有加热好
                                     {
-                                        if (!结批标记)
+                                        if (!结批标记 && !一个循环标记)
                                         {
                                             PS入料手臂吸放料流程.StepID = 511;
                                         }
@@ -5046,7 +5153,7 @@ namespace H5509_V2
                                 }
                                 else //如果没有加热好
                                 {
-                                    if (!结批标记)
+                                    if (!结批标记 && !一个循环标记)
                                     {
                                         PS入料手臂吸放料流程.StepID = 511;
                                     }
@@ -5108,7 +5215,7 @@ namespace H5509_V2
                         break;
 
                     case 511:
-                        if (!结批标记 && 获取Heat盘加热好的指定IC个数(0, false, 1, out num2)) //如果State：0的状态数量 >= 1 说明加热盘还没有放满
+                        if (!结批标记 && !一个循环标记 && 获取Heat盘加热好的指定IC个数(0, false, 1, out num2)) //如果State：0的状态数量 >= 1 说明加热盘还没有放满
                         {
                             if (获取Heat盘未放IC的指定IC个数(0, out int num)) //如果需要放置的IC个数 >=1 && <=4
                             {
@@ -5161,7 +5268,12 @@ namespace H5509_V2
                             Load换盘标记 = true;
                             PS入料手臂吸放料流程.StepID = 805;
                         }
-                        else Thread.Sleep(10);
+                        else
+                        {
+                            PS入料手臂吸放料流程.StepID = 905;
+                            PS入料手臂吸放料流程StepID = 1516;
+                            PS入料手臂吸放料流程Processing = true;
+                        }
                         break;
 
                     case 1520:
@@ -5486,9 +5598,9 @@ namespace H5509_V2
 
                     case 515:
                         PS入料手臂吸放料流程.StepName = "获取Load盘坐标";
-                        RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                         if (获取Load盘坐标(true, out xPoint, out yPoint))
                         {
+                            RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->获取到Load盘坐标");
                             PS入料手臂吸放料流程.StepID = 520;
                         }
                         else
@@ -5497,9 +5609,18 @@ namespace H5509_V2
                             {
                                 if (!结批标记) //在这里判断为True，说明无待测盘时点了结批
                                 {
-                                    iswait = false;
-                                    Load换盘标记 = true;
-                                    PS入料手臂吸放料流程.StepID = 805;
+                                    if(!Auto1换盘标记 && !Auto2换盘标记) //如果没有换盘标记
+                                    {
+                                        iswait = false;
+                                        Load换盘标记 = true;
+                                        PS入料手臂吸放料流程.StepID = 805;
+                                    }
+                                    else
+                                    {
+                                        PS入料手臂吸放料流程.StepID = 905;
+                                        PS入料手臂吸放料流程StepID = 515;
+                                        PS入料手臂吸放料流程Processing = true;
+                                    }
                                 }
                                 else //判断吸嘴上有没有料
                                 {
@@ -5864,7 +5985,7 @@ namespace H5509_V2
                         }
                         else
                         {
-                            if (结批标记 || 结批触发定时器.Enabled)
+                            if (结批标记 || 一个循环标记 || 结批触发定时器.Enabled)
                             {
                                 PS入料手臂吸放料流程.StepID = 500;
                                 PS入料手臂吸放料流程.Processing = false;
@@ -6078,7 +6199,7 @@ namespace H5509_V2
                     case 799:
                         PS入料手臂吸放料流程.StepName = $"入料手臂_放料第{colums + 1}列流程完成";
                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                        if (结批标记 || 结批触发定时器.Enabled)
+                        if (结批标记 || 一个循环标记 || 结批触发定时器.Enabled)
                         {
                             PS入料手臂吸放料流程.StepID = 500;
                             PS入料手臂吸放料流程.Processing = false;
@@ -6970,7 +7091,7 @@ namespace H5509_V2
                                 && 入料手臂停止工作标记
                                 && 测试手臂入料停止工作标记
                                 && 测试手臂出料停止工作标记
-                                && 结批标记)
+                                && (结批标记 || 一个循环标记))
                             {
                                 出料手臂出料停止工作标记 = true;
                             }
@@ -8687,7 +8808,6 @@ namespace H5509_V2
                                     飞梭后入料状态 = 0;
                                 }
                             }
-                            //OneCycle
                             Thread.Sleep(10);
                         }
                         break;
@@ -8701,7 +8821,7 @@ namespace H5509_V2
                             && !飞梭前入料IC[0].Contains(true) //飞梭前入料IC第1列无料
                             && !飞梭前入料IC[1].Contains(true) //飞梭前入料IC第2列无料
                             && 入料手臂停止工作标记
-                            && 结批标记)
+                            && (结批标记 || 一个循环标记))
                         {
                             测试手臂入料停止工作标记 = true;
                             PS测试手臂取待测料流程.Processing = false;
@@ -8710,7 +8830,7 @@ namespace H5509_V2
                         }
                         else
                         {
-                            if (入料手臂停止工作标记 && 结批标记)
+                            if (入料手臂停止工作标记 && (结批标记 || 一个循环标记))
                             {
                                 bool[] open = new bool[]
                                 {
@@ -8788,7 +8908,7 @@ namespace H5509_V2
                                 {
                                     if (temp > 加热盘.波动温度上限 || temp <= 加热盘.波动温度下限)
                                     {
-                                        temppass = false; 
+                                        temppass = false;
                                     }
                                 }
                                 if (temppass)
@@ -9602,7 +9722,7 @@ namespace H5509_V2
                                 && !SiteTestState.Contains(4) //测试区有料待取走
                                 && 测试手臂入料停止工作标记
                                 && 入料手臂停止工作标记
-                                && 结批标记)
+                                && (结批标记 || 一个循环标记))
                             {
                                 测试手臂出料停止工作标记 = true;
                             }
@@ -12704,8 +12824,8 @@ namespace H5509_V2
                                                     && Load上顶标记 == 1
                                                     && Empty下降标记 == 1
                                                     && Empty上顶标记 == 1;
-                                                    //&& !Auto1换盘标记
-                                                    //&& !Auto2换盘标记;
+                        //&& !Auto1换盘标记
+                        //&& !Auto2换盘标记;
 
                         PS抓盘手臂取Load空盘流程.Permit = !PS抓盘手臂取Load空盘流程.Processing
                                                     && !PS待测盘上顶流程.Processing
