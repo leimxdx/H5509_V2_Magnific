@@ -41,7 +41,7 @@ namespace H5509_V2
         private static Dictionary<string, FileCounter> _fileCounters = new Dictionary<string, FileCounter>();
 
         ConcurrentQueue<log> logNeed2Add = new ConcurrentQueue<log>(); // 用于存储需要添加的日志
-
+        public Action 发送批次信息 { get; set; } // 用于发送批量信息的委托
 
         class FileCounter
         {
@@ -2067,6 +2067,11 @@ namespace H5509_V2
                 uiButton21.Text = "导出Excel";
                 MessageBox.Show("导出异常!详细信息:" + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            发送批次信息();
         }
     }
     

@@ -197,6 +197,7 @@
             this.TitleColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.ZoomScaleRect = new System.Drawing.Rectangle(15, 15, 800, 450);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ForMain_FormClosing);
             this.Load += new System.EventHandler(this.ForMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

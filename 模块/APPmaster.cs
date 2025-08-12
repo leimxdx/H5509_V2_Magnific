@@ -29,6 +29,7 @@ using Sunny.UI;
 using Sunny.UI.Win32;
 using static GTN.mc;
 using static H5509_V2.ForMain;
+using static H5509_V2.WriteData;
 using Ttimer = System.Timers.Timer;
 
 namespace H5509_V2
@@ -58,6 +59,14 @@ namespace H5509_V2
         public static string trayTemp = "";
 
         public static int Socket使用次数超限数 = 0;
+
+        public static bool 温控器读取探测温度异常 = false;
+
+        public static bool 温控器读取设定温度异常 = false;
+
+        public static bool 温控器设定温度异常 = false;
+
+        public static bool 温控器读取_设定温度报警 = true;
 
         public static int 报警次数 = 0;
 
@@ -436,6 +445,26 @@ namespace H5509_V2
         public static string oth = "";
 
         public static string othAll = "";
+
+        public static string 全部回零异常Error;
+
+        public static string 读取Site1_Site8探测温度Error;
+
+        public static string 读取Site9_Site16探测温度Error;
+
+        public static string 读取加热盘探测温度Error;
+
+        public static string 设定Site1_Site8温度Error;
+
+        public static string 设定Site9_Site16温度Error;
+
+        public static string 设定加热盘温度Error;
+
+        public static string 读取Site1_Site8设定温度Error;
+
+        public static string 读取Site9_Site16设定温度Error;
+
+        public static string 读取加热盘设定温度Error;
 
         public static string[] ServoAxis = { "M16_入料手臂Y轴", "M17_出料手臂Y轴", "M18_放Tary盘轴", "M19_测试手臂Z轴", "M20_飞梭轴", "M21_测试手臂X轴", "M22_入料手臂X轴", "M23_出料手臂X轴" };
 
@@ -1706,6 +1735,7 @@ namespace H5509_V2
                         case "TCPPort": TCPPort = Convert.ToInt32(value); break;
                         case "connectionString": SQLServerConnString = value; break;
                         case "气压报警": 气压报警 = value; break;
+                        case "温控器读取_设定温度报警": 温控器读取_设定温度报警 = Convert.ToBoolean(value); break;
                     }
                 }
             }
@@ -2332,12 +2362,39 @@ namespace H5509_V2
                 string result6 = dTMHelper.WriteSv(0, 设定温度);
                 if (result5 != "Success" || result6 != "Success")
                 {
-                    if (result5 != "Success") return $"模块2设定温度失败!" + result5;
-                    if (result6 != "Success") return $"模块1设定温度失败!" + result6;
+                    if (!温控器设定温度异常 && 温控器读取_设定温度报警)
+                    {
+                        温控器设定温度异常 = true;
+
+                        if (result5 != "Success")
+                        {
+                            Listcode.Add($"1400452");
+                            RunLog($"[Code]1400452,[Msg]设定Site1-Site8温度失败!详细信息:" + result5, LogType.AlarmLog);
+                        }
+                        if (result6 != "Success")
+                        {
+                            Listcode.Add($"1400453");
+                            RunLog($"[Code]1400453,[Msg]设定Site9-Site16温度失败!详细信息:" + result6, LogType.AlarmLog);
+                        }
+                    }
+                    return "Fail";
                 }
+                else 温控器设定温度异常 = false;
+
                 return "Success";
             }
-            else return $"模块3设定温度失败!" + result4;
+            else
+            {
+                if (!温控器设定温度异常 && 温控器读取_设定温度报警)
+                {
+                    温控器设定温度异常 = true;
+                    Listcode.Add($"1400454");
+                    RunLog($"[Code]1400454,[Msg]设定加热盘温度失败!详细信息:" + result4, LogType.AlarmLog);
+                }
+                else 温控器设定温度异常 = false;
+
+                return "Fail";
+            }
         }
 
         public static void SaveBatchData()
@@ -3511,7 +3568,8 @@ namespace H5509_V2
 
         public static void RunLog(string info, WriteData.LogType txtType = WriteData.LogType.RunLog, bool isReceive = false, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
         {
-            Log.AddLog(excelLevel, excelType, info); //写入Excel
+            try { Log.AddLog(excelLevel, excelType, info); } //写入Excel
+            catch { }
 
             LogManager log = new LogManager()
             {
@@ -4398,7 +4456,7 @@ namespace H5509_V2
 
         public static TimeSpan 获取加热倒数时间()
         {
-            if(温度模式 != "高温" || !温控达温) return new TimeSpan(0);
+            if (温度模式 != "高温" || !温控达温) return new TimeSpan(0);
 
             TimeSpan timeSpan = new TimeSpan(23, 59, 59); //IC加热时间不会大于这个吧
 

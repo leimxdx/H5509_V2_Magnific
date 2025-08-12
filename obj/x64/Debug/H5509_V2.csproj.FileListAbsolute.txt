@@ -111,7 +111,6 @@ D:\GitHub\H5509_V2\bin\Debug\SiCommunication.dll
 D:\GitHub\H5509_V2\bin\Debug\Newtonsoft.Json.dll
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.HeatMap.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.FrmInputPwd.resources
-D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Auto1Map.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Auto2Map.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Fix1Map.resources
@@ -121,3 +120,4 @@ D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewSetupName.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewTrayInfo.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewHeatTrayInfo.resources
 D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.ChangePwd.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config

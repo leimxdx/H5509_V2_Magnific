@@ -2690,6 +2690,15 @@ namespace H5509_alarm
                     case "1400446":
                     case "1400447":
                     case "1400448":
+                    case "1400449":
+                    case "1400450":
+                    case "1400451":
+                    case "1400452":
+                    case "1400453":
+                    case "1400454":
+                    case "1400455":
+                    case "1400456":
+                    case "1400457":
                     case "5430100":
 
                         if (alarm)
@@ -2914,6 +2923,27 @@ namespace H5509_alarm
                                     row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("sid", sid);
                                 }
                                 break;
+
+                            case "1400420": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 全部回零异常Error); break;
+
+                            case "1400449": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 读取Site1_Site8探测温度Error); break;
+
+                            case "1400450": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 读取Site9_Site16探测温度Error); break;
+
+                            case "1400451": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 读取加热盘探测温度Error); break;
+
+                            case "1400452": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 设定Site1_Site8温度Error); break;
+
+                            case "1400453": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 设定Site9_Site16温度Error); break;
+
+                            case "1400454": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 设定加热盘温度Error); break;
+
+                            case "1400455": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 读取Site1_Site8设定温度Error); break;
+
+                            case "1400456": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 读取Site9_Site16设定温度Error); break;
+
+                            case "1400457": row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 读取加热盘设定温度Error); break;
+
 
                             case "2008007":  //MXX_MoveFail M1_入料手臂Z1轴
                                 { row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("MXX_Name", "M01_入料手臂Z1轴").Replace("Msg", M1_入料手臂Z1轴ErrorMsg); }

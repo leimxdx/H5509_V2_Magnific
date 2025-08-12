@@ -196,12 +196,14 @@ namespace H5509_V2
         /// <returns></returns>
         private string WaitAxisHome(List<AxisHomeInfo> axisHomes, int type = 0)
         {
+            string error = "";
             bool[] bools = new bool[axisHomes.Count];
             for (int i = 0; i < axisHomes.Count; i++)
             {
                 string result = WaitAxisHome(axisHomes[i], type);
                 if (result != "Success")
                 {
+                    error += result + ";";
                     RunLog(result);
                     bools[i] = false;
                 }
@@ -209,7 +211,7 @@ namespace H5509_V2
             }
             if (bools.Contains(false))
             {
-                return "Fail";
+                return error;
             }
             else return "Success";
         }

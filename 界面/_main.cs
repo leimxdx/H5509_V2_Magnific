@@ -232,23 +232,7 @@ namespace H5509_V2
                         textBoxstate.Text = getstr[15];
                         textBoxtemprature.Text = getstr[16];
 
-                        Com.Send($"@START_INFO {textBoxFlowcaedno.Text}:" +
-                                                    $"{textBoxmachine.Text}:" + //Machine
-                                                    $"{textBoxcustom.Text}:" + //Custom
-                                                    $"{textBoxproduct.Text}:" + //Product
-                                                    $"{textBoxLotno.Text}:" +//LotNO
-                                                    $"{textBoxdatecode.Text}:" +//DateCode
-                                                    $"{textBoxfwversion.Text}:" +//FW Version
-                                                    $"{textBoxcheckcode.Text}:" +//CheckCode
-                                                    $"{textBoxmqty.Text}:" +//MQTY
-                                                    $"{textBoxcode.Text}:" +//CODE
-                                                    $"{textBoxcodecrc.Text}:" +//CODECRC
-                                                    $"{textBoxstation.Text}:" +//Station
-                                                    $"{textBoxmark.Text}:" +//Mark
-                                                    $"{textBoxuser.Text}:" +//User
-                                                    $"{textBoxtestflow.Text}:" +//TestFlow
-                                                    $"{textBoxstate.Text}:" +//State
-                                                    $"{textBoxtemprature.Text}+");  //Temperature
+                        SendLotNo();
                     }
                     else
                     {
@@ -278,6 +262,31 @@ namespace H5509_V2
                 //    ld.Add(_tempDt);
                 //}
             }
+        }
+
+        public void SendLotNo()
+        {
+            if (!Com.IsOpenCom)
+            {
+                MessageBox.Show("串口未连接!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            Com.Send($"@START_INFO {textBoxFlowcaedno.Text}:" +
+                                        $"{textBoxmachine.Text}:" + //Machine
+                                        $"{textBoxcustom.Text}:" + //Custom
+                                        $"{textBoxproduct.Text}:" + //Product
+                                        $"{textBoxLotno.Text}:" +//LotNO
+                                        $"{textBoxdatecode.Text}:" +//DateCode
+                                        $"{textBoxfwversion.Text}:" +//FW Version
+                                        $"{textBoxcheckcode.Text}:" +//CheckCode
+                                        $"{textBoxmqty.Text}:" +//MQTY
+                                        $"{textBoxcode.Text}:" +//CODE
+                                        $"{textBoxcodecrc.Text}:" +//CODECRC
+                                        $"{textBoxstation.Text}:" +//Station
+                                        $"{textBoxmark.Text}:" +//Mark
+                                        $"{textBoxuser.Text}:" +//User
+                                        $"{textBoxtestflow.Text}:" +//TestFlow
+                                        $"{textBoxstate.Text}:" +//State
+                                        $"{textBoxtemprature.Text}+");  //Temperature
         }
 
         private void uiCheckBox1_CheckedChanged(object sender, EventArgs e)

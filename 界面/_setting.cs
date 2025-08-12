@@ -8639,8 +8639,50 @@ namespace H5509_V2
 
         private void button264_Click(object sender, EventArgs e)
         {
+            //List<bool[]> open = new List<bool[]>()
+            //                {
+            //                    new bool[] { true, true, true, true },
+            //                    new bool[] { true , true, true, true  },
+            //                };
+            //string result = APPmaster.Com.Send(0, open, 无测试机模式);
+            //if (result == "Success")
+            //{
+            //    SiteTestState[0] = 2;
+            //    PS测试区气缸下压动作流程.StepID = 599;
+            //}
+            //else
+            //{
+            //    Listcode.Add("800007");
+            //    RunLog($"[Code]800007,[Msg]发送Site{0 + 1}测试信号失败!" + result, LogType.AlarmLog);
+            //    ProgramPause = true;
+            //    IsPause = true;
+            //}
+            //string result = handler.整机回零流程();
+            //if (result == "Success")
+            //{
+            //    H5509归零 = true;
+            //    Listcode.Add("1400444");
+            //    RunLog("[Code]1400444,[Msg]归零完成", LogType.AlarmLog);
+            //    RunLog("归零完成", LogType.OperateLog);
+            //}
+            //else
+            //{
+            //    Listcode.Add("1400420");
+            //    RunLog("[Code]1400420,[Msg]归零失败!" + result, LogType.AlarmLog);
+            //    全部回零异常Error = result;
+            //    RunLog("归零失败", LogType.OperateLog);
+            //}
             //Auto1数量 = 8162;
             //Fix2数量 = 4;
+        }
+
+        private void button265_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("是否确认取消暂停？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                IsPause = false;
+            }
         }
     }
 }

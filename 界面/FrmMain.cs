@@ -127,6 +127,8 @@ namespace H5509_V2
             handler = new Handler();
             motionEx = MotionEx.GetInstance();
 
+            Log.发送批次信息 = main.SendLotNo;
+
             setting.刷新分BIN信息 = main.刷新分BIN信息;
             setting.刷新温度信息 = main.刷新温度显示;
             setting.刷新按钮状态 = 刷新按钮权限;
@@ -334,6 +336,7 @@ namespace H5509_V2
             {
                 //writeDataHelper.PrintLog("软件退出");
                 退出标记 = true; //让报警弹窗也退出，否则主程序退出不了
+                DialogResult = DialogResult.Cancel;
                 //gg.CloseCard(); //关闭轴卡
                 Application.Exit(); //退出软件
             }
@@ -430,7 +433,7 @@ namespace H5509_V2
                                     runlog.Add(logs.Msg);
                                     runlogtime.Add(logs.Time);
                                 }
-                                else if(logs.TxtLogtype == LogType.OperateLog || logs.TxtLogtype == LogType.ParamLog)
+                                else if (logs.TxtLogtype == LogType.OperateLog || logs.TxtLogtype == LogType.ParamLog)
                                 {
                                     operatelog.Add(logs.Msg);
                                     operatelogtime.Add(logs.Time);
@@ -712,7 +715,7 @@ namespace H5509_V2
                                                 string labelname = $"lbl_dout{dout}";
                                                 设置信息.开site信息.SetSiteValue(site, dut, "0");
                                                 result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
-                                                if (result != "Success") 
+                                                if (result != "Success")
                                                 {
                                                     RunLog("Site保存失败!" + result);
                                                 }
@@ -815,14 +818,6 @@ namespace H5509_V2
                 {
                     if (TCPConnect)
                     {
-                        #region 读取设定温度
-
-                        string result4 = dTMHelper.ReadSv(0, out short[] svvalue);
-                        string result5 = dTMHelper.ReadSv(1, out short[] svvalue2);
-                        string result6 = dTMHelper.ReadSv(2, 0, out short[] svvalue3);
-
-                        #endregion
-
                         #region 读取探测温度
 
                         string result = dTMHelper.ReadPv(0, out ushort[] value);
@@ -831,15 +826,78 @@ namespace H5509_V2
 
                         #endregion
 
-                        if (result != "Success" || result2 != "Success" || result3 != "Success" || result4 != "Success" || result5 != "Success" || result6 != "Success")
+                        if (result != "Success" || result2 != "Success" || result3 != "Success")
                         {
-                            TCPConnect = false;
-                            ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1400448");
-                            RunLog($"[Code]1400448,[Msg]温控器连接失败!", LogType.AlarmLog);
+                            if (!温控器读取探测温度异常 && 温控器读取_设定温度报警)
+                            {
+                                温控器读取探测温度异常 = true;
+
+                                if (result != "Success")
+                                {
+                                    Listcode.Add($"1400449");
+                                    RunLog($"[Code]1400449,[Msg]读取Site1-Site8探测温度失败!详细信息:" + result, LogType.AlarmLog);
+                                    读取Site1_Site8探测温度Error = result;
+                                }
+                                if (result2 != "Success")
+                                {
+                                    Listcode.Add($"1400450");
+                                    RunLog($"[Code]1400450,[Msg]读取Site9-Site16探测温度失败!详细信息:" + result2, LogType.AlarmLog);
+                                    读取Site9_Site16探测温度Error = result2;
+                                }
+                                if (result3 != "Success")
+                                {
+                                    Listcode.Add($"1400451");
+                                    RunLog($"[Code]1400451,[Msg]读取加热盘探测温度失败!详细信息:" + result3, LogType.AlarmLog);
+                                    读取加热盘探测温度Error = result3;
+                                }
+
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            Thread.Sleep(500);
                             continue;
                         }
+                        else 温控器读取探测温度异常 = false;
+
+                        #region 读取设定温度
+
+                        string result4 = dTMHelper.ReadSv(0, out short[] svvalue);
+                        string result5 = dTMHelper.ReadSv(1, out short[] svvalue2);
+                        string result6 = dTMHelper.ReadSv(2, 0, out short[] svvalue3);
+
+                        if (result4 != "Success" || result5 != "Success" || result6 != "Success")
+                        {
+                            if (!温控器读取设定温度异常 && 温控器读取_设定温度报警)
+                            {
+                                温控器读取设定温度异常 = true;
+
+                                if (result4 != "Success")
+                                {
+                                    Listcode.Add($"1400455");
+                                    RunLog($"[Code]1400455,[Msg]读取Site1-Site8设定温度失败!详细信息:" + result4, LogType.AlarmLog);
+                                    读取Site1_Site8设定温度Error = result4;
+                                }
+                                if (result5 != "Success")
+                                {
+                                    Listcode.Add($"1400456");
+                                    RunLog($"[Code]1400456,[Msg]读取Site9-Site16设定温度失败!详细信息:" + result5, LogType.AlarmLog);
+                                    读取Site9_Site16设定温度Error = result5;
+                                }
+                                if (result6 != "Success")
+                                {
+                                    Listcode.Add($"1400457");
+                                    RunLog($"[Code]1400457,[Msg]读取加热盘设定温度失败!详细信息:" + result6, LogType.AlarmLog);
+                                    读取加热盘设定温度Error = result6;
+                                }
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            Thread.Sleep(500);
+                            continue;
+                        }
+                        else 温控器读取设定温度异常 = false;
+
+                        #endregion
 
                         for (int i = 0; i < svvalue.Length; i++)
                         {
@@ -853,16 +911,35 @@ namespace H5509_V2
 
                         SiteSvTemp[16] = (double)svvalue3[0] / 10;
 
+                        bool issetpass = true;
                         for (int i = 0; i < SiteSvTemp.Length; i++)
                         {
                             if (SiteSvTemp[i] != 设定温度)
                             {
                                 if (设定温控器温度() != "Success")
                                 {
+                                    issetpass = false;
                                     break;
+                                }
+                                else
+                                {
+                                    温控器设定温度异常 = false;
+                                    break; //只设置一次(Site1-16以及加热盘会一起设置)，下个循环再判断
                                 }
                             }
                         }
+
+                        if (!issetpass)
+                        {
+                            if (温控器设定温度异常 && 温控器读取_设定温度报警)
+                            {
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            Thread.Sleep(500);
+                            continue;
+                        }
+                        else 温控器设定温度异常 = false;
 
                         for (int i = 0; i < value.Length; i++)
                         {
@@ -1136,6 +1213,13 @@ namespace H5509_V2
             return "Success";
         }
 
+        private void ForMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (DialogResult == DialogResult.None)
+            {
+                e.Cancel = true;
+            }
+        }
     }
 
 }

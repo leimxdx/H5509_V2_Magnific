@@ -6,9 +6,11 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DocumentFormat.OpenXml.Drawing;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 using static H5509_V2.APPmaster;
 using Ttimer = System.Timers.Timer;
 namespace H5509_V2
@@ -28,29 +30,37 @@ namespace H5509_V2
 
         void dGV_init(DataGridView dGV, int x, int y)
         {
+            //dGV.EnableHeadersVisualStyles = false;
+
             dGV.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False; // 禁止换行
             dGV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None; // 关闭自动调整行高
+            dGV.RowTemplate.Height = (dGV.Size.Height - 23) / y; // 设置所有新行的默认高度
 
-            dGV.RowTemplate.Height = dGV.Size.Height / y; // 设置所有新行的默认高度
+            dGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing; // 禁止列标题行高度调整
+            dGV.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing; // 禁止行标题列宽度调整
 
             dGV.Rows.Clear();
             dGV.Columns.Clear();
 
             for (int i = 0; i < x; i++)
             {
-                dGV.Columns.Add("Column" + i.ToString(), "Column" + i.ToString());
-                dGV.Columns[i].Width = dGV.Width / x; // 设置所有列的宽度
+                dGV.Columns.Add("Column" + i.ToString(), (i + 1).ToString("d2"));
+                dGV.Columns[i].Width = (dGV.Width - 50) / x; // 设置所有列的宽度
+                dGV.Columns[i].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
 
             dGV.Rows.Add(y);
 
-            if (x == 1)
+            //if (x == 1)
+            //{
+            for (int i = 0; i < dGV.Rows.Count; i++)
             {
-                for (int i = 0; i < dGV.Rows.Count; i++)
-                {
-                    dGV.Rows[i].Cells[0].Value = (dGV.Rows.Count - i).ToString("d2");
-                }
+                dGV.Rows[i].HeaderCell.Value = (i + 1).ToString("d2");
+                //dGV.Rows[i].HeaderCell.Style.f
+                //dGV.Rows[i].Cells[0].Value = (dGV.Rows.Count - i).ToString("d2");
             }
+            //}
+            
 
             //dGV.Enabled = false;
         }
@@ -105,12 +115,13 @@ namespace H5509_V2
                     if (LoadDicPoint[$"{i},{j}"])
                     {
                         aa.Style.BackColor = Color.LimeGreen;
+                        aa.Value = 1; // 设置单元格值为1
                         //dGV_TrayMap.Rows[j].Cells[i].Value = 1;
                     }
                     else
                     {
                         aa.Style.BackColor = Color.White;
-                        //dGV_TrayMap.Rows[j].Cells[i].Value = 0;
+                        aa.Value = 0; // 设置单元格值为1
                     }
                 }
             }
@@ -170,16 +181,17 @@ namespace H5509_V2
                     if (dGV_LoadTrayMap.Rows[x].Cells[y].Style.BackColor == Color.LimeGreen)
                     {
                         dGV_LoadTrayMap.Rows[x].Cells[y].Style.BackColor = Color.White;
-                        //dGV_TrayMap.Rows[x].Cells[y].Value = 0;
+                        dGV_LoadTrayMap.Rows[x].Cells[y].Value = 0;
                         LsLoadDicPoint[$"{y},{x}"] = false;
                     }
                     else
                     {
                         dGV_LoadTrayMap.Rows[x].Cells[y].Style.BackColor = Color.LimeGreen;
-                        //dGV_TrayMap.Rows[x].Cells[y].Value = 1;
+                        dGV_LoadTrayMap.Rows[x].Cells[y].Value = 1;
                         LsLoadDicPoint[$"{y},{x}"] = true;
                     }
                 }
+                //dGV_LoadTrayMap.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect;
                 dGV_LoadTrayMap.ClearSelection();
             }
         }
@@ -212,7 +224,7 @@ namespace H5509_V2
                 for (int j = 0; j < LoadYPoint.Length; j++)
                 {
                     dGV_LoadTrayMap.Rows[j].Cells[i].Style.BackColor = Color.LimeGreen;
-                    //dGV_TrayMap.Rows[j].Cells[i].Value = 1;
+                    dGV_LoadTrayMap.Rows[j].Cells[i].Value = 1;
                     LsLoadDicPoint[$"{i},{j}"] = true;
                 }
             }
@@ -227,7 +239,7 @@ namespace H5509_V2
                 for (int j = 0; j < LoadYPoint.Length; j++)
                 {
                     dGV_LoadTrayMap.Rows[j].Cells[i].Style.BackColor = Color.White;
-                    //dGV_TrayMap.Rows[j].Cells[i].Value = 1;
+                    dGV_LoadTrayMap.Rows[j].Cells[i].Value = 0;
                     LsLoadDicPoint[$"{i},{j}"] = false;
                 }
             }
@@ -244,13 +256,13 @@ namespace H5509_V2
                     if (dGV_LoadTrayMap.Rows[j].Cells[i].Style.BackColor == Color.LimeGreen)
                     {
                         dGV_LoadTrayMap.Rows[j].Cells[i].Style.BackColor = Color.White;
-                        //dGV_TrayMap.Rows[j].Cells[i].Value = 0;
+                        dGV_LoadTrayMap.Rows[j].Cells[i].Value = 0;
                         LsLoadDicPoint[$"{i},{j}"] = false;
                     }
                     else
                     {
                         dGV_LoadTrayMap.Rows[j].Cells[i].Style.BackColor = Color.LimeGreen;
-                        //dGV_TrayMap.Rows[j].Cells[i].Value = 1;
+                        dGV_LoadTrayMap.Rows[j].Cells[i].Value = 1;
                         LsLoadDicPoint[$"{i},{j}"] = true;
                     }
                 }
@@ -278,12 +290,12 @@ namespace H5509_V2
                     if (LoadDicPoint[$"{i},{j}"])
                     {
                         aa.Style.BackColor = Color.LimeGreen;
-                        //dGV_TrayMap.Rows[j].Cells[i].Value = 1;
+                        aa.Value = 1;
                     }
                     else
                     {
                         aa.Style.BackColor = Color.White;
-                        //dGV_TrayMap.Rows[j].Cells[i].Value = 0;
+                        aa.Value = 0;
                     }
                 }
             }
@@ -315,7 +327,6 @@ namespace H5509_V2
                 {
                     DialogResult = DialogResult.Cancel;
                 }
-                else Timer.Stop();
             }
             else DialogResult = DialogResult.Cancel;
         }
@@ -332,8 +343,12 @@ namespace H5509_V2
                         e.Cancel = true;
                         DialogResult = DialogResult.Cancel;
                     }
-                    else Timer.Stop();
                 }
+            }
+            if (!e.Cancel)
+            {
+                Timer.Stop();
+                this.Dispose();
             }
         }
 
@@ -346,6 +361,62 @@ namespace H5509_V2
         {
             设备状态 = 0;
 
+        }
+
+        private void dGV_LoadTrayMap_MouseMove(object sender, MouseEventArgs e)
+        {
+            // 使用 HitTest 定位鼠标位置
+            var hitTest = dGV_LoadTrayMap.HitTest(e.X, e.Y);
+
+            // 根据命中结果切换选择模式
+            switch (hitTest.Type)
+            {
+                case DataGridViewHitTestType.ColumnHeader: // 列标题行
+                    dGV_LoadTrayMap.ClearSelection();
+                    dGV_LoadTrayMap.SelectionMode = DataGridViewSelectionMode.FullColumnSelect;
+                    break;
+                case DataGridViewHitTestType.RowHeader: // 行标题列
+                    dGV_LoadTrayMap.ClearSelection();
+                    dGV_LoadTrayMap.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    break;
+                case DataGridViewHitTestType.Cell: // 普通单元格
+                    dGV_LoadTrayMap.ClearSelection();
+                    dGV_LoadTrayMap.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                    break;
+                // 其他区域（如空白处）可按需处理
+                default:
+                    dGV_LoadTrayMap.ClearSelection();
+                    dGV_LoadTrayMap.SelectionMode = DataGridViewSelectionMode.FullRowSelect; // 恢复原始模式
+                    break;
+            }
+        }
+
+        private void dGV_LoadTrayMap_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left && dGV_LoadTrayMap.HitTest(e.X, e.Y).Type != DataGridViewHitTestType.ColumnHeader)
+            {
+                dGV_LoadTrayMap_CellMouseUp(null, null); //改回前先刷新一下
+                dGV_LoadTrayMap.SelectionMode = DataGridViewSelectionMode.RowHeaderSelect; // 恢复行选择
+            }
+        }
+
+        private void dGV_LoadTrayMap_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex >= 0) // 确保点击的是列头
+            {
+                // 1. 临时切换为 ColumnHeaderSelect 模式（选中整列）
+                dGV_LoadTrayMap.SelectionMode = DataGridViewSelectionMode.ColumnHeaderSelect;
+
+                //// 2. 取消之前的选择（可选）
+                //dGV_LoadTrayMap.ClearSelection();
+
+                // 3. 选中当前列
+                dGV_LoadTrayMap.Columns[e.ColumnIndex].Selected = true;
+
+                // 4. （可选）恢复原选择模式（例如 1 秒后自动恢复）
+                // 可以用 Timer 或手动恢复
+                // 这里演示手动恢复（例如用户点击其他地方时恢复）
+            }
         }
     }
 }

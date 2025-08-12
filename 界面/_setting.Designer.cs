@@ -927,6 +927,7 @@
             this.button78 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.tabPage11 = new System.Windows.Forms.TabPage();
+            this.button265 = new System.Windows.Forms.Button();
             this.pal_dout1_8 = new System.Windows.Forms.Panel();
             this.lbl_dout1 = new System.Windows.Forms.Label();
             this.label644 = new System.Windows.Forms.Label();
@@ -2432,7 +2433,7 @@
             this.tabPage6.Controls.Add(this.uiTabControl5);
             this.tabPage6.Location = new System.Drawing.Point(0, 40);
             this.tabPage6.Name = "tabPage6";
-            this.tabPage6.Size = new System.Drawing.Size(200, 60);
+            this.tabPage6.Size = new System.Drawing.Size(1893, 944);
             this.tabPage6.TabIndex = 5;
             this.tabPage6.Text = "产品";
             // 
@@ -2452,7 +2453,7 @@
             this.uiTabControl5.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl5.SelectedIndex = 0;
             this.uiTabControl5.ShowTabDivider = false;
-            this.uiTabControl5.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl5.Size = new System.Drawing.Size(1893, 944);
             this.uiTabControl5.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl5.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl5.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -2472,7 +2473,7 @@
             this.tabPage23.Controls.Add(this.panel1);
             this.tabPage23.Location = new System.Drawing.Point(0, 40);
             this.tabPage23.Name = "tabPage23";
-            this.tabPage23.Size = new System.Drawing.Size(200, 20);
+            this.tabPage23.Size = new System.Drawing.Size(1893, 904);
             this.tabPage23.TabIndex = 0;
             this.tabPage23.Text = "档案列表";
             // 
@@ -2484,7 +2485,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(464, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(0, 20);
+            this.panel2.Size = new System.Drawing.Size(1429, 904);
             this.panel2.TabIndex = 313;
             // 
             // uiTabControl6
@@ -2503,7 +2504,7 @@
             this.uiTabControl6.Name = "uiTabControl6";
             this.uiTabControl6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl6.SelectedIndex = 0;
-            this.uiTabControl6.Size = new System.Drawing.Size(0, 0);
+            this.uiTabControl6.Size = new System.Drawing.Size(1425, 842);
             this.uiTabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl6.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -2531,7 +2532,7 @@
             this.tabPage25.Controls.Add(this.label49);
             this.tabPage25.Location = new System.Drawing.Point(0, 40);
             this.tabPage25.Name = "tabPage25";
-            this.tabPage25.Size = new System.Drawing.Size(0, 0);
+            this.tabPage25.Size = new System.Drawing.Size(1425, 802);
             this.tabPage25.TabIndex = 2;
             this.tabPage25.Text = "设定";
             // 
@@ -9000,9 +9001,9 @@
             this.panel4.Controls.Add(this.uiButton4);
             this.panel4.Controls.Add(this.uiButton3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(0, -38);
+            this.panel4.Location = new System.Drawing.Point(0, 842);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(0, 58);
+            this.panel4.Size = new System.Drawing.Size(1425, 58);
             this.panel4.TabIndex = 179;
             // 
             // uiCheckBox196
@@ -9095,7 +9096,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(464, 20);
+            this.panel1.Size = new System.Drawing.Size(464, 904);
             this.panel1.TabIndex = 316;
             // 
             // uiDataGridView1
@@ -9144,7 +9145,7 @@
             this.uiDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle5;
             this.uiDataGridView1.RowTemplate.Height = 28;
             this.uiDataGridView1.SelectedIndex = -1;
-            this.uiDataGridView1.Size = new System.Drawing.Size(460, 0);
+            this.uiDataGridView1.Size = new System.Drawing.Size(460, 842);
             this.uiDataGridView1.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView1.TabIndex = 0;
             this.uiDataGridView1.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView1_CellMouseClick);
@@ -9155,7 +9156,7 @@
             this.panel5.Controls.Add(this.uiButton8);
             this.panel5.Controls.Add(this.uiButton11);
             this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel5.Location = new System.Drawing.Point(0, -42);
+            this.panel5.Location = new System.Drawing.Point(0, 842);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(460, 58);
             this.panel5.TabIndex = 180;
@@ -14781,6 +14782,7 @@
             // tabPage11
             // 
             this.tabPage11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage11.Controls.Add(this.button265);
             this.tabPage11.Controls.Add(this.pal_dout1_8);
             this.tabPage11.Controls.Add(this.pal_dout25_32);
             this.tabPage11.Controls.Add(this.pal_dout9_16);
@@ -14809,10 +14811,23 @@
             this.tabPage11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage11.Location = new System.Drawing.Point(0, 40);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(200, 60);
+            this.tabPage11.Size = new System.Drawing.Size(1893, 904);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Tag = "@02@#0D#";
             this.tabPage11.Text = "流程调试";
+            // 
+            // button265
+            // 
+            this.button265.ForeColor = System.Drawing.Color.Red;
+            this.button265.Location = new System.Drawing.Point(1443, 634);
+            this.button265.Margin = new System.Windows.Forms.Padding(2);
+            this.button265.Name = "button265";
+            this.button265.Size = new System.Drawing.Size(204, 30);
+            this.button265.TabIndex = 407;
+            this.button265.Tag = "@02@#0D#";
+            this.button265.Text = "IsPause=True(高风险)";
+            this.button265.UseVisualStyleBackColor = true;
+            this.button265.Click += new System.EventHandler(this.button265_Click);
             // 
             // pal_dout1_8
             // 
@@ -15613,7 +15628,7 @@
             this.uiTabControl4.Name = "uiTabControl4";
             this.uiTabControl4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl4.SelectedIndex = 0;
-            this.uiTabControl4.Size = new System.Drawing.Size(760, 60);
+            this.uiTabControl4.Size = new System.Drawing.Size(760, 904);
             this.uiTabControl4.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl4.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl4.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -15632,7 +15647,7 @@
             this.tabPage13.Controls.Add(this.groupBox3);
             this.tabPage13.Location = new System.Drawing.Point(0, 40);
             this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Size = new System.Drawing.Size(760, 20);
+            this.tabPage13.Size = new System.Drawing.Size(760, 864);
             this.tabPage13.TabIndex = 0;
             this.tabPage13.Text = "入料流程";
             // 
@@ -21949,7 +21964,7 @@
             this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(200, 60);
+            this.tabPage3.Size = new System.Drawing.Size(1893, 904);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "初始点位";
             // 
@@ -21971,7 +21986,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl2.Size = new System.Drawing.Size(1893, 904);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -21995,7 +22010,7 @@
             this.tabPage7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage7.Location = new System.Drawing.Point(0, 40);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(200, 20);
+            this.tabPage7.Size = new System.Drawing.Size(1893, 864);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Tag = "";
             this.tabPage7.Text = "入料手臂";
@@ -23784,7 +23799,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 60);
+            this.tabPage8.Size = new System.Drawing.Size(1893, 864);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Tag = "";
             this.tabPage8.Text = "出料手臂";
@@ -25976,7 +25991,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(200, 60);
+            this.tabPage9.Size = new System.Drawing.Size(1893, 864);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Tag = "";
             this.tabPage9.Text = "测试手臂";
@@ -27172,7 +27187,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 60);
+            this.tabPage16.Size = new System.Drawing.Size(1893, 864);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Tag = "";
             this.tabPage16.Text = "梭车";
@@ -27469,7 +27484,7 @@
             this.tabPage17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(200, 60);
+            this.tabPage17.Size = new System.Drawing.Size(1893, 864);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
             // 
@@ -31964,5 +31979,6 @@
         public System.Windows.Forms.TextBox textBox26;
         private System.Windows.Forms.Button button263;
         private System.Windows.Forms.Button button264;
+        public System.Windows.Forms.Button button265;
     }
 }

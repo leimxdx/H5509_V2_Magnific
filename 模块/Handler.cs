@@ -4075,10 +4075,15 @@ namespace H5509_V2
                             {
                                 参数初始化();
                                 显示Dout颜色();
-                                if (!Com.IsconnectTester)
-                                {
-                                    刷新批次信息();
-                                }
+
+                                //if (!Com.IsconnectTester)
+                                //{
+                                //    刷新批次信息();
+                                //}
+
+                                Com.IsconnectTester = false;
+                                刷新批次信息();
+
                                 H5509正在归零 = true;
                                 H5509归零 = false;
                                 IsPause = false;
@@ -4101,7 +4106,8 @@ namespace H5509_V2
                                     else
                                     {
                                         Listcode.Add("1400420");
-                                        RunLog("[Code]1400420,[Msg]归零失败", LogType.AlarmLog);
+                                        RunLog("[Code]1400420,[Msg]归零失败!" + result, LogType.AlarmLog);
+                                        全部回零异常Error = result;
                                         RunLog("归零失败", LogType.OperateLog);
                                     }
 
@@ -4387,14 +4393,17 @@ namespace H5509_V2
             Task<string> task3 = Task.Run(() => { return 测试手臂Z回零(); });
             if (task1.Result != "Success" || task2.Result != "Success" || task3.Result != "Success")
             {
-                return "Fail";
+                string errortext = "";
+                if (task1.Result != "Success") errortext += task1.Result + ";";
+                if (task2.Result != "Success") errortext += task2.Result + ";";
+                if (task3.Result != "Success") errortext += task3.Result + ";";
+                return errortext;
             }
 
             string result = motionEx.GetDiHome(new string[] { "M18_放Tary盘轴" }, out string[] home);
             if (result != "Success")
             {
-                RunLog("读取放Tary盘轴原点信号失败！" + result);
-                return result;
+                return "读取放Tary盘轴原点信号失败！" + result;
             }
 
             if (home[0] == "0") //如果挡住了原点则出入料手臂同时回零
@@ -4418,7 +4427,14 @@ namespace H5509_V2
 
             if (task1.Result != "Success" || task2.Result != "Success" || task3.Result != "Success" || task4.Result != "Success" || task5.Result != "Success" || task6.Result != "Success")
             {
-                return "Fail";
+                string errortext = "";
+                if (task1.Result != "Success") errortext += task1.Result + ";";
+                if (task2.Result != "Success") errortext += task2.Result + ";";
+                if (task3.Result != "Success") errortext += task3.Result + ";";
+                if (task4.Result != "Success") errortext += task4.Result + ";";
+                if (task5.Result != "Success") errortext += task5.Result + ";";
+                if (task6.Result != "Success") errortext += task6.Result + ";";
+                return errortext;
             }
 
             task1 = Task.Run(() => { return 放Tary盘轴回零(); });
@@ -4426,7 +4442,10 @@ namespace H5509_V2
 
             if (task1.Result != "Success" || task2.Result != "Success")
             {
-                return "Fail";
+                string errortext = "";
+                if (task1.Result != "Success") errortext += task1.Result + ";";
+                if (task2.Result != "Success") errortext += task2.Result + ";";
+                return errortext;
             }
 
             if (温控加热 && 温度模式 == "高温")
@@ -5609,7 +5628,7 @@ namespace H5509_V2
                             {
                                 if (!结批标记) //在这里判断为True，说明无待测盘时点了结批
                                 {
-                                    if(!Auto1换盘标记 && !Auto2换盘标记) //如果没有换盘标记
+                                    if (!Auto1换盘标记 && !Auto2换盘标记) //如果没有换盘标记
                                     {
                                         iswait = false;
                                         Load换盘标记 = true;
@@ -11301,11 +11320,11 @@ namespace H5509_V2
             {
                 Thread.Sleep(10);
 
-                if (H5509初始化 == false)
-                {
-                    Thread.Sleep(100);
-                    continue;
-                }
+                //if (H5509初始化 == false)
+                //{
+                //    Thread.Sleep(100);
+                //    continue;
+                //}
 
                 if (APPmaster.IsForecePause)
                 {
@@ -11875,7 +11894,7 @@ namespace H5509_V2
             }
         }
 
-        public void Auto2顶盘流程()
+        public void Auto2顶盘流程()  
         {
             string result = "";
             double movepos = 0;
@@ -11884,11 +11903,11 @@ namespace H5509_V2
             {
                 Thread.Sleep(10);
 
-                if (H5509初始化 == false)
-                {
-                    Thread.Sleep(100);
-                    continue;
-                }
+                //if (H5509初始化 == false)
+                //{
+                //    Thread.Sleep(100);
+                //    continue;
+                //}
 
                 if (APPmaster.IsForecePause)
                 {
@@ -12471,6 +12490,7 @@ namespace H5509_V2
                 //{
                 //    continue;
                 //}
+
                 Thread.Sleep(10);
 
                 if (APPmaster.IsForecePause)
