@@ -345,7 +345,7 @@ namespace H5509_V2
                         btn._color = doY[i] == "1" ? Color.Lime : Color.Red;
                     }
 
-                    //this.Refresh();
+                    this.Refresh();
                     //stopwatch.Stop();
                     //UIMessageTip.Show(this, stopwatch.ElapsedMilliseconds.ToString(), null, 1000, true, true);
 
@@ -612,6 +612,12 @@ namespace H5509_V2
 
         private void uiSwitch78_ValueChanged(object sender, bool value)
         {
+            if (当前权限 == "Operator")
+            {
+                UIMessageTip.ShowError(this.Parent, "权限不足", 1000, true, true);
+                return;
+            }
+
             if (!APPmaster.InitedOK)
             {
                 UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);

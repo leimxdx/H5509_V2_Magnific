@@ -64,6 +64,12 @@ namespace H5509_V2
 
         private void IOButton_Click(object sender, EventArgs e)
         {
+            if (当前权限 == "Operator")
+            {
+                UIMessageTip.ShowError(this.Parent, "权限不足", 1000, true, true);
+                return;
+            }
+
             if (!APPmaster.InitedOK)
             {
                 UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);

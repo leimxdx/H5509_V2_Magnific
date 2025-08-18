@@ -1193,7 +1193,7 @@ namespace H5509_V2
                             }
                             else if (一个循环标记)
                             {
-                                label_driverStatus.Text = "一个循环中";
+                                label_driverStatus.Text = "一次循环中";
                                 label_driverStatus.ForeColor = Color.LimeGreen;
                             }
                             else
@@ -1209,7 +1209,7 @@ namespace H5509_V2
                         {
                             if (一个循环完成)
                             {
-                                label_driverStatus.Text = "一个循环完成";
+                                label_driverStatus.Text = "一次循环完成";
                                 label_driverStatus.ForeColor = Color.Black;
                             }
                             else
@@ -1501,7 +1501,7 @@ namespace H5509_V2
 
         private void label10_Click(object sender, EventArgs e)
         {
-            if (设备状态 != 1)
+             if (设备状态 != 1)
             {
                 if (label10.Text == "停止")
                 {

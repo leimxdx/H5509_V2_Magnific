@@ -3214,28 +3214,28 @@ namespace H5509_V2
                 {
                     isstart = false;
                     Listcode.Add("1400020"); //系统错误--气压不足
-                    RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
+                    RunLog("[Code]1400020,[Msg](按下开始)整机气压异常", LogType.AlarmLog);
                 }
             }
             else
             {
                 isstart = false;
                 Listcode.Add("1400020"); //系统错误--气压不足
-                RunLog("[Code]1400020,[Msg]气压读取失败!" + result, LogType.AlarmLog);
+                RunLog("[Code]1400020,[Msg](按下开始)气压读取失败!" + result, LogType.AlarmLog);
             }
 
             if (!H5509归零)
             {
                 isstart = false;
                 Listcode.Add("1400445");
-                RunLog("[Code]1400445,[Msg]设备未归零", LogType.AlarmLog);
+                RunLog("[Code]1400445,[Msg](按下开始)设备未归零", LogType.AlarmLog);
             }
 
             if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
             {
                 isstart = false;
                 Listcode.Add("1400442");
-                RunLog("[Code]1400442,[Msg]Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+                RunLog("[Code]1400442,[Msg](按下开始)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
             }
 
             if (io[0] == "0") //15
@@ -3287,20 +3287,22 @@ namespace H5509_V2
                 RunLog("[Code]4032009,[Msg](按下开始)Fix3请放置空盘", LogType.AlarmLog);
             }
 
-            if (io[7] != "0")//23
-            {
-                isstart = false;
-                Listcode.Add("4020009");
-                RunLog("[Code]4020009,[Msg](按下开始)AUTO1前对射感应到无Tray盘", LogType.AlarmLog);
-            }
+            //if (设备状态 != 0)
+            //{
+            //    if (io[7] != "0")//23
+            //    {
+            //        isstart = false;
+            //        Listcode.Add("4020009");
+            //        RunLog("[Code]4020009,[Msg](按下开始)AUTO1前对射感应到无Tray盘", LogType.AlarmLog);
+            //    }
 
-            if (io[9] != "0")//25
-            {
-                isstart = false;
-                Listcode.Add("4021009");
-                RunLog("[Code]4021009,[Msg](按下开始)AUTO2前对射感应到无Tray盘", LogType.AlarmLog);
-            }
-
+            //    if (io[9] != "0")//25
+            //    {
+            //        isstart = false;
+            //        Listcode.Add("4021009");
+            //        RunLog("[Code]4021009,[Msg](按下开始)AUTO2前对射感应到无Tray盘", LogType.AlarmLog);
+            //    }
+            //}
 
             if (!安全门禁用)
             {
@@ -3338,7 +3340,7 @@ namespace H5509_V2
             {
                 isstart = false;
                 Listcode.Add("1400430");
-                RunLog("[Code]1400430,[Msg]串口未连接");
+                RunLog("[Code]1400430,[Msg](按下开始)串口未连接");
             }
             else
             {
@@ -3346,7 +3348,7 @@ namespace H5509_V2
                 {
                     isstart = false;
                     Listcode.Add("1400440");
-                    RunLog("[Code]1400430,[Msg]未发送生产信息给测试机"); //listcode.Add("1400440");
+                    RunLog("[Code]1400430,[Msg](按下开始)未发送生产信息给测试机"); //listcode.Add("1400440");
                 }
             }
 
@@ -3356,6 +3358,81 @@ namespace H5509_V2
                 {
                     if (温度模式 == "高温")
                     {
+                        if (温控器读取_设定温度报警)
+                        {
+                            if (温控器读取Site1_Site8探测温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400449");
+                                //温控器读取Site1_Site8探测温度异常 = false;
+                                RunLog($"[Code]1400449,[Msg](按下开始)读取Site1-Site8探测温度失败!详细信息:" + 读取Site1_Site8探测温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器读取Site9_Site16探测温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400450");
+                                //温控器读取Site9_Site16探测温度异常 = false;
+                                RunLog($"[Code]1400450,[Msg](按下开始)读取Site9-Site16探测温度失败!详细信息:" + 读取Site9_Site16探测温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器读取加热盘探测温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400451");
+                                //温控器读取加热盘探测温度异常 = false;
+                                RunLog($"[Code]1400451,[Msg](按下开始)读取加热盘探测温度失败!详细信息:" + 读取加热盘探测温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器读取Site1_Site8设定温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400455");
+                                //温控器读取Site1_Site8设定温度异常 = false;
+                                RunLog($"[Code]1400455,[Msg](按下开始)读取Site1-Site8设定温度失败!详细信息:" + 读取Site1_Site8设定温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器读取Site9_Site16设定温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400456");
+                                //温控器读取Site9_Site16设定温度异常 = false;
+                                RunLog($"[Code]1400456,[Msg](按下开始)读取Site9-Site16设定温度失败!详细信息:" + 读取Site9_Site16设定温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器读取加热盘设定温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400457");
+                                //温控器读取加热盘设定温度异常 = false;
+                                RunLog($"[Code]1400457,[Msg](按下开始)读取加热盘设定温度失败!详细信息:" + 读取加热盘设定温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器设定Site1_Site8温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400452");
+                                //温控器设定Site1_Site8温度异常 = false;
+                                RunLog($"[Code]1400452,[Msg](按下开始)设定Site1-Site8温度失败!详细信息:" + 设定Site1_Site8温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器设定Site9_Site16温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400453");
+                                //温控器设定Site9_Site16温度异常 = false;
+                                RunLog($"[Code]1400453,[Msg](按下开始)设定Site9-Site16温度失败!详细信息:" + 设定Site9_Site16温度Error, LogType.AlarmLog);
+                            }
+
+                            if (温控器设定加热盘温度异常)
+                            {
+                                isstart = false;
+                                Listcode.Add($"1400454");
+                                //温控器设定加热盘温度异常 = false;
+                                RunLog($"[Code]1400454,[Msg](按下开始)设定加热盘温度失败!详细信息:" + 设定加热盘温度Error, LogType.AlarmLog);
+                            }
+                        }
+
                         for (int i = 0; i < SiteSvTemp.Length; i++)
                         {
                             if (SiteSvTemp[i] != 设定温度)
@@ -3363,7 +3440,7 @@ namespace H5509_V2
                                 //if (设定温控器温度() != "Success")
                                 isstart = false;
                                 Listcode.Add("1400447");
-                                RunLog("[Code]1400447,[Msg]设定温度失败", LogType.AlarmLog);
+                                RunLog("[Code]1400447,[Msg](按下开始)设定温度失败", LogType.AlarmLog);
                                 break;
                             }
                         }
@@ -3602,7 +3679,7 @@ namespace H5509_V2
                         if (ProgramStart)
                         {
                             ProgramStart = false;
-                            RunLog("按下开始(程序)", LogType.OperateLog);
+                            RunLog("按下开始(程序)", LogType.RunLog);
                         }
                         else if (ProgramBtnStart)
                         {
@@ -3618,7 +3695,7 @@ namespace H5509_V2
                         if (Load正在下降回零 || Empty正在下降回零)
                         {
                             isstart = false;
-                            RunLog("Load或Empty正在下降回零，无法开始", LogType.OperateLog);
+                            RunLog("(按下开始)Load或Empty正在下降回零，无法开始", LogType.OperateLog);
 
                             if (Empty正在下降回零) IsEmptyPause = false;
                             if (Load正在下降回零) IsLoadPause = false;
@@ -3627,19 +3704,19 @@ namespace H5509_V2
                         if (H5509正在归零)
                         {
                             isstart = false;
-                            RunLog("设备正在回零...,无法开始", LogType.OperateLog);
+                            RunLog("(按下开始)设备正在回零...,无法开始", LogType.OperateLog);
                         }
 
                         if (结批选项选择中)
                         {
                             isstart = false;
-                            RunLog("结批选项选择中...,无法开始", LogType.OperateLog);
+                            RunLog("(按下开始)结批选项选择中...,无法开始", LogType.OperateLog);
                         }
 
                         if (一个循环选项选择中)
                         {
                             isstart = false;
-                            RunLog("一个循环选项选择中...,无法开始", LogType.OperateLog);
+                            RunLog("(按下开始)一个循环选项选择中...,无法开始", LogType.OperateLog);
                         }
 
                         string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
@@ -3669,7 +3746,7 @@ namespace H5509_V2
                                     isstart = false;
                                     Listcode.Add("1400330");
                                     RunLog("执行SQl异常：" + sql);
-                                    RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", LogType.AlarmLog);
+                                    RunLog("[Code]1400330,[Msg](按下开始)创建MAP信息数据库失败!", LogType.AlarmLog);
                                 }
 
                                 if (line1 <= -2)
@@ -3677,7 +3754,7 @@ namespace H5509_V2
                                     isstart = false;
                                     Listcode.Add("1400330");
                                     RunLog("执行SQl异常：" + sql2);
-                                    RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
+                                    RunLog("[Code]1400330,[Msg](按下开始)创建BIN信息数据库失败!", LogType.AlarmLog);
                                 }
 
                                 if (isstart)
@@ -3837,7 +3914,7 @@ namespace H5509_V2
                         else if (ProgramBtnPause)
                         {
                             ProgramBtnPause = false;
-                            RunLog("按下暂停(界面)");//, LogType.OperateLog
+                            RunLog("按下暂停(界面)", LogType.OperateLog);//, LogType.OperateLog
                         }
                         else
                         {
@@ -4758,6 +4835,7 @@ namespace H5509_V2
                                 测试手臂入料停止工作标记 = false;
                                 测试手臂出料停止工作标记 = false;
                                 出料手臂出料停止工作标记 = false;
+                                加热盘停止入料标记 = false;
 
                                 检测梭车是否有IC遗留();
                                 OneCycle按钮闪烁的定时器.Stop();
@@ -6031,7 +6109,7 @@ namespace H5509_V2
                             break;
                         }
 
-                        double[] xypPos = 获取梭车xyp放料点位(colums);
+                        double[] xypPos = 入料手臂抓料等待标记 ? 获取梭车xyp放料点位2(colums) : 获取梭车xyp放料点位(colums); //抓着料在等待就取得要过来的梭车位置
                         result = 入料手臂移动(xypPos[0], xypPos[1], xypPos[2]); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                         if (result == "Success")
                         {
@@ -11894,7 +11972,7 @@ namespace H5509_V2
             }
         }
 
-        public void Auto2顶盘流程()  
+        public void Auto2顶盘流程()
         {
             string result = "";
             double movepos = 0;

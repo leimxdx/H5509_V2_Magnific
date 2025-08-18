@@ -60,11 +60,23 @@ namespace H5509_V2
 
         public static int Socket使用次数超限数 = 0;
 
-        public static bool 温控器读取探测温度异常 = false;
+        public static bool 温控器读取Site1_Site8探测温度异常 = false;
 
-        public static bool 温控器读取设定温度异常 = false;
+        public static bool 温控器读取Site9_Site16探测温度异常 = false;
 
-        public static bool 温控器设定温度异常 = false;
+        public static bool 温控器读取加热盘探测温度异常 = false;
+
+        public static bool 温控器读取Site1_Site8设定温度异常 = false;
+
+        public static bool 温控器读取Site9_Site16设定温度异常 = false;
+
+        public static bool 温控器读取加热盘设定温度异常 = false;
+
+        public static bool 温控器设定Site1_Site8温度异常 = false;
+
+        public static bool 温控器设定Site9_Site16温度异常 = false;
+
+        public static bool 温控器设定加热盘温度异常 = false;
 
         public static bool 温控器读取_设定温度报警 = true;
 
@@ -2358,40 +2370,57 @@ namespace H5509_V2
             string result4 = dTMHelper.WriteSv(2, 0, 设定温度);
             if (result4 == "Success")
             {
+                温控器设定加热盘温度异常 = false;
                 string result5 = dTMHelper.WriteSv(1, 设定温度);
                 string result6 = dTMHelper.WriteSv(0, 设定温度);
                 if (result5 != "Success" || result6 != "Success")
                 {
-                    if (!温控器设定温度异常 && 温控器读取_设定温度报警)
+                    if (result5 != "Success")
                     {
-                        温控器设定温度异常 = true;
+                        读取Site1_Site8设定温度Error = result5;
 
-                        if (result5 != "Success")
+                        if (!温控器设定Site1_Site8温度异常)
                         {
+                            温控器设定Site1_Site8温度异常 = true;
                             Listcode.Add($"1400452");
                             RunLog($"[Code]1400452,[Msg]设定Site1-Site8温度失败!详细信息:" + result5, LogType.AlarmLog);
                         }
-                        if (result6 != "Success")
+                    }
+                    else 温控器设定Site1_Site8温度异常 = false;
+
+                    if (result6 != "Success")
+                    {
+                        读取Site9_Site16设定温度Error = result6;
+
+                        if (!温控器设定Site9_Site16温度异常)
                         {
+                            温控器设定Site9_Site16温度异常 = true;
                             Listcode.Add($"1400453");
                             RunLog($"[Code]1400453,[Msg]设定Site9-Site16温度失败!详细信息:" + result6, LogType.AlarmLog);
                         }
                     }
+                    else 温控器设定Site9_Site16温度异常 = false;
+
                     return "Fail";
                 }
-                else 温控器设定温度异常 = false;
+                else
+                {
+                    温控器设定Site1_Site8温度异常 = false;
+                    温控器设定Site9_Site16温度异常 = false;
+                }
 
                 return "Success";
             }
             else
             {
-                if (!温控器设定温度异常 && 温控器读取_设定温度报警)
+                读取加热盘设定温度Error = result4;
+
+                if (!温控器设定加热盘温度异常)
                 {
-                    温控器设定温度异常 = true;
+                    温控器设定加热盘温度异常 = true;
                     Listcode.Add($"1400454");
                     RunLog($"[Code]1400454,[Msg]设定加热盘温度失败!详细信息:" + result4, LogType.AlarmLog);
                 }
-                else 温控器设定温度异常 = false;
 
                 return "Fail";
             }
@@ -4207,6 +4236,42 @@ namespace H5509_V2
                 {
                     pos[0] = 初始点位.入料_梭车2_X + 梭车列间距 + 点位微调.入料_梭车2第2列放_X;
                     pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第2列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
+                }
+            }
+            return pos;
+        }
+
+        public static double[] 获取梭车xyp放料点位2(int colum)
+        {
+            double[] pos = new double[3];
+            if (飞梭2位置 == 0) //梭车2在后，梭车1在前
+            {
+                if (colum == 0) //梭车2第1列
+                {
+                    pos[0] = 初始点位.入料_梭车2_X + 点位微调.入料_梭车2第1列放_X;
+                    pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第1列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距; ;
+                }
+                else  //梭车2第2列
+                {
+                    pos[0] = 初始点位.入料_梭车2_X + 梭车列间距 + 点位微调.入料_梭车2第2列放_X;
+                    pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第2列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
+                }
+            }
+            else //梭车2在前，梭车1后
+            {
+                if (colum == 0) //梭车1第1列
+                {
+                    pos[0] = 初始点位.入料_梭车1_X + 点位微调.入料_梭车1第1列放_X;
+                    pos[1] = 初始点位.入料_梭车1_Y + 点位微调.入料_梭车1第1列放_Y;
+                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
+                }
+                else  //梭车1第2列
+                {
+                    pos[0] = 初始点位.入料_梭车1_X + 梭车列间距 + 点位微调.入料_梭车1第2列放_X;
+                    pos[1] = 初始点位.入料_梭车1_Y + 点位微调.入料_梭车1第2列放_Y;
                     pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
                 }
             }

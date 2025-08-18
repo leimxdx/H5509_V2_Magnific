@@ -2468,6 +2468,7 @@ namespace H5509_V2
         private void button217_Click(object sender, EventArgs e)
         {
             Auto1上顶标记 = 1;
+            Auto等待换盘标记 = true;
             抓盘手臂放空盘到Auto1标记 = 2;
             //Task.Run(() => { handler.抓盘手臂放空盘到Auto1(); });
         }
@@ -2475,6 +2476,7 @@ namespace H5509_V2
         private void button218_Click(object sender, EventArgs e)
         {
             Auto2上顶标记 = 1;
+            Auto等待换盘标记 = true;
             抓盘手臂放空盘到Auto2标记 = 2;
             //Task.Run(() => { handler.抓盘手臂放空盘到Auto2(); });
         }
@@ -2482,6 +2484,7 @@ namespace H5509_V2
         private void button219_Click(object sender, EventArgs e)
         {
             Auto1上顶标记 = 2;
+            Auto等待换盘标记 = true;
             抓盘手臂放空盘到Auto1标记 = 2;
             //Task.Run(() => { handler.抓盘手臂换Auto1空盘(); });
         }
@@ -2489,6 +2492,7 @@ namespace H5509_V2
         private void button220_Click(object sender, EventArgs e)
         {
             Auto2上顶标记 = 2;
+            Auto等待换盘标记 = true;
             抓盘手臂放空盘到Auto2标记 = 2;
             //Task.Run(() => { handler.抓盘手臂换Auto2空盘(); });
         }
@@ -5029,6 +5033,7 @@ namespace H5509_V2
                         else
                         {
                             bool comischange = false;
+                            bool timeischange = false;
                             if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功", WriteData.LogType.ParamLog);
                             if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功", WriteData.LogType.ParamLog);
                             if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功", WriteData.LogType.ParamLog);
@@ -5039,8 +5044,8 @@ namespace H5509_V2
                             if (oldtester.总良率报警间隔 != newtester.总良率报警间隔) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警间隔]:{oldtester.总良率报警间隔}->{newtester.总良率报警间隔}:更新成功", WriteData.LogType.ParamLog);
                             if (oldtester.总良率报警使能 != newtester.总良率报警使能) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[总良率报警使能]:{oldtester.总良率报警使能}->{newtester.总良率报警使能}:更新成功", WriteData.LogType.ParamLog);
                             if (oldtester.socket使用次数 != newtester.socket使用次数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[socket使用次数]:{oldtester.socket使用次数}->{newtester.socket使用次数}:更新成功", WriteData.LogType.ParamLog);
-                            if (oldtester.测试超时时间 != newtester.测试超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功", WriteData.LogType.ParamLog);
-                            if (oldtester.timeout超时时间 != newtester.timeout超时时间) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功", WriteData.LogType.ParamLog);
+                            if (oldtester.测试超时时间 != newtester.测试超时时间) { timeischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时时间]:{oldtester.测试超时时间}->{newtester.测试超时时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.timeout超时时间 != newtester.timeout超时时间) { timeischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.timeout超时时间}->{newtester.timeout超时时间}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.超时发送timeout != newtester.超时发送timeout) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.超时发送timeout}->{newtester.超时发送timeout}:更新成功", WriteData.LogType.ParamLog);
                             if (oldtester.串口号 != newtester.串口号) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[串口号]:{oldtester.串口号}->{newtester.串口号}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.波特率 != newtester.波特率) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[波特率]:{oldtester.波特率}->{newtester.波特率}:更新成功", WriteData.LogType.ParamLog); }
@@ -5048,28 +5053,28 @@ namespace H5509_V2
                             if (oldtester.数据位 != newtester.数据位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[timeout超时时间]:{oldtester.数据位}->{newtester.数据位}:更新成功", WriteData.LogType.ParamLog); }
                             if (oldtester.停止位 != newtester.停止位) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时发送timeout]:{oldtester.停止位}->{newtester.停止位}:更新成功", WriteData.LogType.ParamLog); }
 
-                            if (oldtester.入料手臂吸料超时时间 != newtester.入料手臂吸料超时时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料手臂吸料超时时间]:{oldtester.入料手臂吸料超时时间}->{newtester.入料手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.出料手臂吸料超时时间 != newtester.出料手臂吸料超时时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料手臂吸料超时时间]:{oldtester.出料手臂吸料超时时间}->{newtester.出料手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.测试手臂吸料超时时间 != newtester.测试手臂吸料超时时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吸料超时时间]:{oldtester.测试手臂吸料超时时间}->{newtester.测试手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.入料手臂吹料时间 != newtester.入料手臂吹料时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料手臂吹料时间]:{oldtester.入料手臂吹料时间}->{newtester.入料手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.出料手臂吹料时间 != newtester.出料手臂吹料时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料手臂吹料时间]:{oldtester.出料手臂吹料时间}->{newtester.出料手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.测试手臂吹料时间 != newtester.测试手臂吹料时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吹料时间]:{oldtester.测试手臂吹料时间}->{newtester.测试手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.发送开始信号延时 != newtester.发送开始信号延时) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[发送开始信号延时]:{oldtester.发送开始信号延时}->{newtester.发送开始信号延时}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.离线模式测试等待时间 != newtester.离线模式测试等待时间) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[离线模式测试等待时间]:{oldtester.离线模式测试等待时间}->{newtester.离线模式测试等待时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.入料手臂吸料超时时间 != newtester.入料手臂吸料超时时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料手臂吸料超时时间]:{oldtester.入料手臂吸料超时时间}->{newtester.入料手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.出料手臂吸料超时时间 != newtester.出料手臂吸料超时时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料手臂吸料超时时间]:{oldtester.出料手臂吸料超时时间}->{newtester.出料手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.测试手臂吸料超时时间 != newtester.测试手臂吸料超时时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吸料超时时间]:{oldtester.测试手臂吸料超时时间}->{newtester.测试手臂吸料超时时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.入料手臂吹料时间 != newtester.入料手臂吹料时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料手臂吹料时间]:{oldtester.入料手臂吹料时间}->{newtester.入料手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.出料手臂吹料时间 != newtester.出料手臂吹料时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料手臂吹料时间]:{oldtester.出料手臂吹料时间}->{newtester.出料手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.测试手臂吹料时间 != newtester.测试手臂吹料时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吹料时间]:{oldtester.测试手臂吹料时间}->{newtester.测试手臂吹料时间}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.发送开始信号延时 != newtester.发送开始信号延时) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[发送开始信号延时]:{oldtester.发送开始信号延时}->{newtester.发送开始信号延时}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.离线模式测试等待时间 != newtester.离线模式测试等待时间) { timeischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[离线模式测试等待时间]:{oldtester.离线模式测试等待时间}->{newtester.离线模式测试等待时间}:更新成功", WriteData.LogType.ParamLog); }
 
-                            if (oldtester.入料吸提前开真空 != newtester.入料吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料吸提前开真空]:{oldtester.入料吸提前开真空}->{newtester.入料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.出料吸提前开真空 != newtester.出料吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料吸提前开真空]:{oldtester.出料吸提前开真空}->{newtester.出料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.测试吸提前开真空 != newtester.测试吸提前开真空) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试吸提前开真空]:{oldtester.测试吸提前开真空}->{newtester.测试吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.入料吸提前开真空 != newtester.入料吸提前开真空) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料吸提前开真空]:{oldtester.入料吸提前开真空}->{newtester.入料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.出料吸提前开真空 != newtester.出料吸提前开真空) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料吸提前开真空]:{oldtester.出料吸提前开真空}->{newtester.出料吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.测试吸提前开真空 != newtester.测试吸提前开真空) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试吸提前开真空]:{oldtester.测试吸提前开真空}->{newtester.测试吸提前开真空}:更新成功", WriteData.LogType.ParamLog); }
 
-                            if (oldtester.Auto侧敲使能 != newtester.Auto侧敲使能) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto侧敲使能]:{oldtester.Auto侧敲使能}->{newtester.Auto侧敲使能}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.前侧同时敲击 != newtester.前侧同时敲击) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[前侧同时敲击]:{oldtester.前侧同时敲击}->{newtester.前侧同时敲击}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.放置多少颗敲击 != newtester.放置多少颗敲击) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[放置多少颗敲击]:{oldtester.放置多少颗敲击}->{newtester.放置多少颗敲击}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.Auto侧敲次数 != newtester.Auto侧敲次数) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto侧敲次数]:{oldtester.Auto侧敲次数}->{newtester.Auto侧敲次数}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.侧敲间隔 != newtester.侧敲间隔) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲间隔]:{oldtester.侧敲间隔}->{newtester.侧敲间隔}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.放料时允许侧敲 != newtester.放料时允许侧敲) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[放料时允许侧敲]:{oldtester.放料时允许侧敲}->{newtester.放料时允许侧敲}:更新成功", WriteData.LogType.ParamLog); }
-                            if (oldtester.侧敲时允许放料 != newtester.侧敲时允许放料) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲时允许放料]:{oldtester.侧敲时允许放料}->{newtester.侧敲时允许放料}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.Auto侧敲使能 != newtester.Auto侧敲使能) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto侧敲使能]:{oldtester.Auto侧敲使能}->{newtester.Auto侧敲使能}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.前侧同时敲击 != newtester.前侧同时敲击) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[前侧同时敲击]:{oldtester.前侧同时敲击}->{newtester.前侧同时敲击}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.放置多少颗敲击 != newtester.放置多少颗敲击) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[放置多少颗敲击]:{oldtester.放置多少颗敲击}->{newtester.放置多少颗敲击}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.Auto侧敲次数 != newtester.Auto侧敲次数) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto侧敲次数]:{oldtester.Auto侧敲次数}->{newtester.Auto侧敲次数}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.侧敲间隔 != newtester.侧敲间隔) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲间隔]:{oldtester.侧敲间隔}->{newtester.侧敲间隔}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.放料时允许侧敲 != newtester.放料时允许侧敲) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[放料时允许侧敲]:{oldtester.放料时允许侧敲}->{newtester.放料时允许侧敲}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.侧敲时允许放料 != newtester.侧敲时允许放料) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[侧敲时允许放料]:{oldtester.侧敲时允许放料}->{newtester.侧敲时允许放料}:更新成功", WriteData.LogType.ParamLog); }
 
-                            if (oldtester.Auto换盘时出料Z回零 != newtester.Auto换盘时出料Z回零) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto换盘时出料Z回零]:{oldtester.Auto换盘时出料Z回零}->{newtester.Auto换盘时出料Z回零}:更新成功", WriteData.LogType.ParamLog); }
+                            if (oldtester.Auto换盘时出料Z回零 != newtester.Auto换盘时出料Z回零) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto换盘时出料Z回零]:{oldtester.Auto换盘时出料Z回零}->{newtester.Auto换盘时出料Z回零}:更新成功", WriteData.LogType.ParamLog); }
 
                             if (value == 设置信息.测试机信息.测试机名称)
                             {
@@ -5079,12 +5084,16 @@ namespace H5509_V2
                                     设置信息.测试机信息 = newtester;
                                 }
 
-                                Com.刷新测试超时时间();
+                                if (timeischange)
+                                {
+                                    Com.刷新测试超时时间();
+                                }
 
                                 if (comischange)
                                 {
-                                    Com.CloseCom();
-                                    Com.OpenCom();
+                                    Com.刷新串口信息();
+                                    //Com.CloseCom();
+                                    //Com.OpenCom();
                                 }
                             }
                             刷新测试机(newtester);
@@ -8409,6 +8418,18 @@ namespace H5509_V2
                 RunLog($"Fix3Tray盘拿走标记 = {Fix3Tray盘拿走标记}");
                 RunLog($"总良率报警间隔计数 = {总良率报警间隔计数}");
                 RunLog($"Socket使用次数超限数 = {Socket使用次数超限数}");
+
+                RunLog($"温控器读取Site1_Site8探测温度异常 = {温控器读取Site1_Site8探测温度异常}");
+                RunLog($"温控器读取Site9_Site16探测温度异常 = {温控器读取Site9_Site16探测温度异常}");
+                RunLog($"温控器读取加热盘探测温度异常 = {温控器读取加热盘探测温度异常}");
+                RunLog($"温控器读取Site1_Site8设定温度异常 = {温控器读取Site1_Site8设定温度异常}");
+                RunLog($"温控器读取Site9_Site16设定温度异常 = {温控器读取Site9_Site16设定温度异常}");
+                RunLog($"温控器读取加热盘设定温度异常 = {温控器读取加热盘设定温度异常}");
+                RunLog($"温控器设定Site1_Site8温度异常 = {温控器设定Site1_Site8温度异常}");
+                RunLog($"温控器设定Site9_Site16温度异常 = {温控器设定Site9_Site16温度异常}");
+                RunLog($"温控器设定加热盘温度异常 = {温控器设定加热盘温度异常}");
+                RunLog($"温控器读取_设定温度报警 = {温控器读取_设定温度报警}");
+
                 RunLog($"报警次数 = {报警次数}");
                 RunLog($"正在入料的Site = {正在入料的Site}");
                 RunLog($"trayTemp = {trayTemp}");
@@ -8639,6 +8660,15 @@ namespace H5509_V2
 
         private void button264_Click(object sender, EventArgs e)
         {
+
+            //TimeSpan timeSpan = DateTime.Now - 开始时间;
+            //if (timeSpan.TotalSeconds > 加热盘.升温超时报警)
+            //{
+            //    Listcode.Add($"1400446");
+            //    RunLog($"[Code]1400446,[Msg]升温超时!", LogType.AlarmLog);
+            //    ProgramPause = true; //如果升温超时则触发停止
+            //    IsPause = true;
+            //}
             //List<bool[]> open = new List<bool[]>()
             //                {
             //                    new bool[] { true, true, true, true },
@@ -8682,6 +8712,15 @@ namespace H5509_V2
             if (result == DialogResult.Yes)
             {
                 IsPause = false;
+            }
+        }
+
+        private void button266_Click(object sender, EventArgs e)
+        {
+            string result = GetconfigData();
+            if (result != "Success")
+            {
+                MessageBox.Show("刷新失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }
