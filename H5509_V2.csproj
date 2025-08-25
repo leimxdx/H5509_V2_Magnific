@@ -14,6 +14,8 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,8 +30,6 @@
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -157,141 +157,118 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auto1Map.cs">
+    <Compile Include="界面\Tray\Auto1Map.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Auto1Map.Designer.cs">
+    <Compile Include="界面\Tray\Auto1Map.Designer.cs">
       <DependentUpon>Auto1Map.cs</DependentUpon>
     </Compile>
-    <Compile Include="Auto2Map.cs">
+    <Compile Include="界面\Tray\Auto2Map.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Auto2Map.Designer.cs">
+    <Compile Include="界面\Tray\Auto2Map.Designer.cs">
       <DependentUpon>Auto2Map.cs</DependentUpon>
     </Compile>
-    <Compile Include="BinParam.cs" />
-    <Compile Include="ChangePwd.cs">
+    <Compile Include="界面\其他\ChangePwd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChangePwd.Designer.cs">
+    <Compile Include="界面\其他\ChangePwd.Designer.cs">
       <DependentUpon>ChangePwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="ControlPerm.cs" />
-    <Compile Include="DTMHelper.cs" />
-    <Compile Include="Fix1Map.cs">
+    <Compile Include="界面\Tray\Fix1Map.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fix1Map.Designer.cs">
+    <Compile Include="界面\Tray\Fix1Map.Designer.cs">
       <DependentUpon>Fix1Map.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fix2Map.cs">
+    <Compile Include="界面\Tray\Fix2Map.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fix2Map.Designer.cs">
+    <Compile Include="界面\Tray\Fix2Map.Designer.cs">
       <DependentUpon>Fix2Map.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fix3Map.cs">
+    <Compile Include="界面\Tray\Fix3Map.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Fix3Map.Designer.cs">
+    <Compile Include="界面\Tray\Fix3Map.Designer.cs">
       <DependentUpon>Fix3Map.cs</DependentUpon>
     </Compile>
-    <Compile Include="FlowcaedNoInfo.cs" />
-    <Compile Include="HeatInfo.cs" />
-    <Compile Include="HeatMap.cs">
+    <Compile Include="界面\Tray\HeatMap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="HeatMap.Designer.cs">
+    <Compile Include="界面\Tray\HeatMap.Designer.cs">
       <DependentUpon>HeatMap.cs</DependentUpon>
     </Compile>
-    <Compile Include="HeatMapTimer.cs" />
-    <Compile Include="InitPoint.cs" />
-    <Compile Include="LightSet.cs" />
-    <Compile Include="LoadMap.cs">
+    <Compile Include="界面\Tray\LoadMap.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoadMap.Designer.cs">
+    <Compile Include="界面\Tray\LoadMap.Designer.cs">
       <DependentUpon>LoadMap.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewHeatTrayInfo.cs">
+    <Compile Include="界面\Tray\NewHeatTrayInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewHeatTrayInfo.Designer.cs">
+    <Compile Include="界面\Tray\NewHeatTrayInfo.Designer.cs">
       <DependentUpon>NewHeatTrayInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewSetupName.cs">
+    <Compile Include="界面\Tray\NewSetupName.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewSetupName.Designer.cs">
+    <Compile Include="界面\Tray\NewSetupName.Designer.cs">
       <DependentUpon>NewSetupName.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewTrayInfo.cs">
+    <Compile Include="界面\Tray\NewTrayInfo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NewTrayInfo.Designer.cs">
+    <Compile Include="界面\Tray\NewTrayInfo.Designer.cs">
       <DependentUpon>NewTrayInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="TesterIFParam.cs" />
-    <Compile Include="WriteDataHelper.cs" />
-    <Compile Include="模块\log.cs" />
-    <Compile Include="OffsetPoint.cs" />
-    <Compile Include="SetupInfo.cs" />
-    <Compile Include="SiteStatus.cs" />
-    <Compile Include="TrayInfo.cs" />
-    <Compile Include="工具\SqlServerHelper.cs" />
-    <Compile Include="界面\Form_alarm.cs">
+    <Compile Include="界面\报警\Form_alarm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="界面\Form_alarm.Designer.cs">
+    <Compile Include="界面\报警\Form_alarm.Designer.cs">
       <DependentUpon>Form_alarm.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\FrmInputPwd.cs">
+    <Compile Include="界面\主界面\FrmInputPwd.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="界面\FrmInputPwd.Designer.cs">
+    <Compile Include="界面\主界面\FrmInputPwd.Designer.cs">
       <DependentUpon>FrmInputPwd.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\UIProgressIndicatorEx.cs">
+    <Compile Include="界面\其他\UIProgressIndicatorEx.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="界面\UIProgressIndicatorEx.Designer.cs">
+    <Compile Include="界面\其他\UIProgressIndicatorEx.Designer.cs">
       <DependentUpon>UIProgressIndicatorEx.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\_log.cs">
+    <Compile Include="界面\主界面\_log.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="界面\_log.Designer.cs">
+    <Compile Include="界面\主界面\_log.Designer.cs">
       <DependentUpon>_log.cs</DependentUpon>
     </Compile>
-    <Compile Include="通信\Communication.cs" />
+    <Compile Include="模块\Communication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="动作\AxisRun.cs" />
-    <Compile Include="动作\DeviceIOInfo.cs" />
-    <Compile Include="动作\gts.cs" />
-    <Compile Include="动作\IOInfo.cs" />
-    <Compile Include="动作\Motion.cs" />
-    <Compile Include="动作\MotionEx.cs" />
-    <Compile Include="工具\SQLiteHelper.cs" />
+    <Compile Include="模块\MotionEx.cs" />
     <Compile Include="模块\APPmaster.cs" />
     <Compile Include="模块\Handler.cs" />
-    <Compile Include="模块\ST_ProcessManage.cs" />
     <Compile Include="界面\FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="界面\FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\IOButton.cs">
+    <Compile Include="界面\其他\IOButton.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="界面\IOButton.Designer.cs">
+    <Compile Include="界面\其他\IOButton.Designer.cs">
       <DependentUpon>IOButton.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\_IO.cs">
+    <Compile Include="界面\主界面\_IO.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="界面\_IO.Designer.cs">
+    <Compile Include="界面\主界面\_IO.Designer.cs">
       <DependentUpon>_IO.cs</DependentUpon>
     </Compile>
     <Compile Include="界面\_main.cs">
@@ -300,58 +277,55 @@
     <Compile Include="界面\_main.Designer.cs">
       <DependentUpon>_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\_offset.cs">
+    <Compile Include="界面\主界面\_offset.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="界面\_offset.Designer.cs">
+    <Compile Include="界面\主界面\_offset.Designer.cs">
       <DependentUpon>_offset.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\_setting.cs">
+    <Compile Include="界面\主界面\_setting.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="界面\_setting.Designer.cs">
+    <Compile Include="界面\主界面\_setting.Designer.cs">
       <DependentUpon>_setting.cs</DependentUpon>
     </Compile>
-    <Compile Include="界面\_speed.cs">
+    <Compile Include="界面\主界面\_speed.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="界面\_speed.Designer.cs">
+    <Compile Include="界面\主界面\_speed.Designer.cs">
       <DependentUpon>_speed.cs</DependentUpon>
     </Compile>
-    <Compile Include="轴\AxisHomeInfo.cs" />
-    <Compile Include="轴\AxisInfo.cs" />
-    <Compile Include="轴\AxisRunInfo.cs" />
-    <EmbeddedResource Include="Auto1Map.resx">
+    <EmbeddedResource Include="界面\Tray\Auto1Map.resx">
       <DependentUpon>Auto1Map.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Auto2Map.resx">
+    <EmbeddedResource Include="界面\Tray\Auto2Map.resx">
       <DependentUpon>Auto2Map.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChangePwd.resx">
+    <EmbeddedResource Include="界面\其他\ChangePwd.resx">
       <DependentUpon>ChangePwd.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fix1Map.resx">
+    <EmbeddedResource Include="界面\Tray\Fix1Map.resx">
       <DependentUpon>Fix1Map.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fix2Map.resx">
+    <EmbeddedResource Include="界面\Tray\Fix2Map.resx">
       <DependentUpon>Fix2Map.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Fix3Map.resx">
+    <EmbeddedResource Include="界面\Tray\Fix3Map.resx">
       <DependentUpon>Fix3Map.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="HeatMap.resx">
+    <EmbeddedResource Include="界面\Tray\HeatMap.resx">
       <DependentUpon>HeatMap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoadMap.resx">
+    <EmbeddedResource Include="界面\Tray\LoadMap.resx">
       <DependentUpon>LoadMap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewHeatTrayInfo.resx">
+    <EmbeddedResource Include="界面\Tray\NewHeatTrayInfo.resx">
       <DependentUpon>NewHeatTrayInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewSetupName.resx">
+    <EmbeddedResource Include="界面\Tray\NewSetupName.resx">
       <DependentUpon>NewSetupName.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewTrayInfo.resx">
+    <EmbeddedResource Include="界面\Tray\NewTrayInfo.resx">
       <DependentUpon>NewTrayInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -364,41 +338,39 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="界面\Form_alarm.resx">
+    <EmbeddedResource Include="界面\报警\Form_alarm.resx">
       <DependentUpon>Form_alarm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\FrmInputPwd.resx">
+    <EmbeddedResource Include="界面\主界面\FrmInputPwd.resx">
       <DependentUpon>FrmInputPwd.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="界面\FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\IOButton.resx">
+    <EmbeddedResource Include="界面\其他\IOButton.resx">
       <DependentUpon>IOButton.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\UIProgressIndicatorEx.resx">
+    <EmbeddedResource Include="界面\其他\UIProgressIndicatorEx.resx">
       <DependentUpon>UIProgressIndicatorEx.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\_IO.resx">
+    <EmbeddedResource Include="界面\主界面\_IO.resx">
       <DependentUpon>_IO.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\_log.resx">
+    <EmbeddedResource Include="界面\主界面\_log.resx">
       <DependentUpon>_log.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="界面\_main.resx">
       <DependentUpon>_main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\_offset.resx">
+    <EmbeddedResource Include="界面\主界面\_offset.resx">
       <DependentUpon>_offset.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\_setting.resx">
+    <EmbeddedResource Include="界面\主界面\_setting.resx">
       <DependentUpon>_setting.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="界面\_speed.resx">
+    <EmbeddedResource Include="界面\主界面\_speed.resx">
       <DependentUpon>_speed.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="gtn_core1.cfg" />
-    <None Include="gtn_core2.cfg" />
     <None Include="H5509_alarm.xlsx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -443,9 +415,6 @@
     <None Include="Resources\主界面.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="offset\" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\机台照.jpg" />
   </ItemGroup>
   <ItemGroup>
@@ -461,31 +430,43 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gts.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="gt_rn.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="H5509big.ico" />
-    <Content Include="LAFunc.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="MachineBuilding.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="PIFunc.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Resources\机台照.png" />
     <None Include="Resources\TrayForm.png" />
-    <Content Include="VFunc.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="HardwareGXN\HardwareGXN.csproj">
+      <Project>{65e82f37-fd8b-4a5c-bfe0-b29031e55d0e}</Project>
+      <Name>HardwareGXN</Name>
+    </ProjectReference>
+    <ProjectReference Include="IHardwareGXN\IHardwareGXN.csproj">
+      <Project>{396c4c70-4aa6-438d-8b4e-470aed0a99d4}</Project>
+      <Name>IHardwareGXN</Name>
+    </ProjectReference>
+    <ProjectReference Include="MotionCommon\MotionCommon.csproj">
+      <Project>{908abb7e-bd9b-419c-b207-042a3d8dab24}</Project>
+      <Name>MotionCommon</Name>
+    </ProjectReference>
+    <ProjectReference Include="SQLiteHelper\SQLiteHelper.csproj">
+      <Project>{4322550b-1e28-45b2-a552-3817974ff652}</Project>
+      <Name>SQLiteHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="SQLServerHelper\SQLServerHelper.csproj">
+      <Project>{7ddb4a6b-0557-4902-aea3-f1ea397e3860}</Project>
+      <Name>SQLServerHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="TextFileLogger\TextFileLogger.csproj">
+      <Project>{d14d753f-2501-45dd-bdfb-c5bc5e3b69cd}</Project>
+      <Name>TextFileLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="Thermostat\Thermostat.csproj">
+      <Project>{e64bf547-b15c-490c-87fa-06f2a4c21889}</Project>
+      <Name>Thermostat</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe \\192.168.2.176\GitHub\H5509_V2\bin\Debug</PostBuildEvent>
+    <PostBuildEvent>xcopy /y /s /d D:\GitHub\H5509_V3\bin\Debug\H5509_V2.exe \\192.168.2.176\GitHub\H5509_V3\bin\Debug</PostBuildEvent>
   </PropertyGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

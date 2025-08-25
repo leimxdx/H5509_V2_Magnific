@@ -1,0 +1,24 @@
+D:\GitHub\H5509_V3 - 0.0.2\IHardwareContracts\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.2\IHardwareContracts\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3 - 0.0.2\IHardwareContracts\obj\Debug\IHardwareContracts.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3 - 0.0.2\IHardwareContracts\obj\Debug\IHardwareContracts.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3 - 0.0.2\IHardwareContracts\obj\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.2\IHardwareContracts\obj\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\obj\Debug\IHardwareContracts.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\obj\Debug\IHardwareContracts.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\obj\Debug\IHardwar.30896045.Up2Date
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\obj\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.3\IHardwareContracts\obj\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3\IHardwareContracts\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3\IHardwareContracts\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3\IHardwareContracts\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V3\IHardwareContracts\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V3\IHardwareContracts\obj\Debug\IHardwareContracts.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3\IHardwareContracts\obj\Debug\IHardwareContracts.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3\IHardwareContracts\obj\Debug\IHardwar.30896045.Up2Date
+D:\GitHub\H5509_V3\IHardwareContracts\obj\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3\IHardwareContracts\obj\Debug\IHardwareContracts.pdb

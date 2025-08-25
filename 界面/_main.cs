@@ -13,19 +13,15 @@ using Sunny.UI;
 using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
 using static H5509_V2.ForMain;
-using static H5509_V2.WriteData;
 using Color = System.Drawing.Color;
 using Control = System.Windows.Forms.Control;
+using MotionCommon;
 
 namespace H5509_V2
 {
     public partial class _main : UIUserControl
     {
         public Task RefreshData;
-
-        public MotionEx motionEx = MotionEx.GetInstance();
-
-        public Handler handler = new Handler();
 
         /// <summary>
         /// 设备状态灯闪烁
@@ -2361,6 +2357,8 @@ namespace H5509_V2
 
         private void label9_Click(object sender, EventArgs e)
         {
+            IsPause = false;
+            IsStart = true;
         }
     }
 }

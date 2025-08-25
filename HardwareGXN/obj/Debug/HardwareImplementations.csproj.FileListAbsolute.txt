@@ -1,0 +1,33 @@
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\bin\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\bin\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\obj\Debug\HardwareImplementations.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\obj\Debug\HardwareImplementations.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\obj\Debug\Hardware.3FF1658E.Up2Date
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\obj\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3 - 0.0.2\HardwareImplementations\obj\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\bin\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\bin\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\obj\Debug\HardwareImplementations.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\obj\Debug\HardwareImplementations.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\obj\Debug\Hardware.3FF1658E.Up2Date
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\obj\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\obj\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V3 - 0.0.3\HardwareImplementations\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V3\HardwareImplementations\bin\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3\HardwareImplementations\bin\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3\HardwareImplementations\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3\HardwareImplementations\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V3\HardwareImplementations\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3\HardwareImplementations\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V3\HardwareImplementations\obj\Debug\HardwareImplementations.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3\HardwareImplementations\obj\Debug\HardwareImplementations.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3\HardwareImplementations\obj\Debug\Hardware.3FF1658E.Up2Date
+D:\GitHub\H5509_V3\HardwareImplementations\obj\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3\HardwareImplementations\obj\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3\HardwareImplementations\obj\Debug\HardwareImplementations.FrmGSN.resources
+D:\GitHub\H5509_V3\HardwareImplementations\obj\Debug\HardwareImplementations.csproj.GenerateResource.cache

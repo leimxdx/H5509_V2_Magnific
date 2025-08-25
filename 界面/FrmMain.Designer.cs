@@ -65,7 +65,7 @@
             this.button_setting.Name = "button_setting";
             this.button_setting.Size = new System.Drawing.Size(150, 60);
             this.button_setting.TabIndex = 9;
-            this.button_setting.Tag = "@02@#BCD#";
+            this.button_setting.Tag = "";
             this.button_setting.Text = "设置与维护";
             this.button_setting.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button_setting.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;

@@ -1,0 +1,6 @@
+D:\GitHub\H5509_V3\TextFileLogger\bin\Debug\TextFileLogger.dll
+D:\GitHub\H5509_V3\TextFileLogger\bin\Debug\TextFileLogger.pdb
+D:\GitHub\H5509_V3\TextFileLogger\obj\Debug\TextFileLogger.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3\TextFileLogger\obj\Debug\TextFileLogger.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3\TextFileLogger\obj\Debug\TextFileLogger.dll
+D:\GitHub\H5509_V3\TextFileLogger\obj\Debug\TextFileLogger.pdb

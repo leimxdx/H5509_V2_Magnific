@@ -1,0 +1,9 @@
+D:\GitHub\H5509_V3\Thermostat\bin\Debug\Thermostat.dll
+D:\GitHub\H5509_V3\Thermostat\bin\Debug\Thermostat.pdb
+D:\GitHub\H5509_V3\Thermostat\bin\Debug\SiCommunication.dll
+D:\GitHub\H5509_V3\Thermostat\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V3\Thermostat\obj\Debug\Thermostat.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3\Thermostat\obj\Debug\Thermostat.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3\Thermostat\obj\Debug\Thermostat.csproj.Up2Date
+D:\GitHub\H5509_V3\Thermostat\obj\Debug\Thermostat.dll
+D:\GitHub\H5509_V3\Thermostat\obj\Debug\Thermostat.pdb

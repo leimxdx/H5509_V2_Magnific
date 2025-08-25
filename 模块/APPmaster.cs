@@ -2,47 +2,44 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SQLite;
 using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Design;
-using System.Drawing.Drawing2D;
-using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Cryptography;
-using System.Security.Policy;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Web;
 using System.Windows.Forms;
-using System.Windows.Interop;
-using System.Xml.Linq;
-using DocumentFormat.OpenXml.Vml;
 using H5509_alarm;
-using Sunny.UI;
-using Sunny.UI.Win32;
-using static GTN.mc;
+using H5509_V2;
+using IHardwareGXN.GXNCard;
+using MotionCommon;
 using static H5509_V2.ForMain;
-using static H5509_V2.WriteData;
+using TextFileLogger;
+using SQLServerHelper;
+using SQLiteHelper;
+using Thermostat;
 using Ttimer = System.Timers.Timer;
+using static H5509_V2.APPmaster;
 
 namespace H5509_V2
 {
     public class APPmaster
     {
+        public static MotionEx motionEx;
+
+        public static Handler handler;
+
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
 
         public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false";
 
         public static string SQLServerConnString = ""; //在SqlServer数据库获取
 
-        public static bool InitedOK = false;
+        public static bool InitedOK
+        {
+            get { return MotionEx.IMotion.InitedOK; }
+            set { MotionEx.IMotion.InitedOK = value; }
+        }
 
         public static bool TCPConnect = false;
 
@@ -124,7 +121,9 @@ namespace H5509_V2
 
         public static string 气压报警 = "1";
 
-        public static DTMHelper dTMHelper; //温控器
+        public static string GXN轴卡 = "";
+
+        public static Thermostat.DTMHelper dTMHelper; //温控器
 
         public static string 当前档案;
 
@@ -201,11 +200,23 @@ namespace H5509_V2
 
         public static bool ProgramBtnStart = false; //程序按钮开始
 
-        public static bool IsPause = false; //停止
+        public static bool IsPause //停止
+        {
+            get { return MotionEx.IMotion.IsPause; }
+            set { MotionEx.IMotion.IsPause = value; }
+        }
 
-        public static bool IsLoadPause = false; //停止
+        public static bool IsLoadPause //Load停止
+        {
+            get { return MotionEx.IMotion.IsPause; }
+            set { MotionEx.IMotion.IsPause = value; }
+        }
 
-        public static bool IsEmptyPause = false; //停止
+        public static bool IsEmptyPause //Empty停止
+        {
+            get { return MotionEx.IMotion.IsPause; }
+            set { MotionEx.IMotion.IsPause = value; }
+        }
 
         public static bool ProgramPause = false; //程序暂停
 
@@ -478,7 +489,7 @@ namespace H5509_V2
 
         public static string 读取加热盘设定温度Error;
 
-        public static string[] ServoAxis = { "M16_入料手臂Y轴", "M17_出料手臂Y轴", "M18_放Tary盘轴", "M19_测试手臂Z轴", "M20_飞梭轴", "M21_测试手臂X轴", "M22_入料手臂X轴", "M23_出料手臂X轴" };
+        public static string 系统未定义错误ErrorMsg;
 
         public static int[] Dout128PassNumber = new int[128];
 
@@ -821,8 +832,6 @@ namespace H5509_V2
         public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
 
         public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
-
-        //public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
 
         public static bool 空盘上顶到最大值 = false;
 
@@ -1303,13 +1312,13 @@ namespace H5509_V2
 
         public static string GetIOInfo()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from IOInfo", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, "select * from IOInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                APPmaster.IOList = new List<IOInfo>();
+                List<IOInfo> IOList = new List<IOInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    APPmaster.IOList.Add(new IOInfo()
+                    IOList.Add(new IOInfo()
                     {
                         模块类型 = dr["模块型号"].ToString(),
                         输入 = Convert.ToInt16(dr["输入"].ToString()),
@@ -1323,13 +1332,14 @@ namespace H5509_V2
                         IO区域 = dr["区域"].ToString()
                     });
                 }
+                APPmaster.IOList = IOList;
             }
             return result;
         }
 
         public static string GetInitPoint()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from InitPoint", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, "select * from InitPoint", out DataTable dataTable);
             if (result == "Success")
             {
                 InitPoint initPoint = new InitPoint();
@@ -1435,7 +1445,7 @@ namespace H5509_V2
         public static string GetHeatInfo(string name, out HeatInfo heatInfo)
         {
             heatInfo = new HeatInfo();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from HeatInfo where name = '{name}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from HeatInfo where name = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -1497,7 +1507,7 @@ namespace H5509_V2
         public static string GetOffsetPoint(string name, out OffsetPoint offsetPoint)
         {
             offsetPoint = new OffsetPoint();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from OffsetPoint where 微调点位名称 = '{name}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from OffsetPoint where 微调点位名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -1653,32 +1663,33 @@ namespace H5509_V2
 
         public static string GetAxisInfo()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisInfo", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, "select * from AxisInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                APPmaster.AxisInfoList = new List<AxisInfo>();
+                List<AxisInfo> axisInfoList = new List<AxisInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    APPmaster.AxisInfoList.Add(new AxisInfo()
+                    axisInfoList.Add(new AxisInfo()
                     {
                         轴名称 = dr["轴名称"].ToString(),
                         核号 = Convert.ToInt16(dr["核号"].ToString()),
                         轴号 = Convert.ToInt16(dr["轴号"].ToString()),
                     });
                 }
+                APPmaster.AxisInfoList = axisInfoList;
             }
             return result;
         }
 
         public static string GetAxisRunInfo()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisRunInfo", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, "select * from AxisRunInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                AxisRunInfoList = new List<AxisRunInfo>();
+                List<AxisRunInfo> axisRunInfoList = new List<AxisRunInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    AxisRunInfoList.Add(new AxisRunInfo()
+                    axisRunInfoList.Add(new AxisRunInfo()
                     {
                         轴名称 = dr["轴名称"].ToString(),
                         最大速度 = Convert.ToDouble(dr["最大速度"].ToString()),
@@ -1687,8 +1698,18 @@ namespace H5509_V2
                         步长mm = Convert.ToDouble(dr["步长mm"].ToString()),
                         速度百分比 = Convert.ToDouble(dr["速度百分比"].ToString()),
                         平滑时间 = Convert.ToInt16(dr["平滑时间"].ToString()),
+                        停止类型 = Convert.ToInt32(dr["停止类型"].ToString()),
+                        跟随误差 = Convert.ToInt32(dr["跟随误差"].ToString()),
+                        跟随误差检测 = Convert.ToBoolean(dr["跟随误差检测"].ToString()),
+                        轴二段速方式 = Convert.ToInt32(dr["轴二段速方式"].ToString()),
+                        二段速启动时减速速度 = Convert.ToDouble(dr["二段速启动时减速速度"].ToString()),
+                        二段速启动时减速距离 = Convert.ToInt32(dr["二段速启动时减速距离"].ToString()),
+                        二段速结束时减速速度 = Convert.ToDouble(dr["二段速结束时减速速度"].ToString()),
+                        二段速结束时减速距离 = Convert.ToInt32(dr["二段速结束时减速距离"].ToString()),
+                        轴停后等待超时时间 = Convert.ToInt32(dr["轴停后等待超时时间"].ToString()),
                     });
                 }
+                APPmaster.AxisRunInfoList = axisRunInfoList;
                 AxisRunGetCoreAxis();
             }
             return result;
@@ -1696,13 +1717,13 @@ namespace H5509_V2
 
         public static string GetAxisHomeInfo()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from AxisHomeInfo", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, "select * from AxisHomeInfo", out DataTable dataTable);
             if (result == "Success")
             {
-                APPmaster.AxisHomeInfoList = new List<AxisHomeInfo>();
+                List<AxisHomeInfo> axisHomeInfoList = new List<AxisHomeInfo>();
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    APPmaster.AxisHomeInfoList.Add(new AxisHomeInfo()
+                    axisHomeInfoList.Add(new AxisHomeInfo()
                     {
                         轴名称 = dr["轴名称"].ToString(),
                         模式 = Convert.ToInt16(dr["模式"].ToString()),
@@ -1720,8 +1741,11 @@ namespace H5509_V2
                         Home最大搜索距离 = Convert.ToInt32(dr["Home最大搜索距离"].ToString()),
                         Index最大搜索距离 = Convert.ToInt32(dr["Index最大搜索距离"].ToString()),
                         反向脱离步长 = Convert.ToInt32(dr["反向脱离步长"].ToString()),
+                        使能后回零延时 = Convert.ToInt32(dr["使能后回零延时"].ToString()),
+                        回零后检测原点信号 = Convert.ToBoolean(dr["回零后检测原点信号"].ToString()),
                     });
                 }
+                APPmaster.AxisHomeInfoList = axisHomeInfoList;
                 AxisHomeGetCoreAxis();
             }
             return result;
@@ -1729,12 +1753,12 @@ namespace H5509_V2
 
         public static string GetconfigValue(string name, out string value)
         {
-            return SQLiteHelper.runSql(SQLiteConnString, $"select value from config where name = '{name}'", out value);
+            return Sqlite.runSql(SQLiteConnString, $"select value from config where name = '{name}'", out value);
         }
 
         public static string GetconfigData()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from config", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, "select * from config", out DataTable dataTable);
             if (result == "Success")
             {
                 foreach (DataRow item in dataTable.Rows)
@@ -1748,6 +1772,7 @@ namespace H5509_V2
                         case "connectionString": SQLServerConnString = value; break;
                         case "气压报警": 气压报警 = value; break;
                         case "温控器读取_设定温度报警": 温控器读取_设定温度报警 = Convert.ToBoolean(value); break;
+                        case "GXN轴卡": GXN轴卡 = value; break;
                     }
                 }
             }
@@ -1756,7 +1781,7 @@ namespace H5509_V2
 
         public static string GetLightSet()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, "select * from LightSet", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, "select * from LightSet", out DataTable dataTable);
             if (result == "Success")
             {
                 foreach (DataRow dr in dataTable.Rows)
@@ -1786,7 +1811,7 @@ namespace H5509_V2
         public static string GetLightSet(string state, out LightSet lightset)
         {
             lightset = new LightSet();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from LightSet where 设备状态 = '{state}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from LightSet where 设备状态 = '{state}'", out DataTable dataTable);
             if (result == "Success")
             {
                 foreach (DataRow dr in dataTable.Rows)
@@ -1811,7 +1836,7 @@ namespace H5509_V2
 
         public static string GetContorlPerm()
         {
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from ControlPerm", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from ControlPerm", out DataTable dataTable);
             if (result == "Success")
             {
                 List<ControlPerm> listConPerm = new List<ControlPerm>();
@@ -1833,23 +1858,23 @@ namespace H5509_V2
 
         public static string GetSetupValue(string name, string field, out string value)
         {
-            return SQLiteHelper.runSql(SQLiteConnString, $"select {field} from SetupInfo where 档案名称 = '{name}'", out value);
+            return Sqlite.runSql(SQLiteConnString, $"select {field} from SetupInfo where 档案名称 = '{name}'", out value);
         }
 
         public static string GetPassWord(string name, out string value)
         {
-            return SQLiteHelper.runSql(SQLiteConnString, $"select password from Jurisdiction where realName = '{name}'", out value);
+            return Sqlite.runSql(SQLiteConnString, $"select password from Jurisdiction where realName = '{name}'", out value);
         }
 
         public static string GetPermTime(string name, out string value)
         {
-            return SQLiteHelper.runSql(SQLiteConnString, $"select permtime from Jurisdiction where realName = '{name}'", out value);
+            return Sqlite.runSql(SQLiteConnString, $"select permtime from Jurisdiction where realName = '{name}'", out value);
         }
 
         public static string GetSetupInfo(string name, out SetupInfo setupInfo)//
         {
             setupInfo = new SetupInfo();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 if (dataTable.Rows.Count > 0)
@@ -1873,18 +1898,18 @@ namespace H5509_V2
 
         public static string GetSetupInfoName(out DataTable dt)
         {
-            return SQLiteHelper.runSql(SQLiteConnString, "select 档案名称 from SetupInfo", out dt);
+            return Sqlite.runSql(SQLiteConnString, "select 档案名称 from SetupInfo", out dt);
         }
 
         public static string GetJurisdictionName(out DataTable dt)
         {
-            return SQLiteHelper.runSql(SQLiteConnString, "select realName from Jurisdiction", out dt);
+            return Sqlite.runSql(SQLiteConnString, "select realName from Jurisdiction", out dt);
         }
 
         public static string GetTrayInfo(string name, out TrayInfo trayInfo)
         {
             trayInfo = new TrayInfo();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -1920,7 +1945,7 @@ namespace H5509_V2
         public static string GetSiteStatus(string name, out SiteStatus siteStatus)
         {
             siteStatus = new SiteStatus();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from SiteStatus where Site名称 = '{name}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from SiteStatus where Site名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -1963,7 +1988,7 @@ namespace H5509_V2
         public static string GetBINParam(string name, out BinParam binParam)
         {
             binParam = new BinParam();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{name}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2007,7 +2032,7 @@ namespace H5509_V2
         public static string GetTesterIFParam(string name, out TesterIFParam tester)
         {
             tester = new TesterIFParam();
-            string result = SQLiteHelper.runSql(SQLiteConnString, $"select * from TesterIFParam where 测试机名称 = '{name}'", out DataTable dataTable);
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from TesterIFParam where 测试机名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2071,8 +2096,6 @@ namespace H5509_V2
             }
             return result;
         }
-
-        //public static string GetLightSet(
 
         public static string GetSetupInfoData(string name)
         {
@@ -2191,16 +2214,16 @@ namespace H5509_V2
             result = Init_TrayPoint();
             if (result != "Success") return result;
 
-            for (int i = 0; i < 16; i++)
-            {
-                SiteTestIC.Add(new bool[2][]
-                {
-                    new bool[] { false, false, false, false },
-                    new bool[] { false, false, false, false },
-                });
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    SiteTestIC.Add(new bool[2][]
+            //    {
+            //        new bool[] { false, false, false, false },
+            //        new bool[] { false, false, false, false },
+            //    });
 
-                SiteTestBin.Add(new string[] { "", "", "", "", "", "", "", "" });
-            }
+            //    SiteTestBin.Add(new string[] { "", "", "", "", "", "", "", "" });
+            //}
             return "Success";
         }
 
@@ -2258,7 +2281,7 @@ namespace H5509_V2
         public static string UpdateSiteStatus(string name, int site, string value)
         {
             string sql = $"update SiteStatus set Site{site} = '{value}' where Site名称 = '{name}'";
-            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }
@@ -2266,7 +2289,7 @@ namespace H5509_V2
         public static string UpdateRecord(string value)
         {
             string sql = $"update config set value = '{value}' where name = '当前档案'";
-            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }
@@ -2294,7 +2317,7 @@ namespace H5509_V2
                 $"name5 = '{binParam.name5}'" +
                 $"where 分BIN名称 = '{name}'";
 
-            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
 
             else return "Success";
@@ -2342,7 +2365,7 @@ namespace H5509_V2
                 $"Auto换盘时出料Z回零 = '{tester.Auto换盘时出料Z回零}'" +
                 $" where 测试机名称 = '{name}'";
 
-            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
 
             else return "Success";
@@ -2351,7 +2374,7 @@ namespace H5509_V2
         public static string UpateJurisdiction(string name, string password, string permTime)
         {
             string sql = $"update Jurisdiction set password = '{password}', permtime = '{permTime}' where realName = '{name}'";
-            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }
@@ -2359,7 +2382,7 @@ namespace H5509_V2
         public static string UpateControlPerm(string name, string perm)
         {
             string sql = $"update ControlPerm set 权限 = '{perm}' where 控件名 = '{name}'";
-            int line = SQLiteHelper.runSqlNonQuery(SQLiteConnString, sql);
+            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }
@@ -2472,7 +2495,7 @@ namespace H5509_V2
                        $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{报警次数}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
                        $"'{(空跑模式 ? "空跑模式" : "正常模式")}','在线')";
 
-                int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
+                int line = Sqlite.runSqlNonQuery(SQLiteRunningString, sql);
 
                 if (line <= 0) RunLog("sql保存失败！:" + sql);
             }
@@ -3595,7 +3618,12 @@ namespace H5509_V2
             }
         }
 
-        public static void RunLog(string info, WriteData.LogType txtType = WriteData.LogType.RunLog, bool isReceive = false, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
+        public static void Runlog2(string info)
+        {
+            RunLog(info, LogType.RunLog);
+        }
+
+        public static void RunLog(string info, LogType txtType = LogType.RunLog, bool isReceive = false, string excelLevel = "debug", string excelType = "run")//int level = "debug", string logType = "run"
         {
             try { Log.AddLog(excelLevel, excelType, info); } //写入Excel
             catch { }
@@ -3646,6 +3674,7 @@ namespace H5509_V2
 
             return tempopen;
         }
+
         public static bool[] 检测温度是否异常(double tempmax, double tempmin)
         {
             bool[] tempopen = new bool[17];
@@ -3775,7 +3804,6 @@ namespace H5509_V2
 
             保存开Site更改 = siteopen;
         }
-
 
         public static bool 获取Load盘位置(int index, out double xPos, out double yPos)
         {
@@ -4242,42 +4270,6 @@ namespace H5509_V2
             return pos;
         }
 
-        public static double[] 获取梭车xyp放料点位2(int colum)
-        {
-            double[] pos = new double[3];
-            if (飞梭2位置 == 0) //梭车2在后，梭车1在前
-            {
-                if (colum == 0) //梭车2第1列
-                {
-                    pos[0] = 初始点位.入料_梭车2_X + 点位微调.入料_梭车2第1列放_X;
-                    pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第1列放_Y;
-                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距; ;
-                }
-                else  //梭车2第2列
-                {
-                    pos[0] = 初始点位.入料_梭车2_X + 梭车列间距 + 点位微调.入料_梭车2第2列放_X;
-                    pos[1] = 初始点位.入料_梭车2_Y + 点位微调.入料_梭车2第2列放_Y;
-                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
-                }
-            }
-            else //梭车2在前，梭车1后
-            {
-                if (colum == 0) //梭车1第1列
-                {
-                    pos[0] = 初始点位.入料_梭车1_X + 点位微调.入料_梭车1第1列放_X;
-                    pos[1] = 初始点位.入料_梭车1_Y + 点位微调.入料_梭车1第1列放_Y;
-                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
-                }
-                else  //梭车1第2列
-                {
-                    pos[0] = 初始点位.入料_梭车1_X + 梭车列间距 + 点位微调.入料_梭车1第2列放_X;
-                    pos[1] = 初始点位.入料_梭车1_Y + 点位微调.入料_梭车1第2列放_Y;
-                    pos[2] = 入料放料间距 + 点位微调.入料_梭车_变距;
-                }
-            }
-            return pos;
-        }
-
         public static double[] 获取梭车xyp吸料点位2(int colum) //因两个梭车点位不同，因此出料手臂等待的时候是获取将要过来的梭车的点位
         {
             double[] pos = new double[3];
@@ -4556,6 +4548,151 @@ namespace H5509_V2
             else
             {
                 return timeSpan;
+            }
+        }
+    }
+
+    /// <summary>
+    /// 流程管理数据结构体
+    /// </summary>
+    public struct ST_ProcessManage
+    {
+        /// <summary>
+        /// 当前步ID
+        /// </summary>
+        public int StepID;
+
+        /// <summary>
+        /// 动作名称
+        /// </summary>
+        public string StepName;
+
+        /// <summary>
+        /// 过程中标志
+        /// </summary>
+        public bool Processing;
+
+        /// <summary>
+        /// 过程完成标志
+        /// </summary>
+        public bool Done;
+
+        /// <summary>
+        /// 过程执行条件
+        /// </summary>
+        public bool Condition;
+
+        /// <summary>
+        /// 过程执行允许
+        /// </summary>
+        public bool Permit;
+
+    }
+
+    public class log
+    {
+        public DateTime Time { get; set; }
+        public string LogLevel { get; set; }
+        public string LogType { get; set; }
+        public string LogContent { get; set; }
+    }
+
+    public class LogManager
+    {
+        public string Msg { get; set; }
+
+        public DateTime Time { get; set; }
+
+        public LogType TxtLogtype { get; set; }
+
+        public string ExcelType { get; set; }
+
+        public string ExcelLevel { get; set; }
+
+        public bool IsReceive { get; set; }
+    }
+
+    public class HeatMapTimer
+    {
+        public Ttimer Timer { get; set; }
+
+        public Ttimer WaitTimer { get; set; }
+
+        public HeatMapTimer()
+        {
+            Timer = new Ttimer();
+            Timer.Interval = IC加热时间 * 1000; //2分钟 达温后延时时间  IC加热时间
+            Timer.Elapsed += TimerHeatTick;
+
+            WaitTimer = new Ttimer();
+            WaitTimer.Interval = 500;
+            WaitTimer.Elapsed += WaitTimerHeatTick; //每500ms检测一次是否达温
+        }
+
+        public DateTime StartHeatTime = DateTime.Now;
+
+        public DateTime HeatTime = DateTime.Now;
+
+        public TimeSpan CountDownTime
+        {
+            get
+            {
+                TimeSpan time = StartHeatTime.AddSeconds(Timer.Interval / 1000) - DateTime.Now;
+                if (time.TotalSeconds < 0) return new TimeSpan(0);
+                else return time;
+            }
+        }
+
+        private int status;
+
+        public int Status
+        {
+            get
+            {
+                return status;
+            }
+            set
+            {
+                status = value;
+                if (status == 1)
+                {
+                    if (温度模式 == "常温")
+                    {
+                        Timer.Start();
+                        StartHeatTime = DateTime.Now;
+                        //RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                    }
+                    else
+                    {
+                        if (温控达温) //如果达温了直接开始倒计时
+                        {
+                            Timer.Start();
+                            StartHeatTime = DateTime.Now;
+                            //RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+                        }
+                        else //如果未达温则等达温后再开始倒计时
+                        {
+                            WaitTimer.Start();
+                        }
+                    }
+                }
+            }
+        }
+
+        private void TimerHeatTick(object sender, EventArgs e)
+        {
+            Timer.Stop();
+            Status = 2;
+        }
+
+        private void WaitTimerHeatTick(object sender, EventArgs e)
+        {
+            if (温控达温)
+            {
+                WaitTimer.Stop();
+                Timer.Start();
+                StartHeatTime = DateTime.Now;
+                //RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
             }
         }
     }

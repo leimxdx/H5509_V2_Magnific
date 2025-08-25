@@ -6,6 +6,7 @@ using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
@@ -13,13 +14,20 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using H5509_alarm;
+using H5509_V2.界面;
+using HardwareGXN;
+using HardwareGXN.GENAxisCard;
+using HardwareGXN.GSNAxisCard;
+using IHardwareGXN.GXNCard;
+using SQLiteHelper;
+using SQLServerHelper;
 using Sunny.UI;
 using Sunny.UI.Win32;
+using TextFileLogger;
+//using DTMHelper;
+using Thermostat;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using static GTN.mc;
 using static H5509_V2.APPmaster;
-using static H5509_V2.WriteData;
-using static H5509_V2.WriteData.LogType;
 
 namespace H5509_V2
 {
@@ -62,8 +70,7 @@ namespace H5509_V2
         private _offset offset;
         private _speed speed;
         private _IO io;
-        private Handler handler;
-        private MotionEx motionEx;
+        private IGXNInterface iGXNCard;
 
         public Action 刷新开Site信息;
 
@@ -111,45 +118,66 @@ namespace H5509_V2
                 //Log.AddLog("error", "run", "软件加载失败,请关闭软件重开!" + result);
                 MessageBox.Show($"软件加载失败,请关闭软件重开!\n{result}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Application.Exit();
+                return;
             }
+
+            string GSN = "HardwareGXN.GSNAxisController,HardwareGXN";
+            string GEN = "HardwareGXN.GENAxisController,HardwareGXN";
+
+            Type type = Type.GetType(GXN轴卡);
+            var instance = Activator.CreateInstance(type);
+            iGXNCard = (IGXNInterface)instance; //IGXNInterface gxncard = new HardwareImplementations.GENAxisCard.GENAxisController();
+            iGXNCard.RunLog += Runlog2;
+
+            //Form form = new FrmGSN();
+            //form.Show();
+
+            //gxn.InitCard();
+
+            //MessageBox.Show(gxn.PrintGXN());
+
             //Log.AddLog("debug","run","读取数据库数据完成");
+
         }
 
         private void ForMain_Load(object sender, EventArgs e)
         {
             string result = "";
+            motionEx = new MotionEx(iGXNCard);
             Com = new Communication();
-            main = new _main();
-            setting = new _setting();
+            main = new _main()
+            {
+                刷新界面权限 = 刷新界面权限,
+            };
+            setting = new _setting()
+            {
+                刷新分BIN信息 = main.刷新分BIN信息,
+                刷新温度信息 = main.刷新温度显示,
+                刷新按钮状态 = 刷新按钮权限,
+                刷新开Site状态 = main.刷新开Site状态,
+            };
+            handler = new Handler()
+            {
+                刷新批次信息 = main.刷新批次信息,
+                刷新分BIN信息 = main.刷新分BIN信息,
+                刷新权限 = main.切换为操作员权限,
+                显示Dout颜色 = main.显示Dout颜色,
+            };
             offset = new _offset();
             speed = new _speed();
             io = new _IO();
-            handler = new Handler();
-            motionEx = MotionEx.GetInstance();
+
+            Sqlite.RunLog += Runlog2;
+            SqlServer.RunLog += Runlog2;
 
             Log.发送批次信息 = main.SendLotNo;
 
-            setting.刷新分BIN信息 = main.刷新分BIN信息;
-            setting.刷新温度信息 = main.刷新温度显示;
-            setting.刷新按钮状态 = 刷新按钮权限;
-            setting.刷新开Site状态 = main.刷新开Site状态;
-
-            handler.刷新批次信息 = main.刷新批次信息;
-            handler.刷新分BIN信息 = main.刷新分BIN信息;
-            handler.刷新权限 = main.切换为操作员权限;
-            handler.显示Dout颜色 = main.显示Dout颜色;
-
-            main.刷新界面权限 = 刷新界面权限;
-            main.handler = handler;
-
-            setting.handler = handler;
-            io.handler = handler;
             Com.RefrshLog = Log.DelegteDisplayComInfo;
 
             达温延时 = new System.Timers.Timer() { Interval = 达温后延时时间 * 1000 }; //2分钟
             达温延时.Elapsed += main.TempFirst;
 
-            dTMHelper = new DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
+            dTMHelper = new Thermostat.DTMHelper(TCPIP, TCPPort);//"192.168.1.5", 502
 
             if (!dTMHelper.Connect())
             {
@@ -161,6 +189,10 @@ namespace H5509_V2
                 TCPConnect = true;
                 main.刷新温度显示();
             }
+
+            //Form formw = new Thermostat.FrmMain(dTMHelper);
+            //formw.Show();
+
 
             //MotionEx motionex = MotionEx.GetInstance();
             //MotionEx motionex2 = MotionEx.GetInstance();
@@ -189,6 +221,18 @@ namespace H5509_V2
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
 
+            Form gxnform;
+            if (iGXNCard.PrintGXN() == "GSN轴卡")
+            {
+                FrmGSN frmGsn = new HardwareGXN.GSNAxisCard.FrmGSN(iGXNCard);
+                frmGsn.AxisInfoList = APPmaster.AxisInfoList;
+                frmGsn.AxisHomeInfoList = APPmaster.AxisHomeInfoList;
+                gxnform = frmGsn;
+            }
+            else gxnform = new HardwareGXN.GENAxisCard.FrmGEN(iGXNCard);
+
+            gxnform.Show();
+
             #region 调试参数
 
             //温度模式 = 0;
@@ -207,8 +251,6 @@ namespace H5509_V2
 
             main.canVisable(this);
             刷新界面权限();
-
-            //listcode.Add("1400441"); Dut全部被关闭，请长按结批按钮5S结批
         }
 
         public void 刷新界面权限()
@@ -334,11 +376,64 @@ namespace H5509_V2
             DialogResult result = MessageBox.Show("请确认是否退出软件?", "退出", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
-                //writeDataHelper.PrintLog("软件退出");
-                退出标记 = true; //让报警弹窗也退出，否则主程序退出不了
-                DialogResult = DialogResult.Cancel;
-                //gg.CloseCard(); //关闭轴卡
-                Application.Exit(); //退出软件
+                UIProgressIndicatorEx progressIndicator = new UIProgressIndicatorEx
+                {
+                    IndicateText = "退出保存数据中...",
+                    BackColor = System.Drawing.Color.Transparent,
+                };
+
+                // 创建并显示进度指示器
+                this.Invoke((Action)(() =>
+                {
+                    this.Controls.Add(progressIndicator);
+                    progressIndicator.BringToFront();
+                    progressIndicator.CenterToParent();
+                    progressIndicator.Start();
+                }));
+
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        setting.PrintState();
+
+                        Stopwatch stopwatch = new Stopwatch();
+                        stopwatch.Start();
+
+                        while (true)
+                        {
+                            if (stopwatch.ElapsedMilliseconds > 10000) break;
+                            if (LogQueue.Count == 0 && Log.logNeed2Add.Count == 0 && Log.IsSave) break;
+                            Thread.Sleep(20);
+                        }
+
+                        stopwatch.Stop();
+                        stopwatch.Reset();
+
+                        Thread.Sleep(500);
+                    }
+                    catch (Exception ex)
+                    {
+                        RunLog($"退出异常: {ex.Message}");
+                        UIMessageTip.ShowError(this, $"退出异常: {ex.Message}", 2000);
+                    }
+                    finally
+                    {
+                        // 确保进度指示器在数据完全加载后才关闭
+                        this.Invoke((Action)(() =>
+                        {
+                            progressIndicator.Stop();
+                            this.Controls.Remove(progressIndicator);
+                            progressIndicator.Dispose();
+                        }));
+
+                        //writeDataHelper.PrintLog("软件退出");
+                        退出标记 = true; //让报警弹窗也退出，否则主程序退出不了
+                                     //gg.CloseCard(); //关闭轴卡
+                        DialogResult = DialogResult.Cancel;
+                        Application.Exit(); //退出软件
+                    }
+                });
             }
         }
 
@@ -673,7 +768,7 @@ namespace H5509_V2
                                                 总良率报警间隔计数++;
                                             }
 
-                                            int line = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, $"update SocketUse set Num=Num+1 where Id='{doutstr}'");
+                                            int line = Sqlite.runSqlNonQuery(SQLiteRunningString, $"update SocketUse set Num=Num+1 where Id='{doutstr}'");
                                             if (line <= 0) RunLog($"update SocketUse set Num=Num+1 where Id='{doutstr}',返回:{line}");
                                         }
 
@@ -681,7 +776,7 @@ namespace H5509_V2
                                         int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
                                         //RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
                                         sql = $"update DutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{Com.listtesttimespan[sitenum].Ticks} where id='{doutstr}'";
-                                        int line1 = SQLiteHelper.runSqlNonQuery(SQLiteRunningString, sql);
+                                        int line1 = Sqlite.runSqlNonQuery(SQLiteRunningString, sql);
                                         if (line1 <= 0) RunLog(sql + $"返回:{line1}");
                                         //int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
                                         //int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
@@ -726,6 +821,13 @@ namespace H5509_V2
                                                 //}
                                                 //设置信息.开site信息 = siteStatus;
                                                 main.刷新开Site状态();
+
+                                                if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+                                                {
+                                                    Listcode.Add("1400442");
+                                                    RunLog("[Code]1400442,[Msg](按下开始)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+                                                    ProgramPause = true;
+                                                }
                                             }
                                         }
                                     }
@@ -762,7 +864,7 @@ namespace H5509_V2
                                 }
                                 try
                                 {
-                                    result = SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out string value);
+                                    result = Sqlite.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out string value);
                                     //object su = await SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + motionEx.testerIFParam.socket使用次数);
                                     bool isint = int.TryParse(value.ToString(), out int socketnum);
                                     if (isint)
@@ -812,6 +914,14 @@ namespace H5509_V2
 
         private void 温度读取()
         {
+            int readtemp1 = 0; //Site1-Site8探测温度读取次数
+            int readtemp2 = 0; //Site9-Site16探测温度读取次数
+            int readtemp3 = 0; //加热盘探测温度读取次数
+
+            int readtemp4 = 0; //Site1-Site8设定温度读取次数
+            int readtemp5 = 0; //Site9-Site16设定温度读取次数
+            int readtemp6 = 0; //加热盘设定温度读取次数
+
             while (true)
             {
                 try
@@ -827,15 +937,24 @@ namespace H5509_V2
 
                             if (!温控器读取Site1_Site8探测温度异常)
                             {
-                                温控器读取Site1_Site8探测温度异常 = true;
-                                Listcode.Add($"1400449");
-                                RunLog($"[Code]1400449,[Msg]读取Site1-Site8探测温度失败!详细信息:" + result, LogType.AlarmLog);
+                                readtemp1++;
+                                if (readtemp1 > 3)
+                                {
+                                    readtemp1 = 0;
+                                    温控器读取Site1_Site8探测温度异常 = true;
+                                    Listcode.Add($"1400449");
+                                    RunLog($"[Code]1400449,[Msg]读取Site1-Site8探测温度失败!详细信息:" + result, LogType.AlarmLog);
 
-                                ProgramPause = true;
-                                IsPause = true;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
-                        else 温控器读取Site1_Site8探测温度异常 = false;
+                        else
+                        {
+                            readtemp1 = 0;
+                            温控器读取Site1_Site8探测温度异常 = false;
+                        }
 
                         string result2 = dTMHelper.ReadPv(1, out ushort[] value2);
                         if (result2 != "Success")
@@ -844,15 +963,24 @@ namespace H5509_V2
 
                             if (!温控器读取Site9_Site16探测温度异常)
                             {
-                                温控器读取Site9_Site16探测温度异常 = true;
-                                Listcode.Add($"1400450");
-                                RunLog($"[Code]1400450,[Msg]读取Site9-Site16探测温度失败!详细信息:" + result2, LogType.AlarmLog);
+                                readtemp2++;
+                                if (readtemp2 > 3)
+                                {
+                                    readtemp2 = 0;
+                                    温控器读取Site9_Site16探测温度异常 = true;
+                                    Listcode.Add($"1400450");
+                                    RunLog($"[Code]1400450,[Msg]读取Site9-Site16探测温度失败!详细信息:" + result2, LogType.AlarmLog);
 
-                                ProgramPause = true;
-                                IsPause = true;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
-                        else 温控器读取Site9_Site16探测温度异常 = false;
+                        else
+                        {
+                            readtemp2 = 0;
+                            温控器读取Site9_Site16探测温度异常 = false;
+                        }
 
                         string result3 = dTMHelper.ReadPv(2, 0, out ushort[] value3);
                         if (result3 != "Success")
@@ -861,15 +989,24 @@ namespace H5509_V2
 
                             if (!温控器读取加热盘探测温度异常)
                             {
-                                温控器读取加热盘探测温度异常 = true;
-                                Listcode.Add($"1400451");
-                                RunLog($"[Code]1400451,[Msg]读取加热盘探测温度失败!详细信息:" + result3, LogType.AlarmLog);
+                                readtemp3++;
+                                if (readtemp3 > 3)
+                                {
+                                    readtemp3 = 0;
+                                    温控器读取加热盘探测温度异常 = true;
+                                    Listcode.Add($"1400451");
+                                    RunLog($"[Code]1400451,[Msg]读取加热盘探测温度失败!详细信息:" + result3, LogType.AlarmLog);
 
-                                ProgramPause = true;
-                                IsPause = true;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
-                        else 温控器读取加热盘探测温度异常 = false;
+                        else
+                        {
+                            readtemp3 = 0;
+                            温控器读取加热盘探测温度异常 = false;
+                        }
 
                         #endregion
 
@@ -914,19 +1051,28 @@ namespace H5509_V2
                         string result4 = dTMHelper.ReadSv(0, out short[] svvalue);
                         if (result4 != "Success")
                         {
+                            读取Site1_Site8设定温度Error = result4;
+
                             if (!温控器读取Site1_Site8设定温度异常)
                             {
-                                读取Site1_Site8设定温度Error = result4;
+                                readtemp4++;
+                                if (readtemp4 > 3)
+                                {
+                                    readtemp4 = 0;
+                                    温控器读取Site1_Site8设定温度异常 = true;
+                                    Listcode.Add($"1400455");
+                                    RunLog($"[Code]1400455,[Msg]读取Site1-Site8设定温度失败!详细信息:" + result4, LogType.AlarmLog);
 
-                                温控器读取Site1_Site8设定温度异常 = true;
-                                Listcode.Add($"1400455");
-                                RunLog($"[Code]1400455,[Msg]读取Site1-Site8设定温度失败!详细信息:" + result4, LogType.AlarmLog);
-
-                                ProgramPause = true;
-                                IsPause = true;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
-                        else 温控器读取Site1_Site8设定温度异常 = false;
+                        else
+                        {
+                            readtemp4 = 0;
+                            温控器读取Site1_Site8设定温度异常 = false;
+                        }
 
                         string result5 = dTMHelper.ReadSv(1, out short[] svvalue2);
                         if (result5 != "Success")
@@ -935,15 +1081,24 @@ namespace H5509_V2
 
                             if (!温控器读取Site9_Site16设定温度异常)
                             {
-                                温控器读取Site9_Site16设定温度异常 = true;
-                                Listcode.Add($"1400456");
-                                RunLog($"[Code]1400456,[Msg]读取Site9-Site16设定温度失败!详细信息:" + result5, LogType.AlarmLog);
+                                readtemp5++;
+                                if (readtemp5 > 3)
+                                {
+                                    readtemp5 = 0;
+                                    温控器读取Site9_Site16设定温度异常 = true;
+                                    Listcode.Add($"1400456");
+                                    RunLog($"[Code]1400456,[Msg]读取Site9-Site16设定温度失败!详细信息:" + result5, LogType.AlarmLog);
 
-                                ProgramPause = true;
-                                IsPause = true;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
-                        else 温控器读取Site9_Site16设定温度异常 = false;
+                        else
+                        {
+                            readtemp5 = 0;
+                            温控器读取Site9_Site16设定温度异常 = false;
+                        }
 
                         string result6 = dTMHelper.ReadSv(2, 0, out short[] svvalue3);
                         if (result6 != "Success")
@@ -952,15 +1107,24 @@ namespace H5509_V2
 
                             if (!温控器读取加热盘设定温度异常)
                             {
-                                温控器读取加热盘设定温度异常 = true;
-                                Listcode.Add($"1400457");
-                                RunLog($"[Code]1400457,[Msg]读取加热盘设定温度失败!详细信息:" + result6, LogType.AlarmLog);
+                                readtemp6++;
+                                if (readtemp6 > 3)
+                                {
+                                    readtemp6 = 0;
+                                    温控器读取加热盘设定温度异常 = true;
+                                    Listcode.Add($"1400457");
+                                    RunLog($"[Code]1400457,[Msg]读取加热盘设定温度失败!详细信息:" + result6, LogType.AlarmLog);
 
-                                ProgramPause = true;
-                                IsPause = true;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                         }
-                        else 温控器读取加热盘设定温度异常 = false;
+                        else
+                        {
+                            readtemp6 = 0;
+                            温控器读取加热盘设定温度异常 = false;
+                        }
 
                         if (result4 != "Success" || result5 != "Success" || result6 != "Success")
                         {
@@ -1032,17 +1196,20 @@ namespace H5509_V2
 
                         if (tempopen.Contains(true))
                         {
-                            for (int i = 0; i < tempopen.Length; i++)
+                            if (温度模式 == "高温")
                             {
-                                if (tempopen[i])
+                                for (int i = 0; i < tempopen.Length; i++)
                                 {
-                                    Listcode.Add($"8{i:D2}219");
-                                    if (i == 15) RunLog($"[Code]8{i:D2}219,[Msg]加热盘探头异常!", LogType.AlarmLog);
-                                    else RunLog($"[Code]8{i:D2}219,[Msg]Site{i}探头异常!", LogType.AlarmLog);
+                                    if (tempopen[i])
+                                    {
+                                        Listcode.Add($"8{i:D2}219");
+                                        if (i == 15) RunLog($"[Code]8{i:D2}219,[Msg]加热盘探头异常!", LogType.AlarmLog);
+                                        else RunLog($"[Code]8{i:D2}219,[Msg]Site{i}探头异常!", LogType.AlarmLog);
+                                    }
                                 }
+                                ProgramPause = true; //如果有温度异常则触发停止
+                                IsPause = true;
                             }
-                            ProgramPause = true; //如果有温度异常则触发停止
-                            IsPause = true;
                         }
                         else
                         {

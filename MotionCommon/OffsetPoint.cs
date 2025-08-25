@@ -1,0 +1,145 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MotionCommon
+{
+    public class OffsetPoint
+    {
+        public string 微调点位名称 { get; set; }
+        public double 入料_Load吸_X { get; set; }
+        public double 入料_Load吸_Y { get; set; }
+        public double 入料_Load吸_Z { get; set; }
+        public double 入料_Load_变距 { get; set; }
+        public double 入料_Heat吸_X { get; set; }
+        public double 入料_Heat吸_Y { get; set; }
+        public double 入料_Heat吸_Z { get; set; }
+        public double 入料_Heat放_X { get; set; }
+        public double 入料_Heat放_Y { get; set; }
+        public double 入料_Heat放_Z { get; set; }
+        public double 入料_Heat_变距 { get; set; }
+        public double 入料_梭车1第1列放_X { get; set; }
+        public double 入料_梭车1第1列放_Y { get; set; }
+        public double 入料_梭车1第1列放_Z { get; set; }
+        public double 入料_梭车1第2列放_X { get; set; }
+        public double 入料_梭车1第2列放_Y { get; set; }
+        public double 入料_梭车1第2列放_Z { get; set; }
+        public double 入料_梭车2第1列放_X { get; set; }
+        public double 入料_梭车2第1列放_Y { get; set; }
+        public double 入料_梭车2第1列放_Z { get; set; }
+        public double 入料_梭车2第2列放_X { get; set; }
+        public double 入料_梭车2第2列放_Y { get; set; }
+        public double 入料_梭车2第2列放_Z { get; set; }
+        public double 入料_梭车_变距 { get; set; }
+        public double 出料_梭车1第1列吸_X { get; set; }
+        public double 出料_梭车1第1列吸_Y { get; set; }
+        public double 出料_梭车1第1列吸_Z { get; set; }
+        public double 出料_梭车1第2列吸_X { get; set; }
+        public double 出料_梭车1第2列吸_Y { get; set; }
+        public double 出料_梭车1第2列吸_Z { get; set; }
+        public double 出料_梭车2第1列吸_X { get; set; }
+        public double 出料_梭车2第1列吸_Y { get; set; }
+        public double 出料_梭车2第1列吸_Z { get; set; }
+        public double 出料_梭车2第2列吸_X { get; set; }
+        public double 出料_梭车2第2列吸_Y { get; set; }
+        public double 出料_梭车2第2列吸_Z { get; set; }
+        public double 出料_梭车_变距 { get; set; }
+        public double 出料_Auto1放_X { get; set; }
+        public double 出料_Auto1放_Y { get; set; }
+        public double 出料_Auto1放_Z { get; set; }
+        public double 出料_Auto2放_X { get; set; }
+        public double 出料_Auto2放_Y { get; set; }
+        public double 出料_Auto2放_Z { get; set; }
+        public double 出料_Fix1放_X { get; set; }
+        public double 出料_Fix1放_Y { get; set; }
+        public double 出料_Fix1放_Z { get; set; }
+        public double 出料_Fix2放_X { get; set; }
+        public double 出料_Fix2放_Y { get; set; }
+        public double 出料_Fix2放_Z { get; set; }
+        public double 出料_Fix3放_X { get; set; }
+        public double 出料_Fix3放_Y { get; set; }
+        public double 出料_Fix3放_Z { get; set; }
+        public double 出料_AF_变距 { get; set; }
+        public double 测试_梭车1左吸_X { get; set; }
+        public double 测试_梭车1左吸_Z { get; set; }
+        public double 测试_梭车2左吸_X { get; set; }
+        public double 测试_梭车2左吸_Z { get; set; }
+        public double 测试_梭车1右放_X { get; set; }
+        public double 测试_梭车1右放_Z { get; set; }
+        public double 测试_梭车2右放_X { get; set; }
+        public double 测试_梭车2右放_Z { get; set; }
+        public double 测试_Site1吸_X { get; set; }
+        public double 测试_Site2吸_X { get; set; }
+        public double 测试_Site3吸_X { get; set; }
+        public double 测试_Site4吸_X { get; set; }
+        public double 测试_Site5吸_X { get; set; }
+        public double 测试_Site6吸_X { get; set; }
+        public double 测试_Site7吸_X { get; set; }
+        public double 测试_Site8吸_X { get; set; }
+        public double 测试_Site9吸_X { get; set; }
+        public double 测试_Site10吸_X { get; set; }
+        public double 测试_Site11吸_X { get; set; }
+        public double 测试_Site12吸_X { get; set; }
+        public double 测试_Site13吸_X { get; set; }
+        public double 测试_Site14吸_X { get; set; }
+        public double 测试_Site15吸_X { get; set; }
+        public double 测试_Site16吸_X { get; set; }
+        public double 测试_Site1吸_Z { get; set; }
+        public double 测试_Site2吸_Z { get; set; }
+        public double 测试_Site3吸_Z { get; set; }
+        public double 测试_Site4吸_Z { get; set; }
+        public double 测试_Site5吸_Z { get; set; }
+        public double 测试_Site6吸_Z { get; set; }
+        public double 测试_Site7吸_Z { get; set; }
+        public double 测试_Site8吸_Z { get; set; }
+        public double 测试_Site9吸_Z { get; set; }
+        public double 测试_Site10吸_Z { get; set; }
+        public double 测试_Site11吸_Z { get; set; }
+        public double 测试_Site12吸_Z { get; set; }
+        public double 测试_Site13吸_Z { get; set; }
+        public double 测试_Site14吸_Z { get; set; }
+        public double 测试_Site15吸_Z { get; set; }
+        public double 测试_Site16吸_Z { get; set; }
+        public double 测试_Site1放_X { get; set; }
+        public double 测试_Site2放_X { get; set; }
+        public double 测试_Site3放_X { get; set; }
+        public double 测试_Site4放_X { get; set; }
+        public double 测试_Site5放_X { get; set; }
+        public double 测试_Site6放_X { get; set; }
+        public double 测试_Site7放_X { get; set; }
+        public double 测试_Site8放_X { get; set; }
+        public double 测试_Site9放_X { get; set; }
+        public double 测试_Site10放_X { get; set; }
+        public double 测试_Site11放_X { get; set; }
+        public double 测试_Site12放_X { get; set; }
+        public double 测试_Site13放_X { get; set; }
+        public double 测试_Site14放_X { get; set; }
+        public double 测试_Site15放_X { get; set; }
+        public double 测试_Site16放_X { get; set; }
+        public double 测试_Site1放_Z { get; set; }
+        public double 测试_Site2放_Z { get; set; }
+        public double 测试_Site3放_Z { get; set; }
+        public double 测试_Site4放_Z { get; set; }
+        public double 测试_Site5放_Z { get; set; }
+        public double 测试_Site6放_Z { get; set; }
+        public double 测试_Site7放_Z { get; set; }
+        public double 测试_Site8放_Z { get; set; }
+        public double 测试_Site9放_Z { get; set; }
+        public double 测试_Site10放_Z { get; set; }
+        public double 测试_Site11放_Z { get; set; }
+        public double 测试_Site12放_Z { get; set; }
+        public double 测试_Site13放_Z { get; set; }
+        public double 测试_Site14放_Z { get; set; }
+        public double 测试_Site15放_Z { get; set; }
+        public double 测试_Site16放_Z { get; set; }
+        public double 梭车2_前_Y { get; set; }
+        public double 梭车2_后_Y { get; set; }
+        public double 抓盘_Empty_X { get; set; }
+        public double 抓盘_Load_X { get; set; }
+        public double 抓盘_Auto1_X { get; set; }
+        public double 抓盘_Auto2_X { get; set; }
+
+    }
+}
