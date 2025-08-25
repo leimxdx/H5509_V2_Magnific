@@ -1,0 +1,460 @@
+D:\GitHub\H5509_V2\bin\Debug\gts.dll
+D:\GitHub\H5509_V2\bin\Debug\gt_rn.dll
+D:\GitHub\H5509_V2\bin\Debug\LAFunc.dll
+D:\GitHub\H5509_V2\bin\Debug\MachineBuilding.dll
+D:\GitHub\H5509_V2\bin\Debug\PIFunc.dll
+D:\GitHub\H5509_V2\bin\Debug\VFunc.dll
+D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\bin\Debug\H5509_V2.exe
+D:\GitHub\H5509_V2\bin\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V2\bin\Debug\EntityFramework.dll
+D:\GitHub\H5509_V2\bin\Debug\EntityFramework.SqlServer.dll
+D:\GitHub\H5509_V2\bin\Debug\SunnyUI.Common.dll
+D:\GitHub\H5509_V2\bin\Debug\SunnyUI.dll
+D:\GitHub\H5509_V2\bin\Debug\SunnyUI.FrameDecoder.dll
+D:\GitHub\H5509_V2\bin\Debug\System.Buffers.dll
+D:\GitHub\H5509_V2\bin\Debug\System.Data.SQLite.dll
+D:\GitHub\H5509_V2\bin\Debug\System.Data.SQLite.EF6.dll
+D:\GitHub\H5509_V2\bin\Debug\System.Data.SQLite.Linq.dll
+D:\GitHub\H5509_V2\bin\Debug\System.Memory.dll
+D:\GitHub\H5509_V2\bin\Debug\System.Numerics.Vectors.dll
+D:\GitHub\H5509_V2\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GitHub\H5509_V2\bin\Debug\EntityFramework.xml
+D:\GitHub\H5509_V2\bin\Debug\EntityFramework.SqlServer.xml
+D:\GitHub\H5509_V2\bin\Debug\SunnyUI.FrameDecoder.xml
+D:\GitHub\H5509_V2\bin\Debug\System.Buffers.xml
+D:\GitHub\H5509_V2\bin\Debug\System.Data.SQLite.xml
+D:\GitHub\H5509_V2\bin\Debug\System.Memory.xml
+D:\GitHub\H5509_V2\bin\Debug\System.Numerics.Vectors.xml
+D:\GitHub\H5509_V2\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Properties.Resources.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.ForMain.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._IO.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._log.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._main.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._offset.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._setting.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2._speed.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.IOButton.resources
+D:\H5509_V2\bin\Debug\gts.dll
+D:\H5509_V2\bin\Debug\gt_rn.dll
+D:\H5509_V2\bin\Debug\LAFunc.dll
+D:\H5509_V2\bin\Debug\MachineBuilding.dll
+D:\H5509_V2\bin\Debug\PIFunc.dll
+D:\H5509_V2\bin\Debug\VFunc.dll
+D:\H5509_V2\bin\Debug\配置\SystemData
+D:\H5509_V2\bin\Debug\H5509_V2.exe.config
+D:\H5509_V2\bin\Debug\H5509_V2.exe
+D:\H5509_V2\bin\Debug\H5509_V2.pdb
+D:\H5509_V2\bin\Debug\EntityFramework.dll
+D:\H5509_V2\bin\Debug\EntityFramework.SqlServer.dll
+D:\H5509_V2\bin\Debug\SunnyUI.Common.dll
+D:\H5509_V2\bin\Debug\SunnyUI.dll
+D:\H5509_V2\bin\Debug\SunnyUI.FrameDecoder.dll
+D:\H5509_V2\bin\Debug\System.Buffers.dll
+D:\H5509_V2\bin\Debug\System.Data.SQLite.dll
+D:\H5509_V2\bin\Debug\System.Data.SQLite.EF6.dll
+D:\H5509_V2\bin\Debug\System.Data.SQLite.Linq.dll
+D:\H5509_V2\bin\Debug\System.Memory.dll
+D:\H5509_V2\bin\Debug\System.Numerics.Vectors.dll
+D:\H5509_V2\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\H5509_V2\bin\Debug\EntityFramework.xml
+D:\H5509_V2\bin\Debug\EntityFramework.SqlServer.xml
+D:\H5509_V2\bin\Debug\SunnyUI.FrameDecoder.xml
+D:\H5509_V2\bin\Debug\System.Buffers.xml
+D:\H5509_V2\bin\Debug\System.Data.SQLite.xml
+D:\H5509_V2\bin\Debug\System.Memory.xml
+D:\H5509_V2\bin\Debug\System.Numerics.Vectors.xml
+D:\H5509_V2\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\H5509_V2\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
+D:\H5509_V2\obj\x64\Debug\H5509_V2.Properties.Resources.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2.ForMain.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2.IOButton.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2._IO.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2._log.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2._main.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2._offset.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2._setting.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2._speed.resources
+D:\H5509_V2\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
+D:\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
+D:\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CopyComplete
+D:\H5509_V2\obj\x64\Debug\H5509_V2.exe
+D:\H5509_V2\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.界面.UIProgressIndicatorEx.resources
+D:\GitHub\H5509_V2\bin\Debug\ClosedXML.dll
+D:\GitHub\H5509_V2\bin\Debug\ClosedXML.Parser.dll
+D:\GitHub\H5509_V2\bin\Debug\DocumentFormat.OpenXml.dll
+D:\GitHub\H5509_V2\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+D:\GitHub\H5509_V2\bin\Debug\ExcelNumberFormat.dll
+D:\GitHub\H5509_V2\bin\Debug\Microsoft.Bcl.HashCode.dll
+D:\GitHub\H5509_V2\bin\Debug\RBush.dll
+D:\GitHub\H5509_V2\bin\Debug\SixLabors.Fonts.dll
+D:\GitHub\H5509_V2\bin\Debug\ClosedXML.pdb
+D:\GitHub\H5509_V2\bin\Debug\ClosedXML.xml
+D:\GitHub\H5509_V2\bin\Debug\ClosedXML.Parser.xml
+D:\GitHub\H5509_V2\bin\Debug\DocumentFormat.OpenXml.xml
+D:\GitHub\H5509_V2\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+D:\GitHub\H5509_V2\bin\Debug\ExcelNumberFormat.xml
+D:\GitHub\H5509_V2\bin\Debug\Microsoft.Bcl.HashCode.xml
+D:\GitHub\H5509_V2\bin\Debug\RBush.xml
+D:\GitHub\H5509_V2\bin\Debug\SixLabors.Fonts.xml
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_alarm.Form_alarm.resources
+D:\github\H5509_V2\obj\x64\Debug\H5509_V2.LoadMap.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
+D:\GitHub\H5509_V2\bin\Debug\SiCommunication.dll
+D:\GitHub\H5509_V2\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.HeatMap.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.FrmInputPwd.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Auto1Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Auto2Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Fix1Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Fix2Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.Fix3Map.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewSetupName.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewTrayInfo.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.NewHeatTrayInfo.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.ChangePwd.resources
+D:\GitHub\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\gts.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\gt_rn.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\LAFunc.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\MachineBuilding.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\PIFunc.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\VFunc.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\H5509_V2.exe
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\ClosedXML.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\ClosedXML.Parser.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\DocumentFormat.OpenXml.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\EntityFramework.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\EntityFramework.SqlServer.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\ExcelNumberFormat.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\Microsoft.Bcl.HashCode.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\RBush.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\SiCommunication.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\SixLabors.Fonts.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\SunnyUI.Common.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\SunnyUI.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\SunnyUI.FrameDecoder.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Buffers.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Data.SQLite.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Data.SQLite.EF6.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Data.SQLite.Linq.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Memory.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Numerics.Vectors.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\ClosedXML.pdb
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\ClosedXML.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\ClosedXML.Parser.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\DocumentFormat.OpenXml.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\EntityFramework.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\EntityFramework.SqlServer.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\ExcelNumberFormat.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\Microsoft.Bcl.HashCode.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\RBush.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\SixLabors.Fonts.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\SunnyUI.FrameDecoder.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Buffers.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Data.SQLite.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Memory.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Numerics.Vectors.xml
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.Auto1Map.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.Auto2Map.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.ChangePwd.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.Fix1Map.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.Fix2Map.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.Fix3Map.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.HeatMap.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.LoadMap.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.NewHeatTrayInfo.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.NewSetupName.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.NewTrayInfo.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.Properties.Resources.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_alarm.Form_alarm.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.FrmInputPwd.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.ForMain.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.IOButton.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.界面.UIProgressIndicatorEx.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2._IO.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2._log.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2._main.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2._offset.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2._setting.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2._speed.resources
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.csproj.Up2Date
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.exe
+D:\GitHub\H5509_V3 - 0.0.2\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3 - 0.0.2\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.Auto1Map.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.Auto2Map.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.ChangePwd.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.Fix1Map.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.Fix2Map.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.Fix3Map.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.HeatMap.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.LoadMap.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.NewHeatTrayInfo.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.NewSetupName.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.NewTrayInfo.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.Properties.Resources.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_alarm.Form_alarm.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.FrmInputPwd.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.ForMain.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.IOButton.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.界面.UIProgressIndicatorEx.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2._IO.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2._log.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2._main.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2._offset.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2._setting.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2._speed.resources
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.exe
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\x86\sqlite3.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\x64\sqlite3.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\H5509_V2.exe
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\ClosedXML.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\ClosedXML.Parser.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\CommonUtils.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\DocumentFormat.OpenXml.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\EntityFramework.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\EntityFramework.SqlServer.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\ExcelNumberFormat.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\HardwareImplementations.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\IHardwareContracts.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\Microsoft.Bcl.HashCode.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\RBush.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\SiCommunication.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\SixLabors.Fonts.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\SunnyUI.Common.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\SunnyUI.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\SunnyUI.FrameDecoder.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Buffers.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Data.SQLite.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Data.SQLite.EF6.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Data.SQLite.Linq.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Memory.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Numerics.Vectors.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\CommonUtils.pdb
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\CommonUtils.dll.config
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\HardwareImplementations.pdb
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\IHardwareContracts.pdb
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\ClosedXML.pdb
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\ClosedXML.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\ClosedXML.Parser.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\DocumentFormat.OpenXml.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\EntityFramework.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\EntityFramework.SqlServer.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\ExcelNumberFormat.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\Microsoft.Bcl.HashCode.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\RBush.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\SixLabors.Fonts.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\SunnyUI.FrameDecoder.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Buffers.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Data.SQLite.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Memory.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Numerics.Vectors.xml
+D:\GitHub\H5509_V3 - 0.0.3\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitHub\H5509_V3 - 0.0.3\obj\x64\Debug\H5509_V2.csproj.Up2Date
+D:\GitHub\H5509_V3\bin\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V3\bin\Debug\H5509_V2.exe
+D:\GitHub\H5509_V3\bin\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V3\bin\Debug\ClosedXML.dll
+D:\GitHub\H5509_V3\bin\Debug\ClosedXML.Parser.dll
+D:\GitHub\H5509_V3\bin\Debug\DocumentFormat.OpenXml.dll
+D:\GitHub\H5509_V3\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+D:\GitHub\H5509_V3\bin\Debug\EntityFramework.dll
+D:\GitHub\H5509_V3\bin\Debug\EntityFramework.SqlServer.dll
+D:\GitHub\H5509_V3\bin\Debug\ExcelNumberFormat.dll
+D:\GitHub\H5509_V3\bin\Debug\HardwareGXN.dll
+D:\GitHub\H5509_V3\bin\Debug\IHardwareGXN.dll
+D:\GitHub\H5509_V3\bin\Debug\Microsoft.Bcl.HashCode.dll
+D:\GitHub\H5509_V3\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V3\bin\Debug\RBush.dll
+D:\GitHub\H5509_V3\bin\Debug\SiCommunication.dll
+D:\GitHub\H5509_V3\bin\Debug\SixLabors.Fonts.dll
+D:\GitHub\H5509_V3\bin\Debug\SQLiteHelper.dll
+D:\GitHub\H5509_V3\bin\Debug\SQLServerHelper.dll
+D:\GitHub\H5509_V3\bin\Debug\SunnyUI.Common.dll
+D:\GitHub\H5509_V3\bin\Debug\SunnyUI.dll
+D:\GitHub\H5509_V3\bin\Debug\SunnyUI.FrameDecoder.dll
+D:\GitHub\H5509_V3\bin\Debug\System.Buffers.dll
+D:\GitHub\H5509_V3\bin\Debug\System.Data.SQLite.dll
+D:\GitHub\H5509_V3\bin\Debug\System.Data.SQLite.EF6.dll
+D:\GitHub\H5509_V3\bin\Debug\System.Data.SQLite.Linq.dll
+D:\GitHub\H5509_V3\bin\Debug\System.Memory.dll
+D:\GitHub\H5509_V3\bin\Debug\System.Numerics.Vectors.dll
+D:\GitHub\H5509_V3\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GitHub\H5509_V3\bin\Debug\TextFileLogger.dll
+D:\GitHub\H5509_V3\bin\Debug\Thermostat.dll
+D:\GitHub\H5509_V3\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V3\bin\Debug\HardwareGXN.pdb
+D:\GitHub\H5509_V3\bin\Debug\IHardwareGXN.pdb
+D:\GitHub\H5509_V3\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V3\bin\Debug\SQLiteHelper.pdb
+D:\GitHub\H5509_V3\bin\Debug\SQLServerHelper.pdb
+D:\GitHub\H5509_V3\bin\Debug\TextFileLogger.pdb
+D:\GitHub\H5509_V3\bin\Debug\Thermostat.pdb
+D:\GitHub\H5509_V3\bin\Debug\ClosedXML.pdb
+D:\GitHub\H5509_V3\bin\Debug\ClosedXML.xml
+D:\GitHub\H5509_V3\bin\Debug\ClosedXML.Parser.xml
+D:\GitHub\H5509_V3\bin\Debug\DocumentFormat.OpenXml.xml
+D:\GitHub\H5509_V3\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+D:\GitHub\H5509_V3\bin\Debug\EntityFramework.xml
+D:\GitHub\H5509_V3\bin\Debug\EntityFramework.SqlServer.xml
+D:\GitHub\H5509_V3\bin\Debug\ExcelNumberFormat.xml
+D:\GitHub\H5509_V3\bin\Debug\Microsoft.Bcl.HashCode.xml
+D:\GitHub\H5509_V3\bin\Debug\RBush.xml
+D:\GitHub\H5509_V3\bin\Debug\SixLabors.Fonts.xml
+D:\GitHub\H5509_V3\bin\Debug\SunnyUI.FrameDecoder.xml
+D:\GitHub\H5509_V3\bin\Debug\System.Buffers.xml
+D:\GitHub\H5509_V3\bin\Debug\System.Data.SQLite.xml
+D:\GitHub\H5509_V3\bin\Debug\System.Memory.xml
+D:\GitHub\H5509_V3\bin\Debug\System.Numerics.Vectors.xml
+D:\GitHub\H5509_V3\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.Auto1Map.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.Auto2Map.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.ChangePwd.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.Fix1Map.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.Fix2Map.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.Fix3Map.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.HeatMap.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.LoadMap.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.NewHeatTrayInfo.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.NewSetupName.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.NewTrayInfo.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.Properties.Resources.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_alarm.Form_alarm.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.FrmInputPwd.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.ForMain.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.IOButton.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.界面.UIProgressIndicatorEx.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2._IO.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2._log.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2._main.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2._offset.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2._setting.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2._speed.resources
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.csproj.Up2Date
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.exe
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.exe
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ClosedXML.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ClosedXML.Parser.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\DocumentFormat.OpenXml.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\DocumentFormat.OpenXml.Framework.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\EntityFramework.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\EntityFramework.SqlServer.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ExcelNumberFormat.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\HardwareGXN.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\IHardwareGXN.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\Microsoft.Bcl.HashCode.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\RBush.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SiCommunication.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SixLabors.Fonts.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SQLiteHelper.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SQLServerHelper.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SunnyUI.Common.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SunnyUI.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SunnyUI.FrameDecoder.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Buffers.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Data.SQLite.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Data.SQLite.EF6.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Data.SQLite.Linq.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Memory.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Numerics.Vectors.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\TextFileLogger.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\Thermostat.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\HardwareGXN.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\IHardwareGXN.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SQLiteHelper.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SQLServerHelper.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\TextFileLogger.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\Thermostat.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ClosedXML.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ClosedXML.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ClosedXML.Parser.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\DocumentFormat.OpenXml.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\DocumentFormat.OpenXml.Framework.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\EntityFramework.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\EntityFramework.SqlServer.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ExcelNumberFormat.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\Microsoft.Bcl.HashCode.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\RBush.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SixLabors.Fonts.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\SunnyUI.FrameDecoder.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Buffers.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Data.SQLite.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Memory.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Numerics.Vectors.xml
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Auto1Map.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Auto2Map.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.ChangePwd.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Fix1Map.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Fix2Map.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Fix3Map.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.HeatMap.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.LoadMap.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.NewHeatTrayInfo.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.NewSetupName.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.NewTrayInfo.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Properties.Resources.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_alarm.Form_alarm.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.FrmInputPwd.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.ForMain.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.IOButton.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.界面.UIProgressIndicatorEx.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2._IO.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2._log.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2._main.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2._offset.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2._setting.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2._speed.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.pdb

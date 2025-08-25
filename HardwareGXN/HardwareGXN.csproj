@@ -62,6 +62,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="GSNAxisCard\FrmGSN.resx">
+      <DependentUpon>FrmGSN.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\IHardwareGXN\IHardwareGXN.csproj">
       <Project>{396c4c70-4aa6-438d-8b4e-470aed0a99d4}</Project>
       <Name>IHardwareGXN</Name>
@@ -70,11 +75,6 @@
       <Project>{908abb7e-bd9b-419c-b207-042a3d8dab24}</Project>
       <Name>MotionCommon</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="GSNAxisCard\FrmGSN.resx">
-      <DependentUpon>FrmGSN.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
