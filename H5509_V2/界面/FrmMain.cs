@@ -33,8 +33,8 @@ namespace H5509_V2
 {
     public partial class ForMain : UIForm
     {
+        #region 窗体操作
 
-        #region     窗体操作
         /// <summary>
         /// 防止控件过多产生闪烁现象
         /// </summary>
@@ -63,6 +63,7 @@ namespace H5509_V2
                 System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
                .SetValue(MainPanel, true, null);
         }
+
         #endregion
 
         private _main main;
@@ -137,7 +138,6 @@ namespace H5509_V2
             //MessageBox.Show(gxn.PrintGXN());
 
             //Log.AddLog("debug","run","读取数据库数据完成");
-
         }
 
         private void ForMain_Load(object sender, EventArgs e)
@@ -221,17 +221,17 @@ namespace H5509_V2
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
 
-            Form gxnform;
-            if (iGXNCard.PrintGXN() == "GSN轴卡")
-            {
-                FrmGSN frmGsn = new HardwareGXN.GSNAxisCard.FrmGSN(iGXNCard);
-                frmGsn.AxisInfoList = APPmaster.AxisInfoList;
-                frmGsn.AxisHomeInfoList = APPmaster.AxisHomeInfoList;
-                gxnform = frmGsn;
-            }
-            else gxnform = new HardwareGXN.GENAxisCard.FrmGEN(iGXNCard);
+            //Form gxnform;
+            //if (iGXNCard.PrintGXN() == "GSN轴卡")
+            //{
+            //    FrmGSN frmGsn = new HardwareGXN.GSNAxisCard.FrmGSN(iGXNCard);
+            //    frmGsn.AxisInfoList = APPmaster.AxisInfoList;
+            //    frmGsn.AxisHomeInfoList = APPmaster.AxisHomeInfoList;
+            //    gxnform = frmGsn;
+            //}
+            //else gxnform = new HardwareGXN.GENAxisCard.FrmGEN(iGXNCard);
 
-            gxnform.Show();
+            //gxnform.Show();
 
             #region 调试参数
 

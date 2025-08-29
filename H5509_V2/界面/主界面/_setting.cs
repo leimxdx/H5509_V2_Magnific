@@ -104,6 +104,18 @@ namespace H5509_V2
             uiComboBox14.DataSource = new string[] { "None", "Odd", "Even" };
             uiComboBox13.DataSource = new string[] { "7", "8" };
             uiComboBox15.DataSource = new string[] { "1", "2" };
+            uiComboBox50.DataSource = new string[] { "9600", "19200", "38400", "57600", "115200" };
+            uiComboBox51.DataSource = new string[] { "None", "Odd", "Even" };
+            uiComboBox49.DataSource = new string[] { "7", "8" };
+            uiComboBox48.DataSource = new string[] { "1", "2" };
+
+            刷新串口(SerialPort.GetPortNames());
+
+            清空通讯方式();
+            清空通讯协议();
+            刷新通讯方式();
+            刷新通讯协议();
+            刷新测试机数量显示();
 
             TabPage[] initPointtabPages = { tabPage7, tabPage8, tabPage9, tabPage16, tabPage17, tabPage4, tabPage27, tabPage28, tabPage34, tabPage35, tabPage36, tabPage37, tabPage24, tabPage39, tabPage40 };
             foreach (TabPage tabPage in initPointtabPages)
@@ -136,6 +148,43 @@ namespace H5509_V2
                     }
                 }
             }
+        }
+
+        public void 刷新串口(string[] serialPort)
+        {
+            uiComboBox19.DataSource = serialPort;
+            uiComboBox20.DataSource = serialPort;
+            uiComboBox21.DataSource = serialPort;
+            uiComboBox22.DataSource = serialPort;
+            uiComboBox23.DataSource = serialPort;
+            uiComboBox27.DataSource = serialPort;
+            uiComboBox26.DataSource = serialPort;
+            uiComboBox25.DataSource = serialPort;
+            uiComboBox24.DataSource = serialPort;
+            uiComboBox31.DataSource = serialPort;
+            uiComboBox30.DataSource = serialPort;
+            uiComboBox29.DataSource = serialPort;
+            uiComboBox28.DataSource = serialPort;
+            uiComboBox31.DataSource = serialPort;
+            uiComboBox30.DataSource = serialPort;
+            uiComboBox29.DataSource = serialPort;
+            uiComboBox28.DataSource = serialPort;
+            uiComboBox39.DataSource = serialPort;
+            uiComboBox38.DataSource = serialPort;
+            uiComboBox37.DataSource = serialPort;
+            uiComboBox36.DataSource = serialPort;
+            uiComboBox35.DataSource = serialPort;
+            uiComboBox34.DataSource = serialPort;
+            uiComboBox33.DataSource = serialPort;
+            uiComboBox32.DataSource = serialPort;
+            uiComboBox47.DataSource = serialPort;
+            uiComboBox46.DataSource = serialPort;
+            uiComboBox45.DataSource = serialPort;
+            uiComboBox44.DataSource = serialPort;
+            uiComboBox43.DataSource = serialPort;
+            uiComboBox42.DataSource = serialPort;
+            uiComboBox41.DataSource = serialPort;
+            uiComboBox40.DataSource = serialPort;
         }
 
         public string GetAxisStatus(short core, short axis, ref bool[] gNME601AxisStatus)
@@ -630,7 +679,7 @@ namespace H5509_V2
             //bool1 = !PS抓盘手臂放空盘到Auto2流程.Processing;
             //RunLog("!PS抓盘手臂放空盘到Auto2流程:" + bool1);
             //飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-        } 
+        }
 
         private void uiCheckBox1_Click(object sender, EventArgs e)
         {
@@ -8086,7 +8135,76 @@ namespace H5509_V2
 
                 RunLog($"报警次数 = {报警次数};");
                 RunLog($"正在入料的Site = {正在入料的Site};");
-                RunLog($"trayTemp = {trayTemp};");
+
+                string trayTemp = "";
+                for (int i = 0; i < Auto1XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Auto1YPoint.Length; j++)
+                    {
+                        trayTemp += Auto1DicBin[$"{i},{j}"] + ",";
+                    }
+                }
+                trayTemp = trayTemp.TrimEnd(',');
+                if (trayTemp != "")
+                {
+                    RunLog($"Auto1TrayMap={trayTemp};");
+                }
+
+                trayTemp = "";
+                for (int i = 0; i < Auto2XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Auto2YPoint.Length; j++)
+                    {
+                        trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
+                    }
+                }
+                trayTemp = trayTemp.TrimEnd(',');
+                if (trayTemp != "")
+                {
+                    RunLog($"Auto2TrayMap={trayTemp};");
+                }
+
+                trayTemp = "";
+                for (int i = 0; i < Fix1XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Fix1YPoint.Length; j++)
+                    {
+                        trayTemp += Fix1DicBin[$"{i},{j}"] + ",";
+                    }
+                }
+                trayTemp = trayTemp.TrimEnd(',');
+                if (trayTemp != "")
+                {
+                    RunLog($"Fix1TrayMap={trayTemp};");
+                }
+
+                trayTemp = "";
+                for (int i = 0; i < Fix2XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Fix2YPoint.Length; j++)
+                    {
+                        trayTemp += Fix2DicBin[$"{i},{j}"] + ",";
+                    }
+                }
+                trayTemp = trayTemp.TrimEnd(',');
+                if (trayTemp != "")
+                {
+                    RunLog($"Fix2TrayMap={trayTemp};");
+                }
+
+                trayTemp = "";
+                for (int i = 0; i < Fix3XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Fix3YPoint.Length; j++)
+                    {
+                        trayTemp += Fix3DicBin[$"{i},{j}"] + ",";
+                    }
+                }
+                trayTemp = trayTemp.TrimEnd(',');
+                if (trayTemp != "")
+                {
+                    RunLog($"Fix3TrayMap={trayTemp};");
+                }
 
                 string dout128pass = $"{Dout128PassNumber[0]}";
                 for (int i = 1; i < Dout128PassNumber.Length; i++)
@@ -8375,7 +8493,7 @@ namespace H5509_V2
             //    }
             //    else Thread.Sleep(10);
             //}
-           // break;
+            // break;
             //TimeSpan timeSpan = DateTime.Now - 开始时间;
             //if (timeSpan.TotalSeconds > 加热盘.升温超时报警)
             //{
@@ -8470,6 +8588,234 @@ namespace H5509_V2
                 MessageBox.Show("刷新失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+        }
+
+        #endregion
+
+        #region 通讯协议
+
+        private void 刷新通讯协议()
+        {
+            tabPage26.Parent = uiCheckBox162.Checked ? uiTabControl10 : null;
+            tabPage30.Parent = uiCheckBox163.Checked ? uiTabControl10 : null;
+            tabPage31.Parent = uiCheckBox164.Checked ? uiTabControl10 : null;
+            tabPage41.Parent = uiCheckBox165.Checked ? uiTabControl10 : null;
+
+            uiTabControl10.Refresh();
+        }
+        private void 清空通讯协议()
+        {
+            tabPage19.Parent = null;
+            tabPage20.Parent = null;
+            tabPage21.Parent = null;
+            tabPage22.Parent = null;
+
+            uiTabControl10.Refresh();
+        }
+
+        private void uiCheckBox162_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox162.Checked)
+            {
+                uiCheckBox163.Checked = false;
+                uiCheckBox164.Checked = false;
+                uiCheckBox165.Checked = false;
+            }
+            else uiCheckBox162.Checked = true;
+            清空通讯方式();
+            刷新通讯协议();
+            刷新通讯方式();
+
+
+        }
+
+        private void uiCheckBox163_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox163.Checked)
+            {
+                uiCheckBox162.Checked = false;
+                uiCheckBox164.Checked = false;
+                uiCheckBox165.Checked = false;
+            }
+            else uiCheckBox163.Checked = true;
+            清空通讯方式();
+            刷新通讯协议();
+            刷新通讯方式();
+        }
+
+        private void uiCheckBox164_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox164.Checked)
+            {
+                uiCheckBox162.Checked = false;
+                uiCheckBox163.Checked = false;
+                uiCheckBox165.Checked = false;
+            }
+            else uiCheckBox164.Checked = true;
+            清空通讯方式();
+            刷新通讯协议();
+            刷新通讯方式();
+        }
+
+        private void uiCheckBox165_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox165.Checked)
+            {
+                uiCheckBox162.Checked = false;
+                uiCheckBox163.Checked = false;
+                uiCheckBox164.Checked = false;
+            }
+            else uiCheckBox165.Checked = true;
+            清空通讯方式();
+            刷新通讯协议();
+            刷新通讯方式();
+        }
+
+        #endregion
+
+        #region 通讯方式
+
+        private void 刷新通讯方式()
+        {
+            tabPage19.Parent = uiCheckBox166.Checked ? uiTabControl10 : null;
+            tabPage20.Parent = uiCheckBox167.Checked ? uiTabControl10 : null;
+            tabPage21.Parent = uiCheckBox168.Checked ? uiTabControl10 : null;
+            tabPage22.Parent = uiCheckBox169.Checked ? uiTabControl10 : null;
+        }
+
+        private void 刷新通讯方式(TabPage tabPage)
+        {
+            刷新通讯方式();
+
+            uiTabControl10.SelectedTab = tabPage;
+
+            uiTabControl10.Refresh();
+        }
+
+        private void 清空通讯方式()
+        {
+            tabPage19.Parent = null;
+            tabPage20.Parent = null;
+            tabPage21.Parent = null;
+            tabPage22.Parent = null;
+
+            uiTabControl10.Refresh();
+        }
+
+        private void uiCheckBox166_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox166.Checked)
+            {
+                uiCheckBox167.Checked = false;
+                uiCheckBox168.Checked = false;
+                uiCheckBox169.Checked = false;
+            }
+            else uiCheckBox166.Checked = true;
+            清空通讯协议();
+            刷新通讯方式(tabPage19);
+            刷新通讯协议();
+        }
+
+        private void uiCheckBox167_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox167.Checked)
+            {
+                uiCheckBox166.Checked = false;
+                uiCheckBox168.Checked = false;
+                uiCheckBox169.Checked = false;
+            }
+            else uiCheckBox167.Checked = true;
+            清空通讯协议();
+            刷新通讯方式(tabPage20);
+            刷新通讯协议();
+        }
+
+        private void uiCheckBox168_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox168.Checked)
+            {
+                uiCheckBox166.Checked = false;
+                uiCheckBox167.Checked = false;
+                uiCheckBox169.Checked = false;
+            }
+            else uiCheckBox168.Checked = true;
+            清空通讯协议();
+            刷新通讯方式(tabPage21);
+            刷新通讯协议();
+        }
+
+        private void uiCheckBox169_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox169.Checked)
+            {
+                uiCheckBox166.Checked = false;
+                uiCheckBox167.Checked = false;
+                uiCheckBox168.Checked = false;
+            }
+            else uiCheckBox169.Checked = true;
+            清空通讯协议();
+            刷新通讯方式(tabPage22);
+            刷新通讯协议();
+        }
+
+        #endregion
+
+        #region 测试机数量
+
+        private void 刷新测试机数量显示()
+        {
+            panel_1station.Enabled = uiCheckBox158.Checked;
+            panel_2station.Enabled = uiCheckBox159.Checked;
+            panel_3station.Enabled = uiCheckBox161.Checked;
+            panel_4station.Enabled = uiCheckBox160.Checked;
+        }
+
+        private void uiCheckBox158_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox158.Checked)
+            {
+                uiCheckBox159.Checked = false;
+                uiCheckBox161.Checked = false;
+                uiCheckBox160.Checked = false;
+            }
+            else uiCheckBox158.Checked = true; 
+            刷新测试机数量显示();
+        }
+
+        private void uiCheckBox159_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox159.Checked)
+            {
+                uiCheckBox158.Checked = false;
+                uiCheckBox161.Checked = false;
+                uiCheckBox160.Checked = false;
+            }
+            else uiCheckBox159.Checked = true;
+            刷新测试机数量显示();
+        }
+
+        private void uiCheckBox161_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox161.Checked)
+            {
+                uiCheckBox158.Checked = false;
+                uiCheckBox159.Checked = false;
+                uiCheckBox160.Checked = false;
+            }
+            else uiCheckBox161.Checked = true;
+            刷新测试机数量显示();
+        }
+
+        private void uiCheckBox160_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox160.Checked)
+            {
+                uiCheckBox158.Checked = false;
+                uiCheckBox159.Checked = false;
+                uiCheckBox161.Checked = false;
+            }
+            else uiCheckBox160.Checked = true;
+            刷新测试机数量显示();
         }
 
         #endregion

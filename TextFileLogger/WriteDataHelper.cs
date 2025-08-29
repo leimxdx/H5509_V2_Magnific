@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Ports;
@@ -11,11 +12,22 @@ namespace TextFileLogger
 {
     public enum LogType
     {
+        [Description("运行日志")]
         RunLog = 1,
+
+        [Description("通信日志")]
         ComLog = 2,
+
+        [Description("报警日志")]
         AlarmLog = 3,
+
+        [Description("按键日志")]
         KeyLogPath = 4,
+
+        [Description("操作日志")]
         OperateLog = 5,
+
+        [Description("参数日志")]
         ParamLog = 6
     }
 
@@ -89,6 +101,19 @@ namespace TextFileLogger
         public string OperateLogPath { get; set; }
 
         public string ParamLogPath { get; set; }
+
+        // 日志文件格式配置（可从配置读取）
+        private const string DateFolderFormat = "yyyy";
+
+        private const string MonthFolderFormat = "MM";
+
+        private const string FileNameFormat = "yyyyMMdd.log";
+
+        private const string DateTimeFormat = "yyyy-MM-dd HH:mm:ss";
+
+        private const string DirectionSymbol = " => ";
+
+        private const string ReceiveDirectionSymbol = " <= ";
 
         public WriteDataHelper(string dataDirectory)
         {

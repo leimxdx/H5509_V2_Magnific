@@ -41,6 +41,7 @@ namespace H5509_V2
         //public MotionEx motionEx;
 
         public bool Approvallamp { get; set; } = false;
+
         public bool Onecyclelamp { get; set; } = false;
 
         public System.Timers.Timer 结批触发定时器 = new System.Timers.Timer();
@@ -121,7 +122,6 @@ namespace H5509_V2
             Approvallamp = !Approvallamp;
             motionEx.SetDo("Y008_结批灯", Approvallamp);
         }
-
 
         private void onecycletimerTick(object sender, EventArgs eventArgs)
         {
@@ -1834,8 +1834,6 @@ namespace H5509_V2
 
         #region Load区
 
-
-
         public string Load_Tray前侧定位气缸到位输出()
         {
             string result = motionEx.SetDo("Y018_Load区Tray前侧定位", true);
@@ -2235,7 +2233,6 @@ namespace H5509_V2
 
         #endregion IO控制与读取
 
-
         #region 辅助方法
 
         public void 参数初始化()
@@ -2449,154 +2446,6 @@ namespace H5509_V2
             PS抓盘手臂放空盘到Auto1流程.Processing = false;
             PS抓盘手臂放空盘到Auto2流程.StepID = 500;
             PS抓盘手臂放空盘到Auto2流程.Processing = false;
-        }
-
-        private int[] 吸嘴是否吸料(bool[] open)
-        {
-            int[] opens = new int[4];
-            opens[0] = open[0] ? 0 : 2;
-            opens[1] = open[1] ? 0 : 2;
-            opens[2] = open[2] ? 0 : 2;
-            opens[3] = open[3] ? 0 : 2;
-            return opens;
-        }
-
-        private void 交换飞梭前后入料IC数据()
-        {
-            bool[][] temp = new bool[飞梭前入料IC.Length][];
-            for (int i = 0; i < 飞梭前入料IC.Length; i++)
-            {
-                temp[i] = new bool[飞梭前入料IC[i].Length];
-                Array.Copy(飞梭前入料IC[i], temp[i], 飞梭前入料IC[i].Length);
-            }
-
-            飞梭前入料IC = new bool[飞梭后入料IC.Length][];
-            for (int i = 0; i < 飞梭后入料IC.Length; i++)
-            {
-                飞梭前入料IC[i] = new bool[飞梭后入料IC[i].Length];
-                Array.Copy(飞梭后入料IC[i], 飞梭前入料IC[i], 飞梭后入料IC[i].Length);
-            }
-
-            飞梭后入料IC = new bool[temp.Length][];
-            for (int i = 0; i < temp.Length; i++)
-            {
-                飞梭后入料IC[i] = new bool[temp[i].Length];
-                Array.Copy(temp[i], 飞梭后入料IC[i], temp[i].Length);
-            }
-        }
-
-        private void 交换飞梭前后出料IC数据()
-        {
-            飞梭前出料IC = new bool[飞梭后出料IC.Length][];
-            for (int i = 0; i < 飞梭后出料IC.Length; i++)
-            {
-                飞梭前出料IC[i] = new bool[飞梭后出料IC[i].Length];
-                Array.Copy(飞梭后出料IC[i], 飞梭前出料IC[i], 飞梭后出料IC[i].Length);
-            }
-
-            飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-        }
-
-        private void 交换飞梭前后出料BIN数据()
-        {
-            飞梭前出料BIN项 = new string[飞梭后出料BIN项.Length][];
-            for (int i = 0; i < 飞梭后出料BIN项.Length; i++)
-            {
-                飞梭前出料BIN项[i] = new string[飞梭后出料BIN项[i].Length];
-                Array.Copy(飞梭后出料BIN项[i], 飞梭前出料BIN项[i], 飞梭后出料BIN项[i].Length);
-            }
-        }
-
-        private bool 初次开始检查(string[] io)
-        {
-            bool isstart = true;
-
-            if (io[0] == "0") //15
-            {
-                isstart = false;
-                Listcode.Add("4018008");
-                RunLog("[Code]4018008,[Msg](按下开始)Empty门未关闭", LogType.AlarmLog);
-            }
-
-            if (io[1] == "0")//16
-            {
-                isstart = false;
-                Listcode.Add("4019008");
-                RunLog("[Code]4019008,[Msg](按下开始)Load门未关闭", LogType.AlarmLog);
-            }
-
-            if (io[2] == "0")//18
-            {
-                isstart = false;
-                Listcode.Add("4020008");
-                RunLog("[Code]4020008,[Msg](按下开始)Auto1门未关闭", LogType.AlarmLog);
-            }
-
-            if (io[3] == "0")//19
-            {
-                isstart = false;
-                Listcode.Add("4021008");
-                RunLog("[Code]4021008,[Msg](按下开始)Auto2门未关闭", LogType.AlarmLog);
-            }
-
-            if (Tray盘模式)
-            {
-                if (io[4] == "0")//20
-                {
-                    isstart = false;
-                    Listcode.Add("4030009");
-                    RunLog("[Code]4030009,[Msg](按下开始)Fix1请放置空盘", LogType.AlarmLog);
-                }
-
-                if (io[5] == "0")//21
-                {
-                    isstart = false;
-                    Listcode.Add("4031009");
-                    RunLog("[Code]4031009,[Msg](按下开始)Fix2请放置空盘", LogType.AlarmLog);
-                }
-
-                if (io[6] == "1")//22
-                {
-                    isstart = false;
-                    Listcode.Add("4032009");
-                    RunLog("[Code]4032009,[Msg](按下开始)Fix3请放置空盘", LogType.AlarmLog);
-                }
-
-                if (io[7] == "0")//23
-                {
-                    isstart = false;
-                    Listcode.Add("4020001");
-                    RunLog("[Code]4020001,[Msg](按下开始)AUTO1前对射感应到有Tray盘", LogType.AlarmLog);
-                }
-
-                if (io[8] == "0")//24
-                {
-                    isstart = false;
-                    Listcode.Add("4020001");
-                    RunLog("[Code]4020001,[Msg](按下开始)AUTO1后对射感应到有Tray盘", LogType.AlarmLog);
-                }
-
-                if (io[9] == "0")//25
-                {
-                    isstart = false;
-                    Listcode.Add("4021001");
-                    RunLog("[Code]4021001,[Msg](按下开始)AUTO2前对射感应到有Tray盘", LogType.AlarmLog);
-                }
-
-                if (io[10] == "0")//26
-                {
-                    isstart = false;
-                    Listcode.Add("4021001");
-                    RunLog("[Code]4021001,[Msg](按下开始)AUTO2后对射感应到有Tray盘", LogType.AlarmLog);
-                }
-            }
-
-            if (!CheckAircyStatus())
-            {
-                isstart = false;
-            }
-
-            return isstart;
         }
 
         private bool 开始检查(string[] io)
@@ -2890,6 +2739,154 @@ namespace H5509_V2
             }
 
             return isstart;
+        }
+
+        private bool 初次开始检查(string[] io)
+        {
+            bool isstart = true;
+
+            if (io[0] == "0") //15
+            {
+                isstart = false;
+                Listcode.Add("4018008");
+                RunLog("[Code]4018008,[Msg](按下开始)Empty门未关闭", LogType.AlarmLog);
+            }
+
+            if (io[1] == "0")//16
+            {
+                isstart = false;
+                Listcode.Add("4019008");
+                RunLog("[Code]4019008,[Msg](按下开始)Load门未关闭", LogType.AlarmLog);
+            }
+
+            if (io[2] == "0")//18
+            {
+                isstart = false;
+                Listcode.Add("4020008");
+                RunLog("[Code]4020008,[Msg](按下开始)Auto1门未关闭", LogType.AlarmLog);
+            }
+
+            if (io[3] == "0")//19
+            {
+                isstart = false;
+                Listcode.Add("4021008");
+                RunLog("[Code]4021008,[Msg](按下开始)Auto2门未关闭", LogType.AlarmLog);
+            }
+
+            if (Tray盘模式)
+            {
+                if (io[4] == "0")//20
+                {
+                    isstart = false;
+                    Listcode.Add("4030009");
+                    RunLog("[Code]4030009,[Msg](按下开始)Fix1请放置空盘", LogType.AlarmLog);
+                }
+
+                if (io[5] == "0")//21
+                {
+                    isstart = false;
+                    Listcode.Add("4031009");
+                    RunLog("[Code]4031009,[Msg](按下开始)Fix2请放置空盘", LogType.AlarmLog);
+                }
+
+                if (io[6] == "1")//22
+                {
+                    isstart = false;
+                    Listcode.Add("4032009");
+                    RunLog("[Code]4032009,[Msg](按下开始)Fix3请放置空盘", LogType.AlarmLog);
+                }
+
+                if (io[7] == "0")//23
+                {
+                    isstart = false;
+                    Listcode.Add("4020001");
+                    RunLog("[Code]4020001,[Msg](按下开始)AUTO1前对射感应到有Tray盘", LogType.AlarmLog);
+                }
+
+                if (io[8] == "0")//24
+                {
+                    isstart = false;
+                    Listcode.Add("4020001");
+                    RunLog("[Code]4020001,[Msg](按下开始)AUTO1后对射感应到有Tray盘", LogType.AlarmLog);
+                }
+
+                if (io[9] == "0")//25
+                {
+                    isstart = false;
+                    Listcode.Add("4021001");
+                    RunLog("[Code]4021001,[Msg](按下开始)AUTO2前对射感应到有Tray盘", LogType.AlarmLog);
+                }
+
+                if (io[10] == "0")//26
+                {
+                    isstart = false;
+                    Listcode.Add("4021001");
+                    RunLog("[Code]4021001,[Msg](按下开始)AUTO2后对射感应到有Tray盘", LogType.AlarmLog);
+                }
+            }
+
+            if (!CheckAircyStatus())
+            {
+                isstart = false;
+            }
+
+            return isstart;
+        }
+
+        private int[] 吸嘴是否吸料(bool[] open)
+        {
+            int[] opens = new int[4];
+            opens[0] = open[0] ? 0 : 2;
+            opens[1] = open[1] ? 0 : 2;
+            opens[2] = open[2] ? 0 : 2;
+            opens[3] = open[3] ? 0 : 2;
+            return opens;
+        }
+
+        private void 交换飞梭前后入料IC数据()
+        {
+            bool[][] temp = new bool[飞梭前入料IC.Length][];
+            for (int i = 0; i < 飞梭前入料IC.Length; i++)
+            {
+                temp[i] = new bool[飞梭前入料IC[i].Length];
+                Array.Copy(飞梭前入料IC[i], temp[i], 飞梭前入料IC[i].Length);
+            }
+
+            飞梭前入料IC = new bool[飞梭后入料IC.Length][];
+            for (int i = 0; i < 飞梭后入料IC.Length; i++)
+            {
+                飞梭前入料IC[i] = new bool[飞梭后入料IC[i].Length];
+                Array.Copy(飞梭后入料IC[i], 飞梭前入料IC[i], 飞梭后入料IC[i].Length);
+            }
+
+            飞梭后入料IC = new bool[temp.Length][];
+            for (int i = 0; i < temp.Length; i++)
+            {
+                飞梭后入料IC[i] = new bool[temp[i].Length];
+                Array.Copy(temp[i], 飞梭后入料IC[i], temp[i].Length);
+            }
+        }
+
+        private void 交换飞梭前后出料IC数据()
+        {
+            飞梭前出料IC = new bool[飞梭后出料IC.Length][];
+            for (int i = 0; i < 飞梭后出料IC.Length; i++)
+            {
+                飞梭前出料IC[i] = new bool[飞梭后出料IC[i].Length];
+                Array.Copy(飞梭后出料IC[i], 飞梭前出料IC[i], 飞梭后出料IC[i].Length);
+            }
+
+            飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+        }
+
+        private void 交换飞梭前后出料BIN数据()
+        {
+            飞梭前出料BIN项 = new string[飞梭后出料BIN项.Length][];
+            for (int i = 0; i < 飞梭后出料BIN项.Length; i++)
+            {
+                飞梭前出料BIN项[i] = new string[飞梭后出料BIN项[i].Length];
+                Array.Copy(飞梭后出料BIN项[i], 飞梭前出料BIN项[i], 飞梭后出料BIN项[i].Length);
+            }
         }
 
         private void 检测梭车是否有IC遗留()
@@ -5465,7 +5462,7 @@ namespace H5509_V2
                                             lsopen[i + index] = false;
                                             HeatDicPoint[$"{xPoint},{yPoint + i * HeatInterval}"] = false;
                                             HeatDicTimer[$"{xPoint},{yPoint + i * HeatInterval}"].Status = 0;
-                                            RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料成功");
+                                            //RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料成功");
                                         }
                                         else RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料失败");
                                     }
@@ -5833,7 +5830,7 @@ namespace H5509_V2
                                         {
                                             lsopen[i + index] = false;
                                             LoaderDicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = false;
-                                            RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料成功");
+                                            //RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料成功");
                                         }
                                         else RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料失败");
                                     }
@@ -7044,7 +7041,7 @@ namespace H5509_V2
                                         if (opens[i] == 1)
                                         {
                                             lsopen[i] = false;
-                                            RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料Z{i + index + 1}吸料成功");
+                                            //RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料Z{i + index + 1}吸料成功");
                                         }
                                         else RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料Z{i + index + 1}吸料失败");
                                     }
@@ -8990,7 +8987,7 @@ namespace H5509_V2
                                         if (opens[i] == 1)
                                         {
                                             lsopen[i] = false;
-                                            RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试Z{i + 1}吸料成功");
+                                            //RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试Z{i + 1}吸料成功");
                                         }
                                         else RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试Z{i + 1}吸料失败");
                                     }
@@ -9771,7 +9768,7 @@ namespace H5509_V2
                                         if (opens[i] == 1)
                                         {
                                             lsopen[i] = false;
-                                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试Z{i + 1}吸料成功");
+                                            //RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试Z{i + 1}吸料成功");
                                         }
                                         else RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试Z{i + 1}吸料失败");
                                     }

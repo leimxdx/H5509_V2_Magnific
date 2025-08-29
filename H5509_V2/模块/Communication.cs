@@ -140,7 +140,6 @@ namespace H5509_V2
             刷新串口信息();
         }
 
-
         /// <summary>
         /// 显示通信log
         /// </summary>
@@ -155,7 +154,6 @@ namespace H5509_V2
             string datestr = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}{str}";
             RefrshLog(datestr + message);
         }
-
 
         string old = "";
         private void DataReceivedHandler(object sender, SerialDataReceivedEventArgs e)

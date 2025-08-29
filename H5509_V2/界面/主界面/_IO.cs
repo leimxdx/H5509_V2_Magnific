@@ -27,12 +27,19 @@ namespace H5509_V2
 
         public string[] GNME601_核1_输入 = new string[32];
         public string[] GNME601_核2_输入 = new string[32];
+        public string[][] GNME601_核输入 = new string[2][];
 
         public string[] GNME601_核1_输出 = new string[32];
         public string[] GNME601_核2_输出 = new string[32];
+        public string[][] GNME601_核输出 = new string[2][];
 
         public string[] Glink200_核1_输入 = new string[200];
         public string[] Glink200_核1_输出 = new string[200];
+
+        public Control[][] lbl_梭车前入 = new Control[2][];
+        public Control[][] lbl_梭车前出 = new Control[2][];
+        public Control[][] lbl_梭车后入 = new Control[2][];
+        public Control[][] lbl_梭车后出 = new Control[2][];
 
         List<UILight> ListUiLight = new List<UILight>();
         List<UISwitch> ListUiSwitch = new List<UISwitch>();
@@ -148,6 +155,11 @@ namespace H5509_V2
                     }
                 }
             }
+
+            lbl_梭车前入 = new Control[2][] { new Control[] { lbl_梭车前入1, lbl_梭车前入2, lbl_梭车前入3, lbl_梭车前入4 }, new Control[] { lbl_梭车前入5, lbl_梭车前入6, lbl_梭车前入7, lbl_梭车前入8 } };
+            lbl_梭车前出 = new Control[2][] { new Control[] { lbl_梭车前出1, lbl_梭车前出2, lbl_梭车前出3, lbl_梭车前出4 }, new Control[] { lbl_梭车前出5, lbl_梭车前出6, lbl_梭车前出7, lbl_梭车前出8 } };
+            lbl_梭车后入 = new Control[2][] { new Control[] { lbl_梭车后入1, lbl_梭车后入2, lbl_梭车后入3, lbl_梭车后入4 }, new Control[] { lbl_梭车后入5, lbl_梭车后入6, lbl_梭车后入7, lbl_梭车后入8 } };
+            lbl_梭车后出 = new Control[2][] { new Control[] { lbl_梭车后出1 ,lbl_梭车后出2, lbl_梭车后出3, lbl_梭车后出4 }, new Control[] { lbl_梭车后出5, lbl_梭车后出6, lbl_梭车后出7, lbl_梭车后出8 } };
         }
 
         private void IOUpdateTimer_Tick(object sender, EventArgs e)
@@ -156,93 +168,138 @@ namespace H5509_V2
             {
                 if (!InitedOK) return;
 
-                //GNME601 核1
-                motionEx.GetDi("GNM601", 1, 1, 4, out string value);
-                char[] ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
+                char[] ioval;
+                string value;
+
+                //GNME601 核1 核2 输入
+                for (short i = 1; i <= 2; i++)
                 {
-                    GNME601_核1_输入[i] = ioval[i].ToString();
+                    motionEx.GetDi("GNM601", i, 1, 4, out value);
+                    ioval = value.ToCharArray();
+                    for (int j = 0; j < ioval.Length; j++)
+                    {
+                        GNME601_核输入[i][j] = ioval[j].ToString();
+                    }
                 }
 
-                motionEx.GetDO("GNM601", 1, 1, 12, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
+                ////GNME601 核1
+                //motionEx.GetDi("GNM601", 1, 1, 4, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    GNME601_核1_输入[i] = ioval[i].ToString();
+                //}
+
+                //motionEx.GetDO("GNM601", 1, 1, 12, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    GNME601_核1_输出[i] = ioval[i].ToString();
+                //}
+
+                //GNME601 核1 核2 输出
+                for (short i = 1; i <= 2; i++)
                 {
-                    GNME601_核1_输出[i] = ioval[i].ToString();
+                    motionEx.GetDO("GNM601", i, 1, 12, out value);
+                    ioval = value.ToCharArray();
+                    for (int j = 0; j < ioval.Length; j++)
+                    {
+                        GNME601_核输出[i][j] = ioval[j].ToString();
+                    }
                 }
 
-                //GNME601 核2
-                motionEx.GetDi("GNM601", 2, 1, 4, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    GNME601_核2_输入[i] = ioval[i].ToString();
-                }
+                ////GNME601 核2
+                //motionEx.GetDi("GNM601", 2, 1, 4, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    GNME601_核2_输入[i] = ioval[i].ToString();
+                //}
 
-                motionEx.GetDO("GNM601", 2, 1, 12, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    GNME601_核2_输出[i] = ioval[i].ToString();
-                }
+                //motionEx.GetDO("GNM601", 2, 1, 12, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    GNME601_核2_输出[i] = ioval[i].ToString();
+                //}
 
                 //gLink200 输入
-                motionEx.GetDi("gLink200", 1, 0 * 32 + 1, 4, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
+                for (int i = 0; i < 5; i++)
                 {
-                    Glink200_核1_输入[i + 0 * 32] = ioval[i].ToString();
-                }
-                motionEx.GetDi("gLink200", 1, 1 * 32 + 1, 4, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    Glink200_核1_输入[i + 1 * 32] = ioval[i].ToString();
-                }
-                motionEx.GetDi("gLink200", 1, 2 * 32 + 1, 4, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    Glink200_核1_输入[i + 2 * 32] = ioval[i].ToString();
-                }
-                motionEx.GetDi("gLink200", 1, 3 * 32 + 1, 4, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    Glink200_核1_输入[i + 3 * 32] = ioval[i].ToString();
-                }
-                motionEx.GetDi("gLink200", 1, 4 * 32 + 1, 4, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    Glink200_核1_输入[i + 4 * 32] = ioval[i].ToString();
+                    motionEx.GetDi("gLink200", 1, (short)(i * 32 + 1), 4, out value);
+                    ioval = value.ToCharArray();
+                    for (int j = 0; j < ioval.Length; j++)
+                    {
+                        Glink200_核1_输入[j + i * 32] = ioval[j].ToString();
+                    }
                 }
 
+                //motionEx.GetDi("gLink200", 1, 0 * 32 + 1, 4, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输入[i + 0 * 32] = ioval[i].ToString();
+                //}
+                //motionEx.GetDi("gLink200", 1, 1 * 32 + 1, 4, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输入[i + 1 * 32] = ioval[i].ToString();
+                //}
+                //motionEx.GetDi("gLink200", 1, 2 * 32 + 1, 4, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输入[i + 2 * 32] = ioval[i].ToString();
+                //}
+                //motionEx.GetDi("gLink200", 1, 3 * 32 + 1, 4, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输入[i + 3 * 32] = ioval[i].ToString();
+                //}
+                //motionEx.GetDi("gLink200", 1, 4 * 32 + 1, 4, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输入[i + 4 * 32] = ioval[i].ToString();
+                //}
+
                 //gLink200 输出
-                motionEx.GetDO("gLink200", 1, 0 * 32 + 1, 12, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
+                for (int i = 0; i < 4; i++)
                 {
-                    Glink200_核1_输出[i + 0 * 32] = ioval[i].ToString();
+                    motionEx.GetDO("gLink200", 1, (short)(i * 32 + 1), 12, out value);
+                    ioval = value.ToCharArray();
+                    for (int j = 0; j < ioval.Length; j++)
+                    {
+                        Glink200_核1_输出[j + i * 32] = ioval[j].ToString();
+                    }
                 }
-                motionEx.GetDO("gLink200", 1, 1 * 32 + 1, 12, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    Glink200_核1_输出[i + 1 * 32] = ioval[i].ToString();
-                }
-                motionEx.GetDO("gLink200", 1, 2 * 32 + 1, 12, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    Glink200_核1_输出[i + 2 * 32] = ioval[i].ToString();
-                }
-                motionEx.GetDO("gLink200", 1, 3 * 32 + 1, 12, out value);
-                ioval = value.ToCharArray();
-                for (int i = 0; i < ioval.Length; i++)
-                {
-                    Glink200_核1_输出[i + 3 * 32] = ioval[i].ToString();
-                }
+
+                //motionEx.GetDO("gLink200", 1, 0 * 32 + 1, 12, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输出[i + 0 * 32] = ioval[i].ToString();
+                //}
+                //motionEx.GetDO("gLink200", 1, 1 * 32 + 1, 12, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输出[i + 1 * 32] = ioval[i].ToString();
+                //}
+                //motionEx.GetDO("gLink200", 1, 2 * 32 + 1, 12, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输出[i + 2 * 32] = ioval[i].ToString();
+                //}
+                //motionEx.GetDO("gLink200", 1, 3 * 32 + 1, 12, out value);
+                //ioval = value.ToCharArray();
+                //for (int i = 0; i < ioval.Length; i++)
+                //{
+                //    Glink200_核1_输出[i + 3 * 32] = ioval[i].ToString();
+                //}
 
                 if (uiTabControl1.SelectedIndex == 1)
                 {
@@ -267,7 +324,7 @@ namespace H5509_V2
                         {
                             if (ioinfo.核号 == 1)
                             {
-                                if (GNME601_核1_输入[ioinfo.软件索引 - 1] == "0")
+                                if (GNME601_核输入[0][ioinfo.软件索引 - 1] == "0")
                                 {
                                     diX[i] = "1";
                                 }
@@ -275,7 +332,7 @@ namespace H5509_V2
                             }
                             else
                             {
-                                if (GNME601_核2_输入[ioinfo.软件索引 - 1] == "0")
+                                if (GNME601_核输入[1][ioinfo.软件索引 - 1] == "0")
                                 {
                                     diX[i] = "1";
                                 }
@@ -301,7 +358,7 @@ namespace H5509_V2
 
                             if (ioinfo.核号 == 1)
                             {
-                                if (GNME601_核1_输出[ioinfo.软件索引 - 1] == "0")
+                                if (GNME601_核输出[0][ioinfo.软件索引 - 1] == "0")
                                 {
                                     doY[i] = "0";
                                 }
@@ -309,7 +366,7 @@ namespace H5509_V2
                             }
                             else
                             {
-                                if (GNME601_核2_输出[ioinfo.软件索引 - 1] == "0")
+                                if (GNME601_核输出[1][ioinfo.软件索引 - 1] == "0")
                                 {
                                     doY[i] = "0";
                                 }
@@ -367,7 +424,7 @@ namespace H5509_V2
                             {
                                 if (ioinfo.核号 == 1)
                                 {
-                                    if (GNME601_核1_输入[ioinfo.软件索引 - 1] == "0")
+                                    if (GNME601_核输入[0][ioinfo.软件索引 - 1] == "0")
                                     {
                                         uilight.State = UILightState.On;
                                     }
@@ -375,7 +432,7 @@ namespace H5509_V2
                                 }
                                 else
                                 {
-                                    if (GNME601_核2_输入[ioinfo.软件索引 - 1] == "0")
+                                    if (GNME601_核输入[1][ioinfo.软件索引 - 1] == "0")
                                     {
                                         uilight.State = UILightState.On;
                                     }
@@ -409,7 +466,7 @@ namespace H5509_V2
                             {
                                 if (ioinfo.核号 == 1)
                                 {
-                                    if (GNME601_核1_输出[ioinfo.软件索引 - 1] == "0")
+                                    if (GNME601_核输出[0][ioinfo.软件索引 - 1] == "0")
                                     {
                                         uiswitch.Active = false;
                                     }
@@ -417,7 +474,7 @@ namespace H5509_V2
                                 }
                                 else
                                 {
-                                    if (GNME601_核2_输出[ioinfo.软件索引 - 1] == "0")
+                                    if (GNME601_核输出[1][ioinfo.软件索引 - 1] == "0")
                                     {
                                         uiswitch.Active = false;
                                     }
@@ -437,43 +494,38 @@ namespace H5509_V2
                             }
                         }
                     }
-                    //飞梭前入料IC = new bool[][] { new bool[] {true, true ,false,false } ,new bool[] { true, true, false, false } };
 
-                    lbl_梭车前入1.BackColor = 飞梭前入料IC[0][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前入2.BackColor = 飞梭前入料IC[0][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前入3.BackColor = 飞梭前入料IC[0][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前入4.BackColor = 飞梭前入料IC[0][3] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前入5.BackColor = 飞梭前入料IC[1][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前入6.BackColor = 飞梭前入料IC[1][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前入7.BackColor = 飞梭前入料IC[1][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前入8.BackColor = 飞梭前入料IC[1][3] ? Color.Lime : Color.Cyan;
+                    for (int i = 0; i < lbl_梭车前入.Length; i++)
+                    {
+                        for (int j = 0; j < lbl_梭车前入[i].Length; j++)
+                        {
+                            lbl_梭车前入[i][j].BackColor = 飞梭前入料IC[i][j] ? Color.Lime : Color.Cyan;
+                        }
+                    }
 
-                    lbl_梭车前出1.BackColor = 飞梭前出料IC[0][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前出2.BackColor = 飞梭前出料IC[0][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前出3.BackColor = 飞梭前出料IC[0][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前出4.BackColor = 飞梭前出料IC[0][3] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前出5.BackColor = 飞梭前出料IC[1][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前出6.BackColor = 飞梭前出料IC[1][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前出7.BackColor = 飞梭前出料IC[1][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车前出8.BackColor = 飞梭前出料IC[1][3] ? Color.Lime : Color.Cyan;
+                    for (int i = 0; i < lbl_梭车前出.Length; i++)
+                    {
+                        for (int j = 0; j < lbl_梭车前出[i].Length; j++)
+                        {
+                            lbl_梭车前出[i][j].BackColor = 飞梭前出料IC[i][j] ? Color.Lime : Color.Cyan;
+                        }
+                    }
 
-                    lbl_梭车后入1.BackColor = 飞梭后入料IC[0][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后入2.BackColor = 飞梭后入料IC[0][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后入3.BackColor = 飞梭后入料IC[0][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后入4.BackColor = 飞梭后入料IC[0][3] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后入5.BackColor = 飞梭后入料IC[1][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后入6.BackColor = 飞梭后入料IC[1][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后入7.BackColor = 飞梭后入料IC[1][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后入8.BackColor = 飞梭后入料IC[1][3] ? Color.Lime : Color.Cyan;
+                    for (int i = 0; i < lbl_梭车后入.Length; i++)
+                    {
+                        for (int j = 0; j < lbl_梭车后入[i].Length; j++)
+                        {
+                            lbl_梭车后入[i][j].BackColor = 飞梭后入料IC[i][j] ? Color.Lime : Color.Cyan;
+                        }
+                    }
 
-                    lbl_梭车后出1.BackColor = 飞梭后出料IC[0][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后出2.BackColor = 飞梭后出料IC[0][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后出3.BackColor = 飞梭后出料IC[0][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后出4.BackColor = 飞梭后出料IC[0][3] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后出5.BackColor = 飞梭后出料IC[1][0] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后出6.BackColor = 飞梭后出料IC[1][1] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后出7.BackColor = 飞梭后出料IC[1][2] ? Color.Lime : Color.Cyan;
-                    lbl_梭车后出8.BackColor = 飞梭后出料IC[1][3] ? Color.Lime : Color.Cyan;
+                    for (int i = 0; i < lbl_梭车后出.Length; i++)
+                    {
+                        for (int j = 0; j < lbl_梭车后出[i].Length; j++)
+                        {
+                            lbl_梭车后出[i][j].BackColor = 飞梭后出料IC[i][j] ? Color.Lime : Color.Cyan;
+                        }
+                    }
 
                     bool[] iscan = { uiSwitch19.Active, uiSwitch20.Active, uiSwitch21.Active, uiSwitch22.Active };
                     uiSwitch24.Active = iscan.Contains(true);
@@ -492,7 +544,6 @@ namespace H5509_V2
 
                     iscan = new bool[] { uiSwitch83.Active, uiSwitch82.Active, uiSwitch81.Active, uiSwitch80.Active, uiSwitch97.Active, uiSwitch96.Active, uiSwitch95.Active, uiSwitch94.Active };
                     uiSwitch78.Active = iscan.Contains(true);
-
 
                     //stopwatch.Stop();
                     //UIMessageTip.Show(this, stopwatch.ElapsedMilliseconds.ToString(), null, 1000, true, true);
@@ -537,48 +588,27 @@ namespace H5509_V2
             }
         }
 
-        private void uiButton2_Click(object sender, EventArgs e)
+        private bool StateCheck()
         {
-            string result = "";
-            foreach (var item in tabPage7.Controls)
+            if (当前权限 == "Operator")
             {
-                if (item is UIGroupBox uigroupos)
-                {
-                    foreach (var item1 in uigroupos.Controls)
-                    {
-                        if (item1 is UILight uilight)
-                        {
-                            string io = uilight.TagString;
-                            result = motionEx.GetIOInfo(io, out IOInfo ioinfo);
-                            if (ioinfo.模块类型 == "GNM601")
-                            {
-                                if (ioinfo.IO编号.Contains("X"))
-                                {
-                                    if (ioinfo.核号 == 1)
-                                    {
-                                        if (GNME601_核1_输入[ioinfo.软件索引] == "0")
-                                        {
-                                            uilight.State = UILightState.Off;
-                                        }
-                                        else uilight.State = UILightState.On;
-                                    }
-                                }
-                            }
-                            else if (ioinfo.模块类型 == "gLink200")
-                            {
-                                if (ioinfo.IO编号.Contains("X"))
-                                {
-                                    if (Glink200_核1_输入[ioinfo.软件索引] == "0")
-                                    {
-                                        uilight.State = UILightState.Off;
-                                    }
-                                    else uilight.State = UILightState.On;
-                                }
-                            }
-                        }
-                    }
-                }
+                UIMessageTip.ShowError(this.Parent, "权限不足", 1000, true, true);
+                return false;
             }
+
+            if (!APPmaster.InitedOK)
+            {
+                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
+                return false;
+            }
+
+            if (APPmaster.设备状态 == 1)
+            {
+                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
+                return false;
+            }
+
+            return true;
         }
 
         private void SetDoValue(object sender, EventArgs e)
@@ -611,17 +641,7 @@ namespace H5509_V2
 
         private void uiSwitch78_ValueChanged(object sender, bool value)
         {
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return;
-            }
+            if (!StateCheck()) return;
 
             bool[] lsopen = new bool[] { true, true, true, true, true, true, true, true };
             handler.测试吸嘴_吸放料(lsopen, true, false);
@@ -677,29 +697,6 @@ namespace H5509_V2
             this.uiSwitch44.ValueChanged -= new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
             uiSwitch44.Active = false;
             this.uiSwitch44.ValueChanged += new Sunny.UI.UISwitch.OnValueChanged(this.uiSwitch44_ValueChanged);
-        }
-
-        private bool StateCheck()
-        {
-            if (当前权限 == "Operator")
-            {
-                UIMessageTip.ShowError(this.Parent, "权限不足", 1000, true, true);
-                return false;
-            }
-
-            if (!APPmaster.InitedOK)
-            {
-                UIMessageTip.ShowError(this.Parent, "轴卡未连接", 1000, true, true);
-                return false;
-            }
-
-            if (APPmaster.设备状态 == 1)
-            {
-                UIMessageTip.ShowError(this.Parent, "设备正在运行...", 1000, true, true);
-                return false;
-            }
-
-            return true;
         }
 
         private void uiSwitch23_Click(object sender, EventArgs e)
