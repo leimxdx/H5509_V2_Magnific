@@ -4384,6 +4384,7 @@ namespace H5509_V2
             Task<string> task1 = Task.Run(() => { return 入料手臂Z回零(new bool[] { true, true, true, true }); });
             Task<string> task2 = Task.Run(() => { return 出料手臂Z回零(new bool[] { true, true, true, true }); });
             Task<string> task3 = Task.Run(() => { return 测试手臂Z回零(); });
+
             if (task1.Result != "Success" || task2.Result != "Success" || task3.Result != "Success")
             {
                 string errortext = "";
@@ -10187,6 +10188,7 @@ namespace H5509_V2
             string result;
             short site = 0;
             List<bool[]> open = new List<bool[]>();
+            List<List<bool[]>> opens = new List<List<bool[]>>();
             PS测试区气缸下压动作流程.StepID = 500;
             while (true)
             {
@@ -10279,7 +10281,18 @@ namespace H5509_V2
                     case 520:
                         PS测试区气缸下压动作流程.StepName = $"发送测试信号";
                         RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-                        result = APPmaster.Com.Send(site, open, 无测试机模式);
+                        if (多Site同时测试)
+                        {
+                            result = "Success";
+                            short[] sites = GetSites(site);
+                            if ((SiteTestState[sites[0]] == 1) && SiteTestState[sites[1]] == 1)
+                            {
+                                opens = new List<List<bool[]>>() { GetOpens(SiteTestIC[sites[0]]), GetOpens(SiteTestIC[sites[1]]) };
+                                result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                            }
+                        }
+                        else result = APPmaster.Com.Send(site, open, 无测试机模式);
+
                         if (result == "Success")
                         {
                             SiteTestState[site] = 2;

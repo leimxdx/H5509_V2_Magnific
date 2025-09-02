@@ -249,6 +249,23 @@ namespace H5509_V2
             RefreshInfoLog(str, false);
         }
 
+        public string getstartest(List<List<bool[]>> isopen)
+        {
+            string str = "";
+            for (int x = 0; x < isopen.Count; x++)
+            {
+                for (int i = 0; i < isopen[x].Count; i++)
+                {
+                    for (int j = 0; j < isopen[x][i].Length; j++)
+                    {
+                        if (isopen[x][i][j]) str += "1";
+                        else str += "0";
+                    }
+                }
+            }
+            return str;
+        }
+
         public string getstartest(short site, List<bool[]> isopen)
         {
             string str = $"{site:00} ";
@@ -294,6 +311,47 @@ namespace H5509_V2
                     listtestdatetime[site] = DateTime.Now;
                     Listtimer[site].Start();
                     Iswaitout[site] = false;
+                    //启动定时器
+                }
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "Success";
+        }
+
+        public string Send(short[] site, List<List<bool[]>> isopen, bool isOFFLine = false)
+        {
+            try
+            {
+                string str = getstartest(isopen);
+
+                if (isOFFLine) //离线模式，无测试机
+                {
+                    RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                    RefreshInfoLog("@START_TEST " + str + "+", false);
+                    for (int i = 0; i < site.Length; i++)
+                    {
+                        ListNoTestTimer[site[i]].Start();
+                        listtestdatetime[site[i]] = DateTime.Now;
+                    }
+                }
+                else //在线模式
+                {
+                    if (serialPort == null || !serialPort.IsOpen)
+                    {
+                        return "串口未打开";
+                    }
+                    serialPort.Write("@START_TEST " + str + "+");
+                    RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                    RefreshInfoLog("@START_TEST " + str + "+", false);
+                    for (int i = 0; i < site.Length; i++)
+                    {
+                        listtestdatetime[site[i]] = DateTime.Now;
+                        Listtimer[site[i]].Start();
+                        Iswaitout[site[i]] = false;
+                    }
                     //启动定时器
                 }
             }

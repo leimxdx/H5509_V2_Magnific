@@ -5332,13 +5332,11 @@ namespace H5509_V2
 
         private void 保存测试手臂Offset(string name, string page, OffsetPoint offset)
         {
-
             DialogResult dialog = MessageBox.Show("请确认是否保存!", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dialog == DialogResult.OK)
             {
                 try
                 {
-
                     UpdateOffsetPointData(name, page, "测试_梭车1左吸_X", Convert.ToDouble(numericUpDown78.Text), offset.测试_梭车1左吸_X);
                     UpdateOffsetPointData(name, page, "测试_梭车1左吸_Z", Convert.ToDouble(numericUpDown75.Text), offset.测试_梭车1左吸_Z);
                     UpdateOffsetPointData(name, page, "测试_梭车1右放_X", Convert.ToDouble(numericUpDown73.Text), offset.测试_梭车1右放_X);
@@ -8438,6 +8436,60 @@ namespace H5509_V2
 
         private void button264_Click(object sender, EventArgs e)
         {
+            //short site = 6;
+            //string result = ""; SiteTestState[6] = 1; SiteTestState[7] = 1;
+            //List<bool[]> open = new List<bool[]>();
+            //List<List<bool[]>> opens = new List<List<bool[]>>();
+            //PS测试区气缸下压动作流程.StepName = $"发送测试信号";
+            //RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+            //if (多Site同时测试)
+            //{
+            //    result = "Success";
+            //    short[] sites = GetSites(site);
+            //    if (SiteTestState[sites[0]] == 1 && SiteTestState[sites[1]] == 1)
+            //    {
+            //        opens = new List<List<bool[]>>()
+            //        {
+            //            GetOpens(SiteTestIC[sites[0]]),
+            //            GetOpens(SiteTestIC[sites[1]])
+            //        };
+            //        result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+            //    }
+            //}
+            //else result = APPmaster.Com.Send(site, open, 无测试机模式);
+
+            //if (result == "Success")
+            //{
+            //    SiteTestState[site] = 2;
+            //    PS测试区气缸下压动作流程.StepID = 599;
+            //}
+            //else
+            //{
+            //    Listcode.Add("800007");
+            //    RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+            //    ProgramPause = true;
+            //    IsPause = true;
+            //}
+
+            //short[] site = new short[] { 1, 2 };
+            //List<List<bool[]>> boosls = new List<List<bool[]>>()
+            //{
+            //    new List<bool[]>()
+            //    {
+            //        new bool[] { true, true, true, true },
+            //        new bool[] { true, true, true, true }
+            //    } ,
+            //    new List<bool[]>()
+            //    {
+            //        new bool[] { true, true, true, true },
+            //        new bool[] { true, true, true, true }
+            //    }
+            //};
+            //Com.Send(site, boosls, true);
+
+            //string sendstr = Com.getstartest(site, boosls);
+            //Debug.WriteLine(sendstr);
+
             //PS入料手臂吸放料流程.StepName = "计算放料IC颗数";
 
             //short colums = 0;
@@ -8778,7 +8830,7 @@ namespace H5509_V2
                 uiCheckBox161.Checked = false;
                 uiCheckBox160.Checked = false;
             }
-            else uiCheckBox158.Checked = true; 
+            else uiCheckBox158.Checked = true;
             刷新测试机数量显示();
         }
 
@@ -8819,6 +8871,5 @@ namespace H5509_V2
         }
 
         #endregion
-
     }
 }

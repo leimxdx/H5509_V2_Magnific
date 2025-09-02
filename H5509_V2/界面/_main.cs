@@ -154,6 +154,7 @@ namespace H5509_V2
                 Chk_timer[i] = timer;
             }
 
+            
 
             textBoxmachine.Text = Environment.MachineName;
 

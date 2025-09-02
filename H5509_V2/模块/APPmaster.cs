@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
@@ -13,13 +14,13 @@ using H5509_alarm;
 using H5509_V2;
 using IHardwareGXN.GXNCard;
 using MotionCommon;
-using static H5509_V2.ForMain;
-using TextFileLogger;
-using SQLServerHelper;
 using SQLiteHelper;
+using SQLServerHelper;
+using TextFileLogger;
 using Thermostat;
-using Ttimer = System.Timers.Timer;
 using static H5509_V2.APPmaster;
+using static H5509_V2.ForMain;
+using Ttimer = System.Timers.Timer;
 
 namespace H5509_V2
 {
@@ -80,6 +81,10 @@ namespace H5509_V2
         public static int 开Site数量 = 0;
 
         public static int 关Site数量 = 0;
+
+        public static bool 多Site同时测试 = false;
+
+        public static int 多Site同时测试数量 = 2;
 
         public static int StartSite数量 = 0;
 
@@ -499,6 +504,12 @@ namespace H5509_V2
         public static double Auto1上移固定距离 { get { return 初始点位.Auto1_分盘位 - 初始点位.Auto1_初始位; } }
 
         public static double Auto2上移固定距离 { get { return 初始点位.Auto2_分盘位 - 初始点位.Auto2_初始位; } }
+
+        #region 测试机配置参数
+
+
+
+        #endregion
 
         #region 测试运行参数
 
@@ -1381,6 +1392,32 @@ namespace H5509_V2
             return "Success";
         }
 
+        public static List<bool[]> GetOpens(bool[][] siteopen)
+        {
+            return new List<bool[]>()
+            {
+
+                new bool[] { siteopen[0][0],siteopen[0][1],siteopen[0][2] ,siteopen[0][3]  },
+                new bool[] { siteopen[1][0],siteopen[1][1],siteopen[1][2] ,siteopen[1][3]  },
+            };
+        }
+
+        public static short[] GetSites(short site)
+        {
+            switch (site)
+            {
+                case 0: case 1: return new short[2] { 0, 1 };
+                case 2: case 3: return new short[2] { 2, 3 };
+                case 4: case 5: return new short[2] { 4, 5 };
+                case 6: case 7: return new short[2] { 6, 7 };
+                case 8: case 9: return new short[2] { 8, 9 };
+                case 10: case 11: return new short[2] { 10, 11 };
+                case 12: case 13: return new short[2] { 12, 13 };
+                case 14: case 15: return new short[2] { 14, 15 };
+                default: return new short[2] { 0, 1 };
+            }
+        }
+
         ///// <summary>
         ///// Heat TrayIC点位初始化
         ///// </summary>
@@ -1741,99 +1778,104 @@ namespace H5509_V2
             if (result == "Success")
             {
                 InitPoint initPoint = new InitPoint();
+                Type initType = typeof(InitPoint);
+
                 foreach (DataRow item in dataTable.Rows)
                 {
                     double value = Convert.ToDouble(item["value"].ToString());
-                    switch (item["ptname"].ToString())
-                    {
-                        case "入料_Load_X": initPoint.入料_Load_X = value; break;
-                        case "入料_Load_Y": initPoint.入料_Load_Y = value; break;
-                        case "入料_Load_Z": initPoint.入料_Load_Z = value; break;
-                        case "入料_Heat_X": initPoint.入料_Heat_X = value; break;
-                        case "入料_Heat_Y": initPoint.入料_Heat_Y = value; break;
-                        case "入料_Heat吸_Z": initPoint.入料_Heat吸_Z = value; break;
-                        case "入料_Heat放_Z": initPoint.入料_Heat放_Z = value; break;
-                        case "入料_梭车1_X": initPoint.入料_梭车1_X = value; break;
-                        case "入料_梭车1_Y": initPoint.入料_梭车1_Y = value; break;
-                        case "入料_梭车1_Z": initPoint.入料_梭车1_Z = value; break;
-                        case "入料_梭车2_X": initPoint.入料_梭车2_X = value; break;
-                        case "入料_梭车2_Y": initPoint.入料_梭车2_Y = value; break;
-                        case "入料_梭车2_Z": initPoint.入料_梭车2_Z = value; break;
-                        case "入料_梭车列间隔": initPoint.入料_梭车列间隔 = value; break;
-                        case "入料_变距最大值": initPoint.入料_变距最大值 = value; break;
-                        case "入料_变距最小值": initPoint.入料_变距最小值 = value; break;
-                        case "入料_Z1_硬件补偿": initPoint.入料_Z1_硬件补偿 = value; break;
-                        case "入料_Z2_硬件补偿": initPoint.入料_Z2_硬件补偿 = value; break;
-                        case "入料_Z3_硬件补偿": initPoint.入料_Z3_硬件补偿 = value; break;
-                        case "入料_Z4_硬件补偿": initPoint.入料_Z4_硬件补偿 = value; break;
-                        case "出料_梭车1_X": initPoint.出料_梭车1_X = value; break;
-                        case "出料_梭车1_Y": initPoint.出料_梭车1_Y = value; break;
-                        case "出料_梭车1_Z": initPoint.出料_梭车1_Z = value; break;
-                        case "出料_梭车2_X": initPoint.出料_梭车2_X = value; break;
-                        case "出料_梭车2_Y": initPoint.出料_梭车2_Y = value; break;
-                        case "出料_梭车2_Z": initPoint.出料_梭车2_Z = value; break;
-                        case "出料_Auto1_X": initPoint.出料_Auto1_X = value; break;
-                        case "出料_Auto1_Y": initPoint.出料_Auto1_Y = value; break;
-                        case "出料_Auto1_Z": initPoint.出料_Auto1_Z = value; break;
-                        case "出料_Auto2_X": initPoint.出料_Auto2_X = value; break;
-                        case "出料_Auto2_Y": initPoint.出料_Auto2_Y = value; break;
-                        case "出料_Auto2_Z": initPoint.出料_Auto2_Z = value; break;
-                        case "出料_Fix1_X": initPoint.出料_Fix1_X = value; break;
-                        case "出料_Fix1_Y": initPoint.出料_Fix1_Y = value; break;
-                        case "出料_Fix1_Z": initPoint.出料_Fix1_Z = value; break;
-                        case "出料_Fix2_X": initPoint.出料_Fix2_X = value; break;
-                        case "出料_Fix2_Y": initPoint.出料_Fix2_Y = value; break;
-                        case "出料_Fix2_Z": initPoint.出料_Fix2_Z = value; break;
-                        case "出料_Fix3_X": initPoint.出料_Fix3_X = value; break;
-                        case "出料_Fix3_Y": initPoint.出料_Fix3_Y = value; break;
-                        case "出料_Fix3_Z": initPoint.出料_Fix3_Z = value; break;
-                        case "出料_梭车列间隔": initPoint.出料_梭车列间隔 = value; break;
-                        case "出料_变距最大值": initPoint.出料_变距最大值 = value; break;
-                        case "出料_变距最小值": initPoint.出料_变距最小值 = value; break;
-                        case "出料_Fix3_右移动": initPoint.出料_Fix3_右移动 = value; break;
-                        case "出料_Z1_硬件补偿": initPoint.出料_Z1_硬件补偿 = value; break;
-                        case "出料_Z2_硬件补偿": initPoint.出料_Z2_硬件补偿 = value; break;
-                        case "出料_Z3_硬件补偿": initPoint.出料_Z3_硬件补偿 = value; break;
-                        case "出料_Z4_硬件补偿": initPoint.出料_Z4_硬件补偿 = value; break;
-                        case "测试_梭车1吸_X": initPoint.测试_梭车1吸_X = value; break;
-                        case "测试_梭车1吸_Z": initPoint.测试_梭车1吸_Z = value; break;
-                        case "测试_梭车2吸_X": initPoint.测试_梭车2吸_X = value; break;
-                        case "测试_梭车2吸_Z": initPoint.测试_梭车2吸_Z = value; break;
-                        case "测试_梭车1放_X": initPoint.测试_梭车1放_X = value; break;
-                        case "测试_梭车1放_Z": initPoint.测试_梭车1放_Z = value; break;
-                        case "测试_梭车2放_X": initPoint.测试_梭车2放_X = value; break;
-                        case "测试_梭车2放_Z": initPoint.测试_梭车2放_Z = value; break;
-                        case "测试_梭车列间隔": initPoint.测试_梭车列间隔 = value; break;
-                        case "测试_Test1区_X": initPoint.测试_Test1区_X = value; break;
-                        case "测试_Test2区_X": initPoint.测试_Test2区_X = value; break;
-                        case "测试_Test3区_X": initPoint.测试_Test3区_X = value; break;
-                        case "测试_Test4区_X": initPoint.测试_Test4区_X = value; break;
-                        case "测试_Test区Site间隔": initPoint.测试_Test区Site间隔 = value; break;
-                        case "测试_Test区吸_Z": initPoint.测试_Test区吸_Z = value; break;
-                        case "测试_Test区放_Z": initPoint.测试_Test区放_Z = value; break;
-                        case "梭车2_前_Y": initPoint.梭车2_前_Y = value; break;
-                        case "梭车2_后_Y": initPoint.梭车2_后_Y = value; break;
-                        case "抓盘_Empty_X": initPoint.抓盘_Empty_X = value; break;
-                        case "抓盘_Load_X": initPoint.抓盘_Load_X = value; break;
-                        case "抓盘_Auto1_X": initPoint.抓盘_Auto1_X = value; break;
-                        case "抓盘_Auto2_X": initPoint.抓盘_Auto2_X = value; break;
-                        case "Empty_最高上顶": initPoint.Empty_最高上顶 = value; break;
-                        case "Empty_满盘位": initPoint.Empty_满盘位 = value; break;
-                        case "Load_最高上顶": initPoint.Load_最高上顶 = value; break;
-                        case "Auto1_最高上顶": initPoint.Auto1_最高上顶 = value; break;
-                        case "Auto1_分盘位": initPoint.Auto1_分盘位 = value; break;
-                        case "Auto1_初始位": initPoint.Auto1_初始位 = value; break;
-                        case "Auto1_满盘位": initPoint.Auto1_满盘位 = value; break;
-                        case "Auto2_最高上顶": initPoint.Auto2_最高上顶 = value; break;
-                        case "Auto2_分盘位": initPoint.Auto2_分盘位 = value; break;
-                        case "Auto2_初始位": initPoint.Auto2_初始位 = value; break;
-                        case "Auto2_满盘位": initPoint.Auto2_满盘位 = value; break;
-                        case "Auto1上顶固定高度": initPoint.Auto1上顶固定高度 = value; break;
-                        case "Auto1下降固定高度": initPoint.Auto1下降固定高度 = value; break;
-                        case "Auto2上顶固定高度": initPoint.Auto2上顶固定高度 = value; break;
-                        case "Auto2下降固定高度": initPoint.Auto2下降固定高度 = value; break;
+                    initType.GetProperty(item["ptname"].ToString()).SetValue(initPoint, value);
 
-                    }
+                    //double value = Convert.ToDouble(item["value"].ToString());
+                    //switch (item["ptname"].ToString())
+                    //{
+                    //    case "入料_Load_X": initPoint.入料_Load_X = value; break;
+                    //    case "入料_Load_Y": initPoint.入料_Load_Y = value; break;
+                    //    case "入料_Load_Z": initPoint.入料_Load_Z = value; break;
+                    //    case "入料_Heat_X": initPoint.入料_Heat_X = value; break;
+                    //    case "入料_Heat_Y": initPoint.入料_Heat_Y = value; break;
+                    //    case "入料_Heat吸_Z": initPoint.入料_Heat吸_Z = value; break;
+                    //    case "入料_Heat放_Z": initPoint.入料_Heat放_Z = value; break;
+                    //    case "入料_梭车1_X": initPoint.入料_梭车1_X = value; break;
+                    //    case "入料_梭车1_Y": initPoint.入料_梭车1_Y = value; break;
+                    //    case "入料_梭车1_Z": initPoint.入料_梭车1_Z = value; break;
+                    //    case "入料_梭车2_X": initPoint.入料_梭车2_X = value; break;
+                    //    case "入料_梭车2_Y": initPoint.入料_梭车2_Y = value; break;
+                    //    case "入料_梭车2_Z": initPoint.入料_梭车2_Z = value; break;
+                    //    case "入料_梭车列间隔": initPoint.入料_梭车列间隔 = value; break;
+                    //    case "入料_变距最大值": initPoint.入料_变距最大值 = value; break;
+                    //    case "入料_变距最小值": initPoint.入料_变距最小值 = value; break;
+                    //    case "入料_Z1_硬件补偿": initPoint.入料_Z1_硬件补偿 = value; break;
+                    //    case "入料_Z2_硬件补偿": initPoint.入料_Z2_硬件补偿 = value; break;
+                    //    case "入料_Z3_硬件补偿": initPoint.入料_Z3_硬件补偿 = value; break;
+                    //    case "入料_Z4_硬件补偿": initPoint.入料_Z4_硬件补偿 = value; break;
+                    //    case "出料_梭车1_X": initPoint.出料_梭车1_X = value; break;
+                    //    case "出料_梭车1_Y": initPoint.出料_梭车1_Y = value; break;
+                    //    case "出料_梭车1_Z": initPoint.出料_梭车1_Z = value; break;
+                    //    case "出料_梭车2_X": initPoint.出料_梭车2_X = value; break;
+                    //    case "出料_梭车2_Y": initPoint.出料_梭车2_Y = value; break;
+                    //    case "出料_梭车2_Z": initPoint.出料_梭车2_Z = value; break;
+                    //    case "出料_Auto1_X": initPoint.出料_Auto1_X = value; break;
+                    //    case "出料_Auto1_Y": initPoint.出料_Auto1_Y = value; break;
+                    //    case "出料_Auto1_Z": initPoint.出料_Auto1_Z = value; break;
+                    //    case "出料_Auto2_X": initPoint.出料_Auto2_X = value; break;
+                    //    case "出料_Auto2_Y": initPoint.出料_Auto2_Y = value; break;
+                    //    case "出料_Auto2_Z": initPoint.出料_Auto2_Z = value; break;
+                    //    case "出料_Fix1_X": initPoint.出料_Fix1_X = value; break;
+                    //    case "出料_Fix1_Y": initPoint.出料_Fix1_Y = value; break;
+                    //    case "出料_Fix1_Z": initPoint.出料_Fix1_Z = value; break;
+                    //    case "出料_Fix2_X": initPoint.出料_Fix2_X = value; break;
+                    //    case "出料_Fix2_Y": initPoint.出料_Fix2_Y = value; break;
+                    //    case "出料_Fix2_Z": initPoint.出料_Fix2_Z = value; break;
+                    //    case "出料_Fix3_X": initPoint.出料_Fix3_X = value; break;
+                    //    case "出料_Fix3_Y": initPoint.出料_Fix3_Y = value; break;
+                    //    case "出料_Fix3_Z": initPoint.出料_Fix3_Z = value; break;
+                    //    case "出料_梭车列间隔": initPoint.出料_梭车列间隔 = value; break;
+                    //    case "出料_变距最大值": initPoint.出料_变距最大值 = value; break;
+                    //    case "出料_变距最小值": initPoint.出料_变距最小值 = value; break;
+                    //    case "出料_Fix3_右移动": initPoint.出料_Fix3_右移动 = value; break;
+                    //    case "出料_Z1_硬件补偿": initPoint.出料_Z1_硬件补偿 = value; break;
+                    //    case "出料_Z2_硬件补偿": initPoint.出料_Z2_硬件补偿 = value; break;
+                    //    case "出料_Z3_硬件补偿": initPoint.出料_Z3_硬件补偿 = value; break;
+                    //    case "出料_Z4_硬件补偿": initPoint.出料_Z4_硬件补偿 = value; break;
+                    //    case "测试_梭车1吸_X": initPoint.测试_梭车1吸_X = value; break;
+                    //    case "测试_梭车1吸_Z": initPoint.测试_梭车1吸_Z = value; break;
+                    //    case "测试_梭车2吸_X": initPoint.测试_梭车2吸_X = value; break;
+                    //    case "测试_梭车2吸_Z": initPoint.测试_梭车2吸_Z = value; break;
+                    //    case "测试_梭车1放_X": initPoint.测试_梭车1放_X = value; break;
+                    //    case "测试_梭车1放_Z": initPoint.测试_梭车1放_Z = value; break;
+                    //    case "测试_梭车2放_X": initPoint.测试_梭车2放_X = value; break;
+                    //    case "测试_梭车2放_Z": initPoint.测试_梭车2放_Z = value; break;
+                    //    case "测试_梭车列间隔": initPoint.测试_梭车列间隔 = value; break;
+                    //    case "测试_Test1区_X": initPoint.测试_Test1区_X = value; break;
+                    //    case "测试_Test2区_X": initPoint.测试_Test2区_X = value; break;
+                    //    case "测试_Test3区_X": initPoint.测试_Test3区_X = value; break;
+                    //    case "测试_Test4区_X": initPoint.测试_Test4区_X = value; break;
+                    //    case "测试_Test区Site间隔": initPoint.测试_Test区Site间隔 = value; break;
+                    //    case "测试_Test区吸_Z": initPoint.测试_Test区吸_Z = value; break;
+                    //    case "测试_Test区放_Z": initPoint.测试_Test区放_Z = value; break;
+                    //    case "梭车2_前_Y": initPoint.梭车2_前_Y = value; break;
+                    //    case "梭车2_后_Y": initPoint.梭车2_后_Y = value; break;
+                    //    case "抓盘_Empty_X": initPoint.抓盘_Empty_X = value; break;
+                    //    case "抓盘_Load_X": initPoint.抓盘_Load_X = value; break;
+                    //    case "抓盘_Auto1_X": initPoint.抓盘_Auto1_X = value; break;
+                    //    case "抓盘_Auto2_X": initPoint.抓盘_Auto2_X = value; break;
+                    //    case "Empty_最高上顶": initPoint.Empty_最高上顶 = value; break;
+                    //    case "Empty_满盘位": initPoint.Empty_满盘位 = value; break;
+                    //    case "Load_最高上顶": initPoint.Load_最高上顶 = value; break;
+                    //    case "Auto1_最高上顶": initPoint.Auto1_最高上顶 = value; break;
+                    //    case "Auto1_分盘位": initPoint.Auto1_分盘位 = value; break;
+                    //    case "Auto1_初始位": initPoint.Auto1_初始位 = value; break;
+                    //    case "Auto1_满盘位": initPoint.Auto1_满盘位 = value; break;
+                    //    case "Auto2_最高上顶": initPoint.Auto2_最高上顶 = value; break;
+                    //    case "Auto2_分盘位": initPoint.Auto2_分盘位 = value; break;
+                    //    case "Auto2_初始位": initPoint.Auto2_初始位 = value; break;
+                    //    case "Auto2_满盘位": initPoint.Auto2_满盘位 = value; break;
+                    //    case "Auto1上顶固定高度": initPoint.Auto1上顶固定高度 = value; break;
+                    //    case "Auto1下降固定高度": initPoint.Auto1下降固定高度 = value; break;
+                    //    case "Auto2上顶固定高度": initPoint.Auto2上顶固定高度 = value; break;
+                    //    case "Auto2下降固定高度": initPoint.Auto2下降固定高度 = value; break;
+
+                    //}
                 }
                 初始点位 = initPoint;
             }

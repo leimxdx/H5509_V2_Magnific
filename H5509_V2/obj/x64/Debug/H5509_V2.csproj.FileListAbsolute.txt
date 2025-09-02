@@ -372,8 +372,6 @@ D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.csproj.Up2Date
 D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.exe
 D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.pdb
 D:\GitHub\H5509_V3\obj\x64\Debug\H5509_V2.exe.config
-D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.exe.config
-D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.pdb
 D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ClosedXML.dll
 D:\GitHub\H5509_V2\H5509_V2\bin\Debug\ClosedXML.Parser.dll
@@ -429,7 +427,6 @@ D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Memory.xml
 D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Numerics.Vectors.xml
 D:\GitHub\H5509_V2\H5509_V2\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
-D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Auto1Map.resources
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Auto2Map.resources
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.ChangePwd.resources
@@ -456,5 +453,8 @@ D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2._speed.resources
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.GenerateResource.cache
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
-D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.pdb
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\H5509_V2\bin\Debug\H5509_V2.exe
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe.config

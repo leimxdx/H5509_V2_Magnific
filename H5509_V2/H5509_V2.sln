@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextFileLogger", "..\TextFi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thermostat", "..\Thermostat\Thermostat.csproj", "{E64BF547-B15C-490C-87FA-06F2A4C21889}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlSugar", "..\SqlSugar\SqlSugar.csproj", "{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,14 @@ Global
 		{E64BF547-B15C-490C-87FA-06F2A4C21889}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E64BF547-B15C-490C-87FA-06F2A4C21889}.Release|x64.ActiveCfg = Release|Any CPU
 		{E64BF547-B15C-490C-87FA-06F2A4C21889}.Release|x64.Build.0 = Release|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Debug|x64.Build.0 = Debug|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Release|x64.ActiveCfg = Release|Any CPU
+		{B99B1A82-309A-88D8-3F8D-89F92FEB37B8}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

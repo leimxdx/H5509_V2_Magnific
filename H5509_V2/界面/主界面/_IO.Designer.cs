@@ -565,7 +565,6 @@
             this.uiLight35 = new Sunny.UI.UILight();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.IOUpdateTimer = new System.Windows.Forms.Timer(this.components);
-            this.uiButton1 = new Sunny.UI.UIButton();
             this.tabPage1.SuspendLayout();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -634,7 +633,7 @@
             this.tabPage1.Controls.Add(this.uiTabControl2);
             this.tabPage1.Location = new System.Drawing.Point(0, 40);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage1.Size = new System.Drawing.Size(200, 60);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "IO调试";
             // 
@@ -1738,7 +1737,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1889, 900);
+            this.tabPage8.Size = new System.Drawing.Size(200, 60);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "入料区";
             // 
@@ -2505,7 +2504,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1889, 900);
+            this.tabPage9.Size = new System.Drawing.Size(200, 60);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "出料区";
             // 
@@ -3412,7 +3411,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(1889, 900);
+            this.tabPage16.Size = new System.Drawing.Size(200, 60);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "测试区";
             // 
@@ -8354,24 +8353,9 @@
             // 
             this.IOUpdateTimer.Tick += new System.EventHandler(this.IOUpdateTimer_Tick);
             // 
-            // uiButton1
-            // 
-            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton1.Location = new System.Drawing.Point(674, 6);
-            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(100, 35);
-            this.uiButton1.TabIndex = 4;
-            this.uiButton1.Text = "uiButton1";
-            this.uiButton1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton1.Visible = false;
-            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
-            // 
             // _IO
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.uiTabControl1);
             this.Name = "_IO";
             this.RectColor = System.Drawing.Color.Transparent;
@@ -8464,7 +8448,6 @@
         private Sunny.UI.UIToolTip uiToolTip1;
         private Sunny.UI.UITabControl uiTabControl2;
         public System.Windows.Forms.Timer IOUpdateTimer;
-        private Sunny.UI.UIButton uiButton1;
         private Sunny.UI.UITabControl uiTabControl3;
         private System.Windows.Forms.TabPage tabPage7;
         private Sunny.UI.UIGroupBox uiGroupBox5;

@@ -1,0 +1,123 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\GitHub\\H5509_V2\\SqlSugar\\SqlSugar.csproj": {}
+  },
+  "projects": {
+    "D:\\GitHub\\H5509_V2\\SqlSugar\\SqlSugar.csproj": {
+      "version": "5.1.4.200",
+      "restore": {
+        "projectUniqueName": "D:\\GitHub\\H5509_V2\\SqlSugar\\SqlSugar.csproj",
+        "projectName": "SqlSugar",
+        "projectPath": "D:\\GitHub\\H5509_V2\\SqlSugar\\SqlSugar.csproj",
+        "packagesPath": "C:\\Users\\研发\\.nuget\\packages\\",
+        "outputPath": "D:\\GitHub\\H5509_V2\\SqlSugar\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\研发\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "targetAlias": "netstandard2.1",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "targetAlias": "netstandard2.1",
+          "dependencies": {
+            "Microsoft.Data.SqlClient": {
+              "target": "Package",
+              "version": "[5.2.1, )"
+            },
+            "Microsoft.Data.Sqlite": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
+            "Npgsql": {
+              "target": "Package",
+              "version": "[5.0.18, )"
+            },
+            "Oracle.ManagedDataAccess.Core": {
+              "target": "Package",
+              "version": "[23.8.0, )"
+            },
+            "Oscar.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.0.4, )"
+            },
+            "SqlSugarCore.Dm": {
+              "target": "Package",
+              "version": "[8.8.0, )"
+            },
+            "SqlSugarCore.Kdbndp": {
+              "target": "Package",
+              "version": "[9.3.7.821, )"
+            },
+            "System.Data.Common": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Reflection.Emit.Lightweight": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Text.RegularExpressions": {
+              "target": "Package",
+              "version": "[4.3.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300-preview.0.25177.5\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
