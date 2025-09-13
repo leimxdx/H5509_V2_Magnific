@@ -4,3 +4,9 @@ D:\GitHub\H5509_V3\SQLServerHelper\obj\Debug\SQLServerHelper.csproj.AssemblyRefe
 D:\GitHub\H5509_V3\SQLServerHelper\obj\Debug\SQLServerHelper.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V3\SQLServerHelper\obj\Debug\SQLServerHelper.dll
 D:\GitHub\H5509_V3\SQLServerHelper\obj\Debug\SQLServerHelper.pdb
+D:\GitHub\H5509_V2\SQLServerHelper\bin\Debug\SQLServerHelper.dll
+D:\GitHub\H5509_V2\SQLServerHelper\bin\Debug\SQLServerHelper.pdb
+D:\GitHub\H5509_V2\SQLServerHelper\obj\Debug\SQLServerHelper.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2\SQLServerHelper\obj\Debug\SQLServerHelper.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2\SQLServerHelper\obj\Debug\SQLServerHelper.dll
+D:\GitHub\H5509_V2\SQLServerHelper\obj\Debug\SQLServerHelper.pdb

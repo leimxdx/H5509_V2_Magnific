@@ -881,32 +881,70 @@ namespace H5509_V2
             //}
             //else Com.Send(testnum, isopen);
         }
+        //private void GetTimeOutBin(int site)
+        //{
+        //    if (设置信息.通讯信息.通讯协议 == "得一微")
+        //    {
+        //        int[] sites = { StationId, StationId + 1 };
+
+        //        for (int i = 0; i < sites.Length; i++)
+        //        {
+        //            if (testDataInfos[sites[i]].SiteTestState == 2)
+        //            {
+        //                testDataInfos[sites[i]].Iswaitout = true;
+
+        //                testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[sites[i]].listtestdatetime;
+        //                testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[sites[i]].listtestdatetime;
+
+        //                testDataInfos[sites[i]].SiteTestBin = new string[] { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+        //                testDataInfos[sites[i]].SiteTestState = 3;
+
+        //                DataUpdate(sites[i], testDataInfos[sites[i]]);
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        testDataInfos[site].Iswaitout = true;
+
+        //        testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+        //        testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+
+        //        testDataInfos[site].SiteTestBin = new string[] { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+        //        testDataInfos[site].SiteTestState = 3;
+
+        //        DataUpdate(site, testDataInfos[site]);
+        //    }
+        //}
 
         private void uiButton6_Click(object sender, EventArgs e)
         {
-            int site = (short)(Convert.ToInt16(uiComboBox1.Text) - 1);
-            if (SiteTestState[site] == 2)
-            {
-                Com.Listtimer[site].Stop();
-                //Com.Iswaitout[site] = true;
-                string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
-                if (Com.Bin.ContainsKey(site))
-                {
-                    Com.Bin[site] = bin;
-                }
-                else Com.Bin.Add(site, bin);
-                OutSiteQueue.Enqueue(site);
-                BinSaveQueue.Enqueue(bin);
-                SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
-                SiteTestState[site] = 3;
-                //用来统计数据
-                Com.OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
-                Com.Listtestsingal.Add(site);
-            }
-            else
-            {
-                MessageBox.Show($"Site:{site + 1}未在测试!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            //int site = (short)(Convert.ToInt16(uiComboBox1.Text) - 1);
+            //if (SiteTestState[site] == 2)
+            //{
+            //    Com.Listtimer[site].Stop();
+            //    //Com.Iswaitout[site] = true;
+            //    string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+            //    if (Com.Bin.ContainsKey(site))
+            //    {
+            //        Com.Bin[site] = bin;
+            //    }
+            //    else Com.Bin.Add(site, bin);
+            //    //OutSiteQueue.Enqueue(site);
+            //    //BinSaveQueue.Enqueue(bin);
+
+            //    OutSiteQueue.Enqueue((site, new TestDataInfo() {SiteTestState = 3, SiteTestBin = bin }));
+
+            //    SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
+            //    SiteTestState[site] = 3;
+            //    //用来统计数据
+            //    Com.OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
+            //    Com.Listtestsingal.Add(site);
+            //}
+            //else
+            //{
+            //    MessageBox.Show($"Site:{site + 1}未在测试!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
         }
 
         private void uiButton18_Click(object sender, EventArgs e)
@@ -1036,7 +1074,7 @@ namespace H5509_V2
                             {
                                 ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
                             }
-                            string value = ts.ToString().Replace(".", "天") + "\r\n";
+                            string value = ts.ToString().Replace(".", "天") + ",";
                             value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
                             double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
 
@@ -1131,7 +1169,7 @@ namespace H5509_V2
                             {
                                 ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
                             }
-                            string value = ts.ToString().Replace(".", "天") + "\r\n";
+                            string value = ts.ToString().Replace(".", "天") + ",";
                             value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
                             double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
 
@@ -1232,7 +1270,7 @@ namespace H5509_V2
                             {
                                 ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
                             }
-                            string value = ts.ToString().Replace(".", "天") + "\r\n";
+                            string value = ts.ToString().Replace(".", "天") + ",";
                             value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
                             double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
 

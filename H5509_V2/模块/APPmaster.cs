@@ -7,17 +7,23 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComMaster.Commnunication;
+using ComMaster.Interfaces;
 using H5509_alarm;
 using H5509_V2;
 using IHardwareGXN.GXNCard;
 using MotionCommon;
 using SQLiteHelper;
 using SQLServerHelper;
+using Sunny.UI;
 using TextFileLogger;
 using Thermostat;
+using static System.Windows.Forms.Design.AxImporter;
 using static H5509_V2.APPmaster;
 using static H5509_V2.ForMain;
 using Ttimer = System.Timers.Timer;
@@ -383,13 +389,19 @@ namespace H5509_V2
 
         public static bool 入料IC忽略;
 
+        public static bool 入料IC移动过程中忽略;
+
         public static bool 入料IC吸不起结批;
 
         public static bool 无待测盘结批;
 
         public static bool 出料IC忽略;
 
+        public static bool 出料IC移动过程中忽略;
+
         public static bool 测试IC忽略;
+
+        public static bool 测试IC移动过程中忽略;
 
         public static int 飞梭2位置 = 0; //0:后面 1:前面
 
@@ -846,16 +858,21 @@ namespace H5509_V2
         public static string[] LotNo = new string[17];
 
         //public static List<bool[][]> SiteStatus = new List<bool[][]>(); //保存Site测试开关状态
+        public static StationManager StationManagers;
 
         public static List<bool[][]> SiteTestIC = new List<bool[][]>(); //保存Site放入的IC状态
 
         public static List<string[]> SiteTestBin = new List<string[]>();
 
-        public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>(); //用来保存接收的Bin数据的队列
+        //public static ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>(); //用来保存接收的Bin数据的队列
 
         public static ConcurrentQueue<int> InSiteQueue = new ConcurrentQueue<int>(); //入料队列
+        //public static ConcurrentQueue<int> OutSiteQueue2 = new ConcurrentQueue<int>(); //入料队列
 
-        public static ConcurrentQueue<int> OutSiteQueue = new ConcurrentQueue<int>(); //出料队列
+        public static ConcurrentQueue<(int SiteId, TestDataInfo Data)> OutSiteQueue = new ConcurrentQueue<(int, TestDataInfo)>();
+        public static ConcurrentQueue<(int SiteId, TestDataInfo Data)> OutSiteQueue2 = new ConcurrentQueue<(int, TestDataInfo)>(); //用于数据处理
+
+        //public static ConcurrentQueue<(int SiteId, string[] Data)> OutSiteQueue = new ConcurrentQueue<(int, string[])>();
 
         public static bool 空盘上顶到最大值 = false;
 
@@ -1392,29 +1409,29 @@ namespace H5509_V2
             return "Success";
         }
 
-        public static List<bool[]> GetOpens(bool[][] siteopen)
+        public static List<bool[]> GetOpens(bool[] siteopen)
         {
             return new List<bool[]>()
             {
 
-                new bool[] { siteopen[0][0],siteopen[0][1],siteopen[0][2] ,siteopen[0][3]  },
-                new bool[] { siteopen[1][0],siteopen[1][1],siteopen[1][2] ,siteopen[1][3]  },
+                new bool[] { siteopen[0],siteopen[1],siteopen[2] ,siteopen[3]  },
+                new bool[] { siteopen[4],siteopen[5],siteopen[6] ,siteopen[7]  },
             };
         }
 
-        public static short[] GetSites(short site)
+        public static int[] GetSites(int site)
         {
             switch (site)
             {
-                case 0: case 1: return new short[2] { 0, 1 };
-                case 2: case 3: return new short[2] { 2, 3 };
-                case 4: case 5: return new short[2] { 4, 5 };
-                case 6: case 7: return new short[2] { 6, 7 };
-                case 8: case 9: return new short[2] { 8, 9 };
-                case 10: case 11: return new short[2] { 10, 11 };
-                case 12: case 13: return new short[2] { 12, 13 };
-                case 14: case 15: return new short[2] { 14, 15 };
-                default: return new short[2] { 0, 1 };
+                case 0: case 1: return new int[2] { 0, 1 };
+                case 2: case 3: return new int[2] { 2, 3 };
+                case 4: case 5: return new int[2] { 4, 5 };
+                case 6: case 7: return new int[2] { 6, 7 };
+                case 8: case 9: return new int[2] { 8, 9 };
+                case 10: case 11: return new int[2] { 10, 11 };
+                case 12: case 13: return new int[2] { 12, 13 };
+                case 14: case 15: return new int[2] { 14, 15 };
+                default: return new int[2] { 0, 1 };
             }
         }
 
@@ -1630,52 +1647,74 @@ namespace H5509_V2
         {
             colums = 0;
             open = new bool[4];
-            if (飞梭前入料IC == null || 放料IC目标值 == null) return false;
-            if (梭车是否需要放料(飞梭前入料IC[0], 放料IC目标值[0]))
+
+            try
             {
-                open = 梭车放料ICopen(飞梭前入料IC[0], 放料IC目标值[0]);
-                if (open.Contains(true))
+                if (飞梭前入料IC == null || 放料IC目标值 == null) return false;
+                if (梭车是否需要放料(飞梭前入料IC[0], 放料IC目标值[0]))
                 {
-                    colums = 0;
-                    return true;
+                    open = 梭车放料ICopen(飞梭前入料IC[0], 放料IC目标值[0]);
+                    if (open.Contains(true))
+                    {
+                        colums = 0;
+                        return true;
+                    }
                 }
+                else if (梭车是否需要放料(飞梭前入料IC[1], 放料IC目标值[1]))
+                {
+                    open = 梭车放料ICopen(飞梭前入料IC[1], 放料IC目标值[1]);
+                    if (open.Contains(true))
+                    {
+                        colums = 1;
+                        return true;
+                    }
+                }
+                return false;
             }
-            else if (梭车是否需要放料(飞梭前入料IC[1], 放料IC目标值[1]))
+            catch (Exception ex)
             {
-                open = 梭车放料ICopen(飞梭前入料IC[1], 放料IC目标值[1]);
-                if (open.Contains(true))
-                {
-                    colums = 1;
-                    return true;
-                }
+                string errormsg = $"执行飞梭前入料放料参数异常,详细信息:" + ex.Message;
+                RunLog(errormsg, LogType.RunLog);
+                Thread.Sleep(500);
+                return false;
             }
-            return false;
         }
 
         public static bool 飞梭后入料放料参数(out short colums, out bool[] open)
         {
             colums = 0;
             open = new bool[4];
-            if (飞梭后入料IC == null || 放料IC目标值 == null) return false;
-            if (梭车是否需要放料(飞梭后入料IC[0], 放料IC目标值[0]))
+
+            try
             {
-                open = 梭车放料ICopen(飞梭后入料IC[0], 放料IC目标值[0]);
-                if (open.Contains(true))
+                if (飞梭后入料IC == null || 放料IC目标值 == null) return false;
+                if (梭车是否需要放料(飞梭后入料IC[0], 放料IC目标值[0]))
                 {
-                    colums = 0;
-                    return true;
+                    open = 梭车放料ICopen(飞梭后入料IC[0], 放料IC目标值[0]);
+                    if (open.Contains(true))
+                    {
+                        colums = 0;
+                        return true;
+                    }
                 }
+                else if (梭车是否需要放料(飞梭后入料IC[1], 放料IC目标值[1]))
+                {
+                    open = 梭车放料ICopen(飞梭后入料IC[1], 放料IC目标值[1]);
+                    if (open.Contains(true))
+                    {
+                        colums = 1;
+                        return true;
+                    }
+                }
+                return false;
             }
-            else if (梭车是否需要放料(飞梭后入料IC[1], 放料IC目标值[1]))
+            catch (Exception ex)
             {
-                open = 梭车放料ICopen(飞梭后入料IC[1], 放料IC目标值[1]);
-                if (open.Contains(true))
-                {
-                    colums = 1;
-                    return true;
-                }
+                string errormsg = $"执行飞梭后入料放料参数异常,详细信息:" + ex.Message;
+                RunLog(errormsg, LogType.RunLog);
+                Thread.Sleep(500);
+                return false;
             }
-            return false;
         }
 
         public static bool JudgeNozzleSts(bool[] lsopen, int[] opens, int value)
@@ -2328,6 +2367,7 @@ namespace H5509_V2
                     setupInfo.开site信息.Site名称 = reader["site名称"].ToString();
                     setupInfo.分BIN信息.分BIN名称 = reader["分BIN名称"].ToString();
                     setupInfo.测试机信息.测试机名称 = reader["测试机名称"].ToString();
+                    setupInfo.通讯信息.通讯名称 = reader["通讯名称"].ToString();
                     setupInfo.梭车名称 = reader["梭车名称"].ToString();
                     setupInfo.温度模式 = reader["温度模式"].ToString();
                 }
@@ -2537,6 +2577,53 @@ namespace H5509_V2
             return result;
         }
 
+        public static string GetComInfoSet(string name, out ComInfoSet comInfoSet)
+        {
+            comInfoSet = new ComInfoSet();
+            string result = Sqlite.runSql(SQLiteConnString, $"select * from ComInfoSet where 通讯名称 = '{name}'", out DataTable dataTable);
+            if (result == "Success")
+            {
+                try
+                {
+                    if (dataTable.Rows.Count > 0)
+                    {
+                        DataRow dr = dataTable.Rows[0];
+
+                        comInfoSet = new ComInfoSet()
+                        {
+                            通讯名称 = dr["通讯名称"].ToString(),
+                            通讯协议 = dr["通讯协议"].ToString(),
+                            通讯方式 = dr["通讯方式"].ToString(),
+                            测试机数量 = Convert.ToInt32(dr["测试机数量"].ToString()),
+                            同时测试 = Convert.ToInt32(dr["同时测试"].ToString()),
+                            测试结果中有对应Site = Convert.ToBoolean(dr["测试结果中有对应Site"].ToString()),
+                            Site1 = dr["Site1"].ToString(),
+                            Site2 = dr["Site2"].ToString(),
+                            Site3 = dr["Site3"].ToString(),
+                            Site4 = dr["Site4"].ToString(),
+                            Site5 = dr["Site5"].ToString(),
+                            Site6 = dr["Site6"].ToString(),
+                            Site7 = dr["Site7"].ToString(),
+                            Site8 = dr["Site8"].ToString(),
+                            Site9 = dr["Site9"].ToString(),
+                            Site10 = dr["Site10"].ToString(),
+                            Site11 = dr["Site11"].ToString(),
+                            Site12 = dr["Site12"].ToString(),
+                            Site13 = dr["Site13"].ToString(),
+                            Site14 = dr["Site14"].ToString(),
+                            Site15 = dr["Site15"].ToString(),
+                            Site16 = dr["Site16"].ToString(),
+                        };
+                    }
+                    else result = $"无通讯名称{name}信息";
+                }
+                catch (Exception ex)
+                {
+                    return "获取通讯名称数据异常!" + ex.Message;
+                }
+            }
+            return result;
+        }
         public static string GetSetupInfoData(string name)
         {
             ///设备档案
@@ -2567,6 +2654,10 @@ namespace H5509_V2
                 result = GetTesterIFParam(setupInfo.测试机信息.测试机名称, out TesterIFParam tester);
                 if (result != "Success") return result;
 
+                //测试机参数
+                result = GetComInfoSet(setupInfo.通讯信息.通讯名称, out ComInfoSet comInfoSet);
+                if (result != "Success") return result;
+
                 设置信息.档案名称 = setupInfo.档案名称;
                 设置信息.Tray盘信息 = trayInfo;
                 设置信息.Heat盘信息 = heatInfo;
@@ -2574,6 +2665,7 @@ namespace H5509_V2
                 设置信息.开site信息 = siteStatus;
                 设置信息.分BIN信息 = binparam;
                 设置信息.测试机信息 = tester;
+                设置信息.通讯信息 = comInfoSet;
                 设置信息.梭车名称 = setupInfo.梭车名称;
                 设置信息.温度模式 = setupInfo.温度模式;
             }
@@ -2723,6 +2815,37 @@ namespace H5509_V2
 
             else return "Success";
         }
+        public static string UpdateComInfoSet(string name, ComInfoSet tester)
+        {
+            string sql = $"update ComInfoSet set " +
+                $"通讯协议 = '{tester.通讯协议}'," +
+                $"通讯方式 = '{tester.通讯方式}'," +
+                $"测试机数量 = '{tester.测试机数量}'," +
+                $"同时测试 = '{tester.同时测试}'," +
+                $"测试结果中有对应Site = '{tester.测试结果中有对应Site}'," +
+                $"Site1 = '{tester.Site1}'," +
+                $"Site2 = '{tester.Site2}'," +
+                $"Site3 = '{tester.Site3}'," +
+                $"Site4 = '{tester.Site4}'," +
+                $"Site5 = '{tester.Site5}'," +
+                $"Site6 = '{tester.Site6}'," +
+                $"Site7 = '{tester.Site7}'," +
+                $"Site8 = '{tester.Site8}'," +
+                $"Site9 = '{tester.Site9}'," +
+                $"Site10 = '{tester.Site10}'," +
+                $"Site11 = '{tester.Site11}'," +
+                $"Site12 = '{tester.Site12}'," +
+                $"Site13 = '{tester.Site13}'," +
+                $"Site14 = '{tester.Site14}'," +
+                $"Site15 = '{tester.Site15}'," +
+                $"Site16 = '{tester.Site16}'" +
+                $" where 通讯名称 = '{name}'";
+
+            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            if (line <= 0) return "保存失败";
+
+            else return "Success";
+        }
 
         public static string UpateJurisdiction(string name, string password, string permTime)
         {
@@ -2796,6 +2919,45 @@ namespace H5509_V2
             }
         }
 
+        public static Dictionary<string, object> ConvertToDictionary(SerialPortConfig config)
+        {
+            return new Dictionary<string, object>
+            {
+                { "Protocol", config.Protocol },
+                { "PortName", config.PortName },
+                { "BaudRate", config.BaudRate },
+                { "Parity",config.Parity },
+                { "DataBits", config.DataBits },
+                { "StopBits", config.StopBits },
+            };
+        }
+
+        public static SerialPortConfig GetSiteConfig(int site)
+        {
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                PropertyNameCaseInsensitive = true
+            };
+            // 使用反射获取站点属性
+            Type commInfoType = 设置信息.通讯信息.GetType();
+            string propertyName = $"Site{site + 1}";
+            var property = commInfoType.GetProperty(propertyName);
+
+            if (property == null)
+            {
+                throw new ArgumentException($"未找到站点 {site} 的配置属性");
+            }
+
+            string configJson = (string)property.GetValue(设置信息.通讯信息);
+
+            if (string.IsNullOrWhiteSpace(configJson))
+            {
+                return new SerialPortConfig();
+            }
+
+            return JsonSerializer.Deserialize<SerialPortConfig>(configJson, options);
+        }
         #endregion
 
 
@@ -4593,6 +4755,34 @@ namespace H5509_V2
         }
 
         #endregion
+
+        public static void 刷新通讯配置()
+        {
+            int testNum = 设置信息.通讯信息.测试机数量;
+
+            var configDict = new Dictionary<int, Dictionary<string, object>>();
+
+            // 直接创建并填充数组
+            Dictionary<string, object>[] sites = Enumerable.Range(0, 16)
+                .Select(i => ConvertToDictionary(GetSiteConfig(i)))
+                .ToArray();
+
+            int step = 16 / testNum;
+            for (int i = 0; i < testNum; i++)
+            {
+                int siteIndex = i * step;
+                configDict.Add(siteIndex, sites[siteIndex]);
+            }
+            StationManagers.UpdateStationsConfig(configDict);
+            for (int i = 0; i < 16; i++)
+            {
+                StationManagers.Connect(i);
+                //StationManagers.Send(i, "@START_INFO ZRS2409290dlt:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");
+                //.SendAsync("@START_INFO ZRS240929001A:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");//我为宇宙，woweiyuzhou, I am Yuzhou
+
+                //StationManagers.GetStation(i).SendAsync("@START_TEST 00 11111111+");//我为宇宙，woweiyuzhou, I am Yuzhou
+            }
+        }
 
         public static TimeSpan 获取加热倒数时间()
         {

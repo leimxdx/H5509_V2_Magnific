@@ -172,10 +172,11 @@ namespace H5509_V2
                 string value;
 
                 //GNME601 核1 核2 输入
-                for (short i = 1; i <= 2; i++)
+                for (short i = 0; i < 2; i++)
                 {
-                    motionEx.GetDi("GNM601", i, 1, 4, out value);
+                    motionEx.GetDi("GNM601", (short)(i + 1), 1, 4, out value);
                     ioval = value.ToCharArray();
+                    GNME601_核输入[i] = new string[ioval.Length];
                     for (int j = 0; j < ioval.Length; j++)
                     {
                         GNME601_核输入[i][j] = ioval[j].ToString();
@@ -198,10 +199,11 @@ namespace H5509_V2
                 //}
 
                 //GNME601 核1 核2 输出
-                for (short i = 1; i <= 2; i++)
+                for (short i = 0; i < 2; i++)
                 {
-                    motionEx.GetDO("GNM601", i, 1, 12, out value);
+                    motionEx.GetDO("GNM601", (short)(i + 1), 1, 12, out value);
                     ioval = value.ToCharArray();
+                    GNME601_核输出[i] = new string[ioval.Length];
                     for (int j = 0; j < ioval.Length; j++)
                     {
                         GNME601_核输出[i][j] = ioval[j].ToString();

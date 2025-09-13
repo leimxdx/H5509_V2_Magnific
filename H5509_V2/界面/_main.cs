@@ -64,6 +64,7 @@ namespace H5509_V2
 
         public Action 刷新界面权限;
 
+
         public _main()
         {
             InitializeComponent();
@@ -263,11 +264,17 @@ namespace H5509_V2
 
         public void SendLotNo()
         {
-            if (!Com.IsOpenCom)
+            bool[] check = StationManagers.CheckComConnect();
+            if (check.Contains(false)) //if (!Com.IsOpenCom)
             {
                 MessageBox.Show("串口未连接!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            Com.Send($"@START_INFO {textBoxFlowcaedno.Text}:" +
+
+            StationManagers.GetStationId(out int[] site);
+            for (int i = 0; i < site.Length; i++)
+            {
+                //StationManagers.Connect(site[i]); //Thread.Sleep(50);
+                StationManagers.Send(site[i], $"@START_INFO {textBoxFlowcaedno.Text}:" +
                                         $"{textBoxmachine.Text}:" + //Machine
                                         $"{textBoxcustom.Text}:" + //Custom
                                         $"{textBoxproduct.Text}:" + //Product
@@ -283,7 +290,28 @@ namespace H5509_V2
                                         $"{textBoxuser.Text}:" +//User
                                         $"{textBoxtestflow.Text}:" +//TestFlow
                                         $"{textBoxstate.Text}:" +//State
-                                        $"{textBoxtemprature.Text}+");  //Temperature
+                                        $"{textBoxtemprature.Text}+");
+                //.SendAsync("@START_INFO ZRS240929001A:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");//我为宇宙，woweiyuzhou, I am Yuzhou
+
+                //StationManagers.GetStation(i).SendAsync("@START_TEST 00 11111111+");//我为宇宙，woweiyuzhou, I am Yuzhou
+            }
+            //Com.Send($"@START_INFO {textBoxFlowcaedno.Text}:" +
+            //                            $"{textBoxmachine.Text}:" + //Machine
+            //                            $"{textBoxcustom.Text}:" + //Custom
+            //                            $"{textBoxproduct.Text}:" + //Product
+            //                            $"{textBoxLotno.Text}:" +//LotNO
+            //                            $"{textBoxdatecode.Text}:" +//DateCode
+            //                            $"{textBoxfwversion.Text}:" +//FW Version
+            //                            $"{textBoxcheckcode.Text}:" +//CheckCode
+            //                            $"{textBoxmqty.Text}:" +//MQTY
+            //                            $"{textBoxcode.Text}:" +//CODE
+            //                            $"{textBoxcodecrc.Text}:" +//CODECRC
+            //                            $"{textBoxstation.Text}:" +//Station
+            //                            $"{textBoxmark.Text}:" +//Mark
+            //                            $"{textBoxuser.Text}:" +//User
+            //                            $"{textBoxtestflow.Text}:" +//TestFlow
+            //                            $"{textBoxstate.Text}:" +//State
+            //                            $"{textBoxtemprature.Text}+");  //Temperature
         }
 
         private void uiCheckBox1_CheckedChanged(object sender, EventArgs e)
@@ -677,7 +705,10 @@ namespace H5509_V2
 
                                     刷新开Site状态();
                                     刷新温度显示();
-                                    Com.刷新串口信息();
+                                    StationManagers.UpdateTime();
+                                    刷新通讯配置();
+                                    StationManagers.ConnectAll();
+                                    //Com.刷新串口信息();
                                     ischange = true;
                                     RunLog($"档案切换[{当前档案}]->[{comboBox1.Text.Trim()}]");
                                     当前档案 = value;
@@ -801,10 +832,11 @@ namespace H5509_V2
                 RunLog("刷新档案选项失败!" + result);
                 return;
             }
+            comboBox1.SelectedIndexChanged -= comboBox1_SelectedValueChanged;
+
             comboBox1.DataSource = dt;
             comboBox1.DisplayMember = "档案名称";
 
-            comboBox1.SelectedIndexChanged -= comboBox1_SelectedValueChanged;
             comboBox1.Text = 当前档案;
             comboBox1.SelectedIndexChanged += comboBox1_SelectedValueChanged;
         }
@@ -817,12 +849,12 @@ namespace H5509_V2
                 RunLog("刷新权限选项失败!" + result);
                 return;
             }
+            combox_juris.SelectedIndexChanged -= combox_juris_SelectedIndexChanged;
 
             combox_juris.DataSource = dt;
             combox_juris.DisplayMember = "realName";
             当前权限 = "Operator";
 
-            combox_juris.SelectedIndexChanged -= combox_juris_SelectedIndexChanged;
             comboBox1.Text = 当前权限;
             combox_juris.SelectedIndexChanged += combox_juris_SelectedIndexChanged;
         }
@@ -921,19 +953,20 @@ namespace H5509_V2
                         RunLog($"新开Site{i}");
 
                         if (!InSiteQueue.Contains(i) //如果不在入料队列中
-                            && !OutSiteQueue.Contains(i) //不在出料队列中
-                            && (SiteTestState[i] == 0)
+                            //&& !OutSiteQueue.Contains(i) //不在出料队列中
+                            && !OutSiteQueue.Any(item => item.SiteId == i) //不在出料队列中
+                            && (StationManagers.GetStationState(i) == 0)
                             && (正在入料的Site != i))
                         //&& !正在吸取后入料.Contains(true)) //测试区有料待取走
                         {
                             InSiteQueue.Enqueue(i);
-                            RunLog($"添加Site{i}");
+                            RunLog($"InSiteQueue添加Site{i}");
                         }
                         else
                         {
                             RunLog("!InSiteQueue:" + !InSiteQueue.Contains(i));
-                            RunLog("!OutSiteQueue:" + !OutSiteQueue.Contains(i));
-                            RunLog($"SiteTestState[{i}]:" + SiteTestState[i]);
+                            RunLog("!OutSiteQueue:" + !OutSiteQueue.Any(item => item.SiteId == i));
+                            RunLog($"SiteTestState[{i}]:" + StationManagers.GetStationState(i));
                             RunLog("site:" + 正在入料的Site);
                         }
 
@@ -1317,11 +1350,7 @@ namespace H5509_V2
 
                         if (设备状态 != 0)
                         {
-                            for (int site = 0; site < SiteTestIC.Count; site++)
-                            {
-                                bool[][] open = SiteTestIC[site];
-                                显示Dout颜色(site, open, SiteTestBin[site]);
-                            }
+                            显示Dout颜色();
                         }
                     }));
 
@@ -1337,10 +1366,12 @@ namespace H5509_V2
 
         public void 显示Dout颜色()
         {
-            for (int site = 0; site < SiteTestIC.Count; site++)
+            bool[][][] siteTestIC = StationManagers.GetStationICs();
+            string[][] siteTestbin = StationManagers.GetStationBins();
+            for (int site = 0; site < siteTestIC.Length; site++)
             {
-                bool[][] open = SiteTestIC[site];
-                显示Dout颜色(site, open, SiteTestBin[site]);
+                bool[][] open = siteTestIC[site];
+                显示Dout颜色(site, open, siteTestbin[site]);
             }
         }
 
@@ -1352,7 +1383,7 @@ namespace H5509_V2
                 {
                     if (open[j][k])
                     {
-                        int sitestate = SiteTestState[site];
+                        int sitestate = StationManagers.GetStationState(site);// SiteTestState[site];
                         if (sitestate == 1)
                         {
                             Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Green;

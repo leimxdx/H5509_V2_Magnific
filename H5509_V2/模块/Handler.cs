@@ -555,7 +555,7 @@ namespace H5509_V2
             string result = 读取气缸输入信号("X173_测试吸嘴张开气缸到位", "1", out long ms);
             if (result != "Success") RunLog($"测试吸嘴张开气缸到位输出超时({ms}ms)");
 
-            else RunLog($"测试吸嘴张开气缸到位输出成功({ms}ms)");
+            //else RunLog($"测试吸嘴张开气缸到位输出成功({ms}ms)");
 
             return result;
         }
@@ -565,7 +565,7 @@ namespace H5509_V2
             string result = 读取气缸输入信号("X174_测试吸嘴张开气缸原位", "1", out long ms);
 
             if (result != "Success") RunLog($"测试吸嘴张开气缸原位输出超时({ms}ms)");
-            else RunLog($"测试吸嘴张开气缸原位输出成功({ms}ms)");
+            //else RunLog($"测试吸嘴张开气缸原位输出成功({ms}ms)");
 
             return result;
         }
@@ -587,7 +587,7 @@ namespace H5509_V2
             string result = 读取气缸输入信号("X065_移Tray上下缸下感应", "1", out long ms);
 
             if (result != "Success") RunLog($"移Tray上下气缸原位输出超时({ms}ms)");
-            else RunLog($"移Tray上下气缸原位输出成功({ms}ms)");
+            //else RunLog($"移Tray上下气缸原位输出成功({ms}ms)");
 
             return result;
         }
@@ -597,7 +597,7 @@ namespace H5509_V2
             string result = 读取气缸输入信号("X064_移Tray上下缸上感应", "1", out long ms);
 
             if (result != "Success") RunLog($"移Tray上下气缸到位输出超时({ms}ms)");
-            else RunLog($"移Tray上下气缸到位输出成功({ms}ms)");
+            //else RunLog($"移Tray上下气缸到位输出成功({ms}ms)");
 
             return result;
         }
@@ -651,7 +651,7 @@ namespace H5509_V2
             string result = 读取气缸输入信号("X067_移Tray夹紧缸夹紧感应", "1", out long ms);
 
             if (result != "Success") RunLog($"移Tray夹爪气缸到位输出超时({ms}ms)");
-            else RunLog($"移Tray夹爪气缸到位输出成功({ms}ms)");
+            //else RunLog($"移Tray夹爪气缸到位输出成功({ms}ms)");
 
             return result;
         }
@@ -661,7 +661,7 @@ namespace H5509_V2
             string result = 读取气缸输入信号("X066_移Tray夹紧缸松开感应", "1", out long ms);
 
             if (result != "Success") RunLog($"移Tray夹爪气缸原位输出超时({ms}ms)");
-            else RunLog($"移Tray夹爪气缸原位输出成功({ms}ms)");
+            //else RunLog($"移Tray夹爪气缸原位输出成功({ms}ms)");
 
             return result;
         }
@@ -738,7 +738,7 @@ namespace H5509_V2
 
             result = 读取气缸输入信号(xIoName, "1", out long ms);
             if (result != "Success") RunLog($"{yIoName}到位输出超时({ms}ms)");
-            else RunLog($"{yIoName}到位输出成功({ms}ms)");
+            //else RunLog($"{yIoName}到位输出成功({ms}ms)");
             return result;
         }
 
@@ -753,7 +753,7 @@ namespace H5509_V2
 
             result = 读取气缸输入信号(xIoName, "1", out long ms);
             if (result != "Success") RunLog($"{yIoName}原位输出超时({ms}ms)");
-            else RunLog($"{yIoName}原位输出成功({ms}ms)");
+            //else RunLog($"{yIoName}原位输出成功({ms}ms)");
             return result;
         }
 
@@ -768,7 +768,7 @@ namespace H5509_V2
 
             result = 读取气缸输入信号(xIoName, "1", out long ms);
             if (result != "Success") RunLog($"{yIoName}到位输出超时({ms}ms)");
-            else RunLog($"{yIoName}到位输出成功({ms}ms)");
+            //else RunLog($"{yIoName}到位输出成功({ms}ms)");
             return result;
         }
 
@@ -783,7 +783,7 @@ namespace H5509_V2
             result = 读取气缸输入信号(xIoName, "1", out long ms);
 
             if (result != "Success") RunLog($"{yIoName}原位输出超时({ms}ms)");
-            else RunLog($"{yIoName}原位输出成功({ms}ms)");
+            //else RunLog($"{yIoName}原位输出成功({ms}ms)");
             return result;
         }
 
@@ -2306,17 +2306,20 @@ namespace H5509_V2
             doutContinueFail = new List<int[]>();
             单dut总不良计数 = new List<int[]>();
             单dut总不良累计计数 = new List<int[]>();
-            SiteTestIC = new List<bool[][]>();
-            SiteTestBin = new List<string[]> { };
+            //SiteTestIC = new List<bool[][]>();
+            //SiteTestBin = new List<string[]>();
             for (int i = 0; i < 16; i++)
             {
-                Com.Iswaitout[i] = false;
-                Com.Isreceive[i] = false;
-                SiteTestIC.Add(new bool[2][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
+                //Com.Iswaitout[i] = false;
+                //Com.Isreceive[i] = false;
+                StationManagers.SetStationState(i, 0);
+                StationManagers.SetStationIC(i, new bool[2][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
+                StationManagers.SetStationBin(i, new string[] { "", "", "", "", "", "", "", "" });
+                //SiteTestIC.Add(new bool[2][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
                 doutContinueFail.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
                 单dut总不良计数.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
                 单dut总不良累计计数.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
-                SiteTestBin.Add(new string[] { "", "", "", "", "", "", "", "" });
+                //SiteTestBin.Add(new string[] { "", "", "", "", "", "", "", "" });
                 //显示Dout颜色(i, SiteTestIC[i], SiteTestBin[i]);
             }
             入料IC忽略 = false;
@@ -2325,9 +2328,12 @@ namespace H5509_V2
             出料IC忽略 = false;
             测试IC忽略 = false;
             //Com.IsconnectTester = false;
-            BinSaveQueue = new ConcurrentQueue<string[]>();
+            //BinSaveQueue = new ConcurrentQueue<string[]>();
             InSiteQueue = new ConcurrentQueue<int>();
-            OutSiteQueue = new ConcurrentQueue<int>();
+            //OutSiteQueue = new ConcurrentQueue<int>();
+
+            OutSiteQueue = new ConcurrentQueue<(int SiteId, TestDataInfo Data)>();
+            OutSiteQueue2 = new ConcurrentQueue<(int SiteId, TestDataInfo Data)>();
             载入数 = 0;
             UphNumber = 0;
             Auto1数量 = 0;
@@ -2582,21 +2588,52 @@ namespace H5509_V2
                 }
             }
 
-            if (Com.IsOpenCom == false)
+
+            bool[] check = StationManagers.CheckComConnect();
+            if (check.Contains(false))
             {
+                for (int i = 0; i < check.Length; i++)
+                {
+                    if (!check[i])
+                    {
+                        Debug.WriteLine($"测试机{i + 1}通讯未连接");
+                    }
+                }
                 isstart = false;
                 Listcode.Add("1400430");
                 RunLog("[Code]1400430,[Msg](按下开始)串口未连接");
             }
-            else
+
+            check = StationManagers.CheckTesterConnect();
+            if (check.Contains(false))
             {
-                if (Com.IsconnectTester == false)
+                for (int i = 0; i < check.Length; i++)
                 {
-                    isstart = false;
-                    Listcode.Add("1400440");
-                    RunLog("[Code]1400430,[Msg](按下开始)未发送生产信息给测试机"); //listcode.Add("1400440");
+                    if (!check[i])
+                    {
+                        Debug.WriteLine($"未发送开批信息给测试机{i + 1}");
+                    }
                 }
+                isstart = false;
+                Listcode.Add("1400440");
+                RunLog("[Code]1400430,[Msg](按下开始)未发送生产信息给测试机"); //listcode.Add("1400440");
             }
+
+            //if (Com.IsOpenCom == false)
+            //{
+            //    isstart = false;
+            //    Listcode.Add("1400430");
+            //    RunLog("[Code]1400430,[Msg](按下开始)串口未连接");
+            //}
+            //else
+            //{
+            //    if (Com.IsconnectTester == false)
+            //    {
+            //        isstart = false;
+            //        Listcode.Add("1400440");
+            //        RunLog("[Code]1400430,[Msg](按下开始)未发送生产信息给测试机"); //listcode.Add("1400440");
+            //    }
+            //}
 
             if (isstart)
             {
@@ -3544,6 +3581,59 @@ namespace H5509_V2
 
         #region Task系统任务流程
 
+        public void UpdateInNozzleIC()
+        {
+            string result = 入料吸嘴_真空检测(out string[] iovalue);
+            if (result == "Success" && iovalue.Contains("0"))
+            {
+                for (int i = 0; i < iovalue.Length; i++)
+                {
+                    if (InNozzleICOpen[i] && InNozzleIC)
+                    {
+                        if (iovalue[i] == "0")
+                        {
+                            InNozzleICOpen[i] = false;
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateOutNozzleIC()
+        {
+            string result = 出料吸嘴_真空检测(out string[] iovalue);
+            if (result == "Success" && iovalue.Contains("0"))
+            {
+                for (int i = 0; i < iovalue.Length; i++)
+                {
+                    if (OutNozzleICOpen[i] && OutNozzleIC)
+                    {
+                        if (iovalue[i] == "0")
+                        {
+                            OutNozzleICOpen[i] = false;
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateTestNozzleIC()
+        {
+            string result = 测试吸嘴_真空检测(out string[] iovalue);
+
+            if (result == "Success" && iovalue.Contains("0"))
+            {
+                for (int i = 0; i < iovalue.Length; i++)
+                {
+                    if (TestNozzleICOpen[i] && TestNozzleIC)
+                    {
+                        if (iovalue[i] == "0")
+                        {
+                            TestNozzleICOpen[i] = false;
+                        }
+                    }
+                }
+            }
+        }
+
         public void 系统按钮检测流程()
         {
             string[] ioInfos =
@@ -3795,6 +3885,10 @@ namespace H5509_V2
                                 Auto1下降回零开关 = false;
                                 Auto2下降回零开关 = false;
 
+                                入料IC移动过程中忽略 = false; //报警后有可能会把芯片放回吸嘴上，直接点击了开始
+                                出料IC移动过程中忽略 = false;
+                                测试IC移动过程中忽略 = false;
+
                                 motionEx.SetDo("Y001_开始灯", true);
                                 motionEx.SetDo("Y002_暂停灯", false);
                                 motionEx.SetDo("Y004_重试灯", false);
@@ -3906,6 +4000,12 @@ namespace H5509_V2
                         if (入料IC忽略 == false) 入料IC忽略 = true;
                         if (出料IC忽略 == false) 出料IC忽略 = true;
                         if (测试IC忽略 == false) 测试IC忽略 = true;
+                        if (入料IC移动过程中忽略) UpdateInNozzleIC();
+                        if (出料IC移动过程中忽略) UpdateOutNozzleIC();
+                        if (测试IC移动过程中忽略) UpdateTestNozzleIC();
+                        入料IC移动过程中忽略 = false;
+                        出料IC移动过程中忽略 = false;
+                        测试IC移动过程中忽略 = false;
                         motionEx.SetDo("Y004_重试灯", false);
                         motionEx.SetDo("Y005_忽略灯", true);
                         motionEx.SetDo("Y008_结批灯", false);
@@ -4073,8 +4173,8 @@ namespace H5509_V2
                                 //{
                                 //    刷新批次信息();
                                 //}
+                                StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
 
-                                Com.IsconnectTester = false;
                                 刷新批次信息();
 
                                 H5509正在归零 = true;
@@ -4846,14 +4946,14 @@ namespace H5509_V2
                             Auto1下降回零标记 = 2;
                             Auto2下降回零标记 = 2;
                             PS结批流程.StepID = 525;
-                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->等待Empty,Auto1和Auto2下降回零");
+                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->等待Load,Empty,Auto1和Auto2下降回零");
                         }
                         else Thread.Sleep(10);
                         break;
 
                     case 525:
-                        PS结批流程.StepName = $"等待Empty,Auto1和Auto2下降回零";
-                        if (Empty下降回零标记 == 1 && Auto1下降回零标记 == 1 && Auto2下降回零标记 == 1)
+                        PS结批流程.StepName = $"等待Load,Empty,Auto1和Auto2下降回零";
+                        if (Load下降回零标记 == 1 && Empty下降回零标记 == 1 && Auto1下降回零标记 == 1 && Auto2下降回零标记 == 1)
                         {
                             PS结批流程.StepID = 599;
                         }
@@ -4870,7 +4970,7 @@ namespace H5509_V2
                         H5509归零 = false;
                         H5509初始化 = false;
                         Auto等待换盘标记 = false;
-                        Com.IsconnectTester = false;
+                        StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
                         结束时间 = DateTime.Now;
 
                         LoaderTrayClear();
@@ -5998,11 +6098,9 @@ namespace H5509_V2
                                     if (opens[i] == 1)
                                     {
                                         载入数++;
-                                        lsopen[i] = true;
                                     }
-                                    else lsopen[i] = false;
                                 }
-                                InNozzleICOpen = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] }; //更新吸嘴状态
+                                InNozzleICOpen = new bool[] { opens[0] == 1, opens[1] == 1, opens[2] == 1, opens[3] == 1 }; //更新吸嘴状态
                                 InNozzleIC = true;
                                 PS入料手臂吸放料流程.StepID = 599;
                             }
@@ -6071,6 +6169,7 @@ namespace H5509_V2
                             if (飞梭移动状态 == 0) //梭车停止状态才能放
                             {
                                 InNozzleIC = false;
+                                lsopen = InNozzleICOpen;
                                 double zpos = 获取梭车Z放料点位(colums);
                                 result = 入料手臂Z移动(lsopen, zpos, true);
                                 if (result == "Success")
@@ -6182,6 +6281,7 @@ namespace H5509_V2
                                     }
                                     飞梭前入料IC[colums] = temp;
                                     正在放置前入料[colums] = new bool[] { false, false, false, false };
+                                    InNozzleICOpen = new bool[] { false, false, false, false };
                                     入料手臂抓料等待标记 = false;
                                     PS入料手臂吸放料流程.StepID = 799;
                                 }
@@ -6253,6 +6353,7 @@ namespace H5509_V2
 
                         case 1005:
                             PS入料手臂吸放料流程.StepName = $"获取Heat盘坐标位置";
+                            opens = new int[] { InNozzleICOpen[0] ? 1 : 2, InNozzleICOpen[1] ? 1 : 2, InNozzleICOpen[2] ? 1 : 2, InNozzleICOpen[3] ? 1 : 2 };
                             if (获取Heat盘坐标(0, false, out xPoint, out yPoint))
                             {
                                 RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->获取Heat盘坐标位置");
@@ -6273,7 +6374,14 @@ namespace H5509_V2
                             result = 入料手臂移动(xPos, yPos, 入料吸放料Heat间距 + 点位微调.入料_Heat_变距); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                             if (result == "Success")
                             {
-                                InNozzleIC = false;
+                                //lsopen = InNozzleICOpen;
+                                for (int i = 0; i < lsopen.Length; i++)
+                                {
+                                    if (lsopen[i])
+                                    {
+                                        InNozzleICOpen[i] = false;
+                                    }
+                                }
                                 PS入料手臂吸放料流程.StepID = 1015;
                             }
                             else
@@ -6599,8 +6707,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{opens[0]} , {opens[1]} , {opens[2]} , {opens[3]}");
+                                InNozzleIC = false;
+                                InNozzleICOpen = new bool[] { false, false, false, false };
                                 正在放置前入料[colums] = new bool[] { false, false, false, false };
+                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{opens[0]} , {opens[1]} , {opens[2]} , {opens[3]}");
                                 PS入料手臂吸放料流程.StepID = 1099;
                             }
                             break;
@@ -6731,7 +6841,7 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = "PS入料手臂吸放料流程运行异常,详细信息:" + ex.Message;
+                    string errormsg = $"PS入料手臂吸放料流程({PS入料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message;
                     RunLog(errormsg, LogType.AlarmLog);
                     系统未定义错误ErrorMsg = errormsg;
                     ProgramPause = true;
@@ -7190,7 +7300,7 @@ namespace H5509_V2
 
                         case 705: //放料
                             PS出料手臂吸放料流程.StepName = "计算放料盘位置";
-
+                            opens = new int[] { OutNozzleICOpen[0] ? 1 : 2, OutNozzleICOpen[1] ? 1 : 2, OutNozzleICOpen[2] ? 1 : 2, OutNozzleICOpen[3] ? 1 : 2 };
                             if (判断BIN项(opens, Auto1, bin, out index))
                             {
                                 trayid = 0;
@@ -8307,7 +8417,7 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = "PS出料手臂吸放料流程运行异常,详细信息:" + ex.Message;
+                    string errormsg = $"PS出料手臂吸放料流程({PS出料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message;
                     RunLog(errormsg, LogType.AlarmLog);
                     系统未定义错误ErrorMsg = errormsg;
                     ProgramPause = true;
@@ -8381,7 +8491,7 @@ namespace H5509_V2
                             PS入飞梭移动流程.StepName = $"关闭梭车加热防止火花";
                             if (温控加热 && 温度模式 == "高温")
                             {
-                                RunLog($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                                RunLog($"PS飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                                 if (梭车加热关闭() != "Success")
                                 {
                                     RunLog("梭车加热关闭失败");
@@ -8397,7 +8507,7 @@ namespace H5509_V2
 
                         case 505:
                             PS入飞梭移动流程.StepName = $"飞梭_前后检测产品感应";
-                            RunLog($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                            RunLog($"PS飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                             result = 飞梭_前后检测产品感应(out string[] iovalues);
                             if (result == "Success")
                             {
@@ -8450,7 +8560,7 @@ namespace H5509_V2
 
                         case 515:
                             PS入飞梭移动流程.StepName = $"飞梭轴移动";
-                            RunLog($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                            RunLog($"PS飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                             if (飞梭2位置 == 0)
                             {
                                 result = 飞梭轴移动(初始点位.梭车2_前_Y + 点位微调.梭车2_前_Y);
@@ -8491,7 +8601,7 @@ namespace H5509_V2
                             PS入飞梭移动流程.StepName = $"开启梭车加热";
                             if (温控加热 && 温度模式 == "高温")
                             {
-                                RunLog($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                                RunLog($"PS飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                                 Thread.Sleep(100);
                                 if (梭车加热开启() != "Success")
                                 {
@@ -8506,7 +8616,7 @@ namespace H5509_V2
 
                         case 525:
                             PS入飞梭移动流程.StepName = $"数据交换";
-                            RunLog($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                            RunLog($"PS飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
 
                             交换飞梭前后入料IC数据();
 
@@ -8529,20 +8639,20 @@ namespace H5509_V2
 
                         case 599:
                             PS入飞梭移动流程.StepName = $"飞梭2移动到{(飞梭2位置 == 1 ? "前方" : "后方")}流程完成";
-                            RunLog($"PS入飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
+                            RunLog($"PS飞梭移动流程.StepID={PS入飞梭移动流程.StepID}->{PS入飞梭移动流程.StepName}");
                             PS入飞梭移动流程.Processing = false;
                             PS入飞梭移动流程.StepID = 500;
                             break;
 
                         default:
-                            RunLog(("PS入飞梭移动流程.StepID =" + PS入飞梭移动流程.StepID.ToString() + "对应流程不存在"));
+                            RunLog(("PS飞梭移动流程.StepID =" + PS入飞梭移动流程.StepID.ToString() + "对应流程不存在"));
                             break;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = "PS飞梭移动流程运行异常,请联系管理员检查,详细信息:" + ex.Message;
+                    string errormsg = $"PS飞梭移动流程({PS入飞梭移动流程.StepID})运行异常,详细信息:" + ex.Message;
                     RunLog(errormsg, LogType.AlarmLog);
                     系统未定义错误ErrorMsg = errormsg;
                     ProgramPause = true;
@@ -8754,7 +8864,7 @@ namespace H5509_V2
 
                                                     if (InSiteQueue.Count == 1) //如果只有一个Site在等,则返回出去等下一个
                                                     {
-                                                        if (!SiteTestState.Contains(2)) //如何没有Site正在测试，则交叉
+                                                        if (!StationManagers.CheckTestState(2)) //如何没有Site正在测试，则交叉
                                                         {
                                                             if (飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true) && 入料手臂停止工作标记) //如果前梭车入料区有料才交叉
                                                             {
@@ -8779,8 +8889,9 @@ namespace H5509_V2
                                             {
                                                 飞梭后入料状态 = 0;
                                             }
-                                            SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-                                            SiteTestState[site] = 0; //无料
+                                            //SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+                                            StationManagers.SetStationIC(site, new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
+                                            StationManagers.SetStationState(site, 0); //SiteTestState[site] = 0; //无料
                                             PS测试手臂取待测料流程.Processing = false;
                                             PS测试手臂取待测料流程.StepID = 500;
                                             Thread.Sleep(10);
@@ -8806,8 +8917,9 @@ namespace H5509_V2
                                 {
                                     InSiteQueue.TryDequeue(out movesite);
                                     RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}：Dut被全部关闭");
-                                    SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-                                    SiteTestState[site] = 0; //无料
+                                    //SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+                                    StationManagers.SetStationIC(site, new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
+                                    StationManagers.SetStationState(site, 0); //SiteTestState[site] = 0; //无料
                                     Thread.Sleep(10);
                                 }
                             }
@@ -9145,8 +9257,8 @@ namespace H5509_V2
                             break;
 
                         case 599:
-                            lsopen = new bool[] { opens[0] == 1, opens[1] == 1, opens[2] == 1, opens[3] == 1, opens[4] == 1, opens[5] == 1, opens[6] == 1, opens[7] == 1 };
-                            TestNozzleICOpen = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7] };
+                            TestNozzleICOpen = new bool[] { opens[0] == 1, opens[1] == 1, opens[2] == 1, opens[3] == 1, opens[4] == 1, opens[5] == 1, opens[6] == 1, opens[7] == 1 };
+                            //TestNozzleICOpen = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7] };
                             TestNozzleIC = true;
                             PS测试手臂取待测料流程.StepName = "测试手臂取待测料流程吸料完成";
                             RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
@@ -9181,6 +9293,7 @@ namespace H5509_V2
                                 {
                                     firstdraw = true;
                                     firstdzhome = true;
+                                    lsopen = TestNozzleICOpen;
                                     TestNozzleIC = false;
                                     PS测试手臂取待测料流程.StepID = 715;
                                 }
@@ -9230,7 +9343,7 @@ namespace H5509_V2
 
                         case 720:
                             PS测试手臂取待测料流程.StepName = "测试Z向下移动";
-                            if (SiteTestState[site] == 0)
+                            if (StationManagers.GetStationState(site) == 0)
                             {
                                 RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                                 result = 获取测试Z放料补偿(site, out double sitez);
@@ -9389,12 +9502,13 @@ namespace H5509_V2
                             {
                                 if (!iovalues.Contains("0") && !iovalues2.Contains("0"))
                                 {
-                                    SiteTestIC[site] = new bool[][]
+                                    StationManagers.SetStationIC(site, new bool[][]
                                     {
-                                    new bool[] { opens[0] == 1, opens[1] == 1, opens[2] == 1, opens[3] == 1 },
-                                    new bool[] { opens[4] == 1, opens[5] == 1, opens[6] == 1, opens[7] == 1 }
-                                    };
-                                    SiteTestState[site] = 1; //有料
+                                        new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] },
+                                        new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
+                                    });
+                                    
+                                    StationManagers.SetStationState(site, 1);// SiteTestState[site] = 1; //有料
 
                                     if (飞梭后出料状态 == 1)
                                     {
@@ -9480,7 +9594,7 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = "PS测试手臂取待测料流程运行异常,详细信息:" + ex.Message;
+                    string errormsg = $"PS测试手臂取待测料流程({PS测试手臂取待测料流程.StepID})运行异常,详细信息:" + ex.Message;
                     RunLog(errormsg, LogType.AlarmLog);
                     系统未定义错误ErrorMsg = errormsg;
                     ProgramPause = true;
@@ -9496,6 +9610,7 @@ namespace H5509_V2
             int[] opens = new int[8];
             bool[] lsopen = new bool[8];
             int site = 0;
+            string[] bin = new string[8];
             bool firstdraw = true;
             bool firstdzhome = true;
             Stopwatch stopwatch = new Stopwatch();
@@ -9530,10 +9645,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                if (!SiteTestState.Contains(1) //测试区有料
-                                    && !SiteTestState.Contains(2) //测试区有料测试中
-                                    && !SiteTestState.Contains(3) //测试区有料已测试
-                                    && !SiteTestState.Contains(4) //测试区有料待取走
+                                if (!StationManagers.CheckTestState(1) //测试区有料
+                                    && !StationManagers.CheckTestState(2) //测试区有料测试中
+                                    && !StationManagers.CheckTestState(3) //测试区有料已测试
+                                    && !StationManagers.CheckTestState(4) //测试区有料待取走
                                     && 测试手臂入料停止工作标记
                                     && 入料手臂停止工作标记
                                     && (结批标记 || 一个循环标记))
@@ -9545,16 +9660,18 @@ namespace H5509_V2
 
                         case 501:
                             PS测试手臂取已测料流程.StepName = "获取Site信息";
-                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-
-                            if (OutSiteQueue.TryDequeue(out site))
+                            (int SiteId, TestDataInfo Data) sites;
+                            if (OutSiteQueue.TryDequeue(out sites))
                             {
+                                site = sites.SiteId;
+                                bin = sites.Data.SiteTestBin;
+                                RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->获取Site{site + 1}信息");
                                 IndexTime = DateTime.Now;
-                                bool[][] open = SiteTestIC[site];
+                                bool[][] open = StationManagers.GetStationIC(site); //SiteTestIC[site]; 
                                 opens = new int[8]
                                 {
-                                open[0][0] ? 0 : 2, open[0][1] ? 0 : 2, open[0][2] ? 0 : 2, open[0][3] ? 0 : 2,
-                                open[1][0] ? 0 : 2, open[1][1] ? 0 : 2, open[1][2] ? 0 : 2, open[1][3] ? 0 : 2,
+                                    open[0][0] ? 0 : 2, open[0][1] ? 0 : 2, open[0][2] ? 0 : 2, open[0][3] ? 0 : 2,
+                                    open[1][0] ? 0 : 2, open[1][1] ? 0 : 2, open[1][2] ? 0 : 2, open[1][3] ? 0 : 2,
                                 };
                                 lsopen = new bool[] { open[0][0], open[0][1], open[0][2], open[0][3], open[1][0], open[1][1], open[1][2], open[1][3] };
                                 PS测试手臂取已测料流程.StepID = 505;
@@ -9588,7 +9705,7 @@ namespace H5509_V2
                             break;
 
                         case 510:
-                            PS测试手臂取已测料流程.StepName = "测试手臂X轴移动到Site上方";
+                            PS测试手臂取已测料流程.StepName = $"测试手臂X轴移动到Site{site + 1}上方";
                             RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                             result = 获取测试X吸料补偿(site, out double sitex);
                             if (result == "Success")
@@ -9631,7 +9748,7 @@ namespace H5509_V2
 
                         case 520:
                             PS测试手臂取已测料流程.StepName = "测试Z向下移动";
-                            if (SiteTestState[site] == 4) //待取出
+                            if (StationManagers.GetStationState(site) == 4) //待取出
                             {
                                 string result3 = 测试区_位移气缸原位信号读取(site);
                                 string result4 = 测试区_升降气缸原位信号读取(site);
@@ -9857,8 +9974,9 @@ namespace H5509_V2
                             }
                             else
                             {
-                                SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-                                SiteTestState[site] = 0; //无料
+                                StationManagers.SetStationIC(site, new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
+                                //SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+                                StationManagers.SetStationState(site, 0);// SiteTestState[site] = 0; //无料
                                 PS测试手臂取已测料流程.StepID = 599;
                             }
                             break;
@@ -9924,8 +10042,8 @@ namespace H5509_V2
                             break;
 
                         case 599:
-                            lsopen = new bool[] { opens[0] == 1, opens[1] == 1, opens[2] == 1, opens[3] == 1, opens[4] == 1, opens[5] == 1, opens[6] == 1, opens[7] == 1 };
-                            TestNozzleICOpen = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7] };
+                            TestNozzleICOpen = new bool[] { opens[0] == 1, opens[1] == 1, opens[2] == 1, opens[3] == 1, opens[4] == 1, opens[5] == 1, opens[6] == 1, opens[7] == 1 };
+                            //TestNozzleICOpen = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7] };
                             TestNozzleIC = true;
                             PS测试手臂取已测料流程.StepName = "测试手臂取已测料流程吸料完成";
                             RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
@@ -9960,6 +10078,7 @@ namespace H5509_V2
                                 firstdraw = true;
                                 firstdzhome = true;
                                 TestNozzleIC = false;
+                                lsopen = TestNozzleICOpen;
                                 PS测试手臂取已测料流程.StepID = 715;
                             }
                             else
@@ -10140,22 +10259,22 @@ namespace H5509_V2
                         case 740:
                             PS测试手臂取已测料流程.StepName = "BIN项保存";
                             RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                            if (BinSaveQueue.TryDequeue(out string[] bin))
-                            {
-                                飞梭后出料状态 = 1;
-                                飞梭后出料IC = new bool[][] { new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] }, new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] } }; //SitesTestIC
-                                飞梭后出料BIN项 = new string[][] { new string[] { bin[0], bin[1], bin[2], bin[3] }, new string[] { bin[4], bin[5], bin[6], bin[7] } };
-                                InSiteQueue.Enqueue(site);
+                            //if (BinSaveQueue.TryDequeue(out string[] bin))
+                            //{
+                            飞梭后出料状态 = 1;
+                            飞梭后出料IC = new bool[][] { new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] }, new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] } }; //SitesTestIC
+                            飞梭后出料BIN项 = new string[][] { new string[] { bin[0], bin[1], bin[2], bin[3] }, new string[] { bin[4], bin[5], bin[6], bin[7] } };
+                            InSiteQueue.Enqueue(site);
 
-                                RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->添加Site:{site + 1}");
-                                PS测试手臂取已测料流程.StepID = 799;
-                            }
-                            else
-                            {
-                                RunLog($"Site{site + 1}BIN项保存失败!");
-                                ProgramPause = true;
-                                IsPause = true;
-                            }
+                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->添加Site:{site + 1}");
+                            PS测试手臂取已测料流程.StepID = 799;
+                            //}
+                            //else
+                            //{
+                            //    RunLog($"Site{site + 1}BIN项保存失败!");
+                            //    ProgramPause = true;
+                            //    IsPause = true;
+                            //}
                             break;
 
                         case 799:
@@ -10173,7 +10292,7 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = "PS测试手臂取已测料流程运行异常,详细信息:" + ex.Message;
+                    string errormsg = $"PS测试手臂取已测料流程({PS测试手臂取已测料流程.StepID})运行异常,详细信息:" + ex.Message;
                     RunLog(errormsg, LogType.AlarmLog);
                     系统未定义错误ErrorMsg = errormsg;
                     ProgramPause = true;
@@ -10192,144 +10311,176 @@ namespace H5509_V2
             PS测试区气缸下压动作流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS测试区气缸下压动作流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
 
-                if (!是否可以开始运行())
-                {
-                    continue;
-                }
-
-                switch (PS测试区气缸下压动作流程.StepID)
-                {
-                    case 500:
-                        PS测试区气缸下压动作流程.StepName = "路径规划";
-                        PS测试区气缸下压动作流程.Condition = true;
-                        PS测试区气缸下压动作流程.Permit = true;
-                        if (PS测试区气缸下压动作流程.Condition && PS测试区气缸下压动作流程.Permit)
-                        {
-                            PS测试区气缸下压动作流程.Processing = true;
-                            PS测试区气缸下压动作流程.StepID = 505;
-                        }
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS测试区气缸下压动作流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS测试区气缸下压动作流程.StepName = $"循环检测Site状态";
-                        if (SiteTestState[site] == 1) //有料
-                        {
-                            RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->循环检测Site状态:{site + 1}有料");
-                            bool[][] siteopne = APPmaster.SiteTestIC[site];
-                            open = new List<bool[]>()
+                    if (!是否可以开始运行())
+                    {
+                        continue;
+                    }
+
+                    switch (PS测试区气缸下压动作流程.StepID)
+                    {
+                        case 500:
+                            PS测试区气缸下压动作流程.StepName = "路径规划";
+                            PS测试区气缸下压动作流程.Condition = true;
+                            PS测试区气缸下压动作流程.Permit = true;
+                            if (PS测试区气缸下压动作流程.Condition && PS测试区气缸下压动作流程.Permit)
                             {
-                                new bool[] { siteopne[0][0],siteopne[0][1],siteopne[0][2] ,siteopne[0][3]  },
-                                new bool[] { siteopne[1][0],siteopne[1][1],siteopne[1][2] ,siteopne[1][3]  },
-                            };
-                            PS测试区气缸下压动作流程.StepID = 510;
-                        }
-                        else
-                        {
-                            site++;
-                            if (site >= 16)
-                            {
-                                site = 0;
-                                //PS测试区气缸下压动作流程.StepID = 500;
+                                PS测试区气缸下压动作流程.Processing = true;
+                                PS测试区气缸下压动作流程.StepID = 505;
                             }
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS测试区气缸下压动作流程.StepName = $"测试区气缸前移";
-                        RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-                        result = 测试区_位移气缸到位输出(site);
-                        if (result == "Success")
-                        {
-                            Thread.Sleep(100);
-                            PS测试区气缸下压动作流程.StepID = 515;
-                        }
-                        else
-                        {
-                            Listcode.Add($"10{site + 30:D2}000");
-                            RunLog($"[Code]10{site + 30:D2}000,[Msg]测试区Site{site + 1}气缸前移失败!" + result, LogType.AlarmLog);
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 515:
-                        PS测试区气缸下压动作流程.StepName = $"测试区气缸下压";
-                        RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-                        result = 测试区_下压气缸到位输出(site);
-                        if (result == "Success")
-                        {
-                            Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
-                            PS测试区气缸下压动作流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Listcode.Add($"10{site + 14:D2}000");
-                            RunLog($"[Code]10{site + 14:D2}000,[Msg]测试区Site{site + 1}气缸下压失败!" + result, LogType.AlarmLog);
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 520:
-                        PS测试区气缸下压动作流程.StepName = $"发送测试信号";
-                        RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-                        if (多Site同时测试)
-                        {
-                            result = "Success";
-                            short[] sites = GetSites(site);
-                            if ((SiteTestState[sites[0]] == 1) && SiteTestState[sites[1]] == 1)
+                        case 505:
+                            PS测试区气缸下压动作流程.StepName = $"循环检测Site状态";
+                            if (StationManagers.GetStationState(site) == 1) //有料
                             {
-                                opens = new List<List<bool[]>>() { GetOpens(SiteTestIC[sites[0]]), GetOpens(SiteTestIC[sites[1]]) };
-                                result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                                RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->循环检测Site状态:{site + 1}有料");
+                                bool[][] siteopne = StationManagers.GetStationIC(site); //APPmaster.SiteTestIC[site];
+                                open = new List<bool[]>()
+                                {
+                                    new bool[] { siteopne[0][0],siteopne[0][1],siteopne[0][2] ,siteopne[0][3]  },
+                                    new bool[] { siteopne[1][0],siteopne[1][1],siteopne[1][2] ,siteopne[1][3]  },
+                                };
+                                PS测试区气缸下压动作流程.StepID = 510;
                             }
-                        }
-                        else result = APPmaster.Com.Send(site, open, 无测试机模式);
+                            //else if(StationManagers.GetStationState(site) == 2) //已经下压
+                            //{
 
-                        if (result == "Success")
-                        {
-                            SiteTestState[site] = 2;
-                            PS测试区气缸下压动作流程.StepID = 599;
-                        }
-                        else
-                        {
-                            Listcode.Add("800007");
-                            RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                            //}
+                            else
+                            {
+                                site++;
+                                if (site >= 16)
+                                {
+                                    site = 0;
+                                    //PS测试区气缸下压动作流程.StepID = 500;
+                                }
+                            }
+                            break;
 
-                    case 599:
-                        PS测试区气缸下压动作流程.StepName = $"测试区{site + 1}气缸动作流程完成";
-                        RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-                        PS测试区气缸下压动作流程.Processing = false;
-                        PS测试区气缸下压动作流程.StepID = 500;
-                        break;
+                        case 510:
+                            PS测试区气缸下压动作流程.StepName = $"测试区气缸前移";
+                            RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                            result = 测试区_位移气缸到位输出(site);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(100);
+                                PS测试区气缸下压动作流程.StepID = 515;
+                            }
+                            else
+                            {
+                                Listcode.Add($"10{site + 30:D2}000");
+                                RunLog($"[Code]10{site + 30:D2}000,[Msg]测试区Site{site + 1}气缸前移失败!" + result, LogType.AlarmLog);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
 
-                    default:
-                        RunLog(("PS测试区气缸动作流程.StepID =" + PS测试区气缸下压动作流程.StepID.ToString() + "对应流程不存在"));
-                        break;
-                        /*
-                         * if (site1状态 == 1:有料) //如果需要测试				
-                         {				
-                            TestAircylinderStarttest(testnum); //触发下压动作	
-                            com.Send(testnum, testgetsitestatus[testnum]);				
-                            site1状态 = 2: 测试中			
-                         }				
-                         else if(site1状态 == 3:已测试)				
-                         {				
-                            TestAircylinderEndtest(testnum); //触发抬升动作			
-                            site1状态 = 2: 待取料				
-                         }				
-                        */
+                        case 515:
+                            PS测试区气缸下压动作流程.StepName = $"测试区气缸下压";
+                            RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                            result = 测试区_下压气缸到位输出(site);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                                PS测试区气缸下压动作流程.StepID = 520;
+                            }
+                            else
+                            {
+                                Listcode.Add($"10{site + 14:D2}000");
+                                RunLog($"[Code]10{site + 14:D2}000,[Msg]测试区Site{site + 1}气缸下压失败!" + result, LogType.AlarmLog);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 520:
+                            PS测试区气缸下压动作流程.StepName = $"发送测试信号";
+                            RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                            if (设置信息.通讯信息.同时测试 == 2)
+                            {
+                                result = "Success";
+                                int[] sites = GetSites(site);
+                                bool[] site1 = GetSiteOpen((int)sites[0]);
+                                bool[] site2 = GetSiteOpen((int)sites[1]);
+                                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
+                                if ((states[0] >= 1 || !site1.Contains(true)) && (states[1] == 1 || !site2.Contains(true)))
+                                {
+                                    opens = new List<List<bool[]>>() { GetOpens(site1), GetOpens(site2) };
+                                    //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                                    result = StationManagers.Send(sites, states, opens, 无测试机模式);
+                                    //if (result == "Success")
+                                    //{
+                                    //    StationManagers.SetStationState(sites[0], 2);
+                                    //    StationManagers.SetStationState(sites[1], 2);
+                                    //}
+                                }
+                            }
+                            else
+                            {
+                                result = StationManagers.Send(site, open, 无测试机模式);
+                                //if (result == "Success") StationManagers.SetStationState(site, 2);
+                            }
+
+                            //else result = APPmaster.Com.Send(site, open, 无测试机模式);
+
+                            if (result == "Success")
+                            {
+                                StationManagers.SetStationState(site, 2);
+                                PS测试区气缸下压动作流程.StepID = 599;
+                            }
+                            else
+                            {
+                                Listcode.Add("800007");
+                                RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 599:
+                            PS测试区气缸下压动作流程.StepName = $"测试区{site + 1}气缸动作流程完成";
+                            RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                            PS测试区气缸下压动作流程.Processing = false;
+                            PS测试区气缸下压动作流程.StepID = 500;
+                            break;
+
+                        default:
+                            RunLog(("PS测试区气缸动作流程.StepID =" + PS测试区气缸下压动作流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                            /*
+                             * if (site1状态 == 1:有料) //如果需要测试				
+                             {				
+                                TestAircylinderStarttest(testnum); //触发下压动作	
+                                com.Send(testnum, testgetsitestatus[testnum]);				
+                                site1状态 = 2: 测试中			
+                             }				
+                             else if(site1状态 == 3:已测试)				
+                             {				
+                                TestAircylinderEndtest(testnum); //触发抬升动作			
+                                site1状态 = 2: 待取料				
+                             }				
+                            */
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS测试区气缸下压动作流程({PS测试区气缸下压动作流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -10342,109 +10493,122 @@ namespace H5509_V2
             PS测试区气缸上抬动作流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS测试区气缸上抬动作流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
 
-                if (!是否可以开始运行())
-                {
-                    continue;
-                }
-
-                switch (PS测试区气缸上抬动作流程.StepID)
-                {
-                    case 500:
-                        PS测试区气缸上抬动作流程.StepName = "路径规划";
-                        PS测试区气缸上抬动作流程.Condition = true;
-                        PS测试区气缸上抬动作流程.Permit = true;
-                        if (PS测试区气缸上抬动作流程.Condition && PS测试区气缸上抬动作流程.Permit)
-                        {
-                            PS测试区气缸上抬动作流程.Processing = true;
-                            PS测试区气缸上抬动作流程.StepID = 505;
-                        }
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS测试区气缸上抬动作流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS测试区气缸上抬动作流程.StepName = $"循环检测Site状态";
-                        if (SiteTestState[site] == 3) //已测试
-                        {
-                            RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->循环检测Site状态:{site + 1}测试完成");
-                            PS测试区气缸上抬动作流程.StepID = 510;
-                        }
-                        else
-                        {
-                            site++;
-                            if (site >= 16)
+                    if (!是否可以开始运行())
+                    {
+                        continue;
+                    }
+
+                    switch (PS测试区气缸上抬动作流程.StepID)
+                    {
+                        case 500:
+                            PS测试区气缸上抬动作流程.StepName = "路径规划";
+                            PS测试区气缸上抬动作流程.Condition = true;
+                            PS测试区气缸上抬动作流程.Permit = true;
+                            if (PS测试区气缸上抬动作流程.Condition && PS测试区气缸上抬动作流程.Permit)
                             {
-                                site = 0;
+                                PS测试区气缸上抬动作流程.Processing = true;
+                                PS测试区气缸上抬动作流程.StepID = 505;
                             }
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS测试区气缸上抬动作流程.StepName = $"测试区气缸抬升";
-                        RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
-                        result = 测试区_下压气缸原位输出(site);
-                        if (result == "Success")
-                        {
-                            Thread.Sleep(100);
-                            PS测试区气缸上抬动作流程.StepID = 515;
-                        }
-                        else
-                        {
-                            Listcode.Add($"10{site + 14:D2}001");
-                            RunLog($"[Code]10{site + 14:D2}001,[Msg]测试区Site{site + 1}气缸抬升失败!" + result, LogType.AlarmLog);
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                        case 505:
+                            PS测试区气缸上抬动作流程.StepName = $"循环检测Site状态";
+                            if (StationManagers.testDataInfos[site].SiteTestState == 3) //已测试 SiteTestState[site] == 3
+                            {
+                                RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->循环检测Site状态:{site + 1}测试完成");
+                                PS测试区气缸上抬动作流程.StepID = 510;
+                            }
+                            else
+                            {
+                                site++;
+                                if (site >= 16)
+                                {
+                                    site = 0;
+                                }
+                            }
+                            break;
 
-                    case 515:
-                        PS测试区气缸上抬动作流程.StepName = $"测试区气缸后移";
-                        RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
-                        result = 测试区_位移气缸原位输出(site);
-                        if (result == "Success")
-                        {
-                            Thread.Sleep(100);
-                            SiteTestState[site] = 4;
-                            PS测试区气缸上抬动作流程.StepID = 599;
-                        }
-                        else
-                        {
-                            Listcode.Add($"10{site + 30:D2}001");
-                            RunLog($"[Code]10{site + 30:D2}001,[Msg]测试区Site{site + 1}气缸后移失败!" + result, LogType.AlarmLog);
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                        case 510:
+                            PS测试区气缸上抬动作流程.StepName = $"测试区气缸抬升";
+                            RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
+                            result = 测试区_下压气缸原位输出(site);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(100);
+                                PS测试区气缸上抬动作流程.StepID = 515;
+                            }
+                            else
+                            {
+                                Listcode.Add($"10{site + 14:D2}001");
+                                RunLog($"[Code]10{site + 14:D2}001,[Msg]测试区Site{site + 1}气缸抬升失败!" + result, LogType.AlarmLog);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
 
-                    case 599:
-                        PS测试区气缸上抬动作流程.StepName = $"测试区Site{site + 1}气缸上抬动作流程完成";
-                        RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
-                        PS测试区气缸上抬动作流程.Processing = false;
-                        PS测试区气缸上抬动作流程.StepID = 500;
-                        break;
+                        case 515:
+                            PS测试区气缸上抬动作流程.StepName = $"测试区气缸后移";
+                            RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
+                            result = 测试区_位移气缸原位输出(site);
+                            if (result == "Success")
+                            {
+                                Thread.Sleep(100);
+                                StationManagers.SetStationState(site, 4);// SiteTestState[site] = 4;
+                                PS测试区气缸上抬动作流程.StepID = 599;
+                            }
+                            else
+                            {
+                                Listcode.Add($"10{site + 30:D2}001");
+                                RunLog($"[Code]10{site + 30:D2}001,[Msg]测试区Site{site + 1}气缸后移失败!" + result, LogType.AlarmLog);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
 
-                    default:
-                        RunLog(("PS测试区气缸上抬动作流程.StepID =" + PS测试区气缸上抬动作流程.StepID.ToString() + "对应流程不存在"));
-                        break;
-                        /*
-                         * if (site1状态 == 1:有料) //如果需要测试				
-                         {				
-                            TestAircylinderStarttest(testnum); //触发下压动作	
-                            com.Send(testnum, testgetsitestatus[testnum]);				
-                            site1状态 = 2: 测试中			
-                         }				
-                         else if(site1状态 == 3:已测试)				
-                         {				
-                            TestAircylinderEndtest(testnum); //触发抬升动作			
-                            site1状态 = 2: 待取料				
-                         }				
-                        */
+                        case 599:
+                            PS测试区气缸上抬动作流程.StepName = $"测试区Site{site + 1}气缸上抬动作流程完成";
+                            RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->{PS测试区气缸上抬动作流程.StepName}");
+                            PS测试区气缸上抬动作流程.Processing = false;
+                            PS测试区气缸上抬动作流程.StepID = 500;
+                            break;
+
+                        default:
+                            RunLog(("PS测试区气缸上抬动作流程.StepID =" + PS测试区气缸上抬动作流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                            /*
+                             * if (site1状态 == 1:有料) //如果需要测试				
+                             {				
+                                TestAircylinderStarttest(testnum); //触发下压动作	
+                                com.Send(testnum, testgetsitestatus[testnum]);				
+                                site1状态 = 2: 测试中			
+                             }				
+                             else if(site1状态 == 3:已测试)				
+                             {				
+                                TestAircylinderEndtest(testnum); //触发抬升动作			
+                                site1状态 = 2: 待取料				
+                             }				
+                            */
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS测试区气缸上抬动作流程({PS测试区气缸上抬动作流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }

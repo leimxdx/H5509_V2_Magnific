@@ -100,7 +100,7 @@
             this.MinimizeBox = false;
             this.Name = "NewSetupName";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "0";
+            this.Text = "新增档案";
             this.ResumeLayout(false);
             this.PerformLayout();
 

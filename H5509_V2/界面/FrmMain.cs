@@ -5,28 +5,35 @@ using System.Data;
 using System.Data.SQLite;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComMaster;
+using ComMaster.Interfaces;
+using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
 using H5509_alarm;
 using H5509_V2.界面;
 using HardwareGXN;
 using HardwareGXN.GENAxisCard;
 using HardwareGXN.GSNAxisCard;
+using IHardwareGXN.Communication;
 using IHardwareGXN.GXNCard;
 using SQLiteHelper;
 using SQLServerHelper;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using TextFileLogger;
-//using DTMHelper;
 using Thermostat;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using static System.Windows.Forms.Design.AxImporter;
 using static H5509_V2.APPmaster;
 
 namespace H5509_V2
@@ -54,6 +61,85 @@ namespace H5509_V2
                 cp.ExStyle |= 0x02000000;
                 return cp;
             }
+        }
+
+        private void StationInit()
+        {
+            var configDict = new Dictionary<int, Dictionary<string, object>>();
+
+            // 直接创建并填充数组
+            Dictionary<string, object>[] sites = Enumerable.Range(0, 16)
+                .Select(i => ConvertToDictionary(GetSiteConfig(i)))
+                .ToArray();
+            //if (!configDict.ContainsKey(0)) configDict.Add(0, site1);
+            //if (!configDict.ContainsKey(1)) configDict.Add(1, site2);
+            //if (!configDict.ContainsKey(2)) configDict.Add(2, site3);
+            //if (!configDict.ContainsKey(3)) configDict.Add(3, site4);
+            //if (!configDict.ContainsKey(4)) configDict.Add(4, site5);
+            //if (!configDict.ContainsKey(5)) configDict.Add(5, site6);
+            //if (!configDict.ContainsKey(6)) configDict.Add(6, site7);
+            //if (!configDict.ContainsKey(7)) configDict.Add(7, site8);
+            //if (!configDict.ContainsKey(8)) configDict.Add(8, site9);
+            //if (!configDict.ContainsKey(9)) configDict.Add(9, site10);
+            //if (!configDict.ContainsKey(10)) configDict.Add(10, site11);
+            //if (!configDict.ContainsKey(11)) configDict.Add(11, site12);
+            //if (!configDict.ContainsKey(12)) configDict.Add(12, site13);
+            //if (!configDict.ContainsKey(13)) configDict.Add(13, site14);
+            //if (!configDict.ContainsKey(14)) configDict.Add(14, site15);
+            //if (!configDict.ContainsKey(15)) configDict.Add(15, site16);
+
+
+            int testNum = 设置信息.通讯信息.测试机数量; //1 4 8 16
+
+            //if (testNum == 1)
+            //{
+            //    configDict.Add(0, sites[0]);
+
+            //}
+            //else if (testNum == 4)
+            //{
+            //    configDict.Add(0, sites[0]);
+            //    configDict.Add(4, sites[4]);
+            //    configDict.Add(8, sites[8]);
+            //    configDict.Add(12, sites[12]);
+            //}
+            //else if (testNum == 8)
+            //{
+            //    configDict.Add(0, sites[0]);
+            //    configDict.Add(2, sites[2]);
+            //    configDict.Add(4, sites[4]);
+            //    configDict.Add(6, sites[6]);
+            //    configDict.Add(8, sites[8]);
+            //    configDict.Add(10, sites[10]);
+            //    configDict.Add(12, sites[12]);
+            //    configDict.Add(14, sites[14]);
+            //}
+            //else if (testNum == 16)
+            //{
+            //    configDict.Add(0, sites[0]);
+            //    configDict.Add(1, sites[1]);
+            //    configDict.Add(2, sites[2]);
+            //    configDict.Add(3, sites[3]);
+            //    configDict.Add(4, sites[4]);
+            //    configDict.Add(5, sites[5]);
+            //    configDict.Add(6, sites[6]);
+            //    configDict.Add(7, sites[7]);
+            //    configDict.Add(8, sites[8]);
+            //    configDict.Add(9, sites[9]);
+            //    configDict.Add(10, sites[10]);
+            //    configDict.Add(11, sites[11]);
+            //    configDict.Add(12, sites[12]);
+            //    configDict.Add(13, sites[13]);
+            //    configDict.Add(14, sites[14]);
+            //    configDict.Add(15, sites[15]);
+            //}
+            int step = 16 / testNum;
+            for (int i = 0; i < testNum; i++)
+            {
+                int siteIndex = i * step;
+                configDict.Add(siteIndex, sites[siteIndex]);
+            }
+            StationManagers.UpdateStationsConfig(configDict);
         }
 
         private void SetTablayoutDoubleBuffer()
@@ -130,6 +216,7 @@ namespace H5509_V2
             iGXNCard = (IGXNInterface)instance; //IGXNInterface gxncard = new HardwareImplementations.GENAxisCard.GENAxisController();
             iGXNCard.RunLog += Runlog2;
 
+            StationManagers = new StationManager();
             //Form form = new FrmGSN();
             //form.Show();
 
@@ -144,7 +231,7 @@ namespace H5509_V2
         {
             string result = "";
             motionEx = new MotionEx(iGXNCard);
-            Com = new Communication();
+            //Com = new Communication();
             main = new _main()
             {
                 刷新界面权限 = 刷新界面权限,
@@ -155,6 +242,7 @@ namespace H5509_V2
                 刷新温度信息 = main.刷新温度显示,
                 刷新按钮状态 = 刷新按钮权限,
                 刷新开Site状态 = main.刷新开Site状态,
+                刷新档案选项 = main.刷新档案选项,
             };
             handler = new Handler()
             {
@@ -172,7 +260,10 @@ namespace H5509_V2
 
             Log.发送批次信息 = main.SendLotNo;
 
-            Com.RefrshLog = Log.DelegteDisplayComInfo;
+            //Com.RefrshLog = Log.DelegteDisplayComInfo;
+            StationManagers.RefreshLog = Log.DelegteDisplayComInfo;
+            刷新通讯配置();
+            //StationManagers.ConnectAll();
 
             达温延时 = new System.Timers.Timer() { Interval = 达温后延时时间 * 1000 }; //2分钟
             达温延时.Elapsed += main.TempFirst;
@@ -189,11 +280,107 @@ namespace H5509_V2
                 TCPConnect = true;
                 main.刷新温度显示();
             }
+            //var config = new SerialPortConfig
+            //{
+            //    Protocol = "Serial",
+            //    PortName = "COM3",
+            //    BaudRate = 9600,
+            //    Parity = Parity.None,
+            //    DataBits = 8,
+            //    StopBits = StopBits.One,
+            //};
+            //// 序列化为JSON
+            //string json = System.Text.Json.JsonSerializer.Serialize(config);
 
+            //var options = new JsonSerializerOptions
+            //{
+            //    Converters = { new JsonStringEnumConverter() },
+            //    PropertyNameCaseInsensitive = true
+            //};
+            //SerialPortConfig serialPortConfig = JsonSerializer.Deserialize<SerialPortConfig>(json, options);
+
+            //StationInit();
+
+            //bool[] check = StationManagers.CheckCommunicationConnect();
+            //if (check.Contains(false))
+            //{
+            //    for (int i = 0; i < check.Length; i++)
+            //    {
+            //        if (!check[i])
+            //        {
+            //            Debug.WriteLine($"测试机{i + 1}通讯未连接");
+            //        }
+            //    }
+            //}
+
+
+            //check = StationManagers.CheckTesterConnect();
+            //if (check.Contains(false)) //if (!Com.IsOpenCom)
+            //{
+            //    MessageBox.Show("串口未连接!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
+
+            //// 添加新工位配置
+            //var configDict = new Dictionary<int, Dictionary<string, object>>();
+            //int stationId = 0;
+            //var config = new Dictionary<string, object>
+            //{
+            //    {"Protocol", "Serial"},
+            //    {"PortName", "COM10"},
+            //    {"BaudRate", 9600},
+            //    {"DataBits", 8},
+            //    {"StopBits", 1}, // 通常用1表示停止位1，2表示2，1.5表示1.5（但一般用字符串或枚举）
+            //    {"Parity", "None"}, // 或者使用枚举值
+            //    {"Handshake", "None"}
+            //    //{"Protocol", "Ethernet"},
+            //    //{"IP", "192.168.1.100"},
+            //    //{"Port", 502},
+            //    //{"Timeout", 5000}
+            //};
+            ////StationManagers.RegisterDevice("Serial", "COM11", 0);
+            //configDict.Add(stationId, config);
+
+            //StationManagers.UpdateStationsConfig(configDict);
+            //StationManagers.Connect(stationId);
+            //StationManagers.GetStation(stationId).SendAsync("我为宇宙，woweiyuzhou, I am Yuzhou");
+
+            //ISerialDevice iSerialDevice = StationManagers.GetSerialDevice("COM11");
+            //iSerialDevice.Send("Hello");
+
+
+            //ComMaster.Devices.SerialDevice serial = new ComMaster.Devices.SerialDevice("0", "Site1")
+            //{
+            //    PortName = "COM11",
+            //    BaudRate = 9600,
+            //    DataBits = 8,
+            //    StopBits = 1,
+            //    Parity = "None",
+            //    ReceiveTimeout = 1000,
+            //    NewLine = ","
+            //};
+            //serial.Connect();
+            //Thread.Sleep(1000);
+            //serial.SendData("Hello");
+            //Thread.Sleep(1000);
+            //Thread.Sleep(1000);
+            //SicComMaster.ComUC comUC = new SicComMaster.ComUC();
+            //comUC.Show();
+            //SerialDevice serial = new SerialDevice("0","Site1");
+            //serial.Connect();
+            //string text = "Hello";
+            //byte[] fromString = Encoding.UTF8.GetBytes(text);
+            //serial.SendAndReceive(fromString);
+            //SicComMaster.Communication.CommunicationManager communication = SicComMaster.Communication.CommunicationManager.Instance;
+            //ICommInterface sss = (ICommInterface)communication.GetDevice<ISerialDevice>("Serial","0");
+            //ISerialDevice serialDevice = communication.GetSerialDevice("0");
+            // SicComMaster.Communication.CommunicationManager communication = SicComMaster.Communication.CommunicationManager.Instance;
             //Form formw = new Thermostat.FrmMain(dTMHelper);
             //formw.Show();
-
-
+            //serial.SendData
+            //byte[] bytes =  serial.ReadData();
+            //string str = Encoding.UTF8.GetString(bytes);
+            //Debug.WriteLine("接收："+str);
             //MotionEx motionex = MotionEx.GetInstance();
             //MotionEx motionex2 = MotionEx.GetInstance();
 
@@ -598,6 +785,87 @@ namespace H5509_V2
             }
         }
 
+
+        private bool CheckInNozzleIC()
+        {
+            bool ispass = false;
+            if (InNozzleIC)
+            {
+                string result = handler.入料吸嘴_真空检测(out string[] iovalue);
+                if (result == "Success" && iovalue.Contains("0"))
+                {
+                    for (int i = 0; i < iovalue.Length; i++)
+                    {
+                        if (InNozzleICOpen[i] && InNozzleIC)
+                        {
+                            if (iovalue[i] == "0")
+                            {
+                                入料IC移动过程中忽略 = true;
+                                ispass = true;
+                                Listcode.Add($"30{i + 1}0001"); //出料手臂-吸--1号吸嘴丢失IC
+                                RunLog($"[Code]30{i + 1}0001,[Msg]入料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
+            return ispass;
+        }
+
+        private bool CheckOutNozzleIC()
+        {
+            bool ispass = false;
+            if (OutNozzleIC)
+            {
+                string result = handler.出料吸嘴_真空检测(out string[] iovalue);
+                if (result == "Success" && iovalue.Contains("0"))
+                {
+                    for (int i = 0; i < iovalue.Length; i++)
+                    {
+                        if (OutNozzleICOpen[i] && OutNozzleIC)
+                        {
+                            if (iovalue[i] == "0")
+                            {
+                                出料IC移动过程中忽略 = true;
+                                ispass = true;
+                                Listcode.Add($"30{i + 5}0001"); //出料手臂-吸--1号吸嘴丢失IC
+                                RunLog($"[Code]30{i + 5}0001,[Msg]出料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
+            return ispass;
+        }
+
+        private bool CheckTestNozzleIC()
+        {
+            bool ispass = false;
+            if (TestNozzleIC)
+            {
+                string result = handler.测试吸嘴_真空检测(out string[] iovalue);
+
+                if (result == "Success" && iovalue.Contains("0"))
+                {
+                    for (int i = 0; i < iovalue.Length; i++)
+                    {
+                        if (TestNozzleICOpen[i] && TestNozzleIC)
+                        {
+                            if (iovalue[i] == "0")
+                            {
+                                测试IC移动过程中忽略 = true;
+                                ispass = true;
+                                Listcode.Add($"3{i + 9:D2}9901"); //出料手臂-吸--1号吸嘴丢失IC
+                                RunLog($"[Code]3{i + 9:D2}9901,[Msg]测试手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
+            return ispass;
+        }
+
+
         private void 界面刷新()
         {
             string result = "";
@@ -630,104 +898,44 @@ namespace H5509_V2
                         continue; //如果暂停则不刷新
                     }
 
-                    bool ispass = false;
 
                     if (!空跑模式)
                     {
-                        if (InNozzleIC)
+                        bool boolIn = CheckInNozzleIC();
+                        bool boolout = CheckOutNozzleIC();
+                        bool booltest = CheckTestNozzleIC();
+
+                        if (boolIn || boolout || booltest)
                         {
-                            result = handler.入料吸嘴_真空检测(out string[] iovalue);
-
-                            for (int i = 0; i < iovalue.Length; i++)
-                            {
-                                if (InNozzleICOpen[i] && InNozzleIC)
-                                {
-                                    if (iovalue[i] == "0")
-                                    {
-                                        ispass = true;
-                                        Listcode.Add($"30{i + 1}0001"); //出料手臂-吸--1号吸嘴丢失IC
-                                        RunLog($"[Code]30{i + 1}0001,[Msg]入料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
-                                    }
-                                }
-                            }
-                        }
-
-                        if (OutNozzleIC)
-                        {
-                            result = handler.出料吸嘴_真空检测(out string[] iovalue);
-
-                            for (int i = 0; i < iovalue.Length; i++)
-                            {
-                                if (OutNozzleICOpen[i] && OutNozzleIC)
-                                {
-                                    if (iovalue[i] == "0")
-                                    {
-                                        ispass = true;
-                                        Listcode.Add($"30{i + 5}0001"); //出料手臂-吸--1号吸嘴丢失IC
-                                        RunLog($"[Code]30{i + 5}0001,[Msg]出料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
-                                    }
-                                }
-                            }
-                        }
-
-                        if (TestNozzleIC)
-                        {
-                            result = handler.测试吸嘴_真空检测(out string[] iovalue);
-
-                            for (int i = 0; i < iovalue.Length; i++)
-                            {
-                                if (TestNozzleICOpen[i] && TestNozzleIC)
-                                {
-                                    if (iovalue[i] == "0")
-                                    {
-                                        ispass = true;
-                                        Listcode.Add($"3{i + 9:D2}9901"); //出料手臂-吸--1号吸嘴丢失IC
-                                        RunLog($"[Code]3{i + 9:D2}9901,[Msg]测试手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
-                                    }
-                                }
-                            }
+                            ProgramPause = true;
+                            IsPause = true;
                         }
                     }
 
-                    if (ispass)
-                    {
-                        ProgramPause = true;
-                        IsPause = true;
-                    }
 
                     if (!空跑模式 && 设备状态 != 0)
                     {
                         this.Invoke(new Action(() =>
                         {
-                            if (Com.Iswaitout[testnum]) //如果接收超时
+                            if (OutSiteQueue2.TryDequeue(out (int siteid, TestDataInfo data) sites))
                             {
-                                Com.Iswaitout[testnum] = false;
-                                Listcode.Add($"8{testnum:D2}018");
-                                RunLog($"[Code]8{testnum:D2}018,[Msg]Site{testnum + 1}:接收超时！触发停止", LogType.AlarmLog);
-                                ProgramPause = true; //如果有接收超时则触发停止
-                                IsPause = true;
+                                if (sites.data.Iswaitout)
+                                {
+                                    //Com.Iswaitout[testnum] = false;
+                                    Listcode.Add($"8{testnum:D2}018");
+                                    RunLog($"[Code]8{testnum:D2}018,[Msg]Site{testnum + 1}:接收超时！触发停止", LogType.AlarmLog);
+                                    ProgramPause = true; //如果有接收超时则触发停止
+                                    IsPause = true;
+                                }
 
-                                //后续是否需要重新发送
-                            }
-
-                            //上传bin
-                            //计算每个dut的pass和fail数量
-                            //上传Num=Num+1
-                            //Socket使用时间
-                            //连续不良报警
-                            //自动关site
-                            //累计不良报警
-                            //总良率报警
-                            //Socket使用次数
-                            if (Com.Listtestsingal.Count != 0)
-                            {
-                                int sitenum = Com.Listtestsingal[0];
+                                int sitenum = sites.siteid; // Com.Listtestsingal[0];
                                 RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
                                 //Com.Listtestsingal.Remove(sitenum);
-                                Com.Listtestsingal.RemoveAt(0);
-                                bool[][] open = SiteTestIC[sitenum];
+                                //Com.Listtestsingal.RemoveAt(0);
 
-                                Com.OutBin.TryDequeue(out string[] bins);
+                                bool[][] open = StationManagers.GetStationIC(sitenum); // SiteTestIC[sitenum];
+
+                                string[] bins = sites.data.SiteTestBin; //Com.OutBin.TryDequeue(out string[] bins);
 
                                 //main.显示Dout颜色(sitenum, open, bins);
 
@@ -774,7 +982,7 @@ namespace H5509_V2
                                         int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
                                         int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
                                         //RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
-                                        sql = $"update DutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{Com.listtesttimespan[sitenum].Ticks} where id='{doutstr}'";
+                                        sql = $"update DutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{sites.data.listtesttimespan.Ticks} where id='{doutstr}'";
                                         int line1 = Sqlite.runSqlNonQuery(SQLiteRunningString, sql);
                                         if (line1 <= 0) RunLog(sql + $"返回:{line1}");
                                         //int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
@@ -783,6 +991,7 @@ namespace H5509_V2
                                         //RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
                                     }
                                 }
+
 
                                 bool isyieldex = false;
                                 bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
@@ -890,7 +1099,6 @@ namespace H5509_V2
                                     IsPause = true;
                                 }
                             }
-
                         }));
                     }
 

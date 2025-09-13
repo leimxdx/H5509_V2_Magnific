@@ -27,6 +27,8 @@ namespace MotionCommon
 
         public TesterIFParam 测试机信息 { get; set; } = new TesterIFParam();
 
+        public ComInfoSet 通讯信息 { get; set; } = new ComInfoSet();
+
         public string 梭车名称 { get; set; }
     }
 }

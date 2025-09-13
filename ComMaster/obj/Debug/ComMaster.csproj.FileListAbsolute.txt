@@ -1,0 +1,8 @@
+D:\GitHub\H5509_V2\ComMaster\bin\Debug\ComMaster.dll
+D:\GitHub\H5509_V2\ComMaster\bin\Debug\ComMaster.pdb
+D:\GitHub\H5509_V2\ComMaster\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.csproj.Up2Date
+D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.dll
+D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.pdb

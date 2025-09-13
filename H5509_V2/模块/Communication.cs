@@ -202,9 +202,11 @@ namespace H5509_V2
                                 else Bin.Add(site, bin);
                                 listtesttimespan[site] = DateTime.Now - listtestdatetime[site];
                                 TestTime = DateTime.Now - listtestdatetime[site];
-                                OutSiteQueue.Enqueue(site);
-                                BinSaveQueue.Enqueue(bin);
-                                SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
+                                //OutSiteQueue2.Enqueue(site);
+                                //BinSaveQueue.Enqueue(bin);
+
+                                OutSiteQueue.Enqueue((site, new TestDataInfo() { SiteTestBin = bin }));
+                                //SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
                                 SiteTestState[site] = 3;
 
                                 //用来统计数据
@@ -382,13 +384,15 @@ namespace H5509_V2
                 Bin[t] = bin;
             }
             else Bin.Add(t, bin);
-            OutSiteQueue.Enqueue(t);
-            BinSaveQueue.Enqueue(bin);
+            //OutSiteQueue2.Enqueue(t);
+            //BinSaveQueue.Enqueue(bin);
+
+            OutSiteQueue.Enqueue((t, new TestDataInfo() { SiteTestBin = bin }));
             //用来统计数据
             OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
             Listtestsingal.Add(t);
             SiteTestBin[t] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
-            SiteTestState[t] = 3;
+            StationManagers.SetStationState(t, 3);// SiteTestState[t] = 3;
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
 
         }
@@ -422,13 +426,15 @@ namespace H5509_V2
                 Bin[t] = bin;
             }
             else Bin.Add(t, bin);
-            OutSiteQueue.Enqueue(t);
-            BinSaveQueue.Enqueue(bin);
+            //OutSiteQueue.Enqueue(t);
+            //BinSaveQueue.Enqueue(bin);
+
+            OutSiteQueue.Enqueue((t, new TestDataInfo() { SiteTestBin = bin }));
             //用来统计数据
             OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
             Listtestsingal.Add(t);
             SiteTestBin[t] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
-            SiteTestState[t] = 3;
+            StationManagers.SetStationState(t, 3);// SiteTestState[t] = 3;
             //writeDataHelper.RunLog($"{DateTime.Now.ToString("HH:mm:dd")}:Site{t + 1}接收超时", 2);
         }
 
@@ -471,14 +477,16 @@ namespace H5509_V2
             listtesttimespan[site] = DateTime.Now - listtestdatetime[site];
             TestTime = DateTime.Now - listtestdatetime[site];
 
-            OutSiteQueue.Enqueue(site);
-            BinSaveQueue.Enqueue(bin);
+            //OutSiteQueue.Enqueue(site);
+            //BinSaveQueue.Enqueue(bin);
+
+            OutSiteQueue.Enqueue((site, new TestDataInfo() { SiteTestBin = bin }));
 
             //用来统计数据
             OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
             Listtestsingal.Add(site);
             SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
-            SiteTestState[site] = 3;
+            StationManagers.SetStationState(site, 3);// SiteTestState[t] = 3;
 
             RunLog($"接收Site:{site:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
         }

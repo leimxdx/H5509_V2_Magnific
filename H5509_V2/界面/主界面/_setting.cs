@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -15,24 +15,25 @@ using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Security.RightsManagement;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ComMaster.Interfaces;
 using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Presentation;
-using DocumentFormat.OpenXml.Spreadsheet;
-using DocumentFormat.OpenXml.Vml.Spreadsheet;
-using DocumentFormat.OpenXml.Wordprocessing;
-using Sunny.UI;
-using static H5509_V2.APPmaster;
-using Color = System.Drawing.Color;
-using Control = System.Windows.Forms.Control;
-using MotionCommon;
+using DocumentFormat.OpenXml.Office2013.WebExtension;
 using IHardwareGXN.GXNCard;
-using TextFileLogger;
-using static TextFileLogger.LogType;
+using MotionCommon;
 using SQLiteHelper;
 using SQLServerHelper;
+using Sunny.UI;
+using Sunny.UI.Win32;
+using TextFileLogger;
+using static H5509_V2.APPmaster;
+using static SiCommunication.Profinet.Knx.KnxCode;
+using Color = System.Drawing.Color;
+using Control = System.Windows.Forms.Control;
 
 namespace H5509_V2
 {
@@ -57,6 +58,7 @@ namespace H5509_V2
         public Action 刷新温度信息;
         public Action 刷新按钮状态;
         public Action 刷新开Site状态;
+        public Action 刷新档案选项;
 
         public _setting()
         {
@@ -109,12 +111,29 @@ namespace H5509_V2
             uiComboBox49.DataSource = new string[] { "7", "8" };
             uiComboBox48.DataSource = new string[] { "1", "2" };
 
-            刷新串口(SerialPort.GetPortNames());
+            UIComboBox[] uIComboBoxes = new UIComboBox[]
+            {
+                uiComboBox19,
+                uiComboBox20, uiComboBox21, uiComboBox22, uiComboBox23,
+                uiComboBox27, uiComboBox26, uiComboBox25, uiComboBox24,
+                uiComboBox31, uiComboBox30, uiComboBox29, uiComboBox28,
+                uiComboBox39, uiComboBox38, uiComboBox37, uiComboBox36,
+                uiComboBox35, uiComboBox34, uiComboBox33, uiComboBox32,
+                uiComboBox47, uiComboBox46, uiComboBox45, uiComboBox44,
+                uiComboBox43, uiComboBox42, uiComboBox41, uiComboBox40,
+            };
+
+            foreach (UIComboBox uIComboBox in uIComboBoxes)
+            {
+                uIComboBox.MouseClick += 刷新串口;
+            }
+
+            //刷新串口(SerialPort.GetPortNames());
 
             清空通讯方式();
-            清空通讯协议();
+            //清空通讯协议();
             刷新通讯方式();
-            刷新通讯协议();
+            //刷新通讯协议();
             刷新测试机数量显示();
 
             TabPage[] initPointtabPages = { tabPage7, tabPage8, tabPage9, tabPage16, tabPage17, tabPage4, tabPage27, tabPage28, tabPage34, tabPage35, tabPage36, tabPage37, tabPage24, tabPage39, tabPage40 };
@@ -147,6 +166,18 @@ namespace H5509_V2
                         numericUpDown3.MouseWheel += Ctl_MouseWheel;
                     }
                 }
+            }
+        }
+
+        public void 刷新串口(object sender, MouseEventArgs e)
+        {
+            UIComboBox uICombox = sender as UIComboBox;
+            string Text = uICombox.Text;
+            if (e.Button == MouseButtons.Left)
+            {
+                uICombox.DataSource = SerialPort.GetPortNames();
+                //uiComboBox11.Text = 设置信息.测试机信息.串口号;
+                uICombox.Text = Text;
             }
         }
 
@@ -185,6 +216,7 @@ namespace H5509_V2
             uiComboBox42.DataSource = serialPort;
             uiComboBox41.DataSource = serialPort;
             uiComboBox40.DataSource = serialPort;
+            //uiComboBox40.SelectedIndex  = -1;
         }
 
         public string GetAxisStatus(short core, short axis, ref bool[] gNME601AxisStatus)
@@ -616,10 +648,139 @@ namespace H5509_V2
 
         private void button89_Click(object sender, EventArgs e)
         {
-            温控达温 = true;
-            string point = textBox26.Text;
-            HeatDicPoint[point] = true;
-            HeatDicTimer[point].Status = 1;
+
+            OutSiteQueue.TryPeek(out (int SiteId, TestDataInfo Data) site);
+            int siteid = site.SiteId;
+            //int site = 6;
+            //string result = "";
+            //List<bool[]> open = new List<bool[]>();
+            //List<List<bool[]>> opens = new List<List<bool[]>>();
+            //if (设置信息.通讯信息.同时测试 == 2)
+            //{
+            //    result = "Success";
+            //    int[] sites = GetSites(site);
+            //    bool bool1 = SiteTestState[sites[0]] == 1;
+            //    bool bool2 = !GetSiteOpen((int)sites[0]).Contains(true);
+            //    bool bool3 = SiteTestState[sites[1]] == 1;
+            //    bool bool4 = !GetSiteOpen((int)sites[1]).Contains(true);
+            //    if ((bool1 || bool2) && (bool3 || bool4))
+            //    {
+            //        opens = new List<List<bool[]>>() { GetOpens(SiteTestIC[sites[0]]), GetOpens(SiteTestIC[sites[1]]) };
+            //        //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+            //        result = StationManagers.Send(sites, opens, 无测试机模式);
+            //    }
+            //}
+            //else result = StationManagers.Send(site, open, 无测试机模式);
+            ////else result = APPmaster.Com.Send(site, open, 无测试机模式);
+
+            //if (result == "Success")
+            //{
+            //    SiteTestState[site] = 2;
+            //    PS测试区气缸下压动作流程.StepID = 599;
+            //}
+
+            //int site = 0;
+            //string[] bin = new string[8];
+
+
+            //OutSiteQueue.Enqueue((0, new TestDataInfo() { SiteTestBin = new string[] { "01", "02", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+            //OutSiteQueue.Enqueue((1, new TestDataInfo() { SiteTestBin = new string[] { "03", "04", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+            //OutSiteQueue.Enqueue((2, new TestDataInfo() { SiteTestBin = new string[] { "05", "06", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+            //OutSiteQueue.Enqueue((3, new TestDataInfo() { SiteTestBin = new string[] { "07", "08", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+            //(int SiteId, TestDataInfo Data) sites;
+            //if (OutSiteQueue.TryDequeue(out sites))
+            //{
+            //    site = sites.SiteId;
+            //    bin = sites.Data.SiteTestBin;
+            //    RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->获取Site{site + 1}信息");
+            //    IndexTime = DateTime.Now;
+            //    bool[][] open = SiteTestIC[site];
+            //    int[] opens = new int[8]
+            //    {
+            //                    open[0][0] ? 0 : 2, open[0][1] ? 0 : 2, open[0][2] ? 0 : 2, open[0][3] ? 0 : 2,
+            //                    open[1][0] ? 0 : 2, open[1][1] ? 0 : 2, open[1][2] ? 0 : 2, open[1][3] ? 0 : 2,
+            //    };
+            //    bool[] lsopen = new bool[] { open[0][0], open[0][1], open[0][2], open[0][3], open[1][0], open[1][1], open[1][2], open[1][3] };
+            //    PS测试手臂取已测料流程.StepID = 505;
+            //}
+            //else
+            //{
+            //    RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->获取Site信息失败!");
+            //    ProgramPause = true;
+            //    IsPause = true;
+            //}
+            //string bins = string.Join(",", Auto1);
+            //bins += "," + string.Join(",", Auto2);
+            //if (Fix1.Length != 0)
+            //    bins += "," + string.Join(",", Fix1);
+            //if (Fix2.Length != 0)
+            //    bins += "," + string.Join(",", Fix2);
+            //if (Fix3.Length != 0)
+            //    bins += "," + string.Join(",", Fix3);
+
+            //string[] bins2 = bins.Split(',');
+
+            //string[] bin = GetRandomBin(0, bins2.Length, bins2, 8);
+            //string[] bin = { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+
+            //RefreshInfoLog($"@TEST_DONE {site:D2} {bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}+", true);
+            //RunLog($"@TEST_DONE 00 {bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}+", LogType.ComLog, true);
+            //string test = "@TEST_DONE A1A1F0F0F1F1C1C1F0F0F0F0F0F0F0F0+";
+
+            //int[] site = { 0, 0 + 1 };
+
+            //string bin = test.Substring(11, test.Length - 12);
+
+            //// 2. 将长字符串按每2个字符一组分割
+            //string[] allParts = new string[bin.Length / 2];
+            //for (int i = 0; i < allParts.Length; i++)
+            //{
+            //    allParts[i] = bin.Substring(i * 2, 2);
+            //}
+
+            //string[][] bins = new string[2][];
+            //// 前8个元素组成 bin1
+            //bins[0] = allParts.Take(8).ToArray();
+            //// 后8个元素组成 bin2
+            //bins[1] = allParts.Skip(8).Take(8).ToArray();
+
+            //for (int i = 0; i < site.Length; i++)
+            //{
+            //    TestDataInfo[] testDataInfos = new TestDataInfo[];
+            //    if (testDataInfos[i].SiteTestState == 2 && (testDataInfos[i].Listtimer.Enabled || testDataInfos[i].timeOutTimer.Enabled)) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
+            //    {
+            //        testDataInfos[i].Listtimer.Stop();
+            //        testDataInfos[i].timeOutTimer.Stop();
+
+            //        testDataInfos[i].SiteTestBin = bins[i];
+            //        testDataInfos[i].listtesttimespan = DateTime.Now - testDataInfos[i].listtestdatetime;
+            //        testDataInfos[i].TestTime = DateTime.Now - testDataInfos[i].listtestdatetime;
+
+            //        testDataInfos[i].SiteTestState = 3;
+
+            //        DataUpdate(i, testDataInfos[i]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
+            //                                         ////用来统计数据
+
+            //        RunLog($"接收Site:{site:D2},Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}");
+            //    }
+            //    else RunLog($"site:{site:D2}未在测试!", LogType.ComLog);
+            //}
+
+            //bool[] check = StationManagers.CheckTesterConnect();
+            //if (check.Contains(false))
+            //{
+            //    for (int i = 0; i < check.Length; i++)
+            //    {
+            //        if (!check[i])
+            //        {
+            //            Debug.WriteLine($"未发送开批信息给测试机{i + 1}");
+            //        }
+            //    }
+            //}
+            //温控达温 = true;
+            //string point = textBox26.Text;
+            //HeatDicPoint[point] = true;
+            //HeatDicTimer[point].Status = 1;
             //bool bool1 = !飞梭后入料IC[0].Contains(true); //飞梭后入料IC第1列无料
             //RunLog("!飞梭后入料IC[0]:" + bool1);
             //bool1 = !飞梭后入料IC[1].Contains(true);//飞梭后入料IC第2列无料
@@ -1847,7 +2008,7 @@ namespace H5509_V2
 
             result = 读取气缸输入信号(xIoName, "1", out long ms);
             if (result != "Success") RunLog($"{yIoName}到位输出超时({ms}ms)");
-            else RunLog($"{yIoName}到位输出成功({ms}ms)");
+            //else RunLog($"{yIoName}到位输出成功({ms}ms)");
             return result;
         }
 
@@ -1862,7 +2023,7 @@ namespace H5509_V2
 
             result = 读取气缸输入信号(xIoName, "0", out long ms);
             if (result != "Success") RunLog($"{yIoName}原位输出超时({ms}ms)");
-            else RunLog($"{yIoName}原位输出成功({ms}ms)");
+            //else RunLog($"{yIoName}原位输出成功({ms}ms)");
             return result;
         }
 
@@ -1877,7 +2038,7 @@ namespace H5509_V2
 
             result = 读取气缸输入信号(xIoName, "0", out long ms);
             if (result != "Success") RunLog($"{yIoName}到位输出超时({ms}ms)");
-            else RunLog($"{yIoName}到位输出成功({ms}ms)");
+            //else RunLog($"{yIoName}到位输出成功({ms}ms)");
             return result;
         }
 
@@ -1891,8 +2052,8 @@ namespace H5509_V2
             }
             result = 读取气缸输入信号(xIoName, "1", out long ms);
 
-            if (result == "Success") RunLog($"{yIoName}原位输出超时({ms}ms)");
-            else RunLog($"{yIoName}原位输出成功({ms}ms)");
+            if (result != "Success") RunLog($"{yIoName}原位输出超时({ms}ms)");
+            //else RunLog($"{yIoName}原位输出成功({ms}ms)");
             return result;
         }
 
@@ -3859,6 +4020,17 @@ namespace H5509_V2
             刷新测试机(tester);
         }
 
+        private void 刷新通讯(string name)
+        {
+            string result = GetSetupValue(name, "通讯名称", out string value);
+            if (result != "Success") return;
+
+            result = GetComInfoSet(value, out ComInfoSet tester);
+            if (result != "Success") return;
+
+            刷新通讯(tester);
+        }
+
         private void 刷新测试机(TesterIFParam tester)
         {
             numericUpDown12.Text = tester.Dout连续不良个数.ToString();
@@ -3906,6 +4078,152 @@ namespace H5509_V2
             checkBox12.Checked = tester.Auto换盘时出料Z回零;
         }
 
+        private void 刷新通讯(ComInfoSet comInfoSet)
+        {
+            uiCheckBox162.Checked = comInfoSet.通讯协议 == "晶存";
+            uiCheckBox163.Checked = comInfoSet.通讯协议 == "得一微";
+            uiCheckBox164.Checked = comInfoSet.通讯协议 == "慧荣";
+            uiCheckBox165.Checked = comInfoSet.通讯协议 == "江波龙";
+
+            显示通讯协议();
+
+            uiCheckBox166.Checked = comInfoSet.通讯方式 == "COM";
+            uiCheckBox167.Checked = comInfoSet.通讯方式 == "TCP";
+            uiCheckBox168.Checked = comInfoSet.通讯方式 == "LAN";
+            uiCheckBox169.Checked = comInfoSet.通讯方式 == "GPIB";
+
+            uiCheckBox158.Checked = comInfoSet.测试机数量 == 1;
+            uiCheckBox159.Checked = comInfoSet.测试机数量 == 4;
+            uiCheckBox161.Checked = comInfoSet.测试机数量 == 8;
+            uiCheckBox160.Checked = comInfoSet.测试机数量 == 16;
+
+            uiCheckBox170.Checked = comInfoSet.同时测试 == 1;
+            uiCheckBox171.Checked = comInfoSet.同时测试 == 2;
+
+            uiCheckBox172.Checked = comInfoSet.测试结果中有对应Site;
+
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new JsonStringEnumConverter() },
+                PropertyNameCaseInsensitive = true
+            };
+
+            string[] sites = Enumerable.Range(1, 16).Select(i =>
+            {
+                var property = typeof(ComInfoSet).GetProperty($"Site{i}");
+                string json = (string)property.GetValue(comInfoSet);
+                return JsonSerializer.Deserialize<SerialPortConfig>(json, options).PortName;
+            }).ToArray();
+
+            SerialPortConfig serial = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site1, options);
+            uiComboBox50.Text = serial.BaudRate.ToString();
+            uiComboBox51.Text = serial.Parity.ToString();
+            uiComboBox49.Text = serial.DataBits.ToString();
+            uiComboBox48.Text = serial.StopBits.ToString();
+
+            //string site1 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site1, options).PortName;
+            //string site2 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site2, options).PortName;
+            //string site3 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site3, options).PortName;
+            //string site4 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site4, options).PortName;
+            //string site5 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site5, options).PortName;
+            //string site6 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site6, options).PortName;
+            //string site7 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site7, options).PortName;
+            //string site8 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site8, options).PortName;
+            //string site9 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site9, options).PortName;
+            //string site10 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site10, options).PortName;
+            //string site11 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site11, options).PortName;
+            //string site12 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site12, options).PortName;
+            //string site13 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site13, options).PortName;
+            //string site14 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site14, options).PortName;
+            //string site15 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site15, options).PortName;
+            //string site16 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site16, options).PortName;
+
+            if (uiCheckBox158.Checked)
+            {
+                uiComboBox19.Text = sites[0];
+            }
+            else if (uiCheckBox159.Checked)
+            {
+                uiComboBox20.Text = sites[0];
+                uiComboBox21.Text = sites[4];
+                uiComboBox22.Text = sites[8];
+                uiComboBox23.Text = sites[12];
+            }
+            else if (uiCheckBox161.Checked)
+            {
+                uiComboBox27.Text = sites[0];
+                uiComboBox26.Text = sites[2];
+                uiComboBox25.Text = sites[4];
+                uiComboBox24.Text = sites[6];
+                uiComboBox31.Text = sites[8];
+                uiComboBox30.Text = sites[10];
+                uiComboBox29.Text = sites[12];
+                uiComboBox28.Text = sites[14];
+            }
+            else if (uiCheckBox160.Checked)
+            {
+                uiComboBox39.Text = sites[0];
+                uiComboBox38.Text = sites[1];
+                uiComboBox37.Text = sites[2];
+                uiComboBox36.Text = sites[3];
+                uiComboBox35.Text = sites[4];
+                uiComboBox34.Text = sites[5];
+                uiComboBox33.Text = sites[6];
+                uiComboBox32.Text = sites[7];
+                uiComboBox47.Text = sites[8];
+                uiComboBox46.Text = sites[9];
+                uiComboBox45.Text = sites[10];
+                uiComboBox44.Text = sites[11];
+                uiComboBox43.Text = sites[12];
+                uiComboBox42.Text = sites[13];
+                uiComboBox41.Text = sites[14];
+                uiComboBox40.Text = sites[15];
+            }
+            刷新测试机数量显示();
+            //numericUpDown12.Text = comInfoSet.Dout连续不良个数.ToString();
+            //checkBox1.Checked = comInfoSet.Dout连续不良自动关闭;
+            //checkBox2.Checked = comInfoSet.Dout连续不良报警;
+
+            //numericUpDown5.Text = comInfoSet.Dut累计不良报警个数.ToString();
+            //checkBox3.Checked = comInfoSet.Dut累计不良报警使能;
+            //numericUpDown13.Text = comInfoSet.总良率报警百分比.ToString();
+            //numericUpDown14.Text = comInfoSet.总良率报警基数.ToString();
+            //numericUpDown15.Text = comInfoSet.总良率报警间隔.ToString();
+            //checkBox4.Checked = comInfoSet.总良率报警使能;
+            //numericUpDown16.Text = comInfoSet.socket使用次数.ToString();
+            //numericUpDown_测试超时时间.Text = comInfoSet.测试超时时间.ToString();
+            //numericUpDown_timeout超时时间.Text = comInfoSet.timeout超时时间.ToString();
+            //checkBox_timeout.Checked = comInfoSet.超时发送timeout;
+
+            //uiComboBox11.Text = comInfoSet.串口号;
+            //uiComboBox12.Text = comInfoSet.波特率.ToString();
+            //uiComboBox14.Text = comInfoSet.校验位.ToString();
+            //uiComboBox13.Text = comInfoSet.数据位.ToString();
+            //uiComboBox15.Text = comInfoSet.停止位.ToString();
+
+            //numericUpDown6.Text = comInfoSet.入料手臂吸料超时时间.ToString();
+            //numericUpDown9.Text = comInfoSet.出料手臂吸料超时时间.ToString();
+            //numericUpDown11.Text = comInfoSet.测试手臂吸料超时时间.ToString();
+            //numericUpDown7.Text = comInfoSet.入料手臂吹料时间.ToString();
+            //numericUpDown8.Text = comInfoSet.出料手臂吹料时间.ToString();
+            //numericUpDown10.Text = comInfoSet.测试手臂吹料时间.ToString();
+            //numericUpDown156.Text = comInfoSet.发送开始信号延时.ToString();
+            //numericUpDown160.Text = comInfoSet.离线模式测试等待时间.ToString();
+
+            //checkBox5.Checked = comInfoSet.入料吸提前开真空;
+            //checkBox6.Checked = comInfoSet.出料吸提前开真空;
+            //checkBox7.Checked = comInfoSet.测试吸提前开真空;
+
+            //checkBox8.Checked = comInfoSet.Auto侧敲使能;
+            //checkBox9.Checked = comInfoSet.前侧同时敲击;
+            //numericUpDown185.Text = comInfoSet.放置多少颗敲击.ToString();
+            //numericUpDown184.Text = comInfoSet.Auto侧敲次数.ToString();
+            //numericUpDown186.Text = comInfoSet.侧敲间隔.ToString();
+            //checkBox10.Checked = comInfoSet.放料时允许侧敲;
+            //checkBox11.Checked = comInfoSet.侧敲时允许放料;
+
+            //checkBox12.Checked = comInfoSet.Auto换盘时出料Z回零;
+        }
         private void 刷新分BIN(BinParam binParam)
         {
             (panel3.Controls["radioButton3_" + binParam.fix1num] as UIRadioButton).Checked = true;
@@ -4254,6 +4572,10 @@ namespace H5509_V2
                 else if (tabpagetext == "测试机")
                 {
                     刷新测试机(name);
+                }
+                else if (tabpagetext == "通讯")
+                {
+                    刷新通讯(name);
                 }
                 else if (tabpagetext == "分BIN")
                 {
@@ -4853,15 +5175,15 @@ namespace H5509_V2
 
                                 if (timeischange)
                                 {
-                                    Com.刷新测试超时时间();
+                                    StationManagers.UpdateTime();// Com.刷新测试超时时间();
                                 }
 
-                                if (comischange)
-                                {
-                                    Com.刷新串口信息();
-                                    //Com.CloseCom();
-                                    //Com.OpenCom();
-                                }
+                                //if (comischange)
+                                //{
+                                //    Com.刷新串口信息();
+                                //    //Com.CloseCom();
+                                //    //Com.OpenCom();
+                                //}
                             }
                             刷新测试机(newtester);
                         }
@@ -4874,6 +5196,221 @@ namespace H5509_V2
                 }
             }
         }
+
+        private void 获取串口信息(out string[] jsons)
+        {
+            string 通讯方式 = uiCheckBox166.Checked ? "COM" : uiCheckBox167.Checked ? "TCP" : uiCheckBox168.Checked ? "LAN" : uiCheckBox169.Checked ? "GPIB" : "COM";
+            int 测试机数量 = uiCheckBox158.Checked ? 1 : uiCheckBox159.Checked ? 4 : uiCheckBox161.Checked ? 8 : uiCheckBox160.Checked ? 16 : 1;
+
+            string[] coms = new string[16];
+
+            if (测试机数量 == 1)
+            {
+                for (int i = 0; i < coms.Length; i++)
+                {
+                    coms[i] = uiComboBox19.Text;
+                }
+
+            }
+            else if (测试机数量 == 4)
+            {
+                string[] coms2 = { uiComboBox20.Text, uiComboBox21.Text, uiComboBox22.Text, uiComboBox23.Text };
+                for (int i = 0; i < coms2.Length; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        coms[i * 4 + j] = coms2[i];
+                    }
+                }
+            }
+            else if (测试机数量 == 8)
+            {
+                string[] coms3 = { uiComboBox27.Text, uiComboBox26.Text, uiComboBox25.Text, uiComboBox24.Text, uiComboBox31.Text, uiComboBox30.Text, uiComboBox29.Text, uiComboBox28.Text };
+                for (int i = 0; i < coms3.Length; i++)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        coms[i * 2 + j] = coms3[i];
+                    }
+                }
+            }
+            else if (测试机数量 == 16)
+            {
+                string[] coms4 = { uiComboBox39.Text, uiComboBox38.Text, uiComboBox37.Text, uiComboBox36.Text, uiComboBox35.Text, uiComboBox34.Text, uiComboBox33.Text, uiComboBox32.Text, uiComboBox47.Text, uiComboBox46.Text, uiComboBox45.Text, uiComboBox44.Text, uiComboBox43.Text, uiComboBox42.Text, uiComboBox41.Text, uiComboBox40.Text };
+                for (int i = 0; i < coms4.Length; i++)
+                {
+                    coms[i] = coms4[i];
+                }
+            }
+
+            int baudRate = Convert.ToInt32(uiComboBox50.Text);
+            int dataBits = Convert.ToInt32(uiComboBox49.Text);
+            StopBits stopBits = (StopBits)Enum.Parse(typeof(StopBits), uiComboBox48.Text);
+            Parity parity = (Parity)Enum.Parse(typeof(Parity), uiComboBox51.Text);
+            jsons = new string[coms.Length];
+            for (int i = 0; i < coms.Length; i++)
+            {
+                var config = new SerialPortConfig
+                {
+                    Protocol = "COM",
+                    PortName = coms[i],
+                    BaudRate = baudRate,
+                    Parity = parity,
+                    DataBits = dataBits,
+                    StopBits = stopBits,
+                };
+                // 序列化为JSON
+                jsons[i] = System.Text.Json.JsonSerializer.Serialize(config);
+                //sites.Add(new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", coms[i] }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } } );
+            }
+
+            //var site1 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", coms[0] }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site2 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM11" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site3 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM12" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site4 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM13" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site5 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM14" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site6 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM15" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site7 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM16" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site8 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM17" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site9 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM18" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site10 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM19" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site11 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM20" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site12 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM21" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site13 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM22" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site14 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM23" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site15 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM24" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+            //var site16 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM25" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
+        }
+
+        private void 保存通讯信息()
+        {
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+                try
+                {
+                    DialogResult issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (issave == DialogResult.OK)
+                    {
+                        string result = GetSetupValue(name, "通讯名称", out string value);
+                        if (result != "Success")
+                        {
+                            MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+
+                        result = GetComInfoSet(value, out ComInfoSet oldComset);
+                        if (result != "Success")
+                        {
+                            MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        获取串口信息(out string[] jsons);
+
+
+                        ComInfoSet newComset = new ComInfoSet();
+                        newComset.通讯协议 = uiCheckBox162.Checked ? "晶存" : uiCheckBox163.Checked ? "得一微" : uiCheckBox164.Checked ? "慧荣" : uiCheckBox165.Checked ? "江波龙" : "晶存";
+                        newComset.通讯方式 = uiCheckBox166.Checked ? "COM" : uiCheckBox167.Checked ? "TCP" : uiCheckBox168.Checked ? "LAN" : uiCheckBox169.Checked ? "GPIB" : "COM";
+                        newComset.测试机数量 = uiCheckBox158.Checked ? 1 : uiCheckBox159.Checked ? 4 : uiCheckBox161.Checked ? 8 : uiCheckBox160.Checked ? 16 : 1;
+                        newComset.同时测试 = uiCheckBox170.Checked ? 1 : 2;
+                        newComset.测试结果中有对应Site = uiCheckBox172.Checked;
+                        newComset.Site1 = jsons[0];
+                        newComset.Site2 = jsons[1];
+                        newComset.Site3 = jsons[2];
+                        newComset.Site4 = jsons[3];
+                        newComset.Site5 = jsons[4];
+                        newComset.Site6 = jsons[5];
+                        newComset.Site7 = jsons[6];
+                        newComset.Site8 = jsons[7];
+                        newComset.Site9 = jsons[8];
+                        newComset.Site10 = jsons[9];
+                        newComset.Site11 = jsons[10];
+                        newComset.Site12 = jsons[11];
+                        newComset.Site13 = jsons[12];
+                        newComset.Site14 = jsons[13];
+                        newComset.Site15 = jsons[14];
+                        newComset.Site16 = jsons[15];
+
+                        result = UpdateComInfoSet(value, newComset);
+                        if (result != "Success")
+                        {
+                            MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            刷新通讯(oldComset);
+                        }
+                        else
+                        {
+                            if (oldComset.通讯协议 != newComset.通讯协议) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[通讯协议]:{oldComset.通讯协议}->{newComset.通讯协议}:更新成功", LogType.ParamLog);
+                            if (oldComset.通讯方式 != newComset.通讯方式) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[通讯方式]:{oldComset.通讯方式}->{newComset.通讯方式}:更新成功", LogType.ParamLog);
+                            if (oldComset.测试机数量 != newComset.测试机数量) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[测试机数量]:{oldComset.测试机数量}->{newComset.测试机数量}:更新成功", LogType.ParamLog);
+                            if (oldComset.同时测试 != newComset.同时测试) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[同时测试]:{oldComset.同时测试}->{newComset.同时测试}:更新成功", LogType.ParamLog);
+                            if (oldComset.测试结果中有对应Site != newComset.测试结果中有对应Site) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[测试结果中有对应Site]:{oldComset.测试结果中有对应Site}->{newComset.测试结果中有对应Site}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site1 != newComset.Site1) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site1]:{oldComset.Site1}->{newComset.Site1}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site2 != newComset.Site2) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site2]:{oldComset.Site2}->{newComset.Site2}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site3 != newComset.Site3) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site3]:{oldComset.Site3}->{newComset.Site3}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site4 != newComset.Site4) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site4]:{oldComset.Site4}->{newComset.Site4}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site5 != newComset.Site5) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site5]:{oldComset.Site5}->{newComset.Site5}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site6 != newComset.Site6) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site6]:{oldComset.Site6}->{newComset.Site6}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site7 != newComset.Site7) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site7]:{oldComset.Site7}->{newComset.Site7}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site8 != newComset.Site8) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site8]:{oldComset.Site8}->{newComset.Site8}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site9 != newComset.Site9) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site9]:{oldComset.Site9}->{newComset.Site9}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site10 != newComset.Site10) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site10]:{oldComset.Site10}->{newComset.Site10}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site11 != newComset.Site11) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site11]:{oldComset.Site11}->{newComset.Site11}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site12 != newComset.Site12) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site12]:{oldComset.Site12}->{newComset.Site12}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site13 != newComset.Site13) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site13]:{oldComset.Site13}->{newComset.Site13}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site14 != newComset.Site14) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site14]:{oldComset.Site14}->{newComset.Site14}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site15 != newComset.Site15) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site15]:{oldComset.Site15}->{newComset.Site15}:更新成功", LogType.ParamLog);
+                            if (oldComset.Site16 != newComset.Site16) RunLog($"档案名称:[{name}]:通讯名称:[{value}]:[Site16]:{oldComset.Site16}->{newComset.Site16}:更新成功", LogType.ParamLog);
+
+                            if (value == 设置信息.通讯信息.通讯名称)
+                            {
+                                result = GetComInfoSet(value, out newComset);
+                                if (result == "Success")
+                                {
+                                    设置信息.通讯信息 = newComset;
+                                }
+
+                                刷新通讯配置();
+
+                                //int testNum = 设置信息.通讯信息.测试机数量;
+
+                                //var configDict = new Dictionary<int, Dictionary<string, object>>();
+
+                                //// 直接创建并填充数组
+                                //Dictionary<string, object>[] sites = Enumerable.Range(0, 16)
+                                //    .Select(i => ConvertToDictionary(GetSiteConfig(i)))
+                                //    .ToArray();
+
+                                //int step = 16 / testNum;
+                                //for (int i = 0; i < testNum; i++)
+                                //{
+                                //    int siteIndex = i * step;
+                                //    configDict.Add(siteIndex, sites[siteIndex]);
+                                //}
+                                //StationManagers.UpdateStationsConfig(configDict);
+                                //for (int i = 0; i < 16; i++)
+                                //{
+                                //    StationManagers.Connect(i); Thread.Sleep(5);
+                                //    //StationManagers.Send(i, "@START_INFO ZRS2409290dlt:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");
+                                //    //.SendAsync("@START_INFO ZRS240929001A:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");//我为宇宙，woweiyuzhou, I am Yuzhou
+
+                                //    //StationManagers.GetStation(i).SendAsync("@START_TEST 00 11111111+");//我为宇宙，woweiyuzhou, I am Yuzhou
+                                //}
+
+                            }
+                            刷新通讯(newComset);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    RunLog("保存测试机信息()异常!" + ex.Message);
+                    return;
+                }
+            }
+        }
+
+        
 
         private void 保存分BIN信息()
         {
@@ -5519,6 +6056,10 @@ namespace H5509_V2
                 else if (tabtext == "测试机")
                 {
                     保存测试机信息();
+                }
+                else if (tabtext == "通讯")
+                {
+                    保存通讯信息();
                 }
                 else if (tabtext == "设定")
                 {
@@ -6230,6 +6771,10 @@ namespace H5509_V2
                 else if (tabtext == "测试机")
                 {
                     刷新测试机(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
+                }
+                else if (tabtext == "通讯")
+                {
+                    刷新通讯(uiDataGridView1.Rows[rows].Cells[1].Value.ToString());
                 }
                 else if (tabtext == "点位偏移")
                 {
@@ -7356,19 +7901,23 @@ namespace H5509_V2
                         dialog = MessageBox.Show($"请确认是否新增档案:{newSetupName.Name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                         if (dialog == DialogResult.OK)
                         {
-                            sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,分BIN名称,梭车名称,温度模式)" +
-                            $"values('{newSetupName.Name}', '默认','{newSetupName.Name}', '默认','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}', '常温')";
+                            sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,通讯名称,分BIN名称,梭车名称,温度模式)" +
+                            $"values('{newSetupName.Name}', '默认','{newSetupName.Name}', '默认','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}', '常温')";
                             int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
 
                             if (line >= 1)
                             {
-                                int line1 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into SiteStatus(Site名称)values({newSetupName.Name})");
-                                int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into OffsetPoint(微调点位名称)values({newSetupName.Name})");
-                                int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称)values('{newSetupName.Name}')");
-                                int line4 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3)values('{newSetupName.Name}','01','02,20A,OTH','03;;','04;;','05;;')");
-                                if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line4 >= 1)
+                                string site = "{\"Protocol\":\"COM\",\"PortName\":\"COM10\",\"BaudRate\":9600,\"Parity\":0,\"DataBits\":8,\"StopBits\":1}";
+                                int line1 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into SiteStatus(Site名称)values('{newSetupName.Name}')");
+                                int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into OffsetPoint(微调点位名称)values('{newSetupName.Name}')");
+                                //int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称)values('{newSetupName.Name}')");
+                                int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,串口号,波特率,校验位,数据位,停止位,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零)values('{newSetupName.Name}','{20}','false','false','{30}','false','{90}','{100}','{100}','false','{20000}','{600}','{600}','false','COM1','{9600}','None','{8}','One','{2000}','{2000}','{2000}','{200}','{200}','{200}','{100}','{5000}','false','false','false','false','false','{8}','{2}','{100}','true','true','false')");
+                                int line4 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into ComInfoSet(通讯名称,客户,通讯协议,通讯方式,测试机数量,同时测试,测试结果中有对应Site,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)values('{newSetupName.Name}','默认','晶存','COM','{1}','{1}','true','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}')");
+                                int line5 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3)values('{newSetupName.Name}','01','02,20A,OTH','03;;','04;;','05;;')");
+                                if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line4 >= 1 && line5 >= 1)
                                 {
                                     刷新档案列表();
+                                    刷新档案选项();
                                     MessageBox.Show("新建成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
@@ -8218,15 +8767,19 @@ namespace H5509_V2
                 }
                 RunLog($"Dout128FailNumber={dout128fail};");
 
+
+                int[] SiteTestState = StationManagers.GetStationStates();// SiteTestState[t] = 3;
                 RunLog($"SiteTestState = {SiteTestState[0]},{SiteTestState[1]},{SiteTestState[2]},{SiteTestState[3]},{SiteTestState[4]},{SiteTestState[5]},{SiteTestState[6]},{SiteTestState[7]},{SiteTestState[8]},{SiteTestState[9]},{SiteTestState[10]},{SiteTestState[11]},{SiteTestState[12]},{SiteTestState[13]},{SiteTestState[14]},{SiteTestState[15]};");
-                for (int i = 0; i < SiteTestIC.Count; i++)
+                bool[][][] siteTestIC = StationManagers.GetStationICs();
+                string[][] siteTestBin = StationManagers.GetStationBins();
+                for (int i = 0; i < siteTestIC.Length; i++)
                 {
-                    RunLog($"Com.Iswaitout[{i}] = {Com.Iswaitout[i]};");
-                    RunLog($"SiteTestIC[{i}] = {SiteTestIC[i][0][0]},{SiteTestIC[i][0][1]},{SiteTestIC[i][0][2]},{SiteTestIC[i][0][3]},{SiteTestIC[i][1][0]},{SiteTestIC[i][1][1]},{SiteTestIC[i][1][2]},{SiteTestIC[i][1][3]};");
+                    //RunLog($"Com.Iswaitout[{i}] = {Com.Iswaitout[i]};");
+                    RunLog($"SiteTestIC[{i}] = {siteTestIC[i][0][0]},{siteTestIC[i][0][1]},{siteTestIC[i][0][2]},{siteTestIC[i][0][3]},{siteTestIC[i][1][0]},{siteTestIC[i][1][1]},{siteTestIC[i][1][2]},{siteTestIC[i][1][3]};");
                     RunLog($"doutContinueFail[{i}] = {doutContinueFail[i][0]},{doutContinueFail[i][1]},{doutContinueFail[i][2]},{doutContinueFail[i][3]},{doutContinueFail[i][4]},{doutContinueFail[i][5]},{doutContinueFail[i][6]},{doutContinueFail[i][7]};");
                     RunLog($"单dut总不良计数[{i}] = {单dut总不良计数[i][0]},{单dut总不良计数[i][1]},{单dut总不良计数[i][2]},{单dut总不良计数[i][3]},{单dut总不良计数[i][4]},{单dut总不良计数[i][5]},{单dut总不良计数[i][6]},{单dut总不良计数[i][7]};");
                     RunLog($"单dut总不良累计计数[{i}] = {单dut总不良累计计数[i][0]},{单dut总不良累计计数[i][1]},{单dut总不良累计计数[i][2]},{单dut总不良累计计数[i][3]},{单dut总不良累计计数[i][4]},{单dut总不良累计计数[i][5]},{单dut总不良累计计数[i][6]},{单dut总不良累计计数[i][7]};");
-                    RunLog($"SiteTestBin[{i}] = {SiteTestBin[i][0]},{SiteTestBin[i][1]},{SiteTestBin[i][2]},{SiteTestBin[i][3]},{SiteTestBin[i][4]},{SiteTestBin[i][5]},{SiteTestBin[i][6]},{SiteTestBin[i][7]};");
+                    RunLog($"SiteTestBin[{i}] = {siteTestBin[i][0]},{siteTestBin[i][1]},{siteTestBin[i][2]},{siteTestBin[i][3]},{siteTestBin[i][4]},{siteTestBin[i][5]},{siteTestBin[i][6]},{siteTestBin[i][7]};");
                 }
                 RunLog($"入料IC忽略 = {入料IC忽略};");
                 RunLog($"入料IC吸不起结批 = {入料IC吸不起结批};");
@@ -8234,59 +8787,71 @@ namespace H5509_V2
                 RunLog($"出料IC忽略 = {出料IC忽略};");
                 RunLog($"测试IC忽略 = {测试IC忽略};");
 
+                //OutSiteQueue.Enqueue((0, new TestDataInfo() { SiteTestBin = new string[] { "01", "02", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+                //OutSiteQueue.Enqueue((1, new TestDataInfo() { SiteTestBin = new string[] { "03", "04", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+                //OutSiteQueue.Enqueue((2, new TestDataInfo() { SiteTestBin = new string[] { "05", "06", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+                //OutSiteQueue.Enqueue((3, new TestDataInfo() { SiteTestBin = new string[] { "07", "08", "20A", "20A", "20A", "20A", "20A", "20A" } }));
+
                 string binsaves = "";
-                if (BinSaveQueue.Count > 0)
+                (int SiteId, TestDataInfo Data)[] copiedArray = OutSiteQueue.ToArray();
+                int[] siteids = new int[copiedArray.Length];
+                string[][] binSaveQueue = new string[copiedArray.Length][];
+                for (int i = 0; i < binSaveQueue.Length; i++)
                 {
-                    if (BinSaveQueue.TryDequeue(out string[] binSave))
-                    {
-                        binsaves += $"{binSave[0]},{binSave[1]},{binSave[2]},{binSave[3]},{binSave[4]},{binSave[5]},{binSave[6]},{binSave[7]}";
-                    }
+                    siteids[i] = copiedArray[i].SiteId;
+                    binSaveQueue[i] = copiedArray[i].Data.SiteTestBin;
                 }
+                //string[][] binSaveQueue = DeepCopyQueue(BinSaveQueue);
+                if (binSaveQueue.Length > 0)
+                {
+                    int siteid = siteids[0];
+                    string[] binSave = binSaveQueue[0];
+                    binsaves += $"Site{siteid + 1}:{binSave[0]},{binSave[1]},{binSave[2]},{binSave[3]},{binSave[4]},{binSave[5]},{binSave[6]},{binSave[7]}";
 
-                for (int i = 0; i < BinSaveQueue.Count; i++)
-                {
-                    if (BinSaveQueue.TryDequeue(out string[] binSave))
+                    if (binSaveQueue.Length > 1)
                     {
-                        binsaves += $"--{binSave[0]},{binSave[1]},{binSave[2]},{binSave[3]},{binSave[4]},{binSave[5]},{binSave[6]},{binSave[7]}";
+                        for (int i = 1; i < binSaveQueue.Length; i++)
+                        {
+                            siteid = siteids[i];
+                            binSave = binSaveQueue[i];
+                            binsaves += $"--Site{siteid + 1}:{binSave[0]},{binSave[1]},{binSave[2]},{binSave[3]},{binSave[4]},{binSave[5]},{binSave[6]},{binSave[7]}";
+                        }
                     }
+                    RunLog("BinSaveQueue=" + binsaves);
                 }
-                RunLog("BinSaveQueue=" + binsaves);
-
-                binsaves = "";
-                if (InSiteQueue.Count > 0)
-                {
-                    if (InSiteQueue.TryDequeue(out int insite))
-                    {
-                        binsaves += $"{insite}";
-                    }
-                }
-
-                for (int i = 0; i < InSiteQueue.Count; i++)
-                {
-                    if (InSiteQueue.TryDequeue(out int insite))
-                    {
-                        binsaves += $",{insite}";
-                    }
-                }
-                RunLog("InSiteQueue=" + binsaves);
+                else RunLog("BinSaveQueue=null");
 
                 binsaves = "";
-                if (OutSiteQueue.Count > 0)
+                var insitequeue = InSiteQueue.ToArray();
+                if (insitequeue.Length > 0)
                 {
-                    if (OutSiteQueue.TryDequeue(out int outsite))
+                    binsaves += $"{insitequeue[0]}";
+                    if (insitequeue.Length > 1)
                     {
-                        binsaves += $"{outsite}";
+                        for (int i = 1; i < insitequeue.Length; i++)
+                        {
+                            binsaves += $",{insitequeue[i]}";
+                        }
+                        RunLog("InSiteQueue=" + binsaves);
                     }
                 }
+                else RunLog("InSiteQueue=null");
 
-                for (int i = 0; i < OutSiteQueue.Count; i++)
+                binsaves = "";
+                var outsitequeue = OutSiteQueue.ToArray();
+                if (outsitequeue.Length > 0)
                 {
-                    if (OutSiteQueue.TryDequeue(out int outsite))
+                    binsaves += $"{outsitequeue[0]}";
+                    if (outsitequeue.Length > 1)
                     {
-                        binsaves += $",{outsite}";
+                        for (int i = 1; i < outsitequeue.Length; i++)
+                        {
+                            binsaves += $",{outsitequeue[i]}";
+                        }
+                        RunLog("OutSiteQueue=" + binsaves);
                     }
                 }
-                RunLog("OutSiteQueue=" + binsaves);
+                else RunLog("OutSiteQueue=null");
 
                 RunLog($"载入数 = {载入数};");
                 RunLog($"UphNumber = {UphNumber};");
@@ -8428,7 +8993,21 @@ namespace H5509_V2
                 MessageBox.Show("打印失败!" + ex.Message);
             }
         }
+        public string[][] DeepCopyQueue(ConcurrentQueue<string[]> queue)
+        {
+            return queue
+                .Select(originalArray =>
+                {
+                    // 创建新数组
+                    string[] newArray = new string[originalArray.Length];
 
+                    // 复制元素
+                    Array.Copy(originalArray, newArray, originalArray.Length);
+
+                    return newArray;
+                })
+                .ToArray();
+        }
         private void button263_Click(object sender, EventArgs e)
         {
             PrintState();
@@ -8436,23 +9015,62 @@ namespace H5509_V2
 
         private void button264_Click(object sender, EventArgs e)
         {
-            //short site = 6;
-            //string result = ""; SiteTestState[6] = 1; SiteTestState[7] = 1;
-            //List<bool[]> open = new List<bool[]>();
+            bool[] bools = StationManagers.CheckComConnect();
+
+            //string result = "Success";
+
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    int site = i;
+            //    List<bool[]> open = new List<bool[]>();
+            //    StationManagers.SetStationState(i, 1); //  SiteTestState[6] = 1;
+            //    //StationManagers.SetStationState(7, 1); // SiteTestState[7] = 1;
+            //    List<List<bool[]>> opens = new List<List<bool[]>>();
+            //    if (设置信息.通讯信息.同时测试 == 2)
+            //    {
+            //        int[] sites = GetSites(site);
+            //        bool[] site1 = GetSiteOpen((int)sites[0]);
+            //        bool[] site2 = GetSiteOpen((int)sites[1]);
+            //        int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
+            //        if ((states[0] == 1 || !site1.Contains(true))
+            //            && (states[1] == 1 || !site2.Contains(true)))
+            //        {
+            //            opens = new List<List<bool[]>>() { GetOpens(site1) , GetOpens(site2) };
+            //            //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+            //            result = StationManagers.Send(sites, states, opens, 无测试机模式);
+            //        }
+            //    }
+            //    else result = StationManagers.Send(site, open, 无测试机模式);
+            //}
+
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    //StationManagers.Connect(i);
+            //    //StationManagers.GetStation(i).SendAsync("ZRS240929001A:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25");//我为宇宙，woweiyuzhou, I am Yuzhou
+            //    //Thread.Sleep(5);
+
+            //    List<bool[]> open = new List<bool[]>()
+            //    {
+            //        new bool[] { true, true, true, true },
+            //        new bool[] { true, true, true, true },
+            //    };
+            //    StationManagers.SetStationState(i, 2);
+            //    StationManagers.Send(i, open, false);//.SendAsync("@START_TEST 00 11111111+");//我为宇宙，woweiyuzhou, I am Yuzhou
+            //}
+            //short site = 0;
+            //string result = ""; //SiteTestState[6] = 1; SiteTestState[7] = 1;
+            //List<bool[]> open = new List<bool[]>() { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
             //List<List<bool[]>> opens = new List<List<bool[]>>();
             //PS测试区气缸下压动作流程.StepName = $"发送测试信号";
             //RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-            //if (多Site同时测试)
+            //if (true)
             //{
             //    result = "Success";
             //    short[] sites = GetSites(site);
-            //    if (SiteTestState[sites[0]] == 1 && SiteTestState[sites[1]] == 1)
+            //    if ((SiteTestState[sites[0]] == 1 || !GetSiteOpen((int)sites[0]).Contains(true))
+            //        && SiteTestState[sites[1]] == 1 || !GetSiteOpen((int)sites[1]).Contains(true))
             //    {
-            //        opens = new List<List<bool[]>>()
-            //        {
-            //            GetOpens(SiteTestIC[sites[0]]),
-            //            GetOpens(SiteTestIC[sites[1]])
-            //        };
+            //        opens = new List<List<bool[]>>() { GetOpens(SiteTestIC[sites[0]]), GetOpens(SiteTestIC[sites[1]]) };
             //        result = APPmaster.Com.Send(sites, opens, 无测试机模式);
             //    }
             //}
@@ -8649,9 +9267,9 @@ namespace H5509_V2
         private void 刷新通讯协议()
         {
             tabPage26.Parent = uiCheckBox162.Checked ? uiTabControl10 : null;
-            tabPage30.Parent = uiCheckBox163.Checked ? uiTabControl10 : null;
-            tabPage31.Parent = uiCheckBox164.Checked ? uiTabControl10 : null;
-            tabPage41.Parent = uiCheckBox165.Checked ? uiTabControl10 : null;
+            //tabPage30.Parent = uiCheckBox163.Checked ? uiTabControl10 : null;
+            //tabPage31.Parent = uiCheckBox164.Checked ? uiTabControl10 : null;
+            //tabPage41.Parent = uiCheckBox165.Checked ? uiTabControl10 : null;
 
             uiTabControl10.Refresh();
         }
@@ -8665,6 +9283,14 @@ namespace H5509_V2
             uiTabControl10.Refresh();
         }
 
+        private void 显示通讯协议()
+        {
+            if (uiCheckBox162.Checked) tabPage26.Text = uiCheckBox162.Text;
+            else if (uiCheckBox163.Checked) tabPage26.Text = uiCheckBox163.Text;
+            else if (uiCheckBox164.Checked) tabPage26.Text = uiCheckBox164.Text;
+            else if (uiCheckBox165.Checked) tabPage26.Text = uiCheckBox165.Text;
+        }
+
         private void uiCheckBox162_Click(object sender, EventArgs e)
         {
             if (uiCheckBox162.Checked)
@@ -8672,13 +9298,12 @@ namespace H5509_V2
                 uiCheckBox163.Checked = false;
                 uiCheckBox164.Checked = false;
                 uiCheckBox165.Checked = false;
+                显示通讯协议();
             }
             else uiCheckBox162.Checked = true;
-            清空通讯方式();
-            刷新通讯协议();
-            刷新通讯方式();
-
-
+            //清空通讯方式();
+            //刷新通讯协议();
+            //刷新通讯方式();
         }
 
         private void uiCheckBox163_Click(object sender, EventArgs e)
@@ -8688,11 +9313,12 @@ namespace H5509_V2
                 uiCheckBox162.Checked = false;
                 uiCheckBox164.Checked = false;
                 uiCheckBox165.Checked = false;
+                显示通讯协议();
             }
             else uiCheckBox163.Checked = true;
-            清空通讯方式();
-            刷新通讯协议();
-            刷新通讯方式();
+            //清空通讯方式();
+            //刷新通讯协议();
+            //刷新通讯方式();
         }
 
         private void uiCheckBox164_Click(object sender, EventArgs e)
@@ -8702,11 +9328,12 @@ namespace H5509_V2
                 uiCheckBox162.Checked = false;
                 uiCheckBox163.Checked = false;
                 uiCheckBox165.Checked = false;
+                显示通讯协议();
             }
             else uiCheckBox164.Checked = true;
-            清空通讯方式();
-            刷新通讯协议();
-            刷新通讯方式();
+            //清空通讯方式();
+            //刷新通讯协议();
+            //刷新通讯方式();
         }
 
         private void uiCheckBox165_Click(object sender, EventArgs e)
@@ -8716,11 +9343,12 @@ namespace H5509_V2
                 uiCheckBox162.Checked = false;
                 uiCheckBox163.Checked = false;
                 uiCheckBox164.Checked = false;
+                显示通讯协议();
             }
             else uiCheckBox165.Checked = true;
-            清空通讯方式();
-            刷新通讯协议();
-            刷新通讯方式();
+            //清空通讯方式();
+            //刷新通讯协议();
+            //刷新通讯方式();
         }
 
         #endregion
@@ -8763,9 +9391,9 @@ namespace H5509_V2
                 uiCheckBox169.Checked = false;
             }
             else uiCheckBox166.Checked = true;
-            清空通讯协议();
+            //清空通讯协议();
             刷新通讯方式(tabPage19);
-            刷新通讯协议();
+            //刷新通讯协议();
         }
 
         private void uiCheckBox167_Click(object sender, EventArgs e)
@@ -8777,9 +9405,9 @@ namespace H5509_V2
                 uiCheckBox169.Checked = false;
             }
             else uiCheckBox167.Checked = true;
-            清空通讯协议();
+            //清空通讯协议();
             刷新通讯方式(tabPage20);
-            刷新通讯协议();
+            //刷新通讯协议();
         }
 
         private void uiCheckBox168_Click(object sender, EventArgs e)
@@ -8791,9 +9419,9 @@ namespace H5509_V2
                 uiCheckBox169.Checked = false;
             }
             else uiCheckBox168.Checked = true;
-            清空通讯协议();
+            //清空通讯协议();
             刷新通讯方式(tabPage21);
-            刷新通讯协议();
+            //刷新通讯协议();
         }
 
         private void uiCheckBox169_Click(object sender, EventArgs e)
@@ -8805,9 +9433,9 @@ namespace H5509_V2
                 uiCheckBox168.Checked = false;
             }
             else uiCheckBox169.Checked = true;
-            清空通讯协议();
+            //清空通讯协议();
             刷新通讯方式(tabPage22);
-            刷新通讯协议();
+            //刷新通讯协议();
         }
 
         #endregion

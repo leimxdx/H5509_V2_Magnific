@@ -46,6 +46,7 @@
     <Compile Include="AxisRun.cs" />
     <Compile Include="AxisRunInfo.cs" />
     <Compile Include="BinParam.cs" />
+    <Compile Include="ComInfoSet.cs" />
     <Compile Include="ControlPerm.cs" />
     <Compile Include="FlowcaedNoInfo.cs" />
     <Compile Include="HeatInfo.cs" />

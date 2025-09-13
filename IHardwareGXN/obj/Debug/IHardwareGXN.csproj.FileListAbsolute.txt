@@ -16,12 +16,12 @@ D:\GitHub\H5509_V3\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.CoreCompileInputs.
 D:\GitHub\H5509_V3\IHardwareGXN\obj\Debug\IHardwar.F03A60EF.Up2Date
 D:\GitHub\H5509_V3\IHardwareGXN\obj\Debug\IHardwareGXN.dll
 D:\GitHub\H5509_V3\IHardwareGXN\obj\Debug\IHardwareGXN.pdb
-D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.AssemblyReference.cache
-D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.CoreCompileInputs.cache
-D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.dll
-D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.pdb
 D:\GitHub\H5509_V2\IHardwareGXN\bin\Debug\IHardwareGXN.dll
 D:\GitHub\H5509_V2\IHardwareGXN\bin\Debug\IHardwareGXN.pdb
 D:\GitHub\H5509_V2\IHardwareGXN\bin\Debug\MotionCommon.dll
 D:\GitHub\H5509_V2\IHardwareGXN\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwar.F03A60EF.Up2Date
+D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.dll
+D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.pdb
