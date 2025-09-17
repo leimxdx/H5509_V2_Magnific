@@ -2565,6 +2565,8 @@ namespace H5509_V2
                             侧敲时允许放料 = Convert.ToBoolean(dr["侧敲时允许放料"].ToString()),
 
                             Auto换盘时出料Z回零 = Convert.ToBoolean(dr["Auto换盘时出料Z回零"].ToString()),
+
+                            通讯名称 = dr["通讯名称"].ToString(),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -2575,6 +2577,12 @@ namespace H5509_V2
                 }
             }
             return result;
+        }
+
+        public static ComInfoSet GetComInfoSet(string name)
+        {
+             GetComInfoSet(name, out ComInfoSet comInfoSet);
+            return comInfoSet;
         }
 
         public static string GetComInfoSet(string name, out ComInfoSet comInfoSet)
@@ -2654,8 +2662,8 @@ namespace H5509_V2
                 result = GetTesterIFParam(setupInfo.测试机信息.测试机名称, out TesterIFParam tester);
                 if (result != "Success") return result;
 
-                //测试机参数
-                result = GetComInfoSet(setupInfo.通讯信息.通讯名称, out ComInfoSet comInfoSet);
+                //通讯参数
+                result = GetComInfoSet(tester.通讯名称, out ComInfoSet comInfoSet);
                 if (result != "Success") return result;
 
                 设置信息.档案名称 = setupInfo.档案名称;
@@ -2807,7 +2815,8 @@ namespace H5509_V2
                 $"侧敲间隔 = '{tester.侧敲间隔}'," +
                 $"放料时允许侧敲 = '{tester.放料时允许侧敲}'," +
                 $"侧敲时允许放料 = '{tester.侧敲时允许放料}'," +
-                $"Auto换盘时出料Z回零 = '{tester.Auto换盘时出料Z回零}'" +
+                $"Auto换盘时出料Z回零 = '{tester.Auto换盘时出料Z回零}'," +
+                $"通讯名称 = '{tester.通讯名称}'" +
                 $" where 测试机名称 = '{name}'";
 
             int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);

@@ -2281,7 +2281,7 @@ namespace H5509_V2
             {
                 uiCheckBox205.Checked = 安全门禁用;
                 uiCheckBox203.Checked = 空跑模式;
-                if (!空跑模式)
+                if (!空跑模式 || 设备状态 != 0)
                 {
                     uiCheckBox204.Enabled = false;
                 }
@@ -4076,6 +4076,15 @@ namespace H5509_V2
             checkBox11.Checked = tester.侧敲时允许放料;
 
             checkBox12.Checked = tester.Auto换盘时出料Z回零;
+
+
+            string result = Sqlite.runSql(SQLiteConnString, "select 通讯名称 from ComInfoSet", out DataTable dt);
+            if (result == "Success")
+            {
+                uiComboBox119.DataSource = dt;
+                uiComboBox119.DisplayMember = "通讯名称";
+            }
+            uiComboBox119.Text = tester.通讯名称;
         }
 
         private void 刷新通讯(ComInfoSet comInfoSet)
@@ -4538,10 +4547,6 @@ namespace H5509_V2
             }
         }
 
-        private void 刷新梭车(string name)
-        {
-
-        }
 
         private void 刷新设定信息(string name)
         {
@@ -4588,10 +4593,6 @@ namespace H5509_V2
                 else if (tabpagetext == "点位偏移")
                 {
                     刷新点位偏移(name);
-                }
-                else if (tabpagetext == "梭车")
-                {
-                    刷新梭车(name);
                 }
             }
         }
@@ -4691,6 +4692,29 @@ namespace H5509_V2
                     //刷新取放设定(name);
                 }
             }
+        }
+
+        private void 刷新通讯信息(string tabpagetext)
+        {
+            int rows = uiDataGridView4.SelectedIndex;
+            if (rows >= 0)
+            {
+                string name = uiDataGridView4.Rows[rows].Cells[1].Value.ToString();
+                if (tabpagetext == "通讯信息")
+                {
+                    刷新通讯2(name);
+                }
+            }
+        }
+
+        private void 刷新通讯2(string name)
+        {
+
+        }
+
+        private void 刷新通讯2(ComInfoSet comInfoSet)
+        {
+
         }
 
         private void 刷新加热盘信息(string tabpagetext, string name)
@@ -4888,6 +4912,53 @@ namespace H5509_V2
             }
         }
 
+        private void 刷新通讯列表()
+        {
+            string reuslt = Sqlite.runSql(SQLiteConnString, "select '' as ' ', 通讯名称 from ComInfoSet", out DataTable dt);
+            if (reuslt == "Success")
+            {
+                uiDataGridView4.DataSource = dt;
+                uiDataGridView4.Columns[0].Width = 100;
+                uiDataGridView4.Columns[1].Width = 250;
+
+                uiDataGridView4.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
+
+                uiDataGridView4.ClearSelection();
+                string result = Sqlite.runSql(SQLiteConnString, $"select 通讯名称 from TesterIFParam where 测试机名称='{设置信息.测试机信息.测试机名称}'", out string value).ToString();
+
+                int index = 0;
+                //bool isCurrentTray = false;
+                if (result == "Success")
+                {
+                    foreach (DataGridViewRow dr in uiDataGridView4.Rows)
+                    {
+                        if (dr.Cells[1].Value.Equals(value))
+                        {
+                            dr.Cells[0].Value = "当前通讯";
+                            //dr.Cells[0].Selected = true;
+                            index = dr.Cells[0].RowIndex;
+                            //isCurrentTray = true;
+                            break;
+                        }
+                    }
+                }
+                if (uiDataGridView4.Rows.Count > 0)
+                {
+                    uiDataGridView4.CurrentCell = uiDataGridView4.Rows[index].Cells[1];
+                }
+                刷新通讯信息(uiTabControl9.SelectedTab.Text);
+
+                //if (uiDataGridView3.Rows.Count > 0)
+                //{
+                //    if (isCurrentTray) 刷新加热盘信息(uiTabControl9.SelectedTab.Text, value);
+                //    else 刷新加热盘信息(uiTabControl9.SelectedTab.Text);
+                //}
+                //uiDataGridView3.SelectedIndex = index;
+                //uiDataGridView3.ClearSelection();
+                //uiDataGridView3.ClearSelection();
+            }
+        }
+
         public void 刷新产品(string tabpagetext)
         {
             if (tabpagetext == "档案列表")
@@ -4901,6 +4972,10 @@ namespace H5509_V2
             else if (tabpagetext == "加热盘列表")
             {
                 刷新加热盘列表();
+            }
+            else if (tabpagetext == "通讯列表")
+            {
+                刷新通讯列表();
             }
         }
         private void uiTabControl5_Selecting(object sender, TabControlCancelEventArgs e)
@@ -5113,6 +5188,8 @@ namespace H5509_V2
 
                         newtester.Auto换盘时出料Z回零 = checkBox12.Checked;
 
+                        newtester.通讯名称 = uiComboBox119.Text;
+
                         result = UpdateTesterIFParam(value, newtester);
                         if (result != "Success")
                         {
@@ -5165,6 +5242,9 @@ namespace H5509_V2
 
                             if (oldtester.Auto换盘时出料Z回零 != newtester.Auto换盘时出料Z回零) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Auto换盘时出料Z回零]:{oldtester.Auto换盘时出料Z回零}->{newtester.Auto换盘时出料Z回零}:更新成功", LogType.ParamLog); }
 
+                            if (oldtester.通讯名称 != newtester.通讯名称) { comischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[通讯信息.通讯名称]:{oldtester.通讯名称}->{newtester.通讯名称}:更新成功", LogType.ParamLog); }
+
+
                             if (value == 设置信息.测试机信息.测试机名称)
                             {
                                 result = GetTesterIFParam(value, out newtester);
@@ -5178,12 +5258,18 @@ namespace H5509_V2
                                     StationManagers.UpdateTime();// Com.刷新测试超时时间();
                                 }
 
-                                //if (comischange)
-                                //{
-                                //    Com.刷新串口信息();
-                                //    //Com.CloseCom();
-                                //    //Com.OpenCom();
-                                //}
+                                if (comischange)
+                                {
+                                    result = GetComInfoSet(newtester.通讯名称, out ComInfoSet comInfoSet);
+                                    if (result == "Success")
+                                    {
+                                        设置信息.通讯信息 = comInfoSet;
+                                        刷新通讯配置();
+                                    }
+                                    //Com.刷新串口信息();
+                                    //Com.CloseCom();
+                                    //Com.OpenCom();
+                                }
                             }
                             刷新测试机(newtester);
                         }
@@ -5410,7 +5496,7 @@ namespace H5509_V2
             }
         }
 
-        
+
 
         private void 保存分BIN信息()
         {
@@ -7804,6 +7890,11 @@ namespace H5509_V2
 
         private void uiCheckBox204_Click(object sender, EventArgs e)
         {
+            if (设备状态 != 0)
+            {
+                uiCheckBox204.Checked = Tray盘模式;
+                return;
+            }
             Tray盘模式 = uiCheckBox204.Checked;
         }
 
@@ -8575,7 +8666,7 @@ namespace H5509_V2
             Task.Run(() =>
             {
                 int count = Convert.ToInt32(numericUpDown184.Value); //敲击次数
-                int delay = Convert.ToInt32(numericUpDown186.Value); //敲击间隔
+                int delay = Convert.ToInt32(numericUpDown186.Value); //敲击间隔     
                 for (int i = 0; i < count; i++)
                 {
                     if (checkBox9.Checked) //前侧同时敲击
@@ -9499,5 +9590,23 @@ namespace H5509_V2
         }
 
         #endregion
+
+        private void uiCheckBox170_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox170.Checked)
+            {
+                uiCheckBox171.Checked = false;
+            }
+            else uiCheckBox170.Checked = true;
+        }
+
+        private void uiCheckBox171_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox171.Checked)
+            {
+                uiCheckBox170.Checked = false;
+            }
+            else uiCheckBox171.Checked = true;
+        }
     }
 }

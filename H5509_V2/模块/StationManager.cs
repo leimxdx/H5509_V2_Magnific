@@ -319,11 +319,11 @@ namespace H5509_V2
         }
 
 
-        public string Send(int[] stationId, int[] teststate, List<List<bool[]>> open, bool isOffline = false)
+        public string Send(int stationId, int[] teststate, List<List<bool[]>> open, bool isOffline = false)
         {
-            GetSendDevice(stationId[0], out int sendsite);
+            GetSendDevice(stationId, out int sendsite);
             TestStation testStation = GetStation(sendsite);
-            return testStation.Send(stationId, teststate, open, isOffline);
+            return testStation.Send(teststate, open, isOffline);
         }
 
         public ICommunicationDevice GetDevice(string groupName, string deviceId)

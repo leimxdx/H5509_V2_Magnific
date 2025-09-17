@@ -3598,6 +3598,7 @@ namespace H5509_V2
                 }
             }
         }
+
         public void UpdateOutNozzleIC()
         {
             string result = 出料吸嘴_真空检测(out string[] iovalue);
@@ -3615,6 +3616,7 @@ namespace H5509_V2
                 }
             }
         }
+
         public void UpdateTestNozzleIC()
         {
             string result = 测试吸嘴_真空检测(out string[] iovalue);
@@ -5155,6 +5157,8 @@ namespace H5509_V2
                             }
                             break;
 
+                        #region 规划流程
+
                         case 505:
                             PS入料手臂吸放料流程.StepName = "计算放料IC颗数";
 
@@ -5412,6 +5416,8 @@ namespace H5509_V2
                                 IsPause = true;
                             }
                             break;
+
+                        #endregion
 
                         #region 从加热盘吸取IC
 
@@ -6831,7 +6837,6 @@ namespace H5509_V2
 
                         #endregion
 
-
                         default:
                             RunLog(("PS入料手臂吸放料流程.StepID =" + PS入料手臂吸放料流程.StepID.ToString() + "对应流程不存在"));
                             break;
@@ -7243,7 +7248,8 @@ namespace H5509_V2
                                     {
                                         if (lsopen[i] && opens[i] == 0)
                                         {
-                                            RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->302{i + 1:D2}00,出料Z{i + 1}吸料失败");
+                                            Listcode.Add($"30{i + 5}0000");
+                                            RunLog($"[Code]30{i + 5}0000,[Msg]出料Z{i + 1}吸料失败!", LogType.AlarmLog);
                                         }
                                     }
                                     出料IC忽略 = false;
@@ -10352,10 +10358,6 @@ namespace H5509_V2
                                 };
                                 PS测试区气缸下压动作流程.StepID = 510;
                             }
-                            //else if(StationManagers.GetStationState(site) == 2) //已经下压
-                            //{
-
-                            //}
                             else
                             {
                                 site++;
@@ -10364,6 +10366,7 @@ namespace H5509_V2
                                     site = 0;
                                     //PS测试区气缸下压动作流程.StepID = 500;
                                 }
+
                             }
                             break;
 
@@ -10413,17 +10416,22 @@ namespace H5509_V2
                                 bool[] site1 = GetSiteOpen((int)sites[0]);
                                 bool[] site2 = GetSiteOpen((int)sites[1]);
                                 int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
-                                if ((states[0] >= 1 || !site1.Contains(true)) && (states[1] == 1 || !site2.Contains(true)))
+                                if (((states[0] >= 1 || !site1.Contains(true)) && (states[1] == 1 || !site2.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)))
                                 {
-                                    opens = new List<List<bool[]>>() { GetOpens(site1), GetOpens(site2) };
+                                    opens = new List<List<bool[]>>() 
+                                    { 
+                                        states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                        states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
+                                    };
                                     //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
-                                    result = StationManagers.Send(sites, states, opens, 无测试机模式);
+                                    result = StationManagers.Send(site, states, opens, 无测试机模式);
                                     //if (result == "Success")
                                     //{
-                                    //    StationManagers.SetStationState(sites[0], 2);
-                                    //    StationManagers.SetStationState(sites[1], 2);
+                                    //    if(states[0] >= 1) StationManagers.SetStationState(sites[0], 2);
+                                    //    if(states[1] == 1) StationManagers.SetStationState(sites[1], 2);
                                     //}
                                 }
+                                //else site++;
                             }
                             else
                             {

@@ -215,7 +215,7 @@ namespace H5509_V2
                                         testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
                                         testDataInfos[sites[i]].SiteTestState = 3;
 
-                                        RunLog($"接收Site:{sites[i]:D2},Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}");
+                                        RunLog($"接收Site:{sites[i]:D2},测试Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}");
 
                                         DataUpdate(sites[i], testDataInfos[sites[i]]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
                                     }
@@ -235,19 +235,14 @@ namespace H5509_V2
                                 testDataInfos[site].timeOutTimer.Stop();
 
                                 testDataInfos[site].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
+
                                 testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
                                 testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
-
-                                //SiteTestBin[site] = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
                                 testDataInfos[site].SiteTestState = 3;
 
-                                RunLog($"接收Site:{site:D2},Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+                                RunLog($"接收Site:{site:D2},测试Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
 
                                 DataUpdate(site, testDataInfos[site]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
-                                                                       ////用来统计数据
-                                                                       //OutBin.Enqueue(new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] });
-                                                                       //Listtestsingal.Add(site);
-
                             }
                             else RunLog($"site:{site:D2}未在测试!", LogType.ComLog);
                         }
@@ -375,7 +370,7 @@ namespace H5509_V2
             return "Success";
         }
 
-        public string Send(int[] site, int[] states, List<List<bool[]>> isopen, bool isOFFLine = false)
+        public string Send(int[] states, List<List<bool[]>> isopen, bool isOFFLine = false)
         {
             try
             {
@@ -437,6 +432,8 @@ namespace H5509_V2
                         testDataInfos[sites[i]].SiteTestBin = new string[] { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
                         testDataInfos[sites[i]].SiteTestState = 3;
 
+                        RunLog($"生成Site:{sites[i]:D2},超时Bin:20A 20A 20A 20A 20A 20A 20A 20A");
+
                         DataUpdate(sites[i], testDataInfos[sites[i]]);
                     }
                 }
@@ -450,6 +447,8 @@ namespace H5509_V2
 
                 testDataInfos[site].SiteTestBin = new string[] { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
                 testDataInfos[site].SiteTestState = 3;
+
+                RunLog($"生成Site:{site:D2},超时Bin:20A 20A 20A 20A 20A 20A 20A 20A");
 
                 DataUpdate(site, testDataInfos[site]);
             }
@@ -489,7 +488,7 @@ namespace H5509_V2
 
                         testDataInfos[sites[i]].SiteTestState = 3;
 
-                        RunLog($"接收Site:{sites[i]:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+                        RunLog($"生成Site:{sites[i]:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
 
                         DataUpdate(sites[i], testDataInfos[sites[i]]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
 
@@ -512,7 +511,7 @@ namespace H5509_V2
 
                 testDataInfos[site].SiteTestState = 3;
 
-                RunLog($"接收Site:{site:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+                RunLog($"生成Site:{site:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
 
                 DataUpdate(site, testDataInfos[site]);
             }

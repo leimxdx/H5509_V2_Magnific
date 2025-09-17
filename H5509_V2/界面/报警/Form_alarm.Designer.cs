@@ -404,7 +404,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(32, 108);
             this.label9.TabIndex = 8;
-            this.label9.Text = "入,料,吸,嘴";
+            this.label9.Text = "入\r\n料\r\n吸\r\n嘴";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panel_1
@@ -1729,7 +1729,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(32, 108);
             this.label10.TabIndex = 8;
-            this.label10.Text = "测,试,吸,嘴";
+            this.label10.Text = "测\r\n试\r\n吸\r\n嘴";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TestArmSuck1
@@ -1825,7 +1825,7 @@
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(32, 108);
             this.label11.TabIndex = 8;
-            this.label11.Text = "出,料,吸,嘴";
+            this.label11.Text = "出\r\n料\r\n吸\r\n嘴";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TranArmRSuck1
@@ -1891,7 +1891,7 @@
             this.Shuttle2.Name = "Shuttle2";
             this.Shuttle2.Size = new System.Drawing.Size(90, 100);
             this.Shuttle2.TabIndex = 50;
-            this.Shuttle2.Text = "梭,车,（后）";
+            this.Shuttle2.Text = "梭\r\n车\r\n（后）";
             this.Shuttle2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Shuttle1
@@ -1905,7 +1905,7 @@
             this.Shuttle1.Name = "Shuttle1";
             this.Shuttle1.Size = new System.Drawing.Size(90, 100);
             this.Shuttle1.TabIndex = 51;
-            this.Shuttle1.Text = "梭,车,（前）";
+            this.Shuttle1.Text = "梭\r\n车\r\n（前）";
             this.Shuttle1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CatchArm

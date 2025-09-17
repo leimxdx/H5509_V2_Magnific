@@ -84,5 +84,7 @@ namespace MotionCommon
         public bool 侧敲时允许放料 { get; set; }
 
         public bool Auto换盘时出料Z回零 { get; set; }
+
+        public string 通讯名称 { get; set; }
     }
 }
