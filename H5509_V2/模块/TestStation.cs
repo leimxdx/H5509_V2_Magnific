@@ -8,6 +8,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using ComMaster.Devices;
 using ComMaster.Interfaces;
 using TextFileLogger;
@@ -52,7 +53,7 @@ namespace H5509_V2
 
         public Action<int, TestDataInfo> DataUpdate;
 
-        public Action<string> RefrshLog;
+        public Action<int, string> RefrshLog;
 
         public Action<int, bool> UpdateConnect;
 
@@ -145,21 +146,23 @@ namespace H5509_V2
                     throw new NotSupportedException($"不支持的协议: {config["Protocol"]}");
             }
 
-            // 绑定状态变更事件
-            Communication.ConnectionChanged += (sender, e) =>
-            {
-                ConnectionChanged?.Invoke(this, new ConnectionEventArgs
-                {
-                    StationId = StationId.ToString(),
-                    IsConnected = e.IsConnected,
-                    Message = e.Message
-                });
-            };
+            //// 绑定状态变更事件
+            //Communication.ConnectionChanged += (sender, e) =>
+            //{
+            //    ConnectionChanged?.Invoke(this, new ConnectionEventArgs
+            //    {
+            //        StationId = StationId.ToString(),
+            //        IsConnected = e.IsConnected,
+            //        Message = e.Message
+            //    });
+            //};
         }
 
         public void DataReceived(string outdata)
         {
             Debug.WriteLine($"测试工位{StationId}接收数据:{outdata}");
+
+            RunLog($"({Communication.DeviceName})" + outdata, LogType.ComLog);
             RefreshInfoLog(outdata, true);
 
             while (outdata.Length > 0)
@@ -285,8 +288,8 @@ namespace H5509_V2
                 return;
             }
             Communication.Send(str);
-            //RunLog(str, LogType.ComLog);
-            //RefreshInfoLog(str, false);
+            RunLog($"({Communication.DeviceName})" + str, LogType.ComLog);
+            RefreshInfoLog(str, false);
         }
 
         private void RefreshInfoLog(string message, bool isReceive)
@@ -297,7 +300,7 @@ namespace H5509_V2
                 str = " <= ";
             }
             string datestr = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}{str}";
-            RefrshLog(datestr + message);
+            RefrshLog(StationId, datestr + $"({Communication.DeviceName})" + message);
         }
 
         public string getstartest(List<List<bool[]>> isopen)
@@ -354,8 +357,8 @@ namespace H5509_V2
                 else //在线模式
                 {
                     Send("@START_TEST " + str + "+");
-                    RunLog("@START_TEST " + str + "+", LogType.ComLog);
-                    RefreshInfoLog("@START_TEST " + str + "+", false);
+                    //RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                    //RefreshInfoLog("@START_TEST " + str + "+", false);
                     testDataInfos[site].listtestdatetime = DateTime.Now;
                     testDataInfos[site].Listtimer.Start();
                     testDataInfos[site].Iswaitout = false;
@@ -398,8 +401,8 @@ namespace H5509_V2
                     if (states[1] == 1 || states[1] == 2) testDataInfos[StationId + 1].SiteTestState = 2;
 
                     Send("@START_TEST " + str + "+");
-                    RunLog("@START_TEST " + str + "+", LogType.ComLog);
-                    RefreshInfoLog("@START_TEST " + str + "+", false);
+                    //RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                    //RefreshInfoLog("@START_TEST " + str + "+", false);
 
                     //启动定时器
                 }

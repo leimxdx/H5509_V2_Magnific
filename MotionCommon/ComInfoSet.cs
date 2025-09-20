@@ -21,6 +21,8 @@ namespace MotionCommon
 
         public bool 测试结果中有对应Site { get; set; }
 
+        public string 超时Bin字符串 { get; set; }
+
         public string Site1 { get; set; }
 
         public string Site2 { get; set; }

@@ -62,21 +62,49 @@ namespace H5509_V2
 
         public static bool IsLoadPause //Load停止
         {
-            get { return MotionEx.IMotion.IsPause; }
-            set { MotionEx.IMotion.IsPause = value; }
+            get { return MotionEx.IMotion.IsLoadPause; }
+            set { MotionEx.IMotion.IsLoadPause = value; }
         }
 
         public static bool IsEmptyPause //Empty停止
         {
-            get { return MotionEx.IMotion.IsPause; }
-            set { MotionEx.IMotion.IsPause = value; }
+            get { return MotionEx.IMotion.IsEmptyPause; }
+            set { MotionEx.IMotion.IsEmptyPause = value; }
         }
+
+        public static bool IsForecePause //Empty停止
+        {
+            get { return MotionEx.IMotion.IsForecePause; }
+            set { MotionEx.IMotion.IsForecePause = value; }
+        }
+
+        public static string ProgramPath = Directory.GetCurrentDirectory();
+
+        public static string LotNoLog保存路径 = Directory.GetCurrentDirectory();
+
+        public static bool 工单号自适应 = true;
+
+        public static bool 按了跳过或编辑报警使能 = false;
+
+        public static int Load门开门时间 = 5; //秒
+
+        public static bool 按批号保存使能 = true;
+
+        public static bool 按了跳过或编辑标记 = false;
+
+        public static bool 门已打开超设定时间 = false;
+
+        public static bool 等待Load门开启 = false;
+
+        public static int 测试超时的Dut对应site;
+
+        public static string 未分配超时BIN;
 
         public static bool ProgramPause = false; //程序暂停
 
         public static bool ProgramBtnPause = false; //程序按钮暂停
 
-        public static bool IsForecePause = false; //强制停止
+        //public static bool IsForecePause = false; //强制停止
 
         public static bool TCPConnect = false;
 
@@ -120,7 +148,7 @@ namespace H5509_V2
 
         public static int 报警次数 = 0;
 
-        public static string[] 报警忽略次数 = { "4018004", "4018006", "4019003", "4020009", "4020001", "4021009", "4021001", "4030009", "4030013", "4031009", "4031013", "4032009", "4032013", "1400440", "1400444", "1400445", "1400448" };
+        public static string[] 报警忽略次数 = { "4018004", "4018006", "4019003", "4020009", "4020001", "4021009", "4021001", "4030009", "4030013", "4031009", "4031013", "4032009", "4032013", "1400440", "1400444", "1400445", "1400448", "1400469", "1400470", "1400471", "1400472" };
 
         public static List<分Bin> 分bin = new List<分Bin>();
 
@@ -2252,6 +2280,11 @@ namespace H5509_V2
                         case "气压报警": 气压报警 = value; break;
                         case "温控器读取_设定温度报警": 温控器读取_设定温度报警 = Convert.ToBoolean(value); break;
                         case "GXN轴卡": GXN轴卡 = value; break;
+                        case "工单号自适应": 工单号自适应 = Convert.ToBoolean(value); break;
+                        case "按了跳过或编辑报警使能": 按了跳过或编辑报警使能 = Convert.ToBoolean(value); break;
+                        case "Load门开门时间": Load门开门时间 = Convert.ToInt32(value); break; 
+                        case "按批号保存使能": 按批号保存使能 = Convert.ToBoolean(value); break;
+                        case "LotNoLog保存路径": LotNoLog保存路径 = value; break;
                     }
                 }
             }
@@ -2333,6 +2366,11 @@ namespace H5509_V2
                 ListConPerm = listConPerm;
             }
             return result;
+        }
+
+        public static string GetTesterValue(string name, string field, out string value)
+        {
+            return Sqlite.runSql(SQLiteConnString, $"select {field} from TesterIFParam where 测试机名称 = '{name}'", out value);
         }
 
         public static string GetSetupValue(string name, string field, out string value)
@@ -2537,11 +2575,6 @@ namespace H5509_V2
                             测试超时时间 = Convert.ToInt32(dr["测试超时时间"].ToString()),
                             timeout超时时间 = Convert.ToInt32(dr["timeout超时时间"].ToString()),
                             超时发送timeout = Convert.ToBoolean(dr["超时发送timeout"].ToString()),
-                            串口号 = dr["串口号"].ToString(),
-                            波特率 = Convert.ToInt32(dr["波特率"].ToString()),
-                            校验位 = (Parity)Enum.Parse(typeof(Parity), dr["校验位"].ToString(), true),
-                            数据位 = Convert.ToInt32(dr["数据位"].ToString()),
-                            停止位 = (StopBits)Enum.Parse(typeof(StopBits), dr["停止位"].ToString(), true),
 
                             入料手臂吸料超时时间 = Convert.ToInt32(dr["入料手臂吸料超时时间"].ToString()),
                             出料手臂吸料超时时间 = Convert.ToInt32(dr["出料手臂吸料超时时间"].ToString()),
@@ -2567,6 +2600,10 @@ namespace H5509_V2
                             Auto换盘时出料Z回零 = Convert.ToBoolean(dr["Auto换盘时出料Z回零"].ToString()),
 
                             通讯名称 = dr["通讯名称"].ToString(),
+
+                            测试超时自动关闭Dut = Convert.ToBoolean(dr["测试超时自动关闭Dut"].ToString()),
+                            接收超时Bin自动关闭Dut = Convert.ToBoolean(dr["接收超时Bin自动关闭Dut"].ToString()),
+                            超时Bin字符串显示 = dr["超时Bin字符串显示"].ToString(),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -2605,6 +2642,7 @@ namespace H5509_V2
                             测试机数量 = Convert.ToInt32(dr["测试机数量"].ToString()),
                             同时测试 = Convert.ToInt32(dr["同时测试"].ToString()),
                             测试结果中有对应Site = Convert.ToBoolean(dr["测试结果中有对应Site"].ToString()),
+                            超时Bin字符串 = dr["超时Bin字符串"].ToString(),
                             Site1 = dr["Site1"].ToString(),
                             Site2 = dr["Site2"].ToString(),
                             Site3 = dr["Site3"].ToString(),
@@ -2792,11 +2830,6 @@ namespace H5509_V2
                 $"测试超时时间 = '{tester.测试超时时间}'," +
                 $"timeout超时时间 = '{tester.timeout超时时间}'," +
                 $"超时发送timeout = '{tester.超时发送timeout}'," +
-                $"串口号 = '{tester.串口号}'," +
-                $"波特率 = '{tester.波特率}'," +
-                $"校验位 = '{tester.校验位}'," +
-                $"数据位 = '{tester.数据位}'," +
-                $"停止位 = '{tester.停止位}'," +
                 $"入料手臂吸料超时时间 = '{tester.入料手臂吸料超时时间}'," +
                 $"出料手臂吸料超时时间 = '{tester.出料手臂吸料超时时间}'," +
                 $"测试手臂吸料超时时间 = '{tester.测试手臂吸料超时时间}'," +
@@ -2816,7 +2849,10 @@ namespace H5509_V2
                 $"放料时允许侧敲 = '{tester.放料时允许侧敲}'," +
                 $"侧敲时允许放料 = '{tester.侧敲时允许放料}'," +
                 $"Auto换盘时出料Z回零 = '{tester.Auto换盘时出料Z回零}'," +
-                $"通讯名称 = '{tester.通讯名称}'" +
+                $"通讯名称 = '{tester.通讯名称}'," +
+                $"测试超时自动关闭Dut = '{tester.测试超时自动关闭Dut}'," +
+                $"接收超时Bin自动关闭Dut = '{tester.接收超时Bin自动关闭Dut}'," +
+                $"超时Bin字符串显示 = '{tester.超时Bin字符串显示}'" +
                 $" where 测试机名称 = '{name}'";
 
             int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
@@ -2832,6 +2868,7 @@ namespace H5509_V2
                 $"测试机数量 = '{tester.测试机数量}'," +
                 $"同时测试 = '{tester.同时测试}'," +
                 $"测试结果中有对应Site = '{tester.测试结果中有对应Site}'," +
+                $"超时Bin字符串 = '{tester.超时Bin字符串}'," +
                 $"Site1 = '{tester.Site1}'," +
                 $"Site2 = '{tester.Site2}'," +
                 $"Site3 = '{tester.Site3}'," +
@@ -2916,7 +2953,7 @@ namespace H5509_V2
                        $"'{载入数}','{结束时间}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{设置信息.分BIN信息.name1}','{设置信息.分BIN信息.name2}'," +  //工作时间.Ticks
                        $"'{设置信息.分BIN信息.name3}','{设置信息.分BIN信息.name4}','{设置信息.分BIN信息.name5}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
                        $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{报警次数}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
-                       $"'{(空跑模式 ? "空跑模式" : "正常模式")}','在线')";
+                       $"'{(空跑模式 ? "空跑模式" : "正常模式")}','{(无测试机模式 ? "离线" : "在线")}')";
 
                 int line = Sqlite.runSqlNonQuery(SQLiteRunningString, sql);
 
@@ -2972,6 +3009,23 @@ namespace H5509_V2
 
         #region Log
 
+        public static void LotNoLog(string info)
+        {
+            DateTime datetime = 开始时间;
+
+            string path = LotNoLog保存路径 + "\\" + datetime.Year + "_" + datetime.Month.ToString("D2");
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            string fileName = $"{LotNo[0]}_{datetime.Hour:D2}h{datetime.Minute:D2}m{datetime.Second:D2}s";
+
+            string logPath = Path.Combine(path, fileName + ".log");
+
+            writeDataHelper.LotNoLog(logPath, info);
+        }
+
         public static void Runlog2(string info)
         {
             RunLog(info, LogType.RunLog);
@@ -2992,6 +3046,14 @@ namespace H5509_V2
                 IsReceive = isReceive,
             };
             LogQueue.Enqueue(log);
+
+            if (按批号保存使能 && 设备状态 != 0)
+            {
+                if (txtType == LogType.AlarmLog || txtType == LogType.OperateLog || txtType == LogType.ComLog)
+                {
+                    LotNoLog(info);
+                }
+            }
 
             //Debug.WriteLine("输出日志数量：" + LogQueue.Count);
             Debug.WriteLine(info);

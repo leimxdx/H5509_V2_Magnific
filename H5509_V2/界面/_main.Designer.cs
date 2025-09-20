@@ -4564,10 +4564,12 @@
             this.textBoxFlowcaedno.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.textBoxFlowcaedno.Location = new System.Drawing.Point(144, 67);
             this.textBoxFlowcaedno.Margin = new System.Windows.Forms.Padding(1, 2, 1, 2);
+            this.textBoxFlowcaedno.MinimumSize = new System.Drawing.Size(400, 33);
             this.textBoxFlowcaedno.Name = "textBoxFlowcaedno";
             this.textBoxFlowcaedno.Size = new System.Drawing.Size(400, 33);
             this.textBoxFlowcaedno.TabIndex = 97;
             this.textBoxFlowcaedno.Tag = "@0@";
+            this.textBoxFlowcaedno.TextChanged += new System.EventHandler(this.textBoxFlowcaedno_TextChanged);
             this.textBoxFlowcaedno.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBoxFlowcaedno_KeyDown);
             // 
             // textBoxmark

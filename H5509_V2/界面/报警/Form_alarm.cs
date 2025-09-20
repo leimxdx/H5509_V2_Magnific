@@ -10,9 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClosedXML.Excel;
 using H5509_V2;
-using Sunny.UI.Win32;
-using static H5509_V2.APPmaster;
 using SQLiteHelper;
+using Sunny.UI.Win32;
+using TextFileLogger;
+using static H5509_V2.APPmaster;
 
 namespace H5509_alarm
 {
@@ -788,6 +789,7 @@ namespace H5509_alarm
                     case "4019003":
                     case "4019002":
                     case "4019008":
+                    case "1400472":
                         if (alarm)
                         {
                             S_Loader += alarmCode + ",";
@@ -2549,6 +2551,16 @@ namespace H5509_alarm
                     case "7007913":
                     case "7007914":
                     case "7007915":
+                    case "1400442":
+                    case "1400480":
+                    case "1400481":
+                    case "1400482":
+                    case "1400483":
+                    case "1400484":
+                    case "1400485":
+                    case "1400486":
+                    case "1400487":
+
                         for (int i = 0; i < dut.Length; i++)
                         {
                             foreach (Control c in dut[i])
@@ -2777,11 +2789,13 @@ namespace H5509_alarm
                     case "1400410":
                     case "1400420":
                     case "1400441":
-                    case "1400442":
                     case "1400443":
                     case "1400444":
                     case "1400500":
                     case "1400600":
+                    case "1400469":
+                    case "1400470":
+                    case "1400471":
                         if (alarm)
                         {
                             S_Other += alarmCode + ",";
@@ -2861,6 +2875,7 @@ namespace H5509_alarm
                     case "1400290":
                     case "1400340":
                     case "1400445":
+                    case "1400488":
                         if (alarm)
                         {
                             S_Sys += alarmCode + ",";
@@ -3067,6 +3082,56 @@ namespace H5509_alarm
                                     row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("系统未定义错误", 系统未定义错误ErrorMsg);
                                 }
                                 break;
+                            case "1400472":  //系统未定义错误ErrorMsg
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("second", Load门开门时间.ToString());
+                                }
+                                break;
+                            case "1400480":  //Site(xx)的Dut1测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break;
+                            case "1400481":  //Site(xx)的Dut1测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break;
+                            case "1400482":  //Site(xx)的Dut2测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break;
+                            case "1400483":  //Site(xx)的Dut3测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break;
+                            case "1400484":  //Site(xx)的Dut4测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break;
+                            case "1400485":  //Site(xx)的Dut5测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break;
+                            case "1400486":  //Site(xx)的Dut6测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break;
+                            case "1400487":  //Site(xx)的Dut7测试超时
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("(xx)", 测试超时的Dut对应site.ToString());
+                                }
+                                break; 
+                            case "1400488":  //超时BIN(20A)未分配
+                                {
+                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("20A", 未分配超时BIN);
+                                }
+                                break;
                         }
                     }
 
@@ -3177,7 +3242,7 @@ namespace H5509_alarm
 
         private void Form_alarm_Load(object sender, EventArgs e)
         {
-            RefreshTask = Task.Run(() => 
+            RefreshTask = Task.Run(() =>
             {
                 while (true)
                 {

@@ -267,7 +267,7 @@ namespace H5509_V2
             bool[] check = StationManagers.CheckComConnect();
             if (check.Contains(false)) //if (!Com.IsOpenCom)
             {
-                MessageBox.Show("串口未连接!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("通讯未连接!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             StationManagers.GetStationId(out int[] site);
@@ -2389,8 +2389,121 @@ namespace H5509_V2
 
         private void label9_Click(object sender, EventArgs e)
         {
-            IsPause = false;
-            IsStart = true;
+            //ProgramPause = true;
+            //string oth = 设置信息.测试机信息.超时Bin字符串显示;
+
+            //if (Auto1 != "" && Auto1.Split(",").Contains(oth)) return;
+            //else if (Auto2 != "" && Auto2.Split(",").Contains(oth)) return;
+            //else if (Fix1 != "" && Fix1.Split(",").Contains(oth)) return;
+            //else if (Fix2 != "" && Fix2.Split(",").Contains(oth)) return;
+            //else if (Fix3 != "" && Fix3.Split(",").Contains(oth)) return;
+            //else 
+            //{
+            //    未分配超时BIN = oth;
+            //    Listcode.Add("1400488");
+
+            //    MessageBox.Show($"超时BIN({oth})未分配！请前往分BIN界面添加");
+            //}
+            //IsPause = false;
+            //IsStart = true;
+        }
+
+        private float _defaultFontSize = 14.25f;
+        private float _minFontSize = 9f;
+        private void textBoxFlowcaedno_TextChanged(object sender, EventArgs e)
+        {
+            ////IO编号
+            ////e.Graphics.DrawString(Name.Substring(9), Font, ForeColor, new Rectangle(0, 0, Width, 40), ContentAlignment.MiddleLeft);
+
+            ////画点
+            //e.Graphics.FillEllipse(_color, new Rectangle(44, 10, 20, 20));
+
+            ////IO名称
+            //e.Graphics.DrawString(Text, Font, ForeColor, new Rectangle(62, 0, Width, 40), ContentAlignment.MiddleLeft);
+
+            ////动态调整字体大小
+            ////using (Graphics g = this.CreateGraphics())
+            ////{
+
+            ////while (g.MeasureString(this.Text, this.Font).Width > (this.Width - 62) && this.Font.Size > 6)
+            ////{
+            ////    this.Font = new Font(this.Font.Name, this.Font.Size - 1, this.Font.Style);
+            ////}
+            ////}
+            //while (TextRenderer.MeasureText(this.Text, this.Font).Width > (this.Width - 62) && this.Font.Size > 6)
+            //{
+            //    this.Font = new Font(this.Font.Name, this.Font.Size - 1, this.Font.Style);
+            //}
+
+
+            //TextBox textBox = (TextBox)sender;
+            //// 如果文本框为空，可重置为默认字体（可选）
+            //if (string.IsNullOrEmpty(textBox.Text))
+            //{
+            //    textBox.Font = new Font(textBox.Font.FontFamily, _defaultFontSize, textBox.Font.Style);
+            //    return;
+            //}
+
+            //// 使用Graphics测量文本宽度
+            //using (Graphics graphics = textBox.CreateGraphics())
+            //{
+            //    // 获取文本框的客户端区域（显示内容的区域）的宽度
+            //    int clientWidth = textBox.ClientSize.Width - (textBox.Margin.Left + textBox.Margin.Right) - 3; // 可选的微小调整，根据需要调整
+
+            //    // 循环测量，如果文本宽度大于文本框可用宽度且字体大小大于最小值，则减小字体
+            //    while (TextRenderer.MeasureText(graphics, textBox.Text, textBox.Font).Width > clientWidth && textBox.Font.Size > _minFontSize)
+            //    {
+            //        // 创建一个更小字体大小的Font对象
+            //        float newSize = textBox.Font.Size - 0.5f; // 每次减小0.5个单位
+            //        if (newSize < _minFontSize) newSize = _minFontSize;
+            //        textBox.Font = new Font(textBox.Font.FontFamily, newSize, textBox.Font.Style);
+            //        // 注意：如果字体改变导致再次触发TextChanged事件，通常不会造成死循环，因为字体大小有下限，文本宽度测量值也会随之减小。
+            //        // 但若逻辑复杂，需注意潜在的重入问题。
+            //    }
+            //    // 注意：此示例未处理文本减少时放大的逻辑。如需此功能，可能需要更复杂的逻辑（如先重置到默认大小再重新调整）。
+            //}
+
+            if (工单号自适应)
+            {
+                TextBox textBox = (TextBox)sender;
+
+                // 先重置为默认字体大小（为放大提供基础）
+                textBox.Font = new Font(textBox.Font.FontFamily, _defaultFontSize, textBox.Font.Style);
+
+                // 如果文本框为空，保持默认字体
+                if (string.IsNullOrEmpty(textBox.Text))
+                    return;
+
+                // 获取文本框的客户端区域宽度（考虑内边距）
+                int clientWidth = textBox.ClientSize.Width - 5; // 稍微留一些边距
+
+                // 测量当前默认字体下的文本宽度
+                int textWidth = TextRenderer.MeasureText(textBox.Text, textBox.Font).Width;
+
+                // 如果文本宽度超过文本框宽度，需要缩小字体
+                if (textWidth > clientWidth)
+                {
+                    float currentSize = _defaultFontSize;
+
+                    // 逐步缩小字体直到文本适合或达到最小字体
+                    while (textWidth > clientWidth && currentSize > _minFontSize)
+                    {
+                        currentSize -= 0.5f; // 每次减小0.5个单位
+                        if (currentSize < _minFontSize)
+                            currentSize = _minFontSize;
+
+                        Font testFont = new Font(textBox.Font.FontFamily, currentSize, textBox.Font.Style);
+                        textWidth = TextRenderer.MeasureText(textBox.Text, testFont).Width;
+
+                        if (textWidth <= clientWidth || currentSize == _minFontSize)
+                        {
+                            textBox.Font = testFont;
+                            break;
+                        }
+                    }
+                }
+                //textBox.Refresh();
+            }
         }
     }
 }

@@ -32,7 +32,7 @@ namespace H5509_V2
         //public string[][] SiteTestBin = new string[16][]; //保存Site测试结果对应的Bin信息
 
         //public ConcurrentQueue<string[]> BinSaveQueue = new ConcurrentQueue<string[]>(); //用来保存接收的Bin数据的队列
-        public Action<string> RefreshLog;
+        public Action<int, string> RefreshLog;
 
         public TestDataInfo[] testDataInfos = new TestDataInfo[16];
 
@@ -216,9 +216,9 @@ namespace H5509_V2
             // 处理接收到的数据
         }
 
-        public void UpdateLog(string log)
+        public void UpdateLog(int site, string log)
         {
-            RefreshLog(log);
+            RefreshLog(site, log);
         }
 
         public void UpdateConect(int site, bool isconnect)
@@ -307,6 +307,8 @@ namespace H5509_V2
         {
             GetSendDevice(stationId, out int sendsite);
             TestStation testStation = GetStation(sendsite);
+
+            //UpdateLog(data, false);
             testStation.Send(data);
         }
 

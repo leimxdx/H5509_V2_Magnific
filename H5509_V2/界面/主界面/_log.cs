@@ -48,6 +48,8 @@ namespace H5509_V2
 
         public Action 发送批次信息 { get; set; } // 用于发送批量信息的委托
 
+        private RichTextBox[] siteRichTextBoxs = new RichTextBox[17];
+
         class FileCounter
         {
             public const int MaxRows = 60000; // 最大行数常量
@@ -81,16 +83,17 @@ namespace H5509_V2
             startTime.Value = DateTime.Today;//0时
             endTime.Value = DateTime.Today.AddDays(1);
 
-            uiComboBox11.DataSource = SerialPort.GetPortNames();
-            uiComboBox12.DataSource = new string[] { "9600", "19200", "38400", "57600", "115200" };
-            uiComboBox14.DataSource = new string[] { "None", "Odd", "Even" };
-            uiComboBox13.DataSource = new string[] { "7", "8" };
-            uiComboBox15.DataSource = new string[] { "1", "2" };
 
             dateTimePicker1.Value = DateTime.Now; //开始时间的结束时间
             dateTimePicker2.Value = DateTime.Now.AddDays(-1); //开始时间的开始时间
 
             textBox2.Text = Directory.GetCurrentDirectory() + "\\Log";
+
+            siteRichTextBoxs = new RichTextBox[]
+            {
+                richTextBox1, richTextBox4,richTextBox5,richTextBox6,richTextBox7, richTextBox8,richTextBox9,richTextBox10, richTextBox11,
+                richTextBox12, richTextBox13, richTextBox14, richTextBox15, richTextBox16, richTextBox17, richTextBox18, richTextBox19 
+            };
         }
 
         private void _log_Load(object sender, EventArgs e)
@@ -109,11 +112,11 @@ namespace H5509_V2
 
         public void 刷新日志界面()
         {
-            uiComboBox11.Text = 设置信息.测试机信息.串口号;
-            uiComboBox12.Text = 设置信息.测试机信息.波特率.ToString();
-            uiComboBox14.Text = 设置信息.测试机信息.校验位.ToString();
-            uiComboBox13.Text = 设置信息.测试机信息.数据位.ToString();
-            uiComboBox15.Text = 设置信息.测试机信息.停止位.ToString();
+            //uiComboBox11.Text = 设置信息.测试机信息.串口号;
+            //uiComboBox12.Text = 设置信息.测试机信息.波特率.ToString();
+            //uiComboBox14.Text = 设置信息.测试机信息.校验位.ToString();
+            //uiComboBox13.Text = 设置信息.测试机信息.数据位.ToString();
+            //uiComboBox15.Text = 设置信息.测试机信息.停止位.ToString();
         }
 
         public TimeSpan Timestamp { get; set; }
@@ -650,30 +653,37 @@ namespace H5509_V2
             return File.GetCreationTime(filePath); // 回退使用文件创建时间
         }
 
-        public void DelegteDisplayComInfo(string message)
+        public void DisPlayComInfo(RichTextBox richTextBox, string message)
         {
             try
             {
-                if (richTextBox1.InvokeRequired)
+                if (richTextBox.InvokeRequired)
                 {
-                    richTextBox1.Invoke(new Action(() =>
+                    richTextBox.Invoke(new Action(() =>
                     {
-                        richTextBox1.AppendText(message + '\n');
-                        richTextBox1.Select(richTextBox1.TextLength, 0);
-                        richTextBox1.ScrollToCaret();
+                        richTextBox.AppendText(message + '\n');
+                        richTextBox.Select(richTextBox.TextLength, 0);
+                        richTextBox.ScrollToCaret();
                     }));
                 }
                 else
                 {
-                    richTextBox1.AppendText(message + '\n');
-                    richTextBox1.Select(richTextBox1.TextLength, 0);
-                    richTextBox1.ScrollToCaret();
+                    richTextBox.AppendText(message + '\n');
+                    richTextBox.Select(richTextBox.TextLength, 0);
+                    richTextBox.ScrollToCaret();
                 }
             }
             catch (Exception ex)
             {
                 RunLog($"日志显示异常: {ex.Message}");
             }
+            
+        }
+
+        public void DelegteDisplayComInfo(int site, string message)
+        {
+            DisPlayComInfo(siteRichTextBoxs[0], message);
+            DisPlayComInfo(siteRichTextBoxs[site + 1], message);
         }
 
         public void DelegteDisplayOperateLog(string message, DateTime datetime)
@@ -731,21 +741,35 @@ namespace H5509_V2
 
         private void uiComboBox11_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                uiComboBox11.DataSource = SerialPort.GetPortNames();
-                uiComboBox11.Text = 设置信息.测试机信息.串口号;
-            }
+            //if (e.Button == MouseButtons.Left)
+            //{
+            //    uiComboBox11.DataSource = SerialPort.GetPortNames();
+            //    //uiComboBox11.Text = 设置信息.测试机信息.串口号;
+            //}
         }
 
         private void uiButton2_Click(object sender, EventArgs e)
         {
-            if (设备状态 == 0) Com.CloseCom();
-            Com.OpenCom();
-            if (Com.IsOpenCom)
+            StationManagers.ConnectAll();
+            bool[] check = StationManagers.CheckComConnect();
+            if (check.Contains(false))
             {
-                MessageBox.Show("连接成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                for (int i = 0; i < check.Length; i++)
+                {
+                    if (!check[i])
+                    {
+                        MessageBox.Show($"测试机{i + 1}通讯未连接", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
+            else MessageBox.Show($"连接成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            //if (设备状态 == 0) Com.CloseCom();
+            //Com.OpenCom();
+            //if (Com.IsOpenCom)
+            //{
+            //    MessageBox.Show("连接成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
         }
 
         private void chk_senddoutadd()

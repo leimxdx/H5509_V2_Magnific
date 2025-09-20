@@ -37,6 +37,8 @@ namespace TextFileLogger
 
         public WriteDataHelper WriteDataHelper = new WriteDataHelper(ProgramPath + "\\Log");//
 
+        public string LotNoPath = "";
+
         //创建一个静态对象保存当前的实例
         private static WriteData instance;
 
@@ -82,6 +84,12 @@ namespace TextFileLogger
         {
             return WriteDataHelper.RunLog(log, datetime, logtype, isReceive);
         }
+
+        /// <returns></returns>
+        public bool LotNoLog(string path, string msg)
+        {
+            return WriteDataHelper.LotNoLog(path, msg);
+        }
     }
 
     public class WriteDataHelper
@@ -89,6 +97,8 @@ namespace TextFileLogger
         public WriteDataHelper() { }
 
         private SimpleHybirdLock writeDataLock = new SimpleHybirdLock();
+
+        public string LotNoPath { get; set; }
 
         public string ComLogPath { get; set; }
 
@@ -145,6 +155,25 @@ namespace TextFileLogger
             }
             return Path.Combine(path, fileName);
             //return Path.Combine(path, string.Format("{0}.log", DateTime.Now.ToString("yyyy-MM-dd")));
+        }
+
+        public bool LotNoLog(string logPath, string log)
+        {
+            
+            string writeTime = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}  =>  ";
+
+            //DateTime datetime = DateTime.Now;
+            //path = path + "\\" + datetime.Year + "_" + datetime.Month.ToString("D2");
+
+            //if (!Directory.Exists(path))
+            //{
+            //    Directory.CreateDirectory(path);
+            //}
+            //string timestr = $"{datetime.Hour:D2}h{datetime.Minute:D2}m{datetime.Second:D2}s";
+            //string logPath = Path.Combine(path, fileName + "_" + timestr + ".log");
+            //string logPath = DatapPath(datetime.ToString("yyyy-MM-dd") + ".log", logtype);
+            if (WriteAppend(logPath, writeTime + log)) return true;
+            else return false;
         }
 
         /// <summary>

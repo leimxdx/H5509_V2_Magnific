@@ -50,6 +50,8 @@ namespace H5509_V2
 
         public System.Timers.Timer OneCycle按钮闪烁的定时器 = new System.Timers.Timer(); //OneCycle按钮闪烁的定时器
 
+        public System.Timers.Timer Load门开启定时器 = new System.Timers.Timer();
+
         public Action 刷新批次信息;
 
         public Action 刷新分BIN信息;
@@ -70,6 +72,16 @@ namespace H5509_V2
 
             OneCycle按钮闪烁的定时器.Interval = 400;
             OneCycle按钮闪烁的定时器.Elapsed += onecycletimerTick;
+
+            Load门开启定时器.Interval = 5 * 1000;
+            Load门开启定时器.Elapsed += Load门开启定时器_Tick;
+        }
+
+        private void Load门开启定时器_Tick(object sender, EventArgs eventArgs)
+        {
+            Load门开启定时器.Stop();
+            门已打开超设定时间 = true;
+            RunLog("Load门开启时间达到");
         }
 
         private void ForcedBatchTick(object sender, EventArgs eventArgs)
@@ -1007,6 +1019,24 @@ namespace H5509_V2
 
         #region 入料吸嘴
 
+        public string 入料吸嘴_吸放料(int znozzle, bool ison, bool value)
+        {
+            if (ison)
+            {
+                string[] ioNames = { "Y056_上料1_吸真空", "Y057_上料2_吸真空", "Y058_上料3_吸真空", "Y059_上料4_吸真空" };
+                string result = motionEx.SetDo(ioNames[znozzle], value);
+                if (result != "Success") RunLog($"入料吸嘴Z{znozzle + 1}_吸真空IO输出失败!" + result);
+                return result;
+            }
+            else
+            {
+                string[] ioNames = { "Y060_上料1_破真空", "Y061_上料2_破真空", "Y062_上料3_破真空", "Y063_上料4_破真空" };
+                string result = motionEx.SetDo(ioNames[znozzle], value);
+                if (result != "Success") RunLog($"入料吸嘴Z{znozzle + 1}_破真空IO输出失败!" + result);
+                return result;
+            }
+        }
+
         /// <summary>
         /// 入料吸嘴_吸放料
         /// </summary>
@@ -1140,6 +1170,24 @@ namespace H5509_V2
 
         #region 出料吸嘴
 
+        public string 出料吸嘴_吸放料(int znozzle, bool ison, bool value)
+        {
+            if (ison)
+            {
+                string[] ioNames = { "Y068_下料1_吸真空", "Y069_下料2_吸真空", "Y070_下料3_吸真空", "Y071_下料4_吸真空" };
+                string result = motionEx.SetDo(ioNames[znozzle], value);
+                if (result != "Success") RunLog($"出料吸嘴Z{znozzle + 1}_吸真空IO输出失败!" + result);
+                return result;
+            }
+            else
+            {
+                string[] ioNames = { "Y072_下料1_破真空", "Y073_下料2_破真空", "Y074_下料3_破真空", "Y075_下料4_破真空" };
+                string result = motionEx.SetDo(ioNames[znozzle], value);
+                if (result != "Success") RunLog($"出料吸嘴Z{znozzle + 1}_破真空IO输出失败!" + result);
+                return result;
+            }
+        }
+
         public string 出料吸嘴_吸放料(bool[] isopen, bool ison, bool value)
         {
             List<bool> znozzle = new List<bool>();
@@ -1266,6 +1314,25 @@ namespace H5509_V2
         #endregion
 
         #region 测试吸嘴
+
+        public string 测试吸嘴_吸放料(int znozzle, bool ison, bool value)
+        {
+            if (ison)
+            {
+                string[] ioNames = { "Y078_测试1_吸真空", "Y079_测试2_吸真空", "Y080_测试3_吸真空", "Y081_测试4_吸真空", "Y082_测试5_吸真空", "Y083_测试6_吸真空", "Y084_测试7_吸真空", "Y085_测试8_吸真空" };
+                string result = motionEx.SetDo(ioNames[znozzle], value);
+                if (result != "Success") RunLog($"测试吸嘴Z{znozzle + 1}_吸真空IO输出失败!" + result);
+                return result;
+            }
+            else
+            {
+                string[] ioNames = { "Y086_测试1_破真空", "Y087_测试2_破真空", "Y088_测试3_破真空", "Y089_测试4_破真空", "Y090_测试5_破真空", "Y091_测试6_破真空", "Y092_测试7_破真空", "Y093_测试8_破真空" };
+                string result = motionEx.SetDo(ioNames[znozzle], value);
+                if (result != "Success") RunLog($"测试吸嘴Z{znozzle + 1}_破真空IO输出失败!" + result);
+                return result;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -2281,6 +2348,10 @@ namespace H5509_V2
             Auto1换盘标记 = false;
             Auto2换盘标记 = false;
             Auto等待换盘标记 = false;
+
+            按了跳过或编辑标记 = false;
+            门已打开超设定时间 = false;
+            等待Load门开启 = false;
 
             保存Auto1放料个数 = 0;
             保存Auto2放料个数 = 0;
@@ -3593,6 +3664,7 @@ namespace H5509_V2
                         if (iovalue[i] == "0")
                         {
                             InNozzleICOpen[i] = false;
+                            入料吸嘴_吸放料(i, true, false);
                         }
                     }
                 }
@@ -3611,6 +3683,7 @@ namespace H5509_V2
                         if (iovalue[i] == "0")
                         {
                             OutNozzleICOpen[i] = false;
+                            出料吸嘴_吸放料(i, true, false);
                         }
                     }
                 }
@@ -3630,9 +3703,107 @@ namespace H5509_V2
                         if (iovalue[i] == "0")
                         {
                             TestNozzleICOpen[i] = false;
+                            测试吸嘴_吸放料(i, true, false);
                         }
                     }
                 }
+            }
+        }
+
+        public bool CheckInNozzleIC()
+        {
+            bool ispass = false;
+            if (InNozzleIC)
+            {
+                string result = 入料吸嘴_真空检测(out string[] iovalue);
+                if (result == "Success" && iovalue.Contains("0"))
+                {
+                    for (int i = 0; i < iovalue.Length; i++)
+                    {
+                        if (InNozzleICOpen[i] && InNozzleIC)
+                        {
+                            if (iovalue[i] == "0")
+                            {
+                                入料IC移动过程中忽略 = true;
+                                ispass = true;
+                                Listcode.Add($"30{i + 1}0001"); //出料手臂-吸--1号吸嘴丢失IC
+                                RunLog($"[Code]30{i + 1}0001,[Msg]入料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
+            return ispass;
+        }
+
+        public bool CheckOutNozzleIC()
+        {
+            bool ispass = false;
+            if (OutNozzleIC)
+            {
+                string result = 出料吸嘴_真空检测(out string[] iovalue);
+                if (result == "Success" && iovalue.Contains("0"))
+                {
+                    for (int i = 0; i < iovalue.Length; i++)
+                    {
+                        if (OutNozzleICOpen[i] && OutNozzleIC)
+                        {
+                            if (iovalue[i] == "0")
+                            {
+                                出料IC移动过程中忽略 = true;
+                                ispass = true;
+                                Listcode.Add($"30{i + 5}0001"); //出料手臂-吸--1号吸嘴丢失IC
+                                RunLog($"[Code]30{i + 5}0001,[Msg]出料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
+            return ispass;
+        }
+
+        public bool CheckTestNozzleIC()
+        {
+            bool ispass = false;
+            if (TestNozzleIC)
+            {
+                string result = 测试吸嘴_真空检测(out string[] iovalue);
+
+                if (result == "Success" && iovalue.Contains("0"))
+                {
+                    for (int i = 0; i < iovalue.Length; i++)
+                    {
+                        if (TestNozzleICOpen[i] && TestNozzleIC)
+                        {
+                            if (iovalue[i] == "0")
+                            {
+                                测试IC移动过程中忽略 = true;
+                                ispass = true;
+                                Listcode.Add($"3{i + 9:D2}9901"); //出料手臂-吸--1号吸嘴丢失IC
+                                RunLog($"[Code]3{i + 9:D2}9901,[Msg]测试手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+                            }
+                        }
+                    }
+                }
+            }
+            return ispass;
+        }
+
+        public bool CheckTimeoutBin()
+        {
+            string oth = 设置信息.测试机信息.超时Bin字符串显示;
+
+            if (Auto1 != "" && Auto1.Split(",").Contains(oth)) return false;
+            else if (Auto2 != "" && Auto2.Split(",").Contains(oth)) return false;
+            else if (Fix1 != "" && Fix1.Split(",").Contains(oth)) return false;
+            else if (Fix2 != "" && Fix2.Split(",").Contains(oth)) return false;
+            else if (Fix3 != "" && Fix3.Split(",").Contains(oth)) return false;
+            else
+            {
+                未分配超时BIN = oth;
+                Listcode.Add("1400488");
+                RunLog($"[Code]1400488,[Msg](按下开始)超时BIN({oth})未分配！请前往分BIN界面添加", LogType.AlarmLog);
+                return true;
             }
         }
 
@@ -3725,6 +3896,48 @@ namespace H5509_V2
                         {
                             isstart = false;
                             RunLog("(按下开始)一个循环选项选择中...,无法开始", LogType.OperateLog);
+                        }
+
+                        if (入料IC移动过程中忽略)
+                        {
+                            if (CheckInNozzleIC())
+                            {
+                                isstart = false;
+                                RunLog("(按下开始)入料手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
+                            }
+                        }
+
+                        if (出料IC移动过程中忽略)
+                        {
+                            if (CheckOutNozzleIC())
+                            {
+                                isstart = false;
+                                RunLog("(按下开始)出料手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
+                            }
+                        }
+
+                        if (测试IC移动过程中忽略)
+                        {
+                            if (CheckTestNozzleIC())
+                            {
+                                isstart = false;
+                                RunLog("(按下开始)测试手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
+                            }
+                        }
+
+                        if (等待Load门开启)
+                        {
+                            if (!门已打开超设定时间)
+                            {
+                                isstart = false;
+                                Listcode.Add("1400472");
+                                RunLog($"[Code]1400472,[Msg]请打开Load仓门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
+                            }
+                        }
+
+                        if (CheckTimeoutBin())
+                        {
+                            isstart = false;
                         }
 
                         string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
@@ -4279,6 +4492,7 @@ namespace H5509_V2
                     bool x24 = io[16] == "1"; //X024_Load门感应
                     if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
                     {
+                        Load门开启定时器.Stop();
                         RunLog("Load仓门已关闭", LogType.OperateLog);
                         if (设备状态 != 0)
                         {
@@ -4288,6 +4502,11 @@ namespace H5509_V2
                     else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
                     {
                         RunLog("Load仓门被打开", LogType.OperateLog);
+                        if (等待Load门开启)
+                        {
+                            Load门开启定时器.Start();
+                        }
+
                         if (设备状态 != 0)
                         {
                             if (Load下降回零开关 && 设备状态 == 2)
@@ -4595,190 +4814,202 @@ namespace H5509_V2
             PS初始化流程.StepID = 500;
             while (true)
             {
-                if (H5509归零) Thread.Sleep(10);
-                else Thread.Sleep(100);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS初始化流程.被强制停止");
-                    break;
-                }
+                    if (H5509归零) Thread.Sleep(10);
+                    else Thread.Sleep(100);
 
-                if (!是否可以初始化())
-                {
-                    continue;
-                }
-
-                switch (PS初始化流程.StepID)
-                {
-                    case 500:
-                        PS初始化流程.StepName = "路径规划";
-                        PS初始化流程.Condition = !H5509初始化 && !H5509正在初始化 && 设备状态 == 1;
-                        PS初始化流程.Permit = !PS初始化流程.Processing;
-                        if (PS初始化流程.Condition && PS初始化流程.Permit)
-                        {
-                            H5509正在初始化 = true;
-                            PS初始化流程.Processing = true;
-                            PS初始化流程.StepID = 505;
-                            if (!空跑模式 || Tray盘模式)
-                            {
-                                Empty上顶标记 = 2;
-                                Load上顶标记 = 2;
-                            }
-                        }
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS初始化流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS初始化流程.StepName = "各轴移动到初始点";
-                        RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
-                        Task<string> auto1 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto1顶盘轴移动(初始点位.Auto1_初始位) : "Success"; });
-                        Task<string> auto2 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto2顶盘轴移动(初始点位.Auto2_初始位) : "Success"; });//182.715
-                        Task<string> testp = Task.Run(() => { return 测试吸嘴_张开气缸输出(true); });
-                        Task<string> testx = Task.Run(() => { return 测试手臂X移动(初始点位.测试_梭车1吸_X); });
-                        Task<string> shuttle = Task.Run(() => { return 飞梭轴移动(初始点位.梭车2_后_Y); });
-                        Task<string> inputp = Task.Run(() => { return 入料手臂P移动(7.5); });
-                        Task<string> outputxyp = Task.Run(() => { return 出料手臂移动(256.05, 222.55, 5.3); });
-                        Task<string> fix3 = Task.Run(() => { return Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动); });
-                        if (auto1.Result == "Success" && auto2.Result == "Success" && testp.Result == "Success" && testx.Result == "Success" && shuttle.Result == "Success" && inputp.Result == "Success" && outputxyp.Result == "Success" && fix3.Result == "Success")
-                        {
-                            飞梭2位置 = 0;
-                            Tray平移左右标记 = 1;
-                            if (!空跑模式 || Tray盘模式) PS初始化流程.StepID = 510;
-                            else PS初始化流程.StepID = 530;
-                        }
-                        else
-                        {
-                            if (auto1.Result != "Success") RunLog("Auto1顶盘轴移动失败!" + auto1.Result);
-                            if (auto2.Result != "Success") RunLog("Auto2顶盘轴移动失败!" + auto2.Result);
-                            if (testp.Result != "Success") RunLog("测试吸嘴_张开气缸闭合失败!" + testp.Result);
-                            if (testx.Result != "Success")
-                            {
-                                Listcode.Add("2028007");
-                                RunLog($"[Code]2028007,[Msg]测试手臂X移动到等待位失败!" + testx.Result, LogType.AlarmLog);
-                                M21_测试手臂X轴ErrorMsg = testx.Result;
-                            }
-                            if (shuttle.Result != "Success")
-                            {
-                                Listcode.Add("2027007");
-                                RunLog($"[Code]2027007,[Msg]梭车2移动到后方失败!" + testx.Result, LogType.AlarmLog);
-                                M20_飞梭轴ErrorMsg = testx.Result;
-                            }
-                            if (inputp.Result != "Success") RunLog("入料手臂P移动失败!" + inputp.Result);
-                            if (outputxyp.Result != "Success")
-                            {
-                                Listcode.Add("2030007");
-                                RunLog($"[Code]2030007,[Msg]出料手臂走到等待位失败!" + outputxyp.Result, LogType.AlarmLog);
-                                M23_出料手臂X轴ErrorMsg = outputxyp.Result;
-                            }
-                            if (fix3.Result != "Success") RunLog("Fix3放IC盘轴移动失败!" + fix3.Result);
+                    if (!是否可以初始化())
+                    {
+                        continue;
+                    }
 
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 510:
-                        PS初始化流程.StepName = "检测Auto1/Auto2是否有盘";
-                        RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
-                        string result = Auto1_前Tray存在感应(out string value);
-                        string result2 = Auto2_前Tray存在感应(out string value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                    switch (PS初始化流程.StepID)
+                    {
+                        case 500:
+                            PS初始化流程.StepName = "路径规划";
+                            PS初始化流程.Condition = !H5509初始化 && !H5509正在初始化 && 设备状态 == 1;
+                            PS初始化流程.Permit = !PS初始化流程.Processing;
+                            if (PS初始化流程.Condition && PS初始化流程.Permit)
                             {
-                                PS初始化流程.StepID = 515;
-                                RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->等待Empty上顶");
+                                H5509正在初始化 = true;
+                                PS初始化流程.Processing = true;
+                                PS初始化流程.StepID = 505;
+                                if (!空跑模式 || Tray盘模式)
+                                {
+                                    Empty上顶标记 = 2;
+                                    Load上顶标记 = 2;
+                                }
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            break;
+
+                        case 505:
+                            PS初始化流程.StepName = "各轴移动到初始点";
+                            RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
+                            Task<string> auto1 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto1顶盘轴移动(初始点位.Auto1_初始位) : "Success"; });
+                            Task<string> auto2 = Task.Run(() => { return !空跑模式 || Tray盘模式 ? Auto2顶盘轴移动(初始点位.Auto2_初始位) : "Success"; });//182.715
+                            Task<string> testp = Task.Run(() => { return 测试吸嘴_张开气缸输出(true); });
+                            Task<string> testx = Task.Run(() => { return 测试手臂X移动(初始点位.测试_梭车1吸_X); });
+                            Task<string> shuttle = Task.Run(() => { return 飞梭轴移动(初始点位.梭车2_后_Y); });
+                            Task<string> inputp = Task.Run(() => { return 入料手臂P移动(7.5); });
+                            Task<string> outputxyp = Task.Run(() => { return 出料手臂移动(256.05, 222.55, 5.3); });
+                            Task<string> fix3 = Task.Run(() => { return Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动); });
+                            if (auto1.Result == "Success" && auto2.Result == "Success" && testp.Result == "Success" && testx.Result == "Success" && shuttle.Result == "Success" && inputp.Result == "Success" && outputxyp.Result == "Success" && fix3.Result == "Success")
+                            {
+                                飞梭2位置 = 0;
+                                Tray平移左右标记 = 1;
+                                if (!空跑模式 || Tray盘模式) PS初始化流程.StepID = 510;
+                                else PS初始化流程.StepID = 530;
+                            }
+                            else
+                            {
+                                if (auto1.Result != "Success") RunLog("Auto1顶盘轴移动失败!" + auto1.Result);
+                                if (auto2.Result != "Success") RunLog("Auto2顶盘轴移动失败!" + auto2.Result);
+                                if (testp.Result != "Success") RunLog("测试吸嘴_张开气缸闭合失败!" + testp.Result);
+                                if (testx.Result != "Success")
+                                {
+                                    Listcode.Add("2028007");
+                                    RunLog($"[Code]2028007,[Msg]测试手臂X移动到等待位失败!" + testx.Result, LogType.AlarmLog);
+                                    M21_测试手臂X轴ErrorMsg = testx.Result;
+                                }
+                                if (shuttle.Result != "Success")
+                                {
+                                    Listcode.Add("2027007");
+                                    RunLog($"[Code]2027007,[Msg]梭车2移动到后方失败!" + testx.Result, LogType.AlarmLog);
+                                    M20_飞梭轴ErrorMsg = testx.Result;
+                                }
+                                if (inputp.Result != "Success") RunLog("入料手臂P移动失败!" + inputp.Result);
+                                if (outputxyp.Result != "Success")
+                                {
+                                    Listcode.Add("2030007");
+                                    RunLog($"[Code]2030007,[Msg]出料手臂走到等待位失败!" + outputxyp.Result, LogType.AlarmLog);
+                                    M23_出料手臂X轴ErrorMsg = outputxyp.Result;
+                                }
+                                if (fix3.Result != "Success") RunLog("Fix3放IC盘轴移动失败!" + fix3.Result);
+
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 510:
+                            PS初始化流程.StepName = "检测Auto1/Auto2是否有盘";
+                            RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
+                            string result = Auto1_前Tray存在感应(out string value);
+                            string result2 = Auto2_前Tray存在感应(out string value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS初始化流程.StepID = 515;
+                                    RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->等待Empty上顶");
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "0")
+                                    {
+                                        Listcode.Add("4020001");
+                                        RunLog($"[Code]4020001,[Msg]Auto1前有盘感应到有Tray盘({value})!", LogType.AlarmLog);
+                                    }
+                                    if (value2 != "0")
+                                    {
+                                        Listcode.Add("4021001");
+                                        RunLog($"[Code]4021001,[Msg]Auto2前有盘感应到有Tray盘({value2})!", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-
-                                if (value != "0")
+                                if (result != "Success")
                                 {
                                     Listcode.Add("4020001");
-                                    RunLog($"[Code]4020001,[Msg]Auto1前有盘感应到有Tray盘({value})!", LogType.AlarmLog);
+                                    RunLog($"[Code]4020001,[Msg]读取Auto1_前Tray存在感应失败!" + result, LogType.AlarmLog);
                                 }
-                                if (value2 != "0")
+                                if (result2 != "Success")
                                 {
                                     Listcode.Add("4021001");
-                                    RunLog($"[Code]4021001,[Msg]Auto2前有盘感应到有Tray盘({value2})!", LogType.AlarmLog);
+                                    RunLog($"[Code]4021001,[Msg]读取Auto2_前Tray存在感应失败!" + result2, LogType.AlarmLog);
                                 }
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success")
+                            break;
+
+                        case 515:
+                            PS初始化流程.StepName = "等待Empty上顶";
+                            if (Empty上顶标记 == 1)
                             {
-                                Listcode.Add("4020001");
-                                RunLog($"[Code]4020001,[Msg]读取Auto1_前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                Auto等待换盘标记 = true;
+                                抓盘手臂放空盘到Auto1标记 = 2;
+                                PS初始化流程.StepID = 520;
+                                RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->抓盘手臂放空盘到Auto1");
                             }
-                            if (result2 != "Success")
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 520:
+                            PS初始化流程.StepName = "抓盘手臂放空盘到Auto1";
+                            if (抓盘手臂放空盘到Auto1标记 == 1)
                             {
-                                Listcode.Add("4021001");
-                                RunLog($"[Code]4021001,[Msg]读取Auto2_前Tray存在感应失败!" + result2, LogType.AlarmLog);
+                                抓盘手臂放空盘到Auto2标记 = 2;
+                                PS初始化流程.StepID = 525;
+                                RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->抓盘手臂放空盘到Auto2");
                             }
-                        }
-                        break;
+                            else Thread.Sleep(10);
+                            break;
 
-                    case 515:
-                        PS初始化流程.StepName = "等待Empty上顶";
-                        if (Empty上顶标记 == 1)
-                        {
-                            Auto等待换盘标记 = true;
-                            抓盘手臂放空盘到Auto1标记 = 2;
-                            PS初始化流程.StepID = 520;
-                            RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->抓盘手臂放空盘到Auto1");
-                        }
-                        else Thread.Sleep(10);
-                        break;
+                        case 525:
+                            PS初始化流程.StepName = "抓盘手臂放空盘到Auto2";
+                            if (抓盘手臂放空盘到Auto2标记 == 1)
+                            {
+                                PS初始化流程.StepID = 530;
+                                RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->等待Load上顶");
+                            }
+                            else Thread.Sleep(10);
+                            break;
 
-                    case 520:
-                        PS初始化流程.StepName = "抓盘手臂放空盘到Auto1";
-                        if (抓盘手臂放空盘到Auto1标记 == 1)
-                        {
-                            抓盘手臂放空盘到Auto2标记 = 2;
-                            PS初始化流程.StepID = 525;
-                            RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->抓盘手臂放空盘到Auto2");
-                        }
-                        else Thread.Sleep(10);
-                        break;
+                        case 530:
+                            PS初始化流程.StepName = "等待Load上顶";
+                            if (Load上顶标记 == 1)
+                            {
+                                IndexTime = DateTime.Now;
+                                Auto等待换盘标记 = false;
+                                H5509初始化 = true;
+                                H5509正在初始化 = false;
+                                PS初始化流程.StepID = 599;
+                            }
+                            else Thread.Sleep(10);
+                            break;
 
-                    case 525:
-                        PS初始化流程.StepName = "抓盘手臂放空盘到Auto2";
-                        if (抓盘手臂放空盘到Auto2标记 == 1)
-                        {
-                            PS初始化流程.StepID = 530;
-                            RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->等待Load上顶");
-                        }
-                        else Thread.Sleep(10);
-                        break;
+                        case 599:
+                            PS初始化流程.StepName = $"初始化流程完成";
+                            RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
+                            PS初始化流程.Processing = false;
+                            PS初始化流程.StepID = 500;
+                            break;
 
-                    case 530:
-                        PS初始化流程.StepName = "等待Load上顶";
-                        if (Load上顶标记 == 1)
-                        {
-                            IndexTime = DateTime.Now;
-                            Auto等待换盘标记 = false;
-                            H5509初始化 = true;
-                            H5509正在初始化 = false;
-                            PS初始化流程.StepID = 599;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 599:
-                        PS初始化流程.StepName = $"初始化流程完成";
-                        RunLog($"PS初始化流程.StepID={PS初始化流程.StepID}->{PS初始化流程.StepName}");
-                        PS初始化流程.Processing = false;
-                        PS初始化流程.StepID = 500;
-                        break;
-
-                    default:
-                        RunLog(("PS初始化流程.StepID =" + PS初始化流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        default:
+                            RunLog(("PS初始化流程.StepID =" + PS初始化流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS初始化流程({PS初始化流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -4791,262 +5022,297 @@ namespace H5509_V2
             PS结批流程.StepID = 500;
             while (true)
             {
-                if (结批标记 || 一个循环标记) Thread.Sleep(10);
-                else Thread.Sleep(100);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS结批流程.被强制停止");
-                    break;
-                }
+                    if (结批标记 || 一个循环标记) Thread.Sleep(10);
+                    else Thread.Sleep(100);
 
-                if (!是否可以初始化())
-                {
-                    continue;
-                }
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS结批流程.被强制停止");
+                        break;
+                    }
 
-                switch (PS结批流程.StepID)
-                {
-                    case 500:
-                        PS结批流程.StepName = "路径规划";
-                        bool process = !PS出料手臂吸放料流程.Processing
-                                    && !PS入料手臂吸放料流程.Processing
-                                    && !PS测试手臂取待测料流程.Processing
-                                    && !PS测试手臂取已测料流程.Processing
-                                    && !PS入飞梭移动流程.Processing
-                                    && !PS空盘上顶流程.Processing
-                                    && !PS空盘下降流程.Processing
-                                    && !PS待测盘上顶流程.Processing
-                                    && !PS手动盘1上顶流程.Processing
-                                    && !PS手动盘2上顶流程.Processing
-                                    && !PS抓盘手臂取Empty空盘流程.Processing
-                                    && !PS抓盘手臂取Load空盘流程.Processing
-                                    && !PS抓盘手臂放空盘到Empty流程.Processing
-                                    && !PS抓盘手臂放空盘到Auto1流程.Processing
-                                    && !PS抓盘手臂放空盘到Auto2流程.Processing;
+                    if (!是否可以初始化())
+                    {
+                        continue;
+                    }
 
-                        PS结批流程.Condition = 结批标记 && H5509归零 && H5509初始化 && !正在结批 && !结批完成 && 设备状态 == 1 && 飞梭停止工作;
+                    switch (PS结批流程.StepID)
+                    {
+                        case 500:
+                            PS结批流程.StepName = "路径规划";
+                            bool process = !PS出料手臂吸放料流程.Processing
+                                        && !PS入料手臂吸放料流程.Processing
+                                        && !PS测试手臂取待测料流程.Processing
+                                        && !PS测试手臂取已测料流程.Processing
+                                        && !PS入飞梭移动流程.Processing
+                                        && !PS空盘上顶流程.Processing
+                                        && !PS空盘下降流程.Processing
+                                        && !PS待测盘上顶流程.Processing
+                                        && !PS手动盘1上顶流程.Processing
+                                        && !PS手动盘2上顶流程.Processing
+                                        && !PS抓盘手臂取Empty空盘流程.Processing
+                                        && !PS抓盘手臂取Load空盘流程.Processing
+                                        && !PS抓盘手臂放空盘到Empty流程.Processing
+                                        && !PS抓盘手臂放空盘到Auto1流程.Processing
+                                        && !PS抓盘手臂放空盘到Auto2流程.Processing;
 
-                        PS结批流程.Permit = !PS结批流程.Processing && process;
+                            PS结批流程.Condition = 结批标记 && H5509归零 && H5509初始化 && !正在结批 && !结批完成 && 设备状态 == 1 && 飞梭停止工作;
 
-                        if (PS结批流程.Condition && PS结批流程.Permit)
-                        {
-                            正在结批 = true;
-                            RunLog("正在结批", LogType.OperateLog);
-                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->正在结批...");
-                            PS结批流程.Processing = true;
-                            PS结批流程.StepID = 505;
-                        }
-                        else
-                        {
-                            bool condition = 一个循环标记 && H5509归零 && H5509初始化 && !一个循环完成 && 设备状态 == 1 && 飞梭停止工作;
-                            if (process && condition)
+                            PS结批流程.Permit = !PS结批流程.Processing && process;
+
+                            if (PS结批流程.Condition && PS结批流程.Permit)
                             {
+                                正在结批 = true;
+                                RunLog("正在结批", LogType.OperateLog);
+                                RunLog($"PS结批流程.StepID={PS结批流程.StepID}->正在结批...");
+                                PS结批流程.Processing = true;
+                                PS结批流程.StepID = 505;
+                            }
+                            else
+                            {
+                                bool condition = 一个循环标记 && H5509归零 && H5509初始化 && !一个循环完成 && 设备状态 == 1 && 飞梭停止工作;
+                                if (process && condition)
+                                {
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                    Thread.Sleep(50); //等待程序停止
+
+                                    一个循环标记 = false;
+                                    一个循环完成 = true;
+
+                                    飞梭停止工作 = false;
+                                    入料手臂停止工作标记 = false;
+                                    测试手臂入料停止工作标记 = false;
+                                    测试手臂出料停止工作标记 = false;
+                                    出料手臂出料停止工作标记 = false;
+                                    加热盘停止入料标记 = false;
+                                    飞梭后入料状态 = 0;
+
+                                    检测梭车是否有IC遗留();
+                                    OneCycle按钮闪烁的定时器.Stop();
+                                    Thread.Sleep(10); //等待输出完成
+                                    motionEx.SetDo("Y009_一个循环灯", false);
+
+                                    Listcode.Add("1400100");
+                                    RunLog($"[Code]1400100,[Msg]一次循环完成", LogType.AlarmLog);
+                                }
+                                Thread.Sleep(10);
+                            }
+                            break;
+
+                        case 505:
+                            PS结批流程.StepName = $"出入料手臂走到避让位置";
+                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
+                            Task<string> input = Task.Run(() => { return 入料手臂移动(0, 0, 7.5); });
+                            Task<string> output = Task.Run(() => { return 出料手臂移动(0, 0, 0); });
+                            if (input.Result == "Success" && output.Result == "Success")
+                            {
+                                if (!空跑模式 || Tray盘模式)
+                                {
+                                    Load下降回零标记 = 2;
+                                    Auto1上顶标记 = 2;
+                                    Auto2上顶标记 = 2;
+                                    Auto等待换盘标记 = true;
+                                    bool isIC1 = 获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
+                                    if (!isIC1 || auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要盖空盘
+                                    {
+                                        auto1isding = true;
+                                        抓盘手臂放空盘到Auto1标记 = 2;
+                                    }
+                                    PS结批流程.StepID = 510;
+                                    RunLog($"PS结批流程.StepID={PS结批流程.StepID}->抓盘手臂抓空盘到Auto1");
+                                }
+                                else PS结批流程.StepID = 599;
+                            }
+                            else
+                            {
+                                if (input.Result != "Success")
+                                {
+                                    Listcode.Add("2029007");
+                                    RunLog($"[Code]2029007,[Msg]入料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                                    M22_入料手臂X轴ErrorMsg = result;
+                                }
+                                if (output.Result != "Success")
+                                {
+                                    Listcode.Add("2030007");
+                                    RunLog($"[Code]2030007,[Msg]出料手臂移到避让位置失败!" + result, LogType.AlarmLog);
+                                    M23_出料手臂X轴ErrorMsg = result;
+                                }
                                 ProgramPause = true;
                                 IsPause = true;
-                                Thread.Sleep(50); //等待程序停止
-
-                                一个循环标记 = false;
-                                一个循环完成 = true;
-
-                                飞梭停止工作 = false;
-                                入料手臂停止工作标记 = false;
-                                测试手臂入料停止工作标记 = false;
-                                测试手臂出料停止工作标记 = false;
-                                出料手臂出料停止工作标记 = false;
-                                加热盘停止入料标记 = false;
-                                飞梭后入料状态 = 0;
-
-                                检测梭车是否有IC遗留();
-                                OneCycle按钮闪烁的定时器.Stop();
-                                Thread.Sleep(10); //等待输出完成
-                                motionEx.SetDo("Y009_一个循环灯", false);
-
-                                Listcode.Add("1400100");
-                                RunLog($"[Code]1400100,[Msg]一次循环完成", LogType.AlarmLog);
                             }
-                            Thread.Sleep(10);
-                        }
-                        break;
+                            break;
 
-                    case 505:
-                        PS结批流程.StepName = $"出入料手臂走到避让位置";
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
-                        Task<string> input = Task.Run(() => { return 入料手臂移动(0, 0, 7.5); });
-                        Task<string> output = Task.Run(() => { return 出料手臂移动(0, 0, 0); });
-                        if (input.Result == "Success" && output.Result == "Success")
-                        {
-                            if (!空跑模式 || Tray盘模式)
+                        case 510:
+                            PS结批流程.StepName = $"抓盘手臂抓空盘到Auto1";
+                            if (抓盘手臂放空盘到Auto1标记 == 1 && Auto1上顶标记 == 1) //给Auto2盖空盘时要等Auto1上顶完成
                             {
-                                Load下降回零标记 = 2;
-                                Auto1上顶标记 = 2;
-                                Auto2上顶标记 = 2;
-                                Auto等待换盘标记 = true;
-                                bool isIC1 = 获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
-                                if (!isIC1 || auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要盖空盘
+                                bool isIC2 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
+                                if (!isIC2 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
                                 {
-                                    auto1isding = true;
-                                    抓盘手臂放空盘到Auto1标记 = 2;
+                                    auto2isding = true;
+                                    抓盘手臂放空盘到Auto2标记 = 2;
                                 }
-                                PS结批流程.StepID = 510;
-                                RunLog($"PS结批流程.StepID={PS结批流程.StepID}->抓盘手臂抓空盘到Auto1");
+                                PS结批流程.StepID = 515;
+                                RunLog($"PS结批流程.StepID={PS结批流程.StepID}->抓盘手臂抓空盘到Auto2");
                             }
-                            else PS结批流程.StepID = 599;
-                        }
-                        else
-                        {
-                            if (input.Result != "Success")
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 515:
+                            PS结批流程.StepName = $"抓盘手臂抓空盘到Auto2";
+                            if (抓盘手臂放空盘到Auto2标记 == 1)
                             {
-                                Listcode.Add("2029007");
-                                RunLog($"[Code]2029007,[Msg]入料手臂移到避让位置失败!" + result, LogType.AlarmLog);
-                                M22_入料手臂X轴ErrorMsg = result;
+                                if (auto1isding) Auto1上顶标记 = 2;
+                                if (auto2isding) Auto2上顶标记 = 2;
+                                PS结批流程.StepID = 520;
+                                RunLog($"PS结批流程.StepID={PS结批流程.StepID}->等待Auto1和Auto2上顶");
                             }
-                            if (output.Result != "Success")
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 520:
+                            PS结批流程.StepName = $"等待Auto1和Auto2上顶";
+                            if (Auto1上顶标记 == 1 && Auto2上顶标记 == 1)
                             {
-                                Listcode.Add("2030007");
-                                RunLog($"[Code]2030007,[Msg]出料手臂移到避让位置失败!" + result, LogType.AlarmLog);
-                                M23_出料手臂X轴ErrorMsg = result;
+                                Empty下降回零标记 = 2;
+                                Auto1下降回零标记 = 2;
+                                Auto2下降回零标记 = 2;
+                                PS结批流程.StepID = 525;
+                                RunLog($"PS结批流程.StepID={PS结批流程.StepID}->等待Load,Empty,Auto1和Auto2下降回零");
                             }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 525:
+                            PS结批流程.StepName = $"等待Load,Empty,Auto1和Auto2下降回零";
+                            if (Load下降回零标记 == 1 && Empty下降回零标记 == 1 && Auto1下降回零标记 == 1 && Auto2下降回零标记 == 1)
+                            {
+                                PS结批流程.StepID = 599;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 599:
+                            PS结批流程.StepName = $"数据处理";
+                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->数据处理");
+                            设备状态 = 0;
+                            正在结批 = false;
+                            结批标记 = false;
+                            结批完成 = true;
+                            H5509归零 = false;
+                            H5509初始化 = false;
+                            Auto等待换盘标记 = false;
+                            StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
+                            结束时间 = DateTime.Now;
+
+                            LoaderTrayClear();
+                            HeatTrayClear();
+                            Auto1TrayClear();
+                            Auto2TrayClear();
+                            Fix1TrayClear();
+                            Fix2TrayClear();
+                            Fix3TrayClear();
+
+                            RunLog($"吸取模式:{(空跑模式 ? "空跑模式" : "正常模式")}", LogType.OperateLog);
+                            RunLog($"测试模式:{(无测试机模式 ? "离线" : "在线")}", LogType.OperateLog);
+                            RunLog($"开始时间:{开始时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
+                            RunLog($"按下结批时间:{按下结批时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
+                            RunLog($"结批时间:" + 结批时间.ToString(@"hh\:mm\:ss"), LogType.OperateLog);
+                            RunLog($"结束时间:{结束时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
+                            if (批次运行时间.TotalDays >= 1) RunLog($"运行时间:" + 批次运行时间.ToString(@"dd\.hh\:mm\:ss"), LogType.OperateLog);
+                            else RunLog($"运行时间:" + 批次运行时间.ToString(@"hh\:mm\:ss"), LogType.OperateLog);
+                            RunLog(($"UPH:" + UPHNum.ToString()), LogType.OperateLog);
+                            RunLog($"载入数:{载入数}", LogType.OperateLog);
+                            RunLog($"总计:{出料数}", LogType.OperateLog);
+                            RunLog($"Auto1:{Auto1数量},良率:{Auto1良率:0.00}%", LogType.OperateLog);
+                            RunLog($"Auto2:{Auto2数量},良率:{Auto2良率: 0.00}%", LogType.OperateLog);
+                            RunLog($"Fix1:{Fix1数量},良率:{Fix1良率: 0.00}%", LogType.OperateLog);
+                            RunLog($"Fix2:{Fix2数量},良率:{Fix2良率: 0.00}%", LogType.OperateLog);
+                            RunLog($"Fix3:{Fix3数量},良率:{Fix3良率: 0.00}%", LogType.OperateLog);
+
+                            SaveBatchData();
+
+                            结批按钮闪烁的定时器.Stop();
+                            motionEx.SetDo("Y008_结批灯", false);
+                            Listcode.Add("1400130");
+                            RunLog($"[Code]1400130,[Msg]结批完成", LogType.AlarmLog);
+
+                            //Listcode.Add("1400100"); //一次循环完成
+                            bool isok = int.TryParse(LotNo[8], out int lotCout);
+
+                            if (载入数 != 出料数 || 载入数 != (isok ? lotCout : 0))
+                            {
+                                Listcode.Add("1400443");
+                                RunLog($"[Code]1400443,[Msg]载入数、总数和批次数量不一致", LogType.AlarmLog);
+                            }
+
+                            bool isIC3 = 获取Fix1盘坐标(false, 0, Fix1YPoint.Length, out int fix1xPoint, out int fix1yPoint);
+                            if (!isIC3 || fix1xPoint != 0 || fix1yPoint != 0) //如果有放料才需要盖空盘
+                            {
+                                Listcode.Add("1400469");
+                                RunLog($"[Code]1400469,[Msg]请取走Fix1Tray盘", LogType.AlarmLog);
+                            }
+
+                            bool isIC4 = 获取Fix2盘坐标(false, 0, Fix2YPoint.Length, out int fix2xPoint, out int fix2yPoint);
+                            if (!isIC4 || fix2xPoint != 0 || fix2yPoint != 0) //如果有放料才需要盖空盘
+                            {
+                                Listcode.Add("1400470");
+                                RunLog($"[Code]1400470,[Msg]请取走Fix2Tray盘", LogType.AlarmLog);
+                            }
+
+                            bool isIC5 = 获取Fix3盘坐标(false, 0, Fix3YPoint.Length, out int fix3xPoint, out int fix3yPoint);
+                            if (!isIC5 || fix3xPoint != 0 || fix3yPoint != 0) //如果有放料才需要盖空盘
+                            {
+                                Listcode.Add("1400471");
+                                RunLog($"[Code]1400471,[Msg]请取走Fix3Tray盘", LogType.AlarmLog);
+                            }
+
+                            检测梭车是否有IC遗留();
+
+                            //保存工单dut信息
+                            result = Sqlite.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
+                            if (result == "Success")
+                            {
+                                string tableName = $"dut_{LotNo[0]}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
+                                int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table {tableName}(id nchar(10) not NULL,pass int not NULL,total int not NULL,usedTime varchar(50) not NULL)");
+                                if (line >= -1)
+                                {
+                                    SqlServer.runSql(SQLServerConnString, dataTable, tableName);
+                                }
+                            }
+                            //SQLiteHelper.runSqlNonQuery(SQLiteRunningString, $"select * into dut_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")} from DutCurrent");
+
+                            //合并dut信息
+                            Sqlite.runSqlNonQuery(SQLiteRunningString, $"UPDATE DutAll SET pass = pass + (SELECT dc.pass FROM DutCurrent dc WHERE dc.id = DutAll.id), total = total + (SELECT dc.total FROM DutCurrent dc WHERE dc.id = DutAll.id), usedTime = CAST(usedTime AS INTEGER) + (SELECT dc.usedTime FROM DutCurrent dc WHERE dc.id = DutAll.id) WHERE EXISTS ( SELECT 1 FROM DutCurrent dc WHERE dc.id = DutAll.id)");
+
+                            RunLog($"结批完成", LogType.OperateLog);
+                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结批流程完成");
+
+                            PS结批流程.StepID = 500;
+                            PS结批流程.Processing = false;
                             ProgramPause = true;
                             IsPause = true;
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS结批流程.StepName = $"抓盘手臂抓空盘到Auto1";
-                        if (抓盘手臂放空盘到Auto1标记 == 1 && Auto1上顶标记 == 1) //给Auto2盖空盘时要等Auto1上顶完成
-                        {
-                            bool isIC2 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
-                            if (!isIC2 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要盖空盘
-                            {
-                                auto2isding = true;
-                                抓盘手臂放空盘到Auto2标记 = 2;
-                            }
-                            PS结批流程.StepID = 515;
-                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->抓盘手臂抓空盘到Auto2");
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 515:
-                        PS结批流程.StepName = $"抓盘手臂抓空盘到Auto2";
-                        if (抓盘手臂放空盘到Auto2标记 == 1)
-                        {
-                            if (auto1isding) Auto1上顶标记 = 2;
-                            if (auto2isding) Auto2上顶标记 = 2;
-                            PS结批流程.StepID = 520;
-                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->等待Auto1和Auto2上顶");
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 520:
-                        PS结批流程.StepName = $"等待Auto1和Auto2上顶";
-                        if (Auto1上顶标记 == 1 && Auto2上顶标记 == 1)
-                        {
-                            Empty下降回零标记 = 2;
-                            Auto1下降回零标记 = 2;
-                            Auto2下降回零标记 = 2;
-                            PS结批流程.StepID = 525;
-                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->等待Load,Empty,Auto1和Auto2下降回零");
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 525:
-                        PS结批流程.StepName = $"等待Load,Empty,Auto1和Auto2下降回零";
-                        if (Load下降回零标记 == 1 && Empty下降回零标记 == 1 && Auto1下降回零标记 == 1 && Auto2下降回零标记 == 1)
-                        {
-                            PS结批流程.StepID = 599;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 599:
-                        PS结批流程.StepName = $"数据处理";
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->数据处理");
-                        设备状态 = 0;
-                        正在结批 = false;
-                        结批标记 = false;
-                        结批完成 = true;
-                        H5509归零 = false;
-                        H5509初始化 = false;
-                        Auto等待换盘标记 = false;
-                        StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
-                        结束时间 = DateTime.Now;
-
-                        LoaderTrayClear();
-                        HeatTrayClear();
-                        Auto1TrayClear();
-                        Auto2TrayClear();
-                        Fix1TrayClear();
-                        Fix2TrayClear();
-                        Fix3TrayClear();
-
-                        RunLog($"吸取模式:{(空跑模式 ? "空跑模式" : "正常模式")}", LogType.OperateLog);
-                        RunLog($"测试模式:{(无测试机模式 ? "离线" : "在线")}", LogType.OperateLog);
-                        RunLog($"开始时间:{开始时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
-                        RunLog($"按下结批时间:{按下结批时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
-                        RunLog($"结批时间:" + 结批时间.ToString(@"hh\:mm\:ss"), LogType.OperateLog);
-                        RunLog($"结束时间:{结束时间:yyyy-MM-dd HH:mm:ss.fff}", LogType.OperateLog);
-                        if (批次运行时间.TotalDays >= 1) RunLog($"运行时间:" + 批次运行时间.ToString(@"dd\.hh\:mm\:ss"), LogType.OperateLog);
-                        else RunLog($"运行时间:" + 批次运行时间.ToString(@"hh\:mm\:ss"), LogType.OperateLog);
-                        RunLog(($"UPH:" + UPHNum.ToString()), LogType.OperateLog);
-                        RunLog($"载入数:{载入数}", LogType.OperateLog);
-                        RunLog($"总计:{出料数}", LogType.OperateLog);
-                        RunLog($"Auto1:{Auto1数量},良率:{Auto1良率:0.00}%", LogType.OperateLog);
-                        RunLog($"Auto2:{Auto2数量},良率:{Auto2良率: 0.00}%", LogType.OperateLog);
-                        RunLog($"Fix1:{Fix1数量},良率:{Fix1良率: 0.00}%", LogType.OperateLog);
-                        RunLog($"Fix2:{Fix2数量},良率:{Fix2良率: 0.00}%", LogType.OperateLog);
-                        RunLog($"Fix3:{Fix3数量},良率:{Fix3良率: 0.00}%", LogType.OperateLog);
-
-                        SaveBatchData();
-
-                        结批按钮闪烁的定时器.Stop();
-                        motionEx.SetDo("Y008_结批灯", false);
-                        Listcode.Add("1400130");
-                        RunLog($"[Code]1400130,[Msg]结批完成", LogType.AlarmLog);
-
-                        //Listcode.Add("1400100"); //一次循环完成
-
-                        if (载入数 != 出料数 || 载入数 != Convert.ToInt32(LotNo[8]))
-                        {
-                            Listcode.Add("1400443");
-                            RunLog($"[Code]1400443,[Msg]载入数、总数和批次数量不一致", LogType.AlarmLog);
-                        }
-
-                        检测梭车是否有IC遗留();
-
-                        //保存工单dut信息
-                        result = Sqlite.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
-                        if (result == "Success")
-                        {
-                            string tableName = $"dut_{LotNo[0]}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
-                            int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table {tableName}(id nchar(10) not NULL,pass int not NULL,total int not NULL,usedTime varchar(50) not NULL)");
-                            if (line >= -1)
-                            {
-                                SqlServer.runSql(SQLServerConnString, dataTable, tableName);
-                            }
-                        }
-                        //SQLiteHelper.runSqlNonQuery(SQLiteRunningString, $"select * into dut_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")} from DutCurrent");
-
-                        //合并dut信息
-                        Sqlite.runSqlNonQuery(SQLiteRunningString, $"UPDATE DutAll SET pass = pass + (SELECT dc.pass FROM DutCurrent dc WHERE dc.id = DutAll.id), total = total + (SELECT dc.total FROM DutCurrent dc WHERE dc.id = DutAll.id), usedTime = CAST(usedTime AS INTEGER) + (SELECT dc.usedTime FROM DutCurrent dc WHERE dc.id = DutAll.id) WHERE EXISTS ( SELECT 1 FROM DutCurrent dc WHERE dc.id = DutAll.id)");
-
-                        RunLog($"结批完成", LogType.OperateLog);
-                        RunLog($"PS结批流程.StepID={PS结批流程.StepID}->结批流程完成");
-
-                        PS结批流程.StepID = 500;
-                        PS结批流程.Processing = false;
-                        ProgramPause = true;
-                        IsPause = true;
-                        break;
-
-                    default:
-                        RunLog(("PS结批流程.StepID =" + PS结批流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        default:
+                            RunLog(("PS结批流程.StepID =" + PS结批流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS结批流程({PS结批流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
+            RunLog(("PS结批流程循环退出!"));
         }
 
         public void 入料手臂吸放料流程()
@@ -6052,6 +6318,7 @@ namespace H5509_V2
                                         LoaderDicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = false;
                                     }
                                 }
+                                if (按了跳过或编辑报警使能) 按了跳过或编辑标记 = true;
                                 PS入料手臂吸放料流程.StepID = 555;
                             }
                             else if (入料IC吸不起结批)
@@ -6670,9 +6937,11 @@ namespace H5509_V2
                                         {
                                             Listcode.Add($"30{i + 1}0002");
                                             RunLog($"[Code]30{i + 1}0002,[Msg]入料Z{i + 1}放料失败", LogType.AlarmLog);
-                                        }
+                                        } 
                                     }
                                     入料IC忽略 = false;
+                                    motionEx.SetDo("Y004_重试灯", true);
+                                    motionEx.SetDo("Y005_忽略灯", true);
                                     ProgramPause = true;
                                     IsPause = true;
                                     PS入料手臂吸放料流程.StepID = 1045;
@@ -6764,7 +7033,7 @@ namespace H5509_V2
 
                         case 815:
                             PS入料手臂吸放料流程.StepName = "等待抓盘手臂取Load空盘完成";
-                            if (抓盘手臂取Load空盘标记 == 1)
+                            if (抓盘手臂取Load空盘标记 == 1) //当抓盘手臂移动到Empty上方才会变为1，所以不用担心入料手臂会撞抓盘手臂
                             {
                                 PS入料手臂吸放料流程.StepID = 820;
                                 RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->等待Load上顶完成");
@@ -6923,6 +7192,12 @@ namespace H5509_V2
 
                                         oth = bins[i][j];
 
+                                        if (oth == 设置信息.通讯信息.超时Bin字符串)
+                                        { 
+                                            oth = 设置信息.测试机信息.超时Bin字符串显示;
+                                            bins[i][j] = oth;
+                                        }
+
                                         if (Auto1 != "" && Auto1.Split(",").Contains(oth)) continue;
                                         else if (Auto2 != "" && Auto2.Split(",").Contains(oth)) continue;
                                         else if (Fix1 != "" && Fix1.Split(",").Contains(oth)) continue;
@@ -6935,6 +7210,7 @@ namespace H5509_V2
                                                 isoth = true;
                                                 othAll += oth + ",";
                                                 Listcode.Add("1400500");
+                                                RunLog($"[Code]1400500,[Msg]出现未知Bin项目：{oth}，本批次测试所有出现过的未知Bin项：{othAll}", LogType.AlarmLog);
                                             }
                                             bins[i][j] = "OTH";
                                         }
@@ -9513,7 +9789,7 @@ namespace H5509_V2
                                         new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] },
                                         new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
                                     });
-                                    
+
                                     StationManagers.SetStationState(site, 1);// SiteTestState[site] = 1; //有料
 
                                     if (飞梭后出料状态 == 1)
@@ -10418,8 +10694,8 @@ namespace H5509_V2
                                 int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
                                 if (((states[0] >= 1 || !site1.Contains(true)) && (states[1] == 1 || !site2.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)))
                                 {
-                                    opens = new List<List<bool[]>>() 
-                                    { 
+                                    opens = new List<List<bool[]>>()
+                                    {
                                         states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
                                         states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
                                     };
@@ -10627,132 +10903,144 @@ namespace H5509_V2
             PS空盘上顶流程.StepID = 500;
             while (true)
             {
-                //if(!是否可以开始运行())
-                //{
-                //    continue;
-                //}
-
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS空盘上顶流程.被强制停止");
-                    break;
+                    Thread.Sleep(10);
+
+                    if (APPmaster.IsForecePause)
+                    {
+                        PS空盘上顶流程.StepID = 999;
+                        RunLog($"PS空盘上顶流程已强制停止");
+                    }
+
+                    if (APPmaster.IsPause && Empty舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS空盘上顶流程.StepID)
+                    {
+                        case 999:
+                            PS空盘上顶流程.StepName = "空盘上顶流程已停止";
+                            break;
+
+                        case 500:
+                            PS空盘上顶流程.StepName = "路径规划";
+                            PS空盘上顶流程.Condition = Empty上顶标记 == 2;// && Empty下降标记 == 1(下降时，会要上顶流程)
+                            PS空盘上顶流程.Permit = !PS空盘上顶流程.Processing; //&& !PS空盘下降流程.Processing && !PS空盘下降回零流程.Processing;
+                            if (PS空盘上顶流程.Condition && PS空盘上顶流程.Permit)
+                            {
+                                PS空盘上顶流程.Processing = true;
+                                PS空盘上顶流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS空盘上顶流程.StepName = "Empty向上移动";
+                            RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                            result = Empty向上移动(Empty舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS空盘上顶流程.StepID = 510;
+                            }
+                            else
+                            {
+                                PS空盘上顶流程.StepID = 600;
+                                RunLog("Empty向上移动失败!" + result);
+                            }
+                            break;
+
+                        case 510:
+                            PS空盘上顶流程.StepName = "Empty向下移动";
+                            RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                            result = Empty向下移动(Empty舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS空盘上顶流程.StepID = 515;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("Empty向下移动失败!" + result);
+                            }
+                            break;
+
+                        case 515:
+                            PS空盘上顶流程.StepName = "Empty向上移动固定距离";
+                            RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                            result = Empty顶盘轴移动2(Empty原点偏移, Empty舱门开启标记);//3175 1.5875
+                            if (result == "Success")
+                            {
+                                Empty上顶标记 = 1;
+                                PS空盘上顶流程.StepID = 599;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("Empty向上移动固定距离失败!" + result);
+                            }
+                            break;
+
+                        case 599:
+                            PS空盘上顶流程.StepName = $"空盘上顶流程完成";
+                            RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                            PS空盘上顶流程.Processing = false;
+                            PS空盘上顶流程.StepID = 500;
+                            break;
+
+                        case 600:
+                            PS空盘上顶流程.StepName = "Empty顶盘轴移动到原点";
+                            RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                            result = Empty顶盘轴移动(1, Empty舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS空盘上顶流程.StepID = 605;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Empty顶盘轴移动到原点失败！" + result);
+                            }
+                            break;
+
+                        case 605:
+                            PS空盘上顶流程.StepName = "Empty顶盘轴回零";
+                            RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
+                            result = Empty顶盘轴回零(Empty舱门开启标记);
+                            if (result == "Success")
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("4018004"); //添加报警弹窗
+                                RunLog($"[Code]4018004,[Msg]空盘区没有空盘", LogType.AlarmLog);
+                                PS空盘上顶流程.StepID = 505;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Empty顶盘轴回零失败！" + result);
+                            }
+                            break;
+
+                        default:
+                            RunLog(("PS空盘上顶流程.StepID =" + PS空盘上顶流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+
                 }
-
-                if (APPmaster.IsPause && Empty舱门开启标记 == 0)
+                catch (Exception ex)
                 {
-                    continue;
-                }
-
-                switch (PS空盘上顶流程.StepID)
-                {
-                    case 500:
-                        PS空盘上顶流程.StepName = "路径规划";
-                        PS空盘上顶流程.Condition = Empty上顶标记 == 2;// && Empty下降标记 == 1(下降时，会要上顶流程)
-                        PS空盘上顶流程.Permit = !PS空盘上顶流程.Processing; //&& !PS空盘下降流程.Processing && !PS空盘下降回零流程.Processing;
-                        if (PS空盘上顶流程.Condition && PS空盘上顶流程.Permit)
-                        {
-                            PS空盘上顶流程.Processing = true;
-                            PS空盘上顶流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 505:
-                        PS空盘上顶流程.StepName = "Empty向上移动";
-                        RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty向上移动(Empty舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS空盘上顶流程.StepID = 510;
-                        }
-                        else
-                        {
-                            PS空盘上顶流程.StepID = 600;
-                            RunLog("Empty向上移动失败!" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS空盘上顶流程.StepName = "Empty向下移动";
-                        RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty向下移动(Empty舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS空盘上顶流程.StepID = 515;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("Empty向下移动失败!" + result);
-                        }
-                        break;
-
-                    case 515:
-                        PS空盘上顶流程.StepName = "Empty向上移动固定距离";
-                        RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty顶盘轴移动2(Empty原点偏移, Empty舱门开启标记);//3175 1.5875
-                        if (result == "Success")
-                        {
-                            Empty上顶标记 = 1;
-                            PS空盘上顶流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("Empty向上移动固定距离失败!" + result);
-                        }
-                        break;
-
-                    case 599:
-                        PS空盘上顶流程.StepName = $"空盘上顶流程完成";
-                        RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        PS空盘上顶流程.Processing = false;
-                        PS空盘上顶流程.StepID = 500;
-                        break;
-
-                    case 600:
-                        PS空盘上顶流程.StepName = "Empty顶盘轴移动到原点";
-                        RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty顶盘轴移动(1, Empty舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS空盘上顶流程.StepID = 605;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Empty顶盘轴移动到原点失败！" + result);
-                        }
-                        break;
-
-                    case 605:
-                        PS空盘上顶流程.StepName = "Empty顶盘轴回零";
-                        RunLog($"PS空盘上顶流程.StepID={PS空盘上顶流程.StepID}->{PS空盘上顶流程.StepName}");
-                        result = Empty顶盘轴回零(Empty舱门开启标记);
-                        if (result == "Success")
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("4018004"); //添加报警弹窗
-                            RunLog($"[Code]4018004,[Msg]空盘区没有空盘", LogType.AlarmLog);
-                            PS空盘上顶流程.StepID = 505;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Empty顶盘轴回零失败！" + result);
-                        }
-                        break;
-
-                    default:
-                        RunLog(("PS空盘上顶流程.StepID =" + PS空盘上顶流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                    string errormsg = $"PS空盘上顶流程({PS空盘上顶流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -10765,182 +11053,189 @@ namespace H5509_V2
             PS空盘下降流程.StepID = 500;
             while (true)
             {
-                //if(!是否可以开始运行())
-                //{
-                //    continue;
-                //}
-
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS空盘下降流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
 
-                if (APPmaster.IsPause && Empty舱门开启标记 == 0)
-                {
-                    continue;
-                }
-
-                switch (PS空盘下降流程.StepID)
-                {
-                    case 500:
-                        PS空盘下降流程.StepName = "路径规划";
-                        PS空盘下降流程.Condition = Empty下降标记 == 2 && Empty上顶标记 == 1;
-                        PS空盘下降流程.Permit = !PS空盘下降流程.Processing && !PS空盘上顶流程.Processing && !PS空盘下降回零流程.Processing;
-                        if (PS空盘下降流程.Condition && PS空盘下降流程.Permit)
-                        {
-                            PS空盘下降流程.Processing = true;
-                            PS空盘下降流程.StepID = 501;
-                        }
-                        else Thread.Sleep(10);
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS空盘下降流程.被强制停止");
                         break;
+                    }
 
-                    case 501:
-                        PS空盘下降流程.StepName = "获取Empty下移绝对位置";
-                        result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos1);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo2);
+                    if (APPmaster.IsPause && Empty舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS空盘下降流程.StepID)
+                    {
+                        case 500:
+                            PS空盘下降流程.StepName = "路径规划";
+                            PS空盘下降流程.Condition = Empty下降标记 == 2 && Empty上顶标记 == 1;
+                            PS空盘下降流程.Permit = !PS空盘下降流程.Processing && !PS空盘上顶流程.Processing && !PS空盘下降回零流程.Processing;
+                            if (PS空盘下降流程.Condition && PS空盘下降流程.Permit)
+                            {
+                                PS空盘下降流程.Processing = true;
+                                PS空盘下降流程.StepID = 501;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 501:
+                            PS空盘下降流程.StepName = "获取Empty下移绝对位置";
+                            result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos1);
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo2.步长mm) - Tray_厚度; //6.35
-                                PS空盘下降流程.StepID = 505;
+                                result = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo2);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos1 * axisRunInfo2.步长mm) - Tray_厚度; //6.35
+                                    PS空盘下降流程.StepID = 505;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M12_Empty顶盘轴信息获取失败!" + result);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M12_Empty顶盘轴信息获取失败!" + result);
+                                RunLog("M12_Empty顶盘轴实时位置失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M12_Empty顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 505:
-                        PS空盘下降流程.StepName = $"Empty向下移动{Tray_厚度}mm";
-                        RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
-                        result = Empty顶盘轴移动(movepos, Empty舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS空盘下降流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("Empty向下移动固定距离失败!" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS空盘下降流程.StepName = "判断Empty顶盘轴是否走到最小值";
-                        RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos);
-                        string result3 = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo);
-                        if (result == "Success" && result3 == "Success")
-                        {
-                            double minpoint = 初始点位.Empty_满盘位 / axisRunInfo.步长mm;
-                            if (prfpos < minpoint) //空盘满盘判断值
+                        case 505:
+                            PS空盘下降流程.StepName = $"Empty向下移动{Tray_厚度}mm";
+                            RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
+                            result = Empty顶盘轴移动(movepos, Empty舱门开启标记);
+                            if (result == "Success")
                             {
-                                RunLog($"M12_Empty顶盘轴当前行程{prfpos}<{minpoint}");
+                                PS空盘下降流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("Empty向下移动固定距离失败!" + result);
+                            }
+                            break;
+
+                        case 510:
+                            PS空盘下降流程.StepName = "判断Empty顶盘轴是否走到最小值";
+                            RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos);
+                            string result3 = GetAxisRunInfo("M12_Empty顶盘轴", out AxisRunInfo axisRunInfo);
+                            if (result == "Success" && result3 == "Success")
+                            {
+                                double minpoint = 初始点位.Empty_满盘位 / axisRunInfo.步长mm;
+                                if (prfpos < minpoint) //空盘满盘判断值
+                                {
+                                    RunLog($"M12_Empty顶盘轴当前行程{prfpos}<{minpoint}");
+                                    Listcode.Add("4018006");
+                                    RunLog($"[Code]4018006,[Msg]空盘区空盘放满", LogType.AlarmLog);
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Empty料仓打开标记 = false;
+                                    PS空盘下降流程.StepID = 600; //空盘满盘报警
+                                }
+                                else PS空盘下降流程.StepID = 599;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success") RunLog($"读取Empty顶盘轴编码位置失败！" + result);
+                                if (result3 != "Success") RunLog($"读取Empty顶盘轴运行信息失败！" + result3);
+                            }
+                            break;
+
+                        case 599:
+                            Empty下降标记 = 1;
+                            PS空盘下降流程.StepName = $"空盘下降流程完成";
+                            RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
+                            PS空盘下降流程.Processing = false;
+                            PS空盘下降流程.StepID = 500;
+                            break;
+
+                        case 600:
+                            PS空盘下降流程.StepName = $"检测空盘感应门有没有被打开";
+                            RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
+                            if (Empty料仓打开标记)
+                            {
+                                PS空盘下降流程.StepID = 605;
+                            }
+                            else
+                            {
                                 Listcode.Add("4018006");
                                 RunLog($"[Code]4018006,[Msg]空盘区空盘放满", LogType.AlarmLog);
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                Empty料仓打开标记 = false;
-                                PS空盘下降流程.StepID = 600; //空盘满盘报警
                             }
-                            else PS空盘下降流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") RunLog($"读取Empty顶盘轴编码位置失败！" + result);
-                            if (result3 != "Success") RunLog($"读取Empty顶盘轴运行信息失败！" + result3);
-                        }
-                        break;
+                            break;
 
-                    case 599:
-                        Empty下降标记 = 1;
-                        PS空盘下降流程.StepName = $"空盘下降流程完成";
-                        RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
-                        PS空盘下降流程.Processing = false;
-                        PS空盘下降流程.StepID = 500;
-                        break;
-
-                    case 600:
-                        PS空盘下降流程.StepName = $"检测空盘感应门有没有被打开";
-                        RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->{PS空盘下降流程.StepName}");
-                        if (Empty料仓打开标记)
-                        {
-                            PS空盘下降流程.StepID = 605;
-                        }
-                        else
-                        {
-                            Listcode.Add("4018006");
-                            RunLog($"[Code]4018006,[Msg]空盘区空盘放满", LogType.AlarmLog);
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 605:
-                        PS空盘下降流程.StepName = "检测Empty是否拿走空盘";
-                        result = Empty_前Tray存在感应(out string value);
-                        result2 = Empty_后Tray放歪感应(out string value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 605:
+                            PS空盘下降流程.StepName = "检测Empty是否拿走空盘";
+                            result = Empty_前Tray存在感应(out string value);
+                            result2 = Empty_后Tray放歪感应(out string value2);
+                            if (result == "Success" && result2 == "Success")
                             {
-                                Empty上顶标记 = 2; //触发上顶
-                                PS空盘下降流程.StepID = 610;
-                                RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->等待空盘上顶完成");
+                                if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    Empty上顶标记 = 2; //触发上顶
+                                    PS空盘下降流程.StepID = 610;
+                                    RunLog($"PS空盘下降流程.StepID={PS空盘下降流程.StepID}->等待空盘上顶完成");
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "0")
+                                    {
+                                        RunLog($"抓盘手臂放盘失败！Empty前有盘感应到有Tray盘,value:" + value);
+                                    }
+                                    if (value2 != "0")
+                                    {
+                                        RunLog($"抓盘手臂放盘失败！Empty后放歪感应到有Tray盘,value:" + value2);
+                                    }
+                                    RunLog("空盘区空盘放满");
+                                }
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-
-                                if (value != "0")
-                                {
-                                    RunLog($"抓盘手臂放盘失败！Empty前有盘感应到有Tray盘,value:" + value);
-                                }
-                                if (value2 != "0")
-                                {
-                                    RunLog($"抓盘手臂放盘失败！Empty后放歪感应到有Tray盘,value:" + value2);
-                                }
-                                RunLog("空盘区空盘放满");
+                                if (result != "Success") RunLog($"读取Empty前Tray存在感应失败！" + result);
+                                if (result2 != "Success") RunLog($"读取Empty后Tray放歪感应失败！" + result2);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") RunLog($"读取Empty前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Empty后Tray放歪感应失败！" + result2);
-                        }
-                        break;
+                            break;
 
-                    case 610:
-                        PS空盘下降流程.StepName = "等待空盘上顶完成";
-                        if (Empty上顶标记 == 1)
-                        {
-                            PS空盘下降流程.StepID = 501;
-                        }
-                        else Thread.Sleep(10);
-                        break;
+                        case 610:
+                            PS空盘下降流程.StepName = "等待空盘上顶完成";
+                            if (Empty上顶标记 == 1)
+                            {
+                                PS空盘下降流程.StepID = 501;
+                            }
+                            else Thread.Sleep(10);
+                            break;
 
-                    default:
-                        RunLog(("PS空盘下降流程.StepID =" + PS空盘下降流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        default:
+                            RunLog(("PS空盘下降流程.StepID =" + PS空盘下降流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS空盘下降流程({PS空盘下降流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -10955,71 +11250,82 @@ namespace H5509_V2
                 //{
                 //    continue;
                 //}
-
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS空盘下降回零流程.被强制停止");
-                    break;
+                    Thread.Sleep(10);
+
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS空盘下降回零流程.被强制停止");
+                        break;
+                    }
+
+                    if (APPmaster.IsPause && Empty舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS空盘下降回零流程.StepID)
+                    {
+                        case 500:
+                            PS空盘下降回零流程.StepName = "路径规划";
+                            PS空盘下降回零流程.Condition = Empty下降回零标记 == 2;
+                            PS空盘下降回零流程.Permit = !PS空盘下降回零流程.Processing && !PS空盘下降流程.Processing && !PS空盘上顶流程.Processing;
+                            if (PS空盘下降回零流程.Condition && PS空盘下降回零流程.Permit)
+                            {
+                                PS空盘下降回零流程.Processing = true;
+                                PS空盘下降回零流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS空盘下降回零流程.StepName = "Empty顶盘轴移动到原点";
+                            RunLog($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
+                            result = Empty顶盘轴移动(1, Empty舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS空盘下降回零流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Empty顶盘轴移动到原点失败！" + result);
+                            }
+                            break;
+
+                        case 510:
+                            PS空盘下降回零流程.StepName = "Empty顶盘轴回零";
+                            RunLog($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
+                            result = Empty顶盘轴回零(Empty舱门开启标记);
+                            if (result == "Success")
+                            {
+                                Empty下降回零标记 = 1;
+                                PS空盘下降回零流程.StepID = 500;
+                                PS空盘下降回零流程.Processing = false;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Empty顶盘轴回零失败！" + result);
+                            }
+                            break;
+
+                        default:
+                            RunLog(("PS空盘下降回零流程.StepID =" + PS空盘下降回零流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
                 }
-
-                if (APPmaster.IsPause && Empty舱门开启标记 == 0)
+                catch (Exception ex)
                 {
-                    continue;
-                }
-
-                switch (PS空盘下降回零流程.StepID)
-                {
-                    case 500:
-                        PS空盘下降回零流程.StepName = "路径规划";
-                        PS空盘下降回零流程.Condition = Empty下降回零标记 == 2;
-                        PS空盘下降回零流程.Permit = !PS空盘下降回零流程.Processing && !PS空盘下降流程.Processing && !PS空盘上顶流程.Processing;
-                        if (PS空盘下降回零流程.Condition && PS空盘下降回零流程.Permit)
-                        {
-                            PS空盘下降回零流程.Processing = true;
-                            PS空盘下降回零流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 505:
-                        PS空盘下降回零流程.StepName = "Empty顶盘轴移动到原点";
-                        RunLog($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
-                        result = Empty顶盘轴移动(1, Empty舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS空盘下降回零流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Empty顶盘轴移动到原点失败！" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS空盘下降回零流程.StepName = "Empty顶盘轴回零";
-                        RunLog($"PS空盘下降回零流程.StepID={PS空盘下降回零流程.StepID}->{PS空盘下降回零流程.StepName}");
-                        result = Empty顶盘轴回零(Empty舱门开启标记);
-                        if (result == "Success")
-                        {
-                            Empty下降回零标记 = 1;
-                            PS空盘下降回零流程.StepID = 500;
-                            PS空盘下降回零流程.Processing = false;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Empty顶盘轴回零失败！" + result);
-                        }
-                        break;
-
-                    default:
-                        RunLog(("PS空盘下降回零流程.StepID =" + PS空盘下降回零流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                    string errormsg = $"PS空盘下降回零流程({PS空盘下降回零流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -11030,180 +11336,192 @@ namespace H5509_V2
             PS待测盘上顶流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS待测盘上顶流程.被强制停止");
-                    break;
+                    Thread.Sleep(10);
+                    //if (!是否可以开始运行())
+                    //{
+                    //    continue;
+                    //}
+
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS待测盘上顶流程.被强制停止");
+                        break;
+                    }
+
+                    if (APPmaster.IsPause && Load舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS待测盘上顶流程.StepID)
+                    {
+                        case 500:
+                            PS待测盘上顶流程.StepName = "路径规划";
+                            PS待测盘上顶流程.Condition = Load上顶标记 == 2;
+                            PS待测盘上顶流程.Permit = !PS待测盘上顶流程.Processing;
+                            if (PS待测盘上顶流程.Condition && PS待测盘上顶流程.Permit)
+                            {
+                                PS待测盘上顶流程.Processing = true;
+                                PS待测盘上顶流程.StepID = 505;
+                            }
+                            break;
+
+                        case 505:
+                            PS待测盘上顶流程.StepName = "Load_Tray前侧定位气缸原位输出";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load_Tray前侧定位气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS待测盘上顶流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load_Tray前侧定位气缸原位输出失败！" + result);
+                            }
+                            break;
+
+                        case 510:
+                            PS待测盘上顶流程.StepName = "Load向上移动";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load向上移动(Load舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS待测盘上顶流程.StepID = 515;
+                            }
+                            else
+                            {
+                                PS待测盘上顶流程.StepID = 600;
+                                RunLog($"Load向上移动失败！" + result);
+                            }
+                            break;
+
+                        case 515:
+                            PS待测盘上顶流程.StepName = "Load向下移动";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load向下移动(Load舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS待测盘上顶流程.StepID = 520;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load向下移动失败！" + result);
+                            }
+                            break;
+
+                        case 520:
+                            PS待测盘上顶流程.StepName = "Load向上移动固定距离";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load顶盘轴移动2(Load原点偏移, Load舱门开启标记); //3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS待测盘上顶流程.StepID = 525;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load向上移动固定距离失败！" + result);
+                            }
+                            break;
+
+                        case 525:
+                            PS待测盘上顶流程.StepName = "Load_Tray前侧定位气缸到位输出";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load_Tray前侧定位气缸到位输出();
+                            if (result == "Success")
+                            {
+                                Load上顶标记 = 1;
+                                PS待测盘上顶流程.StepID = 599;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load_Tray前侧定位气缸到位输出失败！" + result);
+                            }
+                            break;
+
+                        case 599:
+                            PS待测盘上顶流程.StepName = $"待测盘上顶流程完成";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            PS待测盘上顶流程.Processing = false;
+                            PS待测盘上顶流程.StepID = 500;
+                            break;
+
+
+                        case 600:
+                            PS待测盘上顶流程.StepName = "Load顶盘轴移动到原点";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load顶盘轴移动(1, Load舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS待测盘上顶流程.StepID = 605;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load顶盘轴移动到原点失败！" + result);
+                            }
+                            break;
+
+                        case 605:
+                            PS待测盘上顶流程.StepName = "Load顶盘轴回零";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load顶盘轴回零(Load舱门开启标记);
+                            if (result == "Success")
+                            {
+                                无待测盘结批 = false;
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("4019003"); //添加报警弹窗
+                                RunLog($"[Code]4019003,[Msg]待测区没有盘", LogType.AlarmLog);
+                                motionEx.SetDo("Y004_重试灯", true);
+                                motionEx.SetDo("Y008_结批灯", true);
+                                PS待测盘上顶流程.StepID = 610;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load顶盘轴回零失败！" + result);
+                            }
+                            break;
+
+                        case 610:
+                            PS待测盘上顶流程.StepName = "待测区没有盘";
+                            if (无待测盘结批)
+                            {
+                                结批标记 = true;
+                                Load上顶标记 = 1;
+                                PS待测盘上顶流程.StepID = 599;
+                            }
+                            else
+                            {
+                                PS待测盘上顶流程.StepID = 505;
+                            }
+                            break;
+
+                        default:
+                            RunLog(("PS待测盘上顶流程.StepID =" + PS待测盘上顶流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
                 }
-
-                if (APPmaster.IsPause && Load舱门开启标记 == 0)
+                catch (Exception ex)
                 {
-                    continue;
-                }
-
-                switch (PS待测盘上顶流程.StepID)
-                {
-                    case 500:
-                        PS待测盘上顶流程.StepName = "路径规划";
-                        PS待测盘上顶流程.Condition = Load上顶标记 == 2;
-                        PS待测盘上顶流程.Permit = !PS待测盘上顶流程.Processing;
-                        if (PS待测盘上顶流程.Condition && PS待测盘上顶流程.Permit)
-                        {
-                            PS待测盘上顶流程.Processing = true;
-                            PS待测盘上顶流程.StepID = 505;
-                        }
-                        break;
-
-                    case 505:
-                        PS待测盘上顶流程.StepName = "Load_Tray前侧定位气缸原位输出";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load_Tray前侧定位气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS待测盘上顶流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load_Tray前侧定位气缸原位输出失败！" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS待测盘上顶流程.StepName = "Load向上移动";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load向上移动(Load舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS待测盘上顶流程.StepID = 515;
-                        }
-                        else
-                        {
-                            PS待测盘上顶流程.StepID = 600;
-                            RunLog($"Load向上移动失败！" + result);
-                        }
-                        break;
-
-                    case 515:
-                        PS待测盘上顶流程.StepName = "Load向下移动";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load向下移动(Load舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS待测盘上顶流程.StepID = 520;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load向下移动失败！" + result);
-                        }
-                        break;
-
-                    case 520:
-                        PS待测盘上顶流程.StepName = "Load向上移动固定距离";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load顶盘轴移动2(Load原点偏移, Load舱门开启标记); //3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS待测盘上顶流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load向上移动固定距离失败！" + result);
-                        }
-                        break;
-
-                    case 525:
-                        PS待测盘上顶流程.StepName = "Load_Tray前侧定位气缸到位输出";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load_Tray前侧定位气缸到位输出();
-                        if (result == "Success")
-                        {
-                            Load上顶标记 = 1;
-                            PS待测盘上顶流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load_Tray前侧定位气缸到位输出失败！" + result);
-                        }
-                        break;
-
-                    case 599:
-                        PS待测盘上顶流程.StepName = $"待测盘上顶流程完成";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        PS待测盘上顶流程.Processing = false;
-                        PS待测盘上顶流程.StepID = 500;
-                        break;
-
-
-                    case 600:
-                        PS待测盘上顶流程.StepName = "Load顶盘轴移动到原点";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load顶盘轴移动(1, Load舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS待测盘上顶流程.StepID = 605;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load顶盘轴移动到原点失败！" + result);
-                        }
-                        break;
-
-                    case 605:
-                        PS待测盘上顶流程.StepName = "Load顶盘轴回零";
-                        RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
-                        result = Load顶盘轴回零(Load舱门开启标记);
-                        if (result == "Success")
-                        {
-                            无待测盘结批 = false;
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("4019003"); //添加报警弹窗
-                            RunLog($"[Code]4019003,[Msg]待测区没有盘", LogType.AlarmLog);
-                            motionEx.SetDo("Y004_重试灯", true);
-                            motionEx.SetDo("Y008_结批灯", true);
-                            PS待测盘上顶流程.StepID = 610;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load顶盘轴回零失败！" + result);
-                        }
-                        break;
-
-                    case 610:
-                        PS待测盘上顶流程.StepName = "待测区没有盘";
-                        if (无待测盘结批)
-                        {
-                            结批标记 = true;
-                            Load上顶标记 = 1;
-                            PS待测盘上顶流程.StepID = 599;
-                        }
-                        else
-                        {
-                            PS待测盘上顶流程.StepID = 505;
-                        }
-                        break;
-
-                    default:
-                        RunLog(("PS待测盘上顶流程.StepID =" + PS待测盘上顶流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                    string errormsg = $"PS待测盘上顶流程({PS待测盘上顶流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -11219,86 +11537,98 @@ namespace H5509_V2
                 //    continue;
                 //}
 
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS待测盘上顶回零流程.被强制停止");
-                    break;
+                    Thread.Sleep(10);
+
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS待测盘上顶回零流程.被强制停止");
+                        break;
+                    }
+
+                    if (APPmaster.IsPause && Load舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS待测盘下降回零流程.StepID)
+                    {
+                        case 500:
+                            PS待测盘下降回零流程.StepName = "路径规划";
+                            PS待测盘下降回零流程.Condition = Load下降回零标记 == 2;
+                            PS待测盘下降回零流程.Permit = !PS待测盘下降回零流程.Processing && !PS待测盘上顶流程.Processing;
+                            if (PS待测盘下降回零流程.Condition && PS待测盘下降回零流程.Permit)
+                            {
+                                PS待测盘下降回零流程.Processing = true;
+                                PS待测盘下降回零流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS待测盘下降回零流程.StepName = "Load_Tray前侧定位气缸原位输出";
+                            RunLog($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
+                            result = Load_Tray前侧定位气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS待测盘下降回零流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load_Tray前侧定位气缸原位输出失败！" + result);
+                            }
+                            break;
+
+                        case 510:
+                            PS待测盘下降回零流程.StepName = "Load顶盘轴移动到原点";
+                            RunLog($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
+                            result = Load顶盘轴移动(1, Load舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS待测盘下降回零流程.StepID = 515;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load顶盘轴移动到原点失败！" + result);
+                            }
+                            break;
+
+                        case 515:
+                            PS待测盘下降回零流程.StepName = "Load顶盘轴回零";
+                            RunLog($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
+                            result = Load顶盘轴回零(Load舱门开启标记);
+                            if (result == "Success")
+                            {
+                                Load下降回零标记 = 1;
+                                PS待测盘下降回零流程.StepID = 500;
+                                PS待测盘下降回零流程.Processing = false;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load顶盘轴回零失败！" + result);
+                            }
+                            break;
+
+                        default:
+                            RunLog(("PS待测盘上顶回零流程.StepID =" + PS待测盘下降回零流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
                 }
-
-                if (APPmaster.IsPause && Load舱门开启标记 == 0)
+                catch (Exception ex)
                 {
-                    continue;
-                }
-
-                switch (PS待测盘下降回零流程.StepID)
-                {
-                    case 500:
-                        PS待测盘下降回零流程.StepName = "路径规划";
-                        PS待测盘下降回零流程.Condition = Load下降回零标记 == 2;
-                        PS待测盘下降回零流程.Permit = !PS待测盘下降回零流程.Processing && !PS待测盘上顶流程.Processing;
-                        if (PS待测盘下降回零流程.Condition && PS待测盘下降回零流程.Permit)
-                        {
-                            PS待测盘下降回零流程.Processing = true;
-                            PS待测盘下降回零流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 505:
-                        PS待测盘下降回零流程.StepName = "Load_Tray前侧定位气缸原位输出";
-                        RunLog($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
-                        result = Load_Tray前侧定位气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS待测盘下降回零流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load_Tray前侧定位气缸原位输出失败！" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS待测盘下降回零流程.StepName = "Load顶盘轴移动到原点";
-                        RunLog($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
-                        result = Load顶盘轴移动(1, Load舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS待测盘下降回零流程.StepID = 515;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load顶盘轴移动到原点失败！" + result);
-                        }
-                        break;
-
-                    case 515:
-                        PS待测盘下降回零流程.StepName = "Load顶盘轴回零";
-                        RunLog($"PS待测盘上顶回零流程.StepID={PS待测盘下降回零流程.StepID}->{PS待测盘下降回零流程.StepName}");
-                        result = Load顶盘轴回零(Load舱门开启标记);
-                        if (result == "Success")
-                        {
-                            Load下降回零标记 = 1;
-                            PS待测盘下降回零流程.StepID = 500;
-                            PS待测盘下降回零流程.Processing = false;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load顶盘轴回零失败！" + result);
-                        }
-                        break;
-
-                    default:
-                        RunLog(("PS待测盘上顶回零流程.StepID =" + PS待测盘下降回零流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                    string errormsg = $"PS待测盘下降回零流程({PS待测盘下降回零流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -11310,285 +11640,298 @@ namespace H5509_V2
             PS手动盘1上顶流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-
-                //if (H5509初始化 == false)
-                //{
-                //    Thread.Sleep(100);
-                //    continue;
-                //}
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS手动盘1上顶流程.被强制停止");
-                    break;
-                }
 
-                if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
-                {
-                    continue;
-                }
+                    Thread.Sleep(10);
 
-                switch (PS手动盘1上顶流程.StepID)
-                {
-                    case 500:
-                        PS手动盘1上顶流程.StepName = "路径规划";
-                        PS手动盘1上顶流程.Condition = Auto1上顶标记 == 2;
-                        PS手动盘1上顶流程.Permit = !PS手动盘1上顶流程.Processing;
-                        if (PS手动盘1上顶流程.Condition && PS手动盘1上顶流程.Permit)
-                        {
-                            PS手动盘1上顶流程.Processing = true;
-                            PS手动盘1上顶流程.StepID = 505;
-                        }
-                        else
-                        {
-                            bool isenable = 设置信息.测试机信息.放料时允许侧敲 || !出料正在Auto1放料;
-                            if (Tray盘模式 && !Auto1换盘标记 && Auto1上顶标记 == 1 && 设置信息.测试机信息.Auto侧敲使能 && isenable)
+                    //if (H5509初始化 == false)
+                    //{
+                    //    Thread.Sleep(100);
+                    //    continue;
+                    //}
+
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS手动盘1上顶流程.被强制停止");
+                        break;
+                    }
+
+                    if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS手动盘1上顶流程.StepID)
+                    {
+                        case 500:
+                            PS手动盘1上顶流程.StepName = "路径规划";
+                            PS手动盘1上顶流程.Condition = Auto1上顶标记 == 2;
+                            PS手动盘1上顶流程.Permit = !PS手动盘1上顶流程.Processing;
+                            if (PS手动盘1上顶流程.Condition && PS手动盘1上顶流程.Permit)
                             {
-                                if (Auto1数量 - 保存Auto1放料个数 >= 设置信息.测试机信息.放置多少颗敲击)
+                                PS手动盘1上顶流程.Processing = true;
+                                PS手动盘1上顶流程.StepID = 505;
+                            }
+                            else
+                            {
+                                bool isenable = 设置信息.测试机信息.放料时允许侧敲 || !出料正在Auto1放料;
+                                if (Tray盘模式 && !Auto1换盘标记 && Auto1上顶标记 == 1 && 设置信息.测试机信息.Auto侧敲使能 && isenable)
                                 {
-                                    bool isIC1 = 获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
-                                    if (!isIC1 || auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要侧敲，加!isIC1是因为满盘时返回False,auto1xy返回是0，所以满盘的时候也要侧敲，和满盘会放空盘一样，如果不加则不会放空盘自然也不会触发侧敲
+                                    if (Auto1数量 - 保存Auto1放料个数 >= 设置信息.测试机信息.放置多少颗敲击)
                                     {
-                                        Auto1正在侧敲 = true;
-                                        保存Auto1放料个数 = Auto1数量;
-                                        PS手动盘1上顶流程.StepID = 605;
+                                        bool isIC1 = 获取Auto1盘坐标(false, out int auto1xPoint, out int auto1yPoint);
+                                        if (!isIC1 || auto1xPoint != 0 || auto1yPoint != 0) //如果有放料才需要侧敲，加!isIC1是因为满盘时返回False,auto1xy返回是0，所以满盘的时候也要侧敲，和满盘会放空盘一样，如果不加则不会放空盘自然也不会触发侧敲
+                                        {
+                                            Auto1正在侧敲 = true;
+                                            保存Auto1放料个数 = Auto1数量;
+                                            PS手动盘1上顶流程.StepID = 605;
+                                        }
                                     }
                                 }
+                                Thread.Sleep(10);
                             }
-                            Thread.Sleep(10);
-                        }
-                        break;
+                            break;
 
-                    case 505:
-                        PS手动盘1上顶流程.StepName = "Auto1_Tray前侧定位气缸原位输出";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1_Tray前侧定位气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray前侧定位气缸原位输出失败!" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS手动盘1上顶流程.StepName = "Auto1向上移动";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1向上移动(Auto1舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 514;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1向上移动失败!" + result);
-                        }
-                        break;
-
-                    case 514:
-                        PS手动盘1上顶流程.StepName = "获取Auto1上移绝对位置";
-                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos1);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                        case 505:
+                            PS手动盘1上顶流程.StepName = "Auto1_Tray前侧定位气缸原位输出";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1_Tray前侧定位气缸原位输出();
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + 初始点位.Auto1上顶固定高度; //6.35  Auto1上移固定距离
-                                PS手动盘1上顶流程.StepID = 515;
+                                PS手动盘1上顶流程.StepID = 510;
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                RunLog($"Auto1_Tray前侧定位气缸原位输出失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 515:
-                        PS手动盘1上顶流程.StepName = $"Auto1向上移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);  //result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", 21);//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 520;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1向上移动固定距离失败!" + result);
-                        }
-                        break;
-
-                    case 520:
-                        PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸到位输出";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1_Tray上顶气缸到位输出();//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray上顶气缸到位输出失败!" + result);
-                        }
-                        break;
-
-                    case 525:
-                        PS手动盘1上顶流程.StepName = "Auto1向下移动";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1向下移动(Auto1舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 526;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1向下移动失败!" + result);
-                        }
-                        break;
-
-                    case 526:
-                        PS手动盘1上顶流程.StepName = "获取Auto1下移绝对位置";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos2);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                        case 510:
+                            PS手动盘1上顶流程.StepName = "Auto1向上移动";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1向上移动(Auto1舱门开启标记);
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - 初始点位.Auto1下降固定高度; //6.35  Auto1上移固定距离 - Tray_厚度
-                                PS手动盘1上顶流程.StepID = 530;
+                                PS手动盘1上顶流程.StepID = 514;
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                RunLog($"Auto1向上移动失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 530:
-                        PS手动盘1上顶流程.StepName = $"Auto1向下移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记); //result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", -15);//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1向下移动固定距离失败!" + result);
-                        }
-                        break;
-
-                    case 535:
-                        PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸原位输出";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1_Tray上顶气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 540;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray上顶气缸原位输出失败!" + result);
-                        }
-                        break;
-
-                    case 540:
-                        PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
-                        string result3 = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo2);
-                        if (result == "Success" && result3 == "Success")
-                        {
-                            double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
-                            if (prfpos < minpoint) //Auto1满盘判断值  && !正在结批
+                        case 514:
+                            PS手动盘1上顶流程.StepName = "获取Auto1上移绝对位置";
+                            result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos1);
+                            if (result == "Success")
                             {
-                                Auto1料仓满盘标记 = true;
-                                RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}"); //Auto1满盘判断值
-                            }
-                            else Auto1料仓满盘标记 = false;
-
-                            Auto1上顶标记 = 1;
-                            PS手动盘1上顶流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto1顶盘轴编码位置失败！" + result);
-                            if (result3 != "Success") RunLog($"读取Auto1顶盘轴运行信息失败！" + result3);
-                        }
-                        break;
-
-                    case 599:
-                        PS手动盘1上顶流程.StepName = $"手动盘1上顶流程完成";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        PS手动盘1上顶流程.Processing = false;
-                        PS手动盘1上顶流程.StepID = 500;
-                        break;
-
-                    case 605:
-                        PS手动盘1上顶流程.StepName = $"手动盘1执行侧敲";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        bool qenable = 设置信息.测试机信息.前侧同时敲击;
-                        int count = 设置信息.测试机信息.Auto侧敲次数;
-                        int delay = 设置信息.测试机信息.侧敲间隔;
-                        for (int i = 0; i < count; i++)
-                        {
-                            if (qenable) //前侧同时敲击
-                            {
-                                if (i > 0) Thread.Sleep(delay);
-                                Auto1_Tray前侧定位气缸原位输出(10);
-                                Thread.Sleep(delay);
-                                Auto1_Tray前侧定位气缸到位输出(10);
+                                result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + 初始点位.Auto1上顶固定高度; //6.35  Auto1上移固定距离
+                                    PS手动盘1上顶流程.StepID = 515;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                }
                             }
                             else
                             {
-                                if (i > 0) Thread.Sleep(delay);
-                                Auto1_Tray侧定位气缸原位输出(10);
-                                Thread.Sleep(delay);
-                                Auto1_Tray侧定位气缸到位输出(10);
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
                             }
-                        }
-                        Auto1正在侧敲 = false;
-                        PS手动盘1上顶流程.StepID = 500;
-                        break;
+                            break;
 
-                    default:
-                        RunLog(("PS手动盘1上顶流程.StepID =" + PS手动盘1上顶流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        case 515:
+                            PS手动盘1上顶流程.StepName = $"Auto1向上移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);  //result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", 21);//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 520;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1向上移动固定距离失败!" + result);
+                            }
+                            break;
+
+                        case 520:
+                            PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸到位输出";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1_Tray上顶气缸到位输出();//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 525;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1_Tray上顶气缸到位输出失败!" + result);
+                            }
+                            break;
+
+                        case 525:
+                            PS手动盘1上顶流程.StepName = "Auto1向下移动";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1向下移动(Auto1舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 526;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1向下移动失败!" + result);
+                            }
+                            break;
+
+                        case 526:
+                            PS手动盘1上顶流程.StepName = "获取Auto1下移绝对位置";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos2);
+                            if (result == "Success")
+                            {
+                                result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - 初始点位.Auto1下降固定高度; //6.35  Auto1上移固定距离 - Tray_厚度
+                                    PS手动盘1上顶流程.StepID = 530;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
+                            }
+                            break;
+
+                        case 530:
+                            PS手动盘1上顶流程.StepName = $"Auto1向下移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记); //result = motionEx.AxisRelativeMove("M14_Auto1顶盘轴", -15);//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1向下移动固定距离失败!" + result);
+                            }
+                            break;
+
+                        case 535:
+                            PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸原位输出";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1_Tray上顶气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 540;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1_Tray上顶气缸原位输出失败!" + result);
+                            }
+                            break;
+
+                        case 540:
+                            PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
+                            string result3 = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo2);
+                            if (result == "Success" && result3 == "Success")
+                            {
+                                double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
+                                if (prfpos < minpoint) //Auto1满盘判断值  && !正在结批
+                                {
+                                    Auto1料仓满盘标记 = true;
+                                    RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}"); //Auto1满盘判断值
+                                }
+                                else Auto1料仓满盘标记 = false;
+
+                                Auto1上顶标记 = 1;
+                                PS手动盘1上顶流程.StepID = 599;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success") RunLog($"读取Auto1顶盘轴编码位置失败！" + result);
+                                if (result3 != "Success") RunLog($"读取Auto1顶盘轴运行信息失败！" + result3);
+                            }
+                            break;
+
+                        case 599:
+                            PS手动盘1上顶流程.StepName = $"手动盘1上顶流程完成";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            PS手动盘1上顶流程.Processing = false;
+                            PS手动盘1上顶流程.StepID = 500;
+                            break;
+
+                        case 605:
+                            PS手动盘1上顶流程.StepName = $"手动盘1执行侧敲";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            bool qenable = 设置信息.测试机信息.前侧同时敲击;
+                            int count = 设置信息.测试机信息.Auto侧敲次数;
+                            int delay = 设置信息.测试机信息.侧敲间隔;
+                            for (int i = 0; i < count; i++)
+                            {
+                                if (qenable) //前侧同时敲击
+                                {
+                                    if (i > 0) Thread.Sleep(delay);
+                                    Auto1_Tray前侧定位气缸原位输出(10);
+                                    Thread.Sleep(delay);
+                                    Auto1_Tray前侧定位气缸到位输出(10);
+                                }
+                                else
+                                {
+                                    if (i > 0) Thread.Sleep(delay);
+                                    Auto1_Tray侧定位气缸原位输出(10);
+                                    Thread.Sleep(delay);
+                                    Auto1_Tray侧定位气缸到位输出(10);
+                                }
+                            }
+                            Auto1正在侧敲 = false;
+                            PS手动盘1上顶流程.StepID = 500;
+                            break;
+
+                        default:
+                            RunLog(("PS手动盘1上顶流程.StepID =" + PS手动盘1上顶流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS手动盘1上顶流程({PS手动盘1上顶流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -11601,207 +11944,219 @@ namespace H5509_V2
             PS手动盘1上顶流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS手动盘1上顶流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
+                    //if (!是否可以开始运行())
+                    //{
+                    //    continue;
+                    //}
 
-                if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
-                {
-                    continue;
-                }
-
-                switch (PS手动盘1上顶流程.StepID)
-                {
-                    case 500:
-                        PS手动盘1上顶流程.StepName = "路径规划";
-                        PS手动盘1上顶流程.Condition = Auto1上顶标记 == 2;
-                        PS手动盘1上顶流程.Permit = !PS手动盘1上顶流程.Processing;
-                        if (PS手动盘1上顶流程.Condition && PS手动盘1上顶流程.Permit)
-                        {
-                            PS手动盘1上顶流程.Processing = true;
-                            PS手动盘1上顶流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS手动盘1上顶流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS手动盘1上顶流程.StepName = "Auto1_Tray前侧定位气缸原位输出";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1_Tray前侧定位气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 506;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray前侧定位气缸原位输出失败!" + result);
-                        }
-                        break;
+                    if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
 
-                    case 506:
-                        PS手动盘1上顶流程.StepName = "获取Auto1上移绝对位置";
-                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos1);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                    switch (PS手动盘1上顶流程.StepID)
+                    {
+                        case 500:
+                            PS手动盘1上顶流程.StepName = "路径规划";
+                            PS手动盘1上顶流程.Condition = Auto1上顶标记 == 2;
+                            PS手动盘1上顶流程.Permit = !PS手动盘1上顶流程.Processing;
+                            if (PS手动盘1上顶流程.Condition && PS手动盘1上顶流程.Permit)
+                            {
+                                PS手动盘1上顶流程.Processing = true;
+                                PS手动盘1上顶流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS手动盘1上顶流程.StepName = "Auto1_Tray前侧定位气缸原位输出";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1_Tray前侧定位气缸原位输出();
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + Auto1上移固定距离; //6.35
-                                PS手动盘1上顶流程.StepID = 510;
+                                PS手动盘1上顶流程.StepID = 506;
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                RunLog($"Auto1_Tray前侧定位气缸原位输出失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS手动盘1上顶流程.StepName = $"Auto1向上移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 515;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1向上移动失败!" + result);
-                        }
-                        break;
-
-                    case 515:
-                        PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸到位输出";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1_Tray上顶气缸到位输出();//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 520;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray上顶气缸到位输出失败!" + result);
-                        }
-                        break;
-
-                    case 520:
-                        PS手动盘1上顶流程.StepName = "获取Auto1下移绝对位置";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos2);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                        case 506:
+                            PS手动盘1上顶流程.StepName = "获取Auto1上移绝对位置";
+                            result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos1);
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - Auto1上移固定距离 - Tray_厚度; //6.35
-                                PS手动盘1上顶流程.StepID = 525;
+                                result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + Auto1上移固定距离; //6.35
+                                    PS手动盘1上顶流程.StepID = 510;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 525:
-                        PS手动盘1上顶流程.StepName = $"Auto1向下移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1向下移动失败!" + result);
-                        }
-                        break;
-
-                    case 530:
-                        PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸原位输出";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = Auto1_Tray上顶气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘1上顶流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray上顶气缸原位输出失败!" + result);
-                        }
-                        break;
-
-                    case 535:
-                        PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
-                        string result3 = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo2);
-                        if (result == "Success" && result3 == "Success")
-                        {
-                            double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
-                            if (prfpos < minpoint) //Auto1满盘判断值
+                        case 510:
+                            PS手动盘1上顶流程.StepName = $"Auto1向上移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);
+                            if (result == "Success")
                             {
-                                Auto1料仓满盘标记 = true;
-                                RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}");
+                                PS手动盘1上顶流程.StepID = 515;
                             }
-                            else Auto1料仓满盘标记 = false;
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1向上移动失败!" + result);
+                            }
+                            break;
 
-                            Auto1上顶标记 = 1;
-                            PS手动盘1上顶流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto1顶盘轴编码位置失败！" + result);
-                            if (result3 != "Success") RunLog($"读取Auto1顶盘轴运行信息失败！" + result3);
-                        }
-                        break;
+                        case 515:
+                            PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸到位输出";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1_Tray上顶气缸到位输出();//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 520;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1_Tray上顶气缸到位输出失败!" + result);
+                            }
+                            break;
 
-                    case 599:
-                        PS手动盘1上顶流程.StepName = $"手动盘1上顶流程完成";
-                        RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
-                        PS手动盘1上顶流程.Processing = false;
-                        PS手动盘1上顶流程.StepID = 500;
-                        break;
+                        case 520:
+                            PS手动盘1上顶流程.StepName = "获取Auto1下移绝对位置";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos2);
+                            if (result == "Success")
+                            {
+                                result = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - Auto1上移固定距离 - Tray_厚度; //6.35
+                                    PS手动盘1上顶流程.StepID = 525;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M14_Auto1顶盘轴信息获取失败!" + result);
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M14_Auto1顶盘轴实时位置失败!" + result);
+                            }
+                            break;
 
-                    default:
-                        RunLog(("PS手动盘1上顶流程.StepID =" + PS手动盘1上顶流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        case 525:
+                            PS手动盘1上顶流程.StepName = $"Auto1向下移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1顶盘轴移动(movepos, Auto1舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1向下移动失败!" + result);
+                            }
+                            break;
+
+                        case 530:
+                            PS手动盘1上顶流程.StepName = "Auto1_Tray上顶气缸原位输出";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = Auto1_Tray上顶气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS手动盘1上顶流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1_Tray上顶气缸原位输出失败!" + result);
+                            }
+                            break;
+
+                        case 535:
+                            PS手动盘1上顶流程.StepName = "判断Auto1料仓是否满盘";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M14_Auto1顶盘轴", out double prfpos);
+                            string result3 = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo2);
+                            if (result == "Success" && result3 == "Success")
+                            {
+                                double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
+                                if (prfpos < minpoint) //Auto1满盘判断值
+                                {
+                                    Auto1料仓满盘标记 = true;
+                                    RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}");
+                                }
+                                else Auto1料仓满盘标记 = false;
+
+                                Auto1上顶标记 = 1;
+                                PS手动盘1上顶流程.StepID = 599;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success") RunLog($"读取Auto1顶盘轴编码位置失败！" + result);
+                                if (result3 != "Success") RunLog($"读取Auto1顶盘轴运行信息失败！" + result3);
+                            }
+                            break;
+
+                        case 599:
+                            PS手动盘1上顶流程.StepName = $"手动盘1上顶流程完成";
+                            RunLog($"PS手动盘1上顶流程.StepID={PS手动盘1上顶流程.StepID}->{PS手动盘1上顶流程.StepName}");
+                            PS手动盘1上顶流程.Processing = false;
+                            PS手动盘1上顶流程.StepID = 500;
+                            break;
+
+                        default:
+                            RunLog(("PS手动盘1上顶流程.StepID =" + PS手动盘1上顶流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS手动盘1上顶流程({PS手动盘1上顶流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -11817,70 +12172,82 @@ namespace H5509_V2
                 //    continue;
                 //}
 
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS手动盘1下降回零流程.被强制停止");
-                    break;
+                    Thread.Sleep(10);
+
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS手动盘1下降回零流程.被强制停止");
+                        break;
+                    }
+
+                    if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS手动盘1下降回零流程.StepID)
+                    {
+                        case 500:
+                            PS手动盘1下降回零流程.StepName = "路径规划";
+                            PS手动盘1下降回零流程.Condition = Auto1下降回零标记 == 2;
+                            PS手动盘1下降回零流程.Permit = !PS手动盘1下降回零流程.Processing && !PS手动盘1上顶流程.Processing;
+                            if (PS手动盘1下降回零流程.Condition && PS手动盘1下降回零流程.Permit)
+                            {
+                                PS手动盘1下降回零流程.Processing = true;
+                                PS手动盘1下降回零流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS手动盘1下降回零流程.StepName = "Auto1顶盘轴移动到原点";
+                            RunLog($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
+                            result = Auto1顶盘轴移动(1, Auto1舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS手动盘1下降回零流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1顶盘轴移动到原点失败！" + result);
+                            }
+                            break;
+
+                        case 510:
+                            PS手动盘1下降回零流程.StepName = "Auto1顶盘轴回零";
+                            RunLog($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
+                            result = Auto1顶盘轴回零(Auto1舱门开启标记);
+                            if (result == "Success")
+                            {
+                                Auto1下降回零标记 = 1;
+                                PS手动盘1下降回零流程.StepID = 500;
+                                PS手动盘1下降回零流程.Processing = false;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1顶盘轴回零失败！" + result);
+                            }
+                            break;
+
+                        default:
+                            RunLog(("PS手动盘1下降回零流程.StepID =" + PS手动盘1下降回零流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
                 }
-
-                if (APPmaster.IsPause && Auto1舱门开启标记 == 0)
+                catch (Exception ex)
                 {
-                    continue;
-                }
-
-                switch (PS手动盘1下降回零流程.StepID)
-                {
-                    case 500:
-                        PS手动盘1下降回零流程.StepName = "路径规划";
-                        PS手动盘1下降回零流程.Condition = Auto1下降回零标记 == 2;
-                        PS手动盘1下降回零流程.Permit = !PS手动盘1下降回零流程.Processing && !PS手动盘1上顶流程.Processing;
-                        if (PS手动盘1下降回零流程.Condition && PS手动盘1下降回零流程.Permit)
-                        {
-                            PS手动盘1下降回零流程.Processing = true;
-                            PS手动盘1下降回零流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 505:
-                        PS手动盘1下降回零流程.StepName = "Auto1顶盘轴移动到原点";
-                        RunLog($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
-                        result = Auto1顶盘轴移动(1, Auto1舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘1下降回零流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1顶盘轴移动到原点失败！" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS手动盘1下降回零流程.StepName = "Auto1顶盘轴回零";
-                        RunLog($"PS手动盘1下降回零流程.StepID={PS手动盘1下降回零流程.StepID}->{PS手动盘1下降回零流程.StepName}");
-                        result = Auto1顶盘轴回零(Auto1舱门开启标记);
-                        if (result == "Success")
-                        {
-                            Auto1下降回零标记 = 1;
-                            PS手动盘1下降回零流程.StepID = 500;
-                            PS手动盘1下降回零流程.Processing = false;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1顶盘轴回零失败！" + result);
-                        }
-                        break;
-
-                    default:
-                        RunLog(("PS手动盘1下降回零流程.StepID =" + PS手动盘1下降回零流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                    string errormsg = $"PS手动盘1下降回零流程({PS手动盘1下降回零流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -11892,287 +12259,299 @@ namespace H5509_V2
             PS手动盘2上顶流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-
-                //if (H5509初始化 == false)
-                //{
-                //    Thread.Sleep(100);
-                //    continue;
-                //}
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS手动盘2上顶流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
 
-                if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
-                {
-                    continue;
-                }
+                    //if (H5509初始化 == false)
+                    //{
+                    //    Thread.Sleep(100);
+                    //    continue;
+                    //}
 
-                switch (PS手动盘2上顶流程.StepID)
-                {
-                    case 500:
-                        PS手动盘2上顶流程.StepName = "路径规划";
-                        PS手动盘2上顶流程.Condition = Auto2上顶标记 == 2;
-                        PS手动盘2上顶流程.Permit = !PS手动盘2上顶流程.Processing;
-                        if (PS手动盘2上顶流程.Condition && PS手动盘2上顶流程.Permit)
-                        {
-                            PS手动盘2上顶流程.Processing = true;
-                            PS手动盘2上顶流程.StepID = 505;
-                        }
-                        else
-                        {
-                            bool isenable = 设置信息.测试机信息.放料时允许侧敲 || !出料正在Auto2放料;
-                            if (Tray盘模式 && !Auto2换盘标记 && Auto2上顶标记 == 1 && 设置信息.测试机信息.Auto侧敲使能 && isenable)
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS手动盘2上顶流程.被强制停止");
+                        break;
+                    }
+
+                    if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS手动盘2上顶流程.StepID)
+                    {
+                        case 500:
+                            PS手动盘2上顶流程.StepName = "路径规划";
+                            PS手动盘2上顶流程.Condition = Auto2上顶标记 == 2;
+                            PS手动盘2上顶流程.Permit = !PS手动盘2上顶流程.Processing;
+                            if (PS手动盘2上顶流程.Condition && PS手动盘2上顶流程.Permit)
                             {
-                                if (Auto2数量 - 保存Auto2放料个数 >= 设置信息.测试机信息.放置多少颗敲击)
+                                PS手动盘2上顶流程.Processing = true;
+                                PS手动盘2上顶流程.StepID = 505;
+                            }
+                            else
+                            {
+                                bool isenable = 设置信息.测试机信息.放料时允许侧敲 || !出料正在Auto2放料;
+                                if (Tray盘模式 && !Auto2换盘标记 && Auto2上顶标记 == 1 && 设置信息.测试机信息.Auto侧敲使能 && isenable)
                                 {
-                                    bool isIC1 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
-                                    if (!isIC1 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要侧敲，加!isIC1是因为满盘时返回False,auto2xy返回是0
+                                    if (Auto2数量 - 保存Auto2放料个数 >= 设置信息.测试机信息.放置多少颗敲击)
                                     {
-                                        Auto2正在侧敲 = true;
-                                        保存Auto2放料个数 = Auto2数量;
-                                        PS手动盘2上顶流程.StepID = 605;
+                                        bool isIC1 = 获取Auto2盘坐标(false, out int auto2xPoint, out int auto2yPoint);
+                                        if (!isIC1 || auto2xPoint != 0 || auto2yPoint != 0) //如果有放料才需要侧敲，加!isIC1是因为满盘时返回False,auto2xy返回是0
+                                        {
+                                            Auto2正在侧敲 = true;
+                                            保存Auto2放料个数 = Auto2数量;
+                                            PS手动盘2上顶流程.StepID = 605;
+                                        }
                                     }
                                 }
+                                Thread.Sleep(10);
                             }
-                            Thread.Sleep(10);
-                        }
-                        break;
+                            break;
 
-                    case 505:
-                        PS手动盘2上顶流程.StepName = "Auto2_Tray前侧定位气缸原位输出";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2_Tray前侧定位气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray前侧定位气缸原位输出失败!" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS手动盘2上顶流程.StepName = "Auto2向上移动";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2向上移动(Auto2舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 511;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2向上移动失败!" + result);
-                        }
-                        break;
-
-                    case 511:
-                        PS手动盘2上顶流程.StepName = "获取Auto2上移绝对位置";
-                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos1);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                        case 505:
+                            PS手动盘2上顶流程.StepName = "Auto2_Tray前侧定位气缸原位输出";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2_Tray前侧定位气缸原位输出();
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + 初始点位.Auto2上顶固定高度; //6.35 Auto2上移固定距离
-                                PS手动盘2上顶流程.StepID = 515;
+                                PS手动盘2上顶流程.StepID = 510;
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                RunLog($"Auto2_Tray前侧定位气缸原位输出失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 515:
-                        PS手动盘2上顶流程.StepName = $"Auto2向上移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记); //result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", 21);//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 520;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2向上移动固定距离失败!" + result);
-                        }
-                        break;
-
-                    case 520:
-                        PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸到位输出";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2_Tray上顶气缸到位输出();//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray上顶气缸到位输出失败!" + result);
-                        }
-                        break;
-
-                    case 525:
-                        PS手动盘2上顶流程.StepName = "Auto2向下移动";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2向下移动(Auto2舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 526;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2向下移动失败!" + result);
-                        }
-                        break;
-
-                    case 526:
-                        PS手动盘2上顶流程.StepName = "获取Auto2下移绝对位置";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos2);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                        case 510:
+                            PS手动盘2上顶流程.StepName = "Auto2向上移动";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2向上移动(Auto2舱门开启标记);
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - 初始点位.Auto2下降固定高度; //15 6.35 Auto2上移固定距离 - Tray_厚度
-                                PS手动盘2上顶流程.StepID = 530;
+                                PS手动盘2上顶流程.StepID = 511;
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                RunLog($"Auto2向上移动失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 530:
-                        PS手动盘2上顶流程.StepName = $"Auto2向下移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);  //result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", -15);//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2向下移动固定距离失败!" + result);
-                        }
-                        break;
-
-                    case 535:
-                        PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸原位输出";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2_Tray上顶气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 540;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray上顶气缸原位输出失败!" + result);
-                        }
-                        break;
-
-
-                    case 540:
-                        PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
-                        string result3 = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo2);
-                        if (result == "Success" && result3 == "Success")
-                        {
-                            double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
-                            if (prfpos < minpoint)// && !正在结批 Auto2满盘判断值
+                        case 511:
+                            PS手动盘2上顶流程.StepName = "获取Auto2上移绝对位置";
+                            result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos1);
+                            if (result == "Success")
                             {
-                                Auto2料仓满盘标记 = true;
-                                RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{minpoint}"); //Auto2满盘判断值
-                            }
-                            else Auto2料仓满盘标记 = false;
-
-                            Auto2上顶标记 = 1;
-                            PS手动盘2上顶流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto2顶盘轴编码位置失败！" + result);
-                            if (result3 != "Success") RunLog($"读取Auto2顶盘轴运行信息失败！" + result3);
-                        }
-                        break;
-
-
-                    case 599:
-                        PS手动盘2上顶流程.StepName = $"手动盘2上顶流程完成";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        PS手动盘2上顶流程.Processing = false;
-                        PS手动盘2上顶流程.StepID = 500;
-                        break;
-
-                    case 605:
-                        PS手动盘2上顶流程.StepName = $"手动盘2执行侧敲";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        bool qenable = 设置信息.测试机信息.前侧同时敲击;
-                        int count = 设置信息.测试机信息.Auto侧敲次数;
-                        int delay = 设置信息.测试机信息.侧敲间隔;
-                        for (int i = 0; i < count; i++)
-                        {
-                            if (qenable) //前侧同时敲击
-                            {
-                                if (i > 0) Thread.Sleep(delay);
-                                Auto2_Tray前侧定位气缸原位输出(10);
-                                Thread.Sleep(delay);
-                                Auto2_Tray前侧定位气缸到位输出(10);
+                                result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + 初始点位.Auto2上顶固定高度; //6.35 Auto2上移固定距离
+                                    PS手动盘2上顶流程.StepID = 515;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                }
                             }
                             else
                             {
-                                if (i > 0) Thread.Sleep(delay);
-                                Auto2_Tray侧定位气缸原位输出(10);
-                                Thread.Sleep(delay);
-                                Auto2_Tray侧定位气缸到位输出(10);
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
                             }
-                        }
-                        Auto2正在侧敲 = false;
-                        PS手动盘2上顶流程.StepID = 500;
-                        break;
+                            break;
 
-                    default:
-                        RunLog(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        case 515:
+                            PS手动盘2上顶流程.StepName = $"Auto2向上移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记); //result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", 21);//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 520;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2向上移动固定距离失败!" + result);
+                            }
+                            break;
+
+                        case 520:
+                            PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸到位输出";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2_Tray上顶气缸到位输出();//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 525;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2_Tray上顶气缸到位输出失败!" + result);
+                            }
+                            break;
+
+                        case 525:
+                            PS手动盘2上顶流程.StepName = "Auto2向下移动";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2向下移动(Auto2舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 526;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2向下移动失败!" + result);
+                            }
+                            break;
+
+                        case 526:
+                            PS手动盘2上顶流程.StepName = "获取Auto2下移绝对位置";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos2);
+                            if (result == "Success")
+                            {
+                                result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - 初始点位.Auto2下降固定高度; //15 6.35 Auto2上移固定距离 - Tray_厚度
+                                    PS手动盘2上顶流程.StepID = 530;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
+                            }
+                            break;
+
+                        case 530:
+                            PS手动盘2上顶流程.StepName = $"Auto2向下移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);  //result = motionEx.AxisRelativeMove("M15_Auto2顶盘轴", -15);//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2向下移动固定距离失败!" + result);
+                            }
+                            break;
+
+                        case 535:
+                            PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸原位输出";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2_Tray上顶气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 540;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2_Tray上顶气缸原位输出失败!" + result);
+                            }
+                            break;
+
+
+                        case 540:
+                            PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
+                            string result3 = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo2);
+                            if (result == "Success" && result3 == "Success")
+                            {
+                                double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
+                                if (prfpos < minpoint)// && !正在结批 Auto2满盘判断值
+                                {
+                                    Auto2料仓满盘标记 = true;
+                                    RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{minpoint}"); //Auto2满盘判断值
+                                }
+                                else Auto2料仓满盘标记 = false;
+
+                                Auto2上顶标记 = 1;
+                                PS手动盘2上顶流程.StepID = 599;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success") RunLog($"读取Auto2顶盘轴编码位置失败！" + result);
+                                if (result3 != "Success") RunLog($"读取Auto2顶盘轴运行信息失败！" + result3);
+                            }
+                            break;
+
+
+                        case 599:
+                            PS手动盘2上顶流程.StepName = $"手动盘2上顶流程完成";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            PS手动盘2上顶流程.Processing = false;
+                            PS手动盘2上顶流程.StepID = 500;
+                            break;
+
+                        case 605:
+                            PS手动盘2上顶流程.StepName = $"手动盘2执行侧敲";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            bool qenable = 设置信息.测试机信息.前侧同时敲击;
+                            int count = 设置信息.测试机信息.Auto侧敲次数;
+                            int delay = 设置信息.测试机信息.侧敲间隔;
+                            for (int i = 0; i < count; i++)
+                            {
+                                if (qenable) //前侧同时敲击
+                                {
+                                    if (i > 0) Thread.Sleep(delay);
+                                    Auto2_Tray前侧定位气缸原位输出(10);
+                                    Thread.Sleep(delay);
+                                    Auto2_Tray前侧定位气缸到位输出(10);
+                                }
+                                else
+                                {
+                                    if (i > 0) Thread.Sleep(delay);
+                                    Auto2_Tray侧定位气缸原位输出(10);
+                                    Thread.Sleep(delay);
+                                    Auto2_Tray侧定位气缸到位输出(10);
+                                }
+                            }
+                            Auto2正在侧敲 = false;
+                            PS手动盘2上顶流程.StepID = 500;
+                            break;
+
+                        default:
+                            RunLog(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS手动盘2上顶流程({PS手动盘2上顶流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -12184,209 +12563,222 @@ namespace H5509_V2
             PS手动盘2上顶流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS手动盘2上顶流程.被强制停止");
-                    break;
-                }
 
-                if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
-                {
-                    continue;
-                }
+                    Thread.Sleep(10);
+                    //if (!是否可以开始运行())
+                    //{
+                    //    continue;
+                    //}
 
-                switch (PS手动盘2上顶流程.StepID)
-                {
-                    case 500:
-                        PS手动盘2上顶流程.StepName = "路径规划";
-                        PS手动盘2上顶流程.Condition = Auto2上顶标记 == 2;
-                        PS手动盘2上顶流程.Permit = !PS手动盘2上顶流程.Processing;
-                        if (PS手动盘2上顶流程.Condition && PS手动盘2上顶流程.Permit)
-                        {
-                            PS手动盘2上顶流程.Processing = true;
-                            PS手动盘2上顶流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS手动盘2上顶流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS手动盘2上顶流程.StepName = "Auto2_Tray前侧定位气缸原位输出";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2_Tray前侧定位气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 506;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray前侧定位气缸原位输出失败!" + result);
-                        }
-                        break;
+                    if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
 
-                    case 506:
-                        PS手动盘2上顶流程.StepName = "获取Auto2上移绝对位置";
-                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos1);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                    switch (PS手动盘2上顶流程.StepID)
+                    {
+                        case 500:
+                            PS手动盘2上顶流程.StepName = "路径规划";
+                            PS手动盘2上顶流程.Condition = Auto2上顶标记 == 2;
+                            PS手动盘2上顶流程.Permit = !PS手动盘2上顶流程.Processing;
+                            if (PS手动盘2上顶流程.Condition && PS手动盘2上顶流程.Permit)
+                            {
+                                PS手动盘2上顶流程.Processing = true;
+                                PS手动盘2上顶流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS手动盘2上顶流程.StepName = "Auto2_Tray前侧定位气缸原位输出";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2_Tray前侧定位气缸原位输出();
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + Auto2上移固定距离; //6.35
-                                PS手动盘2上顶流程.StepID = 510;
+                                PS手动盘2上顶流程.StepID = 506;
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                RunLog($"Auto2_Tray前侧定位气缸原位输出失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS手动盘2上顶流程.StepName = $"Auto2向上移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 515;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2向上移动失败!" + result);
-                        }
-                        break;
-
-                    case 515:
-                        PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸到位输出";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2_Tray上顶气缸到位输出();//3175 1.5875
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 520;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray上顶气缸到位输出失败!" + result);
-                        }
-                        break;
-
-                    case 520:
-                        PS手动盘2上顶流程.StepName = "获取Auto2下移绝对位置";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos2);
-                        if (result == "Success")
-                        {
-                            result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                        case 506:
+                            PS手动盘2上顶流程.StepName = "获取Auto2上移绝对位置";
+                            result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos1);
                             if (result == "Success")
                             {
-                                movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - Auto2上移固定距离 - Tray_厚度; //6.35
-                                PS手动盘2上顶流程.StepID = 525;
+                                result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos1 * axisRunInfo.步长mm) + Auto2上移固定距离; //6.35
+                                    PS手动盘2上顶流程.StepID = 510;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
-                        }
-                        break;
+                            break;
 
-                    case 525:
-                        PS手动盘2上顶流程.StepName = $"Auto2向下移动绝对位置{movepos}mm";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2向下移动失败!" + result);
-                        }
-                        break;
-
-                    case 530:
-                        PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸原位输出";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = Auto2_Tray上顶气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS手动盘2上顶流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray上顶气缸原位输出失败!" + result);
-                        }
-                        break;
-
-                    case 535:
-                        PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
-                        string result3 = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo2);
-                        if (result == "Success" && result3 == "Success")
-                        {
-                            double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
-                            if (prfpos < minpoint) //Auto2满盘判断值
+                        case 510:
+                            PS手动盘2上顶流程.StepName = $"Auto2向上移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);
+                            if (result == "Success")
                             {
-                                Auto2料仓满盘标记 = true;
-                                RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
+                                PS手动盘2上顶流程.StepID = 515;
                             }
-                            else Auto2料仓满盘标记 = false;
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2向上移动失败!" + result);
+                            }
+                            break;
 
-                            Auto2上顶标记 = 1;
-                            PS手动盘2上顶流程.StepID = 599;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") RunLog($"读取Auto2顶盘轴编码位置失败！" + result);
-                            if (result3 != "Success") RunLog($"读取Auto2顶盘轴运行信息失败！" + result3);
-                        }
-                        break;
+                        case 515:
+                            PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸到位输出";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2_Tray上顶气缸到位输出();//3175 1.5875
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 520;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2_Tray上顶气缸到位输出失败!" + result);
+                            }
+                            break;
+
+                        case 520:
+                            PS手动盘2上顶流程.StepName = "获取Auto2下移绝对位置";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos2);
+                            if (result == "Success")
+                            {
+                                result = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo);
+                                if (result == "Success")
+                                {
+                                    movepos = Convert.ToDouble(prfpos2 * axisRunInfo.步长mm) - Auto2上移固定距离 - Tray_厚度; //6.35
+                                    PS手动盘2上顶流程.StepID = 525;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    RunLog("M15_Auto2顶盘轴信息获取失败!" + result);
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog("M15_Auto2顶盘轴实时位置失败!" + result);
+                            }
+                            break;
+
+                        case 525:
+                            PS手动盘2上顶流程.StepName = $"Auto2向下移动绝对位置{movepos}mm";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2顶盘轴移动(movepos, Auto2舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2向下移动失败!" + result);
+                            }
+                            break;
+
+                        case 530:
+                            PS手动盘2上顶流程.StepName = "Auto2_Tray上顶气缸原位输出";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = Auto2_Tray上顶气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS手动盘2上顶流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2_Tray上顶气缸原位输出失败!" + result);
+                            }
+                            break;
+
+                        case 535:
+                            PS手动盘2上顶流程.StepName = "判断Auto2料仓是否满盘";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            result = motionEx.GetCmdEncPos("M15_Auto2顶盘轴", out double prfpos);
+                            string result3 = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo2);
+                            if (result == "Success" && result3 == "Success")
+                            {
+                                double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
+                                if (prfpos < minpoint) //Auto2满盘判断值
+                                {
+                                    Auto2料仓满盘标记 = true;
+                                    RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{Auto2满盘判断值}");
+                                }
+                                else Auto2料仓满盘标记 = false;
+
+                                Auto2上顶标记 = 1;
+                                PS手动盘2上顶流程.StepID = 599;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success") RunLog($"读取Auto2顶盘轴编码位置失败！" + result);
+                                if (result3 != "Success") RunLog($"读取Auto2顶盘轴运行信息失败！" + result3);
+                            }
+                            break;
 
 
-                    case 599:
-                        PS手动盘2上顶流程.StepName = $"手动盘2上顶流程完成";
-                        RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
-                        PS手动盘2上顶流程.Processing = false;
-                        PS手动盘2上顶流程.StepID = 500;
-                        break;
+                        case 599:
+                            PS手动盘2上顶流程.StepName = $"手动盘2上顶流程完成";
+                            RunLog($"PS手动盘2上顶流程.StepID={PS手动盘2上顶流程.StepID}->{PS手动盘2上顶流程.StepName}");
+                            PS手动盘2上顶流程.Processing = false;
+                            PS手动盘2上顶流程.StepID = 500;
+                            break;
 
 
-                    default:
-                        RunLog(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        default:
+                            RunLog(("PS手动盘2上顶流程.StepID =" + PS手动盘2上顶流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS手动盘2上顶流程({PS手动盘2上顶流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -12402,70 +12794,82 @@ namespace H5509_V2
                 //    continue;
                 //}
 
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS手动盘2下降回零流程.被强制停止");
-                    break;
+                    Thread.Sleep(10);
+
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS手动盘2下降回零流程.被强制停止");
+                        break;
+                    }
+
+                    if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
+                    {
+                        continue;
+                    }
+
+                    switch (PS手动盘2下降回零流程.StepID)
+                    {
+                        case 500:
+                            PS手动盘2下降回零流程.StepName = "路径规划";
+                            PS手动盘2下降回零流程.Condition = Auto2下降回零标记 == 2;
+                            PS手动盘2下降回零流程.Permit = !PS手动盘2下降回零流程.Processing && !PS手动盘2上顶流程.Processing;
+                            if (PS手动盘2下降回零流程.Condition && PS手动盘2下降回零流程.Permit)
+                            {
+                                PS手动盘2下降回零流程.Processing = true;
+                                PS手动盘2下降回零流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS手动盘2下降回零流程.StepName = "Auto2顶盘轴移动到原点";
+                            RunLog($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
+                            result = Auto2顶盘轴移动(1, Auto2舱门开启标记);
+                            if (result == "Success")
+                            {
+                                PS手动盘2下降回零流程.StepID = 510;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2顶盘轴移动到原点失败！" + result);
+                            }
+                            break;
+
+                        case 510:
+                            PS手动盘2下降回零流程.StepName = "Auto2顶盘轴回零";
+                            RunLog($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
+                            result = Auto2顶盘轴回零(Auto2舱门开启标记);
+                            if (result == "Success")
+                            {
+                                Auto2下降回零标记 = 1;
+                                PS手动盘2下降回零流程.StepID = 500;
+                                PS手动盘2下降回零流程.Processing = false;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2顶盘轴回零失败！" + result);
+                            }
+                            break;
+
+                        default:
+                            RunLog(("PS手动盘2下降回零流程.StepID =" + PS手动盘2下降回零流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
                 }
-
-                if (APPmaster.IsPause && Auto2舱门开启标记 == 0)
+                catch (Exception ex)
                 {
-                    continue;
-                }
-
-                switch (PS手动盘2下降回零流程.StepID)
-                {
-                    case 500:
-                        PS手动盘2下降回零流程.StepName = "路径规划";
-                        PS手动盘2下降回零流程.Condition = Auto2下降回零标记 == 2;
-                        PS手动盘2下降回零流程.Permit = !PS手动盘2下降回零流程.Processing && !PS手动盘2上顶流程.Processing;
-                        if (PS手动盘2下降回零流程.Condition && PS手动盘2下降回零流程.Permit)
-                        {
-                            PS手动盘2下降回零流程.Processing = true;
-                            PS手动盘2下降回零流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 505:
-                        PS手动盘2下降回零流程.StepName = "Auto2顶盘轴移动到原点";
-                        RunLog($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
-                        result = Auto2顶盘轴移动(1, Auto2舱门开启标记);
-                        if (result == "Success")
-                        {
-                            PS手动盘2下降回零流程.StepID = 510;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2顶盘轴移动到原点失败！" + result);
-                        }
-                        break;
-
-                    case 510:
-                        PS手动盘2下降回零流程.StepName = "Auto2顶盘轴回零";
-                        RunLog($"PS手动盘2下降回零流程.StepID={PS手动盘2下降回零流程.StepID}->{PS手动盘2下降回零流程.StepName}");
-                        result = Auto2顶盘轴回零(Auto2舱门开启标记);
-                        if (result == "Success")
-                        {
-                            Auto2下降回零标记 = 1;
-                            PS手动盘2下降回零流程.StepID = 500;
-                            PS手动盘2下降回零流程.Processing = false;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2顶盘轴回零失败！" + result);
-                        }
-                        break;
-
-                    default:
-                        RunLog(("PS手动盘2下降回零流程.StepID =" + PS手动盘2下降回零流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                    string errormsg = $"PS手动盘2下降回零流程({PS手动盘2下降回零流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -12482,321 +12886,333 @@ namespace H5509_V2
                 //    continue;
                 //}
 
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS抓盘手臂取Empty空盘流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
 
-                if (APPmaster.IsPause)
-                {
-                    continue;
-                }
-
-                switch (PS抓盘手臂取Empty空盘流程.StepID)
-                {
-                    case 500:
-                        PS抓盘手臂取Empty空盘流程.StepName = "路径规划";
-                        PS抓盘手臂取Empty空盘流程.Condition = 抓盘手臂取Empty空盘标记 == 2
-                                                && Empty下降标记 == 1
-                                                && Empty上顶标记 == 1
-                                                && 抓盘手臂放空盘到Empty标记 == 1
-                                                && 抓盘手臂取Load空盘标记 == 1;
-
-                        PS抓盘手臂取Empty空盘流程.Permit = !PS抓盘手臂取Empty空盘流程.Processing
-                                                && !PS空盘下降流程.Processing
-                                                && !PS空盘上顶流程.Processing
-                                                && !PS抓盘手臂放空盘到Empty流程.Processing
-                                                && !PS抓盘手臂取Load空盘流程.Processing;
-
-                        if (PS抓盘手臂取Empty空盘流程.Condition && PS抓盘手臂取Empty空盘流程.Permit)
-                        {
-                            PS抓盘手臂取Empty空盘流程.Processing = true;
-                            PS抓盘手臂取Empty空盘流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS抓盘手臂取Empty空盘流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS抓盘手臂取Empty空盘流程.StepName = "移Tray上下气缸原位输入读取";
-                        RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 移Tray上下气缸原位输入读取(out string value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                    if (APPmaster.IsPause)
+                    {
+                        continue;
+                    }
+
+                    switch (PS抓盘手臂取Empty空盘流程.StepID)
+                    {
+                        case 500:
+                            PS抓盘手臂取Empty空盘流程.StepName = "路径规划";
+                            PS抓盘手臂取Empty空盘流程.Condition = 抓盘手臂取Empty空盘标记 == 2
+                                                    && Empty下降标记 == 1
+                                                    && Empty上顶标记 == 1
+                                                    && 抓盘手臂放空盘到Empty标记 == 1
+                                                    && 抓盘手臂取Load空盘标记 == 1;
+
+                            PS抓盘手臂取Empty空盘流程.Permit = !PS抓盘手臂取Empty空盘流程.Processing
+                                                    && !PS空盘下降流程.Processing
+                                                    && !PS空盘上顶流程.Processing
+                                                    && !PS抓盘手臂放空盘到Empty流程.Processing
+                                                    && !PS抓盘手臂取Load空盘流程.Processing;
+
+                            if (PS抓盘手臂取Empty空盘流程.Condition && PS抓盘手臂取Empty空盘流程.Permit)
                             {
-                                PS抓盘手臂取Empty空盘流程.StepID = 510;
+                                PS抓盘手臂取Empty空盘流程.Processing = true;
+                                PS抓盘手臂取Empty空盘流程.StepID = 505;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 505:
+                            PS抓盘手臂取Empty空盘流程.StepName = "移Tray上下气缸原位输入读取";
+                            RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            result = 移Tray上下气缸原位输入读取(out string value);
+                            if (result == "Success")
+                            {
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂取Empty空盘流程.StepID = 510;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                    RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS抓盘手臂取Empty空盘流程.StepName = "移Tray夹爪气缸原位输入读取";
-                        RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 移Tray夹爪气缸原位输入读取(out value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                        case 510:
+                            PS抓盘手臂取Empty空盘流程.StepName = "移Tray夹爪气缸原位输入读取";
+                            RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            result = 移Tray夹爪气缸原位输入读取(out value);
+                            if (result == "Success")
                             {
-                                PS抓盘手臂取Empty空盘流程.StepID = 515;
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂取Empty空盘流程.StepID = 515;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                    RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸未在原位", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸未在原位", LogType.AlarmLog);
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 515:
-                        PS抓盘手臂取Empty空盘流程.StepName = "放Tary盘轴移动到Empty";
-                        RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Empty空盘流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 520:
-                        PS抓盘手臂取Empty空盘流程.StepName = "移Tray上下气缸到位输出";
-                        RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 移Tray上下气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Empty空盘流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 525:
-                        PS抓盘手臂取Empty空盘流程.StepName = "移Tray夹爪气缸到位输出";
-                        RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 移Tray夹爪气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Empty空盘流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 530:
-                        PS抓盘手臂取Empty空盘流程.StepName = "移Tray上下气缸原位输出";
-                        RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 移Tray上下气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Empty空盘流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 535:
-                        PS抓盘手臂取Empty空盘流程.StepName = "检测Empty是否无空盘";
-                        result = Empty_前Tray存在感应(out value);
-                        if (result == "Success")
-                        {
-                            if (value == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 515:
+                            PS抓盘手臂取Empty空盘流程.StepName = "放Tary盘轴移动到Empty";
+                            RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
+                            if (result == "Success")
                             {
-                                //这时抓取手臂已完成任务，可以去放盘或者换盘了
-                                //转盘手臂抓盘标记
-                                Empty上顶标记 = 2; //空盘上顶
-                                抓盘手臂取Empty空盘标记 = 1;
-                                PS抓盘手臂取Empty空盘流程.StepID = 599;
+                                PS抓盘手臂取Empty空盘流程.StepID = 520;
                             }
-                            else //挡到感应器说明没有抓盘成功，需重新抓盘
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 520:
+                            PS抓盘手臂取Empty空盘流程.StepName = "移Tray上下气缸到位输出";
+                            RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            result = 移Tray上下气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Empty空盘流程.StepID = 525;
+                            }
+                            else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                PS抓盘手臂取Empty空盘流程.StepID = 536; //松开夹爪重新再抓盘
-                                RunLog($"抓盘手臂抓盘失败！" + result);
+                                Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"检测Empty是否无空盘失败！" + result);
-                        }
-                        break;
+                            break;
 
-                    case 536:
-                        PS抓盘手臂取Empty空盘流程.StepName = "移Tray夹爪气缸原位输出";
-                        RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        result = 移Tray夹爪气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Empty空盘流程.StepID = 520;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                        case 525:
+                            PS抓盘手臂取Empty空盘流程.StepName = "移Tray夹爪气缸到位输出";
+                            RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            result = 移Tray夹爪气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Empty空盘流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
 
-                    //case 540:
-                    //    PS抓盘手臂取Empty空盘流程.StepName = "判断Empty顶盘轴是否走到最大值";
-                    //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                    //    result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos);
-                    //    if (result == "Success")
-                    //    {
-                    //        if (prfpos + 12700 > 空盘上顶最大值)
-                    //        {
-                    //            RunLog($"M12_Empty顶盘轴当前上升行程{prfpos + 12700}>{空盘上顶最大值}");
-                    //            PS抓盘手臂取Empty空盘流程.StepID = 700; //执行回零再触发上顶
-                    //        }
-                    //        else PS抓盘手臂取Empty空盘流程.StepID = 545; //上顶一个Tray盘高度
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"判断Empty顶盘轴是否走到最大值失败！" + result);
-                    //    }
-                    //    break;
+                        case 530:
+                            PS抓盘手臂取Empty空盘流程.StepName = "移Tray上下气缸原位输出";
+                            RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            result = 移Tray上下气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Empty空盘流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
 
-                    //case 545:
-                    //    PS抓盘手臂取Empty空盘流程.StepName = "Empty盘轴上顶一个Tray盘";
-                    //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                    //    result = Empty顶盘轴相对移动(6.35);
-                    //    if (result == "Success")
-                    //    {
-                    //        PS抓盘手臂取Empty空盘流程.StepID = 550; //后续需要检测传感器是否灭了
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"Empty盘轴上顶一个Tray盘失败！" + result);
-                    //    }
-                    //    break;
+                        case 535:
+                            PS抓盘手臂取Empty空盘流程.StepName = "检测Empty是否无空盘";
+                            result = Empty_前Tray存在感应(out value);
+                            if (result == "Success")
+                            {
+                                if (value == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    //这时抓取手臂已完成任务，可以去放盘或者换盘了
+                                    //转盘手臂抓盘标记
+                                    Empty上顶标记 = 2; //空盘上顶
+                                    抓盘手臂取Empty空盘标记 = 1;
+                                    PS抓盘手臂取Empty空盘流程.StepID = 599;
+                                }
+                                else //挡到感应器说明没有抓盘成功，需重新抓盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    PS抓盘手臂取Empty空盘流程.StepID = 536; //松开夹爪重新再抓盘
+                                    RunLog($"抓盘手臂抓盘失败！" + result);
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"检测Empty是否无空盘失败！" + result);
+                            }
+                            break;
 
-                    //case 550:
-                    //    PS抓盘手臂取Empty空盘流程.StepName = "检测Empty是否有空盘";
-                    //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                    //    result = Empty_前Tray存在感应(out value);
-                    //    if (result == "Success")
-                    //    {
-                    //        if (value == "0") //返回0是挡到感应器,1是没有挡到感应器
-                    //        {
-                    //            PS抓盘手臂取Empty空盘流程.StepID = 599;
-                    //        }
-                    //        else PS抓盘手臂取Empty空盘流程.StepID = 565; //上顶一个Tray盘高度后检测到没有空盘，操作员可能拿走了空盘或者其他原因，那是执行上顶呢还是一个一个上顶呢？ 先下降一个盘高度再执行上顶
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"检测Empty是否有空盘失败！" + result);
-                    //    }
-                    //    break;
+                        case 536:
+                            PS抓盘手臂取Empty空盘流程.StepName = "移Tray夹爪气缸原位输出";
+                            RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            result = 移Tray夹爪气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Empty空盘流程.StepID = 520;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
 
-                    //case 565:
-                    //    PS抓盘手臂取Empty空盘流程.StepName = "Empty盘轴下降一个Tray盘";
-                    //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                    //    result = Empty顶盘轴相对移动(-6.35);
-                    //    if (result == "Success")
-                    //    {
-                    //        Empty上顶标记 = 2;
-                    //        PS抓盘手臂取Empty空盘流程.StepID = 705;
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"Empty盘轴下降一个Tray盘失败！" + result);
-                    //    }
-                    //    break;
+                        //case 540:
+                        //    PS抓盘手臂取Empty空盘流程.StepName = "判断Empty顶盘轴是否走到最大值";
+                        //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                        //    result = motionEx.GetCmdEncPos("M12_Empty顶盘轴", out double prfpos);
+                        //    if (result == "Success")
+                        //    {
+                        //        if (prfpos + 12700 > 空盘上顶最大值)
+                        //        {
+                        //            RunLog($"M12_Empty顶盘轴当前上升行程{prfpos + 12700}>{空盘上顶最大值}");
+                        //            PS抓盘手臂取Empty空盘流程.StepID = 700; //执行回零再触发上顶
+                        //        }
+                        //        else PS抓盘手臂取Empty空盘流程.StepID = 545; //上顶一个Tray盘高度
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"判断Empty顶盘轴是否走到最大值失败！" + result);
+                        //    }
+                        //    break;
 
-                    case 599:
-                        PS抓盘手臂取Empty空盘流程.StepName = $"抓盘手臂取Empty空盘流程完成";
-                        RunLog($"PS待测盘上顶流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                        PS抓盘手臂取Empty空盘流程.Processing = false;
-                        PS抓盘手臂取Empty空盘流程.StepID = 500;
-                        break;
+                        //case 545:
+                        //    PS抓盘手臂取Empty空盘流程.StepName = "Empty盘轴上顶一个Tray盘";
+                        //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                        //    result = Empty顶盘轴相对移动(6.35);
+                        //    if (result == "Success")
+                        //    {
+                        //        PS抓盘手臂取Empty空盘流程.StepID = 550; //后续需要检测传感器是否灭了
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"Empty盘轴上顶一个Tray盘失败！" + result);
+                        //    }
+                        //    break;
 
-                    //case 700:
-                    //    PS抓盘手臂取Empty空盘流程.StepName = "Empty顶盘轴回零";
-                    //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
-                    //    result = Empty顶盘轴回零();
-                    //    if (result == "Success")
-                    //    {
-                    //        Empty上顶标记 = 2;
-                    //        PS抓盘手臂取Empty空盘流程.StepID = 705;
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"Empty顶盘轴回零失败！" + result);
-                    //    }
-                    //    break;
+                        //case 550:
+                        //    PS抓盘手臂取Empty空盘流程.StepName = "检测Empty是否有空盘";
+                        //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                        //    result = Empty_前Tray存在感应(out value);
+                        //    if (result == "Success")
+                        //    {
+                        //        if (value == "0") //返回0是挡到感应器,1是没有挡到感应器
+                        //        {
+                        //            PS抓盘手臂取Empty空盘流程.StepID = 599;
+                        //        }
+                        //        else PS抓盘手臂取Empty空盘流程.StepID = 565; //上顶一个Tray盘高度后检测到没有空盘，操作员可能拿走了空盘或者其他原因，那是执行上顶呢还是一个一个上顶呢？ 先下降一个盘高度再执行上顶
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"检测Empty是否有空盘失败！" + result);
+                        //    }
+                        //    break;
 
-                    //case 705:
-                    //    if (Empty上顶标记 == 1)
-                    //    {
-                    //        PS抓盘手臂取Empty空盘流程.StepID = 599;
-                    //    }
-                    //    else Thread.Sleep(10);
-                    //    break;
+                        //case 565:
+                        //    PS抓盘手臂取Empty空盘流程.StepName = "Empty盘轴下降一个Tray盘";
+                        //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                        //    result = Empty顶盘轴相对移动(-6.35);
+                        //    if (result == "Success")
+                        //    {
+                        //        Empty上顶标记 = 2;
+                        //        PS抓盘手臂取Empty空盘流程.StepID = 705;
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"Empty盘轴下降一个Tray盘失败！" + result);
+                        //    }
+                        //    break;
 
-                    default:
-                        RunLog(("PS抓盘手臂取Empty空盘流程.StepID =" + PS抓盘手臂取Empty空盘流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        case 599:
+                            PS抓盘手臂取Empty空盘流程.StepName = $"抓盘手臂取Empty空盘流程完成";
+                            RunLog($"PS待测盘上顶流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                            PS抓盘手臂取Empty空盘流程.Processing = false;
+                            PS抓盘手臂取Empty空盘流程.StepID = 500;
+                            break;
+
+                        //case 700:
+                        //    PS抓盘手臂取Empty空盘流程.StepName = "Empty顶盘轴回零";
+                        //    RunLog($"PS抓盘手臂取Empty空盘流程.StepID={PS抓盘手臂取Empty空盘流程.StepID}->{PS抓盘手臂取Empty空盘流程.StepName}");
+                        //    result = Empty顶盘轴回零();
+                        //    if (result == "Success")
+                        //    {
+                        //        Empty上顶标记 = 2;
+                        //        PS抓盘手臂取Empty空盘流程.StepID = 705;
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"Empty顶盘轴回零失败！" + result);
+                        //    }
+                        //    break;
+
+                        //case 705:
+                        //    if (Empty上顶标记 == 1)
+                        //    {
+                        //        PS抓盘手臂取Empty空盘流程.StepID = 599;
+                        //    }
+                        //    else Thread.Sleep(10);
+                        //    break;
+
+                        default:
+                            RunLog(("PS抓盘手臂取Empty空盘流程.StepID =" + PS抓盘手臂取Empty空盘流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS抓盘手臂取Empty空盘流程({PS抓盘手臂取Empty空盘流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
 
@@ -12809,87 +13225,262 @@ namespace H5509_V2
             PS抓盘手臂取Load空盘流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS抓盘手臂取Load空盘流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
+                    //if (!是否可以开始运行())
+                    //{
+                    //    continue;
+                    //}
 
-                if (APPmaster.IsPause)
-                {
-                    continue;
-                }
-
-                switch (PS抓盘手臂取Load空盘流程.StepID)
-                {
-                    case 500:
-                        PS抓盘手臂取Load空盘流程.StepName = "路径规划";
-                        PS抓盘手臂取Load空盘流程.Condition = 抓盘手臂取Load空盘标记 == 2
-                                                    && 抓盘手臂放空盘到Empty标记 == 1
-                                                    && Load上顶标记 == 1
-                                                    && Empty下降标记 == 1
-                                                    && Empty上顶标记 == 1;
-                        //&& !Auto1换盘标记
-                        //&& !Auto2换盘标记;
-
-                        PS抓盘手臂取Load空盘流程.Permit = !PS抓盘手臂取Load空盘流程.Processing
-                                                    && !PS待测盘上顶流程.Processing
-                                                    && !PS待测盘下降流程.Processing
-                                                    && !PS待测盘下降回零流程.Processing
-                                                    && !PS空盘下降流程.Processing
-                                                    && !PS空盘上顶流程.Processing
-                                                    && !PS空盘下降回零流程.Processing
-                                                    && !PS抓盘手臂放空盘到Empty流程.Processing;
-
-                        if (PS抓盘手臂取Load空盘流程.Condition && PS抓盘手臂取Load空盘流程.Permit)
-                        {
-                            Empty下降标记 = 2;
-                            PS抓盘手臂取Load空盘流程.Processing = true;
-                            PS抓盘手臂取Load空盘流程.StepID = 505;
-                        }
-                        else Thread.Sleep(10);
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS抓盘手臂取Load空盘流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS抓盘手臂取Load空盘流程.StepName = "移Tray上下气缸原位输入读取";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 移Tray上下气缸原位输入读取(out string value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                    if (APPmaster.IsPause)
+                    {
+                        continue;
+                    }
+
+                    switch (PS抓盘手臂取Load空盘流程.StepID)
+                    {
+                        case 500:
+                            PS抓盘手臂取Load空盘流程.StepName = "路径规划";
+                            PS抓盘手臂取Load空盘流程.Condition = 抓盘手臂取Load空盘标记 == 2
+                                                        && 抓盘手臂放空盘到Empty标记 == 1
+                                                        && Load上顶标记 == 1
+                                                        && Empty下降标记 == 1
+                                                        && Empty上顶标记 == 1;
+                            //&& !Auto1换盘标记
+                            //&& !Auto2换盘标记;
+
+                            PS抓盘手臂取Load空盘流程.Permit = !PS抓盘手臂取Load空盘流程.Processing
+                                                        && !PS待测盘上顶流程.Processing
+                                                        && !PS待测盘下降流程.Processing
+                                                        && !PS待测盘下降回零流程.Processing
+                                                        && !PS空盘下降流程.Processing
+                                                        && !PS空盘上顶流程.Processing
+                                                        && !PS空盘下降回零流程.Processing
+                                                        && !PS抓盘手臂放空盘到Empty流程.Processing;
+
+                            if (PS抓盘手臂取Load空盘流程.Condition && PS抓盘手臂取Load空盘流程.Permit)
                             {
-                                PS抓盘手臂取Load空盘流程.StepID = 510;
+                                Empty下降标记 = 2;
+                                PS抓盘手臂取Load空盘流程.Processing = true;
+                                PS抓盘手臂取Load空盘流程.StepID = 501;
+                                RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->判断是否按了跳过或编辑标记");
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 501:
+                            PS抓盘手臂取Load空盘流程.StepName = "判断是否按了跳过或编辑标记";
+                            if (按了跳过或编辑标记)
+                            {
+                                Load_Tray前侧定位气缸原位输出();
+                                门已打开超设定时间 = false;
+                                等待Load门开启 = true;
+                                Listcode.Add("1400472"); //跳过抓取Load空盘
+                                RunLog($"[Code]1400472,[Msg]请打开Load仓门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
+                                ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->等待Load仓门开启");
+                            }
+                            else
+                            {
+                                PS抓盘手臂取Load空盘流程.StepID = 505; //没有按下过直接走正常流程
+                            }
+                            break;
+
+                        case 502:
+                            PS抓盘手臂取Load空盘流程.StepName = "等待Load仓门开启";
+                            if (门已打开超设定时间)
+                            {
+                                等待Load门开启 = false;
+                                按了跳过或编辑标记 = false;
+                                PS抓盘手臂取Load空盘流程.StepID = 505;
+                            }
+                            else
+                            {
+                                Listcode.Add("1400472"); //跳过抓取Load空盘
+                                RunLog($"[Code]1400472,[Msg]请打开Load仓门{Load门开门时间}秒并确认是否有料剩余在Tray盘！" + result, LogType.AlarmLog);
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 505:
+                            PS抓盘手臂取Load空盘流程.StepName = "移Tray上下气缸原位输入读取";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 移Tray上下气缸原位输入读取(out string value);
+                            if (result == "Success")
+                            {
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂取Load空盘流程.StepID = 510;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                    RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS抓盘手臂取Load空盘流程.StepName = "移Tray夹爪气缸原位输入读取";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 移Tray夹爪气缸原位输入读取(out value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                        case 510:
+                            PS抓盘手臂取Load空盘流程.StepName = "移Tray夹爪气缸原位输入读取";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 移Tray夹爪气缸原位输入读取(out value);
+                            if (result == "Success")
+                            {
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂取Load空盘流程.StepID = 515;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                    RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸未在原位", LogType.AlarmLog);
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 515:
+                            PS抓盘手臂取Load空盘流程.StepName = "放Tary盘轴移动到Load";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Load_X + 点位微调.抓盘_Load_X);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Load空盘流程.StepID = 520;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Load失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 520:
+                            PS抓盘手臂取Load空盘流程.StepName = "Load_Tray前侧定位气缸原位输出";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = Load_Tray前侧定位气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Load空盘流程.StepID = 521;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load_Tray前侧定位气缸原位输出失败！" + result);
+                            }
+                            break;
+
+                        case 521:
+                            PS抓盘手臂取Load空盘流程.StepName = "移Tray上下气缸到位输出";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 移Tray上下气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Load空盘流程.StepID = 525;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 525:
+                            PS抓盘手臂取Load空盘流程.StepName = "移Tray夹爪气缸到位输出";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 移Tray夹爪气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Load空盘流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 530:
+                            PS抓盘手臂取Load空盘流程.StepName = "移Tray上下气缸原位输出";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 移Tray上下气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂取Load空盘流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 535:
+                            PS抓盘手臂取Load空盘流程.StepName = "检测Load是否无空盘";
+                            result = Load_前Tray存在感应(out value);
+                            if (result == "Success")
+                            {
+                                if (value == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    Load上顶标记 = 2;
+                                    PS抓盘手臂取Load空盘流程.StepID = 540;
+                                }
+                                else //挡到感应器说明没有抓盘成功，需重新抓盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    PS抓盘手臂取Load空盘流程.StepID = 536; //松开夹爪重新再抓盘
+                                    RunLog($"抓盘手臂抓盘失败！" + result);
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"检测Empty是否无空盘失败！" + result);
+                            }
+                            break;
+
+                        case 536:
+                            PS抓盘手臂取Load空盘流程.StepName = "移Tray夹爪气缸原位输出";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 移Tray夹爪气缸原位输出();
+                            if (result == "Success")
                             {
                                 PS抓盘手臂取Load空盘流程.StepID = 515;
                             }
@@ -12897,292 +13488,166 @@ namespace H5509_V2
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
-                                Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸未在原位", LogType.AlarmLog);
+                                Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 515:
-                        PS抓盘手臂取Load空盘流程.StepName = "放Tary盘轴移动到Load";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Load_X + 点位微调.抓盘_Load_X);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Load空盘流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Load失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 520:
-                        PS抓盘手臂取Load空盘流程.StepName = "Load_Tray前侧定位气缸原位输出";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = Load_Tray前侧定位气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Load空盘流程.StepID = 521;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Load_Tray前侧定位气缸原位输出失败！" + result);
-                        }
-                        break;
-
-                    case 521:
-                        PS抓盘手臂取Load空盘流程.StepName = "移Tray上下气缸到位输出";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 移Tray上下气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Load空盘流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 525:
-                        PS抓盘手臂取Load空盘流程.StepName = "移Tray夹爪气缸到位输出";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 移Tray夹爪气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Load空盘流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 530:
-                        PS抓盘手臂取Load空盘流程.StepName = "移Tray上下气缸原位输出";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 移Tray上下气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Load空盘流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 535:
-                        PS抓盘手臂取Load空盘流程.StepName = "检测Load是否无空盘";
-                        result = Load_前Tray存在感应(out value);
-                        if (result == "Success")
-                        {
-                            if (value == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 540:
+                            PS抓盘手臂取Load空盘流程.StepName = "放Tary盘轴移动到Empty";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
+                            if (result == "Success")
                             {
-                                Load上顶标记 = 2;
-                                PS抓盘手臂取Load空盘流程.StepID = 540;
+                                抓盘手臂取Load空盘标记 = 1;
+                                抓盘手臂放空盘到Empty标记 = 2;
+                                PS抓盘手臂取Load空盘流程.StepID = 599;
                             }
-                            else //挡到感应器说明没有抓盘成功，需重新抓盘
+                            else
                             {
-                                APPmaster.ProgramPause = true;
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
                                 IsPause = true;
-                                PS抓盘手臂取Load空盘流程.StepID = 536; //松开夹爪重新再抓盘
-                                RunLog($"抓盘手臂抓盘失败！" + result);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"检测Empty是否无空盘失败！" + result);
-                        }
-                        break;
+                            break;
 
-                    case 536:
-                        PS抓盘手臂取Load空盘流程.StepName = "移Tray夹爪气缸原位输出";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 移Tray夹爪气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂取Load空盘流程.StepID = 515;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                        //case 540:
+                        //    PS抓盘手臂取Load空盘流程.StepName = "判断Load顶盘轴是否走到最大值";
+                        //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                        //    result = motionEx.GetCmdEncPos("M13_Loader顶盘轴", out double prfpos);
+                        //    if (result == "Success")
+                        //    {
+                        //        if (prfpos + 12700 > 待测盘上顶最大值)
+                        //        {
+                        //            RunLog($"M13_Loader顶盘轴当前上升行程{prfpos + 12700}>{待测盘上顶最大值}");
+                        //            PS抓盘手臂取Load空盘流程.StepID = 700; //执行回零再触发上顶
+                        //        }
+                        //        else PS抓盘手臂取Load空盘流程.StepID = 545; //上顶一个Tray盘高度
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"判断Load顶盘轴是否走到最大值失败！" + result);
+                        //    }
+                        //    break;
 
-                    case 540:
-                        PS抓盘手臂取Load空盘流程.StepName = "放Tary盘轴移动到Empty";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
-                        if (result == "Success")
-                        {
-                            抓盘手臂取Load空盘标记 = 1;
-                            抓盘手臂放空盘到Empty标记 = 2;
-                            PS抓盘手臂取Load空盘流程.StepID = 599;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                        //case 545:
+                        //    PS抓盘手臂取Load空盘流程.StepName = "Load盘轴上顶一个Tray盘";
+                        //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                        //    result = Load顶盘轴相对移动(6.35);
+                        //    if (result == "Success")
+                        //    {
+                        //        PS抓盘手臂取Load空盘流程.StepID = 550; //后续需要检测传感器是否灭了
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"Load盘轴上顶一个Tray盘失败！" + result);
+                        //    }
+                        //    break;
 
-                    //case 540:
-                    //    PS抓盘手臂取Load空盘流程.StepName = "判断Load顶盘轴是否走到最大值";
-                    //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                    //    result = motionEx.GetCmdEncPos("M13_Loader顶盘轴", out double prfpos);
-                    //    if (result == "Success")
-                    //    {
-                    //        if (prfpos + 12700 > 待测盘上顶最大值)
-                    //        {
-                    //            RunLog($"M13_Loader顶盘轴当前上升行程{prfpos + 12700}>{待测盘上顶最大值}");
-                    //            PS抓盘手臂取Load空盘流程.StepID = 700; //执行回零再触发上顶
-                    //        }
-                    //        else PS抓盘手臂取Load空盘流程.StepID = 545; //上顶一个Tray盘高度
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"判断Load顶盘轴是否走到最大值失败！" + result);
-                    //    }
-                    //    break;
+                        //case 550:
+                        //    PS抓盘手臂取Load空盘流程.StepName = "检测Load是否有空盘";
+                        //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                        //    result = Load_前Tray存在感应(out value);
+                        //    if (result == "Success")
+                        //    {
+                        //        if (value == "0") //返回0是挡到感应器,1是没有挡到感应器
+                        //        {
+                        //            PS抓盘手臂取Load空盘流程.StepID = 555;
+                        //        }
+                        //        else PS抓盘手臂取Load空盘流程.StepID = 565; //上顶一个Tray盘高度后检测到没有空盘，操作员可能拿走了空盘或者其他原因，那是执行上顶呢还是一个一个上顶呢？ 先下降一个盘高度再执行上顶
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"检测Load是否有空盘失败！" + result);
+                        //    }
+                        //    break;
 
-                    //case 545:
-                    //    PS抓盘手臂取Load空盘流程.StepName = "Load盘轴上顶一个Tray盘";
-                    //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                    //    result = Load顶盘轴相对移动(6.35);
-                    //    if (result == "Success")
-                    //    {
-                    //        PS抓盘手臂取Load空盘流程.StepID = 550; //后续需要检测传感器是否灭了
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"Load盘轴上顶一个Tray盘失败！" + result);
-                    //    }
-                    //    break;
+                        //case 555:
+                        //    PS抓盘手臂取Load空盘流程.StepName = "Load_Tray前侧定位气缸到位输出";
+                        //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                        //    result = Load_Tray前侧定位气缸到位输出();
+                        //    if (result == "Success")
+                        //    {
+                        //        PS抓盘手臂取Load空盘流程.StepID = 599;
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"Load_Tray前侧定位气缸到位输出失败！" + result);
+                        //    }
+                        //    break;
 
-                    //case 550:
-                    //    PS抓盘手臂取Load空盘流程.StepName = "检测Load是否有空盘";
-                    //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                    //    result = Load_前Tray存在感应(out value);
-                    //    if (result == "Success")
-                    //    {
-                    //        if (value == "0") //返回0是挡到感应器,1是没有挡到感应器
-                    //        {
-                    //            PS抓盘手臂取Load空盘流程.StepID = 555;
-                    //        }
-                    //        else PS抓盘手臂取Load空盘流程.StepID = 565; //上顶一个Tray盘高度后检测到没有空盘，操作员可能拿走了空盘或者其他原因，那是执行上顶呢还是一个一个上顶呢？ 先下降一个盘高度再执行上顶
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"检测Load是否有空盘失败！" + result);
-                    //    }
-                    //    break;
+                        //case 565:
+                        //    PS抓盘手臂取Load空盘流程.StepName = "Load盘轴下降一个Tray盘";
+                        //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                        //    result = Load顶盘轴相对移动(-6.35);
+                        //    if (result == "Success")
+                        //    {
+                        //        Load上顶标记 = 2;
+                        //        PS抓盘手臂取Load空盘流程.StepID = 705;
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"Load盘轴下降一个Tray盘失败！" + result);
+                        //    }
+                        //    break;
 
-                    //case 555:
-                    //    PS抓盘手臂取Load空盘流程.StepName = "Load_Tray前侧定位气缸到位输出";
-                    //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                    //    result = Load_Tray前侧定位气缸到位输出();
-                    //    if (result == "Success")
-                    //    {
-                    //        PS抓盘手臂取Load空盘流程.StepID = 599;
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"Load_Tray前侧定位气缸到位输出失败！" + result);
-                    //    }
-                    //    break;
+                        case 599:
+                            PS抓盘手臂取Load空盘流程.StepName = $"抓盘手臂取Load空盘流程完成";
+                            RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                            PS抓盘手臂取Load空盘流程.Processing = false;
+                            PS抓盘手臂取Load空盘流程.StepID = 500;
+                            break;
 
-                    //case 565:
-                    //    PS抓盘手臂取Load空盘流程.StepName = "Load盘轴下降一个Tray盘";
-                    //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                    //    result = Load顶盘轴相对移动(-6.35);
-                    //    if (result == "Success")
-                    //    {
-                    //        Load上顶标记 = 2;
-                    //        PS抓盘手臂取Load空盘流程.StepID = 705;
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"Load盘轴下降一个Tray盘失败！" + result);
-                    //    }
-                    //    break;
+                        //case 700:
+                        //    PS抓盘手臂取Load空盘流程.StepName = "Load顶盘轴回零";
+                        //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
+                        //    result = Load顶盘轴回零();
+                        //    if (result == "Success")
+                        //    {
+                        //        Load上顶标记 = 2;
+                        //        PS抓盘手臂取Load空盘流程.StepID = 705;
+                        //    }
+                        //    else
+                        //    {
+                        //        APPmaster.ProgramPause = true;
+                        //        IsPause = true;
+                        //        RunLog($"Load顶盘轴回零失败！" + result);
+                        //    }
+                        //    break;
 
-                    case 599:
-                        PS抓盘手臂取Load空盘流程.StepName = $"抓盘手臂取Load空盘流程完成";
-                        RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                        PS抓盘手臂取Load空盘流程.Processing = false;
-                        PS抓盘手臂取Load空盘流程.StepID = 500;
-                        break;
+                        //case 705:
+                        //    if (Load上顶标记 == 1)
+                        //    {
+                        //        PS抓盘手臂取Load空盘流程.StepID = 599;
+                        //    }
+                        //    else Thread.Sleep(10);
+                        //    break;
 
-                    //case 700:
-                    //    PS抓盘手臂取Load空盘流程.StepName = "Load顶盘轴回零";
-                    //    RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->{PS抓盘手臂取Load空盘流程.StepName}");
-                    //    result = Load顶盘轴回零();
-                    //    if (result == "Success")
-                    //    {
-                    //        Load上顶标记 = 2;
-                    //        PS抓盘手臂取Load空盘流程.StepID = 705;
-                    //    }
-                    //    else
-                    //    {
-                    //        APPmaster.ProgramPause = true;
-                    //        IsPause = true;
-                    //        RunLog($"Load顶盘轴回零失败！" + result);
-                    //    }
-                    //    break;
-
-                    //case 705:
-                    //    if (Load上顶标记 == 1)
-                    //    {
-                    //        PS抓盘手臂取Load空盘流程.StepID = 599;
-                    //    }
-                    //    else Thread.Sleep(10);
-                    //    break;
-
-                    default:
-                        RunLog(("PS待测盘上顶流程.StepID =" + PS抓盘手臂取Load空盘流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        default:
+                            RunLog(("PS待测盘上顶流程.StepID =" + PS抓盘手臂取Load空盘流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS抓盘手臂取Load空盘流程({PS抓盘手臂取Load空盘流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -13198,230 +13663,242 @@ namespace H5509_V2
                 //{
                 //    continue;
                 //}
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS抓盘手臂放空盘到Empty流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
 
-                if (APPmaster.IsPause)
-                {
-                    continue;
-                }
-
-                switch (PS抓盘手臂放空盘到Empty流程.StepID)
-                {
-                    case 500:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "路径规划";
-                        PS抓盘手臂放空盘到Empty流程.Condition = 抓盘手臂放空盘到Empty标记 == 2 && Empty上顶标记 == 1 && Empty下降标记 == 1;
-                        PS抓盘手臂放空盘到Empty流程.Permit = !PS抓盘手臂放空盘到Empty流程.Processing && !PS空盘上顶流程.Processing && !PS空盘下降流程.Processing;
-                        if (PS抓盘手臂放空盘到Empty流程.Condition && PS抓盘手臂放空盘到Empty流程.Permit)
-                        {
-                            PS抓盘手臂放空盘到Empty流程.Processing = true;
-                            PS抓盘手臂放空盘到Empty流程.StepID = 505;
-                        }
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS抓盘手臂放空盘到Empty流程.被强制停止");
                         break;
+                    }
 
-                    case 505:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "移Tray上下气缸原位输入读取";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 移Tray上下气缸原位输入读取(out string value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                    if (APPmaster.IsPause)
+                    {
+                        continue;
+                    }
+
+                    switch (PS抓盘手臂放空盘到Empty流程.StepID)
+                    {
+                        case 500:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "路径规划";
+                            PS抓盘手臂放空盘到Empty流程.Condition = 抓盘手臂放空盘到Empty标记 == 2 && Empty上顶标记 == 1 && Empty下降标记 == 1;
+                            PS抓盘手臂放空盘到Empty流程.Permit = !PS抓盘手臂放空盘到Empty流程.Processing && !PS空盘上顶流程.Processing && !PS空盘下降流程.Processing;
+                            if (PS抓盘手臂放空盘到Empty流程.Condition && PS抓盘手臂放空盘到Empty流程.Permit)
                             {
-                                PS抓盘手臂放空盘到Empty流程.StepID = 510;
+                                PS抓盘手臂放空盘到Empty流程.Processing = true;
+                                PS抓盘手臂放空盘到Empty流程.StepID = 505;
+                            }
+                            break;
+
+                        case 505:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "移Tray上下气缸原位输入读取";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            result = 移Tray上下气缸原位输入读取(out string value);
+                            if (result == "Success")
+                            {
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂放空盘到Empty流程.StepID = 510;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                    RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "移Tray夹爪气缸到位输入读取";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 移Tray夹爪气缸到位输入读取(out value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                        case 510:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "移Tray夹爪气缸到位输入读取";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            result = 移Tray夹爪气缸到位输入读取(out value);
+                            if (result == "Success")
                             {
-                                PS抓盘手臂放空盘到Empty流程.StepID = 515;
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂放空盘到Empty流程.StepID = 515;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
+                                    RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸未夹紧", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸未夹紧", LogType.AlarmLog);
+                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 515:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "放Tary盘轴移动到Empty";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Empty流程.StepID = 516;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 516:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "判断Empty下降是否完成";
-                        if (Empty下降标记 == 1 && Empty上顶标记 == 1)
-                        {
-                            PS抓盘手臂放空盘到Empty流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
-
-                    case 520:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "移Tray上下气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 移Tray上下气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Empty流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 525:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "移Tray夹爪气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 移Tray夹爪气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Empty流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 530:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "移Tray上下气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 移Tray上下气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Empty流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 535:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "检测Empty是否有空盘";
-                        result = Empty_前Tray存在感应(out value);
-                        result2 = Empty_后Tray放歪感应(out string value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 515:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "放Tary盘轴移动到Empty";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Empty_X + 点位微调.抓盘_Empty_X);
+                            if (result == "Success")
                             {
-                                PS抓盘手臂放空盘到Empty流程.StepID = 540;
+                                PS抓盘手臂放空盘到Empty流程.StepID = 516;
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Empty失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 516:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "判断Empty下降是否完成";
+                            if (Empty下降标记 == 1 && Empty上顶标记 == 1)
+                            {
+                                PS抓盘手臂放空盘到Empty流程.StepID = 520;
+                            }
+                            else
+                            {
+                                Thread.Sleep(10);
+                            }
+                            break;
+
+                        case 520:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "移Tray上下气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            result = 移Tray上下气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Empty流程.StepID = 525;
+                            }
+                            else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
+                                Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
 
-                                if (value != "0")
+                        case 525:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "移Tray夹爪气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            result = 移Tray夹爪气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Empty流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 530:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "移Tray上下气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            result = 移Tray上下气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Empty流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 535:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "检测Empty是否有空盘";
+                            result = Empty_前Tray存在感应(out value);
+                            result2 = Empty_后Tray放歪感应(out string value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Empty没有感应到Tray盘,value:" + value);
+                                    PS抓盘手臂放空盘到Empty流程.StepID = 540;
                                 }
-                                if (value2 != "1")
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
                                 {
-                                    RunLog($"抓盘手臂放盘失败！Empty感应到Tray盘放歪,value:" + value2);
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "0")
+                                    {
+                                        RunLog($"抓盘手臂放盘失败！Empty没有感应到Tray盘,value:" + value);
+                                    }
+                                    if (value2 != "1")
+                                    {
+                                        RunLog($"抓盘手臂放盘失败！Empty感应到Tray盘放歪,value:" + value2);
+                                    }
                                 }
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success") RunLog($"读取Empty前Tray存在感应失败！" + result);
-                            if (result2 != "Success") RunLog($"读取Empty后Tray放歪感应失败！" + result2);
-                        }
-                        break;
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success") RunLog($"读取Empty前Tray存在感应失败！" + result);
+                                if (result2 != "Success") RunLog($"读取Empty后Tray放歪感应失败！" + result2);
+                            }
+                            break;
 
-                    case 540:
-                        PS抓盘手臂放空盘到Empty流程.StepName = "放Tary盘轴回到原点";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        result = 放Tary盘轴移动(0);
-                        if (result == "Success")
-                        {
-                            抓盘手臂放空盘到Empty标记 = 1;
-                            PS抓盘手臂放空盘到Empty流程.StepID = 599;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                        case 540:
+                            PS抓盘手臂放空盘到Empty流程.StepName = "放Tary盘轴回到原点";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            result = 放Tary盘轴移动(0);
+                            if (result == "Success")
+                            {
+                                抓盘手臂放空盘到Empty标记 = 1;
+                                PS抓盘手臂放空盘到Empty流程.StepID = 599;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
 
-                    case 599:
-                        PS抓盘手臂放空盘到Empty流程.StepName = $"抓盘手臂放空盘到Empty流程完成";
-                        RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
-                        PS抓盘手臂放空盘到Empty流程.Processing = false;
-                        PS抓盘手臂放空盘到Empty流程.StepID = 500;
-                        break;
+                        case 599:
+                            PS抓盘手臂放空盘到Empty流程.StepName = $"抓盘手臂放空盘到Empty流程完成";
+                            RunLog($"PS抓盘手臂放空盘到Empty流程.StepID={PS抓盘手臂放空盘到Empty流程.StepID}->{PS抓盘手臂放空盘到Empty流程.StepName}");
+                            PS抓盘手臂放空盘到Empty流程.Processing = false;
+                            PS抓盘手臂放空盘到Empty流程.StepID = 500;
+                            break;
 
-                    default:
-                        RunLog(("PS抓盘手臂放空盘到Empty流程.StepID =" + PS抓盘手臂放空盘到Empty流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        default:
+                            RunLog(("PS抓盘手臂放空盘到Empty流程.StepID =" + PS抓盘手臂放空盘到Empty流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS抓盘手臂放空盘到Empty流程({PS抓盘手臂放空盘到Empty流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
@@ -13437,623 +13914,633 @@ namespace H5509_V2
                 //{
                 //    continue;
                 //}
-
-                Thread.Sleep(10);
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS抓盘手臂放空盘到Auto1流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
 
-                if (APPmaster.IsPause)
-                {
-                    continue;
-                }
-
-                switch (PS抓盘手臂放空盘到Auto1流程.StepID)
-                {
-                    case 500:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "路径规划";
-                        PS抓盘手臂放空盘到Auto1流程.Condition = 抓盘手臂放空盘到Auto1标记 == 2
-                                                    && 抓盘手臂取Empty空盘标记 == 1;
-
-                        PS抓盘手臂放空盘到Auto1流程.Permit = !PS抓盘手臂放空盘到Auto1流程.Processing
-                                                    && !PS抓盘手臂取Empty空盘流程.Processing;
-
-                        if (PS抓盘手臂放空盘到Auto1流程.Condition && PS抓盘手臂放空盘到Auto1流程.Permit)
-                        {
-                            抓盘手臂取Empty空盘标记 = 2;
-                            PS抓盘手臂放空盘到Auto1流程.Processing = true;
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 501;
-                        }
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS抓盘手臂放空盘到Auto1流程.被强制停止");
                         break;
+                    }
 
-                    case 501:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待抓盘手臂取Empty空盘";
-                        if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 505;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
+                    if (APPmaster.IsPause)
+                    {
+                        continue;
+                    }
 
-                    case 505:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸原位输入读取";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray上下气缸原位输入读取(out string value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                    switch (PS抓盘手臂放空盘到Auto1流程.StepID)
+                    {
+                        case 500:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "路径规划";
+                            PS抓盘手臂放空盘到Auto1流程.Condition = 抓盘手臂放空盘到Auto1标记 == 2
+                                                        && 抓盘手臂取Empty空盘标记 == 1;
+
+                            PS抓盘手臂放空盘到Auto1流程.Permit = !PS抓盘手臂放空盘到Auto1流程.Processing
+                                                        && !PS抓盘手臂取Empty空盘流程.Processing;
+
+                            if (PS抓盘手臂放空盘到Auto1流程.Condition && PS抓盘手臂放空盘到Auto1流程.Permit)
                             {
-                                PS抓盘手臂放空盘到Auto1流程.StepID = 510;
+                                抓盘手臂取Empty空盘标记 = 2;
+                                PS抓盘手臂放空盘到Auto1流程.Processing = true;
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 501;
+                            }
+                            break;
+
+                        case 501:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "等待抓盘手臂取Empty空盘";
+                            if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 505;
+                            }
+                            else
+                            {
+                                Thread.Sleep(10);
+                            }
+                            break;
+
+                        case 505:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸原位输入读取";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray上下气缸原位输入读取(out string value);
+                            if (result == "Success")
+                            {
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂放空盘到Auto1流程.StepID = 510;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                    RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray夹爪气缸到位输入读取";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray夹爪气缸到位输入读取(out value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                        case 510:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray夹爪气缸到位输入读取";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray夹爪气缸到位输入读取(out value);
+                            if (result == "Success")
                             {
-                                PS抓盘手臂放空盘到Auto1流程.StepID = 511;
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂放空盘到Auto1流程.StepID = 511;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
+                                    RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸未夹紧", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸未夹紧", LogType.AlarmLog);
+                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 511:
-                        if (Auto1上顶标记 == 1)
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 515;
-                        }
-                        else
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 512;
-                        }
-                        break;
-
-                    case 512:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到等待位";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X - 200);//656.78
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 513;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1等待位失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 513:
-                        if (Auto1上顶标记 == 1)
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 514;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
-
-                    case 514:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否无空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = Auto1_前Tray存在感应(out value);
-                        result2 = Auto1_后Tray放歪感应(out string value3);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "1" && value3 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 511:
+                            if (Auto1上顶标记 == 1)
                             {
                                 PS抓盘手臂放空盘到Auto1流程.StepID = 515;
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            else
                             {
-                                APPmaster.ProgramPause = true;
-                                IsPause = true;
-
-                                if (value != "1")
-                                {
-                                    Listcode.Add("4020001");
-                                    RunLog("[Code]4020001,[Msg]Auto1前对射感应到有Tray盘", LogType.AlarmLog);
-                                }
-                                if (value3 != "1")
-                                {
-                                    Listcode.Add("4020001");
-                                    RunLog("[Code]4020001,[Msg]Auto1后对射感应到有Tray盘", LogType.AlarmLog);
-                                }
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 512;
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
+                            break;
 
-                            if (result != "Success")
+                        case 512:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到等待位";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X - 200);//656.78
+                            if (result == "Success")
                             {
-                                Listcode.Add("4020001");
-                                RunLog("[Code]4020001,[Msg]读取Auto1前Tray存在感应失败！" + result, LogType.AlarmLog);
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 513;
                             }
-                            if (result2 != "Success")
-                            {
-                                Listcode.Add("4020001");
-                                RunLog("[Code]4020001,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
-                            }
-                        }
-                        break;
-
-                    case 515:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到Auto1";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X + 点位微调.抓盘_Auto1_X);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 520:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray上下气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 525:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray夹爪气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray夹爪气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 530:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray上下气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 535:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否有空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = Auto1_前Tray存在感应(out value);
-                        result2 = Auto1_后Tray放歪感应(out string value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
-                            {
-                                PS抓盘手臂放空盘到Auto1流程.StepID = 540;
-                            }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
-                            {
-                                APPmaster.ProgramPause = true;
-                                IsPause = true;
-
-                                if (value != "0")
-                                {
-                                    Listcode.Add("4020009");
-                                    RunLog("[Code]4020009,[Msg]Auto1前对射感应到无Tray盘", LogType.AlarmLog);
-                                }
-                                if (value2 != "1")
-                                {
-                                    Listcode.Add("4020017");
-                                    RunLog("[Code]4020017,[Msg]Auto1后对射感应到Tray盘放歪", LogType.AlarmLog);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-
-                            if (result != "Success")
-                            {
-                                Listcode.Add("4020009");
-                                RunLog("[Code]4020009,[Msg]读取Auto1前Tray存在感应失败!" + result, LogType.AlarmLog);
-                            }
-                            if (result2 != "Success")
-                            {
-                                Listcode.Add("4020017");
-                                RunLog("[Code]4020017,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
-                            }
-                        }
-                        break;
-
-                    case 540:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = $"Auto1_Tray前侧定位气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = Auto1_Tray前侧定位气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 545;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray前侧定位气缸到位输出失败！" + result);
-                        }
-                        break;
-
-                    case 545:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴回到原点";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 放Tary盘轴移动(0);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 550;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 550:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "判断Auto1料仓是否满盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        if (Auto1料仓满盘标记)
-                        {
-                            Auto1上顶标记 = 2;
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 551;
-                        }
-                        else PS抓盘手臂放空盘到Auto1流程.StepID = 599;
-                        break;
-
-
-                    case 551:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待Auto1上顶盖空盘";
-                        if (Auto1上顶标记 == 1)
-                        {
-                            Auto1料仓打开标记 = false;
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("4020001");//自动盘1区--盘放满(满料未拿走)
-                            RunLog($"[Code]4020001,[Msg]Auto1料仓满料！", LogType.AlarmLog);
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 555;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 555:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待料仓料拿走";
-                        if (Auto1料仓打开标记) //料仓被打开
-                        {
-                            抓盘手臂取Empty空盘标记 = 2;
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 560;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("4020001");//自动盘1区--盘放满(满料未拿走)
-                            RunLog($"[Code]4020001,[Msg]Auto1料仓满料！", LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 560:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待抓盘手臂取Empty空盘";
-                        if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 565;
-                        }
-                        Thread.Sleep(10);
-                        break;
-
-                    case 565:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴和Auto1顶盘轴移动到等待位";
-                        Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto1_X - 200); });
-                        Task<string> auto1u = Task.Run(() => { return Auto1顶盘轴移动(初始点位.Auto1_初始位); });
-                        if (trayx.Result == "Success" && auto1u.Result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 570;
-                        }
-                        else
-                        {
-                            if (trayx.Result != "Success")
+                            else
                             {
                                 Listcode.Add("2025007");
                                 RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1等待位失败!" + result, LogType.AlarmLog);
                                 M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
                             }
-                            if (auto1u.Result != "Success")
-                            {
-                                RunLog($"Auto1顶盘轴移动到等待位失败！" + trayx.Result);
-                            }
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                            break;
 
-                    case 570:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否无空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = Auto1_前Tray存在感应(out value);
-                        result2 = Auto1_后Tray放歪感应(out value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 513:
+                            if (Auto1上顶标记 == 1)
                             {
-                                PS抓盘手臂放空盘到Auto1流程.StepID = 575;
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 514;
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            else
+                            {
+                                Thread.Sleep(10);
+                            }
+                            break;
+
+                        case 514:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否无空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = Auto1_前Tray存在感应(out value);
+                            result2 = Auto1_后Tray放歪感应(out string value3);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "1" && value3 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto1流程.StepID = 515;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "1")
+                                    {
+                                        Listcode.Add("4020001");
+                                        RunLog("[Code]4020001,[Msg]Auto1前对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value3 != "1")
+                                    {
+                                        Listcode.Add("4020001");
+                                        RunLog("[Code]4020001,[Msg]Auto1后对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
 
-                                if (value != "1")
+                                if (result != "Success")
                                 {
                                     Listcode.Add("4020001");
-                                    RunLog("[Code]4020001,[Msg]Auto1前对射感应到有Tray盘", LogType.AlarmLog);
+                                    RunLog("[Code]4020001,[Msg]读取Auto1前Tray存在感应失败！" + result, LogType.AlarmLog);
                                 }
-                                if (value2 != "1")
+                                if (result2 != "Success")
                                 {
                                     Listcode.Add("4020001");
-                                    RunLog("[Code]4020001,[Msg]Auto1后对射感应到有Tray盘", LogType.AlarmLog);
+                                    RunLog("[Code]4020001,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
                                 }
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
+                            break;
 
-                            if (result != "Success")
+                        case 515:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到Auto1";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X + 点位微调.抓盘_Auto1_X);
+                            if (result == "Success")
                             {
-                                Listcode.Add("4020001");
-                                RunLog("[Code]4020001,[Msg]读取Auto1前Tray有盘感应失败！" + result, LogType.AlarmLog);
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 520;
                             }
-                            if (result2 != "Success")
+                            else
                             {
-                                Listcode.Add("4020001");
-                                RunLog("[Code]4020001,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
                             }
-                        }
-                        break;
+                            break;
 
-
-                    case 575:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到Auto1";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X + 点位微调.抓盘_Auto1_X);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 580;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 580:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray上下气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 585;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 585:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray夹爪气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray夹爪气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 590;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 590:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 移Tray上下气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 591;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 591:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否有空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = Auto1_前Tray存在感应(out value);
-                        result2 = Auto1_后Tray放歪感应(out value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 520:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray上下气缸到位输出();
+                            if (result == "Success")
                             {
-                                PS抓盘手臂放空盘到Auto1流程.StepID = 592;
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 525;
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 525:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray夹爪气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray夹爪气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 530:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray上下气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 535:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否有空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = Auto1_前Tray存在感应(out value);
+                            result2 = Auto1_后Tray放歪感应(out string value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto1流程.StepID = 540;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "0")
+                                    {
+                                        Listcode.Add("4020009");
+                                        RunLog("[Code]4020009,[Msg]Auto1前对射感应到无Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value2 != "1")
+                                    {
+                                        Listcode.Add("4020017");
+                                        RunLog("[Code]4020017,[Msg]Auto1后对射感应到Tray盘放歪", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
 
-                                if (value != "0")
+                                if (result != "Success")
                                 {
                                     Listcode.Add("4020009");
-                                    RunLog("[Code]4020009,[Msg]Auto1前对射感应到无Tray盘", LogType.AlarmLog);
+                                    RunLog("[Code]4020009,[Msg]读取Auto1前Tray存在感应失败!" + result, LogType.AlarmLog);
                                 }
-                                if (value2 != "1")
+                                if (result2 != "Success")
                                 {
                                     Listcode.Add("4020017");
-                                    RunLog("[Code]4020017,[Msg]Auto1后对射感应到Tray盘放歪", LogType.AlarmLog);
+                                    RunLog("[Code]4020017,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
                                 }
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success")
+                            break;
+
+                        case 540:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = $"Auto1_Tray前侧定位气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = Auto1_Tray前侧定位气缸到位输出();
+                            if (result == "Success")
                             {
-                                Listcode.Add("4020009");
-                                RunLog("[Code]4020009,[Msg]读取Auto1前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 545;
                             }
-                            if (result2 != "Success")
+                            else
                             {
-                                Listcode.Add("4020017");
-                                RunLog("[Code]4020017,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1_Tray前侧定位气缸到位输出失败！" + result);
                             }
-                        }
-                        break;
+                            break;
 
-                    case 592:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = $"Auto1_Tray前侧定位气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = Auto1_Tray前侧定位气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 595;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto1_Tray前侧定位气缸到位输出失败！" + result);
-                        }
-                        break;
+                        case 545:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴回到原点";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 放Tary盘轴移动(0);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 550;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
 
-                    case 595:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴回到原点";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        result = 放Tary盘轴移动(0);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto1流程.StepID = 599;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                        case 550:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "判断Auto1料仓是否满盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            if (Auto1料仓满盘标记)
+                            {
+                                Auto1上顶标记 = 2;
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 551;
+                            }
+                            else PS抓盘手臂放空盘到Auto1流程.StepID = 599;
+                            break;
 
-                    case 599:
-                        抓盘手臂放空盘到Auto1标记 = 1;
-                        PS抓盘手臂放空盘到Auto1流程.StepName = $"抓盘手臂放空盘到Auto1流程完成";
-                        RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
-                        PS抓盘手臂放空盘到Auto1流程.Processing = false;
-                        PS抓盘手臂放空盘到Auto1流程.StepID = 500;
-                        break;
 
-                    default:
-                        RunLog(("PS抓盘手臂放空盘到Auto1流程.StepID =" + PS抓盘手臂放空盘到Auto1流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        case 551:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "等待Auto1上顶盖空盘";
+                            if (Auto1上顶标记 == 1)
+                            {
+                                Auto1料仓打开标记 = false;
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("4020001");//自动盘1区--盘放满(满料未拿走)
+                                RunLog($"[Code]4020001,[Msg]Auto1料仓满料！", LogType.AlarmLog);
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 555;
+                            }
+                            else Thread.Sleep(10);
+                            break;
+
+                        case 555:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "等待料仓料拿走";
+                            if (Auto1料仓打开标记) //料仓被打开
+                            {
+                                抓盘手臂取Empty空盘标记 = 2;
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 560;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("4020001");//自动盘1区--盘放满(满料未拿走)
+                                RunLog($"[Code]4020001,[Msg]Auto1料仓满料！", LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 560:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "等待抓盘手臂取Empty空盘";
+                            if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 565;
+                            }
+                            Thread.Sleep(10);
+                            break;
+
+                        case 565:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴和Auto1顶盘轴移动到等待位";
+                            Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto1_X - 200); });
+                            Task<string> auto1u = Task.Run(() => { return Auto1顶盘轴移动(初始点位.Auto1_初始位); });
+                            if (trayx.Result == "Success" && auto1u.Result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 570;
+                            }
+                            else
+                            {
+                                if (trayx.Result != "Success")
+                                {
+                                    Listcode.Add("2025007");
+                                    RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1等待位失败!" + result, LogType.AlarmLog);
+                                    M18_放Tary盘轴ErrorMsg = result;
+                                }
+                                if (auto1u.Result != "Success")
+                                {
+                                    RunLog($"Auto1顶盘轴移动到等待位失败！" + trayx.Result);
+                                }
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 570:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否无空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = Auto1_前Tray存在感应(out value);
+                            result2 = Auto1_后Tray放歪感应(out value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto1流程.StepID = 575;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "1")
+                                    {
+                                        Listcode.Add("4020001");
+                                        RunLog("[Code]4020001,[Msg]Auto1前对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value2 != "1")
+                                    {
+                                        Listcode.Add("4020001");
+                                        RunLog("[Code]4020001,[Msg]Auto1后对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (result != "Success")
+                                {
+                                    Listcode.Add("4020001");
+                                    RunLog("[Code]4020001,[Msg]读取Auto1前Tray有盘感应失败！" + result, LogType.AlarmLog);
+                                }
+                                if (result2 != "Success")
+                                {
+                                    Listcode.Add("4020001");
+                                    RunLog("[Code]4020001,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                }
+                            }
+                            break;
+
+
+                        case 575:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴移动到Auto1";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Auto1_X + 点位微调.抓盘_Auto1_X);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 580;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto1失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 580:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray上下气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 585;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 585:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray夹爪气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray夹爪气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 590;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 590:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "移Tray上下气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 移Tray上下气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 591;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 591:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "检测Auto1是否有空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = Auto1_前Tray存在感应(out value);
+                            result2 = Auto1_后Tray放歪感应(out value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto1流程.StepID = 592;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "0")
+                                    {
+                                        Listcode.Add("4020009");
+                                        RunLog("[Code]4020009,[Msg]Auto1前对射感应到无Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value2 != "1")
+                                    {
+                                        Listcode.Add("4020017");
+                                        RunLog("[Code]4020017,[Msg]Auto1后对射感应到Tray盘放歪", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success")
+                                {
+                                    Listcode.Add("4020009");
+                                    RunLog("[Code]4020009,[Msg]读取Auto1前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                }
+                                if (result2 != "Success")
+                                {
+                                    Listcode.Add("4020017");
+                                    RunLog("[Code]4020017,[Msg]读取Auto1后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                }
+                            }
+                            break;
+
+                        case 592:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = $"Auto1_Tray前侧定位气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = Auto1_Tray前侧定位气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 595;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto1_Tray前侧定位气缸到位输出失败！" + result);
+                            }
+                            break;
+
+                        case 595:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "放Tary盘轴回到原点";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            result = 放Tary盘轴移动(0);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto1流程.StepID = 599;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 599:
+                            抓盘手臂放空盘到Auto1标记 = 1;
+                            PS抓盘手臂放空盘到Auto1流程.StepName = $"抓盘手臂放空盘到Auto1流程完成";
+                            RunLog($"PS抓盘手臂放空盘到Auto1流程.StepID={PS抓盘手臂放空盘到Auto1流程.StepID}->{PS抓盘手臂放空盘到Auto1流程.StepName}");
+                            PS抓盘手臂放空盘到Auto1流程.Processing = false;
+                            PS抓盘手臂放空盘到Auto1流程.StepID = 500;
+                            break;
+
+                        default:
+                            RunLog(("PS抓盘手臂放空盘到Auto1流程.StepID =" + PS抓盘手臂放空盘到Auto1流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
                 }
-
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS抓盘手臂放空盘到Auto1流程({PS抓盘手臂放空盘到Auto1流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
+                }
             }
         }
 
@@ -14064,401 +14551,128 @@ namespace H5509_V2
             PS抓盘手臂放空盘到Auto2流程.StepID = 500;
             while (true)
             {
-                Thread.Sleep(10);
-                //if (!是否可以开始运行())
-                //{
-                //    continue;
-                //}
-
-                if (APPmaster.IsForecePause)
+                try
                 {
-                    RunLog($"PS抓盘手臂放空盘到Auto2流程.被强制停止");
-                    break;
-                }
+                    Thread.Sleep(10);
+                    //if (!是否可以开始运行())
+                    //{
+                    //    continue;
+                    //}
 
-                if (APPmaster.IsPause)
-                {
-                    continue;
-                }
-                switch (PS抓盘手臂放空盘到Auto2流程.StepID)
-                {
-                    case 500:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "路径规划";
-                        PS抓盘手臂放空盘到Auto2流程.Condition = 抓盘手臂放空盘到Auto2标记 == 2
-                                                    && 抓盘手臂取Empty空盘标记 == 1;
-
-                        PS抓盘手臂放空盘到Auto2流程.Permit = !PS抓盘手臂放空盘到Auto2流程.Processing
-                                                    && !PS抓盘手臂取Empty空盘流程.Processing;
-
-                        if (PS抓盘手臂放空盘到Auto2流程.Condition && PS抓盘手臂放空盘到Auto2流程.Permit)
-                        {
-                            抓盘手臂取Empty空盘标记 = 2;
-                            PS抓盘手臂放空盘到Auto2流程.Processing = true;
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 501;
-                        }
+                    if (APPmaster.IsForecePause)
+                    {
+                        RunLog($"PS抓盘手臂放空盘到Auto2流程.被强制停止");
                         break;
+                    }
 
-                    case 501:
-                        PS抓盘手臂放空盘到Auto1流程.StepName = "等待抓盘手臂取Empty空盘";
-                        if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 505;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
+                    if (APPmaster.IsPause)
+                    {
+                        continue;
+                    }
+                    switch (PS抓盘手臂放空盘到Auto2流程.StepID)
+                    {
+                        case 500:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "路径规划";
+                            PS抓盘手臂放空盘到Auto2流程.Condition = 抓盘手臂放空盘到Auto2标记 == 2
+                                                        && 抓盘手臂取Empty空盘标记 == 1;
 
-                    case 505:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸原位输入读取";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray上下气缸原位输入读取(out string value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                            PS抓盘手臂放空盘到Auto2流程.Permit = !PS抓盘手臂放空盘到Auto2流程.Processing
+                                                        && !PS抓盘手臂取Empty空盘流程.Processing;
+
+                            if (PS抓盘手臂放空盘到Auto2流程.Condition && PS抓盘手臂放空盘到Auto2流程.Permit)
                             {
-                                PS抓盘手臂放空盘到Auto2流程.StepID = 510;
+                                抓盘手臂取Empty空盘标记 = 2;
+                                PS抓盘手臂放空盘到Auto2流程.Processing = true;
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 501;
+                            }
+                            break;
+
+                        case 501:
+                            PS抓盘手臂放空盘到Auto1流程.StepName = "等待抓盘手臂取Empty空盘";
+                            if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 505;
+                            }
+                            else
+                            {
+                                Thread.Sleep(10);
+                            }
+                            break;
+
+                        case 505:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸原位输入读取";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray上下气缸原位输入读取(out string value);
+                            if (result == "Success")
+                            {
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂放空盘到Auto2流程.StepID = 510;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                    RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸未在原位", LogType.AlarmLog);
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 510:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray夹爪气缸到位输入读取";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray夹爪气缸到位输入读取(out value);
-                        if (result == "Success")
-                        {
-                            if (value == "1")
+                        case 510:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray夹爪气缸到位输入读取";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray夹爪气缸到位输入读取(out value);
+                            if (result == "Success")
                             {
-                                PS抓盘手臂放空盘到Auto2流程.StepID = 511;
+                                if (value == "1")
+                                {
+                                    PS抓盘手臂放空盘到Auto2流程.StepID = 511;
+                                }
+                                else
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
+                                    RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸未夹紧", LogType.AlarmLog);
+                                }
                             }
                             else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
                                 Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸未夹紧", LogType.AlarmLog);
+                                RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add($"1010002"); //C_空盘手臂_夹紧--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010002,[Msg]移Tray夹爪气缸原位输入读取失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
+                            break;
 
-                    case 511:
-                        if (Auto2上顶标记 == 1)
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 515;
-                        }
-                        else
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 512;
-                        }
-                        break;
-
-                    case 512:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到等待位";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X - 200);//859.35
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 513;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2等待位失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 513:
-                        if (Auto2上顶标记 == 1)
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 514;
-                        }
-                        else
-                        {
-                            Thread.Sleep(10);
-                        }
-                        break;
-
-                    case 514:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否有空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = Auto2_前Tray存在感应(out value);
-                        result2 = Auto2_后Tray放歪感应(out string value3);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "1" && value3 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 511:
+                            if (Auto2上顶标记 == 1)
                             {
                                 PS抓盘手臂放空盘到Auto2流程.StepID = 515;
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            else
                             {
-                                APPmaster.ProgramPause = true;
-                                IsPause = true;
-
-                                if (value != "1")
-                                {
-                                    Listcode.Add("4021001");
-                                    RunLog("[Code]4021001,[Msg]Auto2前对射感应到有Tray盘", LogType.AlarmLog);
-                                }
-                                if (value3 != "1")
-                                {
-                                    Listcode.Add("4021001");
-                                    RunLog("[Code]4021001,[Msg]Auto2后对射感应到有Tray盘", LogType.AlarmLog);
-                                }
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 512;
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            if (result != "Success")
+                            break;
+
+                        case 512:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到等待位";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X - 200);//859.35
+                            if (result == "Success")
                             {
-                                Listcode.Add("4021001");
-                                RunLog("[Code]4021001,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 513;
                             }
-                            if (result2 != "Success")
-                            {
-                                Listcode.Add("4021001");
-                                RunLog("[Code]4021001,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
-                            }
-                        }
-                        break;
-
-                    case 515:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到Auto2";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X + 点位微调.抓盘_Auto2_X);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 520;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 520:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray上下气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 525;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010000,[Msg]移移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 525:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray夹爪气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray夹爪气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 530;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 530:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray上下气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 535;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 535:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否有空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = Auto2_前Tray存在感应(out value);
-                        result2 = Auto2_后Tray放歪感应(out string value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
-                            {
-                                PS抓盘手臂放空盘到Auto2流程.StepID = 540;
-                            }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
-                            {
-                                APPmaster.ProgramPause = true;
-                                IsPause = true;
-
-                                if (value != "0")
-                                {
-                                    Listcode.Add("4021009");
-                                    RunLog("[Code]4021009,[Msg]Auto2前对射感应到无Tray盘", LogType.AlarmLog);
-                                }
-                                if (value2 != "1")
-                                {
-                                    Listcode.Add("4021017");
-                                    RunLog("[Code]4021017,[Msg]Auto2后感应到Tray盘放歪", LogType.AlarmLog);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-
-                            if (result != "Success")
-                            {
-                                Listcode.Add("4021009");
-                                RunLog("[Code]4021009,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
-                            }
-                            if (result2 != "Success")
-                            {
-                                Listcode.Add("4021017");
-                                RunLog("[Code]4021017,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
-                            }
-                        }
-                        break;
-
-                    case 540:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = $"Auto2_Tray前侧定位气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = Auto2_Tray前侧定位气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 545;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray前侧定位气缸到位输出失败！" + result);
-                        }
-                        break;
-
-                    case 545:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴回到原点";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 放Tary盘轴移动(0);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 550;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 550:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "判断Auto2料仓是否满盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        if (Auto2料仓满盘标记)
-                        {
-                            Auto2上顶标记 = 2;
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 551;
-                        }
-                        else PS抓盘手臂放空盘到Auto2流程.StepID = 599;
-                        break;
-
-                    case 551:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "等待Auto2上顶盖空盘";
-                        if (Auto2上顶标记 == 1)
-                        {
-                            Auto2料仓打开标记 = false;
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("4021001");//自动盘2区--盘放满(满料未拿走)
-                            RunLog($"[Code]4021001,[Msg]Auto2料仓满料", LogType.AlarmLog);
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 555;
-                        }
-                        else Thread.Sleep(10);
-                        break;
-
-                    case 555:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "等待料仓料拿走";
-                        if (Auto2料仓打开标记) //料仓被打开
-                        {
-                            抓盘手臂取Empty空盘标记 = 2;
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 560;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("4021001");//自动盘2区--盘放满(满料未拿走)
-                            RunLog($"[Code]4021001,[Msg]Auto1料仓满料", LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 560:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "等待抓盘手臂取Empty空盘";
-                        if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 565;
-                        }
-                        Thread.Sleep(10);
-                        break;
-
-                    case 565:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴和Auto2顶盘轴移动到等待位";
-                        Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto2_X - 200); });
-                        Task<string> auto2u = Task.Run(() => { return Auto2顶盘轴移动(初始点位.Auto2_初始位); });
-                        if (trayx.Result == "Success" && auto2u.Result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 570;
-                        }
-                        else
-                        {
-                            if (trayx.Result != "Success")
+                            else
                             {
                                 Listcode.Add("2025007");
                                 RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2等待位失败!" + result, LogType.AlarmLog);
@@ -14466,226 +14680,510 @@ namespace H5509_V2
                                 ProgramPause = true;
                                 IsPause = true;
                             }
-                            if (auto2u.Result != "Success")
-                            {
-                                RunLog($"Auto2顶盘轴移动到等待位失败！" + trayx.Result);
-                            }
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                            break;
 
-                    case 570:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否无空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = Auto2_前Tray存在感应(out value);
-                        result2 = Auto2_后Tray放歪感应(out value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                        case 513:
+                            if (Auto2上顶标记 == 1)
                             {
-                                PS抓盘手臂放空盘到Auto2流程.StepID = 575;
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 514;
                             }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                            else
+                            {
+                                Thread.Sleep(10);
+                            }
+                            break;
+
+                        case 514:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否有空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = Auto2_前Tray存在感应(out value);
+                            result2 = Auto2_后Tray放歪感应(out string value3);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "1" && value3 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto2流程.StepID = 515;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "1")
+                                    {
+                                        Listcode.Add("4021001");
+                                        RunLog("[Code]4021001,[Msg]Auto2前对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value3 != "1")
+                                    {
+                                        Listcode.Add("4021001");
+                                        RunLog("[Code]4021001,[Msg]Auto2后对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                if (result != "Success")
+                                {
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                }
+                                if (result2 != "Success")
+                                {
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                }
+                            }
+                            break;
+
+                        case 515:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到Auto2";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X + 点位微调.抓盘_Auto2_X);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 520;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 520:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray上下气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 525;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010000,[Msg]移移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 525:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray夹爪气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray夹爪气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 530;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 530:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray上下气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 535;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 535:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否有空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = Auto2_前Tray存在感应(out value);
+                            result2 = Auto2_后Tray放歪感应(out string value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto2流程.StepID = 540;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "0")
+                                    {
+                                        Listcode.Add("4021009");
+                                        RunLog("[Code]4021009,[Msg]Auto2前对射感应到无Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value2 != "1")
+                                    {
+                                        Listcode.Add("4021017");
+                                        RunLog("[Code]4021017,[Msg]Auto2后感应到Tray盘放歪", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
                             {
                                 APPmaster.ProgramPause = true;
                                 IsPause = true;
 
-                                if (value != "1")
-                                {
-                                    Listcode.Add("4021001");
-                                    RunLog("[Code]4021001,[Msg]Auto2前对射感应到有Tray盘", LogType.AlarmLog);
-                                }
-                                if (value2 != "1")
-                                {
-                                    Listcode.Add("4021001");
-                                    RunLog("[Code]4021001,[Msg]Auto2后对射感应到有Tray盘", LogType.AlarmLog);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-
-                            if (result != "Success")
-                            {
-                                Listcode.Add("4021001");
-                                RunLog("[Code]4021001,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
-                            }
-                            if (result2 != "Success")
-                            {
-                                Listcode.Add("4021001");
-                                RunLog("[Code]4021001,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
-                            }
-                        }
-                        break;
-
-                    case 575:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到Auto2";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X + 点位微调.抓盘_Auto2_X);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 580;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
-
-                    case 580:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray上下气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 585;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 585:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray夹爪气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray夹爪气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 590;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
-                            RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 590:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸原位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 移Tray上下气缸原位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 591;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
-                            RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
-                        }
-                        break;
-
-                    case 591:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否有空盘";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = Auto2_前Tray存在感应(out value);
-                        result2 = Auto2_后Tray放歪感应(out value2);
-                        if (result == "Success" && result2 == "Success")
-                        {
-                            if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
-                            {
-                                PS抓盘手臂放空盘到Auto2流程.StepID = 592;
-                            }
-                            else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
-                            {
-                                APPmaster.ProgramPause = true;
-                                IsPause = true;
-
-                                if (value != "0")
+                                if (result != "Success")
                                 {
                                     Listcode.Add("4021009");
-                                    RunLog("[Code]4021009,[Msg]Auto2前对射感应到无Tray盘", LogType.AlarmLog);
+                                    RunLog("[Code]4021009,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
                                 }
-                                if (value2 != "1")
+                                if (result2 != "Success")
                                 {
                                     Listcode.Add("4021017");
-                                    RunLog("[Code]4021017,[Msg]Auto2后感应到Tray盘放歪", LogType.AlarmLog);
+                                    RunLog("[Code]4021017,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
                                 }
                             }
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
+                            break;
 
-                            if (result != "Success")
+                        case 540:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = $"Auto2_Tray前侧定位气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = Auto2_Tray前侧定位气缸到位输出();
+                            if (result == "Success")
                             {
-                                Listcode.Add("4021009");
-                                RunLog("[Code]4021009,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 545;
                             }
-                            if (result2 != "Success")
+                            else
                             {
-                                Listcode.Add("4021017");
-                                RunLog("[Code]4021017,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2_Tray前侧定位气缸到位输出失败！" + result);
                             }
-                        }
-                        break;
+                            break;
 
-                    case 592:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = $"Auto2_Tray前侧定位气缸到位输出";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = Auto2_Tray前侧定位气缸到位输出();
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 595;
-                        }
-                        else
-                        {
-                            APPmaster.ProgramPause = true;
-                            IsPause = true;
-                            RunLog($"Auto2_Tray前侧定位气缸到位输出失败！" + result);
-                        }
-                        break;
+                        case 545:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴回到原点";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 放Tary盘轴移动(0);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 550;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
 
-                    case 595:
-                        PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴回到原点";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        result = 放Tary盘轴移动(0);
-                        if (result == "Success")
-                        {
-                            PS抓盘手臂放空盘到Auto2流程.StepID = 599;
-                        }
-                        else
-                        {
-                            Listcode.Add("2025007");
-                            RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
-                            M18_放Tary盘轴ErrorMsg = result;
-                            ProgramPause = true;
-                            IsPause = true;
-                        }
-                        break;
+                        case 550:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "判断Auto2料仓是否满盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            if (Auto2料仓满盘标记)
+                            {
+                                Auto2上顶标记 = 2;
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 551;
+                            }
+                            else PS抓盘手臂放空盘到Auto2流程.StepID = 599;
+                            break;
 
-                    case 599:
-                        抓盘手臂放空盘到Auto2标记 = 1;
-                        PS抓盘手臂放空盘到Auto2流程.StepName = $"抓盘手臂放空盘到Auto2流程完成";
-                        RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
-                        PS抓盘手臂放空盘到Auto2流程.Processing = false;
-                        PS抓盘手臂放空盘到Auto2流程.StepID = 500;
-                        break;
+                        case 551:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "等待Auto2上顶盖空盘";
+                            if (Auto2上顶标记 == 1)
+                            {
+                                Auto2料仓打开标记 = false;
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("4021001");//自动盘2区--盘放满(满料未拿走)
+                                RunLog($"[Code]4021001,[Msg]Auto2料仓满料", LogType.AlarmLog);
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 555;
+                            }
+                            else Thread.Sleep(10);
+                            break;
 
-                    default:
-                        RunLog(("PS抓盘手臂放空盘到Auto2流程.StepID =" + PS抓盘手臂放空盘到Auto2流程.StepID.ToString() + "对应流程不存在"));
-                        break;
+                        case 555:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "等待料仓料拿走";
+                            if (Auto2料仓打开标记) //料仓被打开
+                            {
+                                抓盘手臂取Empty空盘标记 = 2;
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 560;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("4021001");//自动盘2区--盘放满(满料未拿走)
+                                RunLog($"[Code]4021001,[Msg]Auto1料仓满料", LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 560:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "等待抓盘手臂取Empty空盘";
+                            if (抓盘手臂取Empty空盘标记 == 1 && Auto等待换盘标记)
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 565;
+                            }
+                            Thread.Sleep(10);
+                            break;
+
+                        case 565:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴和Auto2顶盘轴移动到等待位";
+                            Task<string> trayx = Task.Run(() => { return 放Tary盘轴移动(初始点位.抓盘_Auto2_X - 200); });
+                            Task<string> auto2u = Task.Run(() => { return Auto2顶盘轴移动(初始点位.Auto2_初始位); });
+                            if (trayx.Result == "Success" && auto2u.Result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 570;
+                            }
+                            else
+                            {
+                                if (trayx.Result != "Success")
+                                {
+                                    Listcode.Add("2025007");
+                                    RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2等待位失败!" + result, LogType.AlarmLog);
+                                    M18_放Tary盘轴ErrorMsg = result;
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
+                                if (auto2u.Result != "Success")
+                                {
+                                    RunLog($"Auto2顶盘轴移动到等待位失败！" + trayx.Result);
+                                }
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 570:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否无空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = Auto2_前Tray存在感应(out value);
+                            result2 = Auto2_后Tray放歪感应(out value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "1" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto2流程.StepID = 575;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "1")
+                                    {
+                                        Listcode.Add("4021001");
+                                        RunLog("[Code]4021001,[Msg]Auto2前对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value2 != "1")
+                                    {
+                                        Listcode.Add("4021001");
+                                        RunLog("[Code]4021001,[Msg]Auto2后对射感应到有Tray盘", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (result != "Success")
+                                {
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                }
+                                if (result2 != "Success")
+                                {
+                                    Listcode.Add("4021001");
+                                    RunLog("[Code]4021001,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                }
+                            }
+                            break;
+
+                        case 575:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴移动到Auto2";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 放Tary盘轴移动(初始点位.抓盘_Auto2_X + 点位微调.抓盘_Auto2_X);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 580;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 580:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray上下气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 585;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010000"); //C_空盘手臂_升降--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010000,[Msg]移Tray上下气缸到位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 585:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray夹爪气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray夹爪气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 590;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010003"); //C_空盘手臂_松开--气缸传感器没有检测到ON
+                                RunLog($"[Code]1010003,[Msg]移Tray夹爪气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 590:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "移Tray上下气缸原位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 移Tray上下气缸原位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 591;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                Listcode.Add("1010001"); //C_空盘手臂_升降--气缸传感器没有检测到OFF
+                                RunLog($"[Code]1010001,[Msg]移Tray上下气缸原位输出失败！" + result, LogType.AlarmLog);
+                            }
+                            break;
+
+                        case 591:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "检测Auto2是否有空盘";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = Auto2_前Tray存在感应(out value);
+                            result2 = Auto2_后Tray放歪感应(out value2);
+                            if (result == "Success" && result2 == "Success")
+                            {
+                                if (value == "0" && value2 == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS抓盘手臂放空盘到Auto2流程.StepID = 592;
+                                }
+                                else //没有挡到感应器或者放歪感应器被挡到说明没有放盘成功，需重新放盘
+                                {
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+
+                                    if (value != "0")
+                                    {
+                                        Listcode.Add("4021009");
+                                        RunLog("[Code]4021009,[Msg]Auto2前对射感应到无Tray盘", LogType.AlarmLog);
+                                    }
+                                    if (value2 != "1")
+                                    {
+                                        Listcode.Add("4021017");
+                                        RunLog("[Code]4021017,[Msg]Auto2后感应到Tray盘放歪", LogType.AlarmLog);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+
+                                if (result != "Success")
+                                {
+                                    Listcode.Add("4021009");
+                                    RunLog("[Code]4021009,[Msg]读取Auto2前Tray存在感应失败!" + result, LogType.AlarmLog);
+                                }
+                                if (result2 != "Success")
+                                {
+                                    Listcode.Add("4021017");
+                                    RunLog("[Code]4021017,[Msg]读取Auto2后Tray放歪感应失败!" + result2, LogType.AlarmLog);
+                                }
+                            }
+                            break;
+
+                        case 592:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = $"Auto2_Tray前侧定位气缸到位输出";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = Auto2_Tray前侧定位气缸到位输出();
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 595;
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Auto2_Tray前侧定位气缸到位输出失败！" + result);
+                            }
+                            break;
+
+                        case 595:
+                            PS抓盘手臂放空盘到Auto2流程.StepName = "放Tary盘轴回到原点";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            result = 放Tary盘轴移动(0);
+                            if (result == "Success")
+                            {
+                                PS抓盘手臂放空盘到Auto2流程.StepID = 599;
+                            }
+                            else
+                            {
+                                Listcode.Add("2025007");
+                                RunLog($"[Code]2025007,[Msg]放Tary盘轴回到原点失败!" + result, LogType.AlarmLog);
+                                M18_放Tary盘轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 599:
+                            抓盘手臂放空盘到Auto2标记 = 1;
+                            PS抓盘手臂放空盘到Auto2流程.StepName = $"抓盘手臂放空盘到Auto2流程完成";
+                            RunLog($"PS抓盘手臂放空盘到Auto2流程.StepID={PS抓盘手臂放空盘到Auto2流程.StepID}->{PS抓盘手臂放空盘到Auto2流程.StepName}");
+                            PS抓盘手臂放空盘到Auto2流程.Processing = false;
+                            PS抓盘手臂放空盘到Auto2流程.StepID = 500;
+                            break;
+
+                        default:
+                            RunLog(("PS抓盘手臂放空盘到Auto2流程.StepID =" + PS抓盘手臂放空盘到Auto2流程.StepID.ToString() + "对应流程不存在"));
+                            break;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = $"PS抓盘手臂放空盘到Auto2流程({PS抓盘手臂放空盘到Auto2流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog(errormsg, LogType.AlarmLog);
+                    系统未定义错误ErrorMsg = errormsg;
+                    ProgramPause = true;
+                    IsPause = true;
+                    Listcode.Add("1400070");
                 }
             }
         }
 
         #endregion
-
     }
 }

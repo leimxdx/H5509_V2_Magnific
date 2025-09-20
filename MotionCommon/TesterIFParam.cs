@@ -37,15 +37,15 @@ namespace MotionCommon
 
         public bool 超时发送timeout { get; set; }
 
-        public string 串口号 { get; set; }
+        //public string 串口号 { get; set; }
 
-        public int 波特率 { get; set; }
+        //public int 波特率 { get; set; }
 
-        public Parity 校验位 { get; set; }
+        //public Parity 校验位 { get; set; }
 
-        public int 数据位 { get; set; }
+        //public int 数据位 { get; set; }
 
-        public StopBits 停止位 { get; set; }
+        //public StopBits 停止位 { get; set; }
 
         public int 入料手臂吸料超时时间 { get; set; }
 
@@ -86,5 +86,11 @@ namespace MotionCommon
         public bool Auto换盘时出料Z回零 { get; set; }
 
         public string 通讯名称 { get; set; }
+
+        public bool 测试超时自动关闭Dut { get; set; }
+
+        public bool 接收超时Bin自动关闭Dut { get; set; }
+
+        public string 超时Bin字符串显示 { get; set; }
     }
 }

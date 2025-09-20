@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using ComMaster;
 using ComMaster.Interfaces;
 using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
 using H5509_alarm;
 using H5509_V2.界面;
@@ -384,6 +385,7 @@ namespace H5509_V2
             //MotionEx motionex = MotionEx.GetInstance();
             //MotionEx motionex2 = MotionEx.GetInstance();
 
+
             //防止控件过多产生闪烁现象
             SetControlStyle();
 
@@ -407,7 +409,6 @@ namespace H5509_V2
                 RunLog("软件加载失败,请关闭软件重开!" + result);
                 MessageBox.Show("软件加载失败,请关闭软件重开!", result);
             }
-
             //Form gxnform;
             //if (iGXNCard.PrintGXN() == "GSN轴卡")
             //{
@@ -419,6 +420,75 @@ namespace H5509_V2
             //else gxnform = new HardwareGXN.GENAxisCard.FrmGEN(iGXNCard);
 
             //gxnform.Show();
+
+
+            //int sitenum = 8;
+            //if (设置信息.测试机信息.接收超时Bin自动关闭Dut)
+            //{
+            //    if (bins.Contains(设置信息.通讯信息.超时Bin字符串))
+            //    {
+            //        测试超时的Dut对应site = sitenum + 1;
+            //        for (int dut = 0; dut < bins.Length; dut++)
+            //        {
+            //            if (bins[dut] == 设置信息.通讯信息.超时Bin字符串)
+            //            {
+            //                Listcode.Add($"140048{dut}");
+            //                RunLog($"[Code]140048{dut},[Msg]Site{sitenum + 1}的Dut{dut + 1}测试超时", LogType.AlarmLog);
+
+            //                设置信息.开site信息.SetSiteValue(sitenum, dut, "0");
+            //                result = UpdateSiteStatus(设置信息.开site信息.Site名称, sitenum + 1, 设置信息.开site信息.GetSiteValue(sitenum));
+            //                if (result != "Success") RunLog("Site保存失败!" + result);
+            //            }
+            //        }
+
+            //        main.刷新开Site状态();
+            //        if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+            //        {
+            //            Listcode.Add("1400442");
+            //            RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+            //        }
+            //        ProgramPause = true; //如果有测试超时则触发停止
+            //        IsPause = true;
+            //    }
+            //}
+            //string[][] bins = new string[2][]
+            //                    {
+            //                        new string[]{ "AB", "20A", "A1", "AD" },
+            //                        new string[]{ "AB", "A1", "AB", "AC" },
+            //                    };
+
+            //bool isoth = false;
+            //for (int i = 0; i < bins.Length; i++)
+            //{
+            //    for (int j = 0; j < bins[i].Length; j++)
+            //    {
+            //        //if (!open[i][j]) continue;
+
+            //        oth = bins[i][j];
+
+            //        if (oth == 设置信息.通讯信息.超时Bin字符串)
+            //        {
+            //            oth = 设置信息.测试机信息.超时Bin字符串显示;
+            //            bins[i][j] = oth;
+            //        }
+
+            //        if (Auto1 != "" && Auto1.Split(",").Contains(oth)) continue;
+            //        else if (Auto2 != "" && Auto2.Split(",").Contains(oth)) continue;
+            //        else if (Fix1 != "" && Fix1.Split(",").Contains(oth)) continue;
+            //        else if (Fix2 != "" && Fix2.Split(",").Contains(oth)) continue;
+            //        else if (Fix3 != "" && Fix3.Split(",").Contains(oth)) continue;
+            //        else
+            //        {
+            //            if (!othAll.Contains(oth))
+            //            {
+            //                isoth = true;
+            //                othAll += oth + ",";
+            //                Listcode.Add("1400500");
+            //            }
+            //            bins[i][j] = "OTH";
+            //        }
+            //    }
+            //}
 
             #region 调试参数
 
@@ -758,9 +828,9 @@ namespace H5509_V2
                                 显示操作log(operatelog[i], operatelogtime[i]);
                             }
                         }
+                        Thread.Sleep(10);
                     }
-
-                    Thread.Sleep(500);
+                    else Thread.Sleep(500);
                 }
                 catch (Exception ex)
                 {
@@ -783,86 +853,6 @@ namespace H5509_V2
                     }
                 }
             }
-        }
-
-
-        private bool CheckInNozzleIC()
-        {
-            bool ispass = false;
-            if (InNozzleIC)
-            {
-                string result = handler.入料吸嘴_真空检测(out string[] iovalue);
-                if (result == "Success" && iovalue.Contains("0"))
-                {
-                    for (int i = 0; i < iovalue.Length; i++)
-                    {
-                        if (InNozzleICOpen[i] && InNozzleIC)
-                        {
-                            if (iovalue[i] == "0")
-                            {
-                                入料IC移动过程中忽略 = true;
-                                ispass = true;
-                                Listcode.Add($"30{i + 1}0001"); //出料手臂-吸--1号吸嘴丢失IC
-                                RunLog($"[Code]30{i + 1}0001,[Msg]入料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                    }
-                }
-            }
-            return ispass;
-        }
-
-        private bool CheckOutNozzleIC()
-        {
-            bool ispass = false;
-            if (OutNozzleIC)
-            {
-                string result = handler.出料吸嘴_真空检测(out string[] iovalue);
-                if (result == "Success" && iovalue.Contains("0"))
-                {
-                    for (int i = 0; i < iovalue.Length; i++)
-                    {
-                        if (OutNozzleICOpen[i] && OutNozzleIC)
-                        {
-                            if (iovalue[i] == "0")
-                            {
-                                出料IC移动过程中忽略 = true;
-                                ispass = true;
-                                Listcode.Add($"30{i + 5}0001"); //出料手臂-吸--1号吸嘴丢失IC
-                                RunLog($"[Code]30{i + 5}0001,[Msg]出料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                    }
-                }
-            }
-            return ispass;
-        }
-
-        private bool CheckTestNozzleIC()
-        {
-            bool ispass = false;
-            if (TestNozzleIC)
-            {
-                string result = handler.测试吸嘴_真空检测(out string[] iovalue);
-
-                if (result == "Success" && iovalue.Contains("0"))
-                {
-                    for (int i = 0; i < iovalue.Length; i++)
-                    {
-                        if (TestNozzleICOpen[i] && TestNozzleIC)
-                        {
-                            if (iovalue[i] == "0")
-                            {
-                                测试IC移动过程中忽略 = true;
-                                ispass = true;
-                                Listcode.Add($"3{i + 9:D2}9901"); //出料手臂-吸--1号吸嘴丢失IC
-                                RunLog($"[Code]3{i + 9:D2}9901,[Msg]测试手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
-                            }
-                        }
-                    }
-                }
-            }
-            return ispass;
         }
 
 
@@ -901,9 +891,9 @@ namespace H5509_V2
 
                     if (!空跑模式)
                     {
-                        bool boolIn = CheckInNozzleIC();
-                        bool boolout = CheckOutNozzleIC();
-                        bool booltest = CheckTestNozzleIC();
+                        bool boolIn = handler.CheckInNozzleIC();
+                        bool boolout = handler.CheckOutNozzleIC();
+                        bool booltest = handler.CheckTestNozzleIC();
 
                         if (boolIn || boolout || booltest)
                         {
@@ -919,6 +909,8 @@ namespace H5509_V2
                         {
                             if (OutSiteQueue2.TryDequeue(out (int siteid, TestDataInfo data) sites))
                             {
+                                int sitenum = sites.siteid; // Com.Listtestsingal[0];
+
                                 if (sites.data.Iswaitout)
                                 {
                                     //Com.Iswaitout[testnum] = false;
@@ -926,9 +918,26 @@ namespace H5509_V2
                                     RunLog($"[Code]8{testnum:D2}018,[Msg]Site{testnum + 1}:接收超时！触发停止", LogType.AlarmLog);
                                     ProgramPause = true; //如果有接收超时则触发停止
                                     IsPause = true;
+
+                                    if (设置信息.测试机信息.测试超时自动关闭Dut)
+                                    {
+                                        设置信息.开site信息.SetSiteValue(sitenum, "0");
+                                        result = UpdateSiteStatus(设置信息.开site信息.Site名称, testnum + 1, 设置信息.开site信息.GetSiteValue(testnum));
+                                        if (result != "Success")
+                                        {
+                                            RunLog("Site保存失败!" + result);
+                                        }
+
+                                        main.刷新开Site状态();
+
+                                        if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+                                        {
+                                            Listcode.Add("1400442");
+                                            RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+                                        }
+                                    }
                                 }
 
-                                int sitenum = sites.siteid; // Com.Listtestsingal[0];
                                 RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
                                 //Com.Listtestsingal.Remove(sitenum);
                                 //Com.Listtestsingal.RemoveAt(0);
@@ -936,6 +945,35 @@ namespace H5509_V2
                                 bool[][] open = StationManagers.GetStationIC(sitenum); // SiteTestIC[sitenum];
 
                                 string[] bins = sites.data.SiteTestBin; //Com.OutBin.TryDequeue(out string[] bins);
+
+                                if (设置信息.测试机信息.接收超时Bin自动关闭Dut)
+                                {
+                                    if (bins.Contains(设置信息.通讯信息.超时Bin字符串))
+                                    {
+                                        测试超时的Dut对应site = sitenum + 1;
+                                        for (int dut = 0; dut < bins.Length; dut++)
+                                        {
+                                            if (bins[dut] == 设置信息.通讯信息.超时Bin字符串)
+                                            {
+                                                Listcode.Add($"140048{dut}");
+                                                RunLog($"[Code]140048{dut},[Msg]Site{sitenum + 1}的Dut{dut + 1}测试超时", LogType.AlarmLog);
+
+                                                设置信息.开site信息.SetSiteValue(sitenum, dut, "0");
+                                                result = UpdateSiteStatus(设置信息.开site信息.Site名称, sitenum + 1, 设置信息.开site信息.GetSiteValue(sitenum));
+                                                if (result != "Success") RunLog("Site保存失败!" + result);
+                                            }
+                                        }
+
+                                        main.刷新开Site状态();
+                                        if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+                                        {
+                                            Listcode.Add("1400442");
+                                            RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+                                        }
+                                        ProgramPause = true; //如果有测试超时则触发停止
+                                        IsPause = true;
+                                    }
+                                }
 
                                 //main.显示Dout颜色(sitenum, open, bins);
 
@@ -1014,8 +1052,8 @@ namespace H5509_V2
                                             }
                                             if (isautoclose) //dout连续不良自动关闭该dout，
                                             {
-                                                int dout = site * 8 + dut + 1;
-                                                string labelname = $"lbl_dout{dout}";
+                                                //int dout = site * 8 + dut + 1;
+                                                //string labelname = $"lbl_dout{dout}";
                                                 设置信息.开site信息.SetSiteValue(site, dut, "0");
                                                 result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
                                                 if (result != "Success")
@@ -1033,7 +1071,7 @@ namespace H5509_V2
                                                 if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
                                                 {
                                                     Listcode.Add("1400442");
-                                                    RunLog("[Code]1400442,[Msg](按下开始)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+                                                    RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
                                                     ProgramPause = true;
                                                 }
                                             }

@@ -207,8 +207,12 @@ namespace H5509_V2
                 {
                     for (int j = 0; j < LoadYPoint.Length; j++)
                     {
+                        if (LoadDicPoint[$"{i},{j}"] != LsLoadDicPoint[$"{i},{j}"])
+                        {
+                            if (按了跳过或编辑报警使能) 按了跳过或编辑标记 = true;
+                            LoadDicPoint[$"{i},{j}"] = LsLoadDicPoint[$"{i},{j}"];
+                        }
                         //dGV_TrayMap.Rows[j].Cells[i].Value = 0;
-                        LoadDicPoint[$"{i},{j}"] = LsLoadDicPoint[$"{i},{j}"];
                     }
                 }
                 DialogResult = DialogResult.OK;
