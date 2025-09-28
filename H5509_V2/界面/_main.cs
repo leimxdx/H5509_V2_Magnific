@@ -9,13 +9,14 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using MotionCommon;
 using Sunny.UI;
 using Sunny.UI.Win32;
+using TextFileLogger;
 using static H5509_V2.APPmaster;
 using static H5509_V2.ForMain;
 using Color = System.Drawing.Color;
 using Control = System.Windows.Forms.Control;
-using MotionCommon;
 
 namespace H5509_V2
 {
@@ -64,6 +65,11 @@ namespace H5509_V2
 
         public Action 刷新界面权限;
 
+        private Defalut1 _defalut1;
+
+        private Defalut2 _defalut2;
+
+        private Defalut3 _defalut3;
 
         public _main()
         {
@@ -134,6 +140,10 @@ namespace H5509_V2
 
         private void _main_Load(object sender, EventArgs e)
         {
+            _defalut1 = new Defalut1();
+            _defalut2 = new Defalut2();
+            _defalut3 = new Defalut3();
+
             //1s刷新一次当前时间
             currenttime = new System.Windows.Forms.Timer() { Interval = 1000 };
             currenttime.Tick += Currenttime_Tick;
@@ -155,8 +165,6 @@ namespace H5509_V2
                 Chk_timer[i] = timer;
             }
 
-            
-
             textBoxmachine.Text = Environment.MachineName;
 
             放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; //防止报错
@@ -166,6 +174,8 @@ namespace H5509_V2
             StartSite数量 = 开Site数量;
 
             WindowsButtonBind(); //Open/Close按钮绑定
+
+            刷新自定义界面_委托方法();
 
             刷新分BIN信息();
 
@@ -179,87 +189,126 @@ namespace H5509_V2
             });
         }
 
+        public void 刷新自定义界面_委托方法()
+        {
+            if (自定义界面 == "1") changeDefalutPanel(_defalut1);
+            else if (自定义界面 == "2") changeDefalutPanel(_defalut2);
+            else if (自定义界面 == "3") changeDefalutPanel(_defalut3);
+        }
+
+        /// <summary>
+        /// MainPanel界面切换
+        /// </summary>
+        /// <param name="uc"></param>
+        private void changeDefalutPanel(UserControl uc)
+        {
+            DefalutPanel.Controls.Clear();
+            uc.Parent = DefalutPanel;
+            uc.Dock = DockStyle.Fill;
+            DefalutPanel.Controls.Add(uc);
+        }
+
         private void textBoxFlowcaedno_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            if (设置信息.通讯信息.通讯协议 == "得一微")
             {
-                try
-                {
-                    //MF20240815053-1001@125℃@8H
-                    //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
 
-                    //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
-                    if (uiCheckBox1.Checked && textBoxmqty.Text.Trim().Length == 0)
-                    {
-                        MessageBox.Show("请输入批次数量!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                    string[] getstr = textBoxFlowcaedno.Text.Split(':');
-                    LotNo = getstr;
-                    if (getstr.Length == 17)
-                    {
-                        textBoxFlowcaedno.Text = getstr[0].Replace("-", "_"); //ZRS240929001A:
-                        getstr[0] = textBoxFlowcaedno.Text;
-                        getstr[1] = textBoxmachine.Text;
-                        //textBoxmachine.Text = getstr[1]; //BS-TEST:
-                        textBoxcustom.Text = getstr[2]; //HM:
-                        textBoxproduct.Text = getstr[3];
-                        textBoxLotno.Text = getstr[4];
-                        textBoxdatecode.Text = getstr[5];
-                        textBoxfwversion.Text = getstr[6];
-                        textBoxcheckcode.Text = getstr[7];
-                        if (uiCheckBox1.Checked == false) //如果不是手动就显示扫码出来的数量
-                        {
-                            textBoxmqty.Text = getstr[8];
-                        }
-                        else
-                        {
-                            getstr[8] = textBoxmqty.Text; //如果是手动输入就不修改扫码出来的数量
-                            uiCheckBox1.Checked = false;
-                        }
-                        textBoxcode.Text = getstr[9];
-                        textBoxcodecrc.Text = getstr[10];
-                        textBoxstation.Text = getstr[11];
-                        textBoxmark.Text = getstr[12];
-                        if (textBoxuser.Text.Trim().Length == 0)
-                        {
-                            textBoxuser.Text = getstr[13]; //如果用户没有输入就不修改扫码出来的用户 
-                        }
-                        else getstr[13] = textBoxuser.Text.Trim();
-                        textBoxtestflow.Text = getstr[14];
-                        textBoxstate.Text = getstr[15];
-                        textBoxtemprature.Text = getstr[16];
-
-                        SendLotNo();
-                    }
-                    else
-                    {
-                        textBoxFlowcaedno.Text = "";
-                        throw new Exception($"长度不等于17");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    textBoxFlowcaedno.Text = "";
-                    MessageBox.Show($"批次信息{textBoxFlowcaedno.Text}解析异常：详细信息:" + ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
             }
             else
             {
-                //if (keyflag == false) //防止长按输入
-                //{
-                //    keyflag = true;
-                //    _dt = System.DateTime.Now;
-                //    if (e.KeyCode == Keys.Control)
-                //    {
-                //        ld.Clear();
-                //        textBoxFlowcaedno.Text = "";//清空
-                //        return;
-                //    }
-                //    DateTime _tempDt = System.DateTime.Now;
-                //    ld.Add(_tempDt);
-                //}
+                if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+                {
+                    try
+                    {
+                        //MF20240815053-1001@125℃@8H
+                        //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
+
+                        //ZRS240929001A:BS-TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25
+                        if (uiCheckBox1.Checked && textBoxmqty.Text.Trim().Length == 0)
+                        {
+                            MessageBox.Show("请输入批次数量!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                        string[] getstr = textBoxFlowcaedno.Text.Split(':');
+                        LotNo = getstr;
+                        if (getstr.Length == 17)
+                        {
+                            textBoxFlowcaedno.Text = getstr[0].Replace("-", "_"); //ZRS240929001A:
+                            getstr[0] = textBoxFlowcaedno.Text;
+                            getstr[1] = textBoxmachine.Text;
+                            //textBoxmachine.Text = getstr[1]; //BS-TEST:
+                            textBoxcustom.Text = getstr[2]; //HM:
+                            textBoxproduct.Text = getstr[3];
+                            textBoxLotno.Text = getstr[4];
+                            textBoxdatecode.Text = getstr[5];
+                            textBoxfwversion.Text = getstr[6];
+                            textBoxcheckcode.Text = getstr[7];
+                            if (uiCheckBox1.Checked == false) //如果不是手动就显示扫码出来的数量
+                            {
+                                textBoxmqty.Text = getstr[8];
+                            }
+                            else
+                            {
+                                getstr[8] = textBoxmqty.Text; //如果是手动输入就不修改扫码出来的数量
+                                uiCheckBox1.Checked = false;
+                            }
+                            textBoxcode.Text = getstr[9];
+                            textBoxcodecrc.Text = getstr[10];
+                            textBoxstation.Text = getstr[11];
+                            textBoxmark.Text = getstr[12];
+                            if (textBoxuser.Text.Trim().Length == 0)
+                            {
+                                textBoxuser.Text = getstr[13]; //如果用户没有输入就不修改扫码出来的用户 
+                            }
+                            else getstr[13] = textBoxuser.Text.Trim();
+                            textBoxtestflow.Text = getstr[14];
+                            textBoxstate.Text = getstr[15];
+                            textBoxtemprature.Text = getstr[16];
+
+                            if (设置信息.通讯信息.发送开批信息)
+                            {
+                                SendLotNo();
+                            }
+                        }
+                        else
+                        {
+                            textBoxFlowcaedno.Text = "";
+                            throw new Exception($"长度不等于17");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        textBoxFlowcaedno.Text = "";
+                        MessageBox.Show($"批次信息{textBoxFlowcaedno.Text}解析异常：详细信息:" + ex.Message, "异常", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    //if (keyflag == false) //防止长按输入
+                    //{
+                    //    keyflag = true;
+                    //    _dt = System.DateTime.Now;
+                    //    if (e.KeyCode == Keys.Control)
+                    //    {
+                    //        ld.Clear();
+                    //        textBoxFlowcaedno.Text = "";//清空
+                    //        return;
+                    //    }
+                    //    DateTime _tempDt = System.DateTime.Now;
+                    //    ld.Add(_tempDt);
+                    //}
+                }
             }
+        }
+
+        public bool CheckText()
+        {
+            LotNo = new string[20];
+            LotNo[0] = textBoxFlowcaedno.Text.Trim();
+            LotNo[1] = textBoxmachine.Text.Trim();
+            LotNo[8] = textBoxmqty.Text.Trim();
+            LotNo[13] = textBoxuser.Text.Trim();
+            return textBoxuser.Text.Trim().Length == 0 || textBoxFlowcaedno.Text.Trim().Length == 0;
         }
 
         public void SendLotNo()
@@ -422,6 +471,7 @@ namespace H5509_V2
                         Chk_timer[i].Stop();
                         Chk_timer[i].Start();
                         设置信息.开site信息.SetSiteValue(i, "0");
+                        RunLog($"档案:[{设置信息.档案名称}]-Site{i + 1}-整组Dut被手动关闭", LogType.OperateLog);
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
                         if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                         result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -444,6 +494,7 @@ namespace H5509_V2
                         Chk_timer[i].Stop();
                         Chk_timer[i].Start();
                         设置信息.开site信息.SetSiteValue(i, "1");
+                        RunLog($"档案:[{设置信息.档案名称}]-Site{i + 1}-整组Dut被手动打开", LogType.OperateLog);
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
                         if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                         result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -491,7 +542,9 @@ namespace H5509_V2
                     }
                     ischange = true;
                     int dut = i % 8;
-                    设置信息.开site信息.SetSiteValue(site, dut, label.Text == "" ? "1" : "0");
+                    string sw = label.Text == "" ? "1" : "0";
+                    设置信息.开site信息.SetSiteValue(site, dut, sw);
+                    RunLog($"档案:[{设置信息.档案名称}]-Site{site + 1}-Dut{dut + 1}被手动{(sw == "1" ? "打开" : "关闭")}", LogType.OperateLog);
                     string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
                     if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                     result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -953,7 +1006,7 @@ namespace H5509_V2
                         RunLog($"新开Site{i}");
 
                         if (!InSiteQueue.Contains(i) //如果不在入料队列中
-                            //&& !OutSiteQueue.Contains(i) //不在出料队列中
+                                                     //&& !OutSiteQueue.Contains(i) //不在出料队列中
                             && !OutSiteQueue.Any(item => item.SiteId == i) //不在出料队列中
                             && (StationManagers.GetStationState(i) == 0)
                             && (正在入料的Site != i))
@@ -1297,6 +1350,15 @@ namespace H5509_V2
                             }
                         }
 
+                        if (自定义界面 == "2")
+                        {
+                            _defalut2.Dut连续不良报警个数 = 设置信息.测试机信息.Dout连续不良个数;
+                            _defalut2.Dut连续不良报警使能 = 设置信息.测试机信息.Dout连续不良报警;
+                            _defalut2.总良率报警百分比 = 设置信息.测试机信息.总良率报警百分比;
+                            _defalut2.总良率报警使能 = 设置信息.测试机信息.总良率报警使能;
+                            _defalut2.RefreshUI();
+                        }
+
                         Txt_loadnum.Text = 载入数.ToString();
                         float total = 出料数;
                         txt_total.Text = total.ToString();
@@ -1308,10 +1370,10 @@ namespace H5509_V2
 
                         //double auto1 = total != 0 ? Math.Truncate((Auto1数量 / total * 10000)) / 100 : 0;
                         txt_auto1yield.Text = Auto1良率.ToString("0.00") + '%';
-                        txt_auto2yield.Text = total != 0 ? (Auto2数量 / total * 100).ToString("0.00") + '%': "0.00%";
-                        txt_fix1yield.Text = total != 0 ? (Fix1数量 / total * 100).ToString("0.00") + '%': "0.00%";
-                        txt_fix2yield.Text = total != 0 ? (Fix2数量 / total * 100).ToString("0.00") + '%': "0.00%";
-                        txt_fix3yield.Text = total != 0 ? (Fix3数量 / total * 100).ToString("0.00") + '%': "0.00%";
+                        txt_auto2yield.Text = total != 0 ? (Auto2数量 / total * 100).ToString("0.00") + '%' : "0.00%";
+                        txt_fix1yield.Text = total != 0 ? (Fix1数量 / total * 100).ToString("0.00") + '%' : "0.00%";
+                        txt_fix2yield.Text = total != 0 ? (Fix2数量 / total * 100).ToString("0.00") + '%' : "0.00%";
+                        txt_fix3yield.Text = total != 0 ? (Fix3数量 / total * 100).ToString("0.00") + '%' : "0.00%";
 
                         if (windowstimer.Enabled)
                         {
@@ -1529,7 +1591,7 @@ namespace H5509_V2
 
         private void label10_Click(object sender, EventArgs e)
         {
-             if (设备状态 != 1)
+            if (设备状态 != 1)
             {
                 if (label10.Text == "停止")
                 {
@@ -2389,6 +2451,9 @@ namespace H5509_V2
 
         private void label9_Click(object sender, EventArgs e)
         {
+            //CheckText();
+
+            //SaveBatchData();
             //ProgramPause = true;
             //string oth = 设置信息.测试机信息.超时Bin字符串显示;
 
@@ -2405,7 +2470,15 @@ namespace H5509_V2
             //    MessageBox.Show($"超时BIN({oth})未分配！请前往分BIN界面添加");
             //}
             //IsPause = false;
-            //IsStart = true;
+            ////IsStart = true;
+            //bool isok = int.TryParse(LotNo[8], out int lotCout);
+            //if (!isok) lotCout = 载入数;
+
+            //if (载入数 != 出料数 || 载入数 != lotCout)
+            //{
+            //    Listcode.Add("1400443");
+            //    RunLog($"[Code]1400443,[Msg]载入数、总数和批次数量不一致", LogType.AlarmLog);
+            //}
         }
 
         private float _defaultFontSize = 14.25f;

@@ -472,3 +472,7 @@ D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.pdb
 D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Defalut2.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Defalut3.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.Defalut1.resources
+D:\GitHub\H5509_V2\H5509_V2\obj\x64\Debug\H5509_V2.NewComName.resources

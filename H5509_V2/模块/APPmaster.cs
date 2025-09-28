@@ -82,6 +82,8 @@ namespace H5509_V2
 
         public static string LotNoLog保存路径 = Directory.GetCurrentDirectory();
 
+        public static string 自定义界面 = "1"; 
+
         public static bool 工单号自适应 = true;
 
         public static bool 按了跳过或编辑报警使能 = false;
@@ -1162,6 +1164,11 @@ namespace H5509_V2
         /// 创建安全扭上升沿的缓存值
         /// </summary>
         public static bool SafeswRiseCache = false;
+
+        /// <summary>
+        /// 创建安全扭下降沿的缓存值
+        /// </summary>
+        public static bool SafeswFallCache = false;
 
         /// <summary>
         /// 创建重试上升沿的缓存值
@@ -2285,6 +2292,7 @@ namespace H5509_V2
                         case "Load门开门时间": Load门开门时间 = Convert.ToInt32(value); break; 
                         case "按批号保存使能": 按批号保存使能 = Convert.ToBoolean(value); break;
                         case "LotNoLog保存路径": LotNoLog保存路径 = value; break;
+                        case "自定义界面": 自定义界面 = value; break;
                     }
                 }
             }
@@ -2643,6 +2651,7 @@ namespace H5509_V2
                             同时测试 = Convert.ToInt32(dr["同时测试"].ToString()),
                             测试结果中有对应Site = Convert.ToBoolean(dr["测试结果中有对应Site"].ToString()),
                             超时Bin字符串 = dr["超时Bin字符串"].ToString(),
+                            发送开批信息 = Convert.ToBoolean(dr["发送开批信息"].ToString()),
                             Site1 = dr["Site1"].ToString(),
                             Site2 = dr["Site2"].ToString(),
                             Site3 = dr["Site3"].ToString(),
@@ -2869,6 +2878,7 @@ namespace H5509_V2
                 $"同时测试 = '{tester.同时测试}'," +
                 $"测试结果中有对应Site = '{tester.测试结果中有对应Site}'," +
                 $"超时Bin字符串 = '{tester.超时Bin字符串}'," +
+                $"发送开批信息 = '{tester.发送开批信息}'," +
                 $"Site1 = '{tester.Site1}'," +
                 $"Site2 = '{tester.Site2}'," +
                 $"Site3 = '{tester.Site3}'," +
@@ -4526,24 +4536,25 @@ namespace H5509_V2
             double testx2pos = 初始点位.测试_Test2区_X;
             double testx3pos = 初始点位.测试_Test3区_X;
             double testx4pos = 初始点位.测试_Test4区_X;
+            double testpos = 初始点位.测试_Test区Site间隔;
             switch (site)
             {
                 case 0: xPos = testx1pos; break;
-                case 1: xPos = testx1pos + 80; break;
-                case 2: xPos = testx1pos + 80 * 2; break;
-                case 3: xPos = testx1pos + 80 * 3; break;
+                case 1: xPos = testx1pos + testpos; break;
+                case 2: xPos = testx1pos + testpos * 2; break;
+                case 3: xPos = testx1pos + testpos * 3; break;
                 case 4: xPos = testx2pos; break;
-                case 5: xPos = testx2pos + 80; break;
-                case 6: xPos = testx2pos + 80 * 2; break;
-                case 7: xPos = testx2pos + 80 * 3; break;
+                case 5: xPos = testx2pos + testpos; break;
+                case 6: xPos = testx2pos + testpos * 2; break;
+                case 7: xPos = testx2pos + testpos * 3; break;
                 case 8: xPos = testx3pos; break;
-                case 9: xPos = testx3pos + 80; break;
-                case 10: xPos = testx3pos + 80 * 2; break;
-                case 11: xPos = testx3pos + 80 * 3; break;
+                case 9: xPos = testx3pos + testpos; break;
+                case 10: xPos = testx3pos + testpos * 2; break;
+                case 11: xPos = testx3pos + testpos * 3; break;
                 case 12: xPos = testx4pos; break;
-                case 13: xPos = testx4pos + 80; break;
-                case 14: xPos = testx4pos + 80 * 2; break;
-                case 15: xPos = testx4pos + 80 * 3; break;
+                case 13: xPos = testx4pos + testpos; break;
+                case 14: xPos = testx4pos + testpos * 2; break;
+                case 15: xPos = testx4pos + testpos * 3; break;
                 default: return $"site:{site}不存在";
             }
             return "Success";
@@ -4930,6 +4941,11 @@ namespace H5509_V2
         /// 过程执行允许
         /// </summary>
         public bool Permit;
+
+        /// <summary>
+        /// 流程状态
+        /// </summary>
+        public int State;
 
     }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewTrayInfo));
             this.textBox29 = new System.Windows.Forms.NumericUpDown();
             this.textBox28 = new System.Windows.Forms.NumericUpDown();
             this.textBox27 = new System.Windows.Forms.NumericUpDown();
@@ -168,7 +169,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.TrayForm;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(425, 22);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(297, 286);
@@ -365,7 +366,7 @@
             this.MinimizeBox = false;
             this.Name = "NewTrayInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NewTrayInfo";
+            this.Text = "新增Tray盘";
             ((System.ComponentModel.ISupportInitialize)(this.textBox29)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBox28)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBox27)).EndInit();

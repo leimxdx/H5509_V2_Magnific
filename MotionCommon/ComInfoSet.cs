@@ -23,6 +23,8 @@ namespace MotionCommon
 
         public string 超时Bin字符串 { get; set; }
 
+        public bool 发送开批信息 { get; set; }
+
         public string Site1 { get; set; }
 
         public string Site2 { get; set; }

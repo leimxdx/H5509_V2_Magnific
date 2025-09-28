@@ -178,6 +178,30 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="界面\Tray\NewComName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="界面\Tray\NewComName.Designer.cs">
+      <DependentUpon>NewComName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="界面\自定义界面\Defalut2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="界面\自定义界面\Defalut2.Designer.cs">
+      <DependentUpon>Defalut2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="界面\自定义界面\Defalut3.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="界面\自定义界面\Defalut3.Designer.cs">
+      <DependentUpon>Defalut3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="界面\自定义界面\Defalut1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="界面\自定义界面\Defalut1.Designer.cs">
+      <DependentUpon>Defalut1.cs</DependentUpon>
+    </Compile>
     <Compile Include="模块\StationManager.cs" />
     <Compile Include="模块\TestStation.cs" />
     <Compile Include="界面\Tray\Auto1Map.cs">
@@ -318,6 +342,15 @@
     <Compile Include="界面\主界面\_speed.Designer.cs">
       <DependentUpon>_speed.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="界面\Tray\NewComName.resx">
+      <DependentUpon>NewComName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="界面\自定义界面\Defalut2.resx">
+      <DependentUpon>Defalut2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="界面\自定义界面\Defalut3.resx">
+      <DependentUpon>Defalut3.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="界面\Tray\Auto1Map.resx">
       <DependentUpon>Auto1Map.cs</DependentUpon>
     </EmbeddedResource>
@@ -393,6 +426,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="界面\主界面\_speed.resx">
       <DependentUpon>_speed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="界面\自定义界面\Defalut1.resx">
+      <DependentUpon>Defalut1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="H5509_alarm.xlsx" />
     <None Include="packages.config" />

@@ -244,6 +244,7 @@ namespace H5509_V2
                 刷新按钮状态 = 刷新按钮权限,
                 刷新开Site状态 = main.刷新开Site状态,
                 刷新档案选项 = main.刷新档案选项,
+                刷新自定义界面_委托方法 = main.刷新自定义界面_委托方法,
             };
             handler = new Handler()
             {
@@ -251,6 +252,7 @@ namespace H5509_V2
                 刷新分BIN信息 = main.刷新分BIN信息,
                 刷新权限 = main.切换为操作员权限,
                 显示Dout颜色 = main.显示Dout颜色,
+                检查输入工单输入 = main.CheckText,
             };
             offset = new _offset();
             speed = new _speed();
@@ -313,7 +315,6 @@ namespace H5509_V2
             //        }
             //    }
             //}
-
 
             //check = StationManagers.CheckTesterConnect();
             //if (check.Contains(false)) //if (!Com.IsOpenCom)
@@ -922,6 +923,8 @@ namespace H5509_V2
                                     if (设置信息.测试机信息.测试超时自动关闭Dut)
                                     {
                                         设置信息.开site信息.SetSiteValue(sitenum, "0");
+
+                                        RunLog($"档案:[{设置信息.档案名称}]-Site{testnum + 1}-整组Dut被自动关闭(测试超时)", LogType.OperateLog);
                                         result = UpdateSiteStatus(设置信息.开site信息.Site名称, testnum + 1, 设置信息.开site信息.GetSiteValue(testnum));
                                         if (result != "Success")
                                         {
@@ -959,6 +962,7 @@ namespace H5509_V2
                                                 RunLog($"[Code]140048{dut},[Msg]Site{sitenum + 1}的Dut{dut + 1}测试超时", LogType.AlarmLog);
 
                                                 设置信息.开site信息.SetSiteValue(sitenum, dut, "0");
+                                                RunLog($"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(测试超时)", LogType.OperateLog);
                                                 result = UpdateSiteStatus(设置信息.开site信息.Site名称, sitenum + 1, 设置信息.开site信息.GetSiteValue(sitenum));
                                                 if (result != "Success") RunLog("Site保存失败!" + result);
                                             }
@@ -1055,6 +1059,7 @@ namespace H5509_V2
                                                 //int dout = site * 8 + dut + 1;
                                                 //string labelname = $"lbl_dout{dout}";
                                                 设置信息.开site信息.SetSiteValue(site, dut, "0");
+                                                RunLog($"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)", LogType.OperateLog);
                                                 result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
                                                 if (result != "Success")
                                                 {
@@ -1173,6 +1178,12 @@ namespace H5509_V2
                 {
                     if (TCPConnect)
                     {
+                        if (温度模式 == "常温") //常温不读取温度
+                        {
+                            Thread.Sleep(1000);
+                            continue;
+                        }
+
                         #region 读取探测温度
 
                         string result = dTMHelper.ReadPv(0, out ushort[] value);
@@ -1619,7 +1630,7 @@ namespace H5509_V2
 
             Task抓盘手臂放空盘到Auto1 = new Task(handler.抓盘手臂放空盘到Auto1, cts.Token); //26
 
-            Task抓盘手臂放空盘到Auto2 = new Task(handler.抓盘手臂放空盘到Auto2, cts.Token); //27
+            Task抓盘手臂放空盘到Auto2 = new Task(handler.抓盘手臂放空盘到Auto2, cts.Token); //27 
 
             StartTask = Task.Run(() => //通过线程去开启线程，防止卡顿
             {

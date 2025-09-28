@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NewHeatTrayInfo));
             this.textBox60 = new System.Windows.Forms.NumericUpDown();
             this.textBox59 = new System.Windows.Forms.NumericUpDown();
             this.textBox58 = new System.Windows.Forms.NumericUpDown();
@@ -168,7 +169,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::H5509_V2.Properties.Resources.TrayForm;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(425, 22);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(297, 286);
@@ -365,7 +366,7 @@
             this.MinimizeBox = false;
             this.Name = "NewHeatTrayInfo";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "NewHeatTrayInfo";
+            this.Text = "新增加热盘";
             ((System.ComponentModel.ISupportInitialize)(this.textBox60)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBox59)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textBox58)).EndInit();

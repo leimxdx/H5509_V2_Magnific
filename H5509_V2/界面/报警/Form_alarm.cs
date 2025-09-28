@@ -2796,6 +2796,7 @@ namespace H5509_alarm
                     case "1400469":
                     case "1400470":
                     case "1400471":
+                    case "1400489":
                         if (alarm)
                         {
                             S_Other += alarmCode + ",";

@@ -268,6 +268,7 @@
             this.textBox9 = new System.Windows.Forms.TextBox();
             this.label152 = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.DefalutPanel = new System.Windows.Forms.Panel();
             this.uiComboBox1 = new Sunny.UI.UIComboBox();
             this.uiButton1 = new Sunny.UI.UIButton();
             this.uiDigitalLabel18 = new Sunny.UI.UIDigitalLabel();
@@ -304,7 +305,6 @@
             this.label123 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label_driverStatus = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Txt_loadnum = new System.Windows.Forms.TextBox();
             this.label139 = new System.Windows.Forms.Label();
@@ -387,7 +387,6 @@
             this.groupBox25.SuspendLayout();
             this.uiPanel1.SuspendLayout();
             this.panel31.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.Panel_right.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -3705,6 +3704,7 @@
             // 
             // uiPanel1
             // 
+            this.uiPanel1.Controls.Add(this.DefalutPanel);
             this.uiPanel1.Controls.Add(this.uiComboBox1);
             this.uiPanel1.Controls.Add(this.uiButton1);
             this.uiPanel1.Controls.Add(this.uiDigitalLabel18);
@@ -3733,7 +3733,6 @@
             this.uiPanel1.Controls.Add(this.label123);
             this.uiPanel1.Controls.Add(this.label2);
             this.uiPanel1.Controls.Add(this.label_driverStatus);
-            this.uiPanel1.Controls.Add(this.pictureBox1);
             this.uiPanel1.FillColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.uiPanel1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiPanel1.Location = new System.Drawing.Point(0, 1);
@@ -3744,6 +3743,15 @@
             this.uiPanel1.TabIndex = 1;
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // DefalutPanel
+            // 
+            this.DefalutPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.DefalutPanel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.DefalutPanel.Location = new System.Drawing.Point(839, 5);
+            this.DefalutPanel.Name = "DefalutPanel";
+            this.DefalutPanel.Size = new System.Drawing.Size(467, 414);
+            this.DefalutPanel.TabIndex = 181;
             // 
             // uiComboBox1
             // 
@@ -4239,17 +4247,6 @@
             this.label_driverStatus.Text = "HALT";
             this.label_driverStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.label_driverStatus.TextChanged += new System.EventHandler(this.label_driverStatus_TextChanged);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.pictureBox1.Image = global::H5509_V2.Properties.Resources.机台照1;
-            this.pictureBox1.Location = new System.Drawing.Point(838, 10);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(467, 403);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 161;
-            this.pictureBox1.TabStop = false;
             // 
             // panel1
             // 
@@ -5096,7 +5093,6 @@
             this.uiPanel1.ResumeLayout(false);
             this.uiPanel1.PerformLayout();
             this.panel31.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.Panel_right.ResumeLayout(false);
@@ -5378,7 +5374,6 @@
         private Sunny.UI.UICheckBox Chk_switch16;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private Sunny.UI.UIDigitalLabel uiDigitalLabel16;
         private Sunny.UI.UIDigitalLabel uiDigitalLabel15;
         private Sunny.UI.UIDigitalLabel uiDigitalLabel14;
@@ -5447,5 +5442,6 @@
         private Sunny.UI.UIDigitalLabel uiDigitalLabel18;
         private Sunny.UI.UIButton uiButton1;
         private Sunny.UI.UIComboBox uiComboBox1;
+        private System.Windows.Forms.Panel DefalutPanel;
     }
 }

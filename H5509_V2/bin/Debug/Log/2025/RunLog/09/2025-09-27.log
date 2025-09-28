@@ -1,0 +1,23 @@
+2025-09-27 17:26:58  =>  GTN_Open(5,1):(-6)
+2025-09-27 17:26:58  =>  [error][2025-09-27 17:26:58]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 HardwareGXN.GSNAxisController.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 149
+   在 HardwareGXN.GSNAxisController.InitCard() 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 35
+2025-09-27 17:26:59  =>  创建新文件: D:\GitHub\H5509_V2\H5509_V2\bin\Debug\Logs\202509\Log_20250927-172658.xlsx
+2025-09-27 17:27:19  =>  命令：insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,串口号,波特率,校验位,数据位,停止位,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示)values('调试修','20','false','false','30','false','90','100','100','false','20000','600','600','false','COM1','9600','None','8','One','2000','2000','2000','200','200','200','100','5000','false','false','false','false','false','8','2','100','true','true','false','false','false','20A')，错误信息：SQL logic error
+table TesterIFParam has no column named 串口号
+2025-09-27 17:30:36  =>  GTN_Open(5,1):(-6)
+2025-09-27 17:30:36  =>  [error][2025-09-27 17:30:36]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 HardwareGXN.GSNAxisController.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 149
+   在 HardwareGXN.GSNAxisController.InitCard() 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 35
+2025-09-27 17:34:38  =>  GTN_Open(5,1):(-6)
+2025-09-27 17:34:39  =>  [error][2025-09-27 17:34:38]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 HardwareGXN.GSNAxisController.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 149
+   在 HardwareGXN.GSNAxisController.InitCard() 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 35
+2025-09-27 19:24:21  =>  GTN_Open(5,1):(-6)
+2025-09-27 19:24:21  =>  [error][2025-09-27 19:24:21]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 HardwareGXN.GSNAxisController.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 149
+   在 HardwareGXN.GSNAxisController.InitCard() 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 35
