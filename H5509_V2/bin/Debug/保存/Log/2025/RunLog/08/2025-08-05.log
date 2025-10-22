@@ -1,5 +1,0 @@
-2025-08-05 16:41:57  =>  GTN_Open(5,1):(-6)
-2025-08-05 16:41:57  =>  [error][2025-08-05 16:41:57]：InitCard() System.Exception: 执行指令:  GT_Open
-打开控制器失败(-6)
-   在 H5509_V2.Motion.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V3\动作\Motion.cs:行号 46
-   在 H5509_V2.Motion.InitCard() 位置 D:\GitHub\H5509_V3\动作\Motion.cs:行号 59

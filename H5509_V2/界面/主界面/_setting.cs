@@ -9,6 +9,7 @@ using System.Drawing;
 using System.IO;
 using System.IO.Ports;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Reflection;
 using System.Resources;
 using System.Security.Cryptography;
@@ -21,9 +22,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComMaster.Interfaces;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Office2013.WebExtension;
-using DocumentFormat.OpenXml.Vml;
 using IHardwareGXN.GXNCard;
 using MotionCommon;
 using SQLiteHelper;
@@ -624,8 +622,8 @@ namespace H5509_V2
         private void button89_Click(object sender, EventArgs e)
         {
 
-            OutSiteQueue.TryPeek(out (int SiteId, TestDataInfo Data) site);
-            int siteid = site.SiteId;
+            //OutSiteQueue.TryPeek(out (int SiteId, TestDataInfo Data) site);
+            //int siteid = site.SiteId;
             //int site = 6;
             //string result = "";
             //List<bool[]> open = new List<bool[]>();
@@ -2255,12 +2253,44 @@ namespace H5509_V2
             else if (tabpagetext == "系统设置")
             {
                 uiCheckBox205.Checked = 安全门禁用;
-                uiCheckBox203.Checked = 空跑模式;
-                if (!空跑模式 || 设备状态 != 0)
+
+
+
+                if (空跑模式 == false && Tray盘模式 && 无测试机模式 == false)
                 {
-                    uiCheckBox204.Enabled = false;
+                    uiCheckBox190.Checked = true;
+                    uiCheckBox204.Checked = false;
+                    uiCheckBox187.Checked = false;
+                    uiCheckBox188.Checked = false;
+                    uiCheckBox206.Checked = false;
                 }
+                else if (空跑模式 == false && Tray盘模式)
+                {
+                    uiCheckBox204.Checked = true;
+                    uiCheckBox187.Checked = false;
+                    uiCheckBox188.Checked = false;
+                }
+                else if (空跑模式 && Tray盘模式)
+                {
+                    uiCheckBox204.Checked = false;
+                    uiCheckBox187.Checked = true;
+                    uiCheckBox188.Checked = false;
+                }
+                else if (空跑模式 && Tray盘模式 == false)
+                {
+                    uiCheckBox204.Checked = false;
+                    uiCheckBox187.Checked = false;
+                    uiCheckBox188.Checked = true;
+                }
+
+                //uiCheckBox203.Checked = 空跑模式;
+                //if (!空跑模式 || 设备状态 != 0)
+                //{
+                //    uiCheckBox204.Enabled = false;
+                //}
+
                 uiCheckBox206.Checked = 无测试机模式;
+
                 刷新灯光状态();
                 uiCheckBox181.Checked = 按了跳过或编辑报警使能;
                 numericUpDown196.Text = Load门开门时间.ToString();
@@ -4056,6 +4086,7 @@ namespace H5509_V2
             numericUpDown8.Text = tester.出料手臂吹料时间.ToString();
             numericUpDown10.Text = tester.测试手臂吹料时间.ToString();
             numericUpDown156.Text = tester.发送开始信号延时.ToString();
+            numericUpDown197.Text = tester.接收测试信号上抬延时.ToString();
             numericUpDown160.Text = tester.离线模式测试等待时间.ToString();
 
             checkBox5.Checked = tester.入料吸提前开真空;
@@ -4084,6 +4115,20 @@ namespace H5509_V2
             checkBox13.Checked = tester.测试超时自动关闭Dut;
             checkBox14.Checked = tester.接收超时Bin自动关闭Dut;
 
+
+            uiCheckBox184.Checked = tester.离线模式IC放置位置 == "AutoFix";
+
+            if (tester.离线模式IC放置位置 == "AutoFix")
+            {
+                uiCheckBox184.Checked = true;
+            }
+            else
+            {
+                uiCheckBox184.Checked = false;
+                uiCheckBox185.Checked = true;
+                uiComboBox11.Text = tester.离线模式IC放置位置;
+            }
+
             string timeoutbin = tester.超时Bin字符串显示;
 
             string[] items = { timeoutbin, "OTH" };
@@ -4105,6 +4150,8 @@ namespace H5509_V2
             uiCheckBox162.Checked = comInfoSet.通讯协议 == "晶存";
             uiCheckBox163.Checked = comInfoSet.通讯协议 == "得一微";
             uiCheckBox164.Checked = comInfoSet.通讯协议 == "慧荣";
+            uiCheckBox191.Checked = comInfoSet.通讯协议 == "衡宇";
+            uiCheckBox216.Checked = comInfoSet.通讯协议 == "鹏武";
             uiCheckBox165.Checked = comInfoSet.通讯协议 == "江波龙";
 
             uiCheckBox166.Checked = comInfoSet.通讯方式 == "COM";
@@ -4119,6 +4166,7 @@ namespace H5509_V2
 
             uiCheckBox170.Checked = comInfoSet.同时测试 == 1;
             uiCheckBox171.Checked = comInfoSet.同时测试 == 2;
+            uiCheckBox183.Checked = comInfoSet.同时测试 == 4;
 
             uiCheckBox172.Checked = comInfoSet.测试结果中有对应Site;
 
@@ -4763,14 +4811,18 @@ namespace H5509_V2
             }
         }
 
+        private int uiDataColumsWidth1 = 90;
+        private int uiDataColumsWidth2 = 420;
+        //private int uiDataColumsWidth = 405;
+
         private string 刷新档案列表()
         {
             string result = Sqlite.runSql(SQLiteConnString, "select '' as ' ', 档案名称 from SetupInfo", out DataTable dt);
             if (result == "Success")
             {
                 uiDataGridView1.DataSource = dt;
-                uiDataGridView1.Columns[0].Width = 100;
-                uiDataGridView1.Columns[1].Width = 250;
+                uiDataGridView1.Columns[0].Width = 80;
+                uiDataGridView1.Columns[1].Width = 425;
 
                 uiDataGridView1.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
                 uiDataGridView1.ClearSelection();
@@ -4837,8 +4889,8 @@ namespace H5509_V2
             if (reuslt == "Success")
             {
                 uiDataGridView2.DataSource = dt;
-                uiDataGridView2.Columns[0].Width = 100;
-                uiDataGridView2.Columns[1].Width = 250;
+                uiDataGridView2.Columns[0].Width = 110;
+                uiDataGridView2.Columns[1].Width = 395;
 
                 uiDataGridView2.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
                 uiDataGridView2.ClearSelection();
@@ -4884,7 +4936,7 @@ namespace H5509_V2
             {
                 uiDataGridView3.DataSource = dt;
                 uiDataGridView3.Columns[0].Width = 100;
-                uiDataGridView3.Columns[1].Width = 250;
+                uiDataGridView3.Columns[1].Width = 405;
 
                 uiDataGridView3.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
 
@@ -4930,8 +4982,8 @@ namespace H5509_V2
             if (reuslt == "Success")
             {
                 uiDataGridView4.DataSource = dt;
-                uiDataGridView4.Columns[0].Width = 100;
-                uiDataGridView4.Columns[1].Width = 250;
+                uiDataGridView4.Columns[0].Width = 105;
+                uiDataGridView4.Columns[1].Width = 400;
 
                 uiDataGridView4.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
 
@@ -5179,6 +5231,7 @@ namespace H5509_V2
                         newtester.出料手臂吹料时间 = Convert.ToInt32(numericUpDown8.Text);
                         newtester.测试手臂吹料时间 = Convert.ToInt32(numericUpDown10.Text);
                         newtester.发送开始信号延时 = Convert.ToInt32(numericUpDown156.Text);
+                        newtester.接收测试信号上抬延时 = Convert.ToInt32(numericUpDown197.Text);
                         newtester.离线模式测试等待时间 = Convert.ToInt32(numericUpDown160.Text);
 
                         newtester.入料吸提前开真空 = checkBox5.Checked;
@@ -5201,6 +5254,8 @@ namespace H5509_V2
                         newtester.接收超时Bin自动关闭Dut = checkBox14.Checked;
 
                         newtester.超时Bin字符串显示 = textBox39.Text;
+
+                        newtester.离线模式IC放置位置 = uiCheckBox185.Checked ? uiComboBox11.Text : "AutoFix";
 
                         result = UpdateTesterIFParam(value, newtester);
                         if (result != "Success")
@@ -5234,6 +5289,7 @@ namespace H5509_V2
                             if (oldtester.出料手臂吹料时间 != newtester.出料手臂吹料时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[出料手臂吹料时间]:{oldtester.出料手臂吹料时间}->{newtester.出料手臂吹料时间}:更新成功", LogType.ParamLog); }
                             if (oldtester.测试手臂吹料时间 != newtester.测试手臂吹料时间) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试手臂吹料时间]:{oldtester.测试手臂吹料时间}->{newtester.测试手臂吹料时间}:更新成功", LogType.ParamLog); }
                             if (oldtester.发送开始信号延时 != newtester.发送开始信号延时) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[发送开始信号延时]:{oldtester.发送开始信号延时}->{newtester.发送开始信号延时}:更新成功", LogType.ParamLog); }
+                            if (oldtester.接收测试信号上抬延时 != newtester.接收测试信号上抬延时) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[接收测试信号上抬延时]:{oldtester.接收测试信号上抬延时}->{newtester.接收测试信号上抬延时}:更新成功", LogType.ParamLog); }
                             if (oldtester.离线模式测试等待时间 != newtester.离线模式测试等待时间) { timeischange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[离线模式测试等待时间]:{oldtester.离线模式测试等待时间}->{newtester.离线模式测试等待时间}:更新成功", LogType.ParamLog); }
 
                             if (oldtester.入料吸提前开真空 != newtester.入料吸提前开真空) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[入料吸提前开真空]:{oldtester.入料吸提前开真空}->{newtester.入料吸提前开真空}:更新成功", LogType.ParamLog); }
@@ -5255,6 +5311,8 @@ namespace H5509_V2
                             if (oldtester.测试超时自动关闭Dut != newtester.测试超时自动关闭Dut) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[测试超时自动关闭Dut]:{oldtester.测试超时自动关闭Dut}->{newtester.测试超时自动关闭Dut}:更新成功", LogType.ParamLog); }
                             if (oldtester.接收超时Bin自动关闭Dut != newtester.接收超时Bin自动关闭Dut) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[接收超时Bin自动关闭Dut]:{oldtester.接收超时Bin自动关闭Dut}->{newtester.接收超时Bin自动关闭Dut}:更新成功", LogType.ParamLog); }
                             if (oldtester.超时Bin字符串显示 != newtester.超时Bin字符串显示) { timeoutbinchange = true; RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[超时Bin显示字符串]:{oldtester.超时Bin字符串显示}->{newtester.超时Bin字符串显示}:更新成功", LogType.ParamLog); }
+
+                            if (oldtester.离线模式IC放置位置 != newtester.离线模式IC放置位置) { RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[离线模式IC放置位置]:{oldtester.离线模式IC放置位置}->{newtester.离线模式IC放置位置}:更新成功", LogType.ParamLog); }
 
 
                             if (value == 设置信息.测试机信息.测试机名称)
@@ -5406,10 +5464,10 @@ namespace H5509_V2
 
                         ComInfoSet newComset = new ComInfoSet();
                         newComset.通讯名称 = name;
-                        newComset.通讯协议 = uiCheckBox173.Checked ? "默认" : uiCheckBox162.Checked ? "晶存" : uiCheckBox163.Checked ? "得一微" : uiCheckBox164.Checked ? "慧荣" : uiCheckBox165.Checked ? "江波龙" : "默认";
+                        newComset.通讯协议 = uiCheckBox173.Checked ? "默认" : uiCheckBox162.Checked ? "晶存" : uiCheckBox163.Checked ? "得一微" : uiCheckBox164.Checked ? "慧荣" : uiCheckBox191.Checked ? "衡宇" : uiCheckBox216.Checked ? "鹏武" : uiCheckBox165.Checked ? "江波龙" : "默认";
                         newComset.通讯方式 = uiCheckBox166.Checked ? "COM" : uiCheckBox167.Checked ? "TCP" : uiCheckBox168.Checked ? "LAN" : uiCheckBox169.Checked ? "GPIB" : "COM";
                         newComset.测试机数量 = uiCheckBox158.Checked ? 1 : uiCheckBox159.Checked ? 4 : uiCheckBox161.Checked ? 8 : uiCheckBox160.Checked ? 16 : 1;
-                        newComset.同时测试 = uiCheckBox170.Checked ? 1 : 2;
+                        newComset.同时测试 = uiCheckBox170.Checked ? 1 : uiCheckBox171.Checked ? 2 : 4;
                         newComset.测试结果中有对应Site = uiCheckBox172.Checked;
                         newComset.超时Bin字符串 = uiTextBox7.Text;
                         newComset.发送开批信息 = uiCheckBox179.Checked;
@@ -6173,13 +6231,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6237,13 +6295,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6299,13 +6357,14 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6362,13 +6421,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6425,13 +6484,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6487,13 +6546,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6549,13 +6608,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6611,13 +6670,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6673,13 +6732,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6735,13 +6794,13 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -6797,13 +6856,14 @@ namespace H5509_V2
             if (radioButton1.Checked)
             {
                 if (textBox40.Text == "") return;
-                if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
 
-                if (textBox40.Text == "00")
-                {
-                    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
-                    return;
-                }
+                //if (int.TryParse(textBox40.Text, out int res)) textBox40.Text = res.ToString("D2");
+
+                //if (textBox40.Text == "00")
+                //{
+                //    MessageBox.Show("测试机中\"00\"代表未放料，禁止添加该Bin项!");
+                //    return;
+                //}
 
                 foreach (object listbox in tabPage_bin.Controls)
                 {
@@ -7916,34 +7976,110 @@ namespace H5509_V2
 
         private void uiCheckBox203_Click(object sender, EventArgs e)
         {
-            空跑模式 = uiCheckBox203.Checked;
-            if (空跑模式)
+            //空跑模式 = uiCheckBox203.Checked;
+            //if (空跑模式)
+            //{
+            //    uiCheckBox204.Enabled = true;
+            //    uiCheckBox206.Enabled = true;
+            //}
+            //else
+            //{
+            //    Tray盘模式 = true; //不是空跑模式时，Tray盘模式默认开启
+            //    uiCheckBox204.Checked = true;
+
+            //    无测试机模式 = false; //不是空跑模式时，默认关闭无测试机模式
+            //    uiCheckBox206.Checked = false;
+
+            //    uiCheckBox204.Enabled = false;
+            //    uiCheckBox206.Enabled = false;
+            //}
+        }
+
+
+        private void uiCheckBox190_Click(object sender, EventArgs e) //正常模式 在线模式 + 抓盘 + 吸料
+        {
+            if (uiCheckBox190.Checked) //正常
             {
-                uiCheckBox204.Enabled = true;
-                uiCheckBox206.Enabled = true;
+                空跑模式 = false; //吸料
+                Tray盘模式 = true; //抓盘
+                无测试机模式 = false; //在线
+                uiCheckBox206.Checked = false;
+                uiCheckBox206.Enabled = false;
+
+                uiCheckBox187.Checked = false;
+                uiCheckBox188.Checked = false;
+                uiCheckBox204.Checked = false;
+
             }
             else
             {
-                Tray盘模式 = true; //不是空跑模式时，Tray盘模式默认开启
-                uiCheckBox204.Checked = true;
-
-                无测试机模式 = false; //不是空跑模式时，默认关闭无测试机模式
-                uiCheckBox206.Checked = false;
-
-                uiCheckBox204.Enabled = false;
-                uiCheckBox206.Enabled = false;
+                uiCheckBox190.Checked = true;
             }
         }
 
-        private void uiCheckBox204_Click(object sender, EventArgs e)
+        private void uiCheckBox204_Click(object sender, EventArgs e) //有盘有料模式 正常模式 + 抓盘 + 吸料
         {
-            if (设备状态 != 0)
+            if (uiCheckBox204.Checked) //正常
             {
-                uiCheckBox204.Checked = Tray盘模式;
-                return;
+                空跑模式 = false; //吸料
+                Tray盘模式 = true; //抓盘
+
+                无测试机模式 = true; //离线模式
+                uiCheckBox206.Checked = true;
+                uiCheckBox206.Enabled = true;
+
+                uiCheckBox187.Checked = false;
+                uiCheckBox188.Checked = false;
+                uiCheckBox190.Checked = false;
             }
-            Tray盘模式 = uiCheckBox204.Checked;
+            else
+            {
+                uiCheckBox204.Checked = true;
+            }
+            //if (设备状态 != 0)
+            //{
+            //    uiCheckBox204.Checked = Tray盘模式;
+            //    return;
+            //}
+            //Tray盘模式 = uiCheckBox204.Checked;
         }
+
+        private void uiCheckBox187_Click(object sender, EventArgs e) //有盘无料模式 空跑模式 + 抓盘 + 不吸料
+        {
+            if (uiCheckBox187.Checked) //有盘无料
+            {
+                空跑模式 = true; //不吸料
+                Tray盘模式 = true; //抓盘
+
+                无测试机模式 = true; //离线模式
+                uiCheckBox206.Checked = true;
+                uiCheckBox206.Enabled = true;
+
+                uiCheckBox188.Checked = false;
+                uiCheckBox204.Checked = false;
+                uiCheckBox190.Checked = false;
+            }
+            else uiCheckBox187.Checked = true;
+        }
+
+        private void uiCheckBox188_Click(object sender, EventArgs e) //有盘无料模式 空跑模式 + 不抓盘 + 不吸料
+        {
+            if (uiCheckBox188.Checked) //无盘无料
+            {
+                空跑模式 = true; //不吸料
+                Tray盘模式 = false; //不抓盘
+
+                无测试机模式 = true; //离线模式
+                uiCheckBox206.Checked = true;
+                uiCheckBox206.Enabled = true;
+
+                uiCheckBox187.Checked = false;
+                uiCheckBox204.Checked = false;
+                uiCheckBox190.Checked = false;
+            }
+            else uiCheckBox188.Checked = true;
+        }
+
 
         private void uiCheckBox205_Click(object sender, EventArgs e)
         {
@@ -7952,7 +8088,22 @@ namespace H5509_V2
 
         private void uiCheckBox206_Click(object sender, EventArgs e)
         {
-            无测试机模式 = uiCheckBox206.Checked;
+            if (!uiCheckBox190.Checked)
+            {
+                if (uiCheckBox204.Checked) //有盘有料模式 + 有测试 = 正常模式
+                {
+                    if (!uiCheckBox206.Checked) //在线测试
+                    {
+                        无测试机模式 = false;
+                        空跑模式 = false;
+                        Tray盘模式 = true;
+                        uiCheckBox206.Checked = false;
+                        uiCheckBox204.Checked = false;
+                        uiCheckBox190.Checked = true;
+                    }
+                }
+                无测试机模式 = uiCheckBox206.Checked;
+            }
         }
 
         private void button240_Click(object sender, EventArgs e)
@@ -7995,6 +8146,7 @@ namespace H5509_V2
                 string result = GetSetupInfo(name, out SetupInfo setupInfo);
                 if (result == "Success")
                 {
+
                     string sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,分BIN名称,梭车名称,温度模式)" +
                         $"values('{name}_副本','{setupInfo.Tray盘信息.TrayName}','{setupInfo.开site信息.Site名称}'," +
                         $"'{setupInfo.Heat盘信息.HeatName}','{setupInfo.OffsetPoint.微调点位名称}','{setupInfo.测试机信息.测试机名称}'," +
@@ -8041,7 +8193,7 @@ namespace H5509_V2
                                 int line1 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into SiteStatus(Site名称)values('{newSetupName.Name}')");
                                 int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into OffsetPoint(微调点位名称)values('{newSetupName.Name}')");
                                 //int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称)values('{newSetupName.Name}')");
-                                int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示)values('{newSetupName.Name}','{20}','false','false','{30}','false','{90}','{100}','{100}','false','{20000}','{600}','{600}','false','{2000}','{2000}','{2000}','{200}','{200}','{200}','{100}','{5000}','false','false','false','false','false','{8}','{2}','{100}','true','true','false','false','false','20A')");
+                                int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示)values('{newSetupName.Name}','{20}','false','false','{30}','false','{90}','{100}','{100}','false','{20000}','{600}','{600}','false','{2000}','{2000}','{2000}','{200}','{200}','{200}','{100}','{5}','false','false','false','false','false','{8}','{2}','{100}','true','true','false','false','false','20A')");
                                 //int line4 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into ComInfoSet(通讯名称,客户,通讯协议,通讯方式,测试机数量,同时测试,测试结果中有对应Site,超时Bin字符串,发送开批信息,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)values('{newSetupName.Name}','默认','晶存','COM','{1}','{1}','true','AB','true','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}')");
                                 int line5 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3)values('{newSetupName.Name}','01','02,20A,OTH','03;;','04;;','05;;')");
                                 if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line5 >= 1)
@@ -8059,6 +8211,79 @@ namespace H5509_V2
                     }
                 }
             }
+        }
+
+        private void uiButton42_Click(object sender, EventArgs e)
+        {
+            //是否选中
+            int rows = uiDataGridView1.SelectedIndex;
+            if (rows >= 0)
+            {
+                //获取档案信息
+                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
+                string result = GetSetupInfo(name, out SetupInfo setupInfo);
+                if (result == "Success")
+                {
+                    //获取复制档案名称
+                    CopySetupName copySetupName = new CopySetupName();
+                    copySetupName.jName = name;
+                    DialogResult dialog = copySetupName.ShowDialog();
+                    if (dialog == DialogResult.OK)
+                    {
+                        //获取档案数量
+                        string sql = $"select count(*) from SetupInfo where 档案名称 = '{copySetupName.Name}'";
+                        result = Sqlite.runSql(SQLiteConnString, sql, out string value);
+                        if (result == "Success")
+                        {
+                            //检查档案是否不存在
+                            if (Convert.ToInt32(value) == 0)
+                            {
+                                //新增复制档案
+                                sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,通讯名称,分BIN名称,梭车名称,温度模式)" +
+                                $"values('{copySetupName.Name}', '{setupInfo.Tray盘信息.TrayName}','{copySetupName.Name}', '{setupInfo.Heat盘信息.HeatName}'" +
+                                $",'{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}', '{setupInfo.温度模式}')";
+                                int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                                if (line >= 1)
+                                {
+                                    ///点位微调
+                                    result = GetOffsetPoint(setupInfo.OffsetPoint.微调点位名称, out OffsetPoint offsetPoint);
+                                    if (result != "Success") { MessageBox.Show("获取微调点位信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                                    ///开Site信息
+                                    result = GetSiteStatus(setupInfo.开site信息.Site名称, out SiteStatus siteStatus);
+                                    if (result != "Success") { MessageBox.Show("获取开site信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                                    //分BIN参数
+                                    result = GetBINParam(setupInfo.分BIN信息.分BIN名称, out BinParam binparam);
+                                    if (result != "Success") { MessageBox.Show("获取分BIN信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                                    //测试机参数
+                                    result = GetTesterIFParam(setupInfo.测试机信息.测试机名称, out TesterIFParam tester);
+                                    if (result != "Success") { MessageBox.Show("获取测试机信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+
+                                    //string site = "{\"Protocol\":\"COM\",\"PortName\":\"COM10\",\"BaudRate\":9600,\"Parity\":0,\"DataBits\":8,\"StopBits\":1}";
+                                    int line1 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into SiteStatus(Site名称,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)" +
+                                                                    $"values('{copySetupName.Name}','{string.Join("", siteStatus.Site1)}','{string.Join("", siteStatus.Site2)}','{string.Join("", siteStatus.Site3)}','{string.Join("", siteStatus.Site4)}','{string.Join("", siteStatus.Site5)}','{string.Join("", siteStatus.Site6)}','{string.Join("", siteStatus.Site7)}','{string.Join("", siteStatus.Site8)}','{string.Join("", siteStatus.Site9)}','{string.Join("", siteStatus.Site10)}','{string.Join("", siteStatus.Site11)}','{string.Join("", siteStatus.Site12)}','{string.Join("", siteStatus.Site13)}','{string.Join("", siteStatus.Site14)}','{string.Join("", siteStatus.Site15)}','{string.Join("", siteStatus.Site16)}')");
+                                    int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into OffsetPoint(微调点位名称,入料_Load吸_X,入料_Load吸_Y,入料_Load吸_Z,入料_Load_变距,入料_Heat吸_X,入料_Heat吸_Y,入料_Heat吸_Z,入料_Heat放_X,入料_Heat放_Y,入料_Heat放_Z,入料_Heat_变距,入料_梭车1第1列放_X,入料_梭车1第1列放_Y,入料_梭车1第1列放_Z,入料_梭车1第2列放_X,入料_梭车1第2列放_Y,入料_梭车1第2列放_Z,入料_梭车2第1列放_X,入料_梭车2第1列放_Y,入料_梭车2第1列放_Z,入料_梭车2第2列放_X,入料_梭车2第2列放_Y,入料_梭车2第2列放_Z,入料_梭车_变距,出料_梭车1第1列吸_X,出料_梭车1第1列吸_Y,出料_梭车1第1列吸_Z,出料_梭车1第2列吸_X,出料_梭车1第2列吸_Y,出料_梭车1第2列吸_Z,出料_梭车2第1列吸_X,出料_梭车2第1列吸_Y,出料_梭车2第1列吸_Z,出料_梭车2第2列吸_X,出料_梭车2第2列吸_Y,出料_梭车2第2列吸_Z,出料_梭车_变距,出料_Auto1放_X,出料_Auto1放_Y,出料_Auto1放_Z,出料_Auto2放_X,出料_Auto2放_Y,出料_Auto2放_Z,出料_Fix1放_X,出料_Fix1放_Y,出料_Fix1放_Z,出料_Fix2放_X,出料_Fix2放_Y,出料_Fix2放_Z,出料_Fix3放_X,出料_Fix3放_Y,出料_Fix3放_Z,出料_AF_变距,测试_梭车1左吸_X,测试_梭车1左吸_Z,测试_梭车2左吸_X,测试_梭车2左吸_Z,测试_梭车1右放_X,测试_梭车1右放_Z,测试_梭车2右放_X,测试_梭车2右放_Z,测试_Site1吸_X,测试_Site2吸_X,测试_Site3吸_X,测试_Site4吸_X,测试_Site5吸_X,测试_Site6吸_X,测试_Site7吸_X,测试_Site8吸_X,测试_Site9吸_X,测试_Site10吸_X,测试_Site11吸_X,测试_Site12吸_X,测试_Site13吸_X,测试_Site14吸_X,测试_Site15吸_X,测试_Site16吸_X,测试_Site1吸_Z,测试_Site2吸_Z,测试_Site3吸_Z,测试_Site4吸_Z,测试_Site5吸_Z,测试_Site6吸_Z,测试_Site7吸_Z,测试_Site8吸_Z,测试_Site9吸_Z,测试_Site10吸_Z,测试_Site11吸_Z,测试_Site12吸_Z,测试_Site13吸_Z,测试_Site14吸_Z,测试_Site15吸_Z,测试_Site16吸_Z,测试_Site1放_X,测试_Site2放_X,测试_Site3放_X,测试_Site4放_X,测试_Site5放_X,测试_Site6放_X,测试_Site7放_X,测试_Site8放_X,测试_Site9放_X,测试_Site10放_X,测试_Site11放_X,测试_Site12放_X,测试_Site13放_X,测试_Site14放_X,测试_Site15放_X,测试_Site16放_X,测试_Site1放_Z,测试_Site2放_Z,测试_Site3放_Z,测试_Site4放_Z,测试_Site5放_Z,测试_Site6放_Z,测试_Site7放_Z,测试_Site8放_Z,测试_Site9放_Z,测试_Site10放_Z,测试_Site11放_Z,测试_Site12放_Z,测试_Site13放_Z,测试_Site14放_Z,测试_Site15放_Z,测试_Site16放_Z,梭车2_前_Y,梭车2_后_Y,抓盘_Empty_X,抓盘_Load_X,抓盘_Auto1_X,抓盘_Auto2_X)" +
+                                                                    $"values('{copySetupName.Name}','{offsetPoint.入料_Load吸_X}','{offsetPoint.入料_Load吸_Y}','{offsetPoint.入料_Load吸_Z}','{offsetPoint.入料_Load_变距}','{offsetPoint.入料_Heat吸_X}','{offsetPoint.入料_Heat吸_Y}','{offsetPoint.入料_Heat吸_Z}','{offsetPoint.入料_Heat放_X}','{offsetPoint.入料_Heat放_Y}','{offsetPoint.入料_Heat放_Z}','{offsetPoint.入料_Heat_变距}','{offsetPoint.入料_梭车1第1列放_X}','{offsetPoint.入料_梭车1第1列放_Y}','{offsetPoint.入料_梭车1第1列放_Z}','{offsetPoint.入料_梭车1第2列放_X}','{offsetPoint.入料_梭车1第2列放_Y}','{offsetPoint.入料_梭车1第2列放_Z}','{offsetPoint.入料_梭车2第1列放_X}','{offsetPoint.入料_梭车2第1列放_Y}','{offsetPoint.入料_梭车2第1列放_Z}','{offsetPoint.入料_梭车2第2列放_X}','{offsetPoint.入料_梭车2第2列放_Y}','{offsetPoint.入料_梭车2第2列放_Z}','{offsetPoint.入料_梭车_变距}','{offsetPoint.出料_梭车1第1列吸_X}','{offsetPoint.出料_梭车1第1列吸_Y}','{offsetPoint.出料_梭车1第1列吸_Z}','{offsetPoint.出料_梭车1第2列吸_X}','{offsetPoint.出料_梭车1第2列吸_Y}','{offsetPoint.出料_梭车1第2列吸_Z}','{offsetPoint.出料_梭车2第1列吸_X}','{offsetPoint.出料_梭车2第1列吸_Y}','{offsetPoint.出料_梭车2第1列吸_Z}','{offsetPoint.出料_梭车2第2列吸_X}','{offsetPoint.出料_梭车2第2列吸_Y}','{offsetPoint.出料_梭车2第2列吸_Z}','{offsetPoint.出料_梭车_变距}','{offsetPoint.出料_Auto1放_X}','{offsetPoint.出料_Auto1放_Y}','{offsetPoint.出料_Auto1放_Z}','{offsetPoint.出料_Auto2放_X}','{offsetPoint.出料_Auto2放_Y}','{offsetPoint.出料_Auto2放_Z}','{offsetPoint.出料_Fix1放_X}','{offsetPoint.出料_Fix1放_Y}','{offsetPoint.出料_Fix1放_Z}','{offsetPoint.出料_Fix2放_X}','{offsetPoint.出料_Fix2放_Y}','{offsetPoint.出料_Fix2放_Z}','{offsetPoint.出料_Fix3放_X}','{offsetPoint.出料_Fix3放_Y}','{offsetPoint.出料_Fix3放_Z}','{offsetPoint.出料_AF_变距}','{offsetPoint.测试_梭车1左吸_X}','{offsetPoint.测试_梭车1左吸_Z}','{offsetPoint.测试_梭车2左吸_X}','{offsetPoint.测试_梭车2左吸_Z}','{offsetPoint.测试_梭车1右放_X}','{offsetPoint.测试_梭车1右放_Z}','{offsetPoint.测试_梭车2右放_X}','{offsetPoint.测试_梭车2右放_Z}','{offsetPoint.测试_Site1吸_X}','{offsetPoint.测试_Site2吸_X}','{offsetPoint.测试_Site3吸_X}','{offsetPoint.测试_Site4吸_X}','{offsetPoint.测试_Site5吸_X}','{offsetPoint.测试_Site6吸_X}','{offsetPoint.测试_Site7吸_X}','{offsetPoint.测试_Site8吸_X}','{offsetPoint.测试_Site9吸_X}','{offsetPoint.测试_Site10吸_X}','{offsetPoint.测试_Site11吸_X}','{offsetPoint.测试_Site12吸_X}','{offsetPoint.测试_Site13吸_X}','{offsetPoint.测试_Site14吸_X}','{offsetPoint.测试_Site15吸_X}','{offsetPoint.测试_Site16吸_X}','{offsetPoint.测试_Site1吸_Z}','{offsetPoint.测试_Site2吸_Z}','{offsetPoint.测试_Site3吸_Z}','{offsetPoint.测试_Site4吸_Z}','{offsetPoint.测试_Site5吸_Z}','{offsetPoint.测试_Site6吸_Z}','{offsetPoint.测试_Site7吸_Z}','{offsetPoint.测试_Site8吸_Z}','{offsetPoint.测试_Site9吸_Z}','{offsetPoint.测试_Site10吸_Z}','{offsetPoint.测试_Site11吸_Z}','{offsetPoint.测试_Site12吸_Z}','{offsetPoint.测试_Site13吸_Z}','{offsetPoint.测试_Site14吸_Z}','{offsetPoint.测试_Site15吸_Z}','{offsetPoint.测试_Site16吸_Z}','{offsetPoint.测试_Site1放_X}','{offsetPoint.测试_Site2放_X}','{offsetPoint.测试_Site3放_X}','{offsetPoint.测试_Site4放_X}','{offsetPoint.测试_Site5放_X}','{offsetPoint.测试_Site6放_X}','{offsetPoint.测试_Site7放_X}','{offsetPoint.测试_Site8放_X}','{offsetPoint.测试_Site9放_X}','{offsetPoint.测试_Site10放_X}','{offsetPoint.测试_Site11放_X}','{offsetPoint.测试_Site12放_X}','{offsetPoint.测试_Site13放_X}','{offsetPoint.测试_Site14放_X}','{offsetPoint.测试_Site15放_X}','{offsetPoint.测试_Site16放_X}','{offsetPoint.测试_Site1放_Z}','{offsetPoint.测试_Site2放_Z}','{offsetPoint.测试_Site3放_Z}','{offsetPoint.测试_Site4放_Z}','{offsetPoint.测试_Site5放_Z}','{offsetPoint.测试_Site6放_Z}','{offsetPoint.测试_Site7放_Z}','{offsetPoint.测试_Site8放_Z}','{offsetPoint.测试_Site9放_Z}','{offsetPoint.测试_Site10放_Z}','{offsetPoint.测试_Site11放_Z}','{offsetPoint.测试_Site12放_Z}','{offsetPoint.测试_Site13放_Z}','{offsetPoint.测试_Site14放_Z}','{offsetPoint.测试_Site15放_Z}','{offsetPoint.测试_Site16放_Z}','{offsetPoint.梭车2_前_Y}','{offsetPoint.梭车2_后_Y}','{offsetPoint.抓盘_Empty_X}','{offsetPoint.抓盘_Load_X}','{offsetPoint.抓盘_Auto1_X}','{offsetPoint.抓盘_Auto2_X}')");
+                                    int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,通讯名称,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示,接收测试信号上抬延时,离线模式IC放置位置)" +
+                                                                    $"values('{copySetupName.Name}','{tester.Dout连续不良个数}','{tester.Dout连续不良自动关闭}','{tester.Dout连续不良报警}','{tester.Dut累计不良报警个数}','{tester.Dut累计不良报警使能}','{tester.总良率报警百分比}','{tester.总良率报警基数}','{tester.总良率报警间隔}','{tester.总良率报警使能}','{tester.socket使用次数}','{tester.测试超时时间}','{tester.timeout超时时间}','{tester.超时发送timeout}','{tester.入料手臂吸料超时时间}','{tester.出料手臂吸料超时时间}','{tester.测试手臂吸料超时时间}','{tester.入料手臂吹料时间}','{tester.出料手臂吹料时间}','{tester.测试手臂吹料时间}','{tester.发送开始信号延时}','{tester.离线模式测试等待时间}','{tester.入料吸提前开真空}','{tester.出料吸提前开真空}','{tester.测试吸提前开真空}','{tester.Auto侧敲使能}','{tester.前侧同时敲击}','{tester.放置多少颗敲击}','{tester.Auto侧敲次数}','{tester.侧敲间隔}','{tester.放料时允许侧敲}','{tester.侧敲时允许放料}','{tester.Auto换盘时出料Z回零}','{tester.通讯名称}','{tester.测试超时自动关闭Dut}','{tester.接收超时Bin自动关闭Dut}','{tester.超时Bin字符串显示}','{tester.接收测试信号上抬延时}','{tester.离线模式IC放置位置}')");
+                                    int line5 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3,fix1num,fix2num,fix3num,color1,color2,color3,color4,color5,name1,name2,name3,name4,name5)" +
+                                                                    $"values('{copySetupName.Name}','{binparam.auto1}','{binparam.auto2}','{binparam.fix1}','{binparam.fix2}','{binparam.fix3}','{binparam.fix1num}','{binparam.fix2num}','{binparam.fix3num}','{binparam.color1}','{binparam.color2}','{binparam.color3}','{binparam.color4}','{binparam.color5}','{binparam.name1}','{binparam.name2}','{binparam.name3}','{binparam.name4}','{binparam.name5}')");
+                                    if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line5 >= 1)
+                                    {
+                                        刷新档案列表();
+                                        刷新档案选项();
+                                    }
+                                }
+                                else MessageBox.Show("新建档案失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            } 
+                            else MessageBox.Show($"档案{copySetupName.Name}已存在!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return;
+                        }
+                        else MessageBox.Show("查询档案是否存在失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    //取消复制
+                }
+                else MessageBox.Show("获取需复制的档案信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else MessageBox.Show("请选择要复制档案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void uiButton11_Click(object sender, EventArgs e)
@@ -8094,6 +8319,7 @@ namespace H5509_V2
                         if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line4 >= 1)
                         {
                             刷新档案列表();
+                            刷新档案选项();
                             MessageBox.Show("删除成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         else
@@ -8670,8 +8896,8 @@ namespace H5509_V2
 
         private void button260_Click(object sender, EventArgs e)
         {
-            string sql = $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
-            string sql2 = $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+            string sql = $"create table f_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+            string sql2 = $"create table o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
             int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
             int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
 
@@ -9009,6 +9235,7 @@ namespace H5509_V2
                 RunLog($"Fix1数量 = {Fix1数量};");
                 RunLog($"Fix2数量 = {Fix2数量};");
                 RunLog($"Fix3数量 = {Fix3数量};");
+                RunLog($"Other数量 = {OtherNum};");
                 RunLog($"空盘上顶到最大值 = {空盘上顶到最大值};");
                 RunLog($"空盘下降到最小值 = {空盘下降到最小值};");
                 RunLog($"Auto1料仓满盘标记 = {Auto1料仓满盘标记};");
@@ -9444,6 +9671,13 @@ namespace H5509_V2
         {
             if (uiCheckBox173.Checked)
             {
+                uiCheckBox170.Checked = true;
+                uiCheckBox170_Click(null, null);
+                uiCheckBox172.Checked = true;
+                uiCheckBox179.Checked = true;
+
+                uiCheckBox191.Checked = false;
+                uiCheckBox216.Checked = false;
                 uiCheckBox162.Checked = false;
                 uiCheckBox163.Checked = false;
                 uiCheckBox164.Checked = false;
@@ -9457,6 +9691,13 @@ namespace H5509_V2
         {
             if (uiCheckBox162.Checked)
             {
+                uiCheckBox170.Checked = true;
+                uiCheckBox170_Click(null, null);
+                uiCheckBox172.Checked = true;
+                uiCheckBox179.Checked = true;
+
+                uiCheckBox191.Checked = false;
+                uiCheckBox216.Checked = false;
                 uiCheckBox173.Checked = false;
                 uiCheckBox163.Checked = false;
                 uiCheckBox164.Checked = false;
@@ -9473,6 +9714,13 @@ namespace H5509_V2
         {
             if (uiCheckBox163.Checked)
             {
+                uiCheckBox171.Checked = true;
+                uiCheckBox171_Click(null, null);
+                uiCheckBox172.Checked = false;
+                uiCheckBox179.Checked = false;
+
+                uiCheckBox191.Checked = false;
+                uiCheckBox216.Checked = false;
                 uiCheckBox173.Checked = false;
                 uiCheckBox162.Checked = false;
                 uiCheckBox164.Checked = false;
@@ -9489,6 +9737,13 @@ namespace H5509_V2
         {
             if (uiCheckBox164.Checked)
             {
+                uiCheckBox183.Checked = true;
+                uiCheckBox183_Click(null, null);
+                uiCheckBox172.Checked = false;
+                uiCheckBox179.Checked = false;
+
+                uiCheckBox191.Checked = false;
+                uiCheckBox216.Checked = false;
                 uiCheckBox173.Checked = false;
                 uiCheckBox162.Checked = false;
                 uiCheckBox163.Checked = false;
@@ -9505,6 +9760,8 @@ namespace H5509_V2
         {
             if (uiCheckBox165.Checked)
             {
+                uiCheckBox191.Checked = false;
+                uiCheckBox216.Checked = false;
                 uiCheckBox173.Checked = false;
                 uiCheckBox162.Checked = false;
                 uiCheckBox163.Checked = false;
@@ -9515,6 +9772,41 @@ namespace H5509_V2
             //清空通讯方式();
             //刷新通讯协议();
             //刷新通讯方式();
+        }
+
+        private void uiCheckBox191_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox191.Checked)
+            {
+                uiCheckBox170.Checked = true;
+                uiCheckBox170_Click(null, null);
+                uiCheckBox172.Checked = true;
+                uiCheckBox179.Checked = false;
+
+                uiCheckBox216.Checked = false;
+                uiCheckBox165.Checked = false;
+                uiCheckBox173.Checked = false;
+                uiCheckBox162.Checked = false;
+                uiCheckBox163.Checked = false;
+                uiCheckBox164.Checked = false;
+                //显示通讯协议();
+            }
+            else uiCheckBox191.Checked = true;
+        }
+
+        private void uiCheckBox216_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox216.Checked)
+            {
+                uiCheckBox191.Checked = false;
+                uiCheckBox165.Checked = false;
+                uiCheckBox173.Checked = false;
+                uiCheckBox162.Checked = false;
+                uiCheckBox163.Checked = false;
+                uiCheckBox164.Checked = false;
+                //显示通讯协议();
+            }
+            else uiCheckBox216.Checked = true;
         }
 
         #endregion
@@ -9752,6 +10044,7 @@ namespace H5509_V2
             if (uiCheckBox170.Checked)
             {
                 uiCheckBox171.Checked = false;
+                uiCheckBox183.Checked = false;
             }
             else uiCheckBox170.Checked = true;
         }
@@ -9761,8 +10054,18 @@ namespace H5509_V2
             if (uiCheckBox171.Checked)
             {
                 uiCheckBox170.Checked = false;
+                uiCheckBox183.Checked = false;
             }
             else uiCheckBox171.Checked = true;
+        }
+        private void uiCheckBox183_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox183.Checked)
+            {
+                uiCheckBox170.Checked = false;
+                uiCheckBox171.Checked = false;
+            }
+            else uiCheckBox183.Checked = true;
         }
 
         private void uiDataGridView4_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -9973,7 +10276,7 @@ namespace H5509_V2
                         if (dialog == DialogResult.OK)
                         {
                             string site = "{\"Protocol\":\"COM\",\"PortName\":\"COM10\",\"BaudRate\":9600,\"Parity\":0,\"DataBits\":8,\"StopBits\":1}";
-                            sql = $"insert into ComInfoSet(通讯名称,客户,通讯协议,通讯方式,测试机数量,同时测试,测试结果中有对应Site,超时Bin字符串,发送开批信息,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)values('{newSetupName.Name}','默认','晶存','COM','{1}','{1}','true','AB','true','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}')";
+                            sql = $"insert into ComInfoSet(通讯名称,客户,通讯协议,通讯方式,测试机数量,同时测试,测试结果中有对应Site,超时Bin字符串,发送开批信息,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)values('{newSetupName.Name}','默认','默认','COM','{1}','{1}','true','AB','true','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}')";
                             int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
                             if (line >= 1)
                             {
@@ -10067,6 +10370,64 @@ namespace H5509_V2
             else uiRadioButton3.Checked = true;
 
             刷新自定义界面_委托方法();
+        }
+
+        private void uiCheckBox185_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox185.Checked)
+            {
+                uiCheckBox184.Checked = false;
+            }
+            else uiCheckBox185.Checked = true;
+        }
+        private void uiCheckBox184_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox184.Checked)
+            {
+                uiCheckBox185.Checked = false;
+            }
+            else uiCheckBox184.Checked = true;
+        }
+
+        private void uiCheckBox174_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox174.Checked)
+            {
+                uiCheckBox175.Checked = false;
+                uiCheckBox186.Checked = false;
+            }
+            else uiCheckBox174.Checked = true;
+        }
+
+        private void uiCheckBox175_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox175.Checked)
+            {
+                uiCheckBox174.Checked = false;
+                uiCheckBox186.Checked = false;
+            }
+            else uiCheckBox175.Checked = true;
+        }
+
+        private void uiCheckBox186_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox186.Checked)
+            {
+                uiCheckBox174.Checked = false;
+                uiCheckBox175.Checked = false;
+            }
+            else uiCheckBox186.Checked = true;
+        }
+
+
+        private void uiCheckBox189_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void uiButton38_Click(object sender, EventArgs e)
+        {
+            numericUpDown196.Text = Load门开门时间.ToString();
+            uiCheckBox181.Checked = 按了跳过或编辑报警使能;
         }
     }
 }

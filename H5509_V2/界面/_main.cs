@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Security.Policy;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,7 @@ using Sunny.UI.Win32;
 using TextFileLogger;
 using static H5509_V2.APPmaster;
 using static H5509_V2.ForMain;
+using static SiCommunication.Profinet.Knx.KnxCode;
 using Color = System.Drawing.Color;
 using Control = System.Windows.Forms.Control;
 
@@ -169,6 +171,8 @@ namespace H5509_V2
 
             放料IC目标值 = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }; //防止报错
 
+            显示Site为M();
+
             刷新开Site状态();
 
             StartSite数量 = 开Site数量;
@@ -304,11 +308,17 @@ namespace H5509_V2
         public bool CheckText()
         {
             LotNo = new string[20];
+
+            LotNo[13] = textBoxuser.Text.Trim();
             LotNo[0] = textBoxFlowcaedno.Text.Trim();
             LotNo[1] = textBoxmachine.Text.Trim();
+            LotNo[2] = textBoxcustom.Text.Trim();
+            LotNo[4] = textBoxLotno.Text.Trim();
+            LotNo[14] = textBoxtestflow.Text.Trim();
             LotNo[8] = textBoxmqty.Text.Trim();
-            LotNo[13] = textBoxuser.Text.Trim();
-            return textBoxuser.Text.Trim().Length == 0 || textBoxFlowcaedno.Text.Trim().Length == 0;
+
+            return LotNo[13].Length == 0 || LotNo[0].Length == 0 || LotNo[1].Length == 0 || LotNo[2].Length == 0
+                || LotNo[4].Length == 0 || LotNo[14].Length == 0 || LotNo[8].Length == 0;
         }
 
         public void SendLotNo()
@@ -471,7 +481,12 @@ namespace H5509_V2
                         Chk_timer[i].Stop();
                         Chk_timer[i].Start();
                         设置信息.开site信息.SetSiteValue(i, "0");
-                        RunLog($"档案:[{设置信息.档案名称}]-Site{i + 1}-整组Dut被手动关闭", LogType.OperateLog);
+                        开关Site显示MA[i] = new string[] { "M", "M", "M", "M", "M", "M", "M", "M" };
+
+                        string dutlog = $"档案:[{设置信息.档案名称}]-Site{i + 1}-整组Dut被手动关闭";
+                        RunLog(dutlog, LogType.OperateLog);
+                        if (设备状态 != 0) Summary(1, dutlog);
+
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
                         if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                         result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -494,7 +509,11 @@ namespace H5509_V2
                         Chk_timer[i].Stop();
                         Chk_timer[i].Start();
                         设置信息.开site信息.SetSiteValue(i, "1");
-                        RunLog($"档案:[{设置信息.档案名称}]-Site{i + 1}-整组Dut被手动打开", LogType.OperateLog);
+
+                        string dutlog = $"档案:[{设置信息.档案名称}]-Site{i + 1}-整组Dut被手动打开";
+                        RunLog(dutlog, LogType.OperateLog);
+                        if (设备状态 != 0) Summary(1, dutlog);
+
                         string result = UpdateSiteStatus(设置信息.开site信息.Site名称, i + 1, 设置信息.开site信息.GetSiteValue(i));
                         if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                         result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -542,9 +561,15 @@ namespace H5509_V2
                     }
                     ischange = true;
                     int dut = i % 8;
-                    string sw = label.Text == "" ? "1" : "0";
+                    string sw = (label.Text == "M" || label.Text == "A") ? "1" : "0";
+                    开关Site显示MA[site][dut] = "M";
                     设置信息.开site信息.SetSiteValue(site, dut, sw);
                     RunLog($"档案:[{设置信息.档案名称}]-Site{site + 1}-Dut{dut + 1}被手动{(sw == "1" ? "打开" : "关闭")}", LogType.OperateLog);
+
+                    string dutlog = $"档案:[{设置信息.档案名称}]-Site{site + 1}-Dut{dut + 1}被手动{(sw == "1" ? "打开" : "关闭")}";
+                    RunLog(dutlog, LogType.OperateLog);
+                    if (设备状态 != 0) Summary(1, dutlog);
+
                     string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
                     if (result != "Success") { MessageBox.Show("保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); break; }
                     result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
@@ -755,7 +780,7 @@ namespace H5509_V2
                                 if (result == "Success") //(5)更新tray点位
                                 {
                                     刷新分BIN信息();
-
+                                    显示Site为M();
                                     刷新开Site状态();
                                     刷新温度显示();
                                     StationManagers.UpdateTime();
@@ -929,7 +954,7 @@ namespace H5509_V2
                     else
                     {
                         close++;
-                        Lbl_Dout[i * 8 + j].Text = "";
+                        Lbl_Dout[i * 8 + j].Text = 开关Site显示MA[i][j]; //"";
                     }
                 }
             }
@@ -980,7 +1005,7 @@ namespace H5509_V2
                                 {
                                     if (设备状态 == 1)
                                     {
-                                        Listcode.Add($"5{cloum * 4 + dut + 43}500");
+                                        Listcode.Add($"5{cloum * 4 + dut + 43}0500");
                                     }
                                     else MessageBox.Show($"后梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     RunLog($"后梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出");
@@ -989,7 +1014,7 @@ namespace H5509_V2
                                 {
                                     if (设备状态 == 1)
                                     {
-                                        Listcode.Add($"5{cloum * 4 + dut + 51}500");
+                                        Listcode.Add($"5{cloum * 4 + dut + 51}0500");
                                     }
                                     else MessageBox.Show($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     RunLog($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
@@ -1312,7 +1337,14 @@ namespace H5509_V2
 
                         if (空跑模式)
                         {
-                            Lbl_IClistenmode.Text = "空跑模式";
+                            if (Tray盘模式)
+                            {
+                                Lbl_IClistenmode.Text = "有盘无料模式";
+                            }
+                            else
+                            {
+                                Lbl_IClistenmode.Text = "无盘无料模式";
+                            }
                             Lbl_IClistenmode.ForeColor = Color.Red;
                         }
                         else
@@ -1446,7 +1478,7 @@ namespace H5509_V2
                     if (open[j][k])
                     {
                         int sitestate = StationManagers.GetStationState(site);// SiteTestState[site];
-                        if (sitestate == 1)
+                        if (sitestate == 1 || sitestate == 10)
                         {
                             Lbl_Dout[(site * 8) + (j * 4 + k)].BackColor = Color.Green;
                         }
@@ -2446,11 +2478,178 @@ namespace H5509_V2
                     UPHType = 0;
                 }
             }
-            else UPHType = 0;
+            else UPHType = 1;
         }
 
         private void label9_Click(object sender, EventArgs e)
         {
+
+
+            //string outdata = "@START_TEST_RES 00000200000000000000000020000000+";
+            ////发送111111111
+            ////接收TEST_RES 00000000200002000000
+            //string[][] BinResult32 = new string[4][];
+            //int[][] HasIC32 = new int[4][];
+            //char[] chars = outdata.Substring(16, 32).ToCharArray(); //@START_TEST_RES 00000000000000000000000000000000+
+            //if (chars.Length == 32)
+            //{
+            //    for (int i = 0; i < BinResult32.Length; i++)
+            //    {
+            //        BinResult32[i] = new string[8];
+            //        HasIC32[i] = new int[8];
+            //    }
+            //    for (int i = 0; i < chars.Length; i++)
+            //    {
+            //        int tens = i / 8;  // 十位数
+            //        int units = i % 8; // 个位数
+            //        if (HasIC32[tens][units] == 0)
+            //        {
+            //            if (chars[i] == '2')
+            //            {
+            //                HasIC32[tens][units] = 3;
+            //                BinResult32[tens][units] = "OTH";
+            //            }
+            //        }
+            //    }
+            //}
+
+            //   List<List<bool[]>> isopen = new List<List<bool[]>>() //如果状态==0则全部为False
+            //   {
+            //       new List<bool[]>() { new bool[] { false, true, true, true }, new bool[] { false, true, true, true } },
+            //       new List<bool[]>() { new bool[] { false, true, true, true }, new bool[] { false, true, true, true } },
+            //       new List<bool[]>() { new bool[] { false, true, true, true }, new bool[] { false, true, true, true } },
+            //       new List<bool[]>() { new bool[] { false, true, true, true }, new bool[] { false, true, true, true } },
+            //   };
+            //string[][] BinResult32 = new string[4][];
+
+            //int[][] HasIC32 = new int[4][];
+
+            //   if (isopen.Count == 4) //4个site测试
+            //   {
+            //       BinResult32 = new string[4][];
+            //       HasIC32 = new int[4][];
+
+            //       for (int i = 0; i < 4; i++)
+            //       {
+            //           BinResult32[i] = new string[8];
+            //           HasIC32[i] = new int[8];
+            //       }
+
+            //       for (int i = 0; i < isopen.Count; i++) //4个site
+            //       {
+            //           for (int j = 0; j < isopen[i].Count; j++) //2列
+            //           {
+            //               for (int n = 0; n < isopen[i][j].Length; n++) //4个dut
+            //               {
+            //                   HasIC32[i][j * 4 + n] = isopen[i][j][n] ? 0 : 2;
+            //                   BinResult32[i][j * 4 + n] = isopen[i][j][n] ? "XX" : "YY";
+            //               }
+            //           }
+            //       }
+            //   }
+
+            //string outdata = "@TEST_DONE 25 160+@TEST_DONE 18 B1+";//@TEST_DONE 18 B1+
+            //string pattern = @"@TEST_DONE\s+(\d+)\s+([^+]+)\+";
+            //////foreach (string str in testStrings)
+            //////{
+            ////string str = "@TEST_DONE 25 160+";
+            //MatchCollection matches = Regex.Matches(outdata, pattern);
+            //foreach (Match match in matches)
+            //{
+            //    // 从第一个捕获组（Groups[1]）中获取值
+            //    string numberPart = match.Groups[1].Value; // 对应 (\d+)
+            //    string codePart = match.Groups[2].Value;  // 对应 ([^+]+)
+
+            //    Console.WriteLine($"接收Dut:{numberPart},Bin:{codePart}");
+            //}
+
+            //string outdata = "@TEST_DONE F0 F0 F0 F0 F0 F0 F0 F0 A1 A1 A1 A1 A1 A1 A1 A1+";
+
+            //string bin = outdata.Substring(11, outdata.Length - 12);
+
+            //string[] allParts = bin.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            ////// 2. 将长字符串按每2个字符一组分割
+            ////string[] allParts = new string[bin.Length / 2];
+            ////for (int i = 0; i < allParts.Length; i++)
+            ////{
+            ////    allParts[i] = bin.Substring(i * 2, 2);
+            ////}
+
+            //string[][] bins = new string[2][];
+            //// 前8个元素组成 bin1
+            //bins[0] = allParts.Take(8).ToArray();
+            //// 后8个元素组成 bin2
+            //bins[1] = allParts.Skip(8).Take(8).ToArray();
+
+
+            //string pattern = @"^@TEST_DONE\s+(\d+)\s+([^+]+)\+$";
+            ////foreach (string str in testStrings)
+            ////{
+            //string str = "@TEST_DONE 25 160+";
+            //Match match = Regex.Match(str, pattern);
+            //if (match.Success)
+            //{
+            //    // 从第一个捕获组（Groups[1]）中获取值
+            //    string numberPart = match.Groups[1].Value; // 对应 (\d+)
+            //    string codePart = match.Groups[2].Value;  // 对应 ([^+]+)
+            //    Console.WriteLine($"原字符串: '{str}' -> 提取结果: '{numberPart}'");
+            //}
+            //else
+            //{
+            //    Console.WriteLine($"未能从字符串 '{str}' 中提取到目标内容。");
+            //}
+            //}
+            //string bins = string.Join(",", Auto1);
+            //bins += "," + string.Join(",", Auto2);
+            //if (Fix1.Length != 0)
+            //    bins += "," + string.Join(",", Fix1);
+            //if (Fix2.Length != 0)
+            //    bins += "," + string.Join(",", Fix2);
+            //if (Fix3.Length != 0)
+            //    bins += "," + string.Join(",", Fix3);
+
+            //string[] bins2 = bins.Split(',');
+            //string[] bin = new string[8];
+            //string trays = 设置信息.测试机信息.离线模式IC放置位置;
+            //if (trays == "AutoFix")
+            //{
+            //    bin = GetRandomBin(bins2, 8);
+            //}
+            //else
+            //{
+            //    string binic = "01";
+            //    if (trays == "Auto1") binic = Auto1.Split(',')[0];
+            //    else if (trays == "Auto2") binic = Auto2.Split(',')[0];
+            //    else if (trays == "Fix1") binic = Fix1.Split(',')[0];
+            //    else if (trays == "Fix2") binic = Fix2.Split(',')[0];
+            //    else if (trays == "Fix3") binic = Fix3.Split(',')[0];
+            //    bin = new string[] { binic, binic, binic, binic, binic, binic, binic, binic };
+            //}
+            //    string outdata = "@TEST_DONE A1A1A1A1A1A1A1F1A1A1A1A1A1A1A1B1A1A1A1A1A1A1A1C1A1A1A1A1A1A1A1D1+";
+            //    int StationId = 0;
+            //    int site = StationId; //站点号
+
+            //    int[] sites = { StationId, StationId + 1 };
+
+            //    string bin = outdata.Substring(11, outdata.Length - 12);
+
+            //    // 2. 将长字符串按每2个字符一组分割
+            //    string[] allParts = new string[bin.Length / 2];
+            //    for (int i = 0; i < allParts.Length; i++)
+            //    {
+            //        allParts[i] = bin.Substring(i * 2, 2);
+            //    }
+
+            //    string[][] bins = new string[4][];
+            //    // 前8个元素组成 bin1
+            //    bins[0] = allParts.Take(8).ToArray();
+            //    // 后8个元素组成 bin2
+            //    bins[1] = allParts.Skip(8).Take(8).ToArray();
+            //    bins[2] = allParts.Skip(16).Take(8).ToArray();
+            //    bins[3] = allParts.Skip(24).Take(8).ToArray();
+            //StationManagers.SetStationState(Convert.ToInt32(uiComboBox1.Text), 1);
+
             //CheckText();
 
             //SaveBatchData();
@@ -2577,6 +2776,84 @@ namespace H5509_V2
                 }
                 //textBox.Refresh();
             }
+        }
+
+        public int GetDutNum(int site, int dut)
+        {
+            int pass = Dout128PassNumber[site * 8 + (dut - 1)];
+            int fail = Dout128FailNumber[site * 8 + (dut - 1)];
+            return pass + fail;
+        }
+
+
+
+        private void label147_Click(object sender, EventArgs e)
+        {
+            //List<bool[]> open = new List<bool[]>()
+            //{
+            //    new bool[] { true, true, true, true },
+            //    new bool[] { true, true, true, true },
+            //};
+            //string result = StationManagers.Send(8, open, 无测试机模式);
+
+            //Summary_LotNo = LotNo[0] ?? "" + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+
+            //Summary(3, null, GetEndLotData());
+            //int sitenum = 1;
+            //StationManagers.SetStationIC(sitenum, new bool[][] { new bool[] { true , true , true, true }, new bool[] { true, true, true, true } });
+
+            //bool[][] open = StationManagers.GetStationIC(sitenum); // SiteTestIC[sitenum];
+
+            //string[] bins = new string[] { "A0", "A0", "A0", "A0", "99", "A0", "A0", "A0" } ;//sites.data.SiteTestBin; //Com.OutBin.TryDequeue(out string[] bins);
+
+            //bool[] opens = new bool[] { open[0][0], open[0][1], open[0][2], open[0][3], open[1][0], open[1][1], open[1][2], open[1][3] };
+            //for (int i = 0; i < bins.Length; i++)
+            //{
+            //    if (opens[i])
+            //    {
+            //        if (Auto1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto1数量++;
+            //        else if (Auto2.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto2数量++;
+            //        else if (Fix1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix1数量++;
+            //        else if (Fix2.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix2数量++;
+            //        else if (Fix3.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix3数量++;
+            //        else
+            //        {
+            //            if (Auto1.Contains("OTH")) SocketSaves[sitenum * 8 + i].Auto1数量++;
+            //            else if (Auto2.Contains("OTH")) SocketSaves[sitenum * 8 + i].Auto2数量++;
+            //            else if (Fix1.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix1数量++;
+            //            else if (Fix2.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix2数量++;
+            //            else if (Fix3.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix3数量++;
+            //        }
+            //    }
+            //}
+
+
+
+            //string[] strings = new string[5];
+            //for (int i = 0; i < strings.Length; i++)
+            //{
+            //    strings[i] = "调试2";
+            //}
+
+            //Summary_LotNo = LotNo[0]??"" + "_" + $"{开始时间.Year:D2}y{开始时间.Month:D2}m{开始时间.Day:D2}d{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+            //Summary(0, "调试"); //Alarm
+            //Summary(1, "调试"); //DutClose
+            //Summary(2, "调试"); //Operation
+            //Summary(4, "调试"); //TestCom
+            //Summary(5, "调试"); //ParameterSet
+
+
+            //Summary(3, null, liststring.ToArray()); //Summary
+
+            //liststring.Add($"Categories");
+            //liststring.Add($"Sort# Name     Auto1     Auto2     Fix1     Fix2     Fix3     总计     良率");
+            //liststring.Add($"Site01 - 1     {GetDutNum()}");
+
+
+            //设备状态 = 1;
+            //开关Site显示MA[6] = new string[] { "A", "A", "A", "A", "A", "A", "A", "A" };
+            //开关Site显示MA[2][2] = "A";
+            //刷新开Site状态();
         }
     }
 }

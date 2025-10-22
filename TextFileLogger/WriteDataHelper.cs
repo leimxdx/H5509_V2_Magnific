@@ -85,8 +85,17 @@ namespace TextFileLogger
             return WriteDataHelper.RunLog(log, datetime, logtype, isReceive);
         }
 
-        /// <returns></returns>
         public bool LotNoLog(string path, string msg)
+        {
+            return WriteDataHelper.LotNoLog(path, msg);
+        }
+
+        public bool WriteFileLog(string logPath, string[] content)
+        {
+            return WriteDataHelper.WriteFileLog(logPath, content);
+        }
+
+        public bool LotNoLog2(string path, string msg)
         {
             return WriteDataHelper.LotNoLog(path, msg);
         }
@@ -97,6 +106,8 @@ namespace TextFileLogger
         public WriteDataHelper() { }
 
         private SimpleHybirdLock writeDataLock = new SimpleHybirdLock();
+
+        private SimpleHybirdLock writeDataLock2 = new SimpleHybirdLock();
 
         public string LotNoPath { get; set; }
 
@@ -159,7 +170,6 @@ namespace TextFileLogger
 
         public bool LotNoLog(string logPath, string log)
         {
-            
             string writeTime = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss}  =>  ";
 
             //DateTime datetime = DateTime.Now;
@@ -213,6 +223,12 @@ namespace TextFileLogger
             else return false;
         }
 
+        public bool WriteFileLog(string logPath, string[] content)
+        {
+            if (WriteAppend2(logPath, content)) return true;
+            else return false;
+        }
+
         private bool WriteAppend(string filePath, string content)
         {
             if (WriteAppend(filePath, new string[] { content })) return true;
@@ -245,6 +261,32 @@ namespace TextFileLogger
                 //stop.Stop();
                 //Debug.WriteLine(stop.ElapsedMilliseconds);
                 writeDataLock.Leave();
+            }
+        }
+
+        private bool WriteAppend2(string filePath, string[] contents)
+        {
+            writeDataLock2.Enter();
+            try
+            {
+                using (FileStream fs = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+                {
+                    string content = String.Join(Environment.NewLine, contents) + Environment.NewLine;
+                    byte[] data = Encoding.UTF8.GetBytes(content);
+                    fs.Write(data, 0, data.Length);
+                    fs.Close();
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                //stop.Stop();
+                //Debug.WriteLine(stop.ElapsedMilliseconds);
+                writeDataLock2.Leave();
             }
         }
     }

@@ -92,5 +92,16 @@ namespace H5509_V2
         {
             刷新数据();
         }
+
+        private void Fix1Map_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Timer.Stop();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Timer.Stop();
+            this.Close();
+        }
     }
 }

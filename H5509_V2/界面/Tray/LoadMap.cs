@@ -30,12 +30,18 @@ namespace H5509_V2
 
         void dGV_init(DataGridView dGV, int x, int y)
         {
+            int num = 35;//23
             //dGV.EnableHeadersVisualStyles = false;
 
             dGV.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False; // 禁止换行
             dGV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None; // 关闭自动调整行高
-            dGV.RowTemplate.Height = (dGV.Size.Height - 23) / y; // 设置所有新行的默认高度
+            dGV.RowTemplate.Height = (dGV.Size.Height - num) / y; // 设置所有新行的默认高度
 
+            if ((dGV.Size.Height - num) % y == 0)
+            {
+                dGV.Size = new Size(dGV.Size.Width, dGV.Size.Height + 5);
+            }
+           
             dGV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing; // 禁止列标题行高度调整
             dGV.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing; // 禁止行标题列宽度调整
 
@@ -60,8 +66,6 @@ namespace H5509_V2
                 //dGV.Rows[i].Cells[0].Value = (dGV.Rows.Count - i).ToString("d2");
             }
             //}
-            
-
             //dGV.Enabled = false;
         }
 

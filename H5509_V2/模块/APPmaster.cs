@@ -32,6 +32,8 @@ namespace H5509_V2
 {
     public class APPmaster
     {
+        //xcopy /y /s /d D:\GitHub\H5509_V2\H5509_V2\bin\Debug \\192.168.238.209\GitHub\H5509_V2\H5509_V2\bin\Debug
+
         public static MotionEx motionEx;
 
         public static Handler handler;
@@ -41,6 +43,8 @@ namespace H5509_V2
         public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false";
 
         public static string SQLServerConnString = ""; //在SqlServer数据库获取
+
+        public static SocketSave[] SocketSaves = new SocketSave[128];
 
         public static bool InitedOK
         {
@@ -82,7 +86,9 @@ namespace H5509_V2
 
         public static string LotNoLog保存路径 = Directory.GetCurrentDirectory();
 
-        public static string 自定义界面 = "1"; 
+        public static string Summary_LotNo = "";
+
+        public static string 自定义界面 = "1";
 
         public static bool 工单号自适应 = true;
 
@@ -101,6 +107,10 @@ namespace H5509_V2
         public static int 测试超时的Dut对应site;
 
         public static string 未分配超时BIN;
+
+        public static string 串口数据异常Msg;
+
+        public static string[][] 开关Site显示MA = new string[16][];
 
         public static bool ProgramPause = false; //程序暂停
 
@@ -149,6 +159,8 @@ namespace H5509_V2
         public static bool 温控器读取_设定温度报警 = true;
 
         public static int 报警次数 = 0;
+
+        public static bool 首次出现未知Bin项报警 = false;
 
         public static string[] 报警忽略次数 = { "4018004", "4018006", "4019003", "4020009", "4020001", "4021009", "4021001", "4030009", "4030013", "4031009", "4031013", "4032009", "4032013", "1400440", "1400444", "1400445", "1400448", "1400469", "1400470", "1400471", "1400472" };
 
@@ -381,8 +393,6 @@ namespace H5509_V2
 
         public static bool Auto2正在侧敲 = false;
 
-        public static Communication Com;
-
         public static string 全部回零异常Error;
 
         public static string 读取Site1_Site8探测温度Error;
@@ -444,6 +454,9 @@ namespace H5509_V2
         public static bool 结批选项选择中 = false;
 
         public static bool 一个循环选项选择中 = false;
+
+        public static string[] SoketBin项保存;
+
 
         public static double TrayMax
         {
@@ -555,7 +568,7 @@ namespace H5509_V2
 
         #region 测试运行参数
 
-        public static int UPHType = 0;
+        public static int UPHType = 1;
 
         public static int RealUPHNum
         {
@@ -613,6 +626,8 @@ namespace H5509_V2
 
         public static int 出料数 { get { return Auto1数量 + Auto2数量 + Fix1数量 + Fix2数量 + Fix3数量; } }
 
+        public static int Fail数量 { get { return  Auto2数量 + Fix1数量 + Fix2数量 + Fix3数量; } }
+
         public static int Auto1数量 = 0;
 
         public static int Auto2数量 = 0;
@@ -622,6 +637,15 @@ namespace H5509_V2
         public static int Fix2数量 = 0;
 
         public static int Fix3数量 = 0;
+
+        public static double Failed率
+        {
+            get
+            {
+                if (Fail数量 == 0) return 0;
+                else return Math.Truncate(((double)Fail数量 / 出料数 * 10000)) / 100;
+            }
+        }
 
         public static double Auto1良率
         {
@@ -765,6 +789,8 @@ namespace H5509_V2
         public static string oth = "";
 
         public static string othAll = "";
+
+        public static int OtherNum = 0;
 
         public static double Tray_厚度
         {
@@ -1467,6 +1493,17 @@ namespace H5509_V2
                 case 12: case 13: return new int[2] { 12, 13 };
                 case 14: case 15: return new int[2] { 14, 15 };
                 default: return new int[2] { 0, 1 };
+            }
+        }
+        public static int[] GetSites2(int site)
+        {
+            switch (site)
+            {
+                case 0: case 1: case 2: case 3: return new int[4] { 0, 1, 2, 3 };
+                case 4: case 5: case 6: case 7: return new int[4] { 4, 5, 6, 7 };
+                case 8: case 9: case 10: case 11: return new int[4] { 8, 9, 10, 11 };
+                case 12: case 13: case 14: case 15: return new int[4] { 12, 13, 14, 15 };
+                default: return new int[4] { 0, 1, 2, 3 };
             }
         }
 
@@ -2289,7 +2326,7 @@ namespace H5509_V2
                         case "GXN轴卡": GXN轴卡 = value; break;
                         case "工单号自适应": 工单号自适应 = Convert.ToBoolean(value); break;
                         case "按了跳过或编辑报警使能": 按了跳过或编辑报警使能 = Convert.ToBoolean(value); break;
-                        case "Load门开门时间": Load门开门时间 = Convert.ToInt32(value); break; 
+                        case "Load门开门时间": Load门开门时间 = Convert.ToInt32(value); break;
                         case "按批号保存使能": 按批号保存使能 = Convert.ToBoolean(value); break;
                         case "LotNoLog保存路径": LotNoLog保存路径 = value; break;
                         case "自定义界面": 自定义界面 = value; break;
@@ -2591,6 +2628,7 @@ namespace H5509_V2
                             出料手臂吹料时间 = Convert.ToInt32(dr["出料手臂吹料时间"].ToString()),
                             测试手臂吹料时间 = Convert.ToInt32(dr["测试手臂吹料时间"].ToString()),
                             发送开始信号延时 = Convert.ToInt32(dr["发送开始信号延时"].ToString()),
+                            接收测试信号上抬延时 = Convert.ToInt32(dr["接收测试信号上抬延时"].ToString()),
                             离线模式测试等待时间 = Convert.ToInt32(dr["离线模式测试等待时间"].ToString()),
 
                             入料吸提前开真空 = Convert.ToBoolean(dr["入料吸提前开真空"].ToString()),
@@ -2612,6 +2650,8 @@ namespace H5509_V2
                             测试超时自动关闭Dut = Convert.ToBoolean(dr["测试超时自动关闭Dut"].ToString()),
                             接收超时Bin自动关闭Dut = Convert.ToBoolean(dr["接收超时Bin自动关闭Dut"].ToString()),
                             超时Bin字符串显示 = dr["超时Bin字符串显示"].ToString(),
+
+                            离线模式IC放置位置 = dr["离线模式IC放置位置"].ToString(),
                         };
                     }
                     else result = $"无测试机名称{name}信息";
@@ -2626,7 +2666,7 @@ namespace H5509_V2
 
         public static ComInfoSet GetComInfoSet(string name)
         {
-             GetComInfoSet(name, out ComInfoSet comInfoSet);
+            GetComInfoSet(name, out ComInfoSet comInfoSet);
             return comInfoSet;
         }
 
@@ -2846,6 +2886,7 @@ namespace H5509_V2
                 $"出料手臂吹料时间 = '{tester.出料手臂吹料时间}'," +
                 $"测试手臂吹料时间 = '{tester.测试手臂吹料时间}'," +
                 $"发送开始信号延时 = '{tester.发送开始信号延时}'," +
+                $"接收测试信号上抬延时 = '{tester.接收测试信号上抬延时}'," +
                 $"离线模式测试等待时间 = '{tester.离线模式测试等待时间}'," +
                 $"入料吸提前开真空 = '{tester.入料吸提前开真空}'," +
                 $"出料吸提前开真空 = '{tester.出料吸提前开真空}'," +
@@ -2861,6 +2902,7 @@ namespace H5509_V2
                 $"通讯名称 = '{tester.通讯名称}'," +
                 $"测试超时自动关闭Dut = '{tester.测试超时自动关闭Dut}'," +
                 $"接收超时Bin自动关闭Dut = '{tester.接收超时Bin自动关闭Dut}'," +
+                $"离线模式IC放置位置 = '{tester.离线模式IC放置位置}'," +
                 $"超时Bin字符串显示 = '{tester.超时Bin字符串显示}'" +
                 $" where 测试机名称 = '{name}'";
 
@@ -2959,7 +3001,7 @@ namespace H5509_V2
                        $"Fix1名称,Fix2名称,Fix3名称,Auto1总数,Auto2总数,Fix1总数,Fix2总数,Fix3总数," +
                        $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
                        $"IC吸取模式,测试模式)" +
-                        $"values('{开始时间:yyyy年MM月dd日 HH:mm:ss}','{LotNo[0]}','正常生产','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率:0.00}%'," +
+                        $"values('{开始时间:yyyy年MM月dd日 HH:mm:ss}','{LotNo[0]}','{LotNo[14]}','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率:0.00}%'," +
                        $"'{载入数}','{结束时间}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{设置信息.分BIN信息.name1}','{设置信息.分BIN信息.name2}'," +  //工作时间.Ticks
                        $"'{设置信息.分BIN信息.name3}','{设置信息.分BIN信息.name4}','{设置信息.分BIN信息.name5}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
                        $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{报警次数}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
@@ -3036,6 +3078,72 @@ namespace H5509_V2
             writeDataHelper.LotNoLog(logPath, info);
         }
 
+        /// <summary>
+        /// 0:Alarm,1:DutClose,2:Operation,3:Summary,4:TesterComm,5:ParameterSet
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="info"></param>
+        public static void Summary(int type, string info = null, string[] info2 = null)
+        {
+            //DateTime datetime = 开始时间;
+
+            string path = "D:\\H5509Log\\Summary\\LotNoLog\\" + Summary_LotNo; //ProgramPath + "\\" + Summary_LotNo;
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            switch (type)
+            {
+                case 0: //Alarm.txt
+                    path += "//" + "Alarm.txt";
+                    writeDataHelper.LotNoLog(path, info);
+                    break;
+
+                case 1: //DutClose.txt
+                    path += "//" + "DutClose.txt";
+                    writeDataHelper.LotNoLog(path, info);
+                    break;
+
+                case 2: //Operation.txt
+                    path += "//" + "Operation.txt";
+                    writeDataHelper.LotNoLog(path, info);
+                    break;
+
+                case 3: //Summary.txt
+                    path += "//" + "Summary.txt";
+                    writeDataHelper.WriteFileLog(path, info2);
+                    break;
+
+                case 4: //TesterComm.txt
+                    path += "//" + "TesterComm.txt";
+                    writeDataHelper.LotNoLog(path, info);
+                    break;
+
+                case 5: //ParameterSet.txt
+                    path += "//" + "ParameterSet.txt";
+                    writeDataHelper.LotNoLog(path, info);
+                    break;
+
+                    ////还有很多
+            }
+
+            //string path = LotNoLog保存路径 + "\\" + datetime.Year + "_" + datetime.Month.ToString("D2");
+        }
+
+        public static void Summary(string path, string[] info)
+        {
+            //string path = "D:\\H5509Log\\Summary\\LotNoLog\\" + Summary_LotNo; //ProgramPath + "\\" + Summary_LotNo;
+
+            //if (!Directory.Exists(path))
+            //{
+            //    Directory.CreateDirectory(path);
+            //}
+
+            //writeDataHelper.WriteFileLog(path, info);
+        }
+
         public static void Runlog2(string info)
         {
             RunLog(info, LogType.RunLog);
@@ -3062,6 +3170,17 @@ namespace H5509_V2
                 if (txtType == LogType.AlarmLog || txtType == LogType.OperateLog || txtType == LogType.ComLog)
                 {
                     LotNoLog(info);
+                }
+            }
+
+            if (设备状态 != 0)
+            {
+                switch (txtType)
+                {
+                    case LogType.AlarmLog: Summary(0, info); break;
+                    case LogType.OperateLog: Summary(2, info); break;
+                    case LogType.ComLog: Summary(4, info); break;
+                    case LogType.ParamLog: Summary(5, info); break;
                 }
             }
 
@@ -3965,7 +4084,7 @@ namespace H5509_V2
             }
             trayTemp = trayTemp.TrimEnd(',');
             if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}')";
+            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}')";
             //RunLog("Auto2 Sql:" + sql);
             SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
@@ -3985,7 +4104,7 @@ namespace H5509_V2
             }
             trayTemp = trayTemp.TrimEnd(',');
             if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}')";
+            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}')";
             SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
         }
@@ -4004,7 +4123,7 @@ namespace H5509_V2
             }
             trayTemp = trayTemp.TrimEnd(',');
             if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}')";
+            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}')";
             SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
         }
 
@@ -4022,7 +4141,7 @@ namespace H5509_V2
             }
             trayTemp = trayTemp.TrimEnd(',');
             if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}')";
+            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}')";
             SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
         }
@@ -4844,6 +4963,8 @@ namespace H5509_V2
 
             var configDict = new Dictionary<int, Dictionary<string, object>>();
 
+            StationManagers.DisConnects();
+
             // 直接创建并填充数组
             Dictionary<string, object>[] sites = Enumerable.Range(0, 16)
                 .Select(i => ConvertToDictionary(GetSiteConfig(i)))
@@ -4856,14 +4977,14 @@ namespace H5509_V2
                 configDict.Add(siteIndex, sites[siteIndex]);
             }
             StationManagers.UpdateStationsConfig(configDict);
-            for (int i = 0; i < 16; i++)
-            {
-                StationManagers.Connect(i);
+            //for (int i = 0; i < 16; i++)
+            //{
+                //StationManagers.Connect(i);
                 //StationManagers.Send(i, "@START_INFO ZRS2409290dlt:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");
                 //.SendAsync("@START_INFO ZRS240929001A:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");//我为宇宙，woweiyuzhou, I am Yuzhou
 
                 //StationManagers.GetStation(i).SendAsync("@START_TEST 00 11111111+");//我为宇宙，woweiyuzhou, I am Yuzhou
-            }
+            //}
         }
 
         public static TimeSpan 获取加热倒数时间()
@@ -4904,6 +5025,48 @@ namespace H5509_V2
             {
                 return timeSpan;
             }
+        }
+
+        public static void 显示Site为M()
+        {
+            开关Site显示MA = new string[16][];
+            for (int i = 0; i < 开关Site显示MA.Length; i++)
+            {
+                开关Site显示MA[i] = new string[8] { "M", "M", "M", "M", "M", "M", "M", "M" };
+            }
+        }
+
+        public static string[] GetEndLotData()
+        {
+            List<string> liststring = new List<string>();
+            liststring.Add($"********** H5509 Summary **********");
+            liststring.Add($"********** 机器编号:{Environment.MachineName} **********");
+            liststring.Add($"********** 开始时间:{开始时间:yyyy-MM-dd HH:mm:ss} **********");
+            if (结批完成) liststring.Add($"********** 结束时间:{结束时间:yyyy-MM-dd HH:mm:ss} **********");
+            liststring.Add($"档案:{当前档案 ?? ""}");
+            liststring.Add($"厂内批号:{LotNo[4] ?? ""}");
+            liststring.Add($"客批号:{LotNo[0] ?? ""}");
+            liststring.Add($"测试模式:{LotNo[14] ?? ""}");
+            liststring.Add($"客户:{LotNo[2] ?? ""}");
+            liststring.Add($"操作员:{LotNo[13] ?? ""}");
+            liststring.Add($"批次数量:{LotNo[8] ?? ""}");
+            liststring.Add($"测试模式:{(无测试机模式 ? "离线模式" : "在线模式")}");
+            liststring.Add($"吸取模式:{(空跑模式 ? "空跑模式" : "正常模式")}");
+            if (结批完成)
+            {
+                if (批次运行时间.TotalDays >= 1) liststring.Add($"运行时间:{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}");
+                else liststring.Add($"运行时间:{批次运行时间.ToString(@"hh\:mm\:ss")}");
+            }
+            if (结批完成) liststring.Add($"UPH:{UPHNum}");
+            liststring.Add($"载入数:{载入数}");
+            liststring.Add($"总计:{出料数},Pass:{Auto1数量}({Auto1良率:0.00}%),Failed:{Fail数量}({Failed率:0.00}%)");
+            liststring.Add($"Auto1数量({Auto1}):{Auto1数量},良率:{Auto1良率:0.00}%");
+            liststring.Add($"Auto2数量({Auto2}):{Auto2数量},良率:{Auto2良率:0.00}%");
+            liststring.Add($"Fix1数量({Fix1}):{Fix1数量},良率:{Fix1良率:0.00}%");
+            liststring.Add($"Fix2数量({Fix2}):{Fix2数量},良率:{Fix2良率:0.00}%");
+            liststring.Add($"Fix3数量({Fix3}):{Fix3数量},良率:{Fix3良率:0.00}%");
+
+            return liststring.ToArray();
         }
     }
 
@@ -5053,6 +5216,24 @@ namespace H5509_V2
                 Timer.Start();
                 StartHeatTime = DateTime.Now;
                 //RunLog("StartHeatTime:" + StartHeatTime.ToString("yyyy-MM-dd HH:mm:ss.fff"));
+            }
+        }
+
+    }
+    public class SocketSave
+    {
+        public int Auto1数量;
+        public int Auto2数量;
+        public int Fix1数量;
+        public int Fix2数量;
+        public int Fix3数量;
+        public int 总数 { get { return Auto1数量 + Auto2数量 + Fix1数量 + Fix2数量 + Fix3数量; } }
+        public double 良率
+        {
+            get
+            {
+                if (总数 == 0) return 0;
+                else return Math.Truncate(((double)Auto1数量 / 总数 * 10000)) / 100;
             }
         }
     }

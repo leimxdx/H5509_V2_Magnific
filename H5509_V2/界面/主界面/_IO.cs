@@ -183,6 +183,8 @@ namespace H5509_V2
                     }
                 }
 
+
+                //急停被按下时怎么办，要有一键清除状态吗？
                 ////GNME601 核1
                 //motionEx.GetDi("GNM601", 1, 1, 4, out value);
                 //ioval = value.ToCharArray();

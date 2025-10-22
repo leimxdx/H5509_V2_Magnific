@@ -77,7 +77,7 @@ namespace H5509_V2
 
         public void ConnectAll()
         {
-            GetStationId(out int[] site);
+            GetStationId(out int[] site);  //
             //bool[] isconnect = new bool[site.Length];
             for (int i = 0; i < site.Length; i++)
             {
@@ -96,6 +96,19 @@ namespace H5509_V2
         public void Connect(int station)
         {
             _stations[station].ConnectAsync();
+        }
+
+        public void DisConnect(int station)
+        {
+            _stations[station].Disconnect();
+        }
+
+        public void DisConnects()
+        {
+            foreach (var item in _stations)
+            {
+                _stations[item.Key].Disconnect();
+            }
         }
 
         public bool CheckTestState(int state)
@@ -185,6 +198,7 @@ namespace H5509_V2
         {
             data.SiteTestIC = testDataInfos[site].SiteTestIC;
             testDataInfos[site] = data;
+            TestTime = data.TestTime;
 
             TestDataInfo testdata = new TestDataInfo()
             {
@@ -212,6 +226,7 @@ namespace H5509_V2
                 SiteTestState = data.SiteTestState,
             };
             OutSiteQueue2.Enqueue((site, testdata2));
+
 
             // 处理接收到的数据
         }

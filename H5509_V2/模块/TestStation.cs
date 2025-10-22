@@ -6,6 +6,7 @@ using System.IO.Ports;
 using System.Linq;
 using System.Security.Policy;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,6 +37,7 @@ namespace H5509_V2
 
         public string[] SiteTestBin = new string[8]; //记录测试结果，int:site? ,string[]:bin{"01", "01" ,..., "01"}
         public bool[][] SiteTestIC = new bool[2][];
+
     }
 
     // 单个工位类
@@ -59,6 +61,9 @@ namespace H5509_V2
 
         public TestDataInfo[] testDataInfos = new TestDataInfo[16];
 
+        public string[][] BinResult32 = new string[4][];
+
+        public int[][] HasIC32 = new int[4][];
 
         //public int[] SiteTestState = new int[16];
 
@@ -100,8 +105,14 @@ namespace H5509_V2
                     ListNoTestTimer = timer3,
                     SiteTestState = 0,
                     Isreceive = false,
-                    SiteTestIC = new bool[2][] { new bool[] { false, false, false, false  }, new bool[] { false, false, false, false } },
+                    SiteTestIC = new bool[2][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
                 };
+            }
+
+            for (int i = 0; i < 4; i++)
+            {
+                BinResult32[i] = new string[8];
+                HasIC32[i] = new int[8];
             }
         }
 
@@ -130,7 +141,7 @@ namespace H5509_V2
                     int dataBits = (int)config["DataBits"];
                     string parity = config["Parity"].ToString();
                     int stopBits = (int)config["StopBits"];
-                    Communication = new SerialDevice(portName, baudRate, dataBits, stopBits, parity);
+                    Communication = new SerialDevice(StationId, portName, baudRate, dataBits, stopBits, parity);
                     Communication.DataReceive = DataReceived;
                     break;
                 case "TCP":
@@ -158,11 +169,122 @@ namespace H5509_V2
             //};
         }
 
+        public static int GetTesterId(int site)
+        {
+            int testernum = 设置信息.通讯信息.测试机数量;
+            if (testernum == 1) return 0;
+            else if (testernum == 4)
+            {
+                switch (site)
+                {
+                    case 0: case 1: case 2: case 3: return 0;
+                    case 4: case 5: case 6: case 7: return 1;
+                    case 8: case 9: case 10: case 11: return 2;
+                    case 12: case 13: case 14: case 15: return 3;
+                    default: return 0;
+                }
+            }
+            else if (testernum == 8)
+            {
+                switch (site)
+                {
+                    case 0: case 1: return 0;
+                    case 2: case 3: return 1;
+                    case 4: case 5: return 2;
+                    case 6: case 7: return 3;
+                    case 8: case 9: return 4;
+                    case 10: case 11: return 5;
+                    case 12: case 13: return 6;
+                    case 14: case 15: return 7;
+                    default: return 0;
+                }
+            }
+            else if (testernum == 16) return site;
+            else return 0;
+        }
+
+        private void SaveBinResult(bool isReceive)
+        {
+            bool istrue = true;
+            for (int i = 0; i < HasIC32.Length; i++)
+            {
+                for (int j = 0; j < HasIC32[i].Length; j++)
+                {
+                    if (HasIC32[i][j] <= 0)
+                    {
+                        istrue = false;
+                        break;
+                    }
+                }
+            }
+
+            isReceive = istrue;
+
+            if (isReceive)
+            {
+                #region 待删除
+
+                int site = StationId; //站点号
+
+                int[] sites = { StationId, StationId + 1, StationId + 2, StationId + 3 };
+
+                string[][] bins = BinResult32;
+                //string bin = outdata.Substring(11, outdata.Length - 12);
+
+                //// 2. 将长字符串按每2个字符一组分割
+                //string[] allParts = new string[bin.Length / 2];
+                //for (int i = 0; i < allParts.Length; i++)
+                //{
+                //    allParts[i] = bin.Substring(i * 2, 2);
+                //}
+
+                //string[][] bins = new string[4][];
+                //// 前8个元素组成 bin1
+                //bins[0] = allParts.Take(8).ToArray();
+                //// 后8个元素组成 bin2
+                //bins[1] = allParts.Skip(8).Take(8).ToArray();
+                //bins[2] = allParts.Skip(16).Take(8).ToArray();
+                //bins[3] = allParts.Skip(24).Take(8).ToArray();
+                if (testDataInfos[site].Listtimer.Enabled || testDataInfos[site].timeOutTimer.Enabled)
+                {
+                    //if (bins[0].Length != 8 || bins[1].Length != 8 || bins[2].Length != 8 || bins[3].Length != 8)
+                    //{
+                    //    throw new Exception("接收数据长度异常");
+                    //}
+
+                    testDataInfos[site].Listtimer.Stop();
+                    testDataInfos[site].timeOutTimer.Stop();
+
+                    //testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                    //testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+
+                    for (int i = 0; i < sites.Length; i++)
+                    {
+                        if (testDataInfos[sites[i]].SiteTestState == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
+                        {
+                            testDataInfos[sites[i]].SiteTestBin = new string[] { bins[i][0], bins[i][1], bins[i][2], bins[i][3], bins[i][4], bins[i][5], bins[i][6], bins[i][7] };
+
+                            testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].SiteTestState = 3;
+
+                            RunLog($"接收Site:{sites[i]:D2},测试Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}");
+
+                            DataUpdate(sites[i], testDataInfos[sites[i]]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
+                        }
+                    }
+                }
+                else RunLog($"site:{site:D2}未在测试!", LogType.RunLog);
+
+                #endregion
+            }
+        }
+
         public void DataReceived(string outdata)
         {
             Debug.WriteLine($"测试工位{StationId}接收数据:{outdata}");
 
-            RunLog($"({Communication.DeviceName})" + outdata, LogType.ComLog);
+            RunLog($"(测试机{GetTesterId(StationId) + 1}:{Communication.DeviceName})" + outdata, LogType.ComLog);
             RefreshInfoLog(outdata, true);
 
             while (outdata.Length > 0)
@@ -185,14 +307,24 @@ namespace H5509_V2
 
                             int[] sites = { StationId, StationId + 1 };
 
+                            //string pattern = @"^@TEST_DONE\s+((\bF\d+\b\s+)+)\+$";
+                            //Match match = Regex.Match(outdata, pattern);
+                            //if (match.Success)
+                            //{
+                            //    string allIdentifiers = match.Groups[1].Value; // Groups[1] 对应第一个捕获组
+                            //    string[] allValues = allIdentifiers.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            //}
+
                             string bin = outdata.Substring(11, outdata.Length - 12);
 
-                            // 2. 将长字符串按每2个字符一组分割
-                            string[] allParts = new string[bin.Length / 2];
-                            for (int i = 0; i < allParts.Length; i++)
-                            {
-                                allParts[i] = bin.Substring(i * 2, 2);
-                            }
+                            string[] allParts = bin.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                            //// 2. 将长字符串按每2个字符一组分割
+                            //string[] allParts = new string[bin.Length / 2];
+                            //for (int i = 0; i < allParts.Length; i++)
+                            //{
+                            //    allParts[i] = bin.Substring(i * 2, 2);
+                            //}
 
                             string[][] bins = new string[2][];
                             // 前8个元素组成 bin1
@@ -224,11 +356,64 @@ namespace H5509_V2
                                     }
                                 }
                             }
-                            else RunLog($"site:{site:D2}未在测试!", LogType.ComLog);
+                            else RunLog($"site:{site:D2}未在测试!", LogType.RunLog);
                         }
-                        else
+                        else if (设置信息.通讯信息.通讯协议 == "慧荣") //SMI eMMC芯片
                         {
+                            //接收@TEST_DONE 25 B1+
+                            //接收@TEST_DONE 25 160+
 
+                            bool isReceive = false;
+
+                            //string pattern = @"^@TEST_DONE\s+(\d+)\s+([^+]+)\+$";
+                            string pattern = @"@TEST_DONE\s+(\d+)\s+([^+]+)\+";
+                            //foreach (string str in testStrings)
+                            //{
+                            //string str = "@TEST_DONE 25 160+";
+                            MatchCollection matches = Regex.Matches(outdata, pattern);
+                            foreach (Match match in matches)
+                            {
+                                // 从第一个捕获组（Groups[1]）中获取值
+                                string numberPart = match.Groups[1].Value; // 对应 (\d+)
+                                string codePart = match.Groups[2].Value;  // 对应 ([^+]+)
+
+                                int dutnum = Convert.ToInt32(numberPart);
+                                int tens = dutnum / 10;  // 十位数
+                                int units = dutnum % 10 - 1; // 个位数
+
+                                BinResult32[tens][units] = codePart;
+                                HasIC32[tens][units] = 1;
+
+                                outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
+                                //Convert.ToInt32($"接收Dut{numberPart},Bin{codePart}");
+                            }
+
+                            SaveBinResult(isReceive);
+                        }
+                        else if (设置信息.通讯信息.通讯协议 == "衡宇")
+                        {
+                            string[] bin = outdata.Substring(14, 39).Split(' '); //@TEST_DONE 00 0001 0001 0001 0001 0001 0001 0001 0001+
+                            int site = StationId + Convert.ToInt32(outdata.Substring(11, 2));
+
+                            if (testDataInfos[site].SiteTestState == 2 && (testDataInfos[site].Listtimer.Enabled || testDataInfos[site].timeOutTimer.Enabled)) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
+                            {
+                                testDataInfos[site].Listtimer.Stop();
+                                testDataInfos[site].timeOutTimer.Stop();
+
+                                testDataInfos[site].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
+
+                                testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                                testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                                testDataInfos[site].SiteTestState = 3;
+
+                                RunLog($"接收Site:{site:D2},测试Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+
+                                DataUpdate(site, testDataInfos[site]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
+                            }
+                            else RunLog($"site:{site:D2}未在测试!", LogType.RunLog);
+                        }
+                        else //晶存
+                        {
                             string[] bin = outdata.Substring(14, 23).Split(' '); //@TEST_DONE 05 06 01 06 06 06 06 06 06+
                             int site = Convert.ToInt32(outdata.Substring(11, 2));
 
@@ -247,17 +432,73 @@ namespace H5509_V2
 
                                 DataUpdate(site, testDataInfos[site]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
                             }
-                            else RunLog($"site:{site:D2}未在测试!", LogType.ComLog);
+                            else RunLog($"site:{site:D2}未在测试!", LogType.RunLog);
+                        }
+                        if (!outdata.Contains("+")) break;
+                        else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
+                    }
+                    catch (Exception ex)
+                    {
+                        Listcode.Add("1400150");
+                        RunLog($"[Code]1400150,[Msg]数据解析失败！详细信息：" + ex.Message.Replace("\r\n", " "), LogType.AlarmLog);
+                        int 测试机id = TestStation.GetTesterId(StationId);
+                        串口数据异常Msg = $"(测试机{测试机id + 1}){ex.Message.Replace("\r\n", " ")}";
+                        ProgramPause = true;
+                        IsPause = true;
+                        if (!outdata.Contains("+")) break;
+                        else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
+                    }
+                }
+                else if (outdata.StartsWith("@START_TEST_RES"))
+                {
+                    try
+                    {
+                        if (设置信息.通讯信息.通讯协议 == "慧荣")
+                        {
+                            //发送111111111
+                            //接收TEST_RES 00000000200002000000
+                            char[] chars = outdata.Substring(16, 32).ToCharArray(); //@START_TEST_RES 00000000000000000000000000000000+
+                            if (chars.Length == 32)
+                            {
+                                for (int i = 0; i < chars.Length; i++)
+                                {
+                                    int tens = i / 8;  // 十位数
+                                    int units = i % 8; // 个位数
+                                    if (HasIC32[tens][units] == 0)
+                                    {
+                                        if (chars[i] == '2')
+                                        {
+                                            HasIC32[tens][units] = 3;
+                                            BinResult32[tens][units] = 设置信息.测试机信息.超时Bin字符串显示;
+                                        }
+                                    }
+                                }
+
+                                SaveBinResult(false);
+                            }
                         }
                         outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                     }
                     catch (Exception ex)
                     {
-                        //Listcode.Add("1400150");
-                        //RunLog($"[Code]1400150,[Msg]数据解析失败！详细信息：" + ex.Message, LogType.AlarmLog);
-                        //ProgramPause = true;
-                        //IsPause = true;
+                        Listcode.Add("1400150");
+                        RunLog($"[Code]1400150,[Msg]数据解析失败！详细信息：" + ex.Message.Replace("\r\n", " "), LogType.AlarmLog);
+                        int 测试机id = TestStation.GetTesterId(StationId);
+                        串口数据异常Msg = $"(测试机{测试机id + 1}){ex.Message.Replace("\r\n", " ")}";
+                        ProgramPause = true;
+                        IsPause = true;
+                        if (!outdata.Contains("+")) break; 
+                        else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                     }
+                }
+                //else if (outdata.StartsWith("@UNKNOW_CMD"))
+                //{ 
+
+                //}
+                else
+                {
+                    outdata = "";
+                    break;
                 }
             }
         }
@@ -288,7 +529,7 @@ namespace H5509_V2
                 return;
             }
             Communication.Send(str);
-            RunLog($"({Communication.DeviceName})" + str, LogType.ComLog);
+            RunLog($"(测试机{GetTesterId(StationId) + 1}:{Communication.DeviceName})" + str, LogType.ComLog);
             RefreshInfoLog(str, false);
         }
 
@@ -300,10 +541,11 @@ namespace H5509_V2
                 str = " <= ";
             }
             string datestr = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss.fff}{str}";
-            RefrshLog(StationId, datestr + $"({Communication.DeviceName})" + message);
+
+            RefrshLog(StationId, datestr + $"(测试机{GetTesterId(StationId) + 1}:{Communication.DeviceName})" + message);
         }
 
-        public string getstartest(List<List<bool[]>> isopen)
+        public static string getstartest(List<List<bool[]>> isopen)
         {
             string str = "";
             for (int x = 0; x < isopen.Count; x++)
@@ -320,7 +562,7 @@ namespace H5509_V2
             return str;
         }
 
-        public string getstartest(int site, List<bool[]> isopen)
+        public static string getstartest(int site, List<bool[]> isopen)
         {
             string str = $"{site:00} ";
 
@@ -335,6 +577,18 @@ namespace H5509_V2
             return str;
         }
 
+        public static int GetSiteNum(int site)
+        {
+            switch (site)
+            {
+                case 0: case 4: case 8: case 12: return 0;
+                case 1: case 5: case 9: case 13: return 1;
+                case 2: case 6: case 10: case 14: return 2;
+                case 3: case 7: case 11: case 15: return 3;
+                default: return 0;
+            }
+        }
+
         /// <summary>
         /// 发送信息
         /// </summary>
@@ -344,26 +598,55 @@ namespace H5509_V2
         {
             try
             {
-                string str = getstartest(site, isopen);
+                //晶存site9 10 11 12测 site=8 9 10 11 //衡宇site9 10 11 12测，发0 1 2 3
 
-                if (isOFFLine) //离线模式，无测试机
+                if (设置信息.通讯信息.通讯协议 == "衡宇")
                 {
-                    RunLog("@START_TEST " + str + "+", LogType.ComLog);
-                    RefreshInfoLog("@START_TEST " + str + "+", false);
-                    testDataInfos[site].ListNoTestTimer.Start();
-                    testDataInfos[site].listtestdatetime = DateTime.Now;
-                    testDataInfos[site].SiteTestState = 2;
+                    string str = getstartest(GetSiteNum(site), isopen);
+
+                    if (isOFFLine) //离线模式，无测试机
+                    {
+                        RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                        RefreshInfoLog("@START_TEST " + str + "+", false);
+                        testDataInfos[site].ListNoTestTimer.Start();
+                        testDataInfos[site].listtestdatetime = DateTime.Now;
+                        testDataInfos[site].SiteTestState = 2;
+                    }
+                    else //在线模式
+                    {
+                        Send("@START_TEST " + str + "+");
+                        //RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                        //RefreshInfoLog("@START_TEST " + str + "+", false);
+                        testDataInfos[site].listtestdatetime = DateTime.Now;
+                        testDataInfos[site].Listtimer.Start();
+                        testDataInfos[site].Iswaitout = false;
+                        testDataInfos[site].SiteTestState = 2;
+                        //启动定时器
+                    }
                 }
-                else //在线模式
+                else //晶存
                 {
-                    Send("@START_TEST " + str + "+");
-                    //RunLog("@START_TEST " + str + "+", LogType.ComLog);
-                    //RefreshInfoLog("@START_TEST " + str + "+", false);
-                    testDataInfos[site].listtestdatetime = DateTime.Now;
-                    testDataInfos[site].Listtimer.Start();
-                    testDataInfos[site].Iswaitout = false;
-                    testDataInfos[site].SiteTestState = 2;
-                    //启动定时器
+                    string str = getstartest(site, isopen);
+
+                    if (isOFFLine) //离线模式，无测试机
+                    {
+                        RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                        RefreshInfoLog("@START_TEST " + str + "+", false);
+                        testDataInfos[site].ListNoTestTimer.Start();
+                        testDataInfos[site].listtestdatetime = DateTime.Now;
+                        testDataInfos[site].SiteTestState = 2;
+                    }
+                    else //在线模式
+                    {
+                        Send("@START_TEST " + str + "+");
+                        //RunLog("@START_TEST " + str + "+", LogType.ComLog);
+                        //RefreshInfoLog("@START_TEST " + str + "+", false);
+                        testDataInfos[site].listtestdatetime = DateTime.Now;
+                        testDataInfos[site].Listtimer.Start();
+                        testDataInfos[site].Iswaitout = false;
+                        testDataInfos[site].SiteTestState = 2;
+                        //启动定时器
+                    }
                 }
             }
             catch (Exception ex)
@@ -388,8 +671,12 @@ namespace H5509_V2
                     testDataInfos[StationId].ListNoTestTimer.Start();
                     testDataInfos[StationId].Iswaitout = false;
 
-                    if (states[0] == 1 || states[0] == 2) testDataInfos[StationId].SiteTestState = 2;
-                    if (states[1] == 1 || states[1] == 2) testDataInfos[StationId + 1].SiteTestState = 2;
+                    for (int i = 0; i < states.Length; i++)
+                    {
+                        if (states[i] == 1 || states[i] == 10) testDataInfos[StationId + i].SiteTestState = 2;
+                        //if (states[0] == 1 || states[0] == 10) testDataInfos[StationId].SiteTestState = 2;
+                        //if (states[1] == 1 || states[1] == 10) testDataInfos[StationId + 1].SiteTestState = 2;
+                    }
                 }
                 else //在线模式
                 {
@@ -397,8 +684,36 @@ namespace H5509_V2
                     testDataInfos[StationId].Listtimer.Start();
                     testDataInfos[StationId].Iswaitout = false;
 
-                    if (states[0] == 1 || states[0] == 2) testDataInfos[StationId].SiteTestState = 2;
-                    if (states[1] == 1 || states[1] == 2) testDataInfos[StationId + 1].SiteTestState = 2;
+                    if (isopen.Count == 4) //4个site测试
+                    {
+                        BinResult32 = new string[4][];
+                        HasIC32 = new int[4][];
+
+                        for (int i = 0; i < 4; i++)
+                        {
+                            BinResult32[i] = new string[8];
+                            HasIC32[i] = new int[8];
+                        }
+
+                        for (int i = 0; i < isopen.Count; i++) //4个site
+                        {
+                            for (int j = 0; j < isopen[i].Count; j++) //2列
+                            {
+                                for (int n = 0; n < isopen[i][j].Length; n++) //4个dut
+                                {
+                                    HasIC32[i][j * 4 + n] = isopen[i][j][n] ? 0 : 2;
+                                    BinResult32[i][j * 4 + n] = isopen[i][j][n] ? "XX" : "YY";
+                                }
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < states.Length; i++)
+                    {
+                        if (states[i] == 1 || states[i] == 10) testDataInfos[StationId + i].SiteTestState = 2;
+                        //if (states[0] == 1 || states[0] == 10) testDataInfos[StationId].SiteTestState = 2;
+                        //if (states[1] == 1 || states[1] == 10) testDataInfos[StationId + 1].SiteTestState = 2;
+                    }
 
                     Send("@START_TEST " + str + "+");
                     //RunLog("@START_TEST " + str + "+", LogType.ComLog);
@@ -416,7 +731,8 @@ namespace H5509_V2
 
         private void GetTimeOutBin(int site)
         {
-            if (设置信息.通讯信息.通讯协议 == "得一微")
+            string timeoutbin = 设置信息.测试机信息.超时Bin字符串显示;
+            if (设置信息.通讯信息.同时测试 == 2)
             {
                 //int site = StationId; //站点号
 
@@ -432,34 +748,121 @@ namespace H5509_V2
                         testDataInfos[sites[i]].Iswaitout = true;
                         testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
                         testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
-                        testDataInfos[sites[i]].SiteTestBin = new string[] { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+                        testDataInfos[sites[i]].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                         testDataInfos[sites[i]].SiteTestState = 3;
 
-                        RunLog($"生成Site:{sites[i]:D2},超时Bin:20A 20A 20A 20A 20A 20A 20A 20A");
+                        RunLog($"生成Site:{sites[i]:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}");
 
                         DataUpdate(sites[i], testDataInfos[sites[i]]);
                     }
                 }
             }
+            if (设置信息.通讯信息.同时测试 == 4)
+            {
+                //int site = StationId; //站点号
+
+                if (设置信息.通讯信息.通讯协议 == "慧荣")
+                {
+                    for (int i = 0; i < HasIC32.Length; i++)
+                    {
+                        for (int j = 0; j < HasIC32[i].Length; j++)
+                        {
+                            if (HasIC32[i][j] == 0)
+                            {
+                                BinResult32[i][j] = timeoutbin;
+                            }
+                        }
+                    }
+
+                    string[][] bins = BinResult32;
+
+                    int[] sites = { StationId, StationId + 1, StationId + 2, StationId + 3 };
+
+                    //testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                    //testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+
+                    for (int i = 0; i < sites.Length; i++)
+                    {
+                        if (testDataInfos[sites[i]].SiteTestState == 2)
+                        {
+                            testDataInfos[sites[i]].Iswaitout = true;
+                            testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].SiteTestBin = new string[] { bins[i][0], bins[i][1], bins[i][2], bins[i][3], bins[i][4], bins[i][5], bins[i][6], bins[i][7] };
+                            testDataInfos[sites[i]].SiteTestState = 3;
+
+                            RunLog($"生成Site:{sites[i]:D2},超时Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}");
+
+                            DataUpdate(sites[i], testDataInfos[sites[i]]);
+                        }
+                    }
+                }
+                else //
+                {
+                    int[] sites = { StationId, StationId + 1, StationId + 2, StationId + 3 };
+
+                    //testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                    //testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+
+                    for (int i = 0; i < sites.Length; i++)
+                    {
+                        if (testDataInfos[sites[i]].SiteTestState == 2)
+                        {
+                            testDataInfos[sites[i]].Iswaitout = true;
+                            testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
+                            testDataInfos[sites[i]].SiteTestState = 3;
+
+                            RunLog($"生成Site:{sites[i]:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}");
+
+                            DataUpdate(sites[i], testDataInfos[sites[i]]);
+                        }
+                    }
+                }
+            }
             else
             {
+                //if (设置信息.通讯信息.通讯协议 == "衡宇")
+
                 testDataInfos[site].Iswaitout = true;
 
                 testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
                 testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
 
-                testDataInfos[site].SiteTestBin = new string[] { "20A", "20A", "20A", "20A", "20A", "20A", "20A", "20A" };
+                testDataInfos[site].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                 testDataInfos[site].SiteTestState = 3;
 
-                RunLog($"生成Site:{site:D2},超时Bin:20A 20A 20A 20A 20A 20A 20A 20A");
+                RunLog($"生成Site:{site:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}");
 
                 DataUpdate(site, testDataInfos[site]);
+
             }
+        }
+
+        private string[] GetBins(string[] bins2)
+        {
+            string[] bin = new string[8];
+            string trays = 设置信息.测试机信息.离线模式IC放置位置;
+            if (trays == "AutoFix")
+            {
+                bin = GetRandomBin(bins2, 8);
+            }
+            else
+            {
+                string binic = "01";
+                if (trays == "Auto1") binic = Auto1.Split(',')[0];
+                else if (trays == "Auto2") binic = Auto2.Split(',')[0];
+                else if (trays == "Fix1") binic = Fix1.Split(',')[0];
+                else if (trays == "Fix2") binic = Fix2.Split(',')[0];
+                else if (trays == "Fix3") binic = Fix3.Split(',')[0];
+                bin = new string[] { binic, binic, binic, binic, binic, binic, binic, binic };
+            }
+            return bin;
         }
 
         private void GetRandomBin(int site)
         {
-
             string bins = string.Join(",", Auto1);
             bins += "," + string.Join(",", Auto2);
             if (Fix1.Length != 0)
@@ -472,8 +875,9 @@ namespace H5509_V2
             string[] bins2 = bins.Split(',');
 
 
-            if (设置信息.通讯信息.通讯协议 == "得一微")
+            if (设置信息.通讯信息.同时测试 == 2)//"得一微"
             {
+
                 int[] sites = { StationId, StationId + 1 };
 
                 testDataInfos[site].Listtimer.Stop();
@@ -485,7 +889,34 @@ namespace H5509_V2
                 {
                     if (testDataInfos[sites[i]].SiteTestState == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                     {
-                        string[] bin = GetRandomBin(bins2, 8);
+                        string[] bin = GetBins(bins2);
+
+                        testDataInfos[sites[i]].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
+
+                        testDataInfos[sites[i]].SiteTestState = 3;
+
+                        RunLog($"生成Site:{sites[i]:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+
+                        DataUpdate(sites[i], testDataInfos[sites[i]]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
+
+                    }
+                    //else RunLog($"site:{site:D2}未在测试!", LogType.ComLog);
+                }
+            }
+            else if (设置信息.通讯信息.同时测试 == 4)
+            {
+                int[] sites = { StationId, StationId + 1, StationId + 2, StationId + 3 };
+
+                testDataInfos[site].Listtimer.Stop();
+                testDataInfos[site].timeOutTimer.Stop();
+                testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
+                testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+
+                for (int i = 0; i < sites.Length; i++)
+                {
+                    if (testDataInfos[sites[i]].SiteTestState == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
+                    {
+                        string[] bin = GetBins(bins2);
 
                         testDataInfos[sites[i]].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
 
@@ -501,7 +932,7 @@ namespace H5509_V2
             }
             else
             {
-                string[] bin = GetRandomBin(bins2, 8);
+                string[] bin = GetBins(bins2);
 
                 testDataInfos[site].Listtimer.Stop();
                 testDataInfos[site].timeOutTimer.Stop();
@@ -533,8 +964,8 @@ namespace H5509_V2
                     break;
                 }
             }
-            GetTimeOutBin(site);
 
+            GetTimeOutBin(site);
         }
 
         private void ReceiveTimer(object sender, EventArgs e)
@@ -549,6 +980,15 @@ namespace H5509_V2
                     site = i;
                     break;
                 }
+            }
+
+
+            if (设置信息.测试机信息.超时发送timeout)
+            {
+                testDataInfos[site].timeOutTimer.Start();
+                //发送timeout
+                Send($"@TIMEOUT {site.ToString("D2")}+");
+                return;
             }
 
             GetTimeOutBin(site);
@@ -568,13 +1008,6 @@ namespace H5509_V2
                 }
             }
 
-            if (设置信息.测试机信息.超时发送timeout)
-            {
-                testDataInfos[site].timeOutTimer.Start();
-                //发送timeout
-                Send($"@TIMEOUT {site.ToString("D2")}+");
-                return;
-            }
 
             GetRandomBin(site);
         }

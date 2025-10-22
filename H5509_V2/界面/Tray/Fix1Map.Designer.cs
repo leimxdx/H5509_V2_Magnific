@@ -52,6 +52,7 @@
             this.button3.TabIndex = 51;
             this.button3.Text = "退出";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // dGV_Fix1TrayMap
             // 
@@ -166,6 +167,7 @@
             this.Name = "Fix1Map";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Fix1Map";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Fix1Map_FormClosing);
             this.Load += new System.EventHandler(this.Fix1Map_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Fix1TrayMap)).EndInit();
             this.ResumeLayout(false);

@@ -19,6 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Serialization;
+using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Spreadsheet;
@@ -2395,6 +2396,19 @@ namespace H5509_V2
                 //SiteTestBin.Add(new string[] { "", "", "", "", "", "", "", "" });
                 //显示Dout颜色(i, SiteTestIC[i], SiteTestBin[i]);
             }
+
+            for (int i = 0; i < SocketSaves.Length; i++)
+            {
+                SocketSaves[i] = new SocketSave()
+                {
+                    Auto1数量 = 0,
+                    Auto2数量 = 0,
+                    Fix1数量 = 0,
+                    Fix2数量 = 0,
+                    Fix3数量 = 0,
+                };
+            }
+
             入料IC忽略 = false;
             入料IC吸不起结批 = false;
             无待测盘结批 = false;
@@ -2414,6 +2428,7 @@ namespace H5509_V2
             Fix1数量 = 0;
             Fix2数量 = 0;
             Fix3数量 = 0;
+            OtherNum = 0;
             HeatTrayClear();
             Auto1TrayClear();
             Auto2TrayClear();
@@ -2557,9 +2572,12 @@ namespace H5509_V2
 
             if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
             {
-                isstart = false;
-                Listcode.Add("1400442");
-                RunLog("[Code]1400442,[Msg](按下开始)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+                if (!结批标记)
+                {
+                    isstart = false;
+                    Listcode.Add("1400442");
+                    RunLog("[Code]1400442,[Msg](按下开始)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
+                }
             }
 
             if (io[0] == "0") //15
@@ -2661,37 +2679,48 @@ namespace H5509_V2
                 }
             }
 
-
-            bool[] check = StationManagers.CheckComConnect();
-            if (check.Contains(false))
+            if (!无测试机模式) //如果是在线模式
             {
-                for (int i = 0; i < check.Length; i++)
-                {
-                    if (!check[i])
-                    {
-                        Debug.WriteLine($"测试机{i + 1}通讯未连接");
-                    }
-                }
-                isstart = false;
-                Listcode.Add("1400430");
-                RunLog("[Code]1400430,[Msg](按下开始)串口未连接");
-            }
-
-            if (设置信息.通讯信息.发送开批信息)
-            {
-                check = StationManagers.CheckTesterConnect();
+                bool[] check = StationManagers.CheckComConnect();
                 if (check.Contains(false))
                 {
                     for (int i = 0; i < check.Length; i++)
                     {
                         if (!check[i])
                         {
-                            Debug.WriteLine($"未发送开批信息给测试机{i + 1}");
+                            Debug.WriteLine($"测试机{i + 1}通讯未连接");
                         }
                     }
                     isstart = false;
-                    Listcode.Add("1400440");
-                    RunLog("[Code]1400440,[Msg](按下开始)未发送生产信息给测试机"); //listcode.Add("1400440");
+                    Listcode.Add("1400430");
+                    RunLog("[Code]1400430,[Msg](按下开始)串口未连接");
+                }
+
+                if (设置信息.通讯信息.发送开批信息)
+                {
+                    check = StationManagers.CheckTesterConnect();
+                    if (check.Contains(false))
+                    {
+                        for (int i = 0; i < check.Length; i++)
+                        {
+                            if (!check[i])
+                            {
+                                Debug.WriteLine($"未发送开批信息给测试机{i + 1}");
+                            }
+                        }
+                        isstart = false;
+                        Listcode.Add("1400440");
+                        RunLog("[Code]1400440,[Msg](按下开始)未发送生产信息给测试机"); //listcode.Add("1400440");
+                    }
+                }
+                else
+                {
+                    if (检查输入工单输入())
+                    {
+                        isstart = false;
+                        Listcode.Add("1400489");
+                        RunLog("[Code]1400489,[Msg](按下开始)请输入用户名,客批号,机器编号,客户,测试模式,厂内批号和批次数量"); //listcode.Add("1400440");
+                    }
                 }
             }
             else
@@ -2700,7 +2729,7 @@ namespace H5509_V2
                 {
                     isstart = false;
                     Listcode.Add("1400489");
-                    RunLog("[Code]1400489,[Msg](按下开始)请输入用户名和工单号"); //listcode.Add("1400440");
+                    RunLog("[Code]1400489,[Msg](按下开始)请输入用户名,客批号,机器编号,客户,测试模式,厂内批号和批次数量"); //listcode.Add("1400440");
                 }
             }
 
@@ -4019,7 +4048,7 @@ namespace H5509_V2
                                 {
                                     isstart = false;
                                     Listcode.Add("1400472");
-                                    RunLog($"[Code]1400472,[Msg]请打开Load仓门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
+                                    RunLog($"[Code]1400472,[Msg]请打开前安全门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
                                 }
                             }
 
@@ -4034,6 +4063,7 @@ namespace H5509_V2
                             {
                                 if (!初次开始检查(iov))
                                 {
+                                    StationManagers.ConnectAll(); //清空缓存区
                                     isstart = false;
                                 }
                             }
@@ -4044,9 +4074,12 @@ namespace H5509_V2
                                 {
                                     开始时间 = DateTime.Now;
 
+                                    Summary_LotNo = (LotNo[0] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+                                    //Summary_LotNo = LotNo[0] ?? "" + "_" + 开始时间.ToString("yyyyMMdd") + $"_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+
                                     Sqlite.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
-                                    string sql = $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
-                                    string sql2 = $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+                                    string sql = $"create table f_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+                                    string sql2 = $"create table o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
                                     int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
                                     int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
 
@@ -4408,13 +4441,16 @@ namespace H5509_V2
                                 if (ishome)
                                 {
                                     参数初始化();
+
                                     显示Dout颜色();
 
                                     //if (!Com.IsconnectTester)
                                     //{
                                     //    刷新批次信息();
                                     //}
+                                    
                                     StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
+                                    StationManagers.ConnectAll(); //清空缓存区
 
                                     刷新批次信息();
 
@@ -4518,7 +4554,7 @@ namespace H5509_V2
                         bool x24 = io[16] == "1"; //X024_Load门感应
                         if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
                         {
-                            Load门开启定时器.Stop();
+                            //Load门开启定时器.Stop();
                             RunLog("Load仓门已关闭", LogType.OperateLog);
                             if (设备状态 != 0)
                             {
@@ -4528,10 +4564,10 @@ namespace H5509_V2
                         else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
                         {
                             RunLog("Load仓门被打开", LogType.OperateLog);
-                            if (等待Load门开启)
-                            {
-                                Load门开启定时器.Start();
-                            }
+                            //if (等待Load门开启)
+                            //{
+                            //    Load门开启定时器.Start();
+                            //}
 
                             if (设备状态 != 0)
                             {
@@ -4680,6 +4716,24 @@ namespace H5509_V2
                         {
                             if (!Fix3Tray盘拿走标记) Fix3Tray盘拿走标记 = true;
                             RunLog("Fix3Tray盘被拿走", LogType.OperateLog);
+                        }
+
+                        if (等待Load门开启)
+                        {
+                            if (io[11] == "0")
+                            {
+                                if (!Load门开启定时器.Enabled)
+                                {
+                                    Load门开启定时器.Start();
+                                }
+                            }
+                            else
+                            {
+                                if (Load门开启定时器.Enabled)
+                                {
+                                    Load门开启定时器.Stop();
+                                }
+                            }
                         }
 
                         if (!IsPause && (设备状态 == 1 || H5509正在归零))
@@ -4841,7 +4895,7 @@ namespace H5509_V2
             string result = "";
             if (温控加热 && 温度模式 == "高温")
             {
-                 result = 梭车加热关闭();
+                result = 梭车加热关闭();
                 if (result != "Success")
                 {
                     return result;
@@ -4886,7 +4940,7 @@ namespace H5509_V2
 
             //Task<string> task6 = Task.Run(() => { return Fix3放IC轴回零(); });
 
-            if (task1.Result != "Success" || task2.Result != "Success" || task3.Result != "Success"  || task5.Result != "Success")//|| task4.Result != "Success"  || task6.Result != "Success"
+            if (task1.Result != "Success" || task2.Result != "Success" || task3.Result != "Success" || task5.Result != "Success")//|| task4.Result != "Success"  || task6.Result != "Success"
             {
                 string errortext = "";
                 if (task1.Result != "Success") errortext += task1.Result + ";";
@@ -4965,7 +5019,7 @@ namespace H5509_V2
                             {
                                 if (IsForecePause)
                                 {
-                                    bool ispause = PS结批流程.State == 1 && PS入料手臂吸放料流程.State == 1 && PS出料手臂吸放料流程.State == 1 && PS测试手臂取待测料流程.State == 1 && PS测试手臂取已测料流程.State == 1 && 
+                                    bool ispause = PS结批流程.State == 1 && PS入料手臂吸放料流程.State == 1 && PS出料手臂吸放料流程.State == 1 && PS测试手臂取待测料流程.State == 1 && PS测试手臂取已测料流程.State == 1 &&
                                         PS测试区气缸下压动作流程.State == 1 && PS测试区气缸上抬动作流程.State == 1 && PS空盘上顶流程.State == 1 && PS空盘下降流程.State == 1 && PS空盘下降回零流程.State == 1 &&
                                         PS待测盘上顶流程.State == 1 && PS待测盘下降回零流程.State == 1 && PS待测盘下降流程.State == 1 && PS手动盘1上顶流程.State == 1 && PS手动盘1下降回零流程.State == 1 &&
                                         PS手动盘2上顶流程.State == 1 && PS手动盘2下降回零流程.State == 1 && PS入料手臂放料流程.State == 1 && PS抓盘手臂取Empty空盘流程.State == 1 && PS抓盘手臂取Load空盘流程.State == 1 &&
@@ -5134,7 +5188,7 @@ namespace H5509_V2
                             result = 整机强制归零();
                             if (result == "Success")
                             {
-                                
+
                             }
                             break;
 
@@ -5226,6 +5280,7 @@ namespace H5509_V2
                                     一个循环完成 = true;
 
                                     飞梭停止工作 = false;
+                                    入料手臂工作完成标记 = false;
                                     入料手臂停止工作标记 = false;
                                     测试手臂入料停止工作标记 = false;
                                     测试手臂出料停止工作标记 = false;
@@ -5248,8 +5303,8 @@ namespace H5509_V2
                         case 505:
                             PS结批流程.StepName = $"出入料手臂走到避让位置";
                             RunLog($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
-                            Task<string> input = Task.Run(() => { return 入料手臂移动(0, 0, 7.5); });
-                            Task<string> output = Task.Run(() => { return 出料手臂移动(0, 0, 0); });
+                            Task<string> input = Task.Run(() => { return 入料手臂移动(10, 10, 7.5); });
+                            Task<string> output = Task.Run(() => { return 出料手臂移动(10, 10, 0); });
                             if (input.Result == "Success" && output.Result == "Success")
                             {
                                 if (!空跑模式 || Tray盘模式)
@@ -5274,14 +5329,14 @@ namespace H5509_V2
                                 if (input.Result != "Success")
                                 {
                                     Listcode.Add("2029007");
-                                    RunLog($"[Code]2029007,[Msg]入料手臂移到避让位置失败!" + result, LogType.AlarmLog);
-                                    M22_入料手臂X轴ErrorMsg = result;
+                                    RunLog($"[Code]2029007,[Msg]入料手臂移到避让位置失败!" + input.Result, LogType.AlarmLog);
+                                    M22_入料手臂X轴ErrorMsg = input.Result;
                                 }
                                 if (output.Result != "Success")
                                 {
                                     Listcode.Add("2030007");
-                                    RunLog($"[Code]2030007,[Msg]出料手臂移到避让位置失败!" + result, LogType.AlarmLog);
-                                    M23_出料手臂X轴ErrorMsg = result;
+                                    RunLog($"[Code]2030007,[Msg]出料手臂移到避让位置失败!" + output.Result, LogType.AlarmLog);
+                                    M23_出料手臂X轴ErrorMsg = output.Result;
                                 }
                                 ProgramPause = true;
                                 IsPause = true;
@@ -5330,6 +5385,25 @@ namespace H5509_V2
                             break;
 
                         case 525:
+                            PS结批流程.StepName = $"出料手臂移动到梭车上避让";
+                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
+                            double[] xpos = 获取梭车xyp吸料点位(1);
+                            result = 出料手臂移动(xpos[0], xpos[1], xpos[2]);
+                            if (result == "Success")
+                            {
+                                PS结批流程.StepID = 530;
+                            }
+                            else
+                            {
+                                Listcode.Add("2030007");
+                                RunLog($"[Code]2030007,[Msg]出料手臂移动到梭车上避让失败!" + result, LogType.AlarmLog);
+                                M23_出料手臂X轴ErrorMsg = result;
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
+                            break;
+
+                        case 530:
                             PS结批流程.StepName = $"等待Load,Empty,Auto1和Auto2下降回零";
                             if (Load下降回零标记 == 1 && Empty下降回零标记 == 1 && Auto1下降回零标记 == 1 && Auto2下降回零标记 == 1)
                             {
@@ -5378,6 +5452,8 @@ namespace H5509_V2
 
                             SaveBatchData();
 
+                            Summary(3, null, GetEndLotData());
+
                             结批按钮闪烁的定时器.Stop();
                             motionEx.SetDo("Y008_结批灯", false);
                             Listcode.Add("1400130");
@@ -5419,7 +5495,7 @@ namespace H5509_V2
                             result = Sqlite.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
                             if (result == "Success")
                             {
-                                string tableName = $"dut_{LotNo[0]}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
+                                string tableName = $"dut_{LotNo[0].Replace("-", "_")}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
                                 int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table {tableName}(id nchar(10) not NULL,pass int not NULL,total int not NULL,usedTime varchar(50) not NULL)");
                                 if (line >= -1)
                                 {
@@ -7350,10 +7426,14 @@ namespace H5509_V2
                                         {
                                             if (!othAll.Contains(oth))
                                             {
-                                                isoth = true;
+                                                if (首次出现未知Bin项报警)
+                                                {
+                                                    isoth = true;
+                                                    Listcode.Add("1400500");
+                                                    RunLog($"[Code]1400500,[Msg]出现未知Bin项目：{oth}，本批次测试所有出现过的未知Bin项：{othAll}", LogType.AlarmLog);
+                                                }
+                                                else RunLog($"出现未知Bin项目：{oth}，本批次测试所有出现过的未知Bin项：{othAll}", LogType.RunLog);
                                                 othAll += oth + ",";
-                                                Listcode.Add("1400500");
-                                                RunLog($"[Code]1400500,[Msg]出现未知Bin项目：{oth}，本批次测试所有出现过的未知Bin项：{othAll}", LogType.AlarmLog);
                                             }
                                             bins[i][j] = "OTH";
                                         }
@@ -10071,6 +10151,7 @@ namespace H5509_V2
                             else
                             {
                                 if (!StationManagers.CheckTestState(1) //测试区有料
+                                    && !StationManagers.CheckTestState(10) //测试区有料
                                     && !StationManagers.CheckTestState(2) //测试区有料测试中
                                     && !StationManagers.CheckTestState(3) //测试区有料已测试
                                     && !StationManagers.CheckTestState(4) //测试区有料待取走
@@ -10765,27 +10846,31 @@ namespace H5509_V2
                             break;
 
                         case 505:
-                            PS测试区气缸下压动作流程.StepName = $"循环检测Site状态";
-                            if (StationManagers.GetStationState(site) == 1) //有料
-                            {
-                                RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->循环检测Site状态:{site + 1}有料");
-                                bool[][] siteopne = StationManagers.GetStationIC(site); //APPmaster.SiteTestIC[site];
-                                open = new List<bool[]>()
-                                {
-                                    new bool[] { siteopne[0][0],siteopne[0][1],siteopne[0][2] ,siteopne[0][3]  },
-                                    new bool[] { siteopne[1][0],siteopne[1][1],siteopne[1][2] ,siteopne[1][3]  },
-                                };
-                                PS测试区气缸下压动作流程.StepID = 510;
-                            }
-                            else
-                            {
-                                site++;
-                                if (site >= 16)
-                                {
-                                    site = 0;
-                                    //PS测试区气缸下压动作流程.StepID = 500;
-                                }
 
+                            site++;
+                            if (site >= 16)
+                            {
+                                site = 0;
+                            }
+
+                            PS测试区气缸下压动作流程.StepName = $"循环检测Site状态";
+                            if (StationManagers.GetStationState(site) == 1 || StationManagers.GetStationState(site) == 10) //有料
+                            {
+                                if (StationManagers.GetStationState(site) == 1)
+                                {
+                                    RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->循环检测Site状态:{site + 1}有料");
+                                    bool[][] siteopne = StationManagers.GetStationIC(site); //APPmaster.SiteTestIC[site];
+                                    open = new List<bool[]>()
+                                    {
+                                        new bool[] { siteopne[0][0],siteopne[0][1],siteopne[0][2] ,siteopne[0][3]  },
+                                        new bool[] { siteopne[1][0],siteopne[1][1],siteopne[1][2] ,siteopne[1][3]  },
+                                    };
+                                    PS测试区气缸下压动作流程.StepID = 510;
+                                }
+                                else if (StationManagers.GetStationState(site) == 10)
+                                {
+                                    PS测试区气缸下压动作流程.StepID = 520;
+                                }
                             }
                             break;
 
@@ -10813,7 +10898,11 @@ namespace H5509_V2
                             result = 测试区_下压气缸到位输出(site);
                             if (result == "Success")
                             {
-                                Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                                if (设置信息.通讯信息.同时测试 == 1)
+                                {
+                                    Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                                }
+                                StationManagers.SetStationState(site, 10);
                                 PS测试区气缸下压动作流程.StepID = 520;
                             }
                             else
@@ -10827,15 +10916,20 @@ namespace H5509_V2
 
                         case 520:
                             PS测试区气缸下压动作流程.StepName = $"发送测试信号";
-                            RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
                             if (设置信息.通讯信息.同时测试 == 2)
                             {
                                 result = "Success";
                                 int[] sites = GetSites(site);
-                                bool[] site1 = GetSiteOpen((int)sites[0]);
-                                bool[] site2 = GetSiteOpen((int)sites[1]);
+                                bool[][] siteic1 = StationManagers.GetStationIC((int)sites[0]);
+                                bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
+                                bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
+                                bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
                                 int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
-                                if (((states[0] >= 1 || !site1.Contains(true)) && (states[1] == 1 || !site2.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)))
+
+                                bool[] sitew1 = GetSiteOpen(sites[0]);
+                                bool[] sitew2 = GetSiteOpen(sites[1]);
+
+                                if (((states[0] == 10 || !sitew1.Contains(true)) && (states[1] == 10 || !sitew2.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记) && (states[0] == 10 || states[0] == 0) && (states[1] == 10 || states[1] == 0)))
                                 {
                                     opens = new List<List<bool[]>>()
                                     {
@@ -10843,40 +10937,96 @@ namespace H5509_V2
                                         states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
                                     };
                                     //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                                    Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                                    RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
                                     result = StationManagers.Send(site, states, opens, 无测试机模式);
-                                    //if (result == "Success")
-                                    //{
-                                    //    if(states[0] >= 1) StationManagers.SetStationState(sites[0], 2);
-                                    //    if(states[1] == 1) StationManagers.SetStationState(sites[1], 2);
-                                    //}
+                                    if (result == "Success")
+                                    {
+                                        if (states[0] == 10) StationManagers.SetStationState(sites[0], 2);
+                                        if (states[1] == 10) StationManagers.SetStationState(sites[1], 2);
+                                        PS测试区气缸下压动作流程.StepID = 599;
+                                    }
+                                    else
+                                    {
+                                        Listcode.Add("800007");
+                                        RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                                        ProgramPause = true;
+                                        IsPause = true;
+                                    }
                                 }
-                                //else site++;
+                                else PS测试区气缸下压动作流程.StepID = 599;
+                            }
+                            else if (设置信息.通讯信息.同时测试 == 4)
+                            {
+                                result = "Success";
+                                int[] sites = GetSites2(site); //获取site所属的主站
+                                bool[][] siteic1 = StationManagers.GetStationIC((int)sites[0]);
+                                bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
+                                bool[][] siteic3 = StationManagers.GetStationIC((int)sites[2]);
+                                bool[][] siteic4 = StationManagers.GetStationIC((int)sites[3]);
+                                bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
+                                bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
+                                bool[] site3 = new bool[] { siteic3[0][0], siteic3[0][1], siteic3[0][2], siteic3[0][3], siteic3[1][0], siteic3[1][1], siteic3[1][2], siteic3[1][3] };
+                                bool[] site4 = new bool[] { siteic4[0][0], siteic4[0][1], siteic4[0][2], siteic4[0][3], siteic4[1][0], siteic4[1][1], siteic4[1][2], siteic4[1][3] };
+                                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]), StationManagers.GetStationState(sites[2]), StationManagers.GetStationState(sites[3]) };
+
+                                bool[] sitew1 = GetSiteOpen(sites[0]);
+                                bool[] sitew2 = GetSiteOpen(sites[1]);
+                                bool[] sitew3 = GetSiteOpen(sites[2]);
+                                bool[] sitew4 = GetSiteOpen(sites[3]);
+
+                                if (((states[0] == 10 || !sitew1.Contains(true)) && (states[1] == 10 || !sitew2.Contains(true)) && (states[2] == 10 || !sitew3.Contains(true)) && (states[3] == 10 || !sitew4.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记) && (states[0] == 10 || states[0] == 0) && (states[1] == 10 || states[1] == 0) && (states[2] == 10 || states[2] == 0) && (states[3] == 10 || states[3] == 0)))
+                                {
+                                    opens = new List<List<bool[]>>() //如果状态==0则全部为False
+                                    {
+                                        states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                        states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                        states[2] != 0 ? GetOpens(site3) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                        states[3] != 0 ? GetOpens(site4) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                    };
+                                    //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                                    Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                                    RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                                    result = StationManagers.Send(site, states, opens, 无测试机模式);
+                                    if (result == "Success")
+                                    {
+                                        if (states[0] == 10) StationManagers.SetStationState(sites[0], 2);
+                                        if (states[1] == 10) StationManagers.SetStationState(sites[1], 2);
+                                        if (states[2] == 10) StationManagers.SetStationState(sites[2], 2);
+                                        if (states[3] == 10) StationManagers.SetStationState(sites[3], 2);
+                                        PS测试区气缸下压动作流程.StepID = 599;
+                                    }
+                                    else
+                                    {
+                                        Listcode.Add("800007");
+                                        RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                                        ProgramPause = true;
+                                        IsPause = true;
+                                    }
+                                }
+                                else PS测试区气缸下压动作流程.StepID = 599;
                             }
                             else
                             {
                                 result = StationManagers.Send(site, open, 无测试机模式);
-                                //if (result == "Success") StationManagers.SetStationState(site, 2);
-                            }
-
-                            //else result = APPmaster.Com.Send(site, open, 无测试机模式);
-
-                            if (result == "Success")
-                            {
-                                StationManagers.SetStationState(site, 2);
-                                PS测试区气缸下压动作流程.StepID = 599;
-                            }
-                            else
-                            {
-                                Listcode.Add("800007");
-                                RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
-                                ProgramPause = true;
-                                IsPause = true;
+                                if (result == "Success")
+                                {
+                                    StationManagers.SetStationState(site, 2);
+                                    PS测试区气缸下压动作流程.StepID = 599;
+                                }
+                                else
+                                {
+                                    Listcode.Add("800007");
+                                    RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                                    ProgramPause = true;
+                                    IsPause = true;
+                                }
                             }
                             break;
 
                         case 599:
                             PS测试区气缸下压动作流程.StepName = $"测试区{site + 1}气缸动作流程完成";
-                            RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                            //RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
                             PS测试区气缸下压动作流程.Processing = false;
                             PS测试区气缸下压动作流程.StepID = 500;
                             break;
@@ -10953,6 +11103,7 @@ namespace H5509_V2
                             if (StationManagers.testDataInfos[site].SiteTestState == 3) //已测试 SiteTestState[site] == 3
                             {
                                 RunLog($"PS测试区气缸上抬动作流程.StepID={PS测试区气缸上抬动作流程.StepID}->循环检测Site状态:{site + 1}测试完成");
+                                Thread.Sleep(设置信息.测试机信息.接收测试信号上抬延时);
                                 PS测试区气缸上抬动作流程.StepID = 510;
                             }
                             else
@@ -13374,7 +13525,7 @@ namespace H5509_V2
                                 门已打开超设定时间 = false;
                                 等待Load门开启 = true;
                                 Listcode.Add("1400472"); //跳过抓取Load空盘
-                                RunLog($"[Code]1400472,[Msg]请打开Load仓门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
+                                RunLog($"[Code]1400472,[Msg]请打开前安全门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
                                 ProgramPause = true;
                                 IsPause = true;
                                 RunLog($"PS抓盘手臂取Load空盘流程.StepID={PS抓盘手臂取Load空盘流程.StepID}->等待Load仓门开启");
@@ -13397,7 +13548,7 @@ namespace H5509_V2
                             else
                             {
                                 Listcode.Add("1400472"); //跳过抓取Load空盘
-                                RunLog($"[Code]1400472,[Msg]请打开Load仓门{Load门开门时间}秒并确认是否有料剩余在Tray盘！" + result, LogType.AlarmLog);
+                                RunLog($"[Code]1400472,[Msg]请打开前安全门{Load门开门时间}秒并确认是否有料剩余在Tray盘！" + result, LogType.AlarmLog);
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -15034,8 +15185,8 @@ namespace H5509_V2
                                 if (trayx.Result != "Success")
                                 {
                                     Listcode.Add("2025007");
-                                    RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2等待位失败!" + result, LogType.AlarmLog);
-                                    M18_放Tary盘轴ErrorMsg = result;
+                                    RunLog($"[Code]2025007,[Msg]放Tary盘轴移动到Auto2等待位失败!" + trayx.Result, LogType.AlarmLog);
+                                    M18_放Tary盘轴ErrorMsg = trayx.Result;
                                     ProgramPause = true;
                                     IsPause = true;
                                 }

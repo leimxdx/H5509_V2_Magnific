@@ -61,6 +61,8 @@ namespace MotionCommon
 
         public int 发送开始信号延时 { get; set; }
 
+        public int 接收测试信号上抬延时 { get; set; }
+
         public int 离线模式测试等待时间 { get; set; }
 
         public bool 入料吸提前开真空 { get; set; }
@@ -92,5 +94,7 @@ namespace MotionCommon
         public bool 接收超时Bin自动关闭Dut { get; set; }
 
         public string 超时Bin字符串显示 { get; set; }
+
+        public string 离线模式IC放置位置 { get; set; }
     }
 }

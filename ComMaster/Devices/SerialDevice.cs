@@ -70,11 +70,14 @@ namespace ComMaster.Devices
 
         public string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
+        public int StationId;
+
         #endregion
 
         #region 构造函数
-        public SerialDevice(string portName, int baudRate, int dataBits, int stopBits, string parity)
+        public SerialDevice(int stationid, string portName, int baudRate, int dataBits, int stopBits, string parity)
         {
+            StationId = stationid;
             PortName = portName;
             BaudRate = baudRate;
             DataBits = dataBits;
@@ -99,18 +102,25 @@ namespace ComMaster.Devices
         {
             lock (_syncLock)
             {
-                if (IsConnected) return true;
+                if (IsConnected)
+                {
+                    _serialPort.DiscardOutBuffer();
+                    return true;
+                }
 
                 try
                 {
-                    InitializeSerialPort();
+                    //InitializeSerialPort();
 
                     _serialPort.Open();
+                    _serialPort.DiscardOutBuffer();
+                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},连接成功");
                     UpdateCommunicationTime();
                     return true;
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},连接失败，详细信息：{ex.Message}");
                     return false;
                 }
             }
@@ -125,9 +135,13 @@ namespace ComMaster.Devices
                 try
                 {
                     _serialPort.Close();
+                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},断开连接");
                 }
-                catch (Exception)
-                { }
+                catch (Exception ex)
+                { 
+                    Console.WriteLine(ex.Message);
+                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},断开失败，详细信息：{ex.Message}");
+                }
             }
         }
 
@@ -244,6 +258,7 @@ namespace ComMaster.Devices
                 };
                 _serialPort.DataReceived += DataReceivedHandler;
 
+                Connect();
                 //_serialPort = new SerialBase();
                 //_serialPort.SerialPortInni(PortName, BaudRate, DataBits, GetStopBitsValue(), GetParityValue());
                 //_serialPort.ReceiveTimeOut = ReceiveTimeout;

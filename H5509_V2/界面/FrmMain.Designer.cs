@@ -38,6 +38,7 @@
             this.button_exit = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MainPanel = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -170,12 +171,26 @@
             this.MainPanel.Size = new System.Drawing.Size(1896, 990);
             this.MainPanel.TabIndex = 16;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label8.Location = new System.Drawing.Point(1118, 45);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(191, 27);
+            this.label8.TabIndex = 160;
+            this.label8.Text = "V.1.1.09 20250925";
+            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // ForMain
             // 
             this.AllowShowTitle = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button_exit);
@@ -187,7 +202,6 @@
             this.Controls.Add(this.button_main);
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(2560, 1440);
             this.Name = "ForMain";
             this.Padding = new System.Windows.Forms.Padding(0);
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
@@ -201,6 +215,7 @@
             this.Load += new System.EventHandler(this.ForMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -214,6 +229,7 @@
         private System.Windows.Forms.Button button_exit;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel MainPanel;
+        private System.Windows.Forms.Label label8;
     }
 }
 

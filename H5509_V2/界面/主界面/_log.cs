@@ -92,7 +92,7 @@ namespace H5509_V2
             siteRichTextBoxs = new RichTextBox[]
             {
                 richTextBox1, richTextBox4,richTextBox5,richTextBox6,richTextBox7, richTextBox8,richTextBox9,richTextBox10, richTextBox11,
-                richTextBox12, richTextBox13, richTextBox14, richTextBox15, richTextBox16, richTextBox17, richTextBox18, richTextBox19 
+                richTextBox12, richTextBox13, richTextBox14, richTextBox15, richTextBox16, richTextBox17, richTextBox18, richTextBox19
             };
         }
 
@@ -112,6 +112,7 @@ namespace H5509_V2
 
         public void 刷新日志界面()
         {
+            刷新日志界面(uiTabControl6.SelectedTab.Text);
             //uiComboBox11.Text = 设置信息.测试机信息.串口号;
             //uiComboBox12.Text = 设置信息.测试机信息.波特率.ToString();
             //uiComboBox14.Text = 设置信息.测试机信息.校验位.ToString();
@@ -677,7 +678,7 @@ namespace H5509_V2
             {
                 RunLog($"日志显示异常: {ex.Message}");
             }
-            
+
         }
 
         public void DelegteDisplayComInfo(int site, string message)
@@ -782,6 +783,30 @@ namespace H5509_V2
             this.chk_senddout6.CheckedChanged += new System.EventHandler(this.chk_senddout6_CheckedChanged);
             this.chk_senddout7.CheckedChanged += new System.EventHandler(this.chk_senddout7_CheckedChanged);
             this.chk_senddout8.CheckedChanged += new System.EventHandler(this.chk_senddout8_CheckedChanged);
+            this.chk_senddout9.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout10.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout11.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout12.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout13.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout14.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout15.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout16.CheckedChanged += new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout17.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout18.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout19.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout20.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout21.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout22.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout23.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout24.CheckedChanged += new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout25.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout26.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout27.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout28.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout29.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout30.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout31.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout32.CheckedChanged += new System.EventHandler(this.uiCheckBox2_CheckedChanged);
         }
         private void chk_senddoutsub()
         {
@@ -793,18 +818,84 @@ namespace H5509_V2
             this.chk_senddout6.CheckedChanged -= new System.EventHandler(this.chk_senddout6_CheckedChanged);
             this.chk_senddout7.CheckedChanged -= new System.EventHandler(this.chk_senddout7_CheckedChanged);
             this.chk_senddout8.CheckedChanged -= new System.EventHandler(this.chk_senddout8_CheckedChanged);
+            this.chk_senddout9.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout10.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout11.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout12.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout13.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout14.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout15.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout16.CheckedChanged -= new System.EventHandler(this.chk_senddout16_CheckedChanged);
+            this.chk_senddout17.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout18.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout19.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout20.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout21.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout22.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout23.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout24.CheckedChanged -= new System.EventHandler(this.uiCheckBox11_CheckedChanged);
+            this.chk_senddout25.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout26.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout27.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout28.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout29.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout30.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout31.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
+            this.chk_senddout32.CheckedChanged -= new System.EventHandler(this.uiCheckBox2_CheckedChanged);
         }
 
-        private List<bool[]> GetSiteStatus(out short site)
+        private void GetSiteStatus(out short site, out List<bool[]> listbool)
         {
             site = (short)(Convert.ToInt16(uiComboBox1.Text) - 1);
             List<bool[]> isopen = new List<bool[]>()
             {
-
                 new bool[] { chk_senddout1.Checked, chk_senddout2.Checked, chk_senddout3.Checked, chk_senddout4.Checked },
                 new bool[] { chk_senddout5.Checked, chk_senddout6.Checked, chk_senddout7.Checked, chk_senddout8.Checked }
             };
-            return isopen;
+            listbool = isopen;
+        }
+
+        private void GetSiteStatus(out List<List<bool[]>> listbool)//out short site, 
+        {
+            //site = (short)(Convert.ToInt16(uiComboBox1.Text) - 1);
+            List<bool[]> isopen = new List<bool[]>()
+            {
+                new bool[] { chk_senddout1.Checked, chk_senddout2.Checked, chk_senddout3.Checked, chk_senddout4.Checked },
+                new bool[] { chk_senddout5.Checked, chk_senddout6.Checked, chk_senddout7.Checked, chk_senddout8.Checked }
+            };
+            List<bool[]> isopen2 = new List<bool[]>()
+            {
+                new bool[] { chk_senddout9.Checked, chk_senddout10.Checked, chk_senddout11.Checked, chk_senddout12.Checked },
+                new bool[] { chk_senddout13.Checked, chk_senddout14.Checked, chk_senddout15.Checked, chk_senddout16.Checked }
+            };
+            List<bool[]> isopen3 = new List<bool[]>()
+            {
+                new bool[] { chk_senddout17.Checked, chk_senddout18.Checked, chk_senddout19.Checked, chk_senddout20.Checked },
+                new bool[] { chk_senddout21.Checked, chk_senddout22.Checked, chk_senddout23.Checked, chk_senddout24.Checked }
+            };
+            List<bool[]> isopen4 = new List<bool[]>()
+            {
+                new bool[] { chk_senddout25.Checked, chk_senddout26.Checked, chk_senddout27.Checked, chk_senddout28.Checked },
+                new bool[] { chk_senddout29.Checked, chk_senddout30.Checked, chk_senddout31.Checked, chk_senddout32.Checked }
+            };
+            if (设置信息.通讯信息.同时测试 == 2)
+            {
+                listbool = new List<List<bool[]>>()
+                {
+                    isopen,
+                    isopen2
+                };
+            }
+            else
+            {
+                listbool = new List<List<bool[]>>()
+                {
+                    isopen,
+                    isopen2,
+                    isopen3,
+                    isopen4,
+                };
+            }
         }
 
         /// <summary>
@@ -813,9 +904,28 @@ namespace H5509_V2
         /// <returns></returns>
         private string GetSendisopen()
         {
-            List<bool[]> isopen = GetSiteStatus(out short site);
-            string str = Com.getstartest(site, isopen);
-            return "@START_TEST " + str + "+";
+            if (设置信息.通讯信息.同时测试 == 1)
+            {
+                if (设置信息.通讯信息.通讯协议 == "衡宇")
+                {
+                    GetSiteStatus(out short site, out List<bool[]> listbool);
+                    string str = TestStation.getstartest(TestStation.GetSiteNum((int)site), listbool);
+                    //string str = TestStation.getstartest(site, listbool);
+                    return "@START_TEST " + str + "+";
+                }
+                else
+                {
+                    GetSiteStatus(out short site, out List<bool[]> listbool);
+                    string str = TestStation.getstartest(site, listbool);
+                    return "@START_TEST " + str + "+";
+                }
+            }
+            else
+            {
+                GetSiteStatus(out List<List<bool[]>> listbool);
+                string str = TestStation.getstartest(listbool);
+                return "@START_TEST " + str + "+";
+            }
         }
         private void uiComboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -824,15 +934,56 @@ namespace H5509_V2
 
         private void uiButton3_Click(object sender, EventArgs e)
         {
+            int num = 设置信息.通讯信息.同时测试;
             chk_senddoutsub();
-            chk_senddout1.Checked = true;
-            chk_senddout2.Checked = true;
-            chk_senddout3.Checked = true;
-            chk_senddout4.Checked = true;
-            chk_senddout5.Checked = true;
-            chk_senddout6.Checked = true;
-            chk_senddout7.Checked = true;
-            chk_senddout8.Checked = true;
+            chk_senddout1.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout2.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout3.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout4.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout5.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout6.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout7.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout8.Checked = num == 1 || num == 2 || num == 4;
+            chk_senddout9.Checked = num == 2 || num == 4;
+            chk_senddout10.Checked = num == 2 || num == 4;
+            chk_senddout11.Checked = num == 2 || num == 4;
+            chk_senddout12.Checked = num == 2 || num == 4;
+            chk_senddout13.Checked = num == 2 || num == 4;
+            chk_senddout14.Checked = num == 2 || num == 4;
+            chk_senddout15.Checked = num == 2 || num == 4;
+            chk_senddout16.Checked = num == 2 || num == 4;
+            chk_senddout17.Checked = num == 4;
+            chk_senddout18.Checked = num == 4;
+            chk_senddout19.Checked = num == 4;
+            chk_senddout20.Checked = num == 4;
+            chk_senddout21.Checked = num == 4;
+            chk_senddout22.Checked = num == 4;
+            chk_senddout23.Checked = num == 4;
+            chk_senddout24.Checked = num == 4;
+            chk_senddout25.Checked = num == 4;
+            chk_senddout26.Checked = num == 4;
+            chk_senddout27.Checked = num == 4;
+            chk_senddout28.Checked = num == 4;
+            chk_senddout29.Checked = num == 4;
+            chk_senddout30.Checked = num == 4;
+            chk_senddout31.Checked = num == 4;
+            chk_senddout32.Checked = num == 4;
+            //chk_senddout1.Checked = true;
+            //chk_senddout2.Checked = true;
+            //chk_senddout3.Checked = true;
+            //chk_senddout4.Checked = true;
+            //chk_senddout5.Checked = true;
+            //chk_senddout6.Checked = true;
+            //chk_senddout7.Checked = true;
+            //chk_senddout8.Checked = true;
+            //chk_senddout9.Checked = true;
+            //chk_senddout10.Checked = true;
+            //chk_senddout11.Checked = true;
+            //chk_senddout12.Checked = true;
+            //chk_senddout13.Checked = true;
+            //chk_senddout14.Checked = true;
+            //chk_senddout15.Checked = true;
+            //chk_senddout16.Checked = true;
             chk_senddoutadd();
             richtext_senddata.Text = GetSendisopen();
         }
@@ -888,19 +1039,64 @@ namespace H5509_V2
             chk_senddout6.Checked = false;
             chk_senddout7.Checked = false;
             chk_senddout8.Checked = false;
+            chk_senddout9.Checked = false;
+            chk_senddout10.Checked = false;
+            chk_senddout11.Checked = false;
+            chk_senddout12.Checked = false;
+            chk_senddout13.Checked = false;
+            chk_senddout14.Checked = false;
+            chk_senddout15.Checked = false;
+            chk_senddout16.Checked = false;
+            chk_senddout17.Checked = false;
+            chk_senddout18.Checked = false;
+            chk_senddout19.Checked = false;
+            chk_senddout20.Checked = false;
+            chk_senddout21.Checked = false;
+            chk_senddout22.Checked = false;
+            chk_senddout23.Checked = false;
+            chk_senddout24.Checked = false;
+            chk_senddout25.Checked = false;
+            chk_senddout26.Checked = false;
+            chk_senddout27.Checked = false;
+            chk_senddout28.Checked = false;
+            chk_senddout29.Checked = false;
+            chk_senddout30.Checked = false;
+            chk_senddout31.Checked = false;
+            chk_senddout32.Checked = false;
             chk_senddoutadd();
             richtext_senddata.Text = GetSendisopen();
         }
 
-        private void uiButton5_Click(object sender, EventArgs e)
+        private void uiButton5_Click(object sender, EventArgs e) //@02@#ABCD#
         {
-            List<bool[]> isopen = GetSiteStatus(out short testnum);
+            //@02@#BCD#
+            if (设备状态 == 1)
+            {
+                MessageBox.Show("设备正在运行中...!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (当前权限 == "Operator")
+            {
+                MessageBox.Show("权限不足!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            //List<bool[]> isopen = GetSiteStatus(out short testnum);
             //if (SiteTestState[testnum] == 1)
             //{
-            DialogResult dialog = MessageBox.Show("请确认是否发送测试信号?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (richtext_senddata.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("请输入要发送的数据!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int site = Convert.ToInt32(uiComboBox1.Text);
+            DialogResult dialog = MessageBox.Show($"请确认是否发送数据到测试机{TestStation.GetTesterId(site - 1) + 1}?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dialog == DialogResult.OK)
             {
-                Com.Send(testnum, isopen);
+                StationManagers.Send(site - 1, richtext_senddata.Text); //有点复杂后续再弄，晶存需要
+                //Com.Send(testnum, isopen);
             }
             //}
             //else Com.Send(testnum, isopen);
@@ -988,14 +1184,14 @@ namespace H5509_V2
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                listBox1.Items.Add(dt.Rows[i].ItemArray[0] + "-" + dt.Rows[i].ItemArray[1] + "-" + dt.Rows[i].ItemArray[2]);
+                listBox1.Items.Add(dt.Rows[i].ItemArray[0] + "_" + dt.Rows[i].ItemArray[1] + "_" + dt.Rows[i].ItemArray[2]);
             }
         }
 
-        private void uiTabControl6_Selecting(object sender, TabControlCancelEventArgs e)
-        {
+        public void 刷新日志界面(string text)
+        { 
             //点击数据查询时更新数据
-            if (e.TabPage.Text == "数据查询")
+            if (text == "数据查询")
             {
                 //button23.PerformClick();
                 uiButton18_Click(uiButton18, EventArgs.Empty);
@@ -1026,6 +1222,48 @@ namespace H5509_V2
                     case "料表信息": uiButton17_Click(uiButton17, EventArgs.Empty); break;
                 }
             }
+            else if (text == "通讯log")
+            {
+                int num = 设置信息.通讯信息.同时测试;
+                chk_senddout1.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout2.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout3.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout4.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout5.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout6.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout7.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout8.Enabled = num == 1 || num == 2 || num == 4;
+                chk_senddout9.Enabled = num == 2 || num == 4;
+                chk_senddout10.Enabled = num == 2 || num == 4;
+                chk_senddout11.Enabled = num == 2 || num == 4;
+                chk_senddout12.Enabled = num == 2 || num == 4;
+                chk_senddout13.Enabled = num == 2 || num == 4;
+                chk_senddout14.Enabled = num == 2 || num == 4;
+                chk_senddout15.Enabled = num == 2 || num == 4;
+                chk_senddout16.Enabled = num == 2 || num == 4;
+                chk_senddout17.Enabled = num == 4;
+                chk_senddout18.Enabled = num == 4;
+                chk_senddout19.Enabled = num == 4;
+                chk_senddout20.Enabled = num == 4;
+                chk_senddout21.Enabled = num == 4;
+                chk_senddout22.Enabled = num == 4;
+                chk_senddout23.Enabled = num == 4;
+                chk_senddout24.Enabled = num == 4;
+                chk_senddout25.Enabled = num == 4;
+                chk_senddout26.Enabled = num == 4;
+                chk_senddout27.Enabled = num == 4;
+                chk_senddout28.Enabled = num == 4;
+                chk_senddout29.Enabled = num == 4;
+                chk_senddout30.Enabled = num == 4;
+                chk_senddout31.Enabled = num == 4;
+                chk_senddout32.Enabled = num == 4;
+            }
+        }
+
+        private void uiTabControl6_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            刷新日志界面(e.TabPage.Text);
+            
         }
 
         //dut总良率刷新
@@ -1266,7 +1504,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
             }
 
             string sql = "SELECT * FROM dut_" + s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss");
@@ -1444,7 +1682,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
             }
             Task.Run(new Action(() =>
             {
@@ -1485,7 +1723,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
             }
 
             Task.Run(new Action(() =>
@@ -1493,7 +1731,7 @@ namespace H5509_V2
                 string sql = "";
                 try
                 {
-                    sql = $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='auto2'";
+                    sql = $"select count(*) from o_{s[1].Replace("-","_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='auto2'";
                     string res = SqlServer.runSql(SQLServerConnString, sql, out int num1);
                     if (res == "Success" && num1 > 0)
                     {
@@ -1507,7 +1745,7 @@ namespace H5509_V2
                         }));
                     }
 
-                    sql = $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix1'";
+                    sql = $"select count(*) from o_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix1'";
                     res = SqlServer.runSql(SQLServerConnString, sql, out int num2);
                     if (res == "Success" && num2 > 0)
                     {
@@ -1521,7 +1759,7 @@ namespace H5509_V2
                         }));
                     }
 
-                    sql = $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix2'";
+                    sql = $"select count(*) from o_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix2'";
                     res = SqlServer.runSql(SQLServerConnString, sql, out int num3);
                     if (res == "Success" && num3 > 0)
                     {
@@ -1535,7 +1773,7 @@ namespace H5509_V2
                         }));
                     }
 
-                    sql = $"select count(*) from o_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix3'";
+                    sql = $"select count(*) from o_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix3'";
                     res = SqlServer.runSql(SQLServerConnString, sql, out int num4);
                     if (res == "Success" && num4 > 0)
                     {
@@ -1591,11 +1829,11 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
 
             }
 
-            string sql = $"select * from f_{s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")}  order by 获取MAP时间";
+            string sql = $"select * from f_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")}  order by 获取MAP时间";
             Task.Run(new Action(() =>
             {
                 try
@@ -1996,7 +2234,7 @@ namespace H5509_V2
         /// <param name="num">第N盘</param>
         public void update_dataGridView_out(DataGridView dgv, string name, string s, int num)
         {
-            string sql = $"select * from o_{s} where 名称='{name}' order by 时间 offset {num - 1} rows fetch next 1 rows only";
+            string sql = $"select * from o_{s.Replace("-", "_")} where 名称='{name}' order by 时间 offset {num - 1} rows fetch next 1 rows only";
             Task.Run(new Action(() =>
             {
                 try
@@ -2034,7 +2272,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
             }
             update_dataGridView_out(dataGridView_out1, "auto2", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out1.Text));
         }
@@ -2044,7 +2282,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
             }
             update_dataGridView_out(dataGridView_out2, "fix1", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out2.Text));
 
@@ -2055,7 +2293,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
             }
             update_dataGridView_out(dataGridView_out3, "fix2", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out3.Text));
 
@@ -2066,7 +2304,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('-');
+                s = listBox1.SelectedItem.ToString().Split('_');
             }
             update_dataGridView_out(dataGridView_out4, "fix3", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out4.Text));
 
@@ -2244,6 +2482,21 @@ namespace H5509_V2
         private void uiButton1_Click(object sender, EventArgs e)
         {
             发送批次信息();
+        }
+
+        private void chk_senddout16_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void uiCheckBox11_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void uiCheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            richtext_senddata.Text = GetSendisopen();
         }
     }
 

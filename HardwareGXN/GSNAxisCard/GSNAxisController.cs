@@ -775,7 +775,7 @@ namespace HardwareGXN
                         //}
                     }
 
-                    if ((IsPause && axisRun.暂停类型 == 0) || (IsEmptyPause && axisRun.轴名称 == "M12_Empty顶盘轴") || (IsLoadPause && axisRun.轴名称 == "M13_Loader顶盘轴")) //type == 0 : 暂停有效  == 1 暂停无效
+                    if ((IsPause && axisRun.暂停类型 == 0)) //type == 0 : 暂停有效  == 1 暂停无效
                     {
                         GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), axisRun.停止类型);
                         while (true)
@@ -789,6 +789,37 @@ namespace HardwareGXN
                             }
                         }
                     }
+
+                    if (IsEmptyPause && axisRun.轴名称 == "M12_Empty顶盘轴") //type == 0 : 暂停有效  == 1 暂停无效
+                    {
+                        GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), axisRun.停止类型);
+                        while (true)
+                        {
+                            if (IsForecePause) return "强制停止";
+                            if (IsEmptyPause) Thread.Sleep(10);
+                            else
+                            {
+                                result = UniaxialAbsoluteMoveAbs(axisRun);
+                                break;
+                            }
+                        }
+                    }
+
+                    if (IsLoadPause && axisRun.轴名称 == "M13_Loader顶盘轴") //type == 0 : 暂停有效  == 1 暂停无效
+                    {
+                        GTN_Stop(axisRun.核号, 1 << (axisRun.轴号 - 1), axisRun.停止类型);
+                        while (true)
+                        {
+                            if (IsForecePause) return "强制停止";
+                            if (IsLoadPause) Thread.Sleep(10);
+                            else
+                            {
+                                result = UniaxialAbsoluteMoveAbs(axisRun);
+                                break;
+                            }
+                        }
+                    }
+
 
                     if ((sts & (1 << 1)) == 1)
                     {

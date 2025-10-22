@@ -72,6 +72,11 @@
             this.textBox60.Size = new System.Drawing.Size(227, 29);
             this.textBox60.TabIndex = 400;
             this.textBox60.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox60.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             // 
             // textBox59
             // 
@@ -81,6 +86,11 @@
             this.textBox59.Size = new System.Drawing.Size(227, 29);
             this.textBox59.TabIndex = 399;
             this.textBox59.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox59.Value = new decimal(new int[] {
+            12,
+            0,
+            0,
+            0});
             // 
             // textBox58
             // 
@@ -136,6 +146,11 @@
             this.textBox53.Size = new System.Drawing.Size(227, 29);
             this.textBox53.TabIndex = 394;
             this.textBox53.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox53.Value = new decimal(new int[] {
+            1600,
+            0,
+            0,
+            65536});
             // 
             // textBox52
             // 
@@ -151,6 +166,11 @@
             this.textBox52.Size = new System.Drawing.Size(227, 29);
             this.textBox52.TabIndex = 393;
             this.textBox52.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox52.Value = new decimal(new int[] {
+            3400,
+            0,
+            0,
+            65536});
             // 
             // textBox51
             // 
@@ -166,6 +186,11 @@
             this.textBox51.Size = new System.Drawing.Size(227, 29);
             this.textBox51.TabIndex = 392;
             this.textBox51.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.textBox51.Value = new decimal(new int[] {
+            120,
+            0,
+            0,
+            65536});
             // 
             // pictureBox2
             // 

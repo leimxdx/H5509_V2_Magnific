@@ -565,6 +565,9 @@
             this.uiLight35 = new Sunny.UI.UILight();
             this.uiToolTip1 = new Sunny.UI.UIToolTip(this.components);
             this.IOUpdateTimer = new System.Windows.Forms.Timer(this.components);
+            this.uiGroupBox28 = new Sunny.UI.UIGroupBox();
+            this.label103 = new System.Windows.Forms.Label();
+            this.uiLight51 = new Sunny.UI.UILight();
             this.tabPage1.SuspendLayout();
             this.uiTabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -624,6 +627,7 @@
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
             this.pal_dout1_8.SuspendLayout();
+            this.uiGroupBox28.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage1
@@ -727,6 +731,7 @@
             // tabPage7
             // 
             this.tabPage7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage7.Controls.Add(this.uiGroupBox28);
             this.tabPage7.Controls.Add(this.uiGroupBox5);
             this.tabPage7.Controls.Add(this.uiGroupBox4);
             this.tabPage7.Controls.Add(this.uiGroupBox3);
@@ -1737,7 +1742,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 60);
+            this.tabPage8.Size = new System.Drawing.Size(1889, 900);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Text = "入料区";
             // 
@@ -2504,7 +2509,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(200, 60);
+            this.tabPage9.Size = new System.Drawing.Size(1889, 900);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Text = "出料区";
             // 
@@ -3411,7 +3416,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 60);
+            this.tabPage16.Size = new System.Drawing.Size(1889, 900);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Text = "测试区";
             // 
@@ -8353,6 +8358,46 @@
             // 
             this.IOUpdateTimer.Tick += new System.EventHandler(this.IOUpdateTimer_Tick);
             // 
+            // uiGroupBox28
+            // 
+            this.uiGroupBox28.Controls.Add(this.label103);
+            this.uiGroupBox28.Controls.Add(this.uiLight51);
+            this.uiGroupBox28.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiGroupBox28.Location = new System.Drawing.Point(763, 19);
+            this.uiGroupBox28.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiGroupBox28.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiGroupBox28.Name = "uiGroupBox28";
+            this.uiGroupBox28.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
+            this.uiGroupBox28.Size = new System.Drawing.Size(212, 213);
+            this.uiGroupBox28.TabIndex = 38;
+            this.uiGroupBox28.Text = "其他";
+            this.uiGroupBox28.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label103
+            // 
+            this.label103.AutoSize = true;
+            this.label103.Location = new System.Drawing.Point(30, 48);
+            this.label103.Name = "label103";
+            this.label103.Size = new System.Drawing.Size(74, 21);
+            this.label103.TabIndex = 26;
+            this.label103.Text = "整机气压";
+            // 
+            // uiLight51
+            // 
+            this.uiLight51.CenterColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.uiLight51.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiLight51.Location = new System.Drawing.Point(158, 41);
+            this.uiLight51.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiLight51.Name = "uiLight51";
+            this.uiLight51.OnCenterColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.uiLight51.OnColor = System.Drawing.Color.LimeGreen;
+            this.uiLight51.Radius = 35;
+            this.uiLight51.Size = new System.Drawing.Size(35, 35);
+            this.uiLight51.State = Sunny.UI.UILightState.Off;
+            this.uiLight51.TabIndex = 25;
+            this.uiLight51.TagString = "X020";
+            this.uiLight51.Text = "uiLight51";
+            // 
             // _IO
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -8436,6 +8481,8 @@
             this.panel4.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.pal_dout1_8.ResumeLayout(false);
+            this.uiGroupBox28.ResumeLayout(false);
+            this.uiGroupBox28.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -8978,5 +9025,8 @@
         private System.Windows.Forms.Label lbl_梭车前出6;
         private System.Windows.Forms.Label lbl_梭车前出5;
         private System.Windows.Forms.Label label165;
+        private Sunny.UI.UIGroupBox uiGroupBox28;
+        private System.Windows.Forms.Label label103;
+        private Sunny.UI.UILight uiLight51;
     }
 }

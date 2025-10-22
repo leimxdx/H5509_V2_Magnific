@@ -11,6 +11,6 @@ D:\GitHub\H5509_V2\SQLiteHelper\bin\Debug\SQLiteHelper.pdb
 D:\GitHub\H5509_V2\SQLiteHelper\bin\Debug\System.Data.SQLite.dll
 D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.AssemblyReference.cache
 D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.CoreCompileInputs.cache
-D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHe.64E32CF6.Up2Date
 D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.dll
 D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.pdb
+D:\github\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.CopyComplete

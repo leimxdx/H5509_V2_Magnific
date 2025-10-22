@@ -48,7 +48,7 @@
             // 
             this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.uiButton1.Location = new System.Drawing.Point(174, 74);
+            this.uiButton1.Location = new System.Drawing.Point(409, 79);
             this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton1.Name = "uiButton1";
             this.uiButton1.Size = new System.Drawing.Size(86, 35);
@@ -61,7 +61,7 @@
             // 
             this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton2.Font = new System.Drawing.Font("微软雅黑", 10F);
-            this.uiButton2.Location = new System.Drawing.Point(49, 74);
+            this.uiButton2.Location = new System.Drawing.Point(284, 79);
             this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton2.Name = "uiButton2";
             this.uiButton2.Size = new System.Drawing.Size(86, 35);
@@ -80,7 +80,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Padding = new System.Windows.Forms.Padding(5);
             this.textBox1.ShowText = false;
-            this.textBox1.Size = new System.Drawing.Size(155, 29);
+            this.textBox1.Size = new System.Drawing.Size(378, 29);
             this.textBox1.TabIndex = 366;
             this.textBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.textBox1.Watermark = "";
@@ -90,7 +90,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(310, 142);
+            this.ClientSize = new System.Drawing.Size(531, 142);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.uiButton2);
             this.Controls.Add(this.uiButton1);

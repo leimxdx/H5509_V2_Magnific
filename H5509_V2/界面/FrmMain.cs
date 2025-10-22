@@ -19,6 +19,7 @@ using System.Windows.Forms;
 using ComMaster;
 using ComMaster.Interfaces;
 using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.EMMA;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
 using H5509_alarm;
@@ -28,6 +29,7 @@ using HardwareGXN.GENAxisCard;
 using HardwareGXN.GSNAxisCard;
 using IHardwareGXN.Communication;
 using IHardwareGXN.GXNCard;
+using SiCommunication;
 using SQLiteHelper;
 using SQLServerHelper;
 using Sunny.UI;
@@ -35,6 +37,7 @@ using Sunny.UI.Win32;
 using TextFileLogger;
 using Thermostat;
 using static System.Windows.Forms.Design.AxImporter;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 using static H5509_V2.APPmaster;
 
 namespace H5509_V2
@@ -860,7 +863,7 @@ namespace H5509_V2
         private void 界面刷新()
         {
             string result = "";
-            int testnum = 0;
+            //int testnum = 0;
             while (true)
             {
                 try
@@ -883,14 +886,14 @@ namespace H5509_V2
                         }
                     }));
 
-                    if (IsPause)
-                    {
-                        Thread.Sleep(50);
-                        continue; //如果暂停则不刷新
-                    }
+                    //if (IsPause)
+                    //{
+                    //    Thread.Sleep(50);
+                    //    continue; //如果暂停则不刷新
+                    //}
 
 
-                    if (!空跑模式)
+                    if (!空跑模式 && !IsPause)
                     {
                         bool boolIn = handler.CheckInNozzleIC();
                         bool boolout = handler.CheckOutNozzleIC();
@@ -903,7 +906,6 @@ namespace H5509_V2
                         }
                     }
 
-
                     if (!空跑模式 && 设备状态 != 0)
                     {
                         this.Invoke(new Action(() =>
@@ -914,9 +916,9 @@ namespace H5509_V2
 
                                 if (sites.data.Iswaitout)
                                 {
-                                    //Com.Iswaitout[testnum] = false;
-                                    Listcode.Add($"8{testnum:D2}018");
-                                    RunLog($"[Code]8{testnum:D2}018,[Msg]Site{testnum + 1}:接收超时！触发停止", LogType.AlarmLog);
+                                    //Com.Iswaitout[sitenum] = false;
+                                    Listcode.Add($"8{sitenum:D2}018");
+                                    RunLog($"[Code]8{sitenum:D2}018,[Msg]Site{sitenum + 1}:接收超时！触发停止", LogType.AlarmLog);
                                     ProgramPause = true; //如果有接收超时则触发停止
                                     IsPause = true;
 
@@ -924,13 +926,17 @@ namespace H5509_V2
                                     {
                                         设置信息.开site信息.SetSiteValue(sitenum, "0");
 
-                                        RunLog($"档案:[{设置信息.档案名称}]-Site{testnum + 1}-整组Dut被自动关闭(测试超时)", LogType.OperateLog);
-                                        result = UpdateSiteStatus(设置信息.开site信息.Site名称, testnum + 1, 设置信息.开site信息.GetSiteValue(testnum));
+                                        string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-整组Dut被自动关闭(测试超时)";
+                                        RunLog(dutlog, LogType.OperateLog);
+                                        if (设备状态 != 0) Summary(1, dutlog);
+
+                                        result = UpdateSiteStatus(设置信息.开site信息.Site名称, sitenum + 1, 设置信息.开site信息.GetSiteValue(sitenum));
                                         if (result != "Success")
                                         {
                                             RunLog("Site保存失败!" + result);
                                         }
 
+                                        开关Site显示MA[sitenum] = new string[] { "A", "A", "A", "A", "A", "A", "A", "A" };
                                         main.刷新开Site状态();
 
                                         if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
@@ -942,12 +948,34 @@ namespace H5509_V2
                                 }
 
                                 RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
+
                                 //Com.Listtestsingal.Remove(sitenum);
                                 //Com.Listtestsingal.RemoveAt(0);
 
                                 bool[][] open = StationManagers.GetStationIC(sitenum); // SiteTestIC[sitenum];
 
                                 string[] bins = sites.data.SiteTestBin; //Com.OutBin.TryDequeue(out string[] bins);
+
+                                bool[] opens = new bool[] { open[0][0], open[0][1], open[0][2], open[0][3], open[1][0], open[1][1], open[1][2], open[1][3] };
+                                for (int i = 0; i < bins.Length; i++)
+                                {
+                                    if (opens[i])
+                                    { 
+                                        if (Auto1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto1数量++;
+                                        else if (Auto2.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto2数量++;
+                                        else if (Fix1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix1数量++;
+                                        else if (Fix2.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix2数量++;
+                                        else if (Fix3.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix3数量++;
+                                        else
+                                        {
+                                            if (Auto1.Contains("OTH")) SocketSaves[sitenum * 8 + i].Auto1数量++;
+                                            else if (Auto2.Contains("OTH")) SocketSaves[sitenum * 8 + i].Auto2数量++;
+                                            else if (Fix1.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix1数量++;
+                                            else if (Fix2.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix2数量++;
+                                            else if (Fix3.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix3数量++;
+                                        }
+                                    }
+                                }
 
                                 if (设置信息.测试机信息.接收超时Bin自动关闭Dut)
                                 {
@@ -961,8 +989,13 @@ namespace H5509_V2
                                                 Listcode.Add($"140048{dut}");
                                                 RunLog($"[Code]140048{dut},[Msg]Site{sitenum + 1}的Dut{dut + 1}测试超时", LogType.AlarmLog);
 
+                                                开关Site显示MA[sitenum][dut] = "A";
                                                 设置信息.开site信息.SetSiteValue(sitenum, dut, "0");
-                                                RunLog($"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(测试超时)", LogType.OperateLog);
+
+                                                string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(测试超时)";
+                                                RunLog(dutlog, LogType.OperateLog);
+                                                if (设备状态 != 0) Summary(1, dutlog);
+
                                                 result = UpdateSiteStatus(设置信息.开site信息.Site名称, sitenum + 1, 设置信息.开site信息.GetSiteValue(sitenum));
                                                 if (result != "Success") RunLog("Site保存失败!" + result);
                                             }
@@ -1046,6 +1079,7 @@ namespace H5509_V2
                                     {
                                         if (doutContinueFail[site][dut] >= doutfailnum)
                                         {
+                                            doutContinueFail[site][dut] = 0;
                                             string code = $"6{site + 1:D2}0{dut + 1}14";
                                             if (isalarm) //dout连续不良报警
                                             {
@@ -1059,7 +1093,11 @@ namespace H5509_V2
                                                 //int dout = site * 8 + dut + 1;
                                                 //string labelname = $"lbl_dout{dout}";
                                                 设置信息.开site信息.SetSiteValue(site, dut, "0");
-                                                RunLog($"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)", LogType.OperateLog);
+
+                                                string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)";
+                                                RunLog(dutlog, LogType.OperateLog);
+                                                if (设备状态 != 0) Summary(1, dutlog);
+
                                                 result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
                                                 if (result != "Success")
                                                 {
@@ -1071,12 +1109,14 @@ namespace H5509_V2
                                                 //    RunLog("Site读取失败!" + result); 
                                                 //}
                                                 //设置信息.开site信息 = siteStatus;
+
+                                                开关Site显示MA[site][dut] = "A";
                                                 main.刷新开Site状态();
 
                                                 if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
                                                 {
                                                     Listcode.Add("1400442");
-                                                    RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试", LogType.AlarmLog);
+                                                    RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
                                                     ProgramPause = true;
                                                 }
                                             }
@@ -1145,11 +1185,11 @@ namespace H5509_V2
                         }));
                     }
 
-                    testnum++;
-                    if (testnum >= 16)
-                    {
-                        testnum = 0;
-                    }
+                    //testnum++;
+                    //if (testnum >= 16)
+                    //{
+                    //    testnum = 0;
+                    //}
 
                 }
                 catch (Exception ex)
