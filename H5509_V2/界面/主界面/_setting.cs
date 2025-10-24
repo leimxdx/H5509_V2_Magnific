@@ -4401,17 +4401,17 @@ namespace H5509_V2
                 numericUpDown31.Text = offset.入料_梭车1第1列放_Y.ToString();
                 numericUpDown29.Text = offset.入料_梭车1第1列放_Z.ToString();
 
-                numericUpDown27.Text = offset.入料_梭车1第2列放_X.ToString();
-                numericUpDown26.Text = offset.入料_梭车1第2列放_Y.ToString();
-                numericUpDown25.Text = offset.入料_梭车1第2列放_Z.ToString();
+                numericUpDown21.Text = offset.入料_梭车1第2列放_X.ToString();
+                numericUpDown20.Text = offset.入料_梭车1第2列放_Y.ToString();
+                numericUpDown19.Text = offset.入料_梭车1第2列放_Z.ToString();
 
                 numericUpDown24.Text = offset.入料_Load_变距.ToString();
                 numericUpDown23.Text = offset.入料_Heat_变距.ToString();
                 numericUpDown22.Text = offset.入料_梭车_变距.ToString();
-
-                numericUpDown21.Text = offset.入料_梭车2第1列放_X.ToString();
-                numericUpDown20.Text = offset.入料_梭车2第1列放_Y.ToString();
-                numericUpDown19.Text = offset.入料_梭车2第1列放_Z.ToString();
+                
+                numericUpDown27.Text = offset.入料_梭车2第1列放_X.ToString();
+                numericUpDown26.Text = offset.入料_梭车2第1列放_Y.ToString();
+                numericUpDown25.Text = offset.入料_梭车2第1列放_Z.ToString();
 
                 numericUpDown18.Text = offset.入料_梭车2第2列放_X.ToString();
                 numericUpDown17.Text = offset.入料_梭车2第2列放_Y.ToString();
@@ -5940,17 +5940,17 @@ namespace H5509_V2
                     UpdateOffsetPointData(name, page, "入料_梭车1第1列放_Y", Convert.ToDouble(numericUpDown31.Text), offset.入料_梭车1第1列放_Y);
                     UpdateOffsetPointData(name, page, "入料_梭车1第1列放_Z", Convert.ToDouble(numericUpDown29.Text), offset.入料_梭车1第1列放_Z);
 
-                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_X", Convert.ToDouble(numericUpDown27.Text), offset.入料_梭车1第2列放_X);
-                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_Y", Convert.ToDouble(numericUpDown26.Text), offset.入料_梭车1第2列放_Y);
-                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_Z", Convert.ToDouble(numericUpDown25.Text), offset.入料_梭车1第2列放_Z);
+                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_X", Convert.ToDouble(numericUpDown21.Text), offset.入料_梭车1第2列放_X);
+                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_Y", Convert.ToDouble(numericUpDown20.Text), offset.入料_梭车1第2列放_Y);
+                    UpdateOffsetPointData(name, page, "入料_梭车1第2列放_Z", Convert.ToDouble(numericUpDown19.Text), offset.入料_梭车1第2列放_Z);
 
                     UpdateOffsetPointData(name, page, "入料_Load_变距", Convert.ToDouble(numericUpDown24.Text), offset.入料_Load_变距);
                     UpdateOffsetPointData(name, page, "入料_Heat_变距", Convert.ToDouble(numericUpDown23.Text), offset.入料_Heat_变距);
                     UpdateOffsetPointData(name, page, "入料_梭车_变距", Convert.ToDouble(numericUpDown22.Text), offset.入料_梭车_变距);
 
-                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_X", Convert.ToDouble(numericUpDown21.Text), offset.入料_梭车2第1列放_X);
-                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_Y", Convert.ToDouble(numericUpDown20.Text), offset.入料_梭车2第1列放_Y);
-                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_Z", Convert.ToDouble(numericUpDown19.Text), offset.入料_梭车2第1列放_Z);
+                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_X", Convert.ToDouble(numericUpDown27.Text), offset.入料_梭车2第1列放_X);
+                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_Y", Convert.ToDouble(numericUpDown26.Text), offset.入料_梭车2第1列放_Y);
+                    UpdateOffsetPointData(name, page, "入料_梭车2第1列放_Z", Convert.ToDouble(numericUpDown25.Text), offset.入料_梭车2第1列放_Z);
 
                     UpdateOffsetPointData(name, page, "入料_梭车2第2列放_X", Convert.ToDouble(numericUpDown18.Text), offset.入料_梭车2第2列放_X);
                     UpdateOffsetPointData(name, page, "入料_梭车2第2列放_Y", Convert.ToDouble(numericUpDown17.Text), offset.入料_梭车2第2列放_Y);

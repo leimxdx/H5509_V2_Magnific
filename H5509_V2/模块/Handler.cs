@@ -2414,6 +2414,7 @@ namespace H5509_V2
             无待测盘结批 = false;
             出料IC忽略 = false;
             测试IC忽略 = false;
+            测试区IC忽略 = false;
             //Com.IsconnectTester = false;
             //BinSaveQueue = new ConcurrentQueue<string[]>();
             InSiteQueue = new ConcurrentQueue<int>();
@@ -3771,6 +3772,8 @@ namespace H5509_V2
                                 ispass = true;
                                 Listcode.Add($"30{i + 1}0001"); //出料手臂-吸--1号吸嘴丢失IC
                                 RunLog($"[Code]30{i + 1}0001,[Msg]入料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+
+                                motionEx.SetDo("Y005_忽略灯", true);
                             }
                         }
                     }
@@ -3797,6 +3800,8 @@ namespace H5509_V2
                                 ispass = true;
                                 Listcode.Add($"30{i + 5}0001"); //出料手臂-吸--1号吸嘴丢失IC
                                 RunLog($"[Code]30{i + 5}0001,[Msg]出料手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+
+                                motionEx.SetDo("Y005_忽略灯", true);
                             }
                         }
                     }
@@ -3824,6 +3829,8 @@ namespace H5509_V2
                                 ispass = true;
                                 Listcode.Add($"3{i + 9:D2}9901"); //出料手臂-吸--1号吸嘴丢失IC
                                 RunLog($"[Code]3{i + 9:D2}9901,[Msg]测试手臂-吸--{i + 1}号吸嘴丢失IC", LogType.AlarmLog);
+
+                                motionEx.SetDo("Y005_忽略灯", true);
                             }
                         }
                     }
@@ -4252,11 +4259,15 @@ namespace H5509_V2
                         bool again = io[3] == "1"; //X004_重试
                         if (CheckEdgeSingal(again, ref AgainRiseCache, true))
                         {
+                            RunLog("按下重试", LogType.OperateLog);
+
+                            if (设备状态 == 1) continue;
+
                             入料IC忽略 = false;
                             出料IC忽略 = false;
                             测试IC忽略 = false;
                             入料IC吸不起结批 = false;
-                            RunLog("按下重试", LogType.OperateLog);
+                            测试区IC忽略 = false;
                             motionEx.SetDo("Y004_重试灯", true);
                             motionEx.SetDo("Y005_忽略灯", false);
                             motionEx.SetDo("Y008_结批灯", false);
@@ -4271,6 +4282,52 @@ namespace H5509_V2
                         if (CheckEdgeSingal(ignore, ref IgnoreRiseCache, true))
                         {
                             RunLog("按下跳过", LogType.OperateLog);
+
+                            if (设备状态 == 1) continue;
+
+                            if (设备状态 != 0 && 测试IC忽略 == false && 测试区IC忽略)
+                            {
+                                FrmInputPwd frmInputPwd = new FrmInputPwd();
+                                if (frmInputPwd.ShowDialog() == DialogResult.OK)
+                                {
+                                    string getEngineerwd = GetPassWord("Engineer", out string 密码);
+                                    string getAdministratorwd = GetPassWord("Administrator", out string 密码2);
+                                    string getSupplierwd = GetPassWord("Supplier", out string 密码3);
+                                    if (getEngineerwd == "Success" && getAdministratorwd == "Success" && getSupplierwd == "Success")
+                                    {
+                                        if (frmInputPwd.Password == 密码 || frmInputPwd.Password == 密码2 || frmInputPwd.Password == 密码3)
+                                        {
+                                            RunLog($"密码输出正确");
+                                        }
+                                        else
+                                        {
+                                            RunLog($"密码错误！");//{frmInputPwd.Password}
+                                            MessageBox.Show($"密码错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);//{frmInputPwd.Password}
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (getEngineerwd != "Success")
+                                        {
+                                            RunLog($"获取Engineer密码失败！" + getEngineerwd);
+                                            MessageBox.Show($"获取Engineer密码失败！" + getEngineerwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                        if (getAdministratorwd != "Success")
+                                        {
+                                            RunLog($"获取Administrator密码失败！" + getAdministratorwd);
+                                            MessageBox.Show($"获取Administrator密码失败！" + getAdministratorwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                        if (getSupplierwd != "Success")
+                                        {
+                                            RunLog($"获取Supplier密码失败！" + getSupplierwd);
+                                            MessageBox.Show($"获取Supplier密码失败！" + getSupplierwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
+                                        continue;
+                                    }
+                                }
+                                else continue;
+                            }
+
                             if (入料IC忽略 == false) 入料IC忽略 = true;
                             if (出料IC忽略 == false) 出料IC忽略 = true;
                             if (测试IC忽略 == false) 测试IC忽略 = true;
@@ -4284,6 +4341,7 @@ namespace H5509_V2
                             motionEx.SetDo("Y005_忽略灯", true);
                             motionEx.SetDo("Y008_结批灯", false);
                             motionEx.SetDo("Y011_换盘灯", false);
+
                             //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
                             //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
                             //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
@@ -4448,7 +4506,7 @@ namespace H5509_V2
                                     //{
                                     //    刷新批次信息();
                                     //}
-                                    
+
                                     StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
                                     StationManagers.ConnectAll(); //清空缓存区
 
@@ -4499,6 +4557,9 @@ namespace H5509_V2
                         if (CheckEdgeSingal(exchangetray, ref ExchangetrayRiseCache, true))
                         {
                             RunLog("按下换Tray", LogType.OperateLog);
+
+                            if (设备状态 == 1) continue;
+
                             motionEx.SetDo("Y004_重试灯", false);
                             motionEx.SetDo("Y005_忽略灯", false);
                             motionEx.SetDo("Y008_结批灯", false);
@@ -4605,6 +4666,9 @@ namespace H5509_V2
                         if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
                         {
                             RunLog("按下Tray平移", LogType.OperateLog);
+
+                            if (设备状态 == 1) continue;
+
                             result = motionEx.GetAxisEnable("M11_Fix3放IC轴", out bool enable);
                             if (result == "Success")
                             {
@@ -6635,7 +6699,7 @@ namespace H5509_V2
                                 break;
                             }
 
-                            double[] xypPos = 获取梭车xyp放料点位(colums);
+                            double[] xypPos = 入料手臂抓料等待标记 ? 获取梭车xyp放料点位2(colums) : 获取梭车xyp放料点位(colums); //抓着料在等待就取得要过来的梭车位置
                             result = 入料手臂移动(xypPos[0], xypPos[1], xypPos[2]); //入料手臂移动(xPos, yPos, 10); //写去哪里吸料，至于去哪个位置吸，走多少由APPmaster决定
                             if (result == "Success")
                             {
@@ -9345,9 +9409,9 @@ namespace H5509_V2
 
                                             if (lsopen.Contains(true)) //梭车上只要有一颗就拿走
                                             {
-                                                InSiteQueue.TryDequeue(out movesite);
-                                                正在入料的Site = movesite;
-                                                RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->移除Site{movesite + 1}");
+                                                //InSiteQueue.TryDequeue(out movesite);
+                                                正在入料的Site = site;
+                                                //RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->移除Site{site + 1}");
                                                 RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->拿到取Site{site + 1}的IC信息:{opens[0]},{opens[1]},{opens[2]},{opens[3]},{opens[4]},{opens[5]},{opens[6]},{opens[7]}");
                                                 PS测试手臂取待测料流程.StepID = 505;
                                             }
@@ -9364,7 +9428,7 @@ namespace H5509_V2
                                                 else //没有出料则循环判断每个site
                                                 {
                                                     InSiteQueue.TryDequeue(out movesite);
-                                                    InSiteQueue.Enqueue(site);
+                                                    InSiteQueue.Enqueue(movesite);
                                                     Thread.Sleep(10);
 
                                                     if (InSiteQueue.Count == 1) //如果只有一个Site在等,则返回出去等下一个
@@ -9693,7 +9757,8 @@ namespace H5509_V2
                                         if (lsopen[i] && opens[i] == 0)
                                         {
                                             Listcode.Add($"3{i + 9:D2}9900");
-                                            RunLog($"[Code]3{i + 9:D2}9900,[Msg]测试Z{i + 1}吸料失败!", LogType.AlarmLog);
+                                            RunLog($"[Code]3{i + 9:D2}9900,[Msg]梭车{(飞梭2位置 == 0 ? "2" : "1")}位置,测试Z{i + 1}吸料失败!", LogType.AlarmLog);
+                                            //RunLog($"[Code]3{i + 9:D2}9900,[Msg]测试Z{i + 1}吸料失败!", LogType.AlarmLog);
                                         }
                                     }
                                     测试IC忽略 = false;
@@ -9726,34 +9791,50 @@ namespace H5509_V2
                                 正在吸取后入料 = new bool[] { false, false, false, false, false, false, false, false };
 
                                 飞梭后入料状态 = 0;
-                                PS测试手臂取待测料流程.StepID = 599;
+
+                                if (opens.Contains(1)) //如果有吸嘴吸了至少一颗IC则去测试区放置
+                                {
+                                    InSiteQueue.TryDequeue(out movesite);
+                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->移除Site{movesite + 1}");
+                                    PS测试手臂取待测料流程.StepID = 599;
+                                }
+                                else //全部吸料失败则等梭车交叉过来重新吸取
+                                {
+                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->在梭车{(飞梭2位置 == 0 ? "2" : "1")}未吸起一颗IC(放入Site{site + 1})!");
+                                    PS测试手臂取待测料流程.Processing = false;
+                                    PS测试手臂取待测料流程.StepID = 500;
+                                }
                             }
                             break;
 
                         case 543:
                             if (测试IC忽略)
                             {
-                                if (opens.Contains(1)) //如果有吸嘴吸了IC则放置
+                                //if (opens.Contains(1)) //如果有吸嘴吸了IC则放置
+                                //{
+
+                                for (int i = 0; i < lsopen.Length; i++)
                                 {
-                                    for (int i = 0; i < lsopen.Length; i++)
+                                    if (lsopen[i] && opens[i] == 0)
                                     {
-                                        if (lsopen[i])
-                                        {
-                                            lsopen[i] = false;
-                                            opens[i] = 2;
-                                        }
+                                        lsopen[i] = false;
+                                        opens[i] = 2;
+                                        RunLog($"梭车{(飞梭2位置 == 0 ? "2" : "1")}—{i + 1}位置的IC因测试Z{i + 1}吸料失败被跳过,请手动吸取出IC!", LogType.OperateLog);
+                                        飞梭后入料IC[i / 4][i % 4] = false;
                                     }
-                                    PS测试手臂取待测料流程.StepID = 542;
                                 }
-                                else //吸嘴上没有IC,则直接返回
-                                {
-                                    测试IC忽略 = false;
-                                    ProgramPause = true;
-                                    IsPause = true;
-                                    RunLog("测试Z吸嘴至少吸上1颗IC");
-                                    //opens = new bool[] { false, false, false, false };
-                                    //PS测试手臂取待测料流程.StepID = 505;
-                                }
+                                PS测试手臂取待测料流程.StepID = 542;
+
+                                //}
+                                //else //吸嘴上没有IC,则直接返回
+                                //{
+                                //    测试IC忽略 = false;
+                                //    ProgramPause = true;
+                                //    IsPause = true;
+                                //    RunLog("测试Z吸嘴至少吸上1颗IC");
+                                //    //opens = new bool[] { false, false, false, false };
+                                //    //PS测试手臂取待测料流程.StepID = 505;
+                                //}
                             }
                             else //直接点开始默认重吸
                             {
@@ -9798,7 +9879,11 @@ namespace H5509_V2
                                 {
                                     firstdraw = true;
                                     firstdzhome = true;
-                                    lsopen = TestNozzleICOpen;
+                                    lsopen = new bool[]
+                                    {
+                                        TestNozzleICOpen[0], TestNozzleICOpen[1], TestNozzleICOpen[2], TestNozzleICOpen[3],
+                                        TestNozzleICOpen[4], TestNozzleICOpen[5], TestNozzleICOpen[6], TestNozzleICOpen[7]
+                                    };
                                     TestNozzleIC = false;
                                     PS测试手臂取待测料流程.StepID = 715;
                                 }
@@ -10480,37 +10565,50 @@ namespace H5509_V2
                             }
                             else
                             {
-                                StationManagers.SetStationIC(site, new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
-                                //SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
-                                StationManagers.SetStationState(site, 0);// SiteTestState[site] = 0; //无料
-                                PS测试手臂取已测料流程.StepID = 599;
+                                if (opens.Contains(1)) //如果在测试区至少吸取了至少一个IC
+                                {
+                                    StationManagers.SetStationIC(site, new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
+                                    //SiteTestIC[site] = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
+                                    StationManagers.SetStationState(site, 0);// SiteTestState[site] = 0; //无料
+                                    PS测试手臂取已测料流程.StepID = 599;
+                                }
+                                else //如何一颗料都没有吸起来,说明该吸料的吸嘴一个都没有吸上来，则不用再放料到梭车出料上了, 会发生什么呢？出料不会至为1，不会
+                                {
+                                    InSiteQueue.Enqueue(site);
+                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->在测试区Site{site + 1}未吸起一颗IC(放入梭车)!");
+                                    PS测试手臂取已测料流程.Processing = false;
+                                    PS测试手臂取已测料流程.StepID = 500;
+                                }
                             }
                             break;
 
                         case 543:
                             if (测试IC忽略)
                             {
-                                if (opens.Contains(1)) //如果有吸嘴吸了IC则放置
+                                //if (opens.Contains(1)) //如果有吸嘴吸了IC则放置
+                                //{
+
+                                for (int i = 0; i < lsopen.Length; i++)
                                 {
-                                    for (int i = 0; i < lsopen.Length; i++)
+                                    if (lsopen[i] && opens[i] == 0)
                                     {
-                                        if (lsopen[i])
-                                        {
-                                            lsopen[i] = false;
-                                            opens[i] = 2;
-                                        }
+                                        lsopen[i] = false;
+                                        opens[i] = 2;
+                                        RunLog($"测试区位置:Site{site + 1:D2}-{i + 1}的IC因测试Z{i + 1}吸料失败被跳过,请手动吸取出IC!", LogType.OperateLog);
                                     }
-                                    PS测试手臂取已测料流程.StepID = 542;
                                 }
-                                else //吸嘴上没有IC,则直接返回
-                                {
-                                    测试IC忽略 = false;
-                                    ProgramPause = true;
-                                    IsPause = true;
-                                    RunLog("测试Z吸嘴至少吸上1颗IC");
-                                    //opens = new bool[] { false, false, false, false };
-                                    //PS测试手臂取已测料流程.StepID = 505;
-                                }
+                                PS测试手臂取已测料流程.StepID = 542;
+
+                                //}
+                                //else //吸嘴上没有IC,则直接返回
+                                //{
+                                //    测试IC忽略 = false;
+                                //    ProgramPause = true;
+                                //    IsPause = true;
+                                //    RunLog("测试Z吸嘴至少吸上1颗IC");
+                                //    //opens = new bool[] { false, false, false, false };
+                                //    //PS测试手臂取已测料流程.StepID = 505;
+                                //}
                             }
                             else //直接点开始默认重吸
                             {
@@ -10528,11 +10626,14 @@ namespace H5509_V2
                                 {
                                     if (lsopen[i] && opens[i] == 0)
                                     {
-                                        Listcode.Add($"3{i + 9:D2}9900");
-                                        RunLog($"[Code]3{i + 9:D2}9900,[Msg]测试Z{i + 1}吸料失败!", LogType.AlarmLog);
+                                        Listcode.Add($"3{i + 9:D2}{site:D2}00");
+                                        RunLog($"[Code]3{i + 9:D2}{site:D2}00,[Msg]测试区位置:Site{site + 1:D2}-{i + 1},测试Z{i + 1}吸料失败!", LogType.AlarmLog);
+                                        //Listcode.Add($"3{i + 9:D2}9900");
+                                        //RunLog($"[Code]3{i + 9:D2}9900,[Msg]位置:Site{site + 1:D2}-{i + 1},测试Z{i + 1}吸料失败!", LogType.AlarmLog);
                                     }
                                 }
                                 测试IC忽略 = false;
+                                测试区IC忽略 = true;
                                 ProgramPause = true;
                                 IsPause = true;
                                 PS测试手臂取已测料流程.StepID = 543;

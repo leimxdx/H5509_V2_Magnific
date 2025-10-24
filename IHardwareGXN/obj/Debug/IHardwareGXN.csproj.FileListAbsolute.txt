@@ -24,4 +24,4 @@ D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.AssemblyReference.
 D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.dll
 D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.pdb
-D:\github\H5509_V2\IHardwareGXN\obj\Debug\IHardwareGXN.csproj.CopyComplete
+D:\GitHub\H5509_V2\IHardwareGXN\obj\Debug\IHardwar.F03A60EF.Up2Date

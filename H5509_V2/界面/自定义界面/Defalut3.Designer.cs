@@ -35,10 +35,11 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Defalut3";
-            this.Size = new System.Drawing.Size(467, 414);
+            this.Size = new System.Drawing.Size(473, 369);
             this.ResumeLayout(false);
 
         }

@@ -412,7 +412,7 @@ namespace H5509_V2
 
         private void RefreshCurrentTime()
         {
-            lbl_currenttime.Text = DateTime.Now.ToString("HH:mm:ss");
+            //lbl_currenttime.Text = DateTime.Now.ToString("HH:mm:ss");
             if (设备状态 != 0) //显示运行时间标记
             {
                 TimeSpan timeSpan = DateTime.Now - 开始时间;
@@ -1086,13 +1086,13 @@ namespace H5509_V2
                 case 1: textBox3.Text = Fix1_1; break;
                 case 2:
                     {
-                        textBox3.Text = "分区一：" + Fix1_1 + ",分区二：" + Fix1_2;
+                        textBox3.Text = "分区一：" + Fix1_1 + "\r\n分区二：" + Fix1_2;
                         Fix1 += "," + Fix1_2;
                     }
                     break;
                 case 3:
                     {
-                        textBox3.Text = "分区一：" + Fix1_1 + ",分区二：" + Fix1_2 + ",分区三：" + Fix1_3;
+                        textBox3.Text = "分区一：" + Fix1_1 + "\r\n分区二：" + Fix1_2 + "\r\n分区三：" + Fix1_3;
                         Fix1 += "," + Fix1_2 + "," + Fix1_3;
                     }
                     break;
@@ -1102,13 +1102,13 @@ namespace H5509_V2
                 case 1: textBox2.Text = Fix2_1; break;
                 case 2:
                     {
-                        textBox2.Text = "分区一：" + Fix2_1 + ",分区二：" + Fix2_2;
+                        textBox2.Text = "分区一：" + Fix2_1 + "\r\n分区二：" + Fix2_2;
                         Fix2 += "," + Fix2_2;
                     }
                     break;
                 case 3:
                     {
-                        textBox2.Text = "分区一：" + Fix2_1 + ",分区二：" + Fix2_2 + ",分区三：" + Fix2_3;
+                        textBox2.Text = "分区一：" + Fix2_1 + "\r\n分区二：" + Fix2_2 + "\r\n分区三：" + Fix2_3;
                         Fix2 += "," + Fix2_2 + "," + Fix2_3;
                     }
                     break;
@@ -1118,13 +1118,13 @@ namespace H5509_V2
                 case 1: textBox4.Text = Fix3_1; break;
                 case 2:
                     {
-                        textBox4.Text = "分区一：" + Fix3_1 + ",分区二：" + Fix3_2;
+                        textBox4.Text = "分区一：" + Fix3_1 + "\r\n分区二：" + Fix3_2;
                         Fix3 += "," + Fix3_2;
                     }
                     break;
                 case 3:
                     {
-                        textBox4.Text = "分区一：" + Fix3_1 + ",分区二：" + Fix3_2 + ",分区三：" + Fix3_3;
+                        textBox4.Text = "分区一：" + Fix3_1 + "\r\n分区二：" + Fix3_2 + "\r\n分区三：" + Fix3_3;
                         Fix3 += "," + Fix3_2 + "," + Fix3_3;
                     }
                     break;
@@ -2789,6 +2789,98 @@ namespace H5509_V2
 
         private void label147_Click(object sender, EventArgs e)
         {
+          
+            //bool[] lsopen = new bool[8] { true, true, true, true, true, true, true, true };
+            //int[] opens = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
+            //飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //for (int i = 0; i < lsopen.Length; i++)
+            //{
+            //    if (lsopen[i] && opens[i] == 0)
+            //    {
+            //        lsopen[i] = false;
+            //        opens[i] = 2;
+            //        RunLog($"梭车{(飞梭2位置 == 0 ? "2" : "1")}—{i + 1}位置的IC因测试Z{i + 1}吸料失败被跳过!", LogType.OperateLog);
+            //        飞梭后入料IC[i / 4][i % 4] = false;
+            //    }
+            //}
+            //int site = 0;
+            //for (int i = 0; i < 8; i++)
+            //{
+            //    Listcode.Add($"3{i + 9:D2}9900");
+            //    RunLog($"测试区位置:Site{site + 1:D2}-{i + 1},测试Z{i + 1}吸料失败被跳过!", LogType.AlarmLog);
+            //    RunLog($"[Code]3{i + 9:D2}9900,[Msg]梭车{(飞梭2位置 == 0 ? "2" : "1")}位置,测试Z{i + 1}吸料失败!", LogType.AlarmLog);
+            //}
+            //for (int site = 0; site < 16; site++)
+            //{
+            //    for (int i = 0; i < 8; i++)
+            //    {
+            //        Listcode.Add($"3{i + 9:D2}{site:D2}00");
+            //        RunLog($"[Code]3{i + 9:D2}{site:D2}00,[Msg]测试区位置:Site{site + 1:D2}-{i + 1},测试Z{i + 1}吸料失败!", LogType.AlarmLog);
+            //    }
+            //}
+            //测试IC忽略 = false;
+            //测试区IC忽略 = true;
+            //设备状态 = 2;
+            //RunLog("按下跳过", LogType.OperateLog);
+
+            //if (设备状态 == 1) return;
+
+            //if (设备状态 != 0 && 测试IC忽略 == false && 测试区IC忽略)
+            //{
+            //    FrmInputPwd frmInputPwd = new FrmInputPwd();
+            //    if (frmInputPwd.ShowDialog() == DialogResult.OK)
+            //    {
+            //        string getEngineerwd = GetPassWord("Engineer", out string 密码);
+            //        string getAdministratorwd = GetPassWord("Administrator", out string 密码2);
+            //        string getSupplierwd = GetPassWord("Supplier", out string 密码3);
+            //        if (getEngineerwd == "Success" && getAdministratorwd == "Success" && getSupplierwd == "Success")
+            //        {
+            //            if (frmInputPwd.Password == 密码 || frmInputPwd.Password == 密码2 || frmInputPwd.Password == 密码3)
+            //            {
+            //                RunLog($"密码输出正确");
+            //            }
+            //            else
+            //            {
+            //                RunLog($"密码错误！");//{frmInputPwd.Password}
+            //                MessageBox.Show($"密码错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);//{frmInputPwd.Password}
+            //            }
+            //        }
+            //        else
+            //        {
+            //            if (getEngineerwd != "Success")
+            //            {
+            //                RunLog($"获取Engineer密码失败！" + getEngineerwd);
+            //                MessageBox.Show($"获取Engineer密码失败！" + getEngineerwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            }
+            //            if (getAdministratorwd != "Success")
+            //            {
+            //                RunLog($"获取Administrator密码失败！" + getAdministratorwd);
+            //                MessageBox.Show($"获取Administrator密码失败！" + getAdministratorwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            }
+            //            if (getSupplierwd != "Success")
+            //            {
+            //                RunLog($"获取Supplier密码失败！" + getSupplierwd);
+            //                MessageBox.Show($"获取Supplier密码失败！" + getSupplierwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //            }
+            //            return;
+            //        }
+            //    }
+            //    else return;
+            //}
+
+            //if (入料IC忽略 == false) 入料IC忽略 = true;
+            //if (出料IC忽略 == false) 出料IC忽略 = true;
+            //if (测试IC忽略 == false) 测试IC忽略 = true;
+            //if (入料IC移动过程中忽略) Console.WriteLine("UpdateInNozzleIC");
+            //if (出料IC移动过程中忽略) Console.WriteLine("UpdateOutNozzleIC");
+            //if (测试IC移动过程中忽略) Console.WriteLine("UpdateTestNozzleIC");
+            //入料IC移动过程中忽略 = false;
+            //出料IC移动过程中忽略 = false;
+            //测试IC移动过程中忽略 = false;
+            //motionEx.SetDo("Y004_重试灯", false);
+            //motionEx.SetDo("Y005_忽略灯", true);
+            //motionEx.SetDo("Y008_结批灯", false);
+            //motionEx.SetDo("Y011_换盘灯", false);
             //List<bool[]> open = new List<bool[]>()
             //{
             //    new bool[] { true, true, true, true },
@@ -2854,6 +2946,11 @@ namespace H5509_V2
             //开关Site显示MA[6] = new string[] { "A", "A", "A", "A", "A", "A", "A", "A" };
             //开关Site显示MA[2][2] = "A";
             //刷新开Site状态();
+        }
+
+        private void label153_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

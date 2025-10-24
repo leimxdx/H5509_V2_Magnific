@@ -38,7 +38,8 @@
             this.button_exit = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.MainPanel = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.lbl_currenttime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -171,18 +172,31 @@
             this.MainPanel.Size = new System.Drawing.Size(1896, 990);
             this.MainPanel.TabIndex = 16;
             // 
-            // label8
+            // label25
             // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label8.Location = new System.Drawing.Point(1118, 45);
-            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(191, 27);
-            this.label8.TabIndex = 160;
-            this.label8.Text = "V.1.1.09 20250925";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.label25.Font = new System.Drawing.Font("微软雅黑", 11F);
+            this.label25.Location = new System.Drawing.Point(1096, 48);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(69, 20);
+            this.label25.TabIndex = 183;
+            this.label25.Text = "系统时间";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lbl_currenttime
+            // 
+            this.lbl_currenttime.AutoSize = true;
+            this.lbl_currenttime.BackColor = System.Drawing.Color.Transparent;
+            this.lbl_currenttime.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.lbl_currenttime.Location = new System.Drawing.Point(1160, 47);
+            this.lbl_currenttime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_currenttime.Name = "lbl_currenttime";
+            this.lbl_currenttime.Size = new System.Drawing.Size(163, 21);
+            this.lbl_currenttime.TabIndex = 183;
+            this.lbl_currenttime.Text = "2025/10/23 21:17:13";
+            this.lbl_currenttime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ForMain
             // 
@@ -190,7 +204,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
-            this.Controls.Add(this.label8);
+            this.Controls.Add(this.lbl_currenttime);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.button_exit);
@@ -200,8 +214,10 @@
             this.Controls.Add(this.button_offset);
             this.Controls.Add(this.button_setting);
             this.Controls.Add(this.button_main);
+            this.Controls.Add(this.label25);
             this.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(2560, 1440);
             this.Name = "ForMain";
             this.Padding = new System.Windows.Forms.Padding(0);
             this.RectColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
@@ -229,7 +245,8 @@
         private System.Windows.Forms.Button button_exit;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel MainPanel;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label lbl_currenttime;
     }
 }
 

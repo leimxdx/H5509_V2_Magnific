@@ -870,8 +870,11 @@ namespace H5509_V2
                 {
                     if (退出标记) break;
 
+
                     this.Invoke(new Action(() =>
                     {
+                        lbl_currenttime.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+
                         if (Listcode.Count != 0)
                         {
                             form_alarm.Activate();
@@ -960,7 +963,7 @@ namespace H5509_V2
                                 for (int i = 0; i < bins.Length; i++)
                                 {
                                     if (opens[i])
-                                    { 
+                                    {
                                         if (Auto1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto1数量++;
                                         else if (Auto2.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto2数量++;
                                         else if (Fix1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix1数量++;
@@ -1069,56 +1072,52 @@ namespace H5509_V2
 
 
                                 bool isyieldex = false;
-                                bool isalarm = 设置信息.测试机信息.Dout连续不良报警;
                                 bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
                                 int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+                                bool isalarm = doutfailnum != 0;// 设置信息.测试机信息.Dout连续不良报警;
 
-                                for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
+                                if (isalarm) //Dout连续不良报警
                                 {
-                                    for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
+                                    for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
                                     {
-                                        if (doutContinueFail[site][dut] >= doutfailnum)
+                                        for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
                                         {
-                                            doutContinueFail[site][dut] = 0;
-                                            string code = $"6{site + 1:D2}0{dut + 1}14";
-                                            if (isalarm) //dout连续不良报警
+                                            if (doutContinueFail[site][dut] >= doutfailnum)
                                             {
+                                                doutContinueFail[site][dut] = 0;
+                                                string code = $"6{site + 1:D2}0{dut + 1}14";
+                                                //if (isalarm) //dout连续不良报警
+                                                //{
                                                 RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
                                                 doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
                                                 isyieldex = true;
                                                 Listcode.Add(code);
-                                            }
-                                            if (isautoclose) //dout连续不良自动关闭该dout，
-                                            {
-                                                //int dout = site * 8 + dut + 1;
-                                                //string labelname = $"lbl_dout{dout}";
-                                                设置信息.开site信息.SetSiteValue(site, dut, "0");
 
-                                                string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)";
-                                                RunLog(dutlog, LogType.OperateLog);
-                                                if (设备状态 != 0) Summary(1, dutlog);
-
-                                                result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
-                                                if (result != "Success")
+                                                if (isautoclose) //dout连续不良自动关闭该dout，
                                                 {
-                                                    RunLog("Site保存失败!" + result);
+                                                    设置信息.开site信息.SetSiteValue(site, dut, "0");
+
+                                                    string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)";
+                                                    RunLog(dutlog, LogType.OperateLog);
+                                                    if (设备状态 != 0) Summary(1, dutlog);
+
+                                                    result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+                                                    if (result != "Success")
+                                                    {
+                                                        RunLog("Site保存失败!" + result);
+                                                    }
+
+                                                    开关Site显示MA[site][dut] = "A";
+                                                    main.刷新开Site状态();
+
+                                                    if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+                                                    {
+                                                        Listcode.Add("1400442");
+                                                        RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
+                                                        ProgramPause = true;
+                                                    }
                                                 }
-                                                //result = GetSiteStatus(设置信息.开site信息.Site名称, out SiteStatus siteStatus);
-                                                //if (result != "Success") 
-                                                //{
-                                                //    RunLog("Site读取失败!" + result); 
                                                 //}
-                                                //设置信息.开site信息 = siteStatus;
-
-                                                开关Site显示MA[site][dut] = "A";
-                                                main.刷新开Site状态();
-
-                                                if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
-                                                {
-                                                    Listcode.Add("1400442");
-                                                    RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
-                                                    ProgramPause = true;
-                                                }
                                             }
                                         }
                                     }

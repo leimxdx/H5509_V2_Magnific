@@ -29,8 +29,8 @@ namespace H5509_V2
         {
             textBox1.Text = Dut连续不良报警个数.ToString();
             textBox2.Text = 总良率报警百分比.ToString();
-            uiCheckBox192.Checked = Dut连续不良报警使能;
-            uiCheckBox1.Checked = 总良率报警使能;
+            //uiCheckBox192.Checked = Dut连续不良报警使能;
+            //uiCheckBox1.Checked = 总良率报警使能;
         }
 
         public void RefreshUI()
@@ -44,5 +44,6 @@ namespace H5509_V2
             }
             else UpdateData();
         }
+
     }
 }
