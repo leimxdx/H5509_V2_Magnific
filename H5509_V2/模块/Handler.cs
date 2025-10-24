@@ -9762,6 +9762,7 @@ namespace H5509_V2
                                         }
                                     }
                                     测试IC忽略 = false;
+                                    测试区IC忽略 = true;
                                     ProgramPause = true;
                                     IsPause = true;
                                     motionEx.SetDo("Y004_重试灯", true);
