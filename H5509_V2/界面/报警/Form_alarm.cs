@@ -27,6 +27,8 @@ namespace H5509_alarm
 
         public Task RefreshTask;
 
+        public int AlarmRows { get { return dataGridView_alarm.Rows.Count; } }
+
         public Form_alarm()
         {
             InitializeComponent();

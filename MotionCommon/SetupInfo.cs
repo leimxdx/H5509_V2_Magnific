@@ -30,5 +30,7 @@ namespace MotionCommon
         public ComInfoSet 通讯信息 { get; set; } = new ComInfoSet();
 
         public string 梭车名称 { get; set; }
+
+        public int Auto仓提示换盘数量 { get; set; }
     }
 }

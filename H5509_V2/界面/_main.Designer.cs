@@ -278,6 +278,7 @@
             this.lbl_dout67 = new System.Windows.Forms.Label();
             this.lbl_dout66 = new System.Windows.Forms.Label();
             this.uiPanel1 = new Sunny.UI.UIPanel();
+            this.label25 = new System.Windows.Forms.Label();
             this.DefalutPanel = new System.Windows.Forms.Panel();
             this.uiComboBox1 = new Sunny.UI.UIComboBox();
             this.uiButton1 = new Sunny.UI.UIButton();
@@ -385,24 +386,23 @@
             this.label1595 = new System.Windows.Forms.Label();
             this.CUSTOM = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.label25 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
-            this.yieldRateShow4 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow2 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow3 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow1 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow5 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow6 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow7 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow8 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow9 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow10 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow11 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow12 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow13 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow14 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow15 = new H5509_V2.YieldRateShow();
-            this.yieldRateShow16 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite4 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite2 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite3 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite1 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite8 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite6 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite7 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite5 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite12 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite10 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite11 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite9 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite16 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite14 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite15 = new H5509_V2.YieldRateShow();
+            this.yieldRateShowSite13 = new H5509_V2.YieldRateShow();
             this.Panel_left.SuspendLayout();
             this.tabControl2.SuspendLayout();
             this.tabPage3.SuspendLayout();
@@ -480,10 +480,10 @@
             this.tabPage3.Controls.Add(this.label11);
             this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.label5);
-            this.tabPage3.Controls.Add(this.yieldRateShow4);
-            this.tabPage3.Controls.Add(this.yieldRateShow2);
-            this.tabPage3.Controls.Add(this.yieldRateShow3);
-            this.tabPage3.Controls.Add(this.yieldRateShow1);
+            this.tabPage3.Controls.Add(this.yieldRateShowSite4);
+            this.tabPage3.Controls.Add(this.yieldRateShowSite2);
+            this.tabPage3.Controls.Add(this.yieldRateShowSite3);
+            this.tabPage3.Controls.Add(this.yieldRateShowSite1);
             this.tabPage3.Font = new System.Drawing.Font("微软雅黑", 9F);
             this.tabPage3.Location = new System.Drawing.Point(4, 35);
             this.tabPage3.Margin = new System.Windows.Forms.Padding(2);
@@ -545,10 +545,10 @@
             this.tabPage4.Controls.Add(this.label14);
             this.tabPage4.Controls.Add(this.label15);
             this.tabPage4.Controls.Add(this.label16);
-            this.tabPage4.Controls.Add(this.yieldRateShow5);
-            this.tabPage4.Controls.Add(this.yieldRateShow6);
-            this.tabPage4.Controls.Add(this.yieldRateShow7);
-            this.tabPage4.Controls.Add(this.yieldRateShow8);
+            this.tabPage4.Controls.Add(this.yieldRateShowSite8);
+            this.tabPage4.Controls.Add(this.yieldRateShowSite6);
+            this.tabPage4.Controls.Add(this.yieldRateShowSite7);
+            this.tabPage4.Controls.Add(this.yieldRateShowSite5);
             this.tabPage4.Location = new System.Drawing.Point(4, 35);
             this.tabPage4.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage4.Name = "tabPage4";
@@ -609,10 +609,10 @@
             this.tabPage5.Controls.Add(this.label18);
             this.tabPage5.Controls.Add(this.label19);
             this.tabPage5.Controls.Add(this.label20);
-            this.tabPage5.Controls.Add(this.yieldRateShow9);
-            this.tabPage5.Controls.Add(this.yieldRateShow10);
-            this.tabPage5.Controls.Add(this.yieldRateShow11);
-            this.tabPage5.Controls.Add(this.yieldRateShow12);
+            this.tabPage5.Controls.Add(this.yieldRateShowSite12);
+            this.tabPage5.Controls.Add(this.yieldRateShowSite10);
+            this.tabPage5.Controls.Add(this.yieldRateShowSite11);
+            this.tabPage5.Controls.Add(this.yieldRateShowSite9);
             this.tabPage5.Location = new System.Drawing.Point(4, 35);
             this.tabPage5.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage5.Name = "tabPage5";
@@ -672,10 +672,10 @@
             this.tabPage6.Controls.Add(this.label22);
             this.tabPage6.Controls.Add(this.label23);
             this.tabPage6.Controls.Add(this.label24);
-            this.tabPage6.Controls.Add(this.yieldRateShow13);
-            this.tabPage6.Controls.Add(this.yieldRateShow14);
-            this.tabPage6.Controls.Add(this.yieldRateShow15);
-            this.tabPage6.Controls.Add(this.yieldRateShow16);
+            this.tabPage6.Controls.Add(this.yieldRateShowSite16);
+            this.tabPage6.Controls.Add(this.yieldRateShowSite14);
+            this.tabPage6.Controls.Add(this.yieldRateShowSite15);
+            this.tabPage6.Controls.Add(this.yieldRateShowSite13);
             this.tabPage6.Location = new System.Drawing.Point(4, 35);
             this.tabPage6.Margin = new System.Windows.Forms.Padding(2);
             this.tabPage6.Name = "tabPage6";
@@ -3938,6 +3938,19 @@
             this.uiPanel1.Text = null;
             this.uiPanel1.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.Color.Transparent;
+            this.label25.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label25.Location = new System.Drawing.Point(204, 360);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(191, 27);
+            this.label25.TabIndex = 182;
+            this.label25.Text = "V.1.1.18 20251023";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // DefalutPanel
             // 
             this.DefalutPanel.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -3975,10 +3988,10 @@
             // 
             this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton1.Location = new System.Drawing.Point(409, 356);
+            this.uiButton1.Location = new System.Drawing.Point(400, 356);
             this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(23, 35);
+            this.uiButton1.Size = new System.Drawing.Size(32, 35);
             this.uiButton1.TabIndex = 179;
             this.uiButton1.Text = "状态";
             this.uiButton1.TipsFont = new System.Drawing.Font("微软雅黑", 12F);
@@ -4079,6 +4092,7 @@
             this.label7.Size = new System.Drawing.Size(88, 26);
             this.label7.TabIndex = 156;
             this.label7.Text = "当前温度";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // label4
             // 
@@ -5377,19 +5391,6 @@
             this.panel3.Size = new System.Drawing.Size(582, 435);
             this.panel3.TabIndex = 83;
             // 
-            // label25
-            // 
-            this.label25.AutoSize = true;
-            this.label25.BackColor = System.Drawing.Color.Transparent;
-            this.label25.Font = new System.Drawing.Font("微软雅黑", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label25.Location = new System.Drawing.Point(204, 360);
-            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(191, 27);
-            this.label25.TabIndex = 182;
-            this.label25.Text = "V.1.1.18 20251023";
-            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -5400,149 +5401,149 @@
             this.panel7.Size = new System.Drawing.Size(582, 248);
             this.panel7.TabIndex = 84;
             // 
-            // yieldRateShow4
+            // yieldRateShowSite4
             // 
-            this.yieldRateShow4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow4.Location = new System.Drawing.Point(964, 37);
-            this.yieldRateShow4.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow4.Name = "yieldRateShow4";
-            this.yieldRateShow4.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow4.TabIndex = 0;
+            this.yieldRateShowSite4.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite4.Location = new System.Drawing.Point(964, 37);
+            this.yieldRateShowSite4.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite4.Name = "yieldRateShowSite4";
+            this.yieldRateShowSite4.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite4.TabIndex = 0;
             // 
-            // yieldRateShow2
+            // yieldRateShowSite2
             // 
-            this.yieldRateShow2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow2.Location = new System.Drawing.Point(324, 37);
-            this.yieldRateShow2.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow2.Name = "yieldRateShow2";
-            this.yieldRateShow2.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow2.TabIndex = 0;
+            this.yieldRateShowSite2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite2.Location = new System.Drawing.Point(324, 37);
+            this.yieldRateShowSite2.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite2.Name = "yieldRateShowSite2";
+            this.yieldRateShowSite2.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite2.TabIndex = 0;
             // 
-            // yieldRateShow3
+            // yieldRateShowSite3
             // 
-            this.yieldRateShow3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow3.Location = new System.Drawing.Point(644, 37);
-            this.yieldRateShow3.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow3.Name = "yieldRateShow3";
-            this.yieldRateShow3.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow3.TabIndex = 0;
+            this.yieldRateShowSite3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite3.Location = new System.Drawing.Point(644, 37);
+            this.yieldRateShowSite3.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite3.Name = "yieldRateShowSite3";
+            this.yieldRateShowSite3.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite3.TabIndex = 0;
             // 
-            // yieldRateShow1
+            // yieldRateShowSite1
             // 
-            this.yieldRateShow1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow1.Location = new System.Drawing.Point(4, 37);
-            this.yieldRateShow1.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow1.Name = "yieldRateShow1";
-            this.yieldRateShow1.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow1.TabIndex = 0;
+            this.yieldRateShowSite1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite1.Location = new System.Drawing.Point(4, 37);
+            this.yieldRateShowSite1.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite1.Name = "yieldRateShowSite1";
+            this.yieldRateShowSite1.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite1.TabIndex = 0;
             // 
-            // yieldRateShow5
+            // yieldRateShowSite8
             // 
-            this.yieldRateShow5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow5.Location = new System.Drawing.Point(964, 37);
-            this.yieldRateShow5.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow5.Name = "yieldRateShow5";
-            this.yieldRateShow5.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow5.TabIndex = 2;
+            this.yieldRateShowSite8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite8.Location = new System.Drawing.Point(964, 37);
+            this.yieldRateShowSite8.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite8.Name = "yieldRateShowSite8";
+            this.yieldRateShowSite8.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite8.TabIndex = 2;
             // 
-            // yieldRateShow6
+            // yieldRateShowSite6
             // 
-            this.yieldRateShow6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow6.Location = new System.Drawing.Point(324, 37);
-            this.yieldRateShow6.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow6.Name = "yieldRateShow6";
-            this.yieldRateShow6.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow6.TabIndex = 3;
+            this.yieldRateShowSite6.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite6.Location = new System.Drawing.Point(324, 37);
+            this.yieldRateShowSite6.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite6.Name = "yieldRateShowSite6";
+            this.yieldRateShowSite6.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite6.TabIndex = 3;
             // 
-            // yieldRateShow7
+            // yieldRateShowSite7
             // 
-            this.yieldRateShow7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow7.Location = new System.Drawing.Point(644, 37);
-            this.yieldRateShow7.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow7.Name = "yieldRateShow7";
-            this.yieldRateShow7.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow7.TabIndex = 4;
+            this.yieldRateShowSite7.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite7.Location = new System.Drawing.Point(644, 37);
+            this.yieldRateShowSite7.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite7.Name = "yieldRateShowSite7";
+            this.yieldRateShowSite7.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite7.TabIndex = 4;
             // 
-            // yieldRateShow8
+            // yieldRateShowSite5
             // 
-            this.yieldRateShow8.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow8.Location = new System.Drawing.Point(4, 37);
-            this.yieldRateShow8.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow8.Name = "yieldRateShow8";
-            this.yieldRateShow8.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow8.TabIndex = 5;
+            this.yieldRateShowSite5.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite5.Location = new System.Drawing.Point(4, 37);
+            this.yieldRateShowSite5.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite5.Name = "yieldRateShowSite5";
+            this.yieldRateShowSite5.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite5.TabIndex = 5;
             // 
-            // yieldRateShow9
+            // yieldRateShowSite12
             // 
-            this.yieldRateShow9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow9.Location = new System.Drawing.Point(964, 37);
-            this.yieldRateShow9.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow9.Name = "yieldRateShow9";
-            this.yieldRateShow9.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow9.TabIndex = 2;
+            this.yieldRateShowSite12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite12.Location = new System.Drawing.Point(964, 37);
+            this.yieldRateShowSite12.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite12.Name = "yieldRateShowSite12";
+            this.yieldRateShowSite12.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite12.TabIndex = 2;
             // 
-            // yieldRateShow10
+            // yieldRateShowSite10
             // 
-            this.yieldRateShow10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow10.Location = new System.Drawing.Point(324, 37);
-            this.yieldRateShow10.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow10.Name = "yieldRateShow10";
-            this.yieldRateShow10.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow10.TabIndex = 3;
+            this.yieldRateShowSite10.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite10.Location = new System.Drawing.Point(324, 37);
+            this.yieldRateShowSite10.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite10.Name = "yieldRateShowSite10";
+            this.yieldRateShowSite10.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite10.TabIndex = 3;
             // 
-            // yieldRateShow11
+            // yieldRateShowSite11
             // 
-            this.yieldRateShow11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow11.Location = new System.Drawing.Point(644, 37);
-            this.yieldRateShow11.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow11.Name = "yieldRateShow11";
-            this.yieldRateShow11.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow11.TabIndex = 4;
+            this.yieldRateShowSite11.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite11.Location = new System.Drawing.Point(644, 37);
+            this.yieldRateShowSite11.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite11.Name = "yieldRateShowSite11";
+            this.yieldRateShowSite11.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite11.TabIndex = 4;
             // 
-            // yieldRateShow12
+            // yieldRateShowSite9
             // 
-            this.yieldRateShow12.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow12.Location = new System.Drawing.Point(4, 37);
-            this.yieldRateShow12.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow12.Name = "yieldRateShow12";
-            this.yieldRateShow12.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow12.TabIndex = 5;
+            this.yieldRateShowSite9.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite9.Location = new System.Drawing.Point(4, 37);
+            this.yieldRateShowSite9.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite9.Name = "yieldRateShowSite9";
+            this.yieldRateShowSite9.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite9.TabIndex = 5;
             // 
-            // yieldRateShow13
+            // yieldRateShowSite16
             // 
-            this.yieldRateShow13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow13.Location = new System.Drawing.Point(964, 37);
-            this.yieldRateShow13.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow13.Name = "yieldRateShow13";
-            this.yieldRateShow13.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow13.TabIndex = 2;
+            this.yieldRateShowSite16.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite16.Location = new System.Drawing.Point(964, 37);
+            this.yieldRateShowSite16.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite16.Name = "yieldRateShowSite16";
+            this.yieldRateShowSite16.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite16.TabIndex = 2;
             // 
-            // yieldRateShow14
+            // yieldRateShowSite14
             // 
-            this.yieldRateShow14.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow14.Location = new System.Drawing.Point(324, 37);
-            this.yieldRateShow14.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow14.Name = "yieldRateShow14";
-            this.yieldRateShow14.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow14.TabIndex = 3;
+            this.yieldRateShowSite14.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite14.Location = new System.Drawing.Point(324, 37);
+            this.yieldRateShowSite14.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite14.Name = "yieldRateShowSite14";
+            this.yieldRateShowSite14.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite14.TabIndex = 3;
             // 
-            // yieldRateShow15
+            // yieldRateShowSite15
             // 
-            this.yieldRateShow15.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow15.Location = new System.Drawing.Point(644, 37);
-            this.yieldRateShow15.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow15.Name = "yieldRateShow15";
-            this.yieldRateShow15.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow15.TabIndex = 4;
+            this.yieldRateShowSite15.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite15.Location = new System.Drawing.Point(644, 37);
+            this.yieldRateShowSite15.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite15.Name = "yieldRateShowSite15";
+            this.yieldRateShowSite15.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite15.TabIndex = 4;
             // 
-            // yieldRateShow16
+            // yieldRateShowSite13
             // 
-            this.yieldRateShow16.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.yieldRateShow16.Location = new System.Drawing.Point(4, 37);
-            this.yieldRateShow16.Margin = new System.Windows.Forms.Padding(4);
-            this.yieldRateShow16.Name = "yieldRateShow16";
-            this.yieldRateShow16.Size = new System.Drawing.Size(318, 152);
-            this.yieldRateShow16.TabIndex = 5;
+            this.yieldRateShowSite13.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.yieldRateShowSite13.Location = new System.Drawing.Point(4, 37);
+            this.yieldRateShowSite13.Margin = new System.Windows.Forms.Padding(4);
+            this.yieldRateShowSite13.Name = "yieldRateShowSite13";
+            this.yieldRateShowSite13.Size = new System.Drawing.Size(318, 152);
+            this.yieldRateShowSite13.TabIndex = 5;
             // 
             // _main
             // 
@@ -5946,34 +5947,34 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label5;
-        private YieldRateShow yieldRateShow4;
-        private YieldRateShow yieldRateShow2;
-        private YieldRateShow yieldRateShow3;
-        private YieldRateShow yieldRateShow1;
+        private YieldRateShow yieldRateShowSite4;
+        private YieldRateShow yieldRateShowSite2;
+        private YieldRateShow yieldRateShowSite3;
+        private YieldRateShow yieldRateShowSite1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label16;
-        private YieldRateShow yieldRateShow5;
-        private YieldRateShow yieldRateShow6;
-        private YieldRateShow yieldRateShow7;
-        private YieldRateShow yieldRateShow8;
+        private YieldRateShow yieldRateShowSite8;
+        private YieldRateShow yieldRateShowSite6;
+        private YieldRateShow yieldRateShowSite7;
+        private YieldRateShow yieldRateShowSite5;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
-        private YieldRateShow yieldRateShow9;
-        private YieldRateShow yieldRateShow10;
-        private YieldRateShow yieldRateShow11;
-        private YieldRateShow yieldRateShow12;
+        private YieldRateShow yieldRateShowSite12;
+        private YieldRateShow yieldRateShowSite10;
+        private YieldRateShow yieldRateShowSite11;
+        private YieldRateShow yieldRateShowSite9;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
-        private YieldRateShow yieldRateShow13;
-        private YieldRateShow yieldRateShow14;
-        private YieldRateShow yieldRateShow15;
-        private YieldRateShow yieldRateShow16;
+        private YieldRateShow yieldRateShowSite16;
+        private YieldRateShow yieldRateShowSite14;
+        private YieldRateShow yieldRateShowSite15;
+        private YieldRateShow yieldRateShowSite13;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Panel panel7;
     }

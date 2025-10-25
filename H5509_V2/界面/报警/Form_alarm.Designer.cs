@@ -3352,10 +3352,12 @@
             this.Controls.Add(this.Sys);
             this.Controls.Add(this.Comm);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1260, 910);
+            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1260, 910);
             this.Name = "Form_alarm";
-            this.Text = "Form1";
+            this.Text = "报警/提示";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_alarm_FormClosing);
             this.Load += new System.EventHandler(this.Form_alarm_Load);
             this.panel_1.ResumeLayout(false);

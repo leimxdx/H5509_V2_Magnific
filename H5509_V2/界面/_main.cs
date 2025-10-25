@@ -73,6 +73,7 @@ namespace H5509_V2
 
         private Defalut3 _defalut3;
 
+        private YieldRateShow[] yieldRateShowSites;
         public _main()
         {
             InitializeComponent();
@@ -137,6 +138,26 @@ namespace H5509_V2
                 uiDigitalLabel15,
                 uiDigitalLabel16,
                 uiDigitalLabel17,
+            };
+
+            yieldRateShowSites = new YieldRateShow[] 
+            {
+                yieldRateShowSite1,
+                yieldRateShowSite2,
+                yieldRateShowSite3,
+                yieldRateShowSite4,
+                yieldRateShowSite5,
+                yieldRateShowSite6,
+                yieldRateShowSite7,
+                yieldRateShowSite8,
+                yieldRateShowSite9,
+                yieldRateShowSite10,
+                yieldRateShowSite11,
+                yieldRateShowSite12,
+                yieldRateShowSite13,
+                yieldRateShowSite14,
+                yieldRateShowSite15,
+                yieldRateShowSite16,
             };
         }
 
@@ -1219,7 +1240,7 @@ namespace H5509_V2
             {
                 this.Invoke(new Action(() =>
                 {
-                    foreach (Control c in groupBox26.Controls)
+                    foreach (Control c in panel6.Controls)
                     {
                         if (c is TextBox)
                         {
@@ -1231,7 +1252,7 @@ namespace H5509_V2
             }
             else
             {
-                foreach (Control c in groupBox26.Controls)
+                foreach (Control c in panel6.Controls)
                 {
                     if (c is TextBox)
                     {
@@ -1388,6 +1409,10 @@ namespace H5509_V2
                             _defalut2.Dut连续不良报警使能 = 设置信息.测试机信息.Dout连续不良报警;
                             _defalut2.总良率报警百分比 = 设置信息.测试机信息.总良率报警百分比;
                             _defalut2.总良率报警使能 = 设置信息.测试机信息.总良率报警使能;
+                            _defalut2.testnum = 测试手臂吸不起数量;
+                            _defalut2.inputnum = 入料手臂吸料不起数量;
+                            _defalut2.outputnum = 出料手臂吸料不起数量;
+                            _defalut2.totalnum = 载入数;
                             _defalut2.RefreshUI();
                         }
 
@@ -1414,6 +1439,14 @@ namespace H5509_V2
                             label153.Text = $"权限剩余时间: {(int)remainingTime.TotalSeconds} 秒";
                         }
                         else label153.Visible = false;
+
+                        for (int i = 0; i < yieldRateShowSites.Length; i++)
+                        {
+                            yieldRateShowSites[i].dut_8Pass = Get128PassDatas(i);
+                            yieldRateShowSites[i].dut_8Fail = Get128FailDatas(i);
+                            yieldRateShowSites[i].ShowYieldRate();
+                        }
+
 
                         for (int i = 0; i < Lbl_Temp.Length; i++)
                         {
@@ -1456,6 +1489,26 @@ namespace H5509_V2
                     Thread.Sleep(100);
                 }
             }
+        }
+
+        private int[] Get128PassDatas(int site)
+        {
+            int[] ints = new int[8];
+            for (int i = 0; i < 8; i++)
+            {
+                ints[i] = Dout128PassNumber[site * 8 + i];
+            }
+            return ints;
+        }
+
+        private int[] Get128FailDatas(int site)
+        {
+            int[] ints = new int[8];
+            for (int i = 0; i < 8; i++)
+            {
+                ints[i] = Dout128FailNumber[site * 8 + i];
+            }
+            return ints;
         }
 
         public void 显示Dout颜色()
@@ -2789,7 +2842,18 @@ namespace H5509_V2
 
         private void label147_Click(object sender, EventArgs e)
         {
-          
+            //Listcode.Add("11111");
+            //Auto1Tray盘数量++;
+            //double prfpos = 100;
+            //double minpoint = 99;
+            //if (prfpos < minpoint || Auto1Tray盘数量 >= 设置信息.Auto仓提示换盘数量) //Auto1满盘判断值  && !正在结批
+            //{
+            //    Auto1料仓满盘标记 = true;
+            //    if (prfpos < minpoint) RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}"); //Auto1满盘判断值
+            //    if (Auto1Tray盘数量 >= 设置信息.Auto仓提示换盘数量) RunLog($"Auto1Tray盘数量{Auto1Tray盘数量}>=Auto仓提示换盘数量{设置信息.Auto仓提示换盘数量}"); //Auto1满盘判断值
+            //}
+            //else Auto1料仓满盘标记 = false;
+
             //bool[] lsopen = new bool[8] { true, true, true, true, true, true, true, true };
             //int[] opens = new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 };
             //飞梭后入料IC = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
@@ -2948,9 +3012,10 @@ namespace H5509_V2
             //刷新开Site状态();
         }
 
-        private void label153_Click(object sender, EventArgs e)
-        {
 
+        private void label7_Click(object sender, EventArgs e)
+        {
+            //form_alarm.CancelAllAlarm();
         }
     }
 }

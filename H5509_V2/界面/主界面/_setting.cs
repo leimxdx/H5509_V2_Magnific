@@ -4036,8 +4036,10 @@ namespace H5509_V2
                 uiCheckBox192.Checked = false;
                 uiCheckBox193.Checked = true;
             }
-            label355.Visible = uiCheckBox193.Checked;
-            uiComboBox2.Visible = uiCheckBox193.Checked;
+            //label355.Visible = uiCheckBox193.Checked;
+            uiComboBox2.Enabled = uiCheckBox193.Checked;
+
+            numericUpDown198.Text = dt.Rows[0]["Auto仓提示换盘数量"].ToString();
         }
 
         private void 刷新测试机(string name)
@@ -5098,6 +5100,7 @@ namespace H5509_V2
 
                         string trayname = uiComboBox1.Text;
 
+                        int auto1num = Convert.ToInt32(numericUpDown198.Value);
 
                         if (trayname != setupInfo.Tray盘信息.TrayName)
                         {
@@ -5170,10 +5173,21 @@ namespace H5509_V2
                                     }
                                 }
                             }
-                            else
+                            else MessageBox.Show("温度模式保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+
+                        if (auto1num != setupInfo.Auto仓提示换盘数量)
+                        {
+                            int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set Auto仓提示换盘数量 = '{auto1num}' where 档案名称 = '{name}'");
+                            if (line >= 1)
                             {
-                                MessageBox.Show("温度模式保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                RunLog($"档案名称:[{name}]:Auto仓提示换盘数量:{setupInfo.Auto仓提示换盘数量}->{auto1num}:更新成功", LogType.ParamLog);
+                                if (name == 设置信息.档案名称)
+                                {
+                                    设置信息.Auto仓提示换盘数量 = auto1num;
+                                }
                             }
+                            else MessageBox.Show("Auto仓提示换盘数量保存失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                 }
@@ -7812,15 +7826,15 @@ namespace H5509_V2
         private void uiCheckBox192_Click(object sender, EventArgs e)
         {
             uiCheckBox193.Checked = !uiCheckBox192.Checked;
-            label355.Visible = uiCheckBox193.Checked;
-            uiComboBox2.Visible = uiCheckBox193.Checked;
+            //label355.Visible = uiCheckBox193.Checked;
+            uiComboBox2.Enabled = uiCheckBox193.Checked;
         }
 
         private void uiCheckBox193_Click(object sender, EventArgs e)
         {
             uiCheckBox192.Checked = !uiCheckBox193.Checked;
-            label355.Visible = uiCheckBox193.Checked;
-            uiComboBox2.Visible = uiCheckBox193.Checked;
+            //label355.Enabled = uiCheckBox193.Checked;
+            uiComboBox2.Enabled = uiCheckBox193.Checked;
         }
 
         private void uiTabControl9_Selecting(object sender, TabControlCancelEventArgs e)
@@ -8239,9 +8253,9 @@ namespace H5509_V2
                             if (Convert.ToInt32(value) == 0)
                             {
                                 //新增复制档案
-                                sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,通讯名称,分BIN名称,梭车名称,温度模式)" +
+                                sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,通讯名称,分BIN名称,梭车名称,温度模式,Auto仓提示换盘数量)" +
                                 $"values('{copySetupName.Name}', '{setupInfo.Tray盘信息.TrayName}','{copySetupName.Name}', '{setupInfo.Heat盘信息.HeatName}'" +
-                                $",'{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}', '{setupInfo.温度模式}')";
+                                $",'{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}', '{setupInfo.温度模式}', '{setupInfo.Auto仓提示换盘数量}')";
                                 int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
                                 if (line >= 1)
                                 {
@@ -9238,6 +9252,12 @@ namespace H5509_V2
                 RunLog($"Other数量 = {OtherNum};");
                 RunLog($"空盘上顶到最大值 = {空盘上顶到最大值};");
                 RunLog($"空盘下降到最小值 = {空盘下降到最小值};");
+                RunLog($"Auto1Tray盘数量 = {Auto1Tray盘数量};");
+                RunLog($"Auto2Tray盘数量 = {Auto2Tray盘数量};");
+                RunLog($"测试手臂吸不起数量 = {测试手臂吸不起数量};");
+                //RunLog($"测试手臂Dut吸不起数量 = {测试区吸不起数量};");
+                RunLog($"入料手臂吸料不起数量 = {入料手臂吸料不起数量};");
+                RunLog($"出料手臂吸料不起数量  = {出料手臂吸料不起数量};");
                 RunLog($"Auto1料仓满盘标记 = {Auto1料仓满盘标记};");
                 RunLog($"Auto2料仓满盘标记 = {Auto2料仓满盘标记};");
                 RunLog($"Auto1放盘等待标记 = {Auto1放盘等待标记};");

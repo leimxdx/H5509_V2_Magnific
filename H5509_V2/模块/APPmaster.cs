@@ -962,6 +962,20 @@ namespace H5509_V2
 
         public static int Auto2满盘判断值 = 25000;
 
+        public static int Auto1Tray盘数量;
+
+        public static int Auto2Tray盘数量;
+
+        public static int 测试手臂吸不起数量;
+
+        //public static int 测试区Dut吸不起数量;
+
+        public static int 入料手臂吸料不起数量;
+
+        public static int 出料手臂吸料不起数量;
+
+        public static int 吸料不起数量 { get { return 测试手臂吸不起数量 + 入料手臂吸料不起数量 + 出料手臂吸料不起数量; } }
+
         public static bool Auto1料仓满盘标记;
 
         public static bool Auto2料仓满盘标记;
@@ -2455,6 +2469,7 @@ namespace H5509_V2
                     setupInfo.通讯信息.通讯名称 = reader["通讯名称"].ToString();
                     setupInfo.梭车名称 = reader["梭车名称"].ToString();
                     setupInfo.温度模式 = reader["温度模式"].ToString();
+                    setupInfo.Auto仓提示换盘数量 = Convert.ToInt32(reader["Auto仓提示换盘数量"].ToString());
                 }
                 else return $"无档案{name}信息";
             }
@@ -2765,6 +2780,7 @@ namespace H5509_V2
                 设置信息.通讯信息 = comInfoSet;
                 设置信息.梭车名称 = setupInfo.梭车名称;
                 设置信息.温度模式 = setupInfo.温度模式;
+                设置信息.Auto仓提示换盘数量 = setupInfo.Auto仓提示换盘数量;
             }
             return result;
         }

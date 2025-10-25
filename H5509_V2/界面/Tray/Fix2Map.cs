@@ -99,7 +99,6 @@ namespace H5509_V2
         private void Fix2Map_FormClosing(object sender, FormClosingEventArgs e)
         {
             Timer.Stop();
-            this.Close();
         }
     }
 }

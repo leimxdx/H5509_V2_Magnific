@@ -879,6 +879,7 @@ namespace H5509_V2
                         {
                             form_alarm.Activate();
                             form_alarm.Show();
+                            //form_alarm.TopLevel = true;
                             for (int i = 0; i < Listcode.Count; i++)
                             {
                                 form_alarm.QueueCode.Enqueue(Listcode[i]); //将报警代码放入队列
@@ -886,6 +887,12 @@ namespace H5509_V2
                                 if (!报警忽略次数.Contains(Listcode[i])) 报警次数++;
                                 Listcode.Remove(Listcode[i]);
                             }
+                        }
+
+                        if (form_alarm.AlarmRows > 0)
+                        {
+                            form_alarm.Activate();
+                            form_alarm.Show();
                         }
                     }));
 

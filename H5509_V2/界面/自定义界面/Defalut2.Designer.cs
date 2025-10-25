@@ -38,6 +38,12 @@
             this.uiCheckBox1 = new Sunny.UI.UICheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label12
@@ -64,7 +70,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label2.Location = new System.Drawing.Point(25, 52);
+            this.label2.Location = new System.Drawing.Point(25, 51);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(106, 21);
             this.label2.TabIndex = 330;
@@ -74,7 +80,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label3.Location = new System.Drawing.Point(226, 52);
+            this.label3.Location = new System.Drawing.Point(226, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 21);
             this.label3.TabIndex = 332;
@@ -94,7 +100,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox2.Location = new System.Drawing.Point(136, 48);
+            this.textBox2.Location = new System.Drawing.Point(136, 47);
             this.textBox2.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.textBox2.Name = "textBox2";
             this.textBox2.ReadOnly = true;
@@ -120,6 +126,7 @@
             this.uiCheckBox192.TabIndex = 356;
             this.uiCheckBox192.Tag = "";
             this.uiCheckBox192.Text = "报警使能";
+            this.uiCheckBox192.Visible = false;
             // 
             // uiCheckBox1
             // 
@@ -130,7 +137,7 @@
             this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiCheckBox1.Font = new System.Drawing.Font("微软雅黑", 11F);
             this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.uiCheckBox1.Location = new System.Drawing.Point(311, 50);
+            this.uiCheckBox1.Location = new System.Drawing.Point(311, 49);
             this.uiCheckBox1.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiCheckBox1.Name = "uiCheckBox1";
@@ -139,12 +146,13 @@
             this.uiCheckBox1.TabIndex = 357;
             this.uiCheckBox1.Tag = "";
             this.uiCheckBox1.Text = "报警使能";
+            this.uiCheckBox1.Visible = false;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.label4.Location = new System.Drawing.Point(25, 91);
+            this.label4.Location = new System.Drawing.Point(25, 195);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 21);
             this.label4.TabIndex = 358;
@@ -153,13 +161,76 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.textBox3.Location = new System.Drawing.Point(136, 88);
+            this.textBox3.Location = new System.Drawing.Point(117, 191);
             this.textBox3.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
             this.textBox3.Name = "textBox3";
             this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(83, 29);
+            this.textBox3.Size = new System.Drawing.Size(150, 29);
             this.textBox3.TabIndex = 359;
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label5.Location = new System.Drawing.Point(25, 87);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(154, 21);
+            this.label5.TabIndex = 330;
+            this.label5.Text = "测试手臂吸不起次数";
+            // 
+            // textBox4
+            // 
+            this.textBox4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.textBox4.Location = new System.Drawing.Point(184, 83);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.ReadOnly = true;
+            this.textBox4.Size = new System.Drawing.Size(83, 29);
+            this.textBox4.TabIndex = 360;
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.textBox5.Location = new System.Drawing.Point(184, 119);
+            this.textBox5.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.ReadOnly = true;
+            this.textBox5.Size = new System.Drawing.Size(83, 29);
+            this.textBox5.TabIndex = 362;
+            this.textBox5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label6.Location = new System.Drawing.Point(25, 123);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(154, 21);
+            this.label6.TabIndex = 361;
+            this.label6.Text = "入料手臂吸不起次数";
+            // 
+            // textBox6
+            // 
+            this.textBox6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.textBox6.Location = new System.Drawing.Point(184, 155);
+            this.textBox6.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.ReadOnly = true;
+            this.textBox6.Size = new System.Drawing.Size(83, 29);
+            this.textBox6.TabIndex = 364;
+            this.textBox6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.label7.Location = new System.Drawing.Point(25, 159);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(154, 21);
+            this.label7.TabIndex = 363;
+            this.label7.Text = "出料手臂吸不起次数";
             // 
             // Defalut2
             // 
@@ -167,8 +238,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Controls.Add(this.textBox6);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.textBox4);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.textBox3);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.label4);
@@ -198,5 +275,11 @@
         private Sunny.UI.UICheckBox uiCheckBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label7;
     }
 }
