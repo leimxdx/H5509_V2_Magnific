@@ -4288,6 +4288,8 @@ namespace H5509_V2
 
                             if (设备状态 != 0 && 测试IC忽略 == false && 测试区IC忽略)
                             {
+                                form_alarm.CancelAllAlarm();
+                                form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
                                 FrmInputPwd frmInputPwd = new FrmInputPwd();
                                 if (frmInputPwd.ShowDialog() == DialogResult.OK)
                                 {
@@ -6112,25 +6114,28 @@ namespace H5509_V2
                             result = 入料手臂Z移动(lsopen, -0.3, false);
                             if (result == "Success")
                             {
-                                //上来再侦测一次
-                                result = 入料吸嘴_真空检测(out ioval);
-                                if (result != "Success") break;
-
-                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}");
-
-                                for (int i = 0; i < ioval.Length; i++)
+                                if (!空跑模式)
                                 {
-                                    if (lsopen[i])
+                                    //上来再侦测一次
+                                    result = 入料吸嘴_真空检测(out ioval);
+                                    if (result != "Success") break;
+
+                                    RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}");
+
+                                    for (int i = 0; i < ioval.Length; i++)
                                     {
-                                        if (opens[i] == 1 && ioval[i] == "0")
+                                        if (lsopen[i])
                                         {
-                                            opens[i] = 0;
+                                            if (opens[i] == 1 && ioval[i] == "0")
+                                            {
+                                                opens[i] = 0;
+                                            }
                                         }
                                     }
-                                }
 
-                                bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
-                                入料吸嘴_吸放料(bools, true, false);
+                                    bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
+                                    入料吸嘴_吸放料(bools, true, false);
+                                }
 
                                 for (int i = 0; i < lsopen.Length; i++)
                                 {
@@ -6510,25 +6515,28 @@ namespace H5509_V2
                             result = 入料手臂Z移动(lsopen, -0.3, false);
                             if (result == "Success")
                             {
-                                //上来再侦测一次
-                                result = 入料吸嘴_真空检测(out ioval);
-                                if (result != "Success") break;
-
-                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}");
-
-                                for (int i = 0; i < ioval.Length; i++)
+                                if (!空跑模式)
                                 {
-                                    if (lsopen[i])
+                                    //上来再侦测一次
+                                    result = 入料吸嘴_真空检测(out ioval);
+                                    if (result != "Success") break;
+
+                                    RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}");
+
+                                    for (int i = 0; i < ioval.Length; i++)
                                     {
-                                        if (opens[i] == 1 && ioval[i] == "0")
+                                        if (lsopen[i])
                                         {
-                                            opens[i] = 0;
+                                            if (opens[i] == 1 && ioval[i] == "0")
+                                            {
+                                                opens[i] = 0;
+                                            }
                                         }
                                     }
-                                }
 
-                                bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
-                                入料吸嘴_吸放料(bools, true, false);
+                                    bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
+                                    入料吸嘴_吸放料(bools, true, false);
+                                }
 
                                 for (int i = 0; i < lsopen.Length; i++)
                                 {
@@ -7777,25 +7785,28 @@ namespace H5509_V2
                             result = 出料手臂Z移动(lsopen, -0.3, false);
                             if (result == "Success")
                             {
-                                //上来再侦测一次
-                                result = 出料吸嘴_真空检测(out string[] ioval);
-                                if (result != "Success") break;
-
-                                RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}");
-
-                                for (int i = 0; i < ioval.Length; i++)
+                                if (!空跑模式)
                                 {
-                                    if (lsopen[i])
+                                    //上来再侦测一次
+                                    result = 出料吸嘴_真空检测(out string[] ioval);
+                                    if (result != "Success") break;
+
+                                    RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}");
+
+                                    for (int i = 0; i < ioval.Length; i++)
                                     {
-                                        if (opens[i] == 1 && ioval[i] == "0")
+                                        if (lsopen[i])
                                         {
-                                            opens[i] = 0;
+                                            if (opens[i] == 1 && ioval[i] == "0")
+                                            {
+                                                opens[i] = 0;
+                                            }
                                         }
                                     }
-                                }
 
-                                bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
-                                出料吸嘴_吸放料(bools, true, false);
+                                    bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
+                                    出料吸嘴_吸放料(bools, true, false);
+                                }
 
                                 for (int i = 0; i < lsopen.Length; i++)
                                 {
@@ -9756,24 +9767,27 @@ namespace H5509_V2
                             result = 测试手臂Z移动(-0.3, false);
                             if (result == "Success")
                             {
-                                //上来再侦测一次
-                                result = 测试吸嘴_真空检测(out string[] ioval);
-                                if (result != "Success") break;
-
-                                RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}");
-
-                                for (int i = 0; i < ioval.Length; i++)
+                                if (!空跑模式)
                                 {
-                                    if (lsopen[i])
+                                    //上来再侦测一次
+                                    result = 测试吸嘴_真空检测(out string[] ioval);
+                                    if (result != "Success") break;
+
+                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}");
+
+                                    for (int i = 0; i < ioval.Length; i++)
                                     {
-                                        if (opens[i] == 1 && ioval[i] == "0")
+                                        if (lsopen[i])
                                         {
-                                            opens[i] = 0;
+                                            if (opens[i] == 1 && ioval[i] == "0")
+                                            {
+                                                opens[i] = 0;
+                                            }
                                         }
                                     }
+                                    bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
+                                    测试吸嘴_吸放料(bools, true, false);
                                 }
-                                bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
-                                测试吸嘴_吸放料(bools, true, false);
 
                                 for (int i = 0; i < lsopen.Length; i++)
                                 {
@@ -10595,24 +10609,27 @@ namespace H5509_V2
                             result = 测试手臂Z移动(-0.3, false);
                             if (result == "Success")
                             {
-                                //上来再侦测一次
-                                result = 测试吸嘴_真空检测(out string[] ioval);
-                                if (result != "Success") break;
-
-                                RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}");
-
-                                for (int i = 0; i < ioval.Length; i++)
+                                if (!空跑模式)
                                 {
-                                    if (lsopen[i])
+                                    //上来再侦测一次
+                                    result = 测试吸嘴_真空检测(out string[] ioval);
+                                    if (result != "Success") break;
+
+                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}");
+
+                                    for (int i = 0; i < ioval.Length; i++)
                                     {
-                                        if (opens[i] == 1 && ioval[i] == "0")
+                                        if (lsopen[i])
                                         {
-                                            opens[i] = 0;
+                                            if (opens[i] == 1 && ioval[i] == "0")
+                                            {
+                                                opens[i] = 0;
+                                            }
                                         }
                                     }
+                                    bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
+                                    测试吸嘴_吸放料(bools, true, false);
                                 }
-                                bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
-                                测试吸嘴_吸放料(bools, true, false);
 
                                 for (int i = 0; i < lsopen.Length; i++)
                                 {
@@ -12395,16 +12412,19 @@ namespace H5509_V2
                             string result3 = GetAxisRunInfo("M14_Auto1顶盘轴", out AxisRunInfo axisRunInfo2);
                             if (result == "Success" && result3 == "Success")
                             {
-                                Auto1Tray盘数量++;
-                                double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
-                                if (prfpos < minpoint || Auto1Tray盘数量 >= 设置信息.Auto仓提示换盘数量) //Auto1满盘判断值  && !正在结批
+                                if (!正在结批)
                                 {
-                                    Auto1料仓满盘标记 = true;
-                                    if (prfpos < minpoint) RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}"); //Auto1满盘判断值
-                                    if (Auto1Tray盘数量 >= 设置信息.Auto仓提示换盘数量) RunLog($"Auto1Tray盘数量{Auto1Tray盘数量}>=Auto仓提示换盘数量{设置信息.Auto仓提示换盘数量}"); //Auto1满盘判断值
+                                    Auto1Tray盘数量++;
+                                    double minpoint = 初始点位.Auto1_满盘位 / axisRunInfo2.步长mm;
+                                    if (prfpos < minpoint || Auto1Tray盘数量 >= 设置信息.Auto仓提示换盘数量) //Auto1满盘判断值  && !正在结批
+                                    {
+                                        Auto1料仓满盘标记 = true;
+                                        if (prfpos < minpoint) RunLog($"M14_Auto1顶盘轴当前行程{prfpos}<Auto1满盘判断值{minpoint}"); //Auto1满盘判断值
+                                        if (Auto1Tray盘数量 >= 设置信息.Auto仓提示换盘数量) RunLog($"Auto1Tray盘数量{Auto1Tray盘数量}>=Auto仓提示换盘数量{设置信息.Auto仓提示换盘数量}"); //Auto1满盘判断值
+                                        Auto1Tray盘数量 = 0;
+                                    }
+                                    else Auto1料仓满盘标记 = false;
                                 }
-                                else Auto1料仓满盘标记 = false;
-
                                 Auto1上顶标记 = 1;
                                 PS手动盘1上顶流程.StepID = 599;
                             }
@@ -13001,16 +13021,19 @@ namespace H5509_V2
                             string result3 = GetAxisRunInfo("M15_Auto2顶盘轴", out AxisRunInfo axisRunInfo2);
                             if (result == "Success" && result3 == "Success")
                             {
-                                Auto2Tray盘数量++;
-                                double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
-                                if (prfpos < minpoint || Auto2Tray盘数量 >= 设置信息.Auto仓提示换盘数量)// && !正在结批 Auto2满盘判断值
+                                if (!正在结批)
                                 {
-                                    Auto2料仓满盘标记 = true;
-                                    if (prfpos < minpoint) RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{minpoint}"); //Auto2满盘判断值
-                                    if (Auto2Tray盘数量 >= 设置信息.Auto仓提示换盘数量) RunLog($"Auto2Tray盘数量{Auto2Tray盘数量}>=Auto仓提示换盘数量{设置信息.Auto仓提示换盘数量}"); //Auto2满盘判断值
+                                    Auto2Tray盘数量++;
+                                    double minpoint = 初始点位.Auto2_满盘位 / axisRunInfo2.步长mm;
+                                    if (prfpos < minpoint || Auto2Tray盘数量 >= 设置信息.Auto仓提示换盘数量)// && !正在结批 Auto2满盘判断值
+                                    {
+                                        Auto2料仓满盘标记 = true;
+                                        if (prfpos < minpoint) RunLog($"M15_Auto2顶盘轴当前行程{prfpos}<Auto2满盘判断值{minpoint}"); //Auto2满盘判断值
+                                        if (Auto2Tray盘数量 >= 设置信息.Auto仓提示换盘数量) RunLog($"Auto2Tray盘数量{Auto2Tray盘数量}>=Auto仓提示换盘数量{设置信息.Auto仓提示换盘数量}"); //Auto2满盘判断值
+                                        Auto2Tray盘数量 = 0;
+                                    }
+                                    else Auto2料仓满盘标记 = false;
                                 }
-                                else Auto2料仓满盘标记 = false;
-
                                 Auto2上顶标记 = 1;
                                 PS手动盘2上顶流程.StepID = 599;
                             }
