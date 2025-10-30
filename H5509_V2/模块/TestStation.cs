@@ -757,7 +757,7 @@ namespace H5509_V2
                     }
                 }
             }
-            if (设置信息.通讯信息.同时测试 == 4)
+            else if (设置信息.通讯信息.同时测试 == 4)
             {
                 //int site = StationId; //站点号
 

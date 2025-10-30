@@ -2296,6 +2296,59 @@ namespace H5509_V2
             }
         }
 
+        public void HandlerDebug()
+        {
+            int site = 12;
+            string result = "Success";
+            bool[] lsopen = new bool[8] { true, true, true, true, true, true, true, true };
+            int[] sites = GetSites(site);
+            StationManagers.SetStationIC(site, new bool[][]
+            {
+                                        new bool[] { true, lsopen[1], lsopen[2], lsopen[3] },
+                                        new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
+            });
+            StationManagers.SetStationIC(site + 1, new bool[][]
+            {
+                                        new bool[] { true, lsopen[1], lsopen[2], lsopen[3] },
+                                        new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
+            });
+            bool[][] siteic1 = StationManagers.GetStationIC((int)sites[0]);
+            bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
+            bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
+            bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
+            int[] states = new int[] { 10, 10 };
+
+            bool[] sitew1 = GetSiteOpen(sites[0]);
+            bool[] sitew2 = GetSiteOpen(sites[1]);
+
+            if (((states[0] == 10 || !sitew1.Contains(true)) && (states[1] == 10 || !sitew2.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记) && (states[0] == 10 || states[0] == 0) && (states[1] == 10 || states[1] == 0)))
+            {
+                List<List<bool[]>> opens = new List<List<bool[]>>()
+                                    {
+                                        states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                        states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
+                                    };
+                //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                result = StationManagers.Send(site, states, opens, 无测试机模式);
+                if (result == "Success")
+                {
+                    if (states[0] == 10) StationManagers.SetStationState(sites[0], 2);
+                    if (states[1] == 10) StationManagers.SetStationState(sites[1], 2);
+                    PS测试区气缸下压动作流程.StepID = 599;
+                }
+                else
+                {
+                    Listcode.Add("800007");
+                    RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                    ProgramPause = true;
+                    IsPause = true;
+                }
+            }
+            else PS测试区气缸下压动作流程.StepID = 599;
+        }
+
         #endregion IO控制与读取
 
         #region 辅助方法
@@ -4412,45 +4465,55 @@ namespace H5509_V2
                         if (CheckEdgeSingal(onecycle, ref OnecycleRiseCache, true))
                         {
                             RunLog("按下一个循环", LogType.OperateLog);
-                            if (!结批标记)
+
+                            //if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+                            //{
+                            //    Listcode.Add("1400442");
+                            //    RunLog("[Code]1400442,[Msg](按下一次循环)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
+                            //}
+
+                            if (IsDutAllCLose()) //当初次开始时检测有没有开dut
                             {
-                                if (!一个循环标记)
+                                if (!结批标记)
                                 {
-                                    if (温度模式 == "高温")
+                                    if (!一个循环标记)
                                     {
-                                        一个循环选项选择中 = true;
-                                        ProgramPause = true;
-                                        IsPause = true;
-                                        DialogResult dialog = MessageBox.Show("请确认是否清空加热盘?\n是:将加热盘剩余IC取完\n否:直接结批\n取消:不做任何操作", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                                        if (dialog == DialogResult.Yes)
+                                        if (温度模式 == "高温")
+                                        {
+                                            一个循环选项选择中 = true;
+                                            ProgramPause = true;
+                                            IsPause = true;
+                                            DialogResult dialog = MessageBox.Show("请确认是否清空加热盘?\n是:将加热盘剩余IC取完\n否:直接结批\n取消:不做任何操作", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                            if (dialog == DialogResult.Yes)
+                                            {
+                                                一个循环标记 = true;
+                                                一个循环完成 = false;
+                                                按下一个循环时间 = DateTime.Now;
+                                                OneCycle按钮闪烁的定时器.Start();
+                                            }
+                                            else if (dialog == DialogResult.No)
+                                            {
+                                                一个循环标记 = true;
+                                                一个循环完成 = false;
+                                                按下一个循环时间 = DateTime.Now;
+                                                加热盘停止入料标记 = true;
+                                                OneCycle按钮闪烁的定时器.Start();
+                                            }
+                                            一个循环选项选择中 = false;
+                                            ProgramStart = true;
+                                        }
+                                        else
                                         {
                                             一个循环标记 = true;
                                             一个循环完成 = false;
                                             按下一个循环时间 = DateTime.Now;
                                             OneCycle按钮闪烁的定时器.Start();
                                         }
-                                        else if (dialog == DialogResult.No)
-                                        {
-                                            一个循环标记 = true;
-                                            一个循环完成 = false;
-                                            按下一个循环时间 = DateTime.Now;
-                                            加热盘停止入料标记 = true;
-                                            OneCycle按钮闪烁的定时器.Start();
-                                        }
-                                        一个循环选项选择中 = false;
-                                        ProgramStart = true;
                                     }
-                                    else
-                                    {
-                                        一个循环标记 = true;
-                                        一个循环完成 = false;
-                                        按下一个循环时间 = DateTime.Now;
-                                        OneCycle按钮闪烁的定时器.Start();
-                                    }
+                                    else RunLog("无法触发一个循环,正在一个循环中...");
                                 }
-                                else RunLog("无法触发一个循环,正在一个循环中...");
+                                else RunLog("无法触发结批,正在结批中...");
                             }
-                            else RunLog("无法触发结批,正在结批中...");
                         }
 
                         bool home = io[9] == "1"; //X010_归零
@@ -4524,6 +4587,7 @@ namespace H5509_V2
                                     motionEx.SetDo("Y010_归零灯", true);
                                     form_alarm.CancelAllAlarm();
                                     if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
+                                    //form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
                                     Task.Run(() =>
                                     {
                                         result = 整机回零流程();

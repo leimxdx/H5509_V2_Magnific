@@ -1091,7 +1091,7 @@ namespace H5509_V2
                                         {
                                             if (doutContinueFail[site][dut] >= doutfailnum)
                                             {
-                                                doutContinueFail[site][dut] = 0;
+                                                //doutContinueFail[site][dut] = 0;
                                                 string code = $"6{site + 1:D2}0{dut + 1}14";
                                                 //if (isalarm) //dout连续不良报警
                                                 //{

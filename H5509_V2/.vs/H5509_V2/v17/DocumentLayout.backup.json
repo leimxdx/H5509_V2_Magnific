@@ -3,35 +3,19 @@
   "WorkspaceRootPath": "D:\\GitHub\\H5509_V2\\H5509_V2\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\tray\\fix3map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\fix3map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|d:\\github\\h5509_v2\\h5509_v2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
@@ -43,19 +27,80 @@
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|d:\\github\\h5509_v2\\h5509_v2\\\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\teststation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\teststation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96368B3D-2558-41A4-AE82-520E7349D4D3}|..\\ComMaster\\ComMaster.csproj|d:\\github\\h5509_v2\\commaster\\devices\\serialdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{96368B3D-2558-41A4-AE82-520E7349D4D3}|..\\ComMaster\\ComMaster.csproj|d:\\github\\h5509_v2\\commaster\\interfaces\\iserialdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\stationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\stationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{908ABB7E-BD9B-419C-B207-042A3D8DAB24}|..\\MotionCommon\\MotionCommon.csproj|d:\\github\\h5509_v2\\motioncommon\\testerifparam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{4322550B-1E28-45B2-A552-3817974FF652}|..\\SQLiteHelper\\SQLiteHelper.csproj|d:\\github\\h5509_v2\\sqlitehelper\\sqlite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\defalut2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\defalut2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\defalut2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\defalut2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_io.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_io.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\tray\\fix3map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\fix3map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto2Map.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -94,10 +139,6 @@
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\heatmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\defalut2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\defalut2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -105,38 +146,15 @@
       "AbsoluteMoniker": "D:0:0:{908ABB7E-BD9B-419C-B207-042A3D8DAB24}|..\\MotionCommon\\MotionCommon.csproj|d:\\github\\h5509_v2\\motioncommon\\initpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\teststation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\teststation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\stationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\stationmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{908ABB7E-BD9B-419C-B207-042A3D8DAB24}|..\\MotionCommon\\MotionCommon.csproj|d:\\github\\h5509_v2\\motioncommon\\setupinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|d:\\github\\h5509_v2\\h5509_v2\\\u754C\u9762\\\u5176\u4ED6\\yieldrateshow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\yieldrateshow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u5176\u4ED6\\yieldrateshow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\yieldrateshow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u5176\u4ED6\\yieldrateshow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\_main.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{96368B3D-2558-41A4-AE82-520E7349D4D3}|..\\ComMaster\\ComMaster.csproj|d:\\github\\h5509_v2\\commaster\\devices\\serialdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\defalut3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -175,10 +193,6 @@
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\copysetupname.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\MotionEx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u6A21\u5757\\MotionEx.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -214,9 +228,6 @@
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u62A5\u8B66\\form_alarm.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{908ABB7E-BD9B-419C-B207-042A3D8DAB24}|..\\MotionCommon\\MotionCommon.csproj|d:\\github\\h5509_v2\\motioncommon\\testerifparam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
@@ -236,10 +247,6 @@
       "AbsoluteMoniker": "D:0:0:{908ABB7E-BD9B-419C-B207-042A3D8DAB24}|..\\MotionCommon\\MotionCommon.csproj|d:\\github\\h5509_v2\\motioncommon\\cominfoset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\tray\\loadmap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{65E82F37-FD8B-4A5C-BFE0-B29031E55D0E}|..\\HardwareGXN\\HardwareGXN.csproj|D:\\GitHub\\H5509_V2\\HardwareGXN\\GSNAxisCard\\GSNAxisController.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -250,9 +257,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{396C4C70-4AA6-438D-8B4E-470AED0A99D4}|..\\IHardwareGXN\\IHardwareGXN.csproj|D:\\GitHub\\H5509_V2\\IHardwareGXN\\GXNCard\\IGXNInterface.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{96368B3D-2558-41A4-AE82-520E7349D4D3}|..\\ComMaster\\ComMaster.csproj|d:\\github\\h5509_v2\\commaster\\interfaces\\iserialdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{96368B3D-2558-41A4-AE82-520E7349D4D3}|..\\ComMaster\\ComMaster.csproj|d:\\github\\h5509_v2\\commaster\\common\\devicebace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -286,10 +290,6 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{96368B3D-2558-41A4-AE82-520E7349D4D3}|..\\ComMaster\\ComMaster.csproj|d:\\github\\h5509_v2\\commaster\\devices\\ethernetdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_io.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2.csproj|solutionrelative:\u754C\u9762\\\u4E3B\u754C\u9762\\_io.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|SQLiteHelper||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
@@ -384,17 +384,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 0,
               "Title": "Handler.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\Handler.cs",
               "RelativeDocumentMoniker": "\u6A21\u5757\\Handler.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\Handler.cs",
               "RelativeToolTip": "\u6A21\u5757\\Handler.cs",
-              "ViewState": "AgIAAKwQAAAAAAAAAAAlwKEPAAAtAAAAAAAAAA==",
+              "ViewState": "AgIAAFYmAAAAAAAAAADgv3EmAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-12T08:48:09.423Z",
               "IsPinned": true,
@@ -402,7 +402,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 45,
+              "DocumentIndex": 49,
               "Title": "MotionEx.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\MotionEx.cs",
               "RelativeDocumentMoniker": "\u6A21\u5757\\MotionEx.cs",
@@ -415,125 +415,150 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "FrmMain.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\FrmMain.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
               "RelativeToolTip": "\u754C\u9762\\FrmMain.cs",
-              "ViewState": "AgIAAOMCAAAAAAAAAIAxwGYDAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAF0BAAAAAAAAAADwv3cBAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-14T09:54:23.205Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "APPmaster.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\APPmaster.cs",
               "RelativeDocumentMoniker": "\u6A21\u5757\\APPmaster.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\APPmaster.cs",
               "RelativeToolTip": "\u6A21\u5757\\APPmaster.cs",
-              "ViewState": "AgIAAKUAAAAAAAAAAAAiwMgAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAFYLAAAAAAAAAAArwGkLAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-14T09:28:13.519Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 7,
               "Title": "SerialDevice.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Devices\\SerialDevice.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Devices\\SerialDevice.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\ComMaster\\Devices\\SerialDevice.cs",
               "RelativeToolTip": "..\\ComMaster\\Devices\\SerialDevice.cs",
-              "ViewState": "AgIAAIUAAAAAAAAAAAAkwCcBAABbAAAAAAAAAA==",
+              "ViewState": "AgIAACgAAAAAAAAAAAD4vzUAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-03T11:38:47.449Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Document",
-              "DocumentIndex": 65,
+              "DocumentIndex": 8,
               "Title": "ISerialDevice.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Interfaces\\ISerialDevice.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Interfaces\\ISerialDevice.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\ComMaster\\Interfaces\\ISerialDevice.cs",
               "RelativeToolTip": "..\\ComMaster\\Interfaces\\ISerialDevice.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAA8wCQAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAmwCQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-03T11:34:51.864Z",
               "IsPinned": true
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Fix3Map.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix3Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix3Map.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:44:40.892Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
+              "Title": "TestStation.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\TestStation.cs",
+              "RelativeDocumentMoniker": "\u6A21\u5757\\TestStation.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\TestStation.cs",
+              "RelativeToolTip": "\u6A21\u5757\\TestStation.cs",
+              "ViewState": "AgIAADQAAAAAAAAAAADwv5sAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-06T12:02:06.807Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "_main.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_main.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.cs",
               "RelativeToolTip": "\u754C\u9762\\_main.cs",
-              "ViewState": "AgIAAGsLAAAAAAAAAAAlwLgLAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAB0LAAAAAAAAAAAAAB0LAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-15T06:01:28.465Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Auto1Map.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto1Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Auto1Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto1Map.cs",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Auto1Map.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAkwDoAAAANAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "StationManager.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\StationManager.cs",
+              "RelativeDocumentMoniker": "\u6A21\u5757\\StationManager.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\StationManager.cs",
+              "RelativeToolTip": "\u6A21\u5757\\StationManager.cs",
+              "ViewState": "AgIAALUAAAAAAAAAAIA4wMYAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:09:46.283Z",
+              "WhenOpened": "2025-09-06T11:53:50.569Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "_setting.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "ViewState": "AgIAABojAAAAAAAAAAAqwEIjAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-02T02:54:38.469Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Form_alarm.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs [\u8BBE\u8BA1]*",
-              "RelativeToolTip": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs [\u8BBE\u8BA1]*",
+              "DocumentIndex": 12,
+              "Title": "_setting.Designer.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs",
+              "ViewState": "AgIAAAIPAAAAAAAAAAArwA8PAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-15T08:59:36.229Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Form_alarm.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs*",
-              "RelativeToolTip": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs*",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAB0AAABOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-16T00:32:01.313Z",
+              "WhenOpened": "2025-08-21T12:01:21.338Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 13,
+              "Title": "TesterIFParam.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\MotionCommon\\TesterIFParam.cs",
+              "RelativeDocumentMoniker": "..\\MotionCommon\\TesterIFParam.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\MotionCommon\\TesterIFParam.cs",
+              "RelativeToolTip": "..\\MotionCommon\\TesterIFParam.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAF0AAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-17T00:19:10.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_log.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
+              "ViewState": "AgIAAIsCAAAAAAAAAAArwKECAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T02:54:25.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "_main.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\_main.cs",
@@ -545,432 +570,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Sqlite.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\SQLiteHelper\\Sqlite.cs",
-              "RelativeDocumentMoniker": "..\\SQLiteHelper\\Sqlite.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\SQLiteHelper\\Sqlite.cs",
-              "RelativeToolTip": "..\\SQLiteHelper\\Sqlite.cs",
-              "ViewState": "AgIAAIcAAAAAAAAAAIA5wK8AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-30T03:14:10.189Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "_offset.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-05T11:14:22.8Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "_setting.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs [\u8BBE\u8BA1]*",
-              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs [\u8BBE\u8BA1]*",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-18T01:08:10.139Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Defalut2.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
-              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T01:59:57.008Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "FrmMain.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\FrmMain.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T03:47:46.777Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-08-21T03:47:46.777Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "_setting.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs*",
-              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs*",
-              "ViewState": "AgIAAAESAAAAAAAAAAArwBESAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T02:54:38.469Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Fix3Map.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix3Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix3Map.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAkwGMAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:09:29.872Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "Auto2Map.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto2Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Auto2Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto2Map.cs",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Auto2Map.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:09:42.374Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Fix1Map.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix1Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix1Map.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:45:06.778Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Fix1Map.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix1Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix1Map.cs",
-              "ViewState": "AgIAAEMAAAAAAAAAAAAkwF8AAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:09:20.857Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "Fix2Map.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix2Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix2Map.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAkwGIAAABPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:09:14.734Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "Fix2Map.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix2Map.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix2Map.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:09:13.366Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "HeatMap.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\HeatMap.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\HeatMap.cs",
-              "ViewState": "AgIAAF4AAAAAAAAAAAAkwDEAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:09:58.161Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "HeatMap.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\HeatMap.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\HeatMap.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:42:18.665Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 24,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAlwBYAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-26T00:23:09.733Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "Defalut2.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T01:59:03.883Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 25,
-              "Title": "InitPoint.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\MotionCommon\\InitPoint.cs",
-              "RelativeDocumentMoniker": "..\\MotionCommon\\InitPoint.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\MotionCommon\\InitPoint.cs",
-              "RelativeToolTip": "..\\MotionCommon\\InitPoint.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAIAxwFsAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-30T07:47:37.466Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 28,
-              "Title": "StationManager.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\StationManager.cs",
-              "RelativeDocumentMoniker": "\u6A21\u5757\\StationManager.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\StationManager.cs",
-              "RelativeToolTip": "\u6A21\u5757\\StationManager.cs",
-              "ViewState": "AgIAAAQBAAAAAAAAAAAjwDIBAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-06T11:53:50.569Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 27,
-              "Title": "TestStation.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\TestStation.cs",
-              "RelativeDocumentMoniker": "\u6A21\u5757\\TestStation.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\TestStation.cs",
-              "RelativeToolTip": "\u6A21\u5757\\TestStation.cs",
-              "ViewState": "AgIAAEYDAAAAAAAAAAArwG0DAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-06T12:02:06.807Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 29,
-              "Title": "_log.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
-              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
-              "ViewState": "AgIAAGQDAAAAAAAAAAAvwIwDAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T02:54:25.543Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 30,
-              "Title": "SetupInfo.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\MotionCommon\\SetupInfo.cs",
-              "RelativeDocumentMoniker": "..\\MotionCommon\\SetupInfo.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\MotionCommon\\SetupInfo.cs",
-              "RelativeToolTip": "..\\MotionCommon\\SetupInfo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-05T13:54:41.506Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 26,
-              "Title": "_setting.Designer.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs*",
-              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.Designer.cs*",
-              "ViewState": "AgIAABQAAAAAAAAAAAAvwDwAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T12:01:21.338Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 31,
-              "Title": "YieldRateShow.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
-              "RelativeToolTip": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAASwCkAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-24T09:06:29.23Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 32,
-              "Title": "YieldRateShow.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-22T02:50:26.372Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 37,
-              "Title": "Defalut2.Designer.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
-              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAACBjwBYAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T02:20:58.848Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 36,
-              "Title": "Defalut1.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T01:47:54.928Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 35,
-              "Title": "Defalut3.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T01:59:32.469Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 33,
-              "Title": "_main.Designer.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.Designer.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\_main.Designer.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.Designer.cs",
-              "RelativeToolTip": "\u754C\u9762\\_main.Designer.cs",
-              "ViewState": "AgIAADAXAAAAAAAAAADgv1gXAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T11:13:14.665Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 38,
-              "Title": "_offset.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
-              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAvwFkAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T02:25:53.313Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 39,
-              "Title": "NewHeatTrayInfo.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewHeatTrayInfo.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewHeatTrayInfo.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewHeatTrayInfo.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\NewHeatTrayInfo.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:41:04.13Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 40,
-              "Title": "NewSetupName.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewSetupName.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewSetupName.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewSetupName.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\NewSetupName.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T02:30:16.755Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 41,
-              "Title": "NewTrayInfo.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewTrayInfo.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewTrayInfo.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewTrayInfo.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\NewTrayInfo.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:41:47.692Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 42,
-              "Title": "ChangePwd.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:52:17.457Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 43,
-              "Title": "CopySetupName.cs [\u8BBE\u8BA1]",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\CopySetupName.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\CopySetupName.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\CopySetupName.cs [\u8BBE\u8BA1]",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\CopySetupName.cs [\u8BBE\u8BA1]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-23T08:02:54.02Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 44,
+              "DocumentIndex": 15,
               "Title": "LoadMap.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\LoadMap.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\LoadMap.cs",
@@ -981,7 +592,400 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 49,
+              "DocumentIndex": 14,
+              "Title": "LoadMap.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\LoadMap.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\LoadMap.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\LoadMap.cs",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\LoadMap.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAADwv60AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-19T09:04:02.934Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Form_alarm.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "ViewState": "AgIAAJcMAAAAAAAAAADwv7IMAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-16T00:32:01.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Defalut2.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T01:59:03.883Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "_IO.Designer.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
+              "ViewState": "AgIAAC4GAAAAAAAAAAAlwE0GAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-04T06:42:51.942Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Defalut2.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T01:59:57.008Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Sqlite.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\SQLiteHelper\\Sqlite.cs",
+              "RelativeDocumentMoniker": "..\\SQLiteHelper\\Sqlite.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\SQLiteHelper\\Sqlite.cs",
+              "RelativeToolTip": "..\\SQLiteHelper\\Sqlite.cs",
+              "ViewState": "AgIAAHQAAAAAAAAAAAAAAH8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T03:14:10.189Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "_main.Designer.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.Designer.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\_main.Designer.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\_main.Designer.cs",
+              "RelativeToolTip": "\u754C\u9762\\_main.Designer.cs",
+              "ViewState": "AgIAADkXAAAAAAAAAAAlwFgXAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-11T11:13:14.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_setting.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-18T01:08:10.139Z",
+              "EditorCaption": " [\u8BBE\u8BA1]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "_offset.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T11:14:22.8Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Form_alarm.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-15T08:59:36.229Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Auto1Map.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto1Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Auto1Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto1Map.cs",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Auto1Map.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAkwDoAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:09:46.283Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Fix3Map.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix3Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix3Map.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:44:40.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "Fix3Map.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix3Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix3Map.cs",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix3Map.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAkwGMAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:09:29.872Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Auto2Map.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto2Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Auto2Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto2Map.cs",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Auto2Map.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAkwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:09:42.374Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Fix1Map.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix1Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix1Map.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:45:06.778Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "Fix1Map.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix1Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix1Map.cs",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix1Map.cs",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAkwF8AAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:09:20.857Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "Fix2Map.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix2Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix2Map.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAkwGIAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:09:14.734Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Fix2Map.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\Fix2Map.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Fix2Map.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\Fix2Map.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:09:13.366Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "HeatMap.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\HeatMap.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\HeatMap.cs",
+              "ViewState": "AgIAAF4AAAAAAAAAAAAkwDEAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:09:58.161Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "HeatMap.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\HeatMap.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\HeatMap.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\HeatMap.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:42:18.665Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAlwBYAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-26T00:23:09.733Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "InitPoint.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\MotionCommon\\InitPoint.cs",
+              "RelativeDocumentMoniker": "..\\MotionCommon\\InitPoint.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\MotionCommon\\InitPoint.cs",
+              "RelativeToolTip": "..\\MotionCommon\\InitPoint.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAIAxwFsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-30T07:47:37.466Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "SetupInfo.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\MotionCommon\\SetupInfo.cs",
+              "RelativeDocumentMoniker": "..\\MotionCommon\\SetupInfo.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\MotionCommon\\SetupInfo.cs",
+              "RelativeToolTip": "..\\MotionCommon\\SetupInfo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-05T13:54:41.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "YieldRateShow.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAASwCkAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-24T09:06:29.23Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "YieldRateShow.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u5176\u4ED6\\YieldRateShow.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-22T02:50:26.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Defalut2.Designer.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut2.Designer.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAABRwBYAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T02:20:58.848Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Defalut1.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T01:47:54.928Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "Defalut3.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-27T01:59:32.469Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "_offset.cs",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAvwFkAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T02:25:53.313Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "NewHeatTrayInfo.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewHeatTrayInfo.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewHeatTrayInfo.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewHeatTrayInfo.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\NewHeatTrayInfo.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:41:04.13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "NewSetupName.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewSetupName.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewSetupName.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewSetupName.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\NewSetupName.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-12T02:30:16.755Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "NewTrayInfo.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewTrayInfo.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewTrayInfo.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewTrayInfo.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\NewTrayInfo.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:41:47.692Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "ChangePwd.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T02:52:17.457Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "CopySetupName.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\CopySetupName.cs",
+              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\CopySetupName.cs",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\CopySetupName.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "\u754C\u9762\\Tray\\CopySetupName.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-23T08:02:54.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
               "Title": "NewComName.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewComName.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewComName.cs",
@@ -992,7 +996,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 46,
+              "DocumentIndex": 50,
               "Title": "H5509_V2",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\H5509_V2.csproj",
               "RelativeDocumentMoniker": "H5509_V2.csproj",
@@ -1003,7 +1007,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 47,
+              "DocumentIndex": 51,
               "Title": "_IO.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs",
@@ -1014,7 +1018,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 48,
+              "DocumentIndex": 52,
               "Title": "_IO.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs",
@@ -1026,7 +1030,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 51,
+              "DocumentIndex": 55,
               "Title": "NewComName.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewComName.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewComName.cs",
@@ -1038,7 +1042,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 52,
+              "DocumentIndex": 56,
               "Title": "NewHeatTrayInfo.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewHeatTrayInfo.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewHeatTrayInfo.cs",
@@ -1050,7 +1054,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 50,
+              "DocumentIndex": 54,
               "Title": "NewSetupName.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\NewSetupName.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\NewSetupName.cs",
@@ -1062,20 +1066,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 53,
+              "DocumentIndex": 57,
               "Title": "Form_alarm.Designer.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.Designer.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.Designer.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.Designer.cs*",
-              "RelativeToolTip": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.Designer.cs*",
+              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.Designer.cs",
+              "RelativeToolTip": "\u754C\u9762\\\u62A5\u8B66\\Form_alarm.Designer.cs",
               "ViewState": "AgIAAEQBAAAAAAAAAADgv1wBAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T07:36:54.184Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-27T07:36:54.184Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 55,
+              "DocumentIndex": 58,
               "Title": "_speed.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs",
@@ -1086,19 +1089,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 54,
-              "Title": "TesterIFParam.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\MotionCommon\\TesterIFParam.cs",
-              "RelativeDocumentMoniker": "..\\MotionCommon\\TesterIFParam.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\MotionCommon\\TesterIFParam.cs",
-              "RelativeToolTip": "..\\MotionCommon\\TesterIFParam.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBEAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-17T00:19:10.356Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 56,
+              "DocumentIndex": 59,
               "Title": "Defalut3.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs",
@@ -1106,12 +1097,11 @@
               "RelativeToolTip": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut3.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-27T02:00:04.032Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-27T02:00:04.032Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 57,
+              "DocumentIndex": 60,
               "Title": "FrmInputPwd.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\FrmInputPwd.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\FrmInputPwd.cs",
@@ -1128,13 +1118,12 @@
               "RelativeDocumentMoniker": "\u6A21\u5757\\Communication.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u6A21\u5757\\Communication.cs",
               "RelativeToolTip": "\u6A21\u5757\\Communication.cs",
-              "ViewState": "AgIAALEAAAAAAAAAAAAIwLkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-14T09:57:52.485Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 58,
+              "DocumentIndex": 61,
               "Title": "Defalut1.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u81EA\u5B9A\u4E49\u754C\u9762\\Defalut1.cs",
@@ -1146,7 +1135,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 59,
+              "DocumentIndex": 62,
               "Title": "ComInfoSet.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\MotionCommon\\ComInfoSet.cs",
               "RelativeDocumentMoniker": "..\\MotionCommon\\ComInfoSet.cs",
@@ -1158,7 +1147,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 62,
+              "DocumentIndex": 64,
               "Title": "GENAxisController.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HardwareGXN\\GENAxisCard\\GENAxisController.cs",
               "RelativeDocumentMoniker": "..\\HardwareGXN\\GENAxisCard\\GENAxisController.cs",
@@ -1170,19 +1159,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 60,
-              "Title": "LoadMap.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\LoadMap.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\Tray\\LoadMap.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\LoadMap.cs",
-              "RelativeToolTip": "\u754C\u9762\\Tray\\LoadMap.cs",
-              "ViewState": "AgIAALUAAAAAAAAAAAAhwNMAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-19T09:04:02.934Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 63,
+              "DocumentIndex": 65,
               "Title": "AbstractGXN.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\IHardwareGXN\\GXNCard\\AbstractGXN.cs",
               "RelativeDocumentMoniker": "..\\IHardwareGXN\\GXNCard\\AbstractGXN.cs",
@@ -1194,7 +1171,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 61,
+              "DocumentIndex": 63,
               "Title": "GSNAxisController.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\HardwareGXN\\GSNAxisCard\\GSNAxisController.cs",
               "RelativeDocumentMoniker": "..\\HardwareGXN\\GSNAxisCard\\GSNAxisController.cs",
@@ -1206,7 +1183,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 64,
+              "DocumentIndex": 66,
               "Title": "IGXNInterface.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\IHardwareGXN\\GXNCard\\IGXNInterface.cs",
               "RelativeDocumentMoniker": "..\\IHardwareGXN\\GXNCard\\IGXNInterface.cs",
@@ -1218,7 +1195,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 66,
+              "DocumentIndex": 67,
               "Title": "DeviceBace.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Common\\DeviceBace.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Common\\DeviceBace.cs",
@@ -1230,7 +1207,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 67,
+              "DocumentIndex": 68,
               "Title": "ICommunicationDevice.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Interfaces\\ICommunicationDevice.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Interfaces\\ICommunicationDevice.cs",
@@ -1242,7 +1219,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 70,
+              "DocumentIndex": 71,
               "Title": "WriteDataHelper.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\TextFileLogger\\WriteDataHelper.cs",
               "RelativeDocumentMoniker": "..\\TextFileLogger\\WriteDataHelper.cs",
@@ -1254,7 +1231,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 69,
+              "DocumentIndex": 70,
               "Title": "UIProgressIndicatorEx.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\UIProgressIndicatorEx.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\UIProgressIndicatorEx.cs",
@@ -1265,19 +1242,18 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 72,
+              "DocumentIndex": 73,
               "Title": "_log.cs [\u8BBE\u8BA1]",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-21T13:49:58.856Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-08-21T13:49:58.856Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 68,
+              "DocumentIndex": 69,
               "Title": "IOButton.Designer.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\IOButton.Designer.cs",
               "RelativeDocumentMoniker": "\u754C\u9762\\\u5176\u4ED6\\IOButton.Designer.cs",
@@ -1289,7 +1265,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 71,
+              "DocumentIndex": 72,
               "Title": "CommunicationManager.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Commnunication\\CommunicationManager.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Commnunication\\CommunicationManager.cs",
@@ -1301,7 +1277,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 74,
+              "DocumentIndex": 75,
               "Title": "ModbusDevice.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Devices\\ModbusDevice.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Devices\\ModbusDevice.cs",
@@ -1313,7 +1289,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 75,
+              "DocumentIndex": 76,
               "Title": "EthernetDevice.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Devices\\EthernetDevice.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Devices\\EthernetDevice.cs",
@@ -1325,7 +1301,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 73,
+              "DocumentIndex": 74,
               "Title": "GpibDevice.cs",
               "DocumentMoniker": "D:\\GitHub\\H5509_V2\\ComMaster\\Devices\\GpibDevice.cs",
               "RelativeDocumentMoniker": "..\\ComMaster\\Devices\\GpibDevice.cs",
@@ -1334,18 +1310,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-09-03T11:39:11.047Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 76,
-              "Title": "_IO.Designer.cs",
-              "DocumentMoniker": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
-              "RelativeDocumentMoniker": "\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
-              "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
-              "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.Designer.cs",
-              "ViewState": "AgIAAIEgAAAAAAAAAAAiwKEgAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-04T06:42:51.942Z"
             },
             {
               "$type": "Document",
@@ -1414,8 +1378,7 @@
               "RelativeToolTip": "\u754C\u9762\\\u4E3B\u754C\u9762\\_log.Designer.cs",
               "ViewState": "AgIAABMAAAAAAAAAAABRwBYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T00:39:20.954Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-22T00:39:20.954Z"
             },
             {
               "$type": "Document",
@@ -1629,8 +1592,7 @@
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto1Map.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "\u754C\u9762\\Tray\\Auto1Map.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:45:21.039Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-08-22T02:45:21.039Z"
             },
             {
               "$type": "Document",
@@ -1641,8 +1603,7 @@
               "ToolTip": "D:\\GitHub\\H5509_V2\\H5509_V2\\\u754C\u9762\\Tray\\Auto2Map.cs [\u8BBE\u8BA1]",
               "RelativeToolTip": "\u754C\u9762\\Tray\\Auto2Map.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T02:45:14.551Z",
-              "EditorCaption": " [\u8BBE\u8BA1]"
+              "WhenOpened": "2025-08-22T02:45:14.551Z"
             }
           ]
         }

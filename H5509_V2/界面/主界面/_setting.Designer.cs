@@ -55,6 +55,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.uiTabControl6 = new Sunny.UI.UITabControl();
             this.tabPage25 = new System.Windows.Forms.TabPage();
+            this.numericUpDown198 = new System.Windows.Forms.NumericUpDown();
+            this.label698 = new System.Windows.Forms.Label();
             this.uiCheckBox193 = new Sunny.UI.UICheckBox();
             this.uiCheckBox192 = new Sunny.UI.UICheckBox();
             this.uiTextBox1 = new Sunny.UI.UITextBox();
@@ -130,7 +132,6 @@
             this.checkBox_timeout = new Sunny.UI.UICheckBox();
             this.label419 = new System.Windows.Forms.Label();
             this.label422 = new System.Windows.Forms.Label();
-            this.label420 = new System.Windows.Forms.Label();
             this.numericUpDown_测试超时时间 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown_timeout超时时间 = new System.Windows.Forms.NumericUpDown();
             this.label421 = new System.Windows.Forms.Label();
@@ -2131,8 +2132,7 @@
             this.uiRadioButton1 = new Sunny.UI.UIRadioButton();
             this.panel18 = new System.Windows.Forms.Panel();
             this.uiRadioButton2 = new Sunny.UI.UIRadioButton();
-            this.label698 = new System.Windows.Forms.Label();
-            this.numericUpDown198 = new System.Windows.Forms.NumericUpDown();
+            this.label420 = new System.Windows.Forms.Label();
             this.defalut32 = new H5509_V2.Defalut3();
             this.defalut11 = new H5509_V2.Defalut1();
             this.defalut21 = new H5509_V2.Defalut2();
@@ -2142,6 +2142,7 @@
             this.panel2.SuspendLayout();
             this.uiTabControl6.SuspendLayout();
             this.tabPage25.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown198)).BeginInit();
             this.tabPage27.SuspendLayout();
             this.uiTitlePanel28.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown160)).BeginInit();
@@ -2648,7 +2649,6 @@
             this.panel20.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel18.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown198)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPage6
@@ -2762,6 +2762,41 @@
             this.tabPage25.Size = new System.Drawing.Size(1337, 802);
             this.tabPage25.TabIndex = 2;
             this.tabPage25.Text = "设定";
+            // 
+            // numericUpDown198
+            // 
+            this.numericUpDown198.Location = new System.Drawing.Point(216, 198);
+            this.numericUpDown198.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.numericUpDown198.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown198.Name = "numericUpDown198";
+            this.numericUpDown198.Size = new System.Drawing.Size(151, 29);
+            this.numericUpDown198.TabIndex = 381;
+            this.numericUpDown198.Tag = "@02@#BCD#";
+            this.numericUpDown198.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDown198.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label698
+            // 
+            this.label698.AutoSize = true;
+            this.label698.Location = new System.Drawing.Point(35, 200);
+            this.label698.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label698.Name = "label698";
+            this.label698.Size = new System.Drawing.Size(159, 21);
+            this.label698.TabIndex = 357;
+            this.label698.Tag = "";
+            this.label698.Text = "Auto仓提示换盘数量";
             // 
             // uiCheckBox193
             // 
@@ -3765,12 +3800,12 @@
             // 
             // uiTitlePanel16
             // 
+            this.uiTitlePanel16.Controls.Add(this.label420);
             this.uiTitlePanel16.Controls.Add(this.checkBox13);
             this.uiTitlePanel16.Controls.Add(this.checkBox14);
             this.uiTitlePanel16.Controls.Add(this.checkBox_timeout);
             this.uiTitlePanel16.Controls.Add(this.label419);
             this.uiTitlePanel16.Controls.Add(this.label422);
-            this.uiTitlePanel16.Controls.Add(this.label420);
             this.uiTitlePanel16.Controls.Add(this.numericUpDown_测试超时时间);
             this.uiTitlePanel16.Controls.Add(this.numericUpDown_timeout超时时间);
             this.uiTitlePanel16.Controls.Add(this.label421);
@@ -3795,13 +3830,13 @@
             this.checkBox13.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBox13.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.checkBox13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.checkBox13.Location = new System.Drawing.Point(258, 51);
+            this.checkBox13.Location = new System.Drawing.Point(27, 86);
             this.checkBox13.MinimumSize = new System.Drawing.Size(1, 1);
             this.checkBox13.Name = "checkBox13";
-            this.checkBox13.Size = new System.Drawing.Size(129, 26);
+            this.checkBox13.Size = new System.Drawing.Size(305, 26);
             this.checkBox13.TabIndex = 360;
             this.checkBox13.Tag = "@02@#BCD#";
-            this.checkBox13.Text = "自动关闭Dut";
+            this.checkBox13.Text = "测试最大等待时间超时后自动关闭Dut";
             // 
             // checkBox14
             // 
@@ -3812,7 +3847,7 @@
             this.checkBox14.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBox14.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.checkBox14.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.checkBox14.Location = new System.Drawing.Point(31, 154);
+            this.checkBox14.Location = new System.Drawing.Point(27, 117);
             this.checkBox14.MinimumSize = new System.Drawing.Size(1, 1);
             this.checkBox14.Name = "checkBox14";
             this.checkBox14.Size = new System.Drawing.Size(233, 26);
@@ -3829,44 +3864,37 @@
             this.checkBox_timeout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBox_timeout.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.checkBox_timeout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.checkBox_timeout.Location = new System.Drawing.Point(31, 86);
+            this.checkBox_timeout.Location = new System.Drawing.Point(27, 155);
             this.checkBox_timeout.MinimumSize = new System.Drawing.Size(1, 1);
             this.checkBox_timeout.Name = "checkBox_timeout";
             this.checkBox_timeout.Size = new System.Drawing.Size(241, 26);
             this.checkBox_timeout.TabIndex = 360;
             this.checkBox_timeout.Tag = "@02@#BCD#";
             this.checkBox_timeout.Text = "超时后发送timeout给测试机";
+            this.checkBox_timeout.Visible = false;
             // 
             // label419
             // 
             this.label419.AutoSize = true;
-            this.label419.Location = new System.Drawing.Point(258, 122);
+            this.label419.Location = new System.Drawing.Point(476, 159);
             this.label419.Name = "label419";
             this.label419.Size = new System.Drawing.Size(26, 21);
             this.label419.TabIndex = 23;
             this.label419.Text = "秒";
+            this.label419.Visible = false;
             // 
             // label422
             // 
             this.label422.AutoSize = true;
             this.label422.Location = new System.Drawing.Point(27, 54);
             this.label422.Name = "label422";
-            this.label422.Size = new System.Drawing.Size(74, 21);
+            this.label422.Size = new System.Drawing.Size(138, 21);
             this.label422.TabIndex = 6;
-            this.label422.Text = "测试超时";
-            // 
-            // label420
-            // 
-            this.label420.AutoSize = true;
-            this.label420.Location = new System.Drawing.Point(202, 54);
-            this.label420.Name = "label420";
-            this.label420.Size = new System.Drawing.Size(56, 21);
-            this.label420.TabIndex = 22;
-            this.label420.Text = "秒后 , ";
+            this.label422.Text = "测试最大等待时间";
             // 
             // numericUpDown_测试超时时间
             // 
-            this.numericUpDown_测试超时时间.Location = new System.Drawing.Point(107, 50);
+            this.numericUpDown_测试超时时间.Location = new System.Drawing.Point(165, 50);
             this.numericUpDown_测试超时时间.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -3890,7 +3918,7 @@
             // 
             // numericUpDown_timeout超时时间
             // 
-            this.numericUpDown_timeout超时时间.Location = new System.Drawing.Point(163, 118);
+            this.numericUpDown_timeout超时时间.Location = new System.Drawing.Point(298, 152);
             this.numericUpDown_timeout超时时间.Minimum = new decimal(new int[] {
             1,
             0,
@@ -3906,15 +3934,17 @@
             0,
             0,
             0});
+            this.numericUpDown_timeout超时时间.Visible = false;
             // 
             // label421
             // 
             this.label421.AutoSize = true;
-            this.label421.Location = new System.Drawing.Point(27, 122);
+            this.label421.Location = new System.Drawing.Point(280, 128);
             this.label421.Name = "label421";
             this.label421.Size = new System.Drawing.Size(134, 21);
             this.label421.TabIndex = 20;
             this.label421.Text = "timeout超时时间";
+            this.label421.Visible = false;
             // 
             // uiTitlePanel15
             // 
@@ -4201,7 +4231,7 @@
             this.checkBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBox1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.checkBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.checkBox1.Location = new System.Drawing.Point(28, 110);
+            this.checkBox1.Location = new System.Drawing.Point(25, 78);
             this.checkBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(283, 26);
@@ -4218,13 +4248,14 @@
             this.checkBox2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.checkBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.checkBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
-            this.checkBox2.Location = new System.Drawing.Point(28, 78);
+            this.checkBox2.Location = new System.Drawing.Point(188, 110);
             this.checkBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(193, 26);
             this.checkBox2.TabIndex = 356;
-            this.checkBox2.Tag = "@02@#BCD#";
+            this.checkBox2.Tag = "";
             this.checkBox2.Text = "Dut连续不良报警使能";
+            this.checkBox2.Visible = false;
             // 
             // label433
             // 
@@ -5983,7 +6014,7 @@
             this.tabPage34.Controls.Add(this.uiTitlePanel18);
             this.tabPage34.Location = new System.Drawing.Point(0, 40);
             this.tabPage34.Name = "tabPage34";
-            this.tabPage34.Size = new System.Drawing.Size(1337, 762);
+            this.tabPage34.Size = new System.Drawing.Size(200, 20);
             this.tabPage34.TabIndex = 4;
             this.tabPage34.Text = "出料手臂";
             // 
@@ -6930,7 +6961,7 @@
             this.tabPage35.Controls.Add(this.uiTitlePanel19);
             this.tabPage35.Location = new System.Drawing.Point(0, 40);
             this.tabPage35.Name = "tabPage35";
-            this.tabPage35.Size = new System.Drawing.Size(1337, 762);
+            this.tabPage35.Size = new System.Drawing.Size(200, 20);
             this.tabPage35.TabIndex = 5;
             this.tabPage35.Text = "测试手臂";
             // 
@@ -9258,7 +9289,7 @@
             this.tabPage36.Controls.Add(this.uiTitlePanel20);
             this.tabPage36.Location = new System.Drawing.Point(0, 40);
             this.tabPage36.Name = "tabPage36";
-            this.tabPage36.Size = new System.Drawing.Size(1337, 762);
+            this.tabPage36.Size = new System.Drawing.Size(200, 20);
             this.tabPage36.TabIndex = 3;
             this.tabPage36.Text = "梭车";
             // 
@@ -9346,7 +9377,7 @@
             this.tabPage37.Controls.Add(this.uiTitlePanel21);
             this.tabPage37.Location = new System.Drawing.Point(0, 40);
             this.tabPage37.Name = "tabPage37";
-            this.tabPage37.Size = new System.Drawing.Size(1337, 762);
+            this.tabPage37.Size = new System.Drawing.Size(200, 20);
             this.tabPage37.TabIndex = 6;
             this.tabPage37.Text = "抓盘手臂";
             // 
@@ -10024,7 +10055,7 @@
             this.tabPage33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage33.Location = new System.Drawing.Point(0, 40);
             this.tabPage33.Name = "tabPage33";
-            this.tabPage33.Size = new System.Drawing.Size(1337, 802);
+            this.tabPage33.Size = new System.Drawing.Size(0, 0);
             this.tabPage33.TabIndex = 4;
             this.tabPage33.Text = "取放设定";
             // 
@@ -10620,7 +10651,7 @@
             this.tabPage40.Controls.Add(this.label580);
             this.tabPage40.Location = new System.Drawing.Point(0, 40);
             this.tabPage40.Name = "tabPage40";
-            this.tabPage40.Size = new System.Drawing.Size(1337, 802);
+            this.tabPage40.Size = new System.Drawing.Size(0, 0);
             this.tabPage40.TabIndex = 4;
             this.tabPage40.Text = "温度设定";
             // 
@@ -13328,7 +13359,7 @@
             this.tabPage41.Controls.Add(this.label791);
             this.tabPage41.Location = new System.Drawing.Point(0, 40);
             this.tabPage41.Name = "tabPage41";
-            this.tabPage41.Size = new System.Drawing.Size(1337, 802);
+            this.tabPage41.Size = new System.Drawing.Size(0, 0);
             this.tabPage41.TabIndex = 4;
             this.tabPage41.Text = "通讯设置";
             // 
@@ -17216,7 +17247,7 @@
             this.tabPage11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage11.Location = new System.Drawing.Point(0, 40);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage11.Size = new System.Drawing.Size(200, 20);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Tag = "@02@#0D#";
             this.tabPage11.Text = "流程调试";
@@ -18033,7 +18064,7 @@
             this.uiTabControl4.Name = "uiTabControl4";
             this.uiTabControl4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl4.SelectedIndex = 0;
-            this.uiTabControl4.Size = new System.Drawing.Size(760, 904);
+            this.uiTabControl4.Size = new System.Drawing.Size(760, 20);
             this.uiTabControl4.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl4.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl4.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -18052,7 +18083,7 @@
             this.tabPage13.Controls.Add(this.groupBox3);
             this.tabPage13.Location = new System.Drawing.Point(0, 40);
             this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Size = new System.Drawing.Size(760, 864);
+            this.tabPage13.Size = new System.Drawing.Size(760, 0);
             this.tabPage13.TabIndex = 0;
             this.tabPage13.Text = "入料流程";
             // 
@@ -19348,7 +19379,7 @@
             this.tabPage14.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage14.Location = new System.Drawing.Point(0, 40);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(760, 864);
+            this.tabPage14.Size = new System.Drawing.Size(760, 20);
             this.tabPage14.TabIndex = 1;
             this.tabPage14.Text = "出料流程";
             // 
@@ -20941,7 +20972,7 @@
             this.tabPage15.Controls.Add(this.groupBox16);
             this.tabPage15.Location = new System.Drawing.Point(0, 40);
             this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Size = new System.Drawing.Size(760, 864);
+            this.tabPage15.Size = new System.Drawing.Size(760, 20);
             this.tabPage15.TabIndex = 2;
             this.tabPage15.Text = "测试入料流程";
             // 
@@ -22477,7 +22508,7 @@
             this.tabPage18.Controls.Add(this.groupBox19);
             this.tabPage18.Location = new System.Drawing.Point(0, 40);
             this.tabPage18.Name = "tabPage18";
-            this.tabPage18.Size = new System.Drawing.Size(760, 864);
+            this.tabPage18.Size = new System.Drawing.Size(760, 20);
             this.tabPage18.TabIndex = 3;
             this.tabPage18.Text = "测试出料流程";
             // 
@@ -24369,7 +24400,7 @@
             this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage3.Size = new System.Drawing.Size(200, 20);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "初始点位";
             // 
@@ -24391,7 +24422,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(1893, 904);
+            this.uiTabControl2.Size = new System.Drawing.Size(200, 20);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -24415,7 +24446,7 @@
             this.tabPage7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage7.Location = new System.Drawing.Point(0, 40);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(1893, 864);
+            this.tabPage7.Size = new System.Drawing.Size(200, 0);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Tag = "";
             this.tabPage7.Text = "入料手臂";
@@ -26354,7 +26385,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(1893, 864);
+            this.tabPage8.Size = new System.Drawing.Size(200, 20);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Tag = "";
             this.tabPage8.Text = "出料手臂";
@@ -28696,7 +28727,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(1893, 864);
+            this.tabPage9.Size = new System.Drawing.Size(200, 20);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Tag = "";
             this.tabPage9.Text = "测试手臂";
@@ -29942,7 +29973,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(1893, 864);
+            this.tabPage16.Size = new System.Drawing.Size(200, 20);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Tag = "";
             this.tabPage16.Text = "梭车";
@@ -30289,7 +30320,7 @@
             this.tabPage17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(1893, 864);
+            this.tabPage17.Size = new System.Drawing.Size(200, 20);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
             // 
@@ -30734,7 +30765,7 @@
             this.tabPage4.Controls.Add(this.uiTitlePanel26);
             this.tabPage4.Location = new System.Drawing.Point(0, 40);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(1893, 864);
+            this.tabPage4.Size = new System.Drawing.Size(200, 20);
             this.tabPage4.TabIndex = 5;
             this.tabPage4.Text = "顶盘手臂";
             // 
@@ -32768,40 +32799,14 @@
             this.uiRadioButton2.Text = "自定义1";
             this.uiRadioButton2.Click += new System.EventHandler(this.uiRadioButton2_Click);
             // 
-            // label698
+            // label420
             // 
-            this.label698.AutoSize = true;
-            this.label698.Location = new System.Drawing.Point(35, 200);
-            this.label698.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label698.Name = "label698";
-            this.label698.Size = new System.Drawing.Size(159, 21);
-            this.label698.TabIndex = 357;
-            this.label698.Tag = "";
-            this.label698.Text = "Auto仓提示换盘数量";
-            // 
-            // numericUpDown198
-            // 
-            this.numericUpDown198.Location = new System.Drawing.Point(216, 198);
-            this.numericUpDown198.Maximum = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            this.numericUpDown198.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown198.Name = "numericUpDown198";
-            this.numericUpDown198.Size = new System.Drawing.Size(151, 29);
-            this.numericUpDown198.TabIndex = 381;
-            this.numericUpDown198.Tag = "@02@#BCD#";
-            this.numericUpDown198.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDown198.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.label420.AutoSize = true;
+            this.label420.Location = new System.Drawing.Point(260, 54);
+            this.label420.Name = "label420";
+            this.label420.Size = new System.Drawing.Size(26, 21);
+            this.label420.TabIndex = 360;
+            this.label420.Text = "秒";
             // 
             // defalut32
             // 
@@ -32847,6 +32852,7 @@
             this.uiTabControl6.ResumeLayout(false);
             this.tabPage25.ResumeLayout(false);
             this.tabPage25.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown198)).EndInit();
             this.tabPage27.ResumeLayout(false);
             this.uiTitlePanel28.ResumeLayout(false);
             this.uiTitlePanel28.PerformLayout();
@@ -33425,7 +33431,6 @@
             this.panel20.ResumeLayout(false);
             this.panel19.ResumeLayout(false);
             this.panel18.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown198)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -33478,7 +33483,6 @@
         private Sunny.UI.UITitlePanel uiTitlePanel16;
         private System.Windows.Forms.Label label419;
         private System.Windows.Forms.Label label422;
-        private System.Windows.Forms.Label label420;
         private System.Windows.Forms.NumericUpDown numericUpDown_测试超时时间;
         private System.Windows.Forms.NumericUpDown numericUpDown_timeout超时时间;
         private System.Windows.Forms.Label label421;
@@ -35519,5 +35523,6 @@
         private Sunny.UI.UIButton uiButton42;
         public System.Windows.Forms.Label label698;
         private System.Windows.Forms.NumericUpDown numericUpDown198;
+        private System.Windows.Forms.Label label420;
     }
 }

@@ -36,4 +36,4 @@ D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.csproj.GenerateResource.cac
 D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.dll
 D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.pdb
-D:\github\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.csproj.CopyComplete
+D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\Hardware.9378FFA3.Up2Date

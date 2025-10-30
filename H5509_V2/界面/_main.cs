@@ -1028,7 +1028,7 @@ namespace H5509_V2
                                     {
                                         Listcode.Add($"5{cloum * 4 + dut + 43}0500");
                                     }
-                                    else MessageBox.Show($"后梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    //else MessageBox.Show($"后梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     RunLog($"后梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出");
                                 }
                                 if (飞梭前入料IC[cloum][dut] || 正在放置前入料[cloum][dut]) //入料4个吸嘴
@@ -1037,7 +1037,7 @@ namespace H5509_V2
                                     {
                                         Listcode.Add($"5{cloum * 4 + dut + 51}0500");
                                     }
-                                    else MessageBox.Show($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    //else MessageBox.Show($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     RunLog($"前梭车入料:所有site的Dut{cloum * 4 + dut + 1}全部被关闭，IC无法被取出{(正在放置前入料[cloum][dut] ? "(入料吸嘴上)" : "")}");
                                 }
                             }
@@ -2842,6 +2842,9 @@ namespace H5509_V2
 
         private void label147_Click(object sender, EventArgs e)
         {
+            //Task.Run(() => { 
+            //handler.HandlerDebug();
+            //});
             //Listcode.Add("11111");
             //Auto1Tray盘数量++;
             //double prfpos = 100;

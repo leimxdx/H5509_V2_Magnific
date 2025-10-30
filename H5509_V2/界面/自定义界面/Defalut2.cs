@@ -39,10 +39,13 @@ namespace H5509_V2
             textBox2.Text = 总良率报警百分比.ToString();
 
             textBox4.Text = testnum.ToString();
-            textBox5.Text = inputnum.ToString();
+            textBox5.Text = "0";// inputnum.ToString();
             textBox6.Text = outputnum.ToString();
 
-            textBox3.Text = $"{testnum + inputnum + outputnum}/{totalnum}";
+            //textBox3.Text = $"{testnum + inputnum + outputnum}/{totalnum}";
+
+            textBox3.Text = $"{testnum + 0 + outputnum}/{totalnum}";
+
             //uiCheckBox192.Checked = Dut连续不良报警使能;
             //uiCheckBox1.Checked = 总良率报警使能;
         }
