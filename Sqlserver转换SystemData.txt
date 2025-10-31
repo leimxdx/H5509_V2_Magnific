@@ -1,0 +1,438 @@
+-- AxisHomeInfo表
+CREATE TABLE AxisHomeInfo (
+    轴名称 NVARCHAR(50),
+    模式 NVARCHAR(50) DEFAULT '11',
+    回零启动方向 NVARCHAR(50) DEFAULT '-1',  -- 修正了空格问题
+    Index搜索方向 NVARCHAR(50) DEFAULT '-1',
+    捕获触发沿 NVARCHAR(50) DEFAULT '1',
+    捕获触发器 NVARCHAR(50) DEFAULT '-1',
+    搜索速度 NVARCHAR(50) DEFAULT '10',
+    搜索Index速度 NVARCHAR(50) DEFAULT '5',
+    定位速度 NVARCHAR(50) DEFAULT '5',
+    加速度 NVARCHAR(50) DEFAULT '10',
+    减速度 NVARCHAR(50) DEFAULT '10',
+    平滑时间 NVARCHAR(50) DEFAULT '0',
+    零点偏置 NVARCHAR(50) DEFAULT '0',
+    Home最大搜索距离 NVARCHAR(50) DEFAULT '0',
+    Index最大搜索距离 NVARCHAR(50) DEFAULT '0',
+    反向脱离步长 NVARCHAR(50) DEFAULT '1000',
+    使能后回零延时 NVARCHAR(50) DEFAULT '500',
+    回零后检测原点信号 NVARCHAR(50) DEFAULT 'False'  -- 布尔值用字符串表示
+);
+
+-- AxisInfo表
+CREATE TABLE AxisInfo (
+    轴名称 NVARCHAR(50),
+    核号 NVARCHAR(50),
+    轴号 NVARCHAR(50)
+);
+
+-- AxisRunInfo表
+CREATE TABLE AxisRunInfo (
+    轴名称 NVARCHAR(50),
+    最大速度 NVARCHAR(50) DEFAULT '10',
+    加速度 NVARCHAR(50) DEFAULT '0.5',
+    减速度 NVARCHAR(50) DEFAULT '0.5',
+    步长mm NVARCHAR(50) DEFAULT '0.001',
+    速度百分比 NVARCHAR(50) DEFAULT '10',
+    平滑时间 NVARCHAR(50) DEFAULT '0',
+    停止类型 NVARCHAR(50) DEFAULT '0',
+    跟随误差 NVARCHAR(50) DEFAULT '500',
+    跟随误差检测 NVARCHAR(50) DEFAULT 'True',  -- 布尔值用字符串表示
+    轴二段速方式 NVARCHAR(50) DEFAULT '0',
+    二段速启动时减速速度 NVARCHAR(50) DEFAULT '0.1',
+    二段速启动时减速距离 NVARCHAR(50) DEFAULT '1000',
+    二段速结束时减速速度 NVARCHAR(50) DEFAULT '0.1',
+    二段速结束时减速距离 NVARCHAR(50) DEFAULT '1000',
+    轴停后等待超时时间 NVARCHAR(50) DEFAULT '2000'
+);
+
+-- BinParam表
+CREATE TABLE BinParam (
+    分BIN名称 NVARCHAR(50),
+    auto1 NVARCHAR(50) DEFAULT '11',
+    auto2 NVARCHAR(50) DEFAULT '22',
+    fix1 NVARCHAR(50) DEFAULT '1',
+    fix2 NVARCHAR(50) DEFAULT '1',
+    fix3 NVARCHAR(50) DEFAULT '1',
+    fix1num NVARCHAR(50) DEFAULT '1',
+    fix2num NVARCHAR(50) DEFAULT '1',
+    fix3num NVARCHAR(50) DEFAULT '1',
+    color1 NVARCHAR(50) DEFAULT '-16711936',  -- 修正了空格问题
+    color2 NVARCHAR(50) DEFAULT '-128',
+    color3 NVARCHAR(50) DEFAULT '-14998306',
+    color4 NVARCHAR(50) DEFAULT '-65536',
+    color5 NVARCHAR(50) DEFAULT '-65536',
+    name1 NVARCHAR(50) DEFAULT 'BIN1',  -- 添加单引号
+    name2 NVARCHAR(50) DEFAULT 'BIN2',
+    name3 NVARCHAR(50) DEFAULT 'BIN3',
+    name4 NVARCHAR(50) DEFAULT 'BIN4',
+    name5 NVARCHAR(50) DEFAULT 'BIN5'
+);
+
+-- ComInfoSet表
+CREATE TABLE ComInfoSet (
+    通讯名称 NVARCHAR(50),
+    客户 NVARCHAR(50) DEFAULT '默认',  -- 添加单引号
+    通讯协议 NVARCHAR(50),
+    通讯方式 NVARCHAR(50),
+    测试机数量 NVARCHAR(50),
+    同时测试 NVARCHAR(50),
+    测试结果中有对应Site NVARCHAR(50),
+    超时Bin字符串 NVARCHAR(50),
+    发送开批信息 NVARCHAR(50) DEFAULT 'true',  -- 布尔值用字符串表示
+    Site1 NVARCHAR(50),
+    Site2 NVARCHAR(50),
+    Site3 NVARCHAR(50),
+    Site4 NVARCHAR(50),
+    Site5 NVARCHAR(50),
+    Site6 NVARCHAR(50),
+    Site7 NVARCHAR(50),
+    Site8 NVARCHAR(50),
+    Site9 NVARCHAR(50),
+    Site10 NVARCHAR(50),
+    Site11 NVARCHAR(50),
+    Site12 NVARCHAR(50),
+    Site13 NVARCHAR(50),
+    Site14 NVARCHAR(50),
+    Site15 NVARCHAR(50),
+    Site16 NVARCHAR(50)
+);
+
+-- ComSet表
+CREATE TABLE ComSet (
+    协议名称 NVARCHAR(50),
+    同时测试Site数量 NVARCHAR(50),
+    超时Bin字符串 NVARCHAR(50),
+    发送开批信息 NVARCHAR(50),
+    测试机结果中有对应Site NVARCHAR(50)
+);
+
+-- config表
+CREATE TABLE config (
+    name NVARCHAR(50),
+    value NVARCHAR(50)
+);
+
+-- ControlPerm表
+CREATE TABLE ControlPerm (
+    控件名 NVARCHAR(50),
+    中文名 NVARCHAR(50),
+    权限 NVARCHAR(50) DEFAULT 'Operator',  -- 添加单引号
+    状态 NVARCHAR(50) DEFAULT '0',
+    显示 NVARCHAR(50) DEFAULT '0'
+);
+
+-- HeatInfo表
+CREATE TABLE HeatInfo (
+    id INT IDENTITY(1,1) PRIMARY KEY,  -- 修正自增主键语法
+    name NVARCHAR(50) NOT NULL,  -- 移除多余的长度定义
+    xnum INT NOT NULL,
+    ynum INT NOT NULL,
+    xstart FLOAT NOT NULL,  -- DOUBLE改为FLOAT
+    ystart FLOAT NOT NULL,
+    xpitch FLOAT NOT NULL,
+    ypitch FLOAT NOT NULL,
+    width FLOAT,
+    length FLOAT,
+    height FLOAT NOT NULL,
+    设定温度 NVARCHAR(50) DEFAULT '25',
+    波动温度 NVARCHAR(50) DEFAULT '3',
+    IC加热时间 NVARCHAR(50) DEFAULT '120',
+    达温后延时 NVARCHAR(50) DEFAULT '120',
+    报警温度 NVARCHAR(50) DEFAULT '100',
+    超温温度 NVARCHAR(50) DEFAULT '150',
+    升温超时报警 NVARCHAR(50) DEFAULT '1800',
+    达温标准 NVARCHAR(50) DEFAULT '平均数',  -- 添加单引号
+    探头类型 NVARCHAR(50) DEFAULT 'K',  -- 添加单引号
+    温控器温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site1温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site2温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site3温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site4温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site5温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site6温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site7温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site8温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site9温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site10温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site11温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site12温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site13温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site14温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site15温度补偿 NVARCHAR(50) DEFAULT '0',
+    Site16温度补偿 NVARCHAR(50) DEFAULT '0'
+);
+
+-- InitPoint表
+CREATE TABLE InitPoint (
+    ptname NVARCHAR(50),
+    value NVARCHAR(50) DEFAULT '0',
+    area NVARCHAR(50)
+);
+
+-- IOInfo表
+CREATE TABLE IOInfo (
+    模块型号 NVARCHAR(50),
+    输入 NVARCHAR(50) DEFAULT '16',
+    输出 NVARCHAR(50) DEFAULT '16',
+    核号 NVARCHAR(50),
+    模块号 NVARCHAR(50),
+    硬件索引 NVARCHAR(50),
+    软件索引 NVARCHAR(50),
+    IO编号 NVARCHAR(50),
+    IO名称 NVARCHAR(50),
+    区域 NVARCHAR(50)
+);
+
+-- Jurisdiction表
+CREATE TABLE Jurisdiction (
+    Id INT IDENTITY(1,1) PRIMARY KEY,  -- 修正自增主键语法
+    operators VARCHAR(20) NOT NULL,  -- 修正语法
+    realName NVARCHAR(20) NOT NULL,  -- 移除多余的长度定义
+    password VARCHAR(50) NOT NULL,  -- 修正语法
+    permtime NVARCHAR(50) DEFAULT '60'
+);
+
+-- LightSet表
+CREATE TABLE LightSet (
+    设备状态 NVARCHAR(50),
+    绿灯颜色显示 NVARCHAR(50),
+    绿灯显示方式 NVARCHAR(50),
+    黄灯颜色显示 NVARCHAR(50),
+    黄灯显示方式 NVARCHAR(50),
+    红灯颜色显示 NVARCHAR(50),
+    红灯显示方式 NVARCHAR(50),
+    音乐提示 NVARCHAR(50),
+    报警音乐 NVARCHAR(50)
+);
+
+-- OffsetPoint表
+CREATE TABLE OffsetPoint (
+    微调点位名称 NVARCHAR(50),
+    入料_Load吸_X NVARCHAR(50) DEFAULT '0',
+    入料_Load吸_Y NVARCHAR(50) DEFAULT '0',
+    入料_Load吸_Z NVARCHAR(50) DEFAULT '0',
+    入料_Load_变距 NVARCHAR(50) DEFAULT '0',
+    入料_Heat吸_X NVARCHAR(50) DEFAULT '0',
+    入料_Heat吸_Y NVARCHAR(50) DEFAULT '0',
+    入料_Heat吸_Z NVARCHAR(50) DEFAULT '0',
+    入料_Heat放_X NVARCHAR(50) DEFAULT '0',
+    入料_Heat放_Y NVARCHAR(50) DEFAULT '0',
+    入料_Heat放_Z NVARCHAR(50) DEFAULT '0',
+    入料_Heat_变距 NVARCHAR(50) DEFAULT '0',
+    入料_梭车1第1列放_X NVARCHAR(50) DEFAULT '0',
+    入料_梭车1第1列放_Y NVARCHAR(50) DEFAULT '0',
+    入料_梭车1第1列放_Z NVARCHAR(50) DEFAULT '0',
+    入料_梭车1第2列放_X NVARCHAR(50) DEFAULT '0',
+    入料_梭车1第2列放_Y NVARCHAR(50) DEFAULT '0',
+    入料_梭车1第2列放_Z NVARCHAR(50) DEFAULT '0',
+    入料_梭车2第1列放_X NVARCHAR(50) DEFAULT '0',
+    入料_梭车2第1列放_Y NVARCHAR(50) DEFAULT '0',
+    入料_梭车2第1列放_Z NVARCHAR(50) DEFAULT '0',
+    入料_梭车2第2列放_X NVARCHAR(50) DEFAULT '0',
+    入料_梭车2第2列放_Y NVARCHAR(50) DEFAULT '0',
+    入料_梭车2第2列放_Z NVARCHAR(50) DEFAULT '0',
+    入料_梭车_变距 NVARCHAR(50) DEFAULT '0',
+    出料_梭车1第1列吸_X NVARCHAR(50) DEFAULT '0',
+    出料_梭车1第1列吸_Y NVARCHAR(50) DEFAULT '0',
+    出料_梭车1第1列吸_Z NVARCHAR(50) DEFAULT '0',
+    出料_梭车1第2列吸_X NVARCHAR(50) DEFAULT '0',
+    出料_梭车1第2列吸_Y NVARCHAR(50) DEFAULT '0',
+    出料_梭车1第2列吸_Z NVARCHAR(50) DEFAULT '0',
+    出料_梭车2第1列吸_X NVARCHAR(50) DEFAULT '0',
+    出料_梭车2第1列吸_Y NVARCHAR(50) DEFAULT '0',
+    出料_梭车2第1列吸_Z NVARCHAR(50) DEFAULT '0',
+    出料_梭车2第2列吸_X NVARCHAR(50) DEFAULT '0',
+    出料_梭车2第2列吸_Y NVARCHAR(50) DEFAULT '0',
+    出料_梭车2第2列吸_Z NVARCHAR(50) DEFAULT '0',
+    出料_梭车_变距 NVARCHAR(50) DEFAULT '0',
+    出料_Auto1放_X NVARCHAR(50) DEFAULT '0',
+    出料_Auto1放_Y NVARCHAR(50) DEFAULT '0',
+    出料_Auto1放_Z NVARCHAR(50) DEFAULT '0',
+    出料_Auto2放_X NVARCHAR(50) DEFAULT '0',
+    出料_Auto2放_Y NVARCHAR(50) DEFAULT '0',
+    出料_Auto2放_Z NVARCHAR(50) DEFAULT '0',
+    出料_Fix1放_X NVARCHAR(50) DEFAULT '0',
+    出料_Fix1放_Y NVARCHAR(50) DEFAULT '0',
+    出料_Fix1放_Z NVARCHAR(50) DEFAULT '0',
+    出料_Fix2放_X NVARCHAR(50) DEFAULT '0',
+    出料_Fix2放_Y NVARCHAR(50) DEFAULT '0',
+    出料_Fix2放_Z NVARCHAR(50) DEFAULT '0',
+    出料_Fix3放_X NVARCHAR(50) DEFAULT '0',
+    出料_Fix3放_Y NVARCHAR(50) DEFAULT '0',
+    出料_Fix3放_Z NVARCHAR(50) DEFAULT '0',
+    出料_AF_变距 NVARCHAR(50) DEFAULT '0',
+    测试_梭车1左吸_X NVARCHAR(50) DEFAULT '0',
+    测试_梭车1左吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_梭车2左吸_X NVARCHAR(50) DEFAULT '0',
+    测试_梭车2左吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_梭车1右放_X NVARCHAR(50) DEFAULT '0',
+    测试_梭车1右放_Z NVARCHAR(50) DEFAULT '0',
+    测试_梭车2右放_X NVARCHAR(50) DEFAULT '0',
+    测试_梭车2右放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site1吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site2吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site3吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site4吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site5吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site6吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site7吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site8吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site9吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site10吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site11吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site12吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site13吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site14吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site15吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site16吸_X NVARCHAR(50) DEFAULT '0',
+    测试_Site1吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site2吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site3吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site4吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site5吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site6吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site7吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site8吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site9吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site10吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site11吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site12吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site13吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site14吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site15吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site16吸_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site1放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site2放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site3放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site4放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site5放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site6放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site7放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site8放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site9放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site10放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site11放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site12放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site13放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site14放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site15放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site16放_X NVARCHAR(50) DEFAULT '0',
+    测试_Site1放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site2放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site3放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site4放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site5放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site6放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site7放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site8放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site9放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site10放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site11放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site12放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site13放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site14放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site15放_Z NVARCHAR(50) DEFAULT '0',
+    测试_Site16放_Z NVARCHAR(50) DEFAULT '0',
+    梭车2_前_Y NVARCHAR(50) DEFAULT '0',
+    梭车2_后_Y NVARCHAR(50) DEFAULT '0',
+    抓盘_Empty_X NVARCHAR(50) DEFAULT '0',
+    抓盘_Load_X NVARCHAR(50) DEFAULT '0',
+    抓盘_Auto1_X NVARCHAR(50) DEFAULT '0',
+    抓盘_Auto2_X NVARCHAR(50) DEFAULT '0'
+);
+
+-- SetupInfo表
+CREATE TABLE SetupInfo (
+    档案名称 NVARCHAR(50),
+    tray盘名称 NVARCHAR(50),
+    site名称 NVARCHAR(50),
+    加热盘名称 NVARCHAR(50),
+    偏移点位名称 NVARCHAR(50),
+    测试机名称 NVARCHAR(50),
+    通讯名称 NVARCHAR(50),
+    分BIN名称 NVARCHAR(50),
+    梭车名称 NVARCHAR(50),
+    温度模式 NVARCHAR(50),
+    Auto仓提示换盘数量 NVARCHAR(50) DEFAULT '20'
+);
+
+-- SiteStatus表
+CREATE TABLE SiteStatus (
+    Site名称 NVARCHAR(50),
+    Site1 NVARCHAR(50) DEFAULT '11111111',
+    Site2 NVARCHAR(50) DEFAULT '11111111',
+    Site3 NVARCHAR(50) DEFAULT '11111111',
+    Site4 NVARCHAR(50) DEFAULT '11111111',
+    Site5 NVARCHAR(50) DEFAULT '11111111',
+    Site6 NVARCHAR(50) DEFAULT '11111111',
+    Site7 NVARCHAR(50) DEFAULT '11111111',
+    Site8 NVARCHAR(50) DEFAULT '11111111',
+    Site9 NVARCHAR(50) DEFAULT '11111111',
+    Site10 NVARCHAR(50) DEFAULT '11111111',
+    Site11 NVARCHAR(50) DEFAULT '11111111',
+    Site12 NVARCHAR(50) DEFAULT '11111111',
+    Site13 NVARCHAR(50) DEFAULT '11111111',
+    Site14 NVARCHAR(50) DEFAULT '11111111',
+    Site15 NVARCHAR(50) DEFAULT '11111111',
+    Site16 NVARCHAR(50) DEFAULT '11111111'
+);
+
+-- TesterIFParam表
+CREATE TABLE TesterIFParam (
+    测试机名称 NVARCHAR(50),
+    Dout连续不良个数 NVARCHAR(50) DEFAULT '20',
+    Dout连续不良自动关闭 NVARCHAR(50) DEFAULT 'False',
+    Dout连续不良报警 NVARCHAR(50) DEFAULT 'False',
+    Dut累计不良报警个数 NVARCHAR(50) DEFAULT '30',
+    Dut累计不良报警使能 NVARCHAR(50) DEFAULT 'False',
+    总良率报警百分比 NVARCHAR(50) DEFAULT '90',
+    总良率报警基数 NVARCHAR(50) DEFAULT '100',
+    总良率报警间隔 NVARCHAR(50) DEFAULT '100',
+    总良率报警使能 NVARCHAR(50) DEFAULT 'False',
+    socket使用次数 NVARCHAR(50) DEFAULT '20000',
+    测试超时时间 NVARCHAR(50) DEFAULT '600',
+    timeout超时时间 NVARCHAR(50) DEFAULT '600',
+    超时发送timeout NVARCHAR(50) DEFAULT 'False',
+    入料手臂吸料超时时间 NVARCHAR(50) DEFAULT '2000',
+    出料手臂吸料超时时间 NVARCHAR(50) DEFAULT '2000',
+    测试手臂吸料超时时间 NVARCHAR(50) DEFAULT '2000',
+    入料手臂吹料时间 NVARCHAR(50) DEFAULT '200',
+    出料手臂吹料时间 NVARCHAR(50) DEFAULT '200',
+    测试手臂吹料时间 NVARCHAR(50) DEFAULT '200',
+    发送开始信号延时 NVARCHAR(50) DEFAULT '100',
+    离线模式测试等待时间 NVARCHAR(50) DEFAULT '5000',
+    入料吸提前开真空 NVARCHAR(50) DEFAULT 'True',
+    出料吸提前开真空 NVARCHAR(50) DEFAULT 'True',
+    测试吸提前开真空 NVARCHAR(50) DEFAULT 'True',
+    Auto侧敲使能 NVARCHAR(50) DEFAULT 'False',
+    前侧同时敲击 NVARCHAR(50) DEFAULT 'False',
+    放置多少颗敲击 NVARCHAR(50) DEFAULT '8',
+    Auto侧敲次数 NVARCHAR(50) DEFAULT '2',
+    侧敲间隔 NVARCHAR(50) DEFAULT '100',
+    放料时允许侧敲 NVARCHAR(50) DEFAULT 'True',
+    侧敲时允许放料 NVARCHAR(50) DEFAULT 'True',
+    Auto换盘时出料Z回零 NVARCHAR(50) DEFAULT 'False',
+    通讯名称 NVARCHAR(50) DEFAULT '默认',
+    测试超时自动关闭Dut NVARCHAR(50) DEFAULT 'false',
+    接收超时Bin自动关闭Dut NVARCHAR(50) DEFAULT 'false',
+    超时Bin字符串显示 NVARCHAR(50) DEFAULT 'timeout',
+    接收测试信号上抬延时 NVARCHAR(50) DEFAULT '100',
+    离线模式IC放置位置 NVARCHAR(50) DEFAULT 'Auto1'
+);
+
+-- TrayInfo表
+CREATE TABLE TrayInfo (
+    id INT IDENTITY(1,1) PRIMARY KEY,  -- 修正自增主键语法
+    name NVARCHAR(50) NOT NULL,  -- 移除多余的长度定义
+    xnum INT NOT NULL,
+    ynum INT NOT NULL,
+    xstart FLOAT NOT NULL,  -- DOUBLE改为FLOAT
+    ystart FLOAT NOT NULL,
+    xpitch FLOAT NOT NULL,
+    ypitch FLOAT NOT NULL,
+    width FLOAT,
+    length FLOAT,
+    height FLOAT NOT NULL
+);

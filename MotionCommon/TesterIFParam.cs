@@ -13,6 +13,8 @@ namespace MotionCommon
 
         public int Dout连续不良个数 { get; set; }
 
+        public int Dout连续良品个数 { get; set; }
+
         public bool Dout连续不良自动关闭 { get; set; }
 
         public bool Dout连续不良报警 { get; set; }

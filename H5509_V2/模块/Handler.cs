@@ -2426,6 +2426,7 @@ namespace H5509_V2
             Dout128FailNumber = new int[128];
             SiteTestState = new int[16];
             doutContinueFail = new List<int[]>();
+            doutContinuePass = new List<int[]>();
             单dut总不良计数 = new List<int[]>();
             单dut总不良累计计数 = new List<int[]>();
             //SiteTestIC = new List<bool[][]>();
@@ -2439,6 +2440,7 @@ namespace H5509_V2
                 StationManagers.SetStationBin(i, new string[] { "", "", "", "", "", "", "", "" });
                 //SiteTestIC.Add(new bool[2][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } });
                 doutContinueFail.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
+                doutContinuePass.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
                 单dut总不良计数.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
                 单dut总不良累计计数.Add(new int[8] { 0, 0, 0, 0, 0, 0, 0, 0 });
                 //SiteTestBin.Add(new string[] { "", "", "", "", "", "", "", "" });

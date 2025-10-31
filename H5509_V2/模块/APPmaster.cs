@@ -428,6 +428,8 @@ namespace H5509_V2
 
         public static List<int[]> doutContinueFail;
 
+        public static List<int[]> doutContinuePass;
+
         public static List<int[]> 单dut总不良计数; //单dut总不良计数（取消报警后清零）
 
         public static List<int[]> 单dut总不良累计计数;//单dut总不良累计计数（取消报警后不清理）
@@ -2660,6 +2662,7 @@ namespace H5509_V2
                         {
                             测试机名称 = dr["测试机名称"].ToString(),
                             Dout连续不良个数 = Convert.ToInt32(dr["Dout连续不良个数"].ToString()),
+                            //Dout连续良品个数 = Convert.ToInt32(dr["Dout连续良品个数"].ToString()),
                             Dout连续不良自动关闭 = Convert.ToBoolean(dr["Dout连续不良自动关闭"].ToString()),
                             Dout连续不良报警 = Convert.ToBoolean(dr["Dout连续不良报警"].ToString()),
                             Dut累计不良报警个数 = Convert.ToInt32(dr["Dut累计不良报警个数"].ToString()),
@@ -2920,6 +2923,7 @@ namespace H5509_V2
         {
             string sql = $"update TesterIFParam set " +
                 $"Dout连续不良个数 = '{tester.Dout连续不良个数}'," +
+                //$"Dout连续良品个数 = '{tester.Dout连续良品个数}'," +
                 $"Dout连续不良自动关闭 = '{tester.Dout连续不良自动关闭}'," +
                 $"Dout连续不良报警 = '{tester.Dout连续不良报警}'," +
                 $"Dut累计不良报警个数 = '{tester.Dut累计不良报警个数}'," +

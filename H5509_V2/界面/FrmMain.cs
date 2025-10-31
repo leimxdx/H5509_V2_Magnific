@@ -1053,11 +1053,13 @@ namespace H5509_V2
                                             if (Auto1.Contains(bins[m * 4 + n]))
                                             {
                                                 Dout128PassNumber[doutnum + (m * 4 + n)]++;
+                                                doutContinuePass[sitenum][n + m * 4]++;
                                                 doutContinueFail[sitenum][n + m * 4] = 0;
                                             }
                                             else
                                             {
                                                 Dout128FailNumber[doutnum + (m * 4 + n)]++;
+                                                doutContinuePass[sitenum][n + m * 4] = 0;
                                                 doutContinueFail[sitenum][n + m * 4]++;
                                                 单dut总不良计数[sitenum][n + m * 4]++;
                                                 单dut总不良累计计数[sitenum][n + m * 4]++;
@@ -1085,6 +1087,7 @@ namespace H5509_V2
                                 bool isyieldex = false;
                                 bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
                                 int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+                                int doutpassnum = 设置信息.测试机信息.Dout连续良品个数;
                                 bool isalarm = doutfailnum != 0;// 设置信息.测试机信息.Dout连续不良报警;
 
                                 if (isalarm) //Dout连续不良报警

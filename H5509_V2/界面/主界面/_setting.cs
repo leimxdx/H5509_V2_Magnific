@@ -4067,6 +4067,7 @@ namespace H5509_V2
         private void 刷新测试机(TesterIFParam tester)
         {
             numericUpDown12.Text = tester.Dout连续不良个数.ToString();
+            numericUpDown199.Text = tester.Dout连续良品个数.ToString();
             checkBox1.Checked = tester.Dout连续不良自动关闭;
             checkBox2.Checked = tester.Dout连续不良报警;
 
@@ -5225,6 +5226,7 @@ namespace H5509_V2
 
                         TesterIFParam newtester = new TesterIFParam();
                         newtester.Dout连续不良个数 = Convert.ToInt32(numericUpDown12.Text);
+                        newtester.Dout连续良品个数 = Convert.ToInt32(numericUpDown199.Text);
                         newtester.Dout连续不良自动关闭 = checkBox1.Checked;
                         newtester.Dout连续不良报警 = checkBox2.Checked;
                         newtester.Dut累计不良报警个数 = Convert.ToInt32(numericUpDown5.Text);
@@ -5283,6 +5285,7 @@ namespace H5509_V2
                             bool timeischange = false;
                             bool timeoutbinchange = false;
                             if (oldtester.Dout连续不良个数 != newtester.Dout连续不良个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良个数]:{oldtester.Dout连续不良个数}->{newtester.Dout连续不良个数}:更新成功", LogType.ParamLog);
+                            //if (oldtester.Dout连续良品个数 != newtester.Dout连续良品个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续良品个数]:{oldtester.Dout连续良品个数}->{newtester.Dout连续良品个数}:更新成功", LogType.ParamLog);
                             if (oldtester.Dout连续不良自动关闭 != newtester.Dout连续不良自动关闭) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良自动关闭]:{oldtester.Dout连续不良自动关闭}->{newtester.Dout连续不良自动关闭}:更新成功", LogType.ParamLog);
                             if (oldtester.Dout连续不良报警 != newtester.Dout连续不良报警) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dout连续不良报警]:{oldtester.Dout连续不良报警}->{newtester.Dout连续不良报警}:更新成功", LogType.ParamLog);
                             if (oldtester.Dut累计不良报警个数 != newtester.Dut累计不良报警个数) RunLog($"档案名称:[{name}]:测试机名称:[{value}]:[Dut累计不良报警个数]:{oldtester.Dut累计不良报警个数}->{newtester.Dut累计不良报警个数}:更新成功", LogType.ParamLog);
@@ -9241,6 +9244,7 @@ namespace H5509_V2
                     //RunLog($"Com.Iswaitout[{i}] = {Com.Iswaitout[i]};");
                     RunLog($"SiteTestIC[{i}] = {siteTestIC[i][0][0]},{siteTestIC[i][0][1]},{siteTestIC[i][0][2]},{siteTestIC[i][0][3]},{siteTestIC[i][1][0]},{siteTestIC[i][1][1]},{siteTestIC[i][1][2]},{siteTestIC[i][1][3]};");
                     RunLog($"doutContinueFail[{i}] = {doutContinueFail[i][0]},{doutContinueFail[i][1]},{doutContinueFail[i][2]},{doutContinueFail[i][3]},{doutContinueFail[i][4]},{doutContinueFail[i][5]},{doutContinueFail[i][6]},{doutContinueFail[i][7]};");
+                    RunLog($"doutContinuePass[{i}] = {doutContinuePass[i][0]},{doutContinuePass[i][1]},{doutContinuePass[i][2]},{doutContinuePass[i][3]},{doutContinuePass[i][4]},{doutContinuePass[i][5]},{doutContinuePass[i][6]},{doutContinuePass[i][7]};");
                     RunLog($"单dut总不良计数[{i}] = {单dut总不良计数[i][0]},{单dut总不良计数[i][1]},{单dut总不良计数[i][2]},{单dut总不良计数[i][3]},{单dut总不良计数[i][4]},{单dut总不良计数[i][5]},{单dut总不良计数[i][6]},{单dut总不良计数[i][7]};");
                     RunLog($"单dut总不良累计计数[{i}] = {单dut总不良累计计数[i][0]},{单dut总不良累计计数[i][1]},{单dut总不良累计计数[i][2]},{单dut总不良累计计数[i][3]},{单dut总不良累计计数[i][4]},{单dut总不良累计计数[i][5]},{单dut总不良累计计数[i][6]},{单dut总不良累计计数[i][7]};");
                     RunLog($"SiteTestBin[{i}] = {siteTestBin[i][0]},{siteTestBin[i][1]},{siteTestBin[i][2]},{siteTestBin[i][3]},{siteTestBin[i][4]},{siteTestBin[i][5]},{siteTestBin[i][6]},{siteTestBin[i][7]};");
