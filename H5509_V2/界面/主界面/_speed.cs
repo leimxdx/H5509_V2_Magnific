@@ -95,7 +95,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(APPmaster.SQLiteConnString, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
+                int line = SqlServer.runSqlNonQuery(APPmaster.SQLServerConnString_Config, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
                 if (line >= 1)
                 {
                     RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);

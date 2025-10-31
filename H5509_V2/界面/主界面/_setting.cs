@@ -2375,7 +2375,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update InitPoint set value = '{newvalue}' where ptname = '{pointname}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update InitPoint set value = '{newvalue}' where ptname = '{pointname}'");
                 if (line >= 1)
                 {
                     RunLog($"初始点位:[{pointname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -2390,7 +2390,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update AxisRunInfo set {valuename} = '{newvalue}' where 轴名称 = '{pointname}'");
                 if (line >= 1)
                 {
                     RunLog($"运行参数:[{pointname}:{valuename}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -4009,17 +4009,17 @@ namespace H5509_V2
 
         private void 刷新设定(string name)
         {
-            string result = Sqlite.runSql(SQLiteConnString, $"select name from TrayInfo", out DataTable traydt);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select name from TrayInfo", out DataTable traydt);
             if (result != "Success") return;
             uiComboBox1.DataSource = traydt;
             uiComboBox1.DisplayMember = "name";
 
-            result = Sqlite.runSql(SQLiteConnString, $"select name from HeatInfo", out DataTable heatdt);
+            result = SqlServer.runSql(SQLServerConnString_Config, $"select name from HeatInfo", out DataTable heatdt);
             if (result != "Success") return;
             uiComboBox2.DataSource = heatdt;
             uiComboBox2.DisplayMember = "name";
 
-            result = Sqlite.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dt);
+            result = SqlServer.runSql(SQLServerConnString_Config, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dt);
             if (result != "Success") return;
 
             uiTextBox1.Text = dt.Rows[0]["档案名称"].ToString();
@@ -4107,7 +4107,7 @@ namespace H5509_V2
             checkBox12.Checked = tester.Auto换盘时出料Z回零;
 
 
-            string result = Sqlite.runSql(SQLiteConnString, "select 通讯名称 from ComInfoSet", out DataTable dt);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select 通讯名称 from ComInfoSet", out DataTable dt);
             if (result == "Success")
             {
                 uiComboBox119.DataSource = dt;
@@ -4662,7 +4662,7 @@ namespace H5509_V2
 
         private void 刷新Tray盘(string name)
         {
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dt);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from TrayInfo where name = '{name}'", out DataTable dt);
             if (result == "Success")
             {
                 textBox30.Text = dt.Rows[0]["name"].ToString();
@@ -4716,15 +4716,6 @@ namespace H5509_V2
             //uiButton1.Visible = isdis;
         }
 
-        private void 刷新取放设定(string name)
-        {
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dt);
-            if (result == "Success")
-            {
-                //uiComboBox1.Text = dt.Rows[0][0].ToString();
-                //textBox25.Text = dt.Rows[0][1].ToString();
-            }
-        }
 
         private void 刷新Tray盘信息(string tabpagetext, string name)
         {
@@ -4820,7 +4811,7 @@ namespace H5509_V2
 
         private string 刷新档案列表()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select '' as ' ', 档案名称 from SetupInfo", out DataTable dt);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select '' as ' ', 档案名称 from SetupInfo", out DataTable dt);
             if (result == "Success")
             {
                 uiDataGridView1.DataSource = dt;
@@ -4830,7 +4821,7 @@ namespace H5509_V2
                 uiDataGridView1.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
                 uiDataGridView1.ClearSelection();
 
-                result = Sqlite.runSql(SQLiteConnString, "select value from config where name='当前档案'", out string value).ToString();
+                result = SqlServer.runSql(SQLServerConnString_Config, "select value from config where name='当前档案'", out string value).ToString();
 
                 int index = 0;
                 //bool isCurrentTray = false;
@@ -4888,7 +4879,7 @@ namespace H5509_V2
 
         private void 刷新Tray盘列表()
         {
-            string reuslt = Sqlite.runSql(SQLiteConnString, "select '' as ' ', name as Tray盘名称 from TrayInfo", out DataTable dt);
+            string reuslt = SqlServer.runSql(SQLServerConnString_Config, "select '' as ' ', name as Tray盘名称 from TrayInfo", out DataTable dt);
             if (reuslt == "Success")
             {
                 uiDataGridView2.DataSource = dt;
@@ -4897,7 +4888,7 @@ namespace H5509_V2
 
                 uiDataGridView2.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
                 uiDataGridView2.ClearSelection();
-                string result = Sqlite.runSql(SQLiteConnString, $"select tray盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
+                string result = SqlServer.runSql(SQLServerConnString_Config, $"select tray盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
                 int index = 0;
                 //bool isCurrentTray = false;
@@ -4934,7 +4925,7 @@ namespace H5509_V2
 
         private void 刷新加热盘列表()
         {
-            string reuslt = Sqlite.runSql(SQLiteConnString, "select '' as ' ', name as 加热盘名称 from HeatInfo", out DataTable dt);
+            string reuslt = SqlServer.runSql(SQLServerConnString_Config, "select '' as ' ', name as 加热盘名称 from HeatInfo", out DataTable dt);
             if (reuslt == "Success")
             {
                 uiDataGridView3.DataSource = dt;
@@ -4944,7 +4935,7 @@ namespace H5509_V2
                 uiDataGridView3.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
 
                 uiDataGridView3.ClearSelection();
-                string result = Sqlite.runSql(SQLiteConnString, $"select 加热盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
+                string result = SqlServer.runSql(SQLServerConnString_Config, $"select 加热盘名称 from SetupInfo where 档案名称='{设置信息.档案名称}'", out string value).ToString();
 
                 int index = 0;
                 //bool isCurrentTray = false;
@@ -4981,7 +4972,7 @@ namespace H5509_V2
 
         private void 刷新通讯列表()
         {
-            string reuslt = Sqlite.runSql(SQLiteConnString, "select '' as ' ', 通讯名称 from ComInfoSet", out DataTable dt);
+            string reuslt = SqlServer.runSql(SQLServerConnString_Config, "select '' as ' ', 通讯名称 from ComInfoSet", out DataTable dt);
             if (reuslt == "Success")
             {
                 uiDataGridView4.DataSource = dt;
@@ -4991,7 +4982,7 @@ namespace H5509_V2
                 uiDataGridView4.Columns.Cast<DataGridViewColumn>().ToList().ForEach(column => column.SortMode = DataGridViewColumnSortMode.NotSortable);
 
                 uiDataGridView4.ClearSelection();
-                string result = Sqlite.runSql(SQLiteConnString, $"select 通讯名称 from TesterIFParam where 测试机名称='{设置信息.测试机信息.测试机名称}'", out string value).ToString();
+                string result = SqlServer.runSql(SQLServerConnString_Config, $"select 通讯名称 from TesterIFParam where 测试机名称='{设置信息.测试机信息.测试机名称}'", out string value).ToString();
 
                 int index = 0;
                 //bool isCurrentTray = false;
@@ -5105,7 +5096,7 @@ namespace H5509_V2
 
                         if (trayname != setupInfo.Tray盘信息.TrayName)
                         {
-                            int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set tray盘名称 = '{trayname}' where 档案名称 = '{name}'");
+                            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update SetupInfo set tray盘名称 = '{trayname}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
                                 RunLog($"档案名称:[{name}]:Tray名称:{setupInfo.Tray盘信息.TrayName}->{trayname}:更新成功", LogType.ParamLog);
@@ -5134,7 +5125,7 @@ namespace H5509_V2
 
                         if (heatname != setupInfo.Heat盘信息.HeatName)
                         {
-                            int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 加热盘名称 = '{heatname}' where 档案名称 = '{name}'");
+                            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update SetupInfo set 加热盘名称 = '{heatname}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
                                 RunLog($"档案名称:[{name}]:加热盘名称:{setupInfo.Heat盘信息.HeatName}->{heatname}:更新成功", LogType.ParamLog);
@@ -5161,7 +5152,7 @@ namespace H5509_V2
 
                         if (tempmode != setupInfo.温度模式)
                         {
-                            int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set 温度模式 = '{tempmode}' where 档案名称 = '{name}'");
+                            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update SetupInfo set 温度模式 = '{tempmode}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
                                 RunLog($"档案名称:[{name}]:温度模式:{setupInfo.温度模式}->{tempmode}:更新成功", LogType.ParamLog);
@@ -5179,7 +5170,7 @@ namespace H5509_V2
 
                         if (auto1num != setupInfo.Auto仓提示换盘数量)
                         {
-                            int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update SetupInfo set Auto仓提示换盘数量 = '{auto1num}' where 档案名称 = '{name}'");
+                            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update SetupInfo set Auto仓提示换盘数量 = '{auto1num}' where 档案名称 = '{name}'");
                             if (line >= 1)
                             {
                                 RunLog($"档案名称:[{name}]:Auto仓提示换盘数量:{setupInfo.Auto仓提示换盘数量}->{auto1num}:更新成功", LogType.ParamLog);
@@ -7257,7 +7248,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update TrayInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update TrayInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
                     RunLog($"tray盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -7272,7 +7263,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
                     RunLog($"加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -7287,7 +7278,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update HeatInfo set {fiedname} = '{newvalue}' where name = '{trayname}'");
                 if (line >= 1)
                 {
                     RunLog($"加热盘名称-[{trayname}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -7302,7 +7293,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
                 if (line >= 1)
                 {
                     RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -7317,7 +7308,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update LightSet set {fiedname} = '{newvalue}' where 设备状态 = '{lightstate}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update LightSet set {fiedname} = '{newvalue}' where 设备状态 = '{lightstate}'");
                 if (line >= 1)
                 {
                     RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -7332,7 +7323,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update LightSet set {fiedname} = {newvalue} where 设备状态 = '{lightstate}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update LightSet set {fiedname} = {newvalue} where 设备状态 = '{lightstate}'");
                 if (line >= 1)
                 {
                     RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -7347,7 +7338,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"update LightSet set {fiedname} = '{newvalue}' where 设备状态 = '{lightstate}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update LightSet set {fiedname} = '{newvalue}' where 设备状态 = '{lightstate}'");
                 if (line >= 1)
                 {
                     RunLog($"状态灯设置-设备状态-[{lightstate}]-[{fiedname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);
@@ -8154,35 +8145,6 @@ namespace H5509_V2
         }
 
 
-        private void 复制档案代码()
-        {
-            int rows = uiDataGridView1.SelectedIndex;
-            if (rows >= 0)
-            {
-                string name = uiDataGridView1.Rows[rows].Cells[1].Value.ToString();
-                string result = GetSetupInfo(name, out SetupInfo setupInfo);
-                if (result == "Success")
-                {
-
-                    string sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,分BIN名称,梭车名称,温度模式)" +
-                        $"values('{name}_副本','{setupInfo.Tray盘信息.TrayName}','{setupInfo.开site信息.Site名称}'," +
-                        $"'{setupInfo.Heat盘信息.HeatName}','{setupInfo.OffsetPoint.微调点位名称}','{setupInfo.测试机信息.测试机名称}'," +
-                        $"'{setupInfo.分BIN信息.分BIN名称}','{setupInfo.梭车名称}','{setupInfo.温度模式}')";
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
-
-                    if (line >= 0)
-                    {
-                        result = 刷新档案列表();
-                        if (result == "Success") MessageBox.Show("复制档案成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        else MessageBox.Show("复制档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else MessageBox.Show("复制档案失败!返回行数:0", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else MessageBox.Show("复制档案失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else MessageBox.Show("请选择要复制档案!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
         //新增档案
         private void uiButton8_Click(object sender, EventArgs e)
         {
@@ -8191,7 +8153,7 @@ namespace H5509_V2
             if (dialog == DialogResult.OK)
             {
                 string sql = $"select count(*) from SetupInfo where 档案名称 = '{newSetupName.Name}'";
-                string result = Sqlite.runSql(SQLiteConnString, sql, out string value);
+                string result = SqlServer.runSql(SQLServerConnString_Config, sql, out string value);
                 if (result == "Success")
                 {
                     if (Convert.ToInt32(value) >= 1) MessageBox.Show("档案已存在!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -8202,17 +8164,17 @@ namespace H5509_V2
                         {
                             sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,通讯名称,分BIN名称,梭车名称,温度模式)" +
                             $"values('{newSetupName.Name}', '默认','{newSetupName.Name}', '默认','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}','{newSetupName.Name}', '常温')";
-                            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
 
                             if (line >= 1)
                             {
                                 //string site = "{\"Protocol\":\"COM\",\"PortName\":\"COM10\",\"BaudRate\":9600,\"Parity\":0,\"DataBits\":8,\"StopBits\":1}";
-                                int line1 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into SiteStatus(Site名称)values('{newSetupName.Name}')");
-                                int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into OffsetPoint(微调点位名称)values('{newSetupName.Name}')");
+                                int line1 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into SiteStatus(Site名称)values('{newSetupName.Name}')");
+                                int line2 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into OffsetPoint(微调点位名称)values('{newSetupName.Name}')");
                                 //int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称)values('{newSetupName.Name}')");
-                                int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示)values('{newSetupName.Name}','{20}','false','false','{30}','false','{90}','{100}','{100}','false','{20000}','{600}','{600}','false','{2000}','{2000}','{2000}','{200}','{200}','{200}','{100}','{5}','false','false','false','false','false','{8}','{2}','{100}','true','true','false','false','false','20A')");
+                                int line3 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示)values('{newSetupName.Name}','{20}','false','false','{30}','false','{90}','{100}','{100}','false','{20000}','{600}','{600}','false','{2000}','{2000}','{2000}','{200}','{200}','{200}','{100}','{5}','false','false','false','false','false','{8}','{2}','{100}','true','true','false','false','false','20A')");
                                 //int line4 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into ComInfoSet(通讯名称,客户,通讯协议,通讯方式,测试机数量,同时测试,测试结果中有对应Site,超时Bin字符串,发送开批信息,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)values('{newSetupName.Name}','默认','晶存','COM','{1}','{1}','true','AB','true','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}')");
-                                int line5 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3)values('{newSetupName.Name}','01','02,20A,OTH','03;;','04;;','05;;')");
+                                int line5 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3)values('{newSetupName.Name}','01','02,20A,OTH','03;;','04;;','05;;')");
                                 if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line5 >= 1)
                                 {
                                     刷新档案列表();
@@ -8249,7 +8211,7 @@ namespace H5509_V2
                     {
                         //获取档案数量
                         string sql = $"select count(*) from SetupInfo where 档案名称 = '{copySetupName.Name}'";
-                        result = Sqlite.runSql(SQLiteConnString, sql, out string value);
+                        result = SqlServer.runSql(SQLServerConnString_Config, sql, out string value);
                         if (result == "Success")
                         {
                             //检查档案是否不存在
@@ -8259,7 +8221,7 @@ namespace H5509_V2
                                 sql = $"insert into SetupInfo(档案名称,tray盘名称,site名称,加热盘名称,偏移点位名称,测试机名称,通讯名称,分BIN名称,梭车名称,温度模式,Auto仓提示换盘数量)" +
                                 $"values('{copySetupName.Name}', '{setupInfo.Tray盘信息.TrayName}','{copySetupName.Name}', '{setupInfo.Heat盘信息.HeatName}'" +
                                 $",'{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}','{copySetupName.Name}', '{setupInfo.温度模式}', '{setupInfo.Auto仓提示换盘数量}')";
-                                int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                                 if (line >= 1)
                                 {
                                     ///点位微调
@@ -8276,13 +8238,13 @@ namespace H5509_V2
                                     if (result != "Success") { MessageBox.Show("获取测试机信息失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
                                     //string site = "{\"Protocol\":\"COM\",\"PortName\":\"COM10\",\"BaudRate\":9600,\"Parity\":0,\"DataBits\":8,\"StopBits\":1}";
-                                    int line1 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into SiteStatus(Site名称,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)" +
+                                    int line1 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into SiteStatus(Site名称,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)" +
                                                                     $"values('{copySetupName.Name}','{string.Join("", siteStatus.Site1)}','{string.Join("", siteStatus.Site2)}','{string.Join("", siteStatus.Site3)}','{string.Join("", siteStatus.Site4)}','{string.Join("", siteStatus.Site5)}','{string.Join("", siteStatus.Site6)}','{string.Join("", siteStatus.Site7)}','{string.Join("", siteStatus.Site8)}','{string.Join("", siteStatus.Site9)}','{string.Join("", siteStatus.Site10)}','{string.Join("", siteStatus.Site11)}','{string.Join("", siteStatus.Site12)}','{string.Join("", siteStatus.Site13)}','{string.Join("", siteStatus.Site14)}','{string.Join("", siteStatus.Site15)}','{string.Join("", siteStatus.Site16)}')");
-                                    int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into OffsetPoint(微调点位名称,入料_Load吸_X,入料_Load吸_Y,入料_Load吸_Z,入料_Load_变距,入料_Heat吸_X,入料_Heat吸_Y,入料_Heat吸_Z,入料_Heat放_X,入料_Heat放_Y,入料_Heat放_Z,入料_Heat_变距,入料_梭车1第1列放_X,入料_梭车1第1列放_Y,入料_梭车1第1列放_Z,入料_梭车1第2列放_X,入料_梭车1第2列放_Y,入料_梭车1第2列放_Z,入料_梭车2第1列放_X,入料_梭车2第1列放_Y,入料_梭车2第1列放_Z,入料_梭车2第2列放_X,入料_梭车2第2列放_Y,入料_梭车2第2列放_Z,入料_梭车_变距,出料_梭车1第1列吸_X,出料_梭车1第1列吸_Y,出料_梭车1第1列吸_Z,出料_梭车1第2列吸_X,出料_梭车1第2列吸_Y,出料_梭车1第2列吸_Z,出料_梭车2第1列吸_X,出料_梭车2第1列吸_Y,出料_梭车2第1列吸_Z,出料_梭车2第2列吸_X,出料_梭车2第2列吸_Y,出料_梭车2第2列吸_Z,出料_梭车_变距,出料_Auto1放_X,出料_Auto1放_Y,出料_Auto1放_Z,出料_Auto2放_X,出料_Auto2放_Y,出料_Auto2放_Z,出料_Fix1放_X,出料_Fix1放_Y,出料_Fix1放_Z,出料_Fix2放_X,出料_Fix2放_Y,出料_Fix2放_Z,出料_Fix3放_X,出料_Fix3放_Y,出料_Fix3放_Z,出料_AF_变距,测试_梭车1左吸_X,测试_梭车1左吸_Z,测试_梭车2左吸_X,测试_梭车2左吸_Z,测试_梭车1右放_X,测试_梭车1右放_Z,测试_梭车2右放_X,测试_梭车2右放_Z,测试_Site1吸_X,测试_Site2吸_X,测试_Site3吸_X,测试_Site4吸_X,测试_Site5吸_X,测试_Site6吸_X,测试_Site7吸_X,测试_Site8吸_X,测试_Site9吸_X,测试_Site10吸_X,测试_Site11吸_X,测试_Site12吸_X,测试_Site13吸_X,测试_Site14吸_X,测试_Site15吸_X,测试_Site16吸_X,测试_Site1吸_Z,测试_Site2吸_Z,测试_Site3吸_Z,测试_Site4吸_Z,测试_Site5吸_Z,测试_Site6吸_Z,测试_Site7吸_Z,测试_Site8吸_Z,测试_Site9吸_Z,测试_Site10吸_Z,测试_Site11吸_Z,测试_Site12吸_Z,测试_Site13吸_Z,测试_Site14吸_Z,测试_Site15吸_Z,测试_Site16吸_Z,测试_Site1放_X,测试_Site2放_X,测试_Site3放_X,测试_Site4放_X,测试_Site5放_X,测试_Site6放_X,测试_Site7放_X,测试_Site8放_X,测试_Site9放_X,测试_Site10放_X,测试_Site11放_X,测试_Site12放_X,测试_Site13放_X,测试_Site14放_X,测试_Site15放_X,测试_Site16放_X,测试_Site1放_Z,测试_Site2放_Z,测试_Site3放_Z,测试_Site4放_Z,测试_Site5放_Z,测试_Site6放_Z,测试_Site7放_Z,测试_Site8放_Z,测试_Site9放_Z,测试_Site10放_Z,测试_Site11放_Z,测试_Site12放_Z,测试_Site13放_Z,测试_Site14放_Z,测试_Site15放_Z,测试_Site16放_Z,梭车2_前_Y,梭车2_后_Y,抓盘_Empty_X,抓盘_Load_X,抓盘_Auto1_X,抓盘_Auto2_X)" +
+                                    int line2 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into OffsetPoint(微调点位名称,入料_Load吸_X,入料_Load吸_Y,入料_Load吸_Z,入料_Load_变距,入料_Heat吸_X,入料_Heat吸_Y,入料_Heat吸_Z,入料_Heat放_X,入料_Heat放_Y,入料_Heat放_Z,入料_Heat_变距,入料_梭车1第1列放_X,入料_梭车1第1列放_Y,入料_梭车1第1列放_Z,入料_梭车1第2列放_X,入料_梭车1第2列放_Y,入料_梭车1第2列放_Z,入料_梭车2第1列放_X,入料_梭车2第1列放_Y,入料_梭车2第1列放_Z,入料_梭车2第2列放_X,入料_梭车2第2列放_Y,入料_梭车2第2列放_Z,入料_梭车_变距,出料_梭车1第1列吸_X,出料_梭车1第1列吸_Y,出料_梭车1第1列吸_Z,出料_梭车1第2列吸_X,出料_梭车1第2列吸_Y,出料_梭车1第2列吸_Z,出料_梭车2第1列吸_X,出料_梭车2第1列吸_Y,出料_梭车2第1列吸_Z,出料_梭车2第2列吸_X,出料_梭车2第2列吸_Y,出料_梭车2第2列吸_Z,出料_梭车_变距,出料_Auto1放_X,出料_Auto1放_Y,出料_Auto1放_Z,出料_Auto2放_X,出料_Auto2放_Y,出料_Auto2放_Z,出料_Fix1放_X,出料_Fix1放_Y,出料_Fix1放_Z,出料_Fix2放_X,出料_Fix2放_Y,出料_Fix2放_Z,出料_Fix3放_X,出料_Fix3放_Y,出料_Fix3放_Z,出料_AF_变距,测试_梭车1左吸_X,测试_梭车1左吸_Z,测试_梭车2左吸_X,测试_梭车2左吸_Z,测试_梭车1右放_X,测试_梭车1右放_Z,测试_梭车2右放_X,测试_梭车2右放_Z,测试_Site1吸_X,测试_Site2吸_X,测试_Site3吸_X,测试_Site4吸_X,测试_Site5吸_X,测试_Site6吸_X,测试_Site7吸_X,测试_Site8吸_X,测试_Site9吸_X,测试_Site10吸_X,测试_Site11吸_X,测试_Site12吸_X,测试_Site13吸_X,测试_Site14吸_X,测试_Site15吸_X,测试_Site16吸_X,测试_Site1吸_Z,测试_Site2吸_Z,测试_Site3吸_Z,测试_Site4吸_Z,测试_Site5吸_Z,测试_Site6吸_Z,测试_Site7吸_Z,测试_Site8吸_Z,测试_Site9吸_Z,测试_Site10吸_Z,测试_Site11吸_Z,测试_Site12吸_Z,测试_Site13吸_Z,测试_Site14吸_Z,测试_Site15吸_Z,测试_Site16吸_Z,测试_Site1放_X,测试_Site2放_X,测试_Site3放_X,测试_Site4放_X,测试_Site5放_X,测试_Site6放_X,测试_Site7放_X,测试_Site8放_X,测试_Site9放_X,测试_Site10放_X,测试_Site11放_X,测试_Site12放_X,测试_Site13放_X,测试_Site14放_X,测试_Site15放_X,测试_Site16放_X,测试_Site1放_Z,测试_Site2放_Z,测试_Site3放_Z,测试_Site4放_Z,测试_Site5放_Z,测试_Site6放_Z,测试_Site7放_Z,测试_Site8放_Z,测试_Site9放_Z,测试_Site10放_Z,测试_Site11放_Z,测试_Site12放_Z,测试_Site13放_Z,测试_Site14放_Z,测试_Site15放_Z,测试_Site16放_Z,梭车2_前_Y,梭车2_后_Y,抓盘_Empty_X,抓盘_Load_X,抓盘_Auto1_X,抓盘_Auto2_X)" +
                                                                     $"values('{copySetupName.Name}','{offsetPoint.入料_Load吸_X}','{offsetPoint.入料_Load吸_Y}','{offsetPoint.入料_Load吸_Z}','{offsetPoint.入料_Load_变距}','{offsetPoint.入料_Heat吸_X}','{offsetPoint.入料_Heat吸_Y}','{offsetPoint.入料_Heat吸_Z}','{offsetPoint.入料_Heat放_X}','{offsetPoint.入料_Heat放_Y}','{offsetPoint.入料_Heat放_Z}','{offsetPoint.入料_Heat_变距}','{offsetPoint.入料_梭车1第1列放_X}','{offsetPoint.入料_梭车1第1列放_Y}','{offsetPoint.入料_梭车1第1列放_Z}','{offsetPoint.入料_梭车1第2列放_X}','{offsetPoint.入料_梭车1第2列放_Y}','{offsetPoint.入料_梭车1第2列放_Z}','{offsetPoint.入料_梭车2第1列放_X}','{offsetPoint.入料_梭车2第1列放_Y}','{offsetPoint.入料_梭车2第1列放_Z}','{offsetPoint.入料_梭车2第2列放_X}','{offsetPoint.入料_梭车2第2列放_Y}','{offsetPoint.入料_梭车2第2列放_Z}','{offsetPoint.入料_梭车_变距}','{offsetPoint.出料_梭车1第1列吸_X}','{offsetPoint.出料_梭车1第1列吸_Y}','{offsetPoint.出料_梭车1第1列吸_Z}','{offsetPoint.出料_梭车1第2列吸_X}','{offsetPoint.出料_梭车1第2列吸_Y}','{offsetPoint.出料_梭车1第2列吸_Z}','{offsetPoint.出料_梭车2第1列吸_X}','{offsetPoint.出料_梭车2第1列吸_Y}','{offsetPoint.出料_梭车2第1列吸_Z}','{offsetPoint.出料_梭车2第2列吸_X}','{offsetPoint.出料_梭车2第2列吸_Y}','{offsetPoint.出料_梭车2第2列吸_Z}','{offsetPoint.出料_梭车_变距}','{offsetPoint.出料_Auto1放_X}','{offsetPoint.出料_Auto1放_Y}','{offsetPoint.出料_Auto1放_Z}','{offsetPoint.出料_Auto2放_X}','{offsetPoint.出料_Auto2放_Y}','{offsetPoint.出料_Auto2放_Z}','{offsetPoint.出料_Fix1放_X}','{offsetPoint.出料_Fix1放_Y}','{offsetPoint.出料_Fix1放_Z}','{offsetPoint.出料_Fix2放_X}','{offsetPoint.出料_Fix2放_Y}','{offsetPoint.出料_Fix2放_Z}','{offsetPoint.出料_Fix3放_X}','{offsetPoint.出料_Fix3放_Y}','{offsetPoint.出料_Fix3放_Z}','{offsetPoint.出料_AF_变距}','{offsetPoint.测试_梭车1左吸_X}','{offsetPoint.测试_梭车1左吸_Z}','{offsetPoint.测试_梭车2左吸_X}','{offsetPoint.测试_梭车2左吸_Z}','{offsetPoint.测试_梭车1右放_X}','{offsetPoint.测试_梭车1右放_Z}','{offsetPoint.测试_梭车2右放_X}','{offsetPoint.测试_梭车2右放_Z}','{offsetPoint.测试_Site1吸_X}','{offsetPoint.测试_Site2吸_X}','{offsetPoint.测试_Site3吸_X}','{offsetPoint.测试_Site4吸_X}','{offsetPoint.测试_Site5吸_X}','{offsetPoint.测试_Site6吸_X}','{offsetPoint.测试_Site7吸_X}','{offsetPoint.测试_Site8吸_X}','{offsetPoint.测试_Site9吸_X}','{offsetPoint.测试_Site10吸_X}','{offsetPoint.测试_Site11吸_X}','{offsetPoint.测试_Site12吸_X}','{offsetPoint.测试_Site13吸_X}','{offsetPoint.测试_Site14吸_X}','{offsetPoint.测试_Site15吸_X}','{offsetPoint.测试_Site16吸_X}','{offsetPoint.测试_Site1吸_Z}','{offsetPoint.测试_Site2吸_Z}','{offsetPoint.测试_Site3吸_Z}','{offsetPoint.测试_Site4吸_Z}','{offsetPoint.测试_Site5吸_Z}','{offsetPoint.测试_Site6吸_Z}','{offsetPoint.测试_Site7吸_Z}','{offsetPoint.测试_Site8吸_Z}','{offsetPoint.测试_Site9吸_Z}','{offsetPoint.测试_Site10吸_Z}','{offsetPoint.测试_Site11吸_Z}','{offsetPoint.测试_Site12吸_Z}','{offsetPoint.测试_Site13吸_Z}','{offsetPoint.测试_Site14吸_Z}','{offsetPoint.测试_Site15吸_Z}','{offsetPoint.测试_Site16吸_Z}','{offsetPoint.测试_Site1放_X}','{offsetPoint.测试_Site2放_X}','{offsetPoint.测试_Site3放_X}','{offsetPoint.测试_Site4放_X}','{offsetPoint.测试_Site5放_X}','{offsetPoint.测试_Site6放_X}','{offsetPoint.测试_Site7放_X}','{offsetPoint.测试_Site8放_X}','{offsetPoint.测试_Site9放_X}','{offsetPoint.测试_Site10放_X}','{offsetPoint.测试_Site11放_X}','{offsetPoint.测试_Site12放_X}','{offsetPoint.测试_Site13放_X}','{offsetPoint.测试_Site14放_X}','{offsetPoint.测试_Site15放_X}','{offsetPoint.测试_Site16放_X}','{offsetPoint.测试_Site1放_Z}','{offsetPoint.测试_Site2放_Z}','{offsetPoint.测试_Site3放_Z}','{offsetPoint.测试_Site4放_Z}','{offsetPoint.测试_Site5放_Z}','{offsetPoint.测试_Site6放_Z}','{offsetPoint.测试_Site7放_Z}','{offsetPoint.测试_Site8放_Z}','{offsetPoint.测试_Site9放_Z}','{offsetPoint.测试_Site10放_Z}','{offsetPoint.测试_Site11放_Z}','{offsetPoint.测试_Site12放_Z}','{offsetPoint.测试_Site13放_Z}','{offsetPoint.测试_Site14放_Z}','{offsetPoint.测试_Site15放_Z}','{offsetPoint.测试_Site16放_Z}','{offsetPoint.梭车2_前_Y}','{offsetPoint.梭车2_后_Y}','{offsetPoint.抓盘_Empty_X}','{offsetPoint.抓盘_Load_X}','{offsetPoint.抓盘_Auto1_X}','{offsetPoint.抓盘_Auto2_X}')");
-                                    int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,通讯名称,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示,接收测试信号上抬延时,离线模式IC放置位置)" +
+                                    int line3 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into TesterIFParam(测试机名称,Dout连续不良个数,Dout连续不良自动关闭,Dout连续不良报警,Dut累计不良报警个数,Dut累计不良报警使能,总良率报警百分比,总良率报警基数,总良率报警间隔,总良率报警使能,socket使用次数,测试超时时间,timeout超时时间,超时发送timeout,入料手臂吸料超时时间,出料手臂吸料超时时间,测试手臂吸料超时时间,入料手臂吹料时间,出料手臂吹料时间,测试手臂吹料时间,发送开始信号延时,离线模式测试等待时间,入料吸提前开真空,出料吸提前开真空,测试吸提前开真空,Auto侧敲使能,前侧同时敲击,放置多少颗敲击,Auto侧敲次数,侧敲间隔,放料时允许侧敲,侧敲时允许放料,Auto换盘时出料Z回零,通讯名称,测试超时自动关闭Dut,接收超时Bin自动关闭Dut,超时Bin字符串显示,接收测试信号上抬延时,离线模式IC放置位置)" +
                                                                     $"values('{copySetupName.Name}','{tester.Dout连续不良个数}','{tester.Dout连续不良自动关闭}','{tester.Dout连续不良报警}','{tester.Dut累计不良报警个数}','{tester.Dut累计不良报警使能}','{tester.总良率报警百分比}','{tester.总良率报警基数}','{tester.总良率报警间隔}','{tester.总良率报警使能}','{tester.socket使用次数}','{tester.测试超时时间}','{tester.timeout超时时间}','{tester.超时发送timeout}','{tester.入料手臂吸料超时时间}','{tester.出料手臂吸料超时时间}','{tester.测试手臂吸料超时时间}','{tester.入料手臂吹料时间}','{tester.出料手臂吹料时间}','{tester.测试手臂吹料时间}','{tester.发送开始信号延时}','{tester.离线模式测试等待时间}','{tester.入料吸提前开真空}','{tester.出料吸提前开真空}','{tester.测试吸提前开真空}','{tester.Auto侧敲使能}','{tester.前侧同时敲击}','{tester.放置多少颗敲击}','{tester.Auto侧敲次数}','{tester.侧敲间隔}','{tester.放料时允许侧敲}','{tester.侧敲时允许放料}','{tester.Auto换盘时出料Z回零}','{tester.通讯名称}','{tester.测试超时自动关闭Dut}','{tester.接收超时Bin自动关闭Dut}','{tester.超时Bin字符串显示}','{tester.接收测试信号上抬延时}','{tester.离线模式IC放置位置}')");
-                                    int line5 = Sqlite.runSqlNonQuery(SQLiteConnString, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3,fix1num,fix2num,fix3num,color1,color2,color3,color4,color5,name1,name2,name3,name4,name5)" +
+                                    int line5 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"insert into BinParam(分BIN名称,auto1,auto2,fix1,fix2,fix3,fix1num,fix2num,fix3num,color1,color2,color3,color4,color5,name1,name2,name3,name4,name5)" +
                                                                     $"values('{copySetupName.Name}','{binparam.auto1}','{binparam.auto2}','{binparam.fix1}','{binparam.fix2}','{binparam.fix3}','{binparam.fix1num}','{binparam.fix2num}','{binparam.fix3num}','{binparam.color1}','{binparam.color2}','{binparam.color3}','{binparam.color4}','{binparam.color5}','{binparam.name1}','{binparam.name2}','{binparam.name3}','{binparam.name4}','{binparam.name5}')");
                                     if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line5 >= 1)
                                     {
@@ -8325,13 +8287,13 @@ namespace H5509_V2
                 DialogResult dialog = MessageBox.Show($"请确认是否删除档案:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From SetupInfo Where 档案名称 = '{name}'");
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From SetupInfo Where 档案名称 = '{name}'");
                     if (line >= 1)
                     {
-                        int line1 = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From SiteStatus Where Site名称 = '{name}'");
-                        int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From OffsetPoint Where 微调点位名称 = '{name}'");
-                        int line3 = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From TesterIFParam Where 测试机名称 = '{name}'");
-                        int line4 = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From BinParam Where 分BIN名称 = '{name}'");
+                        int line1 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From SiteStatus Where Site名称 = '{name}'");
+                        int line2 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From OffsetPoint Where 微调点位名称 = '{name}'");
+                        int line3 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From TesterIFParam Where 测试机名称 = '{name}'");
+                        int line4 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From BinParam Where 分BIN名称 = '{name}'");
 
                         if (line1 >= 1 && line2 >= 1 && line3 >= 1 && line4 >= 1)
                         {
@@ -8364,7 +8326,7 @@ namespace H5509_V2
                 TrayInfo trayInfo = newTrayInfo.trayInfo;
                 string sql = $"insert into TrayInfo(name,xnum,ynum,xstart,ystart,xpitch,ypitch,width,length,height)" +
                     $"values('{trayInfo.TrayName}', {trayInfo.X_Num}, {trayInfo.Y_Num}, {trayInfo.X_Start}, {trayInfo.Y_Start}, {trayInfo.X_Pitch}, {trayInfo.Y_Pitch}, {trayInfo.Width}, {trayInfo.Length}, {trayInfo.Height})";
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                 if (line <= 0)
                 {
                     RunLog("执行Sql失败:" + sql);
@@ -8388,7 +8350,7 @@ namespace H5509_V2
                 HeatInfo heatInfo = newHeatTrayInfo.heatInfo;
                 string sql = $"insert into HeatInfo(name,xnum,ynum,xstart,ystart,xpitch,ypitch,width,length,height)" +
                     $"values('{heatInfo.HeatName}', {heatInfo.X_Num}, {heatInfo.Y_Num}, {heatInfo.X_Start}, {heatInfo.Y_Start}, {heatInfo.X_Pitch}, {heatInfo.Y_Pitch}, {heatInfo.Width}, {heatInfo.Length}, {heatInfo.Height})";
-                int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                 if (line <= 0)
                 {
                     RunLog("执行Sql失败:" + sql);
@@ -8424,7 +8386,7 @@ namespace H5509_V2
                 DialogResult dialog = MessageBox.Show($"请确认是否删除Tray盘:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From TrayInfo Where name = '{name}'");
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From TrayInfo Where name = '{name}'");
                     if (line >= 1)
                     {
                         刷新Tray盘列表();
@@ -8461,7 +8423,7 @@ namespace H5509_V2
                 DialogResult dialog = MessageBox.Show($"请确认是否删除加热盘:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From HeatInfo Where name = '{name}'");
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From HeatInfo Where name = '{name}'");
                     if (line >= 1)
                     {
                         刷新加热盘列表();
@@ -8920,8 +8882,8 @@ namespace H5509_V2
             string sql2 = $"create table o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL,测试时间 nvarchar(MAX) NULL,测试工位 nvarchar(MAX) NULL)";
             //string sql3 = $"create table otime_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
             //string sql4 = $"create table osite_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
-            int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
-            int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
+            int line1 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql2);
             //int line2 = SqlServer.runSqlNonQuery(SQLServerConnString, sql3);
             //int line3 = SqlServer.runSqlNonQuery(SQLServerConnString, sql4);
 
@@ -10238,7 +10200,7 @@ namespace H5509_V2
                 if (uiCheckBox181.Checked != 按了跳过或编辑报警使能)
                 {
                     string sql = $"update config set value = '{uiCheckBox181.Checked}' where name = '按了跳过或编辑报警使能'";
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                     if (line >= 1)
                     {
                         RunLog($"按了跳过或编辑报警使能:{(按了跳过或编辑报警使能 ? "开" : "关")}->{(uiCheckBox181.Checked ? "开" : "关")}", LogType.OperateLog);
@@ -10254,7 +10216,7 @@ namespace H5509_V2
                 if (numericUpDown196.Value != Load门开门时间)
                 {
                     string sql = $"update config set value = '{numericUpDown196.Value}' where name = 'Load门开门时间'";
-                    int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                    int line2 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
 
                     if (line2 >= 1)
                     {
@@ -10288,7 +10250,7 @@ namespace H5509_V2
                 if (uiCheckBox182.Checked != 按批号保存使能)
                 {
                     string sql = $"update config set value = '{uiCheckBox182.Checked}' where name = '按批号保存使能'";
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                     if (line >= 1)
                     {
                         RunLog($"按批号保存使能:{(按批号保存使能 ? "开" : "关")}->{(uiCheckBox182.Checked ? "开" : "关")}", LogType.OperateLog);
@@ -10303,7 +10265,7 @@ namespace H5509_V2
                 if (richTextBox1.Text.Trim() != LotNoLog保存路径)
                 {
                     string sql = $"update config set value = '{richTextBox1.Text.Trim()}' where name = 'LotNoLog保存路径'";
-                    int line2 = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                    int line2 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
 
                     if (line2 >= 1)
                     {
@@ -10347,7 +10309,7 @@ namespace H5509_V2
                 DialogResult dialog = MessageBox.Show($"请确认是否删除通讯:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, $"delete From ComInfoSet Where 通讯名称 = '{name}'");
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"delete From ComInfoSet Where 通讯名称 = '{name}'");
                     if (line >= 1)
                     {
                         刷新通讯列表();
@@ -10365,7 +10327,7 @@ namespace H5509_V2
             if (dialog == DialogResult.OK)
             {
                 string sql = $"select count(*) from ComInfoSet where 通讯名称 = '{newSetupName.Name}'";
-                string result = Sqlite.runSql(SQLiteConnString, sql, out string value);
+                string result = SqlServer.runSql(SQLServerConnString_Config, sql, out string value);
                 if (result == "Success")
                 {
                     if (Convert.ToInt32(value) >= 1) MessageBox.Show("通讯已存在!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -10376,7 +10338,7 @@ namespace H5509_V2
                         {
                             string site = "{\"Protocol\":\"COM\",\"PortName\":\"COM10\",\"BaudRate\":9600,\"Parity\":0,\"DataBits\":8,\"StopBits\":1}";
                             sql = $"insert into ComInfoSet(通讯名称,客户,通讯协议,通讯方式,测试机数量,同时测试,测试结果中有对应Site,超时Bin字符串,发送开批信息,Site1,Site2,Site3,Site4,Site5,Site6,Site7,Site8,Site9,Site10,Site11,Site12,Site13,Site14,Site15,Site16)values('{newSetupName.Name}','默认','默认','COM','{1}','{1}','true','AB','true','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}','{site}')";
-                            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                             if (line >= 1)
                             {
                                 刷新通讯列表();
@@ -10402,7 +10364,7 @@ namespace H5509_V2
                 if (result == DialogResult.OK)
                 {
                     string sql = $"update config set value = '1' where name = '自定义界面'";
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                     if (line >= 1) 自定义界面 = "1";
                     else MessageBox.Show("更改失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -10429,7 +10391,7 @@ namespace H5509_V2
                 {
                     string sql = $"update config set value = '2' where name = '自定义界面'";
 
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                     if (line >= 1) 自定义界面 = "2";
                     else MessageBox.Show("更改失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -10455,7 +10417,7 @@ namespace H5509_V2
                 if (result == DialogResult.OK)
                 {
                     string sql = $"update config set value = '3' where name = '自定义界面'";
-                    int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+                    int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
                     if (line >= 1) 自定义界面 = "3";
                     else MessageBox.Show("更改失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }

@@ -35,7 +35,8 @@ namespace H5509_V2
         //xcopy /y /s /d D:\GitHub\H5509_V2\H5509_V2\bin\Debug \\192.168.238.209\GitHub\H5509_V2\H5509_V2\bin\Debug
 
         //Data Source=192.168.188.7;Database=H5509;Uid=sa;Encrypt=False;Pwd=sch123
-        //Data Source=192.168.2.5;Database=H5509_V2_24006;Uid=sa;Encrypt=False;Pwd=sch123
+
+        //Data Source=192.168.2.105;Database=H5509_V2_24006_Config;Uid=sa;Encrypt=False;Pwd=sch123
 
         public static MotionEx motionEx;
 
@@ -43,9 +44,11 @@ namespace H5509_V2
 
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
 
-        public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false";
+        public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false"; 
 
-        public static string SQLServerConnString = ""; //在SqlServer数据库获取
+        public static string SQLServerConnString_Config = ""; //在SqlServer数据库获取 H5509_V2_24006_Config  //DataSource = 192.168.2.105; Database=H5509_V2_24006_Config;Uid=sa;Encrypt=False;Pwd=sch123
+
+        public static string SQLServerConnString = ""; //在SqlServer数据库获取 H5509_V2_24006 //DataSource = 192.168.2.105; Database=H5509_V2_24006;Uid=sa;Encrypt=False;Pwd=sch123
 
         public static SocketSave[] SocketSaves = new SocketSave[128];
 
@@ -1466,8 +1469,15 @@ namespace H5509_V2
 
         public static string Init_APPmaster()
         {
+            string result = GetSqliteConnString(); //获取数据库连接字符串
+            if (result != "Success") return result;
+
+            ///设备config
+            result = GetconfigData();
+            if (result != "Success") return result;
+
             ///IO信息
-            string result = GetIOInfo();
+            result = GetIOInfo();
             if (result != "Success") return result;
 
             ///轴信息
@@ -1482,9 +1492,6 @@ namespace H5509_V2
             result = GetAxisHomeInfo();
             if (result != "Success") return result;
 
-            ///设备config
-            result = GetconfigData();
-            if (result != "Success") return result;
 
             ///按钮权限
             result = GetContorlPerm();
@@ -1911,7 +1918,7 @@ namespace H5509_V2
 
         public static string GetIOInfo()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select * from IOInfo", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select * from IOInfo", out DataTable dataTable);
             if (result == "Success")
             {
                 List<IOInfo> IOList = new List<IOInfo>();
@@ -1938,7 +1945,7 @@ namespace H5509_V2
 
         public static string GetInitPoint()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select * from InitPoint", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select * from InitPoint", out DataTable dataTable);
             if (result == "Success")
             {
                 InitPoint initPoint = new InitPoint();
@@ -2049,7 +2056,7 @@ namespace H5509_V2
         public static string GetHeatInfo(string name, out HeatInfo heatInfo)
         {
             heatInfo = new HeatInfo();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from HeatInfo where name = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from HeatInfo where name = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2111,7 +2118,7 @@ namespace H5509_V2
         public static string GetOffsetPoint(string name, out OffsetPoint offsetPoint)
         {
             offsetPoint = new OffsetPoint();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from OffsetPoint where 微调点位名称 = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from OffsetPoint where 微调点位名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2267,7 +2274,7 @@ namespace H5509_V2
 
         public static string GetAxisInfo()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select * from AxisInfo", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select * from AxisInfo", out DataTable dataTable);
             if (result == "Success")
             {
                 List<AxisInfo> axisInfoList = new List<AxisInfo>();
@@ -2285,9 +2292,18 @@ namespace H5509_V2
             return result;
         }
 
+        public static bool GetBoolType(string str)
+        {
+            if (str == "1" || str == "true" || str == "True")
+            {
+                return true;
+            }
+            else return false;
+        }
+
         public static string GetAxisRunInfo()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select * from AxisRunInfo", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select * from AxisRunInfo", out DataTable dataTable);
             if (result == "Success")
             {
                 List<AxisRunInfo> axisRunInfoList = new List<AxisRunInfo>();
@@ -2304,7 +2320,7 @@ namespace H5509_V2
                         平滑时间 = Convert.ToInt16(dr["平滑时间"].ToString()),
                         停止类型 = Convert.ToInt32(dr["停止类型"].ToString()),
                         跟随误差 = Convert.ToInt32(dr["跟随误差"].ToString()),
-                        跟随误差检测 = Convert.ToBoolean(dr["跟随误差检测"].ToString()),
+                        跟随误差检测 = GetBoolType(dr["跟随误差检测"].ToString()),
                         轴二段速方式 = Convert.ToInt32(dr["轴二段速方式"].ToString()),
                         二段速启动时减速速度 = Convert.ToDouble(dr["二段速启动时减速速度"].ToString()),
                         二段速启动时减速距离 = Convert.ToInt32(dr["二段速启动时减速距离"].ToString()),
@@ -2321,7 +2337,7 @@ namespace H5509_V2
 
         public static string GetAxisHomeInfo()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select * from AxisHomeInfo", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select * from AxisHomeInfo", out DataTable dataTable);
             if (result == "Success")
             {
                 List<AxisHomeInfo> axisHomeInfoList = new List<AxisHomeInfo>();
@@ -2346,7 +2362,7 @@ namespace H5509_V2
                         Index最大搜索距离 = Convert.ToInt32(dr["Index最大搜索距离"].ToString()),
                         反向脱离步长 = Convert.ToInt32(dr["反向脱离步长"].ToString()),
                         使能后回零延时 = Convert.ToInt32(dr["使能后回零延时"].ToString()),
-                        回零后检测原点信号 = Convert.ToBoolean(dr["回零后检测原点信号"].ToString()),
+                        回零后检测原点信号 = GetBoolType(dr["回零后检测原点信号"].ToString()),
                     });
                 }
                 APPmaster.AxisHomeInfoList = axisHomeInfoList;
@@ -2357,12 +2373,29 @@ namespace H5509_V2
 
         public static string GetconfigValue(string name, out string value)
         {
-            return Sqlite.runSql(SQLiteConnString, $"select value from config where name = '{name}'", out value);
+            return SqlServer.runSql(SQLServerConnString_Config, $"select value from config where name = '{name}'", out value);
+        }
+
+        public static string GetSqliteConnString() //读取SQlite连接字符串
+        {
+            string result = Sqlite.runSql(SQLiteConnString, "select * from config", out DataTable dataTable);
+            if (result == "Success")
+            {
+                foreach (DataRow item in dataTable.Rows)
+                {
+                    string value = item["value"].ToString();
+                    switch (item["name"].ToString())
+                    {
+                        case "connectionString": SQLServerConnString_Config = value; break;
+                    }
+                }
+            }
+            return result;
         }
 
         public static string GetconfigData()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select * from config", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select * from config", out DataTable dataTable);
             if (result == "Success")
             {
                 foreach (DataRow item in dataTable.Rows)
@@ -2375,12 +2408,12 @@ namespace H5509_V2
                         case "TCPPort": TCPPort = Convert.ToInt32(value); break;
                         case "connectionString": SQLServerConnString = value; break;
                         case "气压报警": 气压报警 = value; break;
-                        case "温控器读取_设定温度报警": 温控器读取_设定温度报警 = Convert.ToBoolean(value); break;
+                        case "温控器读取_设定温度报警": 温控器读取_设定温度报警 = GetBoolType(value.ToString()); break;
                         case "GXN轴卡": GXN轴卡 = value; break;
-                        case "工单号自适应": 工单号自适应 = Convert.ToBoolean(value); break;
-                        case "按了跳过或编辑报警使能": 按了跳过或编辑报警使能 = Convert.ToBoolean(value); break;
+                        case "工单号自适应": 工单号自适应 = GetBoolType(value.ToString()); break;
+                        case "按了跳过或编辑报警使能": 按了跳过或编辑报警使能 = GetBoolType(value.ToString()); break;
                         case "Load门开门时间": Load门开门时间 = Convert.ToInt32(value); break;
-                        case "按批号保存使能": 按批号保存使能 = Convert.ToBoolean(value); break;
+                        case "按批号保存使能": 按批号保存使能 = GetBoolType(value.ToString()); break;
                         case "LotNoLog保存路径": LotNoLog保存路径 = value; break;
                         case "自定义界面": 自定义界面 = value; break;
                     }
@@ -2391,7 +2424,7 @@ namespace H5509_V2
 
         public static string GetLightSet()
         {
-            string result = Sqlite.runSql(SQLiteConnString, "select * from LightSet", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, "select * from LightSet", out DataTable dataTable);
             if (result == "Success")
             {
                 foreach (DataRow dr in dataTable.Rows)
@@ -2399,13 +2432,13 @@ namespace H5509_V2
                     LightSet lightset = new LightSet()
                     {
                         状态 = dr["设备状态"].ToString(),
-                        绿灯颜色显示 = Convert.ToBoolean(dr["绿灯颜色显示"].ToString()),
+                        绿灯颜色显示 = GetBoolType(dr["绿灯颜色显示"].ToString()),
                         绿灯显示方式 = Convert.ToInt32(dr["绿灯显示方式"].ToString()),
-                        黄灯颜色显示 = Convert.ToBoolean(dr["黄灯颜色显示"].ToString()),
+                        黄灯颜色显示 = GetBoolType(dr["黄灯颜色显示"].ToString()),
                         黄灯显示方式 = Convert.ToInt32(dr["黄灯显示方式"].ToString()),
-                        红灯颜色显示 = Convert.ToBoolean(dr["红灯颜色显示"].ToString()),
+                        红灯颜色显示 = GetBoolType(dr["红灯颜色显示"].ToString()),
                         红灯显示方式 = Convert.ToInt32(dr["红灯显示方式"].ToString()),
-                        音乐提示 = Convert.ToBoolean(dr["音乐提示"].ToString()),
+                        音乐提示 = GetBoolType(dr["音乐提示"].ToString()),
                         报警音乐 = dr["报警音乐"].ToString(),
                     };
                     if (lightset.状态 == "报警中") 报警状态灯设置 = lightset;
@@ -2421,7 +2454,7 @@ namespace H5509_V2
         public static string GetLightSet(string state, out LightSet lightset)
         {
             lightset = new LightSet();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from LightSet where 设备状态 = '{state}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from LightSet where 设备状态 = '{state}'", out DataTable dataTable);
             if (result == "Success")
             {
                 foreach (DataRow dr in dataTable.Rows)
@@ -2429,13 +2462,13 @@ namespace H5509_V2
                     lightset = new LightSet()
                     {
                         状态 = dr["设备状态"].ToString(),
-                        绿灯颜色显示 = Convert.ToBoolean(dr["绿灯颜色显示"].ToString()),
+                        绿灯颜色显示 = GetBoolType(dr["绿灯颜色显示"].ToString()),
                         绿灯显示方式 = Convert.ToInt32(dr["绿灯显示方式"].ToString()),
-                        黄灯颜色显示 = Convert.ToBoolean(dr["黄灯颜色显示"].ToString()),
+                        黄灯颜色显示 = GetBoolType(dr["黄灯颜色显示"].ToString()),
                         黄灯显示方式 = Convert.ToInt32(dr["黄灯显示方式"].ToString()),
-                        红灯颜色显示 = Convert.ToBoolean(dr["红灯颜色显示"].ToString()),
+                        红灯颜色显示 = GetBoolType(dr["红灯颜色显示"].ToString()),
                         红灯显示方式 = Convert.ToInt32(dr["红灯显示方式"].ToString()),
-                        音乐提示 = Convert.ToBoolean(dr["音乐提示"].ToString()),
+                        音乐提示 = GetBoolType(dr["音乐提示"].ToString()),
                         报警音乐 = dr["报警音乐"].ToString(),
                     };
                     if (lightset.状态 == state) break;
@@ -2446,7 +2479,7 @@ namespace H5509_V2
 
         public static string GetContorlPerm()
         {
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from ControlPerm", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from ControlPerm", out DataTable dataTable);
             if (result == "Success")
             {
                 List<ControlPerm> listConPerm = new List<ControlPerm>();
@@ -2468,28 +2501,28 @@ namespace H5509_V2
 
         public static string GetTesterValue(string name, string field, out string value)
         {
-            return Sqlite.runSql(SQLiteConnString, $"select {field} from TesterIFParam where 测试机名称 = '{name}'", out value);
+            return SqlServer.runSql(SQLServerConnString_Config, $"select {field} from TesterIFParam where 测试机名称 = '{name}'", out value);
         }
 
         public static string GetSetupValue(string name, string field, out string value)
         {
-            return Sqlite.runSql(SQLiteConnString, $"select {field} from SetupInfo where 档案名称 = '{name}'", out value);
+            return SqlServer.runSql(SQLServerConnString_Config, $"select {field} from SetupInfo where 档案名称 = '{name}'", out value);
         }
 
         public static string GetPassWord(string name, out string value)
         {
-            return Sqlite.runSql(SQLiteConnString, $"select password from Jurisdiction where realName = '{name}'", out value);
+            return SqlServer.runSql(SQLServerConnString_Config, $"select password from Jurisdiction where realName = '{name}'", out value);
         }
 
         public static string GetPermTime(string name, out string value)
         {
-            return Sqlite.runSql(SQLiteConnString, $"select permtime from Jurisdiction where realName = '{name}'", out value);
+            return SqlServer.runSql(SQLServerConnString_Config, $"select permtime from Jurisdiction where realName = '{name}'", out value);
         }
 
         public static string GetSetupInfo(string name, out SetupInfo setupInfo)//
         {
             setupInfo = new SetupInfo();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from SetupInfo where 档案名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 if (dataTable.Rows.Count > 0)
@@ -2515,18 +2548,18 @@ namespace H5509_V2
 
         public static string GetSetupInfoName(out DataTable dt)
         {
-            return Sqlite.runSql(SQLiteConnString, "select 档案名称 from SetupInfo", out dt);
+            return SqlServer.runSql(SQLServerConnString_Config, "select 档案名称 from SetupInfo", out dt);
         }
 
         public static string GetJurisdictionName(out DataTable dt)
         {
-            return Sqlite.runSql(SQLiteConnString, "select realName from Jurisdiction", out dt);
+            return SqlServer.runSql(SQLServerConnString_Config, "select realName from Jurisdiction", out dt);
         }
 
         public static string GetTrayInfo(string name, out TrayInfo trayInfo)
         {
             trayInfo = new TrayInfo();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from TrayInfo where name = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from TrayInfo where name = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2562,7 +2595,7 @@ namespace H5509_V2
         public static string GetSiteStatus(string name, out SiteStatus siteStatus)
         {
             siteStatus = new SiteStatus();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from SiteStatus where Site名称 = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from SiteStatus where Site名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2605,7 +2638,7 @@ namespace H5509_V2
         public static string GetBINParam(string name, out BinParam binParam)
         {
             binParam = new BinParam();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from BinParam where 分BIN名称 = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from BinParam where 分BIN名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2649,7 +2682,7 @@ namespace H5509_V2
         public static string GetTesterIFParam(string name, out TesterIFParam tester)
         {
             tester = new TesterIFParam();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from TesterIFParam where 测试机名称 = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from TesterIFParam where 测试机名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2663,18 +2696,18 @@ namespace H5509_V2
                             测试机名称 = dr["测试机名称"].ToString(),
                             Dout连续不良个数 = Convert.ToInt32(dr["Dout连续不良个数"].ToString()),
                             //Dout连续良品个数 = Convert.ToInt32(dr["Dout连续良品个数"].ToString()),
-                            Dout连续不良自动关闭 = Convert.ToBoolean(dr["Dout连续不良自动关闭"].ToString()),
-                            Dout连续不良报警 = Convert.ToBoolean(dr["Dout连续不良报警"].ToString()),
+                            Dout连续不良自动关闭 = GetBoolType(dr["Dout连续不良自动关闭"].ToString()),
+                            Dout连续不良报警 = GetBoolType(dr["Dout连续不良报警"].ToString()),
                             Dut累计不良报警个数 = Convert.ToInt32(dr["Dut累计不良报警个数"].ToString()),
-                            Dut累计不良报警使能 = Convert.ToBoolean(dr["Dut累计不良报警使能"].ToString()),
+                            Dut累计不良报警使能 = GetBoolType(dr["Dut累计不良报警使能"].ToString()),
                             总良率报警百分比 = Convert.ToDouble(dr["总良率报警百分比"].ToString()),
                             总良率报警基数 = Convert.ToInt32(dr["总良率报警基数"].ToString()),
                             总良率报警间隔 = Convert.ToInt32(dr["总良率报警间隔"].ToString()),
-                            总良率报警使能 = Convert.ToBoolean(dr["总良率报警使能"].ToString()),
+                            总良率报警使能 = GetBoolType(dr["总良率报警使能"].ToString()),
                             socket使用次数 = Convert.ToInt32(dr["socket使用次数"].ToString()),
                             测试超时时间 = Convert.ToInt32(dr["测试超时时间"].ToString()),
                             timeout超时时间 = Convert.ToInt32(dr["timeout超时时间"].ToString()),
-                            超时发送timeout = Convert.ToBoolean(dr["超时发送timeout"].ToString()),
+                            超时发送timeout = GetBoolType(dr["超时发送timeout"].ToString()),
 
                             入料手臂吸料超时时间 = Convert.ToInt32(dr["入料手臂吸料超时时间"].ToString()),
                             出料手臂吸料超时时间 = Convert.ToInt32(dr["出料手臂吸料超时时间"].ToString()),
@@ -2686,24 +2719,24 @@ namespace H5509_V2
                             接收测试信号上抬延时 = Convert.ToInt32(dr["接收测试信号上抬延时"].ToString()),
                             离线模式测试等待时间 = Convert.ToInt32(dr["离线模式测试等待时间"].ToString()),
 
-                            入料吸提前开真空 = Convert.ToBoolean(dr["入料吸提前开真空"].ToString()),
-                            出料吸提前开真空 = Convert.ToBoolean(dr["出料吸提前开真空"].ToString()),
-                            测试吸提前开真空 = Convert.ToBoolean(dr["测试吸提前开真空"].ToString()),
+                            入料吸提前开真空 = GetBoolType(dr["入料吸提前开真空"].ToString()),
+                            出料吸提前开真空 = GetBoolType(dr["出料吸提前开真空"].ToString()),
+                            测试吸提前开真空 = GetBoolType(dr["测试吸提前开真空"].ToString()),
 
-                            Auto侧敲使能 = Convert.ToBoolean(dr["Auto侧敲使能"].ToString()),
-                            前侧同时敲击 = Convert.ToBoolean(dr["前侧同时敲击"].ToString()),
+                            Auto侧敲使能 = GetBoolType(dr["Auto侧敲使能"].ToString()),
+                            前侧同时敲击 = GetBoolType(dr["前侧同时敲击"].ToString()),
                             放置多少颗敲击 = Convert.ToInt32(dr["放置多少颗敲击"].ToString()),
                             Auto侧敲次数 = Convert.ToInt32(dr["Auto侧敲次数"].ToString()),
                             侧敲间隔 = Convert.ToInt32(dr["侧敲间隔"].ToString()),
-                            放料时允许侧敲 = Convert.ToBoolean(dr["放料时允许侧敲"].ToString()),
-                            侧敲时允许放料 = Convert.ToBoolean(dr["侧敲时允许放料"].ToString()),
+                            放料时允许侧敲 = GetBoolType(dr["放料时允许侧敲"].ToString()),
+                            侧敲时允许放料 = GetBoolType(dr["侧敲时允许放料"].ToString()),
 
-                            Auto换盘时出料Z回零 = Convert.ToBoolean(dr["Auto换盘时出料Z回零"].ToString()),
+                            Auto换盘时出料Z回零 = GetBoolType(dr["Auto换盘时出料Z回零"].ToString()),
 
                             通讯名称 = dr["通讯名称"].ToString(),
 
-                            测试超时自动关闭Dut = Convert.ToBoolean(dr["测试超时自动关闭Dut"].ToString()),
-                            接收超时Bin自动关闭Dut = Convert.ToBoolean(dr["接收超时Bin自动关闭Dut"].ToString()),
+                            测试超时自动关闭Dut = GetBoolType(dr["测试超时自动关闭Dut"].ToString()),
+                            接收超时Bin自动关闭Dut = GetBoolType(dr["接收超时Bin自动关闭Dut"].ToString()),
                             超时Bin字符串显示 = dr["超时Bin字符串显示"].ToString(),
 
                             离线模式IC放置位置 = dr["离线模式IC放置位置"].ToString(),
@@ -2728,7 +2761,7 @@ namespace H5509_V2
         public static string GetComInfoSet(string name, out ComInfoSet comInfoSet)
         {
             comInfoSet = new ComInfoSet();
-            string result = Sqlite.runSql(SQLiteConnString, $"select * from ComInfoSet where 通讯名称 = '{name}'", out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, $"select * from ComInfoSet where 通讯名称 = '{name}'", out DataTable dataTable);
             if (result == "Success")
             {
                 try
@@ -2744,9 +2777,9 @@ namespace H5509_V2
                             通讯方式 = dr["通讯方式"].ToString(),
                             测试机数量 = Convert.ToInt32(dr["测试机数量"].ToString()),
                             同时测试 = Convert.ToInt32(dr["同时测试"].ToString()),
-                            测试结果中有对应Site = Convert.ToBoolean(dr["测试结果中有对应Site"].ToString()),
+                            测试结果中有对应Site = GetBoolType(dr["测试结果中有对应Site"].ToString()),
                             超时Bin字符串 = dr["超时Bin字符串"].ToString(),
-                            发送开批信息 = Convert.ToBoolean(dr["发送开批信息"].ToString()),
+                            发送开批信息 = GetBoolType(dr["发送开批信息"].ToString()),
                             Site1 = dr["Site1"].ToString(),
                             Site2 = dr["Site2"].ToString(),
                             Site3 = dr["Site3"].ToString(),
@@ -2877,7 +2910,7 @@ namespace H5509_V2
         public static string UpdateSiteStatus(string name, int site, string value)
         {
             string sql = $"update SiteStatus set Site{site} = '{value}' where Site名称 = '{name}'";
-            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }
@@ -2885,7 +2918,7 @@ namespace H5509_V2
         public static string UpdateRecord(string value)
         {
             string sql = $"update config set value = '{value}' where name = '当前档案'";
-            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }
@@ -2913,7 +2946,7 @@ namespace H5509_V2
                 $"name5 = '{binParam.name5}'" +
                 $"where 分BIN名称 = '{name}'";
 
-            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
             if (line <= 0) return "保存失败";
 
             else return "Success";
@@ -2963,7 +2996,7 @@ namespace H5509_V2
                 $"超时Bin字符串显示 = '{tester.超时Bin字符串显示}'" +
                 $" where 测试机名称 = '{name}'";
 
-            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
             if (line <= 0) return "保存失败";
 
             else return "Success";
@@ -2996,7 +3029,7 @@ namespace H5509_V2
                 $"Site16 = '{tester.Site16}'" +
                 $" where 通讯名称 = '{name}'";
 
-            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
             if (line <= 0) return "保存失败";
 
             else return "Success";
@@ -3005,7 +3038,7 @@ namespace H5509_V2
         public static string UpateJurisdiction(string name, string password, string permTime)
         {
             string sql = $"update Jurisdiction set password = '{password}', permtime = '{permTime}' where realName = '{name}'";
-            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }
@@ -3013,7 +3046,7 @@ namespace H5509_V2
         public static string UpateControlPerm(string name, string perm)
         {
             string sql = $"update ControlPerm set 权限 = '{perm}' where 控件名 = '{name}'";
-            int line = Sqlite.runSqlNonQuery(SQLiteConnString, sql);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
             if (line <= 0) return "保存失败";
             else return "Success";
         }

@@ -49,7 +49,7 @@ CREATE TABLE AxisRunInfo (
 
 -- BinParam表
 CREATE TABLE BinParam (
-    分BIN名称 NVARCHAR(50),
+    分BIN名称 NVARCHAR(100),
     auto1 NVARCHAR(50) DEFAULT '11',
     auto2 NVARCHAR(50) DEFAULT '22',
     fix1 NVARCHAR(50) DEFAULT '1',
@@ -81,22 +81,22 @@ CREATE TABLE ComInfoSet (
     测试结果中有对应Site NVARCHAR(50),
     超时Bin字符串 NVARCHAR(50),
     发送开批信息 NVARCHAR(50) DEFAULT 'true',  -- 布尔值用字符串表示
-    Site1 NVARCHAR(50),
-    Site2 NVARCHAR(50),
-    Site3 NVARCHAR(50),
-    Site4 NVARCHAR(50),
-    Site5 NVARCHAR(50),
-    Site6 NVARCHAR(50),
-    Site7 NVARCHAR(50),
-    Site8 NVARCHAR(50),
-    Site9 NVARCHAR(50),
-    Site10 NVARCHAR(50),
-    Site11 NVARCHAR(50),
-    Site12 NVARCHAR(50),
-    Site13 NVARCHAR(50),
-    Site14 NVARCHAR(50),
-    Site15 NVARCHAR(50),
-    Site16 NVARCHAR(50)
+    Site1 NVARCHAR(100),
+    Site2 NVARCHAR(100),
+    Site3 NVARCHAR(100),
+    Site4 NVARCHAR(100),
+    Site5 NVARCHAR(100),
+    Site6 NVARCHAR(100),
+    Site7 NVARCHAR(100),
+    Site8 NVARCHAR(100),
+    Site9 NVARCHAR(100),
+    Site10 NVARCHAR(100),
+    Site11 NVARCHAR(100),
+    Site12 NVARCHAR(100),
+    Site13 NVARCHAR(100),
+    Site14 NVARCHAR(100),
+    Site15 NVARCHAR(100),
+    Site16 NVARCHAR(100)
 );
 
 -- ComSet表
@@ -111,7 +111,7 @@ CREATE TABLE ComSet (
 -- config表
 CREATE TABLE config (
     name NVARCHAR(50),
-    value NVARCHAR(50)
+    value NVARCHAR(100)
 );
 
 -- ControlPerm表
@@ -345,16 +345,16 @@ CREATE TABLE OffsetPoint (
 
 -- SetupInfo表
 CREATE TABLE SetupInfo (
-    档案名称 NVARCHAR(50),
-    tray盘名称 NVARCHAR(50),
-    site名称 NVARCHAR(50),
-    加热盘名称 NVARCHAR(50),
-    偏移点位名称 NVARCHAR(50),
-    测试机名称 NVARCHAR(50),
-    通讯名称 NVARCHAR(50),
-    分BIN名称 NVARCHAR(50),
-    梭车名称 NVARCHAR(50),
-    温度模式 NVARCHAR(50),
+    档案名称 NVARCHAR(100),
+    tray盘名称 NVARCHAR(100),
+    site名称 NVARCHAR(100),
+    加热盘名称 NVARCHAR(100),
+    偏移点位名称 NVARCHAR(100),
+    测试机名称 NVARCHAR(100),
+    通讯名称 NVARCHAR(100),
+    分BIN名称 NVARCHAR(100),
+    梭车名称 NVARCHAR(100),
+    温度模式 NVARCHAR(100),
     Auto仓提示换盘数量 NVARCHAR(50) DEFAULT '20'
 );
 

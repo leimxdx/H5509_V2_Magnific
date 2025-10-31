@@ -299,3 +299,32 @@
 2025-10-31 17:07:07  =>  PS抓盘手臂放空盘到Auto1流程.Processing =False;
 2025-10-31 17:07:07  =>  PS抓盘手臂放空盘到Auto2流程.StepID = 500;
 2025-10-31 17:07:07  =>  PS抓盘手臂放空盘到Auto2流程.Processing=False;
+2025-10-31 21:02:51  =>  GTN_Open(5,1):(-6)
+2025-10-31 21:02:52  =>  [error][2025-10-31 21:02:52]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 HardwareGXN.GSNAxisController.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 149
+   在 HardwareGXN.GSNAxisController.InitCard() 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 35
+2025-10-31 21:14:05  =>  GTN_Open(5,1):(-6)
+2025-10-31 21:14:06  =>  [error][2025-10-31 21:14:06]：InitCard() System.Exception: 执行指令:  GT_Open
+打开控制器失败(-6)
+   在 HardwareGXN.GSNAxisController.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 149
+   在 HardwareGXN.GSNAxisController.InitCard() 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 35
+2025-10-31 21:14:15  =>  命令：SELECT * FROM dut_3232323_20251029_18_59_23，错误信息：对象名 'dut_3232323_20251029_18_59_23' 无效。
+2025-10-31 21:14:16  =>  命令：SELECT * FROM dut_3232323_20251029_18_59_23，错误信息：对象名 'dut_3232323_20251029_18_59_23' 无效。
+2025-10-31 21:14:20  =>  输入字符串的格式不正确。
+2025-10-31 21:14:20  =>  命令：select count(*) from o_3232323_20251029_18_59_23 where 名称='auto1'，错误信息：对象名 'o_3232323_20251029_18_59_23' 无效。
+2025-10-31 21:14:21  =>  输入字符串的格式不正确。
+2025-10-31 21:14:21  =>  输入字符串的格式不正确。
+2025-10-31 21:14:24  =>  输入字符串的格式不正确。
+2025-10-31 21:14:25  =>  输入字符串的格式不正确。
+2025-10-31 21:14:26  =>  输入字符串的格式不正确。
+2025-10-31 21:14:26  =>  输入字符串的格式不正确。
+2025-10-31 21:14:27  =>  输入字符串的格式不正确。
+2025-10-31 21:14:27  =>  输入字符串的格式不正确。
+2025-10-31 21:14:27  =>  输入字符串的格式不正确。
+2025-10-31 21:14:31  =>  输入字符串的格式不正确。
+2025-10-31 21:14:32  =>  输入字符串的格式不正确。
+2025-10-31 21:14:39  =>  命令：select * from f_3232323_20251029_18_59_23  order by 获取MAP时间，错误信息：对象名 'f_3232323_20251029_18_59_23' 无效。
+2025-10-31 21:14:40  =>  输入字符串的格式不正确。
+2025-10-31 21:14:42  =>  输入字符串的格式不正确。
+2025-10-31 21:15:17  =>  密码错误！

@@ -1035,7 +1035,7 @@ namespace H5509_V2
                                 }
                                 string sql = $"insert into f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
                                 $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','{bb}')";
-                                SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+                                SqlServer.runSqlNonQueryAsync(SQLServerConnString_Config, sql);
 
                                 foreach (string b in bins)
                                 {

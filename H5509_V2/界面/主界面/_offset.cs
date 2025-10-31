@@ -12,6 +12,7 @@ using Sunny.UI;
 using static H5509_V2.APPmaster;
 using MotionCommon;
 using TextFileLogger;
+using SQLServerHelper;
 
 namespace H5509_V2
 {
@@ -272,7 +273,7 @@ namespace H5509_V2
         {
             if (newvalue != oldvalue)
             {
-                int line = SQLiteHelper.Sqlite.runSqlNonQuery(SQLiteConnString, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
+                int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, $"update OffsetPoint set {ptname} = '{newvalue}' where 微调点位名称 = '{otname}'");
                 if (line >= 1)
                 {
                     RunLog($"档案名称-[{icname}]-偏移点位名称-[{otname}]-点位-[{ptname}]{oldvalue}->{newvalue}:更新成功", LogType.ParamLog);

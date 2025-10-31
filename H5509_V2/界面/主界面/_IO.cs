@@ -15,6 +15,7 @@ using Sunny.UI.Win32;
 using static H5509_V2.APPmaster;
 using MotionCommon;
 using SQLiteHelper;
+using SQLServerHelper;
 
 namespace H5509_V2
 {
@@ -52,7 +53,7 @@ namespace H5509_V2
             string sql = "SELECT '系统' UNION ALL SELECT '入料区'  UNION ALL SELECT '出料区'  UNION ALL SELECT '测试区'  UNION ALL SELECT '梭车' UNION ALL SELECT '抓盘手臂'";
 
             //DataRowCollection drs =
-            string result = Sqlite.runSql(SQLiteConnString, sql, out DataTable dataTable);
+            string result = SqlServer.runSql(SQLServerConnString_Config, sql, out DataTable dataTable);
             if (result == "Success")
             {
                 DataRowCollection drs = dataTable.Rows;

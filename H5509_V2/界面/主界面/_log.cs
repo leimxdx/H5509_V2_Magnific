@@ -1507,7 +1507,7 @@ namespace H5509_V2
                 s = listBox1.SelectedItem.ToString().Split('_');
             }
 
-            string sql = "SELECT * FROM dut_" + s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss");
+            string sql = "SELECT * FROM dut_" + s[1].Replace('-','_') + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss");
 
             Task.Run(new Action(() =>
             {
