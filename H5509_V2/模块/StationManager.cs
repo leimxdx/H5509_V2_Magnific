@@ -227,7 +227,6 @@ namespace H5509_V2
             };
             OutSiteQueue2.Enqueue((site, testdata2));
 
-
             // 处理接收到的数据
         }
 

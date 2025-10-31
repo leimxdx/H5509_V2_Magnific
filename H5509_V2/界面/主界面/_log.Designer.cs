@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle73 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle74 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle79 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle80 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle81 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle75 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle76 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle77 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle78 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.cbbLogLevel = new Sunny.UI.UIComboBox();
@@ -190,24 +190,24 @@
             this.dataGridView_flowcaedNoInfo = new System.Windows.Forms.DataGridView();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.tabPage16 = new System.Windows.Forms.TabPage();
-            this.uiButton15 = new Sunny.UI.UIButton();
-            this.comboBox_out4 = new System.Windows.Forms.ComboBox();
-            this.comboBox_out3 = new System.Windows.Forms.ComboBox();
-            this.comboBox_out2 = new System.Windows.Forms.ComboBox();
-            this.comboBox_out1 = new System.Windows.Forms.ComboBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.button_out4 = new Sunny.UI.UIButton();
-            this.button_out3 = new Sunny.UI.UIButton();
-            this.button_out2 = new Sunny.UI.UIButton();
-            this.button_out1 = new Sunny.UI.UIButton();
-            this.label1605 = new System.Windows.Forms.Label();
-            this.label1604 = new System.Windows.Forms.Label();
-            this.label1602 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.dataGridView_out4 = new System.Windows.Forms.DataGridView();
-            this.dataGridView_out3 = new System.Windows.Forms.DataGridView();
-            this.dataGridView_out2 = new System.Windows.Forms.DataGridView();
-            this.dataGridView_out1 = new System.Windows.Forms.DataGridView();
+            this.uiButton34 = new Sunny.UI.UIButton();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.comboBox_数据显示 = new System.Windows.Forms.ComboBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBox_盘数 = new System.Windows.Forms.ComboBox();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.comboBox_盘位 = new System.Windows.Forms.ComboBox();
             this.tabPage17 = new System.Windows.Forms.TabPage();
             this.uiButton16 = new Sunny.UI.UIButton();
             this.uiButton17 = new Sunny.UI.UIButton();
@@ -268,11 +268,7 @@
             this.tabPage15.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_flowcaedNoInfo)).BeginInit();
             this.tabPage16.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_f)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -431,24 +427,24 @@
             this.dgv_data.AllowUserToDeleteRows = false;
             this.dgv_data.AllowUserToResizeColumns = false;
             this.dgv_data.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.White;
-            this.dgv_data.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle73.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle73.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            dataGridViewCellStyle73.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle73.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle73.SelectionForeColor = System.Drawing.Color.White;
+            this.dgv_data.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle73;
             this.dgv_data.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_data.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.dgv_data.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_data.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle74.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle74.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle74.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle74.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle74.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(160)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle74.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle74.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_data.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle74;
             this.dgv_data.ColumnHeadersHeight = 40;
             this.dgv_data.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgv_data.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -456,14 +452,14 @@
             this.LogLevel,
             this.LogType,
             this.LogContent});
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.LightGray;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgv_data.DefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle79.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle79.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle79.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle79.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle79.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle79.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle79.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgv_data.DefaultCellStyle = dataGridViewCellStyle79;
             this.dgv_data.EnableHeadersVisualStyles = false;
             this.dgv_data.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(243)))));
             this.dgv_data.Location = new System.Drawing.Point(20, 178);
@@ -471,35 +467,35 @@
             this.dgv_data.Name = "dgv_data";
             this.dgv_data.ReadOnly = true;
             this.dgv_data.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("微软雅黑", 12F);
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgv_data.RowHeadersDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle80.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle80.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle80.Font = new System.Drawing.Font("微软雅黑", 12F);
+            dataGridViewCellStyle80.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle80.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle80.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle80.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgv_data.RowHeadersDefaultCellStyle = dataGridViewCellStyle80;
             this.dgv_data.RowHeadersWidth = 99;
             this.dgv_data.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("微软雅黑", 10.5F);
-            dataGridViewCellStyle9.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.Color.White;
-            this.dgv_data.RowsDefaultCellStyle = dataGridViewCellStyle9;
+            dataGridViewCellStyle81.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle81.Font = new System.Drawing.Font("微软雅黑", 10.5F);
+            dataGridViewCellStyle81.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle81.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle81.SelectionForeColor = System.Drawing.Color.White;
+            this.dgv_data.RowsDefaultCellStyle = dataGridViewCellStyle81;
             this.dgv_data.RowTemplate.Height = 35;
             this.dgv_data.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dgv_data.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgv_data.Size = new System.Drawing.Size(1414, 705);
+            this.dgv_data.Size = new System.Drawing.Size(1842, 705);
             this.dgv_data.TabIndex = 85;
             this.dgv_data.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_data_RowPostPaint);
             // 
             // LogTime
             // 
             this.LogTime.DataPropertyName = "Time";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.Format = "yyyy-MM-dd HH:mm:ss";
-            this.LogTime.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle75.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle75.Format = "yyyy-MM-dd HH:mm:ss";
+            this.LogTime.DefaultCellStyle = dataGridViewCellStyle75;
             this.LogTime.HeaderText = "日志时间";
             this.LogTime.Name = "LogTime";
             this.LogTime.ReadOnly = true;
@@ -509,8 +505,8 @@
             // LogLevel
             // 
             this.LogLevel.DataPropertyName = "LogLevel";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.LogLevel.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle76.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.LogLevel.DefaultCellStyle = dataGridViewCellStyle76;
             this.LogLevel.HeaderText = "日志等级";
             this.LogLevel.Name = "LogLevel";
             this.LogLevel.ReadOnly = true;
@@ -520,8 +516,8 @@
             // LogType
             // 
             this.LogType.DataPropertyName = "LogType";
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            this.LogType.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle77.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.LogType.DefaultCellStyle = dataGridViewCellStyle77;
             this.LogType.HeaderText = "日志类型";
             this.LogType.Name = "LogType";
             this.LogType.ReadOnly = true;
@@ -531,8 +527,8 @@
             // LogContent
             // 
             this.LogContent.DataPropertyName = "LogContent";
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            this.LogContent.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle78.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            this.LogContent.DefaultCellStyle = dataGridViewCellStyle78;
             this.LogContent.HeaderText = "日志内容";
             this.LogContent.Name = "LogContent";
             this.LogContent.ReadOnly = true;
@@ -587,7 +583,7 @@
             this.uiTabControl6.Name = "uiTabControl6";
             this.uiTabControl6.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl6.SelectedIndex = 0;
-            this.uiTabControl6.Size = new System.Drawing.Size(1468, 990);
+            this.uiTabControl6.Size = new System.Drawing.Size(1896, 990);
             this.uiTabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl6.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -606,7 +602,7 @@
             this.tabPage25.Controls.Add(this.uiTabControl1);
             this.tabPage25.Location = new System.Drawing.Point(0, 40);
             this.tabPage25.Name = "tabPage25";
-            this.tabPage25.Size = new System.Drawing.Size(1468, 950);
+            this.tabPage25.Size = new System.Drawing.Size(1896, 950);
             this.tabPage25.TabIndex = 2;
             this.tabPage25.Text = "日志log";
             // 
@@ -625,7 +621,7 @@
             this.uiTabControl1.Name = "uiTabControl1";
             this.uiTabControl1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl1.SelectedIndex = 0;
-            this.uiTabControl1.Size = new System.Drawing.Size(1468, 950);
+            this.uiTabControl1.Size = new System.Drawing.Size(1896, 950);
             this.uiTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl1.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl1.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -645,7 +641,7 @@
             this.tabPage1.Controls.Add(this.dgv_data);
             this.tabPage1.Location = new System.Drawing.Point(0, 40);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(1468, 910);
+            this.tabPage1.Size = new System.Drawing.Size(1896, 910);
             this.tabPage1.TabIndex = 2;
             this.tabPage1.Text = "表格";
             // 
@@ -720,7 +716,7 @@
             this.tabPage2.Controls.Add(this.richTextBox2);
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1468, 910);
+            this.tabPage2.Size = new System.Drawing.Size(1896, 910);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "操作记录";
             // 
@@ -729,7 +725,7 @@
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox2.Location = new System.Drawing.Point(0, 0);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(1468, 910);
+            this.richTextBox2.Size = new System.Drawing.Size(1896, 910);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             // 
@@ -738,7 +734,7 @@
             this.tabPage3.Controls.Add(this.richTextBox3);
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1468, 910);
+            this.tabPage3.Size = new System.Drawing.Size(1896, 910);
             this.tabPage3.TabIndex = 5;
             this.tabPage3.Text = "报警记录";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -748,7 +744,7 @@
             this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox3.Location = new System.Drawing.Point(0, 0);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(1468, 910);
+            this.richTextBox3.Size = new System.Drawing.Size(1896, 910);
             this.richTextBox3.TabIndex = 2;
             this.richTextBox3.Text = "";
             // 
@@ -758,7 +754,7 @@
             this.tabPage27.Controls.Add(this.panel2);
             this.tabPage27.Location = new System.Drawing.Point(0, 40);
             this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Size = new System.Drawing.Size(1468, 950);
+            this.tabPage27.Size = new System.Drawing.Size(1896, 950);
             this.tabPage27.TabIndex = 4;
             this.tabPage27.Text = "通讯log";
             // 
@@ -769,7 +765,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1468, 950);
+            this.panel2.Size = new System.Drawing.Size(1896, 950);
             this.panel2.TabIndex = 41;
             // 
             // uiGroupBox1
@@ -782,7 +778,7 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(10, 32, 10, 10);
-            this.uiGroupBox1.Size = new System.Drawing.Size(1468, 743);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1896, 743);
             this.uiGroupBox1.TabIndex = 38;
             this.uiGroupBox1.Text = "通讯数据";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -816,7 +812,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(1448, 701);
+            this.uiTabControl2.Size = new System.Drawing.Size(1876, 701);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -833,7 +829,7 @@
             this.tabPage31.Controls.Add(this.richTextBox1);
             this.tabPage31.Location = new System.Drawing.Point(0, 40);
             this.tabPage31.Name = "tabPage31";
-            this.tabPage31.Size = new System.Drawing.Size(1448, 661);
+            this.tabPage31.Size = new System.Drawing.Size(1876, 661);
             this.tabPage31.TabIndex = 16;
             this.tabPage31.Text = "ALLMsg";
             // 
@@ -842,7 +838,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1448, 661);
+            this.richTextBox1.Size = new System.Drawing.Size(1876, 661);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -1356,7 +1352,7 @@
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(1468, 207);
+            this.uiGroupBox2.Size = new System.Drawing.Size(1896, 207);
             this.uiGroupBox2.TabIndex = 39;
             this.uiGroupBox2.Text = "通讯指令";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2030,7 +2026,7 @@
             this.tabPage29.Controls.Add(this.groupBox4);
             this.tabPage29.Location = new System.Drawing.Point(0, 40);
             this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Size = new System.Drawing.Size(200, 60);
+            this.tabPage29.Size = new System.Drawing.Size(1896, 950);
             this.tabPage29.TabIndex = 6;
             this.tabPage29.Text = "数据查询";
             // 
@@ -2048,7 +2044,7 @@
             this.tabControl6.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
             this.tabControl6.Name = "tabControl6";
             this.tabControl6.SelectedIndex = 0;
-            this.tabControl6.Size = new System.Drawing.Size(1056, 924);
+            this.tabControl6.Size = new System.Drawing.Size(1534, 924);
             this.tabControl6.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl6.Style = Sunny.UI.UIStyle.Custom;
             this.tabControl6.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -2063,13 +2059,13 @@
             // 
             // tabPage14
             // 
+            this.tabPage14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage14.Controls.Add(this.tabControl7);
             this.tabPage14.Location = new System.Drawing.Point(0, 40);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(1056, 884);
+            this.tabPage14.Size = new System.Drawing.Size(1534, 884);
             this.tabPage14.TabIndex = 0;
             this.tabPage14.Text = "端口信息";
-            this.tabPage14.UseVisualStyleBackColor = true;
             // 
             // tabControl7
             // 
@@ -2245,7 +2241,7 @@
             this.tabPage21.Controls.Add(this.dataGridView_socketUsed);
             this.tabPage21.Location = new System.Drawing.Point(0, 40);
             this.tabPage21.Name = "tabPage21";
-            this.tabPage21.Size = new System.Drawing.Size(200, 60);
+            this.tabPage21.Size = new System.Drawing.Size(1036, 832);
             this.tabPage21.TabIndex = 3;
             this.tabPage21.Text = "socket使用次数";
             // 
@@ -2346,6 +2342,7 @@
             // 
             // tabPage15
             // 
+            this.tabPage15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage15.Controls.Add(this.uiButton21);
             this.tabPage15.Controls.Add(this.uiButton20);
             this.tabPage15.Controls.Add(this.uiButton19);
@@ -2355,10 +2352,9 @@
             this.tabPage15.Controls.Add(this.textBox2);
             this.tabPage15.Location = new System.Drawing.Point(0, 40);
             this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Size = new System.Drawing.Size(200, 60);
+            this.tabPage15.Size = new System.Drawing.Size(1534, 884);
             this.tabPage15.TabIndex = 1;
             this.tabPage15.Text = "工单详情";
-            this.tabPage15.UseVisualStyleBackColor = true;
             // 
             // uiButton21
             // 
@@ -2447,260 +2443,227 @@
             // 
             // tabPage16
             // 
-            this.tabPage16.Controls.Add(this.uiButton15);
-            this.tabPage16.Controls.Add(this.comboBox_out4);
-            this.tabPage16.Controls.Add(this.comboBox_out3);
-            this.tabPage16.Controls.Add(this.comboBox_out2);
-            this.tabPage16.Controls.Add(this.comboBox_out1);
-            this.tabPage16.Controls.Add(this.groupBox8);
-            this.tabPage16.Controls.Add(this.label1605);
-            this.tabPage16.Controls.Add(this.label1604);
-            this.tabPage16.Controls.Add(this.label1602);
-            this.tabPage16.Controls.Add(this.label6);
-            this.tabPage16.Controls.Add(this.dataGridView_out4);
-            this.tabPage16.Controls.Add(this.dataGridView_out3);
-            this.tabPage16.Controls.Add(this.dataGridView_out2);
-            this.tabPage16.Controls.Add(this.dataGridView_out1);
+            this.tabPage16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage16.Controls.Add(this.uiButton34);
+            this.tabPage16.Controls.Add(this.textBox6);
+            this.tabPage16.Controls.Add(this.label10);
+            this.tabPage16.Controls.Add(this.textBox8);
+            this.tabPage16.Controls.Add(this.label17);
+            this.tabPage16.Controls.Add(this.label16);
+            this.tabPage16.Controls.Add(this.comboBox_数据显示);
+            this.tabPage16.Controls.Add(this.label15);
+            this.tabPage16.Controls.Add(this.textBox4);
+            this.tabPage16.Controls.Add(this.label14);
+            this.tabPage16.Controls.Add(this.textBox3);
+            this.tabPage16.Controls.Add(this.label13);
+            this.tabPage16.Controls.Add(this.textBox1);
+            this.tabPage16.Controls.Add(this.label12);
+            this.tabPage16.Controls.Add(this.label11);
+            this.tabPage16.Controls.Add(this.comboBox_盘数);
+            this.tabPage16.Controls.Add(this.dataGridView1);
+            this.tabPage16.Controls.Add(this.comboBox_盘位);
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 60);
+            this.tabPage16.Size = new System.Drawing.Size(1534, 884);
             this.tabPage16.TabIndex = 2;
             this.tabPage16.Text = "Bin项信息";
-            this.tabPage16.UseVisualStyleBackColor = true;
             // 
-            // uiButton15
+            // uiButton34
             // 
-            this.uiButton15.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiButton15.Location = new System.Drawing.Point(967, 6);
-            this.uiButton15.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton15.Name = "uiButton15";
-            this.uiButton15.Size = new System.Drawing.Size(75, 29);
-            this.uiButton15.TabIndex = 14;
-            this.uiButton15.Text = "刷新";
-            this.uiButton15.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton15.Click += new System.EventHandler(this.uiButton15_Click);
+            this.uiButton34.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton34.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton34.Location = new System.Drawing.Point(739, 15);
+            this.uiButton34.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton34.Name = "uiButton34";
+            this.uiButton34.Size = new System.Drawing.Size(75, 29);
+            this.uiButton34.TabIndex = 442;
+            this.uiButton34.Text = "刷新";
+            this.uiButton34.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton34.Click += new System.EventHandler(this.uiButton34_Click);
             // 
-            // comboBox_out4
+            // textBox6
             // 
-            this.comboBox_out4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_out4.FormattingEnabled = true;
-            this.comboBox_out4.Location = new System.Drawing.Point(978, 66);
-            this.comboBox_out4.Name = "comboBox_out4";
-            this.comboBox_out4.Size = new System.Drawing.Size(70, 29);
-            this.comboBox_out4.TabIndex = 13;
-            this.comboBox_out4.SelectedIndexChanged += new System.EventHandler(this.comboBox_out4_SelectedIndexChanged);
+            this.textBox6.Location = new System.Drawing.Point(899, 181);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(91, 29);
+            this.textBox6.TabIndex = 441;
             // 
-            // comboBox_out3
+            // label10
             // 
-            this.comboBox_out3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_out3.FormattingEnabled = true;
-            this.comboBox_out3.Location = new System.Drawing.Point(716, 66);
-            this.comboBox_out3.Name = "comboBox_out3";
-            this.comboBox_out3.Size = new System.Drawing.Size(70, 29);
-            this.comboBox_out3.TabIndex = 12;
-            this.comboBox_out3.SelectedIndexChanged += new System.EventHandler(this.comboBox_out3_SelectedIndexChanged);
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(828, 184);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(26, 21);
+            this.label10.TabIndex = 440;
+            this.label10.Text = "列";
             // 
-            // comboBox_out2
+            // textBox8
             // 
-            this.comboBox_out2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_out2.FormattingEnabled = true;
-            this.comboBox_out2.Location = new System.Drawing.Point(454, 66);
-            this.comboBox_out2.Name = "comboBox_out2";
-            this.comboBox_out2.Size = new System.Drawing.Size(70, 29);
-            this.comboBox_out2.TabIndex = 11;
-            this.comboBox_out2.SelectedIndexChanged += new System.EventHandler(this.comboBox_out2_SelectedIndexChanged);
+            this.textBox8.Location = new System.Drawing.Point(899, 217);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(91, 29);
+            this.textBox8.TabIndex = 439;
             // 
-            // comboBox_out1
+            // label17
             // 
-            this.comboBox_out1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox_out1.FormattingEnabled = true;
-            this.comboBox_out1.Location = new System.Drawing.Point(192, 66);
-            this.comboBox_out1.Name = "comboBox_out1";
-            this.comboBox_out1.Size = new System.Drawing.Size(70, 29);
-            this.comboBox_out1.TabIndex = 10;
-            this.comboBox_out1.SelectedIndexChanged += new System.EventHandler(this.comboBox_out1_SelectedIndexChanged);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(828, 220);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(26, 21);
+            this.label17.TabIndex = 438;
+            this.label17.Text = "行";
             // 
-            // groupBox8
+            // label16
             // 
-            this.groupBox8.Controls.Add(this.button_out4);
-            this.groupBox8.Controls.Add(this.button_out3);
-            this.groupBox8.Controls.Add(this.button_out2);
-            this.groupBox8.Controls.Add(this.button_out1);
-            this.groupBox8.Location = new System.Drawing.Point(6, 715);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(1042, 105);
-            this.groupBox8.TabIndex = 8;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "数据导出";
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(426, 18);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(74, 21);
+            this.label16.TabIndex = 436;
+            this.label16.Text = "数据显示";
             // 
-            // button_out4
+            // comboBox_数据显示
             // 
-            this.button_out4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_out4.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out4.Location = new System.Drawing.Point(870, 37);
-            this.button_out4.MinimumSize = new System.Drawing.Size(1, 1);
-            this.button_out4.Name = "button_out4";
-            this.button_out4.Size = new System.Drawing.Size(100, 29);
-            this.button_out4.TabIndex = 15;
-            this.button_out4.Text = "导出Excel";
-            this.button_out4.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_out4.Click += new System.EventHandler(this.button_out4_Click);
+            this.comboBox_数据显示.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_数据显示.FormattingEnabled = true;
+            this.comboBox_数据显示.Items.AddRange(new object[] {
+            "测试BIN",
+            "测试时间",
+            "测试工位"});
+            this.comboBox_数据显示.Location = new System.Drawing.Point(508, 15);
+            this.comboBox_数据显示.Name = "comboBox_数据显示";
+            this.comboBox_数据显示.Size = new System.Drawing.Size(136, 29);
+            this.comboBox_数据显示.TabIndex = 437;
+            this.comboBox_数据显示.SelectedIndexChanged += new System.EventHandler(this.comboBox_数据显示_SelectedIndexChanged);
             // 
-            // button_out3
+            // label15
             // 
-            this.button_out3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_out3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out3.Location = new System.Drawing.Point(608, 37);
-            this.button_out3.MinimumSize = new System.Drawing.Size(1, 1);
-            this.button_out3.Name = "button_out3";
-            this.button_out3.Size = new System.Drawing.Size(100, 29);
-            this.button_out3.TabIndex = 14;
-            this.button_out3.Text = "导出Excel";
-            this.button_out3.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_out3.Click += new System.EventHandler(this.button_out3_Click);
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(22, 18);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(42, 21);
+            this.label15.TabIndex = 435;
+            this.label15.Text = "盘位";
             // 
-            // button_out2
+            // textBox4
             // 
-            this.button_out2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_out2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out2.Location = new System.Drawing.Point(346, 37);
-            this.button_out2.MinimumSize = new System.Drawing.Size(1, 1);
-            this.button_out2.Name = "button_out2";
-            this.button_out2.Size = new System.Drawing.Size(100, 29);
-            this.button_out2.TabIndex = 13;
-            this.button_out2.Text = "导出Excel";
-            this.button_out2.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_out2.Click += new System.EventHandler(this.button_out2_Click);
+            this.textBox4.Location = new System.Drawing.Point(899, 328);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(91, 29);
+            this.textBox4.TabIndex = 434;
             // 
-            // button_out1
+            // label14
             // 
-            this.button_out1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_out1.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button_out1.Location = new System.Drawing.Point(84, 37);
-            this.button_out1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.button_out1.Name = "button_out1";
-            this.button_out1.Size = new System.Drawing.Size(100, 29);
-            this.button_out1.TabIndex = 12;
-            this.button_out1.Text = "导出Excel";
-            this.button_out1.TipsFont = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button_out1.Click += new System.EventHandler(this.button_out1_Click);
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(828, 328);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(42, 21);
+            this.label14.TabIndex = 433;
+            this.label14.Text = "工位";
             // 
-            // label1605
+            // textBox3
             // 
-            this.label1605.AutoSize = true;
-            this.label1605.Location = new System.Drawing.Point(900, 69);
-            this.label1605.Name = "label1605";
-            this.label1605.Size = new System.Drawing.Size(40, 21);
-            this.label1605.TabIndex = 7;
-            this.label1605.Text = "Fix3";
+            this.textBox3.Location = new System.Drawing.Point(899, 292);
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(91, 29);
+            this.textBox3.TabIndex = 432;
             // 
-            // label1604
+            // label13
             // 
-            this.label1604.AutoSize = true;
-            this.label1604.Location = new System.Drawing.Point(638, 66);
-            this.label1604.Name = "label1604";
-            this.label1604.Size = new System.Drawing.Size(40, 21);
-            this.label1604.TabIndex = 6;
-            this.label1604.Text = "Fix2";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(828, 292);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(42, 21);
+            this.label13.TabIndex = 431;
+            this.label13.Text = "时间";
             // 
-            // label1602
+            // textBox1
             // 
-            this.label1602.AutoSize = true;
-            this.label1602.Location = new System.Drawing.Point(376, 66);
-            this.label1602.Name = "label1602";
-            this.label1602.Size = new System.Drawing.Size(40, 21);
-            this.label1602.TabIndex = 5;
-            this.label1602.Text = "Fix1";
+            this.textBox1.Location = new System.Drawing.Point(899, 256);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(91, 29);
+            this.textBox1.TabIndex = 430;
             // 
-            // label6
+            // label12
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(102, 69);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(64, 21);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "AUTO2";
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(828, 256);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(54, 21);
+            this.label12.TabIndex = 429;
+            this.label12.Text = "BIN项";
             // 
-            // dataGridView_out4
+            // label11
             // 
-            this.dataGridView_out4.AllowUserToAddRows = false;
-            this.dataGridView_out4.AllowUserToDeleteRows = false;
-            this.dataGridView_out4.AllowUserToResizeColumns = false;
-            this.dataGridView_out4.AllowUserToResizeRows = false;
-            this.dataGridView_out4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_out4.ColumnHeadersVisible = false;
-            this.dataGridView_out4.Location = new System.Drawing.Point(792, 101);
-            this.dataGridView_out4.Name = "dataGridView_out4";
-            this.dataGridView_out4.ReadOnly = true;
-            this.dataGridView_out4.RowHeadersVisible = false;
-            this.dataGridView_out4.RowTemplate.Height = 23;
-            this.dataGridView_out4.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out4.Size = new System.Drawing.Size(256, 608);
-            this.dataGridView_out4.TabIndex = 3;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(216, 18);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(58, 21);
+            this.label11.TabIndex = 427;
+            this.label11.Text = "第几盘";
             // 
-            // dataGridView_out3
+            // comboBox_盘数
             // 
-            this.dataGridView_out3.AllowUserToAddRows = false;
-            this.dataGridView_out3.AllowUserToDeleteRows = false;
-            this.dataGridView_out3.AllowUserToResizeColumns = false;
-            this.dataGridView_out3.AllowUserToResizeRows = false;
-            this.dataGridView_out3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_out3.ColumnHeadersVisible = false;
-            this.dataGridView_out3.Location = new System.Drawing.Point(530, 101);
-            this.dataGridView_out3.Name = "dataGridView_out3";
-            this.dataGridView_out3.ReadOnly = true;
-            this.dataGridView_out3.RowHeadersVisible = false;
-            this.dataGridView_out3.RowTemplate.Height = 23;
-            this.dataGridView_out3.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out3.Size = new System.Drawing.Size(256, 608);
-            this.dataGridView_out3.TabIndex = 2;
+            this.comboBox_盘数.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_盘数.FormattingEnabled = true;
+            this.comboBox_盘数.Items.AddRange(new object[] {
+            "AUTO1",
+            "AUTO2",
+            "FIX1",
+            "FIX2",
+            "FIX3"});
+            this.comboBox_盘数.Location = new System.Drawing.Point(282, 15);
+            this.comboBox_盘数.Name = "comboBox_盘数";
+            this.comboBox_盘数.Size = new System.Drawing.Size(136, 29);
+            this.comboBox_盘数.TabIndex = 428;
+            this.comboBox_盘数.SelectedIndexChanged += new System.EventHandler(this.comboBox_盘数_SelectedIndexChanged);
             // 
-            // dataGridView_out2
+            // dataGridView1
             // 
-            this.dataGridView_out2.AllowUserToAddRows = false;
-            this.dataGridView_out2.AllowUserToDeleteRows = false;
-            this.dataGridView_out2.AllowUserToResizeColumns = false;
-            this.dataGridView_out2.AllowUserToResizeRows = false;
-            this.dataGridView_out2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_out2.ColumnHeadersVisible = false;
-            this.dataGridView_out2.Location = new System.Drawing.Point(268, 101);
-            this.dataGridView_out2.Name = "dataGridView_out2";
-            this.dataGridView_out2.ReadOnly = true;
-            this.dataGridView_out2.RowHeadersVisible = false;
-            this.dataGridView_out2.RowTemplate.Height = 23;
-            this.dataGridView_out2.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out2.Size = new System.Drawing.Size(256, 608);
-            this.dataGridView_out2.TabIndex = 1;
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.ColumnHeadersVisible = false;
+            this.dataGridView1.Location = new System.Drawing.Point(26, 53);
+            this.dataGridView1.MultiSelect = false;
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.ReadOnly = true;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridView1.Size = new System.Drawing.Size(788, 823);
+            this.dataGridView1.TabIndex = 16;
+            this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
-            // dataGridView_out1
+            // comboBox_盘位
             // 
-            this.dataGridView_out1.AllowUserToAddRows = false;
-            this.dataGridView_out1.AllowUserToDeleteRows = false;
-            this.dataGridView_out1.AllowUserToResizeColumns = false;
-            this.dataGridView_out1.AllowUserToResizeRows = false;
-            this.dataGridView_out1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView_out1.ColumnHeadersVisible = false;
-            this.dataGridView_out1.Location = new System.Drawing.Point(6, 101);
-            this.dataGridView_out1.Name = "dataGridView_out1";
-            this.dataGridView_out1.ReadOnly = true;
-            this.dataGridView_out1.RowHeadersVisible = false;
-            this.dataGridView_out1.RowTemplate.Height = 23;
-            this.dataGridView_out1.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridView_out1.Size = new System.Drawing.Size(256, 608);
-            this.dataGridView_out1.TabIndex = 0;
+            this.comboBox_盘位.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox_盘位.FormattingEnabled = true;
+            this.comboBox_盘位.Items.AddRange(new object[] {
+            "AUTO1",
+            "AUTO2",
+            "FIX1",
+            "FIX2",
+            "FIX3"});
+            this.comboBox_盘位.Location = new System.Drawing.Point(72, 15);
+            this.comboBox_盘位.Name = "comboBox_盘位";
+            this.comboBox_盘位.Size = new System.Drawing.Size(136, 29);
+            this.comboBox_盘位.TabIndex = 18;
+            this.comboBox_盘位.SelectedIndexChanged += new System.EventHandler(this.comboBox_盘位_SelectedIndexChanged);
             // 
             // tabPage17
             // 
+            this.tabPage17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage17.Controls.Add(this.uiButton16);
             this.tabPage17.Controls.Add(this.uiButton17);
             this.tabPage17.Controls.Add(this.dataGridView_f);
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(200, 60);
+            this.tabPage17.Size = new System.Drawing.Size(1534, 884);
             this.tabPage17.TabIndex = 3;
             this.tabPage17.Text = "料表信息";
-            this.tabPage17.UseVisualStyleBackColor = true;
             // 
             // uiButton16
             // 
@@ -2861,7 +2824,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.uiTabControl6);
             this.Name = "_log";
-            this.Size = new System.Drawing.Size(1468, 990);
+            this.Size = new System.Drawing.Size(1896, 990);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_data)).EndInit();
             this.uiTabControl6.ResumeLayout(false);
             this.tabPage25.ResumeLayout(false);
@@ -2914,11 +2877,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_flowcaedNoInfo)).EndInit();
             this.tabPage16.ResumeLayout(false);
             this.tabPage16.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView_out1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage17.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView_f)).EndInit();
             this.groupBox4.ResumeLayout(false);
@@ -3007,24 +2966,6 @@
         private Sunny.UI.UIButton uiButton14;
         private System.Windows.Forms.DataGridView dataGridView_flowcaedNoInfo;
         private System.Windows.Forms.TabPage tabPage16;
-        private Sunny.UI.UIButton uiButton15;
-        private System.Windows.Forms.ComboBox comboBox_out4;
-        private System.Windows.Forms.ComboBox comboBox_out3;
-        private System.Windows.Forms.ComboBox comboBox_out2;
-        private System.Windows.Forms.ComboBox comboBox_out1;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private Sunny.UI.UIButton button_out4;
-        private Sunny.UI.UIButton button_out3;
-        private Sunny.UI.UIButton button_out2;
-        private Sunny.UI.UIButton button_out1;
-        private System.Windows.Forms.Label label1605;
-        private System.Windows.Forms.Label label1604;
-        private System.Windows.Forms.Label label1602;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.DataGridView dataGridView_out4;
-        private System.Windows.Forms.DataGridView dataGridView_out3;
-        private System.Windows.Forms.DataGridView dataGridView_out2;
-        private System.Windows.Forms.DataGridView dataGridView_out1;
         private System.Windows.Forms.TabPage tabPage17;
         private Sunny.UI.UIButton uiButton16;
         private Sunny.UI.UIButton uiButton17;
@@ -3111,5 +3052,23 @@
         private Sunny.UI.UICheckBox chk_senddout19;
         private Sunny.UI.UICheckBox chk_senddout18;
         private Sunny.UI.UICheckBox chk_senddout17;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.ComboBox comboBox_盘位;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBox_盘数;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox comboBox_数据显示;
+        private Sunny.UI.UIButton uiButton34;
     }
 }

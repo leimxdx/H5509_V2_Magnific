@@ -127,6 +127,7 @@
             this.uiComboBox119 = new Sunny.UI.UIComboBox();
             this.label794 = new System.Windows.Forms.Label();
             this.uiTitlePanel16 = new Sunny.UI.UITitlePanel();
+            this.label420 = new System.Windows.Forms.Label();
             this.checkBox13 = new Sunny.UI.UICheckBox();
             this.checkBox14 = new Sunny.UI.UICheckBox();
             this.checkBox_timeout = new Sunny.UI.UICheckBox();
@@ -2132,7 +2133,6 @@
             this.uiRadioButton1 = new Sunny.UI.UIRadioButton();
             this.panel18 = new System.Windows.Forms.Panel();
             this.uiRadioButton2 = new Sunny.UI.UIRadioButton();
-            this.label420 = new System.Windows.Forms.Label();
             this.defalut32 = new H5509_V2.Defalut3();
             this.defalut11 = new H5509_V2.Defalut1();
             this.defalut21 = new H5509_V2.Defalut2();
@@ -3820,6 +3820,15 @@
             this.uiTitlePanel16.TabIndex = 69;
             this.uiTitlePanel16.Text = "测试时间";
             this.uiTitlePanel16.TextAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label420
+            // 
+            this.label420.AutoSize = true;
+            this.label420.Location = new System.Drawing.Point(260, 54);
+            this.label420.Name = "label420";
+            this.label420.Size = new System.Drawing.Size(26, 21);
+            this.label420.TabIndex = 360;
+            this.label420.Text = "秒";
             // 
             // checkBox13
             // 
@@ -6014,7 +6023,7 @@
             this.tabPage34.Controls.Add(this.uiTitlePanel18);
             this.tabPage34.Location = new System.Drawing.Point(0, 40);
             this.tabPage34.Name = "tabPage34";
-            this.tabPage34.Size = new System.Drawing.Size(200, 20);
+            this.tabPage34.Size = new System.Drawing.Size(1337, 762);
             this.tabPage34.TabIndex = 4;
             this.tabPage34.Text = "出料手臂";
             // 
@@ -6961,7 +6970,7 @@
             this.tabPage35.Controls.Add(this.uiTitlePanel19);
             this.tabPage35.Location = new System.Drawing.Point(0, 40);
             this.tabPage35.Name = "tabPage35";
-            this.tabPage35.Size = new System.Drawing.Size(200, 20);
+            this.tabPage35.Size = new System.Drawing.Size(1337, 762);
             this.tabPage35.TabIndex = 5;
             this.tabPage35.Text = "测试手臂";
             // 
@@ -9289,7 +9298,7 @@
             this.tabPage36.Controls.Add(this.uiTitlePanel20);
             this.tabPage36.Location = new System.Drawing.Point(0, 40);
             this.tabPage36.Name = "tabPage36";
-            this.tabPage36.Size = new System.Drawing.Size(200, 20);
+            this.tabPage36.Size = new System.Drawing.Size(1337, 762);
             this.tabPage36.TabIndex = 3;
             this.tabPage36.Text = "梭车";
             // 
@@ -9377,7 +9386,7 @@
             this.tabPage37.Controls.Add(this.uiTitlePanel21);
             this.tabPage37.Location = new System.Drawing.Point(0, 40);
             this.tabPage37.Name = "tabPage37";
-            this.tabPage37.Size = new System.Drawing.Size(200, 20);
+            this.tabPage37.Size = new System.Drawing.Size(1337, 762);
             this.tabPage37.TabIndex = 6;
             this.tabPage37.Text = "抓盘手臂";
             // 
@@ -10055,7 +10064,7 @@
             this.tabPage33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage33.Location = new System.Drawing.Point(0, 40);
             this.tabPage33.Name = "tabPage33";
-            this.tabPage33.Size = new System.Drawing.Size(0, 0);
+            this.tabPage33.Size = new System.Drawing.Size(1337, 802);
             this.tabPage33.TabIndex = 4;
             this.tabPage33.Text = "取放设定";
             // 
@@ -10347,7 +10356,7 @@
             // 
             // textBox59
             // 
-            this.textBox59.Location = new System.Drawing.Point(152, 126);
+            this.textBox59.Location = new System.Drawing.Point(152, 125);
             this.textBox59.Name = "textBox59";
             this.textBox59.Size = new System.Drawing.Size(227, 29);
             this.textBox59.TabIndex = 378;
@@ -10357,7 +10366,7 @@
             // textBox58
             // 
             this.textBox58.DecimalPlaces = 2;
-            this.textBox58.Location = new System.Drawing.Point(152, 173);
+            this.textBox58.Location = new System.Drawing.Point(152, 172);
             this.textBox58.Name = "textBox58";
             this.textBox58.Size = new System.Drawing.Size(227, 29);
             this.textBox58.TabIndex = 377;
@@ -10367,7 +10376,7 @@
             // textBox56
             // 
             this.textBox56.DecimalPlaces = 2;
-            this.textBox56.Location = new System.Drawing.Point(152, 220);
+            this.textBox56.Location = new System.Drawing.Point(152, 219);
             this.textBox56.Name = "textBox56";
             this.textBox56.Size = new System.Drawing.Size(227, 29);
             this.textBox56.TabIndex = 376;
@@ -10377,7 +10386,7 @@
             // textBox55
             // 
             this.textBox55.DecimalPlaces = 2;
-            this.textBox55.Location = new System.Drawing.Point(152, 267);
+            this.textBox55.Location = new System.Drawing.Point(152, 266);
             this.textBox55.Name = "textBox55";
             this.textBox55.Size = new System.Drawing.Size(227, 29);
             this.textBox55.TabIndex = 375;
@@ -10387,7 +10396,7 @@
             // textBox54
             // 
             this.textBox54.DecimalPlaces = 2;
-            this.textBox54.Location = new System.Drawing.Point(152, 314);
+            this.textBox54.Location = new System.Drawing.Point(152, 313);
             this.textBox54.Name = "textBox54";
             this.textBox54.Size = new System.Drawing.Size(227, 29);
             this.textBox54.TabIndex = 374;
@@ -10397,7 +10406,7 @@
             // textBox53
             // 
             this.textBox53.DecimalPlaces = 2;
-            this.textBox53.Location = new System.Drawing.Point(152, 361);
+            this.textBox53.Location = new System.Drawing.Point(152, 360);
             this.textBox53.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -10412,7 +10421,7 @@
             // textBox52
             // 
             this.textBox52.DecimalPlaces = 2;
-            this.textBox52.Location = new System.Drawing.Point(152, 408);
+            this.textBox52.Location = new System.Drawing.Point(152, 407);
             this.textBox52.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -10427,7 +10436,7 @@
             // textBox51
             // 
             this.textBox51.DecimalPlaces = 2;
-            this.textBox51.Location = new System.Drawing.Point(152, 455);
+            this.textBox51.Location = new System.Drawing.Point(152, 454);
             this.textBox51.Maximum = new decimal(new int[] {
             300,
             0,
@@ -10451,7 +10460,7 @@
             // label586
             // 
             this.label586.AutoSize = true;
-            this.label586.Location = new System.Drawing.Point(35, 457);
+            this.label586.Location = new System.Drawing.Point(35, 456);
             this.label586.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label586.Name = "label586";
             this.label586.Size = new System.Drawing.Size(61, 21);
@@ -10462,7 +10471,7 @@
             // label587
             // 
             this.label587.AutoSize = true;
-            this.label587.Location = new System.Drawing.Point(35, 410);
+            this.label587.Location = new System.Drawing.Point(35, 409);
             this.label587.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label587.Name = "label587";
             this.label587.Size = new System.Drawing.Size(61, 21);
@@ -10473,7 +10482,7 @@
             // label588
             // 
             this.label588.AutoSize = true;
-            this.label588.Location = new System.Drawing.Point(35, 363);
+            this.label588.Location = new System.Drawing.Point(35, 362);
             this.label588.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label588.Name = "label588";
             this.label588.Size = new System.Drawing.Size(61, 21);
@@ -10484,7 +10493,7 @@
             // label589
             // 
             this.label589.AutoSize = true;
-            this.label589.Location = new System.Drawing.Point(35, 316);
+            this.label589.Location = new System.Drawing.Point(35, 315);
             this.label589.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label589.Name = "label589";
             this.label589.Size = new System.Drawing.Size(84, 21);
@@ -10495,7 +10504,7 @@
             // label590
             // 
             this.label590.AutoSize = true;
-            this.label590.Location = new System.Drawing.Point(35, 269);
+            this.label590.Location = new System.Drawing.Point(35, 268);
             this.label590.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label590.Name = "label590";
             this.label590.Size = new System.Drawing.Size(84, 21);
@@ -10506,7 +10515,7 @@
             // label591
             // 
             this.label591.AutoSize = true;
-            this.label591.Location = new System.Drawing.Point(35, 222);
+            this.label591.Location = new System.Drawing.Point(35, 221);
             this.label591.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label591.Name = "label591";
             this.label591.Size = new System.Drawing.Size(82, 21);
@@ -10538,7 +10547,7 @@
             // label593
             // 
             this.label593.AutoSize = true;
-            this.label593.Location = new System.Drawing.Point(35, 175);
+            this.label593.Location = new System.Drawing.Point(35, 174);
             this.label593.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label593.Name = "label593";
             this.label593.Size = new System.Drawing.Size(82, 21);
@@ -10549,7 +10558,7 @@
             // label594
             // 
             this.label594.AutoSize = true;
-            this.label594.Location = new System.Drawing.Point(35, 128);
+            this.label594.Location = new System.Drawing.Point(35, 127);
             this.label594.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label594.Name = "label594";
             this.label594.Size = new System.Drawing.Size(52, 21);
@@ -10651,7 +10660,7 @@
             this.tabPage40.Controls.Add(this.label580);
             this.tabPage40.Location = new System.Drawing.Point(0, 40);
             this.tabPage40.Name = "tabPage40";
-            this.tabPage40.Size = new System.Drawing.Size(0, 0);
+            this.tabPage40.Size = new System.Drawing.Size(1337, 802);
             this.tabPage40.TabIndex = 4;
             this.tabPage40.Text = "温度设定";
             // 
@@ -13359,7 +13368,7 @@
             this.tabPage41.Controls.Add(this.label791);
             this.tabPage41.Location = new System.Drawing.Point(0, 40);
             this.tabPage41.Name = "tabPage41";
-            this.tabPage41.Size = new System.Drawing.Size(0, 0);
+            this.tabPage41.Size = new System.Drawing.Size(1337, 802);
             this.tabPage41.TabIndex = 4;
             this.tabPage41.Text = "通讯设置";
             // 
@@ -17247,7 +17256,7 @@
             this.tabPage11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage11.Location = new System.Drawing.Point(0, 40);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(200, 20);
+            this.tabPage11.Size = new System.Drawing.Size(1893, 904);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Tag = "@02@#0D#";
             this.tabPage11.Text = "流程调试";
@@ -18064,7 +18073,7 @@
             this.uiTabControl4.Name = "uiTabControl4";
             this.uiTabControl4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl4.SelectedIndex = 0;
-            this.uiTabControl4.Size = new System.Drawing.Size(760, 20);
+            this.uiTabControl4.Size = new System.Drawing.Size(760, 904);
             this.uiTabControl4.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl4.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl4.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -18083,7 +18092,7 @@
             this.tabPage13.Controls.Add(this.groupBox3);
             this.tabPage13.Location = new System.Drawing.Point(0, 40);
             this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Size = new System.Drawing.Size(760, 0);
+            this.tabPage13.Size = new System.Drawing.Size(760, 864);
             this.tabPage13.TabIndex = 0;
             this.tabPage13.Text = "入料流程";
             // 
@@ -19379,7 +19388,7 @@
             this.tabPage14.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage14.Location = new System.Drawing.Point(0, 40);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(760, 20);
+            this.tabPage14.Size = new System.Drawing.Size(760, 864);
             this.tabPage14.TabIndex = 1;
             this.tabPage14.Text = "出料流程";
             // 
@@ -20972,7 +20981,7 @@
             this.tabPage15.Controls.Add(this.groupBox16);
             this.tabPage15.Location = new System.Drawing.Point(0, 40);
             this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Size = new System.Drawing.Size(760, 20);
+            this.tabPage15.Size = new System.Drawing.Size(760, 864);
             this.tabPage15.TabIndex = 2;
             this.tabPage15.Text = "测试入料流程";
             // 
@@ -22508,7 +22517,7 @@
             this.tabPage18.Controls.Add(this.groupBox19);
             this.tabPage18.Location = new System.Drawing.Point(0, 40);
             this.tabPage18.Name = "tabPage18";
-            this.tabPage18.Size = new System.Drawing.Size(760, 20);
+            this.tabPage18.Size = new System.Drawing.Size(760, 864);
             this.tabPage18.TabIndex = 3;
             this.tabPage18.Text = "测试出料流程";
             // 
@@ -24400,7 +24409,7 @@
             this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(200, 20);
+            this.tabPage3.Size = new System.Drawing.Size(1893, 904);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "初始点位";
             // 
@@ -24422,7 +24431,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(200, 20);
+            this.uiTabControl2.Size = new System.Drawing.Size(1893, 904);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -24446,7 +24455,7 @@
             this.tabPage7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage7.Location = new System.Drawing.Point(0, 40);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(200, 0);
+            this.tabPage7.Size = new System.Drawing.Size(1893, 864);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Tag = "";
             this.tabPage7.Text = "入料手臂";
@@ -26385,7 +26394,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 20);
+            this.tabPage8.Size = new System.Drawing.Size(1893, 864);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Tag = "";
             this.tabPage8.Text = "出料手臂";
@@ -28727,7 +28736,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(200, 20);
+            this.tabPage9.Size = new System.Drawing.Size(1893, 864);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Tag = "";
             this.tabPage9.Text = "测试手臂";
@@ -29973,7 +29982,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 20);
+            this.tabPage16.Size = new System.Drawing.Size(1893, 864);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Tag = "";
             this.tabPage16.Text = "梭车";
@@ -30320,7 +30329,7 @@
             this.tabPage17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(200, 20);
+            this.tabPage17.Size = new System.Drawing.Size(1893, 864);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
             // 
@@ -30765,7 +30774,7 @@
             this.tabPage4.Controls.Add(this.uiTitlePanel26);
             this.tabPage4.Location = new System.Drawing.Point(0, 40);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(200, 20);
+            this.tabPage4.Size = new System.Drawing.Size(1893, 864);
             this.tabPage4.TabIndex = 5;
             this.tabPage4.Text = "顶盘手臂";
             // 
@@ -32798,15 +32807,6 @@
             this.uiRadioButton2.TabIndex = 353;
             this.uiRadioButton2.Text = "自定义1";
             this.uiRadioButton2.Click += new System.EventHandler(this.uiRadioButton2_Click);
-            // 
-            // label420
-            // 
-            this.label420.AutoSize = true;
-            this.label420.Location = new System.Drawing.Point(260, 54);
-            this.label420.Name = "label420";
-            this.label420.Size = new System.Drawing.Size(26, 21);
-            this.label420.TabIndex = 360;
-            this.label420.Text = "秒";
             // 
             // defalut32
             // 

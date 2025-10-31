@@ -3087,6 +3087,8 @@ namespace H5509_V2
 
         private void 交换飞梭前后出料BIN数据()
         {
+            飞梭前出料TestSite = 飞梭后出料TestSite;
+            飞梭前出料TestTime = 飞梭后出料TestTime;
             飞梭前出料BIN项 = new string[飞梭后出料BIN项.Length][];
             for (int i = 0; i < 飞梭后出料BIN项.Length; i++)
             {
@@ -4139,10 +4141,14 @@ namespace H5509_V2
                                     //Summary_LotNo = LotNo[0] ?? "" + "_" + 开始时间.ToString("yyyyMMdd") + $"_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
 
                                     Sqlite.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
-                                    string sql = $"create table f_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
-                                    string sql2 = $"create table o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+                                    string sql = $"create table f_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+                                    string sql2 = $"create table o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL,测试时间 nvarchar(MAX) NULL,测试工位 nvarchar(MAX) NULL)";
+                                    //string sql3 = $"create table otime_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+                                    //string sql4 = $"create table osite_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
                                     int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
                                     int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
+                                    //int line2 = SqlServer.runSqlNonQuery(SQLServerConnString, sql3);
+                                    //int line3 = SqlServer.runSqlNonQuery(SQLServerConnString, sql4);
 
                                     if (line <= -2)
                                     {
@@ -4156,7 +4162,9 @@ namespace H5509_V2
                                     {
                                         isstart = false;
                                         Listcode.Add("1400330");
-                                        RunLog("执行SQl异常：" + sql2);
+                                        if (line1 <= -2) RunLog("执行SQl异常：" + sql2);
+                                        //if (line2 <= -2) RunLog("执行SQl异常：" + sql3);
+                                        //if (line3 <= -2) RunLog("执行SQl异常：" + sql4);
                                         RunLog("[Code]1400330,[Msg](按下开始)创建BIN信息数据库失败!", LogType.AlarmLog);
                                     }
 
@@ -7547,8 +7555,12 @@ namespace H5509_V2
             int[] opens = new int[4];
             bool[][] open = new bool[2][];
             bool[] lsopen = new bool[4];
-            string[][] bins = new string[2][];
-            string[] bin = new string[4];
+            string[][] bins = new string[2][]; //用于接收保存并用于放置
+            string[][] bins2 = new string[2][]; //用于原始记录BIN项结果
+            string[] bin = new string[4]; //临时保存用于放置
+            string[] bin2 = new string[4]; //临时保存用于记录原始BIN项结果
+            TimeSpan testtime = new TimeSpan(0); //记录测试测试时间
+            int testsite = 0; //记录测试位置
             short colums = 0;
             int index = 0;
             double xPos = 0;
@@ -7600,6 +7612,13 @@ namespace H5509_V2
                                     new string[]{ 飞梭前出料BIN项[0][0], 飞梭前出料BIN项[0][1], 飞梭前出料BIN项[0][2], 飞梭前出料BIN项[0][3]},
                                     new string[]{ 飞梭前出料BIN项[1][0], 飞梭前出料BIN项[1][1], 飞梭前出料BIN项[1][2], 飞梭前出料BIN项[1][3]},
                                 };
+                                bins2 = new string[2][]
+                                {
+                                    new string[]{ 飞梭前出料BIN项[0][0], 飞梭前出料BIN项[0][1], 飞梭前出料BIN项[0][2], 飞梭前出料BIN项[0][3]},
+                                    new string[]{ 飞梭前出料BIN项[1][0], 飞梭前出料BIN项[1][1], 飞梭前出料BIN项[1][2], 飞梭前出料BIN项[1][3]},
+                                };
+                                testtime = 飞梭前出料TestTime;
+                                testsite = 飞梭前出料TestSite;
 
                                 bool isoth = false;
                                 for (int i = 0; i < bins.Length; i++)
@@ -7672,6 +7691,7 @@ namespace H5509_V2
                                 opens = new int[] { open[0][0] ? 0 : 2, open[0][1] ? 0 : 2, open[0][2] ? 0 : 2, open[0][3] ? 0 : 2 };
                                 lsopen = new bool[] { open[0][0], open[0][1], open[0][2], open[0][3] };
                                 bin = new string[] { bins[0][0], bins[0][1], bins[0][2], bins[0][3] };
+                                bin2 = new string[] { bins2[0][0], bins2[0][1], bins2[0][2], bins2[0][3] };
                                 PS出料手臂吸放料流程.StepID = 510;
                             }
                             else if (open[1].Contains(true))
@@ -7680,6 +7700,7 @@ namespace H5509_V2
                                 opens = new int[] { open[1][0] ? 0 : 2, open[1][1] ? 0 : 2, open[1][2] ? 0 : 2, open[1][3] ? 0 : 2 };
                                 lsopen = new bool[] { open[1][0], open[1][1], open[1][2], open[1][3] };
                                 bin = new string[] { bins[1][0], bins[1][1], bins[1][2], bins[1][3] };
+                                bin2 = new string[] { bins2[1][0], bins2[1][1], bins2[1][2], bins2[1][3] };
 
 
                                 PS出料手臂吸放料流程.StepID = 515;
@@ -8576,31 +8597,41 @@ namespace H5509_V2
                                             {
                                                 Auto1数量++;
                                                 Auto1DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
-                                                Auto1DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
+                                                Auto1DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin2[i + index];
+                                                Auto1DicTestTime[$"{xPoint},{yPoint + i * TrayInterval}"] = testtime.TotalSeconds.ToString("0.0");
+                                                Auto1DicLocation[$"{xPoint},{yPoint + i * TrayInterval}"] = $"{testsite + 1}-{(colums * 4 + (index + i)) + 1}"; //site-dut
                                             }
                                             else if (trayid == 1)
                                             {
                                                 Auto2数量++;
                                                 Auto2DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
-                                                Auto2DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
+                                                Auto2DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin2[i + index];
+                                                Auto2DicTestTime[$"{xPoint},{yPoint + i * TrayInterval}"] = testtime.TotalSeconds.ToString("0.0");
+                                                Auto2DicLocation[$"{xPoint},{yPoint + i * TrayInterval}"] = $"{testsite + 1}-{(colums * 4 + (index + i)) + 1}"; //site-dut
                                             }
                                             else if (trayid == 2)
                                             {
                                                 Fix1数量++;
                                                 Fix1DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
-                                                Fix1DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
+                                                Fix1DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin2[i + index];
+                                                Fix1DicTestTime[$"{xPoint},{yPoint + i * TrayInterval}"] = testtime.TotalSeconds.ToString("0.0");
+                                                Fix1DicLocation[$"{xPoint},{yPoint + i * TrayInterval}"] = $"{testsite + 1}-{(colums * 4 + (index + i)) + 1}"; //site-dut
                                             }
                                             else if (trayid == 3)
                                             {
                                                 Fix2数量++;
                                                 Fix2DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
-                                                Fix2DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
+                                                Fix2DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin2[i + index];
+                                                Fix2DicTestTime[$"{xPoint},{yPoint + i * TrayInterval}"] = testtime.TotalSeconds.ToString("0.0");
+                                                Fix2DicLocation[$"{xPoint},{yPoint + i * TrayInterval}"] = $"{testsite + 1}-{(colums * 4 + (index + i)) + 1}"; //site-dut
                                             }
                                             else
                                             {
                                                 Fix3数量++;
                                                 Fix3DicPoint[$"{xPoint},{yPoint + i * TrayInterval}"] = true;
-                                                Fix3DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin[i + index];
+                                                Fix3DicBin[$"{xPoint},{yPoint + i * TrayInterval}"] = bin2[i + index];
+                                                Fix3DicTestTime[$"{xPoint},{yPoint + i * TrayInterval}"] = testtime.TotalSeconds.ToString("0.0");
+                                                Fix3DicLocation[$"{xPoint},{yPoint + i * TrayInterval}"] = $"{testsite + 1}-{(colums * 4 + (index + i)) + 1}"; //site-dut
                                             }
                                         }
                                     }
@@ -10405,6 +10436,7 @@ namespace H5509_V2
             bool firstdzhome = true;
 
             bool[] count = new bool[8];
+            TimeSpan testtime = new TimeSpan(0);
             Stopwatch stopwatch = new Stopwatch();
             PS测试手臂取已测料流程.StepID = 500;
             while (true)
@@ -10458,6 +10490,8 @@ namespace H5509_V2
                             {
                                 site = sites.SiteId;
                                 bin = sites.Data.SiteTestBin;
+                                testtime = sites.Data.TestTime;
+                                //sites.Data.TestTime = DateTime.Now;
                                 RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->获取Site{site + 1}信息");
                                 IndexTime = DateTime.Now;
                                 bool[][] open = StationManagers.GetStationIC(site); //SiteTestIC[site]; 
@@ -11106,6 +11140,8 @@ namespace H5509_V2
                             飞梭后出料状态 = 1;
                             飞梭后出料IC = new bool[][] { new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] }, new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] } }; //SitesTestIC
                             飞梭后出料BIN项 = new string[][] { new string[] { bin[0], bin[1], bin[2], bin[3] }, new string[] { bin[4], bin[5], bin[6], bin[7] } };
+                            飞梭后出料TestTime = testtime;
+                            飞梭后出料TestSite = site;
                             InSiteQueue.Enqueue(site);
 
                             RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->添加Site:{site + 1}");

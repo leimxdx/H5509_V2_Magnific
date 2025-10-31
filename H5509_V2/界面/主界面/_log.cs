@@ -1189,7 +1189,7 @@ namespace H5509_V2
         }
 
         public void 刷新日志界面(string text)
-        { 
+        {
             //点击数据查询时更新数据
             if (text == "数据查询")
             {
@@ -1217,7 +1217,7 @@ namespace H5509_V2
                     //工单详情
                     case "工单详情": uiButton14_Click(uiButton14, EventArgs.Empty); break;
                     //Bin项信息
-                    case "Bin项信息": uiButton15_Click(uiButton15, EventArgs.Empty); break;
+                    case "Bin项信息": uiButton34_Click(uiButton34, EventArgs.Empty); break;
                     //料表信息
                     case "料表信息": uiButton17_Click(uiButton17, EventArgs.Empty); break;
                 }
@@ -1263,7 +1263,7 @@ namespace H5509_V2
         private void uiTabControl6_Selecting(object sender, TabControlCancelEventArgs e)
         {
             刷新日志界面(e.TabPage.Text);
-            
+
         }
 
         //dut总良率刷新
@@ -1336,7 +1336,7 @@ namespace H5509_V2
                             {
                                 ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
                             }
-                            string value = ts.ToString().Replace(".", "天") + ",";
+                            string value = ts.ToString().Replace(".", "天") + "\r\n";
                             value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
                             double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
 
@@ -1431,7 +1431,7 @@ namespace H5509_V2
                             {
                                 ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
                             }
-                            string value = ts.ToString().Replace(".", "天") + ",";
+                            string value = ts.ToString().Replace(".", "天") + "\r\n";
                             value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
                             double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
 
@@ -1532,7 +1532,7 @@ namespace H5509_V2
                             {
                                 ts = new TimeSpan(long.Parse(dr.ItemArray[3].ToString().Substring(0, dr.ItemArray[3].ToString().Length - 7) + "0000000"));
                             }
-                            string value = ts.ToString().Replace(".", "天") + ",";
+                            string value = ts.ToString().Replace(".", "天") + "\r\n";
                             value += dr.ItemArray[1].ToString() + @"/" + dr.ItemArray[2].ToString() + "=";
                             double d = double.Parse(dr.ItemArray[1].ToString()) / double.Parse(dr.ItemArray[2].ToString());
 
@@ -1704,92 +1704,6 @@ namespace H5509_V2
                 catch (Exception ex)
                 {
                     RunLog("刷新工单详情信息失败!" + sql);
-                }
-            }));
-
-        }
-
-        //Bin项信息刷新
-        private void uiButton15_Click(object sender, EventArgs e)
-        {
-            string[] s;
-            //清空dataGridView_out 1~4
-            for (int i = 1; i <= 4; i++)
-            {
-                (tabPage16.Controls["comboBox_out" + i] as ComboBox).Items.Clear();
-                (tabPage16.Controls["dataGridView_out" + i] as DataGridView).Columns.Clear();
-            }
-
-            if (listBox1.SelectedItem == null) return;
-            else
-            {
-                s = listBox1.SelectedItem.ToString().Split('_');
-            }
-
-            Task.Run(new Action(() =>
-            {
-                string sql = "";
-                try
-                {
-                    sql = $"select count(*) from o_{s[1].Replace("-","_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='auto2'";
-                    string res = SqlServer.runSql(SQLServerConnString, sql, out int num1);
-                    if (res == "Success" && num1 > 0)
-                    {
-                        this.Invoke(new Action(() =>
-                        {
-                            for (int i = 1; i <= num1; i++)
-                            {
-                                comboBox_out1.Items.Add(i.ToString());
-                            }
-                            comboBox_out1.SelectedIndex = 0;
-                        }));
-                    }
-
-                    sql = $"select count(*) from o_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix1'";
-                    res = SqlServer.runSql(SQLServerConnString, sql, out int num2);
-                    if (res == "Success" && num2 > 0)
-                    {
-                        this.Invoke(new Action(() =>
-                        {
-                            for (int i = 1; i <= num2; i++)
-                            {
-                                comboBox_out2.Items.Add(i.ToString());
-                            }
-                            comboBox_out2.SelectedIndex = 0;
-                        }));
-                    }
-
-                    sql = $"select count(*) from o_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix2'";
-                    res = SqlServer.runSql(SQLServerConnString, sql, out int num3);
-                    if (res == "Success" && num3 > 0)
-                    {
-                        this.Invoke(new Action(() =>
-                        {
-                            for (int i = 1; i <= num3; i++)
-                            {
-                                comboBox_out3.Items.Add(i.ToString());
-                            }
-                            comboBox_out3.SelectedIndex = 0;
-                        }));
-                    }
-
-                    sql = $"select count(*) from o_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='fix3'";
-                    res = SqlServer.runSql(SQLServerConnString, sql, out int num4);
-                    if (res == "Success" && num4 > 0)
-                    {
-                        this.Invoke(new Action(() =>
-                        {
-                            for (int i = 1; i <= num4; i++)
-                            {
-                                comboBox_out4.Items.Add(i.ToString());
-                            }
-                            comboBox_out4.SelectedIndex = 0;
-                        }));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    RunLog("刷新Bin项信息失败!" + sql);
                 }
             }));
         }
@@ -1989,7 +1903,7 @@ namespace H5509_V2
                 //工单详情
                 case "工单详情": uiButton14_Click(uiButton14, EventArgs.Empty); break;
                 //Bin项信息
-                case "Bin项信息": uiButton15_Click(uiButton15, EventArgs.Empty); break;
+                case "Bin项信息": uiButton34_Click(uiButton34, EventArgs.Empty); break;
                 //料表信息
                 case "料表信息": uiButton17_Click(uiButton17, EventArgs.Empty); break;
             }
@@ -2149,45 +2063,6 @@ namespace H5509_V2
 
             }
         }
-        private void button_out1_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                ExportDataGridViewToExcel(dataGridView_out1, folderBrowserDialog.SelectedPath + "\\Bin项信息-Auto2第" + comboBox_out1.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
-            }
-        }
-
-        private void button_out2_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                ExportDataGridViewToExcel(dataGridView_out2, folderBrowserDialog.SelectedPath + "\\Bin项信息-Fix1第" + comboBox_out2.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
-            }
-        }
-
-        private void button_out3_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                ExportDataGridViewToExcel(dataGridView_out3, folderBrowserDialog.SelectedPath + "\\Bin项信息-Fix2第" + comboBox_out3.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
-            }
-        }
-
-        private void button_out4_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
-            {
-                string selectedFolderPath = folderBrowserDialog.SelectedPath;
-                ExportDataGridViewToExcel(dataGridView_out4, folderBrowserDialog.SelectedPath + "\\Bin项信息-Fix3第" + comboBox_out4.Text + "盘-" + listBox1.Text.Replace(":", ".") + ".xlsx");
-            }
-        }
 
         private void uiButton16_Click(object sender, EventArgs e)
         {
@@ -2209,22 +2084,29 @@ namespace H5509_V2
         /// <param name="y">行</param>
         void dGV_init(DataGridView dGV, int x, int y)
         {
-            dGV.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False; // 禁止换行
-            dGV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None; // 关闭自动调整行高
-            dGV.DefaultCellStyle.Font = new Font("Microsoft YaHei UI", 10);
-
-            dGV.RowTemplate.Height = dGV.Size.Height / y; // 设置所有新行的默认高度
-
-            dGV.Columns.Clear();
-
-            for (int i = 0; i < x; i++)
+            try
             {
-                dGV.Columns.Add("Column" + i.ToString(), "Column" + i.ToString());
-                dGV.Columns[i].Width = dGV.Width / x; // 设置所有列的宽度
-            }
+                dGV.RowsDefaultCellStyle.WrapMode = DataGridViewTriState.False; // 禁止换行
+                dGV.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None; // 关闭自动调整行高
+                dGV.DefaultCellStyle.Font = new Font("Microsoft YaHei UI", 10);
 
-            dGV.Rows.Add(y);
+                dGV.RowTemplate.Height = dGV.Size.Height / y; // 设置所有新行的默认高度
+
+                dGV.Columns.Clear();
+
+                for (int i = 0; i < x; i++)
+                {
+                    dGV.Columns.Add("Column" + i.ToString(), "Column" + i.ToString());
+                    dGV.Columns[i].Width = dGV.Width / x; // 设置所有列的宽度
+                }
+
+                dGV.Rows.Add(y);
+            }
+            catch { }
         }
+
+        DataTable dataGridView_out_dt;
+
         /// <summary>
         /// 
         /// </summary>
@@ -2232,22 +2114,52 @@ namespace H5509_V2
         /// <param name="name">auto2,fix1,fix2,fix3</param>
         /// <param name="s">表名</param>
         /// <param name="num">第N盘</param>
-        public void update_dataGridView_out(DataGridView dgv, string name, string s, int num)
+        public void update_dataGridView_out(DataGridView dgv, string name, string s, int num, int d)
         {
             string sql = $"select * from o_{s.Replace("-", "_")} where 名称='{name}' order by 时间 offset {num - 1} rows fetch next 1 rows only";
             Task.Run(new Action(() =>
             {
                 try
                 {
-                    string res = SqlServer.runSql(SQLServerConnString, sql, out DataTable dt);
+                    string res = SqlServer.runSql(SQLServerConnString, sql, out dataGridView_out_dt);
                     if (res != "Success") return;
+                    //{
+                    //    dataGridView1.DataSource = null;
+                    //    //dataGridView1.Columns.Clear();
 
-                    int x = int.Parse(dt.Rows[0].ItemArray[2].ToString().Split('x')[0]);
-                    int y = int.Parse(dt.Rows[0].ItemArray[2].ToString().Split('x')[1]);
+                    //} 
 
-                    this.Invoke(new Action(() => { dGV_init(dgv, x, y); }));
+                    if (dataGridView_out_dt.Rows.Count == 0)
+                    {
+                        dataGridView1.Columns.Clear();
+                        dataGridView1.DataSource = null;
+                        return;
+                    }
 
-                    string[] value = dt.Rows[0].ItemArray[3].ToString().Split(',');
+                    int x = int.Parse(dataGridView_out_dt.Rows[0].ItemArray[2].ToString().Split('x')[0]);
+                    int y = int.Parse(dataGridView_out_dt.Rows[0].ItemArray[2].ToString().Split('x')[1]);
+
+                    string[] value = dataGridView_out_dt.Rows[0].ItemArray[3].ToString().Split(',');
+
+                    this.Invoke(new Action(() =>
+                    {
+                        dGV_init(dgv, x, y);
+
+                        textBox8.Text = "1";
+                        textBox6.Text = "1";
+                        textBox1.Text = value[0];
+                        textBox3.Text = "";
+                        textBox4.Text = "";
+
+                        if (dataGridView_out_dt.Columns.Count > 4)
+                        {
+                            value = dataGridView_out_dt.Rows[0].ItemArray[3 + d].ToString().Split(',');
+
+                            textBox3.Text = dataGridView_out_dt.Rows[0].ItemArray[4].ToString().Split(',')[0];
+
+                            textBox4.Text = dataGridView_out_dt.Rows[0].ItemArray[5].ToString().Split(',')[0];
+                        }
+                    }));
                     int z = 0;
                     for (int i = 0; i < x; i++)
                     {
@@ -2257,6 +2169,7 @@ namespace H5509_V2
                             if (++z == value.Length) return;
                         }
                     }
+
                 }
                 catch (Exception ex)
                 {
@@ -2266,49 +2179,6 @@ namespace H5509_V2
 
         }
 
-        private void comboBox_out1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string[] s;
-            if (listBox1.SelectedItem == null) return;
-            else
-            {
-                s = listBox1.SelectedItem.ToString().Split('_');
-            }
-            update_dataGridView_out(dataGridView_out1, "auto2", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out1.Text));
-        }
-        private void comboBox_out2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string[] s;
-            if (listBox1.SelectedItem == null) return;
-            else
-            {
-                s = listBox1.SelectedItem.ToString().Split('_');
-            }
-            update_dataGridView_out(dataGridView_out2, "fix1", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out2.Text));
-
-        }
-        private void comboBox_out3_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string[] s;
-            if (listBox1.SelectedItem == null) return;
-            else
-            {
-                s = listBox1.SelectedItem.ToString().Split('_');
-            }
-            update_dataGridView_out(dataGridView_out3, "fix2", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out3.Text));
-
-        }
-        private void comboBox_out4_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string[] s;
-            if (listBox1.SelectedItem == null) return;
-            else
-            {
-                s = listBox1.SelectedItem.ToString().Split('_');
-            }
-            update_dataGridView_out(dataGridView_out4, "fix3", s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_out4.Text));
-
-        }
 
         private void tabControl6_Selecting(object sender, TabControlCancelEventArgs e)
         {
@@ -2332,7 +2202,7 @@ namespace H5509_V2
                 //工单详情
                 case "工单详情": uiButton14_Click(uiButton14, EventArgs.Empty); break;
                 //Bin项信息
-                case "Bin项信息": uiButton15_Click(uiButton15, EventArgs.Empty); break;
+                case "Bin项信息": uiButton34_Click(uiButton34, EventArgs.Empty); break;
                 //料表信息
                 case "料表信息": uiButton17_Click(uiButton17, EventArgs.Empty); break;
             }
@@ -2497,6 +2367,143 @@ namespace H5509_V2
         private void uiCheckBox2_CheckedChanged(object sender, EventArgs e)
         {
             richtext_senddata.Text = GetSendisopen();
+        }
+
+        private void uiButton34_Click(object sender, EventArgs e)
+        {
+            string[] s;
+
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('_');
+            }
+
+            if (comboBox_盘位.SelectedIndex == -1)
+            {
+                if (comboBox_盘位.Items.Count > 0)
+                {
+                    comboBox_盘位.SelectedIndex = 0;
+                }
+            }
+            if (comboBox_盘数.SelectedIndex == -1)
+            {
+                if (comboBox_盘数.Items.Count > 0)
+                {
+                    comboBox_盘数.SelectedIndex = 0;
+                }
+            }
+            if (comboBox_数据显示.SelectedIndex == -1)
+            {
+                if (comboBox_数据显示.Items.Count > 0)
+                {
+                    this.comboBox_数据显示.SelectedIndexChanged -= new System.EventHandler(this.comboBox_数据显示_SelectedIndexChanged);
+                    comboBox_数据显示.SelectedIndex = 0;
+                    this.comboBox_数据显示.SelectedIndexChanged += new System.EventHandler(this.comboBox_数据显示_SelectedIndexChanged);
+                }
+            }
+
+            try
+            {
+                if (dataGridView_out_dt != null)
+                {
+                    dataGridView_out_dt.Columns.Clear();
+                    dataGridView_out_dt.Clear();
+                }
+                if (dataGridView1 != null && dataGridView1.Rows.Count > 0)
+                {
+                    dataGridView1.Columns.Clear();
+                    dataGridView1.DataSource = null;
+                }
+                update_dataGridView_out(dataGridView1, comboBox_盘位.Text.ToLower(), s[1] + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss"), int.Parse(comboBox_盘数.Text), comboBox_数据显示.SelectedIndex);
+            }
+            catch (Exception ex)
+            {
+                RunLog(ex.Message);
+            }
+
+        }
+
+        private void comboBox_盘数_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            uiButton34_Click(uiButton34, EventArgs.Empty);
+        }
+
+        private void comboBox_盘位_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string[] s;
+
+
+            if (listBox1.SelectedItem == null) return;
+            else
+            {
+                s = listBox1.SelectedItem.ToString().Split('_');
+            }
+
+            comboBox_盘数.Items.Clear();
+            string trayname = comboBox_盘位.Text.ToLower();
+            Task.Run(new Action(() =>
+            {
+                string sql = "";
+                try
+                {
+                    sql = $"select count(*) from o_{s[1].Replace("-", "_") + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss")} where 名称='{trayname}'";
+                    string res = SqlServer.runSql(SQLServerConnString, sql, out int num0);
+                    if (res == "Success" && num0 > 0)
+                    {
+                        this.Invoke(new Action(() =>
+                        {
+                            for (int i = 1; i <= num0; i++)
+                            {
+                                comboBox_盘数.Items.Add(i.ToString());
+                            }
+                            comboBox_盘数.SelectedIndex = 0;
+                        }));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    RunLog("刷新Bin项信息失败!" + sql);
+                }
+            }));
+        }
+
+        private void comboBox_数据显示_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            uiButton34_Click(uiButton34, EventArgs.Empty);
+        }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                int z = 0;
+                if (e.ColumnIndex >= 0 && e.RowIndex >= 0)
+                {
+                    z = e.ColumnIndex * dataGridView_out_dt.Rows.Count + e.RowIndex;
+                }
+                else
+                {
+                    return;
+                }
+
+                textBox8.Text = (e.RowIndex + 1).ToString();
+                textBox6.Text = (e.ColumnIndex + 1).ToString();
+
+                string[] bin项 = dataGridView_out_dt.Rows[0].ItemArray[3].ToString().Split(',');
+                textBox1.Text = bin项[z];
+
+                if (dataGridView_out_dt.Columns.Count < 5)
+                {
+                    return;
+                }
+
+                string[] 测试时间 = dataGridView_out_dt.Rows[0].ItemArray[4].ToString().Split(',');
+                textBox3.Text = 测试时间[z];
+                string[] 测试工位 = dataGridView_out_dt.Rows[0].ItemArray[5].ToString().Split(',');
+                textBox4.Text = 测试工位[z];
+            }
+            catch { }
         }
     }
 

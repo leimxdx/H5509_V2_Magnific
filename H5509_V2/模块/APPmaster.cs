@@ -34,6 +34,9 @@ namespace H5509_V2
     {
         //xcopy /y /s /d D:\GitHub\H5509_V2\H5509_V2\bin\Debug \\192.168.238.209\GitHub\H5509_V2\H5509_V2\bin\Debug
 
+        //Data Source=192.168.188.7;Database=H5509;Uid=sa;Encrypt=False;Pwd=sch123
+        //Data Source=192.168.2.5;Database=H5509_V2_24006;Uid=sa;Encrypt=False;Pwd=sch123
+
         public static MotionEx motionEx;
 
         public static Handler handler;
@@ -135,6 +138,10 @@ namespace H5509_V2
         public static int StartSite数量 = 0;
 
         public static string trayTemp = "";
+
+        public static string trayTestTime = "";
+
+        public static string trayTestSite = "";
 
         public static int Socket使用次数超限数 = 0;
 
@@ -628,7 +635,7 @@ namespace H5509_V2
 
         public static int 出料数 { get { return Auto1数量 + Auto2数量 + Fix1数量 + Fix2数量 + Fix3数量; } }
 
-        public static int Fail数量 { get { return  Auto2数量 + Fix1数量 + Fix2数量 + Fix3数量; } }
+        public static int Fail数量 { get { return Auto2数量 + Fix1数量 + Fix2数量 + Fix3数量; } }
 
         public static int Auto1数量 = 0;
 
@@ -753,6 +760,26 @@ namespace H5509_V2
         public static Dictionary<string, string> Fix2DicBin { get; set; } = new Dictionary<string, string>();
 
         public static Dictionary<string, string> Fix3DicBin { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Auto1DicTestTime { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Auto2DicTestTime { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Fix1DicTestTime { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Fix2DicTestTime { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Fix3DicTestTime { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Auto1DicLocation { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Auto2DicLocation { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Fix1DicLocation { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Fix2DicLocation { get; set; } = new Dictionary<string, string>();
+
+        public static Dictionary<string, string> Fix3DicLocation { get; set; } = new Dictionary<string, string>();
 
         public static int Fix1Num = 1;
 
@@ -1100,7 +1127,15 @@ namespace H5509_V2
 
         public static string[][] 飞梭前出料BIN项;
 
+        public static TimeSpan 飞梭前出料TestTime;
+
+        public static int 飞梭前出料TestSite;
+
         public static string[][] 飞梭后出料BIN项;
+
+        public static TimeSpan 飞梭后出料TestTime;
+
+        public static int 飞梭后出料TestSite;
 
         #region 运行流程参数
 
@@ -3019,7 +3054,7 @@ namespace H5509_V2
                        $"Fix1名称,Fix2名称,Fix3名称,Auto1总数,Auto2总数,Fix1总数,Fix2总数,Fix3总数," +
                        $"Auto1数量,Auto2数量,Fix1数量,Fix2数量,Fix3数量,Socket开启数量,生产中关闭Socket数量,报警次数,加热类型,加热设定值,加热误差范围,生产速度," +
                        $"IC吸取模式,测试模式)" +
-                        $"values('{开始时间:yyyy年MM月dd日 HH:mm:ss}','{LotNo[0]}','{LotNo[14]}','{LotNo[3]}','{LotNo[4]}','{LotNo[13]}','{出料数}','{Auto1数量}','{Auto1良率:0.00}%'," +
+                        $"values('{开始时间:yyyy年MM月dd日 HH:mm:ss}','{(LotNo[0] ?? "")}','{(LotNo[14] ?? "")}','{(LotNo[3] ?? "")}','{(LotNo[4] ?? "")}','{(LotNo[13] ?? "")}','{出料数}','{Auto1数量}','{Auto1良率:0.00}%'," +
                        $"'{载入数}','{结束时间}','{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}','{设置信息.档案名称}','{UPHNum}','{设置信息.分BIN信息.name1}','{设置信息.分BIN信息.name2}'," +  //工作时间.Ticks
                        $"'{设置信息.分BIN信息.name3}','{设置信息.分BIN信息.name4}','{设置信息.分BIN信息.name5}','{Auto1数量}','{Auto2数量}','{Fix1数量}','{Fix2数量}','{Fix3数量}'," +
                        $"'{auto1_num}','{auto2_num}','{fix1_num}','{fix2_num}','{fix3_num}','{StartSite数量}','{StartSite数量 - 开Site数量}','{报警次数}','{温度模式}','{设置信息.Heat盘信息.设定温度}','{设置信息.Heat盘信息.波动温度}','{生产速度}'," +
@@ -3985,72 +4020,112 @@ namespace H5509_V2
 
         public static void Auto1TrayICMapInit()
         {
-            Auto1DicPoint = new Dictionary<string, bool>();
-            Auto1DicBin = new Dictionary<string, string>();
+            Dictionary<string, bool> auto1DicPoint = new Dictionary<string, bool>();
+            Dictionary<string, string> auto1DicBin = new Dictionary<string, string>();
+            Dictionary<string, string> auto1DicTestTime = new Dictionary<string, string>();
+            Dictionary<string, string> auto1DicLocation = new Dictionary<string, string>();
             for (int i = 0; i < Auto1XPoint.Length; i++)
             {
                 for (int j = 0; j < Auto1YPoint.Length; j++)
                 {
-                    Auto1DicPoint.Add($"{i},{j}", false);
-                    Auto1DicBin.Add($"{i},{j}", ""); //"0"
+                    auto1DicPoint.Add($"{i},{j}", false);
+                    auto1DicBin.Add($"{i},{j}", ""); //"0"
+                    auto1DicTestTime.Add($"{i},{j}", ""); //"0"
+                    auto1DicLocation.Add($"{i},{j}", ""); //"0"
                 }
             }
+            Auto1DicPoint = auto1DicPoint;
+            Auto1DicBin = auto1DicBin;
+            Auto1DicTestTime = auto1DicTestTime;
+            Auto1DicLocation = auto1DicLocation;
         }
 
         public static void Auto2TrayICMapInit()
         {
-            Auto2DicPoint = new Dictionary<string, bool>();
-            Auto2DicBin = new Dictionary<string, string>();
+            Dictionary<string, bool> auto2DicPoint = new Dictionary<string, bool>();
+            Dictionary<string, string> auto2DicBin = new Dictionary<string, string>();
+            Dictionary<string, string> auto2DicTestTime = new Dictionary<string, string>();
+            Dictionary<string, string> auto2DicLocation = new Dictionary<string, string>();
             for (int i = 0; i < Auto2XPoint.Length; i++)
             {
                 for (int j = 0; j < Auto2YPoint.Length; j++)
                 {
-                    Auto2DicPoint.Add($"{i},{j}", false);
-                    Auto2DicBin.Add($"{i},{j}", "");
+                    auto2DicPoint.Add($"{i},{j}", false);
+                    auto2DicBin.Add($"{i},{j}", "");
+                    auto2DicTestTime.Add($"{i},{j}", ""); //"0"
+                    auto2DicLocation.Add($"{i},{j}", ""); //"0"
                 }
             }
+            Auto2DicPoint = auto2DicPoint;
+            Auto2DicBin = auto2DicBin;
+            Auto2DicTestTime = auto2DicTestTime;
+            Auto2DicLocation = auto2DicLocation;
         }
 
         public static void Fix1TrayICMapInit()
         {
-            Fix1DicPoint = new Dictionary<string, bool>();
-            Fix1DicBin = new Dictionary<string, string>();
+            Dictionary<string, bool> fix1DicPoint = new Dictionary<string, bool>();
+            Dictionary<string, string> fix1DicBin = new Dictionary<string, string>();
+            Dictionary<string, string> fix1DicTestTime = new Dictionary<string, string>();
+            Dictionary<string, string> fix1DicLocation = new Dictionary<string, string>();
             for (int i = 0; i < Fix1XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix1YPoint.Length; j++)
                 {
-                    Fix1DicPoint.Add($"{i},{j}", false);
-                    Fix1DicBin.Add($"{i},{j}", "");
+                    fix1DicPoint.Add($"{i},{j}", false);
+                    fix1DicBin.Add($"{i},{j}", "");
+                    fix1DicTestTime.Add($"{i},{j}", ""); //"0"
+                    fix1DicLocation.Add($"{i},{j}", ""); //"0"
                 }
             }
+            Fix1DicPoint = fix1DicPoint;
+            Fix1DicBin = fix1DicBin;
+            Fix1DicTestTime = fix1DicTestTime;
+            Fix1DicLocation = fix1DicLocation;
         }
 
         public static void Fix2TrayICMapInit()
         {
-            Fix2DicPoint = new Dictionary<string, bool>();
-            Fix2DicBin = new Dictionary<string, string>();
+            Dictionary<string, bool> fix2DicPoint = new Dictionary<string, bool>();
+            Dictionary<string, string> fix2DicBin = new Dictionary<string, string>();
+            Dictionary<string, string> fix2DicTestTime = new Dictionary<string, string>();
+            Dictionary<string, string> fix2DicLocation = new Dictionary<string, string>();
             for (int i = 0; i < Fix2XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix2YPoint.Length; j++)
                 {
-                    Fix2DicPoint.Add($"{i},{j}", false);
-                    Fix2DicBin.Add($"{i},{j}", "");
+                    fix2DicPoint.Add($"{i},{j}", false);
+                    fix2DicBin.Add($"{i},{j}", "");
+                    fix2DicTestTime.Add($"{i},{j}", ""); //"0"
+                    fix2DicLocation.Add($"{i},{j}", ""); //"0"
                 }
             }
+            Fix2DicPoint = fix2DicPoint;
+            Fix2DicBin = fix2DicBin;
+            Fix2DicTestTime = fix2DicTestTime;
+            Fix2DicLocation = fix2DicLocation;
         }
 
         public static void Fix3TrayICMapInit()
         {
-            Fix3DicPoint = new Dictionary<string, bool>();
-            Fix3DicBin = new Dictionary<string, string>();
+            Dictionary<string, bool> fix3DicPoint = new Dictionary<string, bool>();
+            Dictionary<string, string> fix3DicBin = new Dictionary<string, string>();
+            Dictionary<string, string> fix3DicTestTime = new Dictionary<string, string>();
+            Dictionary<string, string> fix3DicLocation = new Dictionary<string, string>();
             for (int i = 0; i < Fix3XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix3YPoint.Length; j++)
                 {
-                    Fix3DicPoint.Add($"{i},{j}", false);
-                    Fix3DicBin.Add($"{i},{j}", "");
+                    fix3DicPoint.Add($"{i},{j}", false);
+                    fix3DicBin.Add($"{i},{j}", "");
+                    fix3DicTestTime.Add($"{i},{j}", ""); //"0"
+                    fix3DicLocation.Add($"{i},{j}", ""); //"0"
                 }
             }
+            Fix3DicPoint = fix3DicPoint;
+            Fix3DicBin = fix3DicBin;
+            Fix3DicTestTime = fix3DicTestTime;
+            Fix3DicLocation = fix3DicLocation;
         }
 
         public static void LoaderTrayClear()
@@ -4078,19 +4153,49 @@ namespace H5509_V2
 
         public static void Auto1TrayClear()
         {
+            trayTemp = "";
+            trayTestTime = "";
+            trayTestSite = "";
             for (int i = 0; i < Auto1XPoint.Length; i++)
             {
                 for (int j = 0; j < Auto1YPoint.Length; j++)
                 {
                     Auto1DicPoint[$"{i},{j}"] = false;
+                    trayTemp += Auto1DicBin[$"{i},{j}"] + ",";
                     Auto1DicBin[$"{i},{j}"] = "";
+                    trayTestTime += Auto1DicTestTime[$"{i},{j}"] + ",";
+                    Auto1DicTestTime[$"{i},{j}"] = "";
+                    trayTestSite += Auto1DicLocation[$"{i},{j}"] + ",";
+                    Auto1DicLocation[$"{i},{j}"] = "";
                 }
             }
+            trayTemp = trayTemp.TrimEnd(',');
+            trayTestTime = trayTestTime.TrimEnd(',');
+            trayTestSite = trayTestSite.TrimEnd(',');
+            if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
+            {
+                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto1','{Auto1XPoint.Length.ToString() + "x" + Auto1YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            }
+            //    trayTestTime = trayTestTime.TrimEnd(',');
+            //    if (trayTestTime != "")
+            //    {
+            //        string sql = $"insert into otime_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto1','{Auto1XPoint.Length.ToString() + "x" + Auto1YPoint.Length.ToString()}','{trayTestTime}')";
+            //        SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //    }
+            //    trayTestSite = trayTestSite.TrimEnd(',');
+            //    if (trayTestSite != "")
+            //    {
+            //        string sql = $"insert into osite_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto1','{Auto1XPoint.Length.ToString() + "x" + Auto1YPoint.Length.ToString()}','{trayTestSite}')";
+            //        SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //    }
         }
 
         public static void Auto2TrayClear()
         {
             trayTemp = "";
+            trayTestTime = "";
+            trayTestSite = "";
             for (int i = 0; i < Auto2XPoint.Length; i++)
             {
                 for (int j = 0; j < Auto2YPoint.Length; j++)
@@ -4098,19 +4203,39 @@ namespace H5509_V2
                     Auto2DicPoint[$"{i},{j}"] = false;
                     trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
                     Auto2DicBin[$"{i},{j}"] = "";
+                    trayTestTime += Auto2DicTestTime[$"{i},{j}"] + ",";
+                    Auto2DicTestTime[$"{i},{j}"] = "";
+                    trayTestSite += Auto2DicLocation[$"{i},{j}"] + ",";
+                    Auto2DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
-            if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}')";
-            //RunLog("Auto2 Sql:" + sql);
-            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
-
+            trayTestTime = trayTestTime.TrimEnd(',');
+            trayTestSite = trayTestSite.TrimEnd(',');
+            if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
+            {
+                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            }
+            //trayTestTime = trayTestTime.TrimEnd(',');
+            //if (trayTestTime != "")
+            //{
+            //    string sql = $"insert into otime_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTestTime}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
+            //trayTestSite = trayTestSite.TrimEnd(',');
+            //if (trayTestSite != "")
+            //{
+            //    string sql = $"insert into osite_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTestSite}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
         }
 
         public static void Fix1TrayClear()
         {
             trayTemp = "";
+            trayTestTime = "";
+            trayTestSite = "";
             for (int i = 0; i < Fix1XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix1YPoint.Length; j++)
@@ -4118,18 +4243,39 @@ namespace H5509_V2
                     Fix1DicPoint[$"{i},{j}"] = false;
                     trayTemp += Fix1DicBin[$"{i},{j}"] + ",";
                     Fix1DicBin[$"{i},{j}"] = "";
+                    trayTestTime += Fix1DicTestTime[$"{i},{j}"] + ",";
+                    Fix1DicTestTime[$"{i},{j}"] = "";
+                    trayTestSite += Fix1DicLocation[$"{i},{j}"] + ",";
+                    Fix1DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
-            if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}')";
-            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
-
+            trayTestTime = trayTestTime.TrimEnd(',');
+            trayTestSite = trayTestSite.TrimEnd(',');
+            if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
+            {
+                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            }
+            //trayTestTime = trayTestTime.TrimEnd(',');
+            //if (trayTestTime != "")
+            //{
+            //    string sql = $"insert into otime_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTestTime}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
+            //trayTestSite = trayTestSite.TrimEnd(',');
+            //if (trayTestSite != "")
+            //{
+            //    string sql = $"insert into osite_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTestSite}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
         }
 
         public static void Fix2TrayClear()
         {
             trayTemp = "";
+            trayTestTime = "";
+            trayTestSite = "";
             for (int i = 0; i < Fix2XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix2YPoint.Length; j++)
@@ -4137,17 +4283,39 @@ namespace H5509_V2
                     Fix2DicPoint[$"{i},{j}"] = false;
                     trayTemp += Fix2DicBin[$"{i},{j}"] + ",";
                     Fix2DicBin[$"{i},{j}"] = "";
+                    trayTestTime += Fix2DicTestTime[$"{i},{j}"] + ",";
+                    Fix2DicTestTime[$"{i},{j}"] = "";
+                    trayTestSite += Fix2DicLocation[$"{i},{j}"] + ",";
+                    Fix2DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
-            if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}')";
-            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            trayTestTime = trayTestTime.TrimEnd(',');
+            trayTestSite = trayTestSite.TrimEnd(',');
+            if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
+            {
+                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            }
+            //trayTestTime = trayTestTime.TrimEnd(',');
+            //if (trayTestTime != "")
+            //{
+            //    string sql = $"insert into otime_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTestTime}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
+            //trayTestSite = trayTestSite.TrimEnd(',');
+            //if (trayTestSite != "")
+            //{
+            //    string sql = $"insert into osite_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTestSite}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
         }
 
         public static void Fix3TrayClear()
         {
             trayTemp = "";
+            trayTestTime = "";
+            trayTestSite = "";
             for (int i = 0; i < Fix3XPoint.Length; i++)
             {
                 for (int j = 0; j < Fix3YPoint.Length; j++)
@@ -4155,12 +4323,30 @@ namespace H5509_V2
                     Fix3DicPoint[$"{i},{j}"] = false;
                     trayTemp += Fix3DicBin[$"{i},{j}"] + ",";
                     Fix3DicBin[$"{i},{j}"] = "";
+                    trayTestTime += Fix3DicTestTime[$"{i},{j}"] + ",";
+                    Fix3DicTestTime[$"{i},{j}"] = "";
+                    trayTestSite += Fix3DicLocation[$"{i},{j}"] + ",";
+                    Fix3DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
-            if (trayTemp == "") return;
-            string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}')";
-            SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            trayTestTime = trayTestTime.TrimEnd(',');
+            trayTestSite = trayTestSite.TrimEnd(',');
+            if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
+            {
+                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            }
+            //if (trayTestTime != "")
+            //{
+            //    string sql = $"insert into otime_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTestTime}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
+            //if (trayTestSite != "")
+            //{
+            //    string sql = $"insert into osite_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTestSite}')";
+            //    SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
+            //}
 
         }
 
@@ -5033,11 +5219,11 @@ namespace H5509_V2
             StationManagers.UpdateStationsConfig(configDict);
             //for (int i = 0; i < 16; i++)
             //{
-                //StationManagers.Connect(i);
-                //StationManagers.Send(i, "@START_INFO ZRS2409290dlt:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");
-                //.SendAsync("@START_INFO ZRS240929001A:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");//我为宇宙，woweiyuzhou, I am Yuzhou
+            //StationManagers.Connect(i);
+            //StationManagers.Send(i, "@START_INFO ZRS2409290dlt:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");
+            //.SendAsync("@START_INFO ZRS240929001A:BS_TEST:HM:RS70B64G4M08G:E9002B:AE35:FT3_RS70B64G4M08G_032003003_032003003::3040:::FT::R80544:FT3:FT:25+");//我为宇宙，woweiyuzhou, I am Yuzhou
 
-                //StationManagers.GetStation(i).SendAsync("@START_TEST 00 11111111+");//我为宇宙，woweiyuzhou, I am Yuzhou
+            //StationManagers.GetStation(i).SendAsync("@START_TEST 00 11111111+");//我为宇宙，woweiyuzhou, I am Yuzhou
             //}
         }
 

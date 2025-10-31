@@ -4410,7 +4410,7 @@ namespace H5509_V2
                 numericUpDown24.Text = offset.入料_Load_变距.ToString();
                 numericUpDown23.Text = offset.入料_Heat_变距.ToString();
                 numericUpDown22.Text = offset.入料_梭车_变距.ToString();
-                
+
                 numericUpDown27.Text = offset.入料_梭车2第1列放_X.ToString();
                 numericUpDown26.Text = offset.入料_梭车2第1列放_Y.ToString();
                 numericUpDown25.Text = offset.入料_梭车2第1列放_Z.ToString();
@@ -8288,7 +8288,7 @@ namespace H5509_V2
                                     }
                                 }
                                 else MessageBox.Show("新建档案失败!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            } 
+                            }
                             else MessageBox.Show($"档案{copySetupName.Name}已存在!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return;
                         }
                         else MessageBox.Show("查询档案是否存在失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -8910,23 +8910,95 @@ namespace H5509_V2
 
         private void button260_Click(object sender, EventArgs e)
         {
-            string sql = $"create table f_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
-            string sql2 = $"create table o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+            LotNo = new string[30];
+            LotNo[0] = "Debugtesttimesite2";
+            bool isstart = true;
+            string sql = $"create table f_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+            string sql2 = $"create table o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL,测试时间 nvarchar(MAX) NULL,测试工位 nvarchar(MAX) NULL)";
+            //string sql3 = $"create table otime_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+            //string sql4 = $"create table osite_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
             int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
             int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
+            //int line2 = SqlServer.runSqlNonQuery(SQLServerConnString, sql3);
+            //int line3 = SqlServer.runSqlNonQuery(SQLServerConnString, sql4);
+
+            SaveBatchData();
 
             if (line <= -2)
             {
+                isstart = false;
                 RunLog("执行SQl异常：" + sql);
                 RunLog("[Code]1400330,[Msg]创建MAP信息数据库失败!", TextFileLogger.LogType.AlarmLog);
             }
 
             if (line1 <= -2)
             {
+                isstart = false;
                 Listcode.Add("1400330");
-                RunLog("执行SQl异常：" + sql2);
+                if (line1 <= -2) RunLog("执行SQl异常：" + sql2);
+                //if (line2 <= -2) RunLog("执行SQl异常：" + sql3);
+                //if (line3 <= -2) RunLog("执行SQl异常：" + sql4);
                 RunLog("[Code]1400330,[Msg]创建BIN信息数据库失败!", LogType.AlarmLog);
             }
+
+            //if (isstart)
+            //{
+                for (int i = 0; i < Auto1XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Auto1YPoint.Length; j++)
+                    {
+                        Auto1DicPoint[$"{i},{j}"] = true;
+                        Auto1DicBin[$"{i},{j}"] = "Other";
+                        Auto1DicTestTime[$"{i},{j}"] = "132.3";
+                        Auto1DicLocation[$"{i},{j}"] = "12-3";
+                    }
+                }
+                for (int i = 0; i < Auto2XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Auto2YPoint.Length; j++)
+                    {
+                        Auto2DicPoint[$"{i},{j}"] = true;
+                        Auto2DicBin[$"{i},{j}"] = "OTH";
+                        Auto2DicTestTime[$"{i},{j}"] = "142.3";
+                        Auto2DicLocation[$"{i},{j}"] = "13-4";
+                    }
+                }
+                for (int i = 0; i < Fix1XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Fix1YPoint.Length; j++)
+                    {
+                        Fix1DicPoint[$"{i},{j}"] = true;
+                        Fix1DicBin[$"{i},{j}"] = "16-8";
+                        Fix1DicTestTime[$"{i},{j}"] = "132.3";
+                        Fix1DicLocation[$"{i},{j}"] = "9-5";
+                    }
+                }
+                for (int i = 0; i < Fix2XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Fix2YPoint.Length; j++)
+                    {
+                        Fix2DicPoint[$"{i},{j}"] = true;
+                        Fix2DicBin[$"{i},{j}"] = "9999";
+                        Fix2DicTestTime[$"{i},{j}"] = "11";
+                        Fix2DicLocation[$"{i},{j}"] = "1-6";
+                    }
+                }
+                for (int i = 0; i < Fix3XPoint.Length; i++)
+                {
+                    for (int j = 0; j < Fix3YPoint.Length; j++)
+                    {
+                        Fix3DicPoint[$"{i},{j}"] = true;
+                        Fix3DicBin[$"{i},{j}"] = "20A";
+                        Fix3DicTestTime[$"{i},{j}"] = "32.3";
+                        Fix3DicLocation[$"{i},{j}"] = "16-7";
+                    }
+                }
+                Auto1TrayClear();
+                Auto2TrayClear();
+                Fix1TrayClear();
+                Fix2TrayClear();
+                Fix3TrayClear();
+            //}
         }
 
         private void uiButton30_Click_1(object sender, EventArgs e)

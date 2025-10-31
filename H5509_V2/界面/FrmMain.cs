@@ -924,6 +924,10 @@ namespace H5509_V2
                             {
                                 int sitenum = sites.siteid; // Com.Listtestsingal[0];
 
+                                //1.要知道来自哪里
+                                //2.要知道测试结果
+                                //3.要知道测试时间
+
                                 if (sites.data.Iswaitout)
                                 {
                                     //Com.Iswaitout[sitenum] = false;
