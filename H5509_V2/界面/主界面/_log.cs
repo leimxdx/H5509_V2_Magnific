@@ -1184,7 +1184,7 @@ namespace H5509_V2
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                listBox1.Items.Add(dt.Rows[i].ItemArray[0] + "_" + dt.Rows[i].ItemArray[1] + "_" + dt.Rows[i].ItemArray[2]);
+                listBox1.Items.Add(dt.Rows[i].ItemArray[0] + "+" + dt.Rows[i].ItemArray[1] + "+" + dt.Rows[i].ItemArray[2]);
             }
         }
 
@@ -1504,7 +1504,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('_');
+                s = listBox1.SelectedItem.ToString().Split('+');
             }
 
             string sql = "SELECT * FROM dut_" + s[1].Replace('-','_') + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss");
@@ -1682,7 +1682,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('_');
+                s = listBox1.SelectedItem.ToString().Split('+');
             }
             Task.Run(new Action(() =>
             {
@@ -1743,7 +1743,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('_');
+                s = listBox1.SelectedItem.ToString().Split('+');
 
             }
 
@@ -2376,7 +2376,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('_');
+                s = listBox1.SelectedItem.ToString().Split('+');
             }
 
             if (comboBox_盘位.SelectedIndex == -1)
@@ -2437,7 +2437,7 @@ namespace H5509_V2
             if (listBox1.SelectedItem == null) return;
             else
             {
-                s = listBox1.SelectedItem.ToString().Split('_');
+                s = listBox1.SelectedItem.ToString().Split('+');
             }
 
             comboBox_盘数.Items.Clear();

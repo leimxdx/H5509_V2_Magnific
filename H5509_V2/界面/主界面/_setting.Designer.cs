@@ -4381,7 +4381,7 @@
             this.tabPage_bin.Controls.Add(this.listBox1);
             this.tabPage_bin.Location = new System.Drawing.Point(0, 40);
             this.tabPage_bin.Name = "tabPage_bin";
-            this.tabPage_bin.Size = new System.Drawing.Size(200, 60);
+            this.tabPage_bin.Size = new System.Drawing.Size(1337, 802);
             this.tabPage_bin.TabIndex = 5;
             this.tabPage_bin.Text = "分BIN";
             // 
@@ -5230,7 +5230,7 @@
             this.tabPage29.Controls.Add(this.uiTabControl8);
             this.tabPage29.Location = new System.Drawing.Point(0, 40);
             this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Size = new System.Drawing.Size(200, 60);
+            this.tabPage29.Size = new System.Drawing.Size(1337, 802);
             this.tabPage29.TabIndex = 6;
             this.tabPage29.Text = "点位偏移";
             // 
@@ -5251,7 +5251,7 @@
             this.uiTabControl8.Name = "uiTabControl8";
             this.uiTabControl8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl8.SelectedIndex = 0;
-            this.uiTabControl8.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl8.Size = new System.Drawing.Size(1337, 802);
             this.uiTabControl8.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl8.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl8.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -5270,7 +5270,7 @@
             this.tabPage28.Controls.Add(this.uiTitlePanel17);
             this.tabPage28.Location = new System.Drawing.Point(0, 40);
             this.tabPage28.Name = "tabPage28";
-            this.tabPage28.Size = new System.Drawing.Size(200, 20);
+            this.tabPage28.Size = new System.Drawing.Size(1337, 762);
             this.tabPage28.TabIndex = 2;
             this.tabPage28.Text = "入料手臂";
             // 
@@ -13758,7 +13758,7 @@
             this.tabPage5.Controls.Add(this.button_setting);
             this.tabPage5.Location = new System.Drawing.Point(0, 40);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(200, 60);
+            this.tabPage5.Size = new System.Drawing.Size(1893, 944);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "权限";
             // 
@@ -32774,7 +32774,7 @@
             this.tabPage12.Controls.Add(this.panel18);
             this.tabPage12.Location = new System.Drawing.Point(0, 40);
             this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Size = new System.Drawing.Size(200, 60);
+            this.tabPage12.Size = new System.Drawing.Size(1893, 944);
             this.tabPage12.TabIndex = 6;
             this.tabPage12.Text = "自定义界面";
             // 

@@ -3161,7 +3161,7 @@ namespace H5509_V2
             {
                 Directory.CreateDirectory(path);
             }
-            string fileName = $"{LotNo[0]}_{datetime.Hour:D2}h{datetime.Minute:D2}m{datetime.Second:D2}s";
+            string fileName = $"{(LotNo[0] ?? "")}_{datetime.Hour:D2}h{datetime.Minute:D2}m{datetime.Second:D2}s";
 
             string logPath = Path.Combine(path, fileName + ".log");
 
@@ -4211,7 +4211,7 @@ namespace H5509_V2
             trayTestSite = trayTestSite.TrimEnd(',');
             if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
             {
-                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto1','{Auto1XPoint.Length.ToString() + "x" + Auto1YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                string sql = $"insert into o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto1','{Auto1XPoint.Length.ToString() + "x" + Auto1YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
                 SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
             }
             //    trayTestTime = trayTestTime.TrimEnd(',');
@@ -4251,7 +4251,7 @@ namespace H5509_V2
             trayTestSite = trayTestSite.TrimEnd(',');
             if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
             {
-                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                string sql = $"insert into o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','auto2','{Auto2XPoint.Length.ToString() + "x" + Auto2YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
                 SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
             }
             //trayTestTime = trayTestTime.TrimEnd(',');
@@ -4291,7 +4291,7 @@ namespace H5509_V2
             trayTestSite = trayTestSite.TrimEnd(',');
             if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
             {
-                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                string sql = $"insert into o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix1','{Fix1XPoint.Length.ToString() + "x" + Fix1YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
                 SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
             }
             //trayTestTime = trayTestTime.TrimEnd(',');
@@ -4331,7 +4331,7 @@ namespace H5509_V2
             trayTestSite = trayTestSite.TrimEnd(',');
             if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
             {
-                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                string sql = $"insert into o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix2','{Fix2XPoint.Length.ToString() + "x" + Fix2YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
                 SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
             }
             //trayTestTime = trayTestTime.TrimEnd(',');
@@ -4371,7 +4371,7 @@ namespace H5509_V2
             trayTestSite = trayTestSite.TrimEnd(',');
             if (trayTemp != "" || trayTestTime != "" || trayTestSite != "")
             {
-                string sql = $"insert into o_{LotNo[0].Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
+                string sql = $"insert into o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间,名称,大小,数据,测试时间,测试工位) values('{DateTime.Now}','fix3','{Fix3XPoint.Length.ToString() + "x" + Fix3YPoint.Length.ToString()}','{trayTemp}','{trayTestTime}','{trayTestSite}')";
                 SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
             }
             //if (trayTestTime != "")

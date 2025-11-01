@@ -8876,18 +8876,111 @@ namespace H5509_V2
         private void button260_Click(object sender, EventArgs e)
         {
             LotNo = new string[30];
-            LotNo[0] = "Debugtesttimesite2";
+            LotNo[0] = "Debugtest_time_site3";
             bool isstart = true;
             string sql = $"create table f_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
             string sql2 = $"create table o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL,测试时间 nvarchar(MAX) NULL,测试工位 nvarchar(MAX) NULL)";
             //string sql3 = $"create table otime_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
             //string sql4 = $"create table osite_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
-            int line = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql);
-            int line1 = SqlServer.runSqlNonQuery(SQLServerConnString_Config, sql2);
+            int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
+            int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
             //int line2 = SqlServer.runSqlNonQuery(SQLServerConnString, sql3);
             //int line3 = SqlServer.runSqlNonQuery(SQLServerConnString, sql4);
 
             SaveBatchData();
+
+
+            for (int i = 0; i < Auto1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto1YPoint.Length; j++)
+                {
+                    Auto1DicPoint[$"{i},{j}"] = true;
+                    Auto1DicBin[$"{i},{j}"] = "Other";
+                    Auto1DicTestTime[$"{i},{j}"] = "132.3";
+                    Auto1DicLocation[$"{i},{j}"] = "12-3";
+                }
+            }
+            for (int i = 0; i < Auto2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto2YPoint.Length; j++)
+                {
+                    Auto2DicPoint[$"{i},{j}"] = true;
+                    Auto2DicBin[$"{i},{j}"] = "OTH";
+                    Auto2DicTestTime[$"{i},{j}"] = "142.3";
+                    Auto2DicLocation[$"{i},{j}"] = "13-4";
+                }
+            }
+            for (int i = 0; i < Fix1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix1YPoint.Length; j++)
+                {
+                    Fix1DicPoint[$"{i},{j}"] = true;
+                    Fix1DicBin[$"{i},{j}"] = "16-8";
+                    Fix1DicTestTime[$"{i},{j}"] = "132.3";
+                    Fix1DicLocation[$"{i},{j}"] = "9-5";
+                }
+            }
+            for (int i = 0; i < Fix2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix2YPoint.Length; j++)
+                {
+                    Fix2DicPoint[$"{i},{j}"] = true;
+                    Fix2DicBin[$"{i},{j}"] = "9999";
+                    Fix2DicTestTime[$"{i},{j}"] = "11";
+                    Fix2DicLocation[$"{i},{j}"] = "1-6";
+                }
+            }
+            for (int i = 0; i < Fix3XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix3YPoint.Length; j++)
+                {
+                    Fix3DicPoint[$"{i},{j}"] = true;
+                    Fix3DicBin[$"{i},{j}"] = "20A";
+                    Fix3DicTestTime[$"{i},{j}"] = "32.3";
+                    Fix3DicLocation[$"{i},{j}"] = "16-7";
+                }
+            }
+
+
+            bool isIC3 = 获取Fix1盘坐标(false, 0, Fix1YPoint.Length, out int fix1xPoint, out int fix1yPoint);
+            if (!isIC3 || fix1xPoint != 0 || fix1yPoint != 0) //如果有放料才需要盖空盘
+            {
+                Listcode.Add("1400469");
+                RunLog($"[Code]1400469,[Msg]请取走Fix1Tray盘", LogType.AlarmLog);
+            }
+
+            bool isIC4 = 获取Fix2盘坐标(false, 0, Fix2YPoint.Length, out int fix2xPoint, out int fix2yPoint);
+            if (!isIC4 || fix2xPoint != 0 || fix2yPoint != 0) //如果有放料才需要盖空盘
+            {
+                Listcode.Add("1400470");
+                RunLog($"[Code]1400470,[Msg]请取走Fix2Tray盘", LogType.AlarmLog);
+            }
+
+            bool isIC5 = 获取Fix3盘坐标(false, 0, Fix3YPoint.Length, out int fix3xPoint, out int fix3yPoint);
+            if (!isIC5 || fix3xPoint != 0 || fix3yPoint != 0) //如果有放料才需要盖空盘
+            {
+                Listcode.Add("1400471");
+                RunLog($"[Code]1400471,[Msg]请取走Fix3Tray盘", LogType.AlarmLog);
+            }
+
+            //检测梭车是否有IC遗留();
+
+            //保存工单dut信息
+            string result = Sqlite.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
+            if (result == "Success")
+            {
+                string tableName = $"dut_{LotNo[0].Replace("-", "_")}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
+                line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table {tableName}(id nchar(10) not NULL,pass int not NULL,total int not NULL,usedTime varchar(50) not NULL)");
+                if (line >= -1)
+                {
+                    SqlServer.runSql(SQLServerConnString, dataTable, tableName);
+                }
+            }
+            //SQLiteHelper.runSqlNonQuery(SQLiteRunningString, $"select * into dut_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")} from DutCurrent");
+
+            //合并dut信息
+            Sqlite.runSqlNonQuery(SQLiteRunningString, $"UPDATE DutAll SET pass = pass + (SELECT dc.pass FROM DutCurrent dc WHERE dc.id = DutAll.id), total = total + (SELECT dc.total FROM DutCurrent dc WHERE dc.id = DutAll.id), usedTime = CAST(usedTime AS INTEGER) + (SELECT dc.usedTime FROM DutCurrent dc WHERE dc.id = DutAll.id) WHERE EXISTS ( SELECT 1 FROM DutCurrent dc WHERE dc.id = DutAll.id)");
+
 
             if (line <= -2)
             {
@@ -8908,61 +9001,67 @@ namespace H5509_V2
 
             //if (isstart)
             //{
-                for (int i = 0; i < Auto1XPoint.Length; i++)
-                {
-                    for (int j = 0; j < Auto1YPoint.Length; j++)
-                    {
-                        Auto1DicPoint[$"{i},{j}"] = true;
-                        Auto1DicBin[$"{i},{j}"] = "Other";
-                        Auto1DicTestTime[$"{i},{j}"] = "132.3";
-                        Auto1DicLocation[$"{i},{j}"] = "12-3";
-                    }
-                }
-                for (int i = 0; i < Auto2XPoint.Length; i++)
-                {
-                    for (int j = 0; j < Auto2YPoint.Length; j++)
-                    {
-                        Auto2DicPoint[$"{i},{j}"] = true;
-                        Auto2DicBin[$"{i},{j}"] = "OTH";
-                        Auto2DicTestTime[$"{i},{j}"] = "142.3";
-                        Auto2DicLocation[$"{i},{j}"] = "13-4";
-                    }
-                }
-                for (int i = 0; i < Fix1XPoint.Length; i++)
-                {
-                    for (int j = 0; j < Fix1YPoint.Length; j++)
-                    {
-                        Fix1DicPoint[$"{i},{j}"] = true;
-                        Fix1DicBin[$"{i},{j}"] = "16-8";
-                        Fix1DicTestTime[$"{i},{j}"] = "132.3";
-                        Fix1DicLocation[$"{i},{j}"] = "9-5";
-                    }
-                }
-                for (int i = 0; i < Fix2XPoint.Length; i++)
-                {
-                    for (int j = 0; j < Fix2YPoint.Length; j++)
-                    {
-                        Fix2DicPoint[$"{i},{j}"] = true;
-                        Fix2DicBin[$"{i},{j}"] = "9999";
-                        Fix2DicTestTime[$"{i},{j}"] = "11";
-                        Fix2DicLocation[$"{i},{j}"] = "1-6";
-                    }
-                }
-                for (int i = 0; i < Fix3XPoint.Length; i++)
-                {
-                    for (int j = 0; j < Fix3YPoint.Length; j++)
-                    {
-                        Fix3DicPoint[$"{i},{j}"] = true;
-                        Fix3DicBin[$"{i},{j}"] = "20A";
-                        Fix3DicTestTime[$"{i},{j}"] = "32.3";
-                        Fix3DicLocation[$"{i},{j}"] = "16-7";
-                    }
-                }
                 Auto1TrayClear();
                 Auto2TrayClear();
                 Fix1TrayClear();
                 Fix2TrayClear();
                 Fix3TrayClear();
+
+            for (int i = 0; i < Auto1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto1YPoint.Length; j++)
+                {
+                    Auto1DicPoint[$"{i},{j}"] = true;
+                    Auto1DicBin[$"{i},{j}"] = "Othe2";
+                    Auto1DicTestTime[$"{i},{j}"] = "22.3";
+                    Auto1DicLocation[$"{i},{j}"] = "11-3";
+                }
+            }
+            for (int i = 0; i < Auto2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Auto2YPoint.Length; j++)
+                {
+                    Auto2DicPoint[$"{i},{j}"] = true;
+                    Auto2DicBin[$"{i},{j}"] = "OTF";
+                    Auto2DicTestTime[$"{i},{j}"] = "33.3";
+                    Auto2DicLocation[$"{i},{j}"] = "12-4";
+                }
+            }
+            for (int i = 0; i < Fix1XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix1YPoint.Length; j++)
+                {
+                    Fix1DicPoint[$"{i},{j}"] = true;
+                    Fix1DicBin[$"{i},{j}"] = "12-8";
+                    Fix1DicTestTime[$"{i},{j}"] = "44.3";
+                    Fix1DicLocation[$"{i},{j}"] = "6-5";
+                }
+            }
+            for (int i = 0; i < Fix2XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix2YPoint.Length; j++)
+                {
+                    Fix2DicPoint[$"{i},{j}"] = true;
+                    Fix2DicBin[$"{i},{j}"] = "5515";
+                    Fix2DicTestTime[$"{i},{j}"] = "11";
+                    Fix2DicLocation[$"{i},{j}"] = "5-6";
+                }
+            }
+            for (int i = 0; i < Fix3XPoint.Length; i++)
+            {
+                for (int j = 0; j < Fix3YPoint.Length; j++)
+                {
+                    Fix3DicPoint[$"{i},{j}"] = true;
+                    Fix3DicBin[$"{i},{j}"] = "31A";
+                    Fix3DicTestTime[$"{i},{j}"] = "122.3";
+                    Fix3DicLocation[$"{i},{j}"] = "11-7";
+                }
+            }
+            Auto1TrayClear();
+            Auto2TrayClear();
+            Fix1TrayClear();
+            Fix2TrayClear();
+            Fix3TrayClear();
             //}
         }
 
