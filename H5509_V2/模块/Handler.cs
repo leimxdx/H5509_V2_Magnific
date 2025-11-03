@@ -2481,11 +2481,11 @@ namespace H5509_V2
             Fix3数量 = 0;
             OtherNum = 0;
             HeatTrayClear();
-            Auto1TrayClear();
-            Auto2TrayClear();
-            Fix1TrayClear();
-            Fix2TrayClear();
-            Fix3TrayClear();
+            Auto1TrayClear(true, false);
+            Auto2TrayClear(true, false);
+            Fix1TrayClear(true, false);
+            Fix2TrayClear(true, false);
+            Fix3TrayClear(true, false);
             空盘上顶到最大值 = false;
             空盘下降到最小值 = false;
             Auto1Tray盘数量 = 0;
@@ -4053,13 +4053,22 @@ namespace H5509_V2
 
                             form_alarm.CancelAllAlarm();
 
-                            if (Load正在下降回零 || Empty正在下降回零)
+                            if (Empty正在下降回零)
                             {
                                 isstart = false;
-                                RunLog("(按下开始)Load或Empty正在下降回零，无法开始", LogType.OperateLog);
+                                Listcode.Add("1400490");
+                                RunLog($"[Code]1400490,[Msg]请打开Empty仓门等待下降至底部，关上仓门后再按开始！", LogType.AlarmLog);
+                            }
 
-                                if (Empty正在下降回零) IsEmptyPause = false;
-                                if (Load正在下降回零) IsLoadPause = false;
+                            if (Load正在下降回零)
+                            {
+                                isstart = false;
+                                Listcode.Add("1400491");
+                                RunLog($"[Code]1400491,[Msg]请打开Load仓门等待下降至底部，关上仓门后再按开始！", LogType.AlarmLog);
+
+                                //RunLog("(按下开始)Load或Empty正在下降回零，无法开始", LogType.OperateLog);
+                                //if (Empty正在下降回零) IsEmptyPause = false;
+                                //if (Load正在下降回零) IsLoadPause = false;
                             }
 
                             if (H5509正在归零)
@@ -4346,7 +4355,7 @@ namespace H5509_V2
                         if (CheckEdgeSingal(ignore, ref IgnoreRiseCache, true))
                         {
                             RunLog("按下跳过", LogType.OperateLog);
-
+                            ShowAlarmFlag = true;
                             if (设备状态 == 1) continue;
 
                             if (设备状态 != 0 && 测试IC忽略 == false && 测试区IC忽略)
@@ -4408,6 +4417,7 @@ namespace H5509_V2
                             motionEx.SetDo("Y008_结批灯", false);
                             motionEx.SetDo("Y011_换盘灯", false);
 
+                            ShowAlarmFlag = false;
                             //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
                             //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
                             //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
@@ -4597,7 +4607,9 @@ namespace H5509_V2
                                     motionEx.SetDo("Y010_归零灯", true);
                                     form_alarm.CancelAllAlarm();
                                     if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
-                                    //form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
+                                    
+                                    form_alarm.AlarmLight(0, 0, 0, 归零状态灯设置.报警音乐); //按下暂停
+
                                     Task.Run(() =>
                                     {
                                         result = 整机回零流程();
@@ -4620,6 +4632,7 @@ namespace H5509_V2
                                         motionEx.SetDo("Y001_开始灯", false);
                                         motionEx.SetDo("Y002_暂停灯", false);
                                         motionEx.SetDo("Y010_归零灯", false);
+                                        //form_alarm.AlarmLight(0, 1, 0, "无音乐"); //报警自然就有声音了
                                     });
                                 }
                                 else
@@ -5568,11 +5581,11 @@ namespace H5509_V2
 
                             LoaderTrayClear();
                             HeatTrayClear();
-                            Auto1TrayClear();
-                            Auto2TrayClear();
-                            Fix1TrayClear();
-                            Fix2TrayClear();
-                            Fix3TrayClear();
+                            Auto1TrayClear(false, true);
+                            Auto2TrayClear(false, true);
+                            Fix1TrayClear(false, true);
+                            Fix2TrayClear(false, true);
+                            Fix3TrayClear(false, true);
 
                             RunLog($"吸取模式:{(空跑模式 ? "空跑模式" : "正常模式")}", LogType.OperateLog);
                             RunLog($"测试模式:{(无测试机模式 ? "离线" : "在线")}", LogType.OperateLog);
@@ -8083,7 +8096,7 @@ namespace H5509_V2
                                         RunLog("进入Auto1换盘程序");
                                         PS出料手臂吸放料流程.StepID = 805;
                                     }
-                                    else Auto1TrayClear();
+                                    else Auto1TrayClear(true, true);
                                     break;
                                 }
                             }
@@ -8110,7 +8123,7 @@ namespace H5509_V2
                                         RunLog("进入Auto2换盘程序");
                                         PS出料手臂吸放料流程.StepID = 905;
                                     }
-                                    else Auto2TrayClear();
+                                    else Auto2TrayClear(true, true);
                                     break;
                                 }
                             }
@@ -8829,7 +8842,7 @@ namespace H5509_V2
                             PS出料手臂吸放料流程.StepName = "抓盘手臂放空盘到Auto1";
                             if (抓盘手臂放空盘到Auto1标记 == 1)
                             {
-                                Auto1TrayClear();
+                                Auto1TrayClear(true, true);
                                 Auto1换盘标记 = false;
                                 RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->Auto1换盘完成Map更新");
                                 PS出料手臂吸放料流程.StepID = 705;
@@ -8882,7 +8895,7 @@ namespace H5509_V2
                             PS出料手臂吸放料流程.StepName = "抓盘手臂放空盘到Auto2";
                             if (抓盘手臂放空盘到Auto2标记 == 1)
                             {
-                                Auto2TrayClear();
+                                Auto2TrayClear(true, true);
                                 Auto2换盘标记 = false;
                                 RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->Auto2换盘完成Map更新");
                                 PS出料手臂吸放料流程.StepID = 705;
@@ -8983,7 +8996,7 @@ namespace H5509_V2
                             break;
 
                         case 1020:
-                            Fix1TrayClear();
+                            Fix1TrayClear(true, true);
                             PS出料手臂吸放料流程.StepID = 705;
                             break;
 
@@ -9079,7 +9092,7 @@ namespace H5509_V2
                             break;
 
                         case 1120:
-                            Fix2TrayClear();
+                            Fix2TrayClear(true, true);
                             PS出料手臂吸放料流程.StepID = 705;
                             break;
 
@@ -9174,7 +9187,7 @@ namespace H5509_V2
                             break;
 
                         case 1220:
-                            Fix3TrayClear();
+                            Fix3TrayClear(true, true);
                             PS出料手臂吸放料流程.StepID = 705;
                             break;
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using MotionCommon;
+using SQLiteHelper;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using TextFileLogger;
@@ -1406,6 +1407,7 @@ namespace H5509_V2
                         if (自定义界面 == "2")
                         {
                             _defalut2.Dut连续不良报警个数 = 设置信息.测试机信息.Dout连续不良个数;
+                            _defalut2.Dut连续良品报警个数 = 设置信息.测试机信息.Dout连续良品个数;
                             _defalut2.Dut连续不良报警使能 = 设置信息.测试机信息.Dout连续不良报警;
                             _defalut2.总良率报警百分比 = 设置信息.测试机信息.总良率报警百分比;
                             _defalut2.总良率报警使能 = 设置信息.测试机信息.总良率报警使能;
@@ -1723,13 +1725,14 @@ namespace H5509_V2
 
         private void label139_Click(object sender, EventArgs e)
         {
+            ShowAlarmFlag = true;
             LoadMap loadMap = new LoadMap();
-
             loadMap.LoadXPoint = LoaderXPoint;
             loadMap.LoadYPoint = LoaderYPoint;
             loadMap.LoadDicPoint = LoaderDicPoint;
 
             loadMap.ShowDialog();
+            ShowAlarmFlag = false;
         }
 
         private void uiDoubleUpDown14_ValueChanged(object sender, double value)
@@ -2842,9 +2845,194 @@ namespace H5509_V2
 
         private void label147_Click(object sender, EventArgs e)
         {
-            //Task.Run(() => { 
-            //handler.HandlerDebug();
+
+            //for (int i = 0; i < Auto1XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Auto1YPoint.Length; j++)
+            //    {
+            //        Auto1DicPoint[$"{i},{j}"] = true;
+            //        Auto1DicBin[$"{i},{j}"] = "Other";
+            //        Auto1DicTestTime[$"{i},{j}"] = "132.3";
+            //        Auto1DicLocation[$"{i},{j}"] = "12-3";
+            //    }
+            //}
+            //for (int i = 0; i < Auto2XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Auto2YPoint.Length; j++)
+            //    {
+            //        Auto2DicPoint[$"{i},{j}"] = true;
+            //        Auto2DicBin[$"{i},{j}"] = "OTH";
+            //        Auto2DicTestTime[$"{i},{j}"] = "142.3";
+            //        Auto2DicLocation[$"{i},{j}"] = "13-4";
+            //    }
+            //}
+            //for (int i = 0; i < Fix1XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Fix1YPoint.Length; j++)
+            //    {
+            //        Fix1DicPoint[$"{i},{j}"] = true;
+            //        Fix1DicBin[$"{i},{j}"] = "16-8";
+            //        Fix1DicTestTime[$"{i},{j}"] = "132.3";
+            //        Fix1DicLocation[$"{i},{j}"] = "9-5";
+            //    }
+            //}
+            //for (int i = 0; i < Fix2XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Fix2YPoint.Length; j++)
+            //    {
+            //        Fix2DicPoint[$"{i},{j}"] = true;
+            //        Fix2DicBin[$"{i},{j}"] = "9999";
+            //        Fix2DicTestTime[$"{i},{j}"] = "11";
+            //        Fix2DicLocation[$"{i},{j}"] = "1-6";
+            //    }
+            //}
+            //for (int i = 0; i < Fix3XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Fix3YPoint.Length; j++)
+            //    {
+            //        Fix3DicPoint[$"{i},{j}"] = true;
+            //        Fix3DicBin[$"{i},{j}"] = "20A";
+            //        Fix3DicTestTime[$"{i},{j}"] = "32.3";
+            //        Fix3DicLocation[$"{i},{j}"] = "16-7";
+            //    }
+            //}
+
+            //int sitenum = 1;
+            //bool[][] open = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
+            //string[] bins = { "B1", "B1", "B1", "B1", "92", "92", "92", "92" };
+            //int doutnum = sitenum * 8;
+            //for (int m = 0; m < open.Length; m++)
+            //{
+            //    for (int n = 0; n < open[m].Length; n++)
+            //    {
+            //        string doutstr = $"{sitenum:D2}{m * 4 + n + 1}";
+            //        if (open[m][n])
+            //        {
+            //            if (Auto1.Contains(bins[m * 4 + n]))
+            //            {
+            //                Dout128PassNumber[doutnum + (m * 4 + n)]++;
+            //                doutContinuePass[sitenum][n + m * 4]++;
+            //                doutContinueFail[sitenum][n + m * 4] = 0;
+            //            }
+            //            else
+            //            {
+            //                Dout128FailNumber[doutnum + (m * 4 + n)]++;
+            //                doutContinuePass[sitenum][n + m * 4] = 0;
+            //                doutContinueFail[sitenum][n + m * 4]++;
+            //                单dut总不良计数[sitenum][n + m * 4]++;
+            //                单dut总不良累计计数[sitenum][n + m * 4]++;
+            //                总良率报警间隔计数++;
+            //            }
+
+            //            int line = Sqlite.runSqlNonQuery(SQLiteRunningString, $"update SocketUse set Num=Num+1 where Id='{doutstr}'");
+            //            if (line <= 0) RunLog($"update SocketUse set Num=Num+1 where Id='{doutstr}',返回:{line}");
+            //        }
+
+            //        int passnum = Dout128PassNumber[sitenum * 8 + (m * 4 + n)];
+            //        int failnum = Dout128FailNumber[sitenum * 8 + (m * 4 + n)];
+            //        //RunLog($"update dutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as bigint)+{Com.listtesttimespan[sitenum].Ticks} where Id='{doutstr}'");
+            //        string sql = $"update DutCurrent set pass={passnum},total={failnum + passnum},usedTime=CAST(usedTime as INTEGER)+{10} where id='{doutstr}'";
+            //        int line1 = Sqlite.runSqlNonQuery(SQLiteRunningString, sql);
+            //        if (line1 <= 0) RunLog(sql + $"返回:{line1}");
+            //        //int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table f_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )");
+            //        //int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table o_{LotNo[0] + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)");
+            //        //命令：insert into f_ZRS202507192157_20250724_17_19_57(批次开始日期, 获取MAP时间, 料号, 批号, MAP信息)values('2025年7月24日', '2025/7/24 17:31:12', 'RS70B08G3S03F', 'E9002B', '@TEST_DONE 08 06 06 44 06 05 05 06 05')，错误信息：对象名 'f_ZRS202507192157_20250724_17_19_57' 无效。
+            //        //RunLog($"Site{sitenum + 1:D2}-{m * 4 + n + 1}:Pass({passnum}):Fail({failnum}):Yield({(passnum / (float)(passnum + failnum) * 100):0.0}%)");
+            //    }
+            //}
+
+
+            //bool isyieldex = false;
+            //bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
+            //int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+            //bool isalarm = doutfailnum != 0;// 设置信息.测试机信息.Dout连续不良报警;
+            //if (isalarm) //Dout连续不良报警
+            //{
+            //    for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
+            //    {
+            //        for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
+            //        {
+            //            if (doutContinueFail[site][dut] >= doutfailnum)
+            //            {
+            //                string code = $"6{site + 1:D2}0{dut + 1}14";
+            //                RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
+            //                doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
+            //                isyieldex = true;
+            //                Listcode.Add(code);
+
+            //                if (isautoclose) //dout连续不良自动关闭该dout，
+            //                {
+            //                    设置信息.开site信息.SetSiteValue(site, dut, "0");
+
+            //                    string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)";
+            //                    RunLog(dutlog, LogType.OperateLog);
+            //                    if (设备状态 != 0) Summary(1, dutlog);
+
+            //                   string result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+            //                    if (result != "Success")
+            //                    {
+            //                        RunLog("Site保存失败!" + result);
+            //                    }
+
+            //                    开关Site显示MA[site][dut] = "A";
+            //                    //main.刷新开Site状态();
+
+            //                    if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+            //                    {
+            //                        Listcode.Add("1400442");
+            //                        RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
+            //                        ProgramPause = true;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
+
+            //int doutpassnum = 设置信息.测试机信息.Dout连续良品个数;
+            //bool isalarm2 = doutpassnum != 0;//设置信息.测试机信息.Dout连续良品报警;
+            //if (isalarm2)
+            //{
+            //    for (int site = 0; site < doutContinuePass.Count; site++) //连续不良率报警
+            //    {
+            //        for (int dut = 0; dut < doutContinuePass[site].Length; dut++)
+            //        {
+            //            if (doutContinuePass[site][dut] >= doutpassnum)
+            //            {
+            //                string code = $"6{site + 1:D2}1{dut + 1}14";
+            //                RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续良品数量:{doutContinuePass[site][dut]}>={doutpassnum}", LogType.AlarmLog);
+            //                doutContinuePass[site][dut] = 0; //如果已报警良率异常则清空重新计算
+            //                isyieldex = true;
+            //                Listcode.Add(code);
+            //            }
+            //        }
+            //    }
+            //}
+
+            //if (设置信息.测试机信息.Dut累计不良报警使能)
+            //{
+            //    for (int i = 0; i < 单dut总不良计数.Count; i++)
+            //    {
+            //        for (int j = 0; j < 单dut总不良计数[i].Length; j++)
+            //        {
+            //            if (单dut总不良计数[i][j] >= 设置信息.测试机信息.Dut累计不良报警个数)
+            //            {
+            //                isyieldex = true;
+            //                string code = $"6{i + 1:D2}0{j + 1}16";
+            //                Listcode.Add(code);
+            //                RunLog($"[Code]{code},[Msg]Site{i + 1}-Dut{j + 1}:累计不良数量:{单dut总不良计数[i][j]}>={设置信息.测试机信息.Dut累计不良报警个数}", LogType.AlarmLog);
+            //                单dut总不良计数[i][j] = 0;
+            //            }
+            //        }
+            //    }
+            //}
+
+            //Task.Run(() =>
+            //{
+            //    handler.HandlerDebug();
             //});
+
+
             //Listcode.Add("11111");
             //Auto1Tray盘数量++;
             //double prfpos = 100;

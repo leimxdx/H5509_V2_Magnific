@@ -172,7 +172,7 @@ namespace H5509_V2
 
         public static bool 首次出现未知Bin项报警 = false;
 
-        public static string[] 报警忽略次数 = { "4018004", "4018006", "4019003", "4020009", "4020001", "4021009", "4021001", "4030009", "4030013", "4031009", "4031013", "4032009", "4032013", "1400440", "1400444", "1400445", "1400448", "1400469", "1400470", "1400471", "1400472" };
+        public static string[] 报警忽略次数 = { "4018004", "4018006", "4019003", "4020009", "4020001", "4021009", "4021001", "4030009", "4030013", "4031009", "4031013", "4032009", "4032013", "1400440", "1400444", "1400445", "1400448", "1400469", "1400470", "1400471", "1400472", "1400490", "1400491" };
 
         public static List<分Bin> 分bin = new List<分Bin>();
 
@@ -471,6 +471,7 @@ namespace H5509_V2
 
         public static string[] SoketBin项保存;
 
+        public static bool ShowAlarmFlag;
 
         public static double TrayMax
         {
@@ -2695,7 +2696,7 @@ namespace H5509_V2
                         {
                             测试机名称 = dr["测试机名称"].ToString(),
                             Dout连续不良个数 = Convert.ToInt32(dr["Dout连续不良个数"].ToString()),
-                            //Dout连续良品个数 = Convert.ToInt32(dr["Dout连续良品个数"].ToString()),
+                            Dout连续良品个数 = Convert.ToInt32(dr["Dout连续良品个数"].ToString()),
                             Dout连续不良自动关闭 = GetBoolType(dr["Dout连续不良自动关闭"].ToString()),
                             Dout连续不良报警 = GetBoolType(dr["Dout连续不良报警"].ToString()),
                             Dut累计不良报警个数 = Convert.ToInt32(dr["Dut累计不良报警个数"].ToString()),
@@ -2956,7 +2957,7 @@ namespace H5509_V2
         {
             string sql = $"update TesterIFParam set " +
                 $"Dout连续不良个数 = '{tester.Dout连续不良个数}'," +
-                //$"Dout连续良品个数 = '{tester.Dout连续良品个数}'," +
+                $"Dout连续良品个数 = '{tester.Dout连续良品个数}'," +
                 $"Dout连续不良自动关闭 = '{tester.Dout连续不良自动关闭}'," +
                 $"Dout连续不良报警 = '{tester.Dout连续不良报警}'," +
                 $"Dut累计不良报警个数 = '{tester.Dut累计不良报警个数}'," +
@@ -4188,7 +4189,7 @@ namespace H5509_V2
             }
         }
 
-        public static void Auto1TrayClear()
+        public static void Auto1TrayClear(bool isempty, bool save)
         {
             trayTemp = "";
             trayTestTime = "";
@@ -4197,13 +4198,13 @@ namespace H5509_V2
             {
                 for (int j = 0; j < Auto1YPoint.Length; j++)
                 {
-                    Auto1DicPoint[$"{i},{j}"] = false;
-                    trayTemp += Auto1DicBin[$"{i},{j}"] + ",";
-                    Auto1DicBin[$"{i},{j}"] = "";
-                    trayTestTime += Auto1DicTestTime[$"{i},{j}"] + ",";
-                    Auto1DicTestTime[$"{i},{j}"] = "";
-                    trayTestSite += Auto1DicLocation[$"{i},{j}"] + ",";
-                    Auto1DicLocation[$"{i},{j}"] = "";
+                    if(isempty) Auto1DicPoint[$"{i},{j}"] = false;
+                    if(save) trayTemp += Auto1DicBin[$"{i},{j}"] + ",";
+                    if (isempty) Auto1DicBin[$"{i},{j}"] = "";
+                    if (save) trayTestTime += Auto1DicTestTime[$"{i},{j}"] + ",";
+                    if (isempty) Auto1DicTestTime[$"{i},{j}"] = "";
+                    if (save) trayTestSite += Auto1DicLocation[$"{i},{j}"] + ",";
+                    if (isempty) Auto1DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
@@ -4228,7 +4229,7 @@ namespace H5509_V2
             //    }
         }
 
-        public static void Auto2TrayClear()
+        public static void Auto2TrayClear(bool isempty, bool save)
         {
             trayTemp = "";
             trayTestTime = "";
@@ -4237,13 +4238,13 @@ namespace H5509_V2
             {
                 for (int j = 0; j < Auto2YPoint.Length; j++)
                 {
-                    Auto2DicPoint[$"{i},{j}"] = false;
-                    trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
-                    Auto2DicBin[$"{i},{j}"] = "";
-                    trayTestTime += Auto2DicTestTime[$"{i},{j}"] + ",";
-                    Auto2DicTestTime[$"{i},{j}"] = "";
-                    trayTestSite += Auto2DicLocation[$"{i},{j}"] + ",";
-                    Auto2DicLocation[$"{i},{j}"] = "";
+                    if (isempty) Auto2DicPoint[$"{i},{j}"] = false;
+                    if (save) trayTemp += Auto2DicBin[$"{i},{j}"] + ",";
+                    if (isempty) Auto2DicBin[$"{i},{j}"] = "";
+                    if (save) trayTestTime += Auto2DicTestTime[$"{i},{j}"] + ",";
+                    if (isempty) Auto2DicTestTime[$"{i},{j}"] = "";
+                    if (save) trayTestSite += Auto2DicLocation[$"{i},{j}"] + ",";
+                    if (isempty) Auto2DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
@@ -4268,7 +4269,7 @@ namespace H5509_V2
             //}
         }
 
-        public static void Fix1TrayClear()
+        public static void Fix1TrayClear(bool isempty, bool save)
         {
             trayTemp = "";
             trayTestTime = "";
@@ -4277,13 +4278,13 @@ namespace H5509_V2
             {
                 for (int j = 0; j < Fix1YPoint.Length; j++)
                 {
-                    Fix1DicPoint[$"{i},{j}"] = false;
-                    trayTemp += Fix1DicBin[$"{i},{j}"] + ",";
-                    Fix1DicBin[$"{i},{j}"] = "";
-                    trayTestTime += Fix1DicTestTime[$"{i},{j}"] + ",";
-                    Fix1DicTestTime[$"{i},{j}"] = "";
-                    trayTestSite += Fix1DicLocation[$"{i},{j}"] + ",";
-                    Fix1DicLocation[$"{i},{j}"] = "";
+                    if (isempty) Fix1DicPoint[$"{i},{j}"] = false;
+                    if (save) trayTemp += Fix1DicBin[$"{i},{j}"] + ",";
+                    if (isempty) Fix1DicBin[$"{i},{j}"] = "";
+                    if (save) trayTestTime += Fix1DicTestTime[$"{i},{j}"] + ",";
+                    if (isempty) Fix1DicTestTime[$"{i},{j}"] = "";
+                    if (save) trayTestSite += Fix1DicLocation[$"{i},{j}"] + ",";
+                    if (isempty) Fix1DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
@@ -4308,7 +4309,7 @@ namespace H5509_V2
             //}
         }
 
-        public static void Fix2TrayClear()
+        public static void Fix2TrayClear(bool isempty, bool save)
         {
             trayTemp = "";
             trayTestTime = "";
@@ -4317,13 +4318,13 @@ namespace H5509_V2
             {
                 for (int j = 0; j < Fix2YPoint.Length; j++)
                 {
-                    Fix2DicPoint[$"{i},{j}"] = false;
-                    trayTemp += Fix2DicBin[$"{i},{j}"] + ",";
-                    Fix2DicBin[$"{i},{j}"] = "";
-                    trayTestTime += Fix2DicTestTime[$"{i},{j}"] + ",";
-                    Fix2DicTestTime[$"{i},{j}"] = "";
-                    trayTestSite += Fix2DicLocation[$"{i},{j}"] + ",";
-                    Fix2DicLocation[$"{i},{j}"] = "";
+                    if (isempty) Fix2DicPoint[$"{i},{j}"] = false;
+                    if (save) trayTemp += Fix2DicBin[$"{i},{j}"] + ",";
+                    if (isempty) Fix2DicBin[$"{i},{j}"] = "";
+                    if (save) trayTestTime += Fix2DicTestTime[$"{i},{j}"] + ",";
+                    if (isempty) Fix2DicTestTime[$"{i},{j}"] = "";
+                    if (save) trayTestSite += Fix2DicLocation[$"{i},{j}"] + ",";
+                    if (isempty) Fix2DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');
@@ -4348,7 +4349,7 @@ namespace H5509_V2
             //}
         }
 
-        public static void Fix3TrayClear()
+        public static void Fix3TrayClear(bool isempty, bool save)
         {
             trayTemp = "";
             trayTestTime = "";
@@ -4357,13 +4358,13 @@ namespace H5509_V2
             {
                 for (int j = 0; j < Fix3YPoint.Length; j++)
                 {
-                    Fix3DicPoint[$"{i},{j}"] = false;
-                    trayTemp += Fix3DicBin[$"{i},{j}"] + ",";
-                    Fix3DicBin[$"{i},{j}"] = "";
-                    trayTestTime += Fix3DicTestTime[$"{i},{j}"] + ",";
-                    Fix3DicTestTime[$"{i},{j}"] = "";
-                    trayTestSite += Fix3DicLocation[$"{i},{j}"] + ",";
-                    Fix3DicLocation[$"{i},{j}"] = "";
+                    if (isempty) Fix3DicPoint[$"{i},{j}"] = false;
+                    if (save) trayTemp += Fix3DicBin[$"{i},{j}"] + ",";
+                    if (isempty) Fix3DicBin[$"{i},{j}"] = "";
+                    if (save) trayTestTime += Fix3DicTestTime[$"{i},{j}"] + ",";
+                    if (isempty) Fix3DicTestTime[$"{i},{j}"] = "";
+                    if (save) trayTestSite += Fix3DicLocation[$"{i},{j}"] + ",";
+                    if (isempty) Fix3DicLocation[$"{i},{j}"] = "";
                 }
             }
             trayTemp = trayTemp.TrimEnd(',');

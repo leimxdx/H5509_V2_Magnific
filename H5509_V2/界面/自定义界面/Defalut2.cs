@@ -14,6 +14,8 @@ namespace H5509_V2
     {
         public int Dut连续不良报警个数 = 0;
 
+        public int Dut连续良品报警个数 = 0;
+
         public bool Dut连续不良报警使能 = false;
 
         public double 总良率报警百分比 = 0;
@@ -36,6 +38,7 @@ namespace H5509_V2
         private void UpdateData()
         {
             textBox1.Text = Dut连续不良报警个数.ToString();
+            textBox7.Text = Dut连续良品报警个数.ToString();
             textBox2.Text = 总良率报警百分比.ToString();
 
             textBox4.Text = testnum.ToString();

@@ -113,6 +113,7 @@ namespace H5509_V2
 
         private void HeatMap_Load(object sender, EventArgs e)
         {
+            ShowAlarmFlag = true;
             dGV_init(dGV_HeatTrayMap, Heat_X_Num, Heat_Y_Num);
 
             刷新数据();
@@ -123,6 +124,7 @@ namespace H5509_V2
             Timer.Start();
 
             dGV_HeatTrayMap.ClearSelection();
+            ShowAlarmFlag = false;
         }
 
         private void TimerHeatTick(object sender, EventArgs e)

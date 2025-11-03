@@ -18,10 +18,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComMaster;
 using ComMaster.Interfaces;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.EMMA;
-using DocumentFormat.OpenXml.InkML;
-using DocumentFormat.OpenXml.Office2013.Drawing.ChartStyle;
 using H5509_alarm;
 using H5509_V2.界面;
 using HardwareGXN;
@@ -862,6 +858,7 @@ namespace H5509_V2
 
         private void 界面刷新()
         {
+            int shownum = 0;
             string result = "";
             //int testnum = 0;
             while (true)
@@ -891,8 +888,16 @@ namespace H5509_V2
 
                         if (form_alarm.AlarmRows > 0)
                         {
-                            form_alarm.Activate();
-                            form_alarm.Show();
+                            if (!ShowAlarmFlag)
+                            {
+                                shownum++;
+                                if (shownum == 100)
+                                {
+                                    shownum = 0;
+                                    form_alarm.Activate();
+                                    form_alarm.Show();
+                                }
+                            }
                         }
                     }));
 
@@ -1083,116 +1088,133 @@ namespace H5509_V2
                                     }
                                 }
 
-
-                                bool isyieldex = false;
-                                bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
-                                int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
-                                int doutpassnum = 设置信息.测试机信息.Dout连续良品个数;
-                                bool isalarm = doutfailnum != 0;// 设置信息.测试机信息.Dout连续不良报警;
-
-                                if (isalarm) //Dout连续不良报警
+                                if (!无测试机模式) //离线模式不检测良率异常 2025-11-03 14:36:00
                                 {
-                                    for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
+                                    bool isyieldex = false;
+                                    bool isautoclose = 设置信息.测试机信息.Dout连续不良自动关闭;
+                                    int doutfailnum = 设置信息.测试机信息.Dout连续不良个数;
+                                    bool isalarm = doutfailnum != 0;// 设置信息.测试机信息.Dout连续不良报警;
+                                    if (isalarm) //Dout连续不良报警
                                     {
-                                        for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
+                                        for (int site = 0; site < doutContinueFail.Count; site++) //连续不良率报警
                                         {
-                                            if (doutContinueFail[site][dut] >= doutfailnum)
+                                            for (int dut = 0; dut < doutContinueFail[site].Length; dut++)
                                             {
-                                                //doutContinueFail[site][dut] = 0;
-                                                string code = $"6{site + 1:D2}0{dut + 1}14";
-                                                //if (isalarm) //dout连续不良报警
-                                                //{
-                                                RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
-                                                doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
-                                                isyieldex = true;
-                                                Listcode.Add(code);
-
-                                                if (isautoclose) //dout连续不良自动关闭该dout，
+                                                if (doutContinueFail[site][dut] >= doutfailnum)
                                                 {
-                                                    设置信息.开site信息.SetSiteValue(site, dut, "0");
+                                                    string code = $"6{site + 1:D2}0{dut + 1}14";
+                                                    RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续不良数量:{doutContinueFail[site][dut]}>={doutfailnum}", LogType.AlarmLog);
+                                                    doutContinueFail[site][dut] = 0; //如果已报警良率异常则清空重新计算
+                                                    isyieldex = true;
+                                                    Listcode.Add(code);
 
-                                                    string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)";
-                                                    RunLog(dutlog, LogType.OperateLog);
-                                                    if (设备状态 != 0) Summary(1, dutlog);
-
-                                                    result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
-                                                    if (result != "Success")
+                                                    if (isautoclose) //dout连续不良自动关闭该dout，
                                                     {
-                                                        RunLog("Site保存失败!" + result);
-                                                    }
+                                                        设置信息.开site信息.SetSiteValue(site, dut, "0");
 
-                                                    开关Site显示MA[site][dut] = "A";
-                                                    main.刷新开Site状态();
+                                                        string dutlog = $"档案:[{设置信息.档案名称}]-Site{sitenum + 1}-Dut{dut + 1}被自动关闭(连续不良)";
+                                                        RunLog(dutlog, LogType.OperateLog);
+                                                        if (设备状态 != 0) Summary(1, dutlog);
 
-                                                    if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
-                                                    {
-                                                        Listcode.Add("1400442");
-                                                        RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
-                                                        ProgramPause = true;
+                                                        result = UpdateSiteStatus(设置信息.开site信息.Site名称, site + 1, 设置信息.开site信息.GetSiteValue(site));
+                                                        if (result != "Success")
+                                                        {
+                                                            RunLog("Site保存失败!" + result);
+                                                        }
+
+                                                        开关Site显示MA[site][dut] = "A";
+                                                        main.刷新开Site状态();
+
+                                                        if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+                                                        {
+                                                            Listcode.Add("1400442");
+                                                            RunLog("[Code]1400442,[Msg](运行中)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
+                                                            ProgramPause = true;
+                                                        }
                                                     }
                                                 }
-                                                //}
                                             }
                                         }
                                     }
-                                }
 
-                                if (设置信息.测试机信息.Dut累计不良报警使能)
-                                {
-                                    for (int i = 0; i < 单dut总不良计数.Count; i++)
+                                    int doutpassnum = 设置信息.测试机信息.Dout连续良品个数;
+                                    bool isalarm2 = doutpassnum != 0;//设置信息.测试机信息.Dout连续良品报警;
+                                    if (isalarm2)
                                     {
-                                        for (int j = 0; j < 单dut总不良计数[i].Length; j++)
+                                        for (int site = 0; site < doutContinuePass.Count; site++) //连续不良率报警
                                         {
-                                            if (单dut总不良计数[i][j] >= 设置信息.测试机信息.Dut累计不良报警个数)
+                                            for (int dut = 0; dut < doutContinuePass[site].Length; dut++)
                                             {
-                                                isyieldex = true;
-                                                string code = $"6{i + 1:D2}0{j + 1}16";
-                                                Listcode.Add(code);
-                                                RunLog($"[Code]{code},[Msg]Site{i + 1}-Dut{i + 1}:累计不良数量:{单dut总不良计数[i][j]}>{设置信息.测试机信息.Dut累计不良报警个数}", LogType.AlarmLog);
-                                                单dut总不良计数[i][j] = 0;
+                                                if (doutContinuePass[site][dut] >= doutpassnum)
+                                                {
+                                                    string code = $"6{site + 1:D2}1{dut + 1}14";
+                                                    RunLog($"[Code]{code},[Msg]Site{site + 1}-Dut{dut + 1}:连续良品数量:{doutContinuePass[site][dut]}>={doutpassnum}", LogType.AlarmLog);
+                                                    doutContinuePass[site][dut] = 0; //如果已报警良率异常则清空重新计算
+                                                    isyieldex = true;
+                                                    Listcode.Add(code);
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                if (设置信息.测试机信息.总良率报警使能
-                                    && 出料数 >= 设置信息.测试机信息.总良率报警基数
-                                    && 总良率报警间隔计数 >= 设置信息.测试机信息.总良率报警间隔
-                                    && Auto1良率 <= 设置信息.测试机信息.总良率报警百分比)
-                                {
-                                    isyieldex = true;
-                                    string code = "1400320";
-                                    Listcode.Add(code);
-                                    RunLog($"[Code]{code},[Msg]总良率：{Auto1良率}<{设置信息.测试机信息.总良率报警百分比.ToString("P1")}", LogType.AlarmLog);
-                                    总良率报警间隔计数 = 0;
-                                }
-                                try
-                                {
-                                    result = Sqlite.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out string value);
-                                    //object su = await SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + motionEx.testerIFParam.socket使用次数);
-                                    bool isint = int.TryParse(value.ToString(), out int socketnum);
-                                    if (isint)
+
+                                    if (设置信息.测试机信息.Dut累计不良报警使能)
                                     {
-                                        if (socketnum > Socket使用次数超限数)
+                                        for (int i = 0; i < 单dut总不良计数.Count; i++)
                                         {
-                                            Listcode.Add("1400600");
-                                            Socket使用次数超限数 = socketnum;
-                                        }
-                                        else
-                                        {
-                                            if (socketnum == 0)
+                                            for (int j = 0; j < 单dut总不良计数[i].Length; j++)
                                             {
-                                                Socket使用次数超限数 = 0;
+                                                if (单dut总不良计数[i][j] >= 设置信息.测试机信息.Dut累计不良报警个数)
+                                                {
+                                                    isyieldex = true;
+                                                    string code = $"6{i + 1:D2}0{j + 1}16";
+                                                    Listcode.Add(code);
+                                                    RunLog($"[Code]{code},[Msg]Site{i + 1}-Dut{j + 1}:累计不良数量:{单dut总不良计数[i][j]}>={设置信息.测试机信息.Dut累计不良报警个数}", LogType.AlarmLog);
+                                                    单dut总不良计数[i][j] = 0;
+                                                }
                                             }
                                         }
                                     }
-                                }
-                                catch (Exception ex) { RunLog("读取socket使用次数超限数异常：" + ex.Message); }
 
-                                if (isyieldex) //如果良率异常
-                                {
-                                    ProgramPause = true; //如果有良率异常则触发停止
-                                    IsPause = true;
+                                    if (设置信息.测试机信息.总良率报警使能
+                                        && 出料数 >= 设置信息.测试机信息.总良率报警基数
+                                        && 总良率报警间隔计数 >= 设置信息.测试机信息.总良率报警间隔
+                                        && Auto1良率 <= 设置信息.测试机信息.总良率报警百分比)
+                                    {
+                                        isyieldex = true;
+                                        string code = "1400320";
+                                        Listcode.Add(code);
+                                        RunLog($"[Code]{code},[Msg]总良率：{Auto1良率}<{设置信息.测试机信息.总良率报警百分比.ToString("P1")}", LogType.AlarmLog);
+                                        总良率报警间隔计数 = 0;
+                                    }
+                                    try
+                                    {
+                                        result = Sqlite.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + 设置信息.测试机信息.socket使用次数, out string value);
+                                        //object su = await SQLiteHelper.runSql(SQLiteRunningString, "select count(*) from SocketUse where num>" + motionEx.testerIFParam.socket使用次数);
+                                        bool isint = int.TryParse(value.ToString(), out int socketnum);
+                                        if (isint)
+                                        {
+                                            if (socketnum > Socket使用次数超限数)
+                                            {
+                                                Listcode.Add("1400600");
+                                                Socket使用次数超限数 = socketnum;
+                                            }
+                                            else
+                                            {
+                                                if (socketnum == 0)
+                                                {
+                                                    Socket使用次数超限数 = 0;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    catch (Exception ex) { RunLog("读取socket使用次数超限数异常：" + ex.Message); }
+
+                                    if (isyieldex) //如果良率异常
+                                    {
+                                        ProgramPause = true; //如果有良率异常则触发停止
+                                        IsPause = true;
+                                    }
                                 }
                             }
                         }));

@@ -73,7 +73,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>H5509big.ico</ApplicationIcon>
+    <ApplicationIcon>H5509big2.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject />
@@ -508,6 +508,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="H5509big.ico" />
+    <Content Include="H5509big2.ico" />
     <None Include="Resources\机台照.png" />
     <None Include="Resources\TrayForm.png" />
   </ItemGroup>

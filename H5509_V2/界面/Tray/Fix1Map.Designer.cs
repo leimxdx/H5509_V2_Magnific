@@ -30,6 +30,7 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.button3 = new System.Windows.Forms.Button();
             this.dGV_Fix1TrayMap = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -46,7 +47,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.button3.Location = new System.Drawing.Point(439, 555);
+            this.button3.Location = new System.Drawing.Point(931, 873);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(110, 42);
             this.button3.TabIndex = 51;
@@ -71,25 +72,33 @@
             this.Column6,
             this.Column7,
             this.Column8});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dGV_Fix1TrayMap.DefaultCellStyle = dataGridViewCellStyle1;
             this.dGV_Fix1TrayMap.GridColor = System.Drawing.Color.Black;
             this.dGV_Fix1TrayMap.Location = new System.Drawing.Point(18, 14);
             this.dGV_Fix1TrayMap.Name = "dGV_Fix1TrayMap";
             this.dGV_Fix1TrayMap.ReadOnly = true;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dGV_Fix1TrayMap.RowHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.dGV_Fix1TrayMap.RowHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.dGV_Fix1TrayMap.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dGV_Fix1TrayMap.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            this.dGV_Fix1TrayMap.RowHeadersVisible = false;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.dGV_Fix1TrayMap.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dGV_Fix1TrayMap.RowTemplate.Height = 23;
             this.dGV_Fix1TrayMap.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dGV_Fix1TrayMap.Size = new System.Drawing.Size(399, 583);
+            this.dGV_Fix1TrayMap.Size = new System.Drawing.Size(885, 903);
             this.dGV_Fix1TrayMap.TabIndex = 50;
             // 
             // dataGridViewTextBoxColumn1
@@ -161,7 +170,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(567, 610);
+            this.ClientSize = new System.Drawing.Size(1065, 927);
             this.Controls.Add(this.dGV_Fix1TrayMap);
             this.Controls.Add(this.button3);
             this.Name = "Fix1Map";

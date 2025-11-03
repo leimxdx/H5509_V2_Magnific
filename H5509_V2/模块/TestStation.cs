@@ -751,8 +751,9 @@ namespace H5509_V2
                         testDataInfos[sites[i]].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                         testDataInfos[sites[i]].SiteTestState = 3;
 
-                        RunLog($"生成Site:{sites[i]:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}");
-
+                        string logstr = $"生成Site:{sites[i] + 1:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}";
+                        RunLog(logstr, LogType.ComLog);
+                        RefreshInfoLog(logstr, false);
                         DataUpdate(sites[i], testDataInfos[sites[i]]);
                     }
                 }
@@ -791,7 +792,9 @@ namespace H5509_V2
                             testDataInfos[sites[i]].SiteTestBin = new string[] { bins[i][0], bins[i][1], bins[i][2], bins[i][3], bins[i][4], bins[i][5], bins[i][6], bins[i][7] };
                             testDataInfos[sites[i]].SiteTestState = 3;
 
-                            RunLog($"生成Site:{sites[i]:D2},超时Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}");
+                            string logstr = $"生成Site:{sites[i] + 1:D2},超时Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}";
+                            RunLog(logstr, LogType.ComLog);
+                            RefreshInfoLog(logstr, false);
 
                             DataUpdate(sites[i], testDataInfos[sites[i]]);
                         }
@@ -813,8 +816,10 @@ namespace H5509_V2
                             testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
                             testDataInfos[sites[i]].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                             testDataInfos[sites[i]].SiteTestState = 3;
-
-                            RunLog($"生成Site:{sites[i]:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}");
+                            
+                            string logstr = $"生成Site:{sites[i] + 1:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}";
+                            RunLog(logstr, LogType.ComLog);
+                            RefreshInfoLog(logstr, false);
 
                             DataUpdate(sites[i], testDataInfos[sites[i]]);
                         }
@@ -833,7 +838,9 @@ namespace H5509_V2
                 testDataInfos[site].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                 testDataInfos[site].SiteTestState = 3;
 
-                RunLog($"生成Site:{site:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}");
+                string logstr = $"生成Site:{site + 1:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}";
+                RunLog(logstr, LogType.ComLog);
+                RefreshInfoLog(logstr, false);
 
                 DataUpdate(site, testDataInfos[site]);
 
@@ -895,7 +902,9 @@ namespace H5509_V2
 
                         testDataInfos[sites[i]].SiteTestState = 3;
 
-                        RunLog($"生成Site:{sites[i]:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+                        string logstr = $"生成Site:{sites[i] + 1:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}";
+                        RunLog(logstr, LogType.ComLog);
+                        RefreshInfoLog(logstr, false);
 
                         DataUpdate(sites[i], testDataInfos[sites[i]]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
 
@@ -922,7 +931,9 @@ namespace H5509_V2
 
                         testDataInfos[sites[i]].SiteTestState = 3;
 
-                        RunLog($"生成Site:{sites[i]:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+                        string logstr = $"生成Site:{sites[i] + 1:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}";
+                        RunLog(logstr, LogType.ComLog);
+                        RefreshInfoLog(logstr, false);
 
                         DataUpdate(sites[i], testDataInfos[sites[i]]); //必须要传给StationManager,因为数据都是从StationManager取的,单个TestStation有可能负责16个site,也有可能只负责1个site，所以当查看station2时里面会无数据，因为TestStation1负责16个site的数据发送接受(1台测试机)
 
@@ -945,7 +956,9 @@ namespace H5509_V2
 
                 testDataInfos[site].SiteTestState = 3;
 
-                RunLog($"生成Site:{site:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
+                string logstr = $"生成Site:{site + 1:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}";
+                RunLog(logstr, LogType.ComLog);
+                RefreshInfoLog(logstr, false);
 
                 DataUpdate(site, testDataInfos[site]);
             }
