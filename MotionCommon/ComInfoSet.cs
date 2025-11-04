@@ -11,6 +11,8 @@ namespace MotionCommon
     {
         public string 通讯名称 { get; set; }
 
+        public string 客户 { get; set; }
+
         public string 通讯协议 { get; set; }
 
         public string 通讯方式 { get; set; }

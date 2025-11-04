@@ -41,6 +41,9 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.uiCheckBox204 = new Sunny.UI.UICheckBox();
+            this.uiCheckBox1 = new Sunny.UI.UICheckBox();
+            this.uiCheckBox2 = new Sunny.UI.UICheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Auto1TrayMap)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,7 +84,7 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dGV_Auto1TrayMap.DefaultCellStyle = dataGridViewCellStyle1;
             this.dGV_Auto1TrayMap.GridColor = System.Drawing.Color.Black;
-            this.dGV_Auto1TrayMap.Location = new System.Drawing.Point(12, 12);
+            this.dGV_Auto1TrayMap.Location = new System.Drawing.Point(18, 14);
             this.dGV_Auto1TrayMap.Name = "dGV_Auto1TrayMap";
             this.dGV_Auto1TrayMap.ReadOnly = true;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -165,14 +168,73 @@
             this.Column8.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column8.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             // 
+            // uiCheckBox204
+            // 
+            this.uiCheckBox204.AutoSize = true;
+            this.uiCheckBox204.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox204.CheckBoxSize = 20;
+            this.uiCheckBox204.Checked = true;
+            this.uiCheckBox204.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox204.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiCheckBox204.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox204.Location = new System.Drawing.Point(938, 695);
+            this.uiCheckBox204.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox204.Name = "uiCheckBox204";
+            this.uiCheckBox204.Size = new System.Drawing.Size(97, 26);
+            this.uiCheckBox204.TabIndex = 166;
+            this.uiCheckBox204.Tag = "@0@#BCD#";
+            this.uiCheckBox204.Text = "测试BIN";
+            this.uiCheckBox204.Click += new System.EventHandler(this.uiCheckBox204_Click);
+            // 
+            // uiCheckBox1
+            // 
+            this.uiCheckBox1.AutoSize = true;
+            this.uiCheckBox1.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox1.CheckBoxSize = 20;
+            this.uiCheckBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiCheckBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox1.Location = new System.Drawing.Point(938, 738);
+            this.uiCheckBox1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox1.Name = "uiCheckBox1";
+            this.uiCheckBox1.Size = new System.Drawing.Size(101, 26);
+            this.uiCheckBox1.TabIndex = 167;
+            this.uiCheckBox1.Tag = "@0@#BCD#";
+            this.uiCheckBox1.Text = "测试时间";
+            this.uiCheckBox1.Click += new System.EventHandler(this.uiCheckBox1_Click);
+            // 
+            // uiCheckBox2
+            // 
+            this.uiCheckBox2.AutoSize = true;
+            this.uiCheckBox2.CheckBoxColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox2.CheckBoxSize = 20;
+            this.uiCheckBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiCheckBox2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiCheckBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(48)))), ((int)(((byte)(48)))), ((int)(((byte)(48)))));
+            this.uiCheckBox2.Location = new System.Drawing.Point(938, 781);
+            this.uiCheckBox2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiCheckBox2.Name = "uiCheckBox2";
+            this.uiCheckBox2.Size = new System.Drawing.Size(101, 26);
+            this.uiCheckBox2.TabIndex = 168;
+            this.uiCheckBox2.Tag = "@0@#BCD#";
+            this.uiCheckBox2.Text = "测试工位";
+            this.uiCheckBox2.Click += new System.EventHandler(this.uiCheckBox2_Click);
+            // 
             // Auto1Map
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(1065, 927);
+            this.Controls.Add(this.uiCheckBox2);
+            this.Controls.Add(this.uiCheckBox1);
+            this.Controls.Add(this.uiCheckBox204);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.dGV_Auto1TrayMap);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1081, 966);
             this.Name = "Auto1Map";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Auto1Map";
@@ -180,6 +242,7 @@
             this.Load += new System.EventHandler(this.Auto1Map_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dGV_Auto1TrayMap)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -195,5 +258,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private Sunny.UI.UICheckBox uiCheckBox204;
+        private Sunny.UI.UICheckBox uiCheckBox1;
+        private Sunny.UI.UICheckBox uiCheckBox2;
     }
 }

@@ -980,18 +980,27 @@ namespace H5509_V2
                                 {
                                     if (opens[i])
                                     {
-                                        if (Auto1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto1数量++;
-                                        else if (Auto2.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Auto2数量++;
-                                        else if (Fix1.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix1数量++;
-                                        else if (Fix2.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix2数量++;
-                                        else if (Fix3.Contains(bins[i])) SocketSaves[sitenum * 8 + i].Fix3数量++;
+                                        if (Auto1.Split(',').Contains(bins[i])) DoutAuto1Number[sitenum * 8 + i]++;
+                                        else if (Auto2.Split(',').Contains(bins[i])) DoutAuto2Number[sitenum * 8 + i]++;
+                                        else if (Fix1.Split(',').Contains(bins[i])) DoutFix1Number[sitenum * 8 + i]++;
+                                        else if (Fix2.Split(',').Contains(bins[i])) DoutFix2Number[sitenum * 8 + i]++;
+                                        else if (Fix3.Split(',').Contains(bins[i])) DoutFix3Number[sitenum * 8 + i]++;
                                         else
                                         {
-                                            if (Auto1.Contains("OTH")) SocketSaves[sitenum * 8 + i].Auto1数量++;
-                                            else if (Auto2.Contains("OTH")) SocketSaves[sitenum * 8 + i].Auto2数量++;
-                                            else if (Fix1.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix1数量++;
-                                            else if (Fix2.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix2数量++;
-                                            else if (Fix3.Contains("OTH")) SocketSaves[sitenum * 8 + i].Fix3数量++;
+                                            if (Auto1.Split(',').Contains("OTH")) DoutAuto1Number[sitenum * 8 + i]++;
+                                            else if (Auto2.Split(',').Contains("OTH")) DoutAuto2Number[sitenum * 8 + i]++;
+                                            else if (Fix1.Split(',').Contains("OTH")) DoutFix1Number[sitenum * 8 + i]++;
+                                            else if (Fix2.Split(',').Contains("OTH")) DoutFix2Number[sitenum * 8 + i]++;
+                                            else if (Fix3.Split(',').Contains("OTH")) DoutFix3Number[sitenum * 8 + i]++;
+                                        }
+                                        if (BIN项计数.ContainsKey(bins[i]))
+                                        {
+                                            BIN项计数[bins[i]][sitenum * 8 + i]++;
+                                        }
+                                        else
+                                        {
+                                            BIN项计数.Add(bins[i], new int[128]);
+                                            BIN项计数[bins[i]][sitenum * 8 + i]++;
                                         }
                                     }
                                 }
@@ -1039,7 +1048,7 @@ namespace H5509_V2
                                     bb += " " + s;
                                 }
                                 string sql = $"insert into f_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期,获取MAP时间,料号,批号,MAP信息)" +
-                                $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{LotNo[3]}','{LotNo[4]}','{bb}')";
+                                $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{(LotNo[3] ?? "")}','{(LotNo[4] ?? "")}','{bb}')";
                                 SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
                                 foreach (string b in bins)
@@ -1055,7 +1064,7 @@ namespace H5509_V2
                                         string doutstr = $"{sitenum:D2}{m * 4 + n + 1}";
                                         if (open[m][n])
                                         {
-                                            if (Auto1.Contains(bins[m * 4 + n]))
+                                            if (Auto1.Split(',').Contains(bins[m * 4 + n]))
                                             {
                                                 Dout128PassNumber[doutnum + (m * 4 + n)]++;
                                                 doutContinuePass[sitenum][n + m * 4]++;

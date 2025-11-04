@@ -4092,7 +4092,7 @@
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(191, 27);
             this.label25.TabIndex = 182;
-            this.label25.Text = "V.1.1.18 20251023";
+            this.label25.Text = "V.1.1.19 20251103";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // DefalutPanel

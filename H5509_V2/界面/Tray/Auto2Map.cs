@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Ttimer = System.Timers.Timer;
 using static H5509_V2.APPmaster;
+using Ttimer = System.Timers.Timer;
 
 namespace H5509_V2
 {
     public partial class Auto2Map : Form
     {
+        public static int ShowType = 0;
         public Ttimer Timer { get; set; }
         public Auto2Map()
         {
@@ -49,10 +51,13 @@ namespace H5509_V2
         }
         private void 刷新数据()
         {
+            int showtype = ShowType;
             double[] trayXPoint = Auto2XPoint;
             double[] trayYPoint = Auto2YPoint;
             Dictionary<string, bool> tryDicPoint = Auto2DicPoint;
             Dictionary<string, string> tryDicBin = Auto2DicBin;
+            Dictionary<string, string> tryDicTestTime = Auto2DicTestTime;
+            Dictionary<string, string> tryDicLocation = Auto2DicLocation;
 
             for (int i = 0; i < trayXPoint.Length; i++)
             {
@@ -62,7 +67,10 @@ namespace H5509_V2
                     if (tryDicPoint[$"{i},{j}"])
                     {
                         aa.Style.BackColor = System.Drawing.Color.FromArgb(设置信息.分BIN信息.color2);
-                        aa.Value = tryDicBin[$"{i},{j}"];
+                        if (showtype == 0) aa.Value = tryDicBin[$"{i},{j}"];
+                        else if (showtype == 1) aa.Value = tryDicTestTime[$"{i},{j}"];
+                        else if (showtype == 2) aa.Value = tryDicLocation[$"{i},{j}"];
+                        //aa.Value = tryDicBin[$"{i},{j}"];
                     }
                     else
                     {
@@ -85,6 +93,10 @@ namespace H5509_V2
             Timer.Start();
 
             dGV_Auto2TrayMap.ClearSelection();
+
+            uiCheckBox204.Checked = ShowType == 0;
+            uiCheckBox1.Checked = ShowType == 1;
+            uiCheckBox2.Checked = ShowType == 2;
         }
         private void TimerHeatTick(object sender, EventArgs e)
         {
@@ -100,6 +112,42 @@ namespace H5509_V2
         private void Auto2Map_FormClosing(object sender, FormClosingEventArgs e)
         {
             Timer.Stop();
+        }
+
+        private void uiCheckBox2_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox2.Checked)
+            {
+                uiCheckBox1.Checked = false;
+                uiCheckBox204.Checked = false;
+            }
+            else uiCheckBox2.Checked = true;
+
+            ShowType = 2;
+        }
+
+        private void uiCheckBox1_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox1.Checked)
+            {
+                uiCheckBox2.Checked = false;
+                uiCheckBox204.Checked = false;
+            }
+            else uiCheckBox1.Checked = true;
+
+            ShowType = 1;
+        }
+
+        private void uiCheckBox204_Click(object sender, EventArgs e)
+        {
+            if (uiCheckBox204.Checked)
+            {
+                uiCheckBox1.Checked = false;
+                uiCheckBox2.Checked = false;
+            }
+            else uiCheckBox204.Checked = true;
+
+            ShowType = 0;
         }
     }
 }

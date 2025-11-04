@@ -912,7 +912,7 @@ namespace H5509_V2
                     //else RunLog($"site:{site:D2}未在测试!", LogType.ComLog);
                 }
             }
-            else if (设置信息.通讯信息.同时测试 == 4)
+            else if (设置信息.通讯信息.同时测试 == 4) //"慧荣"
             {
                 int[] sites = { StationId, StationId + 1, StationId + 2, StationId + 3 };
 
@@ -941,7 +941,7 @@ namespace H5509_V2
                     //else RunLog($"site:{site:D2}未在测试!", LogType.ComLog);
                 }
             }
-            else
+            else //"晶存" 或 "衡宇"
             {
                 string[] bin = GetBins(bins2);
 

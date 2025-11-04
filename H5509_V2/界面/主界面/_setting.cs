@@ -4149,6 +4149,10 @@ namespace H5509_V2
         {
             textBox37.Text = comInfoSet.通讯名称;
 
+            uiCheckBox174.Checked = comInfoSet.客户 == "默认";
+            uiCheckBox175.Checked = comInfoSet.客户 == "晶存";
+            uiCheckBox186.Checked = comInfoSet.客户 == "弘润";
+
             uiCheckBox173.Checked = comInfoSet.通讯协议 == "默认";
             uiCheckBox162.Checked = comInfoSet.通讯协议 == "晶存";
             uiCheckBox163.Checked = comInfoSet.通讯协议 == "得一微";
@@ -5472,6 +5476,7 @@ namespace H5509_V2
 
                         ComInfoSet newComset = new ComInfoSet();
                         newComset.通讯名称 = name;
+                        newComset.客户 = uiCheckBox174.Checked ? "默认" : uiCheckBox175.Checked ? "晶存" : uiCheckBox186.Checked ? "弘润" : "默认";
                         newComset.通讯协议 = uiCheckBox173.Checked ? "默认" : uiCheckBox162.Checked ? "晶存" : uiCheckBox163.Checked ? "得一微" : uiCheckBox164.Checked ? "慧荣" : uiCheckBox191.Checked ? "衡宇" : uiCheckBox216.Checked ? "鹏武" : uiCheckBox165.Checked ? "江波龙" : "默认";
                         newComset.通讯方式 = uiCheckBox166.Checked ? "COM" : uiCheckBox167.Checked ? "TCP" : uiCheckBox168.Checked ? "LAN" : uiCheckBox169.Checked ? "GPIB" : "COM";
                         newComset.测试机数量 = uiCheckBox158.Checked ? 1 : uiCheckBox159.Checked ? 4 : uiCheckBox161.Checked ? 8 : uiCheckBox160.Checked ? 16 : 1;
@@ -5505,6 +5510,7 @@ namespace H5509_V2
                         else
                         {
                             if (oldComset.通讯协议 != newComset.通讯协议) RunLog($"通讯名称:[{name}]:[通讯协议]:{oldComset.通讯协议}->{newComset.通讯协议}:更新成功", LogType.ParamLog);
+                            if (oldComset.客户 != newComset.客户) RunLog($"通讯名称:[{name}]:[客户]:{oldComset.客户}->{newComset.客户}:更新成功", LogType.ParamLog);
                             if (oldComset.通讯方式 != newComset.通讯方式) RunLog($"通讯名称:[{name}]:[通讯方式]:{oldComset.通讯方式}->{newComset.通讯方式}:更新成功", LogType.ParamLog);
                             if (oldComset.测试机数量 != newComset.测试机数量) RunLog($"通讯名称:[{name}]:[测试机数量]:{oldComset.测试机数量}->{newComset.测试机数量}:更新成功", LogType.ParamLog);
                             if (oldComset.同时测试 != newComset.同时测试) RunLog($"通讯名称:[{name}]:[同时测试]:{oldComset.同时测试}->{newComset.同时测试}:更新成功", LogType.ParamLog);
@@ -8383,6 +8389,11 @@ namespace H5509_V2
                     return;
                 }
 
+                string sql = $"select count(*) from SetupInfo where tray盘名称 = '{name}'";
+                string result = SqlServer.runSql(SQLServerConnString_Config, sql, out string value);
+                if (result != "Success") { MessageBox.Show("查询Tray盘使用情况失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                if (Convert.ToInt32(value) >= 1) { MessageBox.Show("tray盘名称被其它档案使用中无法删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+
                 DialogResult dialog = MessageBox.Show($"请确认是否删除Tray盘:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
                 {
@@ -8419,6 +8430,12 @@ namespace H5509_V2
                     MessageBox.Show("加热盘使用中不能删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                string sql = $"select count(*) from SetupInfo where 加热盘名称 = '{name}'";
+                string result = SqlServer.runSql(SQLServerConnString_Config, sql, out string value);
+                if (result != "Success") { MessageBox.Show("查询加热盘使用情况失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                if (Convert.ToInt32(value) >= 1) { MessageBox.Show("加热盘名称被其它档案使用中无法删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+
 
                 DialogResult dialog = MessageBox.Show($"请确认是否删除加热盘:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)
@@ -8969,7 +8986,7 @@ namespace H5509_V2
             string result = Sqlite.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
             if (result == "Success")
             {
-                string tableName = $"dut_{LotNo[0].Replace("-", "_")}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
+                string tableName = $"dut_{(LotNo[0] ?? "").Replace("-", "_")}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
                 line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table {tableName}(id nchar(10) not NULL,pass int not NULL,total int not NULL,usedTime varchar(50) not NULL)");
                 if (line >= -1)
                 {
@@ -10404,6 +10421,11 @@ namespace H5509_V2
                     MessageBox.Show("通讯使用中不能删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                string sql = $"select count(*) from TesterIFParam where 通讯名称 = '{name}'";
+                string result = SqlServer.runSql(SQLServerConnString_Config, sql, out string value);
+                if (result != "Success") { MessageBox.Show("查询通讯名称使用情况失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
+                if (Convert.ToInt32(value) >= 1) { MessageBox.Show("通讯名称被其它档案使用中无法删除!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return; }
 
                 DialogResult dialog = MessageBox.Show($"请确认是否删除通讯:{name}", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                 if (dialog == DialogResult.OK)

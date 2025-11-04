@@ -2424,6 +2424,11 @@ namespace H5509_V2
             trayTemp = "";
             Dout128PassNumber = new int[128];
             Dout128FailNumber = new int[128];
+            DoutAuto1Number = new int[128];
+            DoutAuto2Number = new int[128];
+            DoutFix1Number = new int[128];
+            DoutFix2Number = new int[128];
+            DoutFix3Number = new int[128];
             SiteTestState = new int[16];
             doutContinueFail = new List<int[]>();
             doutContinuePass = new List<int[]>();
@@ -4148,7 +4153,8 @@ namespace H5509_V2
                                 {
                                     开始时间 = DateTime.Now;
 
-                                    Summary_LotNo = (LotNo[0] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+
+                                    Summary_LotNo = (LotNo[4] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
                                     //Summary_LotNo = LotNo[0] ?? "" + "_" + 开始时间.ToString("yyyyMMdd") + $"_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
 
                                     Sqlite.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
@@ -4582,6 +4588,8 @@ namespace H5509_V2
                                     RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
                                 }
 
+
+
                                 if (ishome)
                                 {
                                     参数初始化();
@@ -4616,13 +4624,13 @@ namespace H5509_V2
                                         if (result == "Success")
                                         {
                                             H5509归零 = true;
-                                            Listcode.Add("1400444");
+                                            if (归零后报警) Listcode.Add("1400444");
                                             RunLog("[Code]1400444,[Msg]归零完成", LogType.AlarmLog);
                                             RunLog("归零完成", LogType.OperateLog);
                                         }
                                         else
                                         {
-                                            Listcode.Add("1400420");
+                                            if (归零后报警) Listcode.Add("1400420");
                                             RunLog("[Code]1400420,[Msg]归零失败!" + result, LogType.AlarmLog);
                                             全部回零异常Error = result;
                                             RunLog("归零失败", LogType.OperateLog);
@@ -5613,7 +5621,7 @@ namespace H5509_V2
                             Listcode.Add("1400130");
                             RunLog($"[Code]1400130,[Msg]结批完成", LogType.AlarmLog);
 
-                            bool isok = int.TryParse(LotNo[8], out int lotCout);
+                            bool isok = int.TryParse((LotNo[8] ?? ""), out int lotCout);
                             if (!isok) lotCout = 载入数;
 
                             if (载入数 != 出料数 || 载入数 != lotCout)
@@ -5649,7 +5657,7 @@ namespace H5509_V2
                             result = Sqlite.runSql(SQLiteRunningString, "Select * From DutCurrent", out DataTable dataTable);
                             if (result == "Success")
                             {
-                                string tableName = $"dut_{LotNo[0].Replace("-", "_")}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
+                                string tableName = $"dut_{(LotNo[0] ?? "").Replace("-", "_")}" + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss");
                                 int line = SqlServer.runSqlNonQuery(SQLServerConnString, $"create table {tableName}(id nchar(10) not NULL,pass int not NULL,total int not NULL,usedTime varchar(50) not NULL)");
                                 if (line >= -1)
                                 {
@@ -14914,6 +14922,7 @@ namespace H5509_V2
                             PS抓盘手臂放空盘到Auto1流程.StepName = "等待料仓料拿走";
                             if (Auto1料仓打开标记) //料仓被打开
                             {
+                                Auto1Tray盘数量 = 0;
                                 抓盘手臂取Empty空盘标记 = 2;
                                 PS抓盘手臂放空盘到Auto1流程.StepID = 560;
                             }
@@ -15548,6 +15557,7 @@ namespace H5509_V2
                             PS抓盘手臂放空盘到Auto2流程.StepName = "等待料仓料拿走";
                             if (Auto2料仓打开标记) //料仓被打开
                             {
+                                Auto2Tray盘数量 = 0;
                                 抓盘手臂取Empty空盘标记 = 2;
                                 PS抓盘手臂放空盘到Auto2流程.StepID = 560;
                             }

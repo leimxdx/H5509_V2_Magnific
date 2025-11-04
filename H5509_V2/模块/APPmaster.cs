@@ -14,10 +14,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ComMaster.Commnunication;
 using ComMaster.Interfaces;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 using H5509_alarm;
 using H5509_V2;
 using IHardwareGXN.GXNCard;
 using MotionCommon;
+using SiCommunication.Core.Net;
 using SQLiteHelper;
 using SQLServerHelper;
 using Sunny.UI;
@@ -44,7 +46,7 @@ namespace H5509_V2
 
         public static string SQLiteConnString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\SystemData"};Polling=true;FailIfMissing=false";
 
-        public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false"; 
+        public static string SQLiteRunningString = $"Data Source={Directory.GetCurrentDirectory() + "\\配置\\RunningData"};Polling=true;FailIfMissing=false";
 
         public static string SQLServerConnString_Config = ""; //在SqlServer数据库获取 H5509_V2_24006_Config  //DataSource = 192.168.2.105; Database=H5509_V2_24006_Config;Uid=sa;Encrypt=False;Pwd=sch123
 
@@ -175,6 +177,8 @@ namespace H5509_V2
         public static string[] 报警忽略次数 = { "4018004", "4018006", "4019003", "4020009", "4020001", "4021009", "4021001", "4030009", "4030013", "4031009", "4031013", "4032009", "4032013", "1400440", "1400444", "1400445", "1400448", "1400469", "1400470", "1400471", "1400472", "1400490", "1400491" };
 
         public static List<分Bin> 分bin = new List<分Bin>();
+
+        public static Dictionary<string, int[]> BIN项计数 = new Dictionary<string, int[]>();
 
         public static _log Log;
 
@@ -429,6 +433,16 @@ namespace H5509_V2
 
         public static int[] Dout128FailNumber = new int[128];
 
+        public static int[] DoutAuto1Number = new int[128];
+
+        public static int[] DoutAuto2Number = new int[128];
+
+        public static int[] DoutFix1Number = new int[128];
+
+        public static int[] DoutFix2Number = new int[128];
+
+        public static int[] DoutFix3Number = new int[128];
+
         public static List<int[]> doutContinueFail;
 
         public static List<int[]> doutContinuePass;
@@ -472,6 +486,8 @@ namespace H5509_V2
         public static string[] SoketBin项保存;
 
         public static bool ShowAlarmFlag;
+
+        public static bool 归零后报警 = false;
 
         public static double TrayMax
         {
@@ -2774,6 +2790,7 @@ namespace H5509_V2
                         comInfoSet = new ComInfoSet()
                         {
                             通讯名称 = dr["通讯名称"].ToString(),
+                            客户 = dr["客户"].ToString(),
                             通讯协议 = dr["通讯协议"].ToString(),
                             通讯方式 = dr["通讯方式"].ToString(),
                             测试机数量 = Convert.ToInt32(dr["测试机数量"].ToString()),
@@ -3006,6 +3023,7 @@ namespace H5509_V2
         {
             string sql = $"update ComInfoSet set " +
                 $"通讯协议 = '{tester.通讯协议}'," +
+                $"客户 = '{tester.客户}'," +
                 $"通讯方式 = '{tester.通讯方式}'," +
                 $"测试机数量 = '{tester.测试机数量}'," +
                 $"同时测试 = '{tester.同时测试}'," +
@@ -4198,8 +4216,8 @@ namespace H5509_V2
             {
                 for (int j = 0; j < Auto1YPoint.Length; j++)
                 {
-                    if(isempty) Auto1DicPoint[$"{i},{j}"] = false;
-                    if(save) trayTemp += Auto1DicBin[$"{i},{j}"] + ",";
+                    if (isempty) Auto1DicPoint[$"{i},{j}"] = false;
+                    if (save) trayTemp += Auto1DicBin[$"{i},{j}"] + ",";
                     if (isempty) Auto1DicBin[$"{i},{j}"] = "";
                     if (save) trayTestTime += Auto1DicTestTime[$"{i},{j}"] + ",";
                     if (isempty) Auto1DicTestTime[$"{i},{j}"] = "";
@@ -5335,14 +5353,73 @@ namespace H5509_V2
                 if (批次运行时间.TotalDays >= 1) liststring.Add($"运行时间:{批次运行时间.ToString(@"dd\.hh\:mm\:ss")}");
                 else liststring.Add($"运行时间:{批次运行时间.ToString(@"hh\:mm\:ss")}");
             }
-            if (结批完成) liststring.Add($"UPH:{UPHNum}");
-            liststring.Add($"载入数:{载入数}");
-            liststring.Add($"总计:{出料数},Pass:{Auto1数量}({Auto1良率:0.00}%),Failed:{Fail数量}({Failed率:0.00}%)");
-            liststring.Add($"Auto1数量({Auto1}):{Auto1数量},良率:{Auto1良率:0.00}%");
-            liststring.Add($"Auto2数量({Auto2}):{Auto2数量},良率:{Auto2良率:0.00}%");
-            liststring.Add($"Fix1数量({Fix1}):{Fix1数量},良率:{Fix1良率:0.00}%");
-            liststring.Add($"Fix2数量({Fix2}):{Fix2数量},良率:{Fix2良率:0.00}%");
-            liststring.Add($"Fix3数量({Fix3}):{Fix3数量},良率:{Fix3良率:0.00}%");
+            if (结批完成) liststring.Add($"UPH : {UPHNum}");
+            liststring.Add($"载入数 : {载入数}");
+            liststring.Add($"总计 : {出料数}, Pass : {Auto1数量}({Auto1良率:0.00}%), Failed : {Fail数量}({Failed率:0.00}%)");
+            liststring.Add($"Auto1数量({Auto1}) : {Auto1数量}, {Auto1良率:0.00}%");
+            liststring.Add($"Auto2数量({Auto2}) : {Auto2数量}, {Auto2良率:0.00}%");
+            liststring.Add($"Fix1数量({Fix1}) : {Fix1数量}, {Fix1良率:0.00}%");
+            liststring.Add($"Fix2数量({Fix2}) : {Fix2数量}, {Fix2良率:0.00}%");
+            liststring.Add($"Fix3数量({Fix3}) : {Fix3数量}, {Fix3良率:0.00}%\n");
+
+            List<string> binnumstr = new List<string>();
+            foreach (var item in BIN项计数)
+            {
+                int[] binnum = BIN项计数[item.Key];
+                binnumstr.Add($"{item.Key}=>{binnum.Sum()}");
+            }
+
+            liststring.Add(string.Join("    ", binnumstr ?? new List<string>()));
+
+            liststring.Add($"\r\nCategories");
+            liststring.Add($"Sort#Name\tAuto1\tAuto2\tFix1\tFix2\tFix3\tTotals\tPercent");
+
+            for (int i = 0; i < 16; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    int auto1n = DoutAuto1Number[i * 8 + j];
+                    int auto2n = DoutAuto2Number[i * 8 + j];
+                    int Fix1n = DoutFix1Number[i * 8 + j];
+                    int Fix2n = DoutFix2Number[i * 8 + j];
+                    int Fix3n = DoutFix3Number[i * 8 + j];
+                    int totals = auto1n + auto2n + Fix1n + Fix2n + Fix3n;
+                    //float percent = auto1n / totals;
+
+                    double percent = totals != 0 ? Math.Truncate(((double)auto1n / totals * 10000)) / 100 : 0;
+
+                    liststring.Add($"Channel {i + 1} - {j + 1}\t{auto1n}\t{auto2n}\t{Fix1n}\t{Fix2n}\t{Fix3n}\t{totals}\t{percent:0.00}%");
+                }
+            }
+
+            liststring.Add("\nS/W Bins");
+            liststring.Add($"CAT_No\tCode\tCh1\tCh2\tCh3\tCh4\tCh5\tCh6\tCh7\tCh8\tCh9\tCh10\tCh11\tCh12\tCh13\tCh14\tCh15\tCh16");
+            liststring.Add("=====================================================================================================================");
+            
+            int binnumcount = 1;
+            List<string> binnumstr2 = new List<string>();
+            int[] result = new int[16];
+
+            foreach (var item in BIN项计数)
+            {
+                int[] binnum = BIN项计数[item.Key];
+                int[] result2 = binnum.Select((value, index) => new { value, group = index / 8 }) .GroupBy(x => x.group) .Select(g => g.Sum(x => x.value)) .ToArray();
+                if (result2.Length == 16)
+                {
+                    string ssss = string.Join("\t", result2);
+                    binnumstr2.Add($"Cat{binnumcount++:D2}\t{item.Key}\t{ssss}");
+                }
+                for (int i = 0; i < result2.Length; i++)
+                {
+                    result[i] += result2[i];
+                }
+            }
+            liststring.Add(string.Join("\n", binnumstr2 ?? new List<string>()));
+            liststring.Add("=====================================================================================================================");
+            if (result.Length == 16)
+            {
+                liststring.Add($"Total===>\t{result[0]}\t{result[1]}\t{result[2]}\t{result[3]}\t{result[4]}\t{result[5]}\t{result[6]}\t{result[7]}\t{result[8]}\t{result[9]}\t{result[10]}\t{result[11]}\t{result[12]}\t{result[13]}\t{result[14]}\t{result[15]}");
+            }
 
             return liststring.ToArray();
         }
