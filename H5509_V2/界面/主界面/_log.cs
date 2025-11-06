@@ -2351,7 +2351,10 @@ namespace H5509_V2
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            发送批次信息();
+            if(设置信息.通讯信息.客户 == "晶存")
+            {
+                发送批次信息();
+            }
         }
 
         private void chk_senddout16_CheckedChanged(object sender, EventArgs e)

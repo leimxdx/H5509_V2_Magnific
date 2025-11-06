@@ -755,13 +755,15 @@ namespace H5509_V2
                 //testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
                 //testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
 
+                TimeSpan testtime = DateTime.Now - testDataInfos[site].listtestdatetime;
+
                 for (int i = 0; i < sites.Length; i++)
                 {
                     if (testDataInfos[sites[i]].SiteTestState == 2)
                     {
                         testDataInfos[sites[i]].Iswaitout = true;
-                        testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                        testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                        testDataInfos[sites[i]].listtesttimespan = testtime;
+                        testDataInfos[sites[i]].TestTime = testtime;
                         testDataInfos[sites[i]].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                         testDataInfos[sites[i]].SiteTestState = 3;
 
@@ -793,6 +795,7 @@ namespace H5509_V2
 
                     int[] sites = { StationId, StationId + 1, StationId + 2, StationId + 3 };
 
+                    TimeSpan testtime = DateTime.Now - testDataInfos[StationId].listtestdatetime;
                     //testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
                     //testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
 
@@ -801,8 +804,8 @@ namespace H5509_V2
                         if (testDataInfos[sites[i]].SiteTestState == 2)
                         {
                             testDataInfos[sites[i]].Iswaitout = true;
-                            testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                            testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].listtesttimespan = testtime;
+                            testDataInfos[sites[i]].TestTime = testtime;
                             testDataInfos[sites[i]].SiteTestBin = new string[] { bins[i][0], bins[i][1], bins[i][2], bins[i][3], bins[i][4], bins[i][5], bins[i][6], bins[i][7] };
                             testDataInfos[sites[i]].SiteTestState = 3;
 
@@ -818,6 +821,7 @@ namespace H5509_V2
                 {
                     int[] sites = { StationId, StationId + 1, StationId + 2, StationId + 3 };
 
+                    TimeSpan testtime = DateTime.Now - testDataInfos[StationId].listtestdatetime;
                     //testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
                     //testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
 
@@ -826,8 +830,8 @@ namespace H5509_V2
                         if (testDataInfos[sites[i]].SiteTestState == 2)
                         {
                             testDataInfos[sites[i]].Iswaitout = true;
-                            testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                            testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                            testDataInfos[sites[i]].listtesttimespan = testtime;
+                            testDataInfos[sites[i]].TestTime = testtime;
                             testDataInfos[sites[i]].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                             testDataInfos[sites[i]].SiteTestState = 3;
                             
@@ -903,8 +907,7 @@ namespace H5509_V2
 
                 testDataInfos[site].Listtimer.Stop();
                 testDataInfos[site].timeOutTimer.Stop();
-                testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                TimeSpan testtime = DateTime.Now - testDataInfos[site].listtestdatetime;
 
                 for (int i = 0; i < sites.Length; i++)
                 {
@@ -914,6 +917,8 @@ namespace H5509_V2
 
                         testDataInfos[sites[i]].Iswaitout = false;
                         testDataInfos[sites[i]].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
+                        testDataInfos[sites[i]].listtesttimespan = testtime;
+                        testDataInfos[sites[i]].TestTime = testtime;
 
                         testDataInfos[sites[i]].SiteTestState = 3;
 
@@ -933,8 +938,7 @@ namespace H5509_V2
 
                 testDataInfos[site].Listtimer.Stop();
                 testDataInfos[site].timeOutTimer.Stop();
-                testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                TimeSpan testtime = DateTime.Now - testDataInfos[site].listtestdatetime;
 
                 for (int i = 0; i < sites.Length; i++)
                 {
@@ -944,7 +948,8 @@ namespace H5509_V2
 
                         testDataInfos[sites[i]].Iswaitout = false;
                         testDataInfos[sites[i]].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
-
+                        testDataInfos[sites[i]].listtesttimespan = testtime;
+                        testDataInfos[sites[i]].TestTime = testtime;
                         testDataInfos[sites[i]].SiteTestState = 3;
 
                         string logstr = $"生成Site:{sites[i] + 1:D2},随机Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}";
@@ -1011,7 +1016,6 @@ namespace H5509_V2
                     break;
                 }
             }
-
 
             if (设置信息.测试机信息.超时发送timeout)
             {

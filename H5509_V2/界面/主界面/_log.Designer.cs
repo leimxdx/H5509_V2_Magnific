@@ -717,7 +717,7 @@
             this.tabPage2.Controls.Add(this.richTextBox2);
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(200, 60);
+            this.tabPage2.Size = new System.Drawing.Size(1896, 910);
             this.tabPage2.TabIndex = 4;
             this.tabPage2.Text = "操作记录";
             // 
@@ -726,7 +726,7 @@
             this.richTextBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox2.Location = new System.Drawing.Point(0, 0);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(200, 60);
+            this.richTextBox2.Size = new System.Drawing.Size(1896, 910);
             this.richTextBox2.TabIndex = 1;
             this.richTextBox2.Text = "";
             // 
@@ -735,7 +735,7 @@
             this.tabPage3.Controls.Add(this.richTextBox3);
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(200, 60);
+            this.tabPage3.Size = new System.Drawing.Size(1896, 910);
             this.tabPage3.TabIndex = 5;
             this.tabPage3.Text = "报警记录";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -745,7 +745,7 @@
             this.richTextBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox3.Location = new System.Drawing.Point(0, 0);
             this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(200, 60);
+            this.richTextBox3.Size = new System.Drawing.Size(1896, 910);
             this.richTextBox3.TabIndex = 2;
             this.richTextBox3.Text = "";
             // 
@@ -755,7 +755,7 @@
             this.tabPage27.Controls.Add(this.panel2);
             this.tabPage27.Location = new System.Drawing.Point(0, 40);
             this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Size = new System.Drawing.Size(200, 60);
+            this.tabPage27.Size = new System.Drawing.Size(1896, 950);
             this.tabPage27.TabIndex = 4;
             this.tabPage27.Text = "通讯log";
             // 
@@ -766,7 +766,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(200, 60);
+            this.panel2.Size = new System.Drawing.Size(1896, 950);
             this.panel2.TabIndex = 41;
             // 
             // uiGroupBox1
@@ -779,7 +779,7 @@
             this.uiGroupBox1.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox1.Name = "uiGroupBox1";
             this.uiGroupBox1.Padding = new System.Windows.Forms.Padding(10, 32, 10, 10);
-            this.uiGroupBox1.Size = new System.Drawing.Size(200, 1);
+            this.uiGroupBox1.Size = new System.Drawing.Size(1896, 743);
             this.uiGroupBox1.TabIndex = 38;
             this.uiGroupBox1.Text = "通讯数据";
             this.uiGroupBox1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -813,7 +813,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(180, 0);
+            this.uiTabControl2.Size = new System.Drawing.Size(1876, 701);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -830,7 +830,7 @@
             this.tabPage31.Controls.Add(this.richTextBox1);
             this.tabPage31.Location = new System.Drawing.Point(0, 40);
             this.tabPage31.Name = "tabPage31";
-            this.tabPage31.Size = new System.Drawing.Size(180, 0);
+            this.tabPage31.Size = new System.Drawing.Size(1876, 661);
             this.tabPage31.TabIndex = 16;
             this.tabPage31.Text = "ALLMsg";
             // 
@@ -839,7 +839,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.richTextBox1.Location = new System.Drawing.Point(0, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(180, 0);
+            this.richTextBox1.Size = new System.Drawing.Size(1876, 661);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
@@ -1348,12 +1348,12 @@
             this.uiGroupBox2.Controls.Add(this.label5);
             this.uiGroupBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.uiGroupBox2.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiGroupBox2.Location = new System.Drawing.Point(0, -147);
+            this.uiGroupBox2.Location = new System.Drawing.Point(0, 743);
             this.uiGroupBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiGroupBox2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiGroupBox2.Name = "uiGroupBox2";
             this.uiGroupBox2.Padding = new System.Windows.Forms.Padding(0, 32, 0, 0);
-            this.uiGroupBox2.Size = new System.Drawing.Size(200, 207);
+            this.uiGroupBox2.Size = new System.Drawing.Size(1896, 207);
             this.uiGroupBox2.TabIndex = 39;
             this.uiGroupBox2.Text = "通讯指令";
             this.uiGroupBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -2027,7 +2027,7 @@
             this.tabPage29.Controls.Add(this.groupBox4);
             this.tabPage29.Location = new System.Drawing.Point(0, 40);
             this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Size = new System.Drawing.Size(1896, 950);
+            this.tabPage29.Size = new System.Drawing.Size(200, 60);
             this.tabPage29.TabIndex = 6;
             this.tabPage29.Text = "数据查询";
             // 
@@ -2156,7 +2156,7 @@
             this.tabPage19.Controls.Add(this.dataGridView_dutCurrent);
             this.tabPage19.Location = new System.Drawing.Point(0, 40);
             this.tabPage19.Name = "tabPage19";
-            this.tabPage19.Size = new System.Drawing.Size(1036, 832);
+            this.tabPage19.Size = new System.Drawing.Size(200, 60);
             this.tabPage19.TabIndex = 1;
             this.tabPage19.Text = "当前工单dut实时良率";
             // 
@@ -2196,7 +2196,7 @@
             this.tabPage20.Controls.Add(this.dataGridView_dutFlowcaedNo);
             this.tabPage20.Location = new System.Drawing.Point(0, 40);
             this.tabPage20.Name = "tabPage20";
-            this.tabPage20.Size = new System.Drawing.Size(1036, 832);
+            this.tabPage20.Size = new System.Drawing.Size(200, 60);
             this.tabPage20.TabIndex = 2;
             this.tabPage20.Text = "工单dut良率查询";
             // 
@@ -2242,7 +2242,7 @@
             this.tabPage21.Controls.Add(this.dataGridView_socketUsed);
             this.tabPage21.Location = new System.Drawing.Point(0, 40);
             this.tabPage21.Name = "tabPage21";
-            this.tabPage21.Size = new System.Drawing.Size(1036, 832);
+            this.tabPage21.Size = new System.Drawing.Size(200, 60);
             this.tabPage21.TabIndex = 3;
             this.tabPage21.Text = "socket使用次数";
             // 
@@ -2353,7 +2353,7 @@
             this.tabPage15.Controls.Add(this.textBox2);
             this.tabPage15.Location = new System.Drawing.Point(0, 40);
             this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Size = new System.Drawing.Size(1450, 884);
+            this.tabPage15.Size = new System.Drawing.Size(200, 60);
             this.tabPage15.TabIndex = 1;
             this.tabPage15.Text = "工单详情";
             // 
@@ -2465,7 +2465,7 @@
             this.tabPage16.Controls.Add(this.comboBox_盘位);
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(1450, 884);
+            this.tabPage16.Size = new System.Drawing.Size(200, 60);
             this.tabPage16.TabIndex = 2;
             this.tabPage16.Text = "Bin项信息";
             // 
@@ -2675,7 +2675,7 @@
             this.tabPage17.Controls.Add(this.dataGridView_f);
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(1450, 884);
+            this.tabPage17.Size = new System.Drawing.Size(200, 60);
             this.tabPage17.TabIndex = 3;
             this.tabPage17.Text = "料表信息";
             // 

@@ -78,194 +78,224 @@ namespace H5509_V2
 
         public void 刷新入料手臂offset()
         {
-            string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
-            if (result == "Success")
+            Task.Run(() =>
             {
-                uiDoubleUpDown99.Text = offset.入料_Load吸_X.ToString();
-                uiDoubleUpDown97.Text = offset.入料_Load吸_Y.ToString();
-                uiDoubleUpDown98.Text = offset.入料_Load吸_Z.ToString();
-                uiDoubleUpDown108.Text = offset.入料_Heat吸_X.ToString();
-                uiDoubleUpDown107.Text = offset.入料_Heat吸_Y.ToString();
-                uiDoubleUpDown106.Text = offset.入料_Heat吸_Z.ToString();
-                uiDoubleUpDown4.Text = offset.入料_Heat放_X.ToString();
-                uiDoubleUpDown3.Text = offset.入料_Heat放_Y.ToString();
-                uiDoubleUpDown2.Text = offset.入料_Heat放_Z.ToString();
+                string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
+                if (result == "Success")
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        uiDoubleUpDown99.Text = offset.入料_Load吸_X.ToString();
+                        uiDoubleUpDown97.Text = offset.入料_Load吸_Y.ToString();
+                        uiDoubleUpDown98.Text = offset.入料_Load吸_Z.ToString();
+                        uiDoubleUpDown108.Text = offset.入料_Heat吸_X.ToString();
+                        uiDoubleUpDown107.Text = offset.入料_Heat吸_Y.ToString();
+                        uiDoubleUpDown106.Text = offset.入料_Heat吸_Z.ToString();
+                        uiDoubleUpDown4.Text = offset.入料_Heat放_X.ToString();
+                        uiDoubleUpDown3.Text = offset.入料_Heat放_Y.ToString();
+                        uiDoubleUpDown2.Text = offset.入料_Heat放_Z.ToString();
 
-                uiDoubleUpDown102.Text = offset.入料_梭车1第1列放_X.ToString();
-                uiDoubleUpDown101.Text = offset.入料_梭车1第1列放_Y.ToString();
-                uiDoubleUpDown100.Text = offset.入料_梭车1第1列放_Z.ToString();
-                uiDoubleUpDown8.Text = offset.入料_梭车1第2列放_X.ToString();
-                uiDoubleUpDown7.Text = offset.入料_梭车1第2列放_Y.ToString();
-                uiDoubleUpDown6.Text = offset.入料_梭车1第2列放_Z.ToString();
-                uiDoubleUpDown1.Text = offset.入料_Load_变距.ToString();
-                uiDoubleUpDown5.Text = offset.入料_Heat_变距.ToString();
-                uiDoubleUpDown15.Text = offset.入料_梭车_变距.ToString();
+                        uiDoubleUpDown102.Text = offset.入料_梭车1第1列放_X.ToString();
+                        uiDoubleUpDown101.Text = offset.入料_梭车1第1列放_Y.ToString();
+                        uiDoubleUpDown100.Text = offset.入料_梭车1第1列放_Z.ToString();
+                        uiDoubleUpDown8.Text = offset.入料_梭车1第2列放_X.ToString();
+                        uiDoubleUpDown7.Text = offset.入料_梭车1第2列放_Y.ToString();
+                        uiDoubleUpDown6.Text = offset.入料_梭车1第2列放_Z.ToString();
+                        uiDoubleUpDown1.Text = offset.入料_Load_变距.ToString();
+                        uiDoubleUpDown5.Text = offset.入料_Heat_变距.ToString();
+                        uiDoubleUpDown15.Text = offset.入料_梭车_变距.ToString();
 
-                uiDoubleUpDown14.Text = offset.入料_梭车2第1列放_X.ToString();
-                uiDoubleUpDown13.Text = offset.入料_梭车2第1列放_Y.ToString();
-                uiDoubleUpDown12.Text = offset.入料_梭车2第1列放_Z.ToString();
-                uiDoubleUpDown11.Text = offset.入料_梭车2第2列放_X.ToString();
-                uiDoubleUpDown10.Text = offset.入料_梭车2第2列放_Y.ToString();
-                uiDoubleUpDown9.Text = offset.入料_梭车2第2列放_Z.ToString();
-            }
-            else MessageBox.Show("刷新入料手臂offset失败!" + result);
+                        uiDoubleUpDown14.Text = offset.入料_梭车2第1列放_X.ToString();
+                        uiDoubleUpDown13.Text = offset.入料_梭车2第1列放_Y.ToString();
+                        uiDoubleUpDown12.Text = offset.入料_梭车2第1列放_Z.ToString();
+                        uiDoubleUpDown11.Text = offset.入料_梭车2第2列放_X.ToString();
+                        uiDoubleUpDown10.Text = offset.入料_梭车2第2列放_Y.ToString();
+                        uiDoubleUpDown9.Text = offset.入料_梭车2第2列放_Z.ToString();
+                    }));
+                }
+                //else MessageBox.Show("刷新入料手臂offset失败!" + result);
+            });
         }
 
         public void 刷新出料手臂offset()
         {
-            string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
-            if (result == "Success")
+            Task.Run(() =>
             {
-                uiDoubleUpDown75.Text = offset.出料_梭车1第1列吸_X.ToString();
-                uiDoubleUpDown74.Text = offset.出料_梭车1第1列吸_Y.ToString();
-                uiDoubleUpDown73.Text = offset.出料_梭车1第1列吸_Z.ToString();
+                string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
+                if (result == "Success")
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        uiDoubleUpDown75.Text = offset.出料_梭车1第1列吸_X.ToString();
+                        uiDoubleUpDown74.Text = offset.出料_梭车1第1列吸_Y.ToString();
+                        uiDoubleUpDown73.Text = offset.出料_梭车1第1列吸_Z.ToString();
 
-                uiDoubleUpDown17.Text = offset.出料_梭车1第2列吸_X.ToString();
-                uiDoubleUpDown18.Text = offset.出料_梭车1第2列吸_Y.ToString();
-                uiDoubleUpDown16.Text = offset.出料_梭车1第2列吸_Z.ToString();
+                        uiDoubleUpDown17.Text = offset.出料_梭车1第2列吸_X.ToString();
+                        uiDoubleUpDown18.Text = offset.出料_梭车1第2列吸_Y.ToString();
+                        uiDoubleUpDown16.Text = offset.出料_梭车1第2列吸_Z.ToString();
 
 
-                uiDoubleUpDown87.Text = offset.出料_Fix1放_X.ToString();
-                uiDoubleUpDown86.Text = offset.出料_Fix1放_Y.ToString();
-                uiDoubleUpDown85.Text = offset.出料_Fix1放_Z.ToString();
+                        uiDoubleUpDown87.Text = offset.出料_Fix1放_X.ToString();
+                        uiDoubleUpDown86.Text = offset.出料_Fix1放_Y.ToString();
+                        uiDoubleUpDown85.Text = offset.出料_Fix1放_Z.ToString();
 
-                uiDoubleUpDown33.Text = offset.出料_梭车_变距.ToString();
-                uiDoubleUpDown34.Text = offset.出料_AF_变距.ToString();
+                        uiDoubleUpDown33.Text = offset.出料_梭车_变距.ToString();
+                        uiDoubleUpDown34.Text = offset.出料_AF_变距.ToString();
 
-                uiDoubleUpDown31.Text = offset.出料_梭车2第1列吸_X.ToString();
-                uiDoubleUpDown32.Text = offset.出料_梭车2第1列吸_Y.ToString();
-                uiDoubleUpDown30.Text = offset.出料_梭车2第1列吸_Z.ToString();
+                        uiDoubleUpDown31.Text = offset.出料_梭车2第1列吸_X.ToString();
+                        uiDoubleUpDown32.Text = offset.出料_梭车2第1列吸_Y.ToString();
+                        uiDoubleUpDown30.Text = offset.出料_梭车2第1列吸_Z.ToString();
 
-                uiDoubleUpDown20.Text = offset.出料_梭车2第2列吸_X.ToString();
-                uiDoubleUpDown21.Text = offset.出料_梭车2第2列吸_Y.ToString();
-                uiDoubleUpDown19.Text = offset.出料_梭车2第2列吸_Z.ToString();
+                        uiDoubleUpDown20.Text = offset.出料_梭车2第2列吸_X.ToString();
+                        uiDoubleUpDown21.Text = offset.出料_梭车2第2列吸_Y.ToString();
+                        uiDoubleUpDown19.Text = offset.出料_梭车2第2列吸_Z.ToString();
 
-                uiDoubleUpDown96.Text = offset.出料_Fix2放_X.ToString();
-                uiDoubleUpDown95.Text = offset.出料_Fix2放_Y.ToString();
-                uiDoubleUpDown94.Text = offset.出料_Fix2放_Z.ToString();
+                        uiDoubleUpDown96.Text = offset.出料_Fix2放_X.ToString();
+                        uiDoubleUpDown95.Text = offset.出料_Fix2放_Y.ToString();
+                        uiDoubleUpDown94.Text = offset.出料_Fix2放_Z.ToString();
 
-                uiDoubleUpDown90.Text = offset.出料_Auto1放_X.ToString();
-                uiDoubleUpDown89.Text = offset.出料_Auto1放_Y.ToString();
-                uiDoubleUpDown88.Text = offset.出料_Auto1放_Z.ToString();
+                        uiDoubleUpDown90.Text = offset.出料_Auto1放_X.ToString();
+                        uiDoubleUpDown89.Text = offset.出料_Auto1放_Y.ToString();
+                        uiDoubleUpDown88.Text = offset.出料_Auto1放_Z.ToString();
 
-                uiDoubleUpDown93.Text = offset.出料_Auto2放_X.ToString();
-                uiDoubleUpDown92.Text = offset.出料_Auto2放_Y.ToString();
-                uiDoubleUpDown91.Text = offset.出料_Auto2放_Z.ToString();
+                        uiDoubleUpDown93.Text = offset.出料_Auto2放_X.ToString();
+                        uiDoubleUpDown92.Text = offset.出料_Auto2放_Y.ToString();
+                        uiDoubleUpDown91.Text = offset.出料_Auto2放_Z.ToString();
 
-                uiDoubleUpDown84.Text = offset.出料_Fix3放_X.ToString();
-                uiDoubleUpDown83.Text = offset.出料_Fix3放_Y.ToString();
-                uiDoubleUpDown82.Text = offset.出料_Fix3放_Z.ToString();
-            }
-            else MessageBox.Show("刷新出料手臂offset失败!" + result);
+                        uiDoubleUpDown84.Text = offset.出料_Fix3放_X.ToString();
+                        uiDoubleUpDown83.Text = offset.出料_Fix3放_Y.ToString();
+                        uiDoubleUpDown82.Text = offset.出料_Fix3放_Z.ToString();
+                    }));
+                }
+                //else MessageBox.Show("刷新出料手臂offset失败!" + result);
+            });
         }
 
         public void 刷新测试手臂offset()
         {
-            string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
-            if (result == "Success")
+            Task.Run(() =>
             {
-                uiDoubleUpDown62.Text = offset.测试_梭车1左吸_X.ToString();
-                uiDoubleUpDown61.Text = offset.测试_梭车1左吸_Z.ToString();
+                string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
+                if (result == "Success")
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        uiDoubleUpDown62.Text = offset.测试_梭车1左吸_X.ToString();
+                        uiDoubleUpDown61.Text = offset.测试_梭车1左吸_Z.ToString();
 
-                uiDoubleUpDown64.Text = offset.测试_梭车2左吸_X.ToString();
-                uiDoubleUpDown63.Text = offset.测试_梭车2左吸_Z.ToString();
+                        uiDoubleUpDown64.Text = offset.测试_梭车2左吸_X.ToString();
+                        uiDoubleUpDown63.Text = offset.测试_梭车2左吸_Z.ToString();
 
-                uiDoubleUpDown70.Text = offset.测试_梭车1右放_X.ToString();
-                uiDoubleUpDown69.Text = offset.测试_梭车1右放_Z.ToString();
+                        uiDoubleUpDown70.Text = offset.测试_梭车1右放_X.ToString();
+                        uiDoubleUpDown69.Text = offset.测试_梭车1右放_Z.ToString();
 
-                uiDoubleUpDown72.Text = offset.测试_梭车2右放_X.ToString();
-                uiDoubleUpDown71.Text = offset.测试_梭车2右放_Z.ToString();
+                        uiDoubleUpDown72.Text = offset.测试_梭车2右放_X.ToString();
+                        uiDoubleUpDown71.Text = offset.测试_梭车2右放_Z.ToString();
 
-                uiDoubleUpDown66.Text = offset.测试_Site1吸_X.ToString();
-                uiDoubleUpDown23.Text = offset.测试_Site2吸_X.ToString();
-                uiDoubleUpDown26.Text = offset.测试_Site3吸_X.ToString();
-                uiDoubleUpDown25.Text = offset.测试_Site4吸_X.ToString();
-                uiDoubleUpDown36.Text = offset.测试_Site5吸_X.ToString();
-                uiDoubleUpDown35.Text = offset.测试_Site6吸_X.ToString();
-                uiDoubleUpDown28.Text = offset.测试_Site7吸_X.ToString();
-                uiDoubleUpDown27.Text = offset.测试_Site8吸_X.ToString();
-                uiDoubleUpDown44.Text = offset.测试_Site9吸_X.ToString();
-                uiDoubleUpDown43.Text = offset.测试_Site10吸_X.ToString();
-                uiDoubleUpDown42.Text = offset.测试_Site11吸_X.ToString();
-                uiDoubleUpDown41.Text = offset.测试_Site12吸_X.ToString();
-                uiDoubleUpDown40.Text = offset.测试_Site13吸_X.ToString();
-                uiDoubleUpDown39.Text = offset.测试_Site14吸_X.ToString();
-                uiDoubleUpDown38.Text = offset.测试_Site15吸_X.ToString();
-                uiDoubleUpDown37.Text = offset.测试_Site16吸_X.ToString();
-                uiDoubleUpDown137.Text = offset.测试_Site1吸_Z.ToString();
-                uiDoubleUpDown136.Text = offset.测试_Site2吸_Z.ToString();
-                uiDoubleUpDown135.Text = offset.测试_Site3吸_Z.ToString();
-                uiDoubleUpDown134.Text = offset.测试_Site4吸_Z.ToString();
-                uiDoubleUpDown133.Text = offset.测试_Site5吸_Z.ToString();
-                uiDoubleUpDown132.Text = offset.测试_Site6吸_Z.ToString();
-                uiDoubleUpDown131.Text = offset.测试_Site7吸_Z.ToString();
-                uiDoubleUpDown130.Text = offset.测试_Site8吸_Z.ToString();
-                uiDoubleUpDown129.Text = offset.测试_Site9吸_Z.ToString();
-                uiDoubleUpDown128.Text = offset.测试_Site10吸_Z.ToString();
-                uiDoubleUpDown127.Text = offset.测试_Site11吸_Z.ToString();
-                uiDoubleUpDown126.Text = offset.测试_Site12吸_Z.ToString();
-                uiDoubleUpDown125.Text = offset.测试_Site13吸_Z.ToString();
-                uiDoubleUpDown124.Text = offset.测试_Site14吸_Z.ToString();
-                uiDoubleUpDown123.Text = offset.测试_Site15吸_Z.ToString();
-                uiDoubleUpDown122.Text = offset.测试_Site16吸_Z.ToString();
-                uiDoubleUpDown81.Text = offset.测试_Site1放_X.ToString();
-                uiDoubleUpDown80.Text = offset.测试_Site2放_X.ToString();
-                uiDoubleUpDown79.Text = offset.测试_Site3放_X.ToString();
-                uiDoubleUpDown78.Text = offset.测试_Site4放_X.ToString();
-                uiDoubleUpDown77.Text = offset.测试_Site5放_X.ToString();
-                uiDoubleUpDown76.Text = offset.测试_Site6放_X.ToString();
-                uiDoubleUpDown68.Text = offset.测试_Site7放_X.ToString();
-                uiDoubleUpDown67.Text = offset.测试_Site8放_X.ToString();
-                uiDoubleUpDown65.Text = offset.测试_Site9放_X.ToString();
-                uiDoubleUpDown54.Text = offset.测试_Site10放_X.ToString();
-                uiDoubleUpDown53.Text = offset.测试_Site11放_X.ToString();
-                uiDoubleUpDown52.Text = offset.测试_Site12放_X.ToString();
-                uiDoubleUpDown48.Text = offset.测试_Site13放_X.ToString();
-                uiDoubleUpDown47.Text = offset.测试_Site14放_X.ToString();
-                uiDoubleUpDown46.Text = offset.测试_Site15放_X.ToString();
-                uiDoubleUpDown45.Text = offset.测试_Site16放_X.ToString();
-                uiDoubleUpDown121.Text = offset.测试_Site1放_Z.ToString();
-                uiDoubleUpDown120.Text = offset.测试_Site2放_Z.ToString();
-                uiDoubleUpDown119.Text = offset.测试_Site3放_Z.ToString();
-                uiDoubleUpDown118.Text = offset.测试_Site4放_Z.ToString();
-                uiDoubleUpDown117.Text = offset.测试_Site5放_Z.ToString();
-                uiDoubleUpDown116.Text = offset.测试_Site6放_Z.ToString();
-                uiDoubleUpDown115.Text = offset.测试_Site7放_Z.ToString();
-                uiDoubleUpDown114.Text = offset.测试_Site8放_Z.ToString();
-                uiDoubleUpDown113.Text = offset.测试_Site9放_Z.ToString();
-                uiDoubleUpDown112.Text = offset.测试_Site10放_Z.ToString();
-                uiDoubleUpDown111.Text = offset.测试_Site11放_Z.ToString();
-                uiDoubleUpDown110.Text = offset.测试_Site12放_Z.ToString();
-                uiDoubleUpDown109.Text = offset.测试_Site13放_Z.ToString();
-                uiDoubleUpDown105.Text = offset.测试_Site14放_Z.ToString();
-                uiDoubleUpDown104.Text = offset.测试_Site15放_Z.ToString();
-                uiDoubleUpDown103.Text = offset.测试_Site16放_Z.ToString();
-            }
-            else MessageBox.Show("刷新测试手臂offset失败!" + result);
+                        uiDoubleUpDown66.Text = offset.测试_Site1吸_X.ToString();
+                        uiDoubleUpDown23.Text = offset.测试_Site2吸_X.ToString();
+                        uiDoubleUpDown26.Text = offset.测试_Site3吸_X.ToString();
+                        uiDoubleUpDown25.Text = offset.测试_Site4吸_X.ToString();
+                        uiDoubleUpDown36.Text = offset.测试_Site5吸_X.ToString();
+                        uiDoubleUpDown35.Text = offset.测试_Site6吸_X.ToString();
+                        uiDoubleUpDown28.Text = offset.测试_Site7吸_X.ToString();
+                        uiDoubleUpDown27.Text = offset.测试_Site8吸_X.ToString();
+                        uiDoubleUpDown44.Text = offset.测试_Site9吸_X.ToString();
+                        uiDoubleUpDown43.Text = offset.测试_Site10吸_X.ToString();
+                        uiDoubleUpDown42.Text = offset.测试_Site11吸_X.ToString();
+                        uiDoubleUpDown41.Text = offset.测试_Site12吸_X.ToString();
+                        uiDoubleUpDown40.Text = offset.测试_Site13吸_X.ToString();
+                        uiDoubleUpDown39.Text = offset.测试_Site14吸_X.ToString();
+                        uiDoubleUpDown38.Text = offset.测试_Site15吸_X.ToString();
+                        uiDoubleUpDown37.Text = offset.测试_Site16吸_X.ToString();
+                        uiDoubleUpDown137.Text = offset.测试_Site1吸_Z.ToString();
+                        uiDoubleUpDown136.Text = offset.测试_Site2吸_Z.ToString();
+                        uiDoubleUpDown135.Text = offset.测试_Site3吸_Z.ToString();
+                        uiDoubleUpDown134.Text = offset.测试_Site4吸_Z.ToString();
+                        uiDoubleUpDown133.Text = offset.测试_Site5吸_Z.ToString();
+                        uiDoubleUpDown132.Text = offset.测试_Site6吸_Z.ToString();
+                        uiDoubleUpDown131.Text = offset.测试_Site7吸_Z.ToString();
+                        uiDoubleUpDown130.Text = offset.测试_Site8吸_Z.ToString();
+                        uiDoubleUpDown129.Text = offset.测试_Site9吸_Z.ToString();
+                        uiDoubleUpDown128.Text = offset.测试_Site10吸_Z.ToString();
+                        uiDoubleUpDown127.Text = offset.测试_Site11吸_Z.ToString();
+                        uiDoubleUpDown126.Text = offset.测试_Site12吸_Z.ToString();
+                        uiDoubleUpDown125.Text = offset.测试_Site13吸_Z.ToString();
+                        uiDoubleUpDown124.Text = offset.测试_Site14吸_Z.ToString();
+                        uiDoubleUpDown123.Text = offset.测试_Site15吸_Z.ToString();
+                        uiDoubleUpDown122.Text = offset.测试_Site16吸_Z.ToString();
+                        uiDoubleUpDown81.Text = offset.测试_Site1放_X.ToString();
+                        uiDoubleUpDown80.Text = offset.测试_Site2放_X.ToString();
+                        uiDoubleUpDown79.Text = offset.测试_Site3放_X.ToString();
+                        uiDoubleUpDown78.Text = offset.测试_Site4放_X.ToString();
+                        uiDoubleUpDown77.Text = offset.测试_Site5放_X.ToString();
+                        uiDoubleUpDown76.Text = offset.测试_Site6放_X.ToString();
+                        uiDoubleUpDown68.Text = offset.测试_Site7放_X.ToString();
+                        uiDoubleUpDown67.Text = offset.测试_Site8放_X.ToString();
+                        uiDoubleUpDown65.Text = offset.测试_Site9放_X.ToString();
+                        uiDoubleUpDown54.Text = offset.测试_Site10放_X.ToString();
+                        uiDoubleUpDown53.Text = offset.测试_Site11放_X.ToString();
+                        uiDoubleUpDown52.Text = offset.测试_Site12放_X.ToString();
+                        uiDoubleUpDown48.Text = offset.测试_Site13放_X.ToString();
+                        uiDoubleUpDown47.Text = offset.测试_Site14放_X.ToString();
+                        uiDoubleUpDown46.Text = offset.测试_Site15放_X.ToString();
+                        uiDoubleUpDown45.Text = offset.测试_Site16放_X.ToString();
+                        uiDoubleUpDown121.Text = offset.测试_Site1放_Z.ToString();
+                        uiDoubleUpDown120.Text = offset.测试_Site2放_Z.ToString();
+                        uiDoubleUpDown119.Text = offset.测试_Site3放_Z.ToString();
+                        uiDoubleUpDown118.Text = offset.测试_Site4放_Z.ToString();
+                        uiDoubleUpDown117.Text = offset.测试_Site5放_Z.ToString();
+                        uiDoubleUpDown116.Text = offset.测试_Site6放_Z.ToString();
+                        uiDoubleUpDown115.Text = offset.测试_Site7放_Z.ToString();
+                        uiDoubleUpDown114.Text = offset.测试_Site8放_Z.ToString();
+                        uiDoubleUpDown113.Text = offset.测试_Site9放_Z.ToString();
+                        uiDoubleUpDown112.Text = offset.测试_Site10放_Z.ToString();
+                        uiDoubleUpDown111.Text = offset.测试_Site11放_Z.ToString();
+                        uiDoubleUpDown110.Text = offset.测试_Site12放_Z.ToString();
+                        uiDoubleUpDown109.Text = offset.测试_Site13放_Z.ToString();
+                        uiDoubleUpDown105.Text = offset.测试_Site14放_Z.ToString();
+                        uiDoubleUpDown104.Text = offset.测试_Site15放_Z.ToString();
+                        uiDoubleUpDown103.Text = offset.测试_Site16放_Z.ToString();
+                    }));
+                }
+                //else MessageBox.Show("刷新测试手臂offset失败!" + result);
+            });
         }
 
         public void 刷新梭车offset()
         {
-            string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
-            if (result == "Success")
+            Task.Run(() =>
             {
-                uiDoubleUpDown57.Text = offset.梭车2_前_Y.ToString();
-                uiDoubleUpDown56.Text = offset.梭车2_后_Y.ToString();
-            }
-            else MessageBox.Show("刷新梭车offset失败!" + result);
+                string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
+                if (result == "Success")
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        uiDoubleUpDown57.Text = offset.梭车2_前_Y.ToString();
+                        uiDoubleUpDown56.Text = offset.梭车2_后_Y.ToString();
+                    }));
+                }
+                //else MessageBox.Show("刷新梭车offset失败!" + result);
+            });
         }
 
         public void 刷新抓盘手臂offset()
         {
-            string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
-            if (result == "Success")
+            Task.Run(() =>
             {
-                uiDoubleUpDown55.Text = offset.抓盘_Empty_X.ToString();
-                uiDoubleUpDown58.Text = offset.抓盘_Load_X.ToString();
-                uiDoubleUpDown60.Text = offset.抓盘_Auto1_X.ToString();
-                uiDoubleUpDown59.Text = offset.抓盘_Auto2_X.ToString();
-            }
-            else MessageBox.Show("刷新抓盘手臂offset失败!" + result);
+                string result = GetOffsetPoint(设置信息.OffsetPoint.微调点位名称, out OffsetPoint offset);
+                if (result == "Success")
+                {
+                    this.Invoke(new Action(() =>
+                    {
+                        uiDoubleUpDown55.Text = offset.抓盘_Empty_X.ToString();
+                        uiDoubleUpDown58.Text = offset.抓盘_Load_X.ToString();
+                        uiDoubleUpDown60.Text = offset.抓盘_Auto1_X.ToString();
+                        uiDoubleUpDown59.Text = offset.抓盘_Auto2_X.ToString();
+                    }));
+                }
+                //else MessageBox.Show("刷新抓盘手臂offset失败!" + result);
+            });
         }
 
 

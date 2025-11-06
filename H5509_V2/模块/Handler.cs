@@ -21,6 +21,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using Microsoft.SqlServer.Server;
 using MotionCommon;
+using SiCommunication;
 using SQLiteHelper;
 using SQLServerHelper;
 using Sunny.UI;
@@ -5853,7 +5854,7 @@ namespace H5509_V2
             bool ismovewait = false;
             bool iswait = false;
 
-            bool[] countnum = new bool[4];
+            bool count2 = true;
 
             PS入料手臂吸放料流程.StepID = 500;
             while (true)
@@ -6224,7 +6225,7 @@ namespace H5509_V2
                             result = APPmaster.获取Heat盘Open(opens, xPoint, yPoint, 0, true, 2, out lsopen, out index);
                             if (result == "Success")
                             {
-                                countnum = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] };
+                                count2 = true; //new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] };
                                 xPos = HeatXPoint[xPoint] + 点位微调.入料_Heat吸_X;
                                 yPos = (HeatYPoint[yPoint] + index * HeatInterval * Heat_Y_Pitch) + 点位微调.入料_Heat吸_Y;
                                 PS入料手臂吸放料流程.StepID = 625;
@@ -6283,11 +6284,13 @@ namespace H5509_V2
                             RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                             if (!空跑模式)
                             {
+                                bool istimeout = false;
                                 stopwatch.Start();
                                 while (JudgeNozzleSts(lsopen, opens, 0))
                                 {
                                     if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.入料手臂吸料超时时间)
                                     {
+                                        istimeout = true;
                                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料吸料超时");
                                         break;
                                     }
@@ -6295,7 +6298,6 @@ namespace H5509_V2
                                     result = 入料吸嘴_真空检测(out ioval);
                                     if (result != "Success") break;
 
-                                    RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}:{stopwatch.ElapsedMilliseconds}ms");
 
                                     for (int i = 0; i < ioval.Length; i++)
                                     {
@@ -6307,12 +6309,12 @@ namespace H5509_V2
 
                                     Thread.Sleep(20);
                                 }
-
                                 stopwatch.Stop();
-                                stopwatch.Reset();
-
+                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}:{stopwatch.ElapsedMilliseconds}ms");
                                 bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
                                 入料吸嘴_吸放料(bools, true, false);
+                                if (istimeout) Thread.Sleep(吸料超时关吸真空延时上移时间);
+                                stopwatch.Reset();
                             }
                             else
                             {
@@ -6380,11 +6382,11 @@ namespace H5509_V2
                                         }
                                         else
                                         {
-                                            if (countnum[i + index])
-                                            {
-                                                countnum[i + index] = false;
-                                                入料手臂吸料不起数量++;
-                                            }
+                                            //if (count[i + index])
+                                            //{
+                                            //    count[i + index] = false;
+                                            //    入料手臂吸料不起数量++;
+                                            //}
                                             RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料失败");
                                         }
                                     }
@@ -6472,6 +6474,11 @@ namespace H5509_V2
                                         }
                                     }
 
+                                    if (count2)
+                                    {
+                                        count2 = false;
+                                        入料手臂吸料不起数量++;
+                                    }
                                     入料IC忽略 = false;
                                     ProgramPause = true;
                                     IsPause = true;
@@ -6606,7 +6613,7 @@ namespace H5509_V2
                             result = APPmaster.获取Load盘Open(opens, xPoint, yPoint, out lsopen, out index);
                             if (result == "Success")
                             {
-                                countnum = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] };
+                                count2 = true; // new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] };
                                 xPos = LoaderXPoint[xPoint] + 点位微调.入料_Load吸_X;
                                 yPos = (LoaderYPoint[yPoint] + index * TrayInterval * Tray_Y_Pitch) + 点位微调.入料_Load吸_Y;
                                 PS入料手臂吸放料流程.StepID = 525;
@@ -6684,11 +6691,13 @@ namespace H5509_V2
                             RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
                             if (!空跑模式)
                             {
+                                bool istimeout = false;
                                 stopwatch.Start();
                                 while (JudgeNozzleSts(lsopen, opens, 0))
                                 {
                                     if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.入料手臂吸料超时时间)
                                     {
+                                        istimeout = true;
                                         RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料吸料超时");
                                         break;
                                     }
@@ -6696,7 +6705,6 @@ namespace H5509_V2
                                     result = 入料吸嘴_真空检测(out ioval);
                                     if (result != "Success") break;
 
-                                    RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}:{stopwatch.ElapsedMilliseconds}ms");
 
                                     for (int i = 0; i < ioval.Length; i++)
                                     {
@@ -6710,10 +6718,12 @@ namespace H5509_V2
                                 }
 
                                 stopwatch.Stop();
-                                stopwatch.Reset();
 
+                                RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}:{stopwatch.ElapsedMilliseconds}ms");
                                 bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
                                 入料吸嘴_吸放料(bools, true, false);
+                                if (istimeout) Thread.Sleep(吸料超时关吸真空延时上移时间);
+                                stopwatch.Reset();
                             }
                             else
                             {
@@ -6780,11 +6790,11 @@ namespace H5509_V2
                                         }
                                         else
                                         {
-                                            if (countnum[i + index])
-                                            {
-                                                countnum[i + index] = false;
-                                                入料手臂吸料不起数量++;
-                                            }
+                                            //if (count[i + index])
+                                            //{
+                                            //    count[i + index] = false;
+                                            //    入料手臂吸料不起数量++;
+                                            //}
                                             RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->入料Z{i + index + 1}吸料失败");
                                         }
                                     }
@@ -6870,6 +6880,11 @@ namespace H5509_V2
                                             Listcode.Add($"30{i + 1}0000");
                                             RunLog($"[Code]30{i + 1}0000,[Msg]入料Z{i + 1}吸料失败!", LogType.AlarmLog);
                                         }
+                                    }
+                                    if (count2)
+                                    {
+                                        count2 = false;
+                                        入料手臂吸料不起数量++;
                                     }
                                     入料IC吸不起结批 = false;
                                     入料IC忽略 = false;
@@ -7729,7 +7744,7 @@ namespace H5509_V2
             bool firstdraw = true;
             bool firstdzhome = true;
             string[] home = new string[4];
-            bool[] countnum = new bool[4];
+            bool count = true;
 
             Stopwatch stopwatch = new Stopwatch();
             PS出料手臂吸放料流程.StepID = 500;
@@ -7889,7 +7904,7 @@ namespace H5509_V2
                             {
                                 firstdraw = true;
                                 firstdzhome = true;
-                                countnum = new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] };
+                                count = true; //new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] };
                                 PS出料手臂吸放料流程.StepID = 520;
                             }
                             else
@@ -7911,6 +7926,7 @@ namespace H5509_V2
                             {
                                 firstdraw = true;
                                 firstdzhome = true;
+                                count = true; //new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3] };
                                 PS出料手臂吸放料流程.StepID = 520;
                             }
                             else
@@ -7968,19 +7984,21 @@ namespace H5509_V2
 
                             if (!空跑模式)
                             {
+                                bool istimeout = false;
+                                string[] ioval = new string[4];
                                 stopwatch.Start();
                                 while (JudgeNozzleSts(lsopen, opens, 0))
                                 {
                                     if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.出料手臂吸料超时时间)
                                     {
+                                        istimeout = true;
                                         RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料吸料超时");
                                         break;
                                     }
 
-                                    result = 出料吸嘴_真空检测(out string[] ioval);
+                                    result = 出料吸嘴_真空检测(out ioval);
                                     if (result != "Success") break;
 
-                                    RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}:{stopwatch.ElapsedMilliseconds}ms");
 
                                     for (int i = 0; i < ioval.Length; i++)
                                     {
@@ -7994,10 +8012,11 @@ namespace H5509_V2
                                 }
 
                                 stopwatch.Stop();
-                                stopwatch.Reset();
-
+                                RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]}:{stopwatch.ElapsedMilliseconds}ms");
                                 bool[] bools = new bool[4] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0 };
                                 出料吸嘴_吸放料(bools, true, false);
+                                if (istimeout) Thread.Sleep(吸料超时关吸真空延时上移时间);
+                                stopwatch.Reset();
                             }
                             else
                             {
@@ -8061,11 +8080,11 @@ namespace H5509_V2
                                         }
                                         else
                                         {
-                                            if (countnum[i])
-                                            {
-                                                countnum[i] = false;
-                                                出料手臂吸料不起数量++;
-                                            }
+                                            //if (count[i])
+                                            //{
+                                            //    count[i] = false;
+                                            //    出料手臂吸料不起数量++;
+                                            //}
                                             RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->出料Z{i + index + 1}吸料失败");
                                         }
                                     }
@@ -8159,6 +8178,11 @@ namespace H5509_V2
                                             Listcode.Add($"30{i + 5}0000");
                                             RunLog($"[Code]30{i + 5}0000,[Msg]出料Z{i + 1}吸料失败!", LogType.AlarmLog);
                                         }
+                                    }
+                                    if (count)
+                                    {
+                                        count = false;
+                                        出料手臂吸料不起数量++;
                                     }
                                     出料IC忽略 = false;
                                     ProgramPause = true;
@@ -9960,19 +9984,21 @@ namespace H5509_V2
                             RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                             if (!空跑模式)
                             {
+                                bool istimeout = false;
+                                string[] ioval = new string[8];
                                 stopwatch.Start();
                                 while (JudgeNozzleSts(lsopen, opens, 0))
                                 {
                                     if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.测试手臂吸料超时时间)
                                     {
+                                        istimeout = true;
                                         RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->测试吸料超时");
                                         break;
                                     }
 
-                                    result = 测试吸嘴_真空检测(out string[] ioval);
+                                    result = 测试吸嘴_真空检测(out ioval);
                                     if (result != "Success") break;
 
-                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}:{stopwatch.ElapsedMilliseconds}ms");
 
                                     for (int i = 0; i < ioval.Length; i++)
                                     {
@@ -9986,10 +10012,12 @@ namespace H5509_V2
                                 }
 
                                 stopwatch.Stop();
-                                stopwatch.Reset();
 
+                                RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}:{stopwatch.ElapsedMilliseconds}ms");
                                 bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
                                 测试吸嘴_吸放料(bools, true, false);
+                                if (istimeout) Thread.Sleep(吸料超时关吸真空延时上移时间);
+                                stopwatch.Reset();
                             }
                             else
                             {
@@ -10493,10 +10521,10 @@ namespace H5509_V2
 
                                     StationManagers.SetStationState(site, 1);// SiteTestState[site] = 1; //有料
 
-                                    if (飞梭后出料状态 == 1)
-                                    {
-                                        DIndexTime = DateTime.Now - IndexTime;
-                                    }
+                                    //if (飞梭后出料状态 == 1) //2025-11-06 14:59 因显示异常屏蔽
+                                    //{
+                                    DIndexTime = DateTime.Now - IndexTime;
+                                    //}
 
                                     PS测试手臂取待测料流程.StepID = 799;
                                 }
@@ -10809,21 +10837,21 @@ namespace H5509_V2
 
                             if (!空跑模式)
                             {
-
+                                bool istimeout = false;
+                                string[] ioval = new string[8];
                                 stopwatch.Start();
 
                                 while (JudgeNozzleSts(lsopen, opens, 0))
                                 {
                                     if (stopwatch.ElapsedMilliseconds > 设置信息.测试机信息.测试手臂吸料超时时间)
                                     {
+                                        istimeout = true;
                                         RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->测试吸料超时");
                                         break;
                                     }
 
-                                    result = 测试吸嘴_真空检测(out string[] ioval);
+                                    result = 测试吸嘴_真空检测(out ioval);
                                     if (result != "Success") break;
-
-                                    RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}:{stopwatch.ElapsedMilliseconds}ms");
 
                                     for (int i = 0; i < ioval.Length; i++)
                                     {
@@ -10837,10 +10865,11 @@ namespace H5509_V2
                                 }
 
                                 stopwatch.Stop();
-                                stopwatch.Reset();
-
+                                RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}:{stopwatch.ElapsedMilliseconds}ms");
                                 bool[] bools = new bool[8] { lsopen[0] && opens[0] == 0, lsopen[1] && opens[1] == 0, lsopen[2] && opens[2] == 0, lsopen[3] && opens[3] == 0, lsopen[4] && opens[4] == 0, lsopen[5] && opens[5] == 0, lsopen[6] && opens[6] == 0, lsopen[7] && opens[7] == 0 };
                                 测试吸嘴_吸放料(bools, true, false);
+                                if (istimeout) Thread.Sleep(吸料超时关吸真空延时上移时间);
+                                stopwatch.Reset();
                             }
                             else
                             {
@@ -11485,8 +11514,8 @@ namespace H5509_V2
                                 };
                                 bool site1isgetic = site1opens.Contains(0);
                                 bool site2isgetic = site2opens.Contains(0);
-                                
-                                if (((states[0] == 10 || !sitew1.Contains(true) || (测试手臂入料停止工作标记 && !site1isgetic)) && (states[1] == 10 || !sitew2.Contains(true) || (测试手臂入料停止工作标记 && !site2isgetic))) 
+
+                                if (((states[0] == 10 || !sitew1.Contains(true) || (测试手臂入料停止工作标记 && !site1isgetic)) && (states[1] == 10 || !sitew2.Contains(true) || (测试手臂入料停止工作标记 && !site2isgetic)))
                                     || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)
                                     && (states[0] == 10 || (states[0] == 0 && !site1isgetic)) && (states[1] == 10 || (states[1] == 0 && !site2isgetic))))
                                 {

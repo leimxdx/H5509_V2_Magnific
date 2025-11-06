@@ -118,6 +118,8 @@ namespace H5509_V2
 
         public static string 串口数据异常Msg;
 
+        public static int 吸料超时关吸真空延时上移时间 = 100;
+
         public static string[][] 开关Site显示MA = new string[16][];
 
         public static bool ProgramPause = false; //程序暂停
@@ -2433,6 +2435,7 @@ namespace H5509_V2
                         case "按批号保存使能": 按批号保存使能 = GetBoolType(value.ToString()); break;
                         case "LotNoLog保存路径": LotNoLog保存路径 = value; break;
                         case "自定义界面": 自定义界面 = value; break;
+                        case "吸料超时关吸真空延时上移时间": 吸料超时关吸真空延时上移时间 = Convert.ToInt32(value); break;
                     }
                 }
             }
