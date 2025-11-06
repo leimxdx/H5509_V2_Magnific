@@ -1845,16 +1845,16 @@ namespace H5509_V2
                         colums = 0;
                         return true;
                     }
-                }
-                else if (梭车是否需要放料(飞梭后入料IC[1], 放料IC目标值[1]))
-                {
-                    open = 梭车放料ICopen(飞梭后入料IC[1], 放料IC目标值[1]);
-                    if (open.Contains(true))
-                    {
-                        colums = 1;
-                        return true;
-                    }
-                }
+                } //防止入料叠料  2025-11-06 08:23:04
+                //else if (梭车是否需要放料(飞梭后入料IC[1], 放料IC目标值[1]))
+                //{
+                //    open = 梭车放料ICopen(飞梭后入料IC[1], 放料IC目标值[1]);
+                //    if (open.Contains(true))
+                //    {
+                //        colums = 1;
+                //        return true;
+                //    }
+                //}
                 return false;
             }
             catch (Exception ex)
@@ -3126,7 +3126,7 @@ namespace H5509_V2
             }
         }
 
-        public static Dictionary<string, object> ConvertToDictionary(SerialPortConfig config)
+        public static Dictionary<string, object> GetCOMDictionary(SerialPortConfig config)
         {
             return new Dictionary<string, object>
             {
@@ -3139,7 +3139,17 @@ namespace H5509_V2
             };
         }
 
-        public static SerialPortConfig GetSiteConfig(int site)
+        public static Dictionary<string, object> GetTCPDictionary(IEtherNetConfig config)
+        {
+            return new Dictionary<string, object>
+            {
+                { "Protocol", config.Protocol },
+                { "PortName", config.PortName },
+                { "Port", config.Port },
+            };
+        }
+
+        public static object GetSiteConfig(int site)
         {
             var options = new JsonSerializerOptions
             {
@@ -3158,12 +3168,24 @@ namespace H5509_V2
 
             string configJson = (string)property.GetValue(设置信息.通讯信息);
 
-            if (string.IsNullOrWhiteSpace(configJson))
+            if (设置信息.通讯信息.通讯方式 == "COM")
             {
-                return new SerialPortConfig();
-            }
+                if (string.IsNullOrWhiteSpace(configJson))
+                {
+                    return new SerialPortConfig();
+                }
 
-            return JsonSerializer.Deserialize<SerialPortConfig>(configJson, options);
+                return JsonSerializer.Deserialize<SerialPortConfig>(configJson, options);
+            }
+            else
+            {
+                if (string.IsNullOrWhiteSpace(configJson))
+                {
+                    return new SerialPortConfig();
+                }
+
+                return JsonSerializer.Deserialize<IEtherNetConfig>(configJson, options);
+            }
         }
         #endregion
 
@@ -5259,12 +5281,27 @@ namespace H5509_V2
 
             var configDict = new Dictionary<int, Dictionary<string, object>>();
 
-            StationManagers.DisConnects();
+            string 通讯方式 = 设置信息.通讯信息.通讯方式;
 
-            // 直接创建并填充数组
-            Dictionary<string, object>[] sites = Enumerable.Range(0, 16)
-                .Select(i => ConvertToDictionary(GetSiteConfig(i)))
-                .ToArray();
+            Dictionary<string, object>[] sites = new Dictionary<string, object>[16];
+
+            if (设置信息.通讯信息.通讯方式 == "COM")
+            {
+                StationManagers.DisConnects();
+                // 直接创建并填充数组
+                sites = Enumerable.Range(0, 16)
+                    .Select(i => GetCOMDictionary((SerialPortConfig)GetSiteConfig(i)))
+                    .ToArray();
+            }
+
+            else if (设置信息.通讯信息.通讯方式 == "TCP")
+            {
+                //StationManagers.DisConnects();
+                // 直接创建并填充数组
+                sites = Enumerable.Range(0, 16)
+                    .Select(i => GetTCPDictionary((IEtherNetConfig)GetSiteConfig(i)))
+                    .ToArray();
+            }
 
             int step = 16 / testNum;
             for (int i = 0; i < testNum; i++)

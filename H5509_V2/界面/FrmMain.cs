@@ -63,84 +63,6 @@ namespace H5509_V2
             }
         }
 
-        private void StationInit()
-        {
-            var configDict = new Dictionary<int, Dictionary<string, object>>();
-
-            // 直接创建并填充数组
-            Dictionary<string, object>[] sites = Enumerable.Range(0, 16)
-                .Select(i => ConvertToDictionary(GetSiteConfig(i)))
-                .ToArray();
-            //if (!configDict.ContainsKey(0)) configDict.Add(0, site1);
-            //if (!configDict.ContainsKey(1)) configDict.Add(1, site2);
-            //if (!configDict.ContainsKey(2)) configDict.Add(2, site3);
-            //if (!configDict.ContainsKey(3)) configDict.Add(3, site4);
-            //if (!configDict.ContainsKey(4)) configDict.Add(4, site5);
-            //if (!configDict.ContainsKey(5)) configDict.Add(5, site6);
-            //if (!configDict.ContainsKey(6)) configDict.Add(6, site7);
-            //if (!configDict.ContainsKey(7)) configDict.Add(7, site8);
-            //if (!configDict.ContainsKey(8)) configDict.Add(8, site9);
-            //if (!configDict.ContainsKey(9)) configDict.Add(9, site10);
-            //if (!configDict.ContainsKey(10)) configDict.Add(10, site11);
-            //if (!configDict.ContainsKey(11)) configDict.Add(11, site12);
-            //if (!configDict.ContainsKey(12)) configDict.Add(12, site13);
-            //if (!configDict.ContainsKey(13)) configDict.Add(13, site14);
-            //if (!configDict.ContainsKey(14)) configDict.Add(14, site15);
-            //if (!configDict.ContainsKey(15)) configDict.Add(15, site16);
-
-
-            int testNum = 设置信息.通讯信息.测试机数量; //1 4 8 16
-
-            //if (testNum == 1)
-            //{
-            //    configDict.Add(0, sites[0]);
-
-            //}
-            //else if (testNum == 4)
-            //{
-            //    configDict.Add(0, sites[0]);
-            //    configDict.Add(4, sites[4]);
-            //    configDict.Add(8, sites[8]);
-            //    configDict.Add(12, sites[12]);
-            //}
-            //else if (testNum == 8)
-            //{
-            //    configDict.Add(0, sites[0]);
-            //    configDict.Add(2, sites[2]);
-            //    configDict.Add(4, sites[4]);
-            //    configDict.Add(6, sites[6]);
-            //    configDict.Add(8, sites[8]);
-            //    configDict.Add(10, sites[10]);
-            //    configDict.Add(12, sites[12]);
-            //    configDict.Add(14, sites[14]);
-            //}
-            //else if (testNum == 16)
-            //{
-            //    configDict.Add(0, sites[0]);
-            //    configDict.Add(1, sites[1]);
-            //    configDict.Add(2, sites[2]);
-            //    configDict.Add(3, sites[3]);
-            //    configDict.Add(4, sites[4]);
-            //    configDict.Add(5, sites[5]);
-            //    configDict.Add(6, sites[6]);
-            //    configDict.Add(7, sites[7]);
-            //    configDict.Add(8, sites[8]);
-            //    configDict.Add(9, sites[9]);
-            //    configDict.Add(10, sites[10]);
-            //    configDict.Add(11, sites[11]);
-            //    configDict.Add(12, sites[12]);
-            //    configDict.Add(13, sites[13]);
-            //    configDict.Add(14, sites[14]);
-            //    configDict.Add(15, sites[15]);
-            //}
-            int step = 16 / testNum;
-            for (int i = 0; i < testNum; i++)
-            {
-                int siteIndex = i * step;
-                configDict.Add(siteIndex, sites[siteIndex]);
-            }
-            StationManagers.UpdateStationsConfig(configDict);
-        }
 
         private void SetTablayoutDoubleBuffer()
         {
@@ -966,7 +888,7 @@ namespace H5509_V2
                                     }
                                 }
 
-                                RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum);
+                                RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum + 1);
 
                                 //Com.Listtestsingal.Remove(sitenum);
                                 //Com.Listtestsingal.RemoveAt(0);
@@ -1782,6 +1704,16 @@ namespace H5509_V2
             {
                 e.Cancel = true;
             }
+        }
+
+        private void uiButton1_Click(object sender, EventArgs e)
+        {
+            ProgramStart = true;
+        }
+
+        private void uiButton2_Click(object sender, EventArgs e)
+        {
+            ProgramPause = true;
         }
     }
 

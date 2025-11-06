@@ -685,14 +685,14 @@
             this.uiCheckBox164 = new Sunny.UI.UICheckBox();
             this.uiCheckBox165 = new Sunny.UI.UICheckBox();
             this.label853 = new System.Windows.Forms.Label();
-            this.uiTextBox17 = new Sunny.UI.UITextBox();
-            this.uiTextBox13 = new Sunny.UI.UITextBox();
-            this.uiTextBox18 = new Sunny.UI.UITextBox();
-            this.uiTextBox11 = new Sunny.UI.UITextBox();
-            this.uiTextBox19 = new Sunny.UI.UITextBox();
-            this.uiTextBox14 = new Sunny.UI.UITextBox();
-            this.uiTextBox20 = new Sunny.UI.UITextBox();
-            this.uiTextBox10 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport16 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport8 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport12 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport4 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport14 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport6 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport10 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport2 = new Sunny.UI.UITextBox();
             this.label825 = new System.Windows.Forms.Label();
             this.label806 = new System.Windows.Forms.Label();
             this.label826 = new System.Windows.Forms.Label();
@@ -701,21 +701,21 @@
             this.label807 = new System.Windows.Forms.Label();
             this.label828 = new System.Windows.Forms.Label();
             this.label797 = new System.Windows.Forms.Label();
-            this.uiTextBox21 = new Sunny.UI.UITextBox();
-            this.uiTextBox15 = new Sunny.UI.UITextBox();
-            this.uiTextBox22 = new Sunny.UI.UITextBox();
-            this.uiTextBox12 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport15 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport7 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport11 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport3 = new Sunny.UI.UITextBox();
             this.label849 = new System.Windows.Forms.Label();
             this.label823 = new System.Windows.Forms.Label();
             this.label850 = new System.Windows.Forms.Label();
             this.label805 = new System.Windows.Forms.Label();
-            this.uiTextBox23 = new Sunny.UI.UITextBox();
-            this.uiTextBox16 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport13 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport5 = new Sunny.UI.UITextBox();
             this.label851 = new System.Windows.Forms.Label();
             this.label824 = new System.Windows.Forms.Label();
-            this.uiTextBox24 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport9 = new Sunny.UI.UITextBox();
             this.label852 = new System.Windows.Forms.Label();
-            this.uiTextBox9 = new Sunny.UI.UITextBox();
+            this.uitxt_tcpport1 = new Sunny.UI.UITextBox();
             this.label796 = new System.Windows.Forms.Label();
             this.label795 = new System.Windows.Forms.Label();
             this.uiCheckBox158 = new Sunny.UI.UICheckBox();
@@ -2132,13 +2132,15 @@
             this.tabPage12 = new System.Windows.Forms.TabPage();
             this.panel20 = new System.Windows.Forms.Panel();
             this.uiRadioButton3 = new Sunny.UI.UIRadioButton();
-            this.defalut32 = new H5509_V2.Defalut3();
             this.panel19 = new System.Windows.Forms.Panel();
             this.uiRadioButton1 = new Sunny.UI.UIRadioButton();
-            this.defalut11 = new H5509_V2.Defalut1();
             this.panel18 = new System.Windows.Forms.Panel();
-            this.defalut21 = new H5509_V2.Defalut2();
             this.uiRadioButton2 = new Sunny.UI.UIRadioButton();
+            this.defalut32 = new H5509_V2.Defalut3();
+            this.defalut11 = new H5509_V2.Defalut1();
+            this.defalut21 = new H5509_V2.Defalut2();
+            this.uiButton43 = new Sunny.UI.UIButton();
+            this.uiButton44 = new Sunny.UI.UIButton();
             this.tabPage6.SuspendLayout();
             this.uiTabControl5.SuspendLayout();
             this.tabPage23.SuspendLayout();
@@ -2951,7 +2953,7 @@
             this.tabPage27.Controls.Add(this.uiTitlePanel3);
             this.tabPage27.Location = new System.Drawing.Point(0, 40);
             this.tabPage27.Name = "tabPage27";
-            this.tabPage27.Size = new System.Drawing.Size(200, 60);
+            this.tabPage27.Size = new System.Drawing.Size(1337, 802);
             this.tabPage27.TabIndex = 4;
             this.tabPage27.Text = "测试机";
             // 
@@ -4381,7 +4383,7 @@
             this.tabPage_bin.Controls.Add(this.listBox1);
             this.tabPage_bin.Location = new System.Drawing.Point(0, 40);
             this.tabPage_bin.Name = "tabPage_bin";
-            this.tabPage_bin.Size = new System.Drawing.Size(200, 60);
+            this.tabPage_bin.Size = new System.Drawing.Size(1337, 802);
             this.tabPage_bin.TabIndex = 5;
             this.tabPage_bin.Text = "分BIN";
             // 
@@ -5230,7 +5232,7 @@
             this.tabPage29.Controls.Add(this.uiTabControl8);
             this.tabPage29.Location = new System.Drawing.Point(0, 40);
             this.tabPage29.Name = "tabPage29";
-            this.tabPage29.Size = new System.Drawing.Size(200, 60);
+            this.tabPage29.Size = new System.Drawing.Size(1337, 802);
             this.tabPage29.TabIndex = 6;
             this.tabPage29.Text = "点位偏移";
             // 
@@ -5251,7 +5253,7 @@
             this.uiTabControl8.Name = "uiTabControl8";
             this.uiTabControl8.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl8.SelectedIndex = 0;
-            this.uiTabControl8.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl8.Size = new System.Drawing.Size(1337, 802);
             this.uiTabControl8.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl8.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl8.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -5270,7 +5272,7 @@
             this.tabPage28.Controls.Add(this.uiTitlePanel17);
             this.tabPage28.Location = new System.Drawing.Point(0, 40);
             this.tabPage28.Name = "tabPage28";
-            this.tabPage28.Size = new System.Drawing.Size(200, 20);
+            this.tabPage28.Size = new System.Drawing.Size(1337, 762);
             this.tabPage28.TabIndex = 2;
             this.tabPage28.Text = "入料手臂";
             // 
@@ -6062,7 +6064,7 @@
             this.tabPage34.Controls.Add(this.uiTitlePanel18);
             this.tabPage34.Location = new System.Drawing.Point(0, 40);
             this.tabPage34.Name = "tabPage34";
-            this.tabPage34.Size = new System.Drawing.Size(200, 60);
+            this.tabPage34.Size = new System.Drawing.Size(1337, 762);
             this.tabPage34.TabIndex = 4;
             this.tabPage34.Text = "出料手臂";
             // 
@@ -7009,7 +7011,7 @@
             this.tabPage35.Controls.Add(this.uiTitlePanel19);
             this.tabPage35.Location = new System.Drawing.Point(0, 40);
             this.tabPage35.Name = "tabPage35";
-            this.tabPage35.Size = new System.Drawing.Size(200, 60);
+            this.tabPage35.Size = new System.Drawing.Size(1337, 762);
             this.tabPage35.TabIndex = 5;
             this.tabPage35.Text = "测试手臂";
             // 
@@ -9337,7 +9339,7 @@
             this.tabPage36.Controls.Add(this.uiTitlePanel20);
             this.tabPage36.Location = new System.Drawing.Point(0, 40);
             this.tabPage36.Name = "tabPage36";
-            this.tabPage36.Size = new System.Drawing.Size(200, 60);
+            this.tabPage36.Size = new System.Drawing.Size(1337, 762);
             this.tabPage36.TabIndex = 3;
             this.tabPage36.Text = "梭车";
             // 
@@ -9425,7 +9427,7 @@
             this.tabPage37.Controls.Add(this.uiTitlePanel21);
             this.tabPage37.Location = new System.Drawing.Point(0, 40);
             this.tabPage37.Name = "tabPage37";
-            this.tabPage37.Size = new System.Drawing.Size(200, 60);
+            this.tabPage37.Size = new System.Drawing.Size(1337, 762);
             this.tabPage37.TabIndex = 6;
             this.tabPage37.Text = "抓盘手臂";
             // 
@@ -9793,7 +9795,7 @@
             this.tabPage32.Controls.Add(this.panel8);
             this.tabPage32.Location = new System.Drawing.Point(0, 40);
             this.tabPage32.Name = "tabPage32";
-            this.tabPage32.Size = new System.Drawing.Size(200, 60);
+            this.tabPage32.Size = new System.Drawing.Size(1893, 904);
             this.tabPage32.TabIndex = 1;
             this.tabPage32.Text = "Tray盘列表";
             // 
@@ -9805,7 +9807,7 @@
             this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel9.Location = new System.Drawing.Point(552, 0);
             this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(0, 60);
+            this.panel9.Size = new System.Drawing.Size(1341, 904);
             this.panel9.TabIndex = 183;
             // 
             // uiTabControl7
@@ -9822,7 +9824,7 @@
             this.uiTabControl7.Name = "uiTabControl7";
             this.uiTabControl7.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl7.SelectedIndex = 0;
-            this.uiTabControl7.Size = new System.Drawing.Size(0, 2);
+            this.uiTabControl7.Size = new System.Drawing.Size(1337, 842);
             this.uiTabControl7.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl7.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl7.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -9862,7 +9864,7 @@
             this.tabPage24.Controls.Add(this.label347);
             this.tabPage24.Location = new System.Drawing.Point(0, 40);
             this.tabPage24.Name = "tabPage24";
-            this.tabPage24.Size = new System.Drawing.Size(0, 0);
+            this.tabPage24.Size = new System.Drawing.Size(1337, 802);
             this.tabPage24.TabIndex = 2;
             this.tabPage24.Text = "Tray盘";
             // 
@@ -10103,7 +10105,7 @@
             this.tabPage33.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
             this.tabPage33.Location = new System.Drawing.Point(0, 40);
             this.tabPage33.Name = "tabPage33";
-            this.tabPage33.Size = new System.Drawing.Size(200, 60);
+            this.tabPage33.Size = new System.Drawing.Size(1337, 802);
             this.tabPage33.TabIndex = 4;
             this.tabPage33.Text = "取放设定";
             // 
@@ -10116,9 +10118,9 @@
             this.panel6.Controls.Add(this.uiButton15);
             this.panel6.Controls.Add(this.uiButton16);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel6.Location = new System.Drawing.Point(0, 2);
+            this.panel6.Location = new System.Drawing.Point(0, 842);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(0, 58);
+            this.panel6.Size = new System.Drawing.Size(1337, 58);
             this.panel6.TabIndex = 180;
             // 
             // uiCheckBox197
@@ -10210,7 +10212,7 @@
             this.panel8.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel8.Location = new System.Drawing.Point(0, 0);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(552, 60);
+            this.panel8.Size = new System.Drawing.Size(552, 904);
             this.panel8.TabIndex = 182;
             // 
             // uiDataGridView2
@@ -10259,7 +10261,7 @@
             this.uiDataGridView2.RowsDefaultCellStyle = dataGridViewCellStyle10;
             this.uiDataGridView2.RowTemplate.Height = 28;
             this.uiDataGridView2.SelectedIndex = -1;
-            this.uiDataGridView2.Size = new System.Drawing.Size(548, 0);
+            this.uiDataGridView2.Size = new System.Drawing.Size(548, 842);
             this.uiDataGridView2.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView2.TabIndex = 1;
             this.uiDataGridView2.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView2_CellMouseClick);
@@ -10270,7 +10272,7 @@
             this.panel7.Controls.Add(this.uiButton7);
             this.panel7.Controls.Add(this.uiButton19);
             this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel7.Location = new System.Drawing.Point(0, -2);
+            this.panel7.Location = new System.Drawing.Point(0, 842);
             this.panel7.Name = "panel7";
             this.panel7.Size = new System.Drawing.Size(548, 58);
             this.panel7.TabIndex = 181;
@@ -10311,7 +10313,7 @@
             this.tabPage38.Controls.Add(this.panel12);
             this.tabPage38.Location = new System.Drawing.Point(0, 40);
             this.tabPage38.Name = "tabPage38";
-            this.tabPage38.Size = new System.Drawing.Size(200, 60);
+            this.tabPage38.Size = new System.Drawing.Size(1893, 904);
             this.tabPage38.TabIndex = 0;
             this.tabPage38.Text = "加热盘列表";
             // 
@@ -10323,7 +10325,7 @@
             this.panel14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel14.Location = new System.Drawing.Point(552, 0);
             this.panel14.Name = "panel14";
-            this.panel14.Size = new System.Drawing.Size(0, 60);
+            this.panel14.Size = new System.Drawing.Size(1341, 904);
             this.panel14.TabIndex = 184;
             // 
             // uiTabControl9
@@ -10340,7 +10342,7 @@
             this.uiTabControl9.Name = "uiTabControl9";
             this.uiTabControl9.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl9.SelectedIndex = 0;
-            this.uiTabControl9.Size = new System.Drawing.Size(0, 2);
+            this.uiTabControl9.Size = new System.Drawing.Size(1337, 842);
             this.uiTabControl9.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl9.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl9.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -10380,7 +10382,7 @@
             this.tabPage39.Controls.Add(this.label595);
             this.tabPage39.Location = new System.Drawing.Point(0, 40);
             this.tabPage39.Name = "tabPage39";
-            this.tabPage39.Size = new System.Drawing.Size(0, 0);
+            this.tabPage39.Size = new System.Drawing.Size(1337, 802);
             this.tabPage39.TabIndex = 2;
             this.tabPage39.Text = "加热盘";
             // 
@@ -10699,7 +10701,7 @@
             this.tabPage40.Controls.Add(this.label580);
             this.tabPage40.Location = new System.Drawing.Point(0, 40);
             this.tabPage40.Name = "tabPage40";
-            this.tabPage40.Size = new System.Drawing.Size(200, 60);
+            this.tabPage40.Size = new System.Drawing.Size(1337, 802);
             this.tabPage40.TabIndex = 4;
             this.tabPage40.Text = "温度设定";
             // 
@@ -11681,9 +11683,9 @@
             this.panel15.Controls.Add(this.uiButton27);
             this.panel15.Controls.Add(this.uiButton28);
             this.panel15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel15.Location = new System.Drawing.Point(0, 2);
+            this.panel15.Location = new System.Drawing.Point(0, 842);
             this.panel15.Name = "panel15";
-            this.panel15.Size = new System.Drawing.Size(0, 58);
+            this.panel15.Size = new System.Drawing.Size(1337, 58);
             this.panel15.TabIndex = 180;
             // 
             // uiCheckBox200
@@ -11775,7 +11777,7 @@
             this.panel12.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel12.Location = new System.Drawing.Point(0, 0);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(552, 60);
+            this.panel12.Size = new System.Drawing.Size(552, 904);
             this.panel12.TabIndex = 183;
             // 
             // uiDataGridView3
@@ -11824,7 +11826,7 @@
             this.uiDataGridView3.RowsDefaultCellStyle = dataGridViewCellStyle15;
             this.uiDataGridView3.RowTemplate.Height = 28;
             this.uiDataGridView3.SelectedIndex = -1;
-            this.uiDataGridView3.Size = new System.Drawing.Size(548, 0);
+            this.uiDataGridView3.Size = new System.Drawing.Size(548, 842);
             this.uiDataGridView3.StripeOddColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
             this.uiDataGridView3.TabIndex = 1;
             this.uiDataGridView3.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.uiDataGridView3_CellMouseClick);
@@ -11836,7 +11838,7 @@
             this.panel13.Controls.Add(this.uiButton24);
             this.panel13.Controls.Add(this.uiButton25);
             this.panel13.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel13.Location = new System.Drawing.Point(0, -2);
+            this.panel13.Location = new System.Drawing.Point(0, 842);
             this.panel13.Name = "panel13";
             this.panel13.Size = new System.Drawing.Size(548, 58);
             this.panel13.TabIndex = 181;
@@ -11935,14 +11937,14 @@
             this.tabPage31.Controls.Add(this.uiCheckBox164);
             this.tabPage31.Controls.Add(this.uiCheckBox165);
             this.tabPage31.Controls.Add(this.label853);
-            this.tabPage31.Controls.Add(this.uiTextBox17);
-            this.tabPage31.Controls.Add(this.uiTextBox13);
-            this.tabPage31.Controls.Add(this.uiTextBox18);
-            this.tabPage31.Controls.Add(this.uiTextBox11);
-            this.tabPage31.Controls.Add(this.uiTextBox19);
-            this.tabPage31.Controls.Add(this.uiTextBox14);
-            this.tabPage31.Controls.Add(this.uiTextBox20);
-            this.tabPage31.Controls.Add(this.uiTextBox10);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport16);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport8);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport12);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport4);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport14);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport6);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport10);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport2);
             this.tabPage31.Controls.Add(this.label825);
             this.tabPage31.Controls.Add(this.label806);
             this.tabPage31.Controls.Add(this.label826);
@@ -11951,21 +11953,21 @@
             this.tabPage31.Controls.Add(this.label807);
             this.tabPage31.Controls.Add(this.label828);
             this.tabPage31.Controls.Add(this.label797);
-            this.tabPage31.Controls.Add(this.uiTextBox21);
-            this.tabPage31.Controls.Add(this.uiTextBox15);
-            this.tabPage31.Controls.Add(this.uiTextBox22);
-            this.tabPage31.Controls.Add(this.uiTextBox12);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport15);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport7);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport11);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport3);
             this.tabPage31.Controls.Add(this.label849);
             this.tabPage31.Controls.Add(this.label823);
             this.tabPage31.Controls.Add(this.label850);
             this.tabPage31.Controls.Add(this.label805);
-            this.tabPage31.Controls.Add(this.uiTextBox23);
-            this.tabPage31.Controls.Add(this.uiTextBox16);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport13);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport5);
             this.tabPage31.Controls.Add(this.label851);
             this.tabPage31.Controls.Add(this.label824);
-            this.tabPage31.Controls.Add(this.uiTextBox24);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport9);
             this.tabPage31.Controls.Add(this.label852);
-            this.tabPage31.Controls.Add(this.uiTextBox9);
+            this.tabPage31.Controls.Add(this.uitxt_tcpport1);
             this.tabPage31.Controls.Add(this.label796);
             this.tabPage31.Controls.Add(this.label795);
             this.tabPage31.Controls.Add(this.uiCheckBox158);
@@ -12211,125 +12213,125 @@
             this.label853.Tag = "";
             this.label853.Text = "端口配置";
             // 
-            // uiTextBox17
+            // uitxt_tcpport16
             // 
-            this.uiTextBox17.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox17.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox17.Location = new System.Drawing.Point(809, 535);
-            this.uiTextBox17.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox17.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox17.Name = "uiTextBox17";
-            this.uiTextBox17.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox17.ShowText = false;
-            this.uiTextBox17.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox17.TabIndex = 442;
-            this.uiTextBox17.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox17.Watermark = "";
+            this.uitxt_tcpport16.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport16.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport16.Location = new System.Drawing.Point(809, 535);
+            this.uitxt_tcpport16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport16.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport16.Name = "uitxt_tcpport16";
+            this.uitxt_tcpport16.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport16.ShowText = false;
+            this.uitxt_tcpport16.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport16.TabIndex = 442;
+            this.uitxt_tcpport16.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport16.Watermark = "";
             // 
-            // uiTextBox13
+            // uitxt_tcpport8
             // 
-            this.uiTextBox13.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox13.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox13.Location = new System.Drawing.Point(444, 535);
-            this.uiTextBox13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox13.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox13.Name = "uiTextBox13";
-            this.uiTextBox13.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox13.ShowText = false;
-            this.uiTextBox13.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox13.TabIndex = 426;
-            this.uiTextBox13.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox13.Watermark = "";
+            this.uitxt_tcpport8.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport8.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport8.Location = new System.Drawing.Point(444, 535);
+            this.uitxt_tcpport8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport8.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport8.Name = "uitxt_tcpport8";
+            this.uitxt_tcpport8.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport8.ShowText = false;
+            this.uitxt_tcpport8.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport8.TabIndex = 426;
+            this.uitxt_tcpport8.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport8.Watermark = "";
             // 
-            // uiTextBox18
+            // uitxt_tcpport12
             // 
-            this.uiTextBox18.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox18.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox18.Location = new System.Drawing.Point(809, 379);
-            this.uiTextBox18.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox18.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox18.Name = "uiTextBox18";
-            this.uiTextBox18.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox18.ShowText = false;
-            this.uiTextBox18.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox18.TabIndex = 434;
-            this.uiTextBox18.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox18.Watermark = "";
+            this.uitxt_tcpport12.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport12.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport12.Location = new System.Drawing.Point(809, 379);
+            this.uitxt_tcpport12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport12.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport12.Name = "uitxt_tcpport12";
+            this.uitxt_tcpport12.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport12.ShowText = false;
+            this.uitxt_tcpport12.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport12.TabIndex = 434;
+            this.uitxt_tcpport12.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport12.Watermark = "";
             // 
-            // uiTextBox11
+            // uitxt_tcpport4
             // 
-            this.uiTextBox11.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox11.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox11.Location = new System.Drawing.Point(444, 379);
-            this.uiTextBox11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox11.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox11.Name = "uiTextBox11";
-            this.uiTextBox11.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox11.ShowText = false;
-            this.uiTextBox11.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox11.TabIndex = 418;
-            this.uiTextBox11.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox11.Watermark = "";
+            this.uitxt_tcpport4.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport4.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport4.Location = new System.Drawing.Point(444, 379);
+            this.uitxt_tcpport4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport4.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport4.Name = "uitxt_tcpport4";
+            this.uitxt_tcpport4.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport4.ShowText = false;
+            this.uitxt_tcpport4.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport4.TabIndex = 418;
+            this.uitxt_tcpport4.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport4.Watermark = "";
             // 
-            // uiTextBox19
+            // uitxt_tcpport14
             // 
-            this.uiTextBox19.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox19.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox19.Location = new System.Drawing.Point(809, 457);
-            this.uiTextBox19.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox19.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox19.Name = "uiTextBox19";
-            this.uiTextBox19.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox19.ShowText = false;
-            this.uiTextBox19.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox19.TabIndex = 438;
-            this.uiTextBox19.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox19.Watermark = "";
+            this.uitxt_tcpport14.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport14.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport14.Location = new System.Drawing.Point(809, 457);
+            this.uitxt_tcpport14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport14.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport14.Name = "uitxt_tcpport14";
+            this.uitxt_tcpport14.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport14.ShowText = false;
+            this.uitxt_tcpport14.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport14.TabIndex = 438;
+            this.uitxt_tcpport14.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport14.Watermark = "";
             // 
-            // uiTextBox14
+            // uitxt_tcpport6
             // 
-            this.uiTextBox14.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox14.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox14.Location = new System.Drawing.Point(444, 457);
-            this.uiTextBox14.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox14.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox14.Name = "uiTextBox14";
-            this.uiTextBox14.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox14.ShowText = false;
-            this.uiTextBox14.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox14.TabIndex = 422;
-            this.uiTextBox14.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox14.Watermark = "";
+            this.uitxt_tcpport6.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport6.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport6.Location = new System.Drawing.Point(444, 457);
+            this.uitxt_tcpport6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport6.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport6.Name = "uitxt_tcpport6";
+            this.uitxt_tcpport6.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport6.ShowText = false;
+            this.uitxt_tcpport6.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport6.TabIndex = 422;
+            this.uitxt_tcpport6.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport6.Watermark = "";
             // 
-            // uiTextBox20
+            // uitxt_tcpport10
             // 
-            this.uiTextBox20.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox20.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox20.Location = new System.Drawing.Point(809, 301);
-            this.uiTextBox20.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox20.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox20.Name = "uiTextBox20";
-            this.uiTextBox20.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox20.ShowText = false;
-            this.uiTextBox20.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox20.TabIndex = 430;
-            this.uiTextBox20.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox20.Watermark = "";
+            this.uitxt_tcpport10.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport10.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport10.Location = new System.Drawing.Point(809, 301);
+            this.uitxt_tcpport10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport10.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport10.Name = "uitxt_tcpport10";
+            this.uitxt_tcpport10.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport10.ShowText = false;
+            this.uitxt_tcpport10.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport10.TabIndex = 430;
+            this.uitxt_tcpport10.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport10.Watermark = "";
             // 
-            // uiTextBox10
+            // uitxt_tcpport2
             // 
-            this.uiTextBox10.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox10.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox10.Location = new System.Drawing.Point(444, 301);
-            this.uiTextBox10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox10.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox10.Name = "uiTextBox10";
-            this.uiTextBox10.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox10.ShowText = false;
-            this.uiTextBox10.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox10.TabIndex = 414;
-            this.uiTextBox10.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox10.Watermark = "";
+            this.uitxt_tcpport2.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport2.Location = new System.Drawing.Point(444, 301);
+            this.uitxt_tcpport2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport2.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport2.Name = "uitxt_tcpport2";
+            this.uitxt_tcpport2.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport2.ShowText = false;
+            this.uitxt_tcpport2.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport2.TabIndex = 414;
+            this.uitxt_tcpport2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport2.Watermark = "";
             // 
             // label825
             // 
@@ -12403,65 +12405,65 @@
             this.label797.TabIndex = 415;
             this.label797.Text = "Port";
             // 
-            // uiTextBox21
+            // uitxt_tcpport15
             // 
-            this.uiTextBox21.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox21.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox21.Location = new System.Drawing.Point(809, 496);
-            this.uiTextBox21.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox21.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox21.Name = "uiTextBox21";
-            this.uiTextBox21.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox21.ShowText = false;
-            this.uiTextBox21.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox21.TabIndex = 440;
-            this.uiTextBox21.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox21.Watermark = "";
+            this.uitxt_tcpport15.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport15.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport15.Location = new System.Drawing.Point(809, 496);
+            this.uitxt_tcpport15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport15.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport15.Name = "uitxt_tcpport15";
+            this.uitxt_tcpport15.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport15.ShowText = false;
+            this.uitxt_tcpport15.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport15.TabIndex = 440;
+            this.uitxt_tcpport15.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport15.Watermark = "";
             // 
-            // uiTextBox15
+            // uitxt_tcpport7
             // 
-            this.uiTextBox15.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox15.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox15.Location = new System.Drawing.Point(444, 496);
-            this.uiTextBox15.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox15.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox15.Name = "uiTextBox15";
-            this.uiTextBox15.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox15.ShowText = false;
-            this.uiTextBox15.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox15.TabIndex = 424;
-            this.uiTextBox15.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox15.Watermark = "";
+            this.uitxt_tcpport7.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport7.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport7.Location = new System.Drawing.Point(444, 496);
+            this.uitxt_tcpport7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport7.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport7.Name = "uitxt_tcpport7";
+            this.uitxt_tcpport7.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport7.ShowText = false;
+            this.uitxt_tcpport7.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport7.TabIndex = 424;
+            this.uitxt_tcpport7.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport7.Watermark = "";
             // 
-            // uiTextBox22
+            // uitxt_tcpport11
             // 
-            this.uiTextBox22.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox22.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox22.Location = new System.Drawing.Point(809, 340);
-            this.uiTextBox22.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox22.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox22.Name = "uiTextBox22";
-            this.uiTextBox22.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox22.ShowText = false;
-            this.uiTextBox22.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox22.TabIndex = 432;
-            this.uiTextBox22.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox22.Watermark = "";
+            this.uitxt_tcpport11.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport11.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport11.Location = new System.Drawing.Point(809, 340);
+            this.uitxt_tcpport11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport11.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport11.Name = "uitxt_tcpport11";
+            this.uitxt_tcpport11.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport11.ShowText = false;
+            this.uitxt_tcpport11.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport11.TabIndex = 432;
+            this.uitxt_tcpport11.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport11.Watermark = "";
             // 
-            // uiTextBox12
+            // uitxt_tcpport3
             // 
-            this.uiTextBox12.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox12.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox12.Location = new System.Drawing.Point(444, 340);
-            this.uiTextBox12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox12.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox12.Name = "uiTextBox12";
-            this.uiTextBox12.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox12.ShowText = false;
-            this.uiTextBox12.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox12.TabIndex = 416;
-            this.uiTextBox12.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox12.Watermark = "";
+            this.uitxt_tcpport3.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport3.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport3.Location = new System.Drawing.Point(444, 340);
+            this.uitxt_tcpport3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport3.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport3.Name = "uitxt_tcpport3";
+            this.uitxt_tcpport3.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport3.ShowText = false;
+            this.uitxt_tcpport3.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport3.TabIndex = 416;
+            this.uitxt_tcpport3.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport3.Watermark = "";
             // 
             // label849
             // 
@@ -12499,35 +12501,35 @@
             this.label805.TabIndex = 417;
             this.label805.Text = "Port";
             // 
-            // uiTextBox23
+            // uitxt_tcpport13
             // 
-            this.uiTextBox23.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox23.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox23.Location = new System.Drawing.Point(809, 418);
-            this.uiTextBox23.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox23.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox23.Name = "uiTextBox23";
-            this.uiTextBox23.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox23.ShowText = false;
-            this.uiTextBox23.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox23.TabIndex = 436;
-            this.uiTextBox23.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox23.Watermark = "";
+            this.uitxt_tcpport13.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport13.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport13.Location = new System.Drawing.Point(809, 418);
+            this.uitxt_tcpport13.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport13.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport13.Name = "uitxt_tcpport13";
+            this.uitxt_tcpport13.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport13.ShowText = false;
+            this.uitxt_tcpport13.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport13.TabIndex = 436;
+            this.uitxt_tcpport13.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport13.Watermark = "";
             // 
-            // uiTextBox16
+            // uitxt_tcpport5
             // 
-            this.uiTextBox16.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox16.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox16.Location = new System.Drawing.Point(444, 418);
-            this.uiTextBox16.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox16.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox16.Name = "uiTextBox16";
-            this.uiTextBox16.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox16.ShowText = false;
-            this.uiTextBox16.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox16.TabIndex = 420;
-            this.uiTextBox16.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox16.Watermark = "";
+            this.uitxt_tcpport5.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport5.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport5.Location = new System.Drawing.Point(444, 418);
+            this.uitxt_tcpport5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport5.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport5.Name = "uitxt_tcpport5";
+            this.uitxt_tcpport5.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport5.ShowText = false;
+            this.uitxt_tcpport5.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport5.TabIndex = 420;
+            this.uitxt_tcpport5.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport5.Watermark = "";
             // 
             // label851
             // 
@@ -12547,20 +12549,20 @@
             this.label824.TabIndex = 421;
             this.label824.Text = "Port";
             // 
-            // uiTextBox24
+            // uitxt_tcpport9
             // 
-            this.uiTextBox24.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox24.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox24.Location = new System.Drawing.Point(809, 262);
-            this.uiTextBox24.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox24.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox24.Name = "uiTextBox24";
-            this.uiTextBox24.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox24.ShowText = false;
-            this.uiTextBox24.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox24.TabIndex = 428;
-            this.uiTextBox24.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox24.Watermark = "";
+            this.uitxt_tcpport9.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport9.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport9.Location = new System.Drawing.Point(809, 262);
+            this.uitxt_tcpport9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport9.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport9.Name = "uitxt_tcpport9";
+            this.uitxt_tcpport9.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport9.ShowText = false;
+            this.uitxt_tcpport9.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport9.TabIndex = 428;
+            this.uitxt_tcpport9.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport9.Watermark = "";
             // 
             // label852
             // 
@@ -12571,20 +12573,20 @@
             this.label852.TabIndex = 429;
             this.label852.Text = "Port";
             // 
-            // uiTextBox9
+            // uitxt_tcpport1
             // 
-            this.uiTextBox9.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.uiTextBox9.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.uiTextBox9.Location = new System.Drawing.Point(444, 262);
-            this.uiTextBox9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiTextBox9.MinimumSize = new System.Drawing.Size(1, 16);
-            this.uiTextBox9.Name = "uiTextBox9";
-            this.uiTextBox9.Padding = new System.Windows.Forms.Padding(5);
-            this.uiTextBox9.ShowText = false;
-            this.uiTextBox9.Size = new System.Drawing.Size(56, 29);
-            this.uiTextBox9.TabIndex = 391;
-            this.uiTextBox9.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiTextBox9.Watermark = "";
+            this.uitxt_tcpport1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.uitxt_tcpport1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uitxt_tcpport1.Location = new System.Drawing.Point(444, 262);
+            this.uitxt_tcpport1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uitxt_tcpport1.MinimumSize = new System.Drawing.Size(1, 16);
+            this.uitxt_tcpport1.Name = "uitxt_tcpport1";
+            this.uitxt_tcpport1.Padding = new System.Windows.Forms.Padding(5);
+            this.uitxt_tcpport1.ShowText = false;
+            this.uitxt_tcpport1.Size = new System.Drawing.Size(56, 29);
+            this.uitxt_tcpport1.TabIndex = 391;
+            this.uitxt_tcpport1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uitxt_tcpport1.Watermark = "";
             // 
             // label796
             // 
@@ -12725,7 +12727,7 @@
             this.uiCheckBox168.Name = "uiCheckBox168";
             this.uiCheckBox168.Size = new System.Drawing.Size(67, 25);
             this.uiCheckBox168.TabIndex = 410;
-            this.uiCheckBox168.Tag = "@02@#BCD#";
+            this.uiCheckBox168.Tag = "";
             this.uiCheckBox168.Text = "LAN";
             this.uiCheckBox168.Click += new System.EventHandler(this.uiCheckBox168_Click);
             // 
@@ -12743,7 +12745,7 @@
             this.uiCheckBox169.Name = "uiCheckBox169";
             this.uiCheckBox169.Size = new System.Drawing.Size(69, 25);
             this.uiCheckBox169.TabIndex = 411;
-            this.uiCheckBox169.Tag = "@02@#BCD#";
+            this.uiCheckBox169.Tag = "";
             this.uiCheckBox169.Text = "GPIB";
             this.uiCheckBox169.Click += new System.EventHandler(this.uiCheckBox169_Click);
             // 
@@ -12808,7 +12810,7 @@
             // label845
             // 
             this.label845.AutoSize = true;
-            this.label845.Location = new System.Drawing.Point(162, 585);
+            this.label845.Location = new System.Drawing.Point(164, 585);
             this.label845.Name = "label845";
             this.label845.Size = new System.Drawing.Size(58, 21);
             this.label845.TabIndex = 395;
@@ -12869,7 +12871,7 @@
             // label846
             // 
             this.label846.AutoSize = true;
-            this.label846.Location = new System.Drawing.Point(162, 702);
+            this.label846.Location = new System.Drawing.Point(164, 702);
             this.label846.Name = "label846";
             this.label846.Size = new System.Drawing.Size(58, 21);
             this.label846.TabIndex = 398;
@@ -12898,7 +12900,7 @@
             // label847
             // 
             this.label847.AutoSize = true;
-            this.label847.Location = new System.Drawing.Point(162, 663);
+            this.label847.Location = new System.Drawing.Point(164, 663);
             this.label847.Name = "label847";
             this.label847.Size = new System.Drawing.Size(58, 21);
             this.label847.TabIndex = 397;
@@ -12916,7 +12918,7 @@
             // label848
             // 
             this.label848.AutoSize = true;
-            this.label848.Location = new System.Drawing.Point(162, 624);
+            this.label848.Location = new System.Drawing.Point(164, 624);
             this.label848.Name = "label848";
             this.label848.Size = new System.Drawing.Size(58, 21);
             this.label848.TabIndex = 396;
@@ -13014,7 +13016,7 @@
             // label834
             // 
             this.label834.AutoSize = true;
-            this.label834.Location = new System.Drawing.Point(162, 539);
+            this.label834.Location = new System.Drawing.Point(164, 539);
             this.label834.Name = "label834";
             this.label834.Size = new System.Drawing.Size(47, 21);
             this.label834.TabIndex = 374;
@@ -13130,7 +13132,7 @@
             // label835
             // 
             this.label835.AutoSize = true;
-            this.label835.Location = new System.Drawing.Point(162, 500);
+            this.label835.Location = new System.Drawing.Point(164, 500);
             this.label835.Name = "label835";
             this.label835.Size = new System.Drawing.Size(47, 21);
             this.label835.TabIndex = 372;
@@ -13179,7 +13181,7 @@
             // label837
             // 
             this.label837.AutoSize = true;
-            this.label837.Location = new System.Drawing.Point(162, 461);
+            this.label837.Location = new System.Drawing.Point(164, 461);
             this.label837.Name = "label837";
             this.label837.Size = new System.Drawing.Size(47, 21);
             this.label837.TabIndex = 370;
@@ -13241,7 +13243,7 @@
             // label838
             // 
             this.label838.AutoSize = true;
-            this.label838.Location = new System.Drawing.Point(162, 422);
+            this.label838.Location = new System.Drawing.Point(164, 422);
             this.label838.Name = "label838";
             this.label838.Size = new System.Drawing.Size(47, 21);
             this.label838.TabIndex = 368;
@@ -13281,7 +13283,7 @@
             // label844
             // 
             this.label844.AutoSize = true;
-            this.label844.Location = new System.Drawing.Point(162, 266);
+            this.label844.Location = new System.Drawing.Point(164, 266);
             this.label844.Name = "label844";
             this.label844.Size = new System.Drawing.Size(47, 21);
             this.label844.TabIndex = 360;
@@ -13310,7 +13312,7 @@
             // label840
             // 
             this.label840.AutoSize = true;
-            this.label840.Location = new System.Drawing.Point(162, 383);
+            this.label840.Location = new System.Drawing.Point(164, 383);
             this.label840.Name = "label840";
             this.label840.Size = new System.Drawing.Size(47, 21);
             this.label840.TabIndex = 366;
@@ -13339,7 +13341,7 @@
             // label843
             // 
             this.label843.AutoSize = true;
-            this.label843.Location = new System.Drawing.Point(162, 305);
+            this.label843.Location = new System.Drawing.Point(164, 305);
             this.label843.Name = "label843";
             this.label843.Size = new System.Drawing.Size(47, 21);
             this.label843.TabIndex = 362;
@@ -13388,7 +13390,7 @@
             // label842
             // 
             this.label842.AutoSize = true;
-            this.label842.Location = new System.Drawing.Point(162, 344);
+            this.label842.Location = new System.Drawing.Point(164, 344);
             this.label842.Name = "label842";
             this.label842.Size = new System.Drawing.Size(47, 21);
             this.label842.TabIndex = 364;
@@ -13758,7 +13760,7 @@
             this.tabPage5.Controls.Add(this.button_setting);
             this.tabPage5.Location = new System.Drawing.Point(0, 40);
             this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Size = new System.Drawing.Size(200, 60);
+            this.tabPage5.Size = new System.Drawing.Size(1893, 944);
             this.tabPage5.TabIndex = 4;
             this.tabPage5.Text = "权限";
             // 
@@ -14079,7 +14081,7 @@
             this.tabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(200, 60);
+            this.tabPage2.Size = new System.Drawing.Size(1893, 944);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "调试";
             // 
@@ -14098,7 +14100,7 @@
             this.uiTabControl3.Name = "uiTabControl3";
             this.uiTabControl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl3.SelectedIndex = 0;
-            this.uiTabControl3.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl3.Size = new System.Drawing.Size(1893, 944);
             this.uiTabControl3.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl3.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl3.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -14121,7 +14123,7 @@
             this.tabPage10.Controls.Add(this.groupBox4);
             this.tabPage10.Location = new System.Drawing.Point(0, 40);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(200, 20);
+            this.tabPage10.Size = new System.Drawing.Size(1893, 904);
             this.tabPage10.TabIndex = 0;
             this.tabPage10.Text = "基础调试";
             // 
@@ -14383,6 +14385,8 @@
             // 
             // groupBox34
             // 
+            this.groupBox34.Controls.Add(this.uiButton43);
+            this.groupBox34.Controls.Add(this.uiButton44);
             this.groupBox34.Controls.Add(this.button266);
             this.groupBox34.Controls.Add(this.button264);
             this.groupBox34.Controls.Add(this.textBox25);
@@ -17295,7 +17299,7 @@
             this.tabPage11.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage11.Location = new System.Drawing.Point(0, 40);
             this.tabPage11.Name = "tabPage11";
-            this.tabPage11.Size = new System.Drawing.Size(200, 60);
+            this.tabPage11.Size = new System.Drawing.Size(1893, 904);
             this.tabPage11.TabIndex = 1;
             this.tabPage11.Tag = "@02@#0D#";
             this.tabPage11.Text = "流程调试";
@@ -18112,7 +18116,7 @@
             this.uiTabControl4.Name = "uiTabControl4";
             this.uiTabControl4.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl4.SelectedIndex = 0;
-            this.uiTabControl4.Size = new System.Drawing.Size(760, 60);
+            this.uiTabControl4.Size = new System.Drawing.Size(760, 904);
             this.uiTabControl4.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl4.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl4.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -18131,7 +18135,7 @@
             this.tabPage13.Controls.Add(this.groupBox3);
             this.tabPage13.Location = new System.Drawing.Point(0, 40);
             this.tabPage13.Name = "tabPage13";
-            this.tabPage13.Size = new System.Drawing.Size(760, 20);
+            this.tabPage13.Size = new System.Drawing.Size(760, 864);
             this.tabPage13.TabIndex = 0;
             this.tabPage13.Text = "入料流程";
             // 
@@ -19427,7 +19431,7 @@
             this.tabPage14.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage14.Location = new System.Drawing.Point(0, 40);
             this.tabPage14.Name = "tabPage14";
-            this.tabPage14.Size = new System.Drawing.Size(200, 60);
+            this.tabPage14.Size = new System.Drawing.Size(760, 864);
             this.tabPage14.TabIndex = 1;
             this.tabPage14.Text = "出料流程";
             // 
@@ -21020,7 +21024,7 @@
             this.tabPage15.Controls.Add(this.groupBox16);
             this.tabPage15.Location = new System.Drawing.Point(0, 40);
             this.tabPage15.Name = "tabPage15";
-            this.tabPage15.Size = new System.Drawing.Size(200, 60);
+            this.tabPage15.Size = new System.Drawing.Size(760, 864);
             this.tabPage15.TabIndex = 2;
             this.tabPage15.Text = "测试入料流程";
             // 
@@ -22556,7 +22560,7 @@
             this.tabPage18.Controls.Add(this.groupBox19);
             this.tabPage18.Location = new System.Drawing.Point(0, 40);
             this.tabPage18.Name = "tabPage18";
-            this.tabPage18.Size = new System.Drawing.Size(200, 60);
+            this.tabPage18.Size = new System.Drawing.Size(760, 864);
             this.tabPage18.TabIndex = 3;
             this.tabPage18.Text = "测试出料流程";
             // 
@@ -24448,7 +24452,7 @@
             this.tabPage3.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage3.Location = new System.Drawing.Point(0, 40);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(200, 60);
+            this.tabPage3.Size = new System.Drawing.Size(1893, 904);
             this.tabPage3.TabIndex = 3;
             this.tabPage3.Text = "初始点位";
             // 
@@ -24470,7 +24474,7 @@
             this.uiTabControl2.Name = "uiTabControl2";
             this.uiTabControl2.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl2.SelectedIndex = 0;
-            this.uiTabControl2.Size = new System.Drawing.Size(200, 60);
+            this.uiTabControl2.Size = new System.Drawing.Size(1893, 904);
             this.uiTabControl2.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl2.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl2.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -24494,7 +24498,7 @@
             this.tabPage7.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage7.Location = new System.Drawing.Point(0, 40);
             this.tabPage7.Name = "tabPage7";
-            this.tabPage7.Size = new System.Drawing.Size(200, 20);
+            this.tabPage7.Size = new System.Drawing.Size(1893, 864);
             this.tabPage7.TabIndex = 0;
             this.tabPage7.Tag = "";
             this.tabPage7.Text = "入料手臂";
@@ -26433,7 +26437,7 @@
             this.tabPage8.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage8.Location = new System.Drawing.Point(0, 40);
             this.tabPage8.Name = "tabPage8";
-            this.tabPage8.Size = new System.Drawing.Size(200, 60);
+            this.tabPage8.Size = new System.Drawing.Size(1893, 864);
             this.tabPage8.TabIndex = 1;
             this.tabPage8.Tag = "";
             this.tabPage8.Text = "出料手臂";
@@ -28775,7 +28779,7 @@
             this.tabPage9.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage9.Location = new System.Drawing.Point(0, 40);
             this.tabPage9.Name = "tabPage9";
-            this.tabPage9.Size = new System.Drawing.Size(200, 60);
+            this.tabPage9.Size = new System.Drawing.Size(1893, 864);
             this.tabPage9.TabIndex = 2;
             this.tabPage9.Tag = "";
             this.tabPage9.Text = "测试手臂";
@@ -30021,7 +30025,7 @@
             this.tabPage16.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage16.Location = new System.Drawing.Point(0, 40);
             this.tabPage16.Name = "tabPage16";
-            this.tabPage16.Size = new System.Drawing.Size(200, 60);
+            this.tabPage16.Size = new System.Drawing.Size(1893, 864);
             this.tabPage16.TabIndex = 3;
             this.tabPage16.Tag = "";
             this.tabPage16.Text = "梭车";
@@ -30368,7 +30372,7 @@
             this.tabPage17.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage17.Location = new System.Drawing.Point(0, 40);
             this.tabPage17.Name = "tabPage17";
-            this.tabPage17.Size = new System.Drawing.Size(200, 60);
+            this.tabPage17.Size = new System.Drawing.Size(1893, 864);
             this.tabPage17.TabIndex = 4;
             this.tabPage17.Text = "抓盘手臂";
             // 
@@ -30813,7 +30817,7 @@
             this.tabPage4.Controls.Add(this.uiTitlePanel26);
             this.tabPage4.Location = new System.Drawing.Point(0, 40);
             this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(200, 60);
+            this.tabPage4.Size = new System.Drawing.Size(1893, 864);
             this.tabPage4.TabIndex = 5;
             this.tabPage4.Text = "顶盘手臂";
             // 
@@ -32801,17 +32805,6 @@
             this.uiRadioButton3.Text = "自定义2";
             this.uiRadioButton3.Click += new System.EventHandler(this.uiRadioButton3_Click_1);
             // 
-            // defalut32
-            // 
-            this.defalut32.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.defalut32.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.defalut32.Font = new System.Drawing.Font("微软雅黑", 12F);
-            this.defalut32.Location = new System.Drawing.Point(114, 12);
-            this.defalut32.Margin = new System.Windows.Forms.Padding(5);
-            this.defalut32.Name = "defalut32";
-            this.defalut32.Size = new System.Drawing.Size(467, 403);
-            this.defalut32.TabIndex = 358;
-            // 
             // panel19
             // 
             this.panel19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -32835,13 +32828,6 @@
             this.uiRadioButton1.Text = "默认";
             this.uiRadioButton1.Click += new System.EventHandler(this.uiRadioButton3_Click);
             // 
-            // defalut11
-            // 
-            this.defalut11.Location = new System.Drawing.Point(114, 12);
-            this.defalut11.Name = "defalut11";
-            this.defalut11.Size = new System.Drawing.Size(467, 403);
-            this.defalut11.TabIndex = 355;
-            // 
             // panel18
             // 
             this.panel18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -32851,17 +32837,6 @@
             this.panel18.Name = "panel18";
             this.panel18.Size = new System.Drawing.Size(594, 429);
             this.panel18.TabIndex = 359;
-            // 
-            // defalut21
-            // 
-            this.defalut21.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            this.defalut21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.defalut21.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.defalut21.Location = new System.Drawing.Point(111, 12);
-            this.defalut21.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
-            this.defalut21.Name = "defalut21";
-            this.defalut21.Size = new System.Drawing.Size(467, 403);
-            this.defalut21.TabIndex = 354;
             // 
             // uiRadioButton2
             // 
@@ -32875,6 +32850,63 @@
             this.uiRadioButton2.TabIndex = 353;
             this.uiRadioButton2.Text = "自定义1";
             this.uiRadioButton2.Click += new System.EventHandler(this.uiRadioButton2_Click);
+            // 
+            // defalut32
+            // 
+            this.defalut32.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.defalut32.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.defalut32.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.defalut32.Location = new System.Drawing.Point(114, 12);
+            this.defalut32.Margin = new System.Windows.Forms.Padding(5);
+            this.defalut32.Name = "defalut32";
+            this.defalut32.Size = new System.Drawing.Size(467, 403);
+            this.defalut32.TabIndex = 358;
+            // 
+            // defalut11
+            // 
+            this.defalut11.Location = new System.Drawing.Point(114, 12);
+            this.defalut11.Name = "defalut11";
+            this.defalut11.Size = new System.Drawing.Size(467, 403);
+            this.defalut11.TabIndex = 355;
+            // 
+            // defalut21
+            // 
+            this.defalut21.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.defalut21.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.defalut21.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.defalut21.Location = new System.Drawing.Point(111, 12);
+            this.defalut21.Margin = new System.Windows.Forms.Padding(6, 5, 6, 5);
+            this.defalut21.Name = "defalut21";
+            this.defalut21.Size = new System.Drawing.Size(467, 403);
+            this.defalut21.TabIndex = 354;
+            // 
+            // uiButton43
+            // 
+            this.uiButton43.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton43.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton43.Location = new System.Drawing.Point(98, 283);
+            this.uiButton43.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton43.Name = "uiButton43";
+            this.uiButton43.RectColor = System.Drawing.Color.White;
+            this.uiButton43.Size = new System.Drawing.Size(82, 30);
+            this.uiButton43.TabIndex = 433;
+            this.uiButton43.Text = "结批";
+            this.uiButton43.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton43.Visible = false;
+            // 
+            // uiButton44
+            // 
+            this.uiButton44.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton44.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton44.Location = new System.Drawing.Point(10, 283);
+            this.uiButton44.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton44.Name = "uiButton44";
+            this.uiButton44.RectColor = System.Drawing.Color.White;
+            this.uiButton44.Size = new System.Drawing.Size(82, 30);
+            this.uiButton44.TabIndex = 432;
+            this.uiButton44.Text = "归零";
+            this.uiButton44.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton44.Visible = false;
             // 
             // _setting
             // 
@@ -35450,18 +35482,18 @@
         private Sunny.UI.UIComboBox uiComboBox37;
         private Sunny.UI.UIComboBox uiComboBox36;
         private System.Windows.Forms.Label label842;
-        private Sunny.UI.UITextBox uiTextBox9;
+        private Sunny.UI.UITextBox uitxt_tcpport1;
         private System.Windows.Forms.Label label796;
         public System.Windows.Forms.Label label795;
         public System.Windows.Forms.Label label853;
-        private Sunny.UI.UITextBox uiTextBox17;
-        private Sunny.UI.UITextBox uiTextBox13;
-        private Sunny.UI.UITextBox uiTextBox18;
-        private Sunny.UI.UITextBox uiTextBox11;
-        private Sunny.UI.UITextBox uiTextBox19;
-        private Sunny.UI.UITextBox uiTextBox14;
-        private Sunny.UI.UITextBox uiTextBox20;
-        private Sunny.UI.UITextBox uiTextBox10;
+        private Sunny.UI.UITextBox uitxt_tcpport16;
+        private Sunny.UI.UITextBox uitxt_tcpport8;
+        private Sunny.UI.UITextBox uitxt_tcpport12;
+        private Sunny.UI.UITextBox uitxt_tcpport4;
+        private Sunny.UI.UITextBox uitxt_tcpport14;
+        private Sunny.UI.UITextBox uitxt_tcpport6;
+        private Sunny.UI.UITextBox uitxt_tcpport10;
+        private Sunny.UI.UITextBox uitxt_tcpport2;
         private System.Windows.Forms.Label label825;
         private System.Windows.Forms.Label label806;
         private System.Windows.Forms.Label label826;
@@ -35470,19 +35502,19 @@
         private System.Windows.Forms.Label label807;
         private System.Windows.Forms.Label label828;
         private System.Windows.Forms.Label label797;
-        private Sunny.UI.UITextBox uiTextBox21;
-        private Sunny.UI.UITextBox uiTextBox15;
-        private Sunny.UI.UITextBox uiTextBox22;
-        private Sunny.UI.UITextBox uiTextBox12;
+        private Sunny.UI.UITextBox uitxt_tcpport15;
+        private Sunny.UI.UITextBox uitxt_tcpport7;
+        private Sunny.UI.UITextBox uitxt_tcpport11;
+        private Sunny.UI.UITextBox uitxt_tcpport3;
         private System.Windows.Forms.Label label849;
         private System.Windows.Forms.Label label823;
         private System.Windows.Forms.Label label850;
         private System.Windows.Forms.Label label805;
-        private Sunny.UI.UITextBox uiTextBox23;
-        private Sunny.UI.UITextBox uiTextBox16;
+        private Sunny.UI.UITextBox uitxt_tcpport13;
+        private Sunny.UI.UITextBox uitxt_tcpport5;
         private System.Windows.Forms.Label label851;
         private System.Windows.Forms.Label label824;
-        private Sunny.UI.UITextBox uiTextBox24;
+        private Sunny.UI.UITextBox uitxt_tcpport9;
         private System.Windows.Forms.Label label852;
         private Sunny.UI.UITextBox uiTextBox7;
         private System.Windows.Forms.Label label793;
@@ -35568,5 +35600,7 @@
         private System.Windows.Forms.Label label699;
         private System.Windows.Forms.Label label700;
         private System.Windows.Forms.NumericUpDown numericUpDown199;
+        private Sunny.UI.UIButton uiButton43;
+        private Sunny.UI.UIButton uiButton44;
     }
 }

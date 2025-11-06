@@ -132,7 +132,6 @@ namespace H5509_alarm
         bool light = true;
         private void timer_light_Tick(object sender, EventArgs e)
         {
-
             if (r) motionEx.SetDo("Y012_红灯", light);
             if (y) motionEx.SetDo("Y013_黄灯", light);
             if (g) motionEx.SetDo("Y014_绿灯", light);
@@ -201,8 +200,7 @@ namespace H5509_alarm
                 }
             }
 
-            if (light) light = false;
-            else light = true;
+            light = !light;
         }
 
 

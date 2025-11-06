@@ -172,14 +172,17 @@ namespace H5509_V2
 
         public void 刷新串口(object sender, MouseEventArgs e)
         {
-            UIComboBox uICombox = sender as UIComboBox;
-            string Text = uICombox.Text;
-            if (e.Button == MouseButtons.Left)
+            if (uiCheckBox166.Checked)
             {
-                uICombox.DataSource = SerialPort.GetPortNames();
-                uICombox.DisplayMember = "String";
-                //uiComboBox11.Text = 设置信息.测试机信息.串口号;
-                uICombox.Text = Text;
+                UIComboBox uICombox = sender as UIComboBox;
+                string Text = uICombox.Text;
+                if (e.Button == MouseButtons.Left)
+                {
+                    uICombox.DataSource = SerialPort.GetPortNames();
+                    uICombox.DisplayMember = "String";
+                    //uiComboBox11.Text = 设置信息.测试机信息.串口号;
+                    uICombox.Text = Text;
+                }
             }
         }
 
@@ -5369,52 +5372,8 @@ namespace H5509_V2
             }
         }
 
-        private void 获取串口信息(out string[] jsons)
+        private void 获取串口配置(string[] coms, out string[] jsons)
         {
-            string 通讯方式 = uiCheckBox166.Checked ? "COM" : uiCheckBox167.Checked ? "TCP" : uiCheckBox168.Checked ? "LAN" : uiCheckBox169.Checked ? "GPIB" : "COM";
-            int 测试机数量 = uiCheckBox158.Checked ? 1 : uiCheckBox159.Checked ? 4 : uiCheckBox161.Checked ? 8 : uiCheckBox160.Checked ? 16 : 1;
-
-            string[] coms = new string[16];
-
-            if (测试机数量 == 1)
-            {
-                for (int i = 0; i < coms.Length; i++)
-                {
-                    coms[i] = uiComboBox39.Text;
-                }
-
-            }
-            else if (测试机数量 == 4)
-            {
-                string[] coms2 = { uiComboBox39.Text, uiComboBox35.Text, uiComboBox47.Text, uiComboBox43.Text };
-                for (int i = 0; i < coms2.Length; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        coms[i * 4 + j] = coms2[i];
-                    }
-                }
-            }
-            else if (测试机数量 == 8)
-            {
-                string[] coms3 = { uiComboBox39.Text, uiComboBox37.Text, uiComboBox35.Text, uiComboBox33.Text, uiComboBox47.Text, uiComboBox45.Text, uiComboBox43.Text, uiComboBox41.Text };
-                for (int i = 0; i < coms3.Length; i++)
-                {
-                    for (int j = 0; j < 2; j++)
-                    {
-                        coms[i * 2 + j] = coms3[i];
-                    }
-                }
-            }
-            else if (测试机数量 == 16)
-            {
-                string[] coms4 = { uiComboBox39.Text, uiComboBox38.Text, uiComboBox37.Text, uiComboBox36.Text, uiComboBox35.Text, uiComboBox34.Text, uiComboBox33.Text, uiComboBox32.Text, uiComboBox47.Text, uiComboBox46.Text, uiComboBox45.Text, uiComboBox44.Text, uiComboBox43.Text, uiComboBox42.Text, uiComboBox41.Text, uiComboBox40.Text };
-                for (int i = 0; i < coms4.Length; i++)
-                {
-                    coms[i] = coms4[i];
-                }
-            }
-
             int baudRate = Convert.ToInt32(uiComboBox50.Text);
             int dataBits = Convert.ToInt32(uiComboBox49.Text);
             StopBits stopBits = (StopBits)Enum.Parse(typeof(StopBits), uiComboBox48.Text);
@@ -5435,6 +5394,145 @@ namespace H5509_V2
                 jsons[i] = System.Text.Json.JsonSerializer.Serialize(config);
                 //sites.Add(new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", coms[i] }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } } );
             }
+        }
+
+        private void 获取TCP配置(string[] coms, string[] ports, out string[] jsons)
+        {
+            jsons = new string[coms.Length];
+            for (int i = 0; i < coms.Length; i++)
+            {
+                var config = new IEtherNetConfig
+                {
+                    Protocol = "TCP",
+                    PortName = coms[i],
+                    Port = Convert.ToInt32(ports[i]),
+                };
+                // 序列化为JSON
+                jsons[i] = System.Text.Json.JsonSerializer.Serialize(config);
+                //sites.Add(new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", coms[i] }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } } );
+            }
+        }
+
+        private void 检查输入TCP配置()
+        {
+            if (uiComboBox39.Enabled)
+            {
+
+            }
+        }
+
+        private void 检查输入串口配置()
+        {
+        }
+
+        private void 检查输入数据配置()
+        {
+            if (uiCheckBox166.Checked)
+            {
+                检查输入串口配置();
+            }
+            else if (uiCheckBox167.Checked)
+            {
+                检查输入TCP配置();
+            }
+        }
+
+        private void 获取通讯信息(out string[] jsons)
+        {
+            string 通讯方式 = uiCheckBox166.Checked ? "COM" : uiCheckBox167.Checked ? "TCP" : uiCheckBox168.Checked ? "LAN" : uiCheckBox169.Checked ? "GPIB" : "COM";
+            int 测试机数量 = uiCheckBox158.Checked ? 1 : uiCheckBox159.Checked ? 4 : uiCheckBox161.Checked ? 8 : uiCheckBox160.Checked ? 16 : 1;
+
+            string[] coms = new string[16];
+            string[] ports = new string[16];
+
+            if (测试机数量 == 1)
+            {
+                for (int i = 0; i < coms.Length; i++)
+                {
+                    coms[i] = uiComboBox39.Text;
+                    ports[i] = uitxt_tcpport1.Text;
+                }
+
+            }
+            else if (测试机数量 == 4)
+            {
+                string[] coms2 = { uiComboBox39.Text, uiComboBox35.Text, uiComboBox47.Text, uiComboBox43.Text };
+                string[] ports2 = { uitxt_tcpport1.Text, uitxt_tcpport5.Text, uitxt_tcpport9.Text, uitxt_tcpport13.Text };
+                for (int i = 0; i < coms2.Length; i++)
+                {
+                    for (int j = 0; j < 4; j++)
+                    {
+                        coms[i * 4 + j] = coms2[i];
+                        ports[i * 4 + j] = ports2[i];
+                    }
+                }
+            }
+            else if (测试机数量 == 8)
+            {
+                string[] coms3 = { uiComboBox39.Text, uiComboBox37.Text, uiComboBox35.Text, uiComboBox33.Text, uiComboBox47.Text, uiComboBox45.Text, uiComboBox43.Text, uiComboBox41.Text };
+                string[] ports3 = { uitxt_tcpport1.Text, uitxt_tcpport3.Text, uitxt_tcpport5.Text, uitxt_tcpport7.Text, uitxt_tcpport9.Text, uitxt_tcpport11.Text, uitxt_tcpport13.Text, uitxt_tcpport15.Text };
+                for (int i = 0; i < coms3.Length; i++)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        coms[i * 2 + j] = coms3[i];
+                        ports[i * 2 + j] = ports3[i];
+                    }
+                }
+            }
+            else if (测试机数量 == 16)
+            {
+                string[] coms4 = { uiComboBox39.Text, uiComboBox38.Text, uiComboBox37.Text, uiComboBox36.Text, uiComboBox35.Text, uiComboBox34.Text, uiComboBox33.Text, uiComboBox32.Text, uiComboBox47.Text, uiComboBox46.Text, uiComboBox45.Text, uiComboBox44.Text, uiComboBox43.Text, uiComboBox42.Text, uiComboBox41.Text, uiComboBox40.Text };
+                string[] ports4 = { uitxt_tcpport1.Text, uitxt_tcpport2.Text, uitxt_tcpport3.Text, uitxt_tcpport4.Text, uitxt_tcpport5.Text, uitxt_tcpport6.Text, uitxt_tcpport7.Text, uitxt_tcpport8.Text, uitxt_tcpport9.Text, uitxt_tcpport10.Text, uitxt_tcpport11.Text, uitxt_tcpport12.Text, uitxt_tcpport13.Text, uitxt_tcpport14.Text, uitxt_tcpport15.Text, uitxt_tcpport16.Text };
+                for (int i = 0; i < coms4.Length; i++)
+                {
+                    coms[i] = coms4[i];
+                    ports[i] = ports4[i];
+                }
+            }
+
+            if (通讯方式 == "COM")
+            {
+                获取串口配置(coms, out jsons);
+            }
+            else if (通讯方式 == "TCP")
+            {
+                获取TCP配置(coms, ports, out jsons);
+            }
+            else if (通讯方式 == "LAN")
+            {
+                获取串口配置(coms, out jsons);
+            }
+            else if (通讯方式 == "GPIB")
+            {
+                获取串口配置(coms, out jsons);
+            }
+            else
+            {
+                获取串口配置(coms, out jsons);
+            }
+
+
+            //int baudRate = Convert.ToInt32(uiComboBox50.Text);
+            //int dataBits = Convert.ToInt32(uiComboBox49.Text);
+            //StopBits stopBits = (StopBits)Enum.Parse(typeof(StopBits), uiComboBox48.Text);
+            //Parity parity = (Parity)Enum.Parse(typeof(Parity), uiComboBox51.Text);
+            //jsons = new string[coms.Length];
+            //for (int i = 0; i < coms.Length; i++)
+            //{
+            //    var config = new SerialPortConfig
+            //    {
+            //        Protocol = "COM",
+            //        PortName = coms[i],
+            //        BaudRate = baudRate,
+            //        Parity = parity,
+            //        DataBits = dataBits,
+            //        StopBits = stopBits,
+            //    };
+            //    // 序列化为JSON
+            //    jsons[i] = System.Text.Json.JsonSerializer.Serialize(config);
+            //    //sites.Add(new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", coms[i] }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } } );
+            //}
 
             //var site1 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", coms[0] }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
             //var site2 = new Dictionary<string, object>() { { "Protocol", "COM" }, { "PortName", "COM11" }, { "BaudRate", baudRate }, { "DataBits", dataBits }, { "StopBits", stopBits }, { "Parity", parity } };
@@ -5462,6 +5560,8 @@ namespace H5509_V2
                 string name = uiDataGridView4.Rows[rows].Cells[1].Value.ToString();
                 try
                 {
+
+
                     DialogResult issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (issave == DialogResult.OK)
                     {
@@ -5471,7 +5571,7 @@ namespace H5509_V2
                             MessageBox.Show("保存失败!" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             return;
                         }
-                        获取串口信息(out string[] jsons);
+                        获取通讯信息(out string[] jsons);
 
 
                         ComInfoSet newComset = new ComInfoSet();
@@ -9018,11 +9118,11 @@ namespace H5509_V2
 
             //if (isstart)
             //{
-                Auto1TrayClear(true, true);
-                Auto2TrayClear(true, true);
-                Fix1TrayClear(true, true);
-                Fix2TrayClear(true, true);
-                Fix3TrayClear(true, true);
+            Auto1TrayClear(true, true);
+            Auto2TrayClear(true, true);
+            Fix1TrayClear(true, true);
+            Fix2TrayClear(true, true);
+            Fix3TrayClear(true, true);
 
             for (int i = 0; i < Auto1XPoint.Length; i++)
             {
@@ -9380,6 +9480,7 @@ namespace H5509_V2
                         }
                         RunLog("InSiteQueue=" + binsaves);
                     }
+                    else RunLog("InSiteQueue=" + binsaves);
                 }
                 else RunLog("InSiteQueue=null");
 
@@ -9396,6 +9497,7 @@ namespace H5509_V2
                         }
                         RunLog("OutSiteQueue=" + binsaves);
                     }
+                    else RunLog("OutSiteQueue=" + binsaves);
                 }
                 else RunLog("OutSiteQueue=null");
 
@@ -10105,22 +10207,22 @@ namespace H5509_V2
             uiComboBox41.Enabled = testNum == 8 || testNum == 16;
             uiComboBox40.Enabled = testNum == 16;
 
-            uiTextBox9.Enabled = showport;
-            uiTextBox10.Enabled = showport && testNum == 16;
-            uiTextBox12.Enabled = showport && (testNum == 8 || testNum == 16);
-            uiTextBox11.Enabled = showport && testNum == 16;
-            uiTextBox16.Enabled = showport && testNum != 1;
-            uiTextBox14.Enabled = showport && testNum == 16;
-            uiTextBox15.Enabled = showport && (testNum == 8 || testNum == 16);
-            uiTextBox13.Enabled = showport && testNum == 16;
-            uiTextBox24.Enabled = showport && testNum != 1;
-            uiTextBox20.Enabled = showport && testNum == 16;
-            uiTextBox22.Enabled = showport && (testNum == 8 || testNum == 16);
-            uiTextBox18.Enabled = showport && testNum == 16;
-            uiTextBox23.Enabled = showport && testNum != 1;
-            uiTextBox19.Enabled = showport && testNum == 16;
-            uiTextBox21.Enabled = showport && (testNum == 8 || testNum == 16);
-            uiTextBox17.Enabled = showport && testNum == 16;
+            uitxt_tcpport1.Enabled = showport;
+            uitxt_tcpport2.Enabled = showport && testNum == 16;
+            uitxt_tcpport3.Enabled = showport && (testNum == 8 || testNum == 16);
+            uitxt_tcpport4.Enabled = showport && testNum == 16;
+            uitxt_tcpport5.Enabled = showport && testNum != 1;
+            uitxt_tcpport6.Enabled = showport && testNum == 16;
+            uitxt_tcpport7.Enabled = showport && (testNum == 8 || testNum == 16);
+            uitxt_tcpport8.Enabled = showport && testNum == 16;
+            uitxt_tcpport9.Enabled = showport && testNum != 1;
+            uitxt_tcpport10.Enabled = showport && testNum == 16;
+            uitxt_tcpport11.Enabled = showport && (testNum == 8 || testNum == 16);
+            uitxt_tcpport12.Enabled = showport && testNum == 16;
+            uitxt_tcpport13.Enabled = showport && testNum != 1;
+            uitxt_tcpport14.Enabled = showport && testNum == 16;
+            uitxt_tcpport15.Enabled = showport && (testNum == 8 || testNum == 16);
+            uitxt_tcpport16.Enabled = showport && testNum == 16;
 
             uiComboBox50.Enabled = testType == "COM";
             uiComboBox51.Enabled = testType == "COM";

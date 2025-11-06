@@ -262,6 +262,7 @@ namespace H5509_V2
                     {
                         if (testDataInfos[sites[i]].SiteTestState == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                         {
+                            testDataInfos[sites[i]].Iswaitout = false;
                             testDataInfos[sites[i]].SiteTestBin = new string[] { bins[i][0], bins[i][1], bins[i][2], bins[i][3], bins[i][4], bins[i][5], bins[i][6], bins[i][7] };
 
                             testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
@@ -344,6 +345,7 @@ namespace H5509_V2
                                 {
                                     if (testDataInfos[sites[i]].SiteTestState == 2) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                                     {
+                                        testDataInfos[sites[i]].Iswaitout = false;
                                         testDataInfos[sites[i]].SiteTestBin = new string[] { bins[i][0], bins[i][1], bins[i][2], bins[i][3], bins[i][4], bins[i][5], bins[i][6], bins[i][7] };
 
                                         testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
@@ -399,6 +401,7 @@ namespace H5509_V2
                             {
                                 testDataInfos[site].Listtimer.Stop();
                                 testDataInfos[site].timeOutTimer.Stop();
+                                testDataInfos[site].Iswaitout = false;
 
                                 testDataInfos[site].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
 
@@ -422,6 +425,7 @@ namespace H5509_V2
                                 testDataInfos[site].Listtimer.Stop();
                                 testDataInfos[site].timeOutTimer.Stop();
 
+                                testDataInfos[site].Iswaitout = false;
                                 testDataInfos[site].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
 
                                 testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
@@ -611,6 +615,7 @@ namespace H5509_V2
                         testDataInfos[site].ListNoTestTimer.Start();
                         testDataInfos[site].listtestdatetime = DateTime.Now;
                         testDataInfos[site].SiteTestState = 2;
+                        testDataInfos[site].Iswaitout = false;
                     }
                     else //在线模式
                     {
@@ -635,6 +640,7 @@ namespace H5509_V2
                         testDataInfos[site].ListNoTestTimer.Start();
                         testDataInfos[site].listtestdatetime = DateTime.Now;
                         testDataInfos[site].SiteTestState = 2;
+                        testDataInfos[site].Iswaitout = false;
                     }
                     else //在线模式
                     {
@@ -673,7 +679,11 @@ namespace H5509_V2
 
                     for (int i = 0; i < states.Length; i++)
                     {
-                        if (states[i] == 1 || states[i] == 10) testDataInfos[StationId + i].SiteTestState = 2;
+                        if (states[i] == 1 || states[i] == 10)
+                        {
+                            testDataInfos[StationId + i].Iswaitout = false;
+                            testDataInfos[StationId + i].SiteTestState = 2;
+                        }
                         //if (states[0] == 1 || states[0] == 10) testDataInfos[StationId].SiteTestState = 2;
                         //if (states[1] == 1 || states[1] == 10) testDataInfos[StationId + 1].SiteTestState = 2;
                     }
@@ -710,7 +720,11 @@ namespace H5509_V2
 
                     for (int i = 0; i < states.Length; i++)
                     {
-                        if (states[i] == 1 || states[i] == 10) testDataInfos[StationId + i].SiteTestState = 2;
+                        if (states[i] == 1 || states[i] == 10)
+                        {
+                            testDataInfos[StationId + i].Iswaitout = false;
+                            testDataInfos[StationId + i].SiteTestState = 2;
+                        }
                         //if (states[0] == 1 || states[0] == 10) testDataInfos[StationId].SiteTestState = 2;
                         //if (states[1] == 1 || states[1] == 10) testDataInfos[StationId + 1].SiteTestState = 2;
                     }
@@ -898,6 +912,7 @@ namespace H5509_V2
                     {
                         string[] bin = GetBins(bins2);
 
+                        testDataInfos[sites[i]].Iswaitout = false;
                         testDataInfos[sites[i]].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
 
                         testDataInfos[sites[i]].SiteTestState = 3;
@@ -927,6 +942,7 @@ namespace H5509_V2
                     {
                         string[] bin = GetBins(bins2);
 
+                        testDataInfos[sites[i]].Iswaitout = false;
                         testDataInfos[sites[i]].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
 
                         testDataInfos[sites[i]].SiteTestState = 3;
@@ -950,6 +966,7 @@ namespace H5509_V2
                 RefreshInfoLog($"@TEST_DONE {site:D2} {bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}+", true);
                 //RunLog($"@TEST_DONE {site:D2} {bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}+", LogType.ComLog, true);
 
+                testDataInfos[site].Iswaitout = false;
                 testDataInfos[site].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
                 testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
                 testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;

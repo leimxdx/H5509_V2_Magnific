@@ -1051,7 +1051,7 @@ namespace H5509_V2
                 {
                     if (!修改前开Site更改[i] && 保存开Site更改[i])
                     {
-                        RunLog($"新开Site{i}");
+                        RunLog($"新开Site{i + 1}");
 
                         if (!InSiteQueue.Contains(i) //如果不在入料队列中
                                                      //&& !OutSiteQueue.Contains(i) //不在出料队列中
@@ -1061,7 +1061,7 @@ namespace H5509_V2
                         //&& !正在吸取后入料.Contains(true)) //测试区有料待取走
                         {
                             InSiteQueue.Enqueue(i);
-                            RunLog($"InSiteQueue添加Site{i}");
+                            RunLog($"InSiteQueue添加Site{i + 1}");
                         }
                         else
                         {
@@ -1074,7 +1074,7 @@ namespace H5509_V2
                     }
                     else if (修改前开Site更改[i] && !保存开Site更改[i])
                     {
-                        RunLog($"新全关Site{i}");
+                        RunLog($"新全关Site{i + 1}");
                     }
                 }
             }
@@ -2901,111 +2901,113 @@ namespace H5509_V2
 
         private void label147_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("点击成功");
-            string binssss = string.Join(",", Auto1);
-            binssss += ("," + string.Join(",", Auto2));
-            if (Fix1.Length != 0) binssss += "," + string.Join(",", Fix1);
-            if (Fix2.Length != 0) binssss += "," + string.Join(",", Fix2);
-            if (Fix3.Length != 0) binssss += "," + string.Join(",", Fix3);
+            //Console.WriteLine("点击成功");
+            //string binssss = string.Join(",", Auto1);
+            //binssss += ("," + string.Join(",", Auto2));
+            //if (Fix1.Length != 0) binssss += "," + string.Join(",", Fix1);
+            //if (Fix2.Length != 0) binssss += "," + string.Join(",", Fix2);
+            //if (Fix3.Length != 0) binssss += "," + string.Join(",", Fix3);
 
-            //string binssss = "";
+            ////string binssss = "";
 
-            string[] binsss = binssss.Split(',');
+            //string[] binsss = binssss.Split(',');
 
-            ////string[] bin = GetBins(bins2);
-
-
-            for (int xx = 0; xx < 10; xx++)
-            {
-                for (int sitenum = 0; sitenum < 16; sitenum++)
-                {
-                    bool[] opens = new bool[] { true, true, true, true, true, true, true, true };
-                    string[] bins = GetRandomBin(binsss, 8);
-                    for (int i = 0; i < bins.Length; i++)
-                    {
-                        if (opens[i])
-                        {
-                            if (Auto1.Split(',').Contains(bins[i])) DoutAuto1Number[sitenum * 8 + i]++;
-                            else if (Auto2.Split(',').Contains(bins[i])) DoutAuto2Number[sitenum * 8 + i]++;
-                            else if (Fix1.Split(',').Contains(bins[i])) DoutFix1Number[sitenum * 8 + i]++;
-                            else if (Fix2.Split(',').Contains(bins[i])) DoutFix2Number[sitenum * 8 + i]++;
-                            else if (Fix3.Split(',').Contains(bins[i])) DoutFix3Number[sitenum * 8 + i]++;
-                            else
-                            {
-                                if (Auto1.Split(',').Contains("OTH")) DoutAuto1Number[sitenum * 8 + i]++;
-                                else if (Auto2.Split(',').Contains("OTH")) DoutAuto2Number[sitenum * 8 + i]++;
-                                else if (Fix1.Split(',').Contains("OTH")) DoutFix1Number[sitenum * 8 + i]++;
-                                else if (Fix2.Split(',').Contains("OTH")) DoutFix2Number[sitenum * 8 + i]++;
-                                else if (Fix3.Split(',').Contains("OTH")) DoutFix3Number[sitenum * 8 + i]++;
-                            }
-                            if (BIN项计数.ContainsKey(bins[i]))
-                            {
-                                BIN项计数[bins[i]][sitenum * 8 + i]++;
-                            }
-                            else
-                            {
-                                BIN项计数.Add(bins[i], new int[128]);
-                                BIN项计数[bins[i]][sitenum * 8 + i]++;
-                            }
-                        }
-                    }
-                    Thread.Sleep(10);
-                }
-            }
+            //////string[] bin = GetBins(bins2);
 
 
-            for (int i = 0; i < Auto1XPoint.Length; i++)
-            {
-                for (int j = 0; j < Auto1YPoint.Length; j++)
-                {
-                    Auto1DicPoint[$"{i},{j}"] = true;
-                    Auto1DicBin[$"{i},{j}"] = "Other";
-                    Auto1DicTestTime[$"{i},{j}"] = "132.3";
-                    Auto1DicLocation[$"{i},{j}"] = "12-3";
-                }
-            }
-            for (int i = 0; i < Auto2XPoint.Length; i++)
-            {
-                for (int j = 0; j < Auto2YPoint.Length; j++)
-                {
-                    Auto2DicPoint[$"{i},{j}"] = true;
-                    Auto2DicBin[$"{i},{j}"] = "OTH";
-                    Auto2DicTestTime[$"{i},{j}"] = "142.3";
-                    Auto2DicLocation[$"{i},{j}"] = "13-4";
-                }
-            }
-            for (int i = 0; i < Fix1XPoint.Length; i++)
-            {
-                for (int j = 0; j < Fix1YPoint.Length; j++)
-                {
-                    Fix1DicPoint[$"{i},{j}"] = true;
-                    Fix1DicBin[$"{i},{j}"] = "16-8";
-                    Fix1DicTestTime[$"{i},{j}"] = "132.3";
-                    Fix1DicLocation[$"{i},{j}"] = "9-5";
-                }
-            }
-            for (int i = 0; i < Fix2XPoint.Length; i++)
-            {
-                for (int j = 0; j < Fix2YPoint.Length; j++)
-                {
-                    Fix2DicPoint[$"{i},{j}"] = true;
-                    Fix2DicBin[$"{i},{j}"] = "9999";
-                    Fix2DicTestTime[$"{i},{j}"] = "11";
-                    Fix2DicLocation[$"{i},{j}"] = "1-6";
-                }
-            }
-            for (int i = 0; i < Fix3XPoint.Length; i++)
-            {
-                for (int j = 0; j < Fix3YPoint.Length; j++)
-                {
-                    Fix3DicPoint[$"{i},{j}"] = true;
-                    Fix3DicBin[$"{i},{j}"] = "20A";
-                    Fix3DicTestTime[$"{i},{j}"] = "32.3";
-                    Fix3DicLocation[$"{i},{j}"] = "16-7";
-                }
-            }
-            Summary_LotNo = (LotNo[0] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
-            Summary(3, null, GetEndLotData());
+            //for (int xx = 0; xx < 10; xx++)
+            //{
+            //    for (int sitenum = 0; sitenum < 16; sitenum++)
+            //    {
+            //        bool[] opens = new bool[] { true, true, true, true, true, true, true, true };
+            //        string[] bins = GetRandomBin(binsss, 8);
+            //        for (int i = 0; i < bins.Length; i++)
+            //        {
+            //            if (opens[i])
+            //            {
+            //                if (Auto1.Split(',').Contains(bins[i])) DoutAuto1Number[sitenum * 8 + i]++;
+            //                else if (Auto2.Split(',').Contains(bins[i])) DoutAuto2Number[sitenum * 8 + i]++;
+            //                else if (Fix1.Split(',').Contains(bins[i])) DoutFix1Number[sitenum * 8 + i]++;
+            //                else if (Fix2.Split(',').Contains(bins[i])) DoutFix2Number[sitenum * 8 + i]++;
+            //                else if (Fix3.Split(',').Contains(bins[i])) DoutFix3Number[sitenum * 8 + i]++;
+            //                else
+            //                {
+            //                    if (Auto1.Split(',').Contains("OTH")) DoutAuto1Number[sitenum * 8 + i]++;
+            //                    else if (Auto2.Split(',').Contains("OTH")) DoutAuto2Number[sitenum * 8 + i]++;
+            //                    else if (Fix1.Split(',').Contains("OTH")) DoutFix1Number[sitenum * 8 + i]++;
+            //                    else if (Fix2.Split(',').Contains("OTH")) DoutFix2Number[sitenum * 8 + i]++;
+            //                    else if (Fix3.Split(',').Contains("OTH")) DoutFix3Number[sitenum * 8 + i]++;
+            //                }
+            //                if (BIN项计数.ContainsKey(bins[i]))
+            //                {
+            //                    BIN项计数[bins[i]][sitenum * 8 + i]++;
+            //                }
+            //                else
+            //                {
+            //                    BIN项计数.Add(bins[i], new int[128]);
+            //                    BIN项计数[bins[i]][sitenum * 8 + i]++;
+            //                }
+            //            }
+            //        }
+            //        Thread.Sleep(10);
+            //    }
+            //}
+
+
+            //for (int i = 0; i < Auto1XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Auto1YPoint.Length; j++)
+            //    {
+            //        Auto1DicPoint[$"{i},{j}"] = true;
+            //        Auto1DicBin[$"{i},{j}"] = "Other";
+            //        Auto1DicTestTime[$"{i},{j}"] = "132.3";
+            //        Auto1DicLocation[$"{i},{j}"] = "12-3";
+            //    }
+            //}
+            //for (int i = 0; i < Auto2XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Auto2YPoint.Length; j++)
+            //    {
+            //        Auto2DicPoint[$"{i},{j}"] = true;
+            //        Auto2DicBin[$"{i},{j}"] = "OTH";
+            //        Auto2DicTestTime[$"{i},{j}"] = "142.3";
+            //        Auto2DicLocation[$"{i},{j}"] = "13-4";
+            //    }
+            //}
+            //for (int i = 0; i < Fix1XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Fix1YPoint.Length; j++)
+            //    {
+            //        Fix1DicPoint[$"{i},{j}"] = true;
+            //        Fix1DicBin[$"{i},{j}"] = "16-8";
+            //        Fix1DicTestTime[$"{i},{j}"] = "132.3";
+            //        Fix1DicLocation[$"{i},{j}"] = "9-5";
+            //    }
+            //}
+            //for (int i = 0; i < Fix2XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Fix2YPoint.Length; j++)
+            //    {
+            //        Fix2DicPoint[$"{i},{j}"] = true;
+            //        Fix2DicBin[$"{i},{j}"] = "9999";
+            //        Fix2DicTestTime[$"{i},{j}"] = "11";
+            //        Fix2DicLocation[$"{i},{j}"] = "1-6";
+            //    }
+            //}
+            //for (int i = 0; i < Fix3XPoint.Length; i++)
+            //{
+            //    for (int j = 0; j < Fix3YPoint.Length; j++)
+            //    {
+            //        Fix3DicPoint[$"{i},{j}"] = true;
+            //        Fix3DicBin[$"{i},{j}"] = "20A";
+            //        Fix3DicTestTime[$"{i},{j}"] = "32.3";
+            //        Fix3DicLocation[$"{i},{j}"] = "16-7";
+            //    }
+            //}
+            //Summary_LotNo = (LotNo[0] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+            //Summary(3, null, GetEndLotData());
+
+
             //int sitenum = 1;
             //bool[][] open = new bool[][] { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
             //string[] bins = { "B1", "B1", "B1", "B1", "92", "92", "92", "92" };

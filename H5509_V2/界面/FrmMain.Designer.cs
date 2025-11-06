@@ -40,6 +40,8 @@
             this.MainPanel = new System.Windows.Forms.Panel();
             this.label25 = new System.Windows.Forms.Label();
             this.lbl_currenttime = new System.Windows.Forms.Label();
+            this.uiButton1 = new Sunny.UI.UIButton();
+            this.uiButton2 = new Sunny.UI.UIButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -198,12 +200,44 @@
             this.lbl_currenttime.Text = "2025/10/23 21:17:13";
             this.lbl_currenttime.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // uiButton1
+            // 
+            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton1.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton1.Location = new System.Drawing.Point(1114, 12);
+            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton1.Name = "uiButton1";
+            this.uiButton1.RectColor = System.Drawing.Color.White;
+            this.uiButton1.Size = new System.Drawing.Size(82, 30);
+            this.uiButton1.TabIndex = 430;
+            this.uiButton1.Text = "开始";
+            this.uiButton1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton1.Visible = false;
+            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
+            // 
+            // uiButton2
+            // 
+            this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton2.Font = new System.Drawing.Font("微软雅黑", 12F);
+            this.uiButton2.Location = new System.Drawing.Point(1202, 12);
+            this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
+            this.uiButton2.Name = "uiButton2";
+            this.uiButton2.RectColor = System.Drawing.Color.White;
+            this.uiButton2.Size = new System.Drawing.Size(82, 30);
+            this.uiButton2.TabIndex = 431;
+            this.uiButton2.Text = "暂停";
+            this.uiButton2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton2.Visible = false;
+            this.uiButton2.Click += new System.EventHandler(this.uiButton2_Click);
+            // 
             // ForMain
             // 
             this.AllowShowTitle = false;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.ControlBoxFillHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(63)))));
+            this.Controls.Add(this.uiButton2);
+            this.Controls.Add(this.uiButton1);
             this.Controls.Add(this.lbl_currenttime);
             this.Controls.Add(this.MainPanel);
             this.Controls.Add(this.pictureBox1);
@@ -247,6 +281,8 @@
         private System.Windows.Forms.Panel MainPanel;
         private System.Windows.Forms.Label label25;
         private System.Windows.Forms.Label lbl_currenttime;
+        private Sunny.UI.UIButton uiButton1;
+        private Sunny.UI.UIButton uiButton2;
     }
 }
 
