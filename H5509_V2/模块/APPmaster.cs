@@ -1013,6 +1013,16 @@ namespace H5509_V2
 
         public static int Auto2满盘判断值 = 25000;
 
+        public static int Auto1换盘次数;
+
+        public static int Auto2换盘次数;
+
+        public static int Fix1换盘次数;
+
+        public static int Fix2换盘次数;
+
+        public static int Fix3换盘次数;
+
         public static int Auto1Tray盘数量;
 
         public static int Auto2Tray盘数量;
@@ -1238,6 +1248,34 @@ namespace H5509_V2
         public static int PS出料手臂放盘回零流程StepID = 505;
 
         public static bool PS出料手臂放盘回零流程Processing = false;
+
+        public static bool D测试手臂X移动到位;
+
+        public static bool D测试手臂Z正在移动;
+
+        public static bool D入料手臂正在移动;
+
+        public static bool D出料手臂正在移动;
+
+        public static double D测试手臂X目标位置记忆;
+
+        public static double D测试手臂Z目标位置记忆;
+
+        public static double D入料手臂X目标位置记忆;
+
+        public static double D入料手臂y目标位置记忆;
+
+        public static double D入料手臂p目标位置记忆;
+
+        public static double D出料手臂X目标位置记忆;
+
+        public static double D出料手臂y目标位置记忆;
+
+        public static double D出料手臂p目标位置记忆;
+
+        public static double D抓盘手臂X目标位置记忆;
+
+        public static double D梭车目标位置记忆;
 
         #region 按键参数
 
@@ -3231,39 +3269,72 @@ namespace H5509_V2
             switch (type)
             {
                 case 0: //Alarm.txt
-                    path += "//" + "Alarm.txt";
+                    path += "\\" + "Alarm.txt";
                     writeDataHelper.LotNoLog(path, info);
                     break;
 
                 case 1: //DutClose.txt
-                    path += "//" + "DutClose.txt";
+                    path += "\\" + "DutClose.txt";
                     writeDataHelper.LotNoLog(path, info);
                     break;
 
                 case 2: //Operation.txt
-                    path += "//" + "Operation.txt";
+                    path += "\\" + "Operation.txt";
                     writeDataHelper.LotNoLog(path, info);
                     break;
 
                 case 3: //Summary.txt
-                    path += "//" + "Summary.txt";
+                    path += "\\" + "Summary.txt";
                     writeDataHelper.WriteFileLog(path, info2);
                     break;
 
                 case 4: //TesterComm.txt
-                    path += "//" + "TesterComm.txt";
+                    path += "\\" + "TesterComm.txt";
                     writeDataHelper.LotNoLog(path, info);
                     break;
 
                 case 5: //ParameterSet.txt
-                    path += "//" + "ParameterSet.txt";
+                    path += "\\" + "ParameterSet.txt";
                     writeDataHelper.LotNoLog(path, info);
+                    break;
+
+                case 6: //Auto1-BIN1/第1/2/3盘/测试BIN-测试时间-测试工位
+                    //path +=
+                    break;
+
+                case 7: //Auto2-BIN2/第1/2/3盘/测试BIN-测试时间-测试工位
+                    break;
+
+                case 8: //Fix1-BIN3/第1/2/3盘/测试BIN-测试时间-测试工位
+                    break;
+
+                case 9: //Fix2-Timeout/第1/2/3盘/测试BIN-测试时间-测试工位
+                    break;
+
+                case 10: //Fix3-NA/第1/2/3盘/测试BIN-测试时间-测试工位
                     break;
 
                     ////还有很多
             }
 
             //string path = LotNoLog保存路径 + "\\" + datetime.Year + "_" + datetime.Month.ToString("D2");
+        }
+
+        public static void Summary_AFTrayMap(string tray, string traybin, string traycode, int traynum, string[] bin, string[] time, string[] point)
+        {
+            string path = "D:\\H5509Log\\Summary\\LotNoLog\\" + Summary_LotNo; //ProgramPath + "\\" + Summary_LotNo;
+
+            path += $"\\{tray}-{traybin}({traycode})\\{traynum}"; //$"\\AUTO1-{设置信息.分BIN信息.name1}({Auto1})\\{Auto1换盘次数}\\测试BIN.txt";
+
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+
+            writeDataHelper.WriteFileLog(path + "\\测试BIN.txt", bin);
+            writeDataHelper.WriteFileLog(path + "\\测试时间.txt", time);
+            writeDataHelper.WriteFileLog(path + "\\测试工位.txt", point);
+
         }
 
         public static void Summary(string path, string[] info)
@@ -4231,6 +4302,192 @@ namespace H5509_V2
                 }
             }
         }
+
+        public static void Auto1DataSave()
+        {
+            List<string> traybin = new List<string>();
+            List<string> traytime = new List<string>();
+            List<string> traypoint = new List<string>();
+
+            string temps = $" \t ";
+            string temps2 = "-----------------------";
+            for (int i = 0; i < Auto1XPoint.Length; i++)
+            {
+                temps += ($"\t{i + 1}");
+                temps2 += "-----------";
+            }
+            temps += "\r\n" + temps2;
+            traybin.Add(temps);
+            traytime.Add(temps);
+            traypoint.Add(temps);
+
+            for (int y = 0; y < Auto1YPoint.Length; y++)
+            {
+                string[] bin = new string[Auto1XPoint.Length];
+                string[] time = new string[Auto1XPoint.Length];
+                string[] point = new string[Auto1XPoint.Length];
+                for (int x = 0; x < Auto1XPoint.Length; x++)
+                {
+                    bin[x] = Auto1DicBin[$"{x},{y}"];
+                    time[x] = Auto1DicTestTime[$"{x},{y}"];
+                    point[x] = Auto1DicLocation[$"{x},{y}"];
+                }
+                traybin.Add($"{y + 1}\t|\t{string.Join("\t", bin)}");
+                traytime.Add($"{y + 1}\t|\t{string.Join("\t", time)}");
+                traypoint.Add($"{y + 1}\t|\t{string.Join("\t", point)}");
+            }
+
+            Summary_AFTrayMap("AUTO1", 设置信息.分BIN信息.name1, Auto1, Auto1换盘次数, traybin.ToArray(), traytime.ToArray(), traypoint.ToArray());
+        }
+
+        public static void Auto2DataSave()
+        {
+            List<string> traybin = new List<string>();
+            List<string> traytime = new List<string>();
+            List<string> traypoint = new List<string>();
+
+            string temps = $" \t ";
+            string temps2 = "-----------------------";
+            for (int i = 0; i < Auto2XPoint.Length; i++)
+            {
+                temps += ($"\t{i + 1}");
+                temps2 += "-----------";
+            }
+            temps += "\r\n" + temps2;
+            traybin.Add(temps);
+            traytime.Add(temps);
+            traypoint.Add(temps);
+
+            for (int y = 0; y < Auto2YPoint.Length; y++)
+            {
+                string[] bin = new string[Auto2XPoint.Length];
+                string[] time = new string[Auto2XPoint.Length];
+                string[] point = new string[Auto2XPoint.Length];
+                for (int x = 0; x < Auto2XPoint.Length; x++)
+                {
+                    bin[x] = Auto2DicBin[$"{x},{y}"];
+                    time[x] = Auto2DicTestTime[$"{x},{y}"];
+                    point[x] = Auto2DicLocation[$"{x},{y}"];
+                }
+                traybin.Add($"{y + 1}\t|\t{string.Join("\t", bin)}");
+                traytime.Add($"{y + 1}\t|\t{string.Join("\t", time)}");
+                traypoint.Add($"{y + 1}\t|\t{string.Join("\t", point)}");
+            }
+
+            Summary_AFTrayMap("AUTO2", 设置信息.分BIN信息.name2, Auto2, Auto2换盘次数, traybin.ToArray(), traytime.ToArray(), traypoint.ToArray());
+        }
+
+
+        public static void Fix1DataSave()
+        {
+            List<string> traybin = new List<string>();
+            List<string> traytime = new List<string>();
+            List<string> traypoint = new List<string>();
+
+            string temps = $" \t ";
+            string temps2 = "-----------------------";
+            for (int i = 0; i < Fix1XPoint.Length; i++)
+            {
+                temps += ($"\t{i + 1}");
+                temps2 += "-----------";
+            }
+            temps += "\r\n" + temps2;
+            traybin.Add(temps);
+            traytime.Add(temps);
+            traypoint.Add(temps);
+
+            for (int y = 0; y < Fix1YPoint.Length; y++)
+            {
+                string[] bin = new string[Fix1XPoint.Length];
+                string[] time = new string[Fix1XPoint.Length];
+                string[] point = new string[Fix1XPoint.Length];
+                for (int x = 0; x < Fix1XPoint.Length; x++)
+                {
+                    bin[x] = Fix1DicBin[$"{x},{y}"];
+                    time[x] = Fix1DicTestTime[$"{x},{y}"];
+                    point[x] = Fix1DicLocation[$"{x},{y}"];
+                }
+                traybin.Add($"{y + 1}\t|\t{string.Join("\t", bin)}");
+                traytime.Add($"{y + 1}\t|\t{string.Join("\t", time)}");
+                traypoint.Add($"{y + 1}\t|\t{string.Join("\t", point)}");
+            }
+
+            Summary_AFTrayMap("FIX1", 设置信息.分BIN信息.name3, Fix1, Fix1换盘次数, traybin.ToArray(), traytime.ToArray(), traypoint.ToArray());
+        }
+
+        public static void Fix2DataSave()
+        {
+            List<string> traybin = new List<string>();
+            List<string> traytime = new List<string>();
+            List<string> traypoint = new List<string>();
+
+            string temps = $" \t ";
+            string temps2 = "-----------------------";
+            for (int i = 0; i < Fix2XPoint.Length; i++)
+            {
+                temps += ($"\t{i + 1}");
+                temps2 += "-----------";
+            }
+            temps += "\r\n" + temps2;
+            traybin.Add(temps);
+            traytime.Add(temps);
+            traypoint.Add(temps);
+
+            for (int y = 0; y < Fix2YPoint.Length; y++)
+            {
+                string[] bin = new string[Fix2XPoint.Length];
+                string[] time = new string[Fix2XPoint.Length];
+                string[] point = new string[Fix2XPoint.Length];
+                for (int x = 0; x < Fix2XPoint.Length; x++)
+                {
+                    bin[x] = Fix2DicBin[$"{x},{y}"];
+                    time[x] = Fix2DicTestTime[$"{x},{y}"];
+                    point[x] = Fix2DicLocation[$"{x},{y}"];
+                }
+                traybin.Add($"{y + 1}\t|\t{string.Join("\t", bin)}");
+                traytime.Add($"{y + 1}\t|\t{string.Join("\t", time)}");
+                traypoint.Add($"{y + 1}\t|\t{string.Join("\t", point)}");
+            }
+
+            Summary_AFTrayMap("FIX2", 设置信息.分BIN信息.name4, Fix2, Fix2换盘次数, traybin.ToArray(), traytime.ToArray(), traypoint.ToArray());
+        }
+        public static void Fix3DataSave()
+        {
+            List<string> traybin = new List<string>();
+            List<string> traytime = new List<string>();
+            List<string> traypoint = new List<string>();
+
+            string temps = $" \t ";
+            string temps2 = "-----------------------";
+            for (int i = 0; i < Fix3XPoint.Length; i++)
+            {
+                temps += ($"\t{i + 1}");
+                temps2 += "-----------";
+            }
+            temps += "\r\n" + temps2;
+            traybin.Add(temps);
+            traytime.Add(temps);
+            traypoint.Add(temps);
+
+            for (int y = 0; y < Fix3YPoint.Length; y++)
+            {
+                string[] bin = new string[Fix3XPoint.Length];
+                string[] time = new string[Fix3XPoint.Length];
+                string[] point = new string[Fix3XPoint.Length];
+                for (int x = 0; x < Fix3XPoint.Length; x++)
+                {
+                    bin[x] = Fix3DicBin[$"{x},{y}"];
+                    time[x] = Fix3DicTestTime[$"{x},{y}"];
+                    point[x] = Fix3DicLocation[$"{x},{y}"];
+                }
+                traybin.Add($"{y + 1}\t|\t{string.Join("\t", bin)}");
+                traytime.Add($"{y + 1}\t|\t{string.Join("\t", time)}");
+                traypoint.Add($"{y + 1}\t|\t{string.Join("\t", point)}");
+            }
+
+            Summary_AFTrayMap("FIX3", 设置信息.分BIN信息.name5, Fix3, Fix3换盘次数, traybin.ToArray(), traytime.ToArray(), traypoint.ToArray());
+        }
+
 
         public static void Auto1TrayClear(bool isempty, bool save)
         {
@@ -5434,8 +5691,8 @@ namespace H5509_V2
 
             liststring.Add("\nS/W Bins");
             liststring.Add($"CAT_No\tCode\tCh1\tCh2\tCh3\tCh4\tCh5\tCh6\tCh7\tCh8\tCh9\tCh10\tCh11\tCh12\tCh13\tCh14\tCh15\tCh16");
-            liststring.Add("=====================================================================================================================");
-            
+            liststring.Add("============================================================================================================================================");
+
             int binnumcount = 1;
             List<string> binnumstr2 = new List<string>();
             int[] result = new int[16];
@@ -5443,7 +5700,7 @@ namespace H5509_V2
             foreach (var item in BIN项计数)
             {
                 int[] binnum = BIN项计数[item.Key];
-                int[] result2 = binnum.Select((value, index) => new { value, group = index / 8 }) .GroupBy(x => x.group) .Select(g => g.Sum(x => x.value)) .ToArray();
+                int[] result2 = binnum.Select((value, index) => new { value, group = index / 8 }).GroupBy(x => x.group).Select(g => g.Sum(x => x.value)).ToArray();
                 if (result2.Length == 16)
                 {
                     string ssss = string.Join("\t", result2);
@@ -5455,7 +5712,7 @@ namespace H5509_V2
                 }
             }
             liststring.Add(string.Join("\n", binnumstr2 ?? new List<string>()));
-            liststring.Add("=====================================================================================================================");
+            liststring.Add("============================================================================================================================================"); //
             if (result.Length == 16)
             {
                 liststring.Add($"Total===>\t{result[0]}\t{result[1]}\t{result[2]}\t{result[3]}\t{result[4]}\t{result[5]}\t{result[6]}\t{result[7]}\t{result[8]}\t{result[9]}\t{result[10]}\t{result[11]}\t{result[12]}\t{result[13]}\t{result[14]}\t{result[15]}");

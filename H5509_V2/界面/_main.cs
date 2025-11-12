@@ -10,7 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
-using DocumentFormat.OpenXml.InkML;
 using MotionCommon;
 using SQLiteHelper;
 using Sunny.UI;
@@ -2901,6 +2900,13 @@ namespace H5509_V2
 
         private void label147_Click(object sender, EventArgs e)
         {
+            //string[] bins = System.IO.File.ReadAllLines("TesterComm.txt");
+            //for (int i = 0; i < bins.Length; i++)
+            //{
+            //    if (bins.Contains("@TEST_DONE"))
+            //}
+
+
             //Console.WriteLine("点击成功");
             //string binssss = string.Join(",", Auto1);
             //binssss += ("," + string.Join(",", Auto2));
@@ -2908,12 +2914,7 @@ namespace H5509_V2
             //if (Fix2.Length != 0) binssss += "," + string.Join(",", Fix2);
             //if (Fix3.Length != 0) binssss += "," + string.Join(",", Fix3);
 
-            ////string binssss = "";
-
             //string[] binsss = binssss.Split(',');
-
-            //////string[] bin = GetBins(bins2);
-
 
             //for (int xx = 0; xx < 10; xx++)
             //{
@@ -2953,7 +2954,6 @@ namespace H5509_V2
             //    }
             //}
 
-
             //for (int i = 0; i < Auto1XPoint.Length; i++)
             //{
             //    for (int j = 0; j < Auto1YPoint.Length; j++)
@@ -2964,6 +2964,7 @@ namespace H5509_V2
             //        Auto1DicLocation[$"{i},{j}"] = "12-3";
             //    }
             //}
+            //Auto1换盘次数++;
             //for (int i = 0; i < Auto2XPoint.Length; i++)
             //{
             //    for (int j = 0; j < Auto2YPoint.Length; j++)
@@ -2974,16 +2975,18 @@ namespace H5509_V2
             //        Auto2DicLocation[$"{i},{j}"] = "13-4";
             //    }
             //}
+            //Auto2换盘次数++;
             //for (int i = 0; i < Fix1XPoint.Length; i++)
             //{
             //    for (int j = 0; j < Fix1YPoint.Length; j++)
             //    {
             //        Fix1DicPoint[$"{i},{j}"] = true;
-            //        Fix1DicBin[$"{i},{j}"] = "16-8";
+            //        Fix1DicBin[$"{i},{j}"] = "A20";
             //        Fix1DicTestTime[$"{i},{j}"] = "132.3";
             //        Fix1DicLocation[$"{i},{j}"] = "9-5";
             //    }
             //}
+            //Fix1换盘次数++;
             //for (int i = 0; i < Fix2XPoint.Length; i++)
             //{
             //    for (int j = 0; j < Fix2YPoint.Length; j++)
@@ -2994,6 +2997,7 @@ namespace H5509_V2
             //        Fix2DicLocation[$"{i},{j}"] = "1-6";
             //    }
             //}
+            //Fix2换盘次数++;
             //for (int i = 0; i < Fix3XPoint.Length; i++)
             //{
             //    for (int j = 0; j < Fix3YPoint.Length; j++)
@@ -3004,8 +3008,48 @@ namespace H5509_V2
             //        Fix3DicLocation[$"{i},{j}"] = "16-7";
             //    }
             //}
+            //Fix3换盘次数++;
+
             //Summary_LotNo = (LotNo[0] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
             //Summary(3, null, GetEndLotData());
+
+            //bool auto1haveic = 获取Auto1盘坐标(true, out int auto1x, out int auto1y);
+            //if (auto1haveic) //如果Auto1有放料
+            //{
+            //    Auto1换盘次数++;
+            //    Auto1DataSave();
+            //}
+            //bool auto2haveic = 获取Auto2盘坐标(true, out int auto2x, out int auto2y);
+            //if (auto2haveic) //如果Auto2有放料
+            //{
+            //    Auto2换盘次数++;
+            //    Auto2DataSave();
+            //}
+            //bool fix1haveic = 获取Fix1盘坐标(true, 0, Fix1YPoint.Length, out int fix1x, out int fix1y);
+            //if (fix1haveic) //如果fix1有放料
+            //{
+            //    Fix1换盘次数++;
+            //    Fix1DataSave();
+            //}
+            //bool fix2haveic = 获取Fix2盘坐标(true, 0, Fix2YPoint.Length, out int fix2x, out int fix2y);
+            //if (fix2haveic) //如果fix1有放料
+            //{
+            //    Fix2换盘次数++;
+            //    Fix2DataSave();
+            //}
+            //bool fix3haveic = 获取Fix3盘坐标(true, 0, Fix3YPoint.Length, out int fix3x, out int fix3y);
+            //if (fix3haveic) //如果fix1有放料
+            //{
+            //    Fix3换盘次数++;
+            //    Fix3DataSave();
+            //}
+
+
+            //Auto1DataSave();
+            //Auto2DataSave();
+            //Fix1DataSave();
+            //Fix2DataSave();
+            //Fix3DataSave();
 
 
             //int sitenum = 1;
@@ -3138,10 +3182,10 @@ namespace H5509_V2
             //    }
             //}
 
-            //Task.Run(() =>
-            //{
-            //    handler.HandlerDebug();
-            //});
+            Task.Run(() =>
+            {
+                handler.HandlerDebug();
+            });
 
 
             //Listcode.Add("11111");

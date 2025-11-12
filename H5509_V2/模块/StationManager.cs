@@ -196,17 +196,30 @@ namespace H5509_V2
 
         public void DataReceived(int site, TestDataInfo data)
         {
-            data.SiteTestIC = testDataInfos[site].SiteTestIC;
+            //data.SiteTestIC = testDataInfos[site].SiteTestIC; //拿的是引用类型，还是会改变原来的值
+
             testDataInfos[site] = data;
             TestTime = data.TestTime;
 
+            bool[][] siteic = new bool[][] 
+            {
+                new bool[] { data.SiteTestIC[0][0], data.SiteTestIC[0][1], data.SiteTestIC[0][2], data.SiteTestIC[0][3] }, 
+                new bool[] { data.SiteTestIC[1][0], data.SiteTestIC[1][1], data.SiteTestIC[1][2], data.SiteTestIC[1][3]  }
+            };
+
+            string[] sitebin = new string[] 
+            { 
+                data.SiteTestBin[0], data.SiteTestBin[1], data.SiteTestBin[2], data.SiteTestBin[3],
+                data.SiteTestBin[4], data.SiteTestBin[5], data.SiteTestBin[6], data.SiteTestBin[7] 
+            };
+
             TestDataInfo testdata = new TestDataInfo()
             {
-                SiteTestIC = data.SiteTestIC,
+                SiteTestIC = siteic,
                 Iswaitout = data.Iswaitout,
                 Listtimer = data.Listtimer,
                 timeOutTimer = data.timeOutTimer,
-                SiteTestBin = data.SiteTestBin,
+                SiteTestBin = sitebin,
                 listtesttimespan = data.listtesttimespan,
                 TestTime = data.TestTime,
                 SiteTestState = data.SiteTestState,
@@ -216,11 +229,11 @@ namespace H5509_V2
 
             TestDataInfo testdata2 = new TestDataInfo()
             {
-                SiteTestIC = data.SiteTestIC,
+                SiteTestIC = siteic,
                 Iswaitout = data.Iswaitout,
                 Listtimer = data.Listtimer,
                 timeOutTimer = data.timeOutTimer,
-                SiteTestBin = data.SiteTestBin,
+                SiteTestBin = sitebin,
                 listtesttimespan = data.listtesttimespan,
                 TestTime = data.TestTime,
                 SiteTestState = data.SiteTestState,

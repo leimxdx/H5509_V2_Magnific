@@ -2299,55 +2299,273 @@ namespace H5509_V2
 
         public void HandlerDebug()
         {
-            //int site = 12;
-            //string result = "Success";
-            //bool[] lsopen = new bool[8] { true, true, true, true, true, true, true, true };
-            //int[] sites = GetSites(site);
-            //StationManagers.SetStationIC(site, new bool[][]
-            //{
-            //                            new bool[] { true, lsopen[1], lsopen[2], lsopen[3] },
-            //                            new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
-            //});
-            //StationManagers.SetStationIC(site + 1, new bool[][]
-            //{
-            //                            new bool[] { true, lsopen[1], lsopen[2], lsopen[3] },
-            //                            new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
-            //});
-            //bool[][] siteic1 = StationManagers.GetStationIC((int)sites[0]);
-            //bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
-            //bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
-            //bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
-            //int[] states = new int[] { 10, 10 };
+            ///*衡宇通讯
+            
+            int site = 8;
+            string result = "Success";
+            List<bool[]> open = new List<bool[]> { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
 
-            //bool[] sitew1 = GetSiteOpen(sites[0]);
-            //bool[] sitew2 = GetSiteOpen(sites[1]);
 
-            //if (((states[0] == 10 || !sitew1.Contains(true)) && (states[1] == 10 || !sitew2.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记) && (states[0] == 10 || states[0] == 0) && (states[1] == 10 || states[1] == 0)))
-            //{
-            //    List<List<bool[]>> opens = new List<List<bool[]>>()
-            //                        {
-            //                            states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
-            //                            states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
-            //                        };
-            //    //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
-            //    Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
-            //    RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
-            //    result = StationManagers.Send(site, states, opens, 无测试机模式);
-            //    if (result == "Success")
-            //    {
-            //        if (states[0] == 10) StationManagers.SetStationState(sites[0], 2);
-            //        if (states[1] == 10) StationManagers.SetStationState(sites[1], 2);
-            //        PS测试区气缸下压动作流程.StepID = 599;
-            //    }
-            //    else
-            //    {
-            //        Listcode.Add("800007");
-            //        RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
-            //        ProgramPause = true;
-            //        IsPause = true;
-            //    }
-            //}
-            //else PS测试区气缸下压动作流程.StepID = 599;
+
+            if (设置信息.通讯信息.同时测试 == 2)
+            {
+                StationManagers.SetStationState(site, 1);
+                StationManagers.SetStationState(site + 1, 1);
+                StationManagers.SetStationIC(site, new bool[][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true }
+                });
+                StationManagers.SetStationIC(site + 1, new bool[][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true }
+                });
+
+                int[] sites = GetSites(site);
+                bool[][] siteic1 = StationManagers.GetStationIC((int)sites[0]);
+                bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
+                bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
+                bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
+                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
+
+                bool[] sitew1 = GetSiteOpen(sites[0]);
+                bool[] sitew2 = GetSiteOpen(sites[1]);
+
+                //如果要测试的Site在前梭车和后梭车上都没有料了，且入料手臂停止放料了，则跳过该Site的测试信号发送
+                //测试手臂入料停止工作标记, 飞梭前后入料IC状态，当前需要测试的Site状态
+
+                //2site
+                int[] site1opens = new int[8]
+                {
+                    sitew1[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew1[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew1[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew1[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                    sitew1[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew1[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew1[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew1[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                };
+                int[] site2opens = new int[8]
+                {
+                    sitew2[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew2[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew2[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew2[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                    sitew2[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew2[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew2[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew2[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                };
+                bool site1isgetic = site1opens.Contains(0);
+                bool site2isgetic = site2opens.Contains(0);
+
+                if (((states[0] == 10 || !sitew1.Contains(true) || (入料手臂停止工作标记 && !site1isgetic)) && (states[1] == 10 || !sitew2.Contains(true) || (入料手臂停止工作标记 && !site2isgetic)))
+                    || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)
+                    && (states[0] == 10 || (states[0] == 0 && !site1isgetic)) && (states[1] == 10 || (states[1] == 0 && !site2isgetic))))
+                {
+                    List<List<bool[]>> opens = new List<List<bool[]>>()
+                                    {
+                                        states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                        states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
+                                    };
+                    //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                    Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                    RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                    result = StationManagers.Send(site, states, opens, 无测试机模式);
+                    if (result == "Success")
+                    {
+                        if (states[0] == 10) StationManagers.SetStationState(sites[0], 2);
+                        if (states[1] == 10) StationManagers.SetStationState(sites[1], 2);
+                        PS测试区气缸下压动作流程.StepID = 599;
+                    }
+                    else
+                    {
+                        Listcode.Add("800007");
+                        RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                        ProgramPause = true;
+                        IsPause = true;
+                    }
+                }
+                else PS测试区气缸下压动作流程.StepID = 599;
+            }
+            else if (设置信息.通讯信息.同时测试 == 4)
+            {
+                StationManagers.SetStationState(site, 1);
+                StationManagers.SetStationState(site + 1, 1);
+                StationManagers.SetStationState(site + 2, 1);
+                StationManagers.SetStationState(site + 3, 1);
+                StationManagers.SetStationIC(site, new bool[][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true }
+                });
+                StationManagers.SetStationIC(site + 1, new bool[][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true }
+                });
+                StationManagers.SetStationIC(site + 2, new bool[][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true }
+                });
+                StationManagers.SetStationIC(site + 3, new bool[][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true }
+                });
+                result = "Success";
+                int[] sites = GetSites2(site); //获取site所属的主站
+                bool[][] siteic1 = StationManagers.GetStationIC((int)sites[0]);
+                bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
+                bool[][] siteic3 = StationManagers.GetStationIC((int)sites[2]);
+                bool[][] siteic4 = StationManagers.GetStationIC((int)sites[3]);
+                bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
+                bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
+                bool[] site3 = new bool[] { siteic3[0][0], siteic3[0][1], siteic3[0][2], siteic3[0][3], siteic3[1][0], siteic3[1][1], siteic3[1][2], siteic3[1][3] };
+                bool[] site4 = new bool[] { siteic4[0][0], siteic4[0][1], siteic4[0][2], siteic4[0][3], siteic4[1][0], siteic4[1][1], siteic4[1][2], siteic4[1][3] };
+                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]), StationManagers.GetStationState(sites[2]), StationManagers.GetStationState(sites[3]) };
+
+                bool[] sitew1 = GetSiteOpen(sites[0]);
+                bool[] sitew2 = GetSiteOpen(sites[1]);
+                bool[] sitew3 = GetSiteOpen(sites[2]);
+                bool[] sitew4 = GetSiteOpen(sites[3]);
+
+                //如果要测试的Site在前梭车和后梭车上都没有料了，且入料手臂停止放料了，则跳过该Site的测试信号发送
+                //测试手臂入料停止工作标记, 飞梭前后入料IC状态，当前需要测试的Site状态
+
+                //4site
+                int[] site1opens = new int[8]
+                {
+                    sitew1[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew1[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew1[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew1[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                    sitew1[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew1[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew1[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew1[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                };
+                int[] site2opens = new int[8]
+                {
+                    sitew2[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew2[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew2[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew2[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                    sitew2[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew2[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew2[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew2[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                };
+                int[] site3opens = new int[8]
+                {
+                    sitew3[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew3[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew3[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew3[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                    sitew3[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew3[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew3[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew3[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                };
+                int[] site4opens = new int[8]
+                {
+                    sitew4[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew4[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew4[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew4[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                    sitew4[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew4[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew4[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew4[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                };
+                bool site1isgetic = site1opens.Contains(0);
+                bool site2isgetic = site2opens.Contains(0);
+                bool site3isgetic = site3opens.Contains(0);
+                bool site4isgetic = site4opens.Contains(0);
+
+                if (((states[0] == 10 || !sitew1.Contains(true) || (入料手臂停止工作标记 && !site1isgetic)) && (states[1] == 10 || !sitew2.Contains(true) || (入料手臂停止工作标记 && !site2isgetic)) && (states[2] == 10 || !sitew3.Contains(true) || (入料手臂停止工作标记 && !site3isgetic)) && (states[3] == 10 || !sitew4.Contains(true) || (入料手臂停止工作标记 && !site4isgetic)))
+                    || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)
+                    && (states[0] == 10 || (states[0] == 0 && !site1isgetic)) && (states[1] == 10 || (states[1] == 0 && !site2isgetic)) && (states[2] == 10 || (states[2] == 0 && !site1isgetic)) && (states[3] == 10 || (states[3] == 0 && !site1isgetic))))
+                {
+                    List<List<bool[]>> opens = new List<List<bool[]>>() //如果状态==0则全部为False
+                    {
+                        states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                        states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                        states[2] != 0 ? GetOpens(site3) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                        states[3] != 0 ? GetOpens(site4) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                    };
+                    //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                    Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                    RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                    result = StationManagers.Send(site, states, opens, 无测试机模式);
+                    if (result == "Success")
+                    {
+                        if (states[0] == 10) StationManagers.SetStationState(sites[0], 2);
+                        if (states[1] == 10) StationManagers.SetStationState(sites[1], 2);
+                        if (states[2] == 10) StationManagers.SetStationState(sites[2], 2);
+                        if (states[3] == 10) StationManagers.SetStationState(sites[3], 2);
+                        PS测试区气缸下压动作流程.StepID = 599;
+                    }
+                    else
+                    {
+                        Listcode.Add("800007");
+                        RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                        ProgramPause = true;
+                        IsPause = true;
+                    }
+                }
+                else PS测试区气缸下压动作流程.StepID = 599;
+            }
+            else
+            {
+                StationManagers.SetStationState(site, 1);
+                StationManagers.SetStationIC(site, new bool[][]
+                {
+                    new bool[] { true, true, true, true },
+                    new bool[] { true, true, true, true }
+                });
+                result = StationManagers.Send(site, open, 无测试机模式);
+                if (result == "Success")
+                {
+                    StationManagers.SetStationState(site, 2);
+                    PS测试区气缸下压动作流程.StepID = 599;
+                }
+                else
+                {
+                    Listcode.Add("800007");
+                    RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                    ProgramPause = true;
+                    IsPause = true;
+                }
+            }
+
+
+
+            //*/
+
+
+
+
+
+            /*得一微通讯
+            int site = 12;
+            string result = "Success";
+            bool[] lsopen = new bool[8] { true, true, true, true, true, true, true, true };
+            int[] sites = GetSites(site);
+            StationManagers.SetStationIC(site, new bool[][]
+            {
+                                        new bool[] { true, lsopen[1], lsopen[2], lsopen[3] },
+                                        new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
+            });
+            StationManagers.SetStationIC(site + 1, new bool[][]
+            {
+                                        new bool[] { true, lsopen[1], lsopen[2], lsopen[3] },
+                                        new bool[] { lsopen[4], lsopen[5], lsopen[6], lsopen[7] }
+            });
+            bool[][] siteic1 = StationManagers.GetStationIC((int)sites[0]);
+            bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
+            bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
+            bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
+            int[] states = new int[] { 10, 10 };
+
+            bool[] sitew1 = GetSiteOpen(sites[0]);
+            bool[] sitew2 = GetSiteOpen(sites[1]);
+
+            if (((states[0] == 10 || !sitew1.Contains(true)) && (states[1] == 10 || !sitew2.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记) && (states[0] == 10 || states[0] == 0) && (states[1] == 10 || states[1] == 0)))
+            {
+                List<List<bool[]>> opens = new List<List<bool[]>>()
+                                    {
+                                        states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
+                                        states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
+                                    };
+                //result = APPmaster.Com.Send(sites, opens, 无测试机模式);
+                Thread.Sleep(设置信息.测试机信息.发送开始信号延时);
+                RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{PS测试区气缸下压动作流程.StepName}");
+                result = StationManagers.Send(site, states, opens, 无测试机模式);
+                if (result == "Success")
+                {
+                    if (states[0] == 10) StationManagers.SetStationState(sites[0], 2);
+                    if (states[1] == 10) StationManagers.SetStationState(sites[1], 2);
+                    PS测试区气缸下压动作流程.StepID = 599;
+                }
+                else
+                {
+                    Listcode.Add("800007");
+                    RunLog($"[Code]800007,[Msg]发送Site{site + 1}测试信号失败!" + result, LogType.AlarmLog);
+                    ProgramPause = true;
+                    IsPause = true;
+                }
+            }
+            else PS测试区气缸下压动作流程.StepID = 599;
+
+            */
 
             //bool[] open = GetSiteOpen(site); //要检查的site
             //if (飞梭后入料IC[0].Contains(true) || 飞梭后入料IC[1].Contains(true)) //如果梭车上有料
@@ -2617,6 +2835,11 @@ namespace H5509_V2
                 Fix3TrayClear(true, false);
                 空盘上顶到最大值 = false;
                 空盘下降到最小值 = false;
+                Auto1换盘次数 = 0;
+                Auto2换盘次数 = 0;
+                Fix1换盘次数 = 0;
+                Fix2换盘次数 = 0;
+                Fix3换盘次数 = 0;
                 Auto1Tray盘数量 = 0;
                 Auto2Tray盘数量 = 0;
                 测试手臂吸不起数量 = 0;
@@ -3308,6 +3531,12 @@ namespace H5509_V2
                     }
                 }
             }
+        }
+
+        private bool 检查测试X轴位置(string name, double mm)
+        {
+            //检查测试X轴位置是否有规划位置一直，误差是否小于运行允许误差
+            return motionEx.AxisPoinitData(name, mm);
         }
 
         #endregion
@@ -5141,6 +5370,17 @@ namespace H5509_V2
                 return errortext;
             }
 
+            task1 = Task.Run(() => { return 入料手臂移动(初始点位.入料_梭车1_X, 初始点位.入料_梭车1_Y, 7.5); });
+            task2 = Task.Run(() => { return 出料手臂移动(初始点位.出料_梭车1_X - 梭车列间距, 初始点位.出料_梭车1_Y, 7.5); });
+
+            if (task1.Result != "Success" || task2.Result != "Success")
+            {
+                string errortext = "";
+                if (task1.Result != "Success") errortext += task1.Result + ";";
+                if (task2.Result != "Success") errortext += task2.Result + ";";
+                return errortext;
+            }
+
             if (温控加热 && 温度模式 == "高温")
             {
                 result = 梭车加热开启();
@@ -5340,10 +5580,10 @@ namespace H5509_V2
                             Task<string> testp = Task.Run(() => { return 测试吸嘴_张开气缸输出(true); });
                             Task<string> testx = Task.Run(() => { return 测试手臂X移动(初始点位.测试_梭车1吸_X); });
                             Task<string> shuttle = Task.Run(() => { return 飞梭轴移动(初始点位.梭车2_后_Y); });
-                            Task<string> inputp = Task.Run(() => { return 入料手臂P移动(7.5); });
+                            Task<string> inputxyp = Task.Run(() => { return 入料手臂移动(初始点位.入料_Heat_X + 80, 0, 7.5); }); //入料手臂P移动(7.5); });
                             Task<string> outputxyp = Task.Run(() => { return 出料手臂移动(256.05, 222.55, 5.3); });
                             Task<string> fix3 = Task.Run(() => { return Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动); });
-                            if (auto1.Result == "Success" && auto2.Result == "Success" && testp.Result == "Success" && testx.Result == "Success" && shuttle.Result == "Success" && inputp.Result == "Success" && outputxyp.Result == "Success" && fix3.Result == "Success")
+                            if (auto1.Result == "Success" && auto2.Result == "Success" && testp.Result == "Success" && testx.Result == "Success" && shuttle.Result == "Success" && inputxyp.Result == "Success" && outputxyp.Result == "Success" && fix3.Result == "Success")
                             {
                                 飞梭2位置 = 0;
                                 Tray平移左右标记 = 1;
@@ -5367,7 +5607,13 @@ namespace H5509_V2
                                     RunLog($"[Code]2027007,[Msg]梭车2移动到后方失败!" + testx.Result, LogType.AlarmLog);
                                     M20_飞梭轴ErrorMsg = testx.Result;
                                 }
-                                if (inputp.Result != "Success") RunLog("入料手臂P移动失败!" + inputp.Result);
+                                //if (inputp.Result != "Success") RunLog("入料手臂P移动失败!" + inputp.Result);
+                                if (inputxyp.Result != "Success")
+                                {
+                                    Listcode.Add("2029007");
+                                    RunLog($"[Code]2029007,[Msg]入料手臂走到等待位失败!" + inputxyp.Result, LogType.AlarmLog);
+                                    M22_入料手臂X轴ErrorMsg = inputxyp.Result;
+                                }
                                 if (outputxyp.Result != "Success")
                                 {
                                     Listcode.Add("2030007");
@@ -5600,8 +5846,8 @@ namespace H5509_V2
                         case 505:
                             PS结批流程.StepName = $"出入料手臂走到避让位置";
                             RunLog($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
-                            Task<string> input = Task.Run(() => { return 入料手臂移动(10, 10, 7.5); });
-                            Task<string> output = Task.Run(() => { return 出料手臂移动(10, 10, 0); });
+                            Task<string> input = Task.Run(() => { return 入料手臂移动(初始点位.入料_Heat_X + 80, 0, 7.5); }); //10, 10, 7.5  初始点位.入料_梭车1_X, 0, 7.5
+                            Task<string> output = Task.Run(() => { return 出料手臂移动(256.05, 222.55, 5.3); }); //10, 10, 0
                             if (input.Result == "Success" && output.Result == "Success")
                             {
                                 if (!空跑模式 || Tray盘模式)
@@ -5682,19 +5928,28 @@ namespace H5509_V2
                             break;
 
                         case 525:
-                            PS结批流程.StepName = $"出料手臂移动到梭车上避让";
-                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}");
-                            double[] xpos = 获取梭车xyp吸料点位(1);
-                            result = 出料手臂移动(xpos[0], xpos[1], xpos[2]);
-                            if (result == "Success")
+                            PS结批流程.StepName = $"出入料手臂移动到梭车上避让";
+                            RunLog($"PS结批流程.StepID={PS结批流程.StepID}->{PS结批流程.StepName}"); //double[] xpos = 获取梭车xyp吸料点位(1);
+                            input = Task.Run(() => { return 入料手臂移动(初始点位.入料_梭车1_X, 初始点位.入料_梭车1_Y, 7.5); }); //10, 10, 7.5  初始点位.入料_梭车1_X, 0, 7.5
+                            output = Task.Run(() => { return 出料手臂移动(初始点位.出料_梭车1_X - 梭车列间距, 初始点位.出料_梭车1_Y, 7.5); }); //10, 10, 0
+                            if (input.Result == "Success" && output.Result == "Success")
                             {
                                 PS结批流程.StepID = 530;
                             }
                             else
                             {
-                                Listcode.Add("2030007");
-                                RunLog($"[Code]2030007,[Msg]出料手臂移动到梭车上避让失败!" + result, LogType.AlarmLog);
-                                M23_出料手臂X轴ErrorMsg = result;
+                                if (input.Result != "Success")
+                                {
+                                    Listcode.Add("2029007");
+                                    RunLog($"[Code]2029007,[Msg]入料手臂移动到避让位置失败!" + input.Result, LogType.AlarmLog);
+                                    M22_入料手臂X轴ErrorMsg = input.Result;
+                                }
+                                if (output.Result != "Success")
+                                {
+                                    Listcode.Add("2030007");
+                                    RunLog($"[Code]2030007,[Msg]出料手臂移动到避让位置失败!" + output.Result, LogType.AlarmLog);
+                                    M23_出料手臂X轴ErrorMsg = output.Result;
+                                }
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -5724,6 +5979,38 @@ namespace H5509_V2
 
                             LoaderTrayClear();
                             HeatTrayClear();
+
+                            bool auto1haveic = 获取Auto1盘坐标(true, out int auto1x, out int auto1y);
+                            if (auto1haveic) //如果Auto1有放料
+                            {
+                                Auto1换盘次数++;
+                                Auto1DataSave();
+                            }
+                            bool auto2haveic = 获取Auto2盘坐标(true, out int auto2x, out int auto2y);
+                            if (auto2haveic) //如果Auto2有放料
+                            {
+                                Auto2换盘次数++;
+                                Auto2DataSave();
+                            }
+                            bool fix1haveic = 获取Fix1盘坐标(true, 0, Fix1YPoint.Length, out int fix1x, out int fix1y);
+                            if (fix1haveic) //如果fix1有放料
+                            {
+                                Fix1换盘次数++;
+                                Fix1DataSave();
+                            }
+                            bool fix2haveic = 获取Fix2盘坐标(true, 0, Fix2YPoint.Length, out int fix2x, out int fix2y);
+                            if (fix2haveic) //如果fix2有放料
+                            {
+                                Fix2换盘次数++;
+                                Fix2DataSave();
+                            }
+                            bool fix3haveic = 获取Fix3盘坐标(true, 0, Fix3YPoint.Length, out int fix3x, out int fix3y);
+                            if (fix3haveic) //如果fix3有放料
+                            {
+                                Fix3换盘次数++;
+                                Fix3DataSave();
+                            }
+
                             Auto1TrayClear(false, true);
                             Auto2TrayClear(false, true);
                             Fix1TrayClear(false, true);
@@ -7600,7 +7887,7 @@ namespace H5509_V2
                         case 805:
                             PS入料手臂吸放料流程.StepName = "入料手臂移到避让位";
                             RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                            result = 入料手臂移动(初始点位.入料_Heat_X, 0, 7.5);
+                            result = 入料手臂移动(初始点位.入料_Heat_X + 80, 0, 7.5); //入料_Heat_X 初始点位.入料_Heat_X, 0, 7.5
                             if (result == "Success")
                             {
                                 PS入料手臂吸放料流程.StepID = 810;
@@ -7670,7 +7957,7 @@ namespace H5509_V2
                         case 905:
                             PS入料手臂吸放料流程.StepName = "入料手臂移到避让位";
                             RunLog($"PS入料手臂吸放料流程.StepID={PS入料手臂吸放料流程.StepID}->{PS入料手臂吸放料流程.StepName}");
-                            result = 入料手臂移动(初始点位.入料_Heat_X, 0, 7.5);
+                            result = 入料手臂移动(初始点位.入料_Heat_X + 80, 0, 7.5);
                             if (result == "Success")
                             {
                                 if (!入料手臂工作完成标记) ismovewait = false;
@@ -9008,6 +9295,8 @@ namespace H5509_V2
                             PS出料手臂吸放料流程.StepName = "抓盘手臂放空盘到Auto1";
                             if (抓盘手臂放空盘到Auto1标记 == 1)
                             {
+                                Auto1换盘次数++;
+                                Auto1DataSave();
                                 Auto1TrayClear(true, true);
                                 Auto1换盘标记 = false;
                                 RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->Auto1换盘完成Map更新");
@@ -9061,6 +9350,8 @@ namespace H5509_V2
                             PS出料手臂吸放料流程.StepName = "抓盘手臂放空盘到Auto2";
                             if (抓盘手臂放空盘到Auto2标记 == 1)
                             {
+                                Auto2换盘次数++;
+                                Auto2DataSave();
                                 Auto2TrayClear(true, true);
                                 Auto2换盘标记 = false;
                                 RunLog($"PS出料手臂吸放料流程.StepID={PS出料手臂吸放料流程.StepID}->Auto2换盘完成Map更新");
@@ -9162,6 +9453,8 @@ namespace H5509_V2
                             break;
 
                         case 1020:
+                            Fix1换盘次数++;
+                            Fix1DataSave();
                             Fix1TrayClear(true, true);
                             PS出料手臂吸放料流程.StepID = 705;
                             break;
@@ -9258,6 +9551,8 @@ namespace H5509_V2
                             break;
 
                         case 1120:
+                            Fix2换盘次数++;
+                            Fix2DataSave();
                             Fix2TrayClear(true, true);
                             PS出料手臂吸放料流程.StepID = 705;
                             break;
@@ -9353,6 +9648,8 @@ namespace H5509_V2
                             break;
 
                         case 1220:
+                            Fix3换盘次数++;
+                            Fix3DataSave();
                             Fix3TrayClear(true, true);
                             PS出料手臂吸放料流程.StepID = 705;
                             break;
@@ -9900,12 +10197,15 @@ namespace H5509_V2
                             break;
 
                         case 510:
-                            PS测试手臂取待测料流程.StepName = "测试手臂X轴到飞梭后入料吸料";
-                            RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
+                            D测试手臂X移动到位 = false;
                             double xpos = 飞梭2位置 == 0 ? (初始点位.测试_梭车2吸_X + 点位微调.测试_梭车2左吸_X) : (初始点位.测试_梭车1吸_X + 点位微调.测试_梭车1左吸_X);
+                            PS测试手臂取待测料流程.StepName = $"测试手臂X轴到飞梭{(飞梭2位置 == 0 ? 2 : 1)}后入料吸料({xpos}mm)";
+                            RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                             result = 测试手臂X移动(xpos);
                             if (result == "Success")
                             {
+                                D测试手臂X目标位置记忆 = xpos;
+                                D测试手臂X移动到位 = true;
                                 firstdraw = true;
                                 firstdzhome = true;
                                 count = true; //new bool[8] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7] };
@@ -10291,13 +10591,17 @@ namespace H5509_V2
 
                         case 710:
                             PS测试手臂取待测料流程.StepName = "测试手臂X移动到测试区放料";
-                            RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                             result = 获取测试X放料补偿(site, out double sitex);
                             if (result == "Success")
                             {
+                                D测试手臂X移动到位 = false;
+                                PS测试手臂取待测料流程.StepName = $"测试手臂X移动到测试区{site + 1}放料({(TestXPoint[site] + sitex):0.00}mm)";
+                                RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                                 result = 测试手臂X移动(TestXPoint[site] + sitex);
                                 if (result == "Success")
                                 {
+                                    D测试手臂X目标位置记忆 = TestXPoint[site] + sitex;
+                                    D测试手臂X移动到位 = true;
                                     firstdraw = true;
                                     firstdzhome = true;
                                     lsopen = new bool[]
@@ -10549,11 +10853,14 @@ namespace H5509_V2
                             break;
 
                         case 745:
-                            PS测试手臂取待测料流程.StepName = $"测试手臂X走到梭车避让";
+                            D测试手臂X移动到位 = false;
+                            PS测试手臂取待测料流程.StepName = $"测试手臂X因IC放歪走到梭车1避让({初始点位.测试_梭车1吸_X}mm)";
                             RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{PS测试手臂取待测料流程.StepName}");
                             result = 测试手臂X移动(初始点位.测试_梭车1吸_X);
                             if (result == "Success")
                             {
+                                D测试手臂X目标位置记忆 = 初始点位.测试_梭车1吸_X;
+                                D测试手臂X移动到位 = true;
                                 if (iovalues.Contains("0"))
                                 {
                                     for (int i = 0; i < iovalues.Length; i++)
@@ -10722,14 +11029,18 @@ namespace H5509_V2
                             break;
 
                         case 510:
-                            PS测试手臂取已测料流程.StepName = $"测试手臂X轴移动到Site{site + 1}上方";
-                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
+                            PS测试手臂取已测料流程.StepName = $"测试手臂X轴移动到Site{site + 1}上方吸料";
                             result = 获取测试X吸料补偿(site, out double sitex);
                             if (result == "Success")
                             {
+                                D测试手臂X移动到位 = false;
+                                PS测试手臂取已测料流程.StepName = $"测试手臂X轴移动到Site{site + 1}上方吸料({(TestXPoint[site] + sitex):0.00}mm)";
+                                RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                                 result = 测试手臂X移动(TestXPoint[site] + sitex);
                                 if (result == "Success")
                                 {
+                                    D测试手臂X目标位置记忆 = TestXPoint[site] + sitex;
+                                    D测试手臂X移动到位 = true;
                                     firstdraw = true;
                                     firstdzhome = true;
                                     count = true; //new bool[] { lsopen[0], lsopen[1], lsopen[2], lsopen[3], lsopen[4], lsopen[5], lsopen[6], lsopen[7] };
@@ -11075,11 +11386,14 @@ namespace H5509_V2
                             break;
 
                         case 545:
-                            PS测试手臂取已测料流程.StepName = "测试Z吸料不起移到梭车上避让";
+                            D测试手臂X移动到位 = false;
+                            PS测试手臂取已测料流程.StepName = $"测试Z吸料不起移到梭车上避让({初始点位.测试_梭车1放_X}mm)";
                             RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                             result = 测试手臂X移动(初始点位.测试_梭车1放_X);
                             if (result == "Success")
                             {
+                                D测试手臂X目标位置记忆 = 初始点位.测试_梭车1放_X;
+                                D测试手臂X移动到位 = true;
                                 for (int i = 0; i < lsopen.Length; i++)
                                 {
                                     if (lsopen[i] && opens[i] == 0)
@@ -11141,13 +11455,16 @@ namespace H5509_V2
                             break;
 
                         case 710:
-                            PS测试手臂取已测料流程.StepName = "测试手臂X移动到梭车";
-                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
-                            int state = 飞梭后出料状态 == 0 ? 0 : 1;
+                            D测试手臂X移动到位 = false;
+                            int state = 飞梭后出料状态 == 0 ? 0 : 1; //如果飞梭后出料已经放了料说明要等梭车交换过来的那个梭车位置放料,要反一下
                             double xpos = 飞梭2位置 == state ? (初始点位.测试_梭车2放_X + 点位微调.测试_梭车2右放_X) : (初始点位.测试_梭车1放_X + 点位微调.测试_梭车1右放_X);
+                            PS测试手臂取已测料流程.StepName = $"测试手臂X移动到梭车{(飞梭2位置 == state ? 2 : 1)}放料({xpos}mm)";
+                            RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{PS测试手臂取已测料流程.StepName}");
                             result = 测试手臂X移动(xpos);
                             if (result == "Success")
                             {
+                                D测试手臂X目标位置记忆 = xpos;
+                                D测试手臂X移动到位 = true;
                                 firstdraw = true;
                                 firstdzhome = true;
                                 TestNozzleIC = false;
@@ -11382,7 +11699,7 @@ namespace H5509_V2
             string result;
             short site = 0;
             List<bool[]> open = new List<bool[]>();
-            List<List<bool[]>> opens = new List<List<bool[]>>();
+            //List<List<bool[]>> opens = new List<List<bool[]>>();
             PS测试区气缸下压动作流程.StepID = 500;
             while (true)
             {
@@ -11485,6 +11802,13 @@ namespace H5509_V2
 
                         case 520:
                             PS测试区气缸下压动作流程.StepName = $"发送测试信号";
+
+                            if (飞梭前入料IC == null || 飞梭后入料IC == null) //有概率为空的情况，下个循环再看
+                            {
+                                Thread.Sleep(10);
+                                break;
+                            }
+
                             if (设置信息.通讯信息.同时测试 == 2)
                             {
                                 result = "Success";
@@ -11515,11 +11839,11 @@ namespace H5509_V2
                                 bool site1isgetic = site1opens.Contains(0);
                                 bool site2isgetic = site2opens.Contains(0);
 
-                                if (((states[0] == 10 || !sitew1.Contains(true) || (测试手臂入料停止工作标记 && !site1isgetic)) && (states[1] == 10 || !sitew2.Contains(true) || (测试手臂入料停止工作标记 && !site2isgetic)))
+                                if (((states[0] == 10 || !sitew1.Contains(true) || (入料手臂停止工作标记 && !site1isgetic)) && (states[1] == 10 || !sitew2.Contains(true) || (入料手臂停止工作标记 && !site2isgetic)))
                                     || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)
                                     && (states[0] == 10 || (states[0] == 0 && !site1isgetic)) && (states[1] == 10 || (states[1] == 0 && !site2isgetic))))
                                 {
-                                    opens = new List<List<bool[]>>()
+                                    List<List<bool[]>> opens = new List<List<bool[]>>()
                                     {
                                         states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
                                         states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } }
@@ -11567,10 +11891,36 @@ namespace H5509_V2
                                 //测试手臂入料停止工作标记, 飞梭前后入料IC状态，当前需要测试的Site状态
 
                                 //4site
-
-                                if (((states[0] == 10 || !sitew1.Contains(true)) && (states[1] == 10 || !sitew2.Contains(true)) && (states[2] == 10 || !sitew3.Contains(true)) && (states[3] == 10 || !sitew4.Contains(true))) || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记) && (states[0] == 10 || states[0] == 0) && (states[1] == 10 || states[1] == 0) && (states[2] == 10 || states[2] == 0) && (states[3] == 10 || states[3] == 0)))
+                                int[] site1opens = new int[8]
                                 {
-                                    opens = new List<List<bool[]>>() //如果状态==0则全部为False
+                                    sitew1[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew1[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew1[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew1[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                                    sitew1[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew1[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew1[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew1[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                                };
+                                int[] site2opens = new int[8]
+                                {
+                                    sitew2[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew2[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew2[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew2[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                                    sitew2[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew2[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew2[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew2[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                                };
+                                int[] site3opens = new int[8]
+                                {
+                                    sitew3[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew3[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew3[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew3[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                                    sitew3[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew3[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew3[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew3[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                                };
+                                int[] site4opens = new int[8]
+                                {
+                                    sitew4[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew4[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew4[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew4[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
+                                    sitew4[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew4[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew4[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew4[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
+                                };
+                                bool site1isgetic = site1opens.Contains(0);
+                                bool site2isgetic = site2opens.Contains(0);
+                                bool site3isgetic = site3opens.Contains(0);
+                                bool site4isgetic = site4opens.Contains(0);
+
+                                if (((states[0] == 10 || !sitew1.Contains(true) || (入料手臂停止工作标记 && !site1isgetic)) && (states[1] == 10 || !sitew2.Contains(true) || (入料手臂停止工作标记 && !site2isgetic)) && (states[2] == 10 || !sitew3.Contains(true) || (入料手臂停止工作标记 && !site3isgetic)) && (states[3] == 10 || !sitew4.Contains(true) || (入料手臂停止工作标记 && !site4isgetic)))
+                                    || (测试手臂入料停止工作标记 && (结批标记 || 一个循环标记)
+                                    && (states[0] == 10 || (states[0] == 0 && !site1isgetic)) && (states[1] == 10 || (states[1] == 0 && !site2isgetic)) && (states[2] == 10 || (states[2] == 0 && !site3isgetic)) && (states[3] == 10 || (states[3] == 0 && !site4isgetic))))
+                                {
+                                    List<List<bool[]>> opens = new List<List<bool[]>>() //如果状态==0则全部为False
                                     {
                                         states[0] != 0 ? GetOpens(site1) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
                                         states[1] != 0 ? GetOpens(site2) : new List<bool[]>() { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } },
@@ -12311,8 +12661,44 @@ namespace H5509_V2
                             break;
 
                         case 525:
+                            PS待测盘上顶流程.StepName = "Load盘放歪检测";
+                            RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+                            result = Load_后Tray放歪感应(out string value);
+                            if (result == "Success")
+                            {
+                                if (value == "1") //返回0是挡到感应器,1是没有挡到感应器
+                                {
+                                    PS待测盘上顶流程.StepID = 530;
+                                }
+                                else
+                                {
+                                    Listcode.Add("1400493");
+                                    RunLog("[Code]1400493,[Msg]Load区后感应器到Tray盘放歪,请按开始重试上顶!", LogType.AlarmLog);
+                                    APPmaster.ProgramPause = true;
+                                    IsPause = true;
+                                    PS待测盘上顶流程.StepID = 510; //重新上顶
+                                }
+                            }
+                            else
+                            {
+                                APPmaster.ProgramPause = true;
+                                IsPause = true;
+                                RunLog($"Load盘放歪检测失败！" + result);
+                            }
+                            break;
+
+
+                        case 530:
                             PS待测盘上顶流程.StepName = "Load_Tray前侧定位气缸到位输出";
                             RunLog($"PS待测盘上顶流程.StepID={PS待测盘上顶流程.StepID}->{PS待测盘上顶流程.StepName}");
+
+                            result = Load_后Tray放歪感应(out string value2);
+                            if (result != "Success" || value2 == "0")
+                            {
+                                PS待测盘上顶流程.StepID = 525;
+                                break;
+                            }
+
                             result = Load_Tray前侧定位气缸到位输出();
                             if (result == "Success")
                             {

@@ -3261,9 +3261,9 @@ namespace H5509_alarm
                                     row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("20A", 未分配超时BIN);
                                 }
                                 break;
-                            case "1400150":  //超时BIN(20A)未分配
+                            case "1400150":  //测试机tester接收的通讯数据(Data)解析失败！详细信息：Msg
                                 {
-                                    row.Cells[1].Value = r.Cells[1].Value.ToString().Replace("Msg", 串口数据异常Msg);
+                                    row.Cells[1].Value = 串口数据异常Msg;
                                 }
                                 break;
                         }

@@ -300,6 +300,7 @@ namespace H5509_V2
 
                 if (outdata.StartsWith("@TEST_DONE"))
                 {
+                    string errorstr = "";
                     try
                     {
                         if (设置信息.通讯信息.通讯协议 == "得一微")
@@ -394,7 +395,24 @@ namespace H5509_V2
                         }
                         else if (设置信息.通讯信息.通讯协议 == "衡宇")
                         {
+                            if (outdata.Length < 54)
+                            {
+                                errorstr = "字符长度小于54";
+                                throw new Exception("衡宇");
+                            }
+                            if (outdata[53] != '+')
+                            {
+                                errorstr = "第54个字符不是‘+’";
+                                throw new Exception("衡宇");
+                            }
+
                             string[] bin = outdata.Substring(14, 39).Split(' '); //@TEST_DONE 00 0001 0001 0001 0001 0001 0001 0001 0001+
+                            if (bin.Length != 8)
+                            {
+                                errorstr = "数据长度不等于8";
+                                throw new Exception("衡宇");
+                            }
+
                             int site = StationId + Convert.ToInt32(outdata.Substring(11, 2));
 
                             if (testDataInfos[site].SiteTestState == 2 && (testDataInfos[site].Listtimer.Enabled || testDataInfos[site].timeOutTimer.Enabled)) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
@@ -438,15 +456,28 @@ namespace H5509_V2
                             }
                             else RunLog($"site:{site:D2}未在测试!", LogType.RunLog);
                         }
+
                         if (!outdata.Contains("+")) break;
                         else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                     }
+                    catch (Exception ex) when (ex.Message.Equals("衡宇") || ex.Message.Equals("得一微"))
+                    {
+                        int 测试机id = TestStation.GetTesterId(StationId);
+                        串口数据异常Msg = $"测试机{测试机id + 1}接收的通讯数据({outdata})解析失败！详细信息：{errorstr}";
+                        Listcode.Add("1400150");
+                        RunLog($"[Code]1400150,[Msg]{串口数据异常Msg}", LogType.AlarmLog); //tester接收的通讯数据(Data)解析失败！详细信息：Msg
+                        ProgramPause = true;
+                        IsPause = true;
+                        int indexnum = outdata.IndexOf('@', 1);
+                        if (indexnum == -1) break; //如果没有找到符号'@'则退出
+                        outdata = outdata.Remove(0, indexnum);
+                    }
                     catch (Exception ex)
                     {
-                        Listcode.Add("1400150");
-                        RunLog($"[Code]1400150,[Msg]数据解析失败！详细信息：" + ex.Message.Replace("\r\n", " "), LogType.AlarmLog);
                         int 测试机id = TestStation.GetTesterId(StationId);
-                        串口数据异常Msg = $"(测试机{测试机id + 1}){ex.Message.Replace("\r\n", " ")}";
+                        串口数据异常Msg = $"测试机{测试机id + 1}接收的通讯数据({outdata})解析失败！详细信息：{ex.Message.Replace("\r\n", " ")}";
+                        Listcode.Add("1400150");
+                        RunLog($"[Code]1400150,[Msg]通讯数据({outdata})解析失败！详细信息：" + ex.Message.Replace("\r\n", " "), LogType.AlarmLog);
                         ProgramPause = true;
                         IsPause = true;
                         if (!outdata.Contains("+")) break;
@@ -485,24 +516,21 @@ namespace H5509_V2
                     }
                     catch (Exception ex)
                     {
-                        Listcode.Add("1400150");
-                        RunLog($"[Code]1400150,[Msg]数据解析失败！详细信息：" + ex.Message.Replace("\r\n", " "), LogType.AlarmLog);
                         int 测试机id = TestStation.GetTesterId(StationId);
-                        串口数据异常Msg = $"(测试机{测试机id + 1}){ex.Message.Replace("\r\n", " ")}";
+                        串口数据异常Msg = $"测试机{测试机id + 1}接收的通讯数据({outdata})解析失败！详细信息：{ex.Message.Replace("\r\n", " ")}";
+                        Listcode.Add("1400150");
+                        RunLog($"[Code]1400150,[Msg]通讯数据({outdata})解析失败！详细信息：" + ex.Message.Replace("\r\n", " "), LogType.AlarmLog);
                         ProgramPause = true;
                         IsPause = true;
-                        if (!outdata.Contains("+")) break; 
+                        if (!outdata.Contains("+")) break;
                         else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                     }
-                }
-                //else if (outdata.StartsWith("@UNKNOW_CMD"))
-                //{ 
-
-                //}
+                } //outdata.StartsWith("@UNKNOW_CMD")
                 else
                 {
-                    outdata = "";
-                    break;
+                    outdata = outdata.Substring(1);
+                    RunLog("清除第一个元素:" + outdata);
+                    //break;
                 }
             }
         }
@@ -616,6 +644,7 @@ namespace H5509_V2
                         testDataInfos[site].listtestdatetime = DateTime.Now;
                         testDataInfos[site].SiteTestState = 2;
                         testDataInfos[site].Iswaitout = false;
+                        testDataInfos[site].SiteTestIC = new bool[][] { isopen[0], isopen[1] };
                     }
                     else //在线模式
                     {
@@ -626,6 +655,7 @@ namespace H5509_V2
                         testDataInfos[site].Listtimer.Start();
                         testDataInfos[site].Iswaitout = false;
                         testDataInfos[site].SiteTestState = 2;
+                        testDataInfos[site].SiteTestIC = new bool[][] { isopen[0], isopen[1] };
                         //启动定时器
                     }
                 }
@@ -641,6 +671,7 @@ namespace H5509_V2
                         testDataInfos[site].listtestdatetime = DateTime.Now;
                         testDataInfos[site].SiteTestState = 2;
                         testDataInfos[site].Iswaitout = false;
+                        testDataInfos[site].SiteTestIC = new bool[][] { isopen[0], isopen[1] };
                     }
                     else //在线模式
                     {
@@ -651,6 +682,7 @@ namespace H5509_V2
                         testDataInfos[site].Listtimer.Start();
                         testDataInfos[site].Iswaitout = false;
                         testDataInfos[site].SiteTestState = 2;
+                        testDataInfos[site].SiteTestIC = new bool[][] { isopen[0], isopen[1] };
                         //启动定时器
                     }
                 }
@@ -683,6 +715,7 @@ namespace H5509_V2
                         {
                             testDataInfos[StationId + i].Iswaitout = false;
                             testDataInfos[StationId + i].SiteTestState = 2;
+                            testDataInfos[StationId + i].SiteTestIC = new bool[][] { isopen[i][0], isopen[i][1] };
                         }
                         //if (states[0] == 1 || states[0] == 10) testDataInfos[StationId].SiteTestState = 2;
                         //if (states[1] == 1 || states[1] == 10) testDataInfos[StationId + 1].SiteTestState = 2;
@@ -724,6 +757,7 @@ namespace H5509_V2
                         {
                             testDataInfos[StationId + i].Iswaitout = false;
                             testDataInfos[StationId + i].SiteTestState = 2;
+                            testDataInfos[StationId + i].SiteTestIC = new bool[][] { isopen[i][0], isopen[i][1] };
                         }
                         //if (states[0] == 1 || states[0] == 10) testDataInfos[StationId].SiteTestState = 2;
                         //if (states[1] == 1 || states[1] == 10) testDataInfos[StationId + 1].SiteTestState = 2;
@@ -834,7 +868,7 @@ namespace H5509_V2
                             testDataInfos[sites[i]].TestTime = testtime;
                             testDataInfos[sites[i]].SiteTestBin = new string[] { timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin, timeoutbin };
                             testDataInfos[sites[i]].SiteTestState = 3;
-                            
+
                             string logstr = $"生成Site:{sites[i] + 1:D2},超时Bin:{timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin} {timeoutbin}";
                             RunLog(logstr, LogType.ComLog);
                             RefreshInfoLog(logstr, false);

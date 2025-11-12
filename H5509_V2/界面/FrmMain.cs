@@ -777,6 +777,34 @@ namespace H5509_V2
             }
         }
 
+        private string[] GetBinsOTHcode(bool[] open, string[] bins)
+        {
+            string[] bins2 = new string[bins.Length];
+
+            for (int i = 0; i < bins2.Length; i++)
+            {
+                bins2[i] = bins[i];
+            }
+
+            for (int i = 0; i < bins2.Length; i++)
+            {
+                if (!open[i]) continue;
+
+                if (bins2[i] == 设置信息.通讯信息.超时Bin字符串)
+                {
+                    bins2[i] = 设置信息.测试机信息.超时Bin字符串显示;
+                }
+
+                if (Auto1 != "" && Auto1.Split(",").Contains(bins2[i])) continue;
+                else if (Auto2 != "" && Auto2.Split(",").Contains(bins2[i])) continue;
+                else if (Fix1 != "" && Fix1.Split(",").Contains(bins2[i])) continue;
+                else if (Fix2 != "" && Fix2.Split(",").Contains(bins2[i])) continue;
+                else if (Fix3 != "" && Fix3.Split(",").Contains(bins2[i])) continue;
+                else bins2[i] = "OTH";
+            }
+
+            return bins2;
+        }
 
         private void 界面刷新()
         {
@@ -893,7 +921,7 @@ namespace H5509_V2
                                 //Com.Listtestsingal.Remove(sitenum);
                                 //Com.Listtestsingal.RemoveAt(0);
 
-                                bool[][] open = StationManagers.GetStationIC(sitenum); // SiteTestIC[sitenum];
+                                bool[][] open = sites.data.SiteTestIC; //StationManagers.GetStationIC(sitenum); // SiteTestIC[sitenum];
 
                                 string[] bins = sites.data.SiteTestBin; //Com.OutBin.TryDequeue(out string[] bins);
 
@@ -973,10 +1001,17 @@ namespace H5509_V2
                                 $"values('{开始时间.ToString("D")}','{DateTime.Now.ToString()}','{(LotNo[3] ?? "")}','{(LotNo[4] ?? "")}','{bb}')";
                                 SqlServer.runSqlNonQueryAsync(SQLServerConnString, sql);
 
-                                foreach (string b in bins)
+                                string[] writebins = GetBinsOTHcode(opens, bins);
+
+                                for (int i = 0; i < writebins.Length; i++)
                                 {
-                                    bin(b);
+                                    if (!opens[i]) continue;
+                                    bin(writebins[i]);
                                 }
+                                //foreach (string b in bins)
+                                //{
+                                //    bin(opens, b);
+                                //}
 
                                 int doutnum = sitenum * 8;
                                 for (int m = 0; m < open.Length; m++)

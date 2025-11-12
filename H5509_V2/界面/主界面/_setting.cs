@@ -324,7 +324,7 @@ namespace H5509_V2
             string result = motion.GNM601_GetDiBit(core, 3, axis, out short value);
             if (result == "Success")
             {
-                label1327.BackColor = value == 0 ? Color.Red : Color.LimeGreen; //0处于触发状态(原点常闭), 1处于未触发状态,挡住了原点
+                label1327.BackColor = value == 0 ? Color.Red : Color.LimeGreen; //0处于触发状态(原点常闭)未挡住原点, 0处于未触发状态,挡住了原点
             }
         }
 
@@ -622,8 +622,108 @@ namespace H5509_V2
             //else writeDataHelper.RunLog("位置清零成功，详细信息：" + result.ErrorMsg);
         }
 
+        private bool 判断Z轴原点挡住再运动(string axisName, bool iscancontinue)
+        {
+            if (axisName == "M21_测试手臂X轴")
+            {
+                string[] axisNames = { "M19_测试手臂Z轴" };
+                string result2 = motionEx.GetDiHome(axisNames, out string[] home);
+                if (result2 != "Success") { MessageBox.Show("执行失败!详细信息:" + result2, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return false; }
+
+                if (home[0] == "1") //label1327.BackColor = value == 0 ? Color.Red : Color.LimeGreen; //0处于触发状态(原点常闭), 1处于未触发状态,挡住了原点
+                {
+                    if (!iscancontinue)
+                    {
+                        MessageBox.Show($"{axisNames[0]}未挡住原点,无法执行指令!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    DialogResult dialog = MessageBox.Show($"{axisNames[0]}未挡住原点,请确认是否执行指令?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    if (dialog == DialogResult.Cancel) return false;
+                }
+            }
+            else if (axisName == "M22_入料手臂X轴" || axisName == "M16_入料手臂Y轴" || axisName == "M5_入料手臂P轴")
+            {
+                string[] axisNames = { "M1_入料手臂Z1轴", "M2_入料手臂Z2轴", "M3_入料手臂Z3轴", "M4_入料手臂Z4轴" };
+
+                string result2 = motionEx.GetDiHome(axisNames, out string[] home);
+                if (result2 != "Success") { MessageBox.Show("执行失败!详细信息:" + result2, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return false; }
+
+                if (home.Contains("1")) //如果有1说明有吸嘴没有挡住原点
+                {
+                    List<string> homelist = new List<string>();
+                    for (int i = 0; i < home.Length; i++)
+                    {
+                        if (home[i] == "1") homelist.Add($"Z{i + 1}");
+                    }
+                    string homestr = string.Join(",", homelist);
+                    if (!iscancontinue)
+                    {
+                        MessageBox.Show($"入料{homestr}轴未挡住原点,无法执行指令!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    DialogResult dialog = MessageBox.Show($"入料{homestr}轴未挡住原点,请确认是否执行指令?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    if (dialog == DialogResult.Cancel) return false;
+                }
+            }
+            else if (axisName == "M23_出料手臂X轴" || axisName == "M17_出料手臂Y轴" || axisName == "M10_出料手臂P轴")
+            {
+                string[] axisNames = { "M6_出料手臂Z1轴", "M7_出料手臂Z2轴", "M8_出料手臂Z3轴", "M9_出料手臂Z4轴" };
+
+                string result2 = motionEx.GetDiHome(axisNames, out string[] home);
+                if (result2 != "Success") { MessageBox.Show("执行失败!详细信息:" + result2, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return false; }
+
+                if (home.Contains("1")) //如果有1说明有吸嘴没有挡住原点
+                {
+                    List<string> homelist = new List<string>();
+                    for (int i = 0; i < home.Length; i++)
+                    {
+                        if (home[i] == "1") homelist.Add($"Z{i + 1}");
+                    }
+                    string homestr = string.Join(",", homelist);
+                    if (!iscancontinue)
+                    {
+                        MessageBox.Show($"出料{homestr}轴未挡住原点,无法执行指令!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    DialogResult dialog = MessageBox.Show($"出料{homestr}轴未挡住原点,请确认是否执行指令?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    if (dialog == DialogResult.Cancel) return false;
+                }
+            }
+            else if (axisName == "M18_放Tary盘轴")
+            {
+                string result2 = motionEx.GetDi("X064_移Tray上下缸上感应", out string value);
+                if (result2 != "Success") { MessageBox.Show("执行失败!详细信息:" + result2, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error); return false; }
+
+                if (value == "0")
+                {
+                    if (!iscancontinue)
+                    {
+                        MessageBox.Show($"抓盘手臂上下气缸未感应到在原位,无法执行指令!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    DialogResult dialog = MessageBox.Show($"抓盘手臂上下气缸未感应到在原位,请确认是否执行指令?", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                    if (dialog == DialogResult.Cancel) return false;
+                }
+            }
+            return true;
+        }
+
         private void button89_Click(object sender, EventArgs e)
         {
+            //AxisRun axisRun = GetRunValue();
+            //if (axisRun != null)
+            //{
+            //    if (!判断Z轴原点挡住再运动(axisRun.轴名称)) return;
+
+            //    if (uiChk_relative.Checked) 相对运动步长 = axisRun.目标位置;
+            //    else 绝对运动步长 = axisRun.目标位置;
+
+            //    string result = motion.UniaxialRelativeMove(axisRun, out int prfPos);
+            //    if (result != "Success")
+            //    {
+            //        MessageBox.Show("执行失败!详细信息:" + result, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    }
+            //}
 
             //OutSiteQueue.TryPeek(out (int SiteId, TestDataInfo Data) site);
             //int siteid = site.SiteId;
@@ -1042,6 +1142,8 @@ namespace H5509_V2
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
+                if (!判断Z轴原点挡住再运动(axisRun.轴名称, true)) return;
+
                 if (uiChk_relative.Checked) 相对运动步长 = axisRun.目标位置;
                 else 绝对运动步长 = axisRun.目标位置;
 
@@ -1064,6 +1166,8 @@ namespace H5509_V2
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
+                if (!判断Z轴原点挡住再运动(axisRun.轴名称, true)) return;
+
                 if (uiChk_relative.Checked) 相对运动步长 = axisRun.目标位置;
                 else 绝对运动步长 = axisRun.目标位置;
 
@@ -1088,6 +1192,8 @@ namespace H5509_V2
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
+                if (!判断Z轴原点挡住再运动(axisRun.轴名称, true)) return;
+
                 if (uiChk_relative.Checked) 相对运动步长 = axisRun.目标位置;
                 else 绝对运动步长 = axisRun.目标位置;
 
@@ -1121,6 +1227,8 @@ namespace H5509_V2
             AxisHomeInfo axisHome = GetHomeValue();
             if (axisHome != null)
             {
+                if (!判断Z轴原点挡住再运动(axisHome.轴名称, true)) return;
+
                 Task.Run(() =>
                 {
                     string result = motionEx.AxisHome(axisHome, 1);
@@ -1199,6 +1307,8 @@ namespace H5509_V2
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
+                if (!判断Z轴原点挡住再运动(axisRun.轴名称, false)) return;
+
                 string result = motion.JogMove(axisRun);
                 if (result != "Success")
                 {
@@ -1228,6 +1338,8 @@ namespace H5509_V2
             AxisRun axisRun = GetRunValue();
             if (axisRun != null)
             {
+                if (!判断Z轴原点挡住再运动(axisRun.轴名称, false)) return;
+
                 axisRun.目标速度 = -axisRun.目标速度;
                 string result = motion.JogMove(axisRun);
                 if (result != "Success")
@@ -5413,28 +5525,71 @@ namespace H5509_V2
             }
         }
 
-        private void 检查输入TCP配置()
+        private bool 检查输入TCP配置()
         {
-            if (uiComboBox39.Enabled)
+            Control[] sites = { uiComboBox39, uiComboBox38, uiComboBox37, uiComboBox36, uiComboBox35, uiComboBox34, uiComboBox33, uiComboBox32, uiComboBox47, uiComboBox46, uiComboBox45, uiComboBox44, uiComboBox43, uiComboBox42, uiComboBox41, uiComboBox40 };
+            for (int i = 0; i < sites.Length; i++)
             {
-
+                if (sites[i].Enabled)
+                {
+                    string[] str = sites[i].Text.Split('.');
+                    if (str.Length > 4)
+                    {
+                        MessageBox.Show($"Site{i + 1}的IP地址格式异常!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                    for (int j = 0; j < str.Length; j++)
+                    {
+                        if (str[j].Length > 3)
+                        {
+                            MessageBox.Show($"Site{i + 1}的IP地址格式异常!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return false;
+                        }
+                    }
+                }
             }
+            return true;
         }
 
-        private void 检查输入串口配置()
+        private bool 检查输入串口配置()
         {
+            Control[] sites = { uiComboBox39, uiComboBox38, uiComboBox37, uiComboBox36, uiComboBox35, uiComboBox34, uiComboBox33, uiComboBox32, uiComboBox47, uiComboBox46, uiComboBox45, uiComboBox44, uiComboBox43, uiComboBox42, uiComboBox41, uiComboBox40 };
+            List<string> usedComs = new List<string>();
+            for (int i = 0; i < sites.Length; i++)
+            {
+                if (sites[i].Enabled)
+                {
+                    usedComs.Add(sites[i].Text);
+                    if (!sites[i].Text.Contains("COM"))
+                    {
+                        MessageBox.Show($"Site{i + 1}的串口名称格式异常!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+
+            //string[] coms = { "COM21", "COM22", "COM23", "COM24", "COM25", "COM26", "COM27", "COM28" };
+            bool hasDuplicates = usedComs.Distinct().Count() == usedComs.Count;
+            if (!hasDuplicates)  // 检查是否有重复
+            {
+                MessageBox.Show($"串口名称重复!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
-        private void 检查输入数据配置()
+        private bool 检查输入数据配置()
         {
             if (uiCheckBox166.Checked)
             {
-                检查输入串口配置();
+                return 检查输入串口配置();
             }
             else if (uiCheckBox167.Checked)
             {
-                检查输入TCP配置();
+                return 检查输入TCP配置();
             }
+            return false;
         }
 
         private void 获取通讯信息(out string[] jsons)
@@ -5560,7 +5715,7 @@ namespace H5509_V2
                 string name = uiDataGridView4.Rows[rows].Cells[1].Value.ToString();
                 try
                 {
-
+                    if (!检查输入数据配置()) return;
 
                     DialogResult issave = MessageBox.Show("请确认是否保存！", "提示", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
                     if (issave == DialogResult.OK)
@@ -10126,6 +10281,24 @@ namespace H5509_V2
                 uiCheckBox167.Checked = false;
                 uiCheckBox168.Checked = false;
                 uiCheckBox169.Checked = false;
+
+                uiComboBox39.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox38.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox37.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox36.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox35.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox34.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox33.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox32.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox47.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox46.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox45.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox44.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox43.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox42.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox41.DropDownStyle = UIDropDownStyle.DropDownList;
+                uiComboBox40.DropDownStyle = UIDropDownStyle.DropDownList;
+
             }
             else uiCheckBox166.Checked = true;
             //清空通讯协议();
@@ -10141,6 +10314,23 @@ namespace H5509_V2
                 uiCheckBox166.Checked = false;
                 uiCheckBox168.Checked = false;
                 uiCheckBox169.Checked = false;
+
+                uiComboBox39.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox38.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox37.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox36.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox35.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox34.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox33.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox32.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox47.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox46.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox45.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox44.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox43.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox42.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox41.DropDownStyle = UIDropDownStyle.DropDown;
+                uiComboBox40.DropDownStyle = UIDropDownStyle.DropDown;
             }
             else uiCheckBox167.Checked = true;
             //清空通讯协议();

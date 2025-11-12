@@ -8,17 +8,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms.VisualStyles;
+using DocumentFormat.OpenXml.Drawing.Charts;
 using DocumentFormat.OpenXml.EMMA;
-using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
-using DocumentFormat.OpenXml.Office2019.Excel.ThreadedComments;
-using DocumentFormat.OpenXml.Spreadsheet;
+using IHardwareGXN.GXNCard;
+using MotionCommon;
 using Sunny.UI.Win32;
 using static System.Windows.Forms.LinkLabel;
 using static H5509_V2.APPmaster;
-using MotionCommon;
 using static MotionCommon.AxisRunInfo;
-using IHardwareGXN.GXNCard;
-using System.Runtime.CompilerServices;
 
 namespace H5509_V2
 {
@@ -315,6 +312,27 @@ namespace H5509_V2
         #endregion
 
         #region 动作
+
+        /// <summary>
+        /// 检查轴当前位置与目标位置的差值是否大于跟随误差
+        /// </summary>
+        /// <param name="axisName"></param>
+        /// <param name="mm"></param>
+        /// <returns></returns>
+        public bool AxisPoinitData(string axisName, double mm)
+        {
+            string result = GetAxisRunInfo(axisName, out AxisRunInfo axisRun);
+            if (result != "Success")
+            {
+                RunLog($"执行AxisPoinitData({axisName},{mm})异常，{result}");
+                return false;
+            }
+
+            int prfPos = Convert.ToInt32(Math.Round(mm / axisRun.步长mm));
+            IMotion.GetCmdEncPos(axisRun.核号, axisRun.轴号, out double encPos);
+            double posvalue = Math.Abs(prfPos - encPos);
+            return posvalue > axisRun.跟随误差;
+        }
 
         /// <summary>
         /// 单轴绝对移动

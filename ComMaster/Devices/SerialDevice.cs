@@ -278,14 +278,14 @@ namespace ComMaster.Devices
                 SerialPort sp = (SerialPort)sender;
                 string outdata = old + sp.ReadExisting();
                 outdata = outdata.Replace("\r", "").Replace("\n", "");
-                if (outdata[outdata.Length - 1] != '+')
+                if (!outdata.EndsWith("+"))
                 {
                     old = outdata;
                     return;
                 }
                 else old = "";
 
-                if (outdata.Length < 1) return;
+                //if (outdata.Length < 1) return;
 
                 DataReceive(outdata);
             }
