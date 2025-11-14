@@ -5556,7 +5556,7 @@ namespace H5509_V2
 
             else if (设置信息.通讯信息.通讯方式 == "TCP")
             {
-                //StationManagers.DisConnects();
+                StationManagers.DisConnects();
                 // 直接创建并填充数组
                 sites = Enumerable.Range(0, 16)
                     .Select(i => GetTCPDictionary((IEtherNetConfig)GetSiteConfig(i)))
@@ -5570,6 +5570,7 @@ namespace H5509_V2
                 configDict.Add(siteIndex, sites[siteIndex]);
             }
             StationManagers.UpdateStationsConfig(configDict);
+
             //for (int i = 0; i < 16; i++)
             //{
             //StationManagers.Connect(i);

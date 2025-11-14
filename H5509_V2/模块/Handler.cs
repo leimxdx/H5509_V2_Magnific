@@ -2309,6 +2309,8 @@ namespace H5509_V2
 
             if (设置信息.通讯信息.同时测试 == 2)
             {
+                入料手臂停止工作标记 = true;
+
                 StationManagers.SetStationState(site, 1);
                 StationManagers.SetStationState(site + 1, 1);
                 StationManagers.SetStationIC(site, new bool[][]
@@ -3418,29 +3420,33 @@ namespace H5509_V2
                 Array.Copy(飞梭前入料IC[i], temp[i], 飞梭前入料IC[i].Length);
             }
 
-            飞梭前入料IC = new bool[飞梭后入料IC.Length][];
+            bool[][] 飞梭前入料IC2 = new bool[飞梭后入料IC.Length][];
             for (int i = 0; i < 飞梭后入料IC.Length; i++)
             {
-                飞梭前入料IC[i] = new bool[飞梭后入料IC[i].Length];
-                Array.Copy(飞梭后入料IC[i], 飞梭前入料IC[i], 飞梭后入料IC[i].Length);
+                飞梭前入料IC2[i] = new bool[飞梭后入料IC[i].Length];
+                Array.Copy(飞梭后入料IC[i], 飞梭前入料IC2[i], 飞梭后入料IC[i].Length);
             }
+            飞梭前入料IC = 飞梭前入料IC2;
 
-            飞梭后入料IC = new bool[temp.Length][];
+            bool[][] 飞梭后入料IC2 = new bool[temp.Length][];
             for (int i = 0; i < temp.Length; i++)
             {
-                飞梭后入料IC[i] = new bool[temp[i].Length];
-                Array.Copy(temp[i], 飞梭后入料IC[i], temp[i].Length);
+                飞梭后入料IC2[i] = new bool[temp[i].Length];
+                Array.Copy(temp[i], 飞梭后入料IC2[i], temp[i].Length);
             }
+            飞梭后入料IC = 飞梭后入料IC2;
         }
 
         private void 交换飞梭前后出料IC数据()
         {
-            飞梭前出料IC = new bool[飞梭后出料IC.Length][];
+            bool[][] 飞梭前出料IC2 = new bool[飞梭后出料IC.Length][];
             for (int i = 0; i < 飞梭后出料IC.Length; i++)
             {
-                飞梭前出料IC[i] = new bool[飞梭后出料IC[i].Length];
-                Array.Copy(飞梭后出料IC[i], 飞梭前出料IC[i], 飞梭后出料IC[i].Length);
+                飞梭前出料IC2[i] = new bool[飞梭后出料IC[i].Length];
+                Array.Copy(飞梭后出料IC[i], 飞梭前出料IC2[i], 飞梭后出料IC[i].Length);
             }
+
+            飞梭前出料IC = 飞梭前出料IC2;
 
             飞梭后出料IC = new bool[][] { new bool[] { false, false, false, false }, new bool[] { false, false, false, false } };
         }
@@ -3449,12 +3455,13 @@ namespace H5509_V2
         {
             飞梭前出料TestSite = 飞梭后出料TestSite;
             飞梭前出料TestTime = 飞梭后出料TestTime;
-            飞梭前出料BIN项 = new string[飞梭后出料BIN项.Length][];
+            string[][] 飞梭前出料BIN项2 = new string[飞梭后出料BIN项.Length][];
             for (int i = 0; i < 飞梭后出料BIN项.Length; i++)
             {
-                飞梭前出料BIN项[i] = new string[飞梭后出料BIN项[i].Length];
-                Array.Copy(飞梭后出料BIN项[i], 飞梭前出料BIN项[i], 飞梭后出料BIN项[i].Length);
+                飞梭前出料BIN项2[i] = new string[飞梭后出料BIN项[i].Length];
+                Array.Copy(飞梭后出料BIN项[i], 飞梭前出料BIN项2[i], 飞梭后出料BIN项[i].Length);
             }
+            飞梭前出料BIN项 = 飞梭前出料BIN项2;
         }
 
         private void 检测梭车是否有IC遗留()
@@ -4316,370 +4323,378 @@ namespace H5509_V2
 
             while (true)
             {
-                if (!InitedOK)
+                try
                 {
-                    Thread.Sleep(1000);
-                    continue;
-                }
-
-                string result = motionEx.GetDi(ioInfos, out string[] io);
-                if (result == "Success")
-                {
-                    bool safesw = io[2] == "1"; //"X003_安全钮"
-                    if (CheckEdgeSingal(safesw, ref SafeswRiseCache, true))
+                    if (!InitedOK)
                     {
-                        safekey = false;
-                        motionEx.SetDo("Y003_安全钮灯", true);
-                        //RunLog("按下安全钮");
+                        Thread.Sleep(1000);
+                        continue;
                     }
 
-                    if (CheckEdgeSingal(safesw, ref SafeswFallCache, false))
+                    string result = motionEx.GetDi(ioInfos, out string[] io);
+                    if (result == "Success")
                     {
-                        safekey = true;
-                        motionEx.SetDo("Y003_安全钮灯", false);
-                        //RunLog("松开安全钮");
-                    }
-
-                    bool stop = io[1] == "1"; //"X002_暂停"
-                    if (CheckEdgeSingal(stop, ref StopRiseCache, true) || ProgramPause || ProgramBtnPause)
-                    {
-                        if (ProgramPause)
+                        bool safesw = io[2] == "1"; //"X003_安全钮"
+                        if (CheckEdgeSingal(safesw, ref SafeswRiseCache, true))
                         {
-                            ProgramPause = false;
-                            RunLog("按下暂停(程序)");//, LogType.OperateLog
-                        }
-                        else if (ProgramBtnPause)
-                        {
-                            ProgramBtnPause = false;
-                            RunLog("按下暂停(界面)", LogType.OperateLog);//, LogType.OperateLog
-                        }
-                        else
-                        {
-                            RunLog("按下暂停", LogType.OperateLog);
+                            safekey = false;
+                            motionEx.SetDo("Y003_安全钮灯", true);
+                            //RunLog("按下安全钮");
                         }
 
-                        APPmaster.IsPause = true;
-                        APPmaster.IsStart = false;
-                        if (Empty正在下降回零 || Empty舱门上顶标记) APPmaster.IsEmptyPause = true;
-                        if (Load正在下降回零 || Load舱门上顶标记) APPmaster.IsLoadPause = true;
-
-                        if (设备状态 == 1) 设备状态 = 2;
-
-                        if (设备状态 == 0 || 设备状态 == 2) motionEx.AllAxisStop();
-
-                        form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
-                        //motionEx.Motion.AllAxisStop();
-
-                        if (设备状态 != 0 && H5509归零 && H5509初始化 && Tray盘模式 && !正在结批)
+                        if (CheckEdgeSingal(safesw, ref SafeswFallCache, false))
                         {
-                            if (!Empty正在下降回零 && !Load正在下降回零 && !Empty舱门正在上顶 && !Load舱门正在上顶)
-                            {
-                                if (!Load换盘标记 && Load上顶标记 == 1 && Load下降回零标记 == 1)
-                                {
-                                    Load下降回零开关 = true;
-                                    //RunLog("Load下降开关打开");
-                                }
-                                if (!Auto1换盘标记 && !Auto2换盘标记 && Empty上顶标记 == 1 && Empty下降标记 == 1)
-                                {
-                                    Empty下降回零开关 = true;
-                                    Auto1下降回零开关 = true;
-                                    Auto2下降回零开关 = true;
-                                    //RunLog("Empty/Auto下降开关打开");
-                                }
-                            }
+                            safekey = true;
+                            motionEx.SetDo("Y003_安全钮灯", false);
+                            //RunLog("松开安全钮");
                         }
 
-                        motionEx.SetDo("Y001_开始灯", false);
-                        motionEx.SetDo("Y002_暂停灯", true);
-                        motionEx.SetDo("Y006_定点停止灯", false);
-                        motionEx.SetDo("Y007_定点开始灯", false);
-                        motionEx.SetDo("Y009_一个循环灯", false);
-                    }
-
-                    if (safekey)
-                    {
-                        bool start = io[0] == "1"; //"X001_开始"
-                        if (CheckEdgeSingal(start, ref StartRiseCache, true) || ProgramStart || ProgramBtnStart)
+                        bool stop = io[1] == "1"; //"X002_暂停"
+                        if (CheckEdgeSingal(stop, ref StopRiseCache, true) || ProgramPause || ProgramBtnPause)
                         {
-                            if (ProgramStart)
+                            if (ProgramPause)
                             {
-                                ProgramStart = false;
-                                RunLog("按下开始(程序)", LogType.RunLog);
+                                ProgramPause = false;
+                                RunLog("按下暂停(程序)");//, LogType.OperateLog
                             }
-                            else if (ProgramBtnStart)
+                            else if (ProgramBtnPause)
                             {
-                                ProgramBtnStart = false;
-                                RunLog("按下开始(界面)", LogType.OperateLog);
+                                ProgramBtnPause = false;
+                                RunLog("按下暂停(界面)", LogType.OperateLog);//, LogType.OperateLog
                             }
-                            else RunLog("按下开始", LogType.OperateLog);
-
-                            bool isstart = true;
-
-                            form_alarm.CancelAllAlarm();
-
-                            if (Empty正在下降回零)
+                            else
                             {
-                                isstart = false;
-                                Listcode.Add("1400490");
-                                RunLog($"[Code]1400490,[Msg]请打开Empty仓门等待下降至底部，关上仓门后再按开始！", LogType.AlarmLog);
+                                RunLog("按下暂停", LogType.OperateLog);
                             }
 
-                            if (Load正在下降回零)
-                            {
-                                isstart = false;
-                                Listcode.Add("1400491");
-                                RunLog($"[Code]1400491,[Msg]请打开Load仓门等待下降至底部，关上仓门后再按开始！", LogType.AlarmLog);
+                            APPmaster.IsPause = true;
+                            APPmaster.IsStart = false;
+                            if (Empty正在下降回零 || Empty舱门上顶标记) APPmaster.IsEmptyPause = true;
+                            if (Load正在下降回零 || Load舱门上顶标记) APPmaster.IsLoadPause = true;
 
-                                //RunLog("(按下开始)Load或Empty正在下降回零，无法开始", LogType.OperateLog);
-                                //if (Empty正在下降回零) IsEmptyPause = false;
-                                //if (Load正在下降回零) IsLoadPause = false;
-                            }
+                            if (设备状态 == 1) 设备状态 = 2;
 
-                            if (H5509正在归零)
-                            {
-                                isstart = false;
-                                RunLog("(按下开始)设备正在回零...,无法开始", LogType.OperateLog);
-                            }
+                            if (设备状态 == 0 || 设备状态 == 2) motionEx.AllAxisStop();
 
-                            if (结批选项选择中)
-                            {
-                                isstart = false;
-                                RunLog("(按下开始)结批选项选择中...,无法开始", LogType.OperateLog);
-                            }
+                            form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
+                                                                   //motionEx.Motion.AllAxisStop();
 
-                            if (一个循环选项选择中)
+                            if (设备状态 != 0 && H5509归零 && H5509初始化 && Tray盘模式 && !正在结批)
                             {
-                                isstart = false;
-                                RunLog("(按下开始)一个循环选项选择中...,无法开始", LogType.OperateLog);
-                            }
-
-                            if (入料IC移动过程中忽略)
-                            {
-                                if (CheckInNozzleIC())
+                                if (!Empty正在下降回零 && !Load正在下降回零 && !Empty舱门正在上顶 && !Load舱门正在上顶)
                                 {
-                                    isstart = false;
-                                    RunLog("(按下开始)入料手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
-                                }
-                            }
-
-                            if (出料IC移动过程中忽略)
-                            {
-                                if (CheckOutNozzleIC())
-                                {
-                                    isstart = false;
-                                    RunLog("(按下开始)出料手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
-                                }
-                            }
-
-                            if (测试IC移动过程中忽略)
-                            {
-                                if (CheckTestNozzleIC())
-                                {
-                                    isstart = false;
-                                    RunLog("(按下开始)测试手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
-                                }
-                            }
-
-                            if (等待Load门开启)
-                            {
-                                if (!门已打开超设定时间)
-                                {
-                                    isstart = false;
-                                    Listcode.Add("1400472");
-                                    RunLog($"[Code]1400472,[Msg]请打开前安全门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
-                                }
-                            }
-
-                            if (CheckTimeoutBin())
-                            {
-                                isstart = false;
-                            }
-
-                            string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
-
-                            if (isstart && 设备状态 == 0)
-                            {
-                                if (!初次开始检查(iov))
-                                {
-                                    StationManagers.ConnectAll(); //清空缓存区
-                                    isstart = false;
-                                }
-                            }
-
-                            if (isstart && 开始检查(iov))
-                            {
-                                if (设备状态 == 0)
-                                {
-                                    开始时间 = DateTime.Now;
-
-
-                                    Summary_LotNo = (LotNo[4] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
-                                    //Summary_LotNo = LotNo[0] ?? "" + "_" + 开始时间.ToString("yyyyMMdd") + $"_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
-
-                                    Sqlite.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
-                                    string sql = $"create table f_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
-                                    string sql2 = $"create table o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL,测试时间 nvarchar(MAX) NULL,测试工位 nvarchar(MAX) NULL)";
-                                    //string sql3 = $"create table otime_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
-                                    //string sql4 = $"create table osite_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
-                                    int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
-                                    int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
-                                    //int line2 = SqlServer.runSqlNonQuery(SQLServerConnString, sql3);
-                                    //int line3 = SqlServer.runSqlNonQuery(SQLServerConnString, sql4);
-
-                                    if (line <= -2)
+                                    if (!Load换盘标记 && Load上顶标记 == 1 && Load下降回零标记 == 1)
                                     {
-                                        isstart = false;
-                                        Listcode.Add("1400330");
-                                        RunLog("执行SQl异常：" + sql);
-                                        RunLog("[Code]1400330,[Msg](按下开始)创建MAP信息数据库失败!", LogType.AlarmLog);
+                                        Load下降回零开关 = true;
+                                        //RunLog("Load下降开关打开");
                                     }
+                                    if (!Auto1换盘标记 && !Auto2换盘标记 && Empty上顶标记 == 1 && Empty下降标记 == 1)
+                                    {
+                                        Empty下降回零开关 = true;
+                                        Auto1下降回零开关 = true;
+                                        Auto2下降回零开关 = true;
+                                        //RunLog("Empty/Auto下降开关打开");
+                                    }
+                                }
+                            }
 
-                                    if (line1 <= -2)
+                            motionEx.SetDo("Y001_开始灯", false);
+                            motionEx.SetDo("Y002_暂停灯", true);
+                            motionEx.SetDo("Y006_定点停止灯", false);
+                            motionEx.SetDo("Y007_定点开始灯", false);
+                            motionEx.SetDo("Y009_一个循环灯", false);
+                        }
+
+                        if (safekey)
+                        {
+                            bool start = io[0] == "1"; //"X001_开始"
+                            if (CheckEdgeSingal(start, ref StartRiseCache, true) || ProgramStart || ProgramBtnStart)
+                            {
+                                if (ProgramStart)
+                                {
+                                    ProgramStart = false;
+                                    RunLog("按下开始(程序)", LogType.RunLog);
+                                }
+                                else if (ProgramBtnStart)
+                                {
+                                    ProgramBtnStart = false;
+                                    RunLog("按下开始(界面)", LogType.OperateLog);
+                                }
+                                else RunLog("按下开始", LogType.OperateLog);
+
+                                bool isstart = true;
+
+                                form_alarm.CancelAllAlarm();
+
+                                if (Empty正在下降回零)
+                                {
+                                    isstart = false;
+                                    Listcode.Add("1400490");
+                                    RunLog($"[Code]1400490,[Msg]请打开Empty仓门等待下降至底部，关上仓门后再按开始！", LogType.AlarmLog);
+                                }
+
+                                if (Load正在下降回零)
+                                {
+                                    isstart = false;
+                                    Listcode.Add("1400491");
+                                    RunLog($"[Code]1400491,[Msg]请打开Load仓门等待下降至底部，关上仓门后再按开始！", LogType.AlarmLog);
+
+                                    //RunLog("(按下开始)Load或Empty正在下降回零，无法开始", LogType.OperateLog);
+                                    //if (Empty正在下降回零) IsEmptyPause = false;
+                                    //if (Load正在下降回零) IsLoadPause = false;
+                                }
+
+                                if (H5509正在归零)
+                                {
+                                    isstart = false;
+                                    RunLog("(按下开始)设备正在回零...,无法开始", LogType.OperateLog);
+                                }
+
+                                if (结批选项选择中)
+                                {
+                                    isstart = false;
+                                    RunLog("(按下开始)结批选项选择中...,无法开始", LogType.OperateLog);
+                                }
+
+                                if (一个循环选项选择中)
+                                {
+                                    isstart = false;
+                                    RunLog("(按下开始)一个循环选项选择中...,无法开始", LogType.OperateLog);
+                                }
+
+                                if (入料IC移动过程中忽略)
+                                {
+                                    if (CheckInNozzleIC())
                                     {
                                         isstart = false;
-                                        Listcode.Add("1400330");
-                                        if (line1 <= -2) RunLog("执行SQl异常：" + sql2);
-                                        //if (line2 <= -2) RunLog("执行SQl异常：" + sql3);
-                                        //if (line3 <= -2) RunLog("执行SQl异常：" + sql4);
-                                        RunLog("[Code]1400330,[Msg](按下开始)创建BIN信息数据库失败!", LogType.AlarmLog);
+                                        RunLog("(按下开始)入料手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
+                                    }
+                                }
+
+                                if (出料IC移动过程中忽略)
+                                {
+                                    if (CheckOutNozzleIC())
+                                    {
+                                        isstart = false;
+                                        RunLog("(按下开始)出料手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
+                                    }
+                                }
+
+                                if (测试IC移动过程中忽略)
+                                {
+                                    if (CheckTestNozzleIC())
+                                    {
+                                        isstart = false;
+                                        RunLog("(按下开始)测试手臂移动过程中有IC掉落,无法开始", LogType.OperateLog);
+                                    }
+                                }
+
+                                if (等待Load门开启)
+                                {
+                                    if (!门已打开超设定时间)
+                                    {
+                                        isstart = false;
+                                        Listcode.Add("1400472");
+                                        RunLog($"[Code]1400472,[Msg]请打开前安全门{Load门开门时间}秒并确认是否有料剩余在Tray盘！", LogType.AlarmLog);
+                                    }
+                                }
+
+                                if (CheckTimeoutBin())
+                                {
+                                    isstart = false;
+                                }
+
+                                string[] iov = { io[15], io[16], io[18], io[19], io[20], io[21], io[22], io[23], io[24], io[25], io[26] };
+
+                                if (isstart && 设备状态 == 0)
+                                {
+                                    if (!初次开始检查(iov))
+                                    {
+                                        StationManagers.ConnectAll(); //清空缓存区
+                                        isstart = false;
+                                    }
+                                }
+
+                                if (isstart && 开始检查(iov))
+                                {
+                                    if (设备状态 == 0)
+                                    {
+                                        开始时间 = DateTime.Now;
+
+
+                                        Summary_LotNo = (LotNo[4] ?? "") + "_" + $"{开始时间.Year:D2}-{开始时间.Month:D2}-{开始时间.Day:D2}_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+                                        //Summary_LotNo = LotNo[0] ?? "" + "_" + 开始时间.ToString("yyyyMMdd") + $"_{开始时间.Hour:D2}h{开始时间.Minute:D2}m{开始时间.Second:D2}s";
+
+                                        Sqlite.runSqlNonQuery(SQLiteRunningString, "update DutCurrent set pass=0,total=0,usedTime=0");
+                                        string sql = $"create table f_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(批次开始日期 nvarchar(50) NULL,获取MAP时间 nvarchar(50) NULL,料号 nvarchar(50) NULL,批号 nvarchar(20) NULL,MAP信息 nvarchar(50) NULL )";
+                                        string sql2 = $"create table o_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL,测试时间 nvarchar(MAX) NULL,测试工位 nvarchar(MAX) NULL)";
+                                        //string sql3 = $"create table otime_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+                                        //string sql4 = $"create table osite_{(LotNo[0] ?? "").Replace("-", "_") + "_" + 开始时间.ToString("yyyyMMdd_HH_mm_ss")}(时间 nvarchar(50) NULL,名称 nvarchar(50) NULL,大小 nvarchar(50) NULL,数据 nvarchar(MAX) NULL)";
+                                        int line = SqlServer.runSqlNonQuery(SQLServerConnString, sql);
+                                        int line1 = SqlServer.runSqlNonQuery(SQLServerConnString, sql2);
+                                        //int line2 = SqlServer.runSqlNonQuery(SQLServerConnString, sql3);
+                                        //int line3 = SqlServer.runSqlNonQuery(SQLServerConnString, sql4);
+
+                                        if (line <= -2)
+                                        {
+                                            isstart = false;
+                                            Listcode.Add("1400330");
+                                            RunLog("执行SQl异常：" + sql);
+                                            RunLog("[Code]1400330,[Msg](按下开始)创建MAP信息数据库失败!", LogType.AlarmLog);
+                                        }
+
+                                        if (line1 <= -2)
+                                        {
+                                            isstart = false;
+                                            Listcode.Add("1400330");
+                                            if (line1 <= -2) RunLog("执行SQl异常：" + sql2);
+                                            //if (line2 <= -2) RunLog("执行SQl异常：" + sql3);
+                                            //if (line3 <= -2) RunLog("执行SQl异常：" + sql4);
+                                            RunLog("[Code]1400330,[Msg](按下开始)创建BIN信息数据库失败!", LogType.AlarmLog);
+                                        }
+
+                                        if (isstart)
+                                        {
+                                            StartRunIn(); //根据开Site情况添加入料队列
+
+                                            //开始前的IO检查
+                                            StartSite数量 = 开Site数量;
+
+                                            if (当前权限 != "Operator")//&& CuPersonnel != "supplier")
+                                            {
+                                                刷新权限();
+                                            }
+
+                                            刷新分BIN信息();
+
+                                            报警次数 = 0;
+                                        }
                                     }
 
                                     if (isstart)
                                     {
-                                        StartRunIn(); //根据开Site情况添加入料队列
-
-                                        //开始前的IO检查
-                                        StartSite数量 = 开Site数量;
-
-                                        if (当前权限 != "Operator")//&& CuPersonnel != "supplier")
+                                        if (一个循环完成)
                                         {
-                                            刷新权限();
+                                            一个循环完成 = false;
+                                            StartRunIn(); //根据开Site情况添加入料队列
                                         }
 
-                                        刷新分BIN信息();
-
-                                        报警次数 = 0;
-                                    }
-                                }
-
-                                if (isstart)
-                                {
-                                    if (一个循环完成)
-                                    {
-                                        一个循环完成 = false;
-                                        StartRunIn(); //根据开Site情况添加入料队列
-                                    }
-
-                                    if (Empty舱门上顶标记)
-                                    {
-                                        if (!Empty舱门正在上顶)
+                                        if (Empty舱门上顶标记)
                                         {
-                                            Empty舱门正在上顶 = true;
-                                            IsEmptyPause = false;
-                                            Empty舱门开启标记 = 1;
-                                            Empty上顶标记 = 2;
-                                            RunLog("Empty正在执行上顶...", LogType.OperateLog);
-                                            Task task = Task.Run(() =>
+                                            if (!Empty舱门正在上顶)
                                             {
-                                                while (true)
+                                                Empty舱门正在上顶 = true;
+                                                IsEmptyPause = false;
+                                                Empty舱门开启标记 = 1;
+                                                Empty上顶标记 = 2;
+                                                RunLog("Empty正在执行上顶...", LogType.OperateLog);
+                                                Task task = Task.Run(() =>
                                                 {
-                                                    if (Empty上顶标记 == 1)
+                                                    while (true)
                                                     {
-                                                        Empty舱门开启标记 = 0;
-                                                        Empty舱门正在上顶 = false;
-                                                        Empty舱门上顶标记 = false;
-                                                        break;
+                                                        if (Empty上顶标记 == 1)
+                                                        {
+                                                            Empty舱门开启标记 = 0;
+                                                            Empty舱门正在上顶 = false;
+                                                            Empty舱门上顶标记 = false;
+                                                            break;
+                                                        }
+                                                        else Thread.Sleep(10);
                                                     }
-                                                    else Thread.Sleep(10);
-                                                }
-                                                Empty舱门正在上顶 = false;
-                                                RunLog("Empty执行上顶完成", LogType.OperateLog);
-                                            });
+                                                    Empty舱门正在上顶 = false;
+                                                    RunLog("Empty执行上顶完成", LogType.OperateLog);
+                                                });
+                                            }
+                                            else IsEmptyPause = false;
                                         }
-                                        else IsEmptyPause = false;
-                                    }
 
-                                    if (Load舱门上顶标记)
-                                    {
-                                        if (!Load舱门正在上顶)
+                                        if (Load舱门上顶标记)
                                         {
-                                            Load舱门正在上顶 = true;
-                                            IsLoadPause = false;
-                                            Load舱门开启标记 = 1;
-                                            Load上顶标记 = 2;
-                                            RunLog("Load正在执行上顶...", LogType.OperateLog);
-                                            Task task = Task.Run(() =>
+                                            if (!Load舱门正在上顶)
                                             {
-                                                while (true)
+                                                Load舱门正在上顶 = true;
+                                                IsLoadPause = false;
+                                                Load舱门开启标记 = 1;
+                                                Load上顶标记 = 2;
+                                                RunLog("Load正在执行上顶...", LogType.OperateLog);
+                                                Task task = Task.Run(() =>
                                                 {
-                                                    if (Load上顶标记 == 1)
+                                                    while (true)
                                                     {
-                                                        Load舱门开启标记 = 0;
-                                                        Load舱门正在上顶 = false;
-                                                        Load舱门上顶标记 = false;
-                                                        break;
+                                                        if (Load上顶标记 == 1)
+                                                        {
+                                                            Load舱门开启标记 = 0;
+                                                            Load舱门正在上顶 = false;
+                                                            Load舱门上顶标记 = false;
+                                                            break;
+                                                        }
+                                                        else Thread.Sleep(10);
                                                     }
-                                                    else Thread.Sleep(10);
-                                                }
-                                                Load舱门正在上顶 = false;
-                                                RunLog("Load执行上顶完成", LogType.OperateLog);
-                                            });
+                                                    Load舱门正在上顶 = false;
+                                                    RunLog("Load执行上顶完成", LogType.OperateLog);
+                                                });
+                                            }
+                                            else IsLoadPause = false;
                                         }
-                                        else IsLoadPause = false;
-                                    }
 
-                                    if (Load舱门上顶标记 || Empty舱门上顶标记)
-                                    {
-                                        if (!开舱门上顶标记)
+                                        if (Load舱门上顶标记 || Empty舱门上顶标记)
                                         {
-                                            开舱门上顶标记 = true;
-                                            Task task = Task.Run(() =>
+                                            if (!开舱门上顶标记)
                                             {
-                                                while (true)
+                                                开舱门上顶标记 = true;
+                                                Task task = Task.Run(() =>
                                                 {
-                                                    if (!Load舱门上顶标记 && !Empty舱门正在上顶)
+                                                    while (true)
                                                     {
-                                                        APPmaster.IsPause = false;
-                                                        APPmaster.IsStart = true;
-                                                        APPmaster.IsLoadPause = false;
-                                                        APPmaster.IsEmptyPause = false;
-                                                        break;
+                                                        if (!Load舱门上顶标记 && !Empty舱门正在上顶)
+                                                        {
+                                                            APPmaster.IsPause = false;
+                                                            APPmaster.IsStart = true;
+                                                            APPmaster.IsLoadPause = false;
+                                                            APPmaster.IsEmptyPause = false;
+                                                            break;
+                                                        }
+                                                        Thread.Sleep(10);
                                                     }
-                                                    Thread.Sleep(10);
-                                                }
-                                                开舱门上顶标记 = false;
-                                            });
+                                                    开舱门上顶标记 = false;
+                                                });
+                                            }
                                         }
+                                        else
+                                        {
+                                            APPmaster.IsPause = false;
+                                            APPmaster.IsStart = true;
+                                            APPmaster.IsLoadPause = false;
+                                            APPmaster.IsEmptyPause = false;
+                                        }
+
+                                        设备状态 = 1;
+                                        结批完成 = false;
+                                        Load下降回零开关 = false;
+                                        Empty下降回零开关 = false;
+                                        Auto1下降回零开关 = false;
+                                        Auto2下降回零开关 = false;
+
+                                        入料IC移动过程中忽略 = false; //报警后有可能会把芯片放回吸嘴上，直接点击了开始
+                                        出料IC移动过程中忽略 = false;
+                                        测试IC移动过程中忽略 = false;
+
+                                        motionEx.SetDo("Y001_开始灯", true);
+                                        motionEx.SetDo("Y002_暂停灯", false);
+                                        motionEx.SetDo("Y004_重试灯", false);
+                                        motionEx.SetDo("Y005_忽略灯", false);
+                                        motionEx.SetDo("Y008_结批灯", false);
+                                        motionEx.SetDo("Y009_一个循环灯", false);
+                                        motionEx.SetDo("Y011_换盘灯", false);
+                                        motionEx.SetDo("Y013_黄灯", false);
+                                        motionEx.SetDo("Y008_结批灯", false);
+                                        motionEx.SetDo("Y014_绿灯", true);
                                     }
                                     else
                                     {
-                                        APPmaster.IsPause = false;
-                                        APPmaster.IsStart = true;
-                                        APPmaster.IsLoadPause = false;
-                                        APPmaster.IsEmptyPause = false;
+                                        ProgramPause = true;
+                                        IsPause = true;
                                     }
-
-                                    设备状态 = 1;
-                                    结批完成 = false;
-                                    Load下降回零开关 = false;
-                                    Empty下降回零开关 = false;
-                                    Auto1下降回零开关 = false;
-                                    Auto2下降回零开关 = false;
-
-                                    入料IC移动过程中忽略 = false; //报警后有可能会把芯片放回吸嘴上，直接点击了开始
-                                    出料IC移动过程中忽略 = false;
-                                    测试IC移动过程中忽略 = false;
-
-                                    motionEx.SetDo("Y001_开始灯", true);
-                                    motionEx.SetDo("Y002_暂停灯", false);
-                                    motionEx.SetDo("Y004_重试灯", false);
-                                    motionEx.SetDo("Y005_忽略灯", false);
-                                    motionEx.SetDo("Y008_结批灯", false);
-                                    motionEx.SetDo("Y009_一个循环灯", false);
-                                    motionEx.SetDo("Y011_换盘灯", false);
-                                    motionEx.SetDo("Y013_黄灯", false);
-                                    motionEx.SetDo("Y008_结批灯", false);
-                                    motionEx.SetDo("Y014_绿灯", true);
                                 }
                                 else
                                 {
@@ -4687,622 +4702,623 @@ namespace H5509_V2
                                     IsPause = true;
                                 }
                             }
-                            else
+
+                            bool again = io[3] == "1"; //X004_重试
+                            if (CheckEdgeSingal(again, ref AgainRiseCache, true))
                             {
-                                ProgramPause = true;
-                                IsPause = true;
+                                RunLog("按下重试", LogType.OperateLog);
+
+                                if (设备状态 == 1) continue;
+
+                                入料IC忽略 = false;
+                                出料IC忽略 = false;
+                                测试IC忽略 = false;
+                                入料IC吸不起结批 = false;
+                                测试区IC忽略 = false;
+                                motionEx.SetDo("Y004_重试灯", true);
+                                motionEx.SetDo("Y005_忽略灯", false);
+                                motionEx.SetDo("Y008_结批灯", false);
+                                motionEx.SetDo("Y011_换盘灯", false);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, true);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
                             }
-                        }
 
-                        bool again = io[3] == "1"; //X004_重试
-                        if (CheckEdgeSingal(again, ref AgainRiseCache, true))
-                        {
-                            RunLog("按下重试", LogType.OperateLog);
-
-                            if (设备状态 == 1) continue;
-
-                            入料IC忽略 = false;
-                            出料IC忽略 = false;
-                            测试IC忽略 = false;
-                            入料IC吸不起结批 = false;
-                            测试区IC忽略 = false;
-                            motionEx.SetDo("Y004_重试灯", true);
-                            motionEx.SetDo("Y005_忽略灯", false);
-                            motionEx.SetDo("Y008_结批灯", false);
-                            motionEx.SetDo("Y011_换盘灯", false);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, true);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
-                        }
-
-                        bool ignore = io[4] == "1"; //X005_忽略/跳过
-                        if (CheckEdgeSingal(ignore, ref IgnoreRiseCache, true))
-                        {
-                            RunLog("按下跳过", LogType.OperateLog);
-                            ShowAlarmFlag = true;
-                            if (设备状态 == 1) continue;
-
-                            if (设备状态 != 0 && 测试IC忽略 == false && 测试区IC忽略)
+                            bool ignore = io[4] == "1"; //X005_忽略/跳过
+                            if (CheckEdgeSingal(ignore, ref IgnoreRiseCache, true))
                             {
-                                form_alarm.CancelAllAlarm();
-                                form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
-                                FrmInputPwd frmInputPwd = new FrmInputPwd();
-                                if (frmInputPwd.ShowDialog() == DialogResult.OK)
+                                RunLog("按下跳过", LogType.OperateLog);
+                                ShowAlarmFlag = true;
+                                if (设备状态 == 1) continue;
+
+                                if (设备状态 != 0 && 测试IC忽略 == false && 测试区IC忽略)
                                 {
-                                    string getEngineerwd = GetPassWord("Engineer", out string 密码);
-                                    string getAdministratorwd = GetPassWord("Administrator", out string 密码2);
-                                    string getSupplierwd = GetPassWord("Supplier", out string 密码3);
-                                    if (getEngineerwd == "Success" && getAdministratorwd == "Success" && getSupplierwd == "Success")
+                                    form_alarm.CancelAllAlarm();
+                                    form_alarm.AlarmLight(0, 1, 0, "无音乐"); //按下暂停
+                                    FrmInputPwd frmInputPwd = new FrmInputPwd();
+                                    if (frmInputPwd.ShowDialog() == DialogResult.OK)
                                     {
-                                        if (frmInputPwd.Password == 密码 || frmInputPwd.Password == 密码2 || frmInputPwd.Password == 密码3)
+                                        string getEngineerwd = GetPassWord("Engineer", out string 密码);
+                                        string getAdministratorwd = GetPassWord("Administrator", out string 密码2);
+                                        string getSupplierwd = GetPassWord("Supplier", out string 密码3);
+                                        if (getEngineerwd == "Success" && getAdministratorwd == "Success" && getSupplierwd == "Success")
                                         {
-                                            RunLog($"密码输出正确");
+                                            if (frmInputPwd.Password == 密码 || frmInputPwd.Password == 密码2 || frmInputPwd.Password == 密码3)
+                                            {
+                                                RunLog($"密码输出正确");
+                                            }
+                                            else
+                                            {
+                                                RunLog($"密码错误！");//{frmInputPwd.Password}
+                                                MessageBox.Show($"密码错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);//{frmInputPwd.Password}
+                                            }
                                         }
                                         else
                                         {
-                                            RunLog($"密码错误！");//{frmInputPwd.Password}
-                                            MessageBox.Show($"密码错误！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);//{frmInputPwd.Password}
+                                            if (getEngineerwd != "Success")
+                                            {
+                                                RunLog($"获取Engineer密码失败！" + getEngineerwd);
+                                                MessageBox.Show($"获取Engineer密码失败！" + getEngineerwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
+                                            if (getAdministratorwd != "Success")
+                                            {
+                                                RunLog($"获取Administrator密码失败！" + getAdministratorwd);
+                                                MessageBox.Show($"获取Administrator密码失败！" + getAdministratorwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
+                                            if (getSupplierwd != "Success")
+                                            {
+                                                RunLog($"获取Supplier密码失败！" + getSupplierwd);
+                                                MessageBox.Show($"获取Supplier密码失败！" + getSupplierwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                            }
+                                            continue;
                                         }
+                                    }
+                                    else continue;
+                                }
+
+                                if (入料IC忽略 == false) 入料IC忽略 = true;
+                                if (出料IC忽略 == false) 出料IC忽略 = true;
+                                if (测试IC忽略 == false) 测试IC忽略 = true;
+                                if (入料IC移动过程中忽略) UpdateInNozzleIC();
+                                if (出料IC移动过程中忽略) UpdateOutNozzleIC();
+                                if (测试IC移动过程中忽略) UpdateTestNozzleIC();
+                                入料IC移动过程中忽略 = false;
+                                出料IC移动过程中忽略 = false;
+                                测试IC移动过程中忽略 = false;
+                                motionEx.SetDo("Y004_重试灯", false);
+                                motionEx.SetDo("Y005_忽略灯", true);
+                                motionEx.SetDo("Y008_结批灯", false);
+                                motionEx.SetDo("Y011_换盘灯", false);
+
+                                ShowAlarmFlag = false;
+                                //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
+                            }
+
+                            bool fixedstop = io[5] == "1"; //X006_定点停止
+                            if (CheckEdgeSingal(fixedstop, ref FixedStopRiseCache, true))
+                            {
+                                RunLog("按下定点停止", LogType.OperateLog);
+                                motionEx.SetDo("Y006_定点停止灯", true);
+                                前方定点停止允许 = true;
+                            }
+
+                            bool fixedstart = io[6] == "1"; //X007_定点开始
+                            if (CheckEdgeSingal(fixedstart, ref FixedStartRiseCache, true))
+                            {
+                                RunLog("按下定点开始", LogType.OperateLog);
+                                motionEx.SetDo("Y007_定点开始灯", true);
+                                后方定点停止允许 = true;
+                            }
+
+                            bool stopbatch = io[7] == "1"; //X008_结批
+                            if (CheckEdgeSingal(stopbatch, ref StopBatchRiseCache, true))
+                            {
+                                RunLog("按下结批", LogType.OperateLog);
+                                if (设备状态 != 0)
+                                {
+                                    if (!强制结批标记)
+                                    {
+                                        if (!结批触发定时器.Enabled)
+                                        {
+                                            结批触发定时器.Start();
+                                            RunLog("结批按钮开始计时", LogType.OperateLog);
+                                        }
+                                    }
+                                    if (!入料IC吸不起结批)
+                                    {
+                                        入料IC吸不起结批 = true;
+                                        按下结批时间 = DateTime.Now;
+                                    }
+                                    if (!无待测盘结批)
+                                    {
+                                        无待测盘结批 = true;
+                                        按下结批时间 = DateTime.Now;
+                                    }
+                                    motionEx.SetDo("Y004_重试灯", false);
+                                    motionEx.SetDo("Y005_忽略灯", false);
+                                    motionEx.SetDo("Y008_结批灯", true);
+                                    motionEx.SetDo("Y011_换盘灯", false);
+                                }
+                                //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, true);
+                                //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
+                            }
+
+                            if (CheckEdgeSingal(stopbatch, ref StopBatchFallCache, false))
+                            {
+                                结批触发定时器.Stop();
+                                RunLog("已松开结批按钮停止计时", LogType.OperateLog);
+                            }
+
+                            bool onecycle = io[8] == "1"; //X009_一个循环
+                            if (CheckEdgeSingal(onecycle, ref OnecycleRiseCache, true))
+                            {
+                                RunLog("按下一个循环", LogType.OperateLog);
+
+                                //if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
+                                //{
+                                //    Listcode.Add("1400442");
+                                //    RunLog("[Code]1400442,[Msg](按下一次循环)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
+                                //}
+
+                                if (IsDutAllCLose()) //当初次开始时检测有没有开dut
+                                {
+                                    if (!结批标记)
+                                    {
+                                        if (!一个循环标记)
+                                        {
+                                            if (温度模式 == "高温")
+                                            {
+                                                一个循环选项选择中 = true;
+                                                ProgramPause = true;
+                                                IsPause = true;
+                                                DialogResult dialog = MessageBox.Show("请确认是否清空加热盘?\n是:将加热盘剩余IC取完\n否:直接结批\n取消:不做任何操作", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                                                if (dialog == DialogResult.Yes)
+                                                {
+                                                    一个循环标记 = true;
+                                                    一个循环完成 = false;
+                                                    按下一个循环时间 = DateTime.Now;
+                                                    OneCycle按钮闪烁的定时器.Start();
+                                                }
+                                                else if (dialog == DialogResult.No)
+                                                {
+                                                    一个循环标记 = true;
+                                                    一个循环完成 = false;
+                                                    按下一个循环时间 = DateTime.Now;
+                                                    加热盘停止入料标记 = true;
+                                                    OneCycle按钮闪烁的定时器.Start();
+                                                }
+                                                一个循环选项选择中 = false;
+                                                ProgramStart = true;
+                                            }
+                                            else
+                                            {
+                                                一个循环标记 = true;
+                                                一个循环完成 = false;
+                                                按下一个循环时间 = DateTime.Now;
+                                                OneCycle按钮闪烁的定时器.Start();
+                                            }
+                                        }
+                                        else RunLog("无法触发一个循环,正在一个循环中...");
+                                    }
+                                    else RunLog("无法触发结批,正在结批中...");
+                                }
+                            }
+
+                            bool home = io[9] == "1"; //X010_归零
+                            if (CheckEdgeSingal(home, ref HomeRiseCache, true))
+                            {
+                                RunLog("按下归零", LogType.OperateLog);
+                                bool ishome = true;
+                                if (!H5509正在归零 && 设备状态 == 0)
+                                {
+                                    if (!安全门禁用)
+                                    {
+                                        result = 门禁感应(out string[] iovalue);
+                                        if (result == "Success")
+                                        {
+                                            if (iovalue.Contains("0"))
+                                            {
+                                                if (iovalue[0] == "0")
+                                                {
+                                                    Listcode.Add("9000000");
+                                                    RunLog("[Code]9000000,[Msg](按下归零)前门禁被打开", LogType.AlarmLog);
+                                                }
+                                                if (iovalue[1] == "0")
+                                                {
+                                                    Listcode.Add("9000010");
+                                                    RunLog("[Code]9000010,[Msg](按下归零)后门禁被打开", LogType.AlarmLog);
+                                                }
+                                                if (iovalue[2] == "0")
+                                                {
+                                                    Listcode.Add("9000020");
+                                                    RunLog("[Code]9000020,[Msg](按下归零)左门禁被打开", LogType.AlarmLog);
+                                                }
+                                                if (iovalue[3] == "0")
+                                                {
+                                                    Listcode.Add("9000040");
+                                                    RunLog("[Code]9000040,[Msg](按下归零)右门禁被打开", LogType.AlarmLog);
+                                                }
+                                                ishome = false;
+                                            }
+                                        }
+                                    }
+
+                                    if (io[27] == 气压报警)
+                                    {
+                                        ishome = false;
+                                        Listcode.Add("1400020"); //系统错误--气压不足
+                                        RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
+                                    }
+
+
+
+                                    if (ishome)
+                                    {
+                                        参数初始化();
+
+                                        显示Dout颜色();
+
+                                        //if (!Com.IsconnectTester)
+                                        //{
+                                        //    刷新批次信息();
+                                        //}
+
+                                        StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
+                                        StationManagers.ConnectAll(); //清空缓存区
+
+                                        刷新批次信息();
+
+                                        H5509正在归零 = true;
+                                        H5509归零 = false;
+                                        IsPause = false;
+                                        结批完成 = false;
+                                        motionEx.SetDo("Y001_开始灯", false);
+                                        motionEx.SetDo("Y002_暂停灯", false);
+                                        motionEx.SetDo("Y010_归零灯", true);
+                                        form_alarm.CancelAllAlarm();
+                                        if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
+
+                                        form_alarm.AlarmLight(归零状态灯设置.红灯显示方式, 归零状态灯设置.黄灯显示方式, 归零状态灯设置.绿灯显示方式, 归零状态灯设置.报警音乐); //按下暂停
+
+                                        Task.Run(() =>
+                                        {
+                                            result = 整机回零流程();
+                                            if (result == "Success")
+                                            {
+                                                H5509归零 = true;
+                                                if (归零后报警) Listcode.Add("1400444");
+                                                RunLog("[Code]1400444,[Msg]归零完成", LogType.AlarmLog);
+                                                RunLog("归零完成", LogType.OperateLog);
+                                            }
+                                            else
+                                            {
+                                                if (归零后报警) Listcode.Add("1400420");
+                                                RunLog("[Code]1400420,[Msg]归零失败!" + result, LogType.AlarmLog);
+                                                全部回零异常Error = result;
+                                                RunLog("归零失败", LogType.OperateLog);
+                                            }
+
+                                            if (!归零后报警)
+                                            {
+                                                ProgramPause = true;
+                                                IsPause = true;
+                                            }
+                                            H5509正在归零 = false;
+                                            motionEx.SetDo("Y001_开始灯", false);
+                                            motionEx.SetDo("Y002_暂停灯", false);
+                                            motionEx.SetDo("Y010_归零灯", false);
+                                            //form_alarm.AlarmLight(0, 1, 0, "无音乐"); //报警自然就有声音了
+                                        });
                                     }
                                     else
                                     {
-                                        if (getEngineerwd != "Success")
-                                        {
-                                            RunLog($"获取Engineer密码失败！" + getEngineerwd);
-                                            MessageBox.Show($"获取Engineer密码失败！" + getEngineerwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                        if (getAdministratorwd != "Success")
-                                        {
-                                            RunLog($"获取Administrator密码失败！" + getAdministratorwd);
-                                            MessageBox.Show($"获取Administrator密码失败！" + getAdministratorwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                        if (getSupplierwd != "Success")
-                                        {
-                                            RunLog($"获取Supplier密码失败！" + getSupplierwd);
-                                            MessageBox.Show($"获取Supplier密码失败！" + getSupplierwd, "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                        }
-                                        continue;
+                                        ProgramPause = true;
+                                        IsPause = true;
                                     }
                                 }
-                                else continue;
                             }
 
-                            if (入料IC忽略 == false) 入料IC忽略 = true;
-                            if (出料IC忽略 == false) 出料IC忽略 = true;
-                            if (测试IC忽略 == false) 测试IC忽略 = true;
-                            if (入料IC移动过程中忽略) UpdateInNozzleIC();
-                            if (出料IC移动过程中忽略) UpdateOutNozzleIC();
-                            if (测试IC移动过程中忽略) UpdateTestNozzleIC();
-                            入料IC移动过程中忽略 = false;
-                            出料IC移动过程中忽略 = false;
-                            测试IC移动过程中忽略 = false;
-                            motionEx.SetDo("Y004_重试灯", false);
-                            motionEx.SetDo("Y005_忽略灯", true);
-                            motionEx.SetDo("Y008_结批灯", false);
-                            motionEx.SetDo("Y011_换盘灯", false);
-
-                            ShowAlarmFlag = false;
-                            //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, true);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, false);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
-                        }
-
-                        bool fixedstop = io[5] == "1"; //X006_定点停止
-                        if (CheckEdgeSingal(fixedstop, ref FixedStopRiseCache, true))
-                        {
-                            RunLog("按下定点停止", LogType.OperateLog);
-                            motionEx.SetDo("Y006_定点停止灯", true);
-                            前方定点停止允许 = true;
-                        }
-
-                        bool fixedstart = io[6] == "1"; //X007_定点开始
-                        if (CheckEdgeSingal(fixedstart, ref FixedStartRiseCache, true))
-                        {
-                            RunLog("按下定点开始", LogType.OperateLog);
-                            motionEx.SetDo("Y007_定点开始灯", true);
-                            后方定点停止允许 = true;
-                        }
-
-                        bool stopbatch = io[7] == "1"; //X008_结批
-                        if (CheckEdgeSingal(stopbatch, ref StopBatchRiseCache, true))
-                        {
-                            RunLog("按下结批", LogType.OperateLog);
-                            if (设备状态 != 0)
+                            bool exchangetray = io[10] == "1"; //X011_换盘
+                            if (CheckEdgeSingal(exchangetray, ref ExchangetrayRiseCache, true))
                             {
-                                if (!强制结批标记)
-                                {
-                                    if (!结批触发定时器.Enabled)
-                                    {
-                                        结批触发定时器.Start();
-                                        RunLog("结批按钮开始计时", LogType.OperateLog);
-                                    }
-                                }
-                                if (!入料IC吸不起结批)
-                                {
-                                    入料IC吸不起结批 = true;
-                                    按下结批时间 = DateTime.Now;
-                                }
-                                if (!无待测盘结批)
-                                {
-                                    无待测盘结批 = true;
-                                    按下结批时间 = DateTime.Now;
-                                }
+                                RunLog("按下换Tray", LogType.OperateLog);
+
+                                if (设备状态 == 1) continue;
+
                                 motionEx.SetDo("Y004_重试灯", false);
                                 motionEx.SetDo("Y005_忽略灯", false);
-                                motionEx.SetDo("Y008_结批灯", true);
-                                motionEx.SetDo("Y011_换盘灯", false);
+                                motionEx.SetDo("Y008_结批灯", false);
+                                motionEx.SetDo("Y011_换盘灯", true);
                             }
-                            //motionEx.SetGNME601_Output(GNME601IO.Y004_重试灯, false);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y005_忽略灯, false);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y008_结批灯, true);
-                            //motionEx.SetGNME601_Output(GNME601IO.Y011_换TRAY灯, false);
-                        }
 
-                        if (CheckEdgeSingal(stopbatch, ref StopBatchFallCache, false))
-                        {
-                            结批触发定时器.Stop();
-                            RunLog("已松开结批按钮停止计时", LogType.OperateLog);
-                        }
-
-                        bool onecycle = io[8] == "1"; //X009_一个循环
-                        if (CheckEdgeSingal(onecycle, ref OnecycleRiseCache, true))
-                        {
-                            RunLog("按下一个循环", LogType.OperateLog);
-
-                            //if (!IsDutAllCLose()) //当初次开始时检测有没有开dut
-                            //{
-                            //    Listcode.Add("1400442");
-                            //    RunLog("[Code]1400442,[Msg](按下一次循环)Dut全部被关闭，请至少开1个Dut进行测试或长按结批后再按开始", LogType.AlarmLog);
-                            //}
-
-                            if (IsDutAllCLose()) //当初次开始时检测有没有开dut
+                            bool x18 = io[15] == "1";  //X018_空盘门感应
+                            if (CheckEdgeSingal(x18, ref EmptyDoorRiseCache, true))
                             {
-                                if (!结批标记)
+                                RunLog("Empty仓门已关闭", LogType.OperateLog);
+                                if (设备状态 != 0)
                                 {
-                                    if (!一个循环标记)
-                                    {
-                                        if (温度模式 == "高温")
-                                        {
-                                            一个循环选项选择中 = true;
-                                            ProgramPause = true;
-                                            IsPause = true;
-                                            DialogResult dialog = MessageBox.Show("请确认是否清空加热盘?\n是:将加热盘剩余IC取完\n否:直接结批\n取消:不做任何操作", "提示", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                                            if (dialog == DialogResult.Yes)
-                                            {
-                                                一个循环标记 = true;
-                                                一个循环完成 = false;
-                                                按下一个循环时间 = DateTime.Now;
-                                                OneCycle按钮闪烁的定时器.Start();
-                                            }
-                                            else if (dialog == DialogResult.No)
-                                            {
-                                                一个循环标记 = true;
-                                                一个循环完成 = false;
-                                                按下一个循环时间 = DateTime.Now;
-                                                加热盘停止入料标记 = true;
-                                                OneCycle按钮闪烁的定时器.Start();
-                                            }
-                                            一个循环选项选择中 = false;
-                                            ProgramStart = true;
-                                        }
-                                        else
-                                        {
-                                            一个循环标记 = true;
-                                            一个循环完成 = false;
-                                            按下一个循环时间 = DateTime.Now;
-                                            OneCycle按钮闪烁的定时器.Start();
-                                        }
-                                    }
-                                    else RunLog("无法触发一个循环,正在一个循环中...");
+                                    if (Empty正在下降回零 && Tray盘模式) IsEmptyPause = true;
                                 }
-                                else RunLog("无法触发结批,正在结批中...");
                             }
-                        }
+                            else if (CheckEdgeSingal(x18, ref EmptyDoorFallCache, false))
+                            {
+                                RunLog("Empty仓门被打开", LogType.OperateLog);
+                                if (设备状态 != 0)
+                                {
+                                    if (Empty料仓打开标记 == false) Empty料仓打开标记 = true;
 
-                        bool home = io[9] == "1"; //X010_归零
-                        if (CheckEdgeSingal(home, ref HomeRiseCache, true))
-                        {
-                            RunLog("按下归零", LogType.OperateLog);
-                            bool ishome = true;
-                            if (!H5509正在归零 && 设备状态 == 0)
+                                    if (Empty下降回零开关 && 设备状态 == 2)
+                                    {
+                                        if (!Empty正在下降回零)
+                                        {
+                                            Empty正在下降回零 = true;
+                                            IsEmptyPause = false;
+                                            Empty舱门开启标记 = 1;
+                                            Empty下降回零标记 = 2;
+                                            RunLog("Empty正在执行下降回零...", LogType.OperateLog);
+                                            Task task = Task.Run(() =>
+                                            {
+                                                while (true)
+                                                {
+                                                    if (Empty下降回零标记 == 1)
+                                                    {
+                                                        Empty舱门上顶标记 = true;
+                                                        Empty舱门开启标记 = 0;
+                                                        break;
+                                                    }
+                                                    else Thread.Sleep(10);
+                                                }
+                                                Empty正在下降回零 = false;
+                                                RunLog("Empty下降回零完成", LogType.OperateLog);
+                                            });
+                                        }
+                                        else IsEmptyPause = false;
+                                    }
+                                }
+                            }
+
+                            bool x24 = io[16] == "1"; //X024_Load门感应
+                            if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
+                            {
+                                //Load门开启定时器.Stop();
+                                RunLog("Load仓门已关闭", LogType.OperateLog);
+                                if (设备状态 != 0)
+                                {
+                                    if (Load正在下降回零 && Tray盘模式) IsLoadPause = true;
+                                }
+                            }
+                            else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
+                            {
+                                RunLog("Load仓门被打开", LogType.OperateLog);
+                                //if (等待Load门开启)
+                                //{
+                                //    Load门开启定时器.Start();
+                                //}
+
+                                if (设备状态 != 0)
+                                {
+                                    if (Load下降回零开关 && 设备状态 == 2)
+                                    {
+                                        if (!Load正在下降回零)
+                                        {
+                                            Load正在下降回零 = true;
+                                            IsLoadPause = false;
+                                            Load舱门开启标记 = 1;
+                                            Load下降回零标记 = 2;
+                                            RunLog("Load正在执行下降回零...", LogType.OperateLog);
+                                            Task task = Task.Run(() =>
+                                            {
+                                                while (true)
+                                                {
+                                                    if (Load下降回零标记 == 1)
+                                                    {
+                                                        Load舱门上顶标记 = true;
+                                                        Load舱门开启标记 = 0;
+                                                        break;
+                                                    }
+                                                    else Thread.Sleep(10);
+                                                }
+                                                Load正在下降回零 = false;
+                                                RunLog("Load下降回零完成", LogType.OperateLog);
+                                            });
+                                        }
+                                        else IsLoadPause = false;
+                                    }
+                                }
+                            }
+
+                            bool traymove = io[17] == "1"; //X038_BIN平移按键
+                            if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
+                            {
+                                RunLog("按下Tray平移", LogType.OperateLog);
+
+                                if (设备状态 == 1) continue;
+
+                                result = motionEx.GetAxisEnable("M11_Fix3放IC轴", out bool enable);
+                                if (result == "Success")
+                                {
+                                    if (!Tray平移运动标记 && enable && 设备状态 != 1)//H5509归零
+                                    {
+                                        Tray平移运动标记 = true;
+
+                                        motionEx.SetDo("Y040_BIN平移按键灯", true);
+                                        Task.Run(() =>
+                                        {
+                                            if (Tray平移左右标记 == 0)
+                                            {
+                                                result = Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动, 1);
+                                                if (result == "Success")
+                                                {
+                                                    Tray平移左右标记 = 1;
+                                                }
+                                                else RunLog("放Tary盘轴移动失败!" + result, LogType.OperateLog);
+                                            }
+
+                                            else if (Tray平移左右标记 == 1)
+                                            {
+                                                result = Fix3放IC盘轴移动(0, 1);
+                                                if (result == "Success")
+                                                {
+                                                    Tray平移左右标记 = 0;
+                                                }
+                                                else RunLog("放Tary盘轴移动失败!" + result, LogType.OperateLog);
+                                            }
+
+                                            motionEx.SetDo("Y040_BIN平移按键灯", false);
+
+                                            Tray平移运动标记 = false;
+                                        });
+                                    }
+                                }
+                                else RunLog("获取M11_Fix3放IC轴状态失败!" + result, LogType.OperateLog);
+                            }
+
+                            bool x36 = io[18] == "1";  //X036_Auto1门感应
+                            if (CheckEdgeSingal(x36, ref Auto1DoorRiseCache, true))
+                            {
+                                RunLog("Auto1仓门已关闭", LogType.OperateLog);
+                            }
+                            else if (CheckEdgeSingal(x36, ref Auto1DoorFallCache, false))
+                            {
+                                RunLog("Auto1仓门被打开", LogType.OperateLog);
+                                if (设备状态 != 0)
+                                {
+                                    if (!Auto1料仓打开标记)
+                                    {
+                                        Auto1料仓打开标记 = true;
+                                    }
+                                }
+                            }
+
+                            bool x42 = io[19] == "1"; //X042_Auto2门感应
+                            if (CheckEdgeSingal(x42, ref Auto2DoorRiseCache, true))
+                            {
+                                RunLog("Auto2仓门已关闭", LogType.OperateLog);
+                            }
+                            else if (CheckEdgeSingal(x42, ref Auto2DoorFallCache, false))
+                            {
+                                RunLog("Auto2仓门被打开", LogType.OperateLog);
+
+                                if (设备状态 != 0)
+                                {
+                                    if (!Auto2料仓打开标记)
+                                    {
+                                        Auto2料仓打开标记 = true;
+                                    }
+                                }
+                            }
+
+                            bool x46 = io[20] == "1"; //X046_FIX1盘感应
+
+                            if (CheckEdgeSingal(x46, ref Fix1TrayRiseCache, true))
+                            {
+                                if (!Fix1Tray盘放置标记) Fix1Tray盘放置标记 = true;
+                                RunLog("Fix1已放置Tray盘", LogType.OperateLog);
+                            }
+                            else if (CheckEdgeSingal(x46, ref Fix1TrayFallCache, false))
+                            {
+                                if (!Fix1Tray盘拿走标记) Fix1Tray盘拿走标记 = true;
+                                RunLog("Fix1Tray盘被拿走", LogType.OperateLog);
+                            }
+
+                            bool x47 = io[21] == "1"; //X047_FIX2盘感应
+
+                            if (CheckEdgeSingal(x47, ref Fix2TrayRiseCache, true))
+                            {
+                                if (!Fix2Tray盘放置标记) Fix2Tray盘放置标记 = true;
+                                RunLog("Fix2已放置Tray盘", LogType.OperateLog);
+                            }
+                            else if (CheckEdgeSingal(x47, ref Fix2TrayFallCache, false))
+                            {
+                                if (!Fix2Tray盘拿走标记) Fix2Tray盘拿走标记 = true;
+                                RunLog("Fix2Tray盘被拿走", LogType.OperateLog);
+                            }
+
+                            bool x45 = io[22] == "0"; //X045_FIX3盘对射
+
+                            if (CheckEdgeSingal(x45, ref Fix3TrayRiseCache, true))
+                            {
+                                if (!Fix3Tray盘放置标记) Fix3Tray盘放置标记 = true;
+                                RunLog("Fix3已放置Tray盘", LogType.OperateLog);
+                            }
+                            else if (CheckEdgeSingal(x45, ref Fix3TrayFallCache, false))
+                            {
+                                if (!Fix3Tray盘拿走标记) Fix3Tray盘拿走标记 = true;
+                                RunLog("Fix3Tray盘被拿走", LogType.OperateLog);
+                            }
+
+                            if (等待Load门开启)
+                            {
+                                if (io[11] == "0")
+                                {
+                                    if (!Load门开启定时器.Enabled)
+                                    {
+                                        Load门开启定时器.Start();
+                                    }
+                                }
+                                else
+                                {
+                                    if (Load门开启定时器.Enabled)
+                                    {
+                                        Load门开启定时器.Stop();
+                                    }
+                                }
+                            }
+
+                            if (!IsPause && (设备状态 == 1 || H5509正在归零))
                             {
                                 if (!安全门禁用)
                                 {
-                                    result = 门禁感应(out string[] iovalue);
-                                    if (result == "Success")
+                                    if (io[11] == "0" || io[12] == "0" || io[13] == "0" || io[14] == "0")
                                     {
-                                        if (iovalue.Contains("0"))
+                                        if (io[11] == "0")
                                         {
-                                            if (iovalue[0] == "0")
-                                            {
-                                                Listcode.Add("9000000");
-                                                RunLog("[Code]9000000,[Msg](按下归零)前门禁被打开", LogType.AlarmLog);
-                                            }
-                                            if (iovalue[1] == "0")
-                                            {
-                                                Listcode.Add("9000010");
-                                                RunLog("[Code]9000010,[Msg](按下归零)后门禁被打开", LogType.AlarmLog);
-                                            }
-                                            if (iovalue[2] == "0")
-                                            {
-                                                Listcode.Add("9000020");
-                                                RunLog("[Code]9000020,[Msg](按下归零)左门禁被打开", LogType.AlarmLog);
-                                            }
-                                            if (iovalue[3] == "0")
-                                            {
-                                                Listcode.Add("9000040");
-                                                RunLog("[Code]9000040,[Msg](按下归零)右门禁被打开", LogType.AlarmLog);
-                                            }
-                                            ishome = false;
+                                            Listcode.Add("9000000");
+                                            RunLog("[Code]9000000,[Msg](运行中)前门禁被打开", LogType.AlarmLog);
                                         }
+                                        if (io[12] == "0")
+                                        {
+                                            Listcode.Add("9000010");
+                                            RunLog("[Code]9000010,[Msg](运行中)后门禁被打开", LogType.AlarmLog);
+                                        }
+                                        if (io[13] == "0")
+                                        {
+                                            Listcode.Add("9000020");
+                                            RunLog("[Code]9000020,[Msg](运行中)左门禁被打开", LogType.AlarmLog);
+                                        }
+                                        if (io[14] == "0")
+                                        {
+                                            Listcode.Add("9000040");
+                                            RunLog("[Code]9000040,[Msg](运行中)右门禁被打开", LogType.AlarmLog);
+                                        }
+                                        ProgramPause = true;
+                                        IsPause = true;
                                     }
                                 }
 
                                 if (io[27] == 气压报警)
                                 {
-                                    ishome = false;
                                     Listcode.Add("1400020"); //系统错误--气压不足
                                     RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
-                                }
-
-
-
-                                if (ishome)
-                                {
-                                    参数初始化();
-
-                                    显示Dout颜色();
-
-                                    //if (!Com.IsconnectTester)
-                                    //{
-                                    //    刷新批次信息();
-                                    //}
-
-                                    StationManagers.SetIsconnectTester(false); //Com.IsconnectTester = false;
-                                    StationManagers.ConnectAll(); //清空缓存区
-
-                                    刷新批次信息();
-
-                                    H5509正在归零 = true;
-                                    H5509归零 = false;
-                                    IsPause = false;
-                                    结批完成 = false;
-                                    motionEx.SetDo("Y001_开始灯", false);
-                                    motionEx.SetDo("Y002_暂停灯", false);
-                                    motionEx.SetDo("Y010_归零灯", true);
-                                    form_alarm.CancelAllAlarm();
-                                    if (温控加热 && 温度模式 == "高温") 梭车加热关闭();
-
-                                    form_alarm.AlarmLight(归零状态灯设置.红灯显示方式, 归零状态灯设置.黄灯显示方式, 归零状态灯设置.绿灯显示方式, 归零状态灯设置.报警音乐); //按下暂停
-
-                                    Task.Run(() =>
-                                    {
-                                        result = 整机回零流程();
-                                        if (result == "Success")
-                                        {
-                                            H5509归零 = true;
-                                            if (归零后报警) Listcode.Add("1400444");
-                                            RunLog("[Code]1400444,[Msg]归零完成", LogType.AlarmLog);
-                                            RunLog("归零完成", LogType.OperateLog);
-                                        }
-                                        else
-                                        {
-                                            if (归零后报警) Listcode.Add("1400420");
-                                            RunLog("[Code]1400420,[Msg]归零失败!" + result, LogType.AlarmLog);
-                                            全部回零异常Error = result;
-                                            RunLog("归零失败", LogType.OperateLog);
-                                        }
-
-                                        if (!归零后报警)
-                                        {
-                                            ProgramPause = true;
-                                            IsPause = true;
-                                        }
-                                        H5509正在归零 = false;
-                                        motionEx.SetDo("Y001_开始灯", false);
-                                        motionEx.SetDo("Y002_暂停灯", false);
-                                        motionEx.SetDo("Y010_归零灯", false);
-                                        //form_alarm.AlarmLight(0, 1, 0, "无音乐"); //报警自然就有声音了
-                                    });
-                                }
-                                else
-                                {
                                     ProgramPause = true;
                                     IsPause = true;
                                 }
                             }
                         }
-
-                        bool exchangetray = io[10] == "1"; //X011_换盘
-                        if (CheckEdgeSingal(exchangetray, ref ExchangetrayRiseCache, true))
-                        {
-                            RunLog("按下换Tray", LogType.OperateLog);
-
-                            if (设备状态 == 1) continue;
-
-                            motionEx.SetDo("Y004_重试灯", false);
-                            motionEx.SetDo("Y005_忽略灯", false);
-                            motionEx.SetDo("Y008_结批灯", false);
-                            motionEx.SetDo("Y011_换盘灯", true);
-                        }
-
-                        bool x18 = io[15] == "1";  //X018_空盘门感应
-                        if (CheckEdgeSingal(x18, ref EmptyDoorRiseCache, true))
-                        {
-                            RunLog("Empty仓门已关闭", LogType.OperateLog);
-                            if (设备状态 != 0)
-                            {
-                                if (Empty正在下降回零 && Tray盘模式) IsEmptyPause = true;
-                            }
-                        }
-                        else if (CheckEdgeSingal(x18, ref EmptyDoorFallCache, false))
-                        {
-                            RunLog("Empty仓门被打开", LogType.OperateLog);
-                            if (设备状态 != 0)
-                            {
-                                if (Empty料仓打开标记 == false) Empty料仓打开标记 = true;
-
-                                if (Empty下降回零开关 && 设备状态 == 2)
-                                {
-                                    if (!Empty正在下降回零)
-                                    {
-                                        Empty正在下降回零 = true;
-                                        IsEmptyPause = false;
-                                        Empty舱门开启标记 = 1;
-                                        Empty下降回零标记 = 2;
-                                        RunLog("Empty正在执行下降回零...", LogType.OperateLog);
-                                        Task task = Task.Run(() =>
-                                        {
-                                            while (true)
-                                            {
-                                                if (Empty下降回零标记 == 1)
-                                                {
-                                                    Empty舱门上顶标记 = true;
-                                                    Empty舱门开启标记 = 0;
-                                                    break;
-                                                }
-                                                else Thread.Sleep(10);
-                                            }
-                                            Empty正在下降回零 = false;
-                                            RunLog("Empty下降回零完成", LogType.OperateLog);
-                                        });
-                                    }
-                                    else IsEmptyPause = false;
-                                }
-                            }
-                        }
-
-                        bool x24 = io[16] == "1"; //X024_Load门感应
-                        if (CheckEdgeSingal(x24, ref LoaderDoorRiseCache, true))
-                        {
-                            //Load门开启定时器.Stop();
-                            RunLog("Load仓门已关闭", LogType.OperateLog);
-                            if (设备状态 != 0)
-                            {
-                                if (Load正在下降回零 && Tray盘模式) IsLoadPause = true;
-                            }
-                        }
-                        else if (CheckEdgeSingal(x24, ref LoaderDoorFallCache, false))
-                        {
-                            RunLog("Load仓门被打开", LogType.OperateLog);
-                            //if (等待Load门开启)
-                            //{
-                            //    Load门开启定时器.Start();
-                            //}
-
-                            if (设备状态 != 0)
-                            {
-                                if (Load下降回零开关 && 设备状态 == 2)
-                                {
-                                    if (!Load正在下降回零)
-                                    {
-                                        Load正在下降回零 = true;
-                                        IsLoadPause = false;
-                                        Load舱门开启标记 = 1;
-                                        Load下降回零标记 = 2;
-                                        RunLog("Load正在执行下降回零...", LogType.OperateLog);
-                                        Task task = Task.Run(() =>
-                                        {
-                                            while (true)
-                                            {
-                                                if (Load下降回零标记 == 1)
-                                                {
-                                                    Load舱门上顶标记 = true;
-                                                    Load舱门开启标记 = 0;
-                                                    break;
-                                                }
-                                                else Thread.Sleep(10);
-                                            }
-                                            Load正在下降回零 = false;
-                                            RunLog("Load下降回零完成", LogType.OperateLog);
-                                        });
-                                    }
-                                    else IsLoadPause = false;
-                                }
-                            }
-                        }
-
-                        bool traymove = io[17] == "1"; //X038_BIN平移按键
-                        if (CheckEdgeSingal(traymove, ref TrayMoveRiseCache, true))
-                        {
-                            RunLog("按下Tray平移", LogType.OperateLog);
-
-                            if (设备状态 == 1) continue;
-
-                            result = motionEx.GetAxisEnable("M11_Fix3放IC轴", out bool enable);
-                            if (result == "Success")
-                            {
-                                if (!Tray平移运动标记 && enable && 设备状态 != 1)//H5509归零
-                                {
-                                    Tray平移运动标记 = true;
-
-                                    motionEx.SetDo("Y040_BIN平移按键灯", true);
-                                    Task.Run(() =>
-                                    {
-                                        if (Tray平移左右标记 == 0)
-                                        {
-                                            result = Fix3放IC盘轴移动(初始点位.出料_Fix3_右移动, 1);
-                                            if (result == "Success")
-                                            {
-                                                Tray平移左右标记 = 1;
-                                            }
-                                            else RunLog("放Tary盘轴移动失败!" + result, LogType.OperateLog);
-                                        }
-
-                                        else if (Tray平移左右标记 == 1)
-                                        {
-                                            result = Fix3放IC盘轴移动(0, 1);
-                                            if (result == "Success")
-                                            {
-                                                Tray平移左右标记 = 0;
-                                            }
-                                            else RunLog("放Tary盘轴移动失败!" + result, LogType.OperateLog);
-                                        }
-
-                                        motionEx.SetDo("Y040_BIN平移按键灯", false);
-
-                                        Tray平移运动标记 = false;
-                                    });
-                                }
-                            }
-                            else RunLog("获取M11_Fix3放IC轴状态失败!" + result, LogType.OperateLog);
-                        }
-
-                        bool x36 = io[18] == "1";  //X036_Auto1门感应
-                        if (CheckEdgeSingal(x36, ref Auto1DoorRiseCache, true))
-                        {
-                            RunLog("Auto1仓门已关闭", LogType.OperateLog);
-                        }
-                        else if (CheckEdgeSingal(x36, ref Auto1DoorFallCache, false))
-                        {
-                            RunLog("Auto1仓门被打开", LogType.OperateLog);
-                            if (设备状态 != 0)
-                            {
-                                if (!Auto1料仓打开标记)
-                                {
-                                    Auto1料仓打开标记 = true;
-                                }
-                            }
-                        }
-
-                        bool x42 = io[19] == "1"; //X042_Auto2门感应
-                        if (CheckEdgeSingal(x42, ref Auto2DoorRiseCache, true))
-                        {
-                            RunLog("Auto2仓门已关闭", LogType.OperateLog);
-                        }
-                        else if (CheckEdgeSingal(x42, ref Auto2DoorFallCache, false))
-                        {
-                            RunLog("Auto2仓门被打开", LogType.OperateLog);
-
-                            if (设备状态 != 0)
-                            {
-                                if (!Auto2料仓打开标记)
-                                {
-                                    Auto2料仓打开标记 = true;
-                                }
-                            }
-                        }
-
-                        bool x46 = io[20] == "1"; //X046_FIX1盘感应
-
-                        if (CheckEdgeSingal(x46, ref Fix1TrayRiseCache, true))
-                        {
-                            if (!Fix1Tray盘放置标记) Fix1Tray盘放置标记 = true;
-                            RunLog("Fix1已放置Tray盘", LogType.OperateLog);
-                        }
-                        else if (CheckEdgeSingal(x46, ref Fix1TrayFallCache, false))
-                        {
-                            if (!Fix1Tray盘拿走标记) Fix1Tray盘拿走标记 = true;
-                            RunLog("Fix1Tray盘被拿走", LogType.OperateLog);
-                        }
-
-                        bool x47 = io[21] == "1"; //X047_FIX2盘感应
-
-                        if (CheckEdgeSingal(x47, ref Fix2TrayRiseCache, true))
-                        {
-                            if (!Fix2Tray盘放置标记) Fix2Tray盘放置标记 = true;
-                            RunLog("Fix2已放置Tray盘", LogType.OperateLog);
-                        }
-                        else if (CheckEdgeSingal(x47, ref Fix2TrayFallCache, false))
-                        {
-                            if (!Fix2Tray盘拿走标记) Fix2Tray盘拿走标记 = true;
-                            RunLog("Fix2Tray盘被拿走", LogType.OperateLog);
-                        }
-
-                        bool x45 = io[22] == "0"; //X045_FIX3盘对射
-
-                        if (CheckEdgeSingal(x45, ref Fix3TrayRiseCache, true))
-                        {
-                            if (!Fix3Tray盘放置标记) Fix3Tray盘放置标记 = true;
-                            RunLog("Fix3已放置Tray盘", LogType.OperateLog);
-                        }
-                        else if (CheckEdgeSingal(x45, ref Fix3TrayFallCache, false))
-                        {
-                            if (!Fix3Tray盘拿走标记) Fix3Tray盘拿走标记 = true;
-                            RunLog("Fix3Tray盘被拿走", LogType.OperateLog);
-                        }
-
-                        if (等待Load门开启)
-                        {
-                            if (io[11] == "0")
-                            {
-                                if (!Load门开启定时器.Enabled)
-                                {
-                                    Load门开启定时器.Start();
-                                }
-                            }
-                            else
-                            {
-                                if (Load门开启定时器.Enabled)
-                                {
-                                    Load门开启定时器.Stop();
-                                }
-                            }
-                        }
-
-                        if (!IsPause && (设备状态 == 1 || H5509正在归零))
-                        {
-                            if (!安全门禁用)
-                            {
-                                if (io[11] == "0" || io[12] == "0" || io[13] == "0" || io[14] == "0")
-                                {
-                                    if (io[11] == "0")
-                                    {
-                                        Listcode.Add("9000000");
-                                        RunLog("[Code]9000000,[Msg](运行中)前门禁被打开", LogType.AlarmLog);
-                                    }
-                                    if (io[12] == "0")
-                                    {
-                                        Listcode.Add("9000010");
-                                        RunLog("[Code]9000010,[Msg](运行中)后门禁被打开", LogType.AlarmLog);
-                                    }
-                                    if (io[13] == "0")
-                                    {
-                                        Listcode.Add("9000020");
-                                        RunLog("[Code]9000020,[Msg](运行中)左门禁被打开", LogType.AlarmLog);
-                                    }
-                                    if (io[14] == "0")
-                                    {
-                                        Listcode.Add("9000040");
-                                        RunLog("[Code]9000040,[Msg](运行中)右门禁被打开", LogType.AlarmLog);
-                                    }
-                                    ProgramPause = true;
-                                    IsPause = true;
-                                }
-                            }
-
-                            if (io[27] == 气压报警)
-                            {
-                                Listcode.Add("1400020"); //系统错误--气压不足
-                                RunLog("[Code]1400020,[Msg]整机气压异常", LogType.AlarmLog);
-                                ProgramPause = true;
-                                IsPause = true;
-                            }
-                        }
+                        Thread.Sleep(6);
                     }
-                    Thread.Sleep(6);
+
+                }
+                catch (Exception ex)
+                {
+                    RunLog($"系统按钮检测流程运行异常,详细信息:" + ex.Message);
+                    Thread.Sleep(500);
                 }
             }
         }
@@ -5742,12 +5758,10 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = $"PS初始化流程({PS初始化流程.StepID})运行异常,详细信息:" + ex.Message;
-                    RunLog(errormsg, LogType.AlarmLog);
-                    系统未定义错误ErrorMsg = errormsg;
-                    ProgramPause = true;
-                    IsPause = true;
-                    Listcode.Add("1400070");
+                    //string errormsg = $"PS初始化流程({PS初始化流程.StepID})运行异常,详细信息:" + ex.Message;
+                    RunLog($"PS初始化流程({PS初始化流程.StepID})运行异常,详细信息:" + ex.Message); //系统未定义错误ErrorMsg = errormsg;
+                    Thread.Sleep(500); //Listcode.Add("1400070");
+
                 }
             }
         }
@@ -6107,12 +6121,14 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = $"PS结批流程({PS结批流程.StepID})运行异常,详细信息:" + ex.Message;
-                    RunLog(errormsg, LogType.AlarmLog);
-                    系统未定义错误ErrorMsg = errormsg;
-                    ProgramPause = true;
-                    IsPause = true;
-                    Listcode.Add("1400070");
+                    RunLog($"PS结批流程({PS结批流程.StepID})运行异常,详细信息:" + ex.Message);
+                    Thread.Sleep(500);
+                    //string errormsg = $"PS结批流程({PS结批流程.StepID})运行异常,详细信息:" + ex.Message;
+                    //RunLog(errormsg, LogType.AlarmLog);
+                    //系统未定义错误ErrorMsg = errormsg;
+                    //ProgramPause = true;
+                    //IsPause = true;
+                    //Listcode.Add("1400070");
                 }
             }
             RunLog(("PS结批流程循环退出!"));
@@ -7998,12 +8014,14 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = $"PS入料手臂吸放料流程({PS入料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message;
-                    RunLog(errormsg, LogType.AlarmLog);
-                    系统未定义错误ErrorMsg = errormsg;
-                    ProgramPause = true;
-                    IsPause = true;
-                    Listcode.Add("1400070");
+                    RunLog($"PS入料手臂吸放料流程({PS入料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message);
+                    Thread.Sleep(500);
+                    //string errormsg = $"PS入料手臂吸放料流程({PS入料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message;
+                    //RunLog(errormsg, LogType.AlarmLog);
+                    //系统未定义错误ErrorMsg = errormsg;
+                    //ProgramPause = true;
+                    //IsPause = true;
+                    //Listcode.Add("1400070");
                 }
             }
         }
@@ -9662,12 +9680,14 @@ namespace H5509_V2
                 }
                 catch (Exception ex)
                 {
-                    string errormsg = $"PS出料手臂吸放料流程({PS出料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message;
-                    RunLog(errormsg, LogType.AlarmLog);
-                    系统未定义错误ErrorMsg = errormsg;
-                    ProgramPause = true;
-                    IsPause = true;
-                    Listcode.Add("1400070");
+                    RunLog($"PS出料手臂吸放料流程({PS出料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message);
+                    Thread.Sleep(500);
+                    //string errormsg = $"PS出料手臂吸放料流程({PS出料手臂吸放料流程.StepID})运行异常,详细信息:" + ex.Message;
+                    //RunLog(errormsg, LogType.AlarmLog);
+                    //系统未定义错误ErrorMsg = errormsg;
+                    //ProgramPause = true;
+                    //IsPause = true;
+                    //Listcode.Add("1400070");
                 }
             }
         }

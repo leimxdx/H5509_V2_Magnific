@@ -145,10 +145,13 @@ namespace H5509_V2
                     Communication.DataReceive = DataReceived;
                     break;
                 case "TCP":
-                    Communication = new EthernetDevice("", "");
+                    string ipAddr = config["PortName"].ToString();
+                    int port = (int)config["Port"]; //{ "Protocol":"TCP","PortName":"192.168.100.5","Port":7005}
+                    Communication = new EthernetDevice(StationId, ipAddr, port);
+                    Communication.DataReceive = DataReceived;
                     break;
                 case "LAN": // 假设LAN与TCP类似，或单独实现
-                    Communication = new EthernetDevice("", "");
+                    Communication = new EthernetDevice(StationId, "127.0.0.1", 100);
                     break;
                 case "GPIB":
                     Communication = new GpibDevice("", "");
@@ -275,7 +278,7 @@ namespace H5509_V2
                         }
                     }
                 }
-                else RunLog($"site:{site:D2}未在测试!", LogType.RunLog);
+                else RunLog($"site:{site + 1:D2}未在测试!", LogType.RunLog);
 
                 #endregion
             }
@@ -317,9 +320,26 @@ namespace H5509_V2
                             //    string[] allValues = allIdentifiers.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                             //}
 
+                            if (outdata.Length < 59) //@TEST_DONE EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB EB+
+                            {
+                                errorstr = "字符长度小于59";
+                                throw new Exception("得一微");
+                            }
+                            if (outdata[58] != '+')
+                            {
+                                errorstr = "第59个字符不是‘+’";
+                                throw new Exception("得一微");
+                            }
+
                             string bin = outdata.Substring(11, outdata.Length - 12);
 
                             string[] allParts = bin.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+                            if (allParts.Length < 16)
+                            {
+                                errorstr = "数据长度小于16";
+                                throw new Exception("得一微");
+                            }
 
                             //// 2. 将长字符串按每2个字符一组分割
                             //string[] allParts = new string[bin.Length / 2];
@@ -339,8 +359,9 @@ namespace H5509_V2
                                 testDataInfos[site].Listtimer.Stop();
                                 testDataInfos[site].timeOutTimer.Stop();
 
+                                TimeSpan testtime = DateTime.Now - testDataInfos[site].listtestdatetime;
                                 //testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                                //testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                                //testDataInfos[site].TestTime  = DateTime.Now - testDataInfos[site].listtestdatetime;
 
                                 for (int i = 0; i < sites.Length; i++)
                                 {
@@ -349,8 +370,8 @@ namespace H5509_V2
                                         testDataInfos[sites[i]].Iswaitout = false;
                                         testDataInfos[sites[i]].SiteTestBin = new string[] { bins[i][0], bins[i][1], bins[i][2], bins[i][3], bins[i][4], bins[i][5], bins[i][6], bins[i][7] };
 
-                                        testDataInfos[sites[i]].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                                        testDataInfos[sites[i]].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                                        testDataInfos[sites[i]].listtesttimespan = testtime;
+                                        testDataInfos[sites[i]].TestTime = testtime;
                                         testDataInfos[sites[i]].SiteTestState = 3;
 
                                         RunLog($"接收Site:{sites[i]:D2},测试Bin:{bins[i][0]} {bins[i][1]} {bins[i][2]} {bins[i][3]} {bins[i][4]} {bins[i][5]} {bins[i][6]} {bins[i][7]}");
@@ -415,6 +436,8 @@ namespace H5509_V2
 
                             int site = StationId + Convert.ToInt32(outdata.Substring(11, 2));
 
+                            TimeSpan testtime = DateTime.Now - testDataInfos[site].listtestdatetime;
+
                             if (testDataInfos[site].SiteTestState == 2 && (testDataInfos[site].Listtimer.Enabled || testDataInfos[site].timeOutTimer.Enabled)) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                             {
                                 testDataInfos[site].Listtimer.Stop();
@@ -423,8 +446,8 @@ namespace H5509_V2
 
                                 testDataInfos[site].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
 
-                                testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                                testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                                testDataInfos[site].listtesttimespan = testtime;
+                                testDataInfos[site].TestTime = testtime;
                                 testDataInfos[site].SiteTestState = 3;
 
                                 RunLog($"接收Site:{site:D2},测试Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
@@ -435,8 +458,28 @@ namespace H5509_V2
                         }
                         else //晶存
                         {
+                            if (outdata.Length < 38)
+                            {
+                                errorstr = "字符长度小于38";
+                                throw new Exception("晶存");
+                            }
+                            if (outdata[37] != '+')
+                            {
+                                errorstr = "第38个字符不是‘+’";
+                                throw new Exception("晶存");
+                            }
+
                             string[] bin = outdata.Substring(14, 23).Split(' '); //@TEST_DONE 05 06 01 06 06 06 06 06 06+
+
+                            if (bin.Length != 8)
+                            {
+                                errorstr = "数据长度不等于8";
+                                throw new Exception("晶存");
+                            }
+
                             int site = Convert.ToInt32(outdata.Substring(11, 2));
+
+                            TimeSpan testtime = DateTime.Now - testDataInfos[site].listtestdatetime;
 
                             if (testDataInfos[site].SiteTestState == 2 && (testDataInfos[site].Listtimer.Enabled || testDataInfos[site].timeOutTimer.Enabled)) //if (listsitetest[site].TestStatus == true && Iswaitout[site] == false && Isreceive[site] == false)
                             {
@@ -446,8 +489,8 @@ namespace H5509_V2
                                 testDataInfos[site].Iswaitout = false;
                                 testDataInfos[site].SiteTestBin = new string[] { bin[0], bin[1], bin[2], bin[3], bin[4], bin[5], bin[6], bin[7] };
 
-                                testDataInfos[site].listtesttimespan = DateTime.Now - testDataInfos[site].listtestdatetime;
-                                testDataInfos[site].TestTime = DateTime.Now - testDataInfos[site].listtestdatetime;
+                                testDataInfos[site].listtesttimespan = testtime;
+                                testDataInfos[site].TestTime = testtime;
                                 testDataInfos[site].SiteTestState = 3;
 
                                 RunLog($"接收Site:{site:D2},测试Bin:{bin[0]} {bin[1]} {bin[2]} {bin[3]} {bin[4]} {bin[5]} {bin[6]} {bin[7]}");
@@ -460,7 +503,7 @@ namespace H5509_V2
                         if (!outdata.Contains("+")) break;
                         else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                     }
-                    catch (Exception ex) when (ex.Message.Equals("衡宇") || ex.Message.Equals("得一微"))
+                    catch (Exception ex) when (ex.Message.Equals("衡宇") || ex.Message.Equals("得一微") || ex.Message.Equals("晶存"))
                     {
                         int 测试机id = TestStation.GetTesterId(StationId);
                         串口数据异常Msg = $"测试机{测试机id + 1}接收的通讯数据({outdata})解析失败！详细信息：{errorstr}";
@@ -469,7 +512,12 @@ namespace H5509_V2
                         ProgramPause = true;
                         IsPause = true;
                         int indexnum = outdata.IndexOf('@', 1);
-                        if (indexnum == -1) break; //如果没有找到符号'@'则退出
+                        if (indexnum == -1)
+                        {
+                            if (!outdata.Contains("+")) break;
+                            else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
+                            break; //如果没有找到符号'@'则退出
+                        }
                         outdata = outdata.Remove(0, indexnum);
                     }
                     catch (Exception ex)
@@ -486,12 +534,18 @@ namespace H5509_V2
                 }
                 else if (outdata.StartsWith("@START_TEST_RES"))
                 {
+                    string errorstr = "";
                     try
                     {
                         if (设置信息.通讯信息.通讯协议 == "慧荣")
                         {
                             //发送111111111
                             //接收TEST_RES 00000000200002000000
+                            if (outdata.Length < 49)
+                            {
+                                errorstr = "字符长度小于49";
+                                throw new Exception("慧荣");
+                            }
                             char[] chars = outdata.Substring(16, 32).ToCharArray(); //@START_TEST_RES 00000000000000000000000000000000+
                             if (chars.Length == 32)
                             {
@@ -513,6 +567,17 @@ namespace H5509_V2
                             }
                         }
                         outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
+                    }
+                    catch (Exception ex) when (ex.Message.Equals("慧荣"))
+                    {
+                        int 测试机id = TestStation.GetTesterId(StationId);
+                        串口数据异常Msg = $"测试机{测试机id + 1}接收的通讯数据({outdata})解析失败！详细信息：{errorstr}";
+                        Listcode.Add("1400150");
+                        RunLog($"[Code]1400150,[Msg]{串口数据异常Msg}", LogType.AlarmLog); //tester接收的通讯数据(Data)解析失败！详细信息：Msg
+                        ProgramPause = true;
+                        IsPause = true;
+                        if (!outdata.Contains("+")) break;
+                        else outdata = outdata.Remove(0, outdata.IndexOf('+') + 1);
                     }
                     catch (Exception ex)
                     {

@@ -3182,10 +3182,10 @@ namespace H5509_V2
             //    }
             //}
 
-            Task.Run(() =>
-            {
-                handler.HandlerDebug();
-            });
+            //Task.Run(() =>
+            //{
+            //    handler.HandlerDebug();
+            //});
 
 
             //Listcode.Add("11111");

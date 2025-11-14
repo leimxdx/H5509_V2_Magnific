@@ -916,7 +916,7 @@ namespace H5509_V2
                                     }
                                 }
 
-                                RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + ":接收Site：" + sitenum + 1);
+                                RunLog(DateTime.Now.ToString("HH:mm:ss.fff") + $":接收Site：{sitenum + 1}");
 
                                 //Com.Listtestsingal.Remove(sitenum);
                                 //Com.Listtestsingal.RemoveAt(0);

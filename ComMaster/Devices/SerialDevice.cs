@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO.Ports;
 using System.Linq;
 using System.Security.Policy;
@@ -92,6 +93,34 @@ namespace ComMaster.Devices
 
         #region 共有方法
 
+        private void InitializeSerialPort()
+        {
+            lock (_syncLock)
+            {
+                if (_serialPort != null)
+                {
+                    if (IsConnected) Disconnect();
+                    _serialPort.Dispose();
+                }
+
+                _serialPort = new SerialPort
+                {
+                    PortName = PortName,
+                    BaudRate = BaudRate,
+                    DataBits = DataBits,
+                    StopBits = GetStopBitsValue(),
+                    Parity = GetParityValue()
+                };
+                _serialPort.DataReceived += DataReceivedHandler;
+
+                Connect();
+
+                //_serialPort = new SerialBase();
+                //_serialPort.SerialPortInni(PortName, BaudRate, DataBits, GetStopBitsValue(), GetParityValue());
+                //_serialPort.ReceiveTimeOut = ReceiveTimeout;
+                //_serialPort.RtsEnable = true;
+            }
+        }
 
         private void UpdateCommunicationTime()
         {
@@ -114,13 +143,13 @@ namespace ComMaster.Devices
 
                     _serialPort.Open();
                     _serialPort.DiscardOutBuffer();
-                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},连接成功");
+                    Debug.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},连接成功");
                     UpdateCommunicationTime();
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},连接失败，详细信息：{ex.Message}");
+                    Debug.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},连接失败，详细信息：{ex.Message}");
                     return false;
                 }
             }
@@ -135,12 +164,12 @@ namespace ComMaster.Devices
                 try
                 {
                     _serialPort.Close();
-                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},断开连接");
+                    Debug.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},断开连接");
                 }
                 catch (Exception ex)
-                { 
-                    Console.WriteLine(ex.Message);
-                    Console.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},断开失败，详细信息：{ex.Message}");
+                {
+                    Debug.WriteLine(ex.Message);
+                    Debug.WriteLine($"连接信息->工作站:{StationId},串口:{_serialPort.PortName},断开失败，详细信息：{ex.Message}");
                 }
             }
         }
@@ -238,33 +267,6 @@ namespace ComMaster.Devices
 
         #region 私有方法
 
-        private void InitializeSerialPort()
-        {
-            lock (_syncLock)
-            {
-                if (_serialPort != null)
-                {
-                    if (IsConnected) Disconnect();
-                    _serialPort.Dispose();
-                }
-
-                _serialPort = new SerialPort
-                {
-                    PortName = PortName,
-                    BaudRate = BaudRate,
-                    DataBits = DataBits,
-                    StopBits = GetStopBitsValue(),
-                    Parity = GetParityValue()
-                };
-                _serialPort.DataReceived += DataReceivedHandler;
-
-                Connect();
-                //_serialPort = new SerialBase();
-                //_serialPort.SerialPortInni(PortName, BaudRate, DataBits, GetStopBitsValue(), GetParityValue());
-                //_serialPort.ReceiveTimeOut = ReceiveTimeout;
-                //_serialPort.RtsEnable = true;
-            }
-        }
 
         string old = "";
 
@@ -291,7 +293,7 @@ namespace ComMaster.Devices
             }
             catch (Exception ex)
             {
-                RunLog("接收串口数据失败！详细信息：" + ex.Message, false, true, false);
+                Debug.WriteLine("接收串口数据失败！详细信息：" + ex.Message);//, false, true, false
                 //Listcode.Add("1400150");
                 //RunLog($"[Code]1400150,[Msg]接收串口数据解析失败！详细信息：" + ex.Message, LogType.AlarmLog);
                 //ProgramPause = true;

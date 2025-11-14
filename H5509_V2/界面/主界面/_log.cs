@@ -751,20 +751,29 @@ namespace H5509_V2
 
         private void uiButton2_Click(object sender, EventArgs e)
         {
-            StationManagers.ConnectAll();
-            bool[] check = StationManagers.CheckComConnect();
-            if (check.Contains(false))
+            uiButton2.Enabled = false;
+            Task.Run(() =>
             {
-                for (int i = 0; i < check.Length; i++)
+                StationManagers.ConnectAll();
+
+                Thread.Sleep(2000);
+                bool[] check = StationManagers.CheckComConnect();
+                if (check.Contains(false))
                 {
-                    if (!check[i])
+                    for (int i = 0; i < check.Length; i++)
                     {
-                        MessageBox.Show($"测试机{i + 1}通讯未连接", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (!check[i])
+                        {
+                            MessageBox.Show($"测试机{i + 1}通讯未连接", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
-            }
-            else MessageBox.Show($"连接成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                else MessageBox.Show($"连接成功!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Invoke(new Action(() => 
+                {
+                    uiButton2.Enabled = true;
+                }));
+            });
             //if (设备状态 == 0) Com.CloseCom();
             //Com.OpenCom();
             //if (Com.IsOpenCom)
@@ -1507,7 +1516,7 @@ namespace H5509_V2
                 s = listBox1.SelectedItem.ToString().Split('+');
             }
 
-            string sql = "SELECT * FROM dut_" + s[1].Replace('-','_') + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss");
+            string sql = "SELECT * FROM dut_" + s[1].Replace('-', '_') + "_" + DateTime.Parse(s[0]).ToString("yyyyMMdd_HH_mm_ss");
 
             Task.Run(new Action(() =>
             {
@@ -2351,7 +2360,7 @@ namespace H5509_V2
 
         private void uiButton1_Click(object sender, EventArgs e)
         {
-            if(设置信息.通讯信息.客户 == "晶存")
+            if (设置信息.通讯信息.客户 == "晶存")
             {
                 发送批次信息();
             }

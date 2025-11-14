@@ -4302,18 +4302,38 @@ namespace H5509_V2
                 PropertyNameCaseInsensitive = true
             };
 
-            string[] sites = Enumerable.Range(1, 16).Select(i =>
-            {
-                var property = typeof(ComInfoSet).GetProperty($"Site{i}");
-                string json = (string)property.GetValue(comInfoSet);
-                return JsonSerializer.Deserialize<SerialPortConfig>(json, options).PortName;
-            }).ToArray();
+            string[] sites = new string[16];
+            string[] ports = new string[16];
 
-            SerialPortConfig serial = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site1, options);
-            uiComboBox50.Text = serial.BaudRate.ToString();
-            uiComboBox51.Text = serial.Parity.ToString();
-            uiComboBox49.Text = serial.DataBits.ToString();
-            uiComboBox48.Text = serial.StopBits.ToString();
+            if (uiCheckBox166.Checked) //COM
+            {
+                sites = Enumerable.Range(1, 16).Select(i =>
+                {
+                    var property = typeof(ComInfoSet).GetProperty($"Site{i}");
+                    string json = (string)property.GetValue(comInfoSet);
+                    return JsonSerializer.Deserialize<SerialPortConfig>(json, options).PortName;
+                }).ToArray();
+
+                SerialPortConfig serial = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site1, options);
+                uiComboBox50.Text = serial.BaudRate.ToString();
+                uiComboBox51.Text = serial.Parity.ToString();
+                uiComboBox49.Text = serial.DataBits.ToString();
+                uiComboBox48.Text = serial.StopBits.ToString();
+
+                uiCheckBox166_Click(null, null);
+            }
+            else if (uiCheckBox167.Checked)
+            {
+                for (int i = 0; i < 16; i++)
+                {
+                    var property = typeof(ComInfoSet).GetProperty($"Site{i + 1}");
+                    string json = (string)property.GetValue(comInfoSet);
+                    IEtherNetConfig etherNetConfig = JsonSerializer.Deserialize<IEtherNetConfig>(json, options);
+                    sites[i] = etherNetConfig.PortName;
+                    ports[i] = etherNetConfig.Port.ToString();
+                }
+                uiCheckBox167_Click(null, null);
+            }
 
             //string site1 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site1, options).PortName;
             //string site2 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site2, options).PortName;
@@ -4373,7 +4393,27 @@ namespace H5509_V2
                 uiComboBox41.Text = sites[14];
                 uiComboBox40.Text = sites[15];
             }
+
+            uitxt_tcpport1.Text = ports[0];
+            uitxt_tcpport2.Text = ports[1];
+            uitxt_tcpport3.Text = ports[2];
+            uitxt_tcpport4.Text = ports[3];
+            uitxt_tcpport5.Text = ports[4];
+            uitxt_tcpport6.Text = ports[5];
+            uitxt_tcpport7.Text = ports[6];
+            uitxt_tcpport8.Text = ports[7];
+            uitxt_tcpport9.Text = ports[8];
+            uitxt_tcpport10.Text = ports[9];
+            uitxt_tcpport11.Text = ports[10];
+            uitxt_tcpport12.Text = ports[11];
+            uitxt_tcpport13.Text = ports[12];
+            uitxt_tcpport14.Text = ports[13];
+            uitxt_tcpport15.Text = ports[14];
+            uitxt_tcpport16.Text = ports[15];
+
             刷新测试机数量显示();
+
+
             //numericUpDown12.Text = comInfoSet.Dout连续不良个数.ToString();
             //checkBox1.Checked = comInfoSet.Dout连续不良自动关闭;
             //checkBox2.Checked = comInfoSet.Dout连续不良报警;
