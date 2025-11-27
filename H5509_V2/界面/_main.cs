@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Xml;
 using MotionCommon;
 using SQLiteHelper;
+using SQLServerHelper;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using TextFileLogger;
@@ -141,7 +142,7 @@ namespace H5509_V2
                 uiDigitalLabel17,
             };
 
-            yieldRateShowSites = new YieldRateShow[] 
+            yieldRateShowSites = new YieldRateShow[]
             {
                 yieldRateShowSite1,
                 yieldRateShowSite2,
@@ -850,6 +851,22 @@ namespace H5509_V2
         {
             bool ischange = false;
 
+            string gettime = GetPermTime(combox_juris.Text, out string 时间);
+            if (报警权限校验为厂商)
+            {
+                权限时间 = Convert.ToInt32(时间) * 60;
+                操作权限 = "D";
+                windowstimer.Start();
+                mousemovetime = DateTime.Now;
+
+                this.combox_juris.SelectedIndexChanged -= new System.EventHandler(this.combox_juris_SelectedIndexChanged);
+                combox_juris.Text = "Supplier";
+                this.combox_juris.SelectedIndexChanged += new System.EventHandler(this.combox_juris_SelectedIndexChanged);
+
+                报警权限校验为厂商 = false;
+                return;
+            }
+
             if (当前权限 != combox_juris.Text)
             {
                 DialogResult result = MessageBox.Show($"是否修改权限为({combox_juris.Text})", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -868,7 +885,6 @@ namespace H5509_V2
                         if (frmInputPwd.ShowDialog() == DialogResult.OK)
                         {
                             string getpwd = GetPassWord(combox_juris.Text, out string 密码);
-                            string gettime = GetPermTime(combox_juris.Text, out string 时间);
                             if (getpwd == "Success")
                             {
                                 if (frmInputPwd.Password == 密码)
@@ -1414,6 +1430,7 @@ namespace H5509_V2
                             _defalut2.testnum = 测试手臂吸不起数量;
                             _defalut2.inputnum = 入料手臂吸料不起数量;
                             _defalut2.outputnum = 出料手臂吸料不起数量;
+                            _defalut2.testputnum = 测试手臂料放歪数量;
                             _defalut2.totalnum = 载入数;
                             _defalut2.RefreshUI();
                         }
@@ -2900,6 +2917,17 @@ namespace H5509_V2
 
         private void label147_Click(object sender, EventArgs e)
         {
+            //Listcode.Add("7005100");
+            //Listcode.Add("7005200");
+            //Listcode.Add("7005300");
+            //Listcode.Add("7005400");
+            //Listcode.Add("7005101");
+
+
+            
+            //string sql = $"select realName from Jurisdiction where password = '{111111}'";
+            //string result = SqlServer.runSql(SQLServerConnString_Config, sql, out string realName);
+            //Console.WriteLine(result);
             //string[] bins = System.IO.File.ReadAllLines("TesterComm.txt");
             //for (int i = 0; i < bins.Length; i++)
             //{
@@ -3361,6 +3389,7 @@ namespace H5509_V2
 
         private void label7_Click(object sender, EventArgs e)
         {
+            //ProgramBtnStart = true;
             //form_alarm.CancelAllAlarm();
         }
     }

@@ -2300,7 +2300,7 @@ namespace H5509_V2
         public void HandlerDebug()
         {
             ///*衡宇通讯
-            
+
             //int site = 14;
             //string result = "Success";
             //List<bool[]> open = new List<bool[]> { new bool[] { true, true, true, true }, new bool[] { true, true, true, true } };
@@ -2897,6 +2897,7 @@ namespace H5509_V2
                 //测试区吸不起数量 = 0;
                 入料手臂吸料不起数量 = 0;
                 出料手臂吸料不起数量 = 0;
+                测试手臂料放歪数量 = 0;
                 Auto1料仓满盘标记 = false;
                 Auto2料仓满盘标记 = false;
                 Auto1放盘等待标记 = false;
@@ -4472,6 +4473,53 @@ namespace H5509_V2
                                 else RunLog("按下开始", LogType.OperateLog);
 
                                 bool isstart = true;
+
+                                if (form_alarm.dataGridView_alarm.Rows.Count > 0)
+                                {
+                                    if (form_alarm.判断是否有dut放歪报警())//form_alarm.判断是否有梭车放歪报警() || 
+                                    {
+                                        form_alarm.Invoke(new Action(() =>
+                                        {
+                                            form_alarm.Activate();
+                                            form_alarm.Show();
+                                        }));
+                                        ShowAlarmFlag = true;
+                                        FrmInputPwd frmInputPwd = new FrmInputPwd();
+                                        if (frmInputPwd.ShowDialog() == DialogResult.OK)
+                                        {
+                                            string sql = $"select realName from Jurisdiction where password = '{frmInputPwd.Password}'";
+                                            result = SqlServer.runSql(SQLServerConnString_Config, sql, out string realName);
+                                            if (result == "Success")
+                                            {
+                                                if (realName != null && realName != "Operator")
+                                                {
+                                                    if (realName == "Supplier")
+                                                    {
+                                                        //将页面权限调整为厂商
+                                                    }
+                                                    else
+                                                    {
+                                                        //判断是否有权限
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    MessageBox.Show("密码错误！");
+                                                    isstart = false;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                MessageBox.Show("密码错误！");
+                                                isstart = false;
+                                            }
+                                        }
+                                        else isstart = false;
+
+                                        ShowAlarmFlag = false;
+                                    }
+                                }
+                                if (!isstart) continue;
 
                                 form_alarm.CancelAllAlarm();
 
@@ -9994,6 +10042,7 @@ namespace H5509_V2
             string[] iovalues2 = new string[1];
 
             bool count = true;
+            bool count2 = true;
             PS测试手臂取待测料流程.StepID = 500;
             while (true)
             {
@@ -10677,6 +10726,7 @@ namespace H5509_V2
                                     D测试手臂X移动到位 = true;
                                     firstdraw = true;
                                     firstdzhome = true;
+                                    count2 = true;
                                     lsopen = new bool[]
                                     {
                                         TestNozzleICOpen[0], TestNozzleICOpen[1], TestNozzleICOpen[2], TestNozzleICOpen[3],
@@ -10899,7 +10949,7 @@ namespace H5509_V2
                                     StationManagers.SetStationState(site, 1);// SiteTestState[site] = 1; //有料
 
                                     TestNozzleICOpen = new bool[8] { false, false, false, false, false, false, false, false };
-  
+
                                     //if (飞梭后出料状态 == 1) //2025-11-06 14:59 因显示异常屏蔽
                                     //{
                                     DIndexTime = DateTime.Now - IndexTime;
@@ -10909,6 +10959,11 @@ namespace H5509_V2
                                 }
                                 else
                                 {
+                                    if (count2)
+                                    {
+                                        count2 = false;
+                                        测试手臂料放歪数量++;
+                                    }
                                     PS测试手臂取待测料流程.StepID = 745;
                                 }
                             }
@@ -11292,7 +11347,7 @@ namespace H5509_V2
                                     result = 测试吸嘴_真空检测(out string[] ioval);
                                     if (result != "Success") break;
 
-                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}");
+                                    RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->{ioval[0]},{ioval[1]},{ioval[2]},{ioval[3]},{ioval[4]},{ioval[5]},{ioval[6]},{ioval[7]}");
 
                                     for (int i = 0; i < ioval.Length; i++)
                                     {
@@ -11421,7 +11476,7 @@ namespace H5509_V2
                                 else //如何一颗料都没有吸起来,说明该吸料的吸嘴一个都没有吸上来，则不用再放料到梭车出料上了, 会发生什么呢？出料不会至为1，不会
                                 {
                                     InSiteQueue.Enqueue(site);
-                                    RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->在测试区Site{site + 1}未吸起一颗IC(放入梭车)!");
+                                    RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->在测试区Site{site + 1}未吸起一颗IC(放入梭车)!");
                                     PS测试手臂取已测料流程.Processing = false;
                                     PS测试手臂取已测料流程.StepID = 500;
                                 }
@@ -11735,6 +11790,7 @@ namespace H5509_V2
                             飞梭后出料TestSite = site;
                             InSiteQueue.Enqueue(site);
 
+                            TestNozzleICOpen = new bool[8] { false, false, false, false, false, false, false, false };
                             RunLog($"PS测试手臂取已测料流程.StepID={PS测试手臂取已测料流程.StepID}->添加Site:{site + 1}");
                             PS测试手臂取已测料流程.StepID = 799;
                             //}
@@ -11896,7 +11952,7 @@ namespace H5509_V2
                                 bool[][] siteic2 = StationManagers.GetStationIC((int)sites[1]);
                                 bool[] site1 = new bool[] { siteic1[0][0], siteic1[0][1], siteic1[0][2], siteic1[0][3], siteic1[1][0], siteic1[1][1], siteic1[1][2], siteic1[1][3] };
                                 bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
-                                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
+
                                 bool[] testICOpen = new bool[]
                                 {
                                     TestNozzleICOpen[0], TestNozzleICOpen[1], TestNozzleICOpen[2], TestNozzleICOpen[3],
@@ -11919,8 +11975,10 @@ namespace H5509_V2
                                     sitew2[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew2[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew2[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew2[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
                                     sitew2[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew2[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew2[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew2[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
                                 };
-                                bool site1isgetic = site1opens.Contains(0) || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发
-                                bool site2isgetic = site2opens.Contains(0) || testICOpen.Contains(true); //没有料可已放入 且 吸嘴上没有料
+                                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]) };
+
+                                bool site1isgetic = site1opens.Contains(0) || states[0] == 1 || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发 或者 该Site已经有料了
+                                bool site2isgetic = site2opens.Contains(0) || states[1] == 1 || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发 或者 该Site已经有料了
 
                                 bool debug1 = states[0] == 10 || !sitew1.Contains(true); //已经放了料 或者 site没有开dut
                                 bool debug2 = (入料手臂停止工作标记 && !site1isgetic);    //入料手臂停止放料了 且 该Site可以放料进去
@@ -11932,7 +11990,7 @@ namespace H5509_V2
 
                                 //如果放了料 或者 Site没有要放的 或者 入料手臂停止放料了且该site放不了料  则发送测试信号
                                 if (((debug1 || debug2) && (debug3 || debug4)) || (debug5 && (debug6) && (debug7)))
-                                {
+                                {   //True,      True,      False,     True,        False,     True,       False
                                     RunLog($"PS测试区气缸下压动作流程.StepID={PS测试区气缸下压动作流程.StepID}->{debug1},{debug2},{debug3},{debug4},{debug5},{debug6},{debug7}");
                                     List<List<bool[]>> opens = new List<List<bool[]>>()
                                     {
@@ -11958,6 +12016,10 @@ namespace H5509_V2
                                     }
                                 }
                                 else PS测试区气缸下压动作流程.StepID = 599;
+
+
+
+
                             }
                             else if (设置信息.通讯信息.同时测试 == 4)
                             {
@@ -11971,7 +12033,6 @@ namespace H5509_V2
                                 bool[] site2 = new bool[] { siteic2[0][0], siteic2[0][1], siteic2[0][2], siteic2[0][3], siteic2[1][0], siteic2[1][1], siteic2[1][2], siteic2[1][3] };
                                 bool[] site3 = new bool[] { siteic3[0][0], siteic3[0][1], siteic3[0][2], siteic3[0][3], siteic3[1][0], siteic3[1][1], siteic3[1][2], siteic3[1][3] };
                                 bool[] site4 = new bool[] { siteic4[0][0], siteic4[0][1], siteic4[0][2], siteic4[0][3], siteic4[1][0], siteic4[1][1], siteic4[1][2], siteic4[1][3] };
-                                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]), StationManagers.GetStationState(sites[2]), StationManagers.GetStationState(sites[3]) };
 
                                 bool[] testICOpen = new bool[]
                                 {
@@ -12007,10 +12068,13 @@ namespace H5509_V2
                                     sitew4[0] && (飞梭后入料IC[0][0] || 飞梭前入料IC[0][0]) ? 0 : 2, sitew4[1] && (飞梭后入料IC[0][1] || 飞梭前入料IC[0][1]) ? 0 : 2, sitew4[2] && (飞梭后入料IC[0][2] || 飞梭前入料IC[0][2]) ? 0 : 2, sitew4[3] && (飞梭后入料IC[0][3] || 飞梭前入料IC[0][3]) ? 0 : 2,
                                     sitew4[4] && (飞梭后入料IC[1][0] || 飞梭前入料IC[1][0]) ? 0 : 2, sitew4[5] && (飞梭后入料IC[1][1] || 飞梭前入料IC[1][1]) ? 0 : 2, sitew4[6] && (飞梭后入料IC[1][2] || 飞梭前入料IC[1][2]) ? 0 : 2, sitew4[7] && (飞梭后入料IC[1][3] || 飞梭前入料IC[1][3]) ? 0 : 2
                                 };
-                                bool site1isgetic = site1opens.Contains(0) || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
-                                bool site2isgetic = site2opens.Contains(0) || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
-                                bool site3isgetic = site3opens.Contains(0) || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
-                                bool site4isgetic = site4opens.Contains(0) || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
+
+                                int[] states = new int[] { StationManagers.GetStationState(sites[0]), StationManagers.GetStationState(sites[1]), StationManagers.GetStationState(sites[2]), StationManagers.GetStationState(sites[3]) };
+
+                                bool site1isgetic = site1opens.Contains(0) || states[0] == 1 || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
+                                bool site2isgetic = site2opens.Contains(0) || states[1] == 1 || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
+                                bool site3isgetic = site3opens.Contains(0) || states[2] == 1 || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
+                                bool site4isgetic = site4opens.Contains(0) || states[3] == 1 || testICOpen.Contains(true); //如果可以放料到dut 或者 吸嘴上有料都不能发; //2025-11-15 13:36:37
 
                                 bool debug1 = states[0] == 10 || !sitew1.Contains(true); //已经放了料 或者 site没有开dut
                                 bool debug2 = (入料手臂停止工作标记 && !site1isgetic);    //入料手臂停止放料了 且 该Site可以放料进去
@@ -12020,7 +12084,7 @@ namespace H5509_V2
                                 bool debug22 = (入料手臂停止工作标记 && !site3isgetic);
                                 bool debug33 = states[3] == 10 || !sitew4.Contains(true);
                                 bool debug44 = (入料手臂停止工作标记 && !site4isgetic);
-                                 
+
                                 bool debug5 = 测试手臂入料停止工作标记 && (结批标记 || 一个循环标记); //测试手臂入料停止工作标记 且 (结批标记 或者 一个循环标记)   
                                 bool debug6 = states[0] == 10 || (states[0] == 0 && !site1isgetic); //如果放了料 或者 (没放料 且 放不了料)
                                 bool debug7 = states[1] == 10 || (states[1] == 0 && !site2isgetic); //如果放了料 或者 (没放料 且 放不了料)

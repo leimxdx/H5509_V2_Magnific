@@ -838,7 +838,7 @@ namespace H5509_V2
 
                         if (form_alarm.AlarmRows > 0)
                         {
-                            if (!ShowAlarmFlag)
+                            if (!ShowAlarmFlag && !form_alarm.报警已关闭)
                             {
                                 shownum++;
                                 if (shownum == 100)

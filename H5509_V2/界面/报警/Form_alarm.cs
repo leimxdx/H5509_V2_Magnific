@@ -27,6 +27,7 @@ namespace H5509_alarm
 
         public Task RefreshTask;
 
+        public bool 报警已关闭 = true;
         public int AlarmRows { get { return dataGridView_alarm.Rows.Count; } }
 
         public Form_alarm()
@@ -3361,12 +3362,41 @@ namespace H5509_alarm
 
         }
 
+
+        public bool 判断是否有梭车放歪报警()
+        {
+            string[] ErrorCode = { "543000", "544000", "545000", "546000", "547000", "548000", "549000", "550000" };
+            for (int i = 0; i < dataGridView_alarm.Rows.Count; i++)
+            {
+                if (ErrorCode.Contains(dataGridView_alarm.Rows[i].Cells[0].Value.ToString().Substring(0, 6)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public bool 判断是否有dut放歪报警()
+        {
+            string[] ErrorCode = { "7005", "7007"};
+            for (int i = 0; i < dataGridView_alarm.Rows.Count; i++)
+            {
+                if (ErrorCode.Contains(dataGridView_alarm.Rows[i].Cells[0].Value.ToString().Substring(0, 4)))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private void Form_alarm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (!退出标记)
             {
                 //alarmLight(0, 1, 0, 0);
-                CancelAlarm();
+
+                //CancelAlarm(); //2025-11-26 做权限管理
+                报警已关闭 = true;
                 e.Cancel = true;
                 this.Hide();
                 Thread.Sleep(1);
@@ -3384,6 +3414,7 @@ namespace H5509_alarm
                     {
                         if (QueueCode.Count != 0)
                         {
+                            报警已关闭 = false;
                             //this.Activate();
                             if (QueueCode.TryDequeue(out string code))
                             {

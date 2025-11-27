@@ -38,6 +38,13 @@ namespace SQLServerHelper
                 RunLog("命令：" + sql + "，错误信息：" + e.Message);
                 return e.Message;
             }
+            catch (Exception ex)
+            {
+                result = null;
+                connection.Close();
+                RunLog("命令：" + sql + "，错误信息：" + ex.Message);
+                return ex.Message;
+            }
             connection.Close();
             return "Success";
         }
@@ -77,6 +84,7 @@ namespace SQLServerHelper
         /// <returns>成功返回"Success"，失败返回错误信息</returns>
         public static string runSql(string connectionString, string sql, out string result)
         {
+            
             string b = runSql(connectionString, sql, out object res);
 
             if (b == "Success")

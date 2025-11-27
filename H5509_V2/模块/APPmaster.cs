@@ -593,6 +593,8 @@ namespace H5509_V2
 
         public static double Auto2上移固定距离 { get { return 初始点位.Auto2_分盘位 - 初始点位.Auto2_初始位; } }
 
+        
+
         #region 测试机配置参数
 
 
@@ -758,6 +760,7 @@ namespace H5509_V2
         public static double[] Fix3XPoint; //手动盘3X坐标
 
         public static double[] Fix3YPoint; //手动盘3Y坐标
+
 
         public static Dictionary<string, bool> LoaderDicPoint = new Dictionary<string, bool>(); //待测盘Map图
 
@@ -1035,6 +1038,8 @@ namespace H5509_V2
 
         public static int 出料手臂吸料不起数量;
 
+        public static int 测试手臂料放歪数量;
+
         public static int 吸料不起数量 { get { return 测试手臂吸不起数量 + 入料手臂吸料不起数量 + 出料手臂吸料不起数量; } }
 
         public static bool Auto1料仓满盘标记;
@@ -1278,6 +1283,7 @@ namespace H5509_V2
         public static double D梭车目标位置记忆;
 
         #region 按键参数
+        public static bool 报警权限校验为厂商 = false;
 
         /// <summary>
         /// 程序是否触发开始
