@@ -4782,9 +4782,9 @@ namespace H5509_V2
                                         motionEx.SetDo("Y005_忽略灯", false);
                                         motionEx.SetDo("Y008_结批灯", false);
                                         motionEx.SetDo("Y009_一个循环灯", false);
+                                        motionEx.SetDo("Y010_归零灯", false);
                                         motionEx.SetDo("Y011_换盘灯", false);
                                         motionEx.SetDo("Y013_黄灯", false);
-                                        motionEx.SetDo("Y008_结批灯", false);
                                         motionEx.SetDo("Y014_绿灯", true);
                                     }
                                     else
@@ -10238,9 +10238,10 @@ namespace H5509_V2
                                                                 飞梭后入料状态 = 0;
                                                             }
                                                         }
-                                                        PS测试手臂取待测料流程.Processing = false;
-                                                        PS测试手臂取待测料流程.StepID = 500;
                                                     }
+                                                    PS测试手臂取待测料流程.Processing = false;
+                                                    PS测试手臂取待测料流程.StepID = 500;
+                                                    Thread.Sleep(100); //延时长一点等其他流程运行
                                                     //for (int i = 0; i < InSiteQueue.Count; i++)
                                                     //{
 
