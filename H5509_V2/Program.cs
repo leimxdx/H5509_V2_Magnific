@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -53,6 +54,16 @@ namespace H5509_V2
         {
             try
             {
+                // 授权配置（必须在第一次访问 LicenseService.Current 之前）
+                // 已用授权码台账：默认三处保持不动（ProgramData / LocalAppData / 注册表），
+                // 再追加第 4 处放到软件根目录，并设置隐藏属性。
+                LicenseOptions options = LicenseOptions.CreateDefault();
+                options.UsedCodeFileName = "used.dat";
+                options.UsedCodeHidden = true;
+                options.UsedCodeExtraFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "used.dat");
+                options.UsedCodeExtraHidden = true;
+                LicenseService.Configure(options);
+
                 LicenseService service = LicenseService.Current;
 
                 APPmaster.LicenseValid = service.Refresh().IsValid;

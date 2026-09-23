@@ -76,6 +76,9 @@ namespace H5509_V2
 
         private _main main;
         private _setting setting;
+
+        /// <summary>授权到期提醒定时器</summary>
+        private System.Windows.Forms.Timer _授权到期提醒Timer;
         private _offset offset;
         private _speed speed;
         private _IO io;
@@ -436,6 +439,21 @@ namespace H5509_V2
             {
                 _ = APPmaster.form_alarm.Handle;   // 确保报警窗口句柄已创建（必须在 UI 线程）
                 APPmaster.检查许可证();
+            }
+            catch { }
+
+            // 授权到期提醒：剩余 ≤ 授权到期提醒天数 时，每 授权到期提醒间隔 报警提示一次
+            // （天数和间隔在 APPmaster.授权到期提醒天数 / 授权到期提醒间隔 里改）
+            try
+            {
+                _授权到期提醒Timer = new System.Windows.Forms.Timer
+                {
+                    Interval = (int)Math.Max(60000, APPmaster.授权到期提醒间隔.TotalMilliseconds)
+                };
+                _授权到期提醒Timer.Tick += (sender2, e2) => APPmaster.检查授权到期提醒();
+                _授权到期提醒Timer.Start();
+
+                APPmaster.检查授权到期提醒();   // 启动时先检查一次
             }
             catch { }
         }
@@ -1746,7 +1764,19 @@ namespace H5509_V2
             if (DialogResult == DialogResult.None)
             {
                 e.Cancel = true;
+                return;
             }
+
+            try
+            {
+                if (_授权到期提醒Timer != null)
+                {
+                    _授权到期提醒Timer.Stop();
+                    _授权到期提醒Timer.Dispose();
+                    _授权到期提醒Timer = null;
+                }
+            }
+            catch { }
         }
 
         private void uiButton1_Click(object sender, EventArgs e)

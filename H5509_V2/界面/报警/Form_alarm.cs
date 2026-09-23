@@ -3007,6 +3007,7 @@ namespace H5509_alarm
                     case "1400445":
                     case "1400488":
                     case "1400499":   // 软件未授权
+                    case "1400501":   // 软件授权即将到期
                         if (alarm)
                         {
                             S_Sys += alarmCode + ",";
@@ -3390,6 +3391,9 @@ namespace H5509_alarm
         /// <summary>“软件未授权”报警代码（归在“系统异常”类）</summary>
         public const string LicenseAlarmCode = "1400499";
 
+        /// <summary>“授权即将到期”提醒代码（归在“系统异常”类）</summary>
+        public const string ExpireSoonAlarmCode = "1400501";
+
         /// <summary>触发“软件未授权”报警（重复调用只保留一条）</summary>
         public void RaiseLicenseAlarm()
         {
@@ -3455,6 +3459,64 @@ namespace H5509_alarm
                 }));
             }
             catch { }
+        }
+
+        /// <summary>
+        /// “授权即将到期”提醒：加到报警列表并写报警日志，N 秒后自动消失（不常驻，避免一直亮红灯）。
+        /// </summary>
+        public void RaiseExpireSoonAlarm(string message, int displaySeconds)
+        {
+            try
+            {
+                if (!IsHandleCreated || IsDisposed) return;
+
+                Invoke(new Action(() =>
+                {
+                    // 先清掉上一条提醒，避免每 2 小时堆一条
+                    RemoveExpireSoonAlarm();
+
+                    var row = new DataGridViewRow();
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = ExpireSoonAlarmCode });
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = message });
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") });
+                    dataGridView_alarm.Rows.Add(row);
+
+                    ShowCode(ExpireSoonAlarmCode, true);
+
+                    try { RunLog("[Code]" + ExpireSoonAlarmCode + ",[Msg]" + message, LogType.AlarmLog); } catch { }
+
+                    if (!Visible) Show();
+
+                    if (displaySeconds > 0)
+                    {
+                        var timer = new System.Windows.Forms.Timer { Interval = displaySeconds * 1000 };
+                        timer.Tick += (s, e) =>
+                        {
+                            timer.Stop();
+                            timer.Dispose();
+                            try { RemoveExpireSoonAlarm(); } catch { }
+                        };
+                        timer.Start();
+                    }
+                }));
+            }
+            catch { }
+        }
+
+        private void RemoveExpireSoonAlarm()
+        {
+            bool removed = false;
+
+            for (int i = dataGridView_alarm.Rows.Count - 1; i >= 0; i--)
+            {
+                if (Convert.ToString(dataGridView_alarm.Rows[i].Cells[0].Value) == ExpireSoonAlarmCode)
+                {
+                    dataGridView_alarm.Rows.RemoveAt(i);
+                    removed = true;
+                }
+            }
+
+            if (removed) ShowCode(ExpireSoonAlarmCode, false);
         }
 
         public bool 判断是否有dut放歪报警()
