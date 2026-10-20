@@ -3267,6 +3267,16 @@ namespace H5509_alarm
                                     row.Cells[1].Value = 串口数据异常Msg;
                                 }
                                 break;
+                            case "3010002":
+                                {
+                                    row.Cells[1].Value = 入料吸嘴回原失败Msg;
+                                }
+                                break;
+                            case "3050002":
+                                {
+                                    row.Cells[1].Value = 出料吸嘴回原失败Msg;
+                                }
+                                break;
                         }
                     }
 

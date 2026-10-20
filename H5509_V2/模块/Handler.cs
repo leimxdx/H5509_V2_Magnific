@@ -370,7 +370,7 @@ namespace H5509_V2
             return motionEx.AxisHome(axisNames);
         }
 
-        public string 入料手臂Z回零(bool[] isopen)
+        public string 入料手臂Z回零(bool[] isopen, int type = 0)
         {
             List<string> axisHomes = new List<string>();
 
@@ -379,7 +379,7 @@ namespace H5509_V2
             if (isopen[2]) axisHomes.Add("M3_入料手臂Z3轴");
             if (isopen[3]) axisHomes.Add("M4_入料手臂Z4轴");
 
-            return motionEx.AxisHome(axisHomes.ToArray());
+            return motionEx.AxisHome(axisHomes.ToArray(), type);
         }
 
         public string 出料手臂X回零()
@@ -403,7 +403,7 @@ namespace H5509_V2
             return motionEx.AxisHome(axisNames);
         }
 
-        public string 出料手臂Z回零(bool[] isopen)
+        public string 出料手臂Z回零(bool[] isopen, int type = 0)
         {
             List<string> axisHomes = new List<string>();
 
@@ -412,7 +412,7 @@ namespace H5509_V2
             if (isopen[2]) axisHomes.Add("M8_出料手臂Z3轴");
             if (isopen[3]) axisHomes.Add("M9_出料手臂Z4轴");
 
-            return motionEx.AxisHome(axisHomes.ToArray());
+            return motionEx.AxisHome(axisHomes.ToArray(), type);
         }
 
         public string 测试手臂X回零()
@@ -2045,7 +2045,7 @@ namespace H5509_V2
                 RunLog("BIN_A区Tray上顶气缸到位输出失败！" + result);
                 return result;
             }
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(Auto1上顶延时); //没有感应器，固定延时处理
             return result;
         }
 
@@ -2182,7 +2182,7 @@ namespace H5509_V2
                 RunLog("BIN_B区Tray上顶气缸到位输出失败！" + result);
                 return result;
             }
-            Thread.Sleep(300); //没有感应器，固定延时处理
+            Thread.Sleep(Auto2上顶延时); //没有感应器，固定延时处理
             return result;
         }
 
@@ -6851,6 +6851,15 @@ namespace H5509_V2
                                     PS入料手臂吸放料流程.StepID = 652;
                                 }
                             }
+                            else
+                            {
+                                Listcode.Add("3010002");
+                                RunLog($"[Code]3010002,[Msg]入料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"入料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                入料吸嘴回原失败Msg = "入料手臂Z回零失败";
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
                             break;
 
                         case 652:
@@ -7259,6 +7268,15 @@ namespace H5509_V2
                                     PS入料手臂吸放料流程.StepID = 552;
                                 }
                             }
+                            else
+                            {
+                                Listcode.Add("3010002");
+                                RunLog($"[Code]3010002,[Msg]入料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"入料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                入料吸嘴回原失败Msg = "入料手臂Z回零失败";
+                                ProgramPause = true;
+                                IsPause = true;
+                            }
                             break;
 
                         case 552:
@@ -7599,7 +7617,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"入料手臂Z回原失败!" + result);
+                                Listcode.Add("3010002");
+                                RunLog($"[Code]3010002,[Msg]入料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"入料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                入料吸嘴回原失败Msg = "入料手臂Z回零失败";
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -7885,7 +7906,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"入料吸嘴_回原检测失败!" + result);
+                                Listcode.Add("3010002");
+                                RunLog($"[Code]3010002,[Msg]入料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"入料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                入料吸嘴回原失败Msg = "入料手臂Z回零失败";
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -7909,7 +7933,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"入料手臂Z回原失败!" + result);
+                                Listcode.Add("3010002");
+                                RunLog($"[Code]3010002,[Msg]入料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"入料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                入料吸嘴回原失败Msg = "入料手臂Z回零失败";
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -8545,7 +8572,7 @@ namespace H5509_V2
                         case 541:
                             PS出料手臂吸放料流程.StepName = "出料手臂Z回原";
                             bool[] homeopen = new bool[] { home[0] == "1" || lsopen[0], home[1] == "1" || lsopen[1], home[2] == "1" || lsopen[2], home[3] == "1" || lsopen[3] };
-                            result = 出料手臂Z回零(homeopen);
+                            result = 出料手臂Z回零(homeopen); //不用加1, 因为Ispause = false, 还在运行中
                             if (result == "Success")
                             {
                                 if (home.Contains("1")) //如果是因为挡住原点才回的原点
@@ -8556,7 +8583,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"出料手臂Z回零失败!" + result);
+                                Listcode.Add("3050002");
+                                RunLog($"[Code]3050002,[Msg]出料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"出料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                出料吸嘴回原失败Msg = "出料手臂Z回零失败";
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -9262,7 +9292,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"出料手臂Z回零失败!" + result);
+                                Listcode.Add("3050002");
+                                RunLog($"[Code]3050002,[Msg]出料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"出料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                出料吸嘴回原失败Msg = "出料手臂Z回零失败";
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -9349,7 +9382,10 @@ namespace H5509_V2
                             }
                             else
                             {
-                                RunLog($"出料手臂Z回零失败!" + result);
+                                Listcode.Add("3050002");
+                                RunLog($"[Code]3050002,[Msg]出料手臂Z回零失败!", LogType.AlarmLog);
+                                RunLog($"出料手臂Z回零失败!" + result, LogType.AlarmLog);
+                                出料吸嘴回原失败Msg = "出料手臂Z回零失败";
                                 ProgramPause = true;
                                 IsPause = true;
                             }
@@ -10241,7 +10277,7 @@ namespace H5509_V2
                                                     }
                                                     PS测试手臂取待测料流程.Processing = false;
                                                     PS测试手臂取待测料流程.StepID = 500;
-                                                    Thread.Sleep(100); //延时长一点等其他流程运行
+                                                    Thread.Sleep(50); //延时长一点等其他流程运行
                                                     //for (int i = 0; i < InSiteQueue.Count; i++)
                                                     //{
 
@@ -10253,7 +10289,7 @@ namespace H5509_V2
                                         else //如果梭车没有料,则等梭车交换后到有料
                                         {
                                             RunLog($"PS测试手臂取待测料流程.StepID={PS测试手臂取待测料流程.StepID}->Site{site + 1}取料：梭车上没有IC");
-                                            if ((飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[0].Contains(true) || 飞梭后出料状态 == 1) && 入料手臂停止工作标记)
+                                            if ((飞梭前入料IC[0].Contains(true) || 飞梭前入料IC[1].Contains(true) || 飞梭后出料状态 == 1) && 入料手臂停止工作标记)
                                             {
                                                 飞梭后入料状态 = 0;
                                             }
@@ -11902,7 +11938,7 @@ namespace H5509_V2
                             result = 测试区_位移气缸到位输出(site);
                             if (result == "Success")
                             {
-                                Thread.Sleep(100);
+                                Thread.Sleep(后移后延时下压);
                                 PS测试区气缸下压动作流程.StepID = 515;
                             }
                             else

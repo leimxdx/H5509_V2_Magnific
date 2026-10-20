@@ -237,11 +237,7 @@ namespace H5509_V2
 
         private void textBoxFlowcaedno_KeyDown(object sender, KeyEventArgs e)
         {
-            if (设置信息.通讯信息.通讯协议 == "得一微")
-            {
-
-            }
-            else
+            if (设置信息.通讯信息.通讯协议 == "晶存")
             {
                 if (e.KeyCode == System.Windows.Forms.Keys.Enter)
                 {

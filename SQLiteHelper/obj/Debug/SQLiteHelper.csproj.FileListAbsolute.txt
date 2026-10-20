@@ -14,3 +14,19 @@ D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.CoreCompileInputs.
 D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.dll
 D:\GitHub\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.pdb
 D:\github\H5509_V2\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.CopyComplete
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\bin\Debug\SQLiteHelper.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\bin\Debug\SQLiteHelper.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\bin\Debug\System.Data.SQLite.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\obj\Debug\SQLiteHe.64E32CF6.Up2Date
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\obj\Debug\SQLiteHelper.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\SQLiteHelper\obj\Debug\SQLiteHelper.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\bin\Debug\SQLiteHelper.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\bin\Debug\SQLiteHelper.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\bin\Debug\System.Data.SQLite.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.AssemblyReference.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.CoreCompileInputs.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHe.64E32CF6.Up2Date
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHelper.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHelper.pdb

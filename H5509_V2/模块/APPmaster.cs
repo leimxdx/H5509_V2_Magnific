@@ -118,6 +118,10 @@ namespace H5509_V2
 
         public static string 串口数据异常Msg;
 
+        public static string 入料吸嘴回原失败Msg;
+
+        public static string 出料吸嘴回原失败Msg;
+
         public static int 吸料超时关吸真空延时上移时间 = 100;
 
         public static string[][] 开关Site显示MA = new string[16][];
@@ -133,6 +137,13 @@ namespace H5509_V2
         public static string TCPIP;
 
         public static int TCPPort;
+
+        public static int Auto1上顶延时 = 900;
+
+        public static int Auto2上顶延时 = 300;
+
+
+        public static int 后移后延时下压 = 200;
 
         public static int 开Site数量 = 0;
 
@@ -2480,6 +2491,9 @@ namespace H5509_V2
                         case "LotNoLog保存路径": LotNoLog保存路径 = value; break;
                         case "自定义界面": 自定义界面 = value; break;
                         case "吸料超时关吸真空延时上移时间": 吸料超时关吸真空延时上移时间 = Convert.ToInt32(value); break;
+                        case "Auto1上顶延时": Auto1上顶延时 = Convert.ToInt32(value); break;
+                        case "Auto2上顶延时": Auto2上顶延时 = Convert.ToInt32(value); break;
+                        case "后移后延时下压": 后移后延时下压 = Convert.ToInt32(value); break;
                     }
                 }
             }

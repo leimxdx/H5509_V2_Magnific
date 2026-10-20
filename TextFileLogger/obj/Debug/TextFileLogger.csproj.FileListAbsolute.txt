@@ -10,3 +10,15 @@ D:\GitHub\H5509_V2\TextFileLogger\obj\Debug\TextFileLogger.csproj.AssemblyRefere
 D:\GitHub\H5509_V2\TextFileLogger\obj\Debug\TextFileLogger.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\TextFileLogger\obj\Debug\TextFileLogger.dll
 D:\GitHub\H5509_V2\TextFileLogger\obj\Debug\TextFileLogger.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\TextFileLogger\bin\Debug\TextFileLogger.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\TextFileLogger\bin\Debug\TextFileLogger.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\TextFileLogger\obj\Debug\TextFileLogger.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\TextFileLogger\obj\Debug\TextFileLogger.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\TextFileLogger\obj\Debug\TextFileLogger.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\TextFileLogger\obj\Debug\TextFileLogger.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\bin\Debug\TextFileLogger.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\bin\Debug\TextFileLogger.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\obj\Debug\TextFileLogger.csproj.AssemblyReference.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\obj\Debug\TextFileLogger.csproj.CoreCompileInputs.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\obj\Debug\TextFileLogger.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\obj\Debug\TextFileLogger.pdb

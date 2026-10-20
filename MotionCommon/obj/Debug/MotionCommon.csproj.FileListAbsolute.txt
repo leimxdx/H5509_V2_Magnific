@@ -16,3 +16,15 @@ D:\GitHub\H5509_V2\MotionCommon\obj\Debug\MotionCommon.csproj.AssemblyReference.
 D:\GitHub\H5509_V2\MotionCommon\obj\Debug\MotionCommon.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\MotionCommon\obj\Debug\MotionCommon.dll
 D:\GitHub\H5509_V2\MotionCommon\obj\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\MotionCommon\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\MotionCommon\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\MotionCommon\obj\Debug\MotionCommon.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\MotionCommon\obj\Debug\MotionCommon.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\MotionCommon\obj\Debug\MotionCommon.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\MotionCommon\obj\Debug\MotionCommon.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\bin\Debug\MotionCommon.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\bin\Debug\MotionCommon.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\obj\Debug\MotionCommon.csproj.AssemblyReference.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\obj\Debug\MotionCommon.csproj.CoreCompileInputs.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\obj\Debug\MotionCommon.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\obj\Debug\MotionCommon.pdb

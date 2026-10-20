@@ -1,7 +1,0 @@
-2025-11-29 22:22:08  =>  参数初始化...
-2025-11-29 22:22:08  =>  参数初始化完成
-2025-11-29 22:22:08  =>  GTN_Open(5,1):(-6)
-2025-11-29 22:22:08  =>  [error][2025-11-29 22:22:08]：InitCard() System.Exception: 执行指令:  GT_Open
-打开控制器失败(-6)
-   在 HardwareGXN.GSNAxisController.ErrorHandler(String command, Int16 error) 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 149
-   在 HardwareGXN.GSNAxisController.InitCard() 位置 D:\GitHub\H5509_V2\HardwareGXN\GSNAxisCard\GSNAxisController.cs:行号 35

@@ -37,3 +37,29 @@ D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.csproj.CoreCompileInputs.ca
 D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.dll
 D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\HardwareGXN.pdb
 D:\GitHub\H5509_V2\HardwareGXN\obj\Debug\Hardware.9378FFA3.Up2Date
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\bin\Debug\HardwareGXN.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\bin\Debug\HardwareGXN.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\bin\Debug\IHardwareGXN.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\bin\Debug\MotionCommon.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\bin\Debug\IHardwareGXN.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\bin\Debug\MotionCommon.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\obj\Debug\HardwareGXN.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\obj\Debug\HardwareGXN.GSNAxisCard.FrmGSN.resources
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\obj\Debug\HardwareGXN.csproj.GenerateResource.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\obj\Debug\HardwareGXN.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\obj\Debug\Hardware.9378FFA3.Up2Date
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\obj\Debug\HardwareGXN.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\HardwareGXN\obj\Debug\HardwareGXN.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\bin\Debug\HardwareGXN.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\bin\Debug\HardwareGXN.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\bin\Debug\IHardwareGXN.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\bin\Debug\MotionCommon.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\bin\Debug\IHardwareGXN.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\bin\Debug\MotionCommon.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\obj\Debug\HardwareGXN.csproj.AssemblyReference.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\obj\Debug\HardwareGXN.GSNAxisCard.FrmGSN.resources
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\obj\Debug\HardwareGXN.csproj.GenerateResource.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\obj\Debug\HardwareGXN.csproj.CoreCompileInputs.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\obj\Debug\Hardware.9378FFA3.Up2Date
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\obj\Debug\HardwareGXN.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\HardwareGXN\obj\Debug\HardwareGXN.pdb

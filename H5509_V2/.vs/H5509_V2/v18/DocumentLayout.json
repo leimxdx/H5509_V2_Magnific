@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\GitHub\\H5509_V2 - 1.1.26.1 \u5F18\u6DA6\u4F7F\u7528\u7248\u672C\u5F00\u59CB\u4FDD\u5B58\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2\\",
+  "Documents": [],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

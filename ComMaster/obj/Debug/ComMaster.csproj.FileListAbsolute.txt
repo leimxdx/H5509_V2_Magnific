@@ -6,3 +6,11 @@ D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.csproj.CoreCompileInputs.cache
 D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.dll
 D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.pdb
 D:\GitHub\H5509_V2\ComMaster\obj\Debug\ComMaster.csproj.Up2Date
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\bin\Debug\ComMaster.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\bin\Debug\ComMaster.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.csproj.Up2Date
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.pdb

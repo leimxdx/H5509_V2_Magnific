@@ -16,3 +16,21 @@ D:\GitHub\H5509_V2\Thermostat\obj\Debug\Thermostat.csproj.CoreCompileInputs.cach
 D:\GitHub\H5509_V2\Thermostat\obj\Debug\Thermostat.dll
 D:\GitHub\H5509_V2\Thermostat\obj\Debug\Thermostat.pdb
 D:\github\H5509_V2\Thermostat\obj\Debug\Thermostat.csproj.CopyComplete
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\bin\Debug\Thermostat.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\bin\Debug\Thermostat.pdb
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\bin\Debug\SiCommunication.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\bin\Debug\Newtonsoft.Json.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\obj\Debug\Thermostat.csproj.AssemblyReference.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\obj\Debug\Thermostat.csproj.CoreCompileInputs.cache
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\obj\Debug\Thermostat.csproj.Up2Date
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\obj\Debug\Thermostat.dll
+D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\Thermostat\obj\Debug\Thermostat.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\bin\Debug\Thermostat.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\bin\Debug\Thermostat.pdb
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\bin\Debug\SiCommunication.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\bin\Debug\Newtonsoft.Json.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.csproj.AssemblyReference.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.csproj.CoreCompileInputs.cache
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.csproj.Up2Date
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.dll
+D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.pdb
