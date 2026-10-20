@@ -28,3 +28,9 @@ D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\obj\Debug\MotionCommon.csproj.CoreCompileInputs.cache
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\obj\Debug\MotionCommon.dll
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\MotionCommon\obj\Debug\MotionCommon.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\MotionCommon\bin\Debug\MotionCommon.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\MotionCommon\bin\Debug\MotionCommon.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\MotionCommon\obj\Debug\MotionCommon.csproj.AssemblyReference.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\MotionCommon\obj\Debug\MotionCommon.csproj.CoreCompileInputs.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\MotionCommon\obj\Debug\MotionCommon.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\MotionCommon\obj\Debug\MotionCommon.pdb

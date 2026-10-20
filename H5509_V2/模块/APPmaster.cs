@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Data;
@@ -3207,6 +3207,7 @@ namespace H5509_V2
                 { "Protocol", config.Protocol },
                 { "PortName", config.PortName },
                 { "Port", config.Port },
+                { "Mode", (config as TcpSiteConfig)?.Mode },
             };
         }
 
@@ -3245,7 +3246,7 @@ namespace H5509_V2
                     return new SerialPortConfig();
                 }
 
-                return JsonSerializer.Deserialize<IEtherNetConfig>(configJson, options);
+                return JsonSerializer.Deserialize<TcpSiteConfig>(configJson, options);
             }
         }
         #endregion

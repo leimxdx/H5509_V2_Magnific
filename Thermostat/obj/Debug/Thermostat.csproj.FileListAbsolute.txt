@@ -34,3 +34,11 @@ D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.csproj.Up2Date
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.dll
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\Thermostat\obj\Debug\Thermostat.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\bin\Debug\Thermostat.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\bin\Debug\Thermostat.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\bin\Debug\SiCommunication.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\obj\Debug\Thermostat.csproj.AssemblyReference.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\obj\Debug\Thermostat.csproj.CoreCompileInputs.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\obj\Debug\Thermostat.csproj.Up2Date
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\obj\Debug\Thermostat.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\Thermostat\obj\Debug\Thermostat.pdb

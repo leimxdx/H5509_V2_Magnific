@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -4333,6 +4333,12 @@ namespace H5509_V2
                     ports[i] = etherNetConfig.Port.ToString();
                 }
                 uiCheckBox167_Click(null, null);
+
+                //TCP方向：老配置没有Mode字段，默认客户端
+                确保TCP模式单选已创建();
+                bool isServerMode = 读取TCP模式(comInfoSet) == "Server";
+                uirdTCPClient.Checked = !isServerMode;
+                uirdTCPServer.Checked = isServerMode;
             }
 
             //string site1 = JsonSerializer.Deserialize<SerialPortConfig>(comInfoSet.Site1, options).PortName;
@@ -5550,14 +5556,18 @@ namespace H5509_V2
 
         private void 获取TCP配置(string[] coms, string[] ports, out string[] jsons)
         {
+            //服务端模式只需要端口区分测试机，IP留空
+            bool isServer = 是TCP服务端();
+
             jsons = new string[coms.Length];
             for (int i = 0; i < coms.Length; i++)
             {
-                var config = new IEtherNetConfig
+                var config = new TcpSiteConfig
                 {
                     Protocol = "TCP",
-                    PortName = coms[i],
+                    PortName = isServer ? "" : coms[i],
                     Port = Convert.ToInt32(ports[i]),
+                    Mode = isServer ? "Server" : "Client",
                 };
                 // 序列化为JSON
                 jsons[i] = System.Text.Json.JsonSerializer.Serialize(config);
@@ -5627,9 +5637,50 @@ namespace H5509_V2
             }
             else if (uiCheckBox167.Checked)
             {
+                if (是TCP服务端()) return 检查输入TCP服务端配置();
                 return 检查输入TCP配置();
             }
             return false;
+        }
+
+        /// <summary>
+        /// 服务端模式只校验端口：非空、数字、1~65535、互不重复
+        /// </summary>
+        private bool 检查输入TCP服务端配置()
+        {
+            Control[] ports = TCP端口控件();
+            List<int> used = new List<int>();
+
+            for (int i = 0; i < ports.Length; i++)
+            {
+                if (!ports[i].Enabled) continue;
+
+                string text = ports[i].Text.Trim();
+                if (text.Length == 0)
+                {
+                    MessageBox.Show($"测试机{i + 1}的监听端口为空!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                if (!int.TryParse(text, out int value))
+                {
+                    MessageBox.Show($"测试机{i + 1}的监听端口({text})不是数字", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                if (value <= 0 || value > 65535)
+                {
+                    MessageBox.Show($"测试机{i + 1}的监听端口({value})超出范围(1~65535)", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+                used.Add(value);
+            }
+
+            if (used.Distinct().Count() != used.Count)
+            {
+                MessageBox.Show($"测试机的监听端口重复!", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
         }
 
         private void 获取通讯信息(out string[] jsons)
@@ -10286,6 +10337,133 @@ namespace H5509_V2
 
         #endregion
 
+        #region TCP客户端/服务端
+
+        //TCP方向单选：运行时创建，避免改动Designer
+        private UIRadioButton uirdTCPClient;
+
+        private UIRadioButton uirdTCPServer;
+
+        private bool 正在刷新TCP模式 = false;
+
+        /// <summary>
+        /// 创建 TCP客户端 / TCP服务端 单选，仅勾选TCP时显示
+        /// </summary>
+        private void 确保TCP模式单选已创建()
+        {
+            if (uirdTCPClient != null) return;
+
+            //本工程里 TCP 勾选框默认是禁用的，这里放开，否则无法勾选TCP
+            uiCheckBox167.Enabled = true;
+
+            uirdTCPClient = new UIRadioButton();
+            uirdTCPClient.Cursor = Cursors.Hand;
+            uirdTCPClient.Font = new Font("微软雅黑", 11F);
+            uirdTCPClient.Location = new Point(520, 173);
+            uirdTCPClient.Size = new Size(120, 25);
+            uirdTCPClient.Name = "uirdTCPClient";
+            uirdTCPClient.Text = "TCP客户端";
+            uirdTCPClient.Checked = true;
+            uirdTCPClient.Visible = false;
+            uirdTCPClient.Click += uirdTCPClient_Click;
+
+            uirdTCPServer = new UIRadioButton();
+            uirdTCPServer.Cursor = Cursors.Hand;
+            uirdTCPServer.Font = new Font("微软雅黑", 11F);
+            uirdTCPServer.Location = new Point(655, 173);
+            uirdTCPServer.Size = new Size(120, 25);
+            uirdTCPServer.Name = "uirdTCPServer";
+            uirdTCPServer.Text = "TCP服务端";
+            uirdTCPServer.Visible = false;
+            uirdTCPServer.Click += uirdTCPServer_Click;
+
+            tabPage31.Controls.Add(uirdTCPClient);
+            tabPage31.Controls.Add(uirdTCPServer);
+            uirdTCPClient.BringToFront();
+            uirdTCPServer.BringToFront();
+        }
+
+        /// <summary>
+        /// 是否TCP服务端模式：上位机监听端口，测试机来连，只需端口号区分测试机
+        /// </summary>
+        private bool 是TCP服务端()
+        {
+            return uiCheckBox167.Checked && uirdTCPServer != null && uirdTCPServer.Checked;
+        }
+
+        private void 刷新TCP模式单选()
+        {
+            确保TCP模式单选已创建();
+
+            uirdTCPClient.Visible = uiCheckBox167.Checked;
+            uirdTCPServer.Visible = uiCheckBox167.Checked;
+        }
+
+        private void uirdTCPClient_Click(object sender, EventArgs e)
+        {
+            if (正在刷新TCP模式) return;
+
+            正在刷新TCP模式 = true;
+            uirdTCPClient.Checked = true;
+            uirdTCPServer.Checked = false;
+            正在刷新TCP模式 = false;
+
+            刷新测试机数量显示();
+        }
+
+        private void uirdTCPServer_Click(object sender, EventArgs e)
+        {
+            if (正在刷新TCP模式) return;
+
+            正在刷新TCP模式 = true;
+            uirdTCPClient.Checked = false;
+            uirdTCPServer.Checked = true;
+            正在刷新TCP模式 = false;
+
+            刷新测试机数量显示();
+        }
+
+        /// <summary>
+        /// 读取已保存的TCP方向，老配置(无Mode字段)返回Client
+        /// </summary>
+        private string 读取TCP模式(ComInfoSet comInfoSet)
+        {
+            try
+            {
+                var options = new JsonSerializerOptions
+                {
+                    Converters = { new JsonStringEnumConverter() },
+                    PropertyNameCaseInsensitive = true
+                };
+
+                TcpSiteConfig config = JsonSerializer.Deserialize<TcpSiteConfig>(comInfoSet.Site1, options);
+
+                if (config != null && !string.IsNullOrWhiteSpace(config.Mode)) return config.Mode;
+            }
+            catch (Exception)
+            {
+            }
+            return "Client";
+        }
+
+        /// <summary>
+        /// 16个IP下拉(顺序与检查输入TCP配置一致)
+        /// </summary>
+        private Control[] TCP地址控件()
+        {
+            return new Control[] { uiComboBox39, uiComboBox38, uiComboBox37, uiComboBox36, uiComboBox35, uiComboBox34, uiComboBox33, uiComboBox32, uiComboBox47, uiComboBox46, uiComboBox45, uiComboBox44, uiComboBox43, uiComboBox42, uiComboBox41, uiComboBox40 };
+        }
+
+        /// <summary>
+        /// 16个端口输入
+        /// </summary>
+        private Control[] TCP端口控件()
+        {
+            return new Control[] { uitxt_tcpport1, uitxt_tcpport2, uitxt_tcpport3, uitxt_tcpport4, uitxt_tcpport5, uitxt_tcpport6, uitxt_tcpport7, uitxt_tcpport8, uitxt_tcpport9, uitxt_tcpport10, uitxt_tcpport11, uitxt_tcpport12, uitxt_tcpport13, uitxt_tcpport14, uitxt_tcpport15, uitxt_tcpport16 };
+        }
+
+        #endregion
+
         #region 通讯方式
 
         private void 刷新通讯方式()
@@ -10345,6 +10523,7 @@ namespace H5509_V2
             //清空通讯协议();
             //刷新通讯方式(tabPage19);
             //刷新通讯协议();
+            刷新TCP模式单选();
             刷新测试机数量显示();
         }
 
@@ -10377,6 +10556,7 @@ namespace H5509_V2
             //清空通讯协议();
             //刷新通讯方式(tabPage20);
             //刷新通讯协议();
+            刷新TCP模式单选();
             刷新测试机数量显示();
         }
 
@@ -10416,6 +10596,8 @@ namespace H5509_V2
 
         private void 刷新测试机数量显示()
         {
+            确保TCP模式单选已创建();
+
             string testType = uiCheckBox166.Checked ? "COM" : uiCheckBox167.Checked ? "TCP" : uiCheckBox168.Checked ? "LAN" : uiCheckBox169.Checked ? "GPIB" : "COM";
             int testNum = uiCheckBox158.Checked ? 1 : uiCheckBox159.Checked ? 4 : uiCheckBox161.Checked ? 8 : uiCheckBox160.Checked ? 16 : 1;
 
@@ -10459,6 +10641,15 @@ namespace H5509_V2
             uiComboBox51.Enabled = testType == "COM";
             uiComboBox49.Enabled = testType == "COM";
             uiComboBox48.Enabled = testType == "COM";
+
+            //TCP服务端模式：只需端口区分测试机，IP禁用(不隐藏)
+            if (是TCP服务端())
+            {
+                foreach (Control c in TCP地址控件())
+                {
+                    c.Enabled = false;
+                }
+            }
 
             //if (testNum == 1)
             //{

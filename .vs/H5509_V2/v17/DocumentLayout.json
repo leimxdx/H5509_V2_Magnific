@@ -1,16 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\",
+  "WorkspaceRootPath": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|H5509_V2||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|d:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\h5509_v2_magnific\\h5509_v2_magnific\\h5509_v2\\\u6A21\u5757\\tcpserverdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u6A21\u5757\\tcpserverdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\h5509_v2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|d:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\h5509_v2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\h5509_v2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\h5509_v2\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|1e78f8db-6c07-4d61-a18f-7514010abd56"
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|H5509_V2||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -57,24 +58,36 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "TcpServerDevice.cs",
+              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "RelativeToolTip": "H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAmwDUBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T08:21:45.183Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "H5509_V2",
-              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2\\H5509_V2.csproj",
+              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\H5509_V2.csproj",
               "RelativeDocumentMoniker": "H5509_V2\\H5509_V2.csproj",
-              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2\\H5509_V2.csproj",
+              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\H5509_V2.csproj",
               "RelativeToolTip": "H5509_V2\\H5509_V2.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-08-25T14:15:49.92Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-25T14:15:49.92Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "Program.cs",
-              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2\\Program.cs",
+              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\Program.cs",
               "RelativeDocumentMoniker": "H5509_V2\\Program.cs",
-              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2 - 1.1.28 \u5EF6\u65F6300\u6539\u4E3A900\\H5509_V2\\Program.cs",
+              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\Program.cs",
               "RelativeToolTip": "H5509_V2\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAIwBkAAAAmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-25T14:06:52.095Z"
             }

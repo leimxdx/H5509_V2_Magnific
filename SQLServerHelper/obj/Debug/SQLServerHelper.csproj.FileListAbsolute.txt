@@ -22,3 +22,9 @@ D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLServerHelper\obj\Debug\SQLServerHelper.csproj.CoreCompileInputs.cache
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLServerHelper\obj\Debug\SQLServerHelper.dll
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLServerHelper\obj\Debug\SQLServerHelper.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLServerHelper\bin\Debug\SQLServerHelper.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLServerHelper\bin\Debug\SQLServerHelper.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLServerHelper\obj\Debug\SQLServerHelper.csproj.AssemblyReference.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLServerHelper\obj\Debug\SQLServerHelper.csproj.CoreCompileInputs.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLServerHelper\obj\Debug\SQLServerHelper.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLServerHelper\obj\Debug\SQLServerHelper.pdb

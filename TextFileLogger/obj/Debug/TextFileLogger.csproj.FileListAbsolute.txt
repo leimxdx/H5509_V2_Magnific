@@ -22,3 +22,9 @@ D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\obj\Debug\TextFileLogger.csproj.CoreCompileInputs.cache
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\obj\Debug\TextFileLogger.dll
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\TextFileLogger\obj\Debug\TextFileLogger.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\TextFileLogger\bin\Debug\TextFileLogger.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\TextFileLogger\bin\Debug\TextFileLogger.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\TextFileLogger\obj\Debug\TextFileLogger.csproj.AssemblyReference.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\TextFileLogger\obj\Debug\TextFileLogger.csproj.CoreCompileInputs.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\TextFileLogger\obj\Debug\TextFileLogger.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\TextFileLogger\obj\Debug\TextFileLogger.pdb

@@ -14,3 +14,10 @@ D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 �
 D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.csproj.Up2Date
 D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.dll
 D:\GitHub\H5509_V2 - 1.1.26.1 弘润使用版本开始保存\H5509_V2 - 1.1.27 修复bug\ComMaster\obj\Debug\ComMaster.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\ComMaster\bin\Debug\ComMaster.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\ComMaster\bin\Debug\ComMaster.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\ComMaster\obj\Debug\ComMaster.csproj.AssemblyReference.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\ComMaster\obj\Debug\ComMaster.csproj.CoreCompileInputs.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\ComMaster\obj\Debug\ComMaster.csproj.Up2Date
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\ComMaster\obj\Debug\ComMaster.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\ComMaster\obj\Debug\ComMaster.pdb

@@ -30,3 +30,11 @@ D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHe.64E32CF6.Up2Date
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHelper.dll
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\SQLiteHelper\obj\Debug\SQLiteHelper.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\bin\Debug\SQLiteHelper.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\bin\Debug\SQLiteHelper.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\bin\Debug\System.Data.SQLite.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.AssemblyReference.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\obj\Debug\SQLiteHelper.csproj.CoreCompileInputs.cache
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\obj\Debug\SQLiteHe.64E32CF6.Up2Date
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\obj\Debug\SQLiteHelper.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\SQLiteHelper\obj\Debug\SQLiteHelper.pdb

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -145,9 +145,13 @@ namespace H5509_V2
                     Communication.DataReceive = DataReceived;
                     break;
                 case "TCP":
-                    string ipAddr = config["PortName"].ToString();
+                    string ipAddr = config["PortName"] == null ? "" : config["PortName"].ToString();
                     int port = (int)config["Port"]; //{ "Protocol":"TCP","PortName":"192.168.100.5","Port":7005}
-                    Communication = new EthernetDevice(StationId, ipAddr, port);
+                    //Mode为空(老配置)按客户端处理
+                    bool isServer = config.ContainsKey("Mode") && config["Mode"] != null
+                        && config["Mode"].ToString().Equals("Server", StringComparison.OrdinalIgnoreCase);
+                    if (isServer) Communication = new TcpServerDevice(StationId, port);
+                    else Communication = new EthernetDevice(StationId, ipAddr, port);
                     Communication.DataReceive = DataReceived;
                     break;
                 case "LAN": // 假设LAN与TCP类似，或单独实现
