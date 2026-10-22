@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TLicense;
 
 namespace H5509_V2
 {
@@ -15,6 +16,10 @@ namespace H5509_V2
         [STAThread]
         static void Main()
         {
+            // 必须在创建任何窗体/控件之前调用
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
             int processCount = 0;
             Process[] pa = Process.GetProcesses();//获取当前进程数组。
             var ProcessName = Process.GetCurrentProcess().ProcessName;
@@ -33,9 +38,39 @@ namespace H5509_V2
                 return; //Exit;
             }
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            // 授权：未授权/过期也允许启动（否则无法登录超级管理员去激活），
+            // 但 LicenseValid=false 会挡住“开始运行”，并触发“软件未授权”报警。
+            初始化授权();
+
             Application.Run(new ForMain());
+        }
+
+        /// <summary>
+        /// 初始化授权状态（不阻塞启动）：
+        /// 校验通过 → 允许运行；不通过 → 只禁止运行，界面照常打开。
+        /// </summary>
+        private static void 初始化授权()
+        {
+            try
+            {
+                LicenseService service = LicenseService.Current;
+
+                APPmaster.LicenseValid = service.Refresh().IsValid;
+
+                // 后台每分钟复核；失效时关闸并报警（系统异常-软件未授权）
+                service.LicenseInvalidated += (s, result) =>
+                {
+                    APPmaster.LicenseValid = false;
+                    try { APPmaster.form_alarm?.RaiseLicenseAlarm(); } catch { }
+                };
+
+                service.StartMonitor(TimeSpan.FromMinutes(1));
+            }
+            catch (Exception ex)
+            {
+                APPmaster.LicenseValid = false;
+                Debug.WriteLine("授权初始化失败：" + ex.Message);
+            }
         }
     }
 }

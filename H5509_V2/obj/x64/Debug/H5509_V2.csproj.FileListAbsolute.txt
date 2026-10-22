@@ -796,7 +796,6 @@ D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\H5509_V2\obj\x64\Debug\H5509_V2.exe
 D:\工作\东莞思创汇\项目7\H5509_V2 - 1.1.28 延时300改为900\H5509_V2 - 1.1.28 延时300改为900\H5509_V2\obj\x64\Debug\H5509_V2.pdb
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\obj\x64\Debug\H5509_V2.csproj.AssemblyReference.cache
-C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\obj\x64\Debug\H5509_V2.exe.config
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\H5509_V2.exe.config
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\H5509_V2.exe
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\H5509_V2.pdb
@@ -835,7 +834,6 @@ C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\System.ValueTuple.dll
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\TextFileLogger.dll
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\Thermostat.dll
-C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\Newtonsoft.Json.dll
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\ComMaster.pdb
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\HardwareGXN.pdb
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\IHardwareGXN.pdb
@@ -901,3 +899,6 @@ C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\obj\x64\Debug\H5509_V2.csproj.Up2Date
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\obj\x64\Debug\H5509_V2.exe
 C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\obj\x64\Debug\H5509_V2.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\TLicense.dll
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\bin\Debug\TLicense.pdb
+C:\Users\mxdx\Desktop\HarnessWorkSpace\H5509_V2_Magnific\H5509_V2_Magnific\H5509_V2\obj\x64\Debug\H5509_V2.exe.config

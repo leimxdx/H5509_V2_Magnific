@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -3006,6 +3006,7 @@ namespace H5509_alarm
                     case "1400340":
                     case "1400445":
                     case "1400488":
+                    case "1400499":   // 软件未授权
                         if (alarm)
                         {
                             S_Sys += alarmCode + ",";
@@ -3384,6 +3385,76 @@ namespace H5509_alarm
                 }
             }
             return false;
+        }
+
+        /// <summary>“软件未授权”报警代码（归在“系统异常”类）</summary>
+        public const string LicenseAlarmCode = "1400499";
+
+        /// <summary>触发“软件未授权”报警（重复调用只保留一条）</summary>
+        public void RaiseLicenseAlarm()
+        {
+            try
+            {
+                if (!IsHandleCreated || IsDisposed) return;
+
+                Invoke(new Action(() =>
+                {
+                    foreach (DataGridViewRow r in dataGridView_alarm.Rows)
+                    {
+                        if (Convert.ToString(r.Cells[0].Value) == LicenseAlarmCode)
+                        {
+                            ShowCode(LicenseAlarmCode, true);
+                            return;
+                        }
+                    }
+
+                    var row = new DataGridViewRow();
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = LicenseAlarmCode });
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = "软件未授权" });
+                    row.Cells.Add(new DataGridViewTextBoxCell { Value = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") });
+                    dataGridView_alarm.Rows.Add(row);
+
+                    // 写入报警日志（报警日志页 / 日志文件 / Alarm.txt）
+                    try { RunLog("[Code]" + LicenseAlarmCode + ",[Msg]软件未授权", LogType.AlarmLog); } catch { }
+
+                    ShowCode(LicenseAlarmCode, true);
+
+                    if (!Visible) Show();
+                    Activate();
+                }));
+            }
+            catch { }
+        }
+
+        /// <summary>清除“软件未授权”报警（授权恢复后调用）</summary>
+        public void ClearLicenseAlarm()
+        {
+            try
+            {
+                if (!IsHandleCreated || IsDisposed) return;
+
+                Invoke(new Action(() =>
+                {
+                    ShowCode(LicenseAlarmCode, false);
+
+                    bool removed = false;
+                    for (int i = dataGridView_alarm.Rows.Count - 1; i >= 0; i--)
+                    {
+                        if (Convert.ToString(dataGridView_alarm.Rows[i].Cells[0].Value) == LicenseAlarmCode)
+                        {
+                            dataGridView_alarm.Rows.RemoveAt(i);
+                            removed = true;
+                        }
+                    }
+
+                    // 解除也记一条操作日志，方便对账
+                    if (removed)
+                    {
+                        try { RunLog("[Code]" + LicenseAlarmCode + ",[Msg]软件未授权报警已解除（授权已恢复）", LogType.OperateLog); } catch { }
+                    }
+                }));
+            }
+            catch { }
         }
 
         public bool 判断是否有dut放歪报警()

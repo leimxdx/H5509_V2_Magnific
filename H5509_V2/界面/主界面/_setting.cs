@@ -29,6 +29,7 @@ using SQLServerHelper;
 using Sunny.UI;
 using Sunny.UI.Win32;
 using TextFileLogger;
+using TLicense;
 using static H5509_V2.APPmaster;
 using static SiCommunication.Profinet.Knx.KnxCode;
 using Color = System.Drawing.Color;
@@ -64,6 +65,8 @@ namespace H5509_V2
         public _setting()
         {
             InitializeComponent();
+
+            刷新许可证页签();   // 许可证页签：仅超级管理员登录后显示
 
             motion = MotionEx.IMotion;
 
@@ -2361,6 +2364,8 @@ namespace H5509_V2
 
         private void 刷新设置与维护界面(string tabpagetext)
         {
+            刷新许可证页签();   // 按当前登录权限显示/隐藏“许可证”页签
+
             if (tabpagetext == "产品")
             {
                 刷新产品(uiTabControl5.SelectedTab.Text);
@@ -2437,6 +2442,165 @@ namespace H5509_V2
         {
             刷新设置与维护界面(e.TabPage.Text);
         }
+
+        #region 许可证
+
+        /// <summary>是否超级管理员（只有超级管理员能看/能改许可证页签）</summary>
+        private bool 是超级管理员
+        {
+            get { return APPmaster.操作权限 == APPmaster.超级管理员角色; }
+        }
+
+        /// <summary>按当前登录权限显示/隐藏“许可证”页签（tabPage19）</summary>
+        private void 刷新许可证页签()
+        {
+            bool show = 是超级管理员;
+            bool exists = uiTabControl1.Controls.Contains(tabPage19);
+
+            if (show && !exists)
+            {
+                uiTabControl1.Controls.Add(tabPage19);   // 追加在“自定义界面”之后
+            }
+            else if (!show && exists)
+            {
+                if (uiTabControl1.SelectedTab == tabPage19) uiTabControl1.SelectedIndex = 0;
+                uiTabControl1.Controls.Remove(tabPage19);
+            }
+
+            if (show) 刷新许可证信息();
+        }
+
+        /// <summary>刷新机器码与授权信息</summary>
+        private void 刷新许可证信息()
+        {
+            LicenseValidationResult status = LicenseService.Current.Refresh();
+            txt_lic_machine.Text = LicenseService.Current.MachineCode;
+
+            if (status.IsValid)
+            {
+                LicensePayload p = status.Payload;
+
+                string expiry = p.HasCalendarExpiry
+                    ? status.ExpiryText + "（剩余 " + status.RemainingText + "）"
+                    : status.ExpiryText;
+
+                string runtime = p.HasRuntimeLimit
+                    ? "\r\n运行额度：" + status.RuntimeConsumedHours.ToString("0.0") + " / " + p.MaxRuntimeHours +
+                      " 小时（合计 " + p.RuntimeDays.ToString("0.#") + " 天，剩余 " + status.RuntimeRemainingText +
+                      " ≈ " + status.RuntimeRemainingDaysText + "）"
+                    : "";
+
+                lbl_lic_info.ForeColor = status.IsExpiringSoon || (p.HasRuntimeLimit && status.RuntimeRemainingText != "-" &&
+                                                                   (status.RuntimeConsumedHours / Math.Max(1, p.MaxRuntimeHours)) >= 0.9)
+                    ? Color.OrangeRed
+                    : Color.SeaGreen;
+
+                lbl_lic_info.Text =
+                    "状态：已授权\r\n" +
+                    "客户：" + p.Customer + "\r\n" +
+                    "产品标识：" + p.ProductId + "\r\n" +
+                    "类型：" + p.TypeDisplay + "\r\n" +
+                    "到期：" + expiry +
+                    runtime + "\r\n" +
+                    "授权编号：" + p.LicenseId;
+            }
+            else
+            {
+                lbl_lic_info.ForeColor = Color.Firebrick;
+                lbl_lic_info.Text =
+                    "状态：未授权（" + status.Status + "）\r\n" +
+                    status.Message + "\r\n" +
+                    (string.IsNullOrEmpty(status.Detail) ? "" : status.Detail + "\r\n") +
+                    "公钥指纹：" + LicenseService.Current.PublicKeyFingerprint;
+            }
+        }
+
+        private void btn_lic_refresh_Click(object sender, EventArgs e)
+        {
+            刷新许可证信息();
+        }
+
+        private void btn_lic_copy_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Clipboard.SetText(txt_lic_machine.Text);
+                MessageBox.Show(this, "机器码已复制到剪贴板。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, "复制失败：" + ex.Message, "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        /// <summary>从 .lic / .txt 文件读取授权码，填到输入框里，再点“激活 / 更新”。</summary>
+        private void btn_lic_import_Click(object sender, EventArgs e)
+        {
+            if (!是超级管理员)
+            {
+                MessageBox.Show(this, "只有超级管理员可以修改授权。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            using (var dialog = new OpenFileDialog())
+            {
+                dialog.Title = "选择授权文件";
+                dialog.Filter = "授权文件 (*.lic;*.txt)|*.lic;*.txt|所有文件 (*.*)|*.*";
+
+                if (dialog.ShowDialog(this) != DialogResult.OK) return;
+
+                try
+                {
+                    txt_lic_code.Text = File.ReadAllText(dialog.FileName).Trim();
+                    txt_lic_code.Focus();
+
+                    MessageBox.Show(this, "已读取授权文件：\r\n" + dialog.FileName +
+                                          "\r\n\r\n请点「激活 / 更新」完成激活。",
+                        "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(this, "读取文件失败：" + ex.Message, "提示",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+        }
+
+        private void btn_lic_activate_Click(object sender, EventArgs e)
+        {
+            if (!是超级管理员)
+            {
+                MessageBox.Show(this, "只有超级管理员可以修改授权。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string code = txt_lic_code.Text.Trim();
+            if (code.Length == 0)
+            {
+                MessageBox.Show(this, "请先粘贴授权码。", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            LicenseValidationResult result = LicenseService.Current.Activate(code);
+            刷新许可证信息();
+
+            if (result.IsValid)
+            {
+                APPmaster.LicenseValid = true;
+                try { APPmaster.form_alarm?.ClearLicenseAlarm(); } catch { }
+
+                txt_lic_code.Clear();
+                MessageBox.Show(this,
+                    "激活成功！\r\n\r\n客户：" + result.Payload.Customer + "\r\n到期：" + result.ExpiryText,
+                    "授权成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(this, result.Message, "激活失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        #endregion
 
         public void 刷新设置与维护界面()
         {

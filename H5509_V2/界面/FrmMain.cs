@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -430,6 +430,14 @@ namespace H5509_V2
 
             main.canVisable(this);
             刷新界面权限();
+
+            // 授权检查：无效则立即触发“系统异常-软件未授权”报警
+            try
+            {
+                _ = APPmaster.form_alarm.Handle;   // 确保报警窗口句柄已创建（必须在 UI 线程）
+                APPmaster.检查许可证();
+            }
+            catch { }
         }
 
         public void 刷新界面权限()

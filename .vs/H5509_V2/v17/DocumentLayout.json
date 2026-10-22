@@ -1,17 +1,89 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\",
+  "WorkspaceRootPath": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|d:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\h5509_v2_magnific\\h5509_v2_magnific\\h5509_v2\\\u6A21\u5757\\tcpserverdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u6A21\u5757\\tcpserverdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|c:\\users\\mxdx\\desktop\\harnessworkspace\\h5509_v2_magnific\\h5509_v2_magnific\\h5509_v2\\\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u62A5\u8B66\\form_alarm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\frmmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u6A21\u5757\\appmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u6A21\u5757\\handler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\_main.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_io.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_io.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u6A21\u5757\\tcpserverdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u6A21\u5757\\tcpserverdevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u5176\u4ED6\\changepwd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u5176\u4ED6\\changepwd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\frminputpwd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{7ADC71CB-EB5D-4636-81F6-030FE672102D}|H5509_V2\\H5509_V2.csproj|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\frminputpwd.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|H5509_V2||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.license.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:h5509_v2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.license.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -21,7 +93,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 16,
           "Children": [
             {
               "$type": "Bookmark",
@@ -57,39 +129,243 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "TcpServerDevice.cs",
-              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
-              "RelativeDocumentMoniker": "H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
-              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
-              "RelativeToolTip": "H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAmwDUBAAAAAAAAAAAAAA==",
+              "DocumentIndex": 11,
+              "Title": "_main.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\_main.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\_main.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\_main.cs",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\_main.cs",
+              "ViewState": "AgIAAMoFAAAAAAAAAAAowN4FAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-20T08:21:45.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-21T03:06:05.257Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "H5509_V2",
-              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\H5509_V2.csproj",
-              "RelativeDocumentMoniker": "H5509_V2\\H5509_V2.csproj",
-              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\H5509_V2.csproj",
-              "RelativeToolTip": "H5509_V2\\H5509_V2.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-08-25T14:15:49.92Z"
+              "Title": "_setting.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "ViewState": "AgIAAMwJAAAAAAAAAAAmwAYKAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:10:27.125Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "_setting.License.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T08:49:03.076Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "_main.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\_main.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\_main.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\_main.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\_main.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:00:18.461Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Handler.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\Handler.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u6A21\u5757\\Handler.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\Handler.cs",
+              "RelativeToolTip": "H5509_V2\\\u6A21\u5757\\Handler.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwLYKAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:11:30.523Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FrmMain.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\FrmMain.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\FrmMain.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAgwGIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:05:45.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_log.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_log.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:08:23.342Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\Program.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\Program.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\Program.cs",
+              "RelativeToolTip": "H5509_V2\\Program.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAYwDsAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-25T14:06:52.095Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Form_alarm.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "ViewState": "AgIAAE8NAAAAAAAAAAAAwG8NAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T08:15:18.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "TcpServerDevice.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "RelativeToolTip": "H5509_V2\\\u6A21\u5757\\TcpServerDevice.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAAFUAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-20T08:21:45.183Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "APPmaster.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\APPmaster.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u6A21\u5757\\APPmaster.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u6A21\u5757\\APPmaster.cs",
+              "RelativeToolTip": "H5509_V2\\\u6A21\u5757\\APPmaster.cs",
+              "ViewState": "AgIAAPEAAAAAAAAAAAApwDwBAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:11:09.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_offset.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_offset.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:08:15.477Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "_IO.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_IO.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:08:26.95Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "FrmMain.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\FrmMain.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\FrmMain.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\FrmMain.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:00:27.62Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\Program.cs",
-              "RelativeDocumentMoniker": "H5509_V2\\Program.cs",
-              "ToolTip": "D:\\\u5DE5\u4F5C\\\u4E1C\u839E\u601D\u521B\u6C47\\\u9879\u76EE7\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\Program.cs",
-              "RelativeToolTip": "H5509_V2\\Program.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAIwBkAAAAmAAAAAAAAAA==",
+              "Title": "Form_alarm.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u62A5\u8B66\\Form_alarm.cs [\u8BBE\u8BA1]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-25T14:06:52.095Z"
+              "WhenOpened": "2026-10-21T08:15:16.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "_setting.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:08:14.556Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "_setting.License.cs",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_setting.License.cs",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T08:49:06.172Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "FrmInputPwd.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\FrmInputPwd.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\FrmInputPwd.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\FrmInputPwd.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\FrmInputPwd.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:09:16.695Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "_speed.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u4E3B\u754C\u9762\\_speed.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:08:04.442Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ChangePwd.cs [\u8BBE\u8BA1]",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs",
+              "RelativeDocumentMoniker": "H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs [\u8BBE\u8BA1]",
+              "RelativeToolTip": "H5509_V2\\\u754C\u9762\\\u5176\u4ED6\\ChangePwd.cs [\u8BBE\u8BA1]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-21T03:09:30.897Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "H5509_V2",
+              "DocumentMoniker": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\H5509_V2.csproj",
+              "RelativeDocumentMoniker": "H5509_V2\\H5509_V2.csproj",
+              "ToolTip": "C:\\Users\\mxdx\\Desktop\\HarnessWorkSpace\\H5509_V2_Magnific\\H5509_V2_Magnific\\H5509_V2\\H5509_V2.csproj",
+              "RelativeToolTip": "H5509_V2\\H5509_V2.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-08-25T14:15:49.92Z"
             }
           ]
         }

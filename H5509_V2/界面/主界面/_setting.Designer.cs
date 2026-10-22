@@ -1,4 +1,4 @@
-﻿namespace H5509_V2
+namespace H5509_V2
 {
     partial class _setting
     {
@@ -2141,6 +2141,18 @@
             this.panel18 = new System.Windows.Forms.Panel();
             this.defalut21 = new H5509_V2.Defalut2();
             this.uiRadioButton2 = new Sunny.UI.UIRadioButton();
+            this.tabPage19 = new System.Windows.Forms.TabPage();
+            this.lbl_lic_info = new System.Windows.Forms.Label();
+            this.btn_lic_refresh = new System.Windows.Forms.Button();
+            this.btn_lic_activate = new System.Windows.Forms.Button();
+            this.btn_lic_import = new System.Windows.Forms.Button();
+            this.txt_lic_code = new System.Windows.Forms.TextBox();
+            this.lbl_lic_code_caption = new System.Windows.Forms.Label();
+            this.btn_lic_copy = new System.Windows.Forms.Button();
+            this.txt_lic_machine = new System.Windows.Forms.TextBox();
+            this.lbl_lic_machine_caption = new System.Windows.Forms.Label();
+            this.lbl_lic_tip = new System.Windows.Forms.Label();
+            this.lbl_lic_title = new System.Windows.Forms.Label();
             this.tabPage6.SuspendLayout();
             this.uiTabControl5.SuspendLayout();
             this.tabPage23.SuspendLayout();
@@ -2655,6 +2667,7 @@
             this.panel20.SuspendLayout();
             this.panel19.SuspendLayout();
             this.panel18.SuspendLayout();
+            this.tabPage19.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabPage6
@@ -14081,7 +14094,7 @@
             this.tabPage2.ForeColor = System.Drawing.SystemColors.ControlText;
             this.tabPage2.Location = new System.Drawing.Point(0, 40);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage2.Size = new System.Drawing.Size(200, 60);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "调试";
             // 
@@ -14100,7 +14113,7 @@
             this.uiTabControl3.Name = "uiTabControl3";
             this.uiTabControl3.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.uiTabControl3.SelectedIndex = 0;
-            this.uiTabControl3.Size = new System.Drawing.Size(1893, 944);
+            this.uiTabControl3.Size = new System.Drawing.Size(200, 60);
             this.uiTabControl3.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.uiTabControl3.Style = Sunny.UI.UIStyle.Custom;
             this.uiTabControl3.TabBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
@@ -14123,7 +14136,7 @@
             this.tabPage10.Controls.Add(this.groupBox4);
             this.tabPage10.Location = new System.Drawing.Point(0, 40);
             this.tabPage10.Name = "tabPage10";
-            this.tabPage10.Size = new System.Drawing.Size(1893, 904);
+            this.tabPage10.Size = new System.Drawing.Size(200, 20);
             this.tabPage10.TabIndex = 0;
             this.tabPage10.Text = "基础调试";
             // 
@@ -32776,6 +32789,7 @@
             this.uiTabControl1.Controls.Add(this.tabPage5);
             this.uiTabControl1.Controls.Add(this.tabPage6);
             this.uiTabControl1.Controls.Add(this.tabPage12);
+            this.uiTabControl1.Controls.Add(this.tabPage19);
             this.uiTabControl1.DrawMode = System.Windows.Forms.TabDrawMode.OwnerDrawFixed;
             this.uiTabControl1.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiTabControl1.ItemSize = new System.Drawing.Size(150, 40);
@@ -32806,7 +32820,7 @@
             this.tabPage12.Controls.Add(this.panel18);
             this.tabPage12.Location = new System.Drawing.Point(0, 40);
             this.tabPage12.Name = "tabPage12";
-            this.tabPage12.Size = new System.Drawing.Size(200, 60);
+            this.tabPage12.Size = new System.Drawing.Size(1893, 944);
             this.tabPage12.TabIndex = 6;
             this.tabPage12.Text = "自定义界面";
             // 
@@ -32907,6 +32921,137 @@
             this.uiRadioButton2.TabIndex = 353;
             this.uiRadioButton2.Text = "自定义1";
             this.uiRadioButton2.Click += new System.EventHandler(this.uiRadioButton2_Click);
+            // 
+            // tabPage19
+            // 
+            this.tabPage19.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(249)))), ((int)(((byte)(255)))));
+            this.tabPage19.Controls.Add(this.lbl_lic_info);
+            this.tabPage19.Controls.Add(this.btn_lic_refresh);
+            this.tabPage19.Controls.Add(this.btn_lic_import);
+            this.tabPage19.Controls.Add(this.btn_lic_activate);
+            this.tabPage19.Controls.Add(this.txt_lic_code);
+            this.tabPage19.Controls.Add(this.lbl_lic_code_caption);
+            this.tabPage19.Controls.Add(this.btn_lic_copy);
+            this.tabPage19.Controls.Add(this.txt_lic_machine);
+            this.tabPage19.Controls.Add(this.lbl_lic_machine_caption);
+            this.tabPage19.Controls.Add(this.lbl_lic_tip);
+            this.tabPage19.Controls.Add(this.lbl_lic_title);
+            this.tabPage19.Location = new System.Drawing.Point(0, 40);
+            this.tabPage19.Name = "tabPage19";
+            this.tabPage19.Size = new System.Drawing.Size(1893, 944);
+            this.tabPage19.TabIndex = 7;
+            this.tabPage19.Text = "许可证";
+            // 
+            // lbl_lic_info
+            // 
+            this.lbl_lic_info.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.lbl_lic_info.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbl_lic_info.Location = new System.Drawing.Point(40, 400);
+            this.lbl_lic_info.Name = "lbl_lic_info";
+            this.lbl_lic_info.Padding = new System.Windows.Forms.Padding(10, 8, 10, 8);
+            this.lbl_lic_info.Size = new System.Drawing.Size(700, 190);
+            this.lbl_lic_info.TabIndex = 9;
+            // 
+            // btn_lic_refresh
+            // 
+            this.btn_lic_refresh.Location = new System.Drawing.Point(290, 340);
+            this.btn_lic_refresh.Name = "btn_lic_refresh";
+            this.btn_lic_refresh.Size = new System.Drawing.Size(110, 40);
+            this.btn_lic_refresh.TabIndex = 8;
+            this.btn_lic_refresh.Text = "刷新状态";
+            this.btn_lic_refresh.UseVisualStyleBackColor = true;
+            this.btn_lic_refresh.Click += new System.EventHandler(this.btn_lic_refresh_Click);
+            // 
+            // btn_lic_activate
+            // 
+            this.btn_lic_activate.Font = new System.Drawing.Font("微软雅黑", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.btn_lic_activate.Location = new System.Drawing.Point(130, 340);
+            this.btn_lic_activate.Name = "btn_lic_activate";
+            this.btn_lic_activate.Size = new System.Drawing.Size(140, 40);
+            this.btn_lic_activate.TabIndex = 7;
+            this.btn_lic_activate.Text = "激活 / 更新";
+            this.btn_lic_activate.UseVisualStyleBackColor = true;
+            this.btn_lic_activate.Click += new System.EventHandler(this.btn_lic_activate_Click);
+            // 
+            // btn_lic_import
+            // 
+            this.btn_lic_import.Location = new System.Drawing.Point(420, 340);
+            this.btn_lic_import.Name = "btn_lic_import";
+            this.btn_lic_import.Size = new System.Drawing.Size(130, 40);
+            this.btn_lic_import.TabIndex = 10;
+            this.btn_lic_import.Text = "从文件导入…";
+            this.btn_lic_import.UseVisualStyleBackColor = true;
+            this.btn_lic_import.Click += new System.EventHandler(this.btn_lic_import_Click);
+            // 
+            // txt_lic_code
+            // 
+            this.txt_lic_code.AcceptsReturn = true;
+            this.txt_lic_code.Font = new System.Drawing.Font("Consolas", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_lic_code.Location = new System.Drawing.Point(130, 172);
+            this.txt_lic_code.Multiline = true;
+            this.txt_lic_code.Name = "txt_lic_code";
+            this.txt_lic_code.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txt_lic_code.Size = new System.Drawing.Size(560, 150);
+            this.txt_lic_code.TabIndex = 6;
+            // 
+            // lbl_lic_code_caption
+            // 
+            this.lbl_lic_code_caption.AutoSize = true;
+            this.lbl_lic_code_caption.Location = new System.Drawing.Point(40, 176);
+            this.lbl_lic_code_caption.Name = "lbl_lic_code_caption";
+            this.lbl_lic_code_caption.Size = new System.Drawing.Size(74, 21);
+            this.lbl_lic_code_caption.TabIndex = 5;
+            this.lbl_lic_code_caption.Text = "授权码：";
+            // 
+            // btn_lic_copy
+            // 
+            this.btn_lic_copy.Location = new System.Drawing.Point(570, 124);
+            this.btn_lic_copy.Name = "btn_lic_copy";
+            this.btn_lic_copy.Size = new System.Drawing.Size(90, 32);
+            this.btn_lic_copy.TabIndex = 4;
+            this.btn_lic_copy.Text = "复制";
+            this.btn_lic_copy.UseVisualStyleBackColor = true;
+            this.btn_lic_copy.Click += new System.EventHandler(this.btn_lic_copy_Click);
+            // 
+            // txt_lic_machine
+            // 
+            this.txt_lic_machine.BackColor = System.Drawing.Color.White;
+            this.txt_lic_machine.Font = new System.Drawing.Font("Consolas", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_lic_machine.Location = new System.Drawing.Point(130, 126);
+            this.txt_lic_machine.Name = "txt_lic_machine";
+            this.txt_lic_machine.ReadOnly = true;
+            this.txt_lic_machine.Size = new System.Drawing.Size(420, 23);
+            this.txt_lic_machine.TabIndex = 3;
+            this.txt_lic_machine.TabStop = false;
+            // 
+            // lbl_lic_machine_caption
+            // 
+            this.lbl_lic_machine_caption.AutoSize = true;
+            this.lbl_lic_machine_caption.Location = new System.Drawing.Point(40, 130);
+            this.lbl_lic_machine_caption.Name = "lbl_lic_machine_caption";
+            this.lbl_lic_machine_caption.Size = new System.Drawing.Size(74, 21);
+            this.lbl_lic_machine_caption.TabIndex = 2;
+            this.lbl_lic_machine_caption.Text = "机器码：";
+            // 
+            // lbl_lic_tip
+            // 
+            this.lbl_lic_tip.AutoSize = true;
+            this.lbl_lic_tip.ForeColor = System.Drawing.Color.DimGray;
+            this.lbl_lic_tip.Location = new System.Drawing.Point(40, 76);
+            this.lbl_lic_tip.Name = "lbl_lic_tip";
+            this.lbl_lic_tip.Size = new System.Drawing.Size(507, 21);
+            this.lbl_lic_tip.TabIndex = 1;
+            this.lbl_lic_tip.Text = "机器码发给供应商换取授权码；授权码粘贴后点“激活 / 更新”即可。";
+            // 
+            // lbl_lic_title
+            // 
+            this.lbl_lic_title.AutoSize = true;
+            this.lbl_lic_title.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.lbl_lic_title.Location = new System.Drawing.Point(40, 30);
+            this.lbl_lic_title.Name = "lbl_lic_title";
+            this.lbl_lic_title.Size = new System.Drawing.Size(88, 26);
+            this.lbl_lic_title.TabIndex = 0;
+            this.lbl_lic_title.Text = "软件授权";
             // 
             // _setting
             // 
@@ -33504,6 +33649,8 @@
             this.panel20.ResumeLayout(false);
             this.panel19.ResumeLayout(false);
             this.panel18.ResumeLayout(false);
+            this.tabPage19.ResumeLayout(false);
+            this.tabPage19.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -35602,5 +35749,17 @@
         private System.Windows.Forms.NumericUpDown numericUpDown199;
         private Sunny.UI.UIButton uiButton43;
         private Sunny.UI.UIButton uiButton44;
+        private System.Windows.Forms.TabPage tabPage19;
+        private System.Windows.Forms.Label lbl_lic_title;
+        private System.Windows.Forms.Label lbl_lic_tip;
+        private System.Windows.Forms.Label lbl_lic_machine_caption;
+        private System.Windows.Forms.TextBox txt_lic_machine;
+        private System.Windows.Forms.Button btn_lic_copy;
+        private System.Windows.Forms.Label lbl_lic_code_caption;
+        private System.Windows.Forms.TextBox txt_lic_code;
+        private System.Windows.Forms.Button btn_lic_activate;
+        private System.Windows.Forms.Button btn_lic_import;
+        private System.Windows.Forms.Button btn_lic_refresh;
+        private System.Windows.Forms.Label lbl_lic_info;
     }
 }

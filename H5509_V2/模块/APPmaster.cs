@@ -304,6 +304,34 @@ namespace H5509_V2
 
         public static string 操作权限 { get; set; } = "A"; //A：operator B：engineer  C：administrator D：supplier
 
+        /// <summary>超级管理员角色（只有该角色能查看/修改许可证）：D=Supplier。若 C 才是超级管理员，改成 "C"。</summary>
+        public const string 超级管理员角色 = "D";
+
+        /// <summary>授权是否有效：启动门禁/激活成功后为 true，授权失效时置 false</summary>
+        public static volatile bool LicenseValid = true;
+
+        /// <summary>报警只触发一次，避免运行循环里反复 Invoke</summary>
+        private static int _licenseAlarmRaised;
+
+        /// <summary>
+        /// 许可证检查：无效时触发“系统异常-软件未授权”报警，返回 false。
+        /// 用缓存字段判断，不在这里读文件/验签（运行循环里会被频繁调用）。
+        /// </summary>
+        public static bool 检查许可证()
+        {
+            if (LicenseValid)
+            {
+                System.Threading.Interlocked.Exchange(ref _licenseAlarmRaised, 0);
+                return true;
+            }
+
+            if (System.Threading.Interlocked.CompareExchange(ref _licenseAlarmRaised, 1, 0) == 0)
+            {
+                try { form_alarm?.RaiseLicenseAlarm(); } catch { }
+            }
+            return false;
+        }
+
         public static int 梭车第二段距离 = 10000;
 
         public static double 第二段速度 = 0.3;
@@ -1491,6 +1519,8 @@ namespace H5509_V2
 
         public static bool 是否可以开始运行()
         {
+            if (!检查许可证()) return false;
+
             if (IsPause == true || IsStart == false)
             {
                 return false;

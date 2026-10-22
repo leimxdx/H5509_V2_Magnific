@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -3361,6 +3361,9 @@ namespace H5509_V2
 
         private bool 初次开始检查(string[] io)
         {
+            // 授权无效（到期/未激活）直接不允许开始，并报警
+            if (!APPmaster.检查许可证()) return false;
+
             bool isstart = true;
 
             if (io[0] == "0") //15
